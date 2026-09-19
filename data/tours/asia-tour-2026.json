@@ -1,0 +1,219 @@
+{
+  "id": "asia-tour-2026",
+  "title": "OFFICIAL HIGE DANDISM ASIA TOUR 2026",
+  "type": "專場",
+  "templateBasis": "以台北 2026-08-30 骨架為藍本，點歌段不進模板而由各場以 insert 自理；首爾 2026-08-08 首場已驗證骨架一致，模板維持不換",
+  "templateSetlist": [
+    {
+      "encore": false,
+      "order": 0,
+      "songId": "same-blue"
+    },
+    {
+      "encore": false,
+      "order": 1,
+      "songId": "shukumei"
+    },
+    {
+      "encore": false,
+      "order": 2,
+      "songId": "50pct"
+    },
+    {
+      "encore": false,
+      "order": 3,
+      "songId": "sanitizer"
+    },
+    {
+      "encore": false,
+      "order": 4,
+      "songId": "elder-flower"
+    },
+    {
+      "encore": false,
+      "order": 5,
+      "songId": "laughter"
+    },
+    {
+      "encore": false,
+      "order": 6,
+      "songId": "pretender"
+    },
+    {
+      "encore": false,
+      "kind": [
+        "interlude"
+      ],
+      "note": "ひ組のテーマ ～八岐大蛇編～",
+      "order": 7
+    },
+    {
+      "encore": false,
+      "order": 8,
+      "songId": "fire-ground"
+    },
+    {
+      "encore": false,
+      "order": 9,
+      "songId": "make-me-wonder"
+    },
+    {
+      "encore": false,
+      "order": 10,
+      "songId": "cry-baby"
+    },
+    {
+      "encore": false,
+      "order": 11,
+      "songId": "takaga-i-love-you"
+    },
+    {
+      "encore": false,
+      "order": 12,
+      "songId": "i-love"
+    },
+    {
+      "encore": false,
+      "order": 13,
+      "songId": "tattoo"
+    },
+    {
+      "encore": false,
+      "order": 14,
+      "songId": "mixed-nuts"
+    },
+    {
+      "encore": false,
+      "order": 15,
+      "songId": "white-noise"
+    },
+    {
+      "encore": false,
+      "order": 16,
+      "songId": "rashisa"
+    },
+    {
+      "encore": true,
+      "order": 17,
+      "songId": "stardust"
+    },
+    {
+      "encore": true,
+      "order": 18,
+      "songId": "stand-by-you"
+    }
+  ],
+  "shows": [
+    {
+      "id": "asia-tour-2026-korea-0808",
+      "date": "2026-08-08",
+      "weekday": "六",
+      "city": "首爾",
+      "venue": "高尺天空巨蛋",
+      "opensAt": "19:00",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/1981868"
+      ],
+      "diff": {}
+    },
+    {
+      "id": "asia-tour-2026-korea-0809",
+      "date": "2026-08-09",
+      "weekday": "日",
+      "city": "首爾",
+      "venue": "高尺天空巨蛋",
+      "opensAt": "19:00",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/1981869"
+      ],
+      "diff": {}
+    },
+    {
+      "id": "asia-tour-2026-singapore-0821",
+      "date": "2026-08-21",
+      "weekday": "五",
+      "city": "新加坡",
+      "venue": "星宇表演藝術中心",
+      "opensAt": "20:00",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/1981870"
+      ],
+      "diff": {
+        "insert": [
+          {
+            "after": 13,
+            "item": {
+              "encore": false,
+              "songId": "nichijo",
+              "kind": [
+                "request"
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "asia-tour-2026-taipei-0829",
+      "date": "2026-08-29",
+      "weekday": "六",
+      "city": "台北",
+      "venue": "台北小巨蛋",
+      "opensAt": "18:00",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/1981871"
+      ],
+      "diff": {
+        "insert": [
+          {
+            "after": 13,
+            "item": {
+              "encore": false,
+              "songId": "115man-kiro-no-film",
+              "kind": [
+                "request"
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "asia-tour-2026-taipei-0830",
+      "date": "2026-08-30",
+      "weekday": "日",
+      "city": "台北",
+      "venue": "台北小巨蛋",
+      "opensAt": "18:00",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/1934873"
+      ],
+      "diff": {
+        "insert": [
+          {
+            "after": 13,
+            "item": {
+              "encore": false,
+              "songId": "subtitle",
+              "kind": [
+                "request"
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "asia-tour-2026-bangkok-0906",
+      "date": "2026-09-06",
+      "weekday": "日",
+      "city": "曼谷",
+      "venue": "UOB LIVE",
+      "opensAt": "18:00",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/1981872"
+      ],
+      "diff": {}
+    }
+  ]
+}

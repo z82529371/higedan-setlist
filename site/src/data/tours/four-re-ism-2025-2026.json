@@ -1,0 +1,462 @@
+{
+  "id": "four-re-ism-2025-2026",
+  "title": "OFFICIAL HIGE DANDISM one-man tour FOUR-RE:ISM",
+  "type": "專場",
+  "templateBasis": "以 2025-12-10 福岡 Zepp Fukuoka 為藍本",
+  "templateSetlist": [
+    {
+      "encore": false,
+      "order": 0,
+      "songId": "white-noise"
+    },
+    {
+      "encore": false,
+      "order": 1,
+      "songId": "no-doubt"
+    },
+    {
+      "encore": false,
+      "order": 2,
+      "songId": "rolling"
+    },
+    {
+      "encore": false,
+      "order": 3,
+      "songId": "driver"
+    },
+    {
+      "encore": false,
+      "order": 4,
+      "songId": "anarchy"
+    },
+    {
+      "encore": false,
+      "order": 5,
+      "songId": "parabola"
+    },
+    {
+      "encore": false,
+      "order": 6,
+      "songId": "ai-nandaga"
+    },
+    {
+      "encore": false,
+      "order": 7,
+      "songId": "whats-going-on"
+    },
+    {
+      "encore": false,
+      "order": 8,
+      "songId": "zero-no-mama-de-iraterara"
+    },
+    {
+      "encore": false,
+      "order": 9,
+      "songId": "subtitle",
+      "kind": ["satoshi-solo"]
+    },
+    {
+      "encore": false,
+      "order": 10,
+      "songId": "knit-no-boushi",
+      "kind": ["satoshi-solo"]
+    },
+    {
+      "encore": false,
+      "order": 11,
+      "songId": "b-side-blues"
+    },
+    {
+      "encore": false,
+      "order": 12,
+      "songId": "sanitizer"
+    },
+    {
+      "encore": false,
+      "order": 13,
+      "songId": "itan-na-star"
+    },
+    {
+      "encore": false,
+      "order": 14,
+      "songId": "stand-by-you"
+    },
+    {
+      "encore": false,
+      "order": 15,
+      "songId": "rashisa"
+    },
+    {
+      "encore": true,
+      "order": 16,
+      "songId": "sweet-tweet"
+    },
+    {
+      "encore": true,
+      "order": 17,
+      "songId": "make-me-wonder",
+      "kind": ["premiere"]
+    },
+    {
+      "encore": true,
+      "order": 18,
+      "songId": "fire-ground"
+    }
+  ],
+  "shows": [
+    {
+      "id": "four-re-ism-fukuoka-1210",
+      "date": "2025-12-10",
+      "weekday": "三",
+      "city": "福岡",
+      "venue": "福岡Zepp",
+      "opensAt": "19:00",
+      "sourceUrls": ["https://www.livefans.jp/events/1866409"],
+      "diff": {
+        "insert": [
+          {
+            "after": 8,
+            "item": {
+              "encore": false,
+              "songId": "same-blue",
+              "kind": ["request", "satoshi-solo"]
+            }
+          },
+          {
+            "after": 8,
+            "item": {
+              "encore": false,
+              "songId": "vintage",
+              "kind": ["request", "satoshi-solo"]
+            }
+          },
+          {
+            "after": 8,
+            "item": {
+              "encore": false,
+              "songId": "i-love",
+              "kind": ["request", "satoshi-solo"]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "four-re-ism-fukuoka-1211",
+      "date": "2025-12-11",
+      "weekday": "四",
+      "city": "福岡",
+      "venue": "福岡Zepp",
+      "opensAt": "19:00",
+      "sourceUrls": ["https://www.livefans.jp/events/1866410"],
+      "diff": {
+        "insert": [
+          {
+            "after": 8,
+            "item": {
+              "encore": false,
+              "songId": "yugure-zoi",
+              "kind": ["request", "satoshi-solo"]
+            }
+          },
+          {
+            "after": 8,
+            "item": {
+              "encore": false,
+              "songId": "115man-kiro-no-film",
+              "kind": ["request", "satoshi-solo"]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "four-re-ism-osaka-1215",
+      "date": "2025-12-15",
+      "weekday": "一",
+      "city": "大阪",
+      "venue": "大阪Zepp Bayside",
+      "opensAt": "19:00",
+      "sourceUrls": ["https://www.livefans.jp/events/1866411"],
+      "diff": {
+        "insert": [
+          {
+            "after": 8,
+            "item": {
+              "encore": false,
+              "songId": "apoptosis",
+              "kind": ["request", "satoshi-solo"]
+            }
+          },
+          {
+            "after": 8,
+            "item": {
+              "encore": false,
+              "songId": "dakuten",
+              "kind": ["request", "satoshi-solo"]
+            }
+          },
+          {
+            "after": 8,
+            "item": {
+              "encore": false,
+              "songId": "koi-no-sarigiwa",
+              "kind": ["request", "satoshi-solo"]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "four-re-ism-osaka-1216",
+      "date": "2025-12-16",
+      "weekday": "二",
+      "city": "大阪",
+      "venue": "大阪Zepp Bayside",
+      "opensAt": "19:00",
+      "sourceUrls": ["https://www.livefans.jp/events/1866412"],
+      "diff": {
+        "insert": [
+          {
+            "after": 8,
+            "item": {
+              "encore": false,
+              "songId": "sousisouai",
+              "kind": ["request", "satoshi-solo"]
+            }
+          },
+          {
+            "after": 8,
+            "item": {
+              "encore": false,
+              "songId": "universe",
+              "kind": ["request", "satoshi-solo"]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "four-re-ism-tokyo-1222",
+      "date": "2025-12-22",
+      "weekday": "一",
+      "city": "東京",
+      "venue": "東京Zepp DiverCity",
+      "opensAt": "19:00",
+      "sourceUrls": ["https://www.livefans.jp/events/1866413"],
+      "diff": {
+        "insert": [
+          {
+            "after": 8,
+            "item": {
+              "encore": false,
+              "songId": "sharon",
+              "kind": ["request", "satoshi-solo"]
+            }
+          },
+          {
+            "after": 8,
+            "item": {
+              "encore": false,
+              "songId": "laughter",
+              "kind": ["request", "satoshi-solo"]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "four-re-ism-tokyo-1223",
+      "date": "2025-12-23",
+      "weekday": "二",
+      "city": "東京",
+      "venue": "東京Zepp DiverCity",
+      "opensAt": "19:00",
+      "sourceUrls": ["https://www.livefans.jp/events/1866414"],
+      "diff": {
+        "insert": [
+          {
+            "after": 8,
+            "item": {
+              "encore": false,
+              "songId": "lady",
+              "kind": ["request", "satoshi-solo"]
+            }
+          },
+          {
+            "after": 8,
+            "item": {
+              "encore": false,
+              "songId": "i-love",
+              "kind": ["request", "satoshi-solo"]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "four-re-ism-sapporo-0113",
+      "date": "2026-01-13",
+      "weekday": "二",
+      "city": "札幌",
+      "venue": "札幌Zepp",
+      "opensAt": "19:00",
+      "sourceUrls": ["https://www.livefans.jp/events/1866415"],
+      "diff": {
+        "insert": [
+          {
+            "after": 8,
+            "item": {
+              "encore": false,
+              "songId": "rowan",
+              "kind": ["request", "satoshi-solo"]
+            }
+          },
+          {
+            "after": 8,
+            "item": {
+              "encore": false,
+              "songId": "shihatsu-ga-michibiku-kouhukuron",
+              "kind": ["request", "satoshi-solo"]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "four-re-ism-sapporo-0114",
+      "date": "2026-01-14",
+      "weekday": "三",
+      "city": "札幌",
+      "venue": "札幌Zepp",
+      "opensAt": "19:00",
+      "sourceUrls": ["https://www.livefans.jp/events/1866416"],
+      "diff": {
+        "insert": [
+          {
+            "after": 8,
+            "item": {
+              "encore": false,
+              "songId": "coffee-to-syrup",
+              "kind": ["request", "satoshi-solo"]
+            }
+          },
+          {
+            "after": 8,
+            "item": {
+              "encore": false,
+              "songId": "vintage",
+              "kind": ["request", "satoshi-solo"]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "four-re-ism-nagoya-0121",
+      "date": "2026-01-21",
+      "weekday": "三",
+      "city": "名古屋",
+      "venue": "名古屋Zepp",
+      "opensAt": "19:00",
+      "sourceUrls": ["https://www.livefans.jp/events/1866417"],
+      "diff": {
+        "insert": [
+          {
+            "after": 8,
+            "item": {
+              "encore": false,
+              "songId": "chessboard",
+              "kind": ["request", "satoshi-solo"]
+            }
+          },
+          {
+            "after": 8,
+            "item": {
+              "encore": false,
+              "songId": "happy-birthday-to-you",
+              "kind": ["request", "satoshi-solo"]
+            }
+          },
+          {
+            "after": 8,
+            "item": {
+              "encore": false,
+              "songId": "apoptosis",
+              "kind": ["request", "satoshi-solo"]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "four-re-ism-nagoya-0122",
+      "date": "2026-01-22",
+      "weekday": "四",
+      "city": "名古屋",
+      "venue": "名古屋Zepp",
+      "opensAt": "19:00",
+      "sourceUrls": ["https://www.livefans.jp/events/1866418"],
+      "diff": {
+        "insert": [
+          {
+            "after": 8,
+            "item": {
+              "encore": false,
+              "songId": "mikanseinamamade",
+              "kind": ["request", "satoshi-solo"]
+            }
+          },
+          {
+            "after": 8,
+            "item": {
+              "encore": false,
+              "songId": "takaga-i-love-you",
+              "kind": ["request", "satoshi-solo"]
+            }
+          },
+          {
+            "after": 8,
+            "item": {
+              "encore": false,
+              "songId": "shower",
+              "kind": ["request", "satoshi-solo"]
+            }
+          },
+          {
+            "after": 8,
+            "item": {
+              "encore": false,
+              "songId": "hakan",
+              "kind": ["request", "satoshi-solo"]
+            }
+          },
+          {
+            "after": 8,
+            "item": {
+              "encore": false,
+              "songId": "vintage",
+              "kind": ["request", "satoshi-solo"]
+            }
+          },
+          {
+            "after": 8,
+            "item": {
+              "encore": false,
+              "songId": "nichiyoubi-no-love-letter",
+              "kind": ["request", "satoshi-solo"]
+            }
+          },
+          {
+            "after": 8,
+            "item": {
+              "encore": false,
+              "songId": "shihatsu-ga-michibiku-kouhukuron",
+              "kind": ["request", "satoshi-solo"]
+            }
+          }
+        ]
+      }
+    }
+  ]
+}
