@@ -1,0 +1,10 @@
+{
+  "name": "higedan-setlist",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "pnpm --dir site dev",
+    "build": "pnpm --dir site build",
+    "preview": "pnpm --dir site preview"
+  }
+}
