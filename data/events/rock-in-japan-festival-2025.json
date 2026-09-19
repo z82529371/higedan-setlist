@@ -1,0 +1,65 @@
+{
+  "id": "rock-in-japan-festival-2025",
+  "title": "ROCK IN JAPAN FESTIVAL 2025",
+  "type": "音樂祭",
+  "shows": [
+    {
+      "id": "rock-in-japan-festival-2025-0920",
+      "date": "2025-09-20",
+      "weekday": "六",
+      "city": "千葉",
+      "venue": "千葉市蘇我體育公園",
+      "opensAt": "18:45",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/1812790"
+      ],
+      "setlist": [
+        {
+          "encore": false,
+          "order": 0,
+          "songId": "tattoo"
+        },
+        {
+          "encore": false,
+          "order": 1,
+          "songId": "white-noise"
+        },
+        {
+          "encore": false,
+          "order": 2,
+          "songId": "mixed-nuts"
+        },
+        {
+          "encore": false,
+          "order": 3,
+          "songId": "shukumei"
+        },
+        {
+          "encore": false,
+          "order": 4,
+          "songId": "i-love"
+        },
+        {
+          "encore": false,
+          "order": 5,
+          "songId": "pretender"
+        },
+        {
+          "encore": false,
+          "order": 6,
+          "songId": "rashisa"
+        },
+        {
+          "encore": false,
+          "order": 7,
+          "songId": "50pct"
+        },
+        {
+          "encore": false,
+          "order": 8,
+          "songId": "stand-by-you"
+        }
+      ]
+    }
+  ]
+}
