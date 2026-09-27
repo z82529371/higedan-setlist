@@ -1,0 +1,296 @@
+{
+  "リンクステーションホール青森": {
+    "venue": "青森市文化會館",
+    "city": "青森",
+    "region": "東北",
+    "prefecture": "青森縣"
+  },
+  "札幌文化芸術劇場hitaru": {
+    "venue": "札幌文化藝術劇場 hitaru",
+    "city": "札幌",
+    "region": "北海道",
+    "prefecture": "北海道"
+  },
+  "札幌文化芸術劇場 hitaru": {
+    "venue": "札幌文化藝術劇場 hitaru",
+    "city": "札幌",
+    "region": "北海道",
+    "prefecture": "北海道"
+  },
+  "コーチャンフォー釧路文化ホール": {
+    "venue": "釧路市民文化會館",
+    "city": "釧路",
+    "region": "北海道",
+    "prefecture": "北海道"
+  },
+  "帯広市民文化ホール": {
+    "venue": "帶廣市民文化會館",
+    "city": "帶廣",
+    "region": "北海道",
+    "prefecture": "北海道"
+  },
+  "愛媛県県民文化会館 メインホール": {
+    "venue": "愛媛縣縣民文化會館",
+    "city": "松山",
+    "region": "四國",
+    "prefecture": "愛媛縣"
+  },
+  "愛媛県県民文化会館": {
+    "venue": "愛媛縣縣民文化會館",
+    "city": "松山",
+    "region": "四國",
+    "prefecture": "愛媛縣"
+  },
+  "高知県立県民文化ホール オレンジホール": {
+    "venue": "高知縣立縣民文化會館 Orange Hall",
+    "city": "高知",
+    "region": "四國",
+    "prefecture": "高知縣"
+  },
+  "倉敷市民会館": {
+    "venue": "倉敷市民會館",
+    "city": "倉敷",
+    "region": "中國",
+    "prefecture": "岡山縣"
+  },
+  "広島文化学園HBGホール": {
+    "venue": "廣島文化學園HBG會館",
+    "city": "廣島",
+    "region": "中國",
+    "prefecture": "廣島縣"
+  },
+  "ふくやま芸術文化ホール リーデンローズ 大ホール": {
+    "venue": "福山藝術文化會館 Reed & Rose",
+    "city": "福山",
+    "region": "中國",
+    "prefecture": "廣島縣"
+  },
+  "名古屋国際会議場 センチュリーホール": {
+    "venue": "名古屋國際會議場 世紀廳",
+    "city": "名古屋",
+    "region": "中部",
+    "prefecture": "愛知縣"
+  },
+  "Niterra日本特殊陶業市民会館 フォレストホール": {
+    "venue": "森林會館",
+    "city": "名古屋",
+    "region": "中部",
+    "prefecture": "愛知縣"
+  },
+  "横浜アリーナ": {
+    "venue": "橫濱Arena",
+    "city": "橫濱",
+    "region": "關東",
+    "prefecture": "神奈川縣"
+  },
+  "Kアリーナ横浜": {
+    "venue": "橫濱K-Arena",
+    "city": "橫濱",
+    "region": "關東",
+    "prefecture": "神奈川縣"
+  },
+  "K-Arena": {
+    "venue": "橫濱K-Arena",
+    "city": "橫濱",
+    "region": "關東",
+    "prefecture": "神奈川縣"
+  },
+  "K-Arena Yokohama": {
+    "venue": "橫濱K-Arena",
+    "city": "橫濱",
+    "region": "關東",
+    "prefecture": "神奈川縣"
+  },
+  "Ｋ－Ａｒｅｎａ　YOKOHAMA": {
+    "venue": "橫濱K-Arena",
+    "city": "橫濱",
+    "region": "關東",
+    "prefecture": "神奈川縣"
+  },
+  "SGC HALL ARIAKE": {
+    "venue": "有明SGC會館",
+    "city": "東京",
+    "region": "關東",
+    "prefecture": "東京都"
+  },
+  "日本武道館": {
+    "venue": "日本武道館",
+    "city": "東京",
+    "region": "關東",
+    "prefecture": "東京都"
+  },
+  "本多の森ホール": {
+    "venue": "本多之森會館",
+    "city": "金澤",
+    "region": "中部",
+    "prefecture": "石川縣"
+  },
+  "やまぎん県民ホール": {
+    "venue": "山形縣民會館",
+    "city": "山形",
+    "region": "東北",
+    "prefecture": "山形縣"
+  },
+  "あきた芸術劇場ミルハス 大ホール": {
+    "venue": "秋田藝術劇場",
+    "city": "秋田",
+    "region": "東北",
+    "prefecture": "秋田縣"
+  },
+  "仙台サンプラザ ホール": {
+    "venue": "仙台太陽廣場會館",
+    "city": "仙台",
+    "region": "東北",
+    "prefecture": "宮城縣"
+  },
+  "ふくしん夢の音楽堂 大ホール": {
+    "venue": "夢之音樂堂",
+    "city": "福島",
+    "region": "東北",
+    "prefecture": "福島縣"
+  },
+  "大阪城ホール": {
+    "venue": "大阪城會館",
+    "city": "大阪",
+    "region": "關西",
+    "prefecture": "大阪府"
+  },
+  "Osaka-Jo Hall": {
+    "venue": "大阪城會館",
+    "city": "大阪",
+    "region": "關西",
+    "prefecture": "大阪府"
+  },
+  "アルカスSASEBO 大ホール": {
+    "venue": "ARKAS佐世保",
+    "city": "佐世保",
+    "region": "九州",
+    "prefecture": "長崎縣"
+  },
+  "iichiko総合文化センター グランシアタ": {
+    "venue": "iichiko 大劇場",
+    "city": "大分",
+    "region": "九州",
+    "prefecture": "大分縣"
+  },
+  "福岡サンパレス": {
+    "venue": "福岡太陽宮殿會館",
+    "city": "福岡",
+    "region": "九州",
+    "prefecture": "福岡縣"
+  },
+  "新潟県民会館 大ホール": {
+    "venue": "新潟縣民會館",
+    "city": "新潟",
+    "region": "中部",
+    "prefecture": "新潟縣"
+  },
+  "Taipei Arena": {
+    "venue": "台北小巨蛋",
+    "city": "台北",
+    "region": "海外",
+    "prefecture": "台灣"
+  },
+  "KSPO DOME": {
+    "venue": "高尺天空巨蛋",
+    "city": "首爾",
+    "region": "海外",
+    "prefecture": "韓國"
+  },
+  "THE STAR THEATRE": {
+    "venue": "星宇表演藝術中心",
+    "city": "新加坡",
+    "region": "海外",
+    "prefecture": "新加坡"
+  },
+  "UOB LIVE": {
+    "venue": "UOB LIVE",
+    "city": "曼谷",
+    "region": "海外",
+    "prefecture": "泰國"
+  },
+  "フェスティバルホール": {
+    "venue": "節日大廳",
+    "city": "大阪",
+    "region": "關西",
+    "prefecture": "大阪府"
+  },
+  "富山市芸術文化ホール オーバード・ホール": {
+    "venue": "富山市藝術文化館Oberd Hall",
+    "city": "富山",
+    "region": "中部",
+    "prefecture": "富山県"
+  },
+  "旭川市民文化会館 大ホール": {
+    "venue": "旭川市民文化會館 大會堂",
+    "city": "旭川",
+    "region": "北海道",
+    "prefecture": "北海道"
+  },
+  "真駒内セキスイハイムアイスアリーナ": {
+    "venue": "Makomanai Sekisui Heim冰上競技場",
+    "city": "札幌",
+    "region": "北海道",
+    "prefecture": "北海道"
+  },
+  "ポートメッセなごや 第1展示館": {
+    "venue": "Portmesse名古屋1館",
+    "city": "名古屋",
+    "region": "中部",
+    "prefecture": "愛知県"
+  },
+  "マリンメッセ福岡 A館": {
+    "venue": "Marine Messe福岡A棟",
+    "city": "福岡",
+    "region": "九州",
+    "prefecture": "福岡県"
+  },
+  "KINTEX Hall 5": {
+    "venue": "KINTEX Hall 5",
+    "city": "首爾",
+    "region": "韓國",
+    "prefecture": "韓国"
+  },
+  "Zepp Nagoya": {
+    "venue": "Zepp Nagoya",
+    "city": "名古屋",
+    "region": "",
+    "prefecture": "愛知県"
+  },
+  "Zepp Sapporo": {
+    "venue": "Zepp Sapporo",
+    "city": "札幌",
+    "region": "",
+    "prefecture": "北海道"
+  },
+  "Zepp DiverCity": {
+    "venue": "Zepp DiverCity",
+    "city": "東京",
+    "region": "",
+    "prefecture": "東京都"
+  },
+  "Zepp Osaka Bayside": {
+    "venue": "Zepp Osaka Bayside",
+    "city": "大阪",
+    "region": "",
+    "prefecture": "大阪府"
+  },
+  "Zepp Fukuoka": {
+    "venue": "Zepp Fukuoka",
+    "city": "福岡",
+    "region": "",
+    "prefecture": "福岡県"
+  },
+  "日産スタジアム": {
+    "venue": "日產體育場",
+    "city": "橫濱",
+    "region": "關東",
+    "prefecture": "神奈川県"
+  },
+  "ヤンマースタジアム長居": {
+    "venue": "洋馬長居體育場",
+    "city": "大阪",
+    "region": "關西",
+    "prefecture": "大阪府"
+  }
+}

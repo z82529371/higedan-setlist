@@ -178,15 +178,30 @@ function resolve(diff, tpl) {
     (diff.kind ?? []).map((k) => [k.order, k.kind]),
   );
   const skip = new Set(diff.skip ?? []);
-  const items = tpl.filter((i) => !skip.has(i.order)).map((i) => ({ ...i }));
-  for (const i of items) {
-    if (i.order in notes) i.note = notes[i.order];
-    if (i.order in kinds) i.kind = kinds[i.order];
-  }
+  
   const inserts = {};
-  for (const ins of diff.insert ?? [])
+  for (const ins of diff.insert ?? []) {
     (inserts[ins.after] ??= []).push({ ...ins.item });
-  return items.flatMap((i) => [i, ...(inserts[i.order] ?? [])]);
+  }
+
+  const result = [];
+  if (inserts[0]) {
+    result.push(...inserts[0]);
+  }
+
+  for (const item of tpl) {
+    if (!skip.has(item.order)) {
+      const copy = { ...item };
+      if (copy.order in notes) copy.note = notes[copy.order];
+      if (copy.order in kinds) copy.kind = kinds[copy.order];
+      result.push(copy);
+    }
+    if (inserts[item.order]) {
+      result.push(...inserts[item.order]);
+    }
+  }
+
+  return result;
 }
 
 function resolveShowItems(unit, show) {
@@ -302,6 +317,7 @@ export default function App() {
   const [songGroupFilter, setSongGroupFilter] = useState("all");
   const [venueGroupFilter, setVenueGroupFilter] = useState("all");
   const [showGroupFilter, setShowGroupFilter] = useState("all");
+  const [showYearFilter, setShowYearFilter] = useState("all");
 
   const slipRef = useRef(null);
 
@@ -440,53 +456,95 @@ export default function App() {
         (() => {
           const soloUnits = allUnits.filter((u) => u.type === "專場");
           const festUnits = allUnits.filter((u) => u.type !== "專場");
+
+          // Filter by category
+          const categoryFiltered = allUnits.filter((u) => {
+            if (showGroupFilter === "tour") return u.type === "專場";
+            if (showGroupFilter === "event") return u.type !== "專場";
+            return true;
+          });
+
+          // Extract available start years within current category
+          const yearsSet = new Set(
+            categoryFiltered
+              .map((u) => unitEarliest(u).split("-")[0])
+              .filter((y) => y && y !== "9999"),
+          );
+          const availableYears = Array.from(yearsSet).sort((a, b) => b.localeCompare(a));
+
+          // Filter by year if selected
+          const finalUnits = categoryFiltered.filter((u) => {
+            if (showYearFilter === "all") return true;
+            return unitEarliest(u).split("-")[0] === showYearFilter;
+          });
+
           return (
             <div className="filter-pill-bar" role="group" aria-label="場次巡演分組">
               <div className="group-label">演出類型</div>
               <button
                 className={`filter-pill ${showGroupFilter === "all" ? "is-active" : ""}`}
-                onClick={() => setShowGroupFilter("all")}
+                onClick={() => {
+                  setShowGroupFilter("all");
+                  setShowYearFilter("all");
+                }}
               >
-                全部場次
+                全部場次 ({allUnits.length})
               </button>
               <button
                 className={`filter-pill ${showGroupFilter === "tour" ? "is-active" : ""}`}
-                onClick={() => setShowGroupFilter("tour")}
+                onClick={() => {
+                  setShowGroupFilter("tour");
+                  setShowYearFilter("all");
+                }}
               >
                 巡演專場 ({soloUnits.length})
               </button>
               <button
                 className={`filter-pill ${showGroupFilter === "event" ? "is-active" : ""}`}
-                onClick={() => setShowGroupFilter("event")}
+                onClick={() => {
+                  setShowGroupFilter("event");
+                  setShowYearFilter("all");
+                }}
               >
-                音樂祭／事件 ({festUnits.length})
+                音樂祭／特別事件 ({festUnits.length})
               </button>
 
+              <div style={{ margin: "10px 0 4px 0", display: "flex", alignItems: "center", gap: "8px", flexWrap: "wrap" }}>
+                <span className="group-label" style={{ margin: 0 }}>開始年份</span>
+                <button
+                  className={`filter-pill ${showYearFilter === "all" ? "is-active" : ""}`}
+                  onClick={() => setShowYearFilter("all")}
+                >
+                  全部年份
+                </button>
+                {availableYears.map((year) => {
+                  const count = categoryFiltered.filter(
+                    (u) => unitEarliest(u).split("-")[0] === year,
+                  ).length;
+                  return (
+                    <button
+                      key={year}
+                      className={`filter-pill ${showYearFilter === year ? "is-active" : ""}`}
+                      onClick={() => setShowYearFilter(year)}
+                    >
+                      📅 {year} ({count})
+                    </button>
+                  );
+                })}
+              </div>
+
               <div className="unit-pills-row">
-                {(showGroupFilter === "all" || showGroupFilter === "tour") &&
-                  [...soloUnits]
-                    .sort((a, b) => (unitEarliest(b) < unitEarliest(a) ? -1 : 1))
-                    .map((u) => (
-                      <button
-                        key={u.id}
-                        className={`unit-pill tour-pill ${u.id === selUnitId ? "is-on" : ""}`}
-                        onClick={() => handleUnitChange(u.id)}
-                      >
-                        {shortUnitTitle(u)}
-                      </button>
-                    ))}
-                {(showGroupFilter === "all" || showGroupFilter === "event") &&
-                  [...festUnits]
-                    .sort((a, b) => (unitEarliest(b) < unitEarliest(a) ? -1 : 1))
-                    .map((u) => (
-                      <button
-                        key={u.id}
-                        className={`unit-pill event-pill ${u.id === selUnitId ? "is-on" : ""}`}
-                        onClick={() => handleUnitChange(u.id)}
-                      >
-                        {shortUnitTitle(u)}
-                      </button>
-                    ))}
+                {[...finalUnits]
+                  .sort((a, b) => (unitEarliest(b) < unitEarliest(a) ? -1 : 1))
+                  .map((u) => (
+                    <button
+                      key={u.id}
+                      className={`unit-pill ${u.type === "專場" ? "tour-pill" : "event-pill"} ${u.id === selUnitId ? "is-on" : ""}`}
+                      onClick={() => handleUnitChange(u.id)}
+                    >
+                      {shortUnitTitle(u)}
+                    </button>
+                  ))}
               </div>
             </div>
           );
