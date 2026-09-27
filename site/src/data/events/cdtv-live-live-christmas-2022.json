@@ -1,0 +1,30 @@
+{
+  "id": "cdtv-live-live-christmas-2022",
+  "title": "CDTVライブ！ライブ！クリスマス4時間スペシャル",
+  "type": "音樂祭",
+  "shows": [
+    {
+      "id": "1500153",
+      "date": "2022-12-19",
+      "weekday": "月",
+      "city": "東京",
+      "venue": "TBS電視台",
+      "opensAt": "19:00",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/1500153"
+      ],
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "songId": "mixed-nuts"
+        },
+        {
+          "order": 2,
+          "encore": false,
+          "songId": "subtitle"
+        }
+      ]
+    }
+  ]
+}

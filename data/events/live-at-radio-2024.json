@@ -1,0 +1,45 @@
+{
+  "id": "live-at-radio-2024",
+  "title": "Live@Radio",
+  "type": "專場",
+  "shows": [
+    {
+      "id": "1668319",
+      "date": "2024-05-07",
+      "weekday": "火",
+      "city": "東京",
+      "venue": "電台直播",
+      "opensAt": "22:15",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/1668319"
+      ],
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "songId": "nichijo"
+        },
+        {
+          "order": 2,
+          "encore": false,
+          "songId": "tattoo"
+        },
+        {
+          "order": 3,
+          "encore": false,
+          "songId": "chessboard"
+        },
+        {
+          "order": 4,
+          "encore": false,
+          "songId": "mixed-nuts"
+        },
+        {
+          "order": 5,
+          "encore": false,
+          "songId": "soulsoup"
+        }
+      ]
+    }
+  ]
+}

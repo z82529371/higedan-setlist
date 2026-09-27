@@ -1,0 +1,106 @@
+{
+  "id": "unofficial-2024",
+  "title": "one-man live 2024 -UNOFFICIAL-",
+  "type": "專場",
+  "shows": [
+    {
+      "id": "1672294",
+      "date": "2024-07-23",
+      "weekday": "火",
+      "city": "東京",
+      "venue": "東京Zepp Haneda",
+      "opensAt": "19:00",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/1672294"
+      ],
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "songId": "mixed-nuts"
+        },
+        {
+          "order": 2,
+          "encore": false,
+          "songId": "no-doubt"
+        },
+        {
+          "order": 3,
+          "encore": false,
+          "songId": "white-noise"
+        },
+        {
+          "order": 4,
+          "encore": false,
+          "songId": "choral-a"
+        },
+        {
+          "order": 5,
+          "encore": false,
+          "songId": "filament"
+        },
+        {
+          "order": 6,
+          "encore": false,
+          "songId": "nichijo"
+        },
+        {
+          "order": 7,
+          "encore": false,
+          "songId": "rowan"
+        },
+        {
+          "order": 8,
+          "encore": false,
+          "songId": "takaga-i-love-you"
+        },
+        {
+          "order": 9,
+          "encore": false,
+          "songId": "fire-ground"
+        },
+        {
+          "order": 10,
+          "encore": false,
+          "songId": "laughter"
+        },
+        {
+          "order": 11,
+          "encore": false,
+          "songId": "escapade"
+        },
+        {
+          "order": 12,
+          "encore": false,
+          "songId": "stand-by-you"
+        },
+        {
+          "order": 13,
+          "encore": false,
+          "songId": "i-love"
+        },
+        {
+          "order": 14,
+          "encore": false,
+          "songId": "last-song"
+        },
+        {
+          "order": 15,
+          "encore": false,
+          "songId": "soulsoup"
+        },
+        {
+          "order": 16,
+          "encore": true,
+          "songId": "anarchy",
+          "note": "Rejoice ver."
+        },
+        {
+          "order": 17,
+          "encore": true,
+          "songId": "tattoo"
+        }
+      ]
+    }
+  ]
+}

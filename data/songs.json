@@ -355,6 +355,36 @@
       "id": "catchball",
       "title": "Catch Ball",
       "livefansId": "851685"
+    },
+    {
+      "id": "choral-a",
+      "title": "Choral A",
+      "livefansId": "736006"
+    },
+    {
+      "id": "filament",
+      "title": "フィラメント",
+      "livefansId": "687566"
+    },
+    {
+      "id": "escapade",
+      "title": "ESCAPADE",
+      "livefansId": "540831"
+    },
+    {
+      "id": "parade",
+      "title": "parade",
+      "livefansId": "329569"
+    },
+    {
+      "id": "clap-clap",
+      "title": "Clap Clap",
+      "livefansId": "435721"
+    },
+    {
+      "id": "tell-me-baby",
+      "title": "Tell Me Baby",
+      "livefansId": "502826"
     }
   ]
 }
