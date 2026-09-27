@@ -1,0 +1,69 @@
+{
+  "id": "uverworld-vs-official-hige-dandism-2024",
+  "title": "UVERworld vs Official髭男dism",
+  "type": "對バン",
+  "shows": [
+    {
+      "id": "1727334",
+      "date": "2024-12-26",
+      "weekday": "木",
+      "city": "東京",
+      "venue": "日本武道館",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/1727334"
+      ],
+      "setlist": [
+        {
+          "encore": false,
+          "order": 1,
+          "songId": "pretender"
+        },
+        {
+          "encore": false,
+          "order": 2,
+          "songId": "i-love"
+        },
+        {
+          "encore": false,
+          "order": 3,
+          "songId": "cry-baby"
+        },
+        {
+          "encore": false,
+          "order": 4,
+          "title": "浮世CROSSING [UVERworld]"
+        },
+        {
+          "encore": false,
+          "order": 5,
+          "title": "SHAMROCK [UVERworld]"
+        },
+        {
+          "encore": false,
+          "order": 6,
+          "songId": "same-blue"
+        },
+        {
+          "encore": false,
+          "order": 7,
+          "songId": "subtitle"
+        },
+        {
+          "encore": false,
+          "order": 8,
+          "songId": "stand-by-you"
+        },
+        {
+          "encore": false,
+          "order": 9,
+          "songId": "shukumei"
+        },
+        {
+          "encore": false,
+          "order": 10,
+          "songId": "mixed-nuts"
+        }
+      ]
+    }
+  ]
+}

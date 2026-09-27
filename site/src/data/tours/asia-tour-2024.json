@@ -1,0 +1,168 @@
+{
+  "id": "asia-tour-2024",
+  "title": "Asia Tour 2024 - Rejoice -",
+  "type": "專場",
+  "shows": [
+    {
+      "id": "1720176",
+      "date": "2024-12-15",
+      "city": "台北",
+      "venue": "台北小巨蛋",
+      "region": "台灣",
+      "prefecture": "台北",
+      "title": "Asia Tour 2024 - Rejoice - 台灣公演",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/1720176"
+      ],
+      "diff": {
+        "insert": [
+          {
+            "after": 10,
+            "item": {
+              "encore": false,
+              "songId": "pretender",
+              "note": "楢崎さんと一緒に合唱",
+              "kind": [
+                "request"
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "1720175",
+      "date": "2024-12-01",
+      "city": "首爾",
+      "venue": "KINTEX Hall 5",
+      "region": "韓國",
+      "prefecture": "高陽",
+      "title": "Asia Tour 2024 - Rejoice - 韓國公演 Day 2",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/1720175"
+      ],
+      "diff": {
+        "insert": [
+          {
+            "after": 17,
+            "item": {
+              "encore": true,
+              "songId": "itan-na-star"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "1720174",
+      "date": "2024-11-30",
+      "city": "首爾",
+      "venue": "KINTEX Hall 5",
+      "region": "韓國",
+      "prefecture": "高陽",
+      "title": "Asia Tour 2024 - Rejoice - 韓國公演 Day 1",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/1720174"
+      ]
+    }
+  ],
+  "templateSetlist": [
+    {
+      "order": 1,
+      "encore": false,
+      "songId": "finder",
+      "note": "OP映像"
+    },
+    {
+      "order": 2,
+      "encore": false,
+      "songId": "pretender"
+    },
+    {
+      "order": 3,
+      "encore": false,
+      "songId": "shukumei"
+    },
+    {
+      "order": 4,
+      "encore": false,
+      "songId": "stand-by-you"
+    },
+    {
+      "order": 5,
+      "encore": false,
+      "songId": "yesterday"
+    },
+    {
+      "order": 6,
+      "encore": false,
+      "songId": "nichijo"
+    },
+    {
+      "order": 7,
+      "encore": false,
+      "songId": "subtitle"
+    },
+    {
+      "order": 8,
+      "encore": false,
+      "songId": "i-love"
+    },
+    {
+      "order": 9,
+      "encore": false,
+      "songId": "white-noise"
+    },
+    {
+      "order": 10,
+      "encore": false,
+      "songId": "no-doubt"
+    },
+    {
+      "order": 11,
+      "encore": false,
+      "songId": "universe"
+    },
+    {
+      "order": 12,
+      "encore": false,
+      "songId": "cry-baby"
+    },
+    {
+      "order": 13,
+      "encore": false,
+      "songId": "anarchy",
+      "note": "Rejoice ver."
+    },
+    {
+      "order": 14,
+      "encore": false,
+      "songId": "chessboard"
+    },
+    {
+      "order": 15,
+      "encore": false,
+      "songId": "sharon"
+    },
+    {
+      "order": 16,
+      "encore": false,
+      "songId": "mixed-nuts"
+    },
+    {
+      "order": 17,
+      "encore": true,
+      "songId": "same-blue"
+    },
+    {
+      "order": 18,
+      "encore": true,
+      "songId": "soulsoup"
+    },
+    {
+      "order": 19,
+      "encore": true,
+      "songId": "tattoo"
+    }
+  ]
+}

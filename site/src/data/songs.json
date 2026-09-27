@@ -77,7 +77,7 @@
     },
     {
       "id": "white-noise",
-      "title": "ホワイトノイズ",
+      "title": "White Noise",
       "livefansId": "754448"
     },
     {
@@ -202,6 +202,11 @@
       "livefansId": "626357"
     },
     {
+      "id": "tabi-wa-michizure",
+      "title": "旅は道連れ",
+      "livefansId": "626360"
+    },
+    {
       "id": "yugure-zoi",
       "title": "夕暮れ沿い",
       "livefansId": "329557"
@@ -315,6 +320,41 @@
       "id": "soulsoup",
       "title": "SOULSOUP",
       "livefansId": "830423"
+    },
+    {
+      "id": "55",
+      "title": "55",
+      "livefansId": "582048"
+    },
+    {
+      "id": "bedroom-talk",
+      "title": "Bedroom Talk",
+      "livefansId": "687565"
+    },
+    {
+      "id": "hello",
+      "title": "HELLO",
+      "livefansId": "651486"
+    },
+    {
+      "id": "uramitsuramikiwami",
+      "title": "うらみつらみきわみ",
+      "livefansId": "851687"
+    },
+    {
+      "id": "inu-ka-cat-ka-de-shinumade-kenka-shiyou",
+      "title": "犬かキャットかで死ぬまで喧嘩しよう!",
+      "livefansId": "474418"
+    },
+    {
+      "id": "finder",
+      "title": "Finder",
+      "livefansId": "851682"
+    },
+    {
+      "id": "catchball",
+      "title": "Catch Ball",
+      "livefansId": "851685"
     }
   ]
 }

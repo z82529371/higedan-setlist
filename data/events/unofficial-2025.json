@@ -1,0 +1,123 @@
+{
+  "id": "unofficial-2025",
+  "title": "one-man live 2025 -UNOFFICIAL-",
+  "type": "專場",
+  "shows": [
+    {
+      "id": "1775094",
+      "date": "2025-04-24",
+      "weekday": "木",
+      "city": "橫濱",
+      "venue": "KT Zepp Yokohama",
+      "opensAt": "19:00",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/1775094"
+      ],
+      "setlist": [
+        {
+          "encore": false,
+          "order": 1,
+          "songId": "amazing"
+        },
+        {
+          "encore": false,
+          "order": 2,
+          "songId": "pending-machine"
+        },
+        {
+          "encore": false,
+          "order": 3,
+          "songId": "coffee-to-syrup"
+        },
+        {
+          "encore": false,
+          "order": 4,
+          "songId": "bad-for-me"
+        },
+        {
+          "encore": false,
+          "order": 5,
+          "songId": "vintage"
+        },
+        {
+          "encore": false,
+          "order": 6,
+          "songId": "bedroom-talk"
+        },
+        {
+          "encore": false,
+          "order": 7,
+          "songId": "lady"
+        },
+        {
+          "encore": false,
+          "order": 8,
+          "songId": "55"
+        },
+        {
+          "encore": false,
+          "order": 9,
+          "songId": "tabi-wa-michizure"
+        },
+        {
+          "encore": false,
+          "order": 10,
+          "songId": "hello"
+        },
+        {
+          "encore": false,
+          "order": 11,
+          "songId": "driver"
+        },
+        {
+          "encore": false,
+          "order": 12,
+          "songId": "uramitsuramikiwami"
+        },
+        {
+          "encore": false,
+          "order": 13,
+          "songId": "inu-ka-cat-ka-de-shinumade-kenka-shiyou"
+        },
+        {
+          "encore": false,
+          "order": 14,
+          "songId": "nichiyoubi-no-love-letter"
+        },
+        {
+          "encore": false,
+          "order": 15,
+          "songId": "rolling"
+        },
+        {
+          "encore": true,
+          "order": 16,
+          "songId": "50pct"
+        },
+        {
+          "encore": true,
+          "order": 17,
+          "songId": "universe",
+          "kind": [
+            "request"
+          ],
+          "note": "リクエスト1曲目"
+        },
+        {
+          "encore": true,
+          "order": 18,
+          "songId": "stand-by-you",
+          "kind": [
+            "request"
+          ],
+          "note": "リクエスト2曲目"
+        },
+        {
+          "encore": true,
+          "order": 19,
+          "songId": "sweet-tweet"
+        }
+      ]
+    }
+  ]
+}

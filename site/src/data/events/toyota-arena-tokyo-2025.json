@@ -4,13 +4,15 @@
   "type": "專場",
   "shows": [
     {
-      "id": "toyota-arena-tokyo-2025-1011",
-      "date": "2025-10-11",
-      "weekday": "六",
+      "id": "toyota-arena-tokyo-2025-1012",
+      "date": "2025-10-12",
+      "weekday": "日",
       "city": "東京",
       "venue": "東京TOYOTA競技場",
       "opensAt": "19:00",
-      "sourceUrls": ["https://www.livefans.jp/events/1827081"],
+      "sourceUrls": [
+        "https://www.livefans.jp/events/1827082"
+      ],
       "setlist": [
         {
           "encore": false,
@@ -60,7 +62,9 @@
         {
           "encore": false,
           "order": 9,
-          "kind": ["interlude"],
+          "kind": [
+            "interlude"
+          ],
           "note": "I'm home(Interlude)"
         },
         {
@@ -111,13 +115,15 @@
       ]
     },
     {
-      "id": "toyota-arena-tokyo-2025-1012",
-      "date": "2025-10-12",
-      "weekday": "日",
+      "id": "toyota-arena-tokyo-2025-1011",
+      "date": "2025-10-11",
+      "weekday": "六",
       "city": "東京",
       "venue": "東京TOYOTA競技場",
       "opensAt": "19:00",
-      "sourceUrls": ["https://www.livefans.jp/events/1827082"],
+      "sourceUrls": [
+        "https://www.livefans.jp/events/1827081"
+      ],
       "setlist": [
         {
           "encore": false,
@@ -167,7 +173,9 @@
         {
           "encore": false,
           "order": 9,
-          "kind": ["interlude"],
+          "kind": [
+            "interlude"
+          ],
           "note": "I'm home(Interlude)"
         },
         {

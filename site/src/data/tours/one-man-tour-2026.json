@@ -107,324 +107,14 @@
   ],
   "shows": [
     {
-      "id": "one-man-tour-2026-sendai-0404",
-      "date": "2026-04-04",
-      "weekday": "六",
-      "city": "仙台",
-      "venue": "仙台太陽廣場會館",
-      "opensAt": "18:00",
-      "sourceUrls": [
-        "https://www.livefans.jp/events/1866419"
-      ],
-      "diff": {
-        "skip": [
-          8,
-          9
-        ],
-        "insert": [
-          {
-            "after": 7,
-            "item": {
-              "encore": false,
-              "songId": "pretender"
-            }
-          },
-          {
-            "after": 7,
-            "item": {
-              "encore": false,
-              "songId": "elder-flower"
-            }
-          }
-        ]
-      }
-    },
-    {
-      "id": "one-man-tour-2026-sendai-0405",
-      "date": "2026-04-05",
+      "id": "one-man-tour-2026-yokohama-0726",
+      "date": "2026-07-26",
       "weekday": "日",
-      "city": "仙台",
-      "venue": "仙台太陽廣場會館",
+      "city": "橫濱",
+      "venue": "橫濱K-Arena",
       "opensAt": "18:00",
       "sourceUrls": [
-        "https://www.livefans.jp/events/1866420"
-      ],
-      "diff": {}
-    },
-    {
-      "id": "one-man-tour-2026-fukuoka-0417",
-      "date": "2026-04-17",
-      "weekday": "五",
-      "city": "福岡",
-      "venue": "福岡太陽宮殿會館",
-      "opensAt": "19:00",
-      "sourceUrls": [
-        "https://www.livefans.jp/events/1866421"
-      ],
-      "diff": {}
-    },
-    {
-      "id": "one-man-tour-2026-fukuoka-0418",
-      "date": "2026-04-18",
-      "weekday": "六",
-      "city": "福岡",
-      "venue": "福岡太陽宮殿會館",
-      "opensAt": "19:00",
-      "sourceUrls": [
-        "https://www.livefans.jp/events/1866422"
-      ],
-      "diff": {}
-    },
-    {
-      "id": "one-man-tour-2026-kochi-0425",
-      "date": "2026-04-25",
-      "weekday": "六",
-      "city": "高知",
-      "venue": "高知縣立縣民文化會館 Orange Hall",
-      "opensAt": "18:00",
-      "sourceUrls": [
-        "https://www.livefans.jp/events/1866423"
-      ],
-      "diff": {}
-    },
-    {
-      "id": "one-man-tour-2026-ehime-0427",
-      "date": "2026-04-27",
-      "weekday": "一",
-      "city": "愛媛",
-      "venue": "愛媛縣縣民文化會館",
-      "opensAt": "19:00",
-      "sourceUrls": [
-        "https://www.livefans.jp/events/1866424"
-      ],
-      "diff": {}
-    },
-    {
-      "id": "one-man-tour-2026-niigata-0503",
-      "date": "2026-05-03",
-      "weekday": "日",
-      "city": "新潟",
-      "venue": "新潟縣民會館",
-      "opensAt": "18:00",
-      "sourceUrls": [
-        "https://www.livefans.jp/events/1866426"
-      ],
-      "diff": {}
-    },
-    {
-      "id": "one-man-tour-2026-niigata-0504",
-      "date": "2026-05-04",
-      "weekday": "一",
-      "city": "新潟",
-      "venue": "新潟縣民會館",
-      "opensAt": "18:00",
-      "sourceUrls": [
-        "https://www.livefans.jp/events/1866427"
-      ],
-      "diff": {}
-    },
-    {
-      "id": "one-man-tour-2026-oita-0510",
-      "date": "2026-05-10",
-      "weekday": "日",
-      "city": "大分",
-      "venue": "iichiko 大劇場",
-      "opensAt": "18:00",
-      "sourceUrls": [
-        "https://www.livefans.jp/events/1866428"
-      ],
-      "diff": {}
-    },
-    {
-      "id": "one-man-tour-2026-nagasaki-0512",
-      "date": "2026-05-12",
-      "weekday": "二",
-      "city": "長崎",
-      "venue": "ARKAS佐世保",
-      "opensAt": "19:00",
-      "sourceUrls": [
-        "https://www.livefans.jp/events/1866432"
-      ],
-      "diff": {}
-    },
-    {
-      "id": "one-man-tour-2026-yamagata-0521",
-      "date": "2026-05-21",
-      "weekday": "四",
-      "city": "山形",
-      "venue": "山形縣民會館",
-      "opensAt": "19:00",
-      "sourceUrls": [
-        "https://www.livefans.jp/events/1866433"
-      ],
-      "diff": {}
-    },
-    {
-      "id": "one-man-tour-2026-akita-0523",
-      "date": "2026-05-23",
-      "weekday": "六",
-      "city": "秋田",
-      "venue": "秋田藝術劇場",
-      "opensAt": "18:00",
-      "sourceUrls": [
-        "https://www.livefans.jp/events/1866434"
-      ],
-      "diff": {}
-    },
-    {
-      "id": "one-man-tour-2026-hiroshima-0530",
-      "date": "2026-05-30",
-      "weekday": "六",
-      "city": "廣島",
-      "venue": "廣島文化學園HBG會館",
-      "opensAt": "18:00",
-      "sourceUrls": [
-        "https://www.livefans.jp/events/1866438"
-      ],
-      "diff": {}
-    },
-    {
-      "id": "one-man-tour-2026-hiroshima-0531",
-      "date": "2026-05-31",
-      "weekday": "日",
-      "city": "廣島",
-      "venue": "廣島文化學園HBG會館",
-      "opensAt": "18:00",
-      "sourceUrls": [
-        "https://www.livefans.jp/events/1866439"
-      ],
-      "diff": {}
-    },
-    {
-      "id": "one-man-tour-2026-sapporo-0611",
-      "date": "2026-06-11",
-      "weekday": "四",
-      "city": "札幌",
-      "venue": "帶廣市民文化會館",
-      "opensAt": "19:00",
-      "sourceUrls": [
-        "https://www.livefans.jp/events/1866443"
-      ],
-      "diff": {}
-    },
-    {
-      "id": "one-man-tour-2026-sapporo-0613",
-      "date": "2026-06-13",
-      "weekday": "六",
-      "city": "札幌",
-      "venue": "釧路市民文化會館",
-      "opensAt": "18:00",
-      "sourceUrls": [
-        "https://www.livefans.jp/events/1866444"
-      ],
-      "diff": {}
-    },
-    {
-      "id": "one-man-tour-2026-sapporo-0620",
-      "date": "2026-06-20",
-      "weekday": "六",
-      "city": "札幌",
-      "venue": "札幌文化藝術劇場 hitaru",
-      "opensAt": "18:00",
-      "sourceUrls": [
-        "https://www.livefans.jp/events/1866445"
-      ],
-      "diff": {}
-    },
-    {
-      "id": "one-man-tour-2026-sapporo-0621",
-      "date": "2026-06-21",
-      "weekday": "日",
-      "city": "札幌",
-      "venue": "札幌文化藝術劇場 hitaru",
-      "opensAt": "18:00",
-      "sourceUrls": [
-        "https://www.livefans.jp/events/1866446"
-      ],
-      "diff": {}
-    },
-    {
-      "id": "one-man-tour-2026-nagoya-0703",
-      "date": "2026-07-03",
-      "weekday": "五",
-      "city": "名古屋",
-      "venue": "森林會館",
-      "opensAt": "19:00",
-      "sourceUrls": [
-        "https://www.livefans.jp/events/1866447"
-      ],
-      "diff": {}
-    },
-    {
-      "id": "one-man-tour-2026-nagoya-0704",
-      "date": "2026-07-04",
-      "weekday": "六",
-      "city": "名古屋",
-      "venue": "森林會館",
-      "opensAt": "19:00",
-      "sourceUrls": [
-        "https://www.livefans.jp/events/1866448"
-      ],
-      "diff": {}
-    },
-    {
-      "id": "one-man-tour-2026-tokyo-0711",
-      "date": "2026-07-11",
-      "weekday": "六",
-      "city": "東京",
-      "venue": "有明SGC會館",
-      "opensAt": "18:00",
-      "sourceUrls": [
-        "https://www.livefans.jp/events/1866449"
-      ],
-      "diff": {}
-    },
-    {
-      "id": "one-man-tour-2026-tokyo-0712",
-      "date": "2026-07-12",
-      "weekday": "日",
-      "city": "東京",
-      "venue": "有明SGC會館",
-      "opensAt": "18:00",
-      "sourceUrls": [
-        "https://www.livefans.jp/events/1866450"
-      ],
-      "diff": {}
-    },
-    {
-      "id": "one-man-tour-2026-osaka-0718",
-      "date": "2026-07-18",
-      "weekday": "六",
-      "city": "大阪",
-      "venue": "大阪城會館",
-      "opensAt": "18:00",
-      "sourceUrls": [
-        "https://www.livefans.jp/events/1866451"
-      ],
-      "diff": {
-        "skip": [
-          5
-        ],
-        "insert": [
-          {
-            "after": 4,
-            "item": {
-              "encore": false,
-              "songId": "laughter"
-            }
-          }
-        ]
-      }
-    },
-    {
-      "id": "one-man-tour-2026-osaka-0719",
-      "date": "2026-07-19",
-      "weekday": "日",
-      "city": "大阪",
-      "venue": "大阪城會館",
-      "opensAt": "18:00",
-      "sourceUrls": [
-        "https://www.livefans.jp/events/1866452"
+        "https://www.livefans.jp/events/1866454"
       ],
       "diff": {
         "skip": [
@@ -467,14 +157,14 @@
       }
     },
     {
-      "id": "one-man-tour-2026-yokohama-0726",
-      "date": "2026-07-26",
+      "id": "one-man-tour-2026-osaka-0719",
+      "date": "2026-07-19",
       "weekday": "日",
-      "city": "橫濱",
-      "venue": "橫濱K-Arena",
+      "city": "大阪",
+      "venue": "大阪城會館",
       "opensAt": "18:00",
       "sourceUrls": [
-        "https://www.livefans.jp/events/1866454"
+        "https://www.livefans.jp/events/1866452"
       ],
       "diff": {
         "skip": [
@@ -486,6 +176,316 @@
             "item": {
               "encore": false,
               "songId": "laughter"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "one-man-tour-2026-osaka-0718",
+      "date": "2026-07-18",
+      "weekday": "六",
+      "city": "大阪",
+      "venue": "大阪城會館",
+      "opensAt": "18:00",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/1866451"
+      ],
+      "diff": {
+        "skip": [
+          5
+        ],
+        "insert": [
+          {
+            "after": 4,
+            "item": {
+              "encore": false,
+              "songId": "laughter"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "one-man-tour-2026-tokyo-0712",
+      "date": "2026-07-12",
+      "weekday": "日",
+      "city": "東京",
+      "venue": "有明SGC會館",
+      "opensAt": "18:00",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/1866450"
+      ],
+      "diff": {}
+    },
+    {
+      "id": "one-man-tour-2026-tokyo-0711",
+      "date": "2026-07-11",
+      "weekday": "六",
+      "city": "東京",
+      "venue": "有明SGC會館",
+      "opensAt": "18:00",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/1866449"
+      ],
+      "diff": {}
+    },
+    {
+      "id": "one-man-tour-2026-nagoya-0704",
+      "date": "2026-07-04",
+      "weekday": "六",
+      "city": "名古屋",
+      "venue": "森林會館",
+      "opensAt": "19:00",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/1866448"
+      ],
+      "diff": {}
+    },
+    {
+      "id": "one-man-tour-2026-nagoya-0703",
+      "date": "2026-07-03",
+      "weekday": "五",
+      "city": "名古屋",
+      "venue": "森林會館",
+      "opensAt": "19:00",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/1866447"
+      ],
+      "diff": {}
+    },
+    {
+      "id": "one-man-tour-2026-sapporo-0621",
+      "date": "2026-06-21",
+      "weekday": "日",
+      "city": "札幌",
+      "venue": "札幌文化藝術劇場 hitaru",
+      "opensAt": "18:00",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/1866446"
+      ],
+      "diff": {}
+    },
+    {
+      "id": "one-man-tour-2026-sapporo-0620",
+      "date": "2026-06-20",
+      "weekday": "六",
+      "city": "札幌",
+      "venue": "札幌文化藝術劇場 hitaru",
+      "opensAt": "18:00",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/1866445"
+      ],
+      "diff": {}
+    },
+    {
+      "id": "one-man-tour-2026-sapporo-0613",
+      "date": "2026-06-13",
+      "weekday": "六",
+      "city": "札幌",
+      "venue": "釧路市民文化會館",
+      "opensAt": "18:00",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/1866444"
+      ],
+      "diff": {}
+    },
+    {
+      "id": "one-man-tour-2026-sapporo-0611",
+      "date": "2026-06-11",
+      "weekday": "四",
+      "city": "札幌",
+      "venue": "帶廣市民文化會館",
+      "opensAt": "19:00",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/1866443"
+      ],
+      "diff": {}
+    },
+    {
+      "id": "one-man-tour-2026-hiroshima-0531",
+      "date": "2026-05-31",
+      "weekday": "日",
+      "city": "廣島",
+      "venue": "廣島文化學園HBG會館",
+      "opensAt": "18:00",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/1866439"
+      ],
+      "diff": {}
+    },
+    {
+      "id": "one-man-tour-2026-hiroshima-0530",
+      "date": "2026-05-30",
+      "weekday": "六",
+      "city": "廣島",
+      "venue": "廣島文化學園HBG會館",
+      "opensAt": "18:00",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/1866438"
+      ],
+      "diff": {}
+    },
+    {
+      "id": "one-man-tour-2026-akita-0523",
+      "date": "2026-05-23",
+      "weekday": "六",
+      "city": "秋田",
+      "venue": "秋田藝術劇場",
+      "opensAt": "18:00",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/1866434"
+      ],
+      "diff": {}
+    },
+    {
+      "id": "one-man-tour-2026-yamagata-0521",
+      "date": "2026-05-21",
+      "weekday": "四",
+      "city": "山形",
+      "venue": "山形縣民會館",
+      "opensAt": "19:00",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/1866433"
+      ],
+      "diff": {}
+    },
+    {
+      "id": "one-man-tour-2026-nagasaki-0512",
+      "date": "2026-05-12",
+      "weekday": "二",
+      "city": "長崎",
+      "venue": "ARKAS佐世保",
+      "opensAt": "19:00",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/1866432"
+      ],
+      "diff": {}
+    },
+    {
+      "id": "one-man-tour-2026-oita-0510",
+      "date": "2026-05-10",
+      "weekday": "日",
+      "city": "大分",
+      "venue": "iichiko 大劇場",
+      "opensAt": "18:00",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/1866428"
+      ],
+      "diff": {}
+    },
+    {
+      "id": "one-man-tour-2026-niigata-0504",
+      "date": "2026-05-04",
+      "weekday": "一",
+      "city": "新潟",
+      "venue": "新潟縣民會館",
+      "opensAt": "18:00",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/1866427"
+      ],
+      "diff": {}
+    },
+    {
+      "id": "one-man-tour-2026-niigata-0503",
+      "date": "2026-05-03",
+      "weekday": "日",
+      "city": "新潟",
+      "venue": "新潟縣民會館",
+      "opensAt": "18:00",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/1866426"
+      ],
+      "diff": {}
+    },
+    {
+      "id": "one-man-tour-2026-ehime-0427",
+      "date": "2026-04-27",
+      "weekday": "一",
+      "city": "愛媛",
+      "venue": "愛媛縣縣民文化會館",
+      "opensAt": "19:00",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/1866424"
+      ],
+      "diff": {}
+    },
+    {
+      "id": "one-man-tour-2026-kochi-0425",
+      "date": "2026-04-25",
+      "weekday": "六",
+      "city": "高知",
+      "venue": "高知縣立縣民文化會館 Orange Hall",
+      "opensAt": "18:00",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/1866423"
+      ],
+      "diff": {}
+    },
+    {
+      "id": "one-man-tour-2026-fukuoka-0418",
+      "date": "2026-04-18",
+      "weekday": "六",
+      "city": "福岡",
+      "venue": "福岡太陽宮殿會館",
+      "opensAt": "19:00",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/1866422"
+      ],
+      "diff": {}
+    },
+    {
+      "id": "one-man-tour-2026-fukuoka-0417",
+      "date": "2026-04-17",
+      "weekday": "五",
+      "city": "福岡",
+      "venue": "福岡太陽宮殿會館",
+      "opensAt": "19:00",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/1866421"
+      ],
+      "diff": {}
+    },
+    {
+      "id": "one-man-tour-2026-sendai-0405",
+      "date": "2026-04-05",
+      "weekday": "日",
+      "city": "仙台",
+      "venue": "仙台太陽廣場會館",
+      "opensAt": "18:00",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/1866420"
+      ],
+      "diff": {}
+    },
+    {
+      "id": "one-man-tour-2026-sendai-0404",
+      "date": "2026-04-04",
+      "weekday": "六",
+      "city": "仙台",
+      "venue": "仙台太陽廣場會館",
+      "opensAt": "18:00",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/1866419"
+      ],
+      "diff": {
+        "skip": [
+          8,
+          9
+        ],
+        "insert": [
+          {
+            "after": 7,
+            "item": {
+              "encore": false,
+              "songId": "pretender"
+            }
+          },
+          {
+            "after": 7,
+            "item": {
+              "encore": false,
+              "songId": "elder-flower"
             }
           }
         ]
