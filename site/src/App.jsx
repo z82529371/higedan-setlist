@@ -30,6 +30,123 @@ const KIND_TAB = {
 };
 const KIND_ORDER = ["premiere", "unreleased", "satoshi-solo", "request"];
 
+const ALBUM_MAP = {
+  "same-blue": "Rejoice (2024)",
+  "50pct": "Rejoice (2024)",
+  "sanitizer": "Rejoice (2024)",
+  "elder-flower": "Rejoice (2024)",
+  "make-me-wonder": "Rejoice (2024)",
+  "tattoo": "Rejoice (2024)",
+  "subtitle": "Rejoice (2024)",
+  "mixed-nuts": "Rejoice (2024)",
+  "white-noise": "Rejoice (2024)",
+  "nichijo": "Rejoice (2024)",
+  "b-side-blues": "Rejoice (2024)",
+  "dakuten": "Rejoice (2024)",
+  "sousisouai": "Rejoice (2024)",
+  "sharon": "Rejoice (2024)",
+
+  "editorial": "Editorial (2021)",
+  "apoptosis": "Editorial (2021)",
+  "cry-baby": "Editorial (2021)",
+  "i-love": "Editorial (2021)",
+  "laughter": "Editorial (2021)",
+  "universe": "Editorial (2021)",
+  "parabola": "Editorial (2021)",
+  "anarchy": "Editorial (2021)",
+  "shower": "Editorial (2021)",
+  "green-rain": "Editorial (2021)",
+  "knit-no-boushi": "Editorial (2021)",
+  "bed-side-story": "Editorial (2021)",
+  "lost-in-my-room": "Editorial (2021)",
+
+  "pretender": "Traveler (2019)",
+  "shukumei": "Traveler (2019)",
+  "stand-by-you": "Traveler (2019)",
+  "yesterday": "Traveler (2019)",
+  "fire-ground": "Traveler (2019)",
+  "amazing": "Traveler (2019)",
+  "rowan": "Traveler (2019)",
+  "vintage": "Traveler (2019)",
+  "115man-kiro-no-film": "Traveler (2019)",
+  "takaga-i-love-you": "Traveler (2019)",
+  "bad-for-me": "Traveler (2019)",
+
+  "no-doubt": "エスカパレード (2018)",
+  "itan-na-star": "エスカパレード (2018)",
+  "sweet-tweet": "エスカパレード (2018)",
+  "lady": "エスカパレード (2018)",
+  "rolling": "エスカパレード (2018)",
+  "driver": "エスカパレード (2018)",
+  "trailer": "エスカパレード (2018)",
+  "ai-nandaga": "エスカパレード (2018)",
+  "yugure-zoi": "エスカパレード (2018)",
+  "shihatsu-ga-michibiku-kouhukuron": "エスカパレード (2018)",
+};
+
+const ALBUM_ORDER = [
+  "Rejoice (2024)",
+  "Editorial (2021)",
+  "Traveler (2019)",
+  "エスカパレード (2018)",
+  "EP / 單曲",
+  "未發行曲目",
+];
+
+function getSongAlbum(song) {
+  if (song.unreleased || songUnreleased.has(song.id)) return "未發行曲目";
+  return ALBUM_MAP[song.id] ?? "EP / 單曲";
+}
+
+const REGION_ORDER = [
+  "海外（台灣 / 韓國 / 東南亞）",
+  "日本 - 關東",
+  "日本 - 關西",
+  "日本 - 東北 / 北海道",
+  "日本 - 中部 / 九州 / 其他",
+];
+
+function getVenueRegion(v) {
+  const c = v.city ?? "";
+  const n = v.name ?? "";
+  if (
+    c.includes("台北") ||
+    c.includes("首爾") ||
+    c.includes("曼谷") ||
+    c.includes("新加坡") ||
+    n.includes("UOB") ||
+    n.includes("高尺")
+  ) {
+    return "海外（台灣 / 韓國 / 東南亞）";
+  }
+  if (
+    c.includes("東京") ||
+    c.includes("埼玉") ||
+    c.includes("橫濱") ||
+    c.includes("千葉")
+  ) {
+    return "日本 - 關東";
+  }
+  if (
+    c.includes("大阪") ||
+    c.includes("神戶") ||
+    c.includes("京都") ||
+    c.includes("兵庫")
+  ) {
+    return "日本 - 關西";
+  }
+  if (
+    c.includes("仙台") ||
+    c.includes("札幌") ||
+    c.includes("宮城") ||
+    c.includes("岩手") ||
+    c.includes("北海道")
+  ) {
+    return "日本 - 東北 / 北海道";
+  }
+  return "日本 - 中部 / 九州 / 其他";
+}
+
 function showDate(s) {
   return s.weekday ? `${s.date}（${s.weekday}）` : s.date;
 }
@@ -176,6 +293,10 @@ export default function App() {
   const [selShow, setSelShow] = useState(() => defaultShowId(allUnits[0]));
   const [q, setQ] = useState("");
 
+  const [songGroupFilter, setSongGroupFilter] = useState("all");
+  const [venueGroupFilter, setVenueGroupFilter] = useState("all");
+  const [showGroupFilter, setShowGroupFilter] = useState("all");
+
   const slipRef = useRef(null);
 
   const current = unitData.get(selUnitId);
@@ -310,39 +431,107 @@ export default function App() {
       </div>
 
       {tab === "show" && (
-        <div className="unit-groups" role="group" aria-label="選擇單元">
-          {tourUnits.length > 0 && (
-            <div className="query-tabs tour-tabs" role="group" aria-label="巡演">
-              {[...tourUnits]
+        <div className="filter-pill-bar" role="group" aria-label="場次巡演分組">
+          <div className="group-label">演出類型</div>
+          <button
+            className={`filter-pill ${showGroupFilter === "all" ? "is-active" : ""}`}
+            onClick={() => setShowGroupFilter("all")}
+          >
+            全部場次
+          </button>
+          <button
+            className={`filter-pill ${showGroupFilter === "tour" ? "is-active" : ""}`}
+            onClick={() => setShowGroupFilter("tour")}
+          >
+            巡演專場 ({tourUnits.length})
+          </button>
+          <button
+            className={`filter-pill ${showGroupFilter === "event" ? "is-active" : ""}`}
+            onClick={() => setShowGroupFilter("event")}
+          >
+            音樂祭／事件 ({eventUnits.length})
+          </button>
+
+          <div className="unit-pills-row">
+            {(showGroupFilter === "all" || showGroupFilter === "tour") &&
+              [...tourUnits]
                 .sort((a, b) => (unitEarliest(b) < unitEarliest(a) ? -1 : 1))
                 .map((u) => (
                   <button
                     key={u.id}
-                    className={`query-tab ${u.id === selUnitId ? "is-on" : ""}`}
+                    className={`unit-pill tour-pill ${u.id === selUnitId ? "is-on" : ""}`}
                     onClick={() => handleUnitChange(u.id)}
-                    aria-pressed={u.id === selUnitId}
                   >
                     {shortUnitTitle(u)}
                   </button>
                 ))}
-            </div>
-          )}
-          {eventUnits.length > 0 && (
-            <div className="query-tabs event-tabs" role="group" aria-label="事件">
-              {[...eventUnits]
+            {(showGroupFilter === "all" || showGroupFilter === "event") &&
+              [...eventUnits]
                 .sort((a, b) => (unitEarliest(b) < unitEarliest(a) ? -1 : 1))
                 .map((u) => (
                   <button
                     key={u.id}
-                    className={`query-tab ${u.id === selUnitId ? "is-on" : ""}`}
+                    className={`unit-pill event-pill ${u.id === selUnitId ? "is-on" : ""}`}
                     onClick={() => handleUnitChange(u.id)}
-                    aria-pressed={u.id === selUnitId}
                   >
                     {shortUnitTitle(u)}
                   </button>
                 ))}
-            </div>
-          )}
+          </div>
+        </div>
+      )}
+
+      {tab === "song" && (
+        <div className="filter-pill-bar" role="group" aria-label="歌曲專輯分組">
+          <div className="group-label">專輯／發行分類</div>
+          <button
+            className={`filter-pill ${songGroupFilter === "all" ? "is-active" : ""}`}
+            onClick={() => setSongGroupFilter("all")}
+          >
+            全部歌曲 ({allUsedSongs.length})
+          </button>
+          {ALBUM_ORDER.map((album) => {
+            const count = allUsedSongs.filter(
+              (s) => getSongAlbum(s) === album,
+            ).length;
+            if (!count) return null;
+            return (
+              <button
+                key={album}
+                className={`filter-pill ${songGroupFilter === album ? "is-active" : ""}`}
+                onClick={() => setSongGroupFilter(album)}
+              >
+                💿 {album} ({count})
+              </button>
+            );
+          })}
+        </div>
+      )}
+
+      {tab === "venue" && (
+        <div className="filter-pill-bar" role="group" aria-label="場地區域分組">
+          <div className="group-label">地區分區</div>
+          <button
+            className={`filter-pill ${venueGroupFilter === "all" ? "is-active" : ""}`}
+            onClick={() => setVenueGroupFilter("all")}
+          >
+            全部地區 ({allVenues.length})
+          </button>
+          {REGION_ORDER.map((region) => {
+            const count = allVenues.filter(
+              (v) => getVenueRegion(v) === region,
+            ).length;
+            if (!count) return null;
+            return (
+              <button
+                key={region}
+                className={`filter-pill ${venueGroupFilter === region ? "is-active" : ""}`}
+                onClick={() => setVenueGroupFilter(region)}
+              >
+                📍 {region} ({count})
+              </button>
+            );
+          })}
         </div>
       )}
 
@@ -359,102 +548,159 @@ export default function App() {
         >
           <ul className="drawer-list">
             {tab === "show" &&
-              (current?.shows ?? []).map((s) => {
-                const songCount = current.full
-                  .get(s.id)
-                  .filter((i) => i.songId).length;
+              (() => {
+                const shows = current?.shows ?? [];
+                if (!shows.length) return null;
                 return (
-                  <li key={s.id}>
-                    <a
-                      className={`drawer-link ${s.id === selShow ? "is-on" : ""}`}
-                      href="#"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        handleSelectShow(s.id);
-                      }}
-                      title={showLabel(s)}
-                    >
-                      <span className="drawer-show">
-                        <span className="drawer-date">{showDate(s)}</span>
-                        <span className="drawer-venue">{s.venue}</span>
-                        <span className="drawer-city">{s.city}</span>
-                      </span>
-                      <span className="drawer-count">{songCount} 首</span>
-                    </a>
-                  </li>
+                  <Fragment>
+                    <li className="drawer-group-header">
+                      {shortUnitTitle(current.unit)}
+                    </li>
+                    {shows.map((s) => {
+                      const songCount = current.full
+                        .get(s.id)
+                        .filter((i) => i.songId).length;
+                      return (
+                        <li key={s.id}>
+                          <a
+                            className={`drawer-link ${s.id === selShow ? "is-on" : ""}`}
+                            href="#"
+                            onClick={(e) => {
+                              e.preventDefault();
+                              handleSelectShow(s.id);
+                            }}
+                            title={showLabel(s)}
+                          >
+                            <span className="drawer-show">
+                              <span className="drawer-date">{showDate(s)}</span>
+                              <span className="drawer-venue">{s.venue}</span>
+                              <span className="drawer-city">{s.city}</span>
+                            </span>
+                            <span className="drawer-count">{songCount} 首</span>
+                          </a>
+                        </li>
+                      );
+                    })}
+                  </Fragment>
                 );
-              })}
+              })()}
 
             {tab === "song" &&
               (() => {
-                const songs = allUsedSongs.filter((s) =>
+                let filtered = allUsedSongs.filter((s) =>
                   s.title.toLowerCase().includes(needle),
                 );
-                if (!songs.length)
+                if (songGroupFilter !== "all") {
+                  filtered = filtered.filter(
+                    (s) => getSongAlbum(s) === songGroupFilter,
+                  );
+                }
+                if (!filtered.length)
                   return (
                     <li>
                       <p className="empty-hint">
-                        沒有符合的歌曲，換個關鍵字試試。
+                        沒有符合的歌曲，換個分組或關鍵字試試。
                       </p>
                     </li>
                   );
-                return songs.map((s) => {
-                  const count = (globalSongShows.get(s.id) ?? []).length;
-                  return (
-                    <li key={s.id}>
-                      <a
-                        className={`drawer-link ${s.id === selSong ? "is-on" : ""}`}
-                        href="#"
-                        onClick={(e) => {
-                          e.preventDefault();
-                          handleSelectSong(s.id);
-                        }}
-                      >
-                        <span className="drawer-song">
-                          {s.title}
-                          {songUnreleased.has(s.id) && (
-                            <span className="unreleased-tag">（未發行）</span>
-                          )}
-                        </span>
-                        <span className="drawer-count">{count} 場</span>
-                      </a>
-                    </li>
-                  );
-                });
+
+                // Group by Album
+                const groups = new Map();
+                for (const s of filtered) {
+                  const album = getSongAlbum(s);
+                  if (!groups.has(album)) groups.set(album, []);
+                  groups.get(album).push(s);
+                }
+
+                const sortedAlbums = ALBUM_ORDER.filter((album) =>
+                  groups.has(album),
+                );
+
+                return sortedAlbums.map((album) => (
+                  <Fragment key={album}>
+                    <li className="drawer-group-header">💿 {album}</li>
+                    {groups.get(album).map((s) => {
+                      const count = (globalSongShows.get(s.id) ?? []).length;
+                      return (
+                        <li key={s.id}>
+                          <a
+                            className={`drawer-link ${s.id === selSong ? "is-on" : ""}`}
+                            href="#"
+                            onClick={(e) => {
+                              e.preventDefault();
+                              handleSelectSong(s.id);
+                            }}
+                          >
+                            <span className="drawer-song">
+                              {s.title}
+                              {songUnreleased.has(s.id) && (
+                                <span className="unreleased-tag">（未發行）</span>
+                              )}
+                            </span>
+                            <span className="drawer-count">{count} 場</span>
+                          </a>
+                        </li>
+                      );
+                    })}
+                  </Fragment>
+                ));
               })()}
 
             {tab === "venue" &&
               (() => {
-                const venues = allVenues.filter(
+                let filtered = allVenues.filter(
                   (v) =>
                     v.name.toLowerCase().includes(needle) ||
                     v.city.toLowerCase().includes(needle),
                 );
-                if (!venues.length)
+                if (venueGroupFilter !== "all") {
+                  filtered = filtered.filter(
+                    (v) => getVenueRegion(v) === venueGroupFilter,
+                  );
+                }
+                if (!filtered.length)
                   return (
                     <li>
                       <p className="empty-hint">
-                        沒有符合的場地，換個關鍵字試試。
+                        沒有符合的場地，換個分區或關鍵字試試。
                       </p>
                     </li>
                   );
-                return venues.map((v) => (
-                  <li key={v.name}>
-                    <a
-                      className={`drawer-link ${v.name === selVenue ? "is-on" : ""}`}
-                      href="#"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        handleSelectVenue(v.name);
-                      }}
-                    >
-                      <span className="drawer-song">
-                        {v.name}
-                        <span className="venue-city-sub">（{v.city}）</span>
-                      </span>
-                      <span className="drawer-count">{v.shows.length} 場</span>
-                    </a>
-                  </li>
+
+                // Group by Region
+                const groups = new Map();
+                for (const v of filtered) {
+                  const region = getVenueRegion(v);
+                  if (!groups.has(region)) groups.set(region, []);
+                  groups.get(region).push(v);
+                }
+
+                const sortedRegions = REGION_ORDER.filter((region) =>
+                  groups.has(region),
+                );
+
+                return sortedRegions.map((region) => (
+                  <Fragment key={region}>
+                    <li className="drawer-group-header">📍 {region}</li>
+                    {groups.get(region).map((v) => (
+                      <li key={v.name}>
+                        <a
+                          className={`drawer-link ${v.name === selVenue ? "is-on" : ""}`}
+                          href="#"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            handleSelectVenue(v.name);
+                          }}
+                        >
+                          <span className="drawer-song">
+                            {v.name}
+                            <span className="venue-city-sub">（{v.city}）</span>
+                          </span>
+                          <span className="drawer-count">{v.shows.length} 場</span>
+                        </a>
+                      </li>
+                    ))}
+                  </Fragment>
                 ));
               })()}
           </ul>
