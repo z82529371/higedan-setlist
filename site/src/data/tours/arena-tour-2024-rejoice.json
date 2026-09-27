@@ -7,7 +7,7 @@
       "id": "1672278",
       "date": "2024-11-20",
       "city": "札幌",
-      "venue": "真駒內積水海姆冰上競技場",
+      "venue": "Makomanai Sekisui Heim冰上競技場",
       "region": "北海道",
       "prefecture": "北海道",
       "title": "Arena Tour 2024 - Rejoice - 札幌 Day 2",
@@ -55,13 +55,14 @@
             }
           }
         ]
-      }
+      },
+      "opensAt": "19:00"
     },
     {
       "id": "1672277",
       "date": "2024-11-19",
       "city": "札幌",
-      "venue": "真駒內積水海姆冰上競技場",
+      "venue": "Makomanai Sekisui Heim冰上競技場",
       "region": "北海道",
       "prefecture": "北海道",
       "title": "Arena Tour 2024 - Rejoice - 札幌 Day 1",
@@ -73,7 +74,8 @@
           17,
           20
         ]
-      }
+      },
+      "opensAt": "19:00"
     },
     {
       "id": "1672276",
@@ -101,7 +103,8 @@
             }
           }
         ]
-      }
+      },
+      "opensAt": "19:00"
     },
     {
       "id": "1672275",
@@ -119,13 +122,14 @@
           17,
           20
         ]
-      }
+      },
+      "opensAt": "19:00"
     },
     {
       "id": "1672274",
       "date": "2024-10-19",
       "city": "名古屋",
-      "venue": "名古屋Port Messe 第1展示館",
+      "venue": "Portmesse名古屋1館",
       "region": "中部",
       "prefecture": "愛知縣",
       "title": "Arena Tour 2024 - Rejoice - 名古屋 Day 2",
@@ -147,15 +151,16 @@
             }
           }
         ]
-      }
+      },
+      "opensAt": "19:00"
     },
     {
       "id": "1672273",
       "date": "2024-10-18",
       "city": "名古屋",
-      "venue": "名古屋Port Messe 第1展示館",
+      "venue": "Portmesse名古屋1館",
       "region": "中部",
-      "prefecture": "愛知縣",
+      "prefecture": "愛知県",
       "title": "Arena Tour 2024 - Rejoice - 名古屋 Day 1",
       "sourceUrls": [
         "https://www.livefans.jp/events/1672273"
@@ -165,7 +170,8 @@
           17,
           20
         ]
-      }
+      },
+      "opensAt": "19:00"
     },
     {
       "id": "1672272",
@@ -219,7 +225,8 @@
             }
           }
         ]
-      }
+      },
+      "opensAt": "18:00"
     },
     {
       "id": "1672271",
@@ -245,13 +252,14 @@
             ]
           }
         ]
-      }
+      },
+      "opensAt": "18:00"
     },
     {
       "id": "1672270",
       "date": "2024-09-21",
       "city": "福岡",
-      "venue": "福岡海洋展覽館 A館",
+      "venue": "Marine Messe福岡A棟",
       "region": "九州",
       "prefecture": "福岡縣",
       "title": "Arena Tour 2024 - Rejoice - 福岡 Day 2",
@@ -297,15 +305,16 @@
             }
           }
         ]
-      }
+      },
+      "opensAt": "19:00"
     },
     {
       "id": "1672269",
       "date": "2024-09-20",
       "city": "福岡",
-      "venue": "福岡海洋展覽館 A館",
+      "venue": "Marine Messe福岡A棟",
       "region": "九州",
-      "prefecture": "福岡縣",
+      "prefecture": "福岡県",
       "title": "Arena Tour 2024 - Rejoice - 福岡 Day 1",
       "sourceUrls": [
         "https://www.livefans.jp/events/1672269"
@@ -336,7 +345,8 @@
             "note": "弾き語り(1コーラスのみ、初解禁)"
           }
         ]
-      }
+      },
+      "opensAt": "19:00"
     }
   ],
   "templateSetlist": [

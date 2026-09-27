@@ -8,8 +8,8 @@
       "date": "2024-12-15",
       "city": "台北",
       "venue": "台北小巨蛋",
-      "region": "台灣",
-      "prefecture": "台北",
+      "region": "海外",
+      "prefecture": "台灣",
       "title": "Asia Tour 2024 - Rejoice - 台灣公演",
       "sourceUrls": [
         "https://www.livefans.jp/events/1720176"
@@ -28,7 +28,8 @@
             }
           }
         ]
-      }
+      },
+      "opensAt": "18:00"
     },
     {
       "id": "1720175",
@@ -51,7 +52,8 @@
             }
           }
         ]
-      }
+      },
+      "opensAt": "18:00"
     },
     {
       "id": "1720174",
@@ -59,11 +61,12 @@
       "city": "首爾",
       "venue": "KINTEX Hall 5",
       "region": "韓國",
-      "prefecture": "高陽",
+      "prefecture": "韓国",
       "title": "Asia Tour 2024 - Rejoice - 韓國公演 Day 1",
       "sourceUrls": [
         "https://www.livefans.jp/events/1720174"
-      ]
+      ],
+      "opensAt": "19:00"
     }
   ],
   "templateSetlist": [

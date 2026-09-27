@@ -114,7 +114,9 @@
       "sourceUrls": [
         "https://www.livefans.jp/events/1981872"
       ],
-      "diff": {}
+      "diff": {},
+      "region": "海外",
+      "prefecture": "泰國"
     },
     {
       "id": "asia-tour-2026-taipei-0830",
@@ -139,7 +141,9 @@
             }
           }
         ]
-      }
+      },
+      "region": "海外",
+      "prefecture": "台灣"
     },
     {
       "id": "asia-tour-2026-taipei-0829",
@@ -164,7 +168,9 @@
             }
           }
         ]
-      }
+      },
+      "region": "海外",
+      "prefecture": "台灣"
     },
     {
       "id": "asia-tour-2026-singapore-0821",
@@ -189,7 +195,9 @@
             }
           }
         ]
-      }
+      },
+      "region": "海外",
+      "prefecture": "新加坡"
     },
     {
       "id": "asia-tour-2026-korea-0809",
@@ -201,7 +209,9 @@
       "sourceUrls": [
         "https://www.livefans.jp/events/1981869"
       ],
-      "diff": {}
+      "diff": {},
+      "region": "海外",
+      "prefecture": "韓國"
     },
     {
       "id": "asia-tour-2026-korea-0808",
@@ -213,7 +223,9 @@
       "sourceUrls": [
         "https://www.livefans.jp/events/1981868"
       ],
-      "diff": {}
+      "diff": {},
+      "region": "海外",
+      "prefecture": "韓國"
     }
   ]
 }

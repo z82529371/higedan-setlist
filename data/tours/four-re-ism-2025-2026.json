@@ -115,7 +115,7 @@
       "date": "2026-01-22",
       "weekday": "四",
       "city": "名古屋",
-      "venue": "名古屋Zepp",
+      "venue": "Zepp Nagoya",
       "opensAt": "19:00",
       "sourceUrls": [
         "https://www.livefans.jp/events/1866418"
@@ -134,7 +134,7 @@
       "date": "2026-01-21",
       "weekday": "三",
       "city": "名古屋",
-      "venue": "名古屋Zepp",
+      "venue": "Zepp Nagoya",
       "opensAt": "19:00",
       "sourceUrls": [
         "https://www.livefans.jp/events/1866417"
@@ -144,14 +144,15 @@
           9,
           10
         ]
-      }
+      },
+      "prefecture": "愛知県"
     },
     {
       "id": "four-re-ism-sapporo-0114",
       "date": "2026-01-14",
       "weekday": "三",
       "city": "札幌",
-      "venue": "札幌Zepp",
+      "venue": "Zepp Sapporo",
       "opensAt": "19:00",
       "sourceUrls": [
         "https://www.livefans.jp/events/1866416"
@@ -168,7 +169,7 @@
       "date": "2026-01-13",
       "weekday": "二",
       "city": "札幌",
-      "venue": "札幌Zepp",
+      "venue": "Zepp Sapporo",
       "opensAt": "19:00",
       "sourceUrls": [
         "https://www.livefans.jp/events/1866415"
@@ -178,14 +179,15 @@
           9,
           10
         ]
-      }
+      },
+      "prefecture": "北海道"
     },
     {
       "id": "four-re-ism-tokyo-1223",
       "date": "2025-12-23",
       "weekday": "二",
       "city": "東京",
-      "venue": "東京Zepp DiverCity",
+      "venue": "Zepp DiverCity",
       "opensAt": "19:00",
       "sourceUrls": [
         "https://www.livefans.jp/events/1866414"
@@ -203,7 +205,7 @@
       "date": "2025-12-22",
       "weekday": "一",
       "city": "東京",
-      "venue": "東京Zepp DiverCity",
+      "venue": "Zepp DiverCity",
       "opensAt": "19:00",
       "sourceUrls": [
         "https://www.livefans.jp/events/1866413"
@@ -214,14 +216,15 @@
           9,
           10
         ]
-      }
+      },
+      "prefecture": "東京都"
     },
     {
       "id": "four-re-ism-osaka-1216",
       "date": "2025-12-16",
       "weekday": "二",
       "city": "大阪",
-      "venue": "大阪Zepp Bayside",
+      "venue": "Zepp Osaka Bayside",
       "opensAt": "19:00",
       "sourceUrls": [
         "https://www.livefans.jp/events/1866412"
@@ -239,7 +242,7 @@
       "date": "2025-12-15",
       "weekday": "一",
       "city": "大阪",
-      "venue": "大阪Zepp Bayside",
+      "venue": "Zepp Osaka Bayside",
       "opensAt": "19:00",
       "sourceUrls": [
         "https://www.livefans.jp/events/1866411"
@@ -252,14 +255,15 @@
           10,
           17
         ]
-      }
+      },
+      "prefecture": "大阪府"
     },
     {
       "id": "four-re-ism-fukuoka-1211",
       "date": "2025-12-11",
       "weekday": "四",
       "city": "福岡",
-      "venue": "福岡Zepp",
+      "venue": "Zepp Fukuoka",
       "opensAt": "19:00",
       "sourceUrls": [
         "https://www.livefans.jp/events/1866410"
@@ -287,7 +291,7 @@
       "date": "2025-12-10",
       "weekday": "三",
       "city": "福岡",
-      "venue": "福岡Zepp",
+      "venue": "Zepp Fukuoka",
       "opensAt": "19:00",
       "sourceUrls": [
         "https://www.livefans.jp/events/1866409"
@@ -298,7 +302,8 @@
           10,
           17
         ]
-      }
+      },
+      "prefecture": "福岡県"
     }
   ]
 }
