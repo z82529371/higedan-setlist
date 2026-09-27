@@ -174,9 +174,15 @@ function resolve(diff, tpl) {
   const notes = Object.fromEntries(
     (diff.note ?? []).map((n) => [n.order, n.note]),
   );
+  const kinds = Object.fromEntries(
+    (diff.kind ?? []).map((k) => [k.order, k.kind]),
+  );
   const skip = new Set(diff.skip ?? []);
   const items = tpl.filter((i) => !skip.has(i.order)).map((i) => ({ ...i }));
-  for (const i of items) if (i.order in notes) i.note = notes[i.order];
+  for (const i of items) {
+    if (i.order in notes) i.note = notes[i.order];
+    if (i.order in kinds) i.kind = kinds[i.order];
+  }
   const inserts = {};
   for (const ins of diff.insert ?? [])
     (inserts[ins.after] ??= []).push({ ...ins.item });
@@ -431,54 +437,60 @@ export default function App() {
       </div>
 
       {tab === "show" && (
-        <div className="filter-pill-bar" role="group" aria-label="場次巡演分組">
-          <div className="group-label">演出類型</div>
-          <button
-            className={`filter-pill ${showGroupFilter === "all" ? "is-active" : ""}`}
-            onClick={() => setShowGroupFilter("all")}
-          >
-            全部場次
-          </button>
-          <button
-            className={`filter-pill ${showGroupFilter === "tour" ? "is-active" : ""}`}
-            onClick={() => setShowGroupFilter("tour")}
-          >
-            巡演專場 ({tourUnits.length})
-          </button>
-          <button
-            className={`filter-pill ${showGroupFilter === "event" ? "is-active" : ""}`}
-            onClick={() => setShowGroupFilter("event")}
-          >
-            音樂祭／事件 ({eventUnits.length})
-          </button>
+        (() => {
+          const soloUnits = allUnits.filter((u) => u.type === "專場");
+          const festUnits = allUnits.filter((u) => u.type !== "專場");
+          return (
+            <div className="filter-pill-bar" role="group" aria-label="場次巡演分組">
+              <div className="group-label">演出類型</div>
+              <button
+                className={`filter-pill ${showGroupFilter === "all" ? "is-active" : ""}`}
+                onClick={() => setShowGroupFilter("all")}
+              >
+                全部場次
+              </button>
+              <button
+                className={`filter-pill ${showGroupFilter === "tour" ? "is-active" : ""}`}
+                onClick={() => setShowGroupFilter("tour")}
+              >
+                巡演專場 ({soloUnits.length})
+              </button>
+              <button
+                className={`filter-pill ${showGroupFilter === "event" ? "is-active" : ""}`}
+                onClick={() => setShowGroupFilter("event")}
+              >
+                音樂祭／事件 ({festUnits.length})
+              </button>
 
-          <div className="unit-pills-row">
-            {(showGroupFilter === "all" || showGroupFilter === "tour") &&
-              [...tourUnits]
-                .sort((a, b) => (unitEarliest(b) < unitEarliest(a) ? -1 : 1))
-                .map((u) => (
-                  <button
-                    key={u.id}
-                    className={`unit-pill tour-pill ${u.id === selUnitId ? "is-on" : ""}`}
-                    onClick={() => handleUnitChange(u.id)}
-                  >
-                    {shortUnitTitle(u)}
-                  </button>
-                ))}
-            {(showGroupFilter === "all" || showGroupFilter === "event") &&
-              [...eventUnits]
-                .sort((a, b) => (unitEarliest(b) < unitEarliest(a) ? -1 : 1))
-                .map((u) => (
-                  <button
-                    key={u.id}
-                    className={`unit-pill event-pill ${u.id === selUnitId ? "is-on" : ""}`}
-                    onClick={() => handleUnitChange(u.id)}
-                  >
-                    {shortUnitTitle(u)}
-                  </button>
-                ))}
-          </div>
-        </div>
+              <div className="unit-pills-row">
+                {(showGroupFilter === "all" || showGroupFilter === "tour") &&
+                  [...soloUnits]
+                    .sort((a, b) => (unitEarliest(b) < unitEarliest(a) ? -1 : 1))
+                    .map((u) => (
+                      <button
+                        key={u.id}
+                        className={`unit-pill tour-pill ${u.id === selUnitId ? "is-on" : ""}`}
+                        onClick={() => handleUnitChange(u.id)}
+                      >
+                        {shortUnitTitle(u)}
+                      </button>
+                    ))}
+                {(showGroupFilter === "all" || showGroupFilter === "event") &&
+                  [...festUnits]
+                    .sort((a, b) => (unitEarliest(b) < unitEarliest(a) ? -1 : 1))
+                    .map((u) => (
+                      <button
+                        key={u.id}
+                        className={`unit-pill event-pill ${u.id === selUnitId ? "is-on" : ""}`}
+                        onClick={() => handleUnitChange(u.id)}
+                      >
+                        {shortUnitTitle(u)}
+                      </button>
+                    ))}
+              </div>
+            </div>
+          );
+        })()
       )}
 
       {tab === "song" && (
@@ -762,8 +774,13 @@ function ShowSlip({ ud, showId, onSelectSong }) {
     request: "request-slip",
   };
 
+  const getKindArray = (i) => {
+    if (!i || !i.kind) return [];
+    return Array.isArray(i.kind) ? i.kind : [i.kind];
+  };
+
   const primaryKind = (i) => {
-    const k = i.kind ?? [];
+    const k = getKindArray(i);
     if (k.includes("premiere")) return "premiere";
     if (songUnreleased.has(i.songId)) return "unreleased";
     if (k.includes("satoshi-solo")) return "satoshi-solo";
@@ -774,15 +791,17 @@ function ShowSlip({ ud, showId, onSelectSong }) {
   const cardClass = (i) => SLIP_CLASS[primaryKind(i)] ?? "";
 
   const cardTabs = (i) => {
-    const set = new Set(i.kind ?? []);
+    const set = new Set(getKindArray(i));
     if (songUnreleased.has(i.songId)) set.add("unreleased");
     return KIND_ORDER.filter((k) => set.has(k));
   };
 
-  const runKey = (i) =>
-    i.songId && (i.kind ?? []).length > 0
-      ? `${primaryKind(i)}::${(i.kind ?? []).join(",")}`
+  const runKey = (i) => {
+    const k = getKindArray(i);
+    return i.songId && k.length > 0
+      ? `${primaryKind(i)}::${k.join(",")}`
       : null;
+  };
 
   const groupRuns = (list) => {
     const runs = [];
@@ -797,7 +816,7 @@ function ShowSlip({ ud, showId, onSelectSong }) {
 
   const renderRun = (g, prefix) => {
     const first = g.items[0];
-    if (!first.songId) {
+    if (!first.songId && !first.title) {
       return (
         <li key={prefix} className="setlist-item interlude-line">
           <span className="cue-no">—</span>
@@ -808,18 +827,24 @@ function ShowSlip({ ud, showId, onSelectSong }) {
     const multi = g.key && g.items.length > 1;
     const slipClass = cardClass(first);
     const tabs = cardTabs(first);
-    const songLine = (it) => (
-      <a
-        className="setlist-song"
-        href="#"
-        onClick={(e) => {
-          e.preventDefault();
-          onSelectSong(it.songId);
-        }}
-      >
-        {songTitle[it.songId]}
-      </a>
-    );
+    const songLine = (it) => {
+      const title = it.title ?? songTitle[it.songId];
+      if (!it.songId) {
+        return <span className="setlist-song-unlinked">{title}</span>;
+      }
+      return (
+        <a
+          className="setlist-song"
+          href="#"
+          onClick={(e) => {
+            e.preventDefault();
+            onSelectSong(it.songId);
+          }}
+        >
+          {title}
+        </a>
+      );
+    };
     const tabBar =
       tabs.length > 0 ? (
         <span className="slip-tabs">
@@ -860,7 +885,7 @@ function ShowSlip({ ud, showId, onSelectSong }) {
     );
   };
 
-  const songCount = items.filter((i) => i.songId).length;
+  const songCount = items.filter((i) => i.songId || i.title).length;
 
   return (
     <article className="slip" aria-label="場次曲目清單">
@@ -872,10 +897,15 @@ function ShowSlip({ ud, showId, onSelectSong }) {
         </h3>
         <p className="slip-meta">
           {s.opensAt ? `${s.opensAt} 開演・` : ""}
-          {ud.unit.type}・共 {songCount} 首演出曲目・{" "}
-          <a href={s.sourceUrls[0]} target="_blank" rel="noreferrer">
-            livefans 來源
-          </a>
+          {ud.unit.type}・共 {songCount} 首演出曲目
+          {s.sourceUrls?.[0] && (
+            <>
+              ・{" "}
+              <a href={s.sourceUrls[0]} target="_blank" rel="noreferrer">
+                livefans 來源
+              </a>
+            </>
+          )}
         </p>
       </div>
 
@@ -944,7 +974,7 @@ function SongSlip({ songId, globalSongShows, showById, onSelectShow }) {
                 <span className="show-link-venue">{s.venue}</span>
                 <span className="show-link-city">（{s.city}）</span>
               </a>
-              {(item.kind ?? [])
+              {(Array.isArray(item.kind) ? item.kind : item.kind ? [item.kind] : [])
                 .filter((k) => KIND_BADGE[k])
                 .map((k) => (
                   <span key={k} className={`kind-badge kind-badge--${k}`}>

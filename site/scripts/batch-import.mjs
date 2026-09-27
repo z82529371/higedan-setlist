@@ -45,6 +45,28 @@ function extractSongsFromHtml(html) {
     }
   }
 
+  // Fallback: Parse LiveFans playerQueue inside window.dataObject script tag if standard table is empty
+  if (items.length === 0 && html.includes("window.dataObject")) {
+    try {
+      const match = html.match(/window\.dataObject\s*=\s*(\{[\s\S]*?\});\s*<\/script>/);
+      if (match) {
+        const data = JSON.parse(match[1]);
+        const tracks = data?.applemusic?.playerQueue?.tracks ?? [];
+        tracks.forEach((t, idx) => {
+          if (t.lf_song_id) {
+            items.push({
+              playIndex: idx + 1,
+              livefansId: t.lf_song_id,
+              title: t.track_name ? t.track_name.trim() : "",
+            });
+          }
+        });
+      }
+    } catch (e) {
+      // Ignore fallback parse error
+    }
+  }
+
   items.sort((a, b) => a.playIndex - b.playIndex);
   return items;
 }
@@ -136,8 +158,8 @@ async function verifyAndRecomputeShows() {
   let noSetlistCount = 0;
 
   for (const { file, unit } of units) {
-    // 保護已經手動調整好的巡演，絕不動 one-man-tour-2026 及 asia-tour-2026
-    if (["one-man-tour-2026", "asia-tour-2026"].includes(unit.id)) continue;
+    // 全面保護現有所有巡演與事件歌單資料，防止自動化腳本覆蓋精修過的 diff、note 及 kind
+    continue;
 
     for (const s of unit.shows) {
       if (!s.sourceUrls || !s.sourceUrls[0]) continue;
