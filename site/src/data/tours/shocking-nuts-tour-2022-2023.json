@@ -1,0 +1,1215 @@
+{
+  "id": "shocking-nuts-tour-2022-2023",
+  "title": "SHOCKING NUTS TOUR",
+  "type": "專場",
+  "shows": [
+    {
+      "id": "1499381",
+      "date": "2023-02-16",
+      "city": "東京",
+      "venue": "日本武道館",
+      "region": "關東",
+      "prefecture": "東京都",
+      "title": "SHOCKING NUTS TOUR 東京",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/1499381"
+      ],
+      "diff": {
+        "insert": [
+          {
+            "after": 6,
+            "item": {
+              "type": "interlude",
+              "encore": false,
+              "note": "One more time, One more chance [山崎まさよし] (楢﨑誠)"
+            }
+          },
+          {
+            "after": 10,
+            "item": {
+              "type": "interlude",
+              "encore": false,
+              "note": "Canon Rock (ギターヒーロー大輔)"
+            }
+          }
+        ]
+      },
+      "opensAt": "18:00"
+    },
+    {
+      "id": "1499384",
+      "date": "2023-02-15",
+      "city": "東京",
+      "venue": "日本武道館",
+      "region": "關東",
+      "prefecture": "東京都",
+      "title": "SHOCKING NUTS TOUR 東京",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/1499384"
+      ],
+      "diff": {
+        "skip": [
+          3,
+          4,
+          5,
+          6,
+          14,
+          15,
+          19
+        ],
+        "note": [
+          {
+            "order": 18,
+            "note": "弾き語り ワンコーラス"
+          }
+        ],
+        "kind": [
+          {
+            "order": 18,
+            "kind": [
+              "satoshi-solo"
+            ]
+          }
+        ],
+        "insert": [
+          {
+            "after": 2,
+            "item": {
+              "encore": false,
+              "songId": "yesterday"
+            }
+          },
+          {
+            "after": 3,
+            "item": {
+              "encore": false,
+              "songId": "coffee-to-syrup"
+            }
+          },
+          {
+            "after": 4,
+            "item": {
+              "encore": false,
+              "songId": "inu-ka-cat-ka-de-shinumade-kenka-shiyou"
+            }
+          },
+          {
+            "after": 5,
+            "item": {
+              "encore": false,
+              "songId": "bad-for-me"
+            }
+          },
+          {
+            "after": 6,
+            "item": {
+              "encore": false,
+              "songId": "sousisouai"
+            }
+          },
+          {
+            "after": 11,
+            "item": {
+              "type": "interlude",
+              "encore": false,
+              "note": "思ひ出 [鈴木常吉] (楢崎さんGuitarにて弾き語り＋Andy)"
+            }
+          },
+          {
+            "after": 13,
+            "item": {
+              "encore": false,
+              "songId": "stand-by-you"
+            }
+          },
+          {
+            "after": 17,
+            "item": {
+              "encore": true,
+              "songId": "nichiyoubi-no-love-letter"
+            }
+          }
+        ]
+      },
+      "opensAt": "18:00"
+    },
+    {
+      "id": "1499383",
+      "date": "2023-01-31",
+      "city": "大阪",
+      "venue": "節日大廳",
+      "region": "關西",
+      "prefecture": "大阪府",
+      "title": "SHOCKING NUTS TOUR 大阪",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/1499383"
+      ],
+      "diff": {},
+      "opensAt": "18:00"
+    },
+    {
+      "id": "1499382",
+      "date": "2023-01-30",
+      "city": "大阪",
+      "venue": "節日大廳",
+      "region": "關西",
+      "prefecture": "大阪府",
+      "title": "SHOCKING NUTS TOUR 大阪",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/1499382"
+      ],
+      "diff": {
+        "skip": [
+          3,
+          4,
+          5,
+          6,
+          14,
+          15,
+          19
+        ],
+        "insert": [
+          {
+            "after": 2,
+            "item": {
+              "encore": false,
+              "songId": "yesterday"
+            }
+          },
+          {
+            "after": 3,
+            "item": {
+              "encore": false,
+              "songId": "coffee-to-syrup"
+            }
+          },
+          {
+            "after": 4,
+            "item": {
+              "encore": false,
+              "songId": "inu-ka-cat-ka-de-shinumade-kenka-shiyou"
+            }
+          },
+          {
+            "after": 5,
+            "item": {
+              "encore": false,
+              "songId": "bad-for-me"
+            }
+          },
+          {
+            "after": 6,
+            "item": {
+              "encore": false,
+              "songId": "sousisouai"
+            }
+          },
+          {
+            "after": 13,
+            "item": {
+              "encore": false,
+              "songId": "stand-by-you"
+            }
+          },
+          {
+            "after": 18,
+            "item": {
+              "encore": true,
+              "songId": "nichiyoubi-no-love-letter"
+            }
+          }
+        ]
+      },
+      "opensAt": "18:00"
+    },
+    {
+      "id": "1419740",
+      "date": "2022-12-22",
+      "city": "仙台",
+      "venue": "仙台太陽廣場會館",
+      "region": "東北",
+      "prefecture": "宮城縣",
+      "title": "SHOCKING NUTS TOUR 仙台",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/1419740"
+      ],
+      "diff": {
+        "skip": [
+          21
+        ],
+        "insert": [
+          {
+            "after": 18,
+            "item": {
+              "encore": true,
+              "songId": "fire-ground"
+            }
+          }
+        ]
+      },
+      "opensAt": "18:00"
+    },
+    {
+      "id": "1419739",
+      "date": "2022-12-21",
+      "city": "仙台",
+      "venue": "仙台太陽廣場會館",
+      "region": "東北",
+      "prefecture": "宮城縣",
+      "title": "SHOCKING NUTS TOUR 仙台",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/1419739"
+      ],
+      "diff": {
+        "skip": [
+          3,
+          4,
+          5,
+          6,
+          14,
+          15,
+          19,
+          21
+        ],
+        "insert": [
+          {
+            "after": 2,
+            "item": {
+              "encore": false,
+              "songId": "yesterday"
+            }
+          },
+          {
+            "after": 3,
+            "item": {
+              "encore": false,
+              "songId": "coffee-to-syrup"
+            }
+          },
+          {
+            "after": 4,
+            "item": {
+              "encore": false,
+              "songId": "inu-ka-cat-ka-de-shinumade-kenka-shiyou"
+            }
+          },
+          {
+            "after": 5,
+            "item": {
+              "encore": false,
+              "songId": "bad-for-me"
+            }
+          },
+          {
+            "after": 6,
+            "item": {
+              "encore": false,
+              "songId": "sousisouai"
+            }
+          },
+          {
+            "after": 13,
+            "item": {
+              "encore": false,
+              "songId": "stand-by-you"
+            }
+          },
+          {
+            "after": 18,
+            "item": {
+              "encore": true,
+              "songId": "nichiyoubi-no-love-letter"
+            }
+          }
+        ]
+      },
+      "opensAt": "18:00"
+    },
+    {
+      "id": "1419738",
+      "date": "2022-12-14",
+      "city": "富山",
+      "venue": "富山市藝術文化館Oberd Hall",
+      "region": "中部",
+      "prefecture": "富山県",
+      "title": "SHOCKING NUTS TOUR 富山",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/1419738"
+      ],
+      "diff": {
+        "skip": [
+          21
+        ]
+      },
+      "opensAt": "18:00"
+    },
+    {
+      "id": "1419737",
+      "date": "2022-12-13",
+      "city": "富山",
+      "venue": "富山市藝術文化館Oberd Hall",
+      "region": "中部",
+      "prefecture": "富山県",
+      "title": "SHOCKING NUTS TOUR 富山",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/1419737"
+      ],
+      "diff": {
+        "skip": [
+          3,
+          4,
+          5,
+          6,
+          14,
+          15,
+          19,
+          21
+        ],
+        "insert": [
+          {
+            "after": 2,
+            "item": {
+              "encore": false,
+              "songId": "yesterday"
+            }
+          },
+          {
+            "after": 3,
+            "item": {
+              "encore": false,
+              "songId": "coffee-to-syrup"
+            }
+          },
+          {
+            "after": 4,
+            "item": {
+              "encore": false,
+              "songId": "inu-ka-cat-ka-de-shinumade-kenka-shiyou"
+            }
+          },
+          {
+            "after": 5,
+            "item": {
+              "encore": false,
+              "songId": "bad-for-me"
+            }
+          },
+          {
+            "after": 6,
+            "item": {
+              "encore": false,
+              "songId": "sousisouai"
+            }
+          },
+          {
+            "after": 13,
+            "item": {
+              "encore": false,
+              "songId": "stand-by-you"
+            }
+          },
+          {
+            "after": 18,
+            "item": {
+              "encore": true,
+              "songId": "nichiyoubi-no-love-letter"
+            }
+          }
+        ]
+      },
+      "opensAt": "18:00"
+    },
+    {
+      "id": "1419736",
+      "date": "2022-12-07",
+      "city": "福岡",
+      "venue": "福岡太陽宮殿會館",
+      "region": "九州",
+      "prefecture": "福岡縣",
+      "title": "SHOCKING NUTS TOUR 福岡",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/1419736"
+      ],
+      "diff": {
+        "skip": [
+          21
+        ]
+      },
+      "opensAt": "18:00"
+    },
+    {
+      "id": "1419735",
+      "date": "2022-12-06",
+      "city": "福岡",
+      "venue": "福岡太陽宮殿會館",
+      "region": "九州",
+      "prefecture": "福岡縣",
+      "title": "SHOCKING NUTS TOUR 福岡",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/1419735"
+      ],
+      "diff": {
+        "skip": [
+          3,
+          4,
+          5,
+          6,
+          14,
+          15,
+          19,
+          21
+        ],
+        "insert": [
+          {
+            "after": 2,
+            "item": {
+              "encore": false,
+              "songId": "yesterday"
+            }
+          },
+          {
+            "after": 3,
+            "item": {
+              "encore": false,
+              "songId": "coffee-to-syrup"
+            }
+          },
+          {
+            "after": 4,
+            "item": {
+              "encore": false,
+              "songId": "inu-ka-cat-ka-de-shinumade-kenka-shiyou"
+            }
+          },
+          {
+            "after": 5,
+            "item": {
+              "encore": false,
+              "songId": "bad-for-me"
+            }
+          },
+          {
+            "after": 6,
+            "item": {
+              "encore": false,
+              "songId": "sousisouai"
+            }
+          },
+          {
+            "after": 13,
+            "item": {
+              "encore": false,
+              "songId": "stand-by-you"
+            }
+          },
+          {
+            "after": 18,
+            "item": {
+              "encore": true,
+              "songId": "nichiyoubi-no-love-letter"
+            }
+          }
+        ]
+      },
+      "opensAt": "18:00"
+    },
+    {
+      "id": "1419734",
+      "date": "2022-11-29",
+      "city": "福山",
+      "venue": "福山藝術文化會館 Reed & Rose",
+      "region": "中國",
+      "prefecture": "廣島縣",
+      "title": "SHOCKING NUTS TOUR 福山",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/1419734"
+      ],
+      "diff": {
+        "skip": [
+          21
+        ]
+      },
+      "opensAt": "18:00"
+    },
+    {
+      "id": "1419733",
+      "date": "2022-11-28",
+      "city": "福山",
+      "venue": "福山藝術文化會館 Reed & Rose",
+      "region": "中國",
+      "prefecture": "廣島縣",
+      "title": "SHOCKING NUTS TOUR 福山",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/1419733"
+      ],
+      "diff": {
+        "skip": [
+          3,
+          4,
+          5,
+          6,
+          14,
+          15,
+          19,
+          21
+        ],
+        "insert": [
+          {
+            "after": 2,
+            "item": {
+              "encore": false,
+              "songId": "yesterday"
+            }
+          },
+          {
+            "after": 3,
+            "item": {
+              "encore": false,
+              "songId": "coffee-to-syrup"
+            }
+          },
+          {
+            "after": 4,
+            "item": {
+              "encore": false,
+              "songId": "inu-ka-cat-ka-de-shinumade-kenka-shiyou"
+            }
+          },
+          {
+            "after": 5,
+            "item": {
+              "encore": false,
+              "songId": "bad-for-me"
+            }
+          },
+          {
+            "after": 6,
+            "item": {
+              "encore": false,
+              "songId": "sousisouai"
+            }
+          },
+          {
+            "after": 13,
+            "item": {
+              "encore": false,
+              "songId": "stand-by-you"
+            }
+          },
+          {
+            "after": 18,
+            "item": {
+              "encore": true,
+              "songId": "nichiyoubi-no-love-letter"
+            }
+          }
+        ]
+      },
+      "opensAt": "18:00"
+    },
+    {
+      "id": "1419732",
+      "date": "2022-11-17",
+      "city": "札幌",
+      "venue": "札幌文化藝術劇場 hitaru",
+      "region": "北海道",
+      "prefecture": "北海道",
+      "title": "SHOCKING NUTS TOUR 札幌",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/1419732"
+      ],
+      "diff": {
+        "skip": [
+          21
+        ]
+      },
+      "opensAt": "18:00"
+    },
+    {
+      "id": "1419731",
+      "date": "2022-11-16",
+      "city": "旭川",
+      "venue": "旭川市民文化會館 大會堂",
+      "region": "北海道",
+      "prefecture": "北海道",
+      "title": "SHOCKING NUTS TOUR 旭川",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/1419731"
+      ],
+      "diff": {
+        "skip": [
+          3,
+          4,
+          5,
+          6,
+          14,
+          15,
+          19,
+          21
+        ],
+        "insert": [
+          {
+            "after": 2,
+            "item": {
+              "encore": false,
+              "songId": "yesterday"
+            }
+          },
+          {
+            "after": 3,
+            "item": {
+              "encore": false,
+              "songId": "coffee-to-syrup"
+            }
+          },
+          {
+            "after": 4,
+            "item": {
+              "encore": false,
+              "songId": "inu-ka-cat-ka-de-shinumade-kenka-shiyou"
+            }
+          },
+          {
+            "after": 5,
+            "item": {
+              "encore": false,
+              "songId": "bad-for-me"
+            }
+          },
+          {
+            "after": 6,
+            "item": {
+              "encore": false,
+              "songId": "sousisouai"
+            }
+          },
+          {
+            "after": 13,
+            "item": {
+              "encore": false,
+              "songId": "stand-by-you"
+            }
+          },
+          {
+            "after": 18,
+            "item": {
+              "encore": true,
+              "songId": "nichiyoubi-no-love-letter"
+            }
+          }
+        ]
+      },
+      "opensAt": "18:00"
+    },
+    {
+      "id": "1419727",
+      "date": "2022-10-29",
+      "city": "東京",
+      "venue": "日本武道館",
+      "region": "關東",
+      "prefecture": "東京都",
+      "title": "SHOCKING NUTS TOUR 東京",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/1419727"
+      ],
+      "diff": {
+        "skip": [
+          3,
+          4,
+          5,
+          6,
+          14,
+          15,
+          19,
+          21
+        ],
+        "insert": [
+          {
+            "after": 2,
+            "item": {
+              "encore": false,
+              "songId": "yesterday"
+            }
+          },
+          {
+            "after": 3,
+            "item": {
+              "encore": false,
+              "songId": "coffee-to-syrup"
+            }
+          },
+          {
+            "after": 4,
+            "item": {
+              "encore": false,
+              "songId": "inu-ka-cat-ka-de-shinumade-kenka-shiyou"
+            }
+          },
+          {
+            "after": 5,
+            "item": {
+              "encore": false,
+              "songId": "bad-for-me"
+            }
+          },
+          {
+            "after": 6,
+            "item": {
+              "encore": false,
+              "songId": "sousisouai"
+            }
+          },
+          {
+            "after": 13,
+            "item": {
+              "encore": false,
+              "songId": "stand-by-you"
+            }
+          },
+          {
+            "after": 18,
+            "item": {
+              "encore": true,
+              "songId": "nichiyoubi-no-love-letter"
+            }
+          }
+        ]
+      },
+      "opensAt": "17:00"
+    },
+    {
+      "id": "1419726",
+      "date": "2022-10-26",
+      "city": "東京",
+      "venue": "日本武道館",
+      "region": "關東",
+      "prefecture": "東京都",
+      "title": "SHOCKING NUTS TOUR 東京",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/1419726"
+      ],
+      "diff": {
+        "skip": [
+          21
+        ]
+      },
+      "opensAt": "18:00"
+    },
+    {
+      "id": "1419725",
+      "date": "2022-10-25",
+      "city": "東京",
+      "venue": "日本武道館",
+      "region": "關東",
+      "prefecture": "東京都",
+      "title": "SHOCKING NUTS TOUR 東京",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/1419725"
+      ],
+      "diff": {
+        "skip": [
+          3,
+          4,
+          5,
+          6,
+          14,
+          15,
+          19,
+          21
+        ],
+        "insert": [
+          {
+            "after": 2,
+            "item": {
+              "encore": false,
+              "songId": "yesterday"
+            }
+          },
+          {
+            "after": 3,
+            "item": {
+              "encore": false,
+              "songId": "coffee-to-syrup"
+            }
+          },
+          {
+            "after": 4,
+            "item": {
+              "encore": false,
+              "songId": "inu-ka-cat-ka-de-shinumade-kenka-shiyou"
+            }
+          },
+          {
+            "after": 5,
+            "item": {
+              "encore": false,
+              "songId": "bad-for-me"
+            }
+          },
+          {
+            "after": 6,
+            "item": {
+              "encore": false,
+              "songId": "sousisouai"
+            }
+          },
+          {
+            "after": 13,
+            "item": {
+              "encore": false,
+              "songId": "stand-by-you"
+            }
+          },
+          {
+            "after": 18,
+            "item": {
+              "encore": true,
+              "songId": "nichiyoubi-no-love-letter"
+            }
+          }
+        ]
+      },
+      "opensAt": "18:00"
+    },
+    {
+      "id": "1419724",
+      "date": "2022-10-14",
+      "city": "名古屋",
+      "venue": "名古屋國際會議場 世紀廳",
+      "region": "中部",
+      "prefecture": "愛知縣",
+      "title": "SHOCKING NUTS TOUR 名古屋",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/1419724"
+      ],
+      "diff": {
+        "skip": [
+          21
+        ]
+      },
+      "opensAt": "18:00"
+    },
+    {
+      "id": "1419723",
+      "date": "2022-10-13",
+      "city": "名古屋",
+      "venue": "名古屋國際會議場 世紀廳",
+      "region": "中部",
+      "prefecture": "愛知縣",
+      "title": "SHOCKING NUTS TOUR 名古屋",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/1419723"
+      ],
+      "diff": {
+        "skip": [
+          3,
+          4,
+          5,
+          6,
+          14,
+          15,
+          19,
+          21
+        ],
+        "insert": [
+          {
+            "after": 2,
+            "item": {
+              "encore": false,
+              "songId": "yesterday"
+            }
+          },
+          {
+            "after": 3,
+            "item": {
+              "encore": false,
+              "songId": "coffee-to-syrup"
+            }
+          },
+          {
+            "after": 4,
+            "item": {
+              "encore": false,
+              "songId": "inu-ka-cat-ka-de-shinumade-kenka-shiyou"
+            }
+          },
+          {
+            "after": 5,
+            "item": {
+              "encore": false,
+              "songId": "bad-for-me"
+            }
+          },
+          {
+            "after": 6,
+            "item": {
+              "encore": false,
+              "songId": "sousisouai"
+            }
+          },
+          {
+            "after": 13,
+            "item": {
+              "encore": false,
+              "songId": "stand-by-you"
+            }
+          },
+          {
+            "after": 18,
+            "item": {
+              "encore": true,
+              "songId": "nichiyoubi-no-love-letter"
+            }
+          }
+        ]
+      },
+      "opensAt": "18:00"
+    },
+    {
+      "id": "1419722",
+      "date": "2022-09-29",
+      "city": "青森",
+      "venue": "青森市文化會館",
+      "region": "東北",
+      "prefecture": "青森縣",
+      "title": "SHOCKING NUTS TOUR 青森",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/1419722"
+      ],
+      "diff": {
+        "skip": [
+          10,
+          21
+        ],
+        "insert": [
+          {
+            "after": 4,
+            "item": {
+              "encore": false,
+              "songId": "parabola"
+            }
+          },
+          {
+            "after": 18,
+            "item": {
+              "encore": true,
+              "songId": "subtitle",
+              "kind": [
+                "premiere"
+              ]
+            }
+          }
+        ]
+      },
+      "opensAt": "18:00"
+    },
+    {
+      "id": "1419721",
+      "date": "2022-09-28",
+      "city": "青森",
+      "venue": "青森市文化會館",
+      "region": "東北",
+      "prefecture": "青森縣",
+      "title": "SHOCKING NUTS TOUR 青森",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/1419721"
+      ],
+      "diff": {
+        "skip": [
+          3,
+          4,
+          5,
+          6,
+          10,
+          14,
+          15,
+          19,
+          21
+        ],
+        "insert": [
+          {
+            "after": 2,
+            "item": {
+              "encore": false,
+              "songId": "yesterday"
+            }
+          },
+          {
+            "after": 3,
+            "item": {
+              "encore": false,
+              "songId": "coffee-to-syrup"
+            }
+          },
+          {
+            "after": 4,
+            "item": {
+              "encore": false,
+              "songId": "inu-ka-cat-ka-de-shinumade-kenka-shiyou"
+            }
+          },
+          {
+            "after": 5,
+            "item": {
+              "encore": false,
+              "songId": "bad-for-me"
+            }
+          },
+          {
+            "after": 6,
+            "item": {
+              "encore": false,
+              "songId": "sousisouai"
+            }
+          },
+          {
+            "after": 13,
+            "item": {
+              "encore": false,
+              "songId": "escapade"
+            }
+          },
+          {
+            "after": 14,
+            "item": {
+              "encore": false,
+              "songId": "stand-by-you"
+            }
+          },
+          {
+            "after": 18,
+            "item": {
+              "encore": true,
+              "songId": "subtitle",
+              "kind": [
+                "satoshi-solo",
+                "premiere"
+              ]
+            }
+          },
+          {
+            "after": 18,
+            "item": {
+              "encore": true,
+              "songId": "nichiyoubi-no-love-letter"
+            }
+          }
+        ]
+      },
+      "opensAt": "18:00"
+    }
+  ],
+  "templateSetlist": [
+    {
+      "order": 1,
+      "encore": false,
+      "songId": "pretender"
+    },
+    {
+      "order": 2,
+      "encore": false,
+      "songId": "i-love"
+    },
+    {
+      "order": 3,
+      "encore": false,
+      "songId": "tell-me-baby"
+    },
+    {
+      "order": 4,
+      "encore": false,
+      "songId": "second-line"
+    },
+    {
+      "order": 5,
+      "encore": false,
+      "songId": "vintage"
+    },
+    {
+      "order": 6,
+      "encore": false,
+      "songId": "lady"
+    },
+    {
+      "order": 7,
+      "encore": false,
+      "songId": "fuusen",
+      "kind": [
+        "premiere"
+      ]
+    },
+    {
+      "order": 8,
+      "encore": false,
+      "songId": "choral-a"
+    },
+    {
+      "order": 9,
+      "encore": false,
+      "songId": "yugure-zoi"
+    },
+    {
+      "order": 10,
+      "encore": false,
+      "songId": "subtitle",
+      "kind": [
+        "premiere"
+      ]
+    },
+    {
+      "order": 11,
+      "encore": false,
+      "songId": "parade"
+    },
+    {
+      "order": 12,
+      "encore": false,
+      "songId": "anarchy"
+    },
+    {
+      "order": 13,
+      "encore": false,
+      "songId": "cry-baby"
+    },
+    {
+      "order": 14,
+      "encore": false,
+      "songId": "115man-kiro-no-film"
+    },
+    {
+      "order": 15,
+      "encore": false,
+      "songId": "itan-na-star"
+    },
+    {
+      "order": 16,
+      "encore": false,
+      "songId": "shukumei"
+    },
+    {
+      "order": 17,
+      "encore": false,
+      "songId": "mixed-nuts"
+    },
+    {
+      "order": 18,
+      "encore": true,
+      "songId": "universe"
+    },
+    {
+      "order": 19,
+      "encore": true,
+      "songId": "clap-clap"
+    },
+    {
+      "order": 20,
+      "encore": true,
+      "songId": "hakan"
+    },
+    {
+      "order": 21,
+      "encore": true,
+      "songId": "white-noise"
+    }
+  ]
+}
