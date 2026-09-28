@@ -1,11 +1,15 @@
 import { cpSync, existsSync, mkdirSync, rmSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import { validateAndCleanTours } from "./validate-data.mjs";
 
 const here = dirname(fileURLToPath(import.meta.url));
 const root = resolve(here, "..", "..");
 const src = resolve(root, "data");
 const dest = resolve(here, "..", "src", "data");
+
+// Run validation and auto-cleaning prior to syncing data
+validateAndCleanTours();
 
 rmSync(dest, { recursive: true, force: true });
 mkdirSync(dest, { recursive: true });

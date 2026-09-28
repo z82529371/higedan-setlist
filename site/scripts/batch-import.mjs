@@ -35,43 +35,44 @@ function extractSongsFromHtml(html) {
       /<div class="ttl"><a href="\/songs\/(\d+)"[^>]*>([^<]+)<\/a><\/div>/,
     );
 
-    if (songMatch) {
-      // LiveFans player button idx: showBottomMusicPlayer(0, this), showBottomMusicPlayer(1, this)...
-      const playBtnMatch = cellHtml.match(/showBottomMusicPlayer\((\d+)/);
-      const playIndex = playBtnMatch ? parseInt(playBtnMatch[1], 10) : items.length;
+    const subtitleMatch = cellHtml.match(/<p class="subtitle">([^<]+)<\/p>/);
+    const subtitleText = subtitleMatch ? subtitleMatch[1].trim() : "";
 
+    const playBtnMatch = cellHtml.match(/showBottomMusicPlayer\((\d+)/);
+    const playIndex = playBtnMatch ? parseInt(playBtnMatch[1], 10) : items.length;
+
+    const isEncore = cellHtml.includes("sec-connect") || cellHtml.includes("アンコール") || /en\d+/i.test(cellHtml);
+
+    const kind = [];
+    if (subtitleText.includes("弾き語り") || subtitleText.includes("ソロ")) {
+      kind.push("satoshi-solo");
+    }
+    if (subtitleText.includes("新曲")) {
+      kind.push("premiere");
+    }
+
+    if (songMatch) {
       items.push({
         playIndex,
         livefansId: songMatch[1],
         title: songMatch[2].trim(),
+        subtitle: subtitleText,
+        kind: kind.length ? kind : undefined,
+        isEncore,
+      });
+    } else if (subtitleText) {
+      items.push({
+        playIndex,
+        title: subtitleText,
+        subtitle: subtitleText,
+        type: "interlude",
+        isEncore,
       });
     }
   }
 
   // Sort strictly by true play order index from LiveFans player button
   items.sort((a, b) => a.playIndex - b.playIndex);
-
-  // Fallback: Parse LiveFans playerQueue inside window.dataObject script tag if standard table is empty
-  if (items.length === 0 && html.includes("window.dataObject")) {
-    try {
-      const match = html.match(/window\.dataObject\s*=\s*(\{[\s\S]*?\});\s*<\/script>/);
-      if (match) {
-        const data = JSON.parse(match[1]);
-        const tracks = data?.applemusic?.playerQueue?.tracks ?? [];
-        tracks.forEach((t, idx) => {
-          if (t.lf_song_id) {
-            items.push({
-              playIndex: idx + 1,
-              livefansId: t.lf_song_id,
-              title: t.track_name ? t.track_name.trim() : "",
-            });
-          }
-        });
-      }
-    } catch (e) {
-      // Ignore fallback parse error
-    }
-  }
 
   return items;
 }
@@ -172,6 +173,8 @@ function computeDiff(pageSongs, templateSetlist) {
     }));
 
   const templateSongIds = templateSongs.map((i) => i.songId);
+  const encoreStartOrder = templateSongs.find((t) => t.encore)?.order ?? 18;
+
   const pageSongIds = pageSongs.map(
     (item) =>
       livefansIdToId[item.livefansId] ?? titleToId[item.title] ?? item.title,
@@ -192,6 +195,7 @@ function computeDiff(pageSongs, templateSetlist) {
   let tIdx = 0;
   for (let pIdx = 0; pIdx < pageSongIds.length; pIdx++) {
     const pSong = pageSongIds[pIdx];
+    const pMeta = pageSongs[pIdx];
     if (tIdx < templateSongs.length && templateSongs[tIdx].songId === pSong) {
       tIdx++;
     } else {
@@ -219,9 +223,12 @@ function computeDiff(pageSongs, templateSetlist) {
           tIdx++;
         }
         const itemObj = {
-          encore: false,
+          encore: pMeta?.isEncore || anchorOrder >= encoreStartOrder - 1,
           songId: pSong,
         };
+        if (pMeta?.kind) itemObj.kind = pMeta.kind;
+        if (pMeta?.subtitle) itemObj.note = pMeta.subtitle;
+        if (pMeta?.type) itemObj.type = pMeta.type;
         insert.push({
           after: anchorOrder,
           item: itemObj,
@@ -245,12 +252,9 @@ async function verifyAndRecomputeShows() {
   let diffCount = 0;
   let noSetlistCount = 0;
 
+  const targetIds = process.argv.slice(2).filter((arg) => /^\d+$/.test(arg));
+
   for (const { file, unit } of units) {
-    // 僅對新建立且需批次導入的巡演檔案解凍執行，其餘精修檔保護跳過
-    if (file !== "shocking-nuts-tour-2022-2023.json") continue;
-
-    const targetIds = process.argv.slice(2).filter((arg) => /^\d+$/.test(arg));
-
     for (const s of unit.shows) {
       if (targetIds.length > 0 && !targetIds.includes(s.id)) continue;
       if (!s.sourceUrls || !s.sourceUrls[0]) continue;
