@@ -3,17 +3,17 @@ import songsData from "./data/songs.json";
 import "./style.css";
 
 const tourUnits = Object.values(
-  import.meta.glob("./data/tours/*.json", { eager: true, import: "default" }),
+  import.meta.glob("./data/tours/*.json", { eager: true, import: "default" })
 );
 const eventUnits = Object.values(
-  import.meta.glob("./data/events/*.json", { eager: true, import: "default" }),
+  import.meta.glob("./data/events/*.json", { eager: true, import: "default" })
 );
 
 const songTitle = Object.fromEntries(
-  songsData.songs.map((s) => [s.id, s.title]),
+  songsData.songs.map((s) => [s.id, s.title])
 );
 const songUnreleased = new Set(
-  songsData.songs.filter((s) => s.unreleased).map((s) => s.id),
+  songsData.songs.filter((s) => s.unreleased).map((s) => s.id)
 );
 
 const KIND_BADGE = {
@@ -33,41 +33,41 @@ const KIND_ORDER = ["premiere", "unreleased", "satoshi-solo", "request"];
 const ALBUM_MAP = {
   "same-blue": "Rejoice (2024)",
   "50pct": "Rejoice (2024)",
-  "sanitizer": "Rejoice (2024)",
+  sanitizer: "Rejoice (2024)",
   "elder-flower": "Rejoice (2024)",
   "make-me-wonder": "Rejoice (2024)",
-  "tattoo": "Rejoice (2024)",
-  "subtitle": "Rejoice (2024)",
+  tattoo: "Rejoice (2024)",
+  subtitle: "Rejoice (2024)",
   "mixed-nuts": "Rejoice (2024)",
   "white-noise": "Rejoice (2024)",
-  "nichijo": "Rejoice (2024)",
+  nichijo: "Rejoice (2024)",
   "b-side-blues": "Rejoice (2024)",
-  "dakuten": "Rejoice (2024)",
-  "sousisouai": "Rejoice (2024)",
-  "sharon": "Rejoice (2024)",
+  dakuten: "Rejoice (2024)",
+  sousisouai: "Rejoice (2024)",
+  sharon: "Rejoice (2024)",
 
-  "editorial": "Editorial (2021)",
-  "apoptosis": "Editorial (2021)",
+  editorial: "Editorial (2021)",
+  apoptosis: "Editorial (2021)",
   "cry-baby": "Editorial (2021)",
   "i-love": "Editorial (2021)",
-  "laughter": "Editorial (2021)",
-  "universe": "Editorial (2021)",
-  "parabola": "Editorial (2021)",
-  "anarchy": "Editorial (2021)",
-  "shower": "Editorial (2021)",
+  laughter: "Editorial (2021)",
+  universe: "Editorial (2021)",
+  parabola: "Editorial (2021)",
+  anarchy: "Editorial (2021)",
+  shower: "Editorial (2021)",
   "green-rain": "Editorial (2021)",
   "knit-no-boushi": "Editorial (2021)",
   "bed-side-story": "Editorial (2021)",
   "lost-in-my-room": "Editorial (2021)",
 
-  "pretender": "Traveler (2019)",
-  "shukumei": "Traveler (2019)",
+  pretender: "Traveler (2019)",
+  shukumei: "Traveler (2019)",
   "stand-by-you": "Traveler (2019)",
-  "yesterday": "Traveler (2019)",
+  yesterday: "Traveler (2019)",
   "fire-ground": "Traveler (2019)",
-  "amazing": "Traveler (2019)",
-  "rowan": "Traveler (2019)",
-  "vintage": "Traveler (2019)",
+  amazing: "Traveler (2019)",
+  rowan: "Traveler (2019)",
+  vintage: "Traveler (2019)",
   "115man-kiro-no-film": "Traveler (2019)",
   "takaga-i-love-you": "Traveler (2019)",
   "bad-for-me": "Traveler (2019)",
@@ -75,10 +75,10 @@ const ALBUM_MAP = {
   "no-doubt": "エスカパレード (2018)",
   "itan-na-star": "エスカパレード (2018)",
   "sweet-tweet": "エスカパレード (2018)",
-  "lady": "エスカパレード (2018)",
-  "rolling": "エスカパレード (2018)",
-  "driver": "エスカパレード (2018)",
-  "trailer": "エスカパレード (2018)",
+  lady: "エスカパレード (2018)",
+  rolling: "エスカパレード (2018)",
+  driver: "エスカパレード (2018)",
+  trailer: "エスカパレード (2018)",
   "ai-nandaga": "エスカパレード (2018)",
   "yugure-zoi": "エスカパレード (2018)",
   "shihatsu-ga-michibiku-kouhukuron": "エスカパレード (2018)",
@@ -107,43 +107,63 @@ const REGION_ORDER = [
 ];
 
 function getVenueRegion(v) {
+  const r = v.region ?? "";
+  const p = v.prefecture ?? "";
   const c = v.city ?? "";
   const n = v.name ?? "";
+
   if (
+    r === "海外" ||
+    p.includes("台灣") ||
+    p.includes("韓國") ||
+    p.includes("泰國") ||
+    p.includes("新加坡") ||
     c.includes("台北") ||
     c.includes("首爾") ||
     c.includes("曼谷") ||
     c.includes("新加坡") ||
+    c.includes("高陽") ||
     n.includes("UOB") ||
-    n.includes("高尺")
+    n.includes("KSPO") ||
+    n.includes("KINTEX")
   ) {
     return "海外（台灣 / 韓國 / 東南亞）";
   }
+
   if (
-    c.includes("東京") ||
-    c.includes("埼玉") ||
-    c.includes("橫濱") ||
-    c.includes("千葉")
+    r === "關東" ||
+    p.includes("東京") ||
+    p.includes("神奈川") ||
+    p.includes("埼玉") ||
+    p.includes("千葉")
   ) {
     return "日本 - 關東";
   }
+
   if (
-    c.includes("大阪") ||
-    c.includes("神戶") ||
-    c.includes("京都") ||
-    c.includes("兵庫")
+    r === "關西" ||
+    p.includes("大阪") ||
+    p.includes("兵庫") ||
+    p.includes("京都") ||
+    p.includes("奈良")
   ) {
     return "日本 - 關西";
   }
+
   if (
-    c.includes("仙台") ||
-    c.includes("札幌") ||
-    c.includes("宮城") ||
-    c.includes("岩手") ||
-    c.includes("北海道")
+    r === "東北" ||
+    r === "北海道" ||
+    p.includes("北海道") ||
+    p.includes("宮城") ||
+    p.includes("青森") ||
+    p.includes("岩手") ||
+    p.includes("秋田") ||
+    p.includes("山形") ||
+    p.includes("福島")
   ) {
     return "日本 - 東北 / 北海道";
   }
+
   return "日本 - 中部 / 九州 / 其他";
 }
 
@@ -162,23 +182,23 @@ function shortUnitTitle(unit) {
 function unitEarliest(unit) {
   return (unit.shows ?? []).reduce(
     (m, s) => (s.date < m ? s.date : m),
-    unit.shows?.[0]?.date ?? "9999-12-31",
+    unit.shows?.[0]?.date ?? "9999-12-31"
   );
 }
 
 const allUnits = [...tourUnits, ...eventUnits].sort((a, b) =>
-  unitEarliest(b) < unitEarliest(a) ? -1 : 1,
+  unitEarliest(b) < unitEarliest(a) ? -1 : 1
 );
 
 function resolve(diff, tpl) {
   const notes = Object.fromEntries(
-    (diff.note ?? []).map((n) => [n.order, n.note]),
+    (diff.note ?? []).map((n) => [n.order, n.note])
   );
   const kinds = Object.fromEntries(
-    (diff.kind ?? []).map((k) => [k.order, k.kind]),
+    (diff.kind ?? []).map((k) => [k.order, k.kind])
   );
   const skip = new Set(diff.skip ?? []);
-  
+
   const inserts = {};
   for (const ins of diff.insert ?? []) {
     (inserts[ins.after] ??= []).push({ ...ins.item });
@@ -205,13 +225,14 @@ function resolve(diff, tpl) {
 }
 
 function resolveShowItems(unit, show) {
-  if (unit.templateSetlist) return resolve(show.diff ?? {}, unit.templateSetlist);
+  if (unit.templateSetlist)
+    return resolve(show.diff ?? {}, unit.templateSetlist);
   return show.setlist ?? [];
 }
 
 function defaultShowId(unit) {
   const shows = [...(unit?.shows ?? [])].sort((a, b) =>
-    a.date < b.date ? -1 : 1,
+    a.date < b.date ? -1 : 1
   );
   return shows.at(-1)?.id ?? null;
 }
@@ -236,10 +257,10 @@ export default function App() {
       const isTour = !!unit.templateSetlist;
       const tpl = unit.templateSetlist;
       const tplSongSet = new Set(
-        (tpl ?? []).filter((i) => i.songId).map((i) => i.songId),
+        (tpl ?? []).filter((i) => i.songId).map((i) => i.songId)
       );
       const shows = [...(unit.shows ?? [])].sort((a, b) =>
-        a.date < b.date ? -1 : 1,
+        a.date < b.date ? -1 : 1
       );
       const full = new Map(shows.map((s) => [s.id, resolveShowItems(unit, s)]));
       const songShows = new Map();
@@ -280,18 +301,23 @@ export default function App() {
     }
 
     const usedSongsList = songsData.songs.filter(
-      (s) => (songShowsMap.get(s.id) ?? []).length > 0,
+      (s) => (songShowsMap.get(s.id) ?? []).length > 0
     );
 
     const venuesList = Array.from(venueShowsMap.keys())
-      .map((venue) => ({
-        name: venue,
-        city: venueShowsMap.get(venue)[0]?.show.city ?? "",
-        shows: venueShowsMap.get(venue),
-      }))
+      .map((venue) => {
+        const firstShow = venueShowsMap.get(venue)[0]?.show;
+        return {
+          name: venue,
+          city: firstShow?.city ?? "",
+          region: firstShow?.region ?? "",
+          prefecture: firstShow?.prefecture ?? "",
+          shows: venueShowsMap.get(venue),
+        };
+      })
       .sort(
         (a, b) =>
-          b.shows.length - a.shows.length || a.name.localeCompare(b.name),
+          b.shows.length - a.shows.length || a.name.localeCompare(b.name)
       );
 
     return {
@@ -305,9 +331,7 @@ export default function App() {
     };
   }, []);
 
-  const [selUnitId, setSelUnitId] = useState(
-    allUnits[0]?.id ?? null,
-  );
+  const [selUnitId, setSelUnitId] = useState(allUnits[0]?.id ?? null);
   const [tab, setTab] = useState("show");
   const [selSong, setSelSong] = useState(allUsedSongs[0]?.id ?? null);
   const [selVenue, setSelVenue] = useState(allVenues[0]?.name ?? null);
@@ -362,7 +386,9 @@ export default function App() {
   const tplSongs = current?.tpl?.filter((i) => i.songId).length ?? 0;
   const tplCount = current?.tpl?.length ?? 0;
   const footTpl = current?.isTour
-    ? `巡演模板：${tplSongs} 首${tplCount > tplSongs ? `＋${tplCount - tplSongs}段過場` : ""}`
+    ? `巡演模板：${tplSongs} 首${
+        tplCount > tplSongs ? `＋${tplCount - tplSongs}段過場` : ""
+      }`
     : "單發場合，曲目全文收錄";
 
   return (
@@ -379,8 +405,12 @@ export default function App() {
 
       <header className="hero">
         <p className="hero-eyebrow">
-          <span className="stamp">{current?.isTour ? "巡演檔案" : "演出檔案"}</span>
-          {current ? `${shortUnitTitle(current.unit)}・場次 × 歌曲雙向查詢` : ""}
+          <span className="stamp">
+            {current?.isTour ? "巡演檔案" : "演出檔案"}
+          </span>
+          {current
+            ? `${shortUnitTitle(current.unit)}・場次 × 歌曲雙向查詢`
+            : ""}
         </p>
         <h1 className="hero-title">
           那一晚，<span className="thin">他們唱了什麼。</span>
@@ -434,14 +464,14 @@ export default function App() {
                 e.preventDefault();
                 if (tab === "song") {
                   const matched = allUsedSongs.find((s) =>
-                    s.title.toLowerCase().includes(needle),
+                    s.title.toLowerCase().includes(needle)
                   );
                   if (matched) setSelSong(matched.id);
                 } else if (tab === "venue") {
                   const matched = allVenues.find(
                     (v) =>
                       v.name.toLowerCase().includes(needle) ||
-                      v.city.toLowerCase().includes(needle),
+                      v.city.toLowerCase().includes(needle)
                   );
                   if (matched) setSelVenue(matched.name);
                 }
@@ -452,7 +482,7 @@ export default function App() {
         </div>
       </div>
 
-      {tab === "show" && (
+      {tab === "show" &&
         (() => {
           const soloUnits = allUnits.filter((u) => u.type === "專場");
           const festUnits = allUnits.filter((u) => u.type !== "專場");
@@ -468,9 +498,11 @@ export default function App() {
           const yearsSet = new Set(
             categoryFiltered
               .map((u) => unitEarliest(u).split("-")[0])
-              .filter((y) => y && y !== "9999"),
+              .filter((y) => y && y !== "9999")
           );
-          const availableYears = Array.from(yearsSet).sort((a, b) => b.localeCompare(a));
+          const availableYears = Array.from(yearsSet).sort((a, b) =>
+            b.localeCompare(a)
+          );
 
           // Filter by year if selected
           const finalUnits = categoryFiltered.filter((u) => {
@@ -479,10 +511,16 @@ export default function App() {
           });
 
           return (
-            <div className="filter-pill-bar" role="group" aria-label="場次巡演分組">
+            <div
+              className="filter-pill-bar"
+              role="group"
+              aria-label="場次巡演分組"
+            >
               <div className="group-label">演出類型</div>
               <button
-                className={`filter-pill ${showGroupFilter === "all" ? "is-active" : ""}`}
+                className={`filter-pill ${
+                  showGroupFilter === "all" ? "is-active" : ""
+                }`}
                 onClick={() => {
                   setShowGroupFilter("all");
                   setShowYearFilter("all");
@@ -491,7 +529,9 @@ export default function App() {
                 全部場次 ({allUnits.length})
               </button>
               <button
-                className={`filter-pill ${showGroupFilter === "tour" ? "is-active" : ""}`}
+                className={`filter-pill ${
+                  showGroupFilter === "tour" ? "is-active" : ""
+                }`}
                 onClick={() => {
                   setShowGroupFilter("tour");
                   setShowYearFilter("all");
@@ -500,7 +540,9 @@ export default function App() {
                 巡演專場 ({soloUnits.length})
               </button>
               <button
-                className={`filter-pill ${showGroupFilter === "event" ? "is-active" : ""}`}
+                className={`filter-pill ${
+                  showGroupFilter === "event" ? "is-active" : ""
+                }`}
                 onClick={() => {
                   setShowGroupFilter("event");
                   setShowYearFilter("all");
@@ -509,22 +551,36 @@ export default function App() {
                 音樂祭／特別事件 ({festUnits.length})
               </button>
 
-              <div style={{ margin: "10px 0 4px 0", display: "flex", alignItems: "center", gap: "8px", flexWrap: "wrap" }}>
-                <span className="group-label" style={{ margin: 0 }}>開始年份</span>
+              <div
+                style={{
+                  margin: "10px 0 4px 0",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "8px",
+                  flexWrap: "wrap",
+                }}
+              >
+                <span className="group-label" style={{ margin: 0 }}>
+                  開始年份
+                </span>
                 <button
-                  className={`filter-pill ${showYearFilter === "all" ? "is-active" : ""}`}
+                  className={`filter-pill ${
+                    showYearFilter === "all" ? "is-active" : ""
+                  }`}
                   onClick={() => setShowYearFilter("all")}
                 >
                   全部年份
                 </button>
                 {availableYears.map((year) => {
                   const count = categoryFiltered.filter(
-                    (u) => unitEarliest(u).split("-")[0] === year,
+                    (u) => unitEarliest(u).split("-")[0] === year
                   ).length;
                   return (
                     <button
                       key={year}
-                      className={`filter-pill ${showYearFilter === year ? "is-active" : ""}`}
+                      className={`filter-pill ${
+                        showYearFilter === year ? "is-active" : ""
+                      }`}
                       onClick={() => setShowYearFilter(year)}
                     >
                       📅 {year} ({count})
@@ -539,7 +595,9 @@ export default function App() {
                   .map((u) => (
                     <button
                       key={u.id}
-                      className={`unit-pill ${u.type === "專場" ? "tour-pill" : "event-pill"} ${u.id === selUnitId ? "is-on" : ""}`}
+                      className={`unit-pill ${
+                        u.type === "專場" ? "tour-pill" : "event-pill"
+                      } ${u.id === selUnitId ? "is-on" : ""}`}
                       onClick={() => handleUnitChange(u.id)}
                     >
                       {shortUnitTitle(u)}
@@ -548,27 +606,30 @@ export default function App() {
               </div>
             </div>
           );
-        })()
-      )}
+        })()}
 
       {tab === "song" && (
         <div className="filter-pill-bar" role="group" aria-label="歌曲專輯分組">
           <div className="group-label">專輯／發行分類</div>
           <button
-            className={`filter-pill ${songGroupFilter === "all" ? "is-active" : ""}`}
+            className={`filter-pill ${
+              songGroupFilter === "all" ? "is-active" : ""
+            }`}
             onClick={() => setSongGroupFilter("all")}
           >
             全部歌曲 ({allUsedSongs.length})
           </button>
           {ALBUM_ORDER.map((album) => {
             const count = allUsedSongs.filter(
-              (s) => getSongAlbum(s) === album,
+              (s) => getSongAlbum(s) === album
             ).length;
             if (!count) return null;
             return (
               <button
                 key={album}
-                className={`filter-pill ${songGroupFilter === album ? "is-active" : ""}`}
+                className={`filter-pill ${
+                  songGroupFilter === album ? "is-active" : ""
+                }`}
                 onClick={() => setSongGroupFilter(album)}
               >
                 💿 {album} ({count})
@@ -582,20 +643,24 @@ export default function App() {
         <div className="filter-pill-bar" role="group" aria-label="場地區域分組">
           <div className="group-label">地區分區</div>
           <button
-            className={`filter-pill ${venueGroupFilter === "all" ? "is-active" : ""}`}
+            className={`filter-pill ${
+              venueGroupFilter === "all" ? "is-active" : ""
+            }`}
             onClick={() => setVenueGroupFilter("all")}
           >
             全部地區 ({allVenues.length})
           </button>
           {REGION_ORDER.map((region) => {
             const count = allVenues.filter(
-              (v) => getVenueRegion(v) === region,
+              (v) => getVenueRegion(v) === region
             ).length;
             if (!count) return null;
             return (
               <button
                 key={region}
-                className={`filter-pill ${venueGroupFilter === region ? "is-active" : ""}`}
+                className={`filter-pill ${
+                  venueGroupFilter === region ? "is-active" : ""
+                }`}
                 onClick={() => setVenueGroupFilter(region)}
               >
                 📍 {region} ({count})
@@ -612,8 +677,8 @@ export default function App() {
             tab === "show"
               ? "場次列表"
               : tab === "song"
-                ? "歌曲列表"
-                : "場地列表"
+              ? "歌曲列表"
+              : "場地列表"
           }
         >
           <ul className="drawer-list">
@@ -633,7 +698,9 @@ export default function App() {
                       return (
                         <li key={s.id}>
                           <a
-                            className={`drawer-link ${s.id === selShow ? "is-on" : ""}`}
+                            className={`drawer-link ${
+                              s.id === selShow ? "is-on" : ""
+                            }`}
                             href="#"
                             onClick={(e) => {
                               e.preventDefault();
@@ -658,11 +725,11 @@ export default function App() {
             {tab === "song" &&
               (() => {
                 let filtered = allUsedSongs.filter((s) =>
-                  s.title.toLowerCase().includes(needle),
+                  s.title.toLowerCase().includes(needle)
                 );
                 if (songGroupFilter !== "all") {
                   filtered = filtered.filter(
-                    (s) => getSongAlbum(s) === songGroupFilter,
+                    (s) => getSongAlbum(s) === songGroupFilter
                   );
                 }
                 if (!filtered.length)
@@ -683,7 +750,7 @@ export default function App() {
                 }
 
                 const sortedAlbums = ALBUM_ORDER.filter((album) =>
-                  groups.has(album),
+                  groups.has(album)
                 );
 
                 return sortedAlbums.map((album) => (
@@ -694,7 +761,9 @@ export default function App() {
                       return (
                         <li key={s.id}>
                           <a
-                            className={`drawer-link ${s.id === selSong ? "is-on" : ""}`}
+                            className={`drawer-link ${
+                              s.id === selSong ? "is-on" : ""
+                            }`}
                             href="#"
                             onClick={(e) => {
                               e.preventDefault();
@@ -704,7 +773,9 @@ export default function App() {
                             <span className="drawer-song">
                               {s.title}
                               {songUnreleased.has(s.id) && (
-                                <span className="unreleased-tag">（未發行）</span>
+                                <span className="unreleased-tag">
+                                  （未發行）
+                                </span>
                               )}
                             </span>
                             <span className="drawer-count">{count} 場</span>
@@ -721,11 +792,11 @@ export default function App() {
                 let filtered = allVenues.filter(
                   (v) =>
                     v.name.toLowerCase().includes(needle) ||
-                    v.city.toLowerCase().includes(needle),
+                    v.city.toLowerCase().includes(needle)
                 );
                 if (venueGroupFilter !== "all") {
                   filtered = filtered.filter(
-                    (v) => getVenueRegion(v) === venueGroupFilter,
+                    (v) => getVenueRegion(v) === venueGroupFilter
                   );
                 }
                 if (!filtered.length)
@@ -746,7 +817,7 @@ export default function App() {
                 }
 
                 const sortedRegions = REGION_ORDER.filter((region) =>
-                  groups.has(region),
+                  groups.has(region)
                 );
 
                 return sortedRegions.map((region) => (
@@ -755,7 +826,9 @@ export default function App() {
                     {groups.get(region).map((v) => (
                       <li key={v.name}>
                         <a
-                          className={`drawer-link ${v.name === selVenue ? "is-on" : ""}`}
+                          className={`drawer-link ${
+                            v.name === selVenue ? "is-on" : ""
+                          }`}
                           href="#"
                           onClick={(e) => {
                             e.preventDefault();
@@ -766,7 +839,9 @@ export default function App() {
                             {v.name}
                             <span className="venue-city-sub">（{v.city}）</span>
                           </span>
-                          <span className="drawer-count">{v.shows.length} 場</span>
+                          <span className="drawer-count">
+                            {v.shows.length} 場
+                          </span>
                         </a>
                       </li>
                     ))}
@@ -1032,7 +1107,12 @@ function SongSlip({ songId, globalSongShows, showById, onSelectShow }) {
                 <span className="show-link-venue">{s.venue}</span>
                 <span className="show-link-city">（{s.city}）</span>
               </a>
-              {(Array.isArray(item.kind) ? item.kind : item.kind ? [item.kind] : [])
+              {(Array.isArray(item.kind)
+                ? item.kind
+                : item.kind
+                ? [item.kind]
+                : []
+              )
                 .filter((k) => KIND_BADGE[k])
                 .map((k) => (
                   <span key={k} className={`kind-badge kind-badge--${k}`}>
