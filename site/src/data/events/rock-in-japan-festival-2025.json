@@ -8,58 +8,60 @@
       "date": "2025-09-20",
       "weekday": "六",
       "city": "千葉",
-      "venue": "千葉市蘇我體育公園",
+      "venue": "千葉市蘇我體育公園 LOTUS STAGE",
       "opensAt": "18:45",
       "sourceUrls": [
         "https://www.livefans.jp/events/1812790"
       ],
       "setlist": [
         {
-          "encore": false,
-          "order": 0,
-          "songId": "tattoo"
-        },
-        {
-          "encore": false,
           "order": 1,
-          "songId": "white-noise"
-        },
-        {
           "encore": false,
-          "order": 2,
-          "songId": "mixed-nuts"
-        },
-        {
-          "encore": false,
-          "order": 3,
-          "songId": "shukumei"
-        },
-        {
-          "encore": false,
-          "order": 4,
-          "songId": "i-love"
-        },
-        {
-          "encore": false,
-          "order": 5,
           "songId": "pretender"
         },
         {
+          "order": 2,
           "encore": false,
+          "songId": "shukumei"
+        },
+        {
+          "order": 3,
+          "encore": false,
+          "songId": "i-love"
+        },
+        {
+          "order": 4,
+          "encore": false,
+          "songId": "white-noise"
+        },
+        {
+          "order": 5,
+          "encore": false,
+          "songId": "mixed-nuts"
+        },
+        {
           "order": 6,
+          "encore": false,
+          "songId": "tattoo"
+        },
+        {
+          "order": 7,
+          "encore": false,
           "songId": "rashisa"
         },
         {
+          "order": 8,
           "encore": false,
-          "order": 7,
           "songId": "50pct"
         },
         {
+          "order": 9,
           "encore": false,
-          "order": 8,
           "songId": "stand-by-you"
         }
-      ]
+      ],
+      "prefecture": "千葉縣",
+      "region": "關東"
     }
   ]
 }

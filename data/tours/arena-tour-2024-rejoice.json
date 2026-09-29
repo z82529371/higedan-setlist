@@ -4,54 +4,75 @@
   "type": "專場",
   "shows": [
     {
-      "id": "1672278",
-      "date": "2024-11-20",
-      "city": "札幌",
-      "venue": "Makomanai Sekisui Heim冰上競技場",
-      "region": "北海道",
-      "prefecture": "北海道",
-      "title": "Arena Tour 2024 - Rejoice - 札幌 Day 2",
+      "id": "1672269",
+      "date": "2024-09-20",
+      "city": "福岡",
+      "venue": "福岡海洋展覽館 A館",
+      "region": "九州",
+      "prefecture": "福岡縣",
+      "title": "Arena Tour 2024 - Rejoice - 福岡 Day 1",
       "sourceUrls": [
-        "https://www.livefans.jp/events/1672278"
+        "https://www.livefans.jp/events/1672269"
       ],
       "diff": {
         "skip": [
-          12,
-          17
+          1,
+          13,
+          16,
+          19
         ],
         "insert": [
           {
-            "after": 11,
+            "after": 0,
             "item": {
               "encore": false,
-              "songId": "no-doubt"
+              "songId": "finder",
+              "note": "(映像)"
             }
           },
           {
-            "after": 14,
+            "after": 15,
             "item": {
-              "type": "interlude",
               "encore": false,
-              "note": "Supernova [ELLEGARDEN] (大輔ボーカル)"
+              "songId": "anarchy",
+              "note": "Rejoice ver."
             }
           },
           {
-            "after": 14,
+            "after": 17,
             "item": {
-              "type": "interlude",
               "encore": false,
-              "note": "思ひ出 [鈴木常吉] (楢ちゃんソロ)"
+              "type": "interlude",
+              "note": "倒れた人がいたため繋ぎのために↓"
+            }
+          },
+          {
+            "after": 17,
+            "item": {
+              "encore": false,
+              "songId": "pretender",
+              "note": "弾き語り(1コーラスのみ、みんなで合唱)",
+              "kind": [
+                "satoshi-solo"
+              ]
+            }
+          },
+          {
+            "after": 18,
+            "item": {
+              "encore": true,
+              "songId": "same-blue",
+              "note": "弾き語り(1コーラスのみ、初解禁)",
+              "kind": [
+                "satoshi-solo"
+              ]
             }
           },
           {
             "after": 19,
             "item": {
               "encore": true,
-              "songId": "pretender",
-              "note": "1番のみ。弾き語り合唱",
-              "kind": [
-                "satoshi-solo"
-              ]
+              "songId": "i-love"
             }
           }
         ]
@@ -59,47 +80,274 @@
       "opensAt": "19:00"
     },
     {
-      "id": "1672277",
-      "date": "2024-11-19",
-      "city": "札幌",
-      "venue": "Makomanai Sekisui Heim冰上競技場",
-      "region": "北海道",
-      "prefecture": "北海道",
-      "title": "Arena Tour 2024 - Rejoice - 札幌 Day 1",
+      "id": "1672270",
+      "date": "2024-09-21",
+      "city": "福岡",
+      "venue": "福岡海洋展覽館 A館",
+      "region": "九州",
+      "prefecture": "福岡縣",
+      "title": "Arena Tour 2024 - Rejoice - 福岡 Day 2",
       "sourceUrls": [
-        "https://www.livefans.jp/events/1672277"
+        "https://www.livefans.jp/events/1672270"
       ],
       "diff": {
         "skip": [
-          17,
-          20
+          1,
+          10,
+          12,
+          16,
+          19
+        ],
+        "insert": [
+          {
+            "after": 0,
+            "item": {
+              "encore": false,
+              "songId": "finder",
+              "note": "音源での披露。生演奏なし（SEのような感じ）"
+            }
+          },
+          {
+            "after": 9,
+            "item": {
+              "encore": false,
+              "songId": "pretender"
+            }
+          },
+          {
+            "after": 15,
+            "item": {
+              "encore": false,
+              "songId": "anarchy",
+              "note": "Rejoice ver."
+            }
+          },
+          {
+            "after": 18,
+            "item": {
+              "encore": true,
+              "songId": "same-blue",
+              "note": "弾き語り ver.",
+              "kind": [
+                "satoshi-solo"
+              ]
+            }
+          },
+          {
+            "after": 19,
+            "item": {
+              "encore": true,
+              "songId": "universe"
+            }
+          }
         ]
       },
       "opensAt": "19:00"
     },
     {
-      "id": "1672276",
-      "date": "2024-11-13",
-      "city": "橫濱",
-      "venue": "橫濱K-Arena",
-      "region": "關東",
-      "prefecture": "神奈川縣",
-      "title": "Arena Tour 2024 - Rejoice - 橫濱 Day 2",
+      "id": "1672271",
+      "date": "2024-09-28",
+      "city": "大阪",
+      "venue": "大阪城會館",
+      "region": "關西",
+      "prefecture": "大阪府",
+      "title": "Arena Tour 2024 - Rejoice - 大阪 Day 1",
       "sourceUrls": [
-        "https://www.livefans.jp/events/1672276"
+        "https://www.livefans.jp/events/1672271"
       ],
       "diff": {
         "skip": [
-          12,
-          17,
-          20
+          1,
+          13,
+          16,
+          19
         ],
         "insert": [
           {
-            "after": 11,
+            "after": 0,
             "item": {
               "encore": false,
-              "songId": "no-doubt"
+              "songId": "finder",
+              "note": "映像"
+            }
+          },
+          {
+            "after": 15,
+            "item": {
+              "encore": false,
+              "songId": "anarchy",
+              "note": "Rejoice ver."
+            }
+          },
+          {
+            "after": 18,
+            "item": {
+              "encore": true,
+              "songId": "same-blue",
+              "note": "弾き語り",
+              "kind": [
+                "satoshi-solo"
+              ]
+            }
+          },
+          {
+            "after": 19,
+            "item": {
+              "encore": true,
+              "songId": "i-love"
+            }
+          }
+        ]
+      },
+      "opensAt": "18:00"
+    },
+    {
+      "id": "1672272",
+      "date": "2024-09-29",
+      "city": "大阪",
+      "venue": "大阪城會館",
+      "region": "關西",
+      "prefecture": "大阪府",
+      "title": "Arena Tour 2024 - Rejoice - 大阪 Day 2",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/1672272"
+      ],
+      "diff": {
+        "skip": [
+          1,
+          12,
+          16,
+          19
+        ],
+        "insert": [
+          {
+            "after": 0,
+            "item": {
+              "encore": false,
+              "songId": "finder",
+              "note": "OP映像"
+            }
+          },
+          {
+            "after": 15,
+            "item": {
+              "encore": false,
+              "songId": "anarchy",
+              "note": "Rejoice ver."
+            }
+          },
+          {
+            "after": 18,
+            "item": {
+              "encore": true,
+              "title": "プラネタリウム [BUMP OF CHICKEN]",
+              "note": "サビのみ 弾き語り",
+              "kind": [
+                "satoshi-solo"
+              ]
+            }
+          },
+          {
+            "after": 18,
+            "item": {
+              "encore": true,
+              "songId": "same-blue",
+              "note": "リリース前のため1コーラスのみ 弾き語り",
+              "kind": [
+                "satoshi-solo"
+              ]
+            }
+          },
+          {
+            "after": 19,
+            "item": {
+              "encore": true,
+              "songId": "pretender"
+            }
+          }
+        ]
+      },
+      "opensAt": "18:00"
+    },
+    {
+      "id": "1672273",
+      "date": "2024-10-18",
+      "city": "名古屋",
+      "venue": "名古屋港灣展覽館 第1展示館",
+      "region": "中部",
+      "prefecture": "愛知縣",
+      "title": "Arena Tour 2024 - Rejoice - 名古屋 Day 1",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/1672273"
+      ],
+      "diff": {
+        "skip": [
+          1,
+          13,
+          16,
+          19
+        ],
+        "insert": [
+          {
+            "after": 0,
+            "item": {
+              "encore": false,
+              "songId": "finder",
+              "note": "映像"
+            }
+          },
+          {
+            "after": 15,
+            "item": {
+              "encore": false,
+              "songId": "anarchy",
+              "note": "Rejoice ver."
+            }
+          },
+          {
+            "after": 18,
+            "item": {
+              "encore": true,
+              "songId": "same-blue",
+              "note": "フル初披露"
+            }
+          }
+        ]
+      },
+      "opensAt": "19:00"
+    },
+    {
+      "id": "1672274",
+      "date": "2024-10-19",
+      "city": "名古屋",
+      "venue": "名古屋港灣展覽館 第1展示館",
+      "region": "中部",
+      "prefecture": "愛知縣",
+      "title": "Arena Tour 2024 - Rejoice - 名古屋 Day 2",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/1672274"
+      ],
+      "diff": {
+        "skip": [
+          1,
+          12,
+          16
+        ],
+        "insert": [
+          {
+            "after": 0,
+            "item": {
+              "encore": false,
+              "songId": "finder",
+              "note": "映像"
+            }
+          },
+          {
+            "after": 15,
+            "item": {
+              "encore": false,
+              "songId": "anarchy",
+              "note": "Rejoice ver."
             }
           }
         ]
@@ -119,230 +367,173 @@
       ],
       "diff": {
         "skip": [
-          17,
-          20
-        ]
-      },
-      "opensAt": "19:00"
-    },
-    {
-      "id": "1672274",
-      "date": "2024-10-19",
-      "city": "名古屋",
-      "venue": "Portmesse名古屋1館",
-      "region": "中部",
-      "prefecture": "愛知縣",
-      "title": "Arena Tour 2024 - Rejoice - 名古屋 Day 2",
-      "sourceUrls": [
-        "https://www.livefans.jp/events/1672274"
-      ],
-      "diff": {
-        "skip": [
-          12,
-          17,
-          20
+          1,
+          13,
+          16
         ],
         "insert": [
           {
-            "after": 11,
+            "after": 0,
             "item": {
               "encore": false,
-              "songId": "no-doubt"
-            }
-          }
-        ]
-      },
-      "opensAt": "19:00"
-    },
-    {
-      "id": "1672273",
-      "date": "2024-10-18",
-      "city": "名古屋",
-      "venue": "Portmesse名古屋1館",
-      "region": "中部",
-      "prefecture": "愛知県",
-      "title": "Arena Tour 2024 - Rejoice - 名古屋 Day 1",
-      "sourceUrls": [
-        "https://www.livefans.jp/events/1672273"
-      ],
-      "diff": {
-        "skip": [
-          17,
-          20
-        ]
-      },
-      "opensAt": "19:00"
-    },
-    {
-      "id": "1672272",
-      "date": "2024-09-29",
-      "city": "大阪",
-      "venue": "大阪城會館",
-      "region": "關西",
-      "prefecture": "大阪府",
-      "title": "Arena Tour 2024 - Rejoice - 大阪 Day 2",
-      "sourceUrls": [
-        "https://www.livefans.jp/events/1672272"
-      ],
-      "diff": {
-        "skip": [
-          12,
-          17,
-          20
-        ],
-        "kind": [
-          {
-            "order": 19,
-            "kind": [
-              "premiere",
-              "satoshi-solo"
-            ]
-          }
-        ],
-        "insert": [
-          {
-            "after": 11,
-            "item": {
-              "encore": false,
-              "songId": "no-doubt"
+              "songId": "finder",
+              "note": "※映像"
             }
           },
           {
-            "after": 18,
+            "after": 15,
+            "item": {
+              "encore": false,
+              "songId": "anarchy",
+              "note": "Rejoice ver."
+            }
+          }
+        ]
+      },
+      "opensAt": "19:00"
+    },
+    {
+      "id": "1672276",
+      "date": "2024-11-13",
+      "city": "橫濱",
+      "venue": "橫濱K-Arena",
+      "region": "關東",
+      "prefecture": "神奈川縣",
+      "title": "Arena Tour 2024 - Rejoice - 橫濱 Day 2",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/1672276"
+      ],
+      "diff": {
+        "skip": [
+          1,
+          12,
+          16
+        ],
+        "insert": [
+          {
+            "after": 0,
+            "item": {
+              "encore": false,
+              "songId": "finder",
+              "note": "映像"
+            }
+          },
+          {
+            "after": 9,
+            "item": {
+              "encore": false,
+              "type": "interlude",
+              "note": "ピアノ弾きMC"
+            }
+          },
+          {
+            "after": 15,
+            "item": {
+              "encore": false,
+              "songId": "anarchy",
+              "note": "Rejoice ver."
+            }
+          }
+        ]
+      },
+      "opensAt": "19:00"
+    },
+    {
+      "id": "1672277",
+      "date": "2024-11-19",
+      "city": "札幌",
+      "venue": "真駒內積水海姆冰上競技場",
+      "region": "北海道",
+      "prefecture": "北海道",
+      "title": "Arena Tour 2024 - Rejoice - 札幌 Day 1",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/1672277"
+      ],
+      "diff": {
+        "skip": [
+          1,
+          13,
+          16
+        ],
+        "insert": [
+          {
+            "after": 0,
+            "item": {
+              "encore": false,
+              "songId": "finder",
+              "note": "※映像"
+            }
+          },
+          {
+            "after": 15,
+            "item": {
+              "encore": false,
+              "songId": "anarchy",
+              "note": "Rejoice ver."
+            }
+          }
+        ]
+      },
+      "opensAt": "19:00"
+    },
+    {
+      "id": "1672278",
+      "date": "2024-11-20",
+      "city": "札幌",
+      "venue": "真駒內積水海姆冰上競技場",
+      "region": "北海道",
+      "prefecture": "北海道",
+      "title": "Arena Tour 2024 - Rejoice - 札幌 Day 2",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/1672278"
+      ],
+      "diff": {
+        "skip": [
+          12,
+          16
+        ],
+        "insert": [
+          {
+            "after": 15,
+            "item": {
+              "encore": false,
+              "type": "interlude",
+              "note": "Supernova (ELLEGARDEN) 大輔ボーカル"
+            }
+          },
+          {
+            "after": 15,
+            "item": {
+              "encore": false,
+              "type": "interlude",
+              "note": "思ひ出 (鈴木常吉) 楢ちゃんソロ"
+            }
+          },
+          {
+            "after": 15,
+            "item": {
+              "encore": false,
+              "songId": "anarchy",
+              "note": "Rejoice ver."
+            }
+          },
+          {
+            "after": 20,
             "item": {
               "encore": true,
-              "title": "プラネタリウム [BUMP OF CHICKEN]",
+              "songId": "pretender",
+              "note": "1番のみ。弾き語り合唱",
               "kind": [
                 "satoshi-solo"
               ]
             }
           },
           {
-            "after": 19,
+            "after": 20,
             "item": {
               "encore": true,
-              "songId": "pretender"
+              "songId": "i-love"
             }
-          }
-        ]
-      },
-      "opensAt": "18:00"
-    },
-    {
-      "id": "1672271",
-      "date": "2024-09-28",
-      "city": "大阪",
-      "venue": "大阪城會館",
-      "region": "關西",
-      "prefecture": "大阪府",
-      "title": "Arena Tour 2024 - Rejoice - 大阪 Day 1",
-      "sourceUrls": [
-        "https://www.livefans.jp/events/1672271"
-      ],
-      "diff": {
-        "skip": [
-          17
-        ],
-        "kind": [
-          {
-            "order": 19,
-            "kind": [
-              "premiere",
-              "satoshi-solo"
-            ]
-          }
-        ]
-      },
-      "opensAt": "18:00"
-    },
-    {
-      "id": "1672270",
-      "date": "2024-09-21",
-      "city": "福岡",
-      "venue": "Marine Messe福岡A棟",
-      "region": "九州",
-      "prefecture": "福岡縣",
-      "title": "Arena Tour 2024 - Rejoice - 福岡 Day 2",
-      "sourceUrls": [
-        "https://www.livefans.jp/events/1672270"
-      ],
-      "diff": {
-        "skip": [
-          10,
-          12,
-          17,
-          20
-        ],
-        "kind": [
-          {
-            "order": 19,
-            "kind": [
-              "premiere",
-              "satoshi-solo"
-            ]
-          }
-        ],
-        "insert": [
-          {
-            "after": 9,
-            "item": {
-              "encore": false,
-              "songId": "pretender"
-            }
-          },
-          {
-            "after": 11,
-            "item": {
-              "encore": false,
-              "songId": "no-doubt"
-            }
-          },
-          {
-            "after": 19,
-            "item": {
-              "encore": true,
-              "songId": "universe"
-            }
-          }
-        ]
-      },
-      "opensAt": "19:00"
-    },
-    {
-      "id": "1672269",
-      "date": "2024-09-20",
-      "city": "福岡",
-      "venue": "Marine Messe福岡A棟",
-      "region": "九州",
-      "prefecture": "福岡県",
-      "title": "Arena Tour 2024 - Rejoice - 福岡 Day 1",
-      "sourceUrls": [
-        "https://www.livefans.jp/events/1672269"
-      ],
-      "diff": {
-        "kind": [
-          {
-            "order": 17,
-            "kind": [
-              "satoshi-solo"
-            ]
-          },
-          {
-            "order": 19,
-            "kind": [
-              "premiere",
-              "satoshi-solo"
-            ]
-          }
-        ],
-        "note": [
-          {
-            "order": 17,
-            "note": "弾き語り(1コーラスのみ、みんなで合唱)"
-          },
-          {
-            "order": 19,
-            "note": "弾き語り(1コーラスのみ、初解禁)"
           }
         ]
       },
@@ -353,8 +544,7 @@
     {
       "order": 1,
       "encore": false,
-      "songId": "finder",
-      "note": "OP映像"
+      "songId": "finder"
     },
     {
       "order": 2,
@@ -414,28 +604,27 @@
     {
       "order": 13,
       "encore": false,
-      "songId": "uramitsuramikiwami"
+      "songId": "no-doubt"
     },
     {
       "order": 14,
       "encore": false,
-      "songId": "mixed-nuts"
+      "songId": "uramitsuramikiwami"
     },
     {
       "order": 15,
       "encore": false,
-      "songId": "anarchy",
-      "note": "Rejoice ver."
+      "songId": "mixed-nuts"
     },
     {
       "order": 16,
       "encore": false,
-      "songId": "chessboard"
+      "songId": "anarchy"
     },
     {
       "order": 17,
       "encore": false,
-      "songId": "pretender"
+      "songId": "chessboard"
     },
     {
       "order": 18,
@@ -445,25 +634,18 @@
     {
       "order": 19,
       "encore": true,
-      "songId": "same-blue",
-      "kind": [
-        "premiere"
-      ]
+      "songId": "same-blue"
     },
     {
       "order": 20,
       "encore": true,
-      "songId": "i-love"
+      "songId": "soulsoup"
     },
     {
       "order": 21,
       "encore": true,
-      "songId": "soulsoup"
-    },
-    {
-      "order": 22,
-      "encore": true,
       "songId": "tattoo"
     }
-  ]
+  ],
+  "templateBasis": "全自動提煉：基於 10 場演出提取 $\\ge 50\\%$ 多數共識歌單"
 }

@@ -8,7 +8,7 @@
       "date": "2024-07-23",
       "weekday": "火",
       "city": "東京",
-      "venue": "東京Zepp Haneda",
+      "venue": "Zepp Haneda",
       "opensAt": "19:00",
       "sourceUrls": [
         "https://www.livefans.jp/events/1672294"
@@ -100,7 +100,9 @@
           "encore": true,
           "songId": "tattoo"
         }
-      ]
+      ],
+      "prefecture": "東京都",
+      "region": "關東"
     }
   ]
 }

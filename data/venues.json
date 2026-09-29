@@ -1,6 +1,6 @@
 {
   "リンクステーションホール青森": {
-    "venue": "青森市文化會館",
+    "venue": "青森市文化會館 (Linkstation Hall 青森)",
     "city": "青森",
     "region": "東北",
     "prefecture": "青森縣"
@@ -54,7 +54,7 @@
     "prefecture": "岡山縣"
   },
   "広島文化学園HBGホール": {
-    "venue": "廣島文化學園HBG會館",
+    "venue": "廣島文化學園 HBG會館",
     "city": "廣島",
     "region": "中國",
     "prefecture": "廣島縣"
@@ -72,7 +72,7 @@
     "prefecture": "愛知縣"
   },
   "Niterra日本特殊陶業市民会館 フォレストホール": {
-    "venue": "森林會館",
+    "venue": "日本特殊陶業市民會館 Forest Hall",
     "city": "名古屋",
     "region": "中部",
     "prefecture": "愛知縣"
@@ -132,7 +132,7 @@
     "prefecture": "山形縣"
   },
   "あきた芸術劇場ミルハス 大ホール": {
-    "venue": "秋田藝術劇場",
+    "venue": "秋田藝術劇場 Milhas",
     "city": "秋田",
     "region": "東北",
     "prefecture": "秋田縣"
@@ -144,7 +144,7 @@
     "prefecture": "宮城縣"
   },
   "ふくしん夢の音楽堂 大ホール": {
-    "venue": "夢之音樂堂",
+    "venue": "福島夢之音樂堂",
     "city": "福島",
     "region": "東北",
     "prefecture": "福島縣"
@@ -168,7 +168,7 @@
     "prefecture": "長崎縣"
   },
   "iichiko総合文化センター グランシアタ": {
-    "venue": "iichiko 大劇場",
+    "venue": "iichiko綜合文化中心 Gran Theater",
     "city": "大分",
     "region": "九州",
     "prefecture": "大分縣"
@@ -192,7 +192,7 @@
     "prefecture": "台灣"
   },
   "KSPO DOME": {
-    "venue": "高尺天空巨蛋",
+    "venue": "KSPO DOME (奧林匹克體操競技場)",
     "city": "首爾",
     "region": "海外",
     "prefecture": "韓國"
@@ -210,87 +210,159 @@
     "prefecture": "泰國"
   },
   "フェスティバルホール": {
-    "venue": "節日大廳",
+    "venue": "大阪節慶音樂廳 (Festival Hall)",
     "city": "大阪",
     "region": "關西",
     "prefecture": "大阪府"
   },
   "富山市芸術文化ホール オーバード・ホール": {
-    "venue": "富山市藝術文化館Oberd Hall",
+    "venue": "富山市藝術文化館 Aubade Hall",
     "city": "富山",
     "region": "中部",
-    "prefecture": "富山県"
+    "prefecture": "富山縣"
   },
   "旭川市民文化会館 大ホール": {
-    "venue": "旭川市民文化會館 大會堂",
+    "venue": "旭川市民文化會館",
     "city": "旭川",
     "region": "北海道",
     "prefecture": "北海道"
   },
   "真駒内セキスイハイムアイスアリーナ": {
-    "venue": "Makomanai Sekisui Heim冰上競技場",
+    "venue": "真駒內積水海姆冰上競技場",
     "city": "札幌",
     "region": "北海道",
     "prefecture": "北海道"
   },
   "ポートメッセなごや 第1展示館": {
-    "venue": "Portmesse名古屋1館",
+    "venue": "名古屋港灣展覽館 第1展示館",
     "city": "名古屋",
     "region": "中部",
-    "prefecture": "愛知県"
+    "prefecture": "愛知縣"
   },
   "マリンメッセ福岡 A館": {
-    "venue": "Marine Messe福岡A棟",
+    "venue": "福岡海洋展覽館 A館",
     "city": "福岡",
     "region": "九州",
-    "prefecture": "福岡県"
+    "prefecture": "福岡縣"
   },
   "KINTEX Hall 5": {
     "venue": "KINTEX Hall 5",
-    "city": "首爾",
-    "region": "韓國",
-    "prefecture": "韓国"
+    "city": "高陽",
+    "region": "海外",
+    "prefecture": "韓國"
   },
   "Zepp Nagoya": {
     "venue": "Zepp Nagoya",
     "city": "名古屋",
-    "region": "",
-    "prefecture": "愛知県"
+    "region": "中部",
+    "prefecture": "愛知縣"
   },
   "Zepp Sapporo": {
     "venue": "Zepp Sapporo",
     "city": "札幌",
-    "region": "",
+    "region": "北海道",
     "prefecture": "北海道"
   },
   "Zepp DiverCity": {
     "venue": "Zepp DiverCity",
     "city": "東京",
-    "region": "",
+    "region": "關東",
     "prefecture": "東京都"
   },
   "Zepp Osaka Bayside": {
     "venue": "Zepp Osaka Bayside",
     "city": "大阪",
-    "region": "",
+    "region": "關西",
     "prefecture": "大阪府"
   },
   "Zepp Fukuoka": {
     "venue": "Zepp Fukuoka",
     "city": "福岡",
-    "region": "",
-    "prefecture": "福岡県"
+    "region": "九州",
+    "prefecture": "福岡縣"
   },
   "日産スタジアム": {
     "venue": "日產體育場",
     "city": "橫濱",
     "region": "關東",
-    "prefecture": "神奈川県"
+    "prefecture": "神奈川縣"
   },
   "ヤンマースタジアム長居": {
-    "venue": "洋馬長居體育場",
+    "venue": "長居陸上競技場 (Yanmar Stadium 長居)",
     "city": "大阪",
     "region": "關西",
     "prefecture": "大阪府"
+  },
+  "豊洲PIT": {
+    "venue": "豐洲PIT",
+    "city": "東京",
+    "region": "關東",
+    "prefecture": "東京都"
+  },
+  "熊本県農業公園カントリーパーク": {
+    "venue": "熊本縣立農業公園郊野公園",
+    "city": "熊本",
+    "region": "九州",
+    "prefecture": "熊本縣"
+  },
+  "TBSテレビ": {
+    "venue": "TBS電視台",
+    "city": "東京",
+    "region": "關東",
+    "prefecture": "東京都"
+  },
+  "オンラインライブ": {
+    "venue": "線上直播",
+    "city": "東京",
+    "region": "其他",
+    "prefecture": ""
+  },
+  "NHKホール": {
+    "venue": "NHK會館",
+    "city": "東京",
+    "region": "關東",
+    "prefecture": "東京都"
+  },
+  "LOTUS STAGE at 千葉市蘇我スポーツ公園": {
+    "venue": "千葉市蘇我體育公園 LOTUS STAGE",
+    "city": "千葉",
+    "region": "關東",
+    "prefecture": "千葉縣"
+  },
+  "SUMMER SONIC 2025": {
+    "venue": "千葉海洋球場（ZOZO Marine Stadium）",
+    "city": "千葉",
+    "region": "關東",
+    "prefecture": "千葉縣"
+  },
+  "AIR STAGE at 万博記念公園": {
+    "venue": "萬博紀念公園 AIR STAGE",
+    "city": "大阪",
+    "region": "關西",
+    "prefecture": "大阪府"
+  },
+  "LAKESIDE STAGE at 山中湖交流プラザきらら": {
+    "venue": "山中湖交流廣場 Kirara LAKESIDE STAGE",
+    "city": "山梨",
+    "region": "中部",
+    "prefecture": "山梨縣"
+  },
+  "TOYOTA ARENA TOKYO": {
+    "venue": "TOYOTA ARENA TOKYO",
+    "city": "東京",
+    "region": "關東",
+    "prefecture": "東京都"
+  },
+  "Zepp Haneda": {
+    "venue": "Zepp Haneda",
+    "city": "東京",
+    "region": "關東",
+    "prefecture": "東京都"
+  },
+  "KT Zepp Yokohama": {
+    "venue": "KT Zepp Yokohama",
+    "city": "橫濱",
+    "region": "關東",
+    "prefecture": "神奈川縣"
   }
 }

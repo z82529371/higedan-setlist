@@ -15,109 +15,111 @@
       ],
       "setlist": [
         {
-          "encore": false,
           "order": 1,
+          "encore": false,
           "songId": "amazing"
         },
         {
-          "encore": false,
           "order": 2,
+          "encore": false,
           "songId": "pending-machine"
         },
         {
-          "encore": false,
           "order": 3,
+          "encore": false,
           "songId": "coffee-to-syrup"
         },
         {
-          "encore": false,
           "order": 4,
+          "encore": false,
           "songId": "bad-for-me"
         },
         {
-          "encore": false,
           "order": 5,
+          "encore": false,
           "songId": "vintage"
         },
         {
-          "encore": false,
           "order": 6,
+          "encore": false,
           "songId": "bedroom-talk"
         },
         {
-          "encore": false,
           "order": 7,
-          "songId": "lady"
+          "encore": false,
+          "songId": "tell-me-baby"
         },
         {
-          "encore": false,
           "order": 8,
+          "encore": false,
           "songId": "55"
         },
         {
-          "encore": false,
           "order": 9,
+          "encore": false,
           "songId": "tabi-wa-michizure"
         },
         {
-          "encore": false,
           "order": 10,
+          "encore": false,
           "songId": "hello"
         },
         {
-          "encore": false,
           "order": 11,
+          "encore": false,
           "songId": "driver"
         },
         {
-          "encore": false,
           "order": 12,
+          "encore": false,
           "songId": "uramitsuramikiwami"
         },
         {
-          "encore": false,
           "order": 13,
+          "encore": false,
           "songId": "inu-ka-cat-ka-de-shinumade-kenka-shiyou"
         },
         {
-          "encore": false,
           "order": 14,
+          "encore": false,
           "songId": "nichiyoubi-no-love-letter"
         },
         {
-          "encore": false,
           "order": 15,
+          "encore": false,
           "songId": "rolling"
         },
         {
-          "encore": true,
           "order": 16,
+          "encore": true,
           "songId": "50pct"
         },
         {
-          "encore": true,
           "order": 17,
+          "encore": true,
           "songId": "universe",
+          "note": "リクエスト1曲目",
           "kind": [
             "request"
-          ],
-          "note": "リクエスト1曲目"
+          ]
         },
         {
-          "encore": true,
           "order": 18,
+          "encore": true,
           "songId": "stand-by-you",
+          "note": "リクエスト2曲目",
           "kind": [
             "request"
-          ],
-          "note": "リクエスト2曲目"
+          ]
         },
         {
-          "encore": true,
           "order": 19,
+          "encore": true,
           "songId": "sweet-tweet"
         }
-      ]
+      ],
+      "prefecture": "神奈川縣",
+      "region": "關東"
     }
   ]
 }

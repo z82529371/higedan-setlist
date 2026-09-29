@@ -1,71 +1,81 @@
 {
-  "id": "uverworld-vs-official-hige-dandism-2024",
-  "title": "UVERworld vs Official髭男dism",
+  "id": "tooy-1-2022",
+  "title": "TOOY#1",
   "type": "對バン",
   "shows": [
     {
-      "id": "1727334",
-      "date": "2024-12-26",
-      "weekday": "木",
+      "id": "1456558",
+      "date": "2022-09-12",
       "city": "東京",
-      "venue": "日本武道館",
+      "venue": "豐洲PIT",
+      "region": "關東",
+      "prefecture": "東京都",
+      "title": "TOOY#1 東京",
       "sourceUrls": [
-        "https://www.livefans.jp/events/1727334"
+        "https://www.livefans.jp/events/1456558"
       ],
       "setlist": [
         {
           "order": 1,
           "encore": false,
-          "songId": "pretender"
+          "songId": "universe"
         },
         {
           "order": 2,
           "encore": false,
-          "songId": "i-love"
+          "songId": "shukumei"
         },
         {
           "order": 3,
           "encore": false,
-          "songId": "cry-baby"
+          "songId": "115man-kiro-no-film"
         },
         {
           "order": 4,
           "encore": false,
-          "title": "浮世CROSSING [UVERworld]"
+          "songId": "pretender"
         },
         {
           "order": 5,
           "encore": false,
-          "title": "SHAMROCK [UVERworld]"
+          "title": "願い [sumika]",
+          "note": "弾き語り sumika cover",
+          "kind": [
+            "satoshi-solo"
+          ]
         },
         {
           "order": 6,
           "encore": false,
-          "songId": "same-blue"
+          "songId": "cry-baby"
         },
         {
           "order": 7,
           "encore": false,
-          "songId": "subtitle"
+          "songId": "no-doubt"
         },
         {
           "order": 8,
           "encore": false,
-          "songId": "stand-by-you"
+          "title": "ふっかつのじゅもん [sumika]",
+          "note": "sumika cover"
         },
         {
           "order": 9,
           "encore": false,
-          "songId": "shukumei"
+          "songId": "stand-by-you"
         },
         {
           "order": 10,
           "encore": false,
+          "songId": "i-love"
+        },
+        {
+          "order": 11,
+          "encore": false,
           "songId": "mixed-nuts"
         }
-      ],
-      "region": "關東",
-      "prefecture": "東京都"
+      ]
     }
   ]
 }

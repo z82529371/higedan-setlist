@@ -14,56 +14,58 @@
       ],
       "setlist": [
         {
-          "encore": false,
           "order": 1,
+          "encore": false,
           "songId": "pretender"
         },
         {
-          "encore": false,
           "order": 2,
+          "encore": false,
           "songId": "i-love"
         },
         {
-          "encore": false,
           "order": 3,
+          "encore": false,
           "songId": "cry-baby"
         },
         {
-          "encore": false,
           "order": 4,
+          "encore": false,
           "title": "浮世CROSSING [UVERworld]"
         },
         {
-          "encore": false,
           "order": 5,
+          "encore": false,
           "title": "SHAMROCK [UVERworld]"
         },
         {
-          "encore": false,
           "order": 6,
+          "encore": false,
           "songId": "same-blue"
         },
         {
-          "encore": false,
           "order": 7,
+          "encore": false,
           "songId": "subtitle"
         },
         {
-          "encore": false,
           "order": 8,
+          "encore": false,
           "songId": "stand-by-you"
         },
         {
-          "encore": false,
           "order": 9,
+          "encore": false,
           "songId": "shukumei"
         },
         {
-          "encore": false,
           "order": 10,
+          "encore": false,
           "songId": "mixed-nuts"
         }
-      ]
+      ],
+      "region": "關東",
+      "prefecture": "東京都"
     }
   ]
 }

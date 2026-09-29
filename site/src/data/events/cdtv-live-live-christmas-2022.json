@@ -17,14 +17,18 @@
         {
           "order": 1,
           "encore": false,
-          "songId": "mixed-nuts"
+          "songId": "mixed-nuts",
+          "note": "今年の大ヒットソング2曲をSPメドレー"
         },
         {
           "order": 2,
           "encore": false,
-          "songId": "subtitle"
+          "songId": "subtitle",
+          "note": "今年の大ヒットソング2曲をSPメドレー"
         }
-      ]
+      ],
+      "prefecture": "東京都",
+      "region": "關東"
     }
   ]
 }

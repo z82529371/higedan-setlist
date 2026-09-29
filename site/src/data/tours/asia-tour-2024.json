@@ -4,46 +4,61 @@
   "type": "專場",
   "shows": [
     {
-      "id": "1720176",
-      "date": "2024-12-15",
-      "city": "台北",
-      "venue": "台北小巨蛋",
+      "id": "1720174",
+      "date": "2024-11-30",
+      "city": "高陽",
+      "venue": "KINTEX Hall 5",
       "region": "海外",
-      "prefecture": "台灣",
-      "title": "Asia Tour 2024 - Rejoice - 台灣公演",
+      "prefecture": "韓國",
+      "title": "Asia Tour 2024 - Rejoice - 韓國公演 Day 1",
       "sourceUrls": [
-        "https://www.livefans.jp/events/1720176"
+        "https://www.livefans.jp/events/1720174"
       ],
-      "diff": {
-        "insert": [
-          {
-            "after": 10,
-            "item": {
-              "encore": false,
-              "songId": "pretender",
-              "note": "楢崎さんと一緒に合唱",
-              "kind": [
-                "request"
-              ]
-            }
-          }
-        ]
-      },
-      "opensAt": "18:00"
+      "opensAt": "19:00",
+      "diff": {}
     },
     {
       "id": "1720175",
       "date": "2024-12-01",
-      "city": "首爾",
+      "city": "高陽",
       "venue": "KINTEX Hall 5",
-      "region": "韓國",
-      "prefecture": "高陽",
+      "region": "海外",
+      "prefecture": "韓國",
       "title": "Asia Tour 2024 - Rejoice - 韓國公演 Day 2",
       "sourceUrls": [
         "https://www.livefans.jp/events/1720175"
       ],
       "diff": {
+        "skip": [
+          1,
+          10,
+          13
+        ],
         "insert": [
+          {
+            "after": 0,
+            "item": {
+              "encore": false,
+              "songId": "finder",
+              "note": "OP映像"
+            }
+          },
+          {
+            "after": 9,
+            "item": {
+              "encore": false,
+              "songId": "no-doubt",
+              "note": "Editorialツアーver"
+            }
+          },
+          {
+            "after": 12,
+            "item": {
+              "encore": false,
+              "songId": "anarchy",
+              "note": "Rejoice ver."
+            }
+          },
           {
             "after": 17,
             "item": {
@@ -56,25 +71,65 @@
       "opensAt": "18:00"
     },
     {
-      "id": "1720174",
-      "date": "2024-11-30",
-      "city": "首爾",
-      "venue": "KINTEX Hall 5",
-      "region": "韓國",
-      "prefecture": "韓国",
-      "title": "Asia Tour 2024 - Rejoice - 韓國公演 Day 1",
+      "id": "1720176",
+      "date": "2024-12-15",
+      "city": "台北",
+      "venue": "台北小巨蛋",
+      "region": "海外",
+      "prefecture": "台灣",
+      "title": "Asia Tour 2024 - Rejoice - 台灣公演",
       "sourceUrls": [
-        "https://www.livefans.jp/events/1720174"
+        "https://www.livefans.jp/events/1720176"
       ],
-      "opensAt": "19:00"
+      "diff": {
+        "skip": [
+          1,
+          10,
+          13
+        ],
+        "insert": [
+          {
+            "after": 0,
+            "item": {
+              "encore": false,
+              "songId": "finder",
+              "note": "OP映像"
+            }
+          },
+          {
+            "after": 9,
+            "item": {
+              "encore": false,
+              "songId": "no-doubt",
+              "note": "Editorial Tour ver"
+            }
+          },
+          {
+            "after": 10,
+            "item": {
+              "encore": false,
+              "type": "interlude",
+              "note": "楢崎さんと一緒に合唱:Pretender"
+            }
+          },
+          {
+            "after": 12,
+            "item": {
+              "encore": false,
+              "songId": "anarchy",
+              "note": "Rejoice ver."
+            }
+          }
+        ]
+      },
+      "opensAt": "18:00"
     }
   ],
   "templateSetlist": [
     {
       "order": 1,
       "encore": false,
-      "songId": "finder",
-      "note": "OP映像"
+      "songId": "finder"
     },
     {
       "order": 2,
@@ -134,8 +189,7 @@
     {
       "order": 13,
       "encore": false,
-      "songId": "anarchy",
-      "note": "Rejoice ver."
+      "songId": "anarchy"
     },
     {
       "order": 14,
@@ -167,5 +221,6 @@
       "encore": true,
       "songId": "tattoo"
     }
-  ]
+  ],
+  "templateBasis": "全自動提煉：基於 3 場演出提取 $\\ge 50\\%$ 多數共識歌單"
 }

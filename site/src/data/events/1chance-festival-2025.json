@@ -8,51 +8,63 @@
       "date": "2025-09-07",
       "weekday": "日",
       "city": "熊本",
-      "venue": "熊本縣農業公園 Country Park",
+      "venue": "熊本縣立農業公園郊野公園",
       "opensAt": "17:05",
       "sourceUrls": [
         "https://www.livefans.jp/events/1795140"
       ],
       "setlist": [
         {
+          "order": 1,
           "encore": false,
-          "order": 0,
-          "kind": [
-            "interlude"
-          ],
-          "note": "リハ：Apoptosis / Universe / 異端なスター"
+          "type": "interlude",
+          "note": "リハ：アポトーシス (ピアノ ワンフレーズ)"
         },
         {
+          "order": 2,
           "encore": false,
-          "order": 1,
+          "type": "interlude",
+          "note": "リハ：Universe (コーラスサビ)"
+        },
+        {
+          "order": 3,
+          "encore": false,
+          "type": "interlude",
+          "note": "リハ：異端なスター (ベース・ドラムス ワンフレーズ)"
+        },
+        {
+          "order": 4,
+          "encore": false,
           "songId": "pretender"
         },
         {
+          "order": 5,
           "encore": false,
-          "order": 2,
           "songId": "shukumei"
         },
         {
+          "order": 6,
           "encore": false,
-          "order": 3,
           "songId": "white-noise"
         },
         {
+          "order": 7,
           "encore": false,
-          "order": 4,
           "songId": "rashisa"
         },
         {
+          "order": 8,
           "encore": false,
-          "order": 5,
           "songId": "mixed-nuts"
         },
         {
+          "order": 9,
           "encore": false,
-          "order": 6,
           "songId": "50pct"
         }
-      ]
+      ],
+      "prefecture": "熊本縣",
+      "region": "九州"
     }
   ]
 }

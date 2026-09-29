@@ -8,7 +8,7 @@
       "date": "2022-12-31",
       "weekday": "土",
       "city": "東京",
-      "venue": "NHK Hall",
+      "venue": "NHK會館",
       "opensAt": "19:20",
       "sourceUrls": [
         "https://www.livefans.jp/events/1490967"
@@ -17,9 +17,12 @@
         {
           "order": 1,
           "encore": false,
-          "songId": "subtitle"
+          "songId": "subtitle",
+          "note": "101スタジオ"
         }
-      ]
+      ],
+      "prefecture": "東京都",
+      "region": "關東"
     }
   ]
 }
