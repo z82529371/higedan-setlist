@@ -1,4 +1,4 @@
-import { Fragment, useMemo, useRef, useState } from "react";
+import { Fragment, useEffect, useMemo, useRef, useState } from "react";
 import songsData from "./data/songs.json";
 import "./style.css";
 
@@ -237,10 +237,32 @@ function defaultShowId(unit) {
   return shows.at(-1)?.id ?? null;
 }
 
+// Hash routes (no router dep; static hosting safe):
+// #/song/<songId> #/show/<showId> #/venue/<name> #/title/<title>
+function parseRoute(hash) {
+  const m = (hash ?? "").replace(/^#/, "").match(
+    /^\/(song|show|venue|title)\/(.+)$/
+  );
+  if (!m) return null;
+  try {
+    return { kind: m[1], value: decodeURIComponent(m[2]) };
+  } catch {
+    return null;
+  }
+}
+
+const routeHash = {
+  song: (id) => `#/song/${id}`,
+  show: (id) => `#/show/${id}`,
+  venue: (name) => `#/venue/${encodeURIComponent(name)}`,
+  title: (title) => `#/title/${encodeURIComponent(title)}`,
+};
+
 export default function App() {
   const {
     unitData,
     globalSongShows,
+    globalTitleShows,
     globalVenueShows,
     allUsedSongs,
     allVenues,
@@ -249,6 +271,7 @@ export default function App() {
   } = useMemo(() => {
     const unitDataMap = new Map();
     const songShowsMap = new Map();
+    const titleShowsMap = new Map();
     const venueShowsMap = new Map();
     const showByIdMap = new Map();
     const unitByShow = new Map();
@@ -280,8 +303,8 @@ export default function App() {
           });
         }
 
-        for (const i of full.get(s.id)) {
-          if (!i.songId) continue;
+      for (const i of full.get(s.id)) {
+        if (i.songId) {
           if (!songShows.has(i.songId)) songShows.set(i.songId, []);
           songShows.get(i.songId).push(s.id);
 
@@ -294,7 +317,18 @@ export default function App() {
             item: i,
             isTemplateSong: isTour && tplSongSet.has(i.songId),
           });
+        } else if (i.title) {
+          // Cover/title-only tracks: no songs.json entry, keyed by title.
+          if (!titleShowsMap.has(i.title)) titleShowsMap.set(i.title, []);
+          titleShowsMap.get(i.title).push({
+            showId: s.id,
+            unitId: unit.id,
+            unitTitle: shortUnitTitle(unit),
+            unitType: unit.type,
+            item: i,
+          });
         }
+      }
       }
 
       unitDataMap.set(unit.id, { unit, isTour, tpl, shows, full, songShows });
@@ -323,6 +357,7 @@ export default function App() {
     return {
       unitData: unitDataMap,
       globalSongShows: songShowsMap,
+      globalTitleShows: titleShowsMap,
       globalVenueShows: venueShowsMap,
       allUsedSongs: usedSongsList,
       allVenues: venuesList,
@@ -331,11 +366,39 @@ export default function App() {
     };
   }, []);
 
-  const [selUnitId, setSelUnitId] = useState(allUnits[0]?.id ?? null);
-  const [tab, setTab] = useState("show");
-  const [selSong, setSelSong] = useState(allUsedSongs[0]?.id ?? null);
-  const [selVenue, setSelVenue] = useState(allVenues[0]?.name ?? null);
-  const [selShow, setSelShow] = useState(() => defaultShowId(allUnits[0]));
+  const initialSelection = () => {
+    const fallback = {
+      tab: "show",
+      selUnitId: allUnits[0]?.id ?? null,
+      selSong: allUsedSongs[0]?.id ?? null,
+      selTitle: null,
+      selVenue: allVenues[0]?.name ?? null,
+      selShow: defaultShowId(allUnits[0]),
+    };
+    const r = parseRoute(window.location.hash);
+    if (!r) return fallback;
+    if (r.kind === "song" && allUsedSongs.some((s) => s.id === r.value))
+      return { ...fallback, tab: "song", selSong: r.value };
+    if (r.kind === "title" && globalTitleShows.has(r.value))
+      return { ...fallback, tab: "song", selSong: null, selTitle: r.value };
+    if (r.kind === "show" && unitIdByShowId.has(r.value))
+      return {
+        ...fallback,
+        selUnitId: unitIdByShowId.get(r.value),
+        selShow: r.value,
+      };
+    if (r.kind === "venue" && allVenues.some((v) => v.name === r.value))
+      return { ...fallback, tab: "venue", selVenue: r.value };
+    return fallback;
+  };
+  const [initial] = useState(initialSelection);
+
+  const [selUnitId, setSelUnitId] = useState(initial.selUnitId);
+  const [tab, setTab] = useState(initial.tab);
+  const [selSong, setSelSong] = useState(initial.selSong);
+  const [selTitle, setSelTitle] = useState(initial.selTitle);
+  const [selVenue, setSelVenue] = useState(initial.selVenue);
+  const [selShow, setSelShow] = useState(initial.selShow);
   const [q, setQ] = useState("");
 
   const [songGroupFilter, setSongGroupFilter] = useState("all");
@@ -347,34 +410,71 @@ export default function App() {
 
   const current = unitData.get(selUnitId);
 
+  // Hash is the single funnel: selections write hash, hashchange applies state.
+  const applyRoute = (r) => {
+    if (!r) return;
+    if (r.kind === "song" && allUsedSongs.some((s) => s.id === r.value)) {
+      setTab("song");
+      setSelSong(r.value);
+      setSelTitle(null);
+      setQ("");
+    } else if (r.kind === "title" && globalTitleShows.has(r.value)) {
+      setTab("song");
+      setSelTitle(r.value);
+      setSelSong(null);
+      setQ("");
+    } else if (r.kind === "show" && unitIdByShowId.has(r.value)) {
+      setSelUnitId(unitIdByShowId.get(r.value));
+      setTab("show");
+      setSelShow(r.value);
+    } else if (
+      r.kind === "venue" &&
+      allVenues.some((v) => v.name === r.value)
+    ) {
+      setTab("venue");
+      setSelVenue(r.value);
+      setQ("");
+    }
+  };
+
+  useEffect(() => {
+    const onHash = () => applyRoute(parseRoute(window.location.hash));
+    window.addEventListener("hashchange", onHash);
+    return () => window.removeEventListener("hashchange", onHash);
+  }, []);
+
+  const go = (hash) => {
+    if (window.location.hash === hash) applyRoute(parseRoute(hash));
+    else window.location.hash = hash;
+  };
+
   const handleSelectShow = (showId) => {
-    const unitId = unitIdByShowId.get(showId);
-    if (unitId) setSelUnitId(unitId);
-    setTab("show");
-    setSelShow(showId);
+    go(routeHash.show(showId));
     setTimeout(() => {
       slipRef.current?.scrollIntoView({ block: "nearest" });
     }, 0);
   };
 
   const handleSelectSong = (songId) => {
-    setTab("song");
-    setSelSong(songId);
     setQ("");
+    go(routeHash.song(songId));
+  };
+
+  const handleSelectTitle = (title) => {
+    setQ("");
+    go(routeHash.title(title));
   };
 
   const handleSelectVenue = (venueName) => {
-    setTab("venue");
-    setSelVenue(venueName);
     setQ("");
+    go(routeHash.venue(venueName));
   };
 
   const handleUnitChange = (unitId) => {
-    setSelUnitId(unitId);
-    setTab("show");
     setSelSong(null);
+    setSelTitle(null);
     setQ("");
-    setSelShow(defaultShowId(unitData.get(unitId)?.unit));
+    go(routeHash.show(defaultShowId(unitData.get(unitId)?.unit)));
   };
 
   const needle = q.trim().toLowerCase();
@@ -433,7 +533,7 @@ export default function App() {
           onClick={() => {
             setTab("song");
             setQ("");
-            if (!selSong) setSelSong(allUsedSongs[0]?.id ?? null);
+            if (!selSong && !selTitle) setSelSong(allUsedSongs[0]?.id ?? null);
           }}
           aria-pressed={tab === "song"}
         >
@@ -466,14 +566,14 @@ export default function App() {
                   const matched = allUsedSongs.find((s) =>
                     s.title.toLowerCase().includes(needle)
                   );
-                  if (matched) setSelSong(matched.id);
+                  if (matched) handleSelectSong(matched.id);
                 } else if (tab === "venue") {
                   const matched = allVenues.find(
                     (v) =>
                       v.name.toLowerCase().includes(needle) ||
                       v.city.toLowerCase().includes(needle)
                   );
-                  if (matched) setSelVenue(matched.name);
+                  if (matched) handleSelectVenue(matched.name);
                 }
               }
             }}
@@ -701,7 +801,7 @@ export default function App() {
                             className={`drawer-link ${
                               s.id === selShow ? "is-on" : ""
                             }`}
-                            href="#"
+                            href={routeHash.show(s.id)}
                             onClick={(e) => {
                               e.preventDefault();
                               handleSelectShow(s.id);
@@ -764,7 +864,7 @@ export default function App() {
                             className={`drawer-link ${
                               s.id === selSong ? "is-on" : ""
                             }`}
-                            href="#"
+                            href={routeHash.song(s.id)}
                             onClick={(e) => {
                               e.preventDefault();
                               handleSelectSong(s.id);
@@ -829,11 +929,11 @@ export default function App() {
                           className={`drawer-link ${
                             v.name === selVenue ? "is-on" : ""
                           }`}
-                          href="#"
-                          onClick={(e) => {
-                            e.preventDefault();
-                            handleSelectVenue(v.name);
-                          }}
+                            href={routeHash.venue(v.name)}
+                            onClick={(e) => {
+                              e.preventDefault();
+                              handleSelectVenue(v.name);
+                            }}
                         >
                           <span className="drawer-song">
                             {v.name}
@@ -857,16 +957,25 @@ export default function App() {
               ud={current}
               showId={selShow}
               onSelectSong={handleSelectSong}
+              onSelectTitle={handleSelectTitle}
             />
           )}
-          {tab === "song" && (
-            <SongSlip
-              songId={selSong}
-              globalSongShows={globalSongShows}
-              showById={showById}
-              onSelectShow={handleSelectShow}
-            />
-          )}
+          {tab === "song" &&
+            (selTitle ? (
+              <TitleSlip
+                title={selTitle}
+                globalTitleShows={globalTitleShows}
+                showById={showById}
+                onSelectShow={handleSelectShow}
+              />
+            ) : (
+              <SongSlip
+                songId={selSong}
+                globalSongShows={globalSongShows}
+                showById={showById}
+                onSelectShow={handleSelectShow}
+              />
+            ))}
           {tab === "venue" && (
             <VenueSlip
               venueName={selVenue}
@@ -886,7 +995,7 @@ export default function App() {
   );
 }
 
-function ShowSlip({ ud, showId, onSelectSong }) {
+function ShowSlip({ ud, showId, onSelectSong, onSelectTitle }) {
   if (!ud) return null;
   const s = ud.unit.shows.find((x) => x.id === showId);
   if (!s) return null;
@@ -963,12 +1072,23 @@ function ShowSlip({ ud, showId, onSelectSong }) {
     const songLine = (it) => {
       const title = it.title ?? songTitle[it.songId];
       if (!it.songId) {
-        return <span className="setlist-song-unlinked">{title}</span>;
+        return (
+          <a
+            className="setlist-song-unlinked"
+            href={routeHash.title(title)}
+            onClick={(e) => {
+              e.preventDefault();
+              onSelectTitle(title);
+            }}
+          >
+            {title}
+          </a>
+        );
       }
       return (
         <a
           className="setlist-song"
-          href="#"
+          href={routeHash.song(it.songId)}
           onClick={(e) => {
             e.preventDefault();
             onSelectSong(it.songId);
@@ -1097,7 +1217,71 @@ function SongSlip({ songId, globalSongShows, showById, onSelectShow }) {
               </span>
               <a
                 className="show-link-block"
-                href="#"
+                href={routeHash.show(showId)}
+                onClick={(e) => {
+                  e.preventDefault();
+                  onSelectShow(showId);
+                }}
+              >
+                <span className="show-link-date">{showDate(s)}</span>
+                <span className="show-link-venue">{s.venue}</span>
+                <span className="show-link-city">（{s.city}）</span>
+              </a>
+              {(Array.isArray(item.kind)
+                ? item.kind
+                : item.kind
+                ? [item.kind]
+                : []
+              )
+                .filter((k) => KIND_BADGE[k])
+                .map((k) => (
+                  <span key={k} className={`kind-badge kind-badge--${k}`}>
+                    {KIND_BADGE[k]}
+                  </span>
+                ))}
+              {item.note && <span className="track-note"> {item.note}</span>}
+            </li>
+          );
+        })}
+      </ul>
+    </article>
+  );
+}
+
+function TitleSlip({ title, globalTitleShows, showById, onSelectShow }) {
+  if (!title) {
+    return (
+      <div className="slip">
+        <p className="empty-hint">選一首歌曲，看它在全檔案庫哪幾場出現過。</p>
+      </div>
+    );
+  }
+
+  const appearances = globalTitleShows.get(title) ?? [];
+
+  return (
+    <article className="slip" aria-label="翻唱全域出現場次">
+      <div className="slip-head">
+        <p className="slip-tour">ALL TOURS → SONG SHOWS</p>
+        <h3 className="slip-title">{title}</h3>
+        <p className="slip-meta song-detail-count">
+          全檔案庫共出現於 {appearances.length} 場演出
+        </p>
+      </div>
+      <ul className="appearance-list">
+        {appearances.map(({ showId, unitTitle, unitType, item }) => {
+          const s = showById.get(showId);
+          return (
+            <li key={showId}>
+              <span className="tour-badge">
+                {unitTitle}
+                {unitType !== "專場" && (
+                  <span className="type-badge">{unitType}</span>
+                )}
+              </span>
+              <a
+                className="show-link-block"
+                href={routeHash.show(showId)}
                 onClick={(e) => {
                   e.preventDefault();
                   onSelectShow(showId);
@@ -1160,15 +1344,15 @@ function VenueSlip({ venueName, globalVenueShows, onSelectShow }) {
                 <span className="type-badge">{unitType}</span>
               )}
             </span>
-            <a
-              className="show-link-block"
-              href="#"
-              onClick={(e) => {
-                e.preventDefault();
-                onSelectShow(showId);
-              }}
-            >
-              <span className="show-link-date">{showDate(show)}</span>
+              <a
+                className="show-link-block"
+                href={routeHash.show(showId)}
+                onClick={(e) => {
+                  e.preventDefault();
+                  onSelectShow(showId);
+                }}
+              >
+                <span className="show-link-date">{showDate(show)}</span>
               <span className="show-link-venue">{show.venue}</span>
               <span className="show-link-city">（{show.city}）</span>
             </a>
