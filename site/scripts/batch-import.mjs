@@ -9,77 +9,280 @@ const songsPath = path.resolve(root, "data", "songs.json");
 
 const songsData = JSON.parse(fs.readFileSync(songsPath, "utf-8"));
 
-const unitFiles = fs
+const eventsDir = path.resolve(root, "data", "events");
+
+const tourFiles = fs
   .readdirSync(toursDir)
-  .filter((f) => f.endsWith(".json"));
-const units = unitFiles.map((f) => ({
-  file: f,
-  unit: JSON.parse(fs.readFileSync(path.resolve(toursDir, f), "utf-8")),
-}));
+  .filter((f) => f.endsWith(".json"))
+  .map((f) => ({
+    file: path.join("tours", f),
+    dir: toursDir,
+    unit: JSON.parse(fs.readFileSync(path.resolve(toursDir, f), "utf-8")),
+  }));
 
-// Map song livefansId or title to song ID
+const eventFiles = fs.existsSync(eventsDir)
+  ? fs
+      .readdirSync(eventsDir)
+      .filter((f) => f.endsWith(".json"))
+      .map((f) => ({
+        file: path.join("events", f),
+        dir: eventsDir,
+        unit: JSON.parse(fs.readFileSync(path.resolve(eventsDir, f), "utf-8")),
+      }))
+  : [];
+
+const units = [...tourFiles, ...eventFiles];
+
+const validSongIds = new Set(songsData.songs.map((s) => s.id));
+
+function unescapeHtml(str) {
+  if (!str) return "";
+  return str
+    .replace(/&#039;/g, "'")
+    .replace(/&quot;/g, '"')
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/&amp;/g, "&");
+}
+
+const cleanTitleKey = (t) =>
+  t
+    ? unescapeHtml(t)
+        .normalize("NFC")
+        .replace(/[\u200B-\u200D\u200E\u200F\u202A-\u202E\uFEFF]/g, "")
+        .trim()
+        .toLowerCase()
+    : "";
+
 const livefansIdToId = Object.fromEntries(
-  songsData.songs.filter((s) => s.livefansId).map((s) => [s.livefansId, s.id]),
+  songsData.songs
+    .filter((s) => s.livefansId)
+    .map((s) => [String(s.livefansId), s.id])
 );
-const titleToId = Object.fromEntries(
-  songsData.songs.map((s) => [s.title.trim(), s.id]),
-);
+const titleToId = {};
+for (const s of songsData.songs) {
+  titleToId[cleanTitleKey(s.title)] = s.id;
+  if (s.titleJa) titleToId[cleanTitleKey(s.titleJa)] = s.id;
+  if (s.titleEn) titleToId[cleanTitleKey(s.titleEn)] = s.id;
+}
+titleToId["b-side blues"] = "b-side-blues";
+titleToId["soul soup"] = "soulsoup";
+titleToId["soulsoup"] = "soulsoup";
+titleToId["sameblue"] = "same-blue";
+titleToId["same blue"] = "same-blue";
+titleToId["trailer"] = "trailer";
+titleToId["traiier"] = "trailer";
 
-function extractSongsFromHtml(html) {
-  const tdRegex = /<td[^>]*class="[^"]*pcsl\d+[^"]*"[^>]*>([\s\S]*?)<\/td>/g;
+function extractSongsFromHtml(html, opts = {}) {
+  const { higedanOnly = false } = opts;
+  const tdRegex =
+    /<td[^>]*class="([^"]*(?:pc)?sl(?:\d+|medley)[^"]*)"[^>]*>([\s\S]*?)<\/td>/g;
   const items = [];
 
   for (const match of html.matchAll(tdRegex)) {
-    const cellHtml = match[1];
+    const tdClass = match[1];
+    const cellHtml = match[2];
     const songMatch = cellHtml.match(
-      /<div class="ttl"><a href="\/songs\/(\d+)"[^>]*>([^<]+)<\/a><\/div>/,
+      /<div class="ttl"><a[^>]*href="(?:https:\/\/www\.livefans\.jp)?\/songs\/(\d+)"[^>]*>([\s\S]*?)<\/a>/
+    );
+    // TV拼盤/音樂祭拼盤：只收髭男段落。他團歌曲格與無藝人節目過場全丟。
+    if (higedanOnly) {
+      if (!songMatch) continue;
+      const artistSpan = cellHtml.match(/<span>([\s\S]*?)<\/span>/);
+      const artist = artistSpan
+        ? artistSpan[1].replace(/<[^>]+>/g, "").trim()
+        : "";
+      if (!artist.includes("髭男")) continue;
+    }
+    const songTitleClean = unescapeHtml(
+      songMatch ? songMatch[2].replace(/<[^>]+>/g, "").trim() : ""
     );
 
-    const subtitleMatch = cellHtml.match(/<p class="subtitle">([^<]+)<\/p>/);
-    const subtitleText = subtitleMatch ? subtitleMatch[1].trim() : "";
+    const medleyMatch = cellHtml.match(
+      /<p class="medley"><b>([\s\S]*?)<\/b><\/p>/
+    );
+    const medleyText = unescapeHtml(
+      medleyMatch ? medleyMatch[1].replace(/<[^>]+>/g, "").trim() : ""
+    );
 
-    const playBtnMatch = cellHtml.match(/showBottomMusicPlayer\((\d+)/);
-    const playIndex = playBtnMatch ? parseInt(playBtnMatch[1], 10) : items.length;
+    const subtitleMatch = cellHtml.match(
+      /<p class="(?:subtitle|memo)">([\s\S]*?)<\/p>/
+    );
+    const rawSubtitle = unescapeHtml(
+      subtitleMatch ? subtitleMatch[1].replace(/<[^>]+>/g, "").trim() : ""
+    );
+    const subtitleText = medleyText
+      ? rawSubtitle
+        ? `[${medleyText}] ${rawSubtitle}`
+        : `[${medleyText}]`
+      : rawSubtitle;
 
-    const isEncore = cellHtml.includes("sec-connect") || cellHtml.includes("アンコール") || /en\d+/i.test(cellHtml);
+    const playBtnMatch =
+      cellHtml.match(/id="idx-(\d+)"/) ||
+      cellHtml.match(/showBottomMusicPlayer\((\d+)/);
+    const playIndex = playBtnMatch ? parseInt(playBtnMatch[1], 10) : null;
+
+    const isEncore =
+      cellHtml.includes("sec-encore") ||
+      cellHtml.includes("アンコール") ||
+      /class="[^"]*en\d+[^"]*"/i.test(cellHtml);
+
+    // Structural encore divider: only these propagate to all later items in
+    // play order. A passing mention of アンコール in a memo flags just that song.
+    const encoreDivider =
+      /<strong>\s*アンコール/.test(cellHtml) ||
+      cellHtml.includes("sec-encore") ||
+      /en\d+/i.test(tdClass);
 
     const kind = [];
-    if (subtitleText.includes("弾き語り") || subtitleText.includes("ソロ")) {
+    const isOtherMemberSolo =
+      subtitleText.includes("楢崎") ||
+      subtitleText.includes("小笹") ||
+      subtitleText.includes("松浦");
+    if (
+      (subtitleText.includes("弾き語り") || subtitleText.includes("ソロ")) &&
+      !isOtherMemberSolo
+    ) {
       kind.push("satoshi-solo");
     }
     if (subtitleText.includes("新曲")) {
       kind.push("premiere");
     }
+    if (
+      subtitleText.includes("リクエスト") ||
+      subtitleText.toLowerCase().includes("request")
+    ) {
+      kind.push("request");
+    }
+
+    const isRehearsal =
+      subtitleText.includes("リハ") ||
+      subtitleText.includes("Soundcheck") ||
+      subtitleText.includes("彩排");
+
+    const ttlIndex = songMatch ? cellHtml.indexOf('<div class="ttl') : -1;
+    // One cell can hold multiple cmt divs (e.g. 3x リハ before one song): collect all.
+    const cmtList = [
+      ...cellHtml.matchAll(/<div class="cmt[^"]*">([\s\S]*?)<\/div>/g),
+    ]
+      .map((m) => ({
+        text: unescapeHtml(m[1].replace(/<[^>]+>/g, "").trim()),
+        before: ttlIndex !== -1 && m.index < ttlIndex,
+      }))
+      .filter((c) => {
+        if (!c.text) return false;
+        const up = c.text.toUpperCase().trim();
+        return !(
+          up === "OPENING" ||
+          up === "SE:" ||
+          /^MC[\s\-_]*\d*$/i.test(up)
+        );
+      });
+
+    for (const c of cmtList.filter((c) => c.before)) {
+      items.push({
+        domIndex: items.length,
+        playIndex: null,
+        title: c.text,
+        subtitle: c.text,
+        type: "interlude",
+        isCmt: true,
+        cmtBefore: true,
+        isEncore,
+        encoreDivider,
+      });
+    }
 
     if (songMatch) {
       items.push({
+        domIndex: items.length,
         playIndex,
         livefansId: songMatch[1],
-        title: songMatch[2].trim(),
+        title: songTitleClean,
         subtitle: subtitleText,
         kind: kind.length ? kind : undefined,
         isEncore,
+        encoreDivider,
       });
-    } else if (subtitleText) {
+    }
+
+    for (const c of cmtList.filter((c) => !c.before)) {
       items.push({
+        domIndex: items.length,
+        playIndex: null,
+        title: c.text,
+        subtitle: c.text,
+        type: "interlude",
+        isCmt: true,
+        cmtBefore: false,
+        isEncore,
+        encoreDivider,
+      });
+    }
+    if (!songMatch && cmtList.length === 0 && subtitleText) {
+      items.push({
+        domIndex: items.length,
         playIndex,
         title: subtitleText,
         subtitle: subtitleText,
-        type: "interlude",
+        type: isRehearsal ? "interlude" : "interlude",
         isEncore,
+        encoreDivider,
       });
     }
   }
 
-  // Sort strictly by true play order index from LiveFans player button
-  items.sort((a, b) => a.playIndex - b.playIndex);
+  // Calculate precise sequence position using playIndex (id="idx-X") with DOM relative offset
+  items.forEach((it) => {
+    if (it.playIndex !== null) {
+      it.sortKey = (it.playIndex + 1) * 100;
+    } else {
+      let prevSong = null;
+      let nextSong = null;
+      for (let i = it.domIndex - 1; i >= 0; i--) {
+        if (items[i].playIndex !== null) {
+          prevSong = items[i];
+          break;
+        }
+      }
+      for (let i = it.domIndex + 1; i < items.length; i++) {
+        if (items[i].playIndex !== null) {
+          nextSong = items[i];
+          break;
+        }
+      }
+
+      if (it.cmtBefore && nextSong) {
+        it.sortKey = (nextSong.playIndex + 1) * 100 - 1;
+      } else if (prevSong) {
+        it.sortKey = (prevSong.playIndex + 1) * 100 + 1;
+      } else if (nextSong) {
+        it.sortKey = (nextSong.playIndex + 1) * 100 - 1;
+      } else {
+        it.sortKey = (it.domIndex + 1) * 100;
+      }
+    }
+  });
+
+  items.sort((a, b) => a.sortKey - b.sortKey || a.domIndex - b.domIndex);
+
+  // Encore divider semantics: once a structural divider appears, everything
+  // after it in play order is encore (covers songs whose own cell has no marker).
+  let inEncore = false;
+  for (const it of items) {
+    if (it.encoreDivider) inEncore = true;
+    if (inEncore) it.isEncore = true;
+    delete it.encoreDivider;
+  }
 
   return items;
 }
 
 function extractShowMetadataFromHtml(html) {
   // Extract address tag: <address><a href="/venues/1021" >＠リンクステーションホール青森 (青森県)</a></address>
-  const addressMatch = html.match(/<address>\s*<a[^>]*>\s*＠\s*([^\(]+)\s*\(([^\)]+)\)/i);
+  const addressMatch = html.match(
+    /<address>\s*<a[^>]*>\s*＠\s*([^\(]+)\s*\(([^\)]+)\)/i
+  );
   let rawVenue = "";
   let rawPref = "";
 
@@ -108,7 +311,50 @@ function extractShowMetadataFromHtml(html) {
   const timeMatch = html.match(/(\d{1,2}:\d{2})\s*開演/);
   const opensAt = timeMatch ? timeMatch[1] : "";
 
-  return { rawVenue, rawPref, livefansDate, opensAt };
+  // Extract event title from h4.liveName2, h1.eventTitle, or meta title (e.g. TOOY#1)
+  let eventTitle = "";
+  const liveNameMatch =
+    html.match(
+      /<h4[^>]*class="liveName2"[^>]*>\s*<a[^>]*>([\s\S]*?)<\/a>\s*<\/h4>/i
+    ) ||
+    html.match(/<h1[^>]*class="[^"]*eventTitle[^"]*"[^>]*>([\s\S]*?)<\/h1>/i);
+  if (liveNameMatch) {
+    eventTitle = liveNameMatch[1].replace(/<[^>]+>/g, "").trim();
+  }
+
+  if (!eventTitle) {
+    const pageTitleMatch = html.match(/<title>([^<]+)<\/title>/i);
+    if (pageTitleMatch) {
+      let t = pageTitleMatch[1].split("|")[0].split("-")[0].trim();
+      if (t.includes("Official髭男dism")) {
+        t = pageTitleMatch[1]
+          .split("|")[0]
+          .replace(/^Official髭男dism\s*[-–—]?\s*/i, "")
+          .trim();
+      }
+      if (!t.startsWith("＠")) {
+        eventTitle = t;
+      }
+    }
+  }
+
+  return { rawVenue, rawPref, livefansDate, opensAt, eventTitle };
+}
+
+function prefToCityAndRegion(pref) {
+  if (!pref) return { city: "東京", region: "關東" };
+  if (pref.includes("東京")) return { city: "東京", region: "關東" };
+  if (pref.includes("大阪")) return { city: "大阪", region: "關西" };
+  if (pref.includes("愛知")) return { city: "名古屋", region: "中部" };
+  if (pref.includes("北海道")) return { city: "札幌", region: "北海道" };
+  if (pref.includes("福岡")) return { city: "福岡", region: "九州" };
+  if (pref.includes("神奈川")) return { city: "橫濱", region: "關東" };
+  if (pref.includes("兵庫")) return { city: "神戶", region: "關西" };
+  if (pref.includes("京都")) return { city: "京都", region: "關西" };
+  if (pref.includes("宮城")) return { city: "仙台", region: "東北" };
+  if (pref.includes("廣島") || pref.includes("広島"))
+    return { city: "廣島", region: "中國" };
+  return { city: pref.replace(/(府|縣|県)$/, ""), region: "日本" };
 }
 
 const venuesPath = path.resolve(root, "data", "venues.json");
@@ -140,7 +386,9 @@ async function autoTranslateVenue(rawVenue) {
   // 2. If片假名 remains, fetch translation from MyMemory API
   if (/[\u30A0-\u30FF]/.test(ruleResult)) {
     try {
-      const url = `https://api.mymemory.translated.net/get?q=${encodeURIComponent(rawVenue)}&langpair=ja|zh-TW`;
+      const url = `https://api.mymemory.translated.net/get?q=${encodeURIComponent(
+        rawVenue
+      )}&langpair=ja|zh-TW`;
       const res = await fetch(url);
       if (res.ok) {
         const json = await res.json();
@@ -165,19 +413,31 @@ async function autoTranslateVenue(rawVenue) {
 
 function computeDiff(pageSongs, templateSetlist) {
   const templateSongs = templateSetlist
-    .filter((i) => i.songId)
+    .filter((i) => i.songId || i.title)
     .map((i) => ({
       order: i.order,
-      songId: i.songId,
+      songId: i.songId ?? i.title,
       encore: !!i.encore,
+      kind: i.kind ?? [],
+      note: i.note ?? "",
     }));
+
+  // Residual note: strip kind-source keywords; only remainder counts as version difference.
+  const residualNote = (note) =>
+    (note ?? "")
+      .replace(/弾き語り|ソロ|新曲|リクエスト|request|リハ|Soundcheck|彩排/gi, "")
+      .replace(/[\s\u3000。、，・:：;；『』「」\(\)\[\]—–\-~〜～!！?？]+/g, "")
+      .trim();
+  const normKind = (k) => [...(k ?? [])].sort().join(",");
 
   const templateSongIds = templateSongs.map((i) => i.songId);
   const encoreStartOrder = templateSongs.find((t) => t.encore)?.order ?? 18;
 
   const pageSongIds = pageSongs.map(
     (item) =>
-      livefansIdToId[item.livefansId] ?? titleToId[item.title] ?? item.title,
+      livefansIdToId[item.livefansId] ??
+      titleToId[cleanTitleKey(item.title)] ??
+      item.title
   );
 
   if (pageSongIds.length === 0) {
@@ -197,10 +457,29 @@ function computeDiff(pageSongs, templateSetlist) {
     const pSong = pageSongIds[pIdx];
     const pMeta = pageSongs[pIdx];
     if (tIdx < templateSongs.length && templateSongs[tIdx].songId === pSong) {
-      tIdx++;
+      const t = templateSongs[tIdx];
+      const kindSame = normKind(t.kind) === normKind(pMeta?.kind ?? []);
+      const noteSame =
+        residualNote(t.note) === residualNote(pMeta?.subtitle ?? "");
+      if (kindSame && noteSame) {
+        tIdx++;
+      } else {
+        // Same song but version difference (e.g. アレンジ): skip + re-insert with note.
+        const anchorOrder = tIdx > 0 ? templateSongs[tIdx - 1].order : 0;
+        if (!skip.includes(t.order)) skip.push(t.order);
+        const itemObj = {
+          encore: pMeta?.isEncore || anchorOrder >= encoreStartOrder - 1,
+          songId: pSong,
+        };
+        if (pMeta?.subtitle) itemObj.note = unescapeHtml(pMeta.subtitle);
+        if (pMeta?.kind) itemObj.kind = pMeta.kind;
+        if (pMeta?.type) itemObj.type = pMeta.type;
+        insert.push({ after: anchorOrder, item: itemObj });
+        tIdx++;
+      }
     } else {
       const nextTMatch = templateSongs.findIndex(
-        (t, idx) => idx >= tIdx && t.songId === pSong,
+        (t, idx) => idx >= tIdx && t.songId === pSong
       );
       if (nextTMatch !== -1) {
         for (let k = tIdx; k < nextTMatch; k++) {
@@ -222,12 +501,25 @@ function computeDiff(pageSongs, templateSetlist) {
           skip.push(currentTOrder);
           tIdx++;
         }
+        const isKnownSong = validSongIds.has(pSong);
         const itemObj = {
           encore: pMeta?.isEncore || anchorOrder >= encoreStartOrder - 1,
-          songId: pSong,
         };
+        if (pMeta?.isCmt || pMeta?.type === "interlude") {
+          itemObj.type = "interlude";
+          itemObj.note = unescapeHtml(pMeta?.subtitle || pSong);
+        } else if (!isKnownSong) {
+          // Cover/special song with a song link but no songs.json entry:
+          // formal track with title (unlinked), never enters the template.
+          itemObj.title = pMeta?.title || pSong;
+          if (pMeta?.subtitle) itemObj.note = unescapeHtml(pMeta.subtitle);
+        } else {
+          itemObj.songId = pSong;
+          if (pMeta?.subtitle) {
+            itemObj.note = unescapeHtml(pMeta.subtitle);
+          }
+        }
         if (pMeta?.kind) itemObj.kind = pMeta.kind;
-        if (pMeta?.subtitle) itemObj.note = pMeta.subtitle;
         if (pMeta?.type) itemObj.type = pMeta.type;
         insert.push({
           after: anchorOrder,
@@ -246,6 +538,154 @@ function computeDiff(pageSongs, templateSetlist) {
   return { diff, status: "DIFF_CALCULATED" };
 }
 
+function buildConsensusTemplate(allShowSongs) {
+  const validShows = allShowSongs.filter((s) => s && s.length > 0);
+  if (validShows.length === 0) return [];
+
+  const threshold = Math.ceil(validShows.length * 0.5);
+  const songCounts = {};
+  const songEncoreCounts = {};
+  const songKindCounts = {};
+  const songPositions = {};
+
+  for (const show of validShows) {
+    show.forEach((item, pos) => {
+      if (item.type === "interlude" || item.isCmt) return;
+
+      const mappedId = item.livefansId
+        ? livefansIdToId[item.livefansId]
+        : titleToId[cleanTitleKey(item.title)];
+
+      if (!mappedId) return;
+
+      const key = `id:${mappedId}`;
+
+      songCounts[key] = (songCounts[key] || 0) + 1;
+      if (item.isEncore) {
+        songEncoreCounts[key] = (songEncoreCounts[key] || 0) + 1;
+      }
+      if (item.kind) {
+        if (!songKindCounts[key]) songKindCounts[key] = {};
+        for (const k of item.kind) {
+          songKindCounts[key][k] = (songKindCounts[key][k] || 0) + 1;
+        }
+      }
+      if (!songPositions[key]) songPositions[key] = [];
+      songPositions[key].push(pos);
+
+      if (!songPositions[key].sampleItem) {
+        songPositions[key].sampleItem = { ...item, mappedId };
+      }
+    });
+  }
+
+  // Filter songs that appear in >= 50% of valid shows
+  const consensusKeys = Object.keys(songCounts).filter(
+    (key) => songCounts[key] >= threshold
+  );
+
+  // Compute average relative position for ordering
+  const scored = consensusKeys.map((key) => {
+    const positions = songPositions[key];
+    const avgPos = positions.reduce((a, b) => a + b, 0) / positions.length;
+    const isEncore =
+      (songEncoreCounts[key] || 0) >= Math.ceil(positions.length * 0.5);
+    const sample = songPositions[key].sampleItem;
+
+    const consensusKind = [];
+    if (songKindCounts[key]) {
+      for (const [k, count] of Object.entries(songKindCounts[key])) {
+        if (count >= threshold) consensusKind.push(k);
+      }
+    }
+
+    return {
+      key,
+      avgPos,
+      isEncore,
+      mappedId: sample.mappedId,
+      title: sample.title,
+      kind: consensusKind.length ? consensusKind : undefined,
+    };
+  });
+
+  // Primary sort by isEncore, secondary sort by avgPos
+  scored.sort((a, b) => {
+    if (a.isEncore !== b.isEncore) return a.isEncore ? 1 : -1;
+    return a.avgPos - b.avgPos;
+  });
+
+  // Construct templateSetlist array
+  return scored.map((item, idx) => {
+    const res = {
+      order: idx + 1,
+      encore: item.isEncore,
+      songId: item.mappedId,
+    };
+    if (item.kind) res.kind = item.kind;
+    return res;
+  });
+}
+
+function formatEventNote(subtitle) {
+  if (subtitle.includes("リハ") || subtitle.includes("Soundcheck")) {
+    return `リハ：${subtitle.replace(/^リハ[：:]?\s*/, "")}`;
+  }
+  return subtitle;
+}
+
+function mapPageSongsToEventSetlist(pageSongs) {
+  const isMapped = pageSongs.map(
+    (sp) => !!(livefansIdToId[sp.livefansId] ?? titleToId[cleanTitleKey(sp.title)])
+  );
+  const isGap = pageSongs.map((sp) => !!(sp.isCmt || sp.type === "interlude"));
+  // Song-link items without a songs.json entry (covers) are formal tracks:
+  // always keep them, never drop.
+  const isCover = pageSongs.map((sp, i) => !!sp.livefansId && !sp.isCmt && !isMapped[i]);
+  // Keep mapped songs and covers, plus any contiguous interlude run touching
+  // a kept song (single-cmt adjacency check drops the head of multi-cmt runs).
+  const keep = isMapped.map((m, i) => m || isCover[i]);
+  let changed = true;
+  while (changed) {
+    changed = false;
+    for (let i = 0; i < pageSongs.length; i++) {
+      if (
+        !keep[i] &&
+        isGap[i] &&
+        ((i > 0 && keep[i - 1]) || (i < pageSongs.length - 1 && keep[i + 1]))
+      ) {
+        keep[i] = true;
+        changed = true;
+      }
+    }
+  }
+
+  const filteredSongs = pageSongs.filter((_, idx) => keep[idx]);
+
+  return filteredSongs.map((sp, idx) => {
+    const mappedId =
+      livefansIdToId[sp.livefansId] ?? titleToId[cleanTitleKey(sp.title)];
+    const item = {
+      order: idx + 1,
+      encore: !!sp.isEncore,
+    };
+    if (mappedId) {
+      item.songId = mappedId;
+    } else if (sp.livefansId && !sp.isCmt) {
+      item.title = sp.title;
+    } else {
+      item.type = "interlude";
+      item.note = sp.subtitle ? formatEventNote(sp.subtitle) : sp.title;
+    }
+    if (sp.subtitle && (mappedId || item.title)) {
+      item.note = formatEventNote(sp.subtitle);
+    }
+    if (sp.kind) item.kind = sp.kind;
+    if (sp.type && mappedId) item.type = sp.type;
+    return item;
+  });
+}
+
 async function verifyAndRecomputeShows() {
   let checkedCount = 0;
   let exactCount = 0;
@@ -253,24 +693,32 @@ async function verifyAndRecomputeShows() {
   let noSetlistCount = 0;
 
   const targetIds = process.argv.slice(2).filter((arg) => /^\d+$/.test(arg));
+  const processedIds = new Set();
 
   for (const { file, unit } of units) {
+    const isTour = unit.shows && unit.shows.length > 1;
+    const fetchedPageSongsMap = new Map();
+
     for (const s of unit.shows) {
       if (targetIds.length > 0 && !targetIds.includes(s.id)) continue;
+      processedIds.add(s.id);
       if (!s.sourceUrls || !s.sourceUrls[0]) continue;
 
       const url = s.sourceUrls[0];
-
       try {
         const res = await fetch(url, {
-          headers: { "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)" },
+          headers: {
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)",
+          },
         });
         if (!res.ok) continue;
         const html = await res.text();
 
         const meta = extractShowMetadataFromHtml(html);
         if (meta.livefansDate && s.date !== meta.livefansDate) {
-          console.warn(`[DATE MISMATCH FIXED] ID ${s.id}: Local (${s.date}) -> LiveFans (${meta.livefansDate})`);
+          console.warn(
+            `[DATE MISMATCH FIXED] ID ${s.id}: Local (${s.date}) -> LiveFans (${meta.livefansDate})`
+          );
           s.date = meta.livefansDate;
         }
         if (meta.opensAt) {
@@ -285,23 +733,55 @@ async function verifyAndRecomputeShows() {
             s.region = trans.region || s.region;
             s.prefecture = trans.prefecture || s.prefecture;
           } else {
-            // 自動翻譯並寫入字典 data/venues.json
             const autoTranslated = await autoTranslateVenue(meta.rawVenue);
             venueTranslationMap[meta.rawVenue] = {
               venue: autoTranslated,
               city: s.city || "",
               region: s.region || "",
-              prefecture: meta.rawPref || s.prefecture || ""
+              prefecture: meta.rawPref || s.prefecture || "",
             };
-            fs.writeFileSync(venuesPath, JSON.stringify(venueTranslationMap, null, 2) + "\n", "utf-8");
-            console.log(`[AUTO TRANSLATED VENUE] Registered "${meta.rawVenue}" -> "${autoTranslated}" in data/venues.json`);
+            fs.writeFileSync(
+              venuesPath,
+              JSON.stringify(venueTranslationMap, null, 2) + "\n",
+              "utf-8"
+            );
+            console.log(
+              `[AUTO TRANSLATED VENUE] Registered "${meta.rawVenue}" -> "${autoTranslated}" in data/venues.json`
+            );
             s.venue = autoTranslated;
           }
         }
 
-        const pageSongs = extractSongsFromHtml(html);
-        const { diff, status } = computeDiff(pageSongs, unit.templateSetlist);
+        // TV拼盤/音樂祭拼盤頁含全出演者曲目：只收髭男段落
+        const higedanOnly =
+          unit.type === "TV拼盤" || unit.type === "音樂祭";
+        const pageSongs = extractSongsFromHtml(html, { higedanOnly });
+        fetchedPageSongsMap.set(s.id, pageSongs);
+      } catch (err) {
+        console.error(`Error verifying ${url}:`, err);
+      }
+    }
 
+    // Auto-generate consensus templateSetlist if this is a Tour unit
+    if (isTour && fetchedPageSongsMap.size > 0) {
+      const allPageSongs = Array.from(fetchedPageSongsMap.values());
+      const consensusTpl = buildConsensusTemplate(allPageSongs);
+      if (consensusTpl.length > 0) {
+        unit.templateSetlist = consensusTpl;
+        unit.templateBasis = `全自動提煉：基於 ${fetchedPageSongsMap.size} 場演出提取 $\\ge 50\\%$ 多數共識歌單`;
+        console.log(
+          `[CONSENSUS TEMPLATE GENERATED] ${unit.title} -> ${consensusTpl.length} songs`
+        );
+      }
+    }
+
+    // Apply computeDiff or setlist direct update
+    for (const s of unit.shows) {
+      const pageSongs = fetchedPageSongsMap.get(s.id);
+      if (!pageSongs) continue;
+
+      if (unit.templateSetlist) {
+        const { diff, status } = computeDiff(pageSongs, unit.templateSetlist);
         checkedCount++;
         if (status === "EXACT_TEMPLATE_MATCH") {
           exactCount++;
@@ -311,21 +791,212 @@ async function verifyAndRecomputeShows() {
           s.diff = diff;
           console.log(
             `[DIFF MATCH] ${s.id} (${s.date} ${s.city} @ ${s.venue}):`,
-            JSON.stringify(diff),
+            JSON.stringify(diff)
           );
         } else {
           noSetlistCount++;
         }
-      } catch (err) {
-        console.error(`Error verifying ${url}:`, err);
+      } else {
+        if (pageSongs.length === 0) {
+          noSetlistCount++;
+          console.log(`[NO SETLIST] ${s.id} (${s.date} ${s.city}): page yielded 0 songs, setlist preserved`);
+        } else {
+          s.setlist = mapPageSongsToEventSetlist(pageSongs);
+          console.log(
+            `[EVENT SHOW UPDATED] Updated show ${s.id} setlist in ${file}`
+          );
+        }
       }
     }
 
     fs.writeFileSync(
-      path.resolve(toursDir, file),
+      path.resolve(root, "data", file),
       JSON.stringify(unit, null, 2) + "\n",
-      "utf-8",
+      "utf-8"
     );
+  }
+
+  // Handle unregistered unknown show IDs
+  const eventsDir = path.resolve(root, "data", "events");
+  const missingTargetIds = targetIds.filter((id) => !processedIds.has(id));
+
+  for (const eventId of missingTargetIds) {
+    const url = `https://www.livefans.jp/events/${eventId}`;
+    console.log(
+      `[UNKNOWN EVENT AUTO-IMPORT] Fetching unknown event ID ${eventId} from ${url}...`
+    );
+
+    try {
+      const res = await fetch(url, {
+        headers: { "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)" },
+      });
+      if (!res.ok) {
+        console.error(
+          `[AUTO-IMPORT ERROR] Failed to fetch ${url}: ${res.status}`
+        );
+        continue;
+      }
+      const html = await res.text();
+      const meta = extractShowMetadataFromHtml(html);
+
+      if (!meta.livefansDate) {
+        console.error(
+          `[AUTO-IMPORT ERROR] Could not parse date for event ${eventId}`
+        );
+        continue;
+      }
+
+      // Type first: TV拼盤/音樂祭拼盤頁只收髭男段落
+      const year = meta.livefansDate.slice(0, 4);
+      const actualTitle = meta.eventTitle || `one-man live ${year}`;
+      let detectedType = "專場";
+      if (
+        /紅白|歌合戦|CDTV|Mステ|ミュージックステーション|FNS歌謡祭|音楽の日|テレ東音楽祭|うたコン/i.test(
+          actualTitle
+        )
+      ) {
+        detectedType = "TV拼盤";
+      } else if (/fes|festival|フェス/i.test(actualTitle)) {
+        detectedType = "音樂祭";
+      } else if (/vs|對バン|対バン/i.test(actualTitle)) {
+        detectedType = "對樂團";
+      }
+      const pageSongs = extractSongsFromHtml(html, {
+        higedanOnly: detectedType === "TV拼盤" || detectedType === "音樂祭",
+      });
+
+      // event title & type & dynamic slug (detected above for higedanOnly)
+      const prefMap = prefToCityAndRegion(meta.rawPref);
+      let venueName = meta.rawVenue || "未知場館";
+      let cityName = prefMap.city;
+      let regionName = prefMap.region;
+      let prefName = meta.rawPref || "";
+
+      if (meta.rawVenue) {
+        if (venueTranslationMap[meta.rawVenue]) {
+          const trans = venueTranslationMap[meta.rawVenue];
+          venueName = trans.venue;
+          cityName = trans.city || cityName;
+          regionName = trans.region || regionName;
+          prefName = trans.prefecture || prefName;
+        } else {
+          const autoTrans = await autoTranslateVenue(meta.rawVenue);
+          venueTranslationMap[meta.rawVenue] = {
+            venue: autoTrans,
+            city: cityName,
+            region: regionName,
+            prefecture: prefName,
+          };
+          fs.writeFileSync(
+            venuesPath,
+            JSON.stringify(venueTranslationMap, null, 2) + "\n",
+            "utf-8"
+          );
+          venueName = autoTrans;
+        }
+      }
+
+      // (actualTitle/detectedType computed above for higedanOnly)
+
+      let slug = meta.eventTitle
+        ? meta.eventTitle
+            .toLowerCase()
+            .replace(/[^a-z0-9]+/g, "-")
+            .replace(/^-+|-+$/g, "")
+        : "";
+
+      if (!slug || slug.length < 2) {
+        slug = `unofficial-${year}`;
+      } else if (!slug.includes(year)) {
+        slug = `${slug}-${year}`;
+      }
+
+      const eventFile = path.resolve(eventsDir, `${slug}.json`);
+      let eventUnit;
+      if (fs.existsSync(eventFile)) {
+        eventUnit = JSON.parse(fs.readFileSync(eventFile, "utf-8"));
+        eventUnit.title = actualTitle;
+      } else {
+        eventUnit = {
+          id: slug,
+          title: actualTitle,
+          type: detectedType,
+          shows: [],
+        };
+      }
+
+      const setlist = pageSongs.map((s, idx) => {
+        const mappedId = livefansIdToId[s.livefansId] ?? titleToId[s.title];
+        const item = {
+          order: idx + 1,
+          encore: !!s.isEncore,
+        };
+
+        if (mappedId) {
+          item.songId = mappedId;
+        } else {
+          item.title = s.title;
+        }
+
+        if (s.subtitle) {
+          if (
+            s.subtitle.includes("リハ") ||
+            s.subtitle.includes("Soundcheck")
+          ) {
+            item.note = `リハ：${s.subtitle.replace(/^リハ[：:]?\s*/, "")}`;
+          } else {
+            item.note = s.subtitle;
+          }
+        }
+        if (s.kind) item.kind = s.kind;
+        if (s.type) item.type = s.type;
+        return item;
+      });
+
+      const showTitle = meta.eventTitle
+        ? `${meta.eventTitle} ${cityName}`
+        : `${eventUnit.title} ${cityName}`;
+
+      const newShow = {
+        id: String(eventId),
+        date: meta.livefansDate,
+        city: cityName,
+        venue: venueName,
+        region: regionName,
+        prefecture: prefName,
+        title: showTitle,
+        sourceUrls: [url],
+        setlist,
+      };
+      if (meta.opensAt) newShow.opensAt = meta.opensAt;
+
+      const existingIdx = eventUnit.shows.findIndex(
+        (s) => s.id === String(eventId)
+      );
+      if (existingIdx !== -1) {
+        eventUnit.shows[existingIdx] = newShow;
+      } else {
+        eventUnit.shows.push(newShow);
+      }
+
+      eventUnit.shows.sort((a, b) => (a.date < b.date ? -1 : 1));
+
+      fs.writeFileSync(
+        eventFile,
+        JSON.stringify(eventUnit, null, 2) + "\n",
+        "utf-8"
+      );
+      console.log(
+        `[UNKNOWN EVENT AUTO-IMPORTED] Saved event ${eventId} (${
+          meta.livefansDate
+        } @ ${venueName}) into ${path.basename(eventFile)}`
+      );
+    } catch (err) {
+      console.error(
+        `[AUTO-IMPORT ERROR] Failed to process event ${eventId}:`,
+        err
+      );
+    }
   }
 
   console.log(`
