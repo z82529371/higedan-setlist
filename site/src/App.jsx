@@ -30,6 +30,75 @@ const KIND_TAB = {
 };
 const KIND_ORDER = ["premiere", "unreleased", "satoshi-solo", "request"];
 
+const queryTabClass = (isOn) =>
+  `appearance-none rounded-full border-[1.5px] border-ink px-[22px] py-2 text-[14px] font-bold cursor-pointer select-none transition-all shadow-[2px_2px_0_rgba(23,35,59,0.12)] hover:-translate-y-[1px] hover:bg-pool-wash hover:shadow-[3px_3px_0_rgba(23,35,59,0.18)] active:translate-y-0 active:shadow-[1px_1px_0_rgba(23,35,59,0.14)] focus-visible:outline-2 focus-visible:outline-tape focus-visible:outline-offset-2 ${
+    isOn
+      ? "bg-ink text-white shadow-[2px_2px_0_var(--color-ink)] hover:opacity-95"
+      : "bg-card text-ink"
+  }`;
+
+const filterPillClass = (isActive) =>
+  `appearance-none rounded border-[1.5px] px-[14px] py-[6px] text-[13px] font-semibold cursor-pointer whitespace-nowrap transition-all motion-reduce:transition-none focus-visible:outline-[3px] focus-visible:outline-pool focus-visible:outline-offset-2 ${
+    isActive
+      ? "bg-band text-band-ink border-band shadow-[2px_2px_0_#e8b428] font-bold"
+      : "border-line bg-paper text-ink hover:bg-pool-wash hover:border-pool hover:text-pool"
+  }`;
+
+const unitPillClass = (isOn) =>
+  `appearance-none rounded-full border px-3 py-1 text-[12px] font-semibold cursor-pointer transition-all motion-reduce:transition-none focus-visible:outline-[3px] focus-visible:outline-pool focus-visible:outline-offset-2 ${
+    isOn
+      ? "bg-tape text-[#3a2c00] border-ink font-bold shadow-[1px_1px_0_var(--color-ink)]"
+      : "border-line bg-card text-ink hover:border-ink hover:bg-pool-wash"
+  }`;
+
+const SETLIST_ITEM =
+  "flex items-baseline gap-3 border-b border-line-soft px-1 py-2 last:border-b-0";
+const CUE_NO =
+  "min-w-[42px] text-right font-mono text-[12px] font-semibold text-muted tabular-nums";
+const CUE_COLOR = {
+  premiere: "text-premiere",
+  unreleased: "text-unreleased",
+  "satoshi-solo": "text-solo",
+  request: "text-request",
+};
+const TRACK_NOTE = "text-[13px] text-muted";
+const SETLIST_SONG =
+  "border-b border-transparent font-medium text-ink no-underline transition-colors hover:border-pool hover:text-pool focus-visible:outline-[3px] focus-visible:outline-pool focus-visible:outline-offset-2 motion-reduce:transition-none";
+const SLIP_ARTICLE =
+  "relative rounded-[3px] border-[1.5px] border-ink bg-card px-[26px] pb-6 pt-[46px] shadow-[5px_5px_0_rgba(23,35,59,0.14)] max-sm:px-4 max-sm:pb-[18px] max-sm:pt-[42px]";
+const SLIP_TAPE =
+  "pointer-events-none absolute left-1/2 top-[-13px] h-[26px] w-[132px] -translate-x-1/2 rotate-[1.5deg] border-x border-dashed border-tape-edge bg-tape-soft";
+const SLIP_CARD = {
+  premiere:
+    "relative rounded-[2px] border-[1.5px] border-premiere border-l-[7px] bg-premiere-bg px-[14px] py-[10px] -mx-2 my-[18px] -rotate-[0.6deg] shadow-[4px_6px_0_var(--color-premiere-wash)] max-sm:mx-[-4px] max-sm:my-3",
+  unreleased:
+    "relative rounded-[2px] border-[1.5px] border-unreleased border-l-[7px] bg-unreleased-bg px-[14px] py-[10px] -mx-2 my-[18px] rotate-[1.1deg] shadow-[4px_6px_0_var(--color-unreleased-wash)] max-sm:mx-[-4px] max-sm:my-3",
+  "satoshi-solo":
+    "relative rounded-[2px] border-[1.5px] border-solo border-l-[7px] bg-solo-bg px-[14px] py-[10px] -mx-2 my-[18px] -rotate-[0.4deg] shadow-[4px_6px_0_var(--color-solo-wash)] max-sm:mx-[-4px] max-sm:my-3",
+  request:
+    "relative rounded-[2px] border-[1.5px] border-request border-l-[7px] bg-white px-[14px] py-[10px] -mx-2 my-[18px] -rotate-[1.2deg] shadow-[4px_6px_0_var(--color-request-shadow)] max-sm:mx-[-4px] max-sm:my-3",
+};
+const SLIP_TAB_COLOR = {
+  premiere: "bg-premiere",
+  unreleased: "bg-unreleased",
+  "satoshi-solo": "bg-solo",
+  request: "bg-request",
+};
+
+const KIND_BADGE_CLASS = (k) =>
+  k === "request"
+    ? "bg-[#fbe9e6] text-request"
+    : k === "satoshi-solo"
+    ? "bg-[#d8efe8] text-[#0b5f50]"
+    : "bg-tape text-[#3a2c00]";
+
+const DRAWER_LINK = (isOn) =>
+  `flex items-center justify-between gap-[10px] border-l-4 border-transparent px-[14px] py-[10px] no-underline transition-colors motion-reduce:transition-none focus-visible:outline-[3px] focus-visible:outline-pool focus-visible:outline-offset-2 ${
+    isOn
+      ? "border-l-tape bg-band text-band-ink hover:bg-band"
+      : "border-l-transparent text-ink hover:border-l-pool hover:bg-pool-wash"
+  }`;
+
 const ALBUM_MAP = {
   "same-blue": "Rejoice (2024)",
   "50pct": "Rejoice (2024)",
@@ -74,14 +143,26 @@ const ALBUM_MAP = {
 
   "no-doubt": "エスカパレード (2018)",
   "itan-na-star": "エスカパレード (2018)",
-  "sweet-tweet": "エスカパレード (2018)",
   lady: "エスカパレード (2018)",
   rolling: "エスカパレード (2018)",
   driver: "エスカパレード (2018)",
   trailer: "エスカパレード (2018)",
-  "ai-nandaga": "エスカパレード (2018)",
-  "yugure-zoi": "エスカパレード (2018)",
-  "shihatsu-ga-michibiku-kouhukuron": "エスカパレード (2018)",
+
+  "sweet-tweet": "ラブとピースは君の中 (2015)",
+  "koi-no-maenarae": "ラブとピースは君の中 (2015)",
+  "yugure-zoi": "ラブとピースは君の中 (2015)",
+  "yuki-seku-asa-ga-kuru": "ラブとピースは君の中 (2015)",
+  "shihatsu-ga-michibiku-kouhukuron": "ラブとピースは君の中 (2015)",
+  "ai-nandaga": "ラブとピースは君の中 (2015)",
+  parade: "ラブとピースは君の中 (2015)",
+  darin: "ラブとピースは君の中 (2015)",
+
+  "clap-clap": "MAN IN THE MIRROR (2016)",
+  "coffee-to-syrup": "MAN IN THE MIRROR (2016)",
+  "happy-birthday-to-you": "MAN IN THE MIRROR (2016)",
+  "koi-no-sarigiwa": "MAN IN THE MIRROR (2016)",
+  "zero-no-mama-de-iraterara": "MAN IN THE MIRROR (2016)",
+  "nichiyoubi-no-love-letter": "MAN IN THE MIRROR (2016)",
 };
 
 const ALBUM_ORDER = [
@@ -89,6 +170,8 @@ const ALBUM_ORDER = [
   "Editorial (2021)",
   "Traveler (2019)",
   "エスカパレード (2018)",
+  "MAN IN THE MIRROR (2016)",
+  "ラブとピースは君の中 (2015)",
   "EP / 單曲",
   "未發行曲目",
 ];
@@ -240,9 +323,9 @@ function defaultShowId(unit) {
 // Hash routes (no router dep; static hosting safe):
 // #/song/<songId> #/show/<showId> #/venue/<name> #/title/<title>
 function parseRoute(hash) {
-  const m = (hash ?? "").replace(/^#/, "").match(
-    /^\/(song|show|venue|title)\/(.+)$/
-  );
+  const m = (hash ?? "")
+    .replace(/^#/, "")
+    .match(/^\/(song|show|venue|title)\/(.+)$/);
   if (!m) return null;
   try {
     return { kind: m[1], value: decodeURIComponent(m[2]) };
@@ -303,32 +386,32 @@ export default function App() {
           });
         }
 
-      for (const i of full.get(s.id)) {
-        if (i.songId) {
-          if (!songShows.has(i.songId)) songShows.set(i.songId, []);
-          songShows.get(i.songId).push(s.id);
+        for (const i of full.get(s.id)) {
+          if (i.songId) {
+            if (!songShows.has(i.songId)) songShows.set(i.songId, []);
+            songShows.get(i.songId).push(s.id);
 
-          if (!songShowsMap.has(i.songId)) songShowsMap.set(i.songId, []);
-          songShowsMap.get(i.songId).push({
-            showId: s.id,
-            unitId: unit.id,
-            unitTitle: shortUnitTitle(unit),
-            unitType: unit.type,
-            item: i,
-            isTemplateSong: isTour && tplSongSet.has(i.songId),
-          });
-        } else if (i.title) {
-          // Cover/title-only tracks: no songs.json entry, keyed by title.
-          if (!titleShowsMap.has(i.title)) titleShowsMap.set(i.title, []);
-          titleShowsMap.get(i.title).push({
-            showId: s.id,
-            unitId: unit.id,
-            unitTitle: shortUnitTitle(unit),
-            unitType: unit.type,
-            item: i,
-          });
+            if (!songShowsMap.has(i.songId)) songShowsMap.set(i.songId, []);
+            songShowsMap.get(i.songId).push({
+              showId: s.id,
+              unitId: unit.id,
+              unitTitle: shortUnitTitle(unit),
+              unitType: unit.type,
+              item: i,
+              isTemplateSong: isTour && tplSongSet.has(i.songId),
+            });
+          } else if (i.title) {
+            // Cover/title-only tracks: no songs.json entry, keyed by title.
+            if (!titleShowsMap.has(i.title)) titleShowsMap.set(i.title, []);
+            titleShowsMap.get(i.title).push({
+              showId: s.id,
+              unitId: unit.id,
+              unitTitle: shortUnitTitle(unit),
+              unitType: unit.type,
+              item: i,
+            });
+          }
         }
-      }
       }
 
       unitDataMap.set(unit.id, { unit, isTour, tpl, shows, full, songShows });
@@ -493,33 +576,37 @@ export default function App() {
 
   return (
     <Fragment>
-      <div className="flight-band">
+      <div className="mx-[-20px] flex flex-wrap items-center gap-x-5 gap-y-2 bg-band px-5 py-2.5 font-mono text-[12px] tracking-[0.14em] text-band-ink max-sm:mx-[-14px]">
         <span>{current?.unit.title ?? ""}</span>
-        <span className="dot-sep">●</span>
+        <span className="opacity-45">●</span>
         <span>
           {current?.shows.length ?? 0} 場・{current?.songShows.size ?? 0} 首歌曲
         </span>
-        <span className="dot-sep">●</span>
+        <span className="opacity-45">●</span>
         <span>資料來源 livefans</span>
       </div>
 
-      <header className="hero">
-        <p className="hero-eyebrow">
-          <span className="stamp">
+      <header className="pb-2 pt-9">
+        <p className="m-0 mb-[10px] font-mono text-[12px] tracking-[0.22em] text-muted">
+          <span className="mr-2 inline-block rounded-full border-[1.5px] border-ink px-[10px] py-[1px] tracking-[0.18em] text-ink">
             {current?.isTour ? "巡演檔案" : "演出檔案"}
           </span>
           {current
             ? `${shortUnitTitle(current.unit)}・場次 × 歌曲雙向查詢`
             : ""}
         </p>
-        <h1 className="hero-title">
-          那一晚，<span className="thin">他們唱了什麼。</span>
+        <h1 className="m-0 font-display text-[clamp(34px,5.2vw,60px)] font-extrabold leading-[1.08] tracking-[0.01em] [text-wrap:balance]">
+          那一晚，<span className="font-bold text-pool">他們唱了什麼。</span>
         </h1>
       </header>
 
-      <div className="query-tabs" role="group" aria-label="查詢方向">
+      <div
+        className="mt-8 mb-[14px] flex flex-wrap items-center gap-2"
+        role="group"
+        aria-label="查詢方向"
+      >
         <button
-          className={`query-tab ${tab === "show" ? "is-on" : ""}`}
+          className={queryTabClass(tab === "show")}
           onClick={() => {
             setTab("show");
             setQ("");
@@ -529,7 +616,7 @@ export default function App() {
           場次
         </button>
         <button
-          className={`query-tab ${tab === "song" ? "is-on" : ""}`}
+          className={queryTabClass(tab === "song")}
           onClick={() => {
             setTab("song");
             setQ("");
@@ -540,7 +627,7 @@ export default function App() {
           歌曲
         </button>
         <button
-          className={`query-tab ${tab === "venue" ? "is-on" : ""}`}
+          className={queryTabClass(tab === "venue")}
           onClick={() => {
             setTab("venue");
             setQ("");
@@ -551,9 +638,15 @@ export default function App() {
           場地
         </button>
 
-        <div className="query-search">
-          <label htmlFor="q">{searchLabelText}</label>
+        <div className="ml-auto flex max-w-[340px] flex-[1_1_220px] items-center gap-2 max-lg:ml-0 max-lg:w-full max-lg:max-w-none">
+          <label
+            htmlFor="q"
+            className="whitespace-nowrap font-mono text-[12px] text-muted"
+          >
+            {searchLabelText}
+          </label>
           <input
+            className="w-full rounded-[3px] border-[1.5px] border-ink bg-card px-3 py-2 text-[14px] text-ink"
             id="q"
             type="search"
             placeholder={searchPlaceholder}
@@ -612,15 +705,15 @@ export default function App() {
 
           return (
             <div
-              className="filter-pill-bar"
+              className="mb-5 flex flex-wrap items-center gap-x-[10px] gap-y-2 rounded-[3px] border-[1.5px] border-ink bg-card px-4 py-3 shadow-[4px_4px_0_rgba(23,35,59,0.1)]"
               role="group"
               aria-label="場次巡演分組"
             >
-              <div className="group-label">演出類型</div>
+              <div className="mr-[6px] flex items-center font-mono text-[11px] font-bold uppercase tracking-[0.15em] text-muted after:content-['：']">
+                演出類型
+              </div>
               <button
-                className={`filter-pill ${
-                  showGroupFilter === "all" ? "is-active" : ""
-                }`}
+                className={filterPillClass(showGroupFilter === "all")}
                 onClick={() => {
                   setShowGroupFilter("all");
                   setShowYearFilter("all");
@@ -629,9 +722,7 @@ export default function App() {
                 全部場次 ({allUnits.length})
               </button>
               <button
-                className={`filter-pill ${
-                  showGroupFilter === "tour" ? "is-active" : ""
-                }`}
+                className={filterPillClass(showGroupFilter === "tour")}
                 onClick={() => {
                   setShowGroupFilter("tour");
                   setShowYearFilter("all");
@@ -640,9 +731,7 @@ export default function App() {
                 巡演專場 ({soloUnits.length})
               </button>
               <button
-                className={`filter-pill ${
-                  showGroupFilter === "event" ? "is-active" : ""
-                }`}
+                className={filterPillClass(showGroupFilter === "event")}
                 onClick={() => {
                   setShowGroupFilter("event");
                   setShowYearFilter("all");
@@ -651,22 +740,12 @@ export default function App() {
                 音樂祭／特別事件 ({festUnits.length})
               </button>
 
-              <div
-                style={{
-                  margin: "10px 0 4px 0",
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "8px",
-                  flexWrap: "wrap",
-                }}
-              >
-                <span className="group-label" style={{ margin: 0 }}>
+              <div className="my-1 flex flex-wrap items-center gap-2">
+                <span className="flex items-center font-mono text-[11px] font-bold uppercase tracking-[0.15em] text-muted after:content-['：']">
                   開始年份
                 </span>
                 <button
-                  className={`filter-pill ${
-                    showYearFilter === "all" ? "is-active" : ""
-                  }`}
+                  className={filterPillClass(showYearFilter === "all")}
                   onClick={() => setShowYearFilter("all")}
                 >
                   全部年份
@@ -678,9 +757,7 @@ export default function App() {
                   return (
                     <button
                       key={year}
-                      className={`filter-pill ${
-                        showYearFilter === year ? "is-active" : ""
-                      }`}
+                      className={filterPillClass(showYearFilter === year)}
                       onClick={() => setShowYearFilter(year)}
                     >
                       📅 {year} ({count})
@@ -689,15 +766,13 @@ export default function App() {
                 })}
               </div>
 
-              <div className="unit-pills-row">
+              <div className="mt-2 flex w-full flex-wrap gap-x-[10px] gap-y-[6px] border-t border-dashed border-line pt-[10px]">
                 {[...finalUnits]
                   .sort((a, b) => (unitEarliest(b) < unitEarliest(a) ? -1 : 1))
                   .map((u) => (
                     <button
                       key={u.id}
-                      className={`unit-pill ${
-                        u.type === "專場" ? "tour-pill" : "event-pill"
-                      } ${u.id === selUnitId ? "is-on" : ""}`}
+                      className={unitPillClass(u.id === selUnitId)}
                       onClick={() => handleUnitChange(u.id)}
                     >
                       {shortUnitTitle(u)}
@@ -709,12 +784,16 @@ export default function App() {
         })()}
 
       {tab === "song" && (
-        <div className="filter-pill-bar" role="group" aria-label="歌曲專輯分組">
-          <div className="group-label">專輯／發行分類</div>
+        <div
+          className="mb-5 flex flex-wrap items-center gap-x-[10px] gap-y-2 rounded-[3px] border-[1.5px] border-ink bg-card px-4 py-3 shadow-[4px_4px_0_rgba(23,35,59,0.1)]"
+          role="group"
+          aria-label="歌曲專輯分組"
+        >
+          <div className="mr-[6px] flex items-center font-mono text-[11px] font-bold uppercase tracking-[0.15em] text-muted after:content-['：']">
+            專輯／發行分類
+          </div>
           <button
-            className={`filter-pill ${
-              songGroupFilter === "all" ? "is-active" : ""
-            }`}
+            className={filterPillClass(songGroupFilter === "all")}
             onClick={() => setSongGroupFilter("all")}
           >
             全部歌曲 ({allUsedSongs.length})
@@ -727,9 +806,7 @@ export default function App() {
             return (
               <button
                 key={album}
-                className={`filter-pill ${
-                  songGroupFilter === album ? "is-active" : ""
-                }`}
+                className={filterPillClass(songGroupFilter === album)}
                 onClick={() => setSongGroupFilter(album)}
               >
                 💿 {album} ({count})
@@ -740,12 +817,16 @@ export default function App() {
       )}
 
       {tab === "venue" && (
-        <div className="filter-pill-bar" role="group" aria-label="場地區域分組">
-          <div className="group-label">地區分區</div>
+        <div
+          className="mb-5 flex flex-wrap items-center gap-x-[10px] gap-y-2 rounded-[3px] border-[1.5px] border-ink bg-card px-4 py-3 shadow-[4px_4px_0_rgba(23,35,59,0.1)]"
+          role="group"
+          aria-label="場地區域分組"
+        >
+          <div className="mr-[6px] flex items-center font-mono text-[11px] font-bold uppercase tracking-[0.15em] text-muted after:content-['：']">
+            地區分區
+          </div>
           <button
-            className={`filter-pill ${
-              venueGroupFilter === "all" ? "is-active" : ""
-            }`}
+            className={filterPillClass(venueGroupFilter === "all")}
             onClick={() => setVenueGroupFilter("all")}
           >
             全部地區 ({allVenues.length})
@@ -758,9 +839,7 @@ export default function App() {
             return (
               <button
                 key={region}
-                className={`filter-pill ${
-                  venueGroupFilter === region ? "is-active" : ""
-                }`}
+                className={filterPillClass(venueGroupFilter === region)}
                 onClick={() => setVenueGroupFilter(region)}
               >
                 📍 {region} ({count})
@@ -770,9 +849,9 @@ export default function App() {
         </div>
       )}
 
-      <main className="query-grid">
+      <main className="grid grid-cols-[300px_1fr] items-start gap-5 max-lg:grid-cols-1">
         <nav
-          className="drawer"
+          className="max-h-[72vh] overflow-hidden overflow-y-auto rounded-[3px] border-[1.5px] border-ink bg-card max-lg:max-h-none"
           aria-label={
             tab === "show"
               ? "場次列表"
@@ -781,14 +860,14 @@ export default function App() {
               : "場地列表"
           }
         >
-          <ul className="drawer-list">
+          <ul className="m-0 list-none p-0 [&>li]:border-b [&>li]:border-line-soft [&>li:last-child]:border-b-0">
             {tab === "show" &&
               (() => {
                 const shows = current?.shows ?? [];
                 if (!shows.length) return null;
                 return (
                   <Fragment>
-                    <li className="drawer-group-header">
+                    <li className="sticky top-0 z-[2] border-b-[1.5px] border-ink bg-band px-[14px] py-[6px] font-mono text-[11px] font-bold tracking-[0.1em] text-band-ink shadow-[0_1px_3px_rgba(0,0,0,0.12)]">
                       {shortUnitTitle(current.unit)}
                     </li>
                     {shows.map((s) => {
@@ -798,9 +877,7 @@ export default function App() {
                       return (
                         <li key={s.id}>
                           <a
-                            className={`drawer-link ${
-                              s.id === selShow ? "is-on" : ""
-                            }`}
+                            className={DRAWER_LINK(s.id === selShow)}
                             href={routeHash.show(s.id)}
                             onClick={(e) => {
                               e.preventDefault();
@@ -808,12 +885,20 @@ export default function App() {
                             }}
                             title={showLabel(s)}
                           >
-                            <span className="drawer-show">
-                              <span className="drawer-date">{showDate(s)}</span>
-                              <span className="drawer-venue">{s.venue}</span>
-                              <span className="drawer-city">{s.city}</span>
+                            <span className="flex min-w-0 flex-1 flex-col leading-[1.5]">
+                              <span className="font-mono text-[12px] text-muted [.bg-band_&]:text-inherit [.bg-band_&]:opacity-85">
+                                {showDate(s)}
+                              </span>
+                              <span className="block overflow-hidden text-ellipsis whitespace-nowrap font-bold">
+                                {s.venue}
+                              </span>
+                              <span className="text-[13px] text-muted [.bg-band_&]:text-inherit [.bg-band_&]:opacity-85">
+                                {s.city}
+                              </span>
                             </span>
-                            <span className="drawer-count">{songCount} 首</span>
+                            <span className="whitespace-nowrap font-mono text-[12px] text-muted [.bg-band_&]:text-white">
+                              {songCount} 首
+                            </span>
                           </a>
                         </li>
                       );
@@ -835,7 +920,7 @@ export default function App() {
                 if (!filtered.length)
                   return (
                     <li>
-                      <p className="empty-hint">
+                      <p className="m-0 px-1 py-[18px] text-[14px] text-muted">
                         沒有符合的歌曲，換個分組或關鍵字試試。
                       </p>
                     </li>
@@ -855,30 +940,32 @@ export default function App() {
 
                 return sortedAlbums.map((album) => (
                   <Fragment key={album}>
-                    <li className="drawer-group-header">💿 {album}</li>
+                    <li className="sticky top-0 z-[2] border-b-[1.5px] border-ink bg-band px-[14px] py-[6px] font-mono text-[11px] font-bold tracking-[0.1em] text-band-ink shadow-[0_1px_3px_rgba(0,0,0,0.12)]">
+                      💿 {album}
+                    </li>
                     {groups.get(album).map((s) => {
                       const count = (globalSongShows.get(s.id) ?? []).length;
                       return (
                         <li key={s.id}>
                           <a
-                            className={`drawer-link ${
-                              s.id === selSong ? "is-on" : ""
-                            }`}
+                            className={DRAWER_LINK(s.id === selSong)}
                             href={routeHash.song(s.id)}
                             onClick={(e) => {
                               e.preventDefault();
                               handleSelectSong(s.id);
                             }}
                           >
-                            <span className="drawer-song">
+                            <span className="block overflow-hidden text-ellipsis whitespace-nowrap">
                               {s.title}
                               {songUnreleased.has(s.id) && (
-                                <span className="unreleased-tag">
+                                <span className="ml-1 text-[0.8em] font-normal text-muted [.bg-band_&]:text-white/75">
                                   （未發行）
                                 </span>
                               )}
                             </span>
-                            <span className="drawer-count">{count} 場</span>
+                            <span className="whitespace-nowrap font-mono text-[12px] text-muted [.bg-band_&]:text-white">
+                              {count} 場
+                            </span>
                           </a>
                         </li>
                       );
@@ -902,7 +989,7 @@ export default function App() {
                 if (!filtered.length)
                   return (
                     <li>
-                      <p className="empty-hint">
+                      <p className="m-0 px-1 py-[18px] text-[14px] text-muted">
                         沒有符合的場地，換個分區或關鍵字試試。
                       </p>
                     </li>
@@ -922,24 +1009,26 @@ export default function App() {
 
                 return sortedRegions.map((region) => (
                   <Fragment key={region}>
-                    <li className="drawer-group-header">📍 {region}</li>
+                    <li className="sticky top-0 z-[2] border-b-[1.5px] border-ink bg-band px-[14px] py-[6px] font-mono text-[11px] font-bold tracking-[0.1em] text-band-ink shadow-[0_1px_3px_rgba(0,0,0,0.12)]">
+                      📍 {region}
+                    </li>
                     {groups.get(region).map((v) => (
                       <li key={v.name}>
                         <a
-                          className={`drawer-link ${
-                            v.name === selVenue ? "is-on" : ""
-                          }`}
-                            href={routeHash.venue(v.name)}
-                            onClick={(e) => {
-                              e.preventDefault();
-                              handleSelectVenue(v.name);
-                            }}
+                          className={DRAWER_LINK(v.name === selVenue)}
+                          href={routeHash.venue(v.name)}
+                          onClick={(e) => {
+                            e.preventDefault();
+                            handleSelectVenue(v.name);
+                          }}
                         >
-                          <span className="drawer-song">
+                          <span className="block overflow-hidden text-ellipsis whitespace-nowrap">
                             {v.name}
-                            <span className="venue-city-sub">（{v.city}）</span>
+                            <span className="text-[12px] font-normal text-muted [.bg-band_&]:text-inherit">
+                              （{v.city}）
+                            </span>
                           </span>
-                          <span className="drawer-count">
+                          <span className="whitespace-nowrap font-mono text-[12px] text-muted [.bg-band_&]:text-white">
                             {v.shows.length} 場
                           </span>
                         </a>
@@ -986,7 +1075,7 @@ export default function App() {
         </section>
       </main>
 
-      <footer className="page-foot">
+      <footer className="mt-12 flex flex-wrap gap-x-[18px] gap-y-[6px] border-t-[1.5px] border-ink pt-3 font-mono text-[12px] text-muted">
         <span>{footTpl}</span>
         <span>{current?.isTour ? "各場差異以 insert / skip 記錄" : ""}</span>
         <span>演出順序、安可標記逐場核對 livefans</span>
@@ -1009,12 +1098,14 @@ function ShowSlip({ ud, showId, onSelectSong, onSelectTitle }) {
   let en = 0;
   const cueNo = (i) => (i.encore ? `EN${(en += 1)}` : `M${(m += 1)}`);
 
-  const SLIP_CLASS = {
-    premiere: "premiere-slip",
-    unreleased: "unreleased-slip",
-    "satoshi-solo": "satoshi-solo-slip",
-    request: "request-slip",
+  const SLIP_CLASS = SLIP_CARD;
+
+  const cueColor = (i) => {
+    const p = primaryKind(i);
+    return p ? CUE_COLOR[p] ?? "text-muted" : "text-muted";
   };
+
+  const songWeight = (i) => (primaryKind(i) ? "font-bold" : "font-medium");
 
   const getKindArray = (i) => {
     if (!i || !i.kind) return [];
@@ -1060,8 +1151,13 @@ function ShowSlip({ ud, showId, onSelectSong, onSelectTitle }) {
     const first = g.items[0];
     if (!first.songId && !first.title) {
       return (
-        <li key={prefix} className="setlist-item interlude-line">
-          <span className="cue-no">—</span>
+        <li
+          key={prefix}
+          className={`${SETLIST_ITEM} text-[13px] text-muted [&_.cue-no]:text-line`}
+        >
+          <span className="cue-no min-w-[42px] text-right font-mono text-[12px] text-line">
+            —
+          </span>
           <span>{first.note ?? ""}</span>
         </li>
       );
@@ -1074,7 +1170,7 @@ function ShowSlip({ ud, showId, onSelectSong, onSelectTitle }) {
       if (!it.songId) {
         return (
           <a
-            className="setlist-song-unlinked"
+            className="transition-colors hover:text-pool focus-visible:outline-[3px] focus-visible:outline-pool focus-visible:outline-offset-2 motion-reduce:transition-none"
             href={routeHash.title(title)}
             onClick={(e) => {
               e.preventDefault();
@@ -1087,7 +1183,7 @@ function ShowSlip({ ud, showId, onSelectSong, onSelectTitle }) {
       }
       return (
         <a
-          className="setlist-song"
+          className={`${SETLIST_SONG} ${songWeight(it)}`}
           href={routeHash.song(it.songId)}
           onClick={(e) => {
             e.preventDefault();
@@ -1100,9 +1196,14 @@ function ShowSlip({ ud, showId, onSelectSong, onSelectTitle }) {
     };
     const tabBar =
       tabs.length > 0 ? (
-        <span className="slip-tabs">
+        <span className="absolute left-[14px] top-[-11px] z-[1] flex gap-[6px]">
           {tabs.map((k) => (
-            <span key={k} className={`slip-tab slip-tab--${k}`}>
+            <span
+              key={k}
+              className={`px-2 py-[1px] font-mono text-[10px] font-semibold leading-[1.4] tracking-[0.2em] text-white ${
+                SLIP_TAB_COLOR[k] ?? "bg-ink"
+              }`}
+            >
               {KIND_TAB[k]}
             </span>
           ))}
@@ -1110,15 +1211,18 @@ function ShowSlip({ ud, showId, onSelectSong, onSelectTitle }) {
       ) : null;
     if (multi) {
       return (
-        <li key={prefix} className={`setlist-item ${slipClass}`}>
+        <li key={prefix} className={`${SETLIST_ITEM} ${slipClass}`}>
           {tabBar}
-          <span className="run-block">
+          <span className="flex min-w-0 flex-1 flex-col gap-[6px]">
             {g.items.map((it) => (
-              <span key={it.order} className="run-line">
-                <span className="cue-no">{cueNo(it)}</span>
+              <span
+                key={it.order}
+                className="flex min-w-0 items-baseline gap-3"
+              >
+                <span className={`${CUE_NO} ${cueColor(it)}`}>{cueNo(it)}</span>
                 <span>
                   {songLine(it)}
-                  {it.note && <span className="track-note"> {it.note}</span>}
+                  {it.note && <span className={TRACK_NOTE}> {it.note}</span>}
                 </span>
               </span>
             ))}
@@ -1127,12 +1231,12 @@ function ShowSlip({ ud, showId, onSelectSong, onSelectTitle }) {
       );
     }
     return (
-      <li key={prefix} className={`setlist-item ${slipClass}`}>
+      <li key={prefix} className={`${SETLIST_ITEM} ${slipClass}`}>
         {tabBar}
-        <span className="cue-no">{cueNo(first)}</span>
+        <span className={`${CUE_NO} ${cueColor(first)}`}>{cueNo(first)}</span>
         <span>
           {songLine(first)}
-          {first.note && <span className="track-note"> {first.note}</span>}
+          {first.note && <span className={TRACK_NOTE}> {first.note}</span>}
         </span>
       </li>
     );
@@ -1141,14 +1245,22 @@ function ShowSlip({ ud, showId, onSelectSong, onSelectTitle }) {
   const songCount = items.filter((i) => i.songId || i.title).length;
 
   return (
-    <article className="slip" aria-label="場次曲目清單">
-      <div className="slip-head">
-        <h3 className="slip-title show-title-block">
-          <span className="show-title-date">{showDate(s)}</span>
-          <span className="show-title-venue">{s.venue}</span>
-          <span className="show-title-city">（{s.city}）</span>
+    <article
+      className={SLIP_ARTICLE}
+      aria-label="場次曲目清單"
+    >
+      <span aria-hidden="true" className={SLIP_TAPE} />
+      <div className="mb-[6px] border-b-2 border-ink pb-3">
+        <h3 className="m-0 flex flex-col gap-[2px] font-display text-[23px] font-extrabold leading-[1.3]">
+          <span className="font-mono text-[15px] font-semibold text-muted">
+            {showDate(s)}
+          </span>
+          <span className="text-[24px] font-extrabold text-ink">{s.venue}</span>
+          <span className="text-[16px] font-medium text-muted">
+            （{s.city}）
+          </span>
         </h3>
-        <p className="slip-meta">
+        <p className="mt-[6px] text-[13px] text-muted [&_a]:text-pool [&_a]:underline-offset-[3px]">
           {s.opensAt ? `${s.opensAt} 開演・` : ""}
           {ud.unit.type}・共 {songCount} 首演出曲目
           {s.sourceUrls?.[0] && (
@@ -1162,15 +1274,18 @@ function ShowSlip({ ud, showId, onSelectSong, onSelectTitle }) {
         </p>
       </div>
 
-      <ol className="setlist">
+      <ol className="m-0 list-none p-0">
         {groupRuns(main).map((g, idx) => renderRun(g, `m-${idx}`))}
       </ol>
       {enc.length > 0 && (
         <>
-          <div className="encore-cut" aria-hidden="true">
+          <div
+            className="encore-cut mb-[6px] mt-[18px] flex items-center gap-[10px] font-mono text-[12px] font-semibold tracking-[0.24em] text-ink before:h-[10px] before:w-[10px] before:border-[1.5px] before:border-ink before:bg-tape after:flex-1 after:border-t-[1.5px] after:border-dashed after:border-ink"
+            aria-hidden="true"
+          >
             ENCORE
           </div>
-          <ol className="setlist">
+          <ol className="m-0 list-none p-0">
             {groupRuns(enc).map((g, idx) => renderRun(g, `e-${idx}`))}
           </ol>
         </>
@@ -1182,8 +1297,11 @@ function ShowSlip({ ud, showId, onSelectSong, onSelectTitle }) {
 function SongSlip({ songId, globalSongShows, showById, onSelectShow }) {
   if (!songId) {
     return (
-      <div className="slip">
-        <p className="empty-hint">選一首歌曲，看它在全檔案庫哪幾場出現過。</p>
+      <div className={SLIP_ARTICLE}>
+        <span aria-hidden="true" className={SLIP_TAPE} />
+        <p className="m-0 px-1 py-[18px] text-[14px] text-muted">
+          選一首歌曲，看它在全檔案庫哪幾場出現過。
+        </p>
       </div>
     );
   }
@@ -1191,41 +1309,60 @@ function SongSlip({ songId, globalSongShows, showById, onSelectShow }) {
   const appearances = globalSongShows.get(songId) ?? [];
 
   return (
-    <article className="slip" aria-label="歌曲全域出現場次">
-      <div className="slip-head">
-        <p className="slip-tour">ALL TOURS → SONG SHOWS</p>
-        <h3 className="slip-title">
+    <article
+      className={SLIP_ARTICLE}
+      aria-label="歌曲全域出現場次"
+    >
+      <span aria-hidden="true" className={SLIP_TAPE} />
+      <div className="mb-[6px] border-b-2 border-ink pb-3">
+        <p className="m-0 mb-1 font-mono text-[12px] tracking-[0.18em] text-muted">
+          ALL TOURS → SONG SHOWS
+        </p>
+        <h3 className="m-0 font-display text-[23px] font-extrabold leading-[1.3]">
           {songTitle[songId]}
           {songUnreleased.has(songId) && (
-            <span className="unreleased-tag">（未發行）</span>
+            <span className="ml-1 align-baseline text-[0.8em] font-normal tracking-[0.02em] text-muted">
+              （未發行）
+            </span>
           )}
         </h3>
-        <p className="slip-meta song-detail-count">
+        <p className="mt-[6px] font-mono text-[13px] text-muted [&_a]:text-pool">
           全檔案庫共出現於 {appearances.length} 場演出
         </p>
       </div>
-      <ul className="appearance-list">
+      <ul className="m-0 mt-3 list-none p-0">
         {appearances.map(({ showId, unitTitle, unitType, item }) => {
           const s = showById.get(showId);
           return (
-            <li key={showId}>
-              <span className="tour-badge">
+            <li
+              key={showId}
+              className="flex items-start gap-3 border-b border-line-soft px-1 py-[10px] last:border-b-0"
+            >
+              <span className="mt-[2px] whitespace-nowrap rounded-[3px] border border-[rgba(30,46,74,0.25)] bg-[rgba(232,180,40,0.38)] px-[6px] py-[2px] font-mono text-[11px] font-semibold text-ink">
                 {unitTitle}
                 {unitType !== "專場" && (
-                  <span className="type-badge">{unitType}</span>
+                  <span className="ml-[7px] rounded-full border border-current px-[6px] py-[1px] align-middle font-mono text-[0.72em] font-semibold tracking-[0.04em] opacity-85">
+                    {unitType}
+                  </span>
                 )}
               </span>
               <a
-                className="show-link-block"
+                className="flex flex-col leading-[1.45] text-ink no-underline transition-colors hover:text-request focus-visible:outline-[3px] focus-visible:outline-pool focus-visible:outline-offset-2 motion-reduce:transition-none [&_.show-link-venue]:hover:text-pool [&_.show-link-venue]:hover:underline"
                 href={routeHash.show(showId)}
                 onClick={(e) => {
                   e.preventDefault();
                   onSelectShow(showId);
                 }}
               >
-                <span className="show-link-date">{showDate(s)}</span>
-                <span className="show-link-venue">{s.venue}</span>
-                <span className="show-link-city">（{s.city}）</span>
+                <span className="font-mono text-[12px] text-muted">
+                  {showDate(s)}
+                </span>
+                <span className="show-link-venue text-[14px] font-bold">
+                  {s.venue}
+                </span>
+                <span className="show-link-city text-[13px] text-muted">
+                  （{s.city}）
+                </span>
               </a>
               {(Array.isArray(item.kind)
                 ? item.kind
@@ -1235,11 +1372,18 @@ function SongSlip({ songId, globalSongShows, showById, onSelectShow }) {
               )
                 .filter((k) => KIND_BADGE[k])
                 .map((k) => (
-                  <span key={k} className={`kind-badge kind-badge--${k}`}>
+                  <span
+                    key={k}
+                    className={`ml-2 inline-block rounded-[3px] px-[7px] py-[3px] align-middle font-mono text-[0.72em] font-semibold leading-none tracking-[0.06em] before:content-['♪_'] ${KIND_BADGE_CLASS(
+                      k
+                    )}`}
+                  >
                     {KIND_BADGE[k]}
                   </span>
                 ))}
-              {item.note && <span className="track-note"> {item.note}</span>}
+              {item.note && (
+                <span className="text-[13px] text-muted"> {item.note}</span>
+              )}
             </li>
           );
         })}
@@ -1251,8 +1395,11 @@ function SongSlip({ songId, globalSongShows, showById, onSelectShow }) {
 function TitleSlip({ title, globalTitleShows, showById, onSelectShow }) {
   if (!title) {
     return (
-      <div className="slip">
-        <p className="empty-hint">選一首歌曲，看它在全檔案庫哪幾場出現過。</p>
+      <div className={SLIP_ARTICLE}>
+        <span aria-hidden="true" className={SLIP_TAPE} />
+        <p className="m-0 px-1 py-[18px] text-[14px] text-muted">
+          選一首歌曲，看它在全檔案庫哪幾場出現過。
+        </p>
       </div>
     );
   }
@@ -1260,36 +1407,55 @@ function TitleSlip({ title, globalTitleShows, showById, onSelectShow }) {
   const appearances = globalTitleShows.get(title) ?? [];
 
   return (
-    <article className="slip" aria-label="翻唱全域出現場次">
-      <div className="slip-head">
-        <p className="slip-tour">ALL TOURS → SONG SHOWS</p>
-        <h3 className="slip-title">{title}</h3>
-        <p className="slip-meta song-detail-count">
+    <article
+      className={SLIP_ARTICLE}
+      aria-label="翻唱全域出現場次"
+    >
+      <span aria-hidden="true" className={SLIP_TAPE} />
+      <div className="mb-[6px] border-b-2 border-ink pb-3">
+        <p className="m-0 mb-1 font-mono text-[12px] tracking-[0.18em] text-muted">
+          ALL TOURS → SONG SHOWS
+        </p>
+        <h3 className="m-0 font-display text-[23px] font-extrabold leading-[1.3]">
+          {title}
+        </h3>
+        <p className="mt-[6px] font-mono text-[13px] text-muted [&_a]:text-pool">
           全檔案庫共出現於 {appearances.length} 場演出
         </p>
       </div>
-      <ul className="appearance-list">
+      <ul className="m-0 mt-3 list-none p-0">
         {appearances.map(({ showId, unitTitle, unitType, item }) => {
           const s = showById.get(showId);
           return (
-            <li key={showId}>
-              <span className="tour-badge">
+            <li
+              key={showId}
+              className="flex items-start gap-3 border-b border-line-soft px-1 py-[10px] last:border-b-0"
+            >
+              <span className="mt-[2px] whitespace-nowrap rounded-[3px] border border-[rgba(30,46,74,0.25)] bg-[rgba(232,180,40,0.38)] px-[6px] py-[2px] font-mono text-[11px] font-semibold text-ink">
                 {unitTitle}
                 {unitType !== "專場" && (
-                  <span className="type-badge">{unitType}</span>
+                  <span className="ml-[7px] rounded-full border border-current px-[6px] py-[1px] align-middle font-mono text-[0.72em] font-semibold tracking-[0.04em] opacity-85">
+                    {unitType}
+                  </span>
                 )}
               </span>
               <a
-                className="show-link-block"
+                className="flex flex-col leading-[1.45] text-ink no-underline transition-colors hover:text-request focus-visible:outline-[3px] focus-visible:outline-pool focus-visible:outline-offset-2 motion-reduce:transition-none [&_.show-link-venue]:hover:text-pool [&_.show-link-venue]:hover:underline"
                 href={routeHash.show(showId)}
                 onClick={(e) => {
                   e.preventDefault();
                   onSelectShow(showId);
                 }}
               >
-                <span className="show-link-date">{showDate(s)}</span>
-                <span className="show-link-venue">{s.venue}</span>
-                <span className="show-link-city">（{s.city}）</span>
+                <span className="font-mono text-[12px] text-muted">
+                  {showDate(s)}
+                </span>
+                <span className="show-link-venue text-[14px] font-bold">
+                  {s.venue}
+                </span>
+                <span className="show-link-city text-[13px] text-muted">
+                  （{s.city}）
+                </span>
               </a>
               {(Array.isArray(item.kind)
                 ? item.kind
@@ -1299,11 +1465,18 @@ function TitleSlip({ title, globalTitleShows, showById, onSelectShow }) {
               )
                 .filter((k) => KIND_BADGE[k])
                 .map((k) => (
-                  <span key={k} className={`kind-badge kind-badge--${k}`}>
+                  <span
+                    key={k}
+                    className={`ml-2 inline-block rounded-[3px] px-[7px] py-[3px] align-middle font-mono text-[0.72em] font-semibold leading-none tracking-[0.06em] before:content-['♪_'] ${KIND_BADGE_CLASS(
+                      k
+                    )}`}
+                  >
                     {KIND_BADGE[k]}
                   </span>
                 ))}
-              {item.note && <span className="track-note"> {item.note}</span>}
+              {item.note && (
+                <span className="text-[13px] text-muted"> {item.note}</span>
+              )}
             </li>
           );
         })}
@@ -1315,8 +1488,11 @@ function TitleSlip({ title, globalTitleShows, showById, onSelectShow }) {
 function VenueSlip({ venueName, globalVenueShows, onSelectShow }) {
   if (!venueName) {
     return (
-      <div className="slip">
-        <p className="empty-hint">選一個場地，看在該場地舉行過哪些場次。</p>
+      <div className={SLIP_ARTICLE}>
+        <span aria-hidden="true" className={SLIP_TAPE} />
+        <p className="m-0 px-1 py-[18px] text-[14px] text-muted">
+          選一個場地，看在該場地舉行過哪些場次。
+        </p>
       </div>
     );
   }
@@ -1325,36 +1501,56 @@ function VenueSlip({ venueName, globalVenueShows, onSelectShow }) {
   const firstCity = venueShows[0]?.show.city ?? "";
 
   return (
-    <article className="slip" aria-label="場地全域場次">
-      <div className="slip-head">
-        <p className="slip-tour">ALL TOURS → VENUE SHOWS</p>
-        <h3 className="slip-title">
-          {venueName} <span className="venue-city-badge">（{firstCity}）</span>
+    <article
+      className={SLIP_ARTICLE}
+      aria-label="場地全域場次"
+    >
+      <span aria-hidden="true" className={SLIP_TAPE} />
+      <div className="mb-[6px] border-b-2 border-ink pb-3">
+        <p className="m-0 mb-1 font-mono text-[12px] tracking-[0.18em] text-muted">
+          ALL TOURS → VENUE SHOWS
+        </p>
+        <h3 className="m-0 font-display text-[23px] font-extrabold leading-[1.3]">
+          {venueName}{" "}
+          <span className="text-[16px] font-normal text-muted">
+            （{firstCity}）
+          </span>
         </h3>
-        <p className="slip-meta song-detail-count">
+        <p className="mt-[6px] font-mono text-[13px] text-muted [&_a]:text-pool">
           全檔案庫共舉辦過 {venueShows.length} 場演出
         </p>
       </div>
-      <ul className="appearance-list">
+      <ul className="m-0 mt-3 list-none p-0">
         {venueShows.map(({ showId, unitTitle, unitType, show }) => (
-          <li key={showId}>
-            <span className="tour-badge">
+          <li
+            key={showId}
+            className="flex items-start gap-3 border-b border-line-soft px-1 py-[10px] last:border-b-0"
+          >
+            <span className="mt-[2px] whitespace-nowrap rounded-[3px] border border-[rgba(30,46,74,0.25)] bg-[rgba(232,180,40,0.38)] px-[6px] py-[2px] font-mono text-[11px] font-semibold text-ink">
               {unitTitle}
               {unitType !== "專場" && (
-                <span className="type-badge">{unitType}</span>
+                <span className="ml-[7px] rounded-full border border-current px-[6px] py-[1px] align-middle font-mono text-[0.72em] font-semibold tracking-[0.04em] opacity-85">
+                  {unitType}
+                </span>
               )}
             </span>
-              <a
-                className="show-link-block"
-                href={routeHash.show(showId)}
-                onClick={(e) => {
-                  e.preventDefault();
-                  onSelectShow(showId);
-                }}
-              >
-                <span className="show-link-date">{showDate(show)}</span>
-              <span className="show-link-venue">{show.venue}</span>
-              <span className="show-link-city">（{show.city}）</span>
+            <a
+              className="flex flex-col leading-[1.45] text-ink no-underline transition-colors hover:text-request focus-visible:outline-[3px] focus-visible:outline-pool focus-visible:outline-offset-2 motion-reduce:transition-none [&_.show-link-venue]:hover:text-pool [&_.show-link-venue]:hover:underline"
+              href={routeHash.show(showId)}
+              onClick={(e) => {
+                e.preventDefault();
+                onSelectShow(showId);
+              }}
+            >
+              <span className="font-mono text-[12px] text-muted">
+                {showDate(show)}
+              </span>
+              <span className="show-link-venue text-[14px] font-bold">
+                {show.venue}
+              </span>
+              <span className="show-link-city text-[13px] text-muted">
+                （{show.city}）
+              </span>
             </a>
           </li>
         ))}
