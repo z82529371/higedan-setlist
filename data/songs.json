@@ -385,6 +385,30 @@
       "id": "tell-me-baby",
       "title": "Tell Me Baby",
       "livefansId": "502826"
+    },
+    {
+      "id": "midori-no-amayoke",
+      "title": "みどりの雨避け",
+      "livefansId": "687564",
+      "unreleased": true
+    },
+    {
+      "id": "lost-in-my-room",
+      "title": "Lost In My Room",
+      "livefansId": "687569",
+      "unreleased": true
+    },
+    {
+      "id": "koi-no-maenarae",
+      "title": "恋の前ならえ"
+    },
+    {
+      "id": "yuki-seku-asa-ga-kuru",
+      "title": "雪急く朝が来る"
+    },
+    {
+      "id": "darin",
+      "title": "ダーリン。"
     }
   ]
 }
