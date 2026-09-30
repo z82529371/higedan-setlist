@@ -1,5 +1,7 @@
 # 31. 未知翻唱過場保留曲名：note 合併曲名與現場備註
 
+> **Superseded by 0032**：翻唱改記無連結正式軌（`title` 軌）。本文保留作取捨史料。
+
 * Status: Accepted
 * Date: 2026-09-29
 

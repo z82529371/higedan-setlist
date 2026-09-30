@@ -1,5 +1,7 @@
 # 單元選擇器按容器分群（巡演／事件），事件排用藤紫
 
+> **Superseded by 0041**：雙排容器分群＋事件藤紫（`.tour-tabs`／`.event-tabs`、`--unit-accent`）已被 Tailwind 硬零取代。現行爲單一單元列表＋膠帶黃選中態（`unitPillClass`），群切改按 `type === "專場"`。容器／類型雙軸語義見 CONTEXT 演出類型條。
+
 show 查詢列的單元選擇器不再把所有單元混在一個 flex 列、也不以「非專場才標」的 type badge 區別，改為**按容器分成兩排**：巡演一排在上一排、事件一排在下，各排同色系，按鈕上不掛 type badge。
 
 - 巡演排沿用既有的深墨藍 pill。

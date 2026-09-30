@@ -1,5 +1,7 @@
 # 0015 次級分組篩選鈕列（歌曲按專輯、場地按地區、場次按演出類型）
 
+> **實作層 Superseded by 0041**：`.filter-pill-bar`／`.filter-pill.is-active`／`.drawer-list` selector 已遷移至 Tailwind utilities（`filterPillClass`／`unitPillClass`／`DRAWER_LINK`）。分組維度決策（專輯／地區／類型＋年份）仍有效。
+
 ## 背景
 使用者在進行「歌曲」與「場地」查詢時，需要能快速依據專輯發行期與地理區域進行高階分類過濾，避免必須自行輸入關鍵字搜尋。
 
