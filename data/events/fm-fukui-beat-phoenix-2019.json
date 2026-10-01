@@ -1,0 +1,56 @@
+{
+  "id": "fm-fukui-beat-phoenix-2019",
+  "title": "FM FUKUI BEAT PHOENIX 2019",
+  "type": "音樂祭",
+  "shows": [
+    {
+      "id": "1151121",
+      "date": "2019-09-16",
+      "city": "福井",
+      "venue": "鳳凰廣場大廳的鳳凰舞臺",
+      "region": "中部",
+      "prefecture": "福井縣",
+      "title": "FM FUKUI BEAT PHOENIX 2019",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/1151121"
+      ],
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "songId": "yesterday"
+        },
+        {
+          "order": 2,
+          "encore": false,
+          "songId": "no-doubt"
+        },
+        {
+          "order": 3,
+          "encore": false,
+          "songId": "fire-ground"
+        },
+        {
+          "order": 4,
+          "encore": false,
+          "songId": "115man-kiro-no-film"
+        },
+        {
+          "order": 5,
+          "encore": false,
+          "songId": "stand-by-you"
+        },
+        {
+          "order": 6,
+          "encore": false,
+          "songId": "pretender"
+        },
+        {
+          "order": 7,
+          "encore": false,
+          "songId": "shukumei"
+        }
+      ]
+    }
+  ]
+}

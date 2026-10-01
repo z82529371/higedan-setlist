@@ -1,0 +1,38 @@
+{
+  "id": "unofficial-2019",
+  "title": "\"テレビ朝日・六本木ヒルズ 夏祭り\"スペシャル・ライヴ",
+  "shortTitle": "テレ朝夏祭り スペシャルライヴ",
+  "type": "音樂祭",
+  "shows": [
+    {
+      "id": "1148852",
+      "date": "2019-08-01",
+      "city": "東京",
+      "venue": "Roppongi Hills Arena",
+      "region": "關東",
+      "prefecture": "東京都",
+      "title": "\"テレビ朝日・六本木ヒルズ 夏祭り\"スペシャル・ライヴ",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/1148852"
+      ],
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "songId": "no-doubt"
+        },
+        {
+          "order": 2,
+          "encore": false,
+          "songId": "pretender"
+        },
+        {
+          "order": 3,
+          "encore": false,
+          "songId": "shukumei"
+        }
+      ],
+      "opensAt": "14:00"
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "id": "ver-23-news-23-2019",
+  "title": "ロックロックこんにちは!Ver.23 ～News-23～",
+  "type": "音樂祭",
+  "shows": [
+    {
+      "id": "1137376",
+      "date": "2019-08-24",
+      "city": "大阪",
+      "venue": "Zepp Namba",
+      "region": "關西",
+      "prefecture": "大阪府",
+      "title": "ロックロックこんにちは!Ver.23 ～News-23～",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/1137376"
+      ],
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "songId": "no-doubt"
+        },
+        {
+          "order": 2,
+          "encore": false,
+          "songId": "fire-ground"
+        },
+        {
+          "order": 3,
+          "encore": false,
+          "songId": "stand-by-you"
+        },
+        {
+          "order": 4,
+          "encore": false,
+          "songId": "pretender"
+        },
+        {
+          "order": 5,
+          "encore": false,
+          "songId": "shukumei"
+        }
+      ]
+    }
+  ]
+}

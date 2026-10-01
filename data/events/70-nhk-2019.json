@@ -12,7 +12,9 @@
       "region": "關東",
       "prefecture": "東京都",
       "title": "第70回NHK紅白歌合戦「夢を歌おう」",
-      "sourceUrls": ["https://www.livefans.jp/events/1205006"],
+      "sourceUrls": [
+        "https://www.livefans.jp/events/1205006"
+      ],
       "setlist": [
         {
           "order": 1,

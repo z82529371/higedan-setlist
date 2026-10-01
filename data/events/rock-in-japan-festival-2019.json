@@ -1,0 +1,56 @@
+{
+  "id": "rock-in-japan-festival-2019",
+  "title": "ROCK IN JAPAN FESTIVAL 2019",
+  "type": "音樂祭",
+  "shows": [
+    {
+      "id": "1105295",
+      "date": "2019-08-03",
+      "city": "水戶",
+      "venue": "PARK STAGE at 国営ひたち海浜公園",
+      "region": "關東",
+      "prefecture": "茨城縣",
+      "title": "ROCK IN JAPAN FESTIVAL 2019",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/1105295"
+      ],
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "songId": "no-doubt"
+        },
+        {
+          "order": 2,
+          "encore": false,
+          "songId": "tell-me-baby"
+        },
+        {
+          "order": 3,
+          "encore": false,
+          "songId": "115man-kiro-no-film"
+        },
+        {
+          "order": 4,
+          "encore": false,
+          "songId": "stand-by-you"
+        },
+        {
+          "order": 5,
+          "encore": false,
+          "songId": "fire-ground"
+        },
+        {
+          "order": 6,
+          "encore": false,
+          "songId": "pretender"
+        },
+        {
+          "order": 7,
+          "encore": false,
+          "songId": "shukumei"
+        }
+      ]
+    }
+  ]
+}
