@@ -298,7 +298,7 @@
     },
     {
       "id": "brothers",
-      "title": "ブラザーズ",
+      "title": "Brothers",
       "livefansId": "509545"
     },
     {
@@ -451,6 +451,12 @@
       "id": "natsu-moyou-no-neko",
       "title": "夏模様の猫",
       "livefansId": "649507"
+    },
+    {
+      "id": "akegata-no-getaway",
+      "title": "明け方のゲッタウェイ",
+      "livefansId": "606720",
+      "unreleased": true
     }
   ]
 }

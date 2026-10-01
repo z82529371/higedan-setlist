@@ -592,5 +592,65 @@
     "city": "市川",
     "region": "關東",
     "prefecture": "千葉縣"
+  },
+  "EARTH STAGE at 幕張メッセ": {
+    "venue": "幕張展覽館的地球舞臺",
+    "city": "千葉",
+    "region": "關東",
+    "prefecture": "千葉縣"
+  },
+  "幕張メッセ イベントホール": {
+    "venue": "幕張展覽館活動廳",
+    "city": "千葉",
+    "region": "關東",
+    "prefecture": "千葉縣"
+  },
+  "Z-STAGE 6号館 at インテックス大阪": {
+    "venue": "Intex Osaka的Z-STAGE Building 6",
+    "city": "大阪",
+    "region": "關西",
+    "prefecture": "大阪府"
+  },
+  "PHOENIX STAGE at フェニックス・プラザ 大ホール": {
+    "venue": "鳳凰廣場大廳的鳳凰舞臺",
+    "city": "福井",
+    "region": "中部",
+    "prefecture": "福井縣"
+  },
+  "Mt.FUJI STAGE at 山中湖交流プラザきらら": {
+    "venue": "Yamanakako Exchange Plaza Kirara的富士山舞臺",
+    "city": "甲府",
+    "region": "中部",
+    "prefecture": "山梨縣"
+  },
+  "HARD OFF ECOスタジアム新潟": {
+    "venue": "HARD OFF新潟生態體育場",
+    "city": "新潟",
+    "region": "中部",
+    "prefecture": "新潟縣"
+  },
+  "Zepp Namba": {
+    "venue": "Zepp Namba",
+    "city": "大阪",
+    "region": "關西",
+    "prefecture": "大阪府"
+  },
+  "SONIC STAGE at SUMMER SONIC 2019会場 [ZOZOマリンスタジアム / 幕張メッセ]": {
+    "venue": "2019年夏季SONIC會場的SONIC STAGE [ZOZO海洋體育場/幕張展覽館]",
+    "city": "千葉",
+    "region": "關東",
+    "prefecture": "千葉縣"
+  },
+  "PARK STAGE at 国営ひたち海浜公園": {
+    "venue": "PARK STAGE at 国営ひたち海浜公園",
+    "city": "水戶",
+    "region": "關東",
+    "prefecture": "茨城縣"
+  },
+  "六本木ヒルズアリーナ": {
+    "venue": "Roppongi Hills Arena",
+    "city": "東京",
+    "region": "關東",
+    "prefecture": "東京都"
   }
 }
