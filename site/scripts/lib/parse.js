@@ -328,22 +328,20 @@ export function extractShowMetadataFromHtml(html) {
     ) ||
     html.match(/<h1[^>]*class="[^"]*eventTitle[^"]*"[^>]*>([\s\S]*?)<\/h1>/i);
   if (liveNameMatch) {
-    eventTitle = liveNameMatch[1].replace(/<[^>]+>/g, "").trim();
+    eventTitle = unescapeHtml(
+      liveNameMatch[1]
+        .replace(/<[^>]+>/g, "")
+        .split("＠")[0]
+        .trim()
+    );
   }
 
   if (!eventTitle) {
     const pageTitleMatch = html.match(/<title>([^<]+)<\/title>/i);
     if (pageTitleMatch) {
-      let t = pageTitleMatch[1].split("|")[0].split("-")[0].trim();
-      if (t.includes("Official髭男dism")) {
-        t = pageTitleMatch[1]
-          .split("|")[0]
-          .replace(/^Official髭男dism\s*[-–—]?\s*/i, "")
-          .trim();
-      }
-      t = t.split("＠")[0].trim();
+      let t = pageTitleMatch[1].split("|")[0].split("＠")[0].trim();
       if (t) {
-        eventTitle = t;
+        eventTitle = unescapeHtml(t);
       }
     }
   }

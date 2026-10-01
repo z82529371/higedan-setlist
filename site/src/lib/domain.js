@@ -92,7 +92,15 @@ export function showLabel(s) {
 }
 
 export function shortUnitTitle(unit) {
-  return unit.title.replace(/^OFFICIAL HIGE DANDISM /, "");
+  if (!unit) return "";
+  if (unit.shortTitle) return unit.shortTitle;
+  const shortened = (unit.title ?? "")
+    .replace(
+      /^(?:Official\s*髭男\s*dism|Official\s*Hige\s*Dandism)\s*[-–—:：]?\s*/i,
+      ""
+    )
+    .trim();
+  return shortened || unit.title || "";
 }
 
 export function unitEarliest(unit) {

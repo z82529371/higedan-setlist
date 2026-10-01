@@ -183,6 +183,13 @@ async function verifyAndRecomputeShows() {
           s.opensAt = meta.opensAt;
         }
 
+        if (meta.eventTitle) {
+          unit.title = meta.eventTitle;
+          if (s.title) {
+            s.title = meta.eventTitle;
+          }
+        }
+
         if (meta.rawVenue) {
           const venueHit = lookupVenue(meta.rawVenue, venueTranslationMap);
           if (venueHit) {
@@ -447,12 +454,7 @@ async function verifyAndRecomputeShows() {
         titleToId,
       });
 
-      const showTitle =
-        detectedType === "電視演出" || detectedType === "線上直播"
-          ? meta.eventTitle || eventUnit.title
-          : meta.eventTitle
-          ? `${meta.eventTitle} ${cityName}`
-          : `${eventUnit.title} ${cityName}`;
+      const showTitle = meta.eventTitle || eventUnit.title;
 
       const newShow = {
         id: String(eventId),
