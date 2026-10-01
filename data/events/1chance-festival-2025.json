@@ -1,6 +1,7 @@
 {
   "id": "1chance-festival-2025",
   "title": "WANIMA pre. 1CHANCE FESTIVAL 2025",
+  "shortTitle": "1CHANCE FESTIVAL 2025",
   "type": "音樂祭",
   "shows": [
     {
@@ -10,9 +11,7 @@
       "city": "熊本",
       "venue": "熊本縣立農業公園郊野公園",
       "opensAt": "17:05",
-      "sourceUrls": [
-        "https://www.livefans.jp/events/1795140"
-      ],
+      "sourceUrls": ["https://www.livefans.jp/events/1795140"],
       "setlist": [
         {
           "order": 1,

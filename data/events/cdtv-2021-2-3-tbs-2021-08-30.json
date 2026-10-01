@@ -1,6 +1,7 @@
 {
   "id": "cdtv-2021-2-3-tbs-2021-08-30",
-  "title": "CDTVライブ ! ライブ ! 夏フェス2021第2夜",
+  "title": "CDTVライブ ! ライブ ! 夏フェス2021★第2夜 3時間スペシャル",
+  "shortTitle": "CDTVライブ ! ライブ ! 夏フェス2021",
   "type": "電視演出",
   "shows": [
     {
@@ -10,10 +11,8 @@
       "venue": "TBS電視台",
       "region": "關東",
       "prefecture": "東京都",
-      "title": "CDTVライブ ! ライブ ! 夏フェス2021第2夜",
-      "sourceUrls": [
-        "https://www.livefans.jp/events/1343101"
-      ],
+      "title": "CDTVライブ ! ライブ ! 夏フェス2021★第2夜 3時間スペシャル",
+      "sourceUrls": ["https://www.livefans.jp/events/1343101"],
       "setlist": [
         {
           "order": 1,

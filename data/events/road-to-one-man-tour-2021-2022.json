@@ -1,6 +1,6 @@
 {
   "id": "road-to-one-man-tour-2021-2022",
-  "title": "Road to 「one - man tour 2021-2022 (仮)」",
+  "title": "Official髭男dism Road to 「one - man tour 2021-2022 (仮)」",
   "type": "專場",
   "shows": [
     {
@@ -10,7 +10,7 @@
       "venue": "ぴあArenaMM",
       "region": "關東",
       "prefecture": "神奈川縣",
-      "title": "Road to 「one - man tour 2021-2022 (仮)」 橫濱",
+      "title": "Official髭男dism Road to 「one - man tour 2021-2022 (仮)」",
       "sourceUrls": [
         "https://www.livefans.jp/events/1310531"
       ],
@@ -96,7 +96,8 @@
           "songId": "universe"
         }
       ],
-      "opensAt": "18:00"
+      "opensAt": "18:00",
+      "diff": {}
     },
     {
       "id": "1310533",
@@ -105,7 +106,7 @@
       "venue": "ぴあArenaMM",
       "region": "關東",
       "prefecture": "神奈川縣",
-      "title": "Road to 「one - man tour 2021-2022 (仮)」 橫濱",
+      "title": "Official髭男dism Road to 「one - man tour 2021-2022 (仮)」",
       "sourceUrls": [
         "https://www.livefans.jp/events/1310533"
       ],
@@ -197,7 +198,19 @@
           "songId": "universe"
         }
       ],
-      "opensAt": "19:00"
+      "opensAt": "19:00",
+      "diff": {
+        "insert": [
+          {
+            "after": 15,
+            "item": {
+              "encore": true,
+              "type": "interlude",
+              "note": "MC (NewAlbum \"Editorial\"発売発表)"
+            }
+          }
+        ]
+      }
     },
     {
       "id": "1310532",
@@ -206,7 +219,7 @@
       "venue": "ぴあArenaMM",
       "region": "關東",
       "prefecture": "神奈川縣",
-      "title": "Road to 「one - man tour 2021-2022 (仮)」 橫濱",
+      "title": "Official髭男dism Road to 「one - man tour 2021-2022 (仮)」",
       "sourceUrls": [
         "https://www.livefans.jp/events/1310532"
       ],
@@ -292,7 +305,91 @@
           "songId": "universe"
         }
       ],
-      "opensAt": "14:30"
+      "opensAt": "14:30",
+      "diff": {}
     }
-  ]
+  ],
+  "templateSetlist": [
+    {
+      "order": 1,
+      "encore": false,
+      "songId": "i-love"
+    },
+    {
+      "order": 2,
+      "encore": false,
+      "songId": "hello"
+    },
+    {
+      "order": 3,
+      "encore": false,
+      "songId": "parabola"
+    },
+    {
+      "order": 4,
+      "encore": false,
+      "songId": "yesterday"
+    },
+    {
+      "order": 5,
+      "encore": false,
+      "songId": "laughter"
+    },
+    {
+      "order": 6,
+      "encore": false,
+      "songId": "rowan"
+    },
+    {
+      "order": 7,
+      "encore": false,
+      "songId": "pretender"
+    },
+    {
+      "order": 8,
+      "encore": false,
+      "songId": "cry-baby"
+    },
+    {
+      "order": 9,
+      "encore": false,
+      "songId": "tabi-wa-michizure"
+    },
+    {
+      "order": 10,
+      "encore": false,
+      "songId": "yugure-zoi"
+    },
+    {
+      "order": 11,
+      "encore": false,
+      "songId": "no-doubt"
+    },
+    {
+      "order": 12,
+      "encore": false,
+      "songId": "fire-ground"
+    },
+    {
+      "order": 13,
+      "encore": false,
+      "songId": "stand-by-you"
+    },
+    {
+      "order": 14,
+      "encore": false,
+      "songId": "last-song"
+    },
+    {
+      "order": 15,
+      "encore": true,
+      "songId": "shukumei"
+    },
+    {
+      "order": 16,
+      "encore": true,
+      "songId": "universe"
+    }
+  ],
+  "templateBasis": "全自動提煉：基於 3 場演出提取 $\\ge 50\\%$ 多數共識歌單"
 }
