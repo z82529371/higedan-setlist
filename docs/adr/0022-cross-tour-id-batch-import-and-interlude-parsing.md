@@ -10,3 +10,5 @@
    - **解析副標題與標籤**：提取 `<p class="subtitle">` 文字，自動識別 `弾き語り` / `ソロ` 為 `satoshi-solo` 標籤、`新曲` 為 `premiere` 標籤，並將完整註解保存至 `note` 屬性。
    - **支援現場 Solo / Cover 間奏**：對無官方 Song ID 的文字列（如《思ひ出 [鈴木常吉]》、《Canon Rock》），自動註冊為 `type: "interlude"` 項目。
    - **自動判斷安可區域**：偵測 DOM 中的 `sec-connect` 與 `アンコール` 標記，自動為安可曲目賦予 `"encore": true`。
+
+> See also 0030：安可偵測定稿為分隔線傳染語義，本篇 `sec-connect` 觸發條件已廢止。

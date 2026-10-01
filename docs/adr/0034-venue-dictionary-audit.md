@@ -25,3 +25,7 @@
 
 * 12 筆場次全數對上字典；`sync-data` 反向同步＋鏡像＋驗證通過。
 * 待查未動：`Niterra` 前綴脫落、`Reed & Rose` 拼法、`SGC HALL ARIAKE` 譯名，低信心，另議。
+
+## 追記（2026-10-01，三待查定案）
+* `Niterra日本特殊陶業市民会館 フォレストホール` 官方冠名含 `Niterra`（命名權至令和10年），依品牌保留原文：`Niterra日本特殊陶業市民會館 Forest Hall`。
+* `Reed & Rose` 維持英文拼法（官方即此）；`SGC HALL ARIAKE` 維持 `有明SGC會館`。三項關閉。
