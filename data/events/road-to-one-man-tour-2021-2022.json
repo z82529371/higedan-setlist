@@ -1,0 +1,298 @@
+{
+  "id": "road-to-one-man-tour-2021-2022",
+  "title": "Road to 「one - man tour 2021-2022 (仮)」",
+  "type": "專場",
+  "shows": [
+    {
+      "id": "1310531",
+      "date": "2021-06-23",
+      "city": "橫濱",
+      "venue": "ぴあArenaMM",
+      "region": "關東",
+      "prefecture": "神奈川縣",
+      "title": "Road to 「one - man tour 2021-2022 (仮)」 橫濱",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/1310531"
+      ],
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "songId": "i-love"
+        },
+        {
+          "order": 2,
+          "encore": false,
+          "songId": "hello"
+        },
+        {
+          "order": 3,
+          "encore": false,
+          "songId": "parabola"
+        },
+        {
+          "order": 4,
+          "encore": false,
+          "songId": "yesterday"
+        },
+        {
+          "order": 5,
+          "encore": false,
+          "songId": "laughter"
+        },
+        {
+          "order": 6,
+          "encore": false,
+          "songId": "rowan"
+        },
+        {
+          "order": 7,
+          "encore": false,
+          "songId": "pretender"
+        },
+        {
+          "order": 8,
+          "encore": false,
+          "songId": "cry-baby"
+        },
+        {
+          "order": 9,
+          "encore": false,
+          "songId": "tabi-wa-michizure"
+        },
+        {
+          "order": 10,
+          "encore": false,
+          "songId": "yugure-zoi"
+        },
+        {
+          "order": 11,
+          "encore": false,
+          "songId": "no-doubt"
+        },
+        {
+          "order": 12,
+          "encore": false,
+          "songId": "fire-ground"
+        },
+        {
+          "order": 13,
+          "encore": false,
+          "songId": "stand-by-you"
+        },
+        {
+          "order": 14,
+          "encore": false,
+          "songId": "last-song"
+        },
+        {
+          "order": 15,
+          "encore": true,
+          "songId": "shukumei"
+        },
+        {
+          "order": 16,
+          "encore": true,
+          "songId": "universe"
+        }
+      ],
+      "opensAt": "18:00"
+    },
+    {
+      "id": "1310533",
+      "date": "2021-06-24",
+      "city": "橫濱",
+      "venue": "ぴあArenaMM",
+      "region": "關東",
+      "prefecture": "神奈川縣",
+      "title": "Road to 「one - man tour 2021-2022 (仮)」 橫濱",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/1310533"
+      ],
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "songId": "i-love"
+        },
+        {
+          "order": 2,
+          "encore": false,
+          "songId": "hello"
+        },
+        {
+          "order": 3,
+          "encore": false,
+          "songId": "parabola"
+        },
+        {
+          "order": 4,
+          "encore": false,
+          "songId": "yesterday"
+        },
+        {
+          "order": 5,
+          "encore": false,
+          "songId": "laughter"
+        },
+        {
+          "order": 6,
+          "encore": false,
+          "songId": "rowan"
+        },
+        {
+          "order": 7,
+          "encore": false,
+          "songId": "pretender"
+        },
+        {
+          "order": 8,
+          "encore": false,
+          "songId": "cry-baby"
+        },
+        {
+          "order": 9,
+          "encore": false,
+          "songId": "tabi-wa-michizure"
+        },
+        {
+          "order": 10,
+          "encore": false,
+          "songId": "yugure-zoi"
+        },
+        {
+          "order": 11,
+          "encore": false,
+          "songId": "no-doubt"
+        },
+        {
+          "order": 12,
+          "encore": false,
+          "songId": "fire-ground"
+        },
+        {
+          "order": 13,
+          "encore": false,
+          "songId": "stand-by-you"
+        },
+        {
+          "order": 14,
+          "encore": false,
+          "songId": "last-song"
+        },
+        {
+          "order": 15,
+          "encore": true,
+          "songId": "shukumei"
+        },
+        {
+          "order": 16,
+          "encore": true,
+          "type": "interlude",
+          "note": "MC (NewAlbum \"Editorial\"発売発表)"
+        },
+        {
+          "order": 17,
+          "encore": true,
+          "songId": "universe"
+        }
+      ],
+      "opensAt": "19:00"
+    },
+    {
+      "id": "1310532",
+      "date": "2021-06-24",
+      "city": "橫濱",
+      "venue": "ぴあArenaMM",
+      "region": "關東",
+      "prefecture": "神奈川縣",
+      "title": "Road to 「one - man tour 2021-2022 (仮)」 橫濱",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/1310532"
+      ],
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "songId": "i-love"
+        },
+        {
+          "order": 2,
+          "encore": false,
+          "songId": "hello"
+        },
+        {
+          "order": 3,
+          "encore": false,
+          "songId": "parabola"
+        },
+        {
+          "order": 4,
+          "encore": false,
+          "songId": "yesterday"
+        },
+        {
+          "order": 5,
+          "encore": false,
+          "songId": "laughter"
+        },
+        {
+          "order": 6,
+          "encore": false,
+          "songId": "rowan"
+        },
+        {
+          "order": 7,
+          "encore": false,
+          "songId": "pretender"
+        },
+        {
+          "order": 8,
+          "encore": false,
+          "songId": "cry-baby"
+        },
+        {
+          "order": 9,
+          "encore": false,
+          "songId": "tabi-wa-michizure"
+        },
+        {
+          "order": 10,
+          "encore": false,
+          "songId": "yugure-zoi"
+        },
+        {
+          "order": 11,
+          "encore": false,
+          "songId": "no-doubt"
+        },
+        {
+          "order": 12,
+          "encore": false,
+          "songId": "fire-ground"
+        },
+        {
+          "order": 13,
+          "encore": false,
+          "songId": "stand-by-you"
+        },
+        {
+          "order": 14,
+          "encore": false,
+          "songId": "last-song"
+        },
+        {
+          "order": 15,
+          "encore": true,
+          "songId": "shukumei"
+        },
+        {
+          "order": 16,
+          "encore": true,
+          "songId": "universe"
+        }
+      ],
+      "opensAt": "14:30"
+    }
+  ]
+}
