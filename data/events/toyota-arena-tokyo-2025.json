@@ -112,7 +112,8 @@
             "after": 9,
             "item": {
               "encore": false,
-              "title": "I'm home(Interlude)"
+              "type": "interlude",
+              "note": "I'm home"
             }
           }
         ]
@@ -228,7 +229,8 @@
             "after": 9,
             "item": {
               "encore": false,
-              "title": "I'm home(Interlude)"
+              "type": "interlude",
+              "note": "I'm home"
             }
           }
         ]

@@ -1,0 +1,29 @@
+{
+  "id": "71-nhk-2020",
+  "title": "第71回NHK紅白歌合戦「今こそ歌おう みんなでエール」",
+  "shortTitle": "第71回NHK紅白歌合戦",
+  "type": "電視演出",
+  "shows": [
+    {
+      "id": "1279398",
+      "date": "2020-12-31",
+      "city": "東京",
+      "venue": "NHK會館",
+      "region": "關東",
+      "prefecture": "東京都",
+      "title": "第71回NHK紅白歌合戦「今こそ歌おう みんなでエール」",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/1279398"
+      ],
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "songId": "i-love",
+          "note": "101スタジオ"
+        }
+      ],
+      "opensAt": "19:30"
+    }
+  ]
+}

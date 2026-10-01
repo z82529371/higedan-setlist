@@ -1,0 +1,32 @@
+{
+  "id": "2020-fns",
+  "title": "2020 FNS歌謡祭 夏",
+  "type": "電視演出",
+  "shows": [
+    {
+      "id": "1265685",
+      "date": "2020-08-26",
+      "city": "東京",
+      "venue": "富士電視台",
+      "region": "關東",
+      "prefecture": "東京都",
+      "title": "2020 FNS歌謡祭 夏",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/1265685"
+      ],
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "songId": "laughter"
+        },
+        {
+          "order": 2,
+          "encore": false,
+          "songId": "hello"
+        }
+      ],
+      "opensAt": "18:30"
+    }
+  ]
+}

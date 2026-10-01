@@ -12,7 +12,9 @@
       "region": "關東",
       "prefecture": "東京都",
       "title": "CDTVライブ ! ライブ ! 夏フェス2021★第2夜 3時間スペシャル",
-      "sourceUrls": ["https://www.livefans.jp/events/1343101"],
+      "sourceUrls": [
+        "https://www.livefans.jp/events/1343101"
+      ],
       "setlist": [
         {
           "order": 1,
