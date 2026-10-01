@@ -1,0 +1,576 @@
+{
+  "id": "one-man-tour-2019",
+  "title": "official髭男dism one-man tour 2019",
+  "shortTitle": "one-man tour 2019",
+  "type": "專場",
+  "shows": [
+    {
+      "id": "1049544",
+      "title": "official髭男dism one-man tour 2019",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/1049544"
+      ],
+      "date": "2019-06-22",
+      "opensAt": "18:00",
+      "venue": "SENDAI GIGS",
+      "city": "仙台",
+      "region": "東北",
+      "prefecture": "宮城縣",
+      "locked": true,
+      "diff": {
+        "skip": [
+          3,
+          5,
+          7,
+          11,
+          13
+        ],
+        "insert": [
+          {
+            "after": 1,
+            "item": {
+              "encore": false,
+              "songId": "amazing"
+            }
+          },
+          {
+            "after": 4,
+            "item": {
+              "encore": false,
+              "songId": "fire-ground"
+            }
+          },
+          {
+            "after": 4,
+            "item": {
+              "encore": false,
+              "songId": "akegata-no-getaway",
+              "note": "新曲",
+              "kind": [
+                "premiere"
+              ]
+            }
+          },
+          {
+            "after": 12,
+            "item": {
+              "encore": false,
+              "songId": "tell-me-baby"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "1049545",
+      "title": "official髭男dism one-man tour 2019",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/1049545"
+      ],
+      "date": "2019-06-30",
+      "opensAt": "18:00",
+      "venue": "Zepp Fukuoka",
+      "city": "福岡",
+      "region": "九州",
+      "prefecture": "福岡縣",
+      "diff": {
+        "skip": [
+          3,
+          5,
+          7,
+          10,
+          11,
+          13
+        ],
+        "insert": [
+          {
+            "after": 1,
+            "item": {
+              "encore": false,
+              "songId": "amazing"
+            }
+          },
+          {
+            "after": 2,
+            "item": {
+              "encore": false,
+              "songId": "tell-me-baby"
+            }
+          },
+          {
+            "after": 4,
+            "item": {
+              "encore": false,
+              "songId": "fire-ground"
+            }
+          },
+          {
+            "after": 8,
+            "item": {
+              "encore": false,
+              "songId": "bad-for-me"
+            }
+          },
+          {
+            "after": 12,
+            "item": {
+              "encore": false,
+              "songId": "akegata-no-getaway",
+              "note": "CD未収録"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "1049550",
+      "title": "official髭男dism one-man tour 2019",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/1049550"
+      ],
+      "date": "2019-07-05",
+      "opensAt": "19:00",
+      "venue": "Zepp Sapporo",
+      "city": "札幌",
+      "region": "北海道",
+      "prefecture": "北海道",
+      "diff": {
+        "skip": [
+          3,
+          5,
+          7,
+          10
+        ],
+        "insert": [
+          {
+            "after": 1,
+            "item": {
+              "encore": false,
+              "songId": "amazing"
+            }
+          },
+          {
+            "after": 2,
+            "item": {
+              "encore": false,
+              "songId": "tell-me-baby"
+            }
+          },
+          {
+            "after": 4,
+            "item": {
+              "encore": false,
+              "songId": "fire-ground"
+            }
+          },
+          {
+            "after": 8,
+            "item": {
+              "encore": false,
+              "songId": "bad-for-me"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "1078251",
+      "title": "official髭男dism one-man tour 2019",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/1078251"
+      ],
+      "date": "2019-07-08",
+      "opensAt": "19:00",
+      "venue": "日本武道館",
+      "city": "東京",
+      "region": "關東",
+      "prefecture": "東京都",
+      "diff": {
+        "skip": [
+          2,
+          3,
+          4,
+          7,
+          9,
+          13,
+          14,
+          18
+        ],
+        "insert": [
+          {
+            "after": 0,
+            "item": {
+              "encore": false,
+              "songId": "115man-kiro-no-film"
+            }
+          },
+          {
+            "after": 6,
+            "item": {
+              "encore": false,
+              "songId": "hajimari-no-asa",
+              "note": "キー:-1"
+            }
+          },
+          {
+            "after": 6,
+            "item": {
+              "encore": false,
+              "songId": "brothers"
+            }
+          },
+          {
+            "after": 12,
+            "item": {
+              "encore": false,
+              "songId": "rolling"
+            }
+          },
+          {
+            "after": 12,
+            "item": {
+              "encore": false,
+              "songId": "akegata-no-getaway",
+              "note": "CD未収録"
+            }
+          },
+          {
+            "after": 13,
+            "item": {
+              "encore": false,
+              "songId": "fire-ground"
+            }
+          },
+          {
+            "after": 17,
+            "item": {
+              "encore": true,
+              "songId": "amazing",
+              "note": "藤原ドラム"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "1049557",
+      "title": "official髭男dism one-man tour 2019",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/1049557"
+      ],
+      "date": "2019-07-13",
+      "opensAt": "18:00",
+      "venue": "Zepp Namba",
+      "city": "大阪",
+      "region": "關西",
+      "prefecture": "大阪府",
+      "diff": {
+        "skip": [
+          3,
+          5,
+          7,
+          10
+        ],
+        "insert": [
+          {
+            "after": 1,
+            "item": {
+              "encore": false,
+              "songId": "amazing"
+            }
+          },
+          {
+            "after": 2,
+            "item": {
+              "encore": false,
+              "songId": "tell-me-baby"
+            }
+          },
+          {
+            "after": 4,
+            "item": {
+              "encore": false,
+              "songId": "fire-ground"
+            }
+          },
+          {
+            "after": 8,
+            "item": {
+              "encore": false,
+              "songId": "bad-for-me"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "1049558",
+      "title": "official髭男dism one-man tour 2019",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/1049558"
+      ],
+      "date": "2019-07-14",
+      "opensAt": "18:00",
+      "venue": "Zepp Nagoya",
+      "city": "名古屋",
+      "region": "中部",
+      "prefecture": "愛知縣",
+      "diff": {
+        "skip": [
+          3,
+          5,
+          7,
+          10,
+          11
+        ],
+        "insert": [
+          {
+            "after": 1,
+            "item": {
+              "encore": false,
+              "songId": "amazing"
+            }
+          },
+          {
+            "after": 2,
+            "item": {
+              "encore": false,
+              "songId": "tell-me-baby"
+            }
+          },
+          {
+            "after": 4,
+            "item": {
+              "encore": false,
+              "songId": "fire-ground"
+            }
+          },
+          {
+            "after": 8,
+            "item": {
+              "encore": false,
+              "songId": "bad-for-me"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "1049559",
+      "title": "official髭男dism one-man tour 2019",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/1049559"
+      ],
+      "date": "2019-07-21",
+      "opensAt": "18:00",
+      "venue": "Zepp DiverCity",
+      "city": "東京",
+      "region": "關東",
+      "prefecture": "東京都",
+      "diff": {
+        "skip": [
+          3,
+          5,
+          7,
+          10
+        ],
+        "insert": [
+          {
+            "after": 1,
+            "item": {
+              "encore": false,
+              "songId": "amazing"
+            }
+          },
+          {
+            "after": 2,
+            "item": {
+              "encore": false,
+              "songId": "tell-me-baby"
+            }
+          },
+          {
+            "after": 4,
+            "item": {
+              "encore": false,
+              "songId": "fire-ground"
+            }
+          },
+          {
+            "after": 8,
+            "item": {
+              "encore": false,
+              "songId": "bad-for-me"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "1049560",
+      "title": "official髭男dism one-man tour 2019",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/1049560"
+      ],
+      "date": "2019-07-22",
+      "opensAt": "19:00",
+      "venue": "Zepp DiverCity",
+      "city": "東京",
+      "region": "關東",
+      "prefecture": "東京都",
+      "diff": {
+        "skip": [
+          2,
+          5,
+          7,
+          10,
+          11
+        ],
+        "insert": [
+          {
+            "after": 3,
+            "item": {
+              "encore": false,
+              "songId": "whats-going-on"
+            }
+          },
+          {
+            "after": 3,
+            "item": {
+              "encore": false,
+              "songId": "tell-me-baby"
+            }
+          },
+          {
+            "after": 4,
+            "item": {
+              "encore": false,
+              "songId": "fire-ground"
+            }
+          },
+          {
+            "after": 6,
+            "item": {
+              "encore": false,
+              "type": "interlude",
+              "note": "/aikoさんと愛子さま"
+            }
+          },
+          {
+            "after": 8,
+            "item": {
+              "encore": false,
+              "songId": "bad-for-me"
+            }
+          },
+          {
+            "after": 12,
+            "item": {
+              "encore": false,
+              "type": "interlude",
+              "note": "サボテンの花"
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "templateSetlist": [
+    {
+      "order": 1,
+      "encore": false,
+      "songId": "itan-na-star"
+    },
+    {
+      "order": 2,
+      "encore": false,
+      "songId": "second-line"
+    },
+    {
+      "order": 3,
+      "encore": false,
+      "songId": "amazing"
+    },
+    {
+      "order": 4,
+      "encore": false,
+      "songId": "hajimari-no-asa"
+    },
+    {
+      "order": 5,
+      "encore": false,
+      "songId": "tell-me-baby"
+    },
+    {
+      "order": 6,
+      "encore": false,
+      "songId": "inu-ka-cat-ka-de-shinumade-kenka-shiyou"
+    },
+    {
+      "order": 7,
+      "encore": false,
+      "songId": "fire-ground"
+    },
+    {
+      "order": 8,
+      "encore": false,
+      "songId": "coffee-to-syrup"
+    },
+    {
+      "order": 9,
+      "encore": false,
+      "songId": "115man-kiro-no-film"
+    },
+    {
+      "order": 10,
+      "encore": false,
+      "songId": "bad-for-me"
+    },
+    {
+      "order": 11,
+      "encore": false,
+      "songId": "lady"
+    },
+    {
+      "order": 12,
+      "encore": false,
+      "songId": "55"
+    },
+    {
+      "order": 13,
+      "encore": false,
+      "songId": "akegata-no-getaway"
+    },
+    {
+      "order": 14,
+      "encore": false,
+      "songId": "rolling"
+    },
+    {
+      "order": 15,
+      "encore": false,
+      "songId": "pretender"
+    },
+    {
+      "order": 16,
+      "encore": false,
+      "songId": "no-doubt"
+    },
+    {
+      "order": 17,
+      "encore": false,
+      "songId": "shukumei"
+    },
+    {
+      "order": 18,
+      "encore": true,
+      "songId": "brothers"
+    },
+    {
+      "order": 19,
+      "encore": true,
+      "songId": "stand-by-you"
+    }
+  ],
+  "templateBasis": "全自動提煉：基於 8 場演出提取 $\\ge 50\\%$ 多數共識歌單"
+}

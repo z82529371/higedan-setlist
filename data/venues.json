@@ -652,5 +652,11 @@
     "city": "東京",
     "region": "關東",
     "prefecture": "東京都"
+  },
+  "SENDAI GIGS": {
+    "venue": "SENDAI GIGS",
+    "city": "仙台",
+    "region": "東北",
+    "prefecture": "宮城縣"
   }
 }
