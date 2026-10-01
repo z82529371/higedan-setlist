@@ -131,7 +131,15 @@ async function verifyAndRecomputeShows() {
   let unchangedFilesCount = 0;
   const scrambledShows = [];
 
-  const targetIds = process.argv.slice(2).filter((arg) => /^\d+$/.test(arg));
+  const targetIds = process.argv
+    .slice(2)
+    .map((arg) => {
+      const m = arg.match(/\/events\/(\d+)/);
+      if (m) return m[1];
+      if (/^\d+$/.test(arg)) return arg;
+      return null;
+    })
+    .filter(Boolean);
   const processedIds = new Set();
 
   for (const { file, unit, raw } of units) {
@@ -342,18 +350,23 @@ async function verifyAndRecomputeShows() {
       const actualTitle = meta.eventTitle || `one-man live ${year}`;
       let detectedType = "專場";
       if (
-        /紅白|歌合戦|CDTV|Mステ|ミュージックステーション|FNS歌謡祭|音楽の日|テレ東音楽祭|うたコン/i.test(
+        /紅白|歌合戦|CDTV|Mステ|ミュージックステーション|FNS歌謡祭|音楽の日|テレ東音樂祭|うたコン/i.test(
           actualTitle
         )
       ) {
-        detectedType = "TV拼盤";
+        detectedType = "電視演出";
       } else if (/fes|festival|フェス/i.test(actualTitle)) {
         detectedType = "音樂祭";
       } else if (/vs|對バン|対バン/i.test(actualTitle)) {
         detectedType = "對バン";
+      } else if (
+        /online|オンライン|配信|live@/i.test(actualTitle) ||
+        meta.rawVenue === "オンラインライブ"
+      ) {
+        detectedType = "線上直播";
       }
       const pageSongs = extractSongsFromHtml(html, {
-        higedanOnly: detectedType === "TV拼盤" || detectedType === "音樂祭",
+        higedanOnly: detectedType === "電視演出" || detectedType === "音樂祭",
       });
 
       // event title & type & dynamic slug (detected above for higedanOnly)
@@ -398,6 +411,7 @@ async function verifyAndRecomputeShows() {
 
       let slug = meta.eventTitle
         ? meta.eventTitle
+            .replace(/^Official髭男dism[：:\s]*/i, "")
             .toLowerCase()
             .replace(/[^a-z0-9]+/g, "-")
             .replace(/^-+|-+$/g, "")

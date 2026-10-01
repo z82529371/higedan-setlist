@@ -1,0 +1,43 @@
+{
+  "id": "editorial-online-free-live-2021",
+  "title": "「Editorial」発売記念ONLINE FREE LIVE",
+  "type": "線上直播",
+  "shows": [
+    {
+      "id": "1340143",
+      "date": "2021-08-28",
+      "city": "東京",
+      "venue": "線上直播",
+      "region": "其他",
+      "prefecture": "",
+      "title": "「Editorial」発売記念ONLINE FREE LIVE",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/1340143"
+      ],
+      "locked": true,
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "songId": "i-love"
+        },
+        {
+          "order": 2,
+          "encore": false,
+          "songId": "universe"
+        },
+        {
+          "order": 3,
+          "encore": false,
+          "songId": "cry-baby"
+        },
+        {
+          "order": 4,
+          "encore": false,
+          "songId": "apoptosis"
+        }
+      ],
+      "opensAt": "20:30"
+    }
+  ]
+}

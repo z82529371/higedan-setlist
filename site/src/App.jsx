@@ -28,6 +28,7 @@ function getUnitCategory(u) {
   if (u.type === "專場") return "tour";
   if (u.type === "對バン" || u.type === "聯合專場") return "collab";
   if (u.type === "電視演出" || u.type === "TV拼盤") return "tv";
+  if (u.type === "線上直播") return "stream";
   return "fest";
 }
 
@@ -316,6 +317,9 @@ export default function App() {
           );
           const festUnits = allUnits.filter((u) => getUnitCategory(u) === "fest");
           const tvUnits = allUnits.filter((u) => getUnitCategory(u) === "tv");
+          const streamUnits = allUnits.filter(
+            (u) => getUnitCategory(u) === "stream"
+          );
 
           // Filter by category
           const categoryFiltered = allUnits.filter(
@@ -393,6 +397,12 @@ export default function App() {
                   onClick={() => handleCategoryChange("tv", tvUnits)}
                 >
                   電視演出 ({tvUnits.length})
+                </button>
+                <button
+                  className={filterPillClass(showGroupFilter === "stream")}
+                  onClick={() => handleCategoryChange("stream", streamUnits)}
+                >
+                  線上直播 ({streamUnits.length})
                 </button>
               </div>
 
