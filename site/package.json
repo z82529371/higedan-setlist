@@ -4,9 +4,10 @@
   "type": "module",
   "scripts": {
     "sync": "node scripts/sync-data.mjs",
+    "test": "node scripts/smoke-test.mjs",
     "dev": "pnpm sync && vite",
     "build": "pnpm sync && vite build",
-    "preview": "vite preview"
+    "preview": "pnpm sync && vite preview"
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.3.3",

@@ -3,6 +3,8 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "sync": "pnpm --dir site sync",
+    "test": "pnpm --dir site test",
     "dev": "pnpm --dir site dev",
     "build": "pnpm --dir site build",
     "preview": "pnpm --dir site preview"
