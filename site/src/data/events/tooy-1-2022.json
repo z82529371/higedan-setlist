@@ -14,6 +14,7 @@
       "sourceUrls": [
         "https://www.livefans.jp/events/1456558"
       ],
+      "locked": true,
       "setlist": [
         {
           "order": 1,
@@ -33,16 +34,16 @@
         {
           "order": 4,
           "encore": false,
-          "songId": "pretender"
-        },
-        {
-          "order": 5,
-          "encore": false,
           "title": "願い [sumika]",
           "note": "弾き語り sumika cover",
           "kind": [
             "satoshi-solo"
           ]
+        },
+        {
+          "order": 5,
+          "encore": false,
+          "songId": "pretender"
         },
         {
           "order": 6,
@@ -52,13 +53,13 @@
         {
           "order": 7,
           "encore": false,
-          "songId": "no-doubt"
+          "title": "ふっかつのじゅもん [sumika]",
+          "note": "sumika cover"
         },
         {
           "order": 8,
           "encore": false,
-          "title": "ふっかつのじゅもん [sumika]",
-          "note": "sumika cover"
+          "songId": "no-doubt"
         },
         {
           "order": 9,

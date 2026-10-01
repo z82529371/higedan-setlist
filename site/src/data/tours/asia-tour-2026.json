@@ -257,19 +257,9 @@
         "https://www.livefans.jp/events/1981872"
       ],
       "diff": {
-        "skip": [
-          7
-        ],
         "insert": [
           {
-            "after": 8,
-            "item": {
-              "encore": false,
-              "songId": "pretender"
-            }
-          },
-          {
-            "after": 8,
+            "after": 7,
             "item": {
               "encore": false,
               "type": "interlude",
