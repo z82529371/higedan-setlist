@@ -1,30 +1,16 @@
 import { readFileSync, writeFileSync, readdirSync, existsSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import {
+  resolve as resolveDiff,
+  encoreStartOrderOf,
+  isEncorePosition,
+} from "../src/lib/resolve.js";
+import { normalizeShowVenue } from "./lib/venue.js";
 
 const here = dirname(fileURLToPath(import.meta.url));
 const root = resolve(here, "..", "..");
 const toursDir = resolve(root, "data", "tours");
-
-function resolveShow(show, tpl) {
-  const diff = show.diff ?? {};
-  const skip = new Set(diff.skip ?? []);
-  const inserts = {};
-  for (const ins of diff.insert ?? []) {
-    (inserts[ins.after] ??= []).push({ ...ins.item });
-  }
-  const result = [];
-  if (inserts[0]) result.push(...inserts[0]);
-  for (const item of tpl) {
-    if (!skip.has(item.order)) {
-      result.push({ ...item });
-    }
-    if (inserts[item.order]) {
-      result.push(...inserts[item.order]);
-    }
-  }
-  return result;
-}
 
 export function validateAndCleanTours() {
   const venuesPath = resolve(root, "data", "venues.json");
@@ -51,41 +37,26 @@ export function validateAndCleanTours() {
 
       for (const show of unit.shows) {
         // Venue normalization against data/venues.json
-        for (const [rawKey, val] of Object.entries(venueTranslationMap)) {
-          if (
-            show.venue === rawKey ||
-            show.venue === val.venue ||
-            (rawKey === "KSPO DOME" && (show.venue.includes("高尺") || show.venue.includes("KSPO")))
-          ) {
-            if (show.venue !== val.venue) {
-              console.log(`[Venue Sync] ${show.id}: Normalized venue '${show.venue}' -> '${val.venue}'`);
-              show.venue = val.venue;
-              modified = true;
-            }
-            if (val.city !== undefined && show.city !== val.city) {
-              show.city = val.city;
-              modified = true;
-            }
-            if (val.region !== undefined && show.region !== val.region) {
-              show.region = val.region;
-              modified = true;
-            }
-            if (val.prefecture !== undefined && show.prefecture !== val.prefecture) {
-              show.prefecture = val.prefecture;
-              modified = true;
-            }
-            break;
+        const beforeVenue = show.venue;
+        const venuePatch = normalizeShowVenue(show, venueTranslationMap);
+        if (venuePatch) {
+          if (venuePatch.venue) {
+            console.log(`[Venue Sync] ${show.id}: Normalized venue '${beforeVenue}' -> '${venuePatch.venue}'`);
           }
+          modified = true;
         }
 
         if (unit.templateSetlist && show.diff) {
           const tpl = unit.templateSetlist;
-          const encoreStartOrder = tpl.find((t) => t.encore)?.order ?? 18;
+          const encoreStartOrder = encoreStartOrderOf(tpl);
 
           // Fix 1: Auto-fix encore flag for inserts after encore start
           if (show.diff.insert) {
             for (const ins of show.diff.insert) {
-              if (ins.after >= encoreStartOrder - 1 && ins.item.encore === false) {
+              if (
+                isEncorePosition(ins.after, encoreStartOrder) &&
+                ins.item.encore === false
+              ) {
                 console.log(`[Validation Fix] ${show.id} (${show.title}): Setting encore: true for insert '${ins.item.songId}' after ${ins.after}`);
                 ins.item.encore = true;
                 modified = true;
@@ -122,7 +93,7 @@ export function validateAndCleanTours() {
           }
 
           // Check 3: Check for adjacent duplicate songs in resolved setlist
-          const resolved = resolveShow(show, tpl).filter((x) => x.songId);
+          const resolved = resolveDiff(show.diff ?? {}, tpl).filter((x) => x.songId);
           for (let i = 0; i < resolved.length - 1; i++) {
             if (resolved[i].songId === resolved[i + 1].songId) {
               console.warn(`[Validation Warning] Show ${show.id} (${show.title} ${show.date}) has duplicate adjacent song: '${resolved[i].songId}' at positions ${i + 1} & ${i + 2}`);

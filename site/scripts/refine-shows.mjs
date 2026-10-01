@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { lookupVenue } from "./lib/venue.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(__dirname, "..", "..");
@@ -8,9 +9,6 @@ const dataDir = path.resolve(root, "data");
 
 const venuesPath = path.resolve(dataDir, "venues.json");
 const venueData = JSON.parse(fs.readFileSync(venuesPath, "utf-8"));
-const venueMap = Object.fromEntries(
-  Object.entries(venueData).map(([raw, item]) => [raw, item.venue]),
-);
 
 const citySlugMap = {
   東京: "tokyo",
@@ -54,8 +52,9 @@ const units = [
 
 for (const { dir, file, unit } of units) {
   for (const s of unit.shows) {
-    if (venueMap[s.venue]) {
-      s.venue = venueMap[s.venue];
+    const venueHit = lookupVenue(s.venue, venueData);
+    if (venueHit) {
+      s.venue = venueHit.venue;
     }
     // Standardize IDs for shows that had generic 'show' slug
     if (s.id.includes("-show-")) {
