@@ -137,21 +137,24 @@
             "after": 2,
             "item": {
               "encore": false,
-              "songId": "coffee-to-syrup"
+              "songId": "coffee-to-syrup",
+              "note": "[メドレー]"
             }
           },
           {
             "after": 2,
             "item": {
               "encore": false,
-              "songId": "whats-going-on"
+              "songId": "whats-going-on",
+              "note": "[メドレー]"
             }
           },
           {
             "after": 2,
             "item": {
               "encore": false,
-              "songId": "inu-ka-cat-ka-de-shinumade-kenka-shiyou"
+              "songId": "inu-ka-cat-ka-de-shinumade-kenka-shiyou",
+              "note": "[メドレー]"
             }
           },
           {
@@ -159,7 +162,7 @@
             "item": {
               "encore": false,
               "songId": "115man-kiro-no-film",
-              "note": "フルコーラス"
+              "note": "[メドレー] フルコーラス"
             }
           },
           {

@@ -478,5 +478,119 @@
     "city": "東京",
     "region": "關東",
     "prefecture": "東京都"
+  },
+  "パシフィコ横浜 国立大ホール": {
+    "venue": "PACIFICO YOKOHAMA國家大廳",
+    "city": "橫濱",
+    "region": "關東",
+    "prefecture": "神奈川縣"
+  },
+  "新潟テルサ": {
+    "venue": "新潟特爾薩(Niigata Telsa)",
+    "city": "新潟",
+    "region": "中部",
+    "prefecture": "新潟縣"
+  },
+  "鹿児島県文化センター 宝山ホール": {
+    "venue": "鹿兒島縣立文化中心寶山館",
+    "city": "鹿児島",
+    "region": "日本",
+    "prefecture": "鹿児島県"
+  },
+  "熊本県立劇場 演劇ホール": {
+    "venue": "熊本縣立劇場 演劇會館",
+    "city": "熊本",
+    "region": "九州",
+    "prefecture": "熊本縣"
+  },
+  "米子市公会堂": {
+    "venue": "米子市公会堂",
+    "city": "米子",
+    "region": "中國",
+    "prefecture": "鳥取縣"
+  },
+  "いわき芸術文化交流館アリオス 大ホール": {
+    "venue": "Iwaki Art and Culture Center Alios Hall",
+    "city": "福島",
+    "region": "東北",
+    "prefecture": "福島縣"
+  },
+  "島根県民会館 大ホール": {
+    "venue": "島根縣民會館 大會堂",
+    "city": "松江",
+    "region": "中國",
+    "prefecture": "島根縣"
+  },
+  "日本特殊陶業市民会館 フォレストホール": {
+    "venue": "Nippon Special Cosmetics Civic Hall森林大廳",
+    "city": "日本特殊陶業",
+    "region": "中部",
+    "prefecture": "愛知縣"
+  },
+  "長良川国際会議場 メインホール": {
+    "venue": "長良川國際會議中心大廳",
+    "city": "岐阜",
+    "region": "中部",
+    "prefecture": "岐阜縣"
+  },
+  "オリンパスホール八王子": {
+    "venue": "OLYMPUS HALL HACHIOJI",
+    "city": "東京",
+    "region": "關東",
+    "prefecture": "東京都"
+  },
+  "愛知県芸術劇場 大ホール": {
+    "venue": "愛知県藝術劇場 大會堂",
+    "city": "名古屋",
+    "region": "中部",
+    "prefecture": "愛知縣"
+  },
+  "神戸国際会館こくさいホール": {
+    "venue": "神戸国際會館こくさい會館",
+    "city": "神戶",
+    "region": "關西",
+    "prefecture": "兵庫縣"
+  },
+  "サンポートホール高松 大ホール": {
+    "venue": "Sunport Hall Takamatsu Grand Hall",
+    "city": "高松",
+    "region": "四國",
+    "prefecture": "香川縣"
+  },
+  "札幌文化芸術劇場hitaru 劇場": {
+    "venue": "札幌文化藝術劇場hitaru 劇場",
+    "city": "札幌",
+    "region": "北海道",
+    "prefecture": "北海道"
+  },
+  "小樽市民会館 ホール": {
+    "venue": "小樽市民會館 會館",
+    "city": "小樽",
+    "region": "北海道",
+    "prefecture": "北海道"
+  },
+  "大宮ソニックシティ 大ホール": {
+    "venue": "大宮索尼克市政廳",
+    "city": "埼玉",
+    "region": "關東",
+    "prefecture": "埼玉縣"
+  },
+  "グランキューブ大阪 メインホール": {
+    "venue": "Grand Cube大阪大殿",
+    "city": "大阪",
+    "region": "關西",
+    "prefecture": "大阪府"
+  },
+  "なら100年会館 大ホール": {
+    "venue": "なら100年會館 大會堂",
+    "city": "奈良",
+    "region": "關西",
+    "prefecture": "奈良縣"
+  },
+  "市川市文化会館 大ホール": {
+    "venue": "市川市文化會館 大會堂",
+    "city": "市川",
+    "region": "關東",
+    "prefecture": "千葉縣"
   }
 }
