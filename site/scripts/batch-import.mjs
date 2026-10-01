@@ -424,18 +424,35 @@ async function verifyAndRecomputeShows() {
 
       // (actualTitle/detectedType computed above for higedanOnly)
 
-      let slug = meta.eventTitle
-        ? meta.eventTitle
-            .replace(/^Official髭男dism[：:\s]*/i, "")
-            .toLowerCase()
-            .replace(/[^a-z0-9]+/g, "-")
-            .replace(/^-+|-+$/g, "")
-        : "";
+      let slug = "";
+      const KNOWN_EVENT_SLUGS = [
+        { match: /音楽と髭達/, prefix: "ongaku-to-higetachi" },
+        { match: /音楽の日/, prefix: "ongaku-no-hi" },
+        { match: /紅白歌合戦/, prefix: "nhk-kohaku" },
+        { match: /FNS歌謡祭/, prefix: "fns-kayosai" },
+      ];
+      for (const k of KNOWN_EVENT_SLUGS) {
+        if (k.match.test(meta.eventTitle || "")) {
+          slug = `${k.prefix}-${year}`;
+          break;
+        }
+      }
 
-      if (!slug || slug.length < 2) {
-        slug = `unofficial-${year}`;
-      } else if (!slug.includes(year)) {
-        slug = `${slug}-${year}`;
+      if (!slug) {
+        slug = meta.eventTitle
+          ? meta.eventTitle
+              .replace(/^Official髭男dism[：:\s]*/i, "")
+              .toLowerCase()
+              .replace(/[^a-z0-9]+/g, "-")
+              .replace(/^-+|-+$/g, "")
+          : "";
+
+        const letterCount = (slug.match(/[a-z]/g) || []).length;
+        if (!slug || letterCount < 2) {
+          slug = `unofficial-${year}`;
+        } else if (!slug.includes(year)) {
+          slug = `${slug}-${year}`;
+        }
       }
 
       let finalSlug = slug;
