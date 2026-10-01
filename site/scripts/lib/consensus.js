@@ -119,105 +119,133 @@ export function computeDiff(pageSongs, templateSetlist, maps) {
       item.title
   );
 
-  if (pageSongIds.length === 0) {
-    return { diff: {}, status: "NO_SETLIST_ON_PAGE" };
+  const isGap = (item) => !!(item.isCmt || item.type === "interlude");
+  const M = templateSongs.length;
+  const N = orderedPageSongs.length;
+
+  // 1. LCS DP matrix: align template songs to page songs
+  const dp = Array.from({ length: M + 1 }, () => new Int32Array(N + 1));
+  for (let i = 0; i < M; i++) {
+    const tId = templateSongs[i].songId;
+    for (let j = 0; j < N; j++) {
+      if (!isGap(orderedPageSongs[j]) && tId === pageSongIds[j]) {
+        dp[i + 1][j + 1] = dp[i][j] + 1;
+      } else {
+        dp[i + 1][j + 1] = Math.max(dp[i + 1][j], dp[i][j + 1]);
+      }
+    }
   }
 
-  if (JSON.stringify(pageSongIds) === JSON.stringify(templateSongIds)) {
-    return { diff: {}, status: "EXACT_TEMPLATE_MATCH" };
+  // 2. Backtrack LCS to extract matched pairs [tIdx, pIdx]
+  let i = M;
+  let j = N;
+  const matchedPairs = [];
+  while (i > 0 && j > 0) {
+    const pMeta = orderedPageSongs[j - 1];
+    if (
+      !isGap(pMeta) &&
+      templateSongs[i - 1].songId === pageSongIds[j - 1] &&
+      dp[i][j] === dp[i - 1][j - 1] + 1
+    ) {
+      matchedPairs.push([i - 1, j - 1]);
+      i--;
+      j--;
+    } else if (dp[i - 1][j] >= dp[i][j - 1]) {
+      i--;
+    } else {
+      j--;
+    }
   }
+  matchedPairs.reverse();
+
+  const matchedT = new Set(matchedPairs.map(([t]) => t));
+  const pToT = new Map(matchedPairs.map(([t, p]) => [p, t]));
 
   const diff = {};
   const skip = [];
   const insert = [];
 
-  let tIdx = 0;
-  for (let pIdx = 0; pIdx < orderedPageSongs.length; pIdx++) {
+  // 3. Any template song not in LCS is skipped
+  for (let tIdx = 0; tIdx < M; tIdx++) {
+    if (!matchedT.has(tIdx)) {
+      skip.push(templateSongs[tIdx].order);
+    }
+  }
+
+  // 4. Walk page songs: record insertions and version note differences (ADR-0028)
+  let lastAnchorOrder = 0;
+
+  for (let pIdx = 0; pIdx < N; pIdx++) {
     const pSong = pageSongIds[pIdx];
     const pMeta = orderedPageSongs[pIdx];
-    if (tIdx < templateSongs.length && templateSongs[tIdx].songId === pSong) {
-      const t = templateSongs[tIdx];
+    const matchedTIdx = pToT.get(pIdx);
+
+    if (matchedTIdx !== undefined) {
+      const t = templateSongs[matchedTIdx];
       const kindSame = normKind(t.kind) === normKind(pMeta?.kind ?? []);
       const noteSame =
         residualNote(t.note) === residualNote(pMeta?.subtitle ?? "");
+
       if (kindSame && noteSame) {
-        tIdx++;
+        lastAnchorOrder = t.order;
       } else {
-        // Same song but version difference (e.g. アレンジ): skip + re-insert with note.
-        const anchorOrder = tIdx > 0 ? templateSongs[tIdx - 1].order : 0;
+        // Version difference: skip template item + insert with note (ADR-0028)
         if (!skip.includes(t.order)) skip.push(t.order);
         const itemObj = {
-          encore: pMeta?.isEncore || isEncorePosition(anchorOrder, encoreStartOrder),
+          encore:
+            pMeta?.isEncore ||
+            isEncorePosition(lastAnchorOrder, encoreStartOrder),
           songId: pSong,
         };
         if (pMeta?.subtitle) itemObj.note = unescapeHtml(pMeta.subtitle);
         if (pMeta?.kind) itemObj.kind = pMeta.kind;
         if (pMeta?.type) itemObj.type = pMeta.type;
-        insert.push({ after: anchorOrder, item: itemObj });
-        tIdx++;
+
+        insert.push({ after: lastAnchorOrder, item: itemObj });
+        lastAnchorOrder = t.order;
       }
     } else {
-      const nextTMatch = templateSongs.findIndex(
-        (t, idx) => idx >= tIdx && t.songId === pSong
-      );
-      if (nextTMatch !== -1) {
-        for (let k = tIdx; k < nextTMatch; k++) {
-          skip.push(templateSongs[k].order);
-        }
-        tIdx = nextTMatch + 1;
-      } else {
-        const anchorOrder = tIdx > 0 ? templateSongs[tIdx - 1].order : 0;
-        const currentTOrder = templateSongs[tIdx]?.order;
-        const isSubstitution =
-          currentTOrder !== undefined &&
-          (!pageSongIds.includes(templateSongs[tIdx].songId) ||
-            skip.includes(currentTOrder));
-        if (
-          isSubstitution &&
-          currentTOrder !== undefined &&
-          !skip.includes(currentTOrder)
-        ) {
-          skip.push(currentTOrder);
-          tIdx++;
-        }
-        const isKnownSong = maps.validSongIds.has(pSong);
-        const itemObj = {
-          encore: pMeta?.isEncore || isEncorePosition(anchorOrder, encoreStartOrder),
-        };
-        if (pMeta?.isCmt || pMeta?.type === "interlude") {
+      const isKnownSong = maps.validSongIds.has(pSong);
+      const itemObj = {
+        encore:
+          pMeta?.isEncore ||
+          isEncorePosition(lastAnchorOrder, encoreStartOrder),
+      };
+
+      if (pMeta?.isCmt || pMeta?.type === "interlude") {
+        itemObj.type = "interlude";
+        itemObj.note = unescapeHtml(pMeta?.subtitle || pSong);
+      } else if (!isKnownSong) {
+        if (isMemberSoloText(pMeta?.subtitle ?? "")) {
           itemObj.type = "interlude";
-          itemObj.note = unescapeHtml(pMeta?.subtitle || pSong);
-        } else if (!isKnownSong) {
-          // Cover/special song with a song link but no songs.json entry:
-          // formal track with title (unlinked), never enters the template —
-          // EXCEPT member-solo corners, which are interludes by content
-          // regardless of linkage (Q1: 看內容不看連結).
-          if (isMemberSoloText(pMeta?.subtitle ?? "")) {
-            itemObj.type = "interlude";
-            const titleText = unescapeHtml(pMeta?.title || pSong);
-            const subText = unescapeHtml(pMeta?.subtitle ?? "");
-            itemObj.note = subText ? `${titleText} ${subText}` : titleText;
-          } else {
-            itemObj.title = pMeta?.title || pSong;
-            if (pMeta?.subtitle) itemObj.note = unescapeHtml(pMeta.subtitle);
-          }
+          const titleText = unescapeHtml(pMeta?.title || pSong);
+          const subText = unescapeHtml(pMeta?.subtitle ?? "");
+          itemObj.note = subText ? `${titleText} ${subText}` : titleText;
         } else {
-          itemObj.songId = pSong;
-          if (pMeta?.subtitle) {
-            itemObj.note = unescapeHtml(pMeta.subtitle);
-          }
+          itemObj.title = pMeta?.title || pSong;
+          if (pMeta?.subtitle) itemObj.note = unescapeHtml(pMeta.subtitle);
         }
-        if (pMeta?.kind) itemObj.kind = pMeta.kind;
-        if (pMeta?.type) itemObj.type = pMeta.type;
-        insert.push({
-          after: anchorOrder,
-          item: itemObj,
-        });
+      } else {
+        itemObj.songId = pSong;
+        if (pMeta?.subtitle) {
+          itemObj.note = unescapeHtml(pMeta.subtitle);
+        }
       }
+
+      if (pMeta?.kind) itemObj.kind = pMeta.kind;
+      if (pMeta?.type) itemObj.type = pMeta.type;
+
+      insert.push({
+        after: lastAnchorOrder,
+        item: itemObj,
+      });
     }
   }
-  for (let k = tIdx; k < templateSongs.length; k++) {
-    skip.push(templateSongs[k].order);
+
+  skip.sort((a, b) => a - b);
+
+  if (skip.length === 0 && insert.length === 0) {
+    return { diff: {}, status: "EXACT_TEMPLATE_MATCH" };
   }
 
   if (skip.length) diff.skip = skip;
