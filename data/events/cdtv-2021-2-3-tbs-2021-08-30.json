@@ -1,0 +1,34 @@
+{
+  "id": "cdtv-2021-2-3-tbs-2021-08-30",
+  "title": "CDTVライブ ! ライブ ! 夏フェス2021第2夜",
+  "type": "TV拼盤",
+  "shows": [
+    {
+      "id": "1343101",
+      "date": "2021-08-30",
+      "city": "東京",
+      "venue": "TBS電視台",
+      "region": "關東",
+      "prefecture": "東京都",
+      "title": "CDTVライブ ! ライブ ! 夏フェス2021第2夜",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/1343101"
+      ],
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "songId": "cry-baby",
+          "note": "フルサイズ"
+        },
+        {
+          "order": 2,
+          "encore": false,
+          "songId": "apoptosis",
+          "note": "フルサイズ"
+        }
+      ],
+      "opensAt": "19:00"
+    }
+  ]
+}
