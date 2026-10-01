@@ -21,6 +21,7 @@ import {
 } from "./lib/domain.js";
 import { trackKey, parseRoute, routeHash } from "./lib/track.js";
 import { ShowSlip, SongSlip, TitleSlip, VenueSlip } from "./components/slips.jsx";
+import SearchBox from "./components/SearchBox.jsx";
 import "./style.css";
 
 function getUnitCategory(u) {
@@ -42,6 +43,19 @@ export default function App() {
     showById,
     unitIdByShowId,
   } = useMemo(() => buildIndex(), []);
+
+  const allTitleTracks = useMemo(() => {
+    const list = [];
+    for (const [key, shows] of trackShows.entries()) {
+      if (key.startsWith("title:")) {
+        list.push({
+          title: key.slice("title:".length),
+          shows,
+        });
+      }
+    }
+    return list;
+  }, [trackShows]);
 
   const initialSelection = () => {
     const fallback = {
@@ -194,12 +208,6 @@ export default function App() {
 
   const needle = q.trim().toLowerCase();
 
-  const searchLabelText = tab === "venue" ? "搜尋場地" : "搜尋歌名";
-  const searchPlaceholder =
-    tab === "venue"
-      ? "全庫搜尋場地，例如 台北小巨蛋"
-      : "全庫搜尋歌曲，例如 Subtitle";
-
   const tplSongs = current?.tpl?.filter((i) => i.songId).length ?? 0;
   const tplCount = current?.tpl?.length ?? 0;
   const footTpl = current?.isTour
@@ -272,41 +280,18 @@ export default function App() {
           場地
         </button>
 
-        <div className="ml-auto flex max-w-[340px] flex-[1_1_220px] items-center gap-2 max-lg:ml-0 max-lg:w-full max-lg:max-w-none">
-          <label
-            htmlFor="q"
-            className="whitespace-nowrap font-mono text-[12px] text-muted"
-          >
-            {searchLabelText}
-          </label>
-          <input
-            className="w-full rounded-[3px] border-[1.5px] border-ink bg-card px-3 py-2 text-[14px] text-ink"
-            id="q"
-            type="search"
-            placeholder={searchPlaceholder}
-            value={q}
-            onChange={(e) => setQ(e.target.value)}
-            onKeyDown={(e) => {
-              if (e.key === "Enter") {
-                e.preventDefault();
-                if (tab === "song") {
-                  const matched = allUsedSongs.find((s) =>
-                    s.title.toLowerCase().includes(needle)
-                  );
-                  if (matched) handleSelectSong(matched.id);
-                } else if (tab === "venue") {
-                  const matched = allVenues.find(
-                    (v) =>
-                      v.name.toLowerCase().includes(needle) ||
-                      v.city.toLowerCase().includes(needle)
-                  );
-                  if (matched) handleSelectVenue(matched.name);
-                }
-              }
-            }}
-            autoComplete="off"
-          />
-        </div>
+        <SearchBox
+          q={q}
+          setQ={setQ}
+          allUsedSongs={allUsedSongs}
+          allTitleTracks={allTitleTracks}
+          allUnits={allUnits}
+          allVenues={allVenues}
+          onSelectSong={handleSelectSong}
+          onSelectTitle={handleSelectTitle}
+          onSelectUnit={handleUnitChange}
+          onSelectVenue={handleSelectVenue}
+        />
       </div>
 
       {tab === "show" &&
@@ -575,9 +560,18 @@ export default function App() {
 
             {tab === "song" &&
               (() => {
-                let filtered = allUsedSongs.filter((s) =>
-                  s.title.toLowerCase().includes(needle)
-                );
+                let filtered = allUsedSongs.filter((s) => {
+                  const t = (s.title || "").toLowerCase();
+                  const ja = (s.titleJa || "").toLowerCase();
+                  const en = (s.titleEn || "").toLowerCase();
+                  const ru = (s.ruby || "").toLowerCase();
+                  return (
+                    t.includes(needle) ||
+                    ja.includes(needle) ||
+                    en.includes(needle) ||
+                    ru.includes(needle)
+                  );
+                });
                 // Piercing search: when search is empty, filter by active album; when searching, search all albums
                 if (!needle && songGroupFilter) {
                   filtered = filtered.filter(
