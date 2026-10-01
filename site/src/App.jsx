@@ -23,6 +23,14 @@ import { trackKey, parseRoute, routeHash } from "./lib/track.js";
 import { ShowSlip, SongSlip, TitleSlip, VenueSlip } from "./components/slips.jsx";
 import "./style.css";
 
+function getUnitCategory(u) {
+  if (!u) return "tour";
+  if (u.type === "專場") return "tour";
+  if (u.type === "對バン" || u.type === "聯合專場") return "collab";
+  if (u.type === "電視演出" || u.type === "TV拼盤") return "tv";
+  return "fest";
+}
+
 export default function App() {
   const {
     unitData,
@@ -86,11 +94,7 @@ export default function App() {
   const [showGroupFilter, setShowGroupFilter] = useState(() => {
     if (initial.selUnitId) {
       const u = allUnits.find((x) => x.id === initial.selUnitId);
-      if (u) {
-        if (u.type === "專場") return "tour";
-        if (u.type === "對バン" || u.type === "聯合專場") return "collab";
-        return "event";
-      }
+      if (u) return getUnitCategory(u);
     }
     return "tour";
   });
@@ -129,9 +133,7 @@ export default function App() {
       setSelUnitId(uId);
       const u = allUnits.find((x) => x.id === uId);
       if (u) {
-        if (u.type === "專場") setShowGroupFilter("tour");
-        else if (u.type === "對バン" || u.type === "聯合專場") setShowGroupFilter("collab");
-        else setShowGroupFilter("event");
+        setShowGroupFilter(getUnitCategory(u));
         const y = unitEarliest(u).split("-")[0];
         if (y && y !== "9999") setShowYearFilter(y);
       }
@@ -308,29 +310,17 @@ export default function App() {
 
       {tab === "show" &&
         (() => {
-          const soloUnits = allUnits.filter((u) => u.type === "專場");
+          const soloUnits = allUnits.filter((u) => getUnitCategory(u) === "tour");
           const collabUnits = allUnits.filter(
-            (u) => u.type === "對バン" || u.type === "聯合專場"
+            (u) => getUnitCategory(u) === "collab"
           );
-          const festUnits = allUnits.filter(
-            (u) =>
-              u.type !== "專場" &&
-              u.type !== "對バン" &&
-              u.type !== "聯合專場"
-          );
+          const festUnits = allUnits.filter((u) => getUnitCategory(u) === "fest");
+          const tvUnits = allUnits.filter((u) => getUnitCategory(u) === "tv");
 
           // Filter by category
-          const categoryFiltered = allUnits.filter((u) => {
-            if (showGroupFilter === "collab")
-              return u.type === "對バン" || u.type === "聯合專場";
-            if (showGroupFilter === "event")
-              return (
-                u.type !== "專場" &&
-                u.type !== "對バン" &&
-                u.type !== "聯合專場"
-              );
-            return u.type === "專場";
-          });
+          const categoryFiltered = allUnits.filter(
+            (u) => getUnitCategory(u) === showGroupFilter
+          );
 
           // Extract available start years within current category
           const yearsSet = new Set(
@@ -393,10 +383,16 @@ export default function App() {
                   聯合專場 ({collabUnits.length})
                 </button>
                 <button
-                  className={filterPillClass(showGroupFilter === "event")}
-                  onClick={() => handleCategoryChange("event", festUnits)}
+                  className={filterPillClass(showGroupFilter === "fest")}
+                  onClick={() => handleCategoryChange("fest", festUnits)}
                 >
-                  音樂祭／特別事件 ({festUnits.length})
+                  音樂祭 ({festUnits.length})
+                </button>
+                <button
+                  className={filterPillClass(showGroupFilter === "tv")}
+                  onClick={() => handleCategoryChange("tv", tvUnits)}
+                >
+                  電視演出 ({tvUnits.length})
                 </button>
               </div>
 
