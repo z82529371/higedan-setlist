@@ -247,7 +247,9 @@ async function verifyAndRecomputeShows() {
     // and all shows were fetched (never overwrite consensus on targeted single-show runs)
     if (
       isTour &&
-      targetIds.length === 0 &&
+      (targetIds.length === 0 ||
+        !unit.templateSetlist ||
+        unit.templateSetlist.length === 0) &&
       fetchedPageSongsMap.size > 0
     ) {
       const allPageSongs = Array.from(fetchedPageSongsMap.values());
@@ -442,8 +444,10 @@ async function verifyAndRecomputeShows() {
 
       if (fs.existsSync(eventFile)) {
         const existing = JSON.parse(fs.readFileSync(eventFile, "utf-8"));
-        const isSameShow = existing.shows.some((s) => s.id === String(eventId));
-        if (!isSameShow && existing.shows.length > 0) {
+        const isTourTitle =
+          /\btour\b/i.test(meta.eventTitle || "") ||
+          /ツアー|巡演/i.test(meta.eventTitle || "");
+        if (!isTourTitle && !isSameShow && existing.shows.length > 0) {
           const dateDiffs = existing.shows
             .filter((s) => s.date)
             .map((s) =>

@@ -104,6 +104,7 @@ export function extractSongsFromHtml(html, opts = {}) {
   const tdRegex =
     /<td[^>]*class="([^"]*(?:pc)?sl(?:\d+|medley)[^"]*)"[^>]*>([\s\S]*?)<\/td>/g;
   const items = [];
+  let currentMedleyText = "";
 
   for (const match of html.matchAll(tdRegex)) {
     const tdClass = match[1];
@@ -127,9 +128,13 @@ export function extractSongsFromHtml(html, opts = {}) {
     const medleyMatch = cellHtml.match(
       /<p class="medley"><b>([\s\S]*?)<\/b><\/p>/
     );
-    const medleyText = unescapeHtml(
-      medleyMatch ? medleyMatch[1].replace(/<[^>]+>/g, "").trim() : ""
-    );
+    if (medleyMatch) {
+      currentMedleyText = unescapeHtml(
+        medleyMatch[1].replace(/<[^>]+>/g, "").trim()
+      );
+    } else if (!/medley/i.test(tdClass)) {
+      currentMedleyText = "";
+    }
 
     const subtitleMatch = cellHtml.match(
       /<p class="(?:subtitle|memo)">([\s\S]*?)<\/p>/
@@ -137,10 +142,10 @@ export function extractSongsFromHtml(html, opts = {}) {
     const rawSubtitle = unescapeHtml(
       subtitleMatch ? subtitleMatch[1].replace(/<[^>]+>/g, "").trim() : ""
     );
-    const subtitleText = medleyText
+    const subtitleText = currentMedleyText
       ? rawSubtitle
-        ? `[${medleyText}] ${rawSubtitle}`
-        : `[${medleyText}]`
+        ? `[${currentMedleyText}] ${rawSubtitle}`
+        : `[${currentMedleyText}]`
       : rawSubtitle;
 
     const playBtnMatch =
