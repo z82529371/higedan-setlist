@@ -121,6 +121,7 @@
       "diff": {
         "skip": [
           3,
+          4,
           20
         ],
         "insert": [
@@ -151,6 +152,14 @@
             "item": {
               "encore": false,
               "songId": "inu-ka-cat-ka-de-shinumade-kenka-shiyou"
+            }
+          },
+          {
+            "after": 2,
+            "item": {
+              "encore": false,
+              "songId": "115man-kiro-no-film",
+              "note": "フルコーラス"
             }
           },
           {
@@ -395,7 +404,21 @@
       "city": "德島",
       "region": "四國",
       "prefecture": "德島縣",
-      "diff": {}
+      "diff": {
+        "skip": [
+          13
+        ],
+        "insert": [
+          {
+            "after": 12,
+            "item": {
+              "encore": false,
+              "songId": "no-doubt",
+              "note": "(阿波踊りver)"
+            }
+          }
+        ]
+      }
     },
     {
       "id": "1310559",
@@ -629,34 +652,18 @@
       "prefecture": "福岡縣",
       "diff": {
         "skip": [
-          16,
-          17,
-          18
+          19
         ],
         "insert": [
           {
-            "after": 19,
+            "after": 15,
             "item": {
-              "encore": true,
-              "songId": "editorial"
+              "encore": false,
+              "songId": "pretender"
             }
           },
           {
-            "after": 19,
-            "item": {
-              "encore": true,
-              "songId": "apoptosis"
-            }
-          },
-          {
-            "after": 19,
-            "item": {
-              "encore": true,
-              "songId": "lost-in-my-room"
-            }
-          },
-          {
-            "after": 19,
+            "after": 18,
             "item": {
               "encore": true,
               "songId": "anarchy"

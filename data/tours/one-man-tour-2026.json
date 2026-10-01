@@ -118,14 +118,14 @@
       ],
       "diff": {
         "skip": [
-          9
+          10
         ],
         "insert": [
           {
-            "after": 10,
+            "after": 8,
             "item": {
               "encore": false,
-              "songId": "pretender"
+              "songId": "elder-flower"
             }
           }
         ]
@@ -145,14 +145,14 @@
       ],
       "diff": {
         "skip": [
-          9
+          10
         ],
         "insert": [
           {
-            "after": 10,
+            "after": 8,
             "item": {
               "encore": false,
-              "songId": "pretender"
+              "songId": "elder-flower"
             }
           }
         ]
@@ -172,14 +172,14 @@
       ],
       "diff": {
         "skip": [
-          9
+          10
         ],
         "insert": [
           {
-            "after": 10,
+            "after": 8,
             "item": {
               "encore": false,
-              "songId": "pretender"
+              "songId": "elder-flower"
             }
           }
         ]
@@ -213,14 +213,14 @@
       ],
       "diff": {
         "skip": [
-          9
+          10
         ],
         "insert": [
           {
-            "after": 10,
+            "after": 8,
             "item": {
               "encore": false,
-              "songId": "pretender"
+              "songId": "elder-flower"
             }
           }
         ]
@@ -240,14 +240,14 @@
       ],
       "diff": {
         "skip": [
-          9
+          10
         ],
         "insert": [
           {
-            "after": 10,
+            "after": 8,
             "item": {
               "encore": false,
-              "songId": "pretender"
+              "songId": "elder-flower"
             }
           }
         ]
@@ -562,7 +562,21 @@
       "sourceUrls": [
         "https://www.livefans.jp/events/1866448"
       ],
-      "diff": {},
+      "diff": {
+        "skip": [
+          13
+        ],
+        "insert": [
+          {
+            "after": 12,
+            "item": {
+              "encore": false,
+              "songId": "anarchy",
+              "note": "通常ver"
+            }
+          }
+        ]
+      },
       "region": "中部",
       "prefecture": "愛知縣"
     },

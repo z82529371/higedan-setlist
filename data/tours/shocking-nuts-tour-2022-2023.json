@@ -72,28 +72,28 @@
             }
           },
           {
-            "after": 3,
+            "after": 2,
             "item": {
               "encore": false,
               "songId": "second-line"
             }
           },
           {
-            "after": 4,
+            "after": 2,
             "item": {
               "encore": false,
               "songId": "parabola"
             }
           },
           {
-            "after": 5,
+            "after": 2,
             "item": {
               "encore": false,
               "songId": "vintage"
             }
           },
           {
-            "after": 6,
+            "after": 2,
             "item": {
               "encore": false,
               "songId": "lady"
@@ -107,7 +107,7 @@
             }
           },
           {
-            "after": 15,
+            "after": 14,
             "item": {
               "encore": false,
               "songId": "itan-na-star"
@@ -125,7 +125,7 @@
             }
           },
           {
-            "after": 19,
+            "after": 18,
             "item": {
               "encore": true,
               "songId": "clap-clap"
@@ -167,6 +167,7 @@
           5,
           6,
           7,
+          8,
           15,
           19
         ],
@@ -179,24 +180,31 @@
             }
           },
           {
-            "after": 3,
+            "after": 2,
             "item": {
               "encore": false,
               "songId": "second-line"
             }
           },
           {
-            "after": 4,
+            "after": 2,
             "item": {
               "encore": false,
               "songId": "vintage"
             }
           },
           {
-            "after": 5,
+            "after": 2,
             "item": {
               "encore": false,
               "songId": "lady"
+            }
+          },
+          {
+            "after": 2,
+            "item": {
+              "encore": false,
+              "songId": "fuusen"
             }
           },
           {
@@ -207,7 +215,7 @@
             }
           },
           {
-            "after": 15,
+            "after": 14,
             "item": {
               "encore": false,
               "songId": "itan-na-star"
@@ -235,7 +243,21 @@
       "sourceUrls": [
         "https://www.livefans.jp/events/1419725"
       ],
-      "diff": {},
+      "diff": {
+        "skip": [
+          20
+        ],
+        "insert": [
+          {
+            "after": 19,
+            "item": {
+              "encore": true,
+              "songId": "hakan",
+              "note": "観客がスマホのライトを点灯"
+            }
+          }
+        ]
+      },
       "opensAt": "18:00"
     },
     {
@@ -268,21 +290,21 @@
             }
           },
           {
-            "after": 3,
+            "after": 2,
             "item": {
               "encore": false,
               "songId": "second-line"
             }
           },
           {
-            "after": 4,
+            "after": 2,
             "item": {
               "encore": false,
               "songId": "vintage"
             }
           },
           {
-            "after": 5,
+            "after": 2,
             "item": {
               "encore": false,
               "songId": "lady"
@@ -296,7 +318,7 @@
             }
           },
           {
-            "after": 15,
+            "after": 14,
             "item": {
               "encore": false,
               "songId": "itan-na-star"
@@ -324,7 +346,20 @@
       "sourceUrls": [
         "https://www.livefans.jp/events/1419727"
       ],
-      "diff": {},
+      "diff": {
+        "skip": [
+          8
+        ],
+        "insert": [
+          {
+            "after": 7,
+            "item": {
+              "encore": false,
+              "songId": "fuusen"
+            }
+          }
+        ]
+      },
       "opensAt": "17:00"
     },
     {
@@ -338,7 +373,20 @@
       "sourceUrls": [
         "https://www.livefans.jp/events/1419731"
       ],
-      "diff": {},
+      "diff": {
+        "skip": [
+          8
+        ],
+        "insert": [
+          {
+            "after": 7,
+            "item": {
+              "encore": false,
+              "songId": "fuusen"
+            }
+          }
+        ]
+      },
       "opensAt": "18:00"
     },
     {
@@ -379,21 +427,21 @@
             }
           },
           {
-            "after": 3,
+            "after": 2,
             "item": {
               "encore": false,
               "songId": "second-line"
             }
           },
           {
-            "after": 4,
+            "after": 2,
             "item": {
               "encore": false,
               "songId": "vintage"
             }
           },
           {
-            "after": 5,
+            "after": 2,
             "item": {
               "encore": false,
               "songId": "lady"
@@ -407,7 +455,7 @@
             }
           },
           {
-            "after": 15,
+            "after": 14,
             "item": {
               "encore": false,
               "songId": "itan-na-star"
@@ -435,7 +483,20 @@
       "sourceUrls": [
         "https://www.livefans.jp/events/1419733"
       ],
-      "diff": {},
+      "diff": {
+        "skip": [
+          8
+        ],
+        "insert": [
+          {
+            "after": 7,
+            "item": {
+              "encore": false,
+              "songId": "fuusen"
+            }
+          }
+        ]
+      },
       "opensAt": "18:00"
     },
     {
@@ -456,6 +517,7 @@
           5,
           6,
           7,
+          8,
           15,
           19
         ],
@@ -468,24 +530,31 @@
             }
           },
           {
-            "after": 3,
+            "after": 2,
             "item": {
               "encore": false,
               "songId": "second-line"
             }
           },
           {
-            "after": 4,
+            "after": 2,
             "item": {
               "encore": false,
               "songId": "vintage"
             }
           },
           {
-            "after": 5,
+            "after": 2,
             "item": {
               "encore": false,
               "songId": "lady"
+            }
+          },
+          {
+            "after": 2,
+            "item": {
+              "encore": false,
+              "songId": "fuusen"
             }
           },
           {
@@ -496,7 +565,7 @@
             }
           },
           {
-            "after": 15,
+            "after": 14,
             "item": {
               "encore": false,
               "songId": "itan-na-star"
@@ -526,11 +595,19 @@
       ],
       "diff": {
         "skip": [
-          8
+          8,
+          9
         ],
         "insert": [
           {
-            "after": 9,
+            "after": 7,
+            "item": {
+              "encore": false,
+              "songId": "choral-a"
+            }
+          },
+          {
+            "after": 7,
             "item": {
               "encore": false,
               "songId": "fuusen"
@@ -570,21 +647,21 @@
             }
           },
           {
-            "after": 3,
+            "after": 2,
             "item": {
               "encore": false,
               "songId": "second-line"
             }
           },
           {
-            "after": 4,
+            "after": 2,
             "item": {
               "encore": false,
               "songId": "vintage"
             }
           },
           {
-            "after": 5,
+            "after": 2,
             "item": {
               "encore": false,
               "songId": "lady"
@@ -598,7 +675,7 @@
             }
           },
           {
-            "after": 15,
+            "after": 14,
             "item": {
               "encore": false,
               "songId": "itan-na-star"
@@ -626,7 +703,24 @@
       "sourceUrls": [
         "https://www.livefans.jp/events/1419737"
       ],
-      "diff": {},
+      "diff": {
+        "skip": [
+          11
+        ],
+        "insert": [
+          {
+            "after": 10,
+            "item": {
+              "encore": false,
+              "songId": "subtitle",
+              "note": "新曲",
+              "kind": [
+                "premiere"
+              ]
+            }
+          }
+        ]
+      },
       "opensAt": "18:00"
     },
     {
@@ -659,21 +753,21 @@
             }
           },
           {
-            "after": 3,
+            "after": 2,
             "item": {
               "encore": false,
               "songId": "second-line"
             }
           },
           {
-            "after": 4,
+            "after": 2,
             "item": {
               "encore": false,
               "songId": "vintage"
             }
           },
           {
-            "after": 5,
+            "after": 2,
             "item": {
               "encore": false,
               "songId": "lady"
@@ -687,7 +781,7 @@
             }
           },
           {
-            "after": 15,
+            "after": 14,
             "item": {
               "encore": false,
               "songId": "itan-na-star"
@@ -715,7 +809,20 @@
       "sourceUrls": [
         "https://www.livefans.jp/events/1419739"
       ],
-      "diff": {},
+      "diff": {
+        "skip": [
+          8
+        ],
+        "insert": [
+          {
+            "after": 7,
+            "item": {
+              "encore": false,
+              "songId": "fuusen"
+            }
+          }
+        ]
+      },
       "opensAt": "18:00"
     },
     {
@@ -748,21 +855,21 @@
             }
           },
           {
-            "after": 3,
+            "after": 2,
             "item": {
               "encore": false,
               "songId": "second-line"
             }
           },
           {
-            "after": 4,
+            "after": 2,
             "item": {
               "encore": false,
               "songId": "vintage"
             }
           },
           {
-            "after": 5,
+            "after": 2,
             "item": {
               "encore": false,
               "songId": "lady"
@@ -776,7 +883,7 @@
             }
           },
           {
-            "after": 15,
+            "after": 14,
             "item": {
               "encore": false,
               "songId": "itan-na-star"
@@ -790,7 +897,7 @@
             }
           },
           {
-            "after": 19,
+            "after": 18,
             "item": {
               "encore": true,
               "songId": "clap-clap"
@@ -852,6 +959,7 @@
           5,
           6,
           7,
+          8,
           15,
           19
         ],
@@ -864,24 +972,31 @@
             }
           },
           {
-            "after": 3,
+            "after": 2,
             "item": {
               "encore": false,
               "songId": "second-line"
             }
           },
           {
-            "after": 4,
+            "after": 2,
             "item": {
               "encore": false,
               "songId": "vintage"
             }
           },
           {
-            "after": 5,
+            "after": 2,
             "item": {
               "encore": false,
               "songId": "lady"
+            }
+          },
+          {
+            "after": 2,
+            "item": {
+              "encore": false,
+              "songId": "fuusen"
             }
           },
           {
@@ -892,7 +1007,7 @@
             }
           },
           {
-            "after": 15,
+            "after": 14,
             "item": {
               "encore": false,
               "songId": "itan-na-star"
@@ -929,7 +1044,8 @@
       ],
       "diff": {
         "skip": [
-          18
+          18,
+          19
         ],
         "insert": [
           {
@@ -941,7 +1057,14 @@
             }
           },
           {
-            "after": 19,
+            "after": 17,
+            "item": {
+              "encore": true,
+              "songId": "nichiyoubi-no-love-letter"
+            }
+          },
+          {
+            "after": 17,
             "item": {
               "encore": true,
               "songId": "universe",
@@ -993,28 +1116,28 @@
             }
           },
           {
-            "after": 3,
+            "after": 2,
             "item": {
               "encore": false,
               "songId": "second-line"
             }
           },
           {
-            "after": 4,
+            "after": 2,
             "item": {
               "encore": false,
               "songId": "vintage"
             }
           },
           {
-            "after": 5,
+            "after": 2,
             "item": {
               "encore": false,
               "songId": "lady"
             }
           },
           {
-            "after": 6,
+            "after": 2,
             "item": {
               "encore": false,
               "type": "interlude",
@@ -1022,7 +1145,7 @@
             }
           },
           {
-            "after": 7,
+            "after": 2,
             "item": {
               "encore": false,
               "songId": "fuusen"
@@ -1044,7 +1167,7 @@
             }
           },
           {
-            "after": 15,
+            "after": 14,
             "item": {
               "encore": false,
               "songId": "itan-na-star"

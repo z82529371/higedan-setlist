@@ -209,11 +209,9 @@ async function verifyAndRecomputeShows() {
           }
         }
 
-        // TV拼盤/音樂祭拼盤頁含全出演者曲目：只收髭男段落
+        // TV拼盤頁含全出演者曲目：只收髭男段落
         const higedanOnly =
-          unit.type === "電視演出" ||
-          unit.type === "TV拼盤" ||
-          unit.type === "音樂祭";
+          unit.type === "電視演出" || unit.type === "TV拼盤";
         const pageSongs = extractSongsFromHtml(html, { higedanOnly });
         fetchedPageSongsMap.set(s.id, pageSongs);
         // Import-time tripwire: DOM order disagreeing with player-index
@@ -373,7 +371,7 @@ async function verifyAndRecomputeShows() {
         detectedType = "線上直播";
       }
       const pageSongs = extractSongsFromHtml(html, {
-        higedanOnly: detectedType === "電視演出" || detectedType === "音樂祭",
+        higedanOnly: detectedType === "電視演出" || detectedType === "TV拼盤",
       });
 
       // event title & type & dynamic slug (detected above for higedanOnly)

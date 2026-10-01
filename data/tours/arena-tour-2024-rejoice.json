@@ -216,6 +216,7 @@
         "skip": [
           1,
           12,
+          13,
           16,
           19
         ],
@@ -226,6 +227,14 @@
               "encore": false,
               "songId": "finder",
               "note": "OP映像"
+            }
+          },
+          {
+            "after": 11,
+            "item": {
+              "encore": false,
+              "songId": "no-doubt",
+              "note": "Editorialツアーアレンジver"
             }
           },
           {
@@ -407,6 +416,7 @@
         "skip": [
           1,
           12,
+          13,
           16
         ],
         "insert": [
@@ -424,6 +434,14 @@
               "encore": false,
               "type": "interlude",
               "note": "ピアノ弾きMC"
+            }
+          },
+          {
+            "after": 11,
+            "item": {
+              "encore": false,
+              "songId": "no-doubt",
+              "note": "スカアレンジ"
             }
           },
           {
