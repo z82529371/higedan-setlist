@@ -1,5 +1,7 @@
 # 38. indie 迷你專輯建檔與分組
 
+> **See also**：2026-10-01 依官方曲目重映射，エスカパレード現 13 首，另新增 `Report`／`What's Going On?` 桶；歸屬原則見 `CONTEXT.md` 專輯歸屬條。
+
 * Status: Accepted
 * Date: 2026-09-30
 

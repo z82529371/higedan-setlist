@@ -1,5 +1,7 @@
 # 37. Editorial 未發表曲建檔與映射刷新
 
+> **See also**：兩曲已於 2026-10-01 官方曲目校正清 `unreleased` 轉入 `Editorial` 桶（未發行剩風船 1 首）；歸屬原則見 `CONTEXT.md` 專輯歸屬條。
+
 * Status: Accepted
 * Date: 2026-09-30
 
