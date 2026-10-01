@@ -256,6 +256,7 @@
       "sourceUrls": [
         "https://www.livefans.jp/events/1981872"
       ],
+      "locked": true,
       "diff": {
         "insert": [
           {

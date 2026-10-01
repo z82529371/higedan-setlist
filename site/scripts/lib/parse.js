@@ -24,6 +24,59 @@ export function isMemberSoloText(t) {
   return /楢[崎﨑]|小笹|松浦|大輔/.test(t);
 }
 
+// DOM order vs player-index order agreement check. Indexed items should
+// appear in DOM in playIndex order; inversions mean the page was edited
+// out of order. Formal songs with null playIndex (e.g. Pretender on 1981872)
+// mean player-button absence and DOM-interpolated positions are guesses.
+// Import-time tripwire only, never reorders anything.
+export function domScrambleInfo(items) {
+  const byDom = [...items].sort((a, b) => a.domIndex - b.domIndex);
+
+  // 1. Inversions among indexed items
+  const indexed = byDom.filter((s) => s.playIndex != null);
+  let inversions = 0;
+  let sample = "";
+  for (let i = 0; i < indexed.length; i++) {
+    for (let j = i + 1; j < indexed.length; j++) {
+      if (indexed[i].playIndex > indexed[j].playIndex) {
+        inversions++;
+        if (!sample) {
+          sample = `${indexed[i].title}(idx:${indexed[i].playIndex}) before ${indexed[j].title}(idx:${indexed[j].playIndex})`;
+        }
+      }
+    }
+  }
+
+  // 2. Formal songs missing player index (null-idx)
+  const missingIdxSongs = byDom.filter(
+    (s) => s.playIndex == null && !s.isCmt && s.type !== "interlude"
+  );
+  const missingCount = missingIdxSongs.length;
+  let missingSample = "";
+  if (missingCount > 0) {
+    missingSample = missingIdxSongs.map((s) => s.title).slice(0, 3).join(", ");
+    if (missingCount > 3) missingSample += ` +${missingCount - 3} more`;
+  }
+
+  const isScrambled = inversions > 0 || missingCount > 0;
+  let description = "";
+  if (inversions > 0 && missingCount > 0) {
+    description = `${inversions} inversions (${sample}) & ${missingCount} songs missing idx (${missingSample})`;
+  } else if (inversions > 0) {
+    description = `${inversions} inversions (${sample})`;
+  } else if (missingCount > 0) {
+    description = `${missingCount} songs missing idx (${missingSample})`;
+  }
+
+  return {
+    isScrambled,
+    inversions,
+    missingCount,
+    description,
+    sample: sample || missingSample,
+  };
+}
+
 // MC/OPENING/SE markers, tolerant of decorative wrappers like ～MC1～.
 // Bare markers and numbered variants (MC/MC1/MC 2/MC-3) are dropped;
 // MCs with content (birthday calls, trouble notes, 弾き語りMC, 楽器分工)

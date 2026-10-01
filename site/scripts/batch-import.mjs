@@ -3,6 +3,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import {
   cleanTitleKey,
+  domScrambleInfo,
   extractSongsFromHtml,
   extractShowMetadataFromHtml,
 } from "./lib/parse.js";
@@ -33,21 +34,29 @@ const eventsDir = path.resolve(root, "data", "events");
 const tourFiles = fs
   .readdirSync(toursDir)
   .filter((f) => f.endsWith(".json"))
-  .map((f) => ({
-    file: path.join("tours", f),
-    dir: toursDir,
-    unit: JSON.parse(fs.readFileSync(path.resolve(toursDir, f), "utf-8")),
-  }));
+  .map((f) => {
+    const full = path.resolve(toursDir, f);
+    return {
+      file: path.join("tours", f),
+      dir: toursDir,
+      unit: JSON.parse(fs.readFileSync(full, "utf-8")),
+      raw: fs.readFileSync(full, "utf-8").replace(/\r\n/g, "\n"),
+    };
+  });
 
 const eventFiles = fs.existsSync(eventsDir)
   ? fs
       .readdirSync(eventsDir)
       .filter((f) => f.endsWith(".json"))
-      .map((f) => ({
-        file: path.join("events", f),
-        dir: eventsDir,
-        unit: JSON.parse(fs.readFileSync(path.resolve(eventsDir, f), "utf-8")),
-      }))
+      .map((f) => {
+        const full = path.resolve(eventsDir, f);
+        return {
+          file: path.join("events", f),
+          dir: eventsDir,
+          unit: JSON.parse(fs.readFileSync(full, "utf-8")),
+          raw: fs.readFileSync(full, "utf-8").replace(/\r\n/g, "\n"),
+        };
+      })
   : [];
 
 const units = [...tourFiles, ...eventFiles];
@@ -118,17 +127,31 @@ async function verifyAndRecomputeShows() {
   let exactCount = 0;
   let diffCount = 0;
   let noSetlistCount = 0;
+  let updatedFilesCount = 0;
+  let unchangedFilesCount = 0;
+  const scrambledShows = [];
 
   const targetIds = process.argv.slice(2).filter((arg) => /^\d+$/.test(arg));
   const processedIds = new Set();
 
-  for (const { file, unit } of units) {
+  for (const { file, unit, raw } of units) {
     const isTour = unit.shows && unit.shows.length > 1;
     const fetchedPageSongsMap = new Map();
 
     for (const s of unit.shows) {
-      if (targetIds.length > 0 && !targetIds.includes(s.id)) continue;
+      const matchesTarget =
+        targetIds.length === 0 ||
+        targetIds.includes(s.id) ||
+        targetIds.some((tid) =>
+          (s.sourceUrls ?? []).some((u) => u.includes(tid))
+        );
+      if (!matchesTarget) continue;
       processedIds.add(s.id);
+      for (const tid of targetIds) {
+        if ((s.sourceUrls ?? []).some((u) => u.includes(tid))) {
+          processedIds.add(tid);
+        }
+      }
       if (!s.sourceUrls || !s.sourceUrls[0]) continue;
 
       const url = s.sourceUrls[0];
@@ -183,13 +206,34 @@ async function verifyAndRecomputeShows() {
           unit.type === "TV拼盤" || unit.type === "音樂祭";
         const pageSongs = extractSongsFromHtml(html, { higedanOnly });
         fetchedPageSongsMap.set(s.id, pageSongs);
+        // Import-time tripwire: DOM order disagreeing with player-index
+        // order or missing player-index on songs means null-idx positions
+        // are guesses, not facts.
+        const scramble = domScrambleInfo(pageSongs);
+        if (scramble.isScrambled) {
+          scrambledShows.push({
+            id: s.id,
+            url,
+            isLocked: !!s.locked,
+            desc: scramble.description,
+          });
+          const tag = s.locked ? "[SCRAMBLED DOM (LOCKED)]" : "[SCRAMBLED DOM]";
+          console.warn(
+            `${tag} ${s.id} ${url}: ${scramble.description}; null-idx positions are guesses — consider hand-verify + locked`
+          );
+        }
       } catch (err) {
         console.error(`Error verifying ${url}:`, err);
       }
     }
 
     // Auto-generate consensus templateSetlist if this is a Tour unit
-    if (isTour && fetchedPageSongsMap.size > 0) {
+    // and all shows were fetched (never overwrite consensus on targeted single-show runs)
+    if (
+      isTour &&
+      targetIds.length === 0 &&
+      fetchedPageSongsMap.size > 0
+    ) {
       const allPageSongs = Array.from(fetchedPageSongsMap.values());
       const consensusTpl = buildConsensusTemplate(allPageSongs, {
         livefansIdToId,
@@ -252,11 +296,15 @@ async function verifyAndRecomputeShows() {
       }
     }
 
-    fs.writeFileSync(
-      path.resolve(root, "data", file),
-      JSON.stringify(unit, null, 2) + "\n",
-      "utf-8"
-    );
+    const out = JSON.stringify(unit, null, 2) + "\n";
+    if (out !== raw) {
+      fs.writeFileSync(path.resolve(root, "data", file), out, "utf-8");
+      updatedFilesCount++;
+      console.log(`[UPDATED] ${file}`);
+    } else {
+      unchangedFilesCount++;
+      console.log(`[UNCHANGED] ${file}: content identical, write skipped`);
+    }
   }
 
   // Handle unregistered unknown show IDs
@@ -455,7 +503,17 @@ Setlist Alignment Summary:
 - Exact template match: ${exactCount}
 - Diffs calculated & applied: ${diffCount}
 - No setlist posted yet on LiveFans: ${noSetlistCount}
+- Files: ${updatedFilesCount} updated, ${unchangedFilesCount} unchanged
   `);
+
+  if (scrambledShows.length > 0) {
+    console.log(`=== SCRAMBLED DOM SUMMARY (${scrambledShows.length} shows) ===`);
+    for (const item of scrambledShows) {
+      const status = item.isLocked ? "LOCKED (OK)" : "ACTION NEEDED";
+      console.log(`- [${status}] ${item.id}: ${item.desc} (${item.url})`);
+    }
+    console.log();
+  }
 }
 
 if (process.argv[1] === fileURLToPath(import.meta.url))

@@ -27,3 +27,8 @@ LiveFans 歌單 `<td>` 的真實播放順以播放器索引（`id="idx-N"`）為
 * 曼谷場 `diff` 收斂為 `after:7` 過場一筆，`resolve` 還原與現場曲序一致。
 * 同類缺 `idx` 頁面不再產生同曲刪除再插入之假差異。
 * 真實的同曲 `skip`＋重插（アレンジ版本差異，ADR-0028）不受影響，不可對此類形態做自動合併。
+
+## Follow-up：匯入期亂序告警與無變更跳寫
+
+* `parse.js` 新增 `domScrambleInfo`（DOM 順 vs `idx` 順逆序對計數）；`batch-import` 在匯入期對逆序頁印 `[SCRAMBLED DOM] id url` 並提示手排＋`locked`，只告警不改排序。
+* `batch-import` 寫入改為內容一致即跳過（`[UNCHANGED]`），消除全量重寫噪音。
