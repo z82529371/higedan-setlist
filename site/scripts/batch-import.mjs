@@ -211,7 +211,9 @@ async function verifyAndRecomputeShows() {
 
         // TV拼盤/音樂祭拼盤頁含全出演者曲目：只收髭男段落
         const higedanOnly =
-          unit.type === "TV拼盤" || unit.type === "音樂祭";
+          unit.type === "電視演出" ||
+          unit.type === "TV拼盤" ||
+          unit.type === "音樂祭";
         const pageSongs = extractSongsFromHtml(html, { higedanOnly });
         fetchedPageSongsMap.set(s.id, pageSongs);
         // Import-time tripwire: DOM order disagreeing with player-index
@@ -349,11 +351,16 @@ async function verifyAndRecomputeShows() {
       const year = meta.livefansDate.slice(0, 4);
       const actualTitle = meta.eventTitle || `one-man live ${year}`;
       let detectedType = "專場";
-      if (
-        /紅白|歌合戦|CDTV|Mステ|ミュージックステーション|FNS歌謡祭|音楽の日|テレ東音樂祭|うたコン/i.test(
+      const isTvTitle =
+        /紅白|歌合戦|CDTV|Mステ|ミュージックステーション|FNS歌謡祭|音楽の日|テレ東音楽祭|テレ東音樂祭|うたコン|MUSIC\s*DAY|ベストアーティスト|ベストヒット|Buzz\s*Rhythm|バズリズム|Venue101|SONGS/i.test(
           actualTitle
-        )
-      ) {
+        );
+      const isTvVenue =
+        /テレビ|TV|日本テレビ|TBS|フジテレビ|テレビ朝日|テレビ東京|NHKスタジオ/i.test(
+          meta.rawVenue || ""
+        );
+
+      if (isTvTitle || isTvVenue) {
         detectedType = "電視演出";
       } else if (/fes|festival|フェス/i.test(actualTitle)) {
         detectedType = "音樂祭";
@@ -465,9 +472,12 @@ async function verifyAndRecomputeShows() {
         return item;
       });
 
-      const showTitle = meta.eventTitle
-        ? `${meta.eventTitle} ${cityName}`
-        : `${eventUnit.title} ${cityName}`;
+      const showTitle =
+        detectedType === "電視演出" || detectedType === "線上直播"
+          ? meta.eventTitle || eventUnit.title
+          : meta.eventTitle
+          ? `${meta.eventTitle} ${cityName}`
+          : `${eventUnit.title} ${cityName}`;
 
       const newShow = {
         id: String(eventId),

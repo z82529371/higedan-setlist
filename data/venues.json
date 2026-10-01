@@ -460,5 +460,23 @@
     "city": "長野",
     "region": "中部",
     "prefecture": "長野縣"
+  },
+  "日本テレビ": {
+    "venue": "日本電視台",
+    "city": "東京",
+    "region": "關東",
+    "prefecture": "東京都"
+  },
+  "フジテレビ": {
+    "venue": "富士電視台",
+    "city": "東京",
+    "region": "關東",
+    "prefecture": "東京都"
+  },
+  "TBSテレビ Bスタジオ": {
+    "venue": "TBS電視台 B攝影棚",
+    "city": "東京",
+    "region": "關東",
+    "prefecture": "東京都"
   }
 }

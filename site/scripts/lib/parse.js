@@ -341,7 +341,8 @@ export function extractShowMetadataFromHtml(html) {
           .replace(/^Official髭男dism\s*[-–—]?\s*/i, "")
           .trim();
       }
-      if (!t.startsWith("＠")) {
+      t = t.split("＠")[0].trim();
+      if (t) {
         eventTitle = t;
       }
     }
