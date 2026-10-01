@@ -442,32 +442,9 @@ async function verifyAndRecomputeShows() {
         };
       }
 
-      const setlist = pageSongs.map((s, idx) => {
-        const mappedId = livefansIdToId[s.livefansId] ?? titleToId[s.title];
-        const item = {
-          order: idx + 1,
-          encore: !!s.isEncore,
-        };
-
-        if (mappedId) {
-          item.songId = mappedId;
-        } else {
-          item.title = s.title;
-        }
-
-        if (s.subtitle) {
-          if (
-            s.subtitle.includes("リハ") ||
-            s.subtitle.includes("Soundcheck")
-          ) {
-            item.note = `リハ：${s.subtitle.replace(/^リハ[：:]?\s*/, "")}`;
-          } else {
-            item.note = s.subtitle;
-          }
-        }
-        if (s.kind) item.kind = s.kind;
-        if (s.type) item.type = s.type;
-        return item;
+      const setlist = mapPageSongsToEventSetlist(pageSongs, {
+        livefansIdToId,
+        titleToId,
       });
 
       const showTitle =
