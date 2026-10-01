@@ -406,7 +406,8 @@
     },
     {
       "id": "darin",
-      "title": "ダーリン。"
+      "title": "ダーリン。",
+      "livefansId": "329571"
     },
     {
       "id": "hajimari-no-asa",
@@ -430,7 +431,8 @@
     },
     {
       "id": "hatsumeika",
-      "title": "発明家"
+      "title": "発明家",
+      "livefansId": "547688"
     },
     {
       "id": "saigo-no-koi-wazurai",
@@ -443,6 +445,11 @@
     {
       "id": "travelers",
       "title": "Travelers"
+    },
+    {
+      "id": "natsu-moyou-no-neko",
+      "title": "夏模様の猫",
+      "livefansId": "649507"
     }
   ]
 }
