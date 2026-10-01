@@ -1,7 +1,9 @@
 # 33. 拼盤頁髭男過濾與未知匯入 TV 判別
 
-* Status: Accepted
+* Status: Superseded by [0045-five-performance-categories-and-tv-parsing-boundary.md](0045-five-performance-categories-and-tv-parsing-boundary.md) (音樂祭過濾部分)
 * Date: 2026-09-30
+
+> **音樂祭過濾 Superseded by 0045**：實證確認 LiveFans 音樂祭頁面為樂團專屬頁面且無 `<span>` 藝人標籤，開過濾會誤判全 skip；`higedanOnly` 已嚴格限縮於電視演出。
 
 ## Context & Problem Statement
 
