@@ -93,6 +93,14 @@ export function isIgnoredCmtText(t) {
 
 export function extractSongsFromHtml(html, opts = {}) {
   const { higedanOnly = false } = opts;
+  // TV多出演者拼盤判定：只有在頁面確實列出多位藝人時才執行過濾；
+  // 若為髭男專屬電視特輯（如 CDTV 4小時SP 髭男フェス 1263650），整場均為髭男曲目，不予濾除。
+  const pageArtists = [...html.matchAll(/\/artists\/(\d+)[^>]*>([^<]+)/g)].map((m) =>
+    m[2].trim()
+  );
+  const isMultiArtistPage = new Set(pageArtists).size > 1;
+  const shouldFilterHigedan = higedanOnly && isMultiArtistPage;
+
   const tdRegex =
     /<td[^>]*class="([^"]*(?:pc)?sl(?:\d+|medley)[^"]*)"[^>]*>([\s\S]*?)<\/td>/g;
   const items = [];
@@ -103,8 +111,8 @@ export function extractSongsFromHtml(html, opts = {}) {
     const songMatch = cellHtml.match(
       /<div class="ttl"><a[^>]*href="(?:https:\/\/www\.livefans\.jp)?\/songs\/(\d+)"[^>]*>([\s\S]*?)<\/a>/
     );
-    // TV拼盤/音樂祭拼盤：只收髭男段落。他團歌曲格與無藝人節目過場全丟。
-    if (higedanOnly) {
+    // TV多出演者拼盤：只收髭男段落。他團歌曲格與無藝人節目過場全丟。
+    if (shouldFilterHigedan) {
       if (!songMatch) continue;
       const artistSpan = cellHtml.match(/<span>([\s\S]*?)<\/span>/);
       const artist = artistSpan

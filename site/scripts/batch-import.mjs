@@ -83,6 +83,7 @@ titleToId["sameblue"] = "same-blue";
 titleToId["same blue"] = "same-blue";
 titleToId["trailer"] = "trailer";
 titleToId["traiier"] = "trailer";
+titleToId["夏模様の貓"] = "natsu-moyou-no-neko";
 
 
 const venuesPath = path.resolve(root, "data", "venues.json");

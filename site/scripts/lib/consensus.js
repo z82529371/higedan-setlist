@@ -224,6 +224,14 @@ export function computeDiff(pageSongs, templateSetlist, maps) {
         } else {
           itemObj.title = pMeta?.title || pSong;
           if (pMeta?.subtitle) itemObj.note = unescapeHtml(pMeta.subtitle);
+          const t = itemObj.title;
+          if (!t.includes("[") && !t.includes("～")) {
+            console.warn(
+              `\x1b[33m[UNREGISTERED SONG DETECTED]\x1b[0m "${t}" (livefansId: ${pMeta?.livefansId || "N/A"})\n` +
+                `   👉 If this is an Official髭男dism song, please add it to data/songs.json:\n` +
+                `      { "id": "<slug>", "title": "${t}"${pMeta?.livefansId ? `, "livefansId": "${pMeta.livefansId}"` : ""} }`
+            );
+          }
         }
       } else {
         itemObj.songId = pSong;
@@ -409,6 +417,13 @@ export function mapPageSongsToEventSetlist(pageSongs, maps) {
       item.note = sp.subtitle ? `${sp.title} ${sp.subtitle}` : sp.title;
     } else if (sp.livefansId && !sp.isCmt) {
       item.title = sp.title;
+      if (!sp.title.includes("[") && !sp.title.includes("～")) {
+        console.warn(
+          `\x1b[33m[UNREGISTERED SONG DETECTED]\x1b[0m "${sp.title}" (livefansId: ${sp.livefansId || "N/A"})\n` +
+            `   👉 If this is an Official髭男dism song, please add it to data/songs.json:\n` +
+            `      { "id": "<slug>", "title": "${sp.title}"${sp.livefansId ? `, "livefansId": "${sp.livefansId}"` : ""} }`
+        );
+      }
     } else {
       item.type = "interlude";
       item.note = sp.subtitle ? formatEventNote(sp.subtitle) : sp.title;

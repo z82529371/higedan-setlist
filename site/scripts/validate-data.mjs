@@ -127,6 +127,59 @@ export function validateAndCleanTours() {
     }
   }
 
+  // Audit: Check for unregistered songs and missing livefansId among performed songs
+  const songsData = JSON.parse(readFileSync(songsPath, "utf8"));
+  const songsMap = new Map(songsData.songs.map((s) => [s.id, s]));
+  const usedSongIds = new Set();
+  const suspiciousTitleTracks = [];
+
+  for (const dirName of dirs) {
+    const targetDir = resolve(root, "data", dirName);
+    if (!existsSync(targetDir)) continue;
+    const files = readdirSync(targetDir).filter((f) => f.endsWith(".json"));
+
+    for (const file of files) {
+      const unit = JSON.parse(readFileSync(resolve(targetDir, file), "utf8"));
+      if (unit.templateSetlist) {
+        for (const item of unit.templateSetlist) {
+          if (item.songId) usedSongIds.add(item.songId);
+          if (item.title && !item.title.includes("[") && !item.title.includes("～") && item.type !== "interlude") {
+            suspiciousTitleTracks.push({ file, title: item.title });
+          }
+        }
+      }
+      for (const show of unit.shows || []) {
+        if (show.setlist) {
+          for (const item of show.setlist) {
+            if (item.songId) usedSongIds.add(item.songId);
+            if (item.title && !item.title.includes("[") && !item.title.includes("～") && item.type !== "interlude") {
+              suspiciousTitleTracks.push({ file, showId: show.id, title: item.title });
+            }
+          }
+        }
+        if (show.diff?.insert) {
+          for (const ins of show.diff.insert) {
+            if (ins.item?.songId) usedSongIds.add(ins.item.songId);
+            if (ins.item?.title && !ins.item.title.includes("[") && !ins.item.title.includes("～") && ins.item.type !== "interlude") {
+              suspiciousTitleTracks.push({ file, showId: show.id, title: ins.item.title });
+            }
+          }
+        }
+      }
+    }
+  }
+
+  for (const item of suspiciousTitleTracks) {
+    console.warn(`[Song Audit Warning] ${item.file}${item.showId ? ` (${item.showId})` : ""}: Track "${item.title}" is recorded as title only without [Artist] notation — verify if it is an uncatalogued original song.`);
+  }
+
+  for (const songId of usedSongIds) {
+    const s = songsMap.get(songId);
+    if (s && !s.livefansId) {
+      console.warn(`[Song Audit Notice] Performed song '${songId}' (${s.title}) is missing livefansId in data/songs.json.`);
+    }
+  }
+
   return totalIssuesFixed;
 }
 
