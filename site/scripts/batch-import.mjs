@@ -2,6 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import {
+  cleanTitleKey,
   extractSongsFromHtml,
   extractShowMetadataFromHtml,
 } from "./lib/parse.js";
@@ -207,6 +208,13 @@ async function verifyAndRecomputeShows() {
     for (const s of unit.shows) {
       const pageSongs = fetchedPageSongsMap.get(s.id);
       if (!pageSongs) continue;
+
+      // Hand-verified positions: fetch still contributes to the consensus
+      // template, but the stored diff/setlist is never rewritten.
+      if (s.locked) {
+        console.log(`[LOCKED] ${s.id}: hand-verified, diff/setlist preserved`);
+        continue;
+      }
 
       if (unit.templateSetlist) {
         const { diff, status } = computeDiff(pageSongs, unit.templateSetlist, {

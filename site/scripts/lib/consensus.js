@@ -1,5 +1,92 @@
-import { unescapeHtml, cleanTitleKey } from "./parse.js";
+import { unescapeHtml, cleanTitleKey, isMemberSoloText } from "./parse.js";
 import { encoreStartOrderOf, isEncorePosition } from "../../src/lib/resolve.js";
+
+const isGapItem = (item) => !!(item.isCmt || item.type === "interlude");
+
+const mappedSongIdOf = (item, maps) =>
+  maps.livefansIdToId[item.livefansId] ??
+  maps.titleToId[cleanTitleKey(item.title)] ??
+  item.title;
+
+// Template-anchored reordering for pages whose DOM order is scrambled.
+// Song cells normally carry a player index (id="idx-N"); when a cell has
+// none (e.g. Pretender on 1981872, link-only player button), the DOM-neighbour
+// interpolation in parse.js misplaces it. Items WITH an index keep play order;
+// items WITHOUT one anchor to the template by song identity, and gaps
+// (cmt/過場) follow their DOM-adjacent song (ADR-0026 intent, identity-based
+// so the gap moves together with its song).
+function reorderPageSongsByTemplate(pageSongs, templateSongs, maps) {
+  if (!pageSongs.some((s) => s.playIndex == null)) return pageSongs;
+
+  const tplPos = new Map();
+  templateSongs.forEach((t, idx) => {
+    if (!tplPos.has(t.songId)) tplPos.set(t.songId, idx);
+  });
+
+  const byDom = [...pageSongs].sort((a, b) => a.domIndex - b.domIndex);
+  const domSongAt = (item, dir) => {
+    const i = byDom.indexOf(item);
+    for (let k = i + dir; k >= 0 && k < byDom.length; k += dir) {
+      if (!isGapItem(byDom[k])) return byDom[k];
+    }
+    return null;
+  };
+
+  // 1. Items with a player index keep exact play order.
+  const placed = pageSongs
+    .filter((s) => s.playIndex != null)
+    .sort((a, b) => a.playIndex - b.playIndex || a.domIndex - b.domIndex);
+  const inPlaced = new Set(placed);
+
+  // 2. Index-less songs anchor to the template; extras fall back to neighbours.
+  for (const s of byDom.filter((x) => x.playIndex == null && !isGapItem(x))) {
+    const t = tplPos.get(mappedSongIdOf(s, maps));
+    let at = -1;
+    if (t !== undefined) {
+      at = placed.findIndex((p) => {
+        if (isGapItem(p)) return false;
+        const pt = tplPos.get(mappedSongIdOf(p, maps));
+        return pt !== undefined && pt > t;
+      });
+      if (at === -1) {
+        for (let i = placed.length - 1; i >= 0; i--) {
+          if (isGapItem(placed[i])) continue;
+          const pt = tplPos.get(mappedSongIdOf(placed[i], maps));
+          if (pt !== undefined && pt <= t) {
+            at = i + 1;
+            break;
+          }
+        }
+      }
+    } else {
+      const prev = domSongAt(s, -1);
+      if (prev && inPlaced.has(prev)) at = placed.indexOf(prev) + 1;
+      else {
+        const next = domSongAt(s, 1);
+        if (next && inPlaced.has(next)) at = placed.indexOf(next);
+      }
+    }
+    placed.splice(at === -1 ? placed.length : at, 0, s);
+    inPlaced.add(s);
+  }
+
+  // 3. Index-less gaps follow their DOM-adjacent song.
+  for (const g of byDom.filter((x) => x.playIndex == null && isGapItem(x))) {
+    let at = -1;
+    if (g.cmtBefore !== true) {
+      const prev = domSongAt(g, -1);
+      if (prev && inPlaced.has(prev)) at = placed.indexOf(prev) + 1;
+    }
+    if (at === -1) {
+      const next = domSongAt(g, 1);
+      if (next && inPlaced.has(next)) at = placed.indexOf(next);
+    }
+    placed.splice(at === -1 ? placed.length : at, 0, g);
+    inPlaced.add(g);
+  }
+
+  return placed;
+}
 
 export function computeDiff(pageSongs, templateSetlist, maps) {
   const templateSongs = templateSetlist
@@ -11,7 +98,6 @@ export function computeDiff(pageSongs, templateSetlist, maps) {
       kind: i.kind ?? [],
       note: i.note ?? "",
     }));
-
   // Residual note: strip kind-source keywords; only remainder counts as version difference.
   const residualNote = (note) =>
     (note ?? "")
@@ -23,7 +109,10 @@ export function computeDiff(pageSongs, templateSetlist, maps) {
   const templateSongIds = templateSongs.map((i) => i.songId);
   const encoreStartOrder = encoreStartOrderOf(templateSongs);
 
-  const pageSongIds = pageSongs.map(
+  // DOM order on LiveFans pages is not always play order; re-anchor
+  // index-less items to the template before aligning.
+  const orderedPageSongs = reorderPageSongsByTemplate(pageSongs, templateSongs, maps);
+  const pageSongIds = orderedPageSongs.map(
     (item) =>
       maps.livefansIdToId[item.livefansId] ??
       maps.titleToId[cleanTitleKey(item.title)] ??
@@ -43,9 +132,9 @@ export function computeDiff(pageSongs, templateSetlist, maps) {
   const insert = [];
 
   let tIdx = 0;
-  for (let pIdx = 0; pIdx < pageSongIds.length; pIdx++) {
+  for (let pIdx = 0; pIdx < orderedPageSongs.length; pIdx++) {
     const pSong = pageSongIds[pIdx];
-    const pMeta = pageSongs[pIdx];
+    const pMeta = orderedPageSongs[pIdx];
     if (tIdx < templateSongs.length && templateSongs[tIdx].songId === pSong) {
       const t = templateSongs[tIdx];
       const kindSame = normKind(t.kind) === normKind(pMeta?.kind ?? []);
@@ -100,9 +189,18 @@ export function computeDiff(pageSongs, templateSetlist, maps) {
           itemObj.note = unescapeHtml(pMeta?.subtitle || pSong);
         } else if (!isKnownSong) {
           // Cover/special song with a song link but no songs.json entry:
-          // formal track with title (unlinked), never enters the template.
-          itemObj.title = pMeta?.title || pSong;
-          if (pMeta?.subtitle) itemObj.note = unescapeHtml(pMeta.subtitle);
+          // formal track with title (unlinked), never enters the template —
+          // EXCEPT member-solo corners, which are interludes by content
+          // regardless of linkage (Q1: 看內容不看連結).
+          if (isMemberSoloText(pMeta?.subtitle ?? "")) {
+            itemObj.type = "interlude";
+            const titleText = unescapeHtml(pMeta?.title || pSong);
+            const subText = unescapeHtml(pMeta?.subtitle ?? "");
+            itemObj.note = subText ? `${titleText} ${subText}` : titleText;
+          } else {
+            itemObj.title = pMeta?.title || pSong;
+            if (pMeta?.subtitle) itemObj.note = unescapeHtml(pMeta.subtitle);
+          }
         } else {
           itemObj.songId = pSong;
           if (pMeta?.subtitle) {
@@ -137,6 +235,8 @@ export function buildConsensusTemplate(allShowSongs, maps) {
   const songEncoreCounts = {};
   const songKindCounts = {};
   const songPositions = {};
+  const songFallbackPositions = {};
+  const songSamples = {};
 
   for (const show of validShows) {
     show.forEach((item, pos) => {
@@ -161,10 +261,13 @@ export function buildConsensusTemplate(allShowSongs, maps) {
         }
       }
       if (!songPositions[key]) songPositions[key] = [];
-      songPositions[key].push(pos);
+      // Index-less items have no trustworthy position (scrambled DOM);
+      // count them but keep them out of the ordering average.
+      if (item.playIndex != null) songPositions[key].push(pos);
+      else (songFallbackPositions[key] ??= []).push(pos);
 
-      if (!songPositions[key].sampleItem) {
-        songPositions[key].sampleItem = { ...item, mappedId };
+      if (!songSamples[key]) {
+        songSamples[key] = { ...item, mappedId };
       }
     });
   }
@@ -175,21 +278,25 @@ export function buildConsensusTemplate(allShowSongs, maps) {
   );
 
   // Compute average relative position for ordering
-  const scored = consensusKeys.map((key) => {
-    const positions = songPositions[key];
-    const avgPos = positions.reduce((a, b) => a + b, 0) / positions.length;
-    const isEncore =
-      (songEncoreCounts[key] || 0) >= Math.ceil(positions.length * 0.5);
-    const sample = songPositions[key].sampleItem;
+  const scored = consensusKeys
+    .map((key) => {
+      const positions = songPositions[key].length
+        ? songPositions[key]
+        : (songFallbackPositions[key] ?? []);
+      if (positions.length === 0) return null;
+      const avgPos = positions.reduce((a, b) => a + b, 0) / positions.length;
+      const isEncore =
+        (songEncoreCounts[key] || 0) >= Math.ceil(positions.length * 0.5);
+      const sample = songSamples[key];
 
-    const consensusKind = [];
-    if (songKindCounts[key]) {
-      for (const [k, count] of Object.entries(songKindCounts[key])) {
-        if (count >= threshold) consensusKind.push(k);
+      const consensusKind = [];
+      if (songKindCounts[key]) {
+        for (const [k, count] of Object.entries(songKindCounts[key])) {
+          if (count >= threshold) consensusKind.push(k);
+        }
       }
-    }
 
-    return {
+      return {
       key,
       avgPos,
       isEncore,
@@ -197,7 +304,8 @@ export function buildConsensusTemplate(allShowSongs, maps) {
       title: sample.title,
       kind: consensusKind.length ? consensusKind : undefined,
     };
-  });
+    })
+    .filter((x) => x !== null);
 
   // Primary sort by isEncore, secondary sort by avgPos
   scored.sort((a, b) => {
@@ -230,11 +338,16 @@ export function mapPageSongsToEventSetlist(pageSongs, maps) {
   );
   const isGap = pageSongs.map((sp) => !!(sp.isCmt || sp.type === "interlude"));
   // Song-link items without a songs.json entry (covers) are formal tracks:
-  // always keep them, never drop.
+  // always keep them, never drop — EXCEPT member-solo corners, which are
+  // interludes by content regardless of linkage (Q1: 看內容不看連結).
   const isCover = pageSongs.map((sp, i) => !!sp.livefansId && !sp.isCmt && !isMapped[i]);
-  // Keep mapped songs and covers, plus any contiguous interlude run touching
-  // a kept song (single-cmt adjacency check drops the head of multi-cmt runs).
-  const keep = isMapped.map((m, i) => m || isCover[i]);
+  const isMemberCover = pageSongs.map(
+    (sp, i) => isCover[i] && isMemberSoloText(sp.subtitle ?? "")
+  );
+  // Keep mapped songs, covers and member-solo corners, plus any contiguous
+  // interlude run touching a kept song (single-cmt adjacency check drops the
+  // head of multi-cmt runs).
+  const keep = isMapped.map((m, i) => m || isCover[i] || isMemberCover[i]);
   let changed = true;
   while (changed) {
     changed = false;
@@ -250,9 +363,11 @@ export function mapPageSongsToEventSetlist(pageSongs, maps) {
     }
   }
 
-  const filteredSongs = pageSongs.filter((_, idx) => keep[idx]);
+  const kept = pageSongs
+    .map((sp, origIdx) => ({ sp, isMember: isMemberCover[origIdx] }))
+    .filter((_, origIdx) => keep[origIdx]);
 
-  return filteredSongs.map((sp, idx) => {
+  return kept.map(({ sp, isMember }, idx) => {
     const mappedId =
       maps.livefansIdToId[sp.livefansId] ?? maps.titleToId[cleanTitleKey(sp.title)];
     const item = {
@@ -261,6 +376,9 @@ export function mapPageSongsToEventSetlist(pageSongs, maps) {
     };
     if (mappedId) {
       item.songId = mappedId;
+    } else if (isMember) {
+      item.type = "interlude";
+      item.note = sp.subtitle ? `${sp.title} ${sp.subtitle}` : sp.title;
     } else if (sp.livefansId && !sp.isCmt) {
       item.title = sp.title;
     } else {

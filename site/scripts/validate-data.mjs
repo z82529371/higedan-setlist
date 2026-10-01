@@ -46,7 +46,7 @@ export function validateAndCleanTours() {
           modified = true;
         }
 
-        if (unit.templateSetlist && show.diff) {
+        if (unit.templateSetlist && show.diff && !show.locked) {
           const tpl = unit.templateSetlist;
           const encoreStartOrder = encoreStartOrderOf(tpl);
 

@@ -17,7 +17,17 @@ export const cleanTitleKey = (t) =>
         .toLowerCase()
     : "";
 
+// Member-solo signal (non-satoshi performers): content-based, independent of
+// whether the cell carries a song link. Covers 﨑 (U+FA11) variant spelling.
+export function isMemberSoloText(t) {
+  if (!t) return false;
+  return /楢[崎﨑]|小笹|松浦|大輔/.test(t);
+}
+
 // MC/OPENING/SE markers, tolerant of decorative wrappers like ～MC1～.
+// Bare markers and numbered variants (MC/MC1/MC 2/MC-3) are dropped;
+// MCs with content (birthday calls, trouble notes, 弾き語りMC, 楽器分工)
+// are kept as interludes. Hand-verified exceptions use `locked`.
 export function isIgnoredCmtText(t) {
   if (!t) return true;
   const up = t.toUpperCase().trim();
@@ -90,10 +100,7 @@ export function extractSongsFromHtml(html, opts = {}) {
       /en\d+/i.test(tdClass);
 
     const kind = [];
-    const isOtherMemberSolo =
-      subtitleText.includes("楢崎") ||
-      subtitleText.includes("小笹") ||
-      subtitleText.includes("松浦");
+    const isOtherMemberSolo = isMemberSoloText(subtitleText);
     if (
       (subtitleText.includes("弾き語り") || subtitleText.includes("ソロ")) &&
       !isOtherMemberSolo
