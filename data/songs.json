@@ -389,14 +389,12 @@
     {
       "id": "midori-no-amayoke",
       "title": "みどりの雨避け",
-      "livefansId": "687564",
-      "unreleased": true
+      "livefansId": "687564"
     },
     {
       "id": "lost-in-my-room",
       "title": "Lost In My Room",
-      "livefansId": "687569",
-      "unreleased": true
+      "livefansId": "687569"
     },
     {
       "id": "koi-no-maenarae",
@@ -409,6 +407,42 @@
     {
       "id": "darin",
       "title": "ダーリン。"
+    },
+    {
+      "id": "hajimari-no-asa",
+      "title": "始まりの朝"
+    },
+    {
+      "id": "equal",
+      "title": "イコール"
+    },
+    {
+      "id": "kiiroi-kuruma",
+      "title": "黄色い車"
+    },
+    {
+      "id": "saredo-hibi-wa",
+      "title": "されど日々は"
+    },
+    {
+      "id": "kanousei",
+      "title": "可能性"
+    },
+    {
+      "id": "hatsumeika",
+      "title": "発明家"
+    },
+    {
+      "id": "saigo-no-koi-wazurai",
+      "title": "最後の恋煩い"
+    },
+    {
+      "id": "052519",
+      "title": "052519"
+    },
+    {
+      "id": "travelers",
+      "title": "Travelers"
     }
   ]
 }

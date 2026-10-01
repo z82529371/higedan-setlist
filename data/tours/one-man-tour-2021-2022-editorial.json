@@ -946,6 +946,7 @@
       "sourceUrls": [
         "https://www.livefans.jp/events/1353359"
       ],
+      "locked": true,
       "date": "2022-03-19",
       "opensAt": "17:00",
       "venue": "埼玉超級競技場",
@@ -955,11 +956,11 @@
       "diff": {
         "insert": [
           {
-            "after": 2,
+            "after": 4,
             "item": {
               "encore": false,
-              "title": "思ひで [鈴木常吉]",
-              "note": "楢﨑 誠"
+              "type": "interlude",
+              "note": "思ひで [鈴木常吉] 楢﨑 誠"
             }
           },
           {

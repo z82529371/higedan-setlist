@@ -936,8 +936,8 @@
             "after": 11,
             "item": {
               "encore": false,
-              "title": "思ひで [鈴木常吉]",
-              "note": "楢崎さんGuitarにて弾き語り＋Andy"
+              "type": "interlude",
+              "note": "思ひで [鈴木常吉] 楢崎さんGuitarにて弾き語り＋Andy"
             }
           },
           {

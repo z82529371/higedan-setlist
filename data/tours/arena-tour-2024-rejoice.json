@@ -487,6 +487,7 @@
       "sourceUrls": [
         "https://www.livefans.jp/events/1672278"
       ],
+      "locked": true,
       "diff": {
         "skip": [
           12,
