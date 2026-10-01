@@ -86,7 +86,11 @@ export default function App() {
   const [showGroupFilter, setShowGroupFilter] = useState(() => {
     if (initial.selUnitId) {
       const u = allUnits.find((x) => x.id === initial.selUnitId);
-      if (u) return u.type === "專場" ? "tour" : "event";
+      if (u) {
+        if (u.type === "專場") return "tour";
+        if (u.type === "對バン" || u.type === "聯合專場") return "collab";
+        return "event";
+      }
     }
     return "tour";
   });
@@ -125,7 +129,9 @@ export default function App() {
       setSelUnitId(uId);
       const u = allUnits.find((x) => x.id === uId);
       if (u) {
-        setShowGroupFilter(u.type === "專場" ? "tour" : "event");
+        if (u.type === "專場") setShowGroupFilter("tour");
+        else if (u.type === "對バン" || u.type === "聯合專場") setShowGroupFilter("collab");
+        else setShowGroupFilter("event");
         const y = unitEarliest(u).split("-")[0];
         if (y && y !== "9999") setShowYearFilter(y);
       }
@@ -303,13 +309,28 @@ export default function App() {
       {tab === "show" &&
         (() => {
           const soloUnits = allUnits.filter((u) => u.type === "專場");
-          const festUnits = allUnits.filter((u) => u.type !== "專場");
+          const collabUnits = allUnits.filter(
+            (u) => u.type === "對バン" || u.type === "聯合專場"
+          );
+          const festUnits = allUnits.filter(
+            (u) =>
+              u.type !== "專場" &&
+              u.type !== "對バン" &&
+              u.type !== "聯合專場"
+          );
 
           // Filter by category
-          const isEvent = showGroupFilter === "event";
-          const categoryFiltered = allUnits.filter((u) =>
-            isEvent ? u.type !== "專場" : u.type === "專場"
-          );
+          const categoryFiltered = allUnits.filter((u) => {
+            if (showGroupFilter === "collab")
+              return u.type === "對バン" || u.type === "聯合專場";
+            if (showGroupFilter === "event")
+              return (
+                u.type !== "專場" &&
+                u.type !== "對バン" &&
+                u.type !== "聯合專場"
+              );
+            return u.type === "專場";
+          });
 
           // Extract available start years within current category
           const yearsSet = new Set(
@@ -330,66 +351,57 @@ export default function App() {
             (u) => unitEarliest(u).split("-")[0] === activeYear
           );
 
+          const handleCategoryChange = (catKey, unitsList) => {
+            setShowGroupFilter(catKey);
+            const years = Array.from(
+              new Set(
+                unitsList
+                  .map((u) => unitEarliest(u).split("-")[0])
+                  .filter((y) => y && y !== "9999")
+              )
+            ).sort((a, b) => b.localeCompare(a));
+            const targetYear = years.includes(showYearFilter)
+              ? showYearFilter
+              : years[0];
+            if (targetYear) setShowYearFilter(targetYear);
+            const firstUnit = unitsList.find(
+              (u) => unitEarliest(u).split("-")[0] === targetYear
+            );
+            if (firstUnit) handleUnitChange(firstUnit.id);
+          };
+
           return (
             <div
-              className="mb-5 flex flex-wrap items-center gap-x-[10px] gap-y-2 rounded-[3px] border-[1.5px] border-ink bg-card px-4 py-3 shadow-[4px_4px_0_rgba(23,35,59,0.1)]"
+              className="mb-5 flex flex-col gap-y-2.5 rounded-[3px] border-[1.5px] border-ink bg-card px-4 py-3 shadow-[4px_4px_0_rgba(23,35,59,0.1)]"
               role="group"
               aria-label="場次巡演分組"
             >
-              <div className="mr-[6px] flex items-center font-mono text-[11px] font-bold uppercase tracking-[0.15em] text-muted after:content-['：']">
-                演出類型
+              <div className="flex flex-wrap items-center gap-2">
+                <span className="mr-[6px] flex items-center font-mono text-[11px] font-bold uppercase tracking-[0.15em] text-muted after:content-['：']">
+                  演出類型
+                </span>
+                <button
+                  className={filterPillClass(showGroupFilter === "tour")}
+                  onClick={() => handleCategoryChange("tour", soloUnits)}
+                >
+                  巡演專場 ({soloUnits.length})
+                </button>
+                <button
+                  className={filterPillClass(showGroupFilter === "collab")}
+                  onClick={() => handleCategoryChange("collab", collabUnits)}
+                >
+                  聯合專場 ({collabUnits.length})
+                </button>
+                <button
+                  className={filterPillClass(showGroupFilter === "event")}
+                  onClick={() => handleCategoryChange("event", festUnits)}
+                >
+                  音樂祭／特別事件 ({festUnits.length})
+                </button>
               </div>
-              <button
-                className={filterPillClass(showGroupFilter !== "event")}
-                onClick={() => {
-                  setShowGroupFilter("tour");
-                  const tours = allUnits.filter((u) => u.type === "專場");
-                  const years = Array.from(
-                    new Set(
-                      tours
-                        .map((u) => unitEarliest(u).split("-")[0])
-                        .filter((y) => y && y !== "9999")
-                    )
-                  ).sort((a, b) => b.localeCompare(a));
-                  const targetYear = years.includes(showYearFilter)
-                    ? showYearFilter
-                    : years[0];
-                  if (targetYear) setShowYearFilter(targetYear);
-                  const firstUnit = tours.find(
-                    (u) => unitEarliest(u).split("-")[0] === targetYear
-                  );
-                  if (firstUnit) handleUnitChange(firstUnit.id);
-                }}
-              >
-                巡演專場 ({soloUnits.length})
-              </button>
-              <button
-                className={filterPillClass(showGroupFilter === "event")}
-                onClick={() => {
-                  setShowGroupFilter("event");
-                  const events = allUnits.filter((u) => u.type !== "專場");
-                  const years = Array.from(
-                    new Set(
-                      events
-                        .map((u) => unitEarliest(u).split("-")[0])
-                        .filter((y) => y && y !== "9999")
-                    )
-                  ).sort((a, b) => b.localeCompare(a));
-                  const targetYear = years.includes(showYearFilter)
-                    ? showYearFilter
-                    : years[0];
-                  if (targetYear) setShowYearFilter(targetYear);
-                  const firstUnit = events.find(
-                    (u) => unitEarliest(u).split("-")[0] === targetYear
-                  );
-                  if (firstUnit) handleUnitChange(firstUnit.id);
-                }}
-              >
-                音樂祭／特別事件 ({festUnits.length})
-              </button>
 
-              <div className="my-1 flex flex-wrap items-center gap-2">
-                <span className="flex items-center font-mono text-[11px] font-bold uppercase tracking-[0.15em] text-muted after:content-['：']">
+              <div className="flex flex-wrap items-center gap-2">
+                <span className="mr-[6px] flex items-center font-mono text-[11px] font-bold uppercase tracking-[0.15em] text-muted after:content-['：']">
                   開始年份
                 </span>
                 {availableYears.map((year) => {
@@ -414,7 +426,7 @@ export default function App() {
                 })}
               </div>
 
-              <div className="mt-2 flex w-full flex-wrap gap-x-[10px] gap-y-[6px] border-t border-dashed border-line pt-[10px]">
+              <div className="mt-1 flex w-full flex-wrap gap-x-[10px] gap-y-[6px] border-t border-dashed border-line pt-[10px]">
                 {[...finalUnits]
                   .sort((a, b) => (unitEarliest(b) < unitEarliest(a) ? -1 : 1))
                   .map((u) => (
