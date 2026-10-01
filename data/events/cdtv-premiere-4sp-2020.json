@@ -1,0 +1,31 @@
+{
+  "id": "cdtv-premiere-4sp-2020",
+  "title": "CDTVライブ ! ライブ ! 初回4時間SP",
+  "shortTitle": "CDTVライブ ! ライブ ! 初回",
+  "type": "電視演出",
+  "shows": [
+    {
+      "id": "1251987",
+      "date": "2020-03-30",
+      "city": "東京",
+      "venue": "TBS電視台",
+      "region": "關東",
+      "prefecture": "東京都",
+      "title": "CDTVライブ ! ライブ ! 初回4時間SP",
+      "sourceUrls": ["https://www.livefans.jp/events/1251987"],
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "songId": "i-love"
+        },
+        {
+          "order": 2,
+          "encore": false,
+          "songId": "shukumei"
+        }
+      ],
+      "opensAt": "19:00"
+    }
+  ]
+}
