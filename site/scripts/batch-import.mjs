@@ -436,14 +436,37 @@ async function verifyAndRecomputeShows() {
         slug = `${slug}-${year}`;
       }
 
-      const eventFile = path.resolve(eventsDir, `${slug}.json`);
+      let finalSlug = slug;
+      let eventFile = path.resolve(eventsDir, `${finalSlug}.json`);
       let eventUnit;
+
+      if (fs.existsSync(eventFile)) {
+        const existing = JSON.parse(fs.readFileSync(eventFile, "utf-8"));
+        const isSameShow = existing.shows.some((s) => s.id === String(eventId));
+        if (!isSameShow && existing.shows.length > 0) {
+          const dateDiffs = existing.shows
+            .filter((s) => s.date)
+            .map((s) =>
+              Math.abs(
+                (new Date(s.date) - new Date(meta.livefansDate)) /
+                  (1000 * 60 * 60 * 24)
+              )
+            );
+          const minDiff = dateDiffs.length > 0 ? Math.min(...dateDiffs) : 0;
+          if (minDiff > 7) {
+            const mmdd = meta.livefansDate.slice(5).replace("-", "");
+            finalSlug = `${slug}-${mmdd}`;
+            eventFile = path.resolve(eventsDir, `${finalSlug}.json`);
+          }
+        }
+      }
+
       if (fs.existsSync(eventFile)) {
         eventUnit = JSON.parse(fs.readFileSync(eventFile, "utf-8"));
-        eventUnit.title = actualTitle;
+        if (!eventUnit.title) eventUnit.title = actualTitle;
       } else {
         eventUnit = {
-          id: slug,
+          id: finalSlug,
           title: actualTitle,
           type: detectedType,
           shows: [],
