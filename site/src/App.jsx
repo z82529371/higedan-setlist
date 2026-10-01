@@ -69,10 +69,37 @@ export default function App() {
   const [selShow, setSelShow] = useState(initial.selShow);
   const [q, setQ] = useState("");
 
-  const [songGroupFilter, setSongGroupFilter] = useState("all");
-  const [venueGroupFilter, setVenueGroupFilter] = useState("all");
-  const [showGroupFilter, setShowGroupFilter] = useState("all");
-  const [showYearFilter, setShowYearFilter] = useState("all");
+  const [songGroupFilter, setSongGroupFilter] = useState(() => {
+    if (initial.selSong) {
+      const s = allUsedSongs.find((x) => x.id === initial.selSong);
+      if (s) return getSongAlbum(s);
+    }
+    return ALBUM_ORDER[0];
+  });
+  const [venueGroupFilter, setVenueGroupFilter] = useState(() => {
+    if (initial.selVenue) {
+      const v = allVenues.find((x) => x.name === initial.selVenue);
+      if (v) return getVenueRegion(v);
+    }
+    return REGION_ORDER[0];
+  });
+  const [showGroupFilter, setShowGroupFilter] = useState(() => {
+    if (initial.selUnitId) {
+      const u = allUnits.find((x) => x.id === initial.selUnitId);
+      if (u) return u.type === "專場" ? "tour" : "event";
+    }
+    return "tour";
+  });
+  const [showYearFilter, setShowYearFilter] = useState(() => {
+    if (initial.selUnitId) {
+      const u = allUnits.find((x) => x.id === initial.selUnitId);
+      if (u) {
+        const y = unitEarliest(u).split("-")[0];
+        if (y && y !== "9999") return y;
+      }
+    }
+    return "2026";
+  });
 
   const slipRef = useRef(null);
 
@@ -84,6 +111,8 @@ export default function App() {
     if (r.kind === "song" && allUsedSongs.some((s) => s.id === r.value)) {
       setTab("song");
       setSelSong(r.value);
+      const s = allUsedSongs.find((x) => x.id === r.value);
+      if (s) setSongGroupFilter(getSongAlbum(s));
       setSelTitle(null);
       setQ("");
     } else if (r.kind === "title" && trackShows.has(trackKey("title", r.value))) {
@@ -92,7 +121,14 @@ export default function App() {
       setSelSong(null);
       setQ("");
     } else if (r.kind === "show" && unitIdByShowId.has(r.value)) {
-      setSelUnitId(unitIdByShowId.get(r.value));
+      const uId = unitIdByShowId.get(r.value);
+      setSelUnitId(uId);
+      const u = allUnits.find((x) => x.id === uId);
+      if (u) {
+        setShowGroupFilter(u.type === "專場" ? "tour" : "event");
+        const y = unitEarliest(u).split("-")[0];
+        if (y && y !== "9999") setShowYearFilter(y);
+      }
       setTab("show");
       setSelShow(r.value);
     } else if (
@@ -101,6 +137,8 @@ export default function App() {
     ) {
       setTab("venue");
       setSelVenue(r.value);
+      const v = allVenues.find((x) => x.name === r.value);
+      if (v) setVenueGroupFilter(getVenueRegion(v));
       setQ("");
     }
   };
@@ -149,7 +187,9 @@ export default function App() {
 
   const searchLabelText = tab === "venue" ? "搜尋場地" : "搜尋歌名";
   const searchPlaceholder =
-    tab === "venue" ? "例如 台北小巨蛋 或 橫濱" : "例如 Subtitle";
+    tab === "venue"
+      ? "全庫搜尋場地，例如 台北小巨蛋"
+      : "全庫搜尋歌曲，例如 Subtitle";
 
   const tplSongs = current?.tpl?.filter((i) => i.songId).length ?? 0;
   const tplCount = current?.tpl?.length ?? 0;
@@ -266,11 +306,10 @@ export default function App() {
           const festUnits = allUnits.filter((u) => u.type !== "專場");
 
           // Filter by category
-          const categoryFiltered = allUnits.filter((u) => {
-            if (showGroupFilter === "tour") return u.type === "專場";
-            if (showGroupFilter === "event") return u.type !== "專場";
-            return true;
-          });
+          const isEvent = showGroupFilter === "event";
+          const categoryFiltered = allUnits.filter((u) =>
+            isEvent ? u.type !== "專場" : u.type === "專場"
+          );
 
           // Extract available start years within current category
           const yearsSet = new Set(
@@ -282,11 +321,14 @@ export default function App() {
             b.localeCompare(a)
           );
 
-          // Filter by year if selected
-          const finalUnits = categoryFiltered.filter((u) => {
-            if (showYearFilter === "all") return true;
-            return unitEarliest(u).split("-")[0] === showYearFilter;
-          });
+          const activeYear = availableYears.includes(showYearFilter)
+            ? showYearFilter
+            : availableYears[0] ?? "";
+
+          // Filter by active year
+          const finalUnits = categoryFiltered.filter(
+            (u) => unitEarliest(u).split("-")[0] === activeYear
+          );
 
           return (
             <div
@@ -298,19 +340,25 @@ export default function App() {
                 演出類型
               </div>
               <button
-                className={filterPillClass(showGroupFilter === "all")}
-                onClick={() => {
-                  setShowGroupFilter("all");
-                  setShowYearFilter("all");
-                }}
-              >
-                全部場次 ({allUnits.length})
-              </button>
-              <button
-                className={filterPillClass(showGroupFilter === "tour")}
+                className={filterPillClass(showGroupFilter !== "event")}
                 onClick={() => {
                   setShowGroupFilter("tour");
-                  setShowYearFilter("all");
+                  const tours = allUnits.filter((u) => u.type === "專場");
+                  const years = Array.from(
+                    new Set(
+                      tours
+                        .map((u) => unitEarliest(u).split("-")[0])
+                        .filter((y) => y && y !== "9999")
+                    )
+                  ).sort((a, b) => b.localeCompare(a));
+                  const targetYear = years.includes(showYearFilter)
+                    ? showYearFilter
+                    : years[0];
+                  if (targetYear) setShowYearFilter(targetYear);
+                  const firstUnit = tours.find(
+                    (u) => unitEarliest(u).split("-")[0] === targetYear
+                  );
+                  if (firstUnit) handleUnitChange(firstUnit.id);
                 }}
               >
                 巡演專場 ({soloUnits.length})
@@ -319,7 +367,22 @@ export default function App() {
                 className={filterPillClass(showGroupFilter === "event")}
                 onClick={() => {
                   setShowGroupFilter("event");
-                  setShowYearFilter("all");
+                  const events = allUnits.filter((u) => u.type !== "專場");
+                  const years = Array.from(
+                    new Set(
+                      events
+                        .map((u) => unitEarliest(u).split("-")[0])
+                        .filter((y) => y && y !== "9999")
+                    )
+                  ).sort((a, b) => b.localeCompare(a));
+                  const targetYear = years.includes(showYearFilter)
+                    ? showYearFilter
+                    : years[0];
+                  if (targetYear) setShowYearFilter(targetYear);
+                  const firstUnit = events.find(
+                    (u) => unitEarliest(u).split("-")[0] === targetYear
+                  );
+                  if (firstUnit) handleUnitChange(firstUnit.id);
                 }}
               >
                 音樂祭／特別事件 ({festUnits.length})
@@ -329,12 +392,6 @@ export default function App() {
                 <span className="flex items-center font-mono text-[11px] font-bold uppercase tracking-[0.15em] text-muted after:content-['：']">
                   開始年份
                 </span>
-                <button
-                  className={filterPillClass(showYearFilter === "all")}
-                  onClick={() => setShowYearFilter("all")}
-                >
-                  全部年份
-                </button>
                 {availableYears.map((year) => {
                   const count = categoryFiltered.filter(
                     (u) => unitEarliest(u).split("-")[0] === year
@@ -342,8 +399,14 @@ export default function App() {
                   return (
                     <button
                       key={year}
-                      className={filterPillClass(showYearFilter === year)}
-                      onClick={() => setShowYearFilter(year)}
+                      className={filterPillClass(activeYear === year)}
+                      onClick={() => {
+                        setShowYearFilter(year);
+                        const firstUnit = categoryFiltered.find(
+                          (u) => unitEarliest(u).split("-")[0] === year
+                        );
+                        if (firstUnit) handleUnitChange(firstUnit.id);
+                      }}
                     >
                       📅 {year} ({count})
                     </button>
@@ -375,14 +438,8 @@ export default function App() {
           aria-label="歌曲專輯分組"
         >
           <div className="mr-[6px] flex items-center font-mono text-[11px] font-bold uppercase tracking-[0.15em] text-muted after:content-['：']">
-            專輯／發行分類
+            專輯分類
           </div>
-          <button
-            className={filterPillClass(songGroupFilter === "all")}
-            onClick={() => setSongGroupFilter("all")}
-          >
-            全部歌曲 ({allUsedSongs.length})
-          </button>
           {ALBUM_ORDER.map((album) => {
             const count = allUsedSongs.filter(
               (s) => getSongAlbum(s) === album
@@ -392,7 +449,13 @@ export default function App() {
               <button
                 key={album}
                 className={filterPillClass(songGroupFilter === album)}
-                onClick={() => setSongGroupFilter(album)}
+                onClick={() => {
+                  setSongGroupFilter(album);
+                  const firstSong = allUsedSongs.find(
+                    (s) => getSongAlbum(s) === album
+                  );
+                  if (firstSong) handleSelectSong(firstSong.id);
+                }}
               >
                 💿 {album} ({count})
               </button>
@@ -410,12 +473,6 @@ export default function App() {
           <div className="mr-[6px] flex items-center font-mono text-[11px] font-bold uppercase tracking-[0.15em] text-muted after:content-['：']">
             地區分區
           </div>
-          <button
-            className={filterPillClass(venueGroupFilter === "all")}
-            onClick={() => setVenueGroupFilter("all")}
-          >
-            全部地區 ({allVenues.length})
-          </button>
           {REGION_ORDER.map((region) => {
             const count = allVenues.filter(
               (v) => getVenueRegion(v) === region
@@ -425,7 +482,13 @@ export default function App() {
               <button
                 key={region}
                 className={filterPillClass(venueGroupFilter === region)}
-                onClick={() => setVenueGroupFilter(region)}
+                onClick={() => {
+                  setVenueGroupFilter(region);
+                  const firstVenue = allVenues.find(
+                    (v) => getVenueRegion(v) === region
+                  );
+                  if (firstVenue) handleSelectVenue(firstVenue.name);
+                }}
               >
                 📍 {region} ({count})
               </button>
@@ -497,7 +560,8 @@ export default function App() {
                 let filtered = allUsedSongs.filter((s) =>
                   s.title.toLowerCase().includes(needle)
                 );
-                if (songGroupFilter !== "all") {
+                // Piercing search: when search is empty, filter by active album; when searching, search all albums
+                if (!needle && songGroupFilter) {
                   filtered = filtered.filter(
                     (s) => getSongAlbum(s) === songGroupFilter
                   );
@@ -566,7 +630,8 @@ export default function App() {
                     v.name.toLowerCase().includes(needle) ||
                     v.city.toLowerCase().includes(needle)
                 );
-                if (venueGroupFilter !== "all") {
+                // Piercing search: when search is empty, filter by active region; when searching, search all regions
+                if (!needle && venueGroupFilter) {
                   filtered = filtered.filter(
                     (v) => getVenueRegion(v) === venueGroupFilter
                   );

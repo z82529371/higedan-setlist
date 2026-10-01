@@ -1,6 +1,6 @@
 # 0015 次級分組篩選鈕列（歌曲按專輯、場地按地區、場次按演出類型）
 
-> **實作層 Superseded by 0041**：`.filter-pill-bar`／`.filter-pill.is-active`／`.drawer-list` selector 已遷移至 Tailwind utilities（`filterPillClass`／`unitPillClass`／`DRAWER_LINK`）。分組維度決策（專輯／地區／類型＋年份）仍有效。
+> **實作層 Superseded by 0041 & Follow-up**：移除「全部」按鈕（歌曲/場地/場次/年份），預設選中最新或主要分組，維持抽屜 10~15 筆精簡視角；搜尋列升格為全局穿透搜尋。分組維度決策（專輯／地區／類型＋年份）仍有效。
 > **See also**：專輯分組現為 8 桶＋EP／單曲＋未發行曲目，歸屬原則見 `CONTEXT.md` 專輯歸屬條。
 
 ## 背景
