@@ -17,6 +17,7 @@ import {
   songUnreleased,
   unitEarliest,
   defaultShowId,
+  getUnitTypeLabel,
   buildIndex,
 } from "./lib/domain.js";
 import { trackKey, parseRoute, routeHash } from "./lib/track.js";
@@ -25,15 +26,15 @@ import SearchBox from "./components/SearchBox.jsx";
 import "./style.css";
 
 function getUnitCategory(u) {
-  if (!u) return "tour";
-  if (u.type === "特別專場") return "special";
-  if (u.type === "學園祭") return "campus";
-  if (u.type === "對バン" || u.type === "聯合專場") return "collab";
-  if (u.type === "電視演出" || u.type === "TV拼盤") return "tv";
-  if (u.type === "線上直播") return "stream";
-  if (u.type === "音樂祭") return "fest";
-  if (u.type === "專場") return u.templateSetlist || u.isTour ? "tour" : "special";
-  return u.templateSetlist || u.isTour ? "tour" : "fest";
+  const type = getUnitTypeLabel(u);
+  if (type === "巡演專場") return "tour";
+  if (type === "特別專場") return "special";
+  if (type === "聯合專場") return "collab";
+  if (type === "音樂祭") return "fest";
+  if (type === "學園祭") return "campus";
+  if (type === "電視演出") return "tv";
+  if (type === "線上直播") return "stream";
+  return "fest";
 }
 
 export default function App() {
@@ -250,7 +251,7 @@ export default function App() {
           onClick={() => {
             setTab("song");
             setQ("");
-            if (!selSong && !selTitle) setSelSong(allUsedSongs[0]?.id ?? null);
+            if (!selSong) setSelSong(allUsedSongs[0]?.id ?? null);
           }}
           aria-pressed={tab === "song"}
         >
