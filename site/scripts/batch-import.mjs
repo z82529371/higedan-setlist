@@ -358,7 +358,15 @@ async function verifyAndRecomputeShows() {
 
       // Type first: TV拼盤/音樂祭拼盤頁只收髭男段落
       const year = meta.livefansDate.slice(0, 4);
-      const actualTitle = meta.eventTitle || `one-man live ${year}`;
+      let actualTitle = meta.eventTitle || `one-man live ${year}`;
+      const isBareBandTitle =
+        /^(?:Official\s*髭男\s*dism|Official\s*Hige\s*Dandism)$/i.test(
+          actualTitle.trim()
+        );
+      if (isBareBandTitle) {
+        const dateStr = meta.livefansDate.replace(/-/g, ".");
+        actualTitle = `Official髭男dism ${dateStr}`;
+      }
       let detectedType = "特別專場";
       const isTvTitle =
         /紅白|歌合戦|CDTV|Mステ|ミュージックステーション|FNS歌謡祭|音楽の日|テレ東音楽祭|テレ東音樂祭|うたコン|MUSIC\s*DAY|ベストアーティスト|ベストヒット|Buzz\s*Rhythm|バズリズム|Venue101|SONGS/i.test(
@@ -456,8 +464,8 @@ async function verifyAndRecomputeShows() {
       }
 
       if (!slug) {
-        slug = meta.eventTitle
-          ? meta.eventTitle
+        slug = actualTitle
+          ? actualTitle
               .replace(/^Official髭男dism[：:\s]*/i, "")
               .toLowerCase()
               .replace(/[^a-z0-9]+/g, "-")
@@ -527,7 +535,9 @@ async function verifyAndRecomputeShows() {
         titleToId,
       });
 
-      const showTitle = meta.eventTitle || eventUnit.title;
+      const showTitle = isBareBandTitle
+        ? actualTitle
+        : meta.eventTitle || eventUnit.title;
 
       const newShow = {
         id: String(eventId),

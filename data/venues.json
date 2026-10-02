@@ -1060,5 +1060,11 @@
     "city": "東京",
     "region": "關東",
     "prefecture": "東京都"
+  },
+  "小田原ダイナシティ": {
+    "venue": "小田原 Dynacity",
+    "city": "小田原",
+    "region": "關東",
+    "prefecture": "神奈川縣"
   }
 }
