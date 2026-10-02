@@ -1,0 +1,52 @@
+{
+  "id": "osaka-metropolitan-rock-festival-2019",
+  "title": "OSAKA METROPOLITAN ROCK FESTIVAL 2019",
+  "type": "音樂祭",
+  "shows": [
+    {
+      "id": "1067511",
+      "date": "2019-05-19",
+      "city": "大阪",
+      "venue": "海之交流廣場 GREEN HILL",
+      "region": "關西",
+      "prefecture": "大阪府",
+      "title": "OSAKA METROPOLITAN ROCK FESTIVAL 2019",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/1067511"
+      ],
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "type": "interlude",
+          "note": "リハ：FIRE GROUND"
+        },
+        {
+          "order": 2,
+          "encore": false,
+          "songId": "no-doubt"
+        },
+        {
+          "order": 3,
+          "encore": false,
+          "songId": "tell-me-baby"
+        },
+        {
+          "order": 4,
+          "encore": false,
+          "songId": "brothers"
+        },
+        {
+          "order": 5,
+          "encore": false,
+          "songId": "pretender"
+        },
+        {
+          "order": 6,
+          "encore": false,
+          "songId": "stand-by-you"
+        }
+      ]
+    }
+  ]
+}
