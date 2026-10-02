@@ -1,34 +1,34 @@
 {
-  "id": "fm802-music-freaks-live-2020",
-  "title": "FM802 MUSIC FREAKS LIVE",
-  "type": "聯合專場",
+  "id": "kansaigaidai-gaidaisai-2018",
+  "title": "関西外国語大学 外大祭",
+  "type": "學園祭",
   "shows": [
     {
-      "id": "1214209",
-      "date": "2020-02-19",
+      "id": "1024886",
+      "date": "2018-10-26",
       "city": "大阪",
-      "venue": "Zepp Osaka Bayside",
+      "venue": "關西外國語大學 谷本紀念講堂",
       "region": "關西",
       "prefecture": "大阪府",
-      "title": "FM802 MUSIC FREAKS LIVE",
+      "title": "関西外国語大学 外大祭",
       "sourceUrls": [
-        "https://www.livefans.jp/events/1214209"
+        "https://www.livefans.jp/events/1024886"
       ],
       "setlist": [
         {
           "order": 1,
           "encore": false,
-          "songId": "yesterday"
+          "songId": "coffee-to-syrup"
         },
         {
           "order": 2,
           "encore": false,
-          "songId": "no-doubt"
+          "songId": "itan-na-star"
         },
         {
           "order": 3,
           "encore": false,
-          "songId": "115man-kiro-no-film"
+          "songId": "bad-for-me"
         },
         {
           "order": 4,
@@ -38,27 +38,22 @@
         {
           "order": 5,
           "encore": false,
-          "title": "ふっかつのじゅもん [sumika]"
+          "songId": "stand-by-you"
         },
         {
           "order": 6,
           "encore": false,
-          "songId": "i-love"
+          "songId": "tell-me-baby"
         },
         {
           "order": 7,
           "encore": false,
-          "songId": "pretender"
+          "songId": "no-doubt"
         },
         {
           "order": 8,
-          "encore": false,
-          "songId": "stand-by-you"
-        },
-        {
-          "order": 9,
-          "encore": false,
-          "songId": "shukumei"
+          "encore": true,
+          "songId": "sweet-tweet"
         }
       ]
     }

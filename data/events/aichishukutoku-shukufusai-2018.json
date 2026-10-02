@@ -1,0 +1,61 @@
+{
+  "id": "aichishukutoku-shukufusai-2018",
+  "title": "愛知淑徳大学 淑楓祭 『Special Guest Live』",
+  "type": "學園祭",
+  "shows": [
+    {
+      "id": "1007729",
+      "date": "2018-10-27",
+      "city": "名古屋",
+      "venue": "愛知淑德大學 長久手校區 體育館",
+      "region": "中部",
+      "prefecture": "愛知縣",
+      "title": "愛知淑徳大学 淑楓祭 『Special Guest Live』",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/1007729"
+      ],
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "songId": "coffee-to-syrup"
+        },
+        {
+          "order": 2,
+          "encore": false,
+          "songId": "itan-na-star"
+        },
+        {
+          "order": 3,
+          "encore": false,
+          "songId": "bad-for-me"
+        },
+        {
+          "order": 4,
+          "encore": false,
+          "songId": "tell-me-baby"
+        },
+        {
+          "order": 5,
+          "encore": false,
+          "songId": "fire-ground"
+        },
+        {
+          "order": 6,
+          "encore": false,
+          "songId": "stand-by-you"
+        },
+        {
+          "order": 7,
+          "encore": false,
+          "songId": "sweet-tweet"
+        },
+        {
+          "order": 8,
+          "encore": false,
+          "songId": "no-doubt"
+        }
+      ]
+    }
+  ]
+}

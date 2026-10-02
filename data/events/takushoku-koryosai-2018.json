@@ -1,0 +1,62 @@
+{
+  "id": "takushoku-koryosai-2018",
+  "title": "拓殖大学 文京キャンパス 紅陵祭",
+  "type": "學園祭",
+  "shows": [
+    {
+      "id": "1024884",
+      "date": "2018-10-20",
+      "city": "東京",
+      "venue": "拓殖大學 文京校區 後藤新平・新渡戶稻造紀念講堂",
+      "region": "關東",
+      "prefecture": "東京都",
+      "title": "拓殖大学 文京キャンパス 紅陵祭",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/1024884"
+      ],
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "songId": "coffee-to-syrup"
+        },
+        {
+          "order": 2,
+          "encore": false,
+          "songId": "itan-na-star"
+        },
+        {
+          "order": 3,
+          "encore": false,
+          "songId": "bad-for-me"
+        },
+        {
+          "order": 4,
+          "encore": false,
+          "songId": "tell-me-baby"
+        },
+        {
+          "order": 5,
+          "encore": false,
+          "songId": "fire-ground"
+        },
+        {
+          "order": 6,
+          "encore": false,
+          "songId": "stand-by-you"
+        },
+        {
+          "order": 7,
+          "encore": false,
+          "songId": "sweet-tweet"
+        },
+        {
+          "order": 8,
+          "encore": false,
+          "songId": "no-doubt"
+        }
+      ],
+      "opensAt": "12:30"
+    }
+  ]
+}

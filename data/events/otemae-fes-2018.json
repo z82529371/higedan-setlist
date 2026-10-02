@@ -1,72 +1,72 @@
 {
-  "id": "uverworld-vs-official-hige-dandism-2024",
-  "title": "UVERworld VS シリーズ \"UVERworld vs Official髭男dism\"",
-  "shortTitle": "UVERworld vs Official髭男dism",
-  "type": "聯合專場",
+  "id": "otemae-fes-2018",
+  "title": "大手前大学 大手前祭",
+  "type": "學園祭",
   "shows": [
     {
-      "id": "1727334",
-      "date": "2024-12-26",
-      "weekday": "木",
-      "city": "東京",
-      "venue": "日本武道館",
+      "id": "1020724",
+      "date": "2018-11-11",
+      "city": "神戶",
+      "venue": "大手前大學 伊丹稻野校區 體育館",
+      "region": "關西",
+      "prefecture": "兵庫縣",
+      "title": "大手前大学 大手前祭",
       "sourceUrls": [
-        "https://www.livefans.jp/events/1727334"
+        "https://www.livefans.jp/events/1020724"
       ],
       "setlist": [
         {
           "order": 1,
           "encore": false,
-          "songId": "pretender"
+          "songId": "coffee-to-syrup"
         },
         {
           "order": 2,
           "encore": false,
-          "songId": "i-love"
+          "songId": "itan-na-star"
         },
         {
           "order": 3,
           "encore": false,
-          "songId": "cry-baby"
+          "songId": "brothers"
         },
         {
           "order": 4,
           "encore": false,
-          "title": "浮世CROSSING [UVERworld]"
+          "songId": "bad-for-me"
         },
         {
           "order": 5,
           "encore": false,
-          "title": "SHAMROCK [UVERworld]"
+          "songId": "tell-me-baby"
         },
         {
           "order": 6,
           "encore": false,
-          "songId": "same-blue"
+          "songId": "fire-ground"
         },
         {
           "order": 7,
           "encore": false,
-          "songId": "subtitle"
+          "songId": "stand-by-you"
         },
         {
           "order": 8,
           "encore": false,
-          "songId": "stand-by-you"
+          "songId": "inu-ka-cat-ka-de-shinumade-kenka-shiyou"
         },
         {
           "order": 9,
           "encore": false,
-          "songId": "shukumei"
+          "songId": "escapade"
         },
         {
           "order": 10,
           "encore": false,
-          "songId": "mixed-nuts"
+          "songId": "no-doubt"
         }
       ],
-      "region": "關東",
-      "prefecture": "東京都"
+      "opensAt": "17:00"
     }
   ]
 }
