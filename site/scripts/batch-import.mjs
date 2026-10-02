@@ -279,6 +279,7 @@ async function verifyAndRecomputeShows() {
       }
 
       if (unit.templateSetlist) {
+        delete s.setlist;
         const { diff, status } = computeDiff(pageSongs, unit.templateSetlist, {
           livefansIdToId,
           titleToId,
