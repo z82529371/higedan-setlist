@@ -302,8 +302,9 @@ export function extractSongsFromHtml(html, opts = {}) {
 
 export function extractShowMetadataFromHtml(html) {
   // Extract address tag: <address><a href="/venues/1021" >＠リンクステーションホール青森 (青森県)</a></address>
+  // Or without link: <address>＠B.9 at ... (熊本県)</address>
   const addressMatch = html.match(
-    /<address>\s*<a[^>]*>\s*＠\s*([^\(]+)\s*\(([^\)]+)\)/i
+    /<address>\s*(?:<a[^>]*>)?\s*＠\s*([^(\n\r<]+)\s*\(([^)\n\r<]+)\)/i
   );
   let rawVenue = "";
   let rawPref = "";
@@ -313,12 +314,12 @@ export function extractShowMetadataFromHtml(html) {
     rawPref = addressMatch[2].trim();
   }
 
-  // Fallback to meta title
+  // Fallback to meta title (guarding against (YYYY.MM.DD) date)
   if (!rawVenue) {
     const metaTitleMatch = html.match(/<meta name="title" content="([^"]+)"/);
     if (metaTitleMatch) {
       const m = metaTitleMatch[1].match(/＠\s*([^\(]+)\s*\(([^\)]+)\)/);
-      if (m) {
+      if (m && !/^\d{4}\.\d{2}\.\d{2}$/.test(m[2].trim())) {
         rawVenue = m[1].trim();
         rawPref = m[2].trim();
       }

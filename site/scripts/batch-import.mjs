@@ -385,7 +385,7 @@ async function verifyAndRecomputeShows() {
         )
       ) {
         detectedType = "學園祭";
-      } else if (/fes|festival|フェス/i.test(actualTitle)) {
+      } else if (/fes|festival|フェス|circuit|サーキット/i.test(actualTitle)) {
         detectedType = "音樂祭";
       } else if (/vs|對バン|対バン|two-man|ツーマン/i.test(actualTitle)) {
         detectedType = "聯合專場";
@@ -400,6 +400,14 @@ async function verifyAndRecomputeShows() {
       const pageSongs = extractSongsFromHtml(html, {
         higedanOnly: detectedType === "電視演出" || detectedType === "TV拼盤",
       });
+
+      if (pageSongs.length === 0) {
+        console.warn(
+          `[AUTO-IMPORT NOTICE] Event ${eventId} (${meta.livefansDate} @ ${
+            meta.rawVenue || "未知場館"
+          }) has 0 songs on LiveFans. Creating stub event with empty setlist.`
+        );
+      }
 
       // event title & type & dynamic slug (detected above for higedanOnly)
       const prefMap = prefToCityAndRegion(meta.rawPref);

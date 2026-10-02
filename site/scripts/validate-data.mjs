@@ -117,6 +117,11 @@ export function validateAndCleanTours() {
           }
         } else if (show.setlist) {
           // Validation for Single Event setlists
+          if (show.setlist.length === 0) {
+            console.log(
+              `[Stub Event Notice] Single Event ${file} has show ${show.id} (${show.title || ""}) with empty setlist (0 songs)`
+            );
+          }
           for (let i = 0; i < show.setlist.length; i++) {
             const item = show.setlist[i];
             if (item.songId && !validSongIds.has(item.songId)) {
