@@ -1,0 +1,270 @@
+{
+  "id": "fan-club-tour-vol-1-2018",
+  "title": "Official髭男dism Fan Club Tour vol.1",
+  "type": "專場",
+  "shows": [
+    {
+      "id": "1494448",
+      "date": "2018-12-20",
+      "city": "東京",
+      "venue": "duo MUSIC EXCHANGE",
+      "region": "關東",
+      "prefecture": "東京都",
+      "title": "Official髭男dism Fan Club Tour vol.1",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/1494448"
+      ],
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "songId": "brothers"
+        },
+        {
+          "order": 2,
+          "encore": false,
+          "songId": "itan-na-star"
+        },
+        {
+          "order": 3,
+          "encore": false,
+          "songId": "koi-no-maenarae"
+        },
+        {
+          "order": 4,
+          "encore": false,
+          "songId": "koi-no-sarigiwa"
+        },
+        {
+          "order": 5,
+          "encore": false,
+          "songId": "darin"
+        },
+        {
+          "order": 6,
+          "encore": false,
+          "songId": "55"
+        },
+        {
+          "order": 7,
+          "encore": false,
+          "songId": "stand-by-you"
+        },
+        {
+          "order": 8,
+          "encore": false,
+          "title": "チキンライス [浜田雅功と槇原敬之]"
+        },
+        {
+          "order": 9,
+          "encore": false,
+          "title": "Don't Stop Me Now [Queen]"
+        },
+        {
+          "order": 10,
+          "encore": false,
+          "songId": "tell-me-baby"
+        },
+        {
+          "order": 11,
+          "encore": false,
+          "songId": "no-doubt"
+        },
+        {
+          "order": 12,
+          "encore": false,
+          "songId": "sweet-tweet"
+        },
+        {
+          "order": 13,
+          "encore": true,
+          "title": "きよしこの夜 [讃美歌]"
+        },
+        {
+          "order": 14,
+          "encore": true,
+          "songId": "yugure-zoi"
+        },
+        {
+          "order": 15,
+          "encore": true,
+          "songId": "inu-ka-cat-ka-de-shinumade-kenka-shiyou"
+        }
+      ],
+      "opensAt": "18:00",
+      "locked": true
+    },
+    {
+      "id": "1494450",
+      "date": "2018-12-23",
+      "city": "大阪",
+      "venue": "BIGCAT",
+      "region": "關西",
+      "prefecture": "大阪府",
+      "title": "Official髭男dism Fan Club Tour vol.1",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/1494450"
+      ],
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "songId": "brothers"
+        },
+        {
+          "order": 2,
+          "encore": false,
+          "songId": "itan-na-star"
+        },
+        {
+          "order": 3,
+          "encore": false,
+          "songId": "koi-no-maenarae"
+        },
+        {
+          "order": 4,
+          "encore": false,
+          "songId": "55"
+        },
+        {
+          "order": 5,
+          "encore": false,
+          "songId": "koi-no-sarigiwa"
+        },
+        {
+          "order": 6,
+          "encore": false,
+          "songId": "darin"
+        },
+        {
+          "order": 7,
+          "encore": false,
+          "songId": "stand-by-you"
+        },
+        {
+          "order": 8,
+          "encore": false,
+          "title": "チキンライス [浜田雅功と槇原敬之]"
+        },
+        {
+          "order": 9,
+          "encore": false,
+          "title": "Don't Stop Me Now [Queen]"
+        },
+        {
+          "order": 10,
+          "encore": false,
+          "songId": "tell-me-baby"
+        },
+        {
+          "order": 11,
+          "encore": false,
+          "songId": "no-doubt"
+        },
+        {
+          "order": 12,
+          "encore": false,
+          "songId": "sweet-tweet"
+        },
+        {
+          "order": 13,
+          "encore": true,
+          "title": "きよしこの夜 [讃美歌]"
+        },
+        {
+          "order": 14,
+          "encore": true,
+          "songId": "yugure-zoi"
+        },
+        {
+          "order": 15,
+          "encore": true,
+          "songId": "inu-ka-cat-ka-de-shinumade-kenka-shiyou"
+        }
+      ],
+      "opensAt": "17:00",
+      "locked": true
+    },
+    {
+      "id": "1494452",
+      "date": "2018-12-25",
+      "city": "名古屋",
+      "venue": "伏見JAMMIN'",
+      "region": "中部",
+      "prefecture": "愛知縣",
+      "title": "Official髭男dism Fan Club Tour vol.1",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/1494452"
+      ],
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "songId": "brothers"
+        },
+        {
+          "order": 2,
+          "encore": false,
+          "songId": "koi-no-maenarae"
+        },
+        {
+          "order": 3,
+          "encore": false,
+          "songId": "55"
+        },
+        {
+          "order": 4,
+          "encore": false,
+          "songId": "koi-no-sarigiwa"
+        },
+        {
+          "order": 5,
+          "encore": false,
+          "songId": "darin"
+        },
+        {
+          "order": 6,
+          "encore": false,
+          "songId": "stand-by-you"
+        },
+        {
+          "order": 7,
+          "encore": false,
+          "songId": "tell-me-baby"
+        },
+        {
+          "order": 8,
+          "encore": false,
+          "title": "Don't Stop Me Now [Queen]"
+        },
+        {
+          "order": 9,
+          "encore": false,
+          "title": "チキンライス [浜田雅功と槇原敬之]"
+        },
+        {
+          "order": 10,
+          "encore": false,
+          "songId": "no-doubt"
+        },
+        {
+          "order": 11,
+          "encore": true,
+          "title": "きよしこの夜 [讃美歌]"
+        },
+        {
+          "order": 12,
+          "encore": true,
+          "songId": "yugure-zoi"
+        },
+        {
+          "order": 13,
+          "encore": true,
+          "songId": "hatsumeika"
+        }
+      ],
+      "opensAt": "18:00",
+      "locked": true
+    }
+  ]
+}
