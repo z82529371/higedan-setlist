@@ -1,0 +1,57 @@
+{
+  "id": "a-flood-of-circus-2018",
+  "title": "A FLOOD OF CIRCUS 大巡業 2018",
+  "type": "聯合專場",
+  "shows": [
+    {
+      "id": "881917",
+      "date": "2018-01-19",
+      "city": "金澤",
+      "venue": "金澤 vanvan V4",
+      "region": "中部",
+      "prefecture": "石川縣",
+      "title": "A FLOOD OF CIRCUS 大巡業 2018",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/881917"
+      ],
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "songId": "ai-nandaga",
+          "note": "+「世界は君のもの」カバー"
+        },
+        {
+          "order": 2,
+          "encore": false,
+          "songId": "itan-na-star"
+        },
+        {
+          "order": 3,
+          "encore": false,
+          "songId": "coffee-to-syrup"
+        },
+        {
+          "order": 4,
+          "encore": false,
+          "songId": "lady"
+        },
+        {
+          "order": 5,
+          "encore": false,
+          "songId": "nichiyoubi-no-love-letter"
+        },
+        {
+          "order": 6,
+          "encore": false,
+          "songId": "inu-ka-cat-ka-de-shinumade-kenka-shiyou"
+        },
+        {
+          "order": 7,
+          "encore": false,
+          "songId": "sweet-tweet"
+        }
+      ]
+    }
+  ]
+}
