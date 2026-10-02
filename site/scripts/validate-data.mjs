@@ -33,6 +33,22 @@ export function validateAndCleanTours() {
       const unit = JSON.parse(readFileSync(filePath, "utf8"));
       if (!unit.shows) continue;
 
+      if (dirName === "events") {
+        const VALID_EVENT_TYPES = new Set([
+          "特別專場",
+          "聯合專場",
+          "音樂祭",
+          "學園祭",
+          "電視演出",
+          "線上直播",
+        ]);
+        if (!VALID_EVENT_TYPES.has(unit.type)) {
+          console.warn(
+            `[Validation Warning] Event ${file} has non-standard type: '${unit.type}'`
+          );
+        }
+      }
+
       let modified = false;
 
       for (const show of unit.shows) {

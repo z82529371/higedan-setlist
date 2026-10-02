@@ -358,7 +358,7 @@ async function verifyAndRecomputeShows() {
       // Type first: TV拼盤/音樂祭拼盤頁只收髭男段落
       const year = meta.livefansDate.slice(0, 4);
       const actualTitle = meta.eventTitle || `one-man live ${year}`;
-      let detectedType = "專場";
+      let detectedType = "特別專場";
       const isTvTitle =
         /紅白|歌合戦|CDTV|Mステ|ミュージックステーション|FNS歌謡祭|音楽の日|テレ東音楽祭|テレ東音樂祭|うたコン|MUSIC\s*DAY|ベストアーティスト|ベストヒット|Buzz\s*Rhythm|バズリズム|Venue101|SONGS/i.test(
           actualTitle
@@ -370,15 +370,23 @@ async function verifyAndRecomputeShows() {
 
       if (isTvTitle || isTvVenue) {
         detectedType = "電視演出";
+      } else if (
+        /学園祭|大学祭|キャンパス|紅陵祭|経大祭|外大祭|淑楓祭|大手前祭/i.test(
+          actualTitle
+        )
+      ) {
+        detectedType = "學園祭";
       } else if (/fes|festival|フェス/i.test(actualTitle)) {
         detectedType = "音樂祭";
-      } else if (/vs|對バン|対バン/i.test(actualTitle)) {
-        detectedType = "對バン";
+      } else if (/vs|對バン|対バン|two-man|ツーマン/i.test(actualTitle)) {
+        detectedType = "聯合專場";
       } else if (
         /online|オンライン|配信|live@/i.test(actualTitle) ||
         meta.rawVenue === "オンラインライブ"
       ) {
         detectedType = "線上直播";
+      } else {
+        detectedType = "特別專場";
       }
       const pageSongs = extractSongsFromHtml(html, {
         higedanOnly: detectedType === "電視演出" || detectedType === "TV拼盤",
@@ -430,6 +438,11 @@ async function verifyAndRecomputeShows() {
         { match: /音楽の日/, prefix: "ongaku-no-hi" },
         { match: /紅白歌合戦/, prefix: "nhk-kohaku" },
         { match: /FNS歌謡祭/, prefix: "fns-kayosai" },
+        { match: /拓殖大学.*紅陵祭|紅陵祭/, prefix: "takushoku-koryosai" },
+        { match: /広島経済大学.*経大祭|経大祭/, prefix: "hue-keidaisai" },
+        { match: /関西外国語大学.*外大祭|外大祭/, prefix: "kansaigaidai-gaidaisai" },
+        { match: /愛知淑徳大学.*淑楓祭|淑楓祭/, prefix: "aichishukutoku-shukufusai" },
+        { match: /大手前大学.*大手前祭|大手前祭/, prefix: "otemae-fes" },
       ];
       for (const k of KNOWN_EVENT_SLUGS) {
         if (k.match.test(meta.eventTitle || "")) {
