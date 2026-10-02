@@ -1,0 +1,259 @@
+{
+  "id": "two-man-live-2019",
+  "title": "Official髭男dism two-man live 2019",
+  "shortTitle": "two-man live 2019",
+  "type": "聯合專場",
+  "shows": [
+    {
+      "id": "1084697",
+      "date": "2019-03-02",
+      "city": "東京",
+      "venue": "新木場STUDIO COAST",
+      "region": "關東",
+      "prefecture": "東京都",
+      "title": "Official髭男dism two-man live 2019",
+      "locked": true,
+      "sourceUrls": [
+        "https://www.livefans.jp/events/1084697"
+      ],
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "songId": "no-doubt"
+        },
+        {
+          "order": 2,
+          "encore": false,
+          "songId": "tell-me-baby"
+        },
+        {
+          "order": 3,
+          "encore": false,
+          "songId": "itan-na-star"
+        },
+        {
+          "order": 4,
+          "encore": false,
+          "songId": "whats-going-on",
+          "note": "Rockアレンジ"
+        },
+        {
+          "order": 5,
+          "encore": false,
+          "songId": "coffee-to-syrup"
+        },
+        {
+          "order": 6,
+          "encore": false,
+          "songId": "115man-kiro-no-film"
+        },
+        {
+          "order": 7,
+          "encore": false,
+          "songId": "fire-ground"
+        },
+        {
+          "order": 8,
+          "encore": false,
+          "songId": "akegata-no-getaway"
+        },
+        {
+          "order": 9,
+          "encore": false,
+          "songId": "inu-ka-cat-ka-de-shinumade-kenka-shiyou"
+        },
+        {
+          "order": 10,
+          "encore": false,
+          "songId": "stand-by-you"
+        },
+        {
+          "order": 11,
+          "encore": true,
+          "songId": "sweet-tweet"
+        }
+      ],
+      "diff": {
+        "skip": [
+          4
+        ],
+        "insert": [
+          {
+            "after": 3,
+            "item": {
+              "encore": false,
+              "songId": "whats-going-on",
+              "note": "Rockアレンジ"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "1084703",
+      "date": "2019-03-17",
+      "city": "大阪",
+      "venue": "なんばHatch",
+      "region": "關西",
+      "prefecture": "大阪府",
+      "title": "Official髭男dism two-man live 2019",
+      "locked": true,
+      "sourceUrls": [
+        "https://www.livefans.jp/events/1084703"
+      ],
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "songId": "no-doubt"
+        },
+        {
+          "order": 2,
+          "encore": false,
+          "songId": "tell-me-baby"
+        },
+        {
+          "order": 3,
+          "encore": false,
+          "songId": "itan-na-star"
+        },
+        {
+          "order": 4,
+          "encore": false,
+          "songId": "whats-going-on"
+        },
+        {
+          "order": 5,
+          "encore": false,
+          "songId": "coffee-to-syrup"
+        },
+        {
+          "order": 6,
+          "encore": false,
+          "songId": "115man-kiro-no-film"
+        },
+        {
+          "order": 7,
+          "encore": false,
+          "songId": "fire-ground"
+        },
+        {
+          "order": 8,
+          "encore": false,
+          "songId": "akegata-no-getaway",
+          "note": "新曲",
+          "kind": [
+            "premiere"
+          ]
+        },
+        {
+          "order": 9,
+          "encore": false,
+          "songId": "inu-ka-cat-ka-de-shinumade-kenka-shiyou"
+        },
+        {
+          "order": 10,
+          "encore": false,
+          "songId": "stand-by-you"
+        },
+        {
+          "order": 11,
+          "encore": true,
+          "title": "オドループ [フレデリック]",
+          "note": "1番のみ"
+        },
+        {
+          "order": 12,
+          "encore": true,
+          "songId": "sweet-tweet",
+          "note": "ラスサビ部分オドループを入れ交えながら演奏"
+        }
+      ],
+      "diff": {
+        "skip": [
+          11
+        ],
+        "insert": [
+          {
+            "after": 10,
+            "item": {
+              "encore": true,
+              "title": "オドループ [フレデリック]",
+              "note": "1番のみ"
+            }
+          },
+          {
+            "after": 10,
+            "item": {
+              "encore": true,
+              "songId": "sweet-tweet",
+              "note": "ラスサビ部分オドループを入れ交えながら演奏"
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "templateSetlist": [
+    {
+      "order": 1,
+      "encore": false,
+      "songId": "no-doubt"
+    },
+    {
+      "order": 2,
+      "encore": false,
+      "songId": "tell-me-baby"
+    },
+    {
+      "order": 3,
+      "encore": false,
+      "songId": "itan-na-star"
+    },
+    {
+      "order": 4,
+      "encore": false,
+      "songId": "whats-going-on"
+    },
+    {
+      "order": 5,
+      "encore": false,
+      "songId": "coffee-to-syrup"
+    },
+    {
+      "order": 6,
+      "encore": false,
+      "songId": "115man-kiro-no-film"
+    },
+    {
+      "order": 7,
+      "encore": false,
+      "songId": "fire-ground"
+    },
+    {
+      "order": 8,
+      "encore": false,
+      "songId": "akegata-no-getaway",
+      "kind": [
+        "premiere"
+      ]
+    },
+    {
+      "order": 9,
+      "encore": false,
+      "songId": "inu-ka-cat-ka-de-shinumade-kenka-shiyou"
+    },
+    {
+      "order": 10,
+      "encore": false,
+      "songId": "stand-by-you"
+    },
+    {
+      "order": 11,
+      "encore": true,
+      "songId": "sweet-tweet"
+    }
+  ],
+  "templateBasis": "全自動提煉：基於 2 場演出提取 $\\ge 50\\%$ 多數共識歌單"
+}
