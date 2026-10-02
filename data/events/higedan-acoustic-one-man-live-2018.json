@@ -1,0 +1,114 @@
+{
+  "id": "higedan-acoustic-one-man-live-2018",
+  "title": "HIGEDAN acoustic one-man live 2018",
+  "shortTitle": "acoustic one-man live 2018",
+  "type": "特別專場",
+  "shows": [
+    {
+      "id": "890784",
+      "date": "2018-02-03",
+      "city": "東京",
+      "venue": "Mt.RAINIER HALL SHIBUYA PLEASURE PLEASURE",
+      "region": "關東",
+      "prefecture": "東京都",
+      "title": "HIGEDAN acoustic one-man live 2018",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/890784"
+      ],
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "songId": "ai-nandaga"
+        },
+        {
+          "order": 2,
+          "encore": false,
+          "songId": "tell-me-baby"
+        },
+        {
+          "order": 3,
+          "encore": false,
+          "songId": "itan-na-star"
+        },
+        {
+          "order": 4,
+          "encore": false,
+          "songId": "koi-no-sarigiwa"
+        },
+        {
+          "order": 5,
+          "encore": false,
+          "songId": "parade"
+        },
+        {
+          "order": 6,
+          "encore": false,
+          "songId": "yugure-zoi"
+        },
+        {
+          "order": 7,
+          "encore": false,
+          "title": "涙のキッス [サザンオールスターズ]"
+        },
+        {
+          "order": 8,
+          "encore": false,
+          "songId": "lady"
+        },
+        {
+          "order": 9,
+          "encore": false,
+          "songId": "happy-birthday-to-you"
+        },
+        {
+          "order": 10,
+          "encore": false,
+          "songId": "whats-going-on"
+        },
+        {
+          "order": 11,
+          "encore": false,
+          "title": "New York State Of Mind [Billy Joel]"
+        },
+        {
+          "order": 12,
+          "encore": false,
+          "songId": "zero-no-mama-de-iraterara"
+        },
+        {
+          "order": 13,
+          "encore": false,
+          "songId": "sousisouai"
+        },
+        {
+          "order": 14,
+          "encore": false,
+          "songId": "coffee-to-syrup"
+        },
+        {
+          "order": 15,
+          "encore": false,
+          "songId": "nichiyoubi-no-love-letter"
+        },
+        {
+          "order": 16,
+          "encore": false,
+          "songId": "inu-ka-cat-ka-de-shinumade-kenka-shiyou"
+        },
+        {
+          "order": 17,
+          "encore": true,
+          "songId": "115man-kiro-no-film"
+        },
+        {
+          "order": 18,
+          "encore": true,
+          "songId": "sweet-tweet"
+        }
+      ],
+      "opensAt": "17:00",
+      "locked": true
+    }
+  ]
+}
