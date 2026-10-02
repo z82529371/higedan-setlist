@@ -1,0 +1,51 @@
+{
+  "id": "fm802-rock-festival-radio-crazy-2018",
+  "title": "FM802 ROCK FESTIVAL RADIO CRAZY 2018",
+  "type": "音樂祭",
+  "shows": [
+    {
+      "id": "1035535",
+      "date": "2018-12-27",
+      "city": "大阪",
+      "venue": "INTEX OSAKA的R-STAGE",
+      "region": "關西",
+      "prefecture": "大阪府",
+      "title": "FM802 ROCK FESTIVAL RADIO CRAZY 2018",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/1035535"
+      ],
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "songId": "115man-kiro-no-film"
+        },
+        {
+          "order": 2,
+          "encore": false,
+          "songId": "tell-me-baby"
+        },
+        {
+          "order": 3,
+          "encore": false,
+          "songId": "fire-ground"
+        },
+        {
+          "order": 4,
+          "encore": false,
+          "songId": "hatsumeika"
+        },
+        {
+          "order": 5,
+          "encore": false,
+          "songId": "no-doubt"
+        },
+        {
+          "order": 6,
+          "encore": false,
+          "songId": "stand-by-you"
+        }
+      ]
+    }
+  ]
+}
