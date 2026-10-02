@@ -448,15 +448,21 @@ async function verifyAndRecomputeShows() {
           : "";
 
         const letterCount = (slug.match(/[a-z]/g) || []).length;
+        const hasYearSpan =
+          /\b\d{2}-\d{2}\b/.test(slug) || /\b\d{4}-\d{4}\b/.test(slug);
         if (!slug || letterCount < 2) {
           slug = `unofficial-${year}`;
-        } else if (!slug.includes(year)) {
+        } else if (!hasYearSpan && !slug.includes(year)) {
           slug = `${slug}-${year}`;
         }
       }
 
       let finalSlug = slug;
-      let eventFile = path.resolve(eventsDir, `${finalSlug}.json`);
+      let targetDir = eventsDir;
+      if (fs.existsSync(path.resolve(toursDir, `${finalSlug}.json`))) {
+        targetDir = toursDir;
+      }
+      let eventFile = path.resolve(targetDir, `${finalSlug}.json`);
       let eventUnit;
 
       if (fs.existsSync(eventFile)) {

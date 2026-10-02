@@ -712,5 +712,125 @@
     "city": "大阪",
     "region": "關西",
     "prefecture": "大阪府"
+  },
+  "NHK大阪ホール": {
+    "venue": "NHK大阪會館",
+    "city": "大阪",
+    "region": "關西",
+    "prefecture": "大阪府"
+  },
+  "鹿児島SR HALL": {
+    "venue": "鹿兒島SR HALL",
+    "city": "鹿兒島",
+    "region": "九州",
+    "prefecture": "鹿兒島縣"
+  },
+  "福岡DRUM LOGOS": {
+    "venue": "福岡DRUM LOGOS",
+    "city": "福岡",
+    "region": "九州",
+    "prefecture": "福岡縣"
+  },
+  "日本特殊陶業市民会館 ビレッジホール": {
+    "venue": "日本特殊陶業市民會館 Village Hall",
+    "city": "名古屋",
+    "region": "中部",
+    "prefecture": "愛知縣"
+  },
+  "浜松窓枠": {
+    "venue": "Live House 濱松窓枠",
+    "city": "濱松",
+    "region": "中部",
+    "prefecture": "靜岡縣"
+  },
+  "米子市文化ホール メインホール": {
+    "venue": "米子市文化會館 主廳",
+    "city": "米子",
+    "region": "中國",
+    "prefecture": "鳥取縣"
+  },
+  "長野CLUB JUNK BOX": {
+    "venue": "長野CLUB JUNK BOX",
+    "city": "長野",
+    "region": "中部",
+    "prefecture": "長野縣"
+  },
+  "GOLDEN PIGS RED STAGE": {
+    "venue": "新潟GOLDEN PIGS RED STAGE",
+    "city": "新潟",
+    "region": "中部",
+    "prefecture": "新潟縣"
+  },
+  "mito LIGHT HOUSE": {
+    "venue": "水戶LIGHT HOUSE",
+    "city": "水戶",
+    "region": "關東",
+    "prefecture": "茨城縣"
+  },
+  "郡山CLUB #9": {
+    "venue": "郡山CLUB #9",
+    "city": "郡山",
+    "region": "東北",
+    "prefecture": "福島縣"
+  },
+  "仙台PIT": {
+    "venue": "仙台PIT",
+    "city": "仙台",
+    "region": "東北",
+    "prefecture": "宮城縣"
+  },
+  "HEAVEN&#039;S ROCK さいたま新都心 VJ-3": {
+    "venue": "HEAVEN'S ROCK 埼玉新都心 VJ-3",
+    "city": "埼玉",
+    "region": "關東",
+    "prefecture": "埼玉縣"
+  },
+  "HEAVEN'S ROCK さいたま新都心 VJ-3": {
+    "venue": "HEAVEN'S ROCK 埼玉新都心 VJ-3",
+    "city": "埼玉",
+    "region": "關東",
+    "prefecture": "埼玉縣"
+  },
+  "広島CLUB QUATTRO": {
+    "venue": "廣島CLUB QUATTRO",
+    "city": "廣島",
+    "region": "中國",
+    "prefecture": "廣島縣"
+  },
+  "米子AZTiC laughs": {
+    "venue": "米子AZTiC laughs",
+    "city": "米子",
+    "region": "中國",
+    "prefecture": "鳥取縣"
+  },
+  "松江AZTiC canova": {
+    "venue": "松江AZTiC canova",
+    "city": "松江",
+    "region": "中國",
+    "prefecture": "島根縣"
+  },
+  "松山SALONKITTY": {
+    "venue": "松山SALONKITTY",
+    "city": "松山",
+    "region": "四國",
+    "prefecture": "愛媛縣"
+  },
+  "高松DIME": {
+    "venue": "高松DIME",
+    "city": "高松",
+    "region": "四國",
+    "prefecture": "香川縣"
+  },
+  "cube garden": {
+    "venue": "札幌cube garden",
+    "city": "札幌",
+    "region": "北海道",
+    "prefecture": "北海道"
+  },
+  "横浜ベイホール": {
+    "venue": "橫濱灣會館",
+    "city": "橫濱",
+    "region": "關東",
+    "prefecture": "神奈川縣"
   }
 }
