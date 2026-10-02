@@ -988,5 +988,71 @@
     "city": "仙台",
     "region": "東北",
     "prefecture": "宮城縣"
+  },
+  "金沢vanvan V4": {
+    "venue": "金澤 vanvan V4",
+    "city": "金澤",
+    "region": "中部",
+    "prefecture": "石川縣"
+  },
+  "柏PALOOZA": {
+    "venue": "柏 PALOOZA",
+    "city": "千葉",
+    "region": "關東",
+    "prefecture": "千葉縣"
+  },
+  "サンケイホールブリーゼ": {
+    "venue": "Sankei Hall Breeze",
+    "city": "大阪",
+    "region": "關西",
+    "prefecture": "大阪府"
+  },
+  "IMAGE": {
+    "venue": "IMAGE",
+    "city": "岡山",
+    "region": "中國",
+    "prefecture": "岡山縣"
+  },
+  "Diamond Hall": {
+    "venue": "Diamond Hall",
+    "city": "名古屋",
+    "region": "中部",
+    "prefecture": "愛知縣"
+  },
+  "BLUE LIVE 広島": {
+    "venue": "BLUE LIVE 廣島",
+    "city": "廣島",
+    "region": "中國",
+    "prefecture": "廣島縣"
+  },
+  "福岡DRUM Be-1": {
+    "venue": "福岡DRUM Be-1",
+    "city": "福岡",
+    "region": "九州",
+    "prefecture": "福岡縣"
+  },
+  "熊本B.9 V2": {
+    "venue": "熊本B.9 V2",
+    "city": "熊本",
+    "region": "九州",
+    "prefecture": "熊本縣"
+  },
+  "仙台darwin": {
+    "venue": "仙台darwin",
+    "city": "仙台",
+    "region": "東北",
+    "prefecture": "宮城縣"
+  },
+  "横浜BAYSIS": {
+    "venue": "橫濱 BAYSIS",
+    "city": "橫濱",
+    "region": "關東",
+    "prefecture": "神奈川縣"
+  },
+  "中野サンプラザ ホール": {
+    "venue": "Nakano Sunplaza Hall",
+    "city": "東京",
+    "region": "關東",
+    "prefecture": "東京都"
   }
 }
