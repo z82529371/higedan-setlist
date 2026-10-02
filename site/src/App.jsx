@@ -109,10 +109,24 @@ export default function App() {
     }
     return "2026";
   });
+  const [showEmptySetlists, setShowEmptySetlists] = useState(false);
 
   const slipRef = useRef(null);
 
   const current = unitData.get(selUnitId);
+
+  const showHasSongs = (unitId, showId) => {
+    const ud = unitData.get(unitId);
+    if (!ud) return false;
+    const items = ud.full.get(showId) || [];
+    return items.some((i) => i.songId || i.title);
+  };
+
+  const unitHasSongs = (unit) => {
+    const ud = unitData.get(unit.id);
+    if (!ud) return false;
+    return (unit.shows ?? []).some((s) => showHasSongs(unit.id, s.id));
+  };
 
   // Hash is the single funnel: selections write hash, hashchange applies state.
   const applyRoute = (r) => {
@@ -282,13 +296,19 @@ export default function App() {
           for (const cat of CATEGORIES) {
             categoryUnitsMap.set(
               cat.key,
-              allUnits.filter((u) => getUnitCategory(u) === cat.key)
+              allUnits.filter(
+                (u) =>
+                  getUnitCategory(u) === cat.key &&
+                  (showEmptySetlists || unitHasSongs(u))
+              )
             );
           }
 
           // Filter by category
           const categoryFiltered = allUnits.filter(
-            (u) => getUnitCategory(u) === showGroupFilter
+            (u) =>
+              getUnitCategory(u) === showGroupFilter &&
+              (showEmptySetlists || unitHasSongs(u) || u.id === selUnitId)
           );
 
           // Extract available start years within current category
@@ -351,6 +371,15 @@ export default function App() {
                     </button>
                   );
                 })}
+                <label className="ml-auto flex cursor-pointer select-none items-center gap-1.5 font-mono text-[12px] text-muted hover:text-ink max-sm:mt-1 max-sm:w-full">
+                  <input
+                    type="checkbox"
+                    className="accent-tape h-[14px] w-[14px] cursor-pointer"
+                    checked={showEmptySetlists}
+                    onChange={(e) => setShowEmptySetlists(e.target.checked)}
+                  />
+                  <span>顯示無歌單場次</span>
+                </label>
               </div>
 
               <div className="flex flex-wrap items-center gap-2">
@@ -385,7 +414,7 @@ export default function App() {
                   .map((u) => (
                     <button
                       key={u.id}
-                      className={unitPillClass(u.id === selUnitId)}
+                      className={unitPillClass(u.id === selUnitId, !unitHasSongs(u))}
                       onClick={() => handleUnitChange(u.id)}
                     >
                       {shortUnitTitle(u)}
@@ -476,7 +505,12 @@ export default function App() {
           <ul className="m-0 list-none p-0 [&>li]:border-b [&>li]:border-line-soft [&>li:last-child]:border-b-0">
             {tab === "show" &&
               (() => {
-                const shows = current?.shows ?? [];
+                const shows = (current?.shows ?? []).filter(
+                  (s) =>
+                    showEmptySetlists ||
+                    showHasSongs(current.unit.id, s.id) ||
+                    s.id === selShow
+                );
                 if (!shows.length) return null;
                 return (
                   <Fragment>
@@ -484,9 +518,9 @@ export default function App() {
                       {shortUnitTitle(current.unit)}
                     </li>
                     {shows.map((s) => {
-                      const songCount = current.full
-                        .get(s.id)
-                        .filter((i) => i.songId).length;
+                      const songCount = (
+                        current.full.get(s.id) || []
+                      ).filter((i) => i.songId || i.title).length;
                       return (
                         <li key={s.id}>
                           <a
@@ -509,9 +543,15 @@ export default function App() {
                                 {s.city}
                               </span>
                             </span>
-                            <span className="whitespace-nowrap font-mono text-[12px] text-muted [.bg-band_&]:text-white">
-                              {songCount} 首
-                            </span>
+                            {songCount > 0 ? (
+                              <span className="whitespace-nowrap font-mono text-[12px] text-muted [.bg-band_&]:text-white">
+                                {songCount} 首
+                              </span>
+                            ) : (
+                              <span className="whitespace-nowrap rounded-[2px] bg-line-soft px-[6px] py-[1px] font-mono text-[11px] font-semibold text-muted">
+                                無歌單
+                              </span>
+                            )}
                           </a>
                         </li>
                       );

@@ -166,7 +166,7 @@ export function ShowSlip({ ud, showId, onSelectSong }) {
         </h3>
         <p className="mt-[6px] text-[13px] text-muted [&_a]:text-pool [&_a]:underline-offset-[3px]">
           {s.opensAt ? `${s.opensAt} 開演・` : ""}
-          {ud.unit.type}・共 {songCount} 首演出曲目
+          {ud.unit.type}・{songCount > 0 ? `共 ${songCount} 首演出曲目` : "尚無曲目紀錄"}
           {s.sourceUrls?.[0] && (
             <>
               ・{" "}
@@ -178,20 +178,31 @@ export function ShowSlip({ ud, showId, onSelectSong }) {
         </p>
       </div>
 
-      <ol className="m-0 list-none p-0">
-        {groupRuns(main).map((g, idx) => renderRun(g, `m-${idx}`))}
-      </ol>
-      {enc.length > 0 && (
+      {items.length === 0 ? (
+        <div className="my-8 rounded-[3px] border border-dashed border-line bg-paper px-6 py-8 text-center">
+          <p className="m-0 text-[16px] font-bold text-ink">🔍 歌單情報未明</p>
+          <p className="m-0 mt-2 text-[13px] text-muted">
+            本場演出目前尚無公開曲目紀錄
+          </p>
+        </div>
+      ) : (
         <>
-          <div
-            className="encore-cut mb-[6px] mt-[18px] flex items-center gap-[10px] font-mono text-[12px] font-semibold tracking-[0.24em] text-ink before:h-[10px] before:w-[10px] before:border-[1.5px] before:border-ink before:bg-tape after:flex-1 after:border-t-[1.5px] after:border-dashed after:border-ink"
-            aria-hidden="true"
-          >
-            ENCORE
-          </div>
           <ol className="m-0 list-none p-0">
-            {groupRuns(enc).map((g, idx) => renderRun(g, `e-${idx}`))}
+            {groupRuns(main).map((g, idx) => renderRun(g, `m-${idx}`))}
           </ol>
+          {enc.length > 0 && (
+            <>
+              <div
+                className="encore-cut mb-[6px] mt-[18px] flex items-center gap-[10px] font-mono text-[12px] font-semibold tracking-[0.24em] text-ink before:h-[10px] before:w-[10px] before:border-[1.5px] before:border-ink before:bg-tape after:flex-1 after:border-t-[1.5px] after:border-dashed after:border-ink"
+                aria-hidden="true"
+              >
+                ENCORE
+              </div>
+              <ol className="m-0 list-none p-0">
+                {groupRuns(enc).map((g, idx) => renderRun(g, `e-${idx}`))}
+              </ol>
+            </>
+          )}
         </>
       )}
     </article>

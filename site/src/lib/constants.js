@@ -26,10 +26,12 @@ export const filterPillClass = (isActive) =>
       : "border-line bg-paper text-ink hover:bg-pool-wash hover:border-pool hover:text-pool"
   }`;
 
-export const unitPillClass = (isOn) =>
+export const unitPillClass = (isOn, isEmpty = false) =>
   `appearance-none rounded-full border px-3 py-1 text-[12px] font-semibold cursor-pointer transition-all motion-reduce:transition-none focus-visible:outline-[3px] focus-visible:outline-pool focus-visible:outline-offset-2 ${
     isOn
       ? "bg-tape text-[#3a2c00] border-ink font-bold shadow-[1px_1px_0_var(--color-ink)]"
+      : isEmpty
+      ? "border-[1.5px] border-dashed border-muted/80 bg-line-soft/80 text-muted hover:border-ink hover:text-ink hover:bg-pool-wash"
       : "border-line bg-card text-ink hover:border-ink hover:bg-pool-wash"
   }`;
 
