@@ -15,11 +15,9 @@ export default function SearchBox({
   q,
   setQ,
   allUsedSongs,
-  allTitleTracks = [],
   allUnits,
   allVenues,
   onSelectSong,
-  onSelectTitle,
   onSelectUnit,
   onSelectVenue,
 }) {
@@ -61,18 +59,6 @@ export default function SearchBox({
           subTitle: sub,
           album: getSongAlbum(s),
           unreleased: s.unreleased || songUnreleased.has(s.id),
-        });
-      }
-    }
-    for (const t of allTitleTracks) {
-      if (t.title.toLowerCase().includes(needle)) {
-        songs.push({
-          type: "title",
-          id: t.title,
-          title: t.title,
-          subTitle: "翻唱 / 特別曲目",
-          album: "其他",
-          unreleased: false,
         });
       }
     }
@@ -135,7 +121,7 @@ export default function SearchBox({
       matchedVenues: venues,
       flatItems: flat,
     };
-  }, [needle, allUsedSongs, allTitleTracks, allUnits, allVenues]);
+  }, [needle, allUsedSongs, allUnits, allVenues]);
 
   // Reset activeIndex when query changes
   useEffect(() => {
@@ -161,8 +147,6 @@ export default function SearchBox({
     setIsOpen(false);
     if (item.type === "song") {
       onSelectSong(item.id);
-    } else if (item.type === "title") {
-      onSelectTitle(item.id);
     } else if (item.type === "unit") {
       onSelectUnit(item.id);
     } else if (item.type === "venue") {

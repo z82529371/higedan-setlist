@@ -20,7 +20,7 @@ import {
   buildIndex,
 } from "./lib/domain.js";
 import { trackKey, parseRoute, routeHash } from "./lib/track.js";
-import { ShowSlip, SongSlip, TitleSlip, VenueSlip } from "./components/slips.jsx";
+import { ShowSlip, SongSlip, VenueSlip } from "./components/slips.jsx";
 import SearchBox from "./components/SearchBox.jsx";
 import "./style.css";
 
@@ -47,25 +47,11 @@ export default function App() {
     unitIdByShowId,
   } = useMemo(() => buildIndex(), []);
 
-  const allTitleTracks = useMemo(() => {
-    const list = [];
-    for (const [key, shows] of trackShows.entries()) {
-      if (key.startsWith("title:")) {
-        list.push({
-          title: key.slice("title:".length),
-          shows,
-        });
-      }
-    }
-    return list;
-  }, [trackShows]);
-
   const initialSelection = () => {
     const fallback = {
       tab: "show",
       selUnitId: allUnits[0]?.id ?? null,
       selSong: allUsedSongs[0]?.id ?? null,
-      selTitle: null,
       selVenue: allVenues[0]?.name ?? null,
       selShow: defaultShowId(allUnits[0]),
     };
@@ -73,8 +59,6 @@ export default function App() {
     if (!r) return fallback;
     if (r.kind === "song" && allUsedSongs.some((s) => s.id === r.value))
       return { ...fallback, tab: "song", selSong: r.value };
-    if (r.kind === "title" && trackShows.has(trackKey("title", r.value)))
-      return { ...fallback, tab: "song", selSong: null, selTitle: r.value };
     if (r.kind === "show" && unitIdByShowId.has(r.value))
       return {
         ...fallback,
@@ -90,7 +74,6 @@ export default function App() {
   const [selUnitId, setSelUnitId] = useState(initial.selUnitId);
   const [tab, setTab] = useState(initial.tab);
   const [selSong, setSelSong] = useState(initial.selSong);
-  const [selTitle, setSelTitle] = useState(initial.selTitle);
   const [selVenue, setSelVenue] = useState(initial.selVenue);
   const [selShow, setSelShow] = useState(initial.selShow);
   const [q, setQ] = useState("");
@@ -139,12 +122,6 @@ export default function App() {
       setSelSong(r.value);
       const s = allUsedSongs.find((x) => x.id === r.value);
       if (s) setSongGroupFilter(getSongAlbum(s));
-      setSelTitle(null);
-      setQ("");
-    } else if (r.kind === "title" && trackShows.has(trackKey("title", r.value))) {
-      setTab("song");
-      setSelTitle(r.value);
-      setSelSong(null);
       setQ("");
     } else if (r.kind === "show" && unitIdByShowId.has(r.value)) {
       const uId = unitIdByShowId.get(r.value);
@@ -192,11 +169,6 @@ export default function App() {
     go(routeHash.song(songId));
   };
 
-  const handleSelectTitle = (title) => {
-    setQ("");
-    go(routeHash.title(title));
-  };
-
   const handleSelectVenue = (venueName) => {
     setQ("");
     go(routeHash.venue(venueName));
@@ -204,7 +176,6 @@ export default function App() {
 
   const handleUnitChange = (unitId) => {
     setSelSong(null);
-    setSelTitle(null);
     setQ("");
     go(routeHash.show(defaultShowId(unitData.get(unitId)?.unit)));
   };
@@ -287,11 +258,9 @@ export default function App() {
           q={q}
           setQ={setQ}
           allUsedSongs={allUsedSongs}
-          allTitleTracks={allTitleTracks}
           allUnits={allUnits}
           allVenues={allVenues}
           onSelectSong={handleSelectSong}
-          onSelectTitle={handleSelectTitle}
           onSelectUnit={handleUnitChange}
           onSelectVenue={handleSelectVenue}
         />
@@ -701,25 +670,16 @@ export default function App() {
               ud={current}
               showId={selShow}
               onSelectSong={handleSelectSong}
-              onSelectTitle={handleSelectTitle}
             />
           )}
-          {tab === "song" &&
-            (selTitle ? (
-              <TitleSlip
-                title={selTitle}
-                trackShows={trackShows}
-                showById={showById}
-                onSelectShow={handleSelectShow}
-              />
-            ) : (
-              <SongSlip
-                songId={selSong}
-                trackShows={trackShows}
-                showById={showById}
-                onSelectShow={handleSelectShow}
-              />
-            ))}
+          {tab === "song" && (
+            <SongSlip
+              songId={selSong}
+              trackShows={trackShows}
+              showById={showById}
+              onSelectShow={handleSelectShow}
+            />
+          )}
           {tab === "venue" && (
             <VenueSlip
               venueName={selVenue}

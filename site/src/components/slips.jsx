@@ -20,7 +20,7 @@ import { songTitle, songUnreleased, showDate } from "../lib/domain.js";
 import { trackKey, trackRoute, routeHash } from "../lib/track.js";
 import { assignCues } from "../lib/resolve.js";
 
-export function ShowSlip({ ud, showId, onSelectSong, onSelectTitle }) {
+export function ShowSlip({ ud, showId, onSelectSong }) {
   if (!ud) return null;
   const s = ud.unit.shows.find((x) => x.id === showId);
   if (!s) return null;
@@ -79,6 +79,9 @@ export function ShowSlip({ ud, showId, onSelectSong, onSelectTitle }) {
     const tabs = cardTabs(first);
     const songLine = (it) => {
       const title = it.title ?? songTitle[it.songId];
+      if (!it.songId) {
+        return <span className="font-medium text-ink">{title}</span>;
+      }
       const link = trackRoute(it, songWeight(it));
       return (
         <a
@@ -86,8 +89,7 @@ export function ShowSlip({ ud, showId, onSelectSong, onSelectTitle }) {
           href={link.hash}
           onClick={(e) => {
             e.preventDefault();
-            if (link.isSong) onSelectSong(it.songId);
-            else onSelectTitle(title);
+            onSelectSong(it.songId);
           }}
         >
           {title}
@@ -285,89 +287,7 @@ export function SongSlip({ songId, trackShows, showById, onSelectShow }) {
   );
 }
 
-export function TitleSlip({ title, trackShows, showById, onSelectShow }) {
-  if (!title) {
-    return (
-      <div className={SLIP_ARTICLE}>
-        <span aria-hidden="true" className={SLIP_TAPE} />
-        <p className="m-0 px-1 py-[18px] text-[14px] text-muted">
-          選一首歌曲，看它在全檔案庫哪幾場出現過。
-        </p>
-      </div>
-    );
-  }
 
-  const appearances = trackShows.get(trackKey("title", title)) ?? [];
-
-  return (
-    <article
-      className={SLIP_ARTICLE}
-      aria-label="翻唱全域出現場次"
-    >
-      <span aria-hidden="true" className={SLIP_TAPE} />
-      <div className="mb-[6px] border-b-2 border-ink pb-3">
-        <p className="m-0 mb-1 font-mono text-[12px] tracking-[0.18em] text-muted">
-          ALL TOURS → SONG SHOWS
-        </p>
-        <h3 className="m-0 font-display text-[23px] font-extrabold leading-[1.3]">
-          {title}
-        </h3>
-        <p className="mt-[6px] font-mono text-[13px] text-muted [&_a]:text-pool">
-          全檔案庫共出現於 {appearances.length} 場演出
-        </p>
-      </div>
-      <ul className="m-0 mt-3 list-none p-0">
-        {appearances.map(({ showId, unitTitle, unitType, item }) => {
-          const s = showById.get(showId);
-          return (
-            <li
-              key={showId}
-              className="flex items-start gap-3 border-b border-line-soft px-1 py-[10px] last:border-b-0"
-            >
-              <span className="mt-[2px] whitespace-nowrap rounded-[3px] border border-[rgba(30,46,74,0.25)] bg-[rgba(232,180,40,0.38)] px-[6px] py-[2px] font-mono text-[11px] font-semibold text-ink">
-                {unitTitle}
-                {unitType !== "專場" && (
-                  <span className="ml-[7px] rounded-full border border-current px-[6px] py-[1px] align-middle font-mono text-[0.72em] font-semibold tracking-[0.04em] opacity-85">
-                    {unitType}
-                  </span>
-                )}
-              </span>
-              <a
-                className="flex flex-col leading-[1.45] text-ink no-underline transition-colors hover:text-request focus-visible:outline-[3px] focus-visible:outline-pool focus-visible:outline-offset-2 motion-reduce:transition-none [&_.show-link-venue]:hover:text-pool [&_.show-link-venue]:hover:underline"
-                href={routeHash.show(showId)}
-                onClick={(e) => {
-                  e.preventDefault();
-                  onSelectShow(showId);
-                }}
-              >
-                <span className="font-mono text-[12px] text-muted">
-                  {showDate(s)}
-                </span>
-                <span className="show-link-venue text-[14px] font-bold">
-                  {s.venue}
-                </span>
-                <span className="show-link-city text-[13px] text-muted">
-                  （{s.city}）
-                </span>
-              </a>
-              {visibleBadges(item.kind).map(({ key, label, cls }) => (
-                <span
-                  key={key}
-                  className={`ml-2 inline-block rounded-[3px] px-[7px] py-[3px] align-middle font-mono text-[0.72em] font-semibold leading-none tracking-[0.06em] before:content-['♪_'] ${cls}`}
-                >
-                  {label}
-                </span>
-              ))}
-              {item.note && (
-                <span className="text-[13px] text-muted"> {item.note}</span>
-              )}
-            </li>
-          );
-        })}
-      </ul>
-    </article>
-  );
-}
 
 export function VenueSlip({ venueName, globalVenueShows, onSelectShow }) {
   if (!venueName) {

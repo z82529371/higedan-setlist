@@ -1,20 +1,18 @@
-import { SETLIST_SONG, TITLE_LINK } from "./constants.js";
+import { SETLIST_SONG } from "./constants.js";
 
-// Internal key namespace: song slugs and free-text titles share one map.
+// Internal key namespace: song slugs share one map.
 export function trackKey(kind, value) {
   return `${kind}:${value}`;
 }
 
-// songId track > title track > null (interludes carry neither).
+// songId track > null (interludes and cover titles carry neither).
 export function trackKeyOf(item) {
   if (!item) return null;
   if (item.songId) return trackKey("song", item.songId);
-  if (item.title) return trackKey("title", item.title);
   return null;
 }
 
-// Single rendering branch for both tracks (both render as anchors;
-// only the hash kind and the weight class differ).
+// Rendering branch for songs (render as anchors; non-songs are plain text).
 export function trackRoute(item, weightCls) {
   if (item.songId) {
     return {
@@ -24,20 +22,15 @@ export function trackRoute(item, weightCls) {
       isSong: true,
     };
   }
-  return {
-    key: trackKey("title", item.title),
-    hash: `#/title/${encodeURIComponent(item.title)}`,
-    cls: TITLE_LINK,
-    isSong: false,
-  };
+  return null;
 }
 
 // Hash routes (no router dep; static hosting safe):
-// #/song/<songId> #/show/<showId> #/venue/<name> #/title/<title>
+// #/song/<songId> #/show/<showId> #/venue/<name>
 export function parseRoute(hash) {
   const m = (hash ?? "")
     .replace(/^#/, "")
-    .match(/^\/(song|show|venue|title)\/(.+)$/);
+    .match(/^\/(song|show|venue)\/(.+)$/);
   if (!m) return null;
   try {
     return { kind: m[1], value: decodeURIComponent(m[2]) };
@@ -50,5 +43,4 @@ export const routeHash = {
   song: (id) => `#/song/${id}`,
   show: (id) => `#/show/${id}`,
   venue: (name) => `#/venue/${encodeURIComponent(name)}`,
-  title: (title) => `#/title/${encodeURIComponent(title)}`,
 };

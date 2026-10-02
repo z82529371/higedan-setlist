@@ -46,8 +46,6 @@ export const CUE_COLOR = {
 export const TRACK_NOTE = "text-[13px] text-muted";
 export const SETLIST_SONG =
   "border-b border-transparent font-medium text-ink no-underline transition-colors hover:border-pool hover:text-pool focus-visible:outline-[3px] focus-visible:outline-pool focus-visible:outline-offset-2 motion-reduce:transition-none";
-export const TITLE_LINK =
-  "transition-colors hover:text-pool focus-visible:outline-[3px] focus-visible:outline-pool focus-visible:outline-offset-2 motion-reduce:transition-none";
 export const SLIP_ARTICLE =
   "relative rounded-[3px] border-[1.5px] border-ink bg-card px-[26px] pb-6 pt-[46px] shadow-[5px_5px_0_rgba(23,35,59,0.14)] max-sm:px-4 max-sm:pb-[18px] max-sm:pt-[42px]";
 export const SLIP_TAPE =
