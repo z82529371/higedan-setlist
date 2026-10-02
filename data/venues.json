@@ -1132,5 +1132,149 @@
     "city": "熊本",
     "region": "九州",
     "prefecture": "熊本縣"
+  },
+  "東海大学 湘南キャンパス 体育館": {
+    "venue": "東海大學湘南校區體育館",
+    "city": "平塚",
+    "region": "關東",
+    "prefecture": "神奈川縣"
+  },
+  "工学院大学 八王子キャンパス 体育館": {
+    "venue": "工學院大學八王子校區體育館",
+    "city": "東京",
+    "region": "關東",
+    "prefecture": "東京都"
+  },
+  "久屋大通公園": {
+    "venue": "久屋大通公園",
+    "city": "名古屋",
+    "region": "中部",
+    "prefecture": "愛知縣"
+  },
+  "SONIC STAGE at 舞洲スポーツアイランド": {
+    "venue": "舞洲體育島 SONIC STAGE",
+    "city": "大阪",
+    "region": "關西",
+    "prefecture": "大阪府"
+  },
+  "舞洲體育島 SONIC STAGE": {
+    "venue": "舞洲體育島 SONIC STAGE",
+    "city": "大阪",
+    "region": "關西",
+    "prefecture": "大阪府"
+  },
+  "WESTステージ at 勾当台公園 市民広場": {
+    "venue": "勾當台公園 市民廣場 WEST STAGE",
+    "city": "仙台",
+    "region": "東北",
+    "prefecture": "宮城縣"
+  },
+  "勾當台公園 市民廣場 WEST STAGE": {
+    "venue": "勾當台公園 市民廣場 WEST STAGE",
+    "city": "仙台",
+    "region": "東北",
+    "prefecture": "宮城縣"
+  },
+  "NEW WALTZ at JOIN ALIVE 2018会場 [いわみざわ公園野外音楽堂キタオン / 北海道グリーンランド遊園地]": {
+    "venue": "いわみざわ公園 NEW WALTZ",
+    "city": "岩見澤",
+    "region": "北海道",
+    "prefecture": "北海道"
+  },
+  "いわみざわ公園 NEW WALTZ": {
+    "venue": "いわみざわ公園 NEW WALTZ",
+    "city": "岩見澤",
+    "region": "北海道",
+    "prefecture": "北海道"
+  },
+  "オリーブホール at SANUKI ROCK COLOSSEUM～BUSTA CUP 9th round～会場": {
+    "venue": "高松オリーブホール",
+    "city": "高松",
+    "region": "四國",
+    "prefecture": "香川縣"
+  },
+  "高松オリーブホール": {
+    "venue": "高松オリーブホール",
+    "city": "高松",
+    "region": "四國",
+    "prefecture": "香川縣"
+  },
+  "阿倍野ROCKTOWN": {
+    "venue": "阿倍野ROCKTOWN",
+    "city": "大阪",
+    "region": "關西",
+    "prefecture": "大阪府"
+  },
+  "アリスガーデン at HIROSHIMA MUSIC STADIUM ハルバン&#039;18会場 [広島CLUB QUATTRO / SECOND CRUTCH / 広島CAVE-BE / 広島BACK BEAT / SUMATRA TIGER / TOWER RECORDS広島 / アリスガーデン]": {
+    "venue": "廣島 Alice Garden",
+    "city": "廣島",
+    "region": "中國",
+    "prefecture": "廣島縣"
+  },
+  "廣島 Alice Garden": {
+    "venue": "廣島 Alice Garden",
+    "city": "廣島",
+    "region": "中國",
+    "prefecture": "廣島縣"
+  },
+  "CLUB RIVERST": {
+    "venue": "CLUB RIVERST",
+    "city": "新潟",
+    "region": "中部",
+    "prefecture": "新潟縣"
+  },
+  "高松festhalle": {
+    "venue": "高松festhalle",
+    "city": "高松",
+    "region": "四國",
+    "prefecture": "香川縣"
+  },
+  "CRAZYMAMA 2nd Room": {
+    "venue": "CRAZYMAMA 2nd Room",
+    "city": "岡山",
+    "region": "中國",
+    "prefecture": "岡山縣"
+  },
+  "札幌KRAPS HALL": {
+    "venue": "札幌KRAPS HALL",
+    "city": "札幌",
+    "region": "北海道",
+    "prefecture": "北海道"
+  },
+  "BIG STEP 大階段 at 心斎橋BIG STEP": {
+    "venue": "心齋橋 BIG STEP 大階梯",
+    "city": "大阪",
+    "region": "關西",
+    "prefecture": "大阪府"
+  },
+  "心齋橋 BIG STEP 大階梯": {
+    "venue": "心齋橋 BIG STEP 大階梯",
+    "city": "大阪",
+    "region": "關西",
+    "prefecture": "大阪府"
+  },
+  "JANUS at MINAMI WHEEL 2017会場": {
+    "venue": "Music Club JANUS",
+    "city": "大阪",
+    "region": "關西",
+    "prefecture": "大阪府"
+  },
+  "Music Club JANUS": {
+    "venue": "Music Club JANUS",
+    "city": "大阪",
+    "region": "關西",
+    "prefecture": "大阪府"
+  },
+  "きらめき通り 特設ステージ": {
+    "venue": "きらめき通り 特設舞台",
+    "city": "福岡",
+    "region": "九州",
+    "prefecture": "福岡縣"
+  },
+  "きらめき通り 特設舞台": {
+    "venue": "きらめき通り 特設舞台",
+    "city": "福岡",
+    "region": "九州",
+    "prefecture": "福岡縣"
   }
 }
