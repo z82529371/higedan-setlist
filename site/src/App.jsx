@@ -26,11 +26,14 @@ import "./style.css";
 
 function getUnitCategory(u) {
   if (!u) return "tour";
-  if (u.type === "專場") return "tour";
+  if (u.type === "特別專場") return "special";
+  if (u.type === "學園祭") return "campus";
   if (u.type === "對バン" || u.type === "聯合專場") return "collab";
   if (u.type === "電視演出" || u.type === "TV拼盤") return "tv";
   if (u.type === "線上直播") return "stream";
-  return "fest";
+  if (u.type === "音樂祭") return "fest";
+  if (u.type === "專場") return u.templateSetlist || u.isTour ? "tour" : "special";
+  return u.templateSetlist || u.isTour ? "tour" : "fest";
 }
 
 export default function App() {
@@ -296,15 +299,23 @@ export default function App() {
 
       {tab === "show" &&
         (() => {
-          const soloUnits = allUnits.filter((u) => getUnitCategory(u) === "tour");
-          const collabUnits = allUnits.filter(
-            (u) => getUnitCategory(u) === "collab"
-          );
-          const festUnits = allUnits.filter((u) => getUnitCategory(u) === "fest");
-          const tvUnits = allUnits.filter((u) => getUnitCategory(u) === "tv");
-          const streamUnits = allUnits.filter(
-            (u) => getUnitCategory(u) === "stream"
-          );
+          const CATEGORIES = [
+            { key: "tour", label: "巡演專場" },
+            { key: "special", label: "特別專場" },
+            { key: "collab", label: "聯合專場" },
+            { key: "fest", label: "音樂祭" },
+            { key: "campus", label: "學園祭" },
+            { key: "tv", label: "電視演出" },
+            { key: "stream", label: "線上直播" },
+          ];
+
+          const categoryUnitsMap = new Map();
+          for (const cat of CATEGORIES) {
+            categoryUnitsMap.set(
+              cat.key,
+              allUnits.filter((u) => getUnitCategory(u) === cat.key)
+            );
+          }
 
           // Filter by category
           const categoryFiltered = allUnits.filter(
@@ -359,36 +370,18 @@ export default function App() {
                 <span className="mr-[6px] flex items-center font-mono text-[11px] font-bold uppercase tracking-[0.15em] text-muted after:content-['：']">
                   演出類型
                 </span>
-                <button
-                  className={filterPillClass(showGroupFilter === "tour")}
-                  onClick={() => handleCategoryChange("tour", soloUnits)}
-                >
-                  巡演專場 ({soloUnits.length})
-                </button>
-                <button
-                  className={filterPillClass(showGroupFilter === "collab")}
-                  onClick={() => handleCategoryChange("collab", collabUnits)}
-                >
-                  聯合專場 ({collabUnits.length})
-                </button>
-                <button
-                  className={filterPillClass(showGroupFilter === "fest")}
-                  onClick={() => handleCategoryChange("fest", festUnits)}
-                >
-                  音樂祭 ({festUnits.length})
-                </button>
-                <button
-                  className={filterPillClass(showGroupFilter === "tv")}
-                  onClick={() => handleCategoryChange("tv", tvUnits)}
-                >
-                  電視演出 ({tvUnits.length})
-                </button>
-                <button
-                  className={filterPillClass(showGroupFilter === "stream")}
-                  onClick={() => handleCategoryChange("stream", streamUnits)}
-                >
-                  線上直播 ({streamUnits.length})
-                </button>
+                {CATEGORIES.map((cat) => {
+                  const uList = categoryUnitsMap.get(cat.key) || [];
+                  return (
+                    <button
+                      key={cat.key}
+                      className={filterPillClass(showGroupFilter === cat.key)}
+                      onClick={() => handleCategoryChange(cat.key, uList)}
+                    >
+                      {cat.label} ({uList.length})
+                    </button>
+                  );
+                })}
               </div>
 
               <div className="flex flex-wrap items-center gap-2">
