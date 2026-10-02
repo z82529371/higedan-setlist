@@ -658,5 +658,53 @@
     "city": "仙台",
     "region": "東北",
     "prefecture": "宮城縣"
+  },
+  "新木場STUDIO COAST": {
+    "venue": "新木場STUDIO COAST",
+    "city": "東京",
+    "region": "關東",
+    "prefecture": "東京都"
+  },
+  "SEASIDE PARK at 若洲公園": {
+    "venue": "若洲公園 SEASIDE PARK",
+    "city": "東京",
+    "region": "關東",
+    "prefecture": "東京都"
+  },
+  "GREEN HILL at 海とのふれあい広場": {
+    "venue": "海之交流廣場 GREEN HILL",
+    "city": "大阪",
+    "region": "關西",
+    "prefecture": "大阪府"
+  },
+  "ダイバーシティ東京プラザ フェスティバル広場": {
+    "venue": "DiverCity東京 節慶廣場",
+    "city": "東京",
+    "region": "關東",
+    "prefecture": "東京都"
+  },
+  "VIVA! STAGE at さいたまスーパーアリーナ": {
+    "venue": "埼玉超級競技場 VIVA! STAGE",
+    "city": "埼玉",
+    "region": "關東",
+    "prefecture": "埼玉縣"
+  },
+  "石川県産業展示館 4号館": {
+    "venue": "石川縣產業展示館 4號館",
+    "city": "金澤",
+    "region": "中部",
+    "prefecture": "石川縣"
+  },
+  "TOKYO DOME CITY HALL": {
+    "venue": "TOKYO DOME CITY HALL",
+    "city": "東京",
+    "region": "關東",
+    "prefecture": "東京都"
+  },
+  "EX THEATER ROPPONGI": {
+    "venue": "EX THEATER ROPPONGI",
+    "city": "東京",
+    "region": "關東",
+    "prefecture": "東京都"
   }
 }
