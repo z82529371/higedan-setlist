@@ -1120,5 +1120,17 @@
     "city": "松江",
     "region": "中國",
     "prefecture": "島根縣"
+  },
+  "B.9 at HAPPY JACK 2019 H-FINAL EDITION LIVE CIRCUIT会場 [熊本B.9 / 熊本B.9 V2 / 熊本Django / ぺいあのPLUS]": {
+    "venue": "熊本B.9",
+    "city": "熊本",
+    "region": "九州",
+    "prefecture": "熊本縣"
+  },
+  "熊本B.9": {
+    "venue": "熊本B.9",
+    "city": "熊本",
+    "region": "九州",
+    "prefecture": "熊本縣"
   }
 }

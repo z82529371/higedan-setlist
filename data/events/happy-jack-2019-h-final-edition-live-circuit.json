@@ -1,0 +1,21 @@
+{
+  "id": "happy-jack-2019-h-final-edition-live-circuit",
+  "title": "HAPPY JACK 2019 H-FINAL EDITION LIVE CIRCUIT",
+  "shortTitle": "HAPPY JACK 2019",
+  "type": "音樂祭",
+  "shows": [
+    {
+      "id": "1072036",
+      "date": "2019-03-16",
+      "city": "熊本",
+      "venue": "熊本B.9",
+      "region": "九州",
+      "prefecture": "熊本縣",
+      "title": "HAPPY JACK 2019 H-FINAL EDITION LIVE CIRCUIT",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/1072036"
+      ],
+      "setlist": []
+    }
+  ]
+}
