@@ -1,0 +1,21 @@
+{
+  "id": "mtv-vmaj-2018-the-live",
+  "title": "MTV VMAJ 2018 -THE LIVE-",
+  "shortTitle": "MTV VMAJ 2018",
+  "type": "電視演出",
+  "shows": [
+    {
+      "id": "1024196",
+      "date": "2018-10-10",
+      "city": "東京",
+      "venue": "新木場STUDIO COAST",
+      "region": "關東",
+      "prefecture": "東京都",
+      "title": "MTV VMAJ 2018 -THE LIVE-",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/1024196"
+      ],
+      "setlist": []
+    }
+  ]
+}

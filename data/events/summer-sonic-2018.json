@@ -1,0 +1,21 @@
+{
+  "id": "summer-sonic-2018",
+  "title": "SUMMER SONIC 2018",
+  "shortTitle": "SUMMER SONIC 2018",
+  "type": "音樂祭",
+  "shows": [
+    {
+      "id": "992073",
+      "date": "2018-08-19",
+      "city": "大阪",
+      "venue": "舞洲體育島 SONIC STAGE",
+      "region": "關西",
+      "prefecture": "大阪府",
+      "title": "SUMMER SONIC 2018",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/992073"
+      ],
+      "setlist": []
+    }
+  ]
+}

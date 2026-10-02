@@ -1,0 +1,22 @@
+{
+  "id": "kogakuin-hachiojisai-2018",
+  "title": "工学院大学 八王子祭",
+  "shortTitle": "工学院大学 八王子祭",
+  "type": "學園祭",
+  "shows": [
+    {
+      "id": "1024883",
+      "date": "2018-10-07",
+      "city": "東京",
+      "venue": "工學院大學八王子校區體育館",
+      "region": "關東",
+      "prefecture": "東京都",
+      "title": "工学院大学 八王子祭",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/1024883"
+      ],
+      "setlist": [],
+      "opensAt": "17:00"
+    }
+  ]
+}

@@ -1,6 +1,7 @@
 {
   "id": "a-flood-of-circus-2018",
   "title": "A FLOOD OF CIRCUS 大巡業 2018",
+  "shortTitle": "A FLOOD OF CIRCUS 2018",
   "type": "聯合專場",
   "shows": [
     {
@@ -52,6 +53,19 @@
           "songId": "sweet-tweet"
         }
       ]
+    },
+    {
+      "id": "881919",
+      "date": "2018-01-20",
+      "city": "新潟",
+      "venue": "CLUB RIVERST",
+      "region": "中部",
+      "prefecture": "新潟縣",
+      "title": "A FLOOD OF CIRCUS 大巡業 2018",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/881919"
+      ],
+      "setlist": []
     }
   ]
 }

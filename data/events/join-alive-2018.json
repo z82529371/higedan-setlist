@@ -1,0 +1,21 @@
+{
+  "id": "join-alive-2018",
+  "title": "JOIN ALIVE 2018",
+  "shortTitle": "JOIN ALIVE 2018",
+  "type": "音樂祭",
+  "shows": [
+    {
+      "id": "942486",
+      "date": "2018-07-15",
+      "city": "岩見澤",
+      "venue": "いわみざわ公園 NEW WALTZ",
+      "region": "北海道",
+      "prefecture": "北海道",
+      "title": "JOIN ALIVE 2018",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/942486"
+      ],
+      "setlist": []
+    }
+  ]
+}

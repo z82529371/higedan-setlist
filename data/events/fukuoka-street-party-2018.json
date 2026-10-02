@@ -1,0 +1,21 @@
+{
+  "id": "fukuoka-street-party-2018",
+  "title": "FUKUOKA STREET PARTY",
+  "shortTitle": "FUKUOKA STREET PARTY",
+  "type": "音樂祭",
+  "shows": [
+    {
+      "id": "1024182",
+      "date": "2018-03-24",
+      "city": "福岡",
+      "venue": "きらめき通り 特設舞台",
+      "region": "九州",
+      "prefecture": "福岡縣",
+      "title": "FUKUOKA STREET PARTY",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/1024182"
+      ],
+      "setlist": []
+    }
+  ]
+}
