@@ -118,7 +118,12 @@ export function defaultShowId(unit) {
   const shows = [...(unit?.shows ?? [])].sort((a, b) =>
     a.date < b.date ? -1 : 1
   );
-  return shows.at(-1)?.id ?? null;
+  const withSongs = shows.filter(
+    (s) =>
+      unit?.templateSetlist ||
+      (s.setlist ?? []).some((i) => i.songId || i.title)
+  );
+  return (withSongs.length > 0 ? withSongs.at(-1) : shows.at(-1))?.id ?? null;
 }
 
 export function buildIndex() {
