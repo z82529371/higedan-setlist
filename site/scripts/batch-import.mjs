@@ -443,6 +443,9 @@ async function verifyAndRecomputeShows() {
         { match: /関西外国語大学.*外大祭|外大祭/, prefix: "kansaigaidai-gaidaisai" },
         { match: /愛知淑徳大学.*淑楓祭|淑楓祭/, prefix: "aichishukutoku-shukufusai" },
         { match: /大手前大学.*大手前祭|大手前祭/, prefix: "otemae-fes" },
+        { match: /宗像フェス/, prefix: "munakata-fes" },
+        { match: /テレビ朝日ドリームフェスティバル|ドリームフェスティバル/, prefix: "tv-asahi-dream-festival" },
+        { match: /未確認フェスティバル/, prefix: "mikakunin-festival" },
       ];
       for (const k of KNOWN_EVENT_SLUGS) {
         if (k.match.test(meta.eventTitle || "")) {
