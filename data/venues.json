@@ -904,5 +904,89 @@
     "city": "東京",
     "region": "關東",
     "prefecture": "東京都"
+  },
+  "ラゾーナ川崎プラザ ルーファ広場 グランドステージ": {
+    "venue": "Lazona川崎廣場 Rufa廣場大舞台",
+    "city": "川崎",
+    "region": "關東",
+    "prefecture": "神奈川縣"
+  },
+  "ヒューリックホール東京": {
+    "venue": "東京Hulic Hall",
+    "city": "東京",
+    "region": "關東",
+    "prefecture": "東京都"
+  },
+  "MINAMI WHEEL 2018": {
+    "venue": "BIGCAT",
+    "city": "大阪",
+    "region": "關西",
+    "prefecture": "大阪府"
+  },
+  "心斎橋BIG STEP": {
+    "venue": "心齋橋 BIG STEP",
+    "city": "大阪",
+    "region": "關西",
+    "prefecture": "大阪府"
+  },
+  "久屋大通公園 久屋広場": {
+    "venue": "久屋大通公園 久屋廣場",
+    "city": "名古屋",
+    "region": "中部",
+    "prefecture": "愛知縣"
+  },
+  "CAMP STAGE at 若洲公園": {
+    "venue": "若洲公園 CAMP STAGE",
+    "city": "東京",
+    "region": "關東",
+    "prefecture": "東京都"
+  },
+  "幕張メッセ 国際展示場 9～11ホール": {
+    "venue": "幕張展覽館 國際展示場 9~11號館",
+    "city": "千葉",
+    "region": "關東",
+    "prefecture": "千葉縣"
+  },
+  "ゼビオアリーナ仙台": {
+    "venue": "Xebio Arena 仙台",
+    "city": "仙台",
+    "region": "東北",
+    "prefecture": "宮城縣"
+  },
+  "恋の浦 夕日の丘野外ステージ": {
+    "venue": "戀之浦 夕日之丘野外舞台",
+    "city": "福津",
+    "region": "九州",
+    "prefecture": "福岡縣"
+  },
+  "HILLSIDE STAGE at 国営ひたち海浜公園": {
+    "venue": "國營常陸海濱公園 HILLSIDE STAGE",
+    "city": "水戶",
+    "region": "關東",
+    "prefecture": "茨城縣"
+  },
+  "TSUTAYA O-WEST": {
+    "venue": "TSUTAYA O-WEST",
+    "city": "東京",
+    "region": "關東",
+    "prefecture": "東京都"
+  },
+  "Alley oop at 山口きらら博記念公園": {
+    "venue": "山口Kirara博紀念公園 Alley oop STAGE",
+    "city": "山口",
+    "region": "中國",
+    "prefecture": "山口縣"
+  },
+  "のぼせもんSTAGE at 国営海の中道海浜公園 野外劇場": {
+    "venue": "國營海之中道海濱公園 戶外劇場（Nobosemon STAGE）",
+    "city": "福岡",
+    "region": "九州",
+    "prefecture": "福岡縣"
+  },
+  "仙台Rensa": {
+    "venue": "仙台Rensa",
+    "city": "仙台",
+    "region": "東北",
+    "prefecture": "宮城縣"
   }
 }
