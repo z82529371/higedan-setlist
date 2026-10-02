@@ -706,5 +706,11 @@
     "city": "東京",
     "region": "關東",
     "prefecture": "東京都"
+  },
+  "なんばHatch": {
+    "venue": "なんばHatch",
+    "city": "大阪",
+    "region": "關西",
+    "prefecture": "大阪府"
   }
 }

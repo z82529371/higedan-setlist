@@ -461,10 +461,15 @@ async function verifyAndRecomputeShows() {
 
       if (fs.existsSync(eventFile)) {
         const existing = JSON.parse(fs.readFileSync(eventFile, "utf-8"));
-        const isTourTitle =
+        const isSeriesTitle =
           /\btour\b/i.test(meta.eventTitle || "") ||
-          /ツアー|巡演/i.test(meta.eventTitle || "");
-        if (!isTourTitle && !isSameShow && existing.shows.length > 0) {
+          /ツアー|巡演|two-man|ツーマン|対バン|對バン/i.test(meta.eventTitle || "");
+        const isSameShow = existing.shows.some(
+          (s) =>
+            s.id === eventId ||
+            (s.sourceUrls ?? []).some((u) => u.includes(eventId))
+        );
+        if (!isSeriesTitle && !isSameShow && existing.shows.length > 0) {
           const dateDiffs = existing.shows
             .filter((s) => s.date)
             .map((s) =>
