@@ -1078,5 +1078,47 @@
     "city": "千葉",
     "region": "關東",
     "prefecture": "千葉縣"
+  },
+  "マイナビBLITZ赤坂": {
+    "venue": "Mynavi Blitz赤阪",
+    "city": "東京",
+    "region": "關東",
+    "prefecture": "東京都"
+  },
+  "THE BOTTOM LINE": {
+    "venue": "THE BOTTOM LINE",
+    "city": "名古屋",
+    "region": "中部",
+    "prefecture": "愛知縣"
+  },
+  "神戸VARIT.": {
+    "venue": "神戸VARIT.",
+    "city": "神戶",
+    "region": "關西",
+    "prefecture": "兵庫縣"
+  },
+  "梅田CLUB QUATTRO": {
+    "venue": "梅田CLUB QUATTRO",
+    "city": "大阪",
+    "region": "關西",
+    "prefecture": "大阪府"
+  },
+  "天神Queblick": {
+    "venue": "天神Queblick",
+    "city": "福岡",
+    "region": "九州",
+    "prefecture": "福岡縣"
+  },
+  "仙台Space Zero": {
+    "venue": "仙台Space Zero",
+    "city": "仙台",
+    "region": "東北",
+    "prefecture": "宮城縣"
+  },
+  "島根県民会館 中ホール": {
+    "venue": "島根縣民會館 中會館",
+    "city": "松江",
+    "region": "中國",
+    "prefecture": "島根縣"
   }
 }

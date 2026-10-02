@@ -1,0 +1,253 @@
+{
+  "id": "one-man-tour-2017-winter",
+  "title": "Official髭男dism one-man tour 2017 -winter-",
+  "type": "巡演專場",
+  "shows": [
+    {
+      "id": "828049",
+      "date": "2017-11-03",
+      "city": "松江",
+      "venue": "島根縣民會館 中會館",
+      "region": "中國",
+      "prefecture": "島根縣",
+      "title": "Official髭男dism one-man tour 2017 -winter-",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/828049"
+      ],
+      "opensAt": "18:00",
+      "diff": {},
+      "locked": true
+    },
+    {
+      "id": "828050",
+      "date": "2017-11-11",
+      "city": "水戶",
+      "venue": "水戶LIGHT HOUSE",
+      "region": "關東",
+      "prefecture": "茨城縣",
+      "title": "Official髭男dism one-man tour 2017 -winter-",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/828050"
+      ],
+      "opensAt": "18:00",
+      "diff": {},
+      "locked": true
+    },
+    {
+      "id": "828051",
+      "date": "2017-11-12",
+      "city": "仙台",
+      "venue": "仙台Space Zero",
+      "region": "東北",
+      "prefecture": "宮城縣",
+      "title": "Official髭男dism one-man tour 2017 -winter-",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/828051"
+      ],
+      "opensAt": "17:30",
+      "diff": {},
+      "locked": true
+    },
+    {
+      "id": "828052",
+      "date": "2017-11-23",
+      "city": "福岡",
+      "venue": "天神Queblick",
+      "region": "九州",
+      "prefecture": "福岡縣",
+      "title": "Official髭男dism one-man tour 2017 -winter-",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/828052"
+      ],
+      "opensAt": "18:00",
+      "diff": {},
+      "locked": true
+    },
+    {
+      "id": "828053",
+      "date": "2017-11-26",
+      "city": "大阪",
+      "venue": "梅田CLUB QUATTRO",
+      "region": "關西",
+      "prefecture": "大阪府",
+      "title": "Official髭男dism one-man tour 2017 -winter-",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/828053"
+      ],
+      "opensAt": "17:30",
+      "diff": {},
+      "locked": true
+    },
+    {
+      "id": "828054",
+      "date": "2017-12-01",
+      "city": "神戶",
+      "venue": "神戸VARIT.",
+      "region": "關西",
+      "prefecture": "兵庫縣",
+      "title": "Official髭男dism one-man tour 2017 -winter-",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/828054"
+      ],
+      "opensAt": "19:00",
+      "diff": {},
+      "locked": true
+    },
+    {
+      "id": "828055",
+      "date": "2017-12-02",
+      "city": "名古屋",
+      "venue": "THE BOTTOM LINE",
+      "region": "中部",
+      "prefecture": "愛知縣",
+      "title": "Official髭男dism one-man tour 2017 -winter-",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/828055"
+      ],
+      "opensAt": "18:00",
+      "diff": {},
+      "locked": true
+    },
+    {
+      "id": "828056",
+      "date": "2017-12-08",
+      "city": "東京",
+      "venue": "Mynavi Blitz赤阪",
+      "region": "關東",
+      "prefecture": "東京都",
+      "title": "Official髭男dism one-man tour 2017 -winter-",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/828056"
+      ],
+      "opensAt": "19:00",
+      "diff": {
+        "skip": [
+          3
+        ],
+        "insert": [
+          {
+            "after": 1,
+            "item": {
+              "encore": false,
+              "songId": "hajimari-no-asa"
+            }
+          },
+          {
+            "after": 16,
+            "item": {
+              "encore": true,
+              "songId": "whats-going-on"
+            }
+          }
+        ],
+        "note": [
+          {
+            "order": 5,
+            "note": "アコースティックver."
+          },
+          {
+            "order": 7,
+            "note": "弾き語り"
+          }
+        ],
+        "kind": [
+          {
+            "order": 7,
+            "kind": [
+              "satoshi-solo"
+            ]
+          }
+        ]
+      },
+      "locked": true
+    }
+  ],
+  "templateSetlist": [
+    {
+      "order": 1,
+      "encore": false,
+      "songId": "koi-no-maenarae"
+    },
+    {
+      "order": 2,
+      "encore": false,
+      "songId": "ai-nandaga"
+    },
+    {
+      "order": 3,
+      "encore": false,
+      "songId": "hajimari-no-asa"
+    },
+    {
+      "order": 4,
+      "encore": false,
+      "songId": "brothers"
+    },
+    {
+      "order": 5,
+      "encore": false,
+      "songId": "yugure-zoi"
+    },
+    {
+      "order": 6,
+      "encore": false,
+      "title": "ぼくらが旅に出る理由 [小沢健二]"
+    },
+    {
+      "order": 7,
+      "encore": false,
+      "songId": "zero-no-mama-de-iraterara"
+    },
+    {
+      "order": 8,
+      "encore": false,
+      "songId": "lady"
+    },
+    {
+      "order": 9,
+      "encore": false,
+      "songId": "tell-me-baby"
+    },
+    {
+      "order": 10,
+      "encore": false,
+      "songId": "nichiyoubi-no-love-letter"
+    },
+    {
+      "order": 11,
+      "encore": false,
+      "songId": "coffee-to-syrup"
+    },
+    {
+      "order": 12,
+      "encore": false,
+      "songId": "driver"
+    },
+    {
+      "order": 13,
+      "encore": false,
+      "songId": "itan-na-star"
+    },
+    {
+      "order": 14,
+      "encore": false,
+      "songId": "clap-clap"
+    },
+    {
+      "order": 15,
+      "encore": false,
+      "songId": "sweet-tweet"
+    },
+    {
+      "order": 16,
+      "encore": true,
+      "songId": "rolling"
+    },
+    {
+      "order": 17,
+      "encore": true,
+      "songId": "inu-ka-cat-ka-de-shinumade-kenka-shiyou"
+    }
+  ],
+  "templateBasis": "全體共識：整輪巡演固定演出 17 曲，包含小澤健二翻唱曲《ぼくらが旅に出る理由》於 M6"
+}
