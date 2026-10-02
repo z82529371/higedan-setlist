@@ -1,0 +1,46 @@
+{
+  "id": "number-shot-2018",
+  "title": "NUMBER SHOT 2018",
+  "type": "音樂祭",
+  "shows": [
+    {
+      "id": "940194",
+      "date": "2018-07-22",
+      "city": "福岡",
+      "venue": "國營海之中道海濱公園 戶外劇場（Nobosemon STAGE）",
+      "region": "九州",
+      "prefecture": "福岡縣",
+      "title": "NUMBER SHOT 2018",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/940194"
+      ],
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "songId": "coffee-to-syrup"
+        },
+        {
+          "order": 2,
+          "encore": false,
+          "songId": "itan-na-star"
+        },
+        {
+          "order": 3,
+          "encore": false,
+          "songId": "tell-me-baby"
+        },
+        {
+          "order": 4,
+          "encore": false,
+          "songId": "no-doubt"
+        },
+        {
+          "order": 5,
+          "encore": false,
+          "songId": "sweet-tweet"
+        }
+      ]
+    }
+  ]
+}

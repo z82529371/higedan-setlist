@@ -1,0 +1,51 @@
+{
+  "id": "pia-music-complex-2018",
+  "title": "PIA MUSIC COMPLEX 2018",
+  "type": "音樂祭",
+  "shows": [
+    {
+      "id": "994292",
+      "date": "2018-09-29",
+      "city": "東京",
+      "venue": "若洲公園 CAMP STAGE",
+      "region": "關東",
+      "prefecture": "東京都",
+      "title": "PIA MUSIC COMPLEX 2018",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/994292"
+      ],
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "songId": "coffee-to-syrup"
+        },
+        {
+          "order": 2,
+          "encore": false,
+          "songId": "itan-na-star"
+        },
+        {
+          "order": 3,
+          "encore": false,
+          "songId": "tell-me-baby"
+        },
+        {
+          "order": 4,
+          "encore": false,
+          "songId": "escapade"
+        },
+        {
+          "order": 5,
+          "encore": false,
+          "songId": "no-doubt"
+        },
+        {
+          "order": 6,
+          "encore": false,
+          "songId": "sweet-tweet"
+        }
+      ]
+    }
+  ]
+}

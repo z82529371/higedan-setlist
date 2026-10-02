@@ -1,0 +1,61 @@
+{
+  "id": "munakata-fes-2018",
+  "title": "宗像フェス2018 ～Fukutsu Koinoura～",
+  "type": "音樂祭",
+  "shows": [
+    {
+      "id": "1019592",
+      "date": "2018-09-09",
+      "city": "福津",
+      "venue": "戀之浦 夕日之丘野外舞台",
+      "region": "九州",
+      "prefecture": "福岡縣",
+      "title": "宗像フェス2018 ～Fukutsu Koinoura～",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/1019592"
+      ],
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "songId": "coffee-to-syrup"
+        },
+        {
+          "order": 2,
+          "encore": false,
+          "songId": "itan-na-star"
+        },
+        {
+          "order": 3,
+          "encore": false,
+          "songId": "tell-me-baby"
+        },
+        {
+          "order": 4,
+          "encore": false,
+          "songId": "ai-nandaga"
+        },
+        {
+          "order": 5,
+          "encore": false,
+          "songId": "nichiyoubi-no-love-letter"
+        },
+        {
+          "order": 6,
+          "encore": false,
+          "songId": "escapade"
+        },
+        {
+          "order": 7,
+          "encore": false,
+          "songId": "no-doubt"
+        },
+        {
+          "order": 8,
+          "encore": false,
+          "songId": "sweet-tweet"
+        }
+      ]
+    }
+  ]
+}

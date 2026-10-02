@@ -1,0 +1,37 @@
+{
+  "id": "j-wave-live-summer-jam-2018-supported-by-antenna",
+  "title": "J-WAVE LIVE SUMMER JAM 2018 supported by antenna",
+  "shortTitle": "J-WAVE LIVE SUMMER JAM 2018",
+  "type": "音樂祭",
+  "shows": [
+    {
+      "id": "960030",
+      "date": "2018-07-14",
+      "city": "橫濱",
+      "venue": "橫濱Arena",
+      "region": "關東",
+      "prefecture": "神奈川縣",
+      "title": "J-WAVE LIVE SUMMER JAM 2018 supported by antenna",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/960030"
+      ],
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "songId": "tell-me-baby"
+        },
+        {
+          "order": 2,
+          "encore": false,
+          "songId": "itan-na-star"
+        },
+        {
+          "order": 3,
+          "encore": false,
+          "songId": "no-doubt"
+        }
+      ]
+    }
+  ]
+}
