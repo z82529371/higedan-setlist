@@ -832,5 +832,47 @@
     "city": "橫濱",
     "region": "關東",
     "prefecture": "神奈川縣"
+  },
+  "COSMO STAGE at 幕張メッセ": {
+    "venue": "幕張展覽館的COSMO舞臺",
+    "city": "千葉",
+    "region": "關東",
+    "prefecture": "千葉縣"
+  },
+  "R-STAGE at インテックス大阪": {
+    "venue": "INTEX OSAKA的R-STAGE",
+    "city": "大阪",
+    "region": "關西",
+    "prefecture": "大阪府"
+  },
+  "福岡国際センター": {
+    "venue": "福岡國際中心",
+    "city": "福岡",
+    "region": "九州",
+    "prefecture": "福岡縣"
+  },
+  "伏見JAMMIN&#039;": {
+    "venue": "伏見JAMMIN'",
+    "city": "名古屋",
+    "region": "中部",
+    "prefecture": "愛知縣"
+  },
+  "伏見JAMMIN'": {
+    "venue": "伏見JAMMIN'",
+    "city": "名古屋",
+    "region": "中部",
+    "prefecture": "愛知縣"
+  },
+  "BIGCAT": {
+    "venue": "BIGCAT",
+    "city": "大阪",
+    "region": "關西",
+    "prefecture": "大阪府"
+  },
+  "duo MUSIC EXCHANGE": {
+    "venue": "duo MUSIC EXCHANGE",
+    "city": "東京",
+    "region": "關東",
+    "prefecture": "東京都"
   }
 }
