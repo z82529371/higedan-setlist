@@ -1402,5 +1402,47 @@
     "city": "千葉",
     "region": "關東",
     "prefecture": "千葉縣"
+  },
+  "名古屋SPADE BOX": {
+    "venue": "名古屋SPADE BOX",
+    "city": "名古屋",
+    "region": "中部",
+    "prefecture": "愛知縣"
+  },
+  "渋谷CLUB QUATTRO": {
+    "venue": "澀谷CLUB QUATTRO",
+    "city": "東京",
+    "region": "關東",
+    "prefecture": "東京都"
+  },
+  "umeda TRAD": {
+    "venue": "umeda TRAD",
+    "city": "大阪",
+    "region": "關西",
+    "prefecture": "大阪府"
+  },
+  "恵比寿LIQUIDROOM": {
+    "venue": "惠比壽LIQUIDROOM",
+    "city": "東京",
+    "region": "關東",
+    "prefecture": "東京都"
+  },
+  "新代田FEVER": {
+    "venue": "新代田FEVER",
+    "city": "東京",
+    "region": "關東",
+    "prefecture": "東京都"
+  },
+  "澀谷CLUB QUATTRO": {
+    "venue": "澀谷CLUB QUATTRO",
+    "city": "東京",
+    "region": "關東",
+    "prefecture": "東京都"
+  },
+  "惠比壽LIQUIDROOM": {
+    "venue": "惠比壽LIQUIDROOM",
+    "city": "東京",
+    "region": "關東",
+    "prefecture": "東京都"
   }
 }
