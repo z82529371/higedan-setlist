@@ -1,17 +1,23 @@
 /* 髭男 Setlist 檔案庫 — Tailwind v4 硬零自訂 CSS（ADR-0040 硬零共識）：
-   本檔僅保留 @import + @theme（設計代幣），無任何自訂 selector / @layer / 全域基底。
-   紙紋格線、膠帶、斜貼卡、selection、focus、reduced-motion 全已搬進 JSX utilities。 */
+   配色調色盤（ADR-0067）：全面精準對齊 higedan.com 官網 service.css 色系
+   - 背景紙色: #e6e6e6 (官網 body 背景)
+   - 墨水文字: #000000 (官網主要文字與邊框)
+   - 官方標誌金: #d19f00 (官網 accent、selection、hover 金)
+   - 實體票根: #ffffff (純白卡片)
+   - 分隔線條: #bdbebe (官網線條色)
+   - 次要文字: #6b6366 (高對比暖灰，符合 WCAG AA 4.5:1)
+*/
 @import "tailwindcss";
 
 @theme {
-  --color-paper: #e9eef2;
+  --color-paper: #e6e6e6;
   --color-card: #ffffff;
-  --color-band: #17233b;
-  --color-band-ink: #f2f5f9;
-  --color-ink: #1e2e4a;
-  --color-muted: #5b6b84;
-  --color-line: #c9d4de;
-  --color-line-soft: #dde5ec;
+  --color-band: #d19f00;
+  --color-band-ink: #000000;
+  --color-ink: #000000;
+  --color-muted: #6b6366;
+  --color-line: #bdbebe;
+  --color-line-soft: #e6e6e6;
   --color-request: #d9261c;
   --color-request-wash: #fbe9e6;
   --color-request-shadow: rgba(217, 38, 28, 0.14);
@@ -26,13 +32,23 @@
   --color-solo-bg: #f2fbf8;
   --color-occasion: #6d5a99;
   --color-occasion-wash: rgba(109, 90, 153, 0.14);
-  --color-tape: #e8b428;
-  --color-tape-soft: rgba(232, 180, 40, 0.38);
-  --color-pool: #1c7ab8;
-  --color-pool-wash: #e3f0f9;
-  --color-grid-line: rgba(28, 122, 184, 0.055);
-  --color-tape-edge: rgba(30, 46, 74, 0.25);
+  --color-tape: #d19f00;
+  --color-tape-soft: rgba(209, 159, 0, 0.45);
+  --color-tape-edge: #000000;
+  --color-pool: #d19f00;
+  --color-pool-wash: #faf5e6;
+  --color-grid-line: rgba(0, 0, 0, 0.04);
   --font-display: "M PLUS Rounded 1c", "Zen Kaku Gothic New", "Noto Sans TC", sans-serif;
   --font-body: "Noto Sans TC", "Zen Kaku Gothic New", system-ui, sans-serif;
   --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+}
+
+::selection {
+  background: #d19f00;
+  color: #e6e6e6;
+}
+
+::-moz-selection {
+  background: #d19f00;
+  color: #e6e6e6;
 }

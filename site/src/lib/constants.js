@@ -13,23 +13,23 @@ export const KIND_TAB = {
 export const KIND_ORDER = ["premiere", "unreleased", "satoshi-solo", "request"];
 
 export const queryTabClass = (isOn) =>
-  `appearance-none rounded-full border-[1.5px] border-ink px-[22px] py-2 text-[14px] font-bold cursor-pointer select-none transition-all shadow-[2px_2px_0_rgba(23,35,59,0.12)] hover:-translate-y-[1px] hover:bg-pool-wash hover:shadow-[3px_3px_0_rgba(23,35,59,0.18)] active:translate-y-0 active:shadow-[1px_1px_0_rgba(23,35,59,0.14)] focus-visible:outline-2 focus-visible:outline-tape focus-visible:outline-offset-2 ${
+  `appearance-none w-full py-2.5 px-3 text-[14px] sm:text-[15px] font-bold cursor-pointer select-none transition-colors motion-reduce:transition-none flex items-center justify-center gap-1.5 focus-visible:outline-2 focus-visible:outline-tape focus-visible:outline-offset-[-2px] ${
     isOn
-      ? "bg-ink text-white shadow-[2px_2px_0_var(--color-ink)] hover:opacity-95"
-      : "bg-card text-ink"
+      ? "bg-ink text-white font-extrabold"
+      : "bg-card text-ink hover:bg-band/10"
   }`;
 
 export const filterPillClass = (isActive) =>
-  `appearance-none rounded border-[1.5px] px-[14px] py-[6px] text-[13px] font-semibold cursor-pointer whitespace-nowrap transition-all motion-reduce:transition-none focus-visible:outline-[3px] focus-visible:outline-pool focus-visible:outline-offset-2 ${
+  `appearance-none rounded border-[1.5px] px-[14px] py-[6px] text-[13px] font-semibold cursor-pointer whitespace-nowrap transition-colors motion-reduce:transition-none focus-visible:outline-[3px] focus-visible:outline-pool focus-visible:outline-offset-2 ${
     isActive
-      ? "bg-band text-band-ink border-band shadow-[2px_2px_0_#e8b428] font-bold"
+      ? "bg-band text-band-ink border-band shadow-[2px_2px_0_#d5a200] font-bold"
       : "border-line bg-paper text-ink hover:bg-pool-wash hover:border-pool hover:text-pool"
   }`;
 
 export const unitPillClass = (isOn, isEmpty = false) =>
-  `appearance-none rounded-full border px-3 py-1 text-[12px] font-semibold cursor-pointer transition-all motion-reduce:transition-none focus-visible:outline-[3px] focus-visible:outline-pool focus-visible:outline-offset-2 ${
+  `appearance-none rounded-full border px-3 py-1 text-[12px] font-semibold cursor-pointer transition-colors motion-reduce:transition-none focus-visible:outline-[3px] focus-visible:outline-pool focus-visible:outline-offset-2 ${
     isOn
-      ? "bg-tape text-[#3a2c00] border-ink font-bold shadow-[1px_1px_0_var(--color-ink)]"
+      ? "bg-tape text-ink border-ink font-bold shadow-[1px_1px_0_var(--color-ink)]"
       : isEmpty
       ? "border-[1.5px] border-dashed border-muted/80 bg-line-soft/80 text-muted hover:border-ink hover:text-ink hover:bg-pool-wash"
       : "border-line bg-card text-ink hover:border-ink hover:bg-pool-wash"
@@ -49,7 +49,7 @@ export const TRACK_NOTE = "text-[13px] text-muted";
 export const SETLIST_SONG =
   "border-b border-transparent font-medium text-ink no-underline transition-colors hover:border-pool hover:text-pool focus-visible:outline-[3px] focus-visible:outline-pool focus-visible:outline-offset-2 motion-reduce:transition-none";
 export const SLIP_ARTICLE =
-  "relative rounded-[3px] border-[1.5px] border-ink bg-card px-[26px] pb-6 pt-[46px] shadow-[5px_5px_0_rgba(23,35,59,0.14)] max-sm:px-4 max-sm:pb-[18px] max-sm:pt-[42px]";
+  "relative rounded-[3px] border-[1.5px] border-ink bg-card px-[26px] pb-6 pt-[46px] shadow-[5px_5px_0_rgba(0,0,0,0.14)] max-sm:px-4 max-sm:pb-[18px] max-sm:pt-[42px]";
 export const SLIP_TAPE =
   "pointer-events-none absolute left-1/2 top-[-13px] h-[26px] w-[132px] -translate-x-1/2 rotate-[1.5deg] border-x border-dashed border-tape-edge bg-tape-soft";
 export const SLIP_CARD = {
@@ -74,10 +74,10 @@ export const KIND_BADGE_CLASS = (k) =>
     ? "bg-[#fbe9e6] text-request"
     : k === "satoshi-solo"
     ? "bg-[#d8efe8] text-[#0b5f50]"
-    : "bg-tape text-[#3a2c00]";
+    : "bg-tape text-ink";
 
 export const DRAWER_LINK = (isOn) =>
-  `flex items-center justify-between gap-[10px] border-l-4 border-transparent px-[14px] py-[10px] no-underline transition-colors motion-reduce:transition-none focus-visible:outline-[3px] focus-visible:outline-pool focus-visible:outline-offset-2 ${
+  `flex w-full items-center justify-between gap-3 border-l-4 border-transparent px-[14px] py-[10px] text-left no-underline transition-colors motion-reduce:transition-none focus-visible:outline-[3px] focus-visible:outline-pool focus-visible:outline-offset-2 ${
     isOn
       ? "border-l-tape bg-band text-band-ink hover:bg-band"
       : "border-l-transparent text-ink hover:border-l-pool hover:bg-pool-wash"
