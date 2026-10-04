@@ -594,7 +594,7 @@
     "prefecture": "千葉縣"
   },
   "EARTH STAGE at 幕張メッセ": {
-    "venue": "幕張展覽館的地球舞臺",
+    "venue": "幕張展覽館 EARTH STAGE",
     "city": "千葉",
     "region": "關東",
     "prefecture": "千葉縣"
@@ -606,19 +606,19 @@
     "prefecture": "千葉縣"
   },
   "Z-STAGE 6号館 at インテックス大阪": {
-    "venue": "Intex Osaka的Z-STAGE Building 6",
+    "venue": "INTEX大阪 Z-STAGE 6號館",
     "city": "大阪",
     "region": "關西",
     "prefecture": "大阪府"
   },
   "PHOENIX STAGE at フェニックス・プラザ 大ホール": {
-    "venue": "鳳凰廣場大廳的鳳凰舞臺",
+    "venue": "鳳凰廣場 大會堂 PHOENIX STAGE",
     "city": "福井",
     "region": "中部",
     "prefecture": "福井縣"
   },
   "Mt.FUJI STAGE at 山中湖交流プラザきらら": {
-    "venue": "Yamanakako Exchange Plaza Kirara的富士山舞臺",
+    "venue": "山中湖交流廣場 Kirara Mt.FUJI STAGE",
     "city": "甲府",
     "region": "中部",
     "prefecture": "山梨縣"
@@ -636,13 +636,13 @@
     "prefecture": "大阪府"
   },
   "SONIC STAGE at SUMMER SONIC 2019会場 [ZOZOマリンスタジアム / 幕張メッセ]": {
-    "venue": "2019年夏季SONIC會場的SONIC STAGE [ZOZO海洋體育場/幕張展覽館]",
+    "venue": "幕張展覽館 SONIC STAGE",
     "city": "千葉",
     "region": "關東",
     "prefecture": "千葉縣"
   },
   "PARK STAGE at 国営ひたち海浜公園": {
-    "venue": "PARK STAGE at 国営ひたち海浜公園",
+    "venue": "國營常陸海濱公園 PARK STAGE",
     "city": "水戶",
     "region": "關東",
     "prefecture": "茨城縣"
@@ -834,13 +834,13 @@
     "prefecture": "神奈川縣"
   },
   "COSMO STAGE at 幕張メッセ": {
-    "venue": "幕張展覽館的COSMO舞臺",
+    "venue": "幕張展覽館 COSMO STAGE",
     "city": "千葉",
     "region": "關東",
     "prefecture": "千葉縣"
   },
   "R-STAGE at インテックス大阪": {
-    "venue": "INTEX OSAKA的R-STAGE",
+    "venue": "INTEX大阪 R-STAGE",
     "city": "大阪",
     "region": "關西",
     "prefecture": "大阪府"
@@ -1074,13 +1074,13 @@
     "prefecture": "東京都"
   },
   "MOON STAGE at 幕張メッセ": {
-    "venue": "幕張展覽館的月亮舞臺",
+    "venue": "幕張展覽館 MOON STAGE",
     "city": "千葉",
     "region": "關東",
     "prefecture": "千葉縣"
   },
   "マイナビBLITZ赤坂": {
-    "venue": "Mynavi Blitz赤阪",
+    "venue": "MYNAVI BLITZ 赤坂",
     "city": "東京",
     "region": "關東",
     "prefecture": "東京都"
@@ -1116,7 +1116,7 @@
     "prefecture": "宮城縣"
   },
   "島根県民会館 中ホール": {
-    "venue": "島根縣民會館 中會館",
+    "venue": "島根縣民會館 中會堂",
     "city": "松江",
     "region": "中國",
     "prefecture": "島根縣"
@@ -1176,13 +1176,13 @@
     "prefecture": "宮城縣"
   },
   "NEW WALTZ at JOIN ALIVE 2018会場 [いわみざわ公園野外音楽堂キタオン / 北海道グリーンランド遊園地]": {
-    "venue": "いわみざわ公園 NEW WALTZ",
+    "venue": "岩見澤公園 NEW WALTZ",
     "city": "岩見澤",
     "region": "北海道",
     "prefecture": "北海道"
   },
   "いわみざわ公園 NEW WALTZ": {
-    "venue": "いわみざわ公園 NEW WALTZ",
+    "venue": "岩見澤公園 NEW WALTZ",
     "city": "岩見澤",
     "region": "北海道",
     "prefecture": "北海道"
@@ -1276,5 +1276,131 @@
     "city": "福岡",
     "region": "九州",
     "prefecture": "福岡縣"
+  },
+  "仙台CLUB JUNK BOX at MEGA☆ROCKS 2017会場 [仙台Rensa / 仙台darwin / 仙台CLUB JUNK BOX / 仙台MACANA / HooK SENDAI / LIVE HOUSE enn 2nd / LIVE HOUSE enn 3rd / 仙台Space Zero / HIGHBURY / TOWER RECORDS仙台パルコ]": {
+    "venue": "仙台CLUB JUNK BOX",
+    "city": "仙台",
+    "region": "東北",
+    "prefecture": "宮城縣"
+  },
+  "岩田屋本館前 STAGE at MUSIC CITY TENJIN 2017会場": {
+    "venue": "岩田屋本館前 STAGE",
+    "city": "福岡",
+    "region": "九州",
+    "prefecture": "福岡縣"
+  },
+  "日比谷野外大音楽堂": {
+    "venue": "日比谷野外大音樂堂",
+    "city": "東京",
+    "region": "關東",
+    "prefecture": "東京都"
+  },
+  "仙台会場 NORTHステージ at 勾当台公園 市民広場": {
+    "venue": "勾當台公園 市民廣場 NORTH STAGE",
+    "city": "仙台",
+    "region": "東北",
+    "prefecture": "宮城縣"
+  },
+  "島根縣民會館 中會堂": {
+    "venue": "島根縣民會館 中會堂",
+    "city": "松江",
+    "region": "中國",
+    "prefecture": "島根縣"
+  },
+  "MYNAVI BLITZ 赤坂": {
+    "venue": "MYNAVI BLITZ 赤坂",
+    "city": "東京",
+    "region": "關東",
+    "prefecture": "東京都"
+  },
+  "Mynavi Blitz赤阪": {
+    "venue": "MYNAVI BLITZ 赤坂",
+    "city": "東京",
+    "region": "關東",
+    "prefecture": "東京都"
+  },
+  "岩見澤公園 NEW WALTZ": {
+    "venue": "岩見澤公園 NEW WALTZ",
+    "city": "岩見澤",
+    "region": "北海道",
+    "prefecture": "北海道"
+  },
+  "幕張展覽館 MOON STAGE": {
+    "venue": "幕張展覽館 MOON STAGE",
+    "city": "千葉",
+    "region": "關東",
+    "prefecture": "千葉縣"
+  },
+  "幕張展覽館 COSMO STAGE": {
+    "venue": "幕張展覽館 COSMO STAGE",
+    "city": "千葉",
+    "region": "關東",
+    "prefecture": "千葉縣"
+  },
+  "幕張展覽館 EARTH STAGE": {
+    "venue": "幕張展覽館 EARTH STAGE",
+    "city": "千葉",
+    "region": "關東",
+    "prefecture": "千葉縣"
+  },
+  "仙台CLUB JUNK BOX": {
+    "venue": "仙台CLUB JUNK BOX",
+    "city": "仙台",
+    "region": "東北",
+    "prefecture": "宮城縣"
+  },
+  "勾當台公園 市民廣場 NORTH STAGE": {
+    "venue": "勾當台公園 市民廣場 NORTH STAGE",
+    "city": "仙台",
+    "region": "東北",
+    "prefecture": "宮城縣"
+  },
+  "岩田屋本館前 STAGE": {
+    "venue": "岩田屋本館前 STAGE",
+    "city": "福岡",
+    "region": "九州",
+    "prefecture": "福岡縣"
+  },
+  "日比谷野外大音樂堂": {
+    "venue": "日比谷野外大音樂堂",
+    "city": "東京",
+    "region": "關東",
+    "prefecture": "東京都"
+  },
+  "國營常陸海濱公園 PARK STAGE": {
+    "venue": "國營常陸海濱公園 PARK STAGE",
+    "city": "水戶",
+    "region": "關東",
+    "prefecture": "茨城縣"
+  },
+  "鳳凰廣場 大會堂 PHOENIX STAGE": {
+    "venue": "鳳凰廣場 大會堂 PHOENIX STAGE",
+    "city": "福井",
+    "region": "中部",
+    "prefecture": "福井縣"
+  },
+  "INTEX大阪 R-STAGE": {
+    "venue": "INTEX大阪 R-STAGE",
+    "city": "大阪",
+    "region": "關西",
+    "prefecture": "大阪府"
+  },
+  "INTEX大阪 Z-STAGE 6號館": {
+    "venue": "INTEX大阪 Z-STAGE 6號館",
+    "city": "大阪",
+    "region": "關西",
+    "prefecture": "大阪府"
+  },
+  "山中湖交流廣場 Kirara Mt.FUJI STAGE": {
+    "venue": "山中湖交流廣場 Kirara Mt.FUJI STAGE",
+    "city": "甲府",
+    "region": "中部",
+    "prefecture": "山梨縣"
+  },
+  "幕張展覽館 SONIC STAGE": {
+    "venue": "幕張展覽館 SONIC STAGE",
+    "city": "千葉",
+    "region": "關東",
+    "prefecture": "千葉縣"
   }
 }

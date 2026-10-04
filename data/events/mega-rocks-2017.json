@@ -1,0 +1,52 @@
+{
+  "id": "mega-rocks-2017",
+  "title": "MEGA☆ROCKS 2017",
+  "type": "音樂祭",
+  "shows": [
+    {
+      "id": "859195",
+      "date": "2017-10-01",
+      "city": "仙台",
+      "venue": "仙台CLUB JUNK BOX",
+      "region": "東北",
+      "prefecture": "宮城縣",
+      "title": "MEGA☆ROCKS 2017",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/859195"
+      ],
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "type": "interlude",
+          "note": "リハ：ブラザーズ"
+        },
+        {
+          "order": 2,
+          "encore": false,
+          "songId": "tell-me-baby"
+        },
+        {
+          "order": 3,
+          "encore": false,
+          "songId": "itan-na-star"
+        },
+        {
+          "order": 4,
+          "encore": false,
+          "songId": "lady"
+        },
+        {
+          "order": 5,
+          "encore": false,
+          "songId": "ai-nandaga"
+        },
+        {
+          "order": 6,
+          "encore": false,
+          "songId": "inu-ka-cat-ka-de-shinumade-kenka-shiyou"
+        }
+      ]
+    }
+  ]
+}
