@@ -1,0 +1,21 @@
+{
+  "id": "tor-road-acoustic-festival-2016",
+  "title": "トアロード・アコースティック・フェスティバル 2016",
+  "shortTitle": "アコフェス 2016",
+  "type": "音樂祭",
+  "shows": [
+    {
+      "id": "613663",
+      "date": "2016-04-17",
+      "city": "神戶",
+      "venue": "神戶VARIT.",
+      "region": "關西",
+      "prefecture": "兵庫縣",
+      "title": "トアロード・アコースティック・フェスティバル 2016",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/613663"
+      ],
+      "setlist": []
+    }
+  ]
+}

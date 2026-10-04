@@ -504,7 +504,7 @@
     "prefecture": "熊本縣"
   },
   "米子市公会堂": {
-    "venue": "米子市公会堂",
+    "venue": "米子市公會堂",
     "city": "米子",
     "region": "中國",
     "prefecture": "鳥取縣"
@@ -1092,7 +1092,7 @@
     "prefecture": "愛知縣"
   },
   "神戸VARIT.": {
-    "venue": "神戸VARIT.",
+    "venue": "神戶VARIT.",
     "city": "神戶",
     "region": "關西",
     "prefecture": "兵庫縣"
@@ -1543,6 +1543,168 @@
   },
   "LIVE SQUARE 2nd LINE": {
     "venue": "LIVE SQUARE 2nd LINE",
+    "city": "大阪",
+    "region": "關西",
+    "prefecture": "大阪府"
+  },
+  "HOLIDAY NEXT NAGOYA at SAKAE SP-RING 2016 会場": {
+    "venue": "HOLIDAY NEXT NAGOYA",
+    "city": "名古屋",
+    "region": "中部",
+    "prefecture": "愛知縣"
+  },
+  "RAD SEVEN at GOLD RUSH2016会場 [APOLLO BASE / DAYTRIVE / 新栄RAD SEVEN / 栄R.A.D / 栄Party&#039;z / TIGHT ROPE / Red Dragon / 新栄CLUB ROCK&#039;N ROLL /名古屋RAD HALL / 名古屋X-HALL / Curry Cafe &amp; Music Bar TOYS / Carnival☆Stars]": {
+    "venue": "RAD SEVEN",
+    "city": "名古屋",
+    "region": "中部",
+    "prefecture": "愛知縣"
+  },
+  "万博記念公園": {
+    "venue": "萬博紀念公園",
+    "city": "大阪",
+    "region": "關西",
+    "prefecture": "大阪府"
+  },
+  "柏DOMe at 柏 MUSIC SUN 2016会場 [柏DOMe / Studio WUU / 柏PALOOZA / 柏616 / 柏駅東口ファミリー広場ウッドデッキステージ / 高島屋エントランスステージ]": {
+    "venue": "柏DOMe",
+    "city": "千葉",
+    "region": "關東",
+    "prefecture": "千葉縣"
+  },
+  "神戸VARIT. at トアロード・アコースティック・フェスティバル 2016会場 [神戸VARIT. / BO TAMBOURiNE CAFÉ / niji café / ARTRIUM / スポルテリア / nomadika / 北野工房のまち]": {
+    "venue": "神戶VARIT.",
+    "city": "神戶",
+    "region": "關西",
+    "prefecture": "兵庫縣"
+  },
+  "心斎橋VARON at MINAMI WHEEL 2015会場": {
+    "venue": "心齋橋VARON",
+    "city": "大阪",
+    "region": "關西",
+    "prefecture": "大阪府"
+  },
+  "芝生広場 メインステージ at 篠島フェス 2015会場 [篠島芝生広場 / 篠島サンサンビーチ]": {
+    "venue": "篠島芝生廣場",
+    "city": "知多",
+    "region": "中部",
+    "prefecture": "愛知縣"
+  },
+  "島根県立大学 出雲キャンパス": {
+    "venue": "島根縣立大學 出雲校區",
+    "city": "出雲",
+    "region": "中國",
+    "prefecture": "島根縣"
+  },
+  "スクールオブミュージック at SAKAE SP-RING 2015会場 [Diamond Hall / APOLLO BASE / 名古屋CLUB QUATTRO / HOLIDAY NEXT NAGOYA / RAD HALL / TIGHT ROPE / 栄R.A.D / 新栄CLUB ROCK&#039;N ROLL / 名古屋LIVE HALL M.I.D / 名古屋ビジュアルアーツ Air Hall / SCHOOL OF MUSIC / FLEX LOUNGE / club JB&#039;S / EDITS / MUJICA]": {
+    "venue": "名古屋スクールオブミュージック",
+    "city": "名古屋",
+    "region": "中部",
+    "prefecture": "愛知縣"
+  },
+  "TOWER RECORDS新宿": {
+    "venue": "TOWER RECORDS 新宿店",
+    "city": "東京",
+    "region": "關東",
+    "prefecture": "東京都"
+  },
+  "米子市公會堂": {
+    "venue": "米子市公會堂",
+    "city": "米子",
+    "region": "中國",
+    "prefecture": "鳥取縣"
+  },
+  "神戶VARIT.": {
+    "venue": "神戶VARIT.",
+    "city": "神戶",
+    "region": "關西",
+    "prefecture": "兵庫縣"
+  },
+  "萬博紀念公園": {
+    "venue": "萬博紀念公園",
+    "city": "大阪",
+    "region": "關西",
+    "prefecture": "大阪府"
+  },
+  "RAD SEVEN": {
+    "venue": "RAD SEVEN",
+    "city": "名古屋",
+    "region": "中部",
+    "prefecture": "愛知縣"
+  },
+  "新榮RAD SEVEN": {
+    "venue": "RAD SEVEN",
+    "city": "名古屋",
+    "region": "中部",
+    "prefecture": "愛知縣"
+  },
+  "柏DOMe": {
+    "venue": "柏DOMe",
+    "city": "千葉",
+    "region": "關東",
+    "prefecture": "千葉縣"
+  },
+  "心齋橋VARON": {
+    "venue": "心齋橋VARON",
+    "city": "大阪",
+    "region": "關西",
+    "prefecture": "大阪府"
+  },
+  "心斎橋VARON": {
+    "venue": "心齋橋VARON",
+    "city": "大阪",
+    "region": "關西",
+    "prefecture": "大阪府"
+  },
+  "篠島芝生廣場": {
+    "venue": "篠島芝生廣場",
+    "city": "知多",
+    "region": "中部",
+    "prefecture": "愛知縣"
+  },
+  "島根縣立大學 出雲校區": {
+    "venue": "島根縣立大學 出雲校區",
+    "city": "出雲",
+    "region": "中國",
+    "prefecture": "島根縣"
+  },
+  "名古屋スクールオブミュージック": {
+    "venue": "名古屋スクールオブミュージック",
+    "city": "名古屋",
+    "region": "中部",
+    "prefecture": "愛知縣"
+  },
+  "HOLIDAY NEXT NAGOYA": {
+    "venue": "HOLIDAY NEXT NAGOYA",
+    "city": "名古屋",
+    "region": "中部",
+    "prefecture": "愛知縣"
+  },
+  "TOWER RECORDS 新宿店": {
+    "venue": "TOWER RECORDS 新宿店",
+    "city": "東京",
+    "region": "關東",
+    "prefecture": "東京都"
+  },
+  "心齋橋Live House Pangea": {
+    "venue": "心齋橋Live House Pangea",
+    "city": "大阪",
+    "region": "關西",
+    "prefecture": "大阪府"
+  },
+  "廣島CAVE-BE": {
+    "venue": "廣島CAVE-BE",
+    "city": "廣島",
+    "region": "中國",
+    "prefecture": "廣島縣"
+  },
+  "柏 PALOOZA": {
+    "venue": "柏 PALOOZA",
+    "city": "千葉",
+    "region": "關東",
+    "prefecture": "千葉縣"
+  },
+  "心齋橋 BIG STEP": {
+    "venue": "心齋橋 BIG STEP",
     "city": "大阪",
     "region": "關西",
     "prefecture": "大阪府"

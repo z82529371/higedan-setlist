@@ -1,0 +1,21 @@
+{
+  "id": "unlimited-tone-2016",
+  "title": "harmonics",
+  "type": "聯合專場",
+  "shows": [
+    {
+      "id": "608761",
+      "date": "2016-04-07",
+      "city": "大阪",
+      "venue": "Music Club JANUS",
+      "region": "關西",
+      "prefecture": "大阪府",
+      "title": "harmonics",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/608761"
+      ],
+      "setlist": [],
+      "opensAt": "19:00"
+    }
+  ]
+}

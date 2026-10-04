@@ -1,0 +1,21 @@
+{
+  "id": "shinojima-fes-2015",
+  "title": "篠島フェス 2015",
+  "shortTitle": "篠島フェス 2015",
+  "type": "音樂祭",
+  "shows": [
+    {
+      "id": "510422",
+      "date": "2015-07-19",
+      "city": "知多",
+      "venue": "篠島芝生廣場",
+      "region": "中部",
+      "prefecture": "愛知縣",
+      "title": "篠島フェス 2015",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/510422"
+      ],
+      "setlist": []
+    }
+  ]
+}

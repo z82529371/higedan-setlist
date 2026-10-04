@@ -1,0 +1,21 @@
+{
+  "id": "movember-2015",
+  "title": "MOVEMBER",
+  "type": "特別專場",
+  "shows": [
+    {
+      "id": "522837",
+      "date": "2015-11-23",
+      "city": "大阪",
+      "venue": "LIVE SQUARE 2nd LINE",
+      "region": "關西",
+      "prefecture": "大阪府",
+      "title": "MOVEMBER",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/522837"
+      ],
+      "setlist": [],
+      "opensAt": "17:30"
+    }
+  ]
+}
