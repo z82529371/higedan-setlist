@@ -1,0 +1,20 @@
+{
+  "id": "music-city-tenjin-2017",
+  "title": "MUSIC CITY TENJIN 2017",
+  "type": "音樂祭",
+  "shows": [
+    {
+      "id": "853681",
+      "date": "2017-09-23",
+      "city": "福岡",
+      "venue": "岩田屋本館前 STAGE",
+      "region": "九州",
+      "prefecture": "福岡縣",
+      "title": "MUSIC CITY TENJIN 2017",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/853681"
+      ],
+      "setlist": []
+    }
+  ]
+}

@@ -1,5 +1,5 @@
 {
-  "id": "supported-by-dash-five-2018",
+  "id": "hige-dash-supported-by-dash-five-2018",
   "title": "ひげダッシュ! supported by DASH FIVE!",
   "shortTitle": "ひげダッシュ!",
   "type": "聯合專場",
@@ -12,7 +12,9 @@
       "region": "關西",
       "prefecture": "大阪府",
       "title": "ひげダッシュ! supported by DASH FIVE!",
-      "sourceUrls": ["https://www.livefans.jp/events/904556"],
+      "sourceUrls": [
+        "https://www.livefans.jp/events/904556"
+      ],
       "setlist": []
     }
   ]

@@ -1,19 +1,18 @@
 {
-  "id": "minami-wheel-2017",
-  "title": "MINAMI WHEEL 2017",
-  "shortTitle": "MINAMI WHEEL 2017",
-  "type": "音樂祭",
+  "id": "unofficial-2017-0717",
+  "title": "Official髭男dism 2017.07.17",
+  "type": "特別專場",
   "shows": [
     {
-      "id": "841025",
-      "date": "2017-10-07",
-      "city": "大阪",
-      "venue": "Music Club JANUS",
-      "region": "關西",
-      "prefecture": "大阪府",
-      "title": "MINAMI WHEEL 2017",
+      "id": "827604",
+      "date": "2017-07-17",
+      "city": "高松",
+      "venue": "高松DIME",
+      "region": "四國",
+      "prefecture": "香川縣",
+      "title": "Official髭男dism 2017.07.17",
       "sourceUrls": [
-        "https://www.livefans.jp/events/841025"
+        "https://www.livefans.jp/events/827604"
       ],
       "setlist": [
         {
@@ -29,20 +28,15 @@
         {
           "order": 3,
           "encore": false,
-          "songId": "brothers"
+          "songId": "hajimari-no-asa"
         },
         {
           "order": 4,
           "encore": false,
-          "songId": "lady"
+          "songId": "coffee-to-syrup"
         },
         {
           "order": 5,
-          "encore": false,
-          "songId": "ai-nandaga"
-        },
-        {
-          "order": 6,
           "encore": false,
           "songId": "sweet-tweet"
         }
