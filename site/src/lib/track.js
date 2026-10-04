@@ -27,10 +27,13 @@ export function trackRoute(item, weightCls) {
 
 // Hash routes (no router dep; static hosting safe):
 // #/song/<songId> #/show/<showId> #/venue/<name>
+// Robust against /#/..., #/..., #..., /..., and trailing slashes
 export function parseRoute(hash) {
-  const m = (hash ?? "")
-    .replace(/^#/, "")
-    .match(/^\/(song|show|venue)\/(.+)$/);
+  if (!hash) return null;
+  const cleaned = (hash ?? "")
+    .replace(/^(?:\/|#)+/, "/")
+    .replace(/\/+$/, "");
+  const m = cleaned.match(/^\/(song|show|venue)\/(.+)$/);
   if (!m) return null;
   try {
     return { kind: m[1], value: decodeURIComponent(m[2]) };

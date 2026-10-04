@@ -189,11 +189,11 @@ export default function SearchBox({
   return (
     <div
       ref={containerRef}
-      className="relative ml-auto flex max-w-[360px] flex-[1_1_240px] items-center gap-2 max-lg:ml-0 max-lg:w-full max-lg:max-w-none"
+      className="relative flex w-full items-center gap-2"
     >
       <label
         htmlFor="global-q"
-        className="whitespace-nowrap font-mono text-[12px] font-bold tracking-[0.08em] text-muted"
+        className="shrink-0 whitespace-nowrap font-mono text-[12px] font-bold tracking-[0.08em] text-muted"
       >
         全域搜尋
       </label>
@@ -202,12 +202,14 @@ export default function SearchBox({
           ref={inputRef}
           id="global-q"
           type="search"
+          name="q"
+          spellCheck={false}
           role="combobox"
           aria-expanded={isOpen && Boolean(needle)}
           aria-autocomplete="list"
           aria-controls="search-dropdown-list"
-          className="w-full rounded-[3px] border-[1.5px] border-ink bg-card py-2 pl-3 pr-8 text-[14px] text-ink placeholder:text-muted/65 focus:border-pool focus:outline-none"
-          placeholder="搜尋歌曲、演出、場地..."
+          className="w-full rounded-[3px] border-[1.5px] border-ink bg-card py-2 pl-3 pr-8 text-[14px] text-ink placeholder:text-muted/65 focus:border-pool focus:ring-2 focus:ring-pool/30 focus:outline-none"
+          placeholder="搜尋歌曲、演出、場地…"
           value={q}
           onChange={(e) => setQ(e.target.value)}
           onFocus={() => {
@@ -245,7 +247,7 @@ export default function SearchBox({
                 {matchedSongs.length > 0 && (
                   <div>
                     <div className="sticky top-0 z-[2] flex items-center justify-between border-b border-line-soft bg-paper/95 px-3 py-1.5 font-mono text-[11px] font-bold tracking-[0.1em] text-muted uppercase backdrop-blur-xs">
-                      <span>🎵 歌曲</span>
+                      <span><span aria-hidden="true">🎵</span> 歌曲</span>
                       <span className="text-[10px] font-normal opacity-75">
                         {matchedSongs.length} 首
                       </span>
@@ -294,7 +296,7 @@ export default function SearchBox({
                 {matchedUnits.length > 0 && (
                   <div>
                     <div className="sticky top-0 z-[2] flex items-center justify-between border-b border-line-soft bg-paper/95 px-3 py-1.5 font-mono text-[11px] font-bold tracking-[0.1em] text-muted uppercase backdrop-blur-xs">
-                      <span>🎤 演出／巡演</span>
+                      <span><span aria-hidden="true">🎤</span> 演出／巡演</span>
                       <span className="text-[10px] font-normal opacity-75">
                         {matchedUnits.length} 部
                       </span>
@@ -334,7 +336,7 @@ export default function SearchBox({
                 {matchedVenues.length > 0 && (
                   <div>
                     <div className="sticky top-0 z-[2] flex items-center justify-between border-b border-line-soft bg-paper/95 px-3 py-1.5 font-mono text-[11px] font-bold tracking-[0.1em] text-muted uppercase backdrop-blur-xs">
-                      <span>📍 場地</span>
+                      <span><span aria-hidden="true">📍</span> 場地</span>
                       <span className="text-[10px] font-normal opacity-75">
                         {matchedVenues.length} 處
                       </span>

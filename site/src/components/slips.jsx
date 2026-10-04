@@ -32,13 +32,13 @@ const CATEGORY_ORDER = [
 ];
 
 const songFilterPillClass = (isActive) =>
-  `appearance-none rounded border-[1.5px] px-2.5 py-[3px] text-[12px] font-semibold cursor-pointer whitespace-nowrap transition-all motion-reduce:transition-none focus-visible:outline-[2px] focus-visible:outline-pool focus-visible:outline-offset-2 ${
+  `appearance-none w-full flex items-center justify-center gap-1 rounded border-[1.5px] px-1.5 py-[5px] sm:px-2 text-[12px] font-semibold cursor-pointer whitespace-nowrap transition-colors motion-reduce:transition-none text-center focus-visible:outline-[2px] focus-visible:outline-pool focus-visible:outline-offset-2 ${
     isActive
-      ? "bg-band text-band-ink border-band shadow-[1px_1px_0_#e8b428] font-bold"
+      ? "bg-band text-band-ink border-band shadow-[1px_1px_0_#d5a200] font-bold"
       : "border-line bg-paper text-ink hover:bg-pool-wash hover:border-pool hover:text-pool"
   }`;
 
-export function ShowSlip({ ud, showId, onSelectSong }) {
+export function ShowSlip({ ud, showId, onSelectSong, onSelectShow }) {
   if (!ud) return null;
   const s = ud.unit.shows.find((x) => x.id === showId);
   if (!s) return null;
@@ -172,28 +172,61 @@ export function ShowSlip({ ud, showId, onSelectSong }) {
       aria-label="場次曲目清單"
     >
       <span aria-hidden="true" className={SLIP_TAPE} />
-      <div className="mb-[6px] border-b-2 border-ink pb-3">
-        <h3 className="m-0 flex flex-col gap-[2px] font-display text-[23px] font-extrabold leading-[1.3]">
-          <span className="font-mono text-[15px] font-semibold text-muted">
-            {showDate(s)}
+      <div className="mb-4 border-b-2 border-ink pb-4">
+        {/* Level 1: Artist branding & category badge */}
+        <div className="flex items-center justify-between gap-2">
+          <div className="flex items-center gap-1.5 font-mono text-[12px] font-bold tracking-[0.2em] text-muted">
+            <span className="inline-block h-2 w-2 rounded-full border border-ink bg-tape" aria-hidden="true" />
+            Official 髭男 dism
+          </div>
+          <span className="inline-flex items-center rounded-[3px] border border-ink/30 bg-tape-soft/40 px-2 py-0.5 font-mono text-[11px] font-bold text-ink">
+            {ud.unit.type}
           </span>
-          <span className="text-[24px] font-extrabold text-ink">{s.venue}</span>
-          <span className="text-[16px] font-medium text-muted">
-            （{s.city}）
-          </span>
-        </h3>
-        <p className="mt-[6px] text-[13px] text-muted [&_a]:text-pool [&_a]:underline-offset-[3px]">
-          {s.opensAt ? `${s.opensAt} 開演・` : ""}
-          {ud.unit.type}・{songCount > 0 ? `共 ${songCount} 首演出曲目` : "尚無曲目紀錄"}
-          {s.sourceUrls?.[0] && (
-            <>
-              ・{" "}
-              <a href={s.sourceUrls[0]} target="_blank" rel="noreferrer">
-                livefans 來源
-              </a>
-            </>
-          )}
-        </p>
+        </div>
+
+        {/* Level 2: Tour / Event Name Headline */}
+        <h2 className="mt-2.5 mb-3 font-display text-[22px] sm:text-[25px] font-black leading-tight text-ink tracking-tight text-pretty">
+          {ud.unit.title}
+        </h2>
+        {/* Level 3: Specific Show Details Ticket Stub Box */}
+        <div className="rounded-[4px] border border-line-soft bg-paper/50 p-3 sm:p-3.5">
+          <div className="flex flex-wrap items-baseline justify-between gap-1 border-b border-line-soft/80 pb-2">
+            <div className="flex items-center gap-1.5 font-mono text-[14px] font-bold text-ink">
+              <span className="text-[13px] text-muted" aria-hidden="true">📅</span>
+              {showDate(s)}
+            </div>
+            {s.opensAt && (
+              <span className="font-mono text-[12px] font-medium text-muted">
+                <span aria-hidden="true">⏰</span> {s.opensAt} 開演
+              </span>
+            )}
+          </div>
+          <div className="mt-2.5 flex flex-wrap items-baseline justify-between gap-2">
+            <h3 className="m-0 font-display text-[20px] sm:text-[22px] font-extrabold text-ink">
+              {s.venue}
+              <span className="ml-1.5 text-[15px] font-medium text-muted">
+                （{s.city}）
+              </span>
+            </h3>
+            <span className="font-mono text-[12px] font-semibold text-pool">
+              {songCount > 0 ? `共 ${songCount} 首演出曲目` : "尚無曲目紀錄"}
+            </span>
+          </div>
+        </div>
+
+        {/* Level 4: External Source Link */}
+        {s.sourceUrls?.[0] && (
+          <div className="mt-2.5 flex items-center justify-end text-[12px] text-muted [&_a]:text-pool [&_a]:underline-offset-[3px]">
+            <a
+              href={s.sourceUrls[0]}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-1 font-mono hover:underline"
+            >
+              <span aria-hidden="true">🔗</span> livefans 來源紀錄
+            </a>
+          </div>
+        )}
       </div>
 
       {items.length === 0 ? (
@@ -228,7 +261,9 @@ export function ShowSlip({ ud, showId, onSelectSong }) {
 }
 
 export function SongSlip({ songId, trackShows, showById, onSelectShow }) {
-  const appearances = trackShows.get(trackKey("song", songId)) ?? [];
+  const appearances = useMemo(() => {
+    return songId ? (trackShows.get(trackKey("song", songId)) ?? []) : [];
+  }, [trackShows, songId]);
 
   const typeCounts = useMemo(() => {
     const counts = new Map();
@@ -254,17 +289,6 @@ export function SongSlip({ songId, trackShows, showById, onSelectShow }) {
       setSelectedType(availableTypes[0]);
     }
   }, [availableTypes, selectedType]);
-
-  if (!songId) {
-    return (
-      <div className={SLIP_ARTICLE}>
-        <span aria-hidden="true" className={SLIP_TAPE} />
-        <p className="m-0 px-1 py-[18px] text-[14px] text-muted">
-          選一首歌曲，看它在全檔案庫哪幾場出現過。
-        </p>
-      </div>
-    );
-  }
 
   const effectiveType = availableTypes.includes(selectedType)
     ? selectedType
@@ -309,6 +333,17 @@ export function SongSlip({ songId, trackShows, showById, onSelectShow }) {
     setCollapsedMap(initial);
   }, [songId, effectiveType, groupedByUnit]);
 
+  if (!songId) {
+    return (
+      <div className={SLIP_ARTICLE}>
+        <span aria-hidden="true" className={SLIP_TAPE} />
+        <p className="m-0 px-1 py-[18px] text-[14px] text-muted">
+          選一首歌曲，看它在全檔案庫哪幾場出現過。
+        </p>
+      </div>
+    );
+  }
+
   const toggleUnit = (unitId) => {
     setCollapsedMap((prev) => {
       const next = new Map(prev);
@@ -347,28 +382,42 @@ export function SongSlip({ songId, trackShows, showById, onSelectShow }) {
       aria-label="歌曲全域出現場次"
     >
       <span aria-hidden="true" className={SLIP_TAPE} />
-      <div className="mb-[6px] border-b-2 border-ink pb-3">
-        <p className="m-0 mb-1 font-mono text-[12px] tracking-[0.18em] text-muted">
-          ALL TOURS → SONG SHOWS
-        </p>
-        <h3 className="m-0 font-display text-[23px] font-extrabold leading-[1.3]">
+      <div className="mb-4 border-b-2 border-ink pb-4">
+        {/* Level 1: Artist branding & category badge */}
+        <div className="flex items-center justify-between gap-2">
+          <div className="flex items-center gap-1.5 font-mono text-[12px] font-bold tracking-[0.2em] text-muted">
+            <span className="inline-block h-2 w-2 rounded-full border border-ink bg-tape" aria-hidden="true" />
+            Official 髭男 dism
+          </div>
+          <span className="inline-flex items-center rounded-[3px] border border-ink/30 bg-tape-soft/40 px-2 py-0.5 font-mono text-[11px] font-bold text-ink">
+            SONG ARCHIVE
+          </span>
+        </div>
+
+        {/* Level 2: Song Title Headline */}
+        <h2 className="mt-2.5 mb-2 font-display text-[24px] sm:text-[27px] font-black leading-tight text-ink tracking-tight text-pretty">
           {songTitle[songId]}
           {songUnreleased.has(songId) && (
-            <span className="ml-1 align-baseline text-[0.8em] font-normal tracking-[0.02em] text-muted">
-              （未發行）
+            <span className="ml-2 inline-block rounded border border-unreleased/40 bg-unreleased-wash px-1.5 py-0.5 font-mono text-[12px] font-semibold text-unreleased align-middle">
+              未發行
             </span>
           )}
-        </h3>
-        <p className="mt-[6px] font-mono text-[13px] text-muted [&_a]:text-pool">
-          全檔案庫共出現於 {appearances.length} 場演出
-        </p>
+        </h2>
+
+        {/* Level 3: Summary stats badge */}
+        <div className="flex items-center gap-2 font-mono text-[13px] text-muted">
+          <span><span aria-hidden="true">📊</span> 全檔案庫共出現於</span>
+          <span className="rounded bg-paper px-2 py-0.5 font-bold text-ink border border-line-soft">
+            {appearances.length} 場演出
+          </span>
+        </div>
       </div>
 
       {availableTypes.length > 0 && (
         <div
           role="tablist"
           aria-label="演出類型篩選"
-          className="my-2 flex flex-wrap gap-1.5 border-b border-line-soft pb-2.5"
+          className="my-2 grid grid-cols-2 min-[380px]:grid-cols-3 sm:grid-cols-4 md:flex md:flex-nowrap md:[&>*]:flex-1 gap-1.5 border-b border-line-soft pb-2.5"
         >
           {availableTypes.map((t) => {
             const count = typeCounts.get(t) || 0;
@@ -382,7 +431,10 @@ export function SongSlip({ songId, trackShows, showById, onSelectShow }) {
                 className={songFilterPillClass(isActive)}
                 onClick={() => setSelectedType(t)}
               >
-                {t} ({count})
+                <span>{t}</span>
+                <span className="font-mono text-[11px] tabular-nums opacity-85">
+                  ({count})
+                </span>
               </button>
             );
           })}
@@ -410,7 +462,7 @@ export function SongSlip({ songId, trackShows, showById, onSelectShow }) {
       )}
 
       {groupedByUnit.length === 0 ? (
-        <p className="m-0 px-1 py-4 text-center font-mono text-[13px] text-muted">
+        <p className="m-0 px-1 py-6 text-center font-mono text-[13px] text-muted">
           此分類下無演出紀錄
         </p>
       ) : (
@@ -422,9 +474,9 @@ export function SongSlip({ songId, trackShows, showById, onSelectShow }) {
             return (
               <section key={g.unitId} className="flex flex-col">
                 <div
-                  className={`flex items-center justify-between gap-2 border-b border-line-dark/30 bg-line-soft/40 px-2.5 py-1.5 rounded-[2px] transition-colors ${
+                  className={`flex items-center justify-between gap-2.5 rounded-[4px] border border-line-soft bg-paper/70 px-3 py-2 transition-colors ${
                     isCollapsible
-                      ? "cursor-pointer hover:bg-line-soft/80 select-none"
+                      ? "cursor-pointer hover:bg-line-soft/80 hover:border-ink/30 select-none"
                       : ""
                   }`}
                   onClick={isCollapsible ? () => toggleUnit(g.unitId) : undefined}
@@ -442,68 +494,72 @@ export function SongSlip({ songId, trackShows, showById, onSelectShow }) {
                   }
                   aria-expanded={isCollapsible ? !isCollapsed : undefined}
                 >
-                  <div className="flex items-center gap-2 min-w-0">
-                    {isCollapsible && (
-                      <span
-                        aria-hidden="true"
-                        className="w-3 text-center font-mono text-[11px] text-muted"
-                      >
-                        {isCollapsed ? "▸" : "▾"}
-                      </span>
-                    )}
-                    <span className="shrink-0 rounded border border-line-dark/30 bg-card px-1.5 py-[1px] font-mono text-[10px] font-medium text-muted">
+                  <div className="flex min-w-0 items-center gap-2">
+                    <span className="shrink-0 rounded-[3px] border border-ink/20 bg-card px-1.5 py-0.5 font-mono text-[10px] font-bold text-ink">
                       {g.unitType}
                     </span>
-                    <h4 className="m-0 truncate font-display text-[14px] font-bold text-ink">
+                    <h3 className="m-0 truncate font-display text-[15px] font-extrabold text-ink">
                       {g.unitTitle}
-                    </h4>
+                    </h3>
                   </div>
-                  <span className="ml-auto shrink-0 font-mono text-[11px] text-muted tabular-nums">
-                    共 {g.items.length} 場
-                  </span>
+                  <div className="ml-auto flex shrink-0 items-center gap-2 font-mono text-[11px] text-muted tabular-nums">
+                    <span className="font-bold text-ink">共 {g.items.length} 場</span>
+                    {isCollapsible && (
+                      <span className="rounded border border-line-soft bg-card px-1.5 py-0.5 text-[9px] font-semibold text-muted">
+                        {isCollapsed ? "▼ 展開" : "▲ 收合"}
+                      </span>
+                    )}
+                  </div>
                 </div>
                 {!isCollapsed && (
                   <ul className="m-0 mt-1 list-none p-0">
                     {g.items.map(({ showId, item }) => {
                       const s = showById.get(showId);
+                      const badges = visibleBadges(item.kind);
+                      const hasMeta = badges.length > 0 || !!item.note;
+
                       return (
                         <li
                           key={showId}
-                          className="flex items-start gap-3 border-b border-line-soft px-2 py-[8px] last:border-b-0 hover:bg-paper/30"
+                          className="border-b border-line-soft/80 px-2.5 py-2.5 last:border-b-0 hover:bg-paper/40 transition-colors"
                         >
                           <a
-                            className="flex flex-1 flex-wrap items-baseline gap-x-2 gap-y-0.5 leading-[1.45] text-ink no-underline transition-colors hover:text-request focus-visible:outline-[3px] focus-visible:outline-pool focus-visible:outline-offset-2 motion-reduce:transition-none [&_.show-link-venue]:hover:text-pool [&_.show-link-venue]:hover:underline"
+                            className="group flex flex-col text-ink no-underline transition-colors hover:text-request focus-visible:outline-[3px] focus-visible:outline-pool focus-visible:outline-offset-2 motion-reduce:transition-none"
                             href={routeHash.show(showId)}
                             onClick={(e) => {
                               e.preventDefault();
                               onSelectShow(showId);
                             }}
                           >
-                            <span className="font-mono text-[12px] text-muted">
-                              {showDate(s)}
-                            </span>
-                            <span className="show-link-venue text-[14px] font-bold">
-                              {s.venue}
-                            </span>
-                            <span className="show-link-city text-[13px] text-muted">
-                              （{s.city}）
-                            </span>
-                          </a>
-                          <div className="flex items-center gap-1.5 self-center">
-                            {visibleBadges(item.kind).map(({ key, label, cls }) => (
-                              <span
-                                key={key}
-                                className={`inline-block rounded-[3px] px-[7px] py-[3px] align-middle font-mono text-[0.72em] font-semibold leading-none tracking-[0.06em] before:content-['♪_'] ${cls}`}
-                              >
-                                {label}
+                            <div className="flex flex-wrap items-baseline gap-x-2 leading-snug">
+                              <span className="shrink-0 font-mono text-[12px] font-semibold text-muted">
+                                {showDate(s)}
                               </span>
-                            ))}
-                            {item.note && (
-                              <span className="text-[13px] text-muted">
-                                {item.note}
+                              <span className="show-link-venue text-[14px] font-bold text-ink group-hover:text-pool group-hover:underline">
+                                {s.venue}
                               </span>
+                              <span className="shrink-0 text-[13px] text-muted">
+                                （{s.city}）
+                              </span>
+                            </div>
+                            {hasMeta && (
+                              <div className="mt-1.5 flex flex-wrap items-center gap-1.5 pl-0.5">
+                                {badges.map(({ key, label, cls }) => (
+                                  <span
+                                    key={key}
+                                    className={`inline-block rounded-[3px] border px-1.5 py-0.5 align-middle font-mono text-[10px] font-bold leading-none tracking-wide ${cls}`}
+                                  >
+                                    ♪ {label}
+                                  </span>
+                                ))}
+                                {item.note && (
+                                  <span className="font-mono text-[11px] text-muted font-medium">
+                                    💬 {item.note}
+                                  </span>
+                                )}
+                              </div>
                             )}
-                          </div>
+                          </a>
                         </li>
                       );
                     })}
@@ -520,7 +576,76 @@ export function SongSlip({ songId, trackShows, showById, onSelectShow }) {
 
 
 
-export function VenueSlip({ venueName, globalVenueShows, onSelectShow }) {
+export function VenueSlip({ venueName, globalVenueShows, unitData, onSelectShow }) {
+  const venueShows = useMemo(() => {
+    return globalVenueShows?.get(venueName) ?? [];
+  }, [globalVenueShows, venueName]);
+
+  const COLLAPSIBLE_THRESHOLD = 3;
+
+  const groupedByUnit = useMemo(() => {
+    const groupMap = new Map();
+    for (const app of venueShows) {
+      if (!groupMap.has(app.unitId)) {
+        groupMap.set(app.unitId, {
+          unitId: app.unitId,
+          unitTitle: app.unitTitle,
+          unitType: app.unitType,
+          earliestDate: app.show?.date ?? "9999-12-31",
+          items: [],
+        });
+      }
+      groupMap.get(app.unitId).items.push(app);
+    }
+    return Array.from(groupMap.values()).sort((a, b) =>
+      b.earliestDate.localeCompare(a.earliestDate)
+    );
+  }, [venueShows]);
+
+  const [collapsedMap, setCollapsedMap] = useState(() => new Map());
+
+  useEffect(() => {
+    const initial = new Map();
+    groupedByUnit.forEach((g) => {
+      if (g.items.length > COLLAPSIBLE_THRESHOLD) {
+        initial.set(g.unitId, true);
+      }
+    });
+    setCollapsedMap(initial);
+  }, [venueName, groupedByUnit]);
+
+  const toggleUnit = (unitId) => {
+    setCollapsedMap((prev) => {
+      const next = new Map(prev);
+      next.set(unitId, !next.get(unitId));
+      return next;
+    });
+  };
+
+  const expandAll = () => {
+    setCollapsedMap((prev) => {
+      const next = new Map(prev);
+      for (const g of groupedByUnit) {
+        if (g.items.length > COLLAPSIBLE_THRESHOLD) next.set(g.unitId, false);
+      }
+      return next;
+    });
+  };
+
+  const collapseAll = () => {
+    setCollapsedMap((prev) => {
+      const next = new Map(prev);
+      for (const g of groupedByUnit) {
+        if (g.items.length > COLLAPSIBLE_THRESHOLD) next.set(g.unitId, true);
+      }
+      return next;
+    });
+  };
+
+  const hasCollapsible = groupedByUnit.some(
+    (g) => g.items.length > COLLAPSIBLE_THRESHOLD
+  );
+
   if (!venueName) {
     return (
       <div className={SLIP_ARTICLE}>
@@ -532,8 +657,7 @@ export function VenueSlip({ venueName, globalVenueShows, onSelectShow }) {
     );
   }
 
-  const venueShows = globalVenueShows.get(venueName) ?? [];
-  const firstCity = venueShows[0]?.show.city ?? "";
+  const firstCity = venueShows[0]?.show?.city ?? "";
 
   return (
     <article
@@ -541,55 +665,163 @@ export function VenueSlip({ venueName, globalVenueShows, onSelectShow }) {
       aria-label="場地全域場次"
     >
       <span aria-hidden="true" className={SLIP_TAPE} />
-      <div className="mb-[6px] border-b-2 border-ink pb-3">
-        <p className="m-0 mb-1 font-mono text-[12px] tracking-[0.18em] text-muted">
-          ALL TOURS → VENUE SHOWS
-        </p>
-        <h3 className="m-0 font-display text-[23px] font-extrabold leading-[1.3]">
-          {venueName}{" "}
-          <span className="text-[16px] font-normal text-muted">
-            （{firstCity}）
+      <div className="mb-4 border-b-2 border-ink pb-4">
+        {/* Level 1: Artist branding & category badge */}
+        <div className="flex items-center justify-between gap-2">
+          <div className="flex items-center gap-1.5 font-mono text-[12px] font-bold tracking-[0.2em] text-muted">
+            <span className="inline-block h-2 w-2 rounded-full border border-ink bg-tape" aria-hidden="true" />
+            Official 髭男 dism
+          </div>
+          <span className="inline-flex items-center rounded-[3px] border border-ink/30 bg-tape-soft/40 px-2 py-0.5 font-mono text-[11px] font-bold text-ink">
+            VENUE ARCHIVE
           </span>
-        </h3>
-        <p className="mt-[6px] font-mono text-[13px] text-muted [&_a]:text-pool">
-          全檔案庫共舉辦過 {venueShows.length} 場演出
-        </p>
-      </div>
-      <ul className="m-0 mt-3 list-none p-0">
-        {venueShows.map(({ showId, unitTitle, unitType, show }) => (
-          <li
-            key={showId}
-            className="flex items-start gap-3 border-b border-line-soft px-1 py-[10px] last:border-b-0"
-          >
-            <span className="mt-[2px] whitespace-nowrap rounded-[3px] border border-[rgba(30,46,74,0.25)] bg-[rgba(232,180,40,0.38)] px-[6px] py-[2px] font-mono text-[11px] font-semibold text-ink">
-              {unitTitle}
-              {unitType !== "巡演專場" && (
-                <span className="ml-[7px] rounded-full border border-current px-[6px] py-[1px] align-middle font-mono text-[0.72em] font-semibold tracking-[0.04em] opacity-85">
-                  {unitType}
-                </span>
-              )}
+        </div>
+
+        {/* Level 2: Venue Title Headline */}
+        <h2 className="mt-2.5 mb-2 font-display text-[24px] sm:text-[27px] font-black leading-tight text-ink tracking-tight text-pretty">
+          {venueName}{" "}
+          {firstCity && (
+            <span className="text-[17px] font-medium text-muted">
+              （{firstCity}）
             </span>
-            <a
-              className="flex flex-col leading-[1.45] text-ink no-underline transition-colors hover:text-request focus-visible:outline-[3px] focus-visible:outline-pool focus-visible:outline-offset-2 motion-reduce:transition-none [&_.show-link-venue]:hover:text-pool [&_.show-link-venue]:hover:underline"
-              href={routeHash.show(showId)}
-              onClick={(e) => {
-                e.preventDefault();
-                onSelectShow(showId);
-              }}
-            >
-              <span className="font-mono text-[12px] text-muted">
-                {showDate(show)}
-              </span>
-              <span className="show-link-venue text-[14px] font-bold">
-                {show.venue}
-              </span>
-              <span className="show-link-city text-[13px] text-muted">
-                （{show.city}）
-              </span>
-            </a>
-          </li>
-        ))}
-      </ul>
+          )}
+        </h2>
+
+        {/* Level 3: Summary stats badge */}
+        <div className="flex items-center gap-2 font-mono text-[13px] text-muted">
+          <span><span aria-hidden="true">🏛️</span> 全檔案庫共舉辦過</span>
+          <span className="rounded bg-paper px-2 py-0.5 font-bold text-ink border border-line-soft">
+            {venueShows.length} 場演出
+          </span>
+        </div>
+      </div>
+
+      {hasCollapsible && (
+        <div className="flex items-center justify-end gap-2 pt-1 pb-2 font-mono text-[11px] text-muted">
+          <button
+            type="button"
+            className="cursor-pointer border-0 bg-transparent p-0 text-muted transition-colors hover:text-ink hover:underline"
+            onClick={expandAll}
+          >
+            全部展開
+          </button>
+          <span aria-hidden="true">・</span>
+          <button
+            type="button"
+            className="cursor-pointer border-0 bg-transparent p-0 text-muted transition-colors hover:text-ink hover:underline"
+            onClick={collapseAll}
+          >
+            全部收合
+          </button>
+        </div>
+      )}
+
+      {groupedByUnit.length === 0 ? (
+        <p className="m-0 px-1 py-6 text-center font-mono text-[13px] text-muted">
+          此場地尚無演出紀錄
+        </p>
+      ) : (
+        <div className="space-y-4 pt-1">
+          {groupedByUnit.map((g) => {
+            const isCollapsible = g.items.length > COLLAPSIBLE_THRESHOLD;
+            const isCollapsed = isCollapsible && (collapsedMap.get(g.unitId) ?? false);
+
+            return (
+              <section key={g.unitId} className="flex flex-col">
+                <div
+                  className={`flex items-center justify-between gap-2.5 rounded-[4px] border border-line-soft bg-paper/70 px-3 py-2 transition-colors ${
+                    isCollapsible
+                      ? "cursor-pointer hover:bg-line-soft/80 hover:border-ink/30 select-none"
+                      : ""
+                  }`}
+                  onClick={isCollapsible ? () => toggleUnit(g.unitId) : undefined}
+                  role={isCollapsible ? "button" : undefined}
+                  tabIndex={isCollapsible ? 0 : undefined}
+                  onKeyDown={
+                    isCollapsible
+                      ? (e) => {
+                          if (e.key === "Enter" || e.key === " ") {
+                            e.preventDefault();
+                            toggleUnit(g.unitId);
+                          }
+                        }
+                      : undefined
+                  }
+                  aria-expanded={isCollapsible ? !isCollapsed : undefined}
+                >
+                  <div className="flex min-w-0 items-center gap-2">
+                    <span className="shrink-0 rounded-[3px] border border-ink/20 bg-card px-1.5 py-0.5 font-mono text-[10px] font-bold text-ink">
+                      {g.unitType}
+                    </span>
+                    <h3 className="m-0 truncate font-display text-[15px] font-extrabold text-ink">
+                      {g.unitTitle}
+                    </h3>
+                  </div>
+                  <div className="ml-auto flex shrink-0 items-center gap-2 font-mono text-[11px] text-muted tabular-nums">
+                    <span className="font-bold text-ink">共 {g.items.length} 場</span>
+                    {isCollapsible && (
+                      <span className="rounded border border-line-soft bg-card px-1.5 py-0.5 text-[9px] font-semibold text-muted">
+                        {isCollapsed ? "▼ 展開" : "▲ 收合"}
+                      </span>
+                    )}
+                  </div>
+                </div>
+
+                {!isCollapsed && (
+                  <ul className="m-0 mt-1 list-none p-0">
+                    {g.items.map(({ showId, show }) => {
+                      const ud = unitData?.get(g.unitId);
+                      const songCount = (ud?.full?.get(showId) || []).filter(
+                        (i) => i.songId || i.title
+                      ).length;
+
+                      return (
+                        <li
+                          key={showId}
+                          className="border-b border-line-soft/80 px-2.5 py-2.5 last:border-b-0 hover:bg-paper/40 transition-colors"
+                        >
+                          <a
+                            className="group flex items-center justify-between gap-3 text-ink no-underline transition-colors focus-visible:outline-[3px] focus-visible:outline-pool focus-visible:outline-offset-2 motion-reduce:transition-none"
+                            href={routeHash.show(showId)}
+                            onClick={(e) => {
+                              e.preventDefault();
+                              onSelectShow(showId);
+                            }}
+                          >
+                            <div className="flex min-w-0 flex-1 flex-col">
+                              <div className="flex flex-wrap items-baseline gap-x-2.5 leading-snug">
+                                <span className="font-mono text-[13px] font-bold text-ink group-hover:text-pool group-hover:underline">
+                                  📅 {showDate(show)}
+                                </span>
+                                {show?.opensAt && (
+                                  <span className="font-mono text-[11px] text-muted">
+                                    ⏰ {show.opensAt} 開演
+                                  </span>
+                                )}
+                              </div>
+                            </div>
+                            <div className="flex shrink-0 items-center gap-2 font-mono text-[11px] tabular-nums">
+                              <span className="rounded bg-paper px-2 py-0.5 font-semibold text-muted border border-line-soft">
+                                {songCount > 0 ? `${songCount} 首曲目` : "尚無曲目"}
+                              </span>
+                              <span
+                                className="font-bold text-pool opacity-80 group-hover:translate-x-0.5 transition-transform"
+                                aria-hidden="true"
+                              >
+                                檢視歌單 →
+                              </span>
+                            </div>
+                          </a>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                )}
+              </section>
+            );
+          })}
+        </div>
+      )}
     </article>
   );
 }
