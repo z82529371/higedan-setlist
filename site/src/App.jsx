@@ -675,9 +675,15 @@ export default function App() {
                         <span className="truncate max-w-[280px] sm:max-w-none">
                           {shortUnitTitle(u)}
                         </span>
-                        <span className="font-mono text-[11px] opacity-80 tabular-nums">
-                          {hasSongs ? `(${showCnt}場)` : `(${showCnt}場·無歌單)`}
-                        </span>
+                        {showCnt > 1 ? (
+                          <span className="font-mono text-[11px] opacity-80 tabular-nums">
+                            ({showCnt}場{!hasSongs ? "·無歌單" : ""})
+                          </span>
+                        ) : !hasSongs ? (
+                          <span className="font-mono text-[11px] opacity-80 tabular-nums">
+                            (無歌單)
+                          </span>
+                        ) : null}
                       </button>
                     );
                   })}
