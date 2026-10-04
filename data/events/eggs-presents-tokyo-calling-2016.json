@@ -1,0 +1,47 @@
+{
+  "id": "eggs-presents-tokyo-calling-2016",
+  "title": "Eggs presents TOKYO CALLING 2016",
+  "shortTitle": "TOKYO CALLING 2016",
+  "type": "音樂祭",
+  "shows": [
+    {
+      "id": "695940",
+      "date": "2016-09-18",
+      "city": "東京",
+      "venue": "新宿 MARZ",
+      "region": "關東",
+      "prefecture": "東京都",
+      "title": "Eggs presents TOKYO CALLING 2016",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/695940"
+      ],
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "songId": "sweet-tweet"
+        },
+        {
+          "order": 2,
+          "encore": false,
+          "songId": "ai-nandaga"
+        },
+        {
+          "order": 3,
+          "encore": false,
+          "songId": "itan-na-star"
+        },
+        {
+          "order": 4,
+          "encore": false,
+          "songId": "whats-going-on"
+        },
+        {
+          "order": 5,
+          "encore": false,
+          "songId": "clap-clap"
+        }
+      ]
+    }
+  ]
+}
