@@ -652,6 +652,8 @@ export default function App() {
                   {pagedUnits.map((u) => {
                     const isCur = u.id === selUnitId;
                     const showCnt = (u.shows ?? []).length;
+                    const uData = unitData.get(u.id);
+                    const hasSongs = (uData?.songShows?.size ?? 0) > 0;
                     return (
                       <button
                         key={u.id}
@@ -665,14 +667,16 @@ export default function App() {
                         className={`rounded-full px-3.5 py-1.5 text-[12px] sm:text-[13px] font-semibold transition-colors motion-reduce:transition-none cursor-pointer inline-flex items-center gap-1.5 focus-visible:ring-2 focus-visible:ring-band focus-visible:outline-none ${
                           isCur
                             ? "bg-band text-band-ink font-bold shadow-xs border border-ink/40"
-                            : "bg-paper text-ink border border-line-soft hover:bg-tape-tint/50 hover:border-ink/60"
+                            : hasSongs
+                            ? "bg-paper text-ink border border-line-soft hover:bg-tape-tint/50 hover:border-ink/60"
+                            : "bg-paper/70 text-muted border border-dashed border-line hover:bg-tape-tint/40 hover:border-ink/60 hover:text-ink"
                         }`}
                       >
                         <span className="truncate max-w-[280px] sm:max-w-none">
                           {shortUnitTitle(u)}
                         </span>
                         <span className="font-mono text-[11px] opacity-80 tabular-nums">
-                          ({showCnt}場)
+                          {hasSongs ? `(${showCnt}場)` : `(${showCnt}場·無歌單)`}
                         </span>
                       </button>
                     );
@@ -709,7 +713,9 @@ export default function App() {
                           className={`rounded-full px-3 py-1.5 text-[12px] font-medium transition-colors motion-reduce:transition-none cursor-pointer inline-flex items-center gap-1.5 focus-visible:ring-2 focus-visible:ring-band focus-visible:outline-none ${
                             isCur
                               ? "bg-band text-band-ink font-bold shadow-xs border border-ink/40"
-                              : "bg-paper text-ink border border-line-soft hover:bg-tape-tint/50 hover:border-ink/60"
+                              : songCnt > 0
+                              ? "bg-paper text-ink border border-line-soft hover:bg-tape-tint/50 hover:border-ink/60"
+                              : "bg-paper/70 text-muted border border-dashed border-line hover:bg-tape-tint/40 hover:border-ink/60 hover:text-ink"
                           }`}
                         >
                           <span className="font-mono tabular-nums">
