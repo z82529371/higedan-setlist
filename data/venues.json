@@ -1480,5 +1480,71 @@
     "city": "名古屋",
     "region": "中部",
     "prefecture": "愛知縣"
+  },
+  "広島CAVE-BE": {
+    "venue": "廣島CAVE-BE",
+    "city": "廣島",
+    "region": "中國",
+    "prefecture": "廣島縣"
+  },
+  "仁愛大学": {
+    "venue": "仁愛大學",
+    "city": "福井",
+    "region": "中部",
+    "prefecture": "福井縣"
+  },
+  "アメリカ村DROP at MINAMI WHEEL 2016会場": {
+    "venue": "美國村 DROP",
+    "city": "大阪",
+    "region": "關西",
+    "prefecture": "大阪府"
+  },
+  "アメリカ村DROP": {
+    "venue": "美國村 DROP",
+    "city": "大阪",
+    "region": "關西",
+    "prefecture": "大阪府"
+  },
+  "新宿MARZ at TOKYO CALLING 2016会場 [新宿LOFT / 新宿LOFT BAR STAGE / 新宿Motion / 新宿Marble / 新宿MARZ / HOLIDAY SHINJUKU / 新宿RUIDO K4 / 新宿ACB HALL / 新宿SAMURAI / 新宿club SCIENCE]": {
+    "venue": "新宿 MARZ",
+    "city": "東京",
+    "region": "關東",
+    "prefecture": "東京都"
+  },
+  "新宿MARZ": {
+    "venue": "新宿 MARZ",
+    "city": "東京",
+    "region": "關東",
+    "prefecture": "東京都"
+  },
+  "心斎橋Live House Pangea": {
+    "venue": "心齋橋Live House Pangea",
+    "city": "大阪",
+    "region": "關西",
+    "prefecture": "大阪府"
+  },
+  "新宿LOFT": {
+    "venue": "新宿LOFT",
+    "city": "東京",
+    "region": "關東",
+    "prefecture": "東京都"
+  },
+  "SHIBUYA TAKE OFF 7": {
+    "venue": "SHIBUYA TAKE OFF 7",
+    "city": "東京",
+    "region": "關東",
+    "prefecture": "東京都"
+  },
+  "名古屋HeartLand": {
+    "venue": "名古屋HeartLand",
+    "city": "名古屋",
+    "region": "中部",
+    "prefecture": "愛知縣"
+  },
+  "LIVE SQUARE 2nd LINE": {
+    "venue": "LIVE SQUARE 2nd LINE",
+    "city": "大阪",
+    "region": "關西",
+    "prefecture": "大阪府"
   }
 }
