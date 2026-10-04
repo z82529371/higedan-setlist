@@ -1,0 +1,49 @@
+{
+  "id": "higedan-summit-17",
+  "title": "髭団サミット17'",
+  "type": "特別專場",
+  "shows": [
+    {
+      "id": "772867",
+      "date": "2017-02-18",
+      "city": "大阪",
+      "venue": "京橋BERONICA",
+      "region": "關西",
+      "prefecture": "大阪府",
+      "title": "髭団サミット17'",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/772867"
+      ],
+      "setlist": [],
+      "opensAt": "14:00"
+    },
+    {
+      "id": "772868",
+      "date": "2017-02-26",
+      "city": "名古屋",
+      "venue": "BLcafe",
+      "region": "中部",
+      "prefecture": "愛知縣",
+      "title": "髭団サミット17'",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/772868"
+      ],
+      "setlist": [],
+      "opensAt": "14:00"
+    },
+    {
+      "id": "772869",
+      "date": "2017-03-04",
+      "city": "東京",
+      "venue": "原宿Strobe Cafe",
+      "region": "關東",
+      "prefecture": "東京都",
+      "title": "髭団サミット17'",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/772869"
+      ],
+      "setlist": [],
+      "opensAt": "13:30"
+    }
+  ]
+}
