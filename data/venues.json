@@ -648,7 +648,7 @@
     "prefecture": "茨城縣"
   },
   "六本木ヒルズアリーナ": {
-    "venue": "Roppongi Hills Arena",
+    "venue": "六本木之丘 Arena",
     "city": "東京",
     "region": "關東",
     "prefecture": "東京都"
@@ -1444,5 +1444,41 @@
     "city": "東京",
     "region": "關東",
     "prefecture": "東京都"
+  },
+  "原宿ストロボカフェ": {
+    "venue": "原宿Strobe Cafe",
+    "city": "東京",
+    "region": "關東",
+    "prefecture": "東京都"
+  },
+  "京橋BERONICA": {
+    "venue": "京橋BERONICA",
+    "city": "大阪",
+    "region": "關西",
+    "prefecture": "大阪府"
+  },
+  "BLcafe": {
+    "venue": "BLcafe",
+    "city": "名古屋",
+    "region": "中部",
+    "prefecture": "愛知縣"
+  },
+  "立川BABEL": {
+    "venue": "立川BABEL",
+    "city": "東京",
+    "region": "關東",
+    "prefecture": "東京都"
+  },
+  "代官山LOOP": {
+    "venue": "代官山LOOP",
+    "city": "東京",
+    "region": "關東",
+    "prefecture": "東京都"
+  },
+  "ell. SIZE": {
+    "venue": "ell. SIZE",
+    "city": "名古屋",
+    "region": "中部",
+    "prefecture": "愛知縣"
   }
 }
