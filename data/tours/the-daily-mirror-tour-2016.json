@@ -1,0 +1,151 @@
+{
+  "id": "the-daily-mirror-tour-2016",
+  "title": "THE DAILY MIRROR tour 2016",
+  "type": "巡演專場",
+  "shows": [
+    {
+      "id": "635486",
+      "date": "2016-07-16",
+      "city": "大阪",
+      "venue": "LIVE SQUARE 2nd LINE",
+      "region": "關西",
+      "prefecture": "大阪府",
+      "title": "THE DAILY MIRROR tour 2016",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/635486"
+      ],
+      "opensAt": "18:00",
+      "diff": {
+        "skip": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11
+        ]
+      },
+      "locked": true
+    },
+    {
+      "id": "1943168",
+      "date": "2016-07-17",
+      "city": "名古屋",
+      "venue": "名古屋HeartLand",
+      "region": "中部",
+      "prefecture": "愛知縣",
+      "title": "THE DAILY MIRROR tour 2016",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/1943168"
+      ],
+      "diff": {},
+      "locked": true
+    },
+    {
+      "id": "727414",
+      "date": "2016-07-23",
+      "city": "東京",
+      "venue": "SHIBUYA TAKE OFF 7",
+      "region": "關東",
+      "prefecture": "東京都",
+      "title": "THE DAILY MIRROR tour 2016",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/727414"
+      ],
+      "diff": {},
+      "locked": true
+    },
+    {
+      "id": "649475",
+      "date": "2016-08-06",
+      "city": "松江",
+      "venue": "松江AZTiC canova",
+      "region": "中國",
+      "prefecture": "島根縣",
+      "title": "THE DAILY MIRROR tour 2016",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/649475"
+      ],
+      "opensAt": "18:00",
+      "diff": {
+        "skip": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11
+        ]
+      },
+      "locked": true
+    }
+  ],
+  "templateSetlist": [
+    {
+      "order": 1,
+      "encore": false,
+      "songId": "koi-no-maenarae"
+    },
+    {
+      "order": 2,
+      "encore": false,
+      "songId": "yuki-seku-asa-ga-kuru"
+    },
+    {
+      "order": 3,
+      "encore": false,
+      "songId": "itan-na-star"
+    },
+    {
+      "order": 4,
+      "encore": false,
+      "songId": "coffee-to-syrup"
+    },
+    {
+      "order": 5,
+      "encore": false,
+      "songId": "koi-no-sarigiwa"
+    },
+    {
+      "order": 6,
+      "encore": false,
+      "songId": "zero-no-mama-de-iraterara"
+    },
+    {
+      "order": 7,
+      "encore": false,
+      "songId": "happy-birthday-to-you"
+    },
+    {
+      "order": 8,
+      "encore": false,
+      "songId": "nichiyoubi-no-love-letter"
+    },
+    {
+      "order": 9,
+      "encore": false,
+      "songId": "sweet-tweet"
+    },
+    {
+      "order": 10,
+      "encore": false,
+      "songId": "clap-clap"
+    },
+    {
+      "order": 11,
+      "encore": true,
+      "songId": "ai-nandaga"
+    }
+  ],
+  "templateBasis": "全自動提煉：基於 4 場演出提取 $\\ge 50\\%$ 多數共識歌單；大阪與松江無歌單紀錄保持存根"
+}
