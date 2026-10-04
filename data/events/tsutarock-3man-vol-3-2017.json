@@ -1,0 +1,68 @@
+{
+  "id": "tsutarock-3man-vol-3-2017",
+  "title": "ツタロックスペシャルライブ\"3MAN!!\"Vol.3",
+  "shortTitle": "ツタロック \"3MAN!!\" Vol.3",
+  "type": "聯合專場",
+  "shows": [
+    {
+      "id": "798737",
+      "date": "2017-05-12",
+      "city": "東京",
+      "venue": "新代田FEVER",
+      "region": "關東",
+      "prefecture": "東京都",
+      "title": "ツタロックスペシャルライブ\"3MAN!!\"Vol.3",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/798737"
+      ],
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "songId": "inu-ka-cat-ka-de-shinumade-kenka-shiyou"
+        },
+        {
+          "order": 2,
+          "encore": false,
+          "songId": "itan-na-star"
+        },
+        {
+          "order": 3,
+          "encore": false,
+          "songId": "hajimari-no-asa"
+        },
+        {
+          "order": 4,
+          "encore": false,
+          "songId": "55",
+          "note": "(パリピアレンジ)"
+        },
+        {
+          "order": 5,
+          "encore": false,
+          "songId": "yugure-zoi",
+          "note": "アコ編"
+        },
+        {
+          "order": 6,
+          "encore": false,
+          "songId": "zero-no-mama-de-iraterara",
+          "note": "(弾き語り)",
+          "kind": [
+            "satoshi-solo"
+          ]
+        },
+        {
+          "order": 7,
+          "encore": false,
+          "songId": "coffee-to-syrup"
+        },
+        {
+          "order": 8,
+          "encore": false,
+          "songId": "sweet-tweet"
+        }
+      ]
+    }
+  ]
+}

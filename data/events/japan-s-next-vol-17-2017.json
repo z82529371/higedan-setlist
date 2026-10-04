@@ -1,0 +1,52 @@
+{
+  "id": "japan-s-next-vol-17-2017",
+  "title": "JAPAN'S NEXT vol.17",
+  "type": "聯合專場",
+  "shows": [
+    {
+      "id": "802810",
+      "date": "2017-06-03",
+      "city": "東京",
+      "venue": "惠比壽LIQUIDROOM",
+      "region": "關東",
+      "prefecture": "東京都",
+      "title": "JAPAN'S NEXT vol.17",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/802810"
+      ],
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "songId": "inu-ka-cat-ka-de-shinumade-kenka-shiyou"
+        },
+        {
+          "order": 2,
+          "encore": false,
+          "songId": "itan-na-star"
+        },
+        {
+          "order": 3,
+          "encore": false,
+          "songId": "yugure-zoi",
+          "note": "アコ編"
+        },
+        {
+          "order": 4,
+          "encore": false,
+          "songId": "zero-no-mama-de-iraterara"
+        },
+        {
+          "order": 5,
+          "encore": false,
+          "songId": "coffee-to-syrup"
+        },
+        {
+          "order": 6,
+          "encore": false,
+          "songId": "sweet-tweet"
+        }
+      ]
+    }
+  ]
+}

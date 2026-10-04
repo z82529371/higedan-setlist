@@ -1,19 +1,19 @@
 {
-  "id": "tbc-2017",
-  "title": "TBC夏まつり2017 絆みやぎ～イチばん近くに～",
-  "shortTitle": "TBC夏まつり2017",
-  "type": "音樂祭",
+  "id": "10th-anniversary-mujack-dream-land-2017",
+  "title": "10th Anniversary!! 『Mujack Dream Land 2017』",
+  "shortTitle": "Mujack Dream Land 2017",
+  "type": "聯合專場",
   "shows": [
     {
-      "id": "841793",
-      "date": "2017-07-22",
-      "city": "仙台",
-      "venue": "勾當台公園 市民廣場 NORTH STAGE",
-      "region": "東北",
-      "prefecture": "宮城縣",
-      "title": "TBC夏まつり2017 絆みやぎ～イチばん近くに～",
+      "id": "803070",
+      "date": "2017-06-23",
+      "city": "大阪",
+      "venue": "Music Club JANUS",
+      "region": "關西",
+      "prefecture": "大阪府",
+      "title": "10th Anniversary!! 『Mujack Dream Land 2017』",
       "sourceUrls": [
-        "https://www.livefans.jp/events/841793"
+        "https://www.livefans.jp/events/803070"
       ],
       "setlist": [
         {
@@ -24,12 +24,12 @@
         {
           "order": 2,
           "encore": false,
-          "songId": "ai-nandaga"
+          "songId": "hajimari-no-asa"
         },
         {
           "order": 3,
           "encore": false,
-          "songId": "itan-na-star"
+          "songId": "zero-no-mama-de-iraterara"
         },
         {
           "order": 4,

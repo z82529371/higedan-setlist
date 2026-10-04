@@ -1,0 +1,72 @@
+{
+  "id": "akahige-kikiippatsu-2017",
+  "title": "赤ひげ危機一髪",
+  "type": "聯合專場",
+  "shows": [
+    {
+      "id": "789518",
+      "date": "2017-05-05",
+      "city": "大阪",
+      "venue": "梅田CLUB QUATTRO",
+      "region": "關西",
+      "prefecture": "大阪府",
+      "title": "赤ひげ危機一髪",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/789518"
+      ],
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "songId": "parade"
+        },
+        {
+          "order": 2,
+          "encore": false,
+          "songId": "itan-na-star"
+        },
+        {
+          "order": 3,
+          "encore": false,
+          "songId": "hajimari-no-asa"
+        },
+        {
+          "order": 4,
+          "encore": false,
+          "songId": "55"
+        },
+        {
+          "order": 5,
+          "encore": false,
+          "songId": "yugure-zoi"
+        },
+        {
+          "order": 6,
+          "encore": false,
+          "songId": "zero-no-mama-de-iraterara"
+        },
+        {
+          "order": 7,
+          "encore": false,
+          "songId": "nichiyoubi-no-love-letter"
+        },
+        {
+          "order": 8,
+          "encore": false,
+          "songId": "coffee-to-syrup"
+        },
+        {
+          "order": 9,
+          "encore": false,
+          "songId": "rolling"
+        },
+        {
+          "order": 10,
+          "encore": false,
+          "songId": "sweet-tweet"
+        }
+      ]
+    }
+  ],
+  "shortTitle": "赤ひげ危機一髪"
+}
