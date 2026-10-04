@@ -1,0 +1,197 @@
+{
+  "id": "one-man-tour-2016",
+  "title": "Official髭男dism one-man tour 2016",
+  "type": "巡演專場",
+  "shows": [
+    {
+      "id": "711143",
+      "date": "2016-11-20",
+      "city": "名古屋",
+      "venue": "ell. SIZE",
+      "region": "中部",
+      "prefecture": "愛知縣",
+      "title": "Official髭男dism one-man tour 2016",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/711143"
+      ],
+      "opensAt": "18:00",
+      "diff": {
+        "skip": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18
+        ]
+      },
+      "locked": true
+    },
+    {
+      "id": "706768",
+      "date": "2016-11-23",
+      "city": "大阪",
+      "venue": "阿倍野ROCKTOWN",
+      "region": "關西",
+      "prefecture": "大阪府",
+      "title": "Official髭男dism one-man tour 2016",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/706768"
+      ],
+      "opensAt": "18:00",
+      "diff": {
+        "skip": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18
+        ]
+      },
+      "locked": true
+    },
+    {
+      "id": "703936",
+      "date": "2016-11-26",
+      "city": "東京",
+      "venue": "代官山LOOP",
+      "region": "關東",
+      "prefecture": "東京都",
+      "title": "Official髭男dism one-man tour 2016",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/703936"
+      ],
+      "opensAt": "18:00",
+      "diff": {},
+      "locked": true
+    }
+  ],
+  "templateSetlist": [
+    {
+      "order": 1,
+      "encore": false,
+      "songId": "yugure-zoi",
+      "note": "Short ver"
+    },
+    {
+      "order": 2,
+      "encore": false,
+      "songId": "ai-nandaga"
+    },
+    {
+      "order": 3,
+      "encore": false,
+      "songId": "mikanseinamamade"
+    },
+    {
+      "order": 4,
+      "encore": false,
+      "songId": "coffee-to-syrup"
+    },
+    {
+      "order": 5,
+      "encore": false,
+      "songId": "itan-na-star"
+    },
+    {
+      "order": 6,
+      "encore": false,
+      "songId": "darin"
+    },
+    {
+      "order": 7,
+      "encore": false,
+      "songId": "knit-no-boushi"
+    },
+    {
+      "order": 8,
+      "encore": false,
+      "songId": "zero-no-mama-de-iraterara"
+    },
+    {
+      "order": 9,
+      "encore": false,
+      "songId": "koi-no-maenarae"
+    },
+    {
+      "order": 10,
+      "encore": false,
+      "title": "PPAP [ピコ太郎]",
+      "note": "リクエスト",
+      "kind": [
+        "request"
+      ]
+    },
+    {
+      "order": 11,
+      "encore": false,
+      "songId": "parade",
+      "note": "リクエスト",
+      "kind": [
+        "request"
+      ]
+    },
+    {
+      "order": 12,
+      "encore": false,
+      "songId": "happy-birthday-to-you"
+    },
+    {
+      "order": 13,
+      "encore": false,
+      "songId": "whats-going-on"
+    },
+    {
+      "order": 14,
+      "encore": false,
+      "songId": "nichiyoubi-no-love-letter"
+    },
+    {
+      "order": 15,
+      "encore": false,
+      "songId": "sweet-tweet"
+    },
+    {
+      "order": 16,
+      "encore": false,
+      "songId": "clap-clap"
+    },
+    {
+      "order": 17,
+      "encore": true,
+      "title": "What's Going On? [Marvin Gaye]",
+      "note": "Mash-up ver"
+    },
+    {
+      "order": 18,
+      "encore": true,
+      "songId": "kiiroi-kuruma"
+    }
+  ],
+  "templateBasis": "以東京代官山LOOP場（全巡演唯一完整記錄場次）為基準模板；名古屋與大阪無公開曲目紀錄保持無歌單存根"
+}
