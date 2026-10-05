@@ -294,17 +294,26 @@ export default function App() {
     return stats;
   }, []);
 
-  // Available years for current category
-  const availableYears = useMemo(() => {
-    const set = new Set();
+  // Available years and show counts for current category
+  const yearStats = useMemo(() => {
+    const map = new Map();
     for (const u of allUnits) {
       if (getUnitTypeLabel(u) === selCategory) {
         const y = unitEarliest(u).split("-")[0];
-        if (y && y !== "9999") set.add(y);
+        if (y && y !== "9999") {
+          const prev = map.get(y) || { shows: 0, units: 0 };
+          prev.shows += u.shows?.length || 0;
+          prev.units += 1;
+          map.set(y, prev);
+        }
       }
     }
-    return Array.from(set).sort((a, b) => b.localeCompare(a));
+    return map;
   }, [selCategory]);
+
+  const availableYears = useMemo(() => {
+    return Array.from(yearStats.keys()).sort((a, b) => b.localeCompare(a));
+  }, [yearStats]);
 
   const handleCategoryClick = (cat) => {
     setSelCategory(cat);
@@ -611,6 +620,7 @@ export default function App() {
                 <div className="flex flex-wrap gap-1.5 sm:gap-2">
                   {availableYears.map((yr) => {
                     const isCur = selYear === yr;
+                    const count = yearStats.get(yr)?.shows || 0;
                     return (
                       <button
                         key={yr}
@@ -626,6 +636,9 @@ export default function App() {
                         }`}
                       >
                         <span>{yr}</span>
+                        <span className="text-[11px] opacity-75 tabular-nums">
+                          ({count}場)
+                        </span>
                       </button>
                     );
                   })}
