@@ -136,7 +136,9 @@ export function validateAndCleanTours() {
 
       // Check if shows need date sorting
       const originalShowsStr = JSON.stringify(unit.shows.map((s) => s.id));
-      unit.shows.sort((a, b) => (a.date < b.date ? -1 : 1));
+      unit.shows.sort((a, b) =>
+        a.date < b.date ? -1 : a.date > b.date ? 1 : (a.opensAt || "").localeCompare(b.opensAt || "")
+      );
       if (JSON.stringify(unit.shows.map((s) => s.id)) !== originalShowsStr) {
         modified = true;
       }
