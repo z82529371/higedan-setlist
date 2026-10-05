@@ -74,4 +74,5 @@
 | [ADR-0067: 精準對齊 Official 髭男 dism 官網 (higedan.com) 設計色系代幣](0067-official-higedan-color-palette-alignment.md) | 已採納 (Accepted) | - |
 | [ADR-0070: 初心者友善單欄聚焦自助導航架構 (Beginner-Proof Single-Column Kiosk Architecture)](0070-beginner-proof-single-column-kiosk-architecture.md) | 已採納 (Accepted) | 替代早期 UI 草案 (ADR-0063~0069) |
 | [ADR-0071: 合作單曲分類維度、聯合專場曲目收錄邊界與早期未發行曲庫擴充](0071-collaboration-single-taxonomy-and-joint-live-filtering.md) | 已採納 (Accepted) | - |
+| [ADR-0072: 早期地下未發行曲庫擴充、Billy Joel 翻唱判定與場館命名標準化](0072-underground-unreleased-songs-billy-joel-covers-and-venue-normalization.md) | 已採納 (Accepted) | - |
 
