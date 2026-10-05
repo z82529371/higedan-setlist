@@ -1840,5 +1840,23 @@
     "city": "東京",
     "region": "關東",
     "prefecture": "東京都"
+  },
+  "CONPASS": {
+    "venue": "CONPASS",
+    "city": "大阪",
+    "region": "關西",
+    "prefecture": "大阪府"
+  },
+  "CONPASS at MINAMI WHEEL 2014会場": {
+    "venue": "CONPASS",
+    "city": "大阪",
+    "region": "關西",
+    "prefecture": "大阪府"
+  },
+  "松江Pianoman": {
+    "venue": "松江Pianoman",
+    "city": "松江",
+    "region": "中國",
+    "prefecture": "島根縣"
   }
 }
