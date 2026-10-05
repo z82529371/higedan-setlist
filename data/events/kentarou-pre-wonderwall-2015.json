@@ -1,0 +1,52 @@
+{
+  "id": "kentarou-pre-wonderwall-2015",
+  "title": "健太郎 pre. ワンダーウォール \"Official髭男dism 「ラブとピースは君の中」リリースツアー\"",
+  "shortTitle": "健太郎 pre. ワンダーウォール",
+  "type": "聯合專場",
+  "shows": [
+    {
+      "id": "535574",
+      "date": "2015-04-18",
+      "city": "名古屋",
+      "venue": "栄R.A.D",
+      "region": "中部",
+      "prefecture": "愛知縣",
+      "title": "健太郎 pre. ワンダーウォール \"Official髭男dism 「ラブとピースは君の中」リリースツアー\"",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/535574"
+      ],
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "songId": "yugure-zoi"
+        },
+        {
+          "order": 2,
+          "encore": false,
+          "songId": "sweet-tweet"
+        },
+        {
+          "order": 3,
+          "encore": false,
+          "songId": "itan-na-star"
+        },
+        {
+          "order": 4,
+          "encore": false,
+          "songId": "ai-nandaga"
+        },
+        {
+          "order": 5,
+          "encore": false,
+          "songId": "koi-no-maenarae"
+        },
+        {
+          "order": 6,
+          "encore": true,
+          "songId": "gomibako-kanojo"
+        }
+      ]
+    }
+  ]
+}

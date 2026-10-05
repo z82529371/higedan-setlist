@@ -1,0 +1,21 @@
+{
+  "id": "hajime-no-ippo-2015",
+  "title": "HAJIME NO IPPO!!",
+  "type": "聯合專場",
+  "shows": [
+    {
+      "id": "414146",
+      "date": "2015-03-15",
+      "city": "大阪",
+      "venue": "Music Club JANUS",
+      "region": "關西",
+      "prefecture": "大阪府",
+      "title": "HAJIME NO IPPO!!",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/414146"
+      ],
+      "setlist": [],
+      "opensAt": "17:00"
+    }
+  ]
+}
