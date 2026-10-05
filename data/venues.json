@@ -1822,5 +1822,23 @@
     "city": "福山",
     "region": "中國",
     "prefecture": "廣島縣"
+  },
+  "KYOTO MUSE": {
+    "venue": "KYOTO MUSE",
+    "city": "京都",
+    "region": "關西",
+    "prefecture": "京都府"
+  },
+  "京都MUSE": {
+    "venue": "KYOTO MUSE",
+    "city": "京都",
+    "region": "關西",
+    "prefecture": "京都府"
+  },
+  "MAIN STAGE at 新代田FEVER": {
+    "venue": "新代田FEVER",
+    "city": "東京",
+    "region": "關東",
+    "prefecture": "東京都"
   }
 }

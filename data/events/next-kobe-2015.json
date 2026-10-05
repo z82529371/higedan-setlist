@@ -1,0 +1,46 @@
+{
+  "id": "next-kobe-2015",
+  "title": "NEXT KOBE!!!",
+  "type": "聯合專場",
+  "shows": [
+    {
+      "id": "1917009",
+      "date": "2015-02-01",
+      "city": "神戶",
+      "venue": "神戶VARIT.",
+      "region": "關西",
+      "prefecture": "兵庫縣",
+      "title": "NEXT KOBE!!!",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/1917009"
+      ],
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "songId": "parade"
+        },
+        {
+          "order": 2,
+          "encore": false,
+          "songId": "koi-no-maenarae"
+        },
+        {
+          "order": 3,
+          "encore": false,
+          "songId": "yugure-zoi"
+        },
+        {
+          "order": 4,
+          "encore": false,
+          "songId": "ai-nandaga"
+        },
+        {
+          "order": 5,
+          "encore": false,
+          "songId": "sweet-tweet"
+        }
+      ]
+    }
+  ]
+}

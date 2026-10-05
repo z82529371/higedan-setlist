@@ -1,0 +1,85 @@
+{
+  "id": "yamane-marina-official-higedandism-2014",
+  "title": "山根万理奈,Official髭男dism",
+  "shortTitle": "山根万理奈 × 髭男",
+  "type": "聯合專場",
+  "shows": [
+    {
+      "id": "396502",
+      "date": "2014-12-21",
+      "city": "松江",
+      "venue": "松江AZTiC canova",
+      "region": "中國",
+      "prefecture": "島根縣",
+      "title": "山根万理奈,Official髭男dism",
+      "sourceUrls": [
+        "https://www.livefans.jp/events/396502"
+      ],
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "songId": "natsu-moyou-no-neko"
+        },
+        {
+          "order": 2,
+          "encore": false,
+          "songId": "parade"
+        },
+        {
+          "order": 3,
+          "encore": false,
+          "songId": "koi-no-maenarae"
+        },
+        {
+          "order": 4,
+          "encore": false,
+          "songId": "yugure-zoi"
+        },
+        {
+          "order": 5,
+          "encore": false,
+          "songId": "furidasu-ame-gokigen-na-kimi"
+        },
+        {
+          "order": 6,
+          "encore": false,
+          "songId": "ai-nandaga"
+        },
+        {
+          "order": 7,
+          "encore": false,
+          "songId": "triangle-wo-mawase"
+        },
+        {
+          "order": 8,
+          "encore": false,
+          "songId": "nichiyoubi-no-love-letter"
+        },
+        {
+          "order": 9,
+          "encore": false,
+          "songId": "sweet-tweet"
+        },
+        {
+          "order": 10,
+          "encore": false,
+          "songId": "gomibako-kanojo"
+        },
+        {
+          "order": 11,
+          "encore": true,
+          "songId": "koi-no-saichu",
+          "note": "w/ 山根万理奈"
+        },
+        {
+          "order": 12,
+          "encore": true,
+          "songId": "bukiyou-na-futari-de",
+          "note": "w/ 山根万理奈"
+        }
+      ],
+      "opensAt": "18:00"
+    }
+  ]
+}
