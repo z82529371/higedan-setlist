@@ -172,6 +172,9 @@ export const ALBUM_MAP = {
   "koi-no-sarigiwa": "MAN IN THE MIRROR (2016)",
   "zero-no-mama-de-iraterara": "MAN IN THE MIRROR (2016)",
   "nichiyoubi-no-love-letter": "MAN IN THE MIRROR (2016)",
+
+  "koi-no-saichu": "合作單曲",
+  "bukiyou-na-futari-de": "合作單曲",
 };
 
 export const ALBUM_ORDER = [
@@ -184,6 +187,7 @@ export const ALBUM_ORDER = [
   "MAN IN THE MIRROR (2016)",
   "ラブとピースは君の中 (2015)",
   "EP / 單曲",
+  "合作單曲",
   "未發行曲目",
 ];
 
