@@ -39,32 +39,32 @@
         {
           "order": 5,
           "encore": false,
-          "title": "ふりだす雨、ゴキゲンな君"
+          "songId": "bukiyou-na-futari-de"
         },
         {
           "order": 6,
           "encore": false,
-          "title": "朝になれば"
+          "songId": "joanna"
         },
         {
           "order": 7,
           "encore": false,
-          "title": "不器用な二人で"
+          "songId": "sakura-no-namida"
         },
         {
           "order": 8,
           "encore": false,
-          "title": "Joanna"
+          "songId": "furidasu-ame-gokigen-na-kimi"
         },
         {
           "order": 9,
           "encore": false,
-          "title": "桜の涙"
+          "songId": "shihatsu-ga-michibiku-kouhukuron"
         },
         {
           "order": 10,
           "encore": false,
-          "songId": "shihatsu-ga-michibiku-kouhukuron"
+          "songId": "asa-ni-nareba"
         },
         {
           "order": 11,
@@ -74,7 +74,7 @@
         {
           "order": 12,
           "encore": false,
-          "title": "トライアングルを回せ"
+          "songId": "triangle-wo-mawase"
         },
         {
           "order": 13,
@@ -109,7 +109,7 @@
         {
           "order": 19,
           "encore": true,
-          "title": "ごみ箱彼女"
+          "songId": "gomibako-kanojo"
         }
       ],
       "opensAt": "20:00"

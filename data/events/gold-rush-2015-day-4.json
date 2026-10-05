@@ -11,7 +11,9 @@
       "region": "關西",
       "prefecture": "京都府",
       "title": "GOLD RUSH 2015 京都編 day.4",
-      "sourceUrls": ["https://www.livefans.jp/events/471263"],
+      "sourceUrls": [
+        "https://www.livefans.jp/events/471263"
+      ],
       "setlist": [
         {
           "order": 1,

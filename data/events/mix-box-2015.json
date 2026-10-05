@@ -11,7 +11,9 @@
       "region": "九州",
       "prefecture": "福岡縣",
       "title": "Mix Box",
-      "sourceUrls": ["https://www.livefans.jp/events/452077"],
+      "sourceUrls": [
+        "https://www.livefans.jp/events/452077"
+      ],
       "setlist": [
         {
           "order": 1,
