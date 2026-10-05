@@ -62,8 +62,11 @@ export function ShowSlip({ ud, showId, onSelectSong, onSelectShow }) {
   const cardTabs = (i) => kindTabs(getKindArray(i.kind), unrel(i));
 
   const runKey = (i) => {
-    const k = getKindArray(i.kind);
-    return i.songId && k.length > 0 ? `${primaryOf(i)}::${k.join(",")}` : null;
+    if (!i.songId) return null;
+    const prim = primaryOf(i);
+    if (!prim) return null;
+    const tabs = cardTabs(i);
+    return `${prim}::${tabs.join(",")}`;
   };
 
   const groupRuns = (list) => {

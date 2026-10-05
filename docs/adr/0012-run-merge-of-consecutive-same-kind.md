@@ -1,5 +1,7 @@
 # 相連同 kind 卡片合併為一段渲染（run）
 
+> **部分 Superseded**：§7 中關於「unreleased 不參與合併」之限制，已由 [0074](0074-unreleased-song-run-merge.md) 推翻。連續未發行歌曲亦依相同 primaryKind 及 cardTabs 併段為單一 UNRELEASED 紙籤卡片。
+
 連續數首演出曲目若具有相同的卡片級 kind（premiere、satoshi-solo、request），前端以「一段」單一紙籤卡片渲染：卡內**逐行**列出各曲，每行自帶各自的 cue 號（如 M9、M10），不採用「M9–M10」範圍記法。資料層仍逐首標 kind——源頭不變，合併純是呈現層決策。
 
 理由：diff（skip／insert／note）以 order 為錨定單位；若在資料層把多首併成一個區塊節點，錨定與曲目順序的簿記會變複雜，且「歌曲全史」檢視需逐首正確帶標籤。

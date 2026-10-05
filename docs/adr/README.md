@@ -75,4 +75,7 @@
 | [ADR-0070: 初心者友善單欄聚焦自助導航架構 (Beginner-Proof Single-Column Kiosk Architecture)](0070-beginner-proof-single-column-kiosk-architecture.md) | 已採納 (Accepted) | 替代早期 UI 草案 (ADR-0063~0069) |
 | [ADR-0071: 合作單曲分類維度、聯合專場曲目收錄邊界與早期未發行曲庫擴充](0071-collaboration-single-taxonomy-and-joint-live-filtering.md) | 已採納 (Accepted) | - |
 | [ADR-0072: 早期地下未發行曲庫擴充、Billy Joel 翻唱判定與場館命名標準化](0072-underground-unreleased-songs-billy-joel-covers-and-venue-normalization.md) | 已採納 (Accepted) | - |
+| [ADR-0073: 早期地下專場系列命名統一、未發表曲庫擴充與 2013 松江場次校準](0073-early-underground-live-taxonomy-and-tonight-series-unification.md) | 已採納 (Accepted) | - |
+| [ADR-0074: 未發行歌曲連續段落合併渲染規範 (Unreleased Song Run-Merge Architecture)](0074-unreleased-song-run-merge.md) | 已採納 (Accepted) | 部分推翻 ADR-0012 |
+
 
