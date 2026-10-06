@@ -1,0 +1,63 @@
+{
+  "id": "chou-houkagosai-calpis-2020",
+  "title": "超放課後祭 Supported by 放課後『カルピス』",
+  "shortTitle": "超放課後祭",
+  "type": "線上直播",
+  "shows": [
+    {
+      "id": "chou-houkagosai-2020-1108",
+      "date": "2020-11-08",
+      "city": "線上",
+      "venue": "線上直播 (YouTube / Twitter / LINE)",
+      "region": "線上",
+      "prefecture": "線上",
+      "title": "超放課後祭 Supported by 放課後『カルピス』 スペシャルライブ",
+      "sourceUrls": [
+        "https://ja.wikipedia.org/wiki/Official%E9%AB%AD%E7%94%B7dism",
+        "https://www.calpis.info/"
+      ],
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "songId": "hello"
+        },
+        {
+          "order": 2,
+          "encore": false,
+          "songId": "parabola"
+        },
+        {
+          "order": 3,
+          "encore": false,
+          "songId": "115-man-kilo-no-film"
+        },
+        {
+          "order": 4,
+          "encore": false,
+          "songId": "fire-ground"
+        },
+        {
+          "order": 5,
+          "encore": false,
+          "songId": "laughter"
+        },
+        {
+          "order": 6,
+          "encore": false,
+          "songId": "stand-by-you"
+        },
+        {
+          "order": 7,
+          "encore": false,
+          "songId": "pretender"
+        },
+        {
+          "order": 8,
+          "encore": false,
+          "songId": "i-love"
+        }
+      ]
+    }
+  ]
+}
