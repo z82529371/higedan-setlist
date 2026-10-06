@@ -20,42 +20,12 @@
         {
           "order": 1,
           "encore": false,
-          "songId": "hello"
+          "songId": "shukumei"
         },
         {
           "order": 2,
           "encore": false,
           "songId": "parabola"
-        },
-        {
-          "order": 3,
-          "encore": false,
-          "songId": "115-man-kilo-no-film"
-        },
-        {
-          "order": 4,
-          "encore": false,
-          "songId": "fire-ground"
-        },
-        {
-          "order": 5,
-          "encore": false,
-          "songId": "laughter"
-        },
-        {
-          "order": 6,
-          "encore": false,
-          "songId": "stand-by-you"
-        },
-        {
-          "order": 7,
-          "encore": false,
-          "songId": "pretender"
-        },
-        {
-          "order": 8,
-          "encore": false,
-          "songId": "i-love"
         }
       ]
     }
