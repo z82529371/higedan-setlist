@@ -1,0 +1,42 @@
+{
+  "id": "momochihama-summer-festa-2015",
+  "title": "RKBラジオ ももち浜サマーフェスタ 2015",
+  "shortTitle": "ももち浜サマーフェスタ 2015",
+  "type": "音樂祭",
+  "shows": [
+    {
+      "id": "x-20150718-momochihama",
+      "date": "2015-07-18",
+      "weekday": "土",
+      "city": "福岡",
+      "venue": "Seaside百道海濱公園",
+      "region": "九州",
+      "prefecture": "福岡縣",
+      "opensAt": "11:00",
+      "title": "RKBラジオ ももち浜サマーフェスタ 2015",
+      "sourceUrls": ["https://x.com/officialhige/status/622325978291814400"],
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "songId": "sweet-tweet"
+        },
+        {
+          "order": 2,
+          "encore": false,
+          "songId": "ai-nandaga"
+        },
+        {
+          "order": 3,
+          "encore": false,
+          "songId": "itan-na-star"
+        },
+        {
+          "order": 4,
+          "encore": false,
+          "songId": "koi-no-maenarae"
+        }
+      ]
+    }
+  ]
+}

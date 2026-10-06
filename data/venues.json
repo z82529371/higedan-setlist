@@ -2044,5 +2044,23 @@
     "city": "奧出雲",
     "region": "中國",
     "prefecture": "島根縣"
+  },
+  "Seaside百道海濱公園": {
+    "venue": "Seaside百道海濱公園",
+    "city": "福岡",
+    "region": "九州",
+    "prefecture": "福岡縣"
+  },
+  "シーサイドももち海浜公園": {
+    "venue": "Seaside百道海濱公園",
+    "city": "福岡",
+    "region": "九州",
+    "prefecture": "福岡縣"
+  },
+  "百道海濱公園": {
+    "venue": "Seaside百道海濱公園",
+    "city": "福岡",
+    "region": "九州",
+    "prefecture": "福岡縣"
   }
 }
