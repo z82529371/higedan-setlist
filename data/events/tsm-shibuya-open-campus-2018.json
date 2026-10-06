@@ -1,0 +1,21 @@
+{
+  "id": "tsm-shibuya-open-campus-2018",
+  "title": "東京スクールオブミュージック専門学校渋谷 オープンキャンパス",
+  "type": "學園祭",
+  "shows": [
+    {
+      "id": "tsm-shibuya-2018-0331",
+      "date": "2018-03-31",
+      "city": "東京",
+      "venue": "東京音樂與舞蹈專門學校澀谷 (TSM澀谷) 10F活動大廳",
+      "region": "關東",
+      "prefecture": "東京都",
+      "title": "東京スクールオブミュージック専門学校渋谷 オープンキャンパス スペシャルライブ",
+      "sourceUrls": [
+        "https://ja.wikipedia.org/wiki/Official%E9%AB%AD%E7%94%B7dism",
+        "https://higedan.com/"
+      ],
+      "setlist": []
+    }
+  ]
+}

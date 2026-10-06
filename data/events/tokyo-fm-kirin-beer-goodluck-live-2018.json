@@ -1,0 +1,20 @@
+{
+  "id": "tokyo-fm-kirin-beer-goodluck-live-2018",
+  "title": "TOKYO FM KIRIN BEER \"GoodLuck\" LIVE",
+  "type": "特別專場",
+  "shows": [
+    {
+      "id": "kirin-goodluck-live-2018-1018",
+      "date": "2018-10-18",
+      "city": "東京",
+      "venue": "TOKYO FM STUDIO IRIS (錄音棚公開生放送)",
+      "region": "關東",
+      "prefecture": "東京都",
+      "title": "TOKYO FM KIRIN BEER \"GoodLuck\" LIVE 公開生放送",
+      "sourceUrls": [
+        "https://ja.wikipedia.org/wiki/Official%E9%AB%AD%E7%94%B7dism"
+      ],
+      "setlist": []
+    }
+  ]
+}
