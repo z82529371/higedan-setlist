@@ -448,6 +448,25 @@ export default function App() {
       }`
     : "單發場合，曲目全文收錄";
 
+  const sourceSummary = useMemo(() => {
+    const sources = new Set();
+    for (const s of current?.shows ?? []) {
+      for (const u of s.sourceUrls ?? []) {
+        if (/x\.com|twitter\.com/i.test(u)) sources.add("X");
+        else if (/livefans\.jp/i.test(u)) sources.add("LiveFans");
+        else {
+          try {
+            sources.add(new URL(u).hostname.replace(/^www\./, ""));
+          } catch {
+            sources.add("外部來源");
+          }
+        }
+      }
+    }
+    if (sources.size === 0) return "LiveFans";
+    return Array.from(sources).join(" · ");
+  }, [current]);
+
   return (
     <Fragment>
       {/* Top Banner */}
@@ -458,7 +477,7 @@ export default function App() {
           {current?.shows.length ?? 0} 場 · {current?.songShows.size ?? 0} 首歌曲
         </span>
         <span className="opacity-45">●</span>
-        <span>資料來源 livefans</span>
+        <span>資料來源 {sourceSummary}</span>
       </div>
 
       {/* Header */}
@@ -1076,7 +1095,7 @@ export default function App() {
       <footer className="mt-12 flex flex-wrap gap-x-[18px] gap-y-[6px] border-t-[1.5px] border-ink pt-3 font-mono text-[12px] text-muted">
         <span>{footTpl}</span>
         <span>{current?.isTour ? "各場差異以 insert / skip 記錄" : ""}</span>
-        <span>演出順序、安可標記逐場核對 livefans</span>
+        <span>演出順序、安可標記逐場核對 {sourceSummary}</span>
       </footer>
     </Fragment>
   );

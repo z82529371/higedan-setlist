@@ -21,6 +21,18 @@ import { songTitle, songUnreleased, showDate } from "../lib/domain.js";
 import { trackKey, trackRoute, routeHash } from "../lib/track.js";
 import { assignCues } from "../lib/resolve.js";
 
+function getSourceLabel(url) {
+  if (!url) return "來源紀錄";
+  if (/x\.com|twitter\.com/i.test(url)) return "X 來源紀錄";
+  if (/livefans\.jp/i.test(url)) return "LiveFans 來源紀錄";
+  try {
+    const host = new URL(url).hostname.replace(/^www\./, "");
+    return `${host} 來源紀錄`;
+  } catch {
+    return "來源紀錄";
+  }
+}
+
 const CATEGORY_ORDER = [
   "巡演專場",
   "特別專場",
@@ -218,16 +230,19 @@ export function ShowSlip({ ud, showId, onSelectSong, onSelectShow }) {
         </div>
 
         {/* Level 4: External Source Link */}
-        {s.sourceUrls?.[0] && (
-          <div className="mt-2.5 flex items-center justify-end text-[12px] text-muted [&_a]:text-pool [&_a]:underline-offset-[3px]">
-            <a
-              href={s.sourceUrls[0]}
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center gap-1 font-mono hover:underline"
-            >
-              <span aria-hidden="true">🔗</span> livefans 來源紀錄
-            </a>
+        {s.sourceUrls && s.sourceUrls.length > 0 && (
+          <div className="mt-2.5 flex flex-wrap items-center justify-end gap-x-3 gap-y-1 text-[12px] text-muted [&_a]:text-pool [&_a]:underline-offset-[3px]">
+            {s.sourceUrls.map((url, i) => (
+              <a
+                key={i}
+                href={url}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-1 font-mono hover:underline"
+              >
+                <span aria-hidden="true">🔗</span> {getSourceLabel(url)}
+              </a>
+            ))}
           </div>
         )}
       </div>

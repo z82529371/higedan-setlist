@@ -79,6 +79,7 @@
 | [ADR-0074: 未發行歌曲連續段落合併渲染規範 (Unreleased Song Run-Merge Architecture)](0074-unreleased-song-run-merge.md) | 已採納 (Accepted) | 部分推翻 ADR-0012 |
 | [ADR-0075: 演出年份膠囊場數標籤與分類動態統計 (Year Selector Show Count Badge and Category Scoped Accounting)](0075-year-selector-show-count-badge.md) | 已採納 (Accepted) | 增強 ADR-0070 第二層導航 |
 | [ADR-0076: 中央場館字典全量審計與地理資訊正名標準化 (Central Venue Dictionary Audit and Geographical Normalization)](0076-venue-and-geography-dictionary-full-audit-and-normalization.md) | 已採納 (Accepted) | 強化 ADR-0013 / ADR-0034 |
+| [ADR-0077: 演出來源動態標籤識別與多渠道一手史料呈現 (Dynamic Provenance Source Labeling for X and Multi-Source Archives)](0077-dynamic-provenance-source-labeling-for-x-and-external-sources.md) | 已採納 (Accepted) | 擴充 ADR-0002 / ADR-0010 |
 
 
 
