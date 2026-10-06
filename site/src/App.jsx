@@ -453,7 +453,8 @@ export default function App() {
     const sources = new Set();
     for (const s of current?.shows ?? []) {
       for (const u of s.sourceUrls ?? []) {
-        if (/x\.com|twitter\.com/i.test(u)) sources.add("X");
+        if (/higedan\.com/i.test(u)) sources.add("官方網站");
+        else if (/x\.com|twitter\.com/i.test(u)) sources.add("X");
         else if (/livefans\.jp/i.test(u)) sources.add("LiveFans");
         else if (/wikipedia\.org/i.test(u)) sources.add("維基百科");
         else {

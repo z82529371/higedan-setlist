@@ -2686,5 +2686,29 @@
     "city": "東京",
     "region": "關東",
     "prefecture": "東京都"
+  },
+  "メ～テレBスタジオ": {
+    "venue": "名古屋電視台 B Studio (BOMBER-E 公開收錄)",
+    "city": "名古屋",
+    "region": "中部",
+    "prefecture": "愛知縣"
+  },
+  "BSスカパー!": {
+    "venue": "BSスカパー! 特別音樂祭舞台 (電視生放送)",
+    "city": "東京",
+    "region": "關東",
+    "prefecture": "東京都"
+  },
+  "テレビ朝日": {
+    "venue": "朝日電視台",
+    "city": "東京",
+    "region": "關東",
+    "prefecture": "東京都"
+  },
+  "NHK放送センター": {
+    "venue": "NHK放送中心",
+    "city": "東京",
+    "region": "關東",
+    "prefecture": "東京都"
   }
 }

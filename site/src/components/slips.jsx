@@ -23,6 +23,7 @@ import { assignCues } from "../lib/resolve.js";
 
 function getSourceLabel(url) {
   if (!url) return "來源紀錄";
+  if (/higedan\.com/i.test(url)) return "官方網站 來源紀錄";
   if (/x\.com|twitter\.com/i.test(url)) return "X 來源紀錄";
   if (/livefans\.jp/i.test(url)) return "LiveFans 來源紀錄";
   if (/wikipedia\.org/i.test(url)) return "維基百科 來源紀錄";
