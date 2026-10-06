@@ -1,0 +1,22 @@
+{
+  "id": "shimane-u-shofusai-2014",
+  "title": "島根大学 淞風祭2014",
+  "shortTitle": "島大淞風祭2014",
+  "type": "學園祭",
+  "shows": [
+    {
+      "id": "shimane-u-shofusai-2014-1013",
+      "date": "2014-10-13",
+      "weekday": "月",
+      "city": "松江",
+      "venue": "島根大學 松江校區",
+      "region": "中國",
+      "prefecture": "島根縣",
+      "title": "島根大学 淞風祭2014",
+      "sourceUrls": [
+        "https://ja.wikipedia.org/wiki/Official%E9%AB%AD%E7%94%B7dism#出演イベント"
+      ],
+      "setlist": []
+    }
+  ]
+}
