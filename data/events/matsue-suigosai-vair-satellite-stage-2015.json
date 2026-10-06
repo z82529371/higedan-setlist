@@ -1,7 +1,7 @@
 {
   "id": "matsue-suigosai-vair-satellite-stage-2015",
   "title": "FM山陰公開生放送 Vair SATELLITE STAGE in 松江水郷祭",
-  "shortTitle": "松江水郷祭 Vair SATELLITE STAGE",
+  "shortTitle": "松江水郷祭",
   "type": "音樂祭",
   "shows": [
     {
@@ -14,9 +14,36 @@
       "prefecture": "島根縣",
       "title": "FM山陰公開生放送 Vair SATELLITE STAGE in 松江水郷祭",
       "sourceUrls": [
+        "https://x.com/officialhige/status/627836701176500228",
         "https://ja.wikipedia.org/wiki/Official%E9%AB%AD%E7%94%B7dism#出演イベント"
       ],
-      "setlist": []
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "songId": "koi-no-maenarae"
+        },
+        {
+          "order": 2,
+          "encore": false,
+          "songId": "nichiyoubi-no-love-letter"
+        },
+        {
+          "order": 3,
+          "encore": false,
+          "songId": "ai-nandaga"
+        },
+        {
+          "order": 4,
+          "encore": false,
+          "songId": "egao-no-matsu-basho"
+        },
+        {
+          "order": 5,
+          "encore": false,
+          "songId": "sweet-tweet"
+        }
+      ]
     }
   ]
 }
