@@ -12,10 +12,22 @@
       "title": "Official髭男dism one-man tour 2018",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=56",
+        "https://x.com/beiketa/status/1015012261125951488",
         "https://www.livefans.jp/events/889678"
       ],
       "opensAt": "19:00",
-      "diff": {}
+      "diff": {
+        "insert": [
+          {
+            "after": 15,
+            "item": {
+              "encore": true,
+              "songId": "parade",
+              "note": "1コーラス"
+            }
+          }
+        ]
+      }
     },
     {
       "id": "889684",
@@ -27,6 +39,7 @@
       "title": "Official髭男dism one-man tour 2018",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=56",
+        "https://x.com/beiketa/status/1015012261125951488",
         "https://www.livefans.jp/events/889684"
       ],
       "opensAt": "17:30",
@@ -42,6 +55,7 @@
       "title": "Official髭男dism one-man tour 2018",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=56",
+        "https://x.com/beiketa/status/1015012261125951488",
         "https://www.livefans.jp/events/889685"
       ],
       "opensAt": "18:00",
@@ -57,6 +71,7 @@
       "title": "Official髭男dism one-man tour 2018",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=56",
+        "https://x.com/beiketa/status/1015012261125951488",
         "https://www.livefans.jp/events/889692"
       ],
       "opensAt": "17:30",
@@ -72,10 +87,60 @@
       "title": "Official髭男dism one-man tour 2018",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=56",
+        "https://x.com/beiketa/status/1015012261125951488",
         "https://www.livefans.jp/events/889697"
       ],
       "opensAt": "19:00",
-      "diff": {}
+      "diff": {
+        "skip": [
+          16,
+          17
+        ],
+        "insert": [
+          {
+            "after": 7,
+            "item": {
+              "encore": false,
+              "songId": "saredo-hibi-wa"
+            }
+          },
+          {
+            "after": 15,
+            "item": {
+              "encore": true,
+              "songId": "clap-clap"
+            }
+          },
+          {
+            "after": 15,
+            "item": {
+              "encore": true,
+              "songId": "itan-na-star"
+            }
+          },
+          {
+            "after": 15,
+            "item": {
+              "encore": true,
+              "songId": "rolling"
+            }
+          },
+          {
+            "after": 15,
+            "item": {
+              "encore": true,
+              "songId": "whats-going-on"
+            }
+          },
+          {
+            "after": 15,
+            "item": {
+              "encore": true,
+              "songId": "mikanseinamamade"
+            }
+          }
+        ]
+      }
     },
     {
       "id": "889701",
@@ -87,10 +152,21 @@
       "title": "Official髭男dism one-man tour 2018",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=56",
+        "https://x.com/beiketa/status/1015012261125951488",
         "https://www.livefans.jp/events/889701"
       ],
       "opensAt": "18:00",
-      "diff": {}
+      "diff": {
+        "insert": [
+          {
+            "after": 8,
+            "item": {
+              "encore": false,
+              "songId": "saredo-hibi-wa"
+            }
+          }
+        ]
+      }
     },
     {
       "id": "889704",
@@ -102,10 +178,53 @@
       "title": "Official髭男dism one-man tour 2018",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=56",
+        "https://x.com/beiketa/status/1015012261125951488",
         "https://www.livefans.jp/events/889704"
       ],
       "opensAt": "18:00",
-      "diff": {}
+      "diff": {
+        "skip": [
+          16,
+          17
+        ],
+        "insert": [
+          {
+            "after": 15,
+            "item": {
+              "encore": true,
+              "songId": "rolling"
+            }
+          },
+          {
+            "after": 15,
+            "item": {
+              "encore": true,
+              "songId": "zero-no-mama-de-iraterara"
+            }
+          },
+          {
+            "after": 15,
+            "item": {
+              "encore": true,
+              "songId": "whats-going-on"
+            }
+          },
+          {
+            "after": 15,
+            "item": {
+              "encore": true,
+              "songId": "itan-na-star"
+            }
+          },
+          {
+            "after": 15,
+            "item": {
+              "encore": true,
+              "songId": "nichiyoubi-no-love-letter"
+            }
+          }
+        ]
+      }
     },
     {
       "id": "889709",
@@ -117,10 +236,28 @@
       "title": "Official髭男dism one-man tour 2018",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=56",
+        "https://x.com/beiketa/status/1015012261125951488",
         "https://www.livefans.jp/events/889709"
       ],
       "opensAt": "18:00",
-      "diff": {}
+      "diff": {
+        "insert": [
+          {
+            "after": 15,
+            "item": {
+              "encore": true,
+              "songId": "55"
+            }
+          },
+          {
+            "after": 15,
+            "item": {
+              "encore": true,
+              "songId": "ai-nandaga"
+            }
+          }
+        ]
+      }
     },
     {
       "id": "889712",
@@ -132,10 +269,61 @@
       "title": "Official髭男dism one-man tour 2018",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=56",
+        "https://x.com/beiketa/status/1015012261125951488",
         "https://www.livefans.jp/events/889712"
       ],
       "opensAt": "18:00",
-      "diff": {}
+      "diff": {
+        "skip": [
+          16,
+          17
+        ],
+        "insert": [
+          {
+            "after": 15,
+            "item": {
+              "encore": true,
+              "songId": "equal"
+            }
+          },
+          {
+            "after": 15,
+            "item": {
+              "encore": true,
+              "songId": "whats-going-on"
+            }
+          },
+          {
+            "after": 15,
+            "item": {
+              "encore": true,
+              "songId": "itan-na-star"
+            }
+          },
+          {
+            "after": 15,
+            "item": {
+              "encore": true,
+              "songId": "darin"
+            }
+          },
+          {
+            "after": 15,
+            "item": {
+              "encore": true,
+              "songId": "kiiroi-kuruma"
+            }
+          },
+          {
+            "after": 15,
+            "item": {
+              "encore": true,
+              "songId": "nichiyoubi-no-love-letter",
+              "note": "退場SE急遽生演奏"
+            }
+          }
+        ]
+      }
     },
     {
       "id": "889713",
@@ -147,10 +335,36 @@
       "title": "Official髭男dism one-man tour 2018",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=56",
+        "https://x.com/beiketa/status/1015012261125951488",
         "https://www.livefans.jp/events/889713"
       ],
       "opensAt": "17:30",
-      "diff": {}
+      "diff": {
+        "insert": [
+          {
+            "after": 15,
+            "item": {
+              "encore": true,
+              "songId": "clap-clap"
+            }
+          },
+          {
+            "after": 15,
+            "item": {
+              "encore": true,
+              "songId": "hajimari-no-asa"
+            }
+          },
+          {
+            "after": 15,
+            "item": {
+              "encore": true,
+              "songId": "ai-nandaga",
+              "note": "フルコーラス"
+            }
+          }
+        ]
+      }
     },
     {
       "id": "945947",
@@ -162,6 +376,7 @@
       "title": "Official髭男dism one-man tour 2018",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=56",
+        "https://x.com/beiketa/status/1015012261125951488",
         "https://www.livefans.jp/events/945947"
       ],
       "opensAt": "19:30",
@@ -177,6 +392,7 @@
       "title": "Official髭男dism one-man tour 2018",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=56",
+        "https://x.com/beiketa/status/1015012261125951488",
         "https://www.livefans.jp/events/889714"
       ],
       "opensAt": "17:30",
@@ -192,10 +408,36 @@
       "title": "Official髭男dism one-man tour 2018",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=56",
+        "https://x.com/beiketa/status/1015012261125951488",
         "https://www.livefans.jp/events/889715"
       ],
       "opensAt": "19:00",
-      "diff": {}
+      "diff": {
+        "insert": [
+          {
+            "after": 15,
+            "item": {
+              "encore": true,
+              "songId": "shihatsu-ga-michibiku-kouhukuron"
+            }
+          },
+          {
+            "after": 15,
+            "item": {
+              "encore": true,
+              "songId": "koi-no-sarigiwa",
+              "note": "アイドルソングver."
+            }
+          },
+          {
+            "after": 15,
+            "item": {
+              "encore": true,
+              "songId": "nichiyoubi-no-love-letter"
+            }
+          }
+        ]
+      }
     },
     {
       "id": "889716",
@@ -207,113 +449,37 @@
       "title": "Official髭男dism one-man tour 2018",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=56",
+        "https://x.com/beiketa/status/1015012261125951488",
         "https://www.livefans.jp/events/889716"
       ],
-      "setlist": [
-        {
-          "order": 1,
-          "encore": false,
-          "songId": "no-doubt"
-        },
-        {
-          "order": 2,
-          "encore": false,
-          "songId": "second-line"
-        },
-        {
-          "order": 3,
-          "encore": false,
-          "songId": "tell-me-baby"
-        },
-        {
-          "order": 4,
-          "encore": false,
-          "songId": "koi-no-maenarae"
-        },
-        {
-          "order": 5,
-          "encore": false,
-          "songId": "driver"
-        },
-        {
-          "order": 6,
-          "encore": false,
-          "songId": "brothers"
-        },
-        {
-          "order": 7,
-          "encore": false,
-          "songId": "lady"
-        },
-        {
-          "order": 8,
-          "encore": false,
-          "songId": "sousisouai"
-        },
-        {
-          "order": 9,
-          "encore": false,
-          "songId": "takaga-i-love-you"
-        },
-        {
-          "order": 10,
-          "encore": false,
-          "songId": "115man-kiro-no-film"
-        },
-        {
-          "order": 11,
-          "encore": false,
-          "songId": "inu-ka-cat-ka-de-shinumade-kenka-shiyou"
-        },
-        {
-          "order": 12,
-          "encore": false,
-          "songId": "escapade"
-        },
-        {
-          "order": 13,
-          "encore": false,
-          "songId": "coffee-to-syrup"
-        },
-        {
-          "order": 14,
-          "encore": false,
-          "songId": "sweet-tweet"
-        },
-        {
-          "order": 15,
-          "encore": false,
-          "songId": "hatsumeika"
-        },
-        {
-          "order": 16,
-          "encore": true,
-          "songId": "yugure-zoi"
-        },
-        {
-          "order": 17,
-          "encore": true,
-          "songId": "ai-nandaga",
-          "note": "(サビのみ)"
-        },
-        {
-          "order": 18,
-          "encore": true,
-          "songId": "koi-no-sarigiwa",
-          "note": "(サビのみ)"
-        },
-        {
-          "order": 19,
-          "encore": true,
-          "songId": "whats-going-on"
-        },
-        {
-          "order": 20,
-          "encore": true,
-          "songId": "itan-na-star"
-        }
-      ],
-      "opensAt": "19:00"
+      "opensAt": "19:00",
+      "diff": {
+        "insert": [
+          {
+            "after": 15,
+            "item": {
+              "encore": true,
+              "songId": "yugure-zoi"
+            }
+          },
+          {
+            "after": 15,
+            "item": {
+              "encore": true,
+              "songId": "ai-nandaga",
+              "note": "サビのみ"
+            }
+          },
+          {
+            "after": 15,
+            "item": {
+              "encore": true,
+              "songId": "koi-no-sarigiwa",
+              "note": "去りたくないver."
+            }
+          }
+        ]
+      }
     }
   ],
   "templateSetlist": [
@@ -395,31 +561,14 @@
     {
       "order": 16,
       "encore": true,
-      "songId": "yugure-zoi"
+      "songId": "whats-going-on"
     },
     {
       "order": 17,
       "encore": true,
-      "songId": "ai-nandaga",
-      "note": "(サビのみ)"
-    },
-    {
-      "order": 18,
-      "encore": true,
-      "songId": "koi-no-sarigiwa",
-      "note": "(サビのみ)"
-    },
-    {
-      "order": 19,
-      "encore": true,
-      "songId": "whats-going-on"
-    },
-    {
-      "order": 20,
-      "encore": true,
       "songId": "itan-na-star"
     }
   ],
-  "templateBasis": "全自動提煉：基於 13 場演出提取 $\\ge 50\\%$ 多數共識歌單",
+  "templateBasis": "考證校準：基本固定模式 17 首（M1-M15 本篇 + 安可 What's Going On? / 異端なスター），各場安可點歌コーナー與巡迴追加曲以 diff 實體還原",
   "shortTitle": "one-man tour 2018"
 }
