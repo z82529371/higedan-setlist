@@ -2068,5 +2068,359 @@
     "city": "知多",
     "region": "中部",
     "prefecture": "愛知縣"
+  },
+  "HYUNDAI CARD UNDERSTAGE": {
+    "venue": "HYUNDAI CARD UNDERSTAGE",
+    "city": "首爾",
+    "region": "海外",
+    "prefecture": "韓國"
+  },
+  "ソウルUNDERSTAGE": {
+    "venue": "HYUNDAI CARD UNDERSTAGE",
+    "city": "首爾",
+    "region": "海外",
+    "prefecture": "韓國"
+  },
+  "UNDERSTAGE": {
+    "venue": "HYUNDAI CARD UNDERSTAGE",
+    "city": "首爾",
+    "region": "海外",
+    "prefecture": "韓國"
+  },
+  "イオンモール日吉津 チューリップコート": {
+    "venue": "永旺夢樂城日吉津 鬱金香廣場",
+    "city": "日吉津",
+    "region": "中國",
+    "prefecture": "鳥取縣"
+  },
+  "イオンモール日吉津": {
+    "venue": "永旺夢樂城日吉津",
+    "city": "日吉津",
+    "region": "中國",
+    "prefecture": "鳥取縣"
+  },
+  "カラコロ工房 24時間テレビイベント松江会場": {
+    "venue": "Karakoro工房 24小時TV活動特設會場",
+    "city": "松江",
+    "region": "中國",
+    "prefecture": "島根縣"
+  },
+  "カラコロ工房": {
+    "venue": "Karakoro工房",
+    "city": "松江",
+    "region": "中國",
+    "prefecture": "島根縣"
+  },
+  "なんばパークス 2階キャニオンコート特設イベントスペース": {
+    "venue": "難波Parks 2F Canyon Court特設活動空間",
+    "city": "大阪",
+    "region": "關西",
+    "prefecture": "大阪府"
+  },
+  "なんばパークス": {
+    "venue": "難波Parks",
+    "city": "大阪",
+    "region": "關西",
+    "prefecture": "大阪府"
+  },
+  "新風館": {
+    "venue": "新風館",
+    "city": "京都",
+    "region": "關西",
+    "prefecture": "京都府"
+  },
+  "イオンモール大日 1Fサニーコート": {
+    "venue": "永旺夢樂城大日 1F Sunny Court",
+    "city": "守口",
+    "region": "關西",
+    "prefecture": "大阪府"
+  },
+  "イオンモール大日": {
+    "venue": "永旺夢樂城大日",
+    "city": "守口",
+    "region": "關西",
+    "prefecture": "大阪府"
+  },
+  "横浜ワールドポーターズ 2F汽車道口催事スペース": {
+    "venue": "橫濱World Porters 2F汽車道口特設會場",
+    "city": "橫濱",
+    "region": "關東",
+    "prefecture": "神奈川縣"
+  },
+  "横浜ワールドポーターズ2F汽車道口 催事スペース": {
+    "venue": "橫濱World Porters 2F汽車道口特設會場",
+    "city": "橫濱",
+    "region": "關東",
+    "prefecture": "神奈川縣"
+  },
+  "横浜ワールドポーターズ": {
+    "venue": "橫濱World Porters",
+    "city": "橫濱",
+    "region": "關東",
+    "prefecture": "神奈川縣"
+  },
+  "名古屋パルコ西館 1Fイベントスペース": {
+    "venue": "名古屋PARCO西館 1F活動空間",
+    "city": "名古屋",
+    "region": "中部",
+    "prefecture": "愛知縣"
+  },
+  "名古屋パルコ西館": {
+    "venue": "名古屋PARCO西館",
+    "city": "名古屋",
+    "region": "中部",
+    "prefecture": "愛知縣"
+  },
+  "ららぽーと甲子園 1Fパークウォークコート": {
+    "venue": "啦啦寶都甲子園 1F Park Walk Court",
+    "city": "西宮",
+    "region": "關西",
+    "prefecture": "兵庫縣"
+  },
+  "ららぽーと甲子園": {
+    "venue": "啦啦寶都甲子園",
+    "city": "西宮",
+    "region": "關西",
+    "prefecture": "兵庫縣"
+  },
+  "タワーレコードあべのHoop店 1Fオープンエアプラザ": {
+    "venue": "TOWER RECORDS 阿倍野Hoop店 1F露天廣場",
+    "city": "大阪",
+    "region": "關西",
+    "prefecture": "大阪府"
+  },
+  "タワーレコードあべのHoop店": {
+    "venue": "TOWER RECORDS 阿倍野Hoop店",
+    "city": "大阪",
+    "region": "關西",
+    "prefecture": "大阪府"
+  },
+  "城天（大阪城公園ストリートライブ）": {
+    "venue": "大阪城公園 城天街頭Live",
+    "city": "大阪",
+    "region": "關西",
+    "prefecture": "大阪府"
+  },
+  "城天": {
+    "venue": "大阪城公園 城天街頭Live",
+    "city": "大阪",
+    "region": "關西",
+    "prefecture": "大阪府"
+  },
+  "イオンモール鶴見緑地 3F サンシャインコート": {
+    "venue": "永旺夢樂城鶴見綠地 3F Sunshine Court",
+    "city": "大阪",
+    "region": "關西",
+    "prefecture": "大阪府"
+  },
+  "イオンモール鶴見緑地": {
+    "venue": "永旺夢樂城鶴見綠地",
+    "city": "大阪",
+    "region": "關西",
+    "prefecture": "大阪府"
+  },
+  "タワーレコード名古屋パルコ店 西館1Fイベントスペース": {
+    "venue": "TOWER RECORDS 名古屋PARCO店 西館1F活動空間",
+    "city": "名古屋",
+    "region": "中部",
+    "prefecture": "愛知縣"
+  },
+  "タワーレコード名古屋パルコ店": {
+    "venue": "TOWER RECORDS 名古屋PARCO店",
+    "city": "名古屋",
+    "region": "中部",
+    "prefecture": "愛知縣"
+  },
+  "タワーレコード梅田NU茶屋町店 イベントスペース": {
+    "venue": "TOWER RECORDS 梅田NU茶屋町店 活動空間",
+    "city": "大阪",
+    "region": "關西",
+    "prefecture": "大阪府"
+  },
+  "タワーレコード梅田NU茶屋町店": {
+    "venue": "TOWER RECORDS 梅田NU茶屋町店",
+    "city": "大阪",
+    "region": "關西",
+    "prefecture": "大阪府"
+  },
+  "タワーレコード難波店": {
+    "venue": "TOWER RECORDS 難波店",
+    "city": "大阪",
+    "region": "關西",
+    "prefecture": "大阪府"
+  },
+  "アリオ鳳 1F アリオコート": {
+    "venue": "Ario鳳 1F Ario Court",
+    "city": "堺",
+    "region": "關西",
+    "prefecture": "大阪府"
+  },
+  "アリオ鳳": {
+    "venue": "Ario鳳",
+    "city": "堺",
+    "region": "關西",
+    "prefecture": "大阪府"
+  },
+  "タワーレコード横浜ビブレ店 店内イベントスペース": {
+    "venue": "TOWER RECORDS 橫濱VIVRE店 店內活動空間",
+    "city": "橫濱",
+    "region": "關東",
+    "prefecture": "神奈川縣"
+  },
+  "タワーレコード横浜ビブレ店": {
+    "venue": "TOWER RECORDS 橫濱VIVRE店",
+    "city": "橫濱",
+    "region": "關東",
+    "prefecture": "神奈川縣"
+  },
+  "イオンモール利府店 1F屋外 西口外特設会場": {
+    "venue": "永旺夢樂城利府店 1F戶外特設會場",
+    "city": "利府",
+    "region": "東北",
+    "prefecture": "宮城縣"
+  },
+  "イオンモール利府店": {
+    "venue": "永旺夢樂城利府店",
+    "city": "利府",
+    "region": "東北",
+    "prefecture": "宮城縣"
+  },
+  "三井アウトレットパーク 札幌北広島": {
+    "venue": "三井OUTLET PARK 札幌北廣島",
+    "city": "北廣島",
+    "region": "北海道",
+    "prefecture": "北海道"
+  },
+  "エアポートウォーク名古屋 3Fイベントステージ": {
+    "venue": "Airport Walk名古屋 3F活動舞台",
+    "city": "豐山",
+    "region": "中部",
+    "prefecture": "愛知縣"
+  },
+  "エアポートウォーク名古屋": {
+    "venue": "Airport Walk名古屋",
+    "city": "豐山",
+    "region": "中部",
+    "prefecture": "愛知縣"
+  },
+  "イオンモール橿原 サンシャインコート": {
+    "venue": "永旺夢樂城橿原 Sunshine Court",
+    "city": "橿原",
+    "region": "關西",
+    "prefecture": "奈良縣"
+  },
+  "イオンモール橿原": {
+    "venue": "永旺夢樂城橿原",
+    "city": "橿原",
+    "region": "關西",
+    "prefecture": "奈良縣"
+  },
+  "イオンモール堺北花田 1Fセンターコート": {
+    "venue": "永旺夢樂城堺北花田 1F Center Court",
+    "city": "堺",
+    "region": "關西",
+    "prefecture": "大阪府"
+  },
+  "イオンモール堺北花田": {
+    "venue": "永旺夢樂城堺北花田",
+    "city": "堺",
+    "region": "關西",
+    "prefecture": "大阪府"
+  },
+  "モラージュ佐賀 北館1F モラージュプラザ": {
+    "venue": "Mallage佐賀 北館1F Mallage Plaza",
+    "city": "佐賀",
+    "region": "九州",
+    "prefecture": "佐賀縣"
+  },
+  "モラージュ佐賀": {
+    "venue": "Mallage佐賀",
+    "city": "佐賀",
+    "region": "九州",
+    "prefecture": "佐賀縣"
+  },
+  "イオンモール大高 1Fセンターコート": {
+    "venue": "永旺夢樂城大高 1F Center Court",
+    "city": "名古屋",
+    "region": "中部",
+    "prefecture": "愛知縣"
+  },
+  "イオンモール大高": {
+    "venue": "永旺夢樂城大高",
+    "city": "名古屋",
+    "region": "中部",
+    "prefecture": "愛知縣"
+  },
+  "高崎オーパ 2Fイベントスペース": {
+    "venue": "高崎OPA 2F活動空間",
+    "city": "高崎",
+    "region": "關東",
+    "prefecture": "群馬縣"
+  },
+  "高崎オーパ": {
+    "venue": "高崎OPA",
+    "city": "高崎",
+    "region": "關東",
+    "prefecture": "群馬縣"
+  },
+  "ダイナシティウエスト小田原 1Fキャニオンステージ": {
+    "venue": "小田原 Dynacity West 1F Canyon Stage",
+    "city": "小田原",
+    "region": "關東",
+    "prefecture": "神奈川縣"
+  },
+  "ダイナシティウエスト小田原": {
+    "venue": "小田原 Dynacity West",
+    "city": "小田原",
+    "region": "關東",
+    "prefecture": "神奈川縣"
+  },
+  "渋谷モディ 1F店頭プラザ": {
+    "venue": "澀谷MODI 1F店頭廣場",
+    "city": "東京",
+    "region": "關東",
+    "prefecture": "東京都"
+  },
+  "渋谷モディ": {
+    "venue": "澀谷MODI",
+    "city": "東京",
+    "region": "關東",
+    "prefecture": "東京都"
+  },
+  "イオンレイクタウンmori 1F 木の広場": {
+    "venue": "永旺LakeTown mori 1F 木之廣場",
+    "city": "越谷",
+    "region": "關東",
+    "prefecture": "埼玉縣"
+  },
+  "イオンレイクタウンmori": {
+    "venue": "永旺LakeTown mori",
+    "city": "越谷",
+    "region": "關東",
+    "prefecture": "埼玉縣"
+  },
+  "イオンモール浜松志都呂 1Fセントラルコート": {
+    "venue": "永旺夢樂城濱松志都呂 1F Central Court",
+    "city": "濱松",
+    "region": "中部",
+    "prefecture": "靜岡縣"
+  },
+  "イオンモール浜松志都呂": {
+    "venue": "永旺夢樂城濱松志都呂",
+    "city": "濱松",
+    "region": "中部",
+    "prefecture": "靜岡縣"
+  },
+  "港区六本木": {
+    "venue": "YouTube Space Tokyo (六本木)",
+    "city": "東京",
+    "region": "關東",
+    "prefecture": "東京都"
+  },
+  "YouTube Space Tokyo": {
+    "venue": "YouTube Space Tokyo (六本木)",
+    "city": "東京",
+    "region": "關東",
+    "prefecture": "東京都"
   }
 }
