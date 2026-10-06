@@ -2548,5 +2548,101 @@
     "city": "米子",
     "region": "中國",
     "prefecture": "鳥取縣"
+  },
+  "吉祥寺SHUFFLE": {
+    "venue": "吉祥寺SHUFFLE",
+    "city": "東京",
+    "region": "關東",
+    "prefecture": "東京都"
+  },
+  "吉祥寺 SHUFFLE": {
+    "venue": "吉祥寺SHUFFLE",
+    "city": "東京",
+    "region": "關東",
+    "prefecture": "東京都"
+  },
+  "下北沢GARDEN": {
+    "venue": "下北澤GARDEN",
+    "city": "東京",
+    "region": "關東",
+    "prefecture": "東京都"
+  },
+  "下北沢 GARDEN": {
+    "venue": "下北澤GARDEN",
+    "city": "東京",
+    "region": "關東",
+    "prefecture": "東京都"
+  },
+  "新栄RAD SEVEN": {
+    "venue": "新榮RAD SEVEN",
+    "city": "名古屋",
+    "region": "中部",
+    "prefecture": "愛知縣"
+  },
+  "国立代々木競技場第一体育館": {
+    "venue": "國立代代木競技場第一體育館",
+    "city": "東京",
+    "region": "關東",
+    "prefecture": "東京都"
+  },
+  "国立代々木競技場": {
+    "venue": "國立代代木競技場",
+    "city": "東京",
+    "region": "關東",
+    "prefecture": "東京都"
+  },
+  "HEAVEN'S ROCK 宇都宮 VJ-2": {
+    "venue": "HEAVEN'S ROCK 宇都宮 VJ-2",
+    "city": "宇都宮",
+    "region": "關東",
+    "prefecture": "栃木縣"
+  },
+  "HEAVEN'S ROCK 宇都宮": {
+    "venue": "HEAVEN'S ROCK 宇都宮 VJ-2",
+    "city": "宇都宮",
+    "region": "關東",
+    "prefecture": "栃木縣"
+  },
+  "宇都宮HEAVENS ROCK": {
+    "venue": "HEAVEN'S ROCK 宇都宮 VJ-2",
+    "city": "宇都宮",
+    "region": "關東",
+    "prefecture": "栃木縣"
+  },
+  "渋谷TAKE OFF 7": {
+    "venue": "SHIBUYA TAKE OFF 7",
+    "city": "東京",
+    "region": "關東",
+    "prefecture": "東京都"
+  },
+  "国宝松江城": {
+    "venue": "國寶松江城 馬出曲輪",
+    "city": "松江",
+    "region": "中國",
+    "prefecture": "島根縣"
+  },
+  "松江城": {
+    "venue": "國寶松江城 馬出曲輪",
+    "city": "松江",
+    "region": "中國",
+    "prefecture": "島根縣"
+  },
+  "TSUTAYA O-Crest": {
+    "venue": "TSUTAYA O-Crest (Spotify O-Crest)",
+    "city": "東京",
+    "region": "關東",
+    "prefecture": "東京都"
+  },
+  "渋谷La.mama": {
+    "venue": "澀谷La.mama",
+    "city": "東京",
+    "region": "關東",
+    "prefecture": "東京都"
+  },
+  "umeda AKASO": {
+    "venue": "umeda AKASO (現 umeda TRAD)",
+    "city": "大阪",
+    "region": "關西",
+    "prefecture": "大阪府"
   }
 }
