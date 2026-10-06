@@ -80,6 +80,7 @@
 | [ADR-0075: 演出年份膠囊場數標籤與分類動態統計 (Year Selector Show Count Badge and Category Scoped Accounting)](0075-year-selector-show-count-badge.md) | 已採納 (Accepted) | 增強 ADR-0070 第二層導航 |
 | [ADR-0076: 中央場館字典全量審計與地理資訊正名標準化 (Central Venue Dictionary Audit and Geographical Normalization)](0076-venue-and-geography-dictionary-full-audit-and-normalization.md) | 已採納 (Accepted) | 強化 ADR-0013 / ADR-0034 |
 | [ADR-0077: 演出來源動態標籤識別與多渠道一手史料呈現 (Dynamic Provenance Source Labeling for X and Multi-Source Archives)](0077-dynamic-provenance-source-labeling-for-x-and-external-sources.md) | 已採納 (Accepted) | 擴充 ADR-0002 / ADR-0010 |
+| [ADR-0078: 八大演出類型分類體系與店家活動（インストアイベント）收錄規範](0078-eight-category-performance-taxonomy-and-instore-events.md) | 已採納 (Accepted) | 擴充 ADR-0056，七大升級至八大分類 |
 
 
 
