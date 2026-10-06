@@ -2464,5 +2464,89 @@
     "city": "米子",
     "region": "中國",
     "prefecture": "鳥取縣"
+  },
+  "滋賀USTONE": {
+    "venue": "滋賀U★STONE",
+    "city": "大津",
+    "region": "關西",
+    "prefecture": "滋賀縣"
+  },
+  "滋賀U★STONE": {
+    "venue": "滋賀U★STONE",
+    "city": "大津",
+    "region": "關西",
+    "prefecture": "滋賀縣"
+  },
+  "平田本町通り歩行者天国": {
+    "venue": "平田本町通步行者天國 特設舞台",
+    "city": "出雲",
+    "region": "中國",
+    "prefecture": "島根縣"
+  },
+  "松江市白潟公園東側特設ステージ": {
+    "venue": "松江市白潟公園 東側特設舞台",
+    "city": "松江",
+    "region": "中國",
+    "prefecture": "島根縣"
+  },
+  "Flying Tiger Copenhagen京都河原町ストア 3F": {
+    "venue": "Flying Tiger Copenhagen 京都河原町店 3F",
+    "city": "京都",
+    "region": "關西",
+    "prefecture": "京都府"
+  },
+  "Flying Tiger Copenhagen 京都河原町店 3F": {
+    "venue": "Flying Tiger Copenhagen 京都河原町店 3F",
+    "city": "京都",
+    "region": "關西",
+    "prefecture": "京都府"
+  },
+  "安来港周辺特設ステージ": {
+    "venue": "安來港周邊特設舞台",
+    "city": "安來",
+    "region": "中國",
+    "prefecture": "島根縣"
+  },
+  "エールエール": {
+    "venue": "廣島站南口地下廣場 (ALE-ALE A-City)",
+    "city": "廣島",
+    "region": "中國",
+    "prefecture": "廣島縣"
+  },
+  "広島駅南口地下広場": {
+    "venue": "廣島站南口地下廣場 (ALE-ALE A-City)",
+    "city": "廣島",
+    "region": "中國",
+    "prefecture": "廣島縣"
+  },
+  "松江高専第一体育館": {
+    "venue": "松江工業高等專門學校 第一體育館",
+    "city": "松江",
+    "region": "中國",
+    "prefecture": "島根縣"
+  },
+  "松江工業高等専門学校 第一体育館": {
+    "venue": "松江工業高等專門學校 第一體育館",
+    "city": "松江",
+    "region": "中國",
+    "prefecture": "島根縣"
+  },
+  "松江工業高等専門学校": {
+    "venue": "松江工業高等專門學校",
+    "city": "松江",
+    "region": "中國",
+    "prefecture": "島根縣"
+  },
+  "米子高専体育館": {
+    "venue": "米子工業高等專門學校 體育館",
+    "city": "米子",
+    "region": "中國",
+    "prefecture": "鳥取縣"
+  },
+  "米子工業高等専門学校 体育館": {
+    "venue": "米子工業高等專門學校 體育館",
+    "city": "米子",
+    "region": "中國",
+    "prefecture": "鳥取縣"
   }
 }
