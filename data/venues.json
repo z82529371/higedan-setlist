@@ -2644,5 +2644,29 @@
     "city": "大阪",
     "region": "關西",
     "prefecture": "大阪府"
+  },
+  "天保山マーケットプレース": {
+    "venue": "天保山Market Place 3F 圓形舞台 (Rotunda Stage)",
+    "city": "大阪",
+    "region": "關西",
+    "prefecture": "大阪府"
+  },
+  "天保山マーケットプレイス": {
+    "venue": "天保山Market Place 3F 圓形舞台 (Rotunda Stage)",
+    "city": "大阪",
+    "region": "關西",
+    "prefecture": "大阪府"
+  },
+  "フジテレビ本社屋": {
+    "venue": "富士電視台本社大樓 大家之夢大陸 Mynavi Stage",
+    "city": "東京",
+    "region": "關東",
+    "prefecture": "東京都"
+  },
+  "両替町公園": {
+    "venue": "久留米市 兩替町公園 特設舞台",
+    "city": "久留米",
+    "region": "九州",
+    "prefecture": "福岡縣"
   }
 }
