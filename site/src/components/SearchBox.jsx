@@ -2,6 +2,7 @@ import { Fragment, useEffect, useMemo, useRef, useState } from "react";
 import { getSongAlbum, shortUnitTitle, songUnreleased, unitEarliest } from "../lib/domain.js";
 
 function getUnitTypeBadge(u) {
+  if (u.type === "店家活動") return "店家活動";
   if (u.type === "特別專場") return "特別專場";
   if (u.type === "學園祭") return "學園祭";
   if (u.type === "電視演出" || u.type === "TV拼盤") return "電視演出";

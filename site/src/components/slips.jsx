@@ -25,6 +25,7 @@ function getSourceLabel(url) {
   if (!url) return "來源紀錄";
   if (/x\.com|twitter\.com/i.test(url)) return "X 來源紀錄";
   if (/livefans\.jp/i.test(url)) return "LiveFans 來源紀錄";
+  if (/wikipedia\.org/i.test(url)) return "維基百科 來源紀錄";
   try {
     const host = new URL(url).hostname.replace(/^www\./, "");
     return `${host} 來源紀錄`;
@@ -37,6 +38,7 @@ const CATEGORY_ORDER = [
   "巡演專場",
   "特別專場",
   "聯合專場",
+  "店家活動",
   "音樂祭",
   "學園祭",
   "電視演出",

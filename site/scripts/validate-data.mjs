@@ -37,6 +37,7 @@ export function validateAndCleanTours() {
         const VALID_EVENT_TYPES = new Set([
           "特別專場",
           "聯合專場",
+          "店家活動",
           "音樂祭",
           "學園祭",
           "電視演出",

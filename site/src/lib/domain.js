@@ -116,6 +116,7 @@ export const allUnits = [...tourUnits, ...eventUnits].sort((a, b) =>
 
 export function getUnitTypeLabel(unit) {
   if (!unit) return "其他";
+  if (unit.type === "店家活動") return "店家活動";
   if (unit.templateSetlist || unit.isTour) return "巡演專場";
   if (unit.type === "特別專場") return "特別專場";
   if (unit.type === "學園祭") return "學園祭";

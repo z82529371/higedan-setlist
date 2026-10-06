@@ -394,6 +394,12 @@ async function verifyAndRecomputeShows() {
         meta.rawVenue === "オンラインライブ"
       ) {
         detectedType = "線上直播";
+      } else if (
+        /インストア|インストアライブ|ミニライブ|サイン会|発売記念フリーライブ|Free Live/i.test(
+          actualTitle
+        )
+      ) {
+        detectedType = "店家活動";
       } else {
         detectedType = "特別專場";
       }

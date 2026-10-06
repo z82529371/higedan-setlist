@@ -24,6 +24,7 @@ const PERFORMANCE_CATEGORIES = [
   "巡演專場",
   "特別專場",
   "聯合專場",
+  "店家活動",
   "音樂祭",
   "學園祭",
   "電視演出",
@@ -454,6 +455,7 @@ export default function App() {
       for (const u of s.sourceUrls ?? []) {
         if (/x\.com|twitter\.com/i.test(u)) sources.add("X");
         else if (/livefans\.jp/i.test(u)) sources.add("LiveFans");
+        else if (/wikipedia\.org/i.test(u)) sources.add("維基百科");
         else {
           try {
             sources.add(new URL(u).hostname.replace(/^www\./, ""));
