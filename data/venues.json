@@ -2668,5 +2668,23 @@
     "city": "久留米",
     "region": "九州",
     "prefecture": "福岡縣"
+  },
+  "東京スクールオブミュージック専門学校渋谷": {
+    "venue": "東京音樂與舞蹈專門學校澀谷 (TSM澀谷) 10F活動大廳",
+    "city": "東京",
+    "region": "關東",
+    "prefecture": "東京都"
+  },
+  "TOKYO FM STUDIO IRIS": {
+    "venue": "TOKYO FM STUDIO IRIS (錄音棚公開生放送)",
+    "city": "東京",
+    "region": "關東",
+    "prefecture": "東京都"
+  },
+  "TOKYO FM": {
+    "venue": "TOKYO FM STUDIO IRIS (錄音棚公開生放送)",
+    "city": "東京",
+    "region": "關東",
+    "prefecture": "東京都"
   }
 }
