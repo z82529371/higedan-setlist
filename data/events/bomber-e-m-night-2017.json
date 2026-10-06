@@ -1,0 +1,31 @@
+{
+  "id": "bomber-e-m-night-2017",
+  "title": "メ～テレ BOMBER-E 「M.ナイト」LIVE",
+  "type": "電視演出",
+  "shows": [
+    {
+      "id": "bomber-e-m-night-2017-0618",
+      "date": "2017-06-18",
+      "city": "名古屋",
+      "venue": "名古屋電視台 B Studio (BOMBER-E 公開收錄)",
+      "region": "中部",
+      "prefecture": "愛知縣",
+      "title": "メ～テレ BOMBER-E 「M.ナイト」公開収録LIVE",
+      "sourceUrls": [
+        "https://higedan.com/news/3/?page=61"
+      ],
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "songId": "itan-na-star"
+        },
+        {
+          "order": 2,
+          "encore": false,
+          "songId": "inu-ka-cat-ka-de-shinumade-kenka-shiyou"
+        }
+      ]
+    }
+  ]
+}

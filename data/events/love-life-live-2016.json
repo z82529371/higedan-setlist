@@ -1,6 +1,7 @@
 {
   "id": "love-life-live-2016",
   "title": "LOVE!LIFE!LIVE! ~ライブ新体験!新しい音楽シーンをココから発信!~",
+  "shortTitle": "LOVE!LIFE!LIVE!",
   "type": "聯合專場",
   "shows": [
     {
@@ -12,6 +13,7 @@
       "prefecture": "東京都",
       "title": "LOVE!LIFE!LIVE! ~ライブ新体験!新しい音楽シーンをココから発信!~",
       "sourceUrls": [
+        "https://higedan.com/news/3/?page=65",
         "https://ja.wikipedia.org/wiki/Official%E9%AB%AD%E7%94%B7dism"
       ],
       "setlist": []

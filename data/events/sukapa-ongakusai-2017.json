@@ -1,0 +1,26 @@
+{
+  "id": "sukapa-ongakusai-2017",
+  "title": "スカパー！音楽祭2017",
+  "type": "電視演出",
+  "shows": [
+    {
+      "id": "sukapa-ongakusai-2017-0312",
+      "date": "2017-03-12",
+      "city": "東京",
+      "venue": "BSスカパー! 特別音樂祭舞台 (電視生放送)",
+      "region": "關東",
+      "prefecture": "東京都",
+      "title": "スカパー！音楽祭2017 生放送",
+      "sourceUrls": [
+        "https://higedan.com/news/3/?page=62"
+      ],
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "songId": "itan-na-star"
+        }
+      ]
+    }
+  ]
+}

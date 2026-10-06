@@ -1,67 +1,66 @@
 {
-  "id": "tokyo-fm-kirin-beer-goodluck-live-2018",
+  "id": "tokyo-fm-kirin-beer-goodluck-live-2017",
   "title": "TOKYO FM KIRIN BEER \"GoodLuck\" LIVE",
   "type": "線上直播",
   "shows": [
     {
-      "id": "kirin-goodluck-live-2018-1020",
-      "date": "2018-10-20",
+      "id": "kirin-goodluck-live-2017-0429",
+      "date": "2017-04-29",
+      "prefecture": "",
+      "title": "TOKYO FM KIRIN BEER \"GoodLuck\" LIVE 公開生放送",
       "city": "線上直播",
       "venue": "線上直播",
       "region": "其他",
-      "title": "TOKYO FM KIRIN BEER \"GoodLuck\" LIVE 公開生放送",
       "sourceUrls": [
-        "https://higedan.com/news/3/?page=49",
-        "https://ja.wikipedia.org/wiki/Official%E9%AB%AD%E7%94%B7dism"
+        "https://higedan.com/news/3/?page=62"
       ],
       "setlist": [
         {
           "order": 1,
           "encore": false,
-          "songId": "yugure-zoi"
+          "songId": "inu-ka-cat-ka-de-shinumade-kenka-shiyou"
         },
         {
           "order": 2,
           "encore": false,
-          "title": "Uptown Girl [Billy Joel]"
+          "songId": "ai-nandaga"
         },
         {
           "order": 3,
           "encore": false,
-          "songId": "bad-for-me"
+          "songId": "itan-na-star"
         },
         {
           "order": 4,
           "encore": false,
-          "songId": "55"
+          "title": "元気を出して [竹内まりや]"
         },
         {
           "order": 5,
           "encore": false,
-          "songId": "115man-kiro-no-film"
+          "title": "Desperado [Eagles]"
         },
         {
           "order": 6,
           "encore": false,
-          "songId": "tell-me-baby"
+          "songId": "yugure-zoi"
         },
         {
           "order": 7,
           "encore": false,
-          "songId": "itan-na-star"
+          "songId": "coffee-to-syrup"
         },
         {
           "order": 8,
           "encore": false,
-          "songId": "no-doubt"
+          "songId": "equal"
         },
         {
           "order": 9,
           "encore": false,
-          "songId": "stand-by-you"
+          "songId": "trailer"
         }
-      ],
-      "prefecture": ""
+      ]
     }
   ]
 }
