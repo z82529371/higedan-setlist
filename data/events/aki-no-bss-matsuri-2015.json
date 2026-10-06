@@ -1,0 +1,22 @@
+{
+  "id": "aki-no-bss-matsuri-2015",
+  "title": "秋のBSSまつり 2015",
+  "shortTitle": "秋のBSSまつり 2015",
+  "type": "音樂祭",
+  "shows": [
+    {
+      "id": "bss-matsuri-2015-0926",
+      "date": "2015-09-26",
+      "weekday": "土",
+      "city": "米子",
+      "venue": "BSS山陰放送本社 特設會場",
+      "region": "中國",
+      "prefecture": "鳥取縣",
+      "title": "秋のBSSまつり 2015",
+      "sourceUrls": [
+        "https://ja.wikipedia.org/wiki/Official%E9%AB%AD%E7%94%B7dism#出演イベント"
+      ],
+      "setlist": []
+    }
+  ]
+}

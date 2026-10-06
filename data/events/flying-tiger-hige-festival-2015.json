@@ -1,0 +1,35 @@
+{
+  "id": "flying-tiger-hige-festival-2015",
+  "title": "Flying Tiger Hige Festival 2015",
+  "type": "音樂祭",
+  "shows": [
+    {
+      "id": "flying-tiger-2015-0808",
+      "date": "2015-08-08",
+      "weekday": "土",
+      "city": "京都",
+      "venue": "Flying Tiger Copenhagen 京都河原町店 3F",
+      "region": "關西",
+      "prefecture": "京都府",
+      "title": "Flying Tiger Hige Festival 2015 (Day 1)",
+      "sourceUrls": [
+        "https://ja.wikipedia.org/wiki/Official%E9%AB%AD%E7%94%B7dism#出演イベント"
+      ],
+      "setlist": []
+    },
+    {
+      "id": "flying-tiger-2015-0809",
+      "date": "2015-08-09",
+      "weekday": "日",
+      "city": "京都",
+      "venue": "Flying Tiger Copenhagen 京都河原町店 3F",
+      "region": "關西",
+      "prefecture": "京都府",
+      "title": "Flying Tiger Hige Festival 2015 (Day 2)",
+      "sourceUrls": [
+        "https://ja.wikipedia.org/wiki/Official%E9%AB%AD%E7%94%B7dism#出演イベント"
+      ],
+      "setlist": []
+    }
+  ]
+}

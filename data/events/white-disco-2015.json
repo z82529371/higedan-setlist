@@ -1,0 +1,22 @@
+{
+  "id": "white-disco-2015",
+  "title": "ホワイトディスコ 2015",
+  "shortTitle": "ホワイトディスコ 2015",
+  "type": "音樂祭",
+  "shows": [
+    {
+      "id": "white-disco-2015-0314",
+      "date": "2015-03-14",
+      "weekday": "土",
+      "city": "大津",
+      "venue": "滋賀U★STONE",
+      "region": "關西",
+      "prefecture": "滋賀縣",
+      "title": "ホワイトディスコ 2015",
+      "sourceUrls": [
+        "https://ja.wikipedia.org/wiki/Official%E9%AB%AD%E7%94%B7dism#出演イベント"
+      ],
+      "setlist": []
+    }
+  ]
+}
