@@ -2422,5 +2422,47 @@
     "city": "東京",
     "region": "關東",
     "prefecture": "東京都"
+  },
+  "BSS山陰放送本社 特設会場": {
+    "venue": "BSS山陰放送本社 特設會場",
+    "city": "米子",
+    "region": "中國",
+    "prefecture": "鳥取縣"
+  },
+  "BSS山陰放送本社 特設會場": {
+    "venue": "BSS山陰放送本社 特設會場",
+    "city": "米子",
+    "region": "中國",
+    "prefecture": "鳥取縣"
+  },
+  "BSS山陰放送": {
+    "venue": "BSS山陰放送本社 特設會場",
+    "city": "米子",
+    "region": "中國",
+    "prefecture": "鳥取縣"
+  },
+  "島根大学 松江キャンパス": {
+    "venue": "島根大學 松江校區",
+    "city": "松江",
+    "region": "中國",
+    "prefecture": "島根縣"
+  },
+  "島根大學 松江校區": {
+    "venue": "島根大學 松江校區",
+    "city": "松江",
+    "region": "中國",
+    "prefecture": "島根縣"
+  },
+  "米子工業高等専門学校": {
+    "venue": "米子工業高等專門學校",
+    "city": "米子",
+    "region": "中國",
+    "prefecture": "鳥取縣"
+  },
+  "米子工業高等專門學校": {
+    "venue": "米子工業高等專門學校",
+    "city": "米子",
+    "region": "中國",
+    "prefecture": "鳥取縣"
   }
 }
