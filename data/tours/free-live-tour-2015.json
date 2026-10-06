@@ -1,0 +1,162 @@
+{
+  "id": "free-live-tour-2015",
+  "title": "ひげだん Free Live Tour 2015",
+  "shortTitle": "Free Live Tour 2015",
+  "type": "店家活動",
+  "shows": [
+    {
+      "id": "free-live-2015-0822",
+      "date": "2015-08-22",
+      "weekday": "土",
+      "city": "日吉津",
+      "venue": "永旺夢樂城日吉津 鬱金香廣場",
+      "region": "中國",
+      "prefecture": "鳥取縣",
+      "title": "ひげだん Free Live Tour 2015",
+      "sourceUrls": [
+        "https://ja.wikipedia.org/wiki/Official%E9%AB%AD%E7%94%B7dism#インストアイベント"
+      ],
+      "setlist": []
+    },
+    {
+      "id": "free-live-2015-0823",
+      "date": "2015-08-23",
+      "weekday": "日",
+      "city": "松江",
+      "venue": "Karakoro工房 24小時TV活動特設會場",
+      "region": "中國",
+      "prefecture": "島根縣",
+      "title": "ひげだん Free Live Tour 2015 (24時間テレビ松江会場)",
+      "sourceUrls": [
+        "https://ja.wikipedia.org/wiki/Official%E9%AB%AD%E7%94%B7dism#インストアイベント"
+      ],
+      "setlist": []
+    },
+    {
+      "id": "free-live-2015-0905",
+      "date": "2015-09-05",
+      "weekday": "土",
+      "city": "大阪",
+      "venue": "難波Parks 2F Canyon Court特設活動空間",
+      "region": "關西",
+      "prefecture": "大阪府",
+      "title": "ひげだん Free Live Tour 2015",
+      "sourceUrls": [
+        "https://ja.wikipedia.org/wiki/Official%E9%AB%AD%E7%94%B7dism#インストアイベント"
+      ],
+      "setlist": []
+    },
+    {
+      "id": "free-live-2015-0906",
+      "date": "2015-09-06",
+      "weekday": "日",
+      "city": "京都",
+      "venue": "新風館",
+      "region": "關西",
+      "prefecture": "京都府",
+      "title": "ひげだん Free Live Tour 2015",
+      "sourceUrls": [
+        "https://ja.wikipedia.org/wiki/Official%E9%AB%AD%E7%94%B7dism#インストアイベント"
+      ],
+      "setlist": []
+    },
+    {
+      "id": "free-live-2015-0912",
+      "date": "2015-09-12",
+      "weekday": "土",
+      "city": "守口",
+      "venue": "永旺夢樂城大日 1F Sunny Court",
+      "region": "關西",
+      "prefecture": "大阪府",
+      "title": "ひげだん Free Live Tour 2015",
+      "sourceUrls": [
+        "https://ja.wikipedia.org/wiki/Official%E9%AB%AD%E7%94%B7dism#インストアイベント"
+      ],
+      "setlist": []
+    },
+    {
+      "id": "free-live-2015-0921",
+      "date": "2015-09-21",
+      "weekday": "月",
+      "city": "橫濱",
+      "venue": "橫濱World Porters 2F汽車道口特設會場",
+      "region": "關東",
+      "prefecture": "神奈川縣",
+      "title": "ひげだん Free Live Tour 2015",
+      "sourceUrls": [
+        "https://ja.wikipedia.org/wiki/Official%E9%AB%AD%E7%94%B7dism#インストアイベント"
+      ],
+      "setlist": []
+    },
+    {
+      "id": "free-live-2015-0927",
+      "date": "2015-09-27",
+      "weekday": "日",
+      "city": "名古屋",
+      "venue": "名古屋PARCO西館 1F活動空間",
+      "region": "中部",
+      "prefecture": "愛知縣",
+      "title": "ひげだん Free Live Tour 2015",
+      "sourceUrls": [
+        "https://ja.wikipedia.org/wiki/Official%E9%AB%AD%E7%94%B7dism#インストアイベント"
+      ],
+      "setlist": []
+    },
+    {
+      "id": "free-live-2015-1003",
+      "date": "2015-10-03",
+      "weekday": "土",
+      "city": "西宮",
+      "venue": "啦啦寶都甲子園 1F Park Walk Court",
+      "region": "關西",
+      "prefecture": "兵庫縣",
+      "title": "ひげだん Free Live Tour 2015",
+      "sourceUrls": [
+        "https://ja.wikipedia.org/wiki/Official%E9%AB%AD%E7%94%B7dism#インストアイベント"
+      ],
+      "setlist": []
+    },
+    {
+      "id": "free-live-2015-1012",
+      "date": "2015-10-12",
+      "weekday": "月",
+      "city": "大阪",
+      "venue": "TOWER RECORDS 阿倍野Hoop店 1F露天廣場",
+      "region": "關西",
+      "prefecture": "大阪府",
+      "title": "ひげだん Free Live Tour 2015",
+      "sourceUrls": [
+        "https://ja.wikipedia.org/wiki/Official%E9%AB%AD%E7%94%B7dism#インストアイベント"
+      ],
+      "setlist": []
+    },
+    {
+      "id": "free-live-2015-1018",
+      "date": "2015-10-18",
+      "weekday": "日",
+      "city": "大阪",
+      "venue": "大阪城公園 城天街頭Live",
+      "region": "關西",
+      "prefecture": "大阪府",
+      "title": "ひげだん Free Live Tour 2015 (城天ストリートライブ)",
+      "sourceUrls": [
+        "https://ja.wikipedia.org/wiki/Official%E9%AB%AD%E7%94%B7dism#インストアイベント"
+      ],
+      "setlist": []
+    },
+    {
+      "id": "free-live-2015-1024",
+      "date": "2015-10-24",
+      "weekday": "土",
+      "city": "大阪",
+      "venue": "永旺夢樂城鶴見綠地 3F Sunshine Court",
+      "region": "關西",
+      "prefecture": "大阪府",
+      "title": "ひげだん Free Live Tour 2015",
+      "sourceUrls": [
+        "https://ja.wikipedia.org/wiki/Official%E9%AB%AD%E7%94%B7dism#インストアイベント"
+      ],
+      "setlist": []
+    }
+  ]
+}

@@ -1,0 +1,64 @@
+{
+  "id": "report-release-acoustic-mini-live-2017",
+  "title": "「レポート」インストア アコースティックミニライブ&サイン会",
+  "shortTitle": "「レポート」Acoustic活動",
+  "type": "店家活動",
+  "shows": [
+    {
+      "id": "report-acoustic-2017-0723",
+      "date": "2017-07-23",
+      "weekday": "日",
+      "city": "利府",
+      "venue": "永旺夢樂城利府店 1F戶外特設會場",
+      "region": "東北",
+      "prefecture": "宮城縣",
+      "title": "インストア アコースティックミニライブ&サイン会",
+      "sourceUrls": [
+        "https://ja.wikipedia.org/wiki/Official%E9%AB%AD%E7%94%B7dism#インストアイベント"
+      ],
+      "setlist": []
+    },
+    {
+      "id": "report-acoustic-2017-1014",
+      "date": "2017-10-14",
+      "weekday": "土",
+      "city": "橫濱",
+      "venue": "TOWER RECORDS 橫濱VIVRE店 店內活動空間",
+      "region": "關東",
+      "prefecture": "神奈川縣",
+      "title": "インストア アコースティックミニライブ&サイン会",
+      "sourceUrls": [
+        "https://ja.wikipedia.org/wiki/Official%E9%AB%AD%E7%94%B7dism#インストアイベント"
+      ],
+      "setlist": []
+    },
+    {
+      "id": "report-acoustic-2017-1022",
+      "date": "2017-10-22",
+      "weekday": "日",
+      "city": "北廣島",
+      "venue": "三井OUTLET PARK 札幌北廣島",
+      "region": "北海道",
+      "prefecture": "北海道",
+      "title": "インストア アコースティックミニライブ&サイン会",
+      "sourceUrls": [
+        "https://ja.wikipedia.org/wiki/Official%E9%AB%AD%E7%94%B7dism#インストアイベント"
+      ],
+      "setlist": []
+    },
+    {
+      "id": "report-acoustic-2017-1118",
+      "date": "2017-11-18",
+      "weekday": "土",
+      "city": "豐山",
+      "venue": "Airport Walk名古屋 3F活動舞台",
+      "region": "中部",
+      "prefecture": "愛知縣",
+      "title": "インストア アコースティックミニライブ&サイン会",
+      "sourceUrls": [
+        "https://ja.wikipedia.org/wiki/Official%E9%AB%AD%E7%94%B7dism#インストアイベント"
+      ],
+      "setlist": []
+    }
+  ]
+}

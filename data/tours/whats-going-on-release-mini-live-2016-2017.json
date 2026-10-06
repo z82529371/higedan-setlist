@@ -1,0 +1,50 @@
+{
+  "id": "whats-going-on-release-mini-live-2016-2017",
+  "title": "「What's Going On?」発売記念インストアミニライブ＆サイン会",
+  "shortTitle": "「What's Going On?」發行紀念活動",
+  "type": "店家活動",
+  "shows": [
+    {
+      "id": "whats-going-on-2016-1218",
+      "date": "2016-12-18",
+      "weekday": "日",
+      "city": "大阪",
+      "venue": "TOWER RECORDS 難波店",
+      "region": "關西",
+      "prefecture": "大阪府",
+      "title": "インストアミニライブ&サイン特典お渡し会",
+      "sourceUrls": [
+        "https://ja.wikipedia.org/wiki/Official%E9%AB%AD%E7%94%B7dism#インストアイベント"
+      ],
+      "setlist": []
+    },
+    {
+      "id": "whats-going-on-2017-0107",
+      "date": "2017-01-07",
+      "weekday": "土",
+      "city": "堺",
+      "venue": "Ario鳳 1F Ario Court",
+      "region": "關西",
+      "prefecture": "大阪府",
+      "title": "インストア ミニライブ&サイン会",
+      "sourceUrls": [
+        "https://ja.wikipedia.org/wiki/Official%E9%AB%AD%E7%94%B7dism#インストアイベント"
+      ],
+      "setlist": []
+    },
+    {
+      "id": "whats-going-on-2017-0129",
+      "date": "2017-01-29",
+      "weekday": "日",
+      "city": "橫濱",
+      "venue": "TOWER RECORDS 橫濱VIVRE店 店內活動空間",
+      "region": "關東",
+      "prefecture": "神奈川縣",
+      "title": "インストア ミニライブ&サイン会",
+      "sourceUrls": [
+        "https://ja.wikipedia.org/wiki/Official%E9%AB%AD%E7%94%B7dism#インストアイベント"
+      ],
+      "setlist": []
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "id": "report-release-free-live-2017",
+  "title": "「レポート」発売記念 FREE LIVE",
+  "shortTitle": "「レポート」發行紀念 FREE LIVE",
+  "type": "店家活動",
+  "shows": [
+    {
+      "id": "report-free-live-2017-0423",
+      "date": "2017-04-23",
+      "weekday": "日",
+      "city": "東京",
+      "venue": "duo MUSIC EXCHANGE",
+      "region": "關東",
+      "prefecture": "東京都",
+      "title": "「レポート」発売記念 FREE LIVE",
+      "sourceUrls": [
+        "https://ja.wikipedia.org/wiki/Official%E9%AB%AD%E7%94%B7dism#インストアイベント"
+      ],
+      "setlist": []
+    }
+  ]
+}

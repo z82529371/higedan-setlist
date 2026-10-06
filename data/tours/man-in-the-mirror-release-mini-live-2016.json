@@ -1,0 +1,50 @@
+{
+  "id": "man-in-the-mirror-release-mini-live-2016",
+  "title": "「MAN IN THE MIRROR」発売記念ミニライブ＆サイン会",
+  "shortTitle": "「MAN IN THE MIRROR」發行紀念活動",
+  "type": "店家活動",
+  "shows": [
+    {
+      "id": "man-in-the-mirror-2016-0618",
+      "date": "2016-06-18",
+      "weekday": "土",
+      "city": "名古屋",
+      "venue": "TOWER RECORDS 名古屋PARCO店 西館1F活動空間",
+      "region": "中部",
+      "prefecture": "愛知縣",
+      "title": "「MAN IN THE MIRROR」発売記念ミニライブ＆サイン会",
+      "sourceUrls": [
+        "https://ja.wikipedia.org/wiki/Official%E9%AB%AD%E7%94%B7dism#インストアイベント"
+      ],
+      "setlist": []
+    },
+    {
+      "id": "man-in-the-mirror-2016-0619",
+      "date": "2016-06-19",
+      "weekday": "日",
+      "city": "大阪",
+      "venue": "TOWER RECORDS 梅田NU茶屋町店 活動空間",
+      "region": "關西",
+      "prefecture": "大阪府",
+      "title": "「MAN IN THE MIRROR」発売記念ミニライブ＆サイン会",
+      "sourceUrls": [
+        "https://ja.wikipedia.org/wiki/Official%E9%AB%AD%E7%94%B7dism#インストアイベント"
+      ],
+      "setlist": []
+    },
+    {
+      "id": "man-in-the-mirror-2016-0625",
+      "date": "2016-06-25",
+      "weekday": "土",
+      "city": "橫濱",
+      "venue": "橫濱World Porters 2F汽車道口特設會場",
+      "region": "關東",
+      "prefecture": "神奈川縣",
+      "title": "「MAN IN THE MIRROR」発売記念ミニライブ＆サイン会",
+      "sourceUrls": [
+        "https://ja.wikipedia.org/wiki/Official%E9%AB%AD%E7%94%B7dism#インストアイベント"
+      ],
+      "setlist": []
+    }
+  ]
+}
