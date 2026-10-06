@@ -78,6 +78,8 @@
 | [ADR-0073: 早期地下專場系列命名統一、未發表曲庫擴充與 2013 松江場次校準](0073-early-underground-live-taxonomy-and-tonight-series-unification.md) | 已採納 (Accepted) | - |
 | [ADR-0074: 未發行歌曲連續段落合併渲染規範 (Unreleased Song Run-Merge Architecture)](0074-unreleased-song-run-merge.md) | 已採納 (Accepted) | 部分推翻 ADR-0012 |
 | [ADR-0075: 演出年份膠囊場數標籤與分類動態統計 (Year Selector Show Count Badge and Category Scoped Accounting)](0075-year-selector-show-count-badge.md) | 已採納 (Accepted) | 增強 ADR-0070 第二層導航 |
+| [ADR-0076: 中央場館字典全量審計與地理資訊正名標準化 (Central Venue Dictionary Audit and Geographical Normalization)](0076-venue-and-geography-dictionary-full-audit-and-normalization.md) | 已採納 (Accepted) | 強化 ADR-0013 / ADR-0034 |
+
 
 
 
