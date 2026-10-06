@@ -1,0 +1,20 @@
+{
+  "id": "gold-rush-zenshousen-kikaku-2016",
+  "title": "GOLD RUSH 前哨戦企画",
+  "type": "音樂祭",
+  "shows": [
+    {
+      "id": "gold-rush-zenshousen-2016-0418",
+      "date": "2016-04-18",
+      "city": "名古屋",
+      "venue": "RAD SEVEN",
+      "region": "中部",
+      "prefecture": "愛知縣",
+      "title": "GOLD RUSH前哨戦企画 〜ゴードマウンテン ENISHIリリースツアー編〜",
+      "sourceUrls": [
+        "https://ja.wikipedia.org/wiki/Official%E9%AB%AD%E7%94%B7dism"
+      ],
+      "setlist": []
+    }
+  ]
+}

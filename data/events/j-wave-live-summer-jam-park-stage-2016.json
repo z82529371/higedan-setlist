@@ -1,0 +1,22 @@
+{
+  "id": "j-wave-live-summer-jam-park-stage-2016",
+  "title": "SUNSTAR presents J-WAVE LIVE SUMMER JAM 2016 PARK STAGE",
+  "shortTitle": "J-WAVE LIVE SUMMER JAM 2016",
+  "type": "音樂祭",
+  "shows": [
+    {
+      "id": "j-wave-summer-jam-2016-0821",
+      "date": "2016-08-21",
+      "city": "東京",
+      "venue": "國立代代木競技場第一體育館",
+      "region": "關東",
+      "prefecture": "東京都",
+      "title": "SUNSTAR presents J-WAVE LIVE SUMMER JAM 2016 PARK STAGE",
+      "sourceUrls": [
+        "https://ja.wikipedia.org/wiki/Official%E9%AB%AD%E7%94%B7dism",
+        "https://www.j-wave.co.jp/"
+      ],
+      "setlist": []
+    }
+  ]
+}
