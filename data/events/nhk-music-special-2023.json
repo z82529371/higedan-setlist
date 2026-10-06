@@ -1,0 +1,27 @@
+{
+  "id": "nhk-music-special-2023",
+  "title": "NHK MUSIC SPECIAL Official髭男dism",
+  "type": "電視演出",
+  "shows": [
+    {
+      "id": "nhk-music-special-2023-1228",
+      "date": "2023-12-28",
+      "city": "東京",
+      "venue": "NHK放送中心",
+      "region": "關東",
+      "prefecture": "東京都",
+      "title": "NHK MUSIC SPECIAL Official髭男dism",
+      "sourceUrls": [
+        "https://ja.wikipedia.org/wiki/Official%E9%AB%AD%E7%94%B7dism"
+      ],
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "songId": "chessboard"
+        }
+      ],
+      "opensAt": "22:00"
+    }
+  ]
+}

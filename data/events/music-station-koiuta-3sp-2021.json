@@ -1,0 +1,27 @@
+{
+  "id": "music-station-koiuta-3sp-2021",
+  "title": "ミュージックステーション 恋うた3時間SP",
+  "type": "電視演出",
+  "shows": [
+    {
+      "id": "music-station-koiuta-3sp-2021-0219",
+      "date": "2021-02-19",
+      "city": "東京",
+      "venue": "朝日電視台",
+      "region": "關東",
+      "prefecture": "東京都",
+      "title": "ミュージックステーション 恋うた3時間SP",
+      "sourceUrls": [
+        "https://ja.wikipedia.org/wiki/Official%E9%AB%AD%E7%94%B7dism"
+      ],
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "songId": "universe"
+        }
+      ],
+      "opensAt": "18:45"
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "id": "music-station-summer-fes-2021",
+  "title": "ミュージックステーション SUMMER FES",
+  "type": "電視演出",
+  "shows": [
+    {
+      "id": "music-station-summer-fes-2021-0820",
+      "date": "2021-08-20",
+      "city": "東京",
+      "venue": "朝日電視台",
+      "region": "關東",
+      "prefecture": "東京都",
+      "title": "ミュージックステーション SUMMER FES",
+      "sourceUrls": [
+        "https://ja.wikipedia.org/wiki/Official%E9%AB%AD%E7%94%B7dism"
+      ],
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "songId": "apoptosis"
+        }
+      ],
+      "opensAt": "18:30"
+    }
+  ]
+}

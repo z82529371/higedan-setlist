@@ -1,0 +1,47 @@
+{
+  "id": "2022-fns",
+  "title": "2022 FNS歌謡祭",
+  "type": "電視演出",
+  "shows": [
+    {
+      "id": "2022-fns-1207",
+      "date": "2022-12-07",
+      "city": "東京",
+      "venue": "富士電視台",
+      "region": "關東",
+      "prefecture": "東京都",
+      "title": "2022 FNS歌謡祭 第1夜",
+      "sourceUrls": [
+        "https://ja.wikipedia.org/wiki/Official%E9%AB%AD%E7%94%B7dism"
+      ],
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "songId": "subtitle"
+        }
+      ],
+      "opensAt": "18:30"
+    },
+    {
+      "id": "2022-fns-1214",
+      "date": "2022-12-14",
+      "city": "東京",
+      "venue": "富士電視台",
+      "region": "關東",
+      "prefecture": "東京都",
+      "title": "2022 FNS歌謡祭 第2夜",
+      "sourceUrls": [
+        "https://ja.wikipedia.org/wiki/Official%E9%AB%AD%E7%94%B7dism"
+      ],
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "songId": "mixed-nuts"
+        }
+      ],
+      "opensAt": "18:30"
+    }
+  ]
+}
