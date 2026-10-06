@@ -1,0 +1,21 @@
+{
+  "id": "music-summer-live-tempozan-2017",
+  "title": "ミュージックサマーライブ＠天保山マーケットプレース",
+  "shortTitle": "ミュージックサマーライブ",
+  "type": "特別專場",
+  "shows": [
+    {
+      "id": "tempozan-summer-live-2017-0819",
+      "date": "2017-08-19",
+      "city": "大阪",
+      "venue": "天保山Market Place 3F 圓形舞台 (Rotunda Stage)",
+      "region": "關西",
+      "prefecture": "大阪府",
+      "title": "ミュージックサマーライブ＠天保山マーケットプレース",
+      "sourceUrls": [
+        "https://ja.wikipedia.org/wiki/Official%E9%AB%AD%E7%94%B7dism"
+      ],
+      "setlist": []
+    }
+  ]
+}

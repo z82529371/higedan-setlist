@@ -1,0 +1,21 @@
+{
+  "id": "kurume-machikado-ongakusai-2017",
+  "title": "くるめ街かど音楽祭2017",
+  "type": "音樂祭",
+  "shows": [
+    {
+      "id": "kurume-machikado-2017-1104",
+      "date": "2017-11-04",
+      "city": "久留米",
+      "venue": "久留米市 兩替町公園 特設舞台",
+      "region": "九州",
+      "prefecture": "福岡縣",
+      "title": "くるめ街かど音楽祭2017",
+      "sourceUrls": [
+        "https://ja.wikipedia.org/wiki/Official%E9%AB%AD%E7%94%B7dism",
+        "https://kurume-machi.info/"
+      ],
+      "setlist": []
+    }
+  ]
+}
