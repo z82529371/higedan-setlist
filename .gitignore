@@ -3,3 +3,4 @@ site/dist/
 site/src/data/
 *.log
 .DS_Store
+.impeccable/
