@@ -16,6 +16,9 @@ export const songTitle = Object.fromEntries(
 export const songUnreleased = new Set(
   songsData.songs.filter((s) => s.unreleased).map((s) => s.id)
 );
+export const songLiveFansId = Object.fromEntries(
+  songsData.songs.filter((s) => s.livefansId).map((s) => [s.id, s.livefansId])
+);
 
 export function getSongAlbum(song) {
   if (song.unreleased || songUnreleased.has(song.id)) return "未發行曲目";

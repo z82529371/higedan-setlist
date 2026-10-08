@@ -45,10 +45,63 @@
 
 ::selection {
   background: #d19f00;
-  color: #e6e6e6;
+  color: #000000;
 }
 
 ::-moz-selection {
   background: #d19f00;
-  color: #e6e6e6;
+  color: #000000;
+}
+
+html[data-theme="dark"] {
+  --color-paper: #0b0c10;
+  --color-card: #111319;
+  --color-band: #d49a00;
+  --color-band-ink: #111319;
+  --color-ink: #f4f4f5;
+  --color-muted: #9ca3af;
+  --color-line: #2e3444;
+  --color-line-soft: #1e222e;
+  --color-request: #e64539;
+  --color-request-wash: rgba(230, 69, 57, 0.2);
+  --color-request-shadow: rgba(230, 69, 57, 0.2);
+  --color-unreleased: #a084d6;
+  --color-unreleased-wash: rgba(160, 132, 214, 0.2);
+  --color-unreleased-bg: #221c2d;
+  --color-premiere: #d99c1e;
+  --color-premiere-wash: rgba(217, 156, 30, 0.2);
+  --color-premiere-bg: #282215;
+  --color-solo: #1cb597;
+  --color-solo-wash: rgba(28, 181, 151, 0.2);
+  --color-solo-bg: #142823;
+  --color-occasion: #9b82d4;
+  --color-occasion-wash: rgba(155, 130, 212, 0.2);
+  --color-tape: #d49a00;
+  --color-tape-soft: rgba(212, 154, 0, 0.45);
+  --color-tape-edge: #f4f4f5;
+  --color-pool: #d49a00;
+  --color-pool-wash: rgba(212, 154, 0, 0.18);
+  --color-grid-line: rgba(255, 255, 255, 0.05);
+}
+
+@media print {
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
+  header,
+  footer,
+  .no-print,
+  button,
+  nav,
+  [role="group"],
+  input {
+    display: none !important;
+  }
+  article {
+    border: 1px solid #000000 !important;
+    box-shadow: none !important;
+    padding: 20px !important;
+    margin: 0 !important;
+  }
 }

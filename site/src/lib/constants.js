@@ -51,7 +51,7 @@ export const SETLIST_SONG =
 export const SLIP_ARTICLE =
   "relative rounded-[3px] border-[1.5px] border-ink bg-card px-[26px] pb-6 pt-[46px] shadow-[5px_5px_0_rgba(0,0,0,0.14)] max-sm:px-4 max-sm:pb-[18px] max-sm:pt-[42px]";
 export const SLIP_TAPE =
-  "pointer-events-none absolute left-1/2 top-[-13px] h-[26px] w-[132px] -translate-x-1/2 rotate-[1.5deg] border-x border-dashed border-tape-edge bg-tape-soft";
+  "pointer-events-none absolute left-1/2 top-[-13px] h-[26px] w-[136px] -translate-x-1/2 rotate-[1.5deg] border-x border-dashed border-ink/40 bg-tape-soft shadow-[0_1px_3px_rgba(0,0,0,0.12)] backdrop-blur-[0.5px]";
 export const SLIP_CARD = {
   premiere:
     "relative rounded-[2px] border-[1.5px] border-premiere border-l-[7px] bg-premiere-bg px-[14px] py-[10px] -mx-2 my-[18px] -rotate-[0.6deg] shadow-[4px_6px_0_var(--color-premiere-wash)] max-sm:mx-[-4px] max-sm:my-3",
@@ -77,10 +77,10 @@ export const KIND_BADGE_CLASS = (k) =>
     : "bg-tape text-ink";
 
 export const DRAWER_LINK = (isOn) =>
-  `flex w-full items-center justify-between gap-3 border-l-4 border-transparent px-[14px] py-[10px] text-left no-underline transition-colors motion-reduce:transition-none focus-visible:outline-[3px] focus-visible:outline-pool focus-visible:outline-offset-2 ${
+  `flex w-full items-center justify-between gap-3 px-[14px] py-[10px] text-left no-underline transition-colors motion-reduce:transition-none focus-visible:outline-[3px] focus-visible:outline-pool focus-visible:outline-offset-2 ${
     isOn
-      ? "border-l-tape bg-band text-band-ink hover:bg-band"
-      : "border-l-transparent text-ink hover:border-l-pool hover:bg-pool-wash"
+      ? "bg-band text-band-ink font-bold shadow-[2px_2px_0_#d5a200]"
+      : "text-ink hover:bg-pool-wash hover:text-pool"
   }`;
 
 export const ALBUM_MAP = {

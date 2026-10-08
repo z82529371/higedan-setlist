@@ -1088,6 +1088,7 @@ export default function App() {
                 globalVenueShows={globalVenueShows}
                 unitData={unitData}
                 onSelectShow={handleSelectShow}
+                onSelectSong={handleSelectSong}
               />
             </section>
           </div>
@@ -1100,6 +1101,16 @@ export default function App() {
         <span>{current?.isTour ? "各場差異以 insert / skip 記錄" : ""}</span>
         <span>演出順序、安可標記逐場核對 {sourceSummary}</span>
       </footer>
+
+      {/* Mobile Floating Return to Top */}
+      <button
+        type="button"
+        onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+        className="fixed bottom-4 right-4 z-30 sm:hidden inline-flex items-center justify-center w-10 h-10 rounded-full bg-band text-band-ink font-bold shadow-md border border-ink text-[14px] cursor-pointer"
+        aria-label="回到頁首"
+      >
+        ↑
+      </button>
     </Fragment>
   );
 }

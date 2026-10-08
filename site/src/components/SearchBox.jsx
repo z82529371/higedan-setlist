@@ -209,7 +209,7 @@ export default function SearchBox({
           aria-expanded={isOpen && Boolean(needle)}
           aria-autocomplete="list"
           aria-controls="search-dropdown-list"
-          className="w-full rounded-[3px] border-[1.5px] border-ink bg-card py-2 pl-3 pr-8 text-[14px] text-ink placeholder:text-muted/65 focus:border-pool focus:ring-2 focus:ring-pool/30 focus:outline-none"
+          className="w-full rounded-[3px] border-[1.5px] border-ink bg-card py-2 pl-3 pr-8 text-[14px] text-ink placeholder:text-muted focus:border-pool focus:ring-2 focus:ring-pool/30 focus:outline-none"
           placeholder="搜尋歌曲、演出、場地…"
           value={q}
           onChange={(e) => setQ(e.target.value)}
@@ -249,7 +249,7 @@ export default function SearchBox({
                   <div>
                     <div className="sticky top-0 z-[2] flex items-center justify-between border-b border-line-soft bg-paper/95 px-3 py-1.5 font-mono text-[11px] font-bold tracking-[0.1em] text-muted uppercase backdrop-blur-xs">
                       <span><span aria-hidden="true">🎵</span> 歌曲</span>
-                      <span className="text-[10px] font-normal opacity-75">
+                      <span className="text-[11px] font-normal opacity-75">
                         {matchedSongs.length} 首
                       </span>
                     </div>
@@ -298,7 +298,7 @@ export default function SearchBox({
                   <div>
                     <div className="sticky top-0 z-[2] flex items-center justify-between border-b border-line-soft bg-paper/95 px-3 py-1.5 font-mono text-[11px] font-bold tracking-[0.1em] text-muted uppercase backdrop-blur-xs">
                       <span><span aria-hidden="true">🎤</span> 演出／巡演</span>
-                      <span className="text-[10px] font-normal opacity-75">
+                      <span className="text-[11px] font-normal opacity-75">
                         {matchedUnits.length} 部
                       </span>
                     </div>
@@ -324,7 +324,7 @@ export default function SearchBox({
                               {u.year} 年
                             </span>
                           </div>
-                          <span className="ml-2 shrink-0 rounded-[2px] border border-line bg-paper px-1.5 py-0.5 font-mono text-[10px] text-muted">
+                          <span className="ml-2 shrink-0 rounded-[2px] border border-line bg-paper px-1.5 py-0.5 font-mono text-[11px] text-muted">
                             {u.badge}
                           </span>
                         </div>
@@ -338,7 +338,7 @@ export default function SearchBox({
                   <div>
                     <div className="sticky top-0 z-[2] flex items-center justify-between border-b border-line-soft bg-paper/95 px-3 py-1.5 font-mono text-[11px] font-bold tracking-[0.1em] text-muted uppercase backdrop-blur-xs">
                       <span><span aria-hidden="true">📍</span> 場地</span>
-                      <span className="text-[10px] font-normal opacity-75">
+                      <span className="text-[11px] font-normal opacity-75">
                         {matchedVenues.length} 處
                       </span>
                     </div>
@@ -374,7 +374,7 @@ export default function SearchBox({
                 )}
 
                 {/* 底部導航提示 */}
-                <div className="sticky bottom-0 border-t border-line-soft bg-paper px-3 py-1 font-mono text-[10px] text-muted flex items-center justify-between">
+                <div className="sticky bottom-0 border-t border-line-soft bg-paper px-3 py-1 font-mono text-[11px] text-muted flex items-center justify-between">
                   <span>↑↓ 選擇・Enter 跳轉・Esc 關閉</span>
                 </div>
               </Fragment>
