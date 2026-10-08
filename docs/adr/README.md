@@ -82,7 +82,4 @@
 | [ADR-0077: 演出來源動態標籤識別與多渠道一手史料呈現 (Dynamic Provenance Source Labeling for X and Multi-Source Archives)](0077-dynamic-provenance-source-labeling-for-x-and-external-sources.md) | 已採納 (Accepted) | 擴充 ADR-0002 / ADR-0010 |
 | [ADR-0078: 八大演出類型分類體系與店家活動（インストアイベント）收錄規範](0078-eight-category-performance-taxonomy-and-instore-events.md) | 已採納 (Accepted) | 擴充 ADR-0056，七大升級至八大分類 |
 | [ADR-0079: 官方網站一手公告來源全量回填與巡演來源繼承規範 (Official Website News Provenance and Tour Inheritance Architecture)](0079-official-website-news-provenance-and-tour-inheritance.md) | 已採納 (Accepted) | 擴充 ADR-0077 多來源史料架構 |
-
-
-
-
+| [ADR-0080: 現場舞台單據與巡演紀念小卡領域分工暨三主題體系 (Stage Run Sheet Slip and Memorial Setlist Card Architecture)](0080-stage-run-sheet-slip-and-memorial-card-modal.md) | 已採納 (Accepted) | 網頁母單純白與小卡三主題解耦、曲目行徽章純淨化 |
