@@ -1,0 +1,28 @@
+{
+  "id": "amaban-grand-prix-vol-8-2014",
+  "title": "第8回 V-air あまばん グランプリ大会 決勝大会",
+  "shortTitle": "第8回 あまばん 決勝",
+  "type": "音樂祭",
+  "shows": [
+    {
+      "id": "amaban-vol-8-2014-0302",
+      "date": "2014-03-02",
+      "weekday": "日",
+      "city": "松江",
+      "venue": "松江TERRSA テルサホール",
+      "region": "中國",
+      "prefecture": "島根縣",
+      "title": "第8回 V-air あまばん グランプリ大会 決勝大会",
+      "sourceUrls": [
+        "https://x.com/officialhige/status/435385869768216576"
+      ],
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "songId": "ai-nandaga"
+        }
+      ]
+    }
+  ]
+}

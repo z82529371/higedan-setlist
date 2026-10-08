@@ -1,0 +1,24 @@
+{
+  "id": "block-mode-style-vol-11-2013",
+  "title": "FreeStyle presents Block Mode Style vol.11",
+  "shortTitle": "Block Mode Style vol.11",
+  "type": "聯合專場",
+  "shows": [
+    {
+      "id": "block-mode-style-vol-11-2013-1103",
+      "date": "2013-11-03",
+      "weekday": "日",
+      "city": "米子",
+      "venue": "米子AZTiC laughs",
+      "region": "中國",
+      "prefecture": "鳥取縣",
+      "title": "FreeStyle presents Block Mode Style vol.11",
+      "sourceUrls": [
+        "https://www.roughdoors.com/live/past-live-2013/"
+      ],
+      "opensAt": "18:30",
+      "startsAt": "19:00",
+      "setlist": []
+    }
+  ]
+}

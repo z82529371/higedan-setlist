@@ -2710,5 +2710,107 @@
     "city": "東京",
     "region": "關東",
     "prefecture": "東京都"
+  },
+  "松江テルサ": {
+    "venue": "松江TERRSA テルサホール",
+    "city": "松江",
+    "region": "中國",
+    "prefecture": "島根縣"
+  },
+  "松江テルサ テルサホール": {
+    "venue": "松江TERRSA テルサホール",
+    "city": "松江",
+    "region": "中國",
+    "prefecture": "島根縣"
+  },
+  "松江TERRSA": {
+    "venue": "松江TERRSA テルサホール",
+    "city": "松江",
+    "region": "中國",
+    "prefecture": "島根縣"
+  },
+  "松江TERRSA テルサホール": {
+    "venue": "松江TERRSA テルサホール",
+    "city": "松江",
+    "region": "中國",
+    "prefecture": "島根縣"
+  },
+  "福山MUSICFACTORY": {
+    "venue": "福山MUSIC FACTORY",
+    "city": "福山",
+    "region": "中國",
+    "prefecture": "廣島縣"
+  },
+  "福山MUSIC FACTORY": {
+    "venue": "福山MUSIC FACTORY",
+    "city": "福山",
+    "region": "中國",
+    "prefecture": "廣島縣"
+  },
+  "米子駅前イオンガイナックスシアター": {
+    "venue": "GAINAX THEATER (永旺米子站前店)",
+    "city": "米子",
+    "region": "中國",
+    "prefecture": "鳥取縣"
+  },
+  "米子駅前イオン ガイナックスシアター": {
+    "venue": "GAINAX THEATER (永旺米子站前店)",
+    "city": "米子",
+    "region": "中國",
+    "prefecture": "鳥取縣"
+  },
+  "ガイナックスシアター": {
+    "venue": "GAINAX THEATER (永旺米子站前店)",
+    "city": "米子",
+    "region": "中國",
+    "prefecture": "鳥取縣"
+  },
+  "GAINAX THEATER": {
+    "venue": "GAINAX THEATER (永旺米子站前店)",
+    "city": "米子",
+    "region": "中國",
+    "prefecture": "鳥取縣"
+  },
+  "松江canova": {
+    "venue": "松江AZTiC canova",
+    "city": "松江",
+    "region": "中國",
+    "prefecture": "島根縣"
+  },
+  "米子ラフズ": {
+    "venue": "米子AZTiC laughs",
+    "city": "米子",
+    "region": "中國",
+    "prefecture": "鳥取縣"
+  },
+  "大根島 HOME": {
+    "venue": "海辺のcafe HOME",
+    "city": "松江",
+    "region": "中國",
+    "prefecture": "島根縣"
+  },
+  "海辺のcafe HOME": {
+    "venue": "海辺のcafe HOME",
+    "city": "松江",
+    "region": "中國",
+    "prefecture": "島根縣"
+  },
+  "HOME": {
+    "venue": "海辺のcafe HOME",
+    "city": "松江",
+    "region": "中國",
+    "prefecture": "島根縣"
+  },
+  "米子市文化ホール前多目的広場": {
+    "venue": "米子市文化會館 前 多目的廣場",
+    "city": "米子",
+    "region": "中國",
+    "prefecture": "鳥取縣"
+  },
+  "米子市文化ホール 多目的広場": {
+    "venue": "米子市文化會館 前 多目的廣場",
+    "city": "米子",
+    "region": "中國",
+    "prefecture": "鳥取縣"
   }
 }

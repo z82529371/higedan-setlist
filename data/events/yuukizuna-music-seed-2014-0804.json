@@ -1,0 +1,20 @@
+{
+  "id": "yuukizuna-music-seed-2014-0804",
+  "title": "ユウキズナmusic seed",
+  "shortTitle": "ユウキズナmusic seed",
+  "type": "聯合專場",
+  "shows": [
+    {
+      "id": "yuukizuna-music-seed-2014-0804-show",
+      "date": "2014-08-04",
+      "weekday": "一",
+      "city": "米子",
+      "venue": "GAINAX THEATER (永旺米子站前店)",
+      "region": "中國",
+      "prefecture": "鳥取縣",
+      "title": "ユウキズナmusic seed",
+      "sourceUrls": ["https://x.com/officialhige/status/470111606093774848"],
+      "setlist": []
+    }
+  ]
+}

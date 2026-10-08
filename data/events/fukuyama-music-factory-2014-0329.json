@@ -1,0 +1,22 @@
+{
+  "id": "fukuyama-music-factory-2014-0329",
+  "title": "福山MUSICFACTORY LIVE",
+  "shortTitle": "福山MUSICFACTORY",
+  "type": "聯合專場",
+  "shows": [
+    {
+      "id": "fukuyama-music-factory-2014-0329-show",
+      "date": "2014-03-29",
+      "weekday": "六",
+      "city": "福山",
+      "venue": "福山MUSIC FACTORY",
+      "region": "中國",
+      "prefecture": "廣島縣",
+      "title": "福山MUSICFACTORY LIVE",
+      "sourceUrls": [
+        "https://x.com/officialhige/status/446243143747248128"
+      ],
+      "setlist": []
+    }
+  ]
+}
