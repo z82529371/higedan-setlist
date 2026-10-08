@@ -120,15 +120,15 @@ export const allUnits = [...tourUnits, ...eventUnits].sort((a, b) =>
 export function getUnitTypeLabel(unit) {
   if (!unit) return "其他";
   if (unit.type === "店家活動") return "店家活動";
-  if (unit.templateSetlist || unit.isTour) return "巡演專場";
   if (unit.type === "特別專場") return "特別專場";
   if (unit.type === "學園祭") return "學園祭";
   if (unit.type === "對バン" || unit.type === "聯合專場") return "聯合專場";
   if (unit.type === "電視演出" || unit.type === "TV拼盤") return "電視演出";
   if (unit.type === "線上直播") return "線上直播";
   if (unit.type === "音樂祭") return "音樂祭";
+  if (unit.type === "巡演專場") return "巡演專場";
   if (unit.type === "專場") return unit.templateSetlist || unit.isTour ? "巡演專場" : "特別專場";
-  return unit.type || "其他";
+  return unit.templateSetlist || unit.isTour ? "巡演專場" : (unit.type || "其他");
 }
 
 export function defaultShowId(unit) {

@@ -1,16 +1,5 @@
 import { Fragment, useEffect, useMemo, useRef, useState } from "react";
-import { getSongAlbum, shortUnitTitle, songUnreleased, unitEarliest } from "../lib/domain.js";
-
-function getUnitTypeBadge(u) {
-  if (u.type === "店家活動") return "店家活動";
-  if (u.type === "特別專場") return "特別專場";
-  if (u.type === "學園祭") return "學園祭";
-  if (u.type === "電視演出" || u.type === "TV拼盤") return "電視演出";
-  if (u.type === "音樂祭") return "音樂祭";
-  if (u.type === "線上直播") return "線上直播";
-  if (u.type === "對バン" || u.type === "聯合專場") return "聯合專場";
-  return u.templateSetlist || u.isTour ? "巡演專場" : "特別專場";
-}
+import { getSongAlbum, getUnitTypeLabel, shortUnitTitle, songUnreleased, unitEarliest } from "../lib/domain.js";
 
 export default function SearchBox({
   q,
@@ -82,7 +71,7 @@ export default function SearchBox({
           id: u.id,
           title: shortUnitTitle(u) || u.title,
           year,
-          badge: getUnitTypeBadge(u),
+          badge: getUnitTypeLabel(u),
         });
       }
     }
