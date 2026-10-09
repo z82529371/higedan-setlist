@@ -4,3 +4,4 @@ site/src/data/
 *.log
 .DS_Store
 .impeccable/
+scratch/
