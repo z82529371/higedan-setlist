@@ -1,0 +1,22 @@
+{
+  "id": "red-room-243-2015",
+  "title": "RED ROOM 243",
+  "shortTitle": "RED ROOM 243",
+  "type": "聯合專場",
+  "shows": [
+    {
+      "id": "red-room-243-2015-show",
+      "date": "2015-03-21",
+      "weekday": "六",
+      "city": "名古屋",
+      "venue": "CLUB ROCK'n'ROLL",
+      "region": "中部",
+      "prefecture": "愛知縣",
+      "title": "RED ROOM 243",
+      "sourceUrls": [
+        "https://x.com/officialhige/status/560732193308160000"
+      ],
+      "setlist": []
+    }
+  ]
+}

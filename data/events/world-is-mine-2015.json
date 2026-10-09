@@ -1,0 +1,22 @@
+{
+  "id": "world-is-mine-2015",
+  "title": "WORLD IS MINE !!",
+  "shortTitle": "WORLD IS MINE !!",
+  "type": "聯合專場",
+  "shows": [
+    {
+      "id": "world-is-mine-2015-show",
+      "date": "2015-03-22",
+      "weekday": "日",
+      "city": "奈良",
+      "venue": "奈良 NEVERLAND",
+      "region": "關西",
+      "prefecture": "奈良縣",
+      "title": "WORLD IS MINE !!",
+      "sourceUrls": [
+        "https://x.com/officialhige/status/578520971763527680"
+      ],
+      "setlist": []
+    }
+  ]
+}

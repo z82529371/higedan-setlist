@@ -1,7 +1,7 @@
 {
   "id": "gold-rush-2015-day-4",
   "title": "GOLD RUSH 2015 京都編 day.4",
-  "type": "聯合專場",
+  "type": "音樂祭",
   "shows": [
     {
       "id": "471263",
@@ -11,9 +11,7 @@
       "region": "關西",
       "prefecture": "京都府",
       "title": "GOLD RUSH 2015 京都編 day.4",
-      "sourceUrls": [
-        "https://www.livefans.jp/events/471263"
-      ],
+      "sourceUrls": ["https://www.livefans.jp/events/471263"],
       "setlist": [
         {
           "order": 1,

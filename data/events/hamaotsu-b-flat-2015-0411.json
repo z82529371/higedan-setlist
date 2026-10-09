@@ -1,0 +1,24 @@
+{
+  "id": "hamaotsu-b-flat-2015-0411",
+  "title": "浜大津B-flat LIVE",
+  "shortTitle": "浜大津B-flat",
+  "type": "聯合專場",
+  "shows": [
+    {
+      "id": "hamaotsu-b-flat-2015-0411-show",
+      "date": "2015-04-11",
+      "weekday": "六",
+      "city": "大津",
+      "venue": "浜大津B-flat",
+      "region": "關西",
+      "prefecture": "滋賀縣",
+      "title": "浜大津B-flat LIVE",
+      "sourceUrls": [
+        "https://x.com/officialhige/status/586799913800839168"
+      ],
+      "opensAt": "17:00",
+      "startsAt": "17:30",
+      "setlist": []
+    }
+  ]
+}

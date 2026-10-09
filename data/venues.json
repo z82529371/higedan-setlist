@@ -1775,6 +1775,30 @@
     "region": "中部",
     "prefecture": "愛知縣"
   },
+  "CLUB ROCK'n'ROLL": {
+    "venue": "CLUB ROCK'n'ROLL",
+    "city": "名古屋",
+    "region": "中部",
+    "prefecture": "愛知縣"
+  },
+  "名古屋Club Rock 'n' Roll": {
+    "venue": "CLUB ROCK'n'ROLL",
+    "city": "名古屋",
+    "region": "中部",
+    "prefecture": "愛知縣"
+  },
+  "名古屋CLUB ROCK'n'ROLL": {
+    "venue": "CLUB ROCK'n'ROLL",
+    "city": "名古屋",
+    "region": "中部",
+    "prefecture": "愛知縣"
+  },
+  "新栄CLUB ROCK'N ROLL": {
+    "venue": "CLUB ROCK'n'ROLL",
+    "city": "名古屋",
+    "region": "中部",
+    "prefecture": "愛知縣"
+  },
   "TSUTAYA 出雲店": {
     "venue": "TSUTAYA 出雲店",
     "city": "出雲",
@@ -1794,6 +1818,12 @@
     "prefecture": "島根縣"
   },
   "松江学園Teddy&#039;s": {
+    "venue": "松江學園Teddy's",
+    "city": "松江",
+    "region": "中國",
+    "prefecture": "島根縣"
+  },
+  "Teddy's": {
     "venue": "松江學園Teddy's",
     "city": "松江",
     "region": "中國",
@@ -1854,6 +1884,12 @@
     "prefecture": "大阪府"
   },
   "松江Pianoman": {
+    "venue": "松江Pianoman",
+    "city": "松江",
+    "region": "中國",
+    "prefecture": "島根縣"
+  },
+  "Pianoman": {
     "venue": "松江Pianoman",
     "city": "松江",
     "region": "中國",
@@ -2011,6 +2047,18 @@
   },
   "奈良100年會館 大會堂": {
     "venue": "奈良100年會館 大會堂",
+    "city": "奈良",
+    "region": "關西",
+    "prefecture": "奈良縣"
+  },
+  "奈良NEVERLAND": {
+    "venue": "奈良 NEVERLAND",
+    "city": "奈良",
+    "region": "關西",
+    "prefecture": "奈良縣"
+  },
+  "奈良 NEVERLAND": {
+    "venue": "奈良 NEVERLAND",
     "city": "奈良",
     "region": "關西",
     "prefecture": "奈良縣"
@@ -2473,6 +2521,24 @@
   },
   "滋賀U★STONE": {
     "venue": "滋賀U★STONE",
+    "city": "大津",
+    "region": "關西",
+    "prefecture": "滋賀縣"
+  },
+  "浜大津B-flat": {
+    "venue": "浜大津B-flat",
+    "city": "大津",
+    "region": "關西",
+    "prefecture": "滋賀縣"
+  },
+  "浜大津 B-flat": {
+    "venue": "浜大津B-flat",
+    "city": "大津",
+    "region": "關西",
+    "prefecture": "滋賀縣"
+  },
+  "B-flat": {
+    "venue": "浜大津B-flat",
     "city": "大津",
     "region": "關西",
     "prefecture": "滋賀縣"

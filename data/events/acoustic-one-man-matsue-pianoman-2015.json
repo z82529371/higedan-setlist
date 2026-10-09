@@ -1,0 +1,24 @@
+{
+  "id": "acoustic-one-man-matsue-pianoman-2015",
+  "title": "アコースティックワンマン",
+  "shortTitle": "松江Pianoman 不插電專場",
+  "type": "特別專場",
+  "shows": [
+    {
+      "id": "acoustic-one-man-matsue-pianoman-2015-show",
+      "date": "2015-04-02",
+      "weekday": "四",
+      "city": "松江",
+      "venue": "松江Pianoman",
+      "region": "中國",
+      "prefecture": "島根縣",
+      "title": "アコースティックワンマン",
+      "sourceUrls": [
+        "https://x.com/officialhige/status/580312141552427009"
+      ],
+      "opensAt": "19:30",
+      "startsAt": "20:00",
+      "setlist": []
+    }
+  ]
+}
