@@ -83,3 +83,4 @@
 | [ADR-0078: 八大演出類型分類體系與店家活動（インストアイベント）收錄規範](0078-eight-category-performance-taxonomy-and-instore-events.md) | 已採納 (Accepted) | 擴充 ADR-0056，七大升級至八大分類 |
 | [ADR-0079: 官方網站一手公告來源全量回填與巡演來源繼承規範 (Official Website News Provenance and Tour Inheritance Architecture)](0079-official-website-news-provenance-and-tour-inheritance.md) | 已採納 (Accepted) | 擴充 ADR-0077 多來源史料架構 |
 | [ADR-0080: 現場舞台單據與巡演紀念小卡領域分工暨三主題體系 (Stage Run Sheet Slip and Memorial Setlist Card Architecture)](0080-stage-run-sheet-slip-and-memorial-card-modal.md) | 已採納 (Accepted) | 網頁母單純白與小卡三主題解耦、曲目行徽章純淨化 |
+| [ADR-0081: 全站正名、官方翹鬍子品牌識別與頂部 Micro-Hero 數據引導架構 (Brand Identity Normalization and Micro-Hero Architecture)](0081-brand-identity-normalization-and-micro-hero-architecture.md) | 已採納 (Accepted) | 拔除亞洲巡演舊標籤、全站正名、官方翹鬍子 Favicon 向量鏈、Header 去煽情化與 Micro-Hero 數據膠囊列 |

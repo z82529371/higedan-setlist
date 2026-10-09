@@ -485,17 +485,32 @@ export default function App() {
 
       {/* Header */}
       <header className="pb-2 pt-8">
-        <p className="m-0 mb-[10px] font-mono text-[12px] tracking-[0.22em] text-muted">
-          <span className="mr-2 inline-block rounded-full border-[1.5px] border-ink px-[10px] py-[1px] tracking-[0.18em] text-ink font-bold">
-            {current?.isTour ? "巡演檔案" : "演出檔案"}
-          </span>
-          {current
-            ? `${shortUnitTitle(current.unit)}・場次 × 歌曲雙向查詢`
-            : ""}
+        <p className="m-0 mb-2 font-mono text-[11px] sm:text-[12px] tracking-[0.2em] text-muted font-bold uppercase">
+          LIVE PERFORMANCE &amp; SETLIST ARCHIVE
         </p>
-        <h1 className="m-0 font-display text-[clamp(32px,5vw,56px)] font-extrabold leading-[1.1] tracking-[0.01em] [text-wrap:balance]">
-          那一晚，<span className="font-bold text-pool">他們唱了什麼。</span>
+        <h1 className="m-0 font-display text-[clamp(28px,4.5vw,46px)] font-extrabold leading-[1.15] tracking-[0.01em]">
+          Official髭男dism <span className="font-bold text-band-ink">Setlist 檔案庫</span>
         </h1>
+        <p className="mt-2.5 mb-0 text-[13px] sm:text-[14px] text-muted leading-relaxed">
+          場次與曲目雙向檔案庫。收錄 2012 年地下獨立時期至當前巨蛋巡演的完整現場足跡。
+        </p>
+        <div className="mt-3 flex flex-wrap items-center gap-2 font-mono text-[11px] sm:text-[12px] text-ink">
+          <span className="inline-flex items-center gap-1 rounded-[4px] border border-ink/20 bg-paper px-2.5 py-1 font-semibold shadow-2xs">
+            <span aria-hidden="true">📅</span> 2012–2026 年
+          </span>
+          <span className="inline-flex items-center gap-1 rounded-[4px] border border-ink/20 bg-paper px-2.5 py-1 font-semibold shadow-2xs">
+            <span aria-hidden="true">🎫</span> {totalAllShows} 場公開演出
+          </span>
+          <span className="inline-flex items-center gap-1 rounded-[4px] border border-ink/20 bg-paper px-2.5 py-1 font-semibold shadow-2xs">
+            <span aria-hidden="true">🎭</span> {PERFORMANCE_CATEGORIES.length} 大演出型態
+          </span>
+          <span className="inline-flex items-center gap-1 rounded-[4px] border border-ink/20 bg-paper px-2.5 py-1 font-semibold shadow-2xs">
+            <span aria-hidden="true">🎵</span> {allUsedSongs.length} 首原創曲目
+          </span>
+          <span className="inline-flex items-center gap-1 rounded-[4px] border border-ink/20 bg-paper px-2.5 py-1 font-semibold shadow-2xs">
+            <span aria-hidden="true">📍</span> {allVenues.length} 處歷史場館
+          </span>
+        </div>
       </header>
 
       {/* Top 3 Query Tabs */}
