@@ -86,7 +86,7 @@ _Avoid_: 實體專場混用、電視節目混用、線上直播場次贅加城�
 
 **單元標題與自訂簡稱（ADR-0046）**:
 單元（巡演或事件）之標題系統採雙軌制：
-- `unit.title`：保留 LiveFans 原始完整名稱（含 `Official髭男dism` / 企劃全名等），供全站頂部狀態欄（`資料來源 livefans`）與詳細頁顯示。場次標題（`s.title`）亦保持乾淨的官方演出名，不追加城市後綴。
+- `unit.title`：保留 LiveFans 原始完整名稱（含 `Official髭男dism` / 企劃全名等），供全站頂部狀態欄（`資料來源 livefans`）與詳細頁顯示。頂部狀態欄於手機端採極窄單行（約 25px、py-1、truncate）俐落呈現，避免大片黃色色塊排擠首屏內容。
 - `unit.shortTitle`（選填）：單元選單按鈕與全域搜尋索引之自訂簡稱。未填寫時，前端自動省略 `Official髭男dism` / `OFFICIAL HIGE DANDISM` 前綴；填寫時以 `shortTitle` 為準（例如對バン自訂為 `UVERworld vs Official髭男dism`、音樂祭自訂為 `SPACE SHOWER SWEET LOVE SHOWER 2025`）。`batch-import.mjs` 腳本執行時嚴格保護既有 JSON 中的 `shortTitle`，永不覆蓋或抹除。
 _Avoid_: 將按鈕簡稱直接覆寫掉 JSON 的 unit.title、腳本同步時抹除使用者的自訂 shortTitle
 

@@ -1275,15 +1275,22 @@ export default function App() {
 
   return (
     <Fragment>
-      {/* Top Banner */}
-      <div className="mx-[-16px] sm:mx-[-24px] flex flex-wrap items-center gap-x-5 gap-y-2 bg-band px-4 sm:px-6 py-2.5 font-mono text-[12px] tracking-[0.14em] text-band-ink">
-        <span>{current?.unit.title ?? ""}</span>
-        <span className="opacity-45">●</span>
-        <span>
-          {current?.shows.length ?? 0} 場 · {current?.songShows.size ?? 0} 首歌曲
-        </span>
-        <span className="opacity-45">●</span>
-        <span>資料來源 {sourceSummary}</span>
+      {/* Top Banner (Responsive Sleek Status Ticker) */}
+      <div className="mx-[-16px] sm:mx-[-24px] flex items-center justify-between gap-2.5 bg-band px-3.5 sm:px-6 py-1 sm:py-2.5 font-mono text-[10px] sm:text-[12px] tracking-wider sm:tracking-[0.14em] text-band-ink whitespace-nowrap overflow-hidden">
+        <div className="truncate min-w-0 font-bold">
+          <span>{current?.unit.title ?? ""}</span>
+        </div>
+        <div className="shrink-0 flex items-center gap-1.5 sm:gap-4 font-bold opacity-90 sm:opacity-100">
+          <span className="hidden sm:inline opacity-45">●</span>
+          <span className="hidden sm:inline">
+            {current?.shows.length ?? 0} 場 · {current?.songShows.size ?? 0} 首歌曲
+          </span>
+          <span className="sm:hidden">
+            {current?.shows.length ?? 0} 場
+          </span>
+          <span className="opacity-45">●</span>
+          <span>來源 {sourceSummary}</span>
+        </div>
       </div>
 
       {/* Header */}
