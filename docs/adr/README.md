@@ -4,7 +4,10 @@
 
 ---
 
-## 決策總覽清單（共 73 篇）
+## 決策總覽清單（共 78 篇）
+
+> [!NOTE]
+> **編號跳號說明**：本目錄編號自 ADR-0001 起至 ADR-0083 止。其中 ADR-0063、ADR-0064、ADR-0065、ADR-0068、ADR-0069 共 5 篇為早期介面排版草案，後續已被 ADR-0070 單欄聚焦架構完整吸收與替代，故無獨立保留歷史檔案；實體決策文件共計 78 篇。
 
 | 決策標題 | 狀態 | 日期 |
 | :--- | :---: | :---: |
@@ -72,7 +75,7 @@
 | [ADR-0062: 歌曲演出列表雙層分類與單元群組化架構 (Two-Layer Song Shows Categorization and Unit Grouping Architecture)](0062-two-layer-song-shows-categorization-and-unit-grouping.md) | 已採納 (Accepted) | - |
 | [ADR-0066: 歌曲類型篩選按鈕平均分配、歌曲場次計數修正與場地列表 UI/UX 優化](0066-song-category-buttons-and-venue-ui-ux-optimization.md) | 已採納 (Accepted) | - |
 | [ADR-0067: 精準對齊 Official 髭男 dism 官網 (higedan.com) 設計色系代幣](0067-official-higedan-color-palette-alignment.md) | 已採納 (Accepted) | - |
-| [ADR-0070: 初心者友善單欄聚焦自助導航架構 (Beginner-Proof Single-Column Kiosk Architecture)](0070-beginner-proof-single-column-kiosk-architecture.md) | 已採納 (Accepted) | 替代早期 UI 草案 (ADR-0063~0069) |
+| [ADR-0070: 初心者友善單欄聚焦自助導航架構 (Beginner-Proof Single-Column Kiosk Architecture)](0070-beginner-proof-single-column-kiosk-architecture.md) | 已採納 (Accepted) | 替代早期 UI 草案 (ADR-0063~0065, ADR-0068~0069) |
 | [ADR-0071: 合作單曲分類維度、聯合專場曲目收錄邊界與早期未發行曲庫擴充](0071-collaboration-single-taxonomy-and-joint-live-filtering.md) | 已採納 (Accepted) | - |
 | [ADR-0072: 早期地下未發行曲庫擴充、Billy Joel 翻唱判定與場館命名標準化](0072-underground-unreleased-songs-billy-joel-covers-and-venue-normalization.md) | 已採納 (Accepted) | - |
 | [ADR-0073: 早期地下專場系列命名統一、未發表曲庫擴充與 2013 松江場次校準](0073-early-underground-live-taxonomy-and-tonight-series-unification.md) | 已採納 (Accepted) | - |
@@ -84,3 +87,6 @@
 | [ADR-0079: 官方網站一手公告來源全量回填與巡演來源繼承規範 (Official Website News Provenance and Tour Inheritance Architecture)](0079-official-website-news-provenance-and-tour-inheritance.md) | 已採納 (Accepted) | 擴充 ADR-0077 多來源史料架構 |
 | [ADR-0080: 現場舞台單據與巡演紀念小卡領域分工暨三主題體系 (Stage Run Sheet Slip and Memorial Setlist Card Architecture)](0080-stage-run-sheet-slip-and-memorial-card-modal.md) | 已採納 (Accepted) | 網頁母單純白與小卡三主題解耦、曲目行徽章純淨化 |
 | [ADR-0081: 全站正名、官方翹鬍子品牌識別與頂部 Micro-Hero 數據引導架構 (Brand Identity Normalization and Micro-Hero Architecture)](0081-brand-identity-normalization-and-micro-hero-architecture.md) | 已採納 (Accepted) | 拔除亞洲巡演舊標籤、全站正名、官方翹鬍子 Favicon 向量鏈、Header 去煽情化與 Micro-Hero 數據膠囊列 |
+| [ADR-0082: 行動端浮動導航抽屜、雙向喚起與全站 RWD 人體工學架構 (Mobile-First Bottom Sheet Navigation and RWD Architecture)](0082-mobile-first-bottom-sheet-navigation-and-rwd-architecture.md) | 已採納 (Accepted) | 解決窄螢幕四階導航壓迫、iOS Safari 防縮放、工具列分流與拇指友善巡演步進器 |
+| [ADR-0083: 場地票券演出類型分流標籤列與雙票券體驗一致性規範 (VenueSlip Category Filter Tabs and Slip Consistency)](0083-venue-category-filter-tabs-and-slip-consistency.md) | 已採納 (Accepted) | 場地票券新增動態演出類型分流標籤，與歌曲票券達成 100% 心智模型與架構對稱 |
+
