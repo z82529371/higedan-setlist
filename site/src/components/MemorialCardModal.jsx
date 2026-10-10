@@ -7,8 +7,8 @@ let sessionMemorialTheme = "vintage";
 
 /**
  * MemorialCardModal
- * 專為 Official 髭男 dism 巡演設計的精良歌單紀念小卡預覽與下載視窗
- * - 支援「雙欄紀念海報 (推薦)」與「單欄長條票券」排版切換，保證收錄全曲 (M1 ~ M20+ 及 安可)
+ * 專為 Official 髭男 dism 巡演設計的精良歌單單欄紀念票券預覽與下載視窗
+ * - 經典「單欄長條票券」排版，保證收錄全曲 (M1 ~ M20+ 及 安可)
  * - 支援「復古手感紙質」、「經典純白卡」與「暗夜舞台黑金」三種風格切換
  * - 高速 2x 原寸 PNG 匯出，絕不裁切截斷
  */
@@ -23,8 +23,6 @@ export function MemorialCardModal({
   totalShows = 1,
 }) {
   const [theme, setTheme] = useState(sessionMemorialTheme); // 'vintage' | 'white' | 'noir'
-  // 若曲目超過 10 首，預設使用雙欄海報版型，版面平衡且全曲一目了然
-  const [layoutMode, setLayoutMode] = useState(main.length > 10 ? "poster" : "slip"); // 'poster' | 'slip'
   const [isExporting, setIsExporting] = useState(false);
   const [copiedText, setCopiedText] = useState(false);
   const cardRef = useRef(null);
@@ -47,14 +45,8 @@ export function MemorialCardModal({
   const isVintage = theme === "vintage";
   const isWhite = theme === "white";
   const isNoir = theme === "noir";
-  const isPoster = layoutMode === "poster";
 
   const cardBgColor = isVintage ? "#fcfaf2" : isWhite ? "#ffffff" : "#111319";
-
-  // 雙欄排版拆分
-  const halfMain = Math.ceil(main.length / 2);
-  const col1Main = layoutMode === "poster" ? main.slice(0, halfMain) : main;
-  const col2Main = layoutMode === "poster" ? main.slice(halfMain) : [];
 
   const handleDownload = async () => {
     const node = cardRef.current;
@@ -62,8 +54,8 @@ export function MemorialCardModal({
     setIsExporting(true);
 
     try {
-      // 確保獲取無截斷的完整高度與寬度
-      const actualWidth = Math.ceil(node.scrollWidth || node.offsetWidth || 560);
+      // 確保獲取無截斷的完整高度與寬度 (單欄長條票券 440px)
+      const actualWidth = Math.ceil(node.scrollWidth || node.offsetWidth || 440);
       const actualHeight = Math.ceil(node.scrollHeight || node.offsetHeight);
 
       const dataUrl = await toPng(node, {
@@ -182,7 +174,7 @@ export function MemorialCardModal({
       aria-label="巡演歌單紀念小卡預覽"
     >
       <div
-        className="relative w-full max-w-[680px] max-h-[94vh] flex flex-col rounded-2xl bg-[#1e212b] border border-[#374151] shadow-2xl overflow-hidden my-auto"
+        className="relative w-full max-w-[500px] max-h-[94vh] flex flex-col rounded-2xl bg-[#1e212b] border border-[#374151] shadow-2xl overflow-hidden my-auto"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Modal Top Bar */}
@@ -190,7 +182,7 @@ export function MemorialCardModal({
           <div className="flex items-center gap-2">
             <span className="text-base" aria-hidden="true">📸</span>
             <span className="font-bold text-sm tracking-wide">
-              巡演歌單紀念小卡預覽
+              巡演歌單紀念票券預覽
             </span>
             <span className="rounded bg-[#d49a00]/20 px-2 py-0.5 text-xs font-mono font-bold text-[#facc15] border border-[#d49a00]/40">
               全 {totalSongsCount} 首收錄
@@ -206,9 +198,8 @@ export function MemorialCardModal({
           </button>
         </div>
 
-        {/* Toolbar: Theme + Layout Switches */}
-        <div className="flex flex-wrap items-center justify-between gap-2 px-4 py-2.5 bg-[#12131a] border-b border-[#2d3446] text-xs">
-          {/* Theme Selector: 3 styles */}
+        {/* Toolbar: Theme Switcher */}
+        <div className="flex items-center justify-between gap-2 px-4 py-2.5 bg-[#12131a] border-b border-[#2d3446] text-xs">
           <div className="flex items-center gap-1.5">
             <span className="text-[#9ca3af] font-mono">風格：</span>
             <button
@@ -245,45 +236,17 @@ export function MemorialCardModal({
               🖤 暗夜舞台金
             </button>
           </div>
-
-          {/* Layout Selector */}
-          <div className="flex items-center gap-1.5 ml-auto">
-            <span className="text-[#9ca3af] font-mono">排版：</span>
-            <button
-              type="button"
-              onClick={() => setLayoutMode("poster")}
-              className={`px-2.5 py-1 rounded text-xs font-bold transition-all cursor-pointer ${
-                isPoster
-                  ? "bg-[#2563eb] text-white shadow-xs"
-                  : "bg-[#202432] text-[#9ca3af] hover:text-white"
-              }`}
-              title="雙欄平衡排版：全曲同時展開，比例最協調"
-            >
-              📑 雙欄海報
-            </button>
-            <button
-              type="button"
-              onClick={() => setLayoutMode("slip")}
-              className={`px-2.5 py-1 rounded text-xs font-bold transition-all cursor-pointer ${
-                !isPoster
-                  ? "bg-[#2563eb] text-white shadow-xs"
-                  : "bg-[#202432] text-[#9ca3af] hover:text-white"
-              }`}
-              title="單欄長條票券：經典直式單據清單"
-            >
-              📜 單欄票券
-            </button>
-          </div>
+          <span className="font-mono text-[11px] text-[#9ca3af] opacity-80 hidden sm:inline">
+            📜 單欄長條票券
+          </span>
         </div>
 
         {/* Card Preview Scroll Area */}
         <div className="flex-1 overflow-y-auto p-3 sm:p-5 pb-8 sm:pb-12 flex justify-center items-start bg-[#0d0e14]/75">
-          {/* ==================== COMMEMORATIVE CARD ==================== */}
+          {/* ==================== COMMEMORATIVE CARD (SINGLE COLUMN TICKET) ==================== */}
           <div
             ref={cardRef}
-            className={`rounded-xl transition-all duration-300 relative h-auto shrink-0 ${
-              isPoster ? "w-[560px] max-w-full" : "w-[440px] max-w-full"
-            } ${
+            className={`rounded-xl transition-all duration-300 relative h-auto shrink-0 w-[440px] max-w-full ${
               isVintage
                 ? "bg-[#fcfaf2] text-[#1c1917] border-[2px] border-[#d6cebf] shadow-[0_16px_40px_rgba(0,0,0,0.5)]"
                 : isWhite
@@ -387,81 +350,39 @@ export function MemorialCardModal({
                 <div className="border-b-2 border-dashed border-current/20" />
               </div>
 
-              {/* ================= SETLIST CONTENT ================= */}
-              {isPoster ? (
-                /* ========== 雙欄海報模式 (POSTER LAYOUT) ========== */
-                <div className="space-y-3">
+              {/* ================= SETLIST CONTENT (SINGLE COLUMN SLIP) ================= */}
+              <div className="space-y-3">
+                <div className="space-y-1">
                   <div className="flex items-center justify-between font-mono text-[11px] font-extrabold tracking-wider uppercase opacity-75">
                     <span>◆ MAIN SETLIST // 本篇演奏曲目</span>
                     <span className="text-[10px] tabular-nums">{main.length} SONGS</span>
                   </div>
+                  <div className="flex flex-col">
+                    {main.map((p, idx) => renderTrackRow(p, idx))}
+                  </div>
+                </div>
 
-                  {/* Two-Column Grid for Main Set */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-5 gap-y-0">
-                    <div className="flex flex-col">
-                      {col1Main.map((p, idx) => renderTrackRow(p, idx))}
+                {/* Encore Section */}
+                {enc.length > 0 && (
+                  <div
+                    className={`rounded-lg p-3 space-y-1 border ${
+                      isVintage
+                        ? "bg-[#f4eedf] border-[#ded4bf]"
+                        : isWhite
+                        ? "bg-[#f9fafb] border-[#e5e7eb]"
+                        : "bg-[#181a23] border-[#2a2f3f]"
+                    }`}
+                  >
+                    <div className="flex items-center justify-between font-mono text-[11px] font-extrabold tracking-wider uppercase opacity-80">
+                      <span className="text-[#d19f00]">◆ ENCORE // 安可曲目</span>
+                      <span className="text-[10px] tabular-nums">{enc.length} SONGS</span>
                     </div>
                     <div className="flex flex-col">
-                      {col2Main.map((p, idx) => renderTrackRow(p, halfMain + idx))}
+                      {enc.map((p, idx) => renderTrackRow(p, idx, true))}
                     </div>
                   </div>
-
-                  {/* Encore Section */}
-                  {enc.length > 0 && (
-                    <div
-                      className={`rounded-lg p-2.5 sm:p-3 space-y-1 border mt-2 ${
-                        isVintage
-                          ? "bg-[#f4eedf] border-[#ded4bf]"
-                          : isWhite
-                          ? "bg-[#f9fafb] border-[#e5e7eb]"
-                          : "bg-[#181a23] border-[#2a2f3f]"
-                      }`}
-                    >
-                      <div className="flex items-center justify-between font-mono text-[11px] font-extrabold tracking-wider uppercase opacity-80">
-                        <span className="text-[#d19f00]">◆ ENCORE // 安可曲目</span>
-                        <span className="text-[10px] tabular-nums">{enc.length} SONGS</span>
-                      </div>
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-5 gap-y-0">
-                        {enc.map((p, idx) => renderTrackRow(p, idx, true))}
-                      </div>
-                    </div>
-                  )}
-                </div>
-              ) : (
-                /* ========== 單欄票券模式 (SLIP LAYOUT) ========== */
-                <div className="space-y-3">
-                  <div className="space-y-1">
-                    <div className="flex items-center justify-between font-mono text-[11px] font-extrabold tracking-wider uppercase opacity-75">
-                      <span>◆ MAIN SETLIST // 本篇演奏曲目</span>
-                      <span className="text-[10px] tabular-nums">{main.length} SONGS</span>
-                    </div>
-                    <div className="flex flex-col">
-                      {main.map((p, idx) => renderTrackRow(p, idx))}
-                    </div>
-                  </div>
-
-                  {/* Encore Section */}
-                  {enc.length > 0 && (
-                    <div
-                      className={`rounded-lg p-3 space-y-1 border ${
-                        isVintage
-                          ? "bg-[#f4eedf] border-[#ded4bf]"
-                          : isWhite
-                          ? "bg-[#f9fafb] border-[#e5e7eb]"
-                          : "bg-[#181a23] border-[#2a2f3f]"
-                      }`}
-                    >
-                      <div className="flex items-center justify-between font-mono text-[11px] font-extrabold tracking-wider uppercase opacity-80">
-                        <span className="text-[#d19f00]">◆ ENCORE // 安可曲目</span>
-                        <span className="text-[10px] tabular-nums">{enc.length} SONGS</span>
-                      </div>
-                      <div className="flex flex-col">
-                        {enc.map((p, idx) => renderTrackRow(p, idx, true))}
-                      </div>
-                    </div>
-                  )}
-                </div>
-              )}
+                )}
+              </div>
 
               {/* Commemorative Footer Stamp & Barcode */}
               <div className="pt-3 border-t border-current/20 flex items-end justify-between gap-3">
