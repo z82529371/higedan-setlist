@@ -54,19 +54,22 @@ export function MemorialCardModal({
     setIsExporting(true);
 
     try {
-      // 確保獲取無截斷的完整高度與寬度 (單欄長條票券 440px)
-      const actualWidth = Math.ceil(node.scrollWidth || node.offsetWidth || 440);
+      // 確保獲取無截斷的完整高度與固定標準 440px 票券寬度（不受手機螢幕縮減影響）
+      const exportWidth = 440;
       const actualHeight = Math.ceil(node.scrollHeight || node.offsetHeight);
 
       const dataUrl = await toPng(node, {
         pixelRatio: 2,
         skipFonts: true,
         backgroundColor: cardBgColor,
-        width: actualWidth,
+        width: exportWidth,
         height: actualHeight,
-        canvasWidth: actualWidth * 2,
+        canvasWidth: exportWidth * 2,
         canvasHeight: actualHeight * 2,
         style: {
+          width: `${exportWidth}px`,
+          minWidth: `${exportWidth}px`,
+          maxWidth: `${exportWidth}px`,
           transform: "none",
           margin: "0",
           maxHeight: "none",
@@ -273,18 +276,18 @@ export function MemorialCardModal({
 
             <div className="p-4 sm:p-6 space-y-4">
               {/* Card Monogram Header */}
-              <div className="flex items-center justify-between pb-2.5 border-b border-dashed border-current/20">
-                <div className="flex flex-col">
-                  <span className="font-mono text-[10px] tracking-[0.22em] font-extrabold uppercase opacity-65">
+              <div className="flex items-center justify-between pb-2.5 border-b border-dashed border-current/20 gap-2">
+                <div className="flex flex-col min-w-0">
+                  <span className="font-mono text-[10px] tracking-[0.2em] font-extrabold uppercase opacity-65 truncate">
                     OFFICIAL HIGEDAN DISM
                   </span>
-                  <span className="font-mono text-[9px] tracking-widest uppercase opacity-50">
-                    LIVE PERFORMANCE MEMORIAL ARCHIVE
+                  <span className="font-mono text-[9px] tracking-wide uppercase opacity-50 truncate">
+                    LIVE ARCHIVE
                   </span>
                 </div>
-                <div className="flex items-center gap-1.5">
+                <div className="flex items-center gap-1.5 shrink-0">
                   <span
-                    className={`font-mono text-[10px] px-2 py-0.5 rounded font-bold border ${
+                    className={`font-mono text-[10px] px-2 py-0.5 rounded font-bold border whitespace-nowrap shrink-0 ${
                       isVintage
                         ? "bg-[#f5ebd2] text-[#78350f] border-[#d6cebf]"
                         : isWhite
@@ -295,7 +298,7 @@ export function MemorialCardModal({
                     {showOrderText}
                   </span>
                   <span
-                    className={`font-mono text-[10px] px-1.5 py-0.5 rounded font-bold ${
+                    className={`font-mono text-[10px] px-1.5 py-0.5 rounded font-bold whitespace-nowrap shrink-0 ${
                       isVintage
                         ? "bg-[#e7dec6] text-[#44403c]"
                         : isWhite
