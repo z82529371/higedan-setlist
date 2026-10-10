@@ -135,6 +135,7 @@ export default function SearchBox({
   const handleSelectItem = (item) => {
     if (!item) return;
     setIsOpen(false);
+    inputRef.current?.blur();
     if (item.type === "song") {
       onSelectSong(item.id);
     } else if (item.type === "unit") {
@@ -198,7 +199,7 @@ export default function SearchBox({
           aria-expanded={isOpen && Boolean(needle)}
           aria-autocomplete="list"
           aria-controls="search-dropdown-list"
-          className="w-full rounded-[3px] border-[1.5px] border-ink bg-card py-2 pl-3 pr-8 text-[14px] text-ink placeholder:text-muted focus:border-pool focus:ring-2 focus:ring-pool/30 focus:outline-none"
+          className="w-full rounded-[3px] border-[1.5px] border-ink bg-card py-2 pl-3 pr-8 text-[16px] sm:text-[14px] text-ink placeholder:text-muted focus:border-pool focus:ring-2 focus:ring-pool/30 focus:outline-none"
           placeholder="搜尋歌曲、演出、場地…"
           value={q}
           onChange={(e) => setQ(e.target.value)}
@@ -225,7 +226,7 @@ export default function SearchBox({
           <div
             id="search-dropdown-list"
             role="listbox"
-            className="absolute left-0 right-0 top-[calc(100%+6px)] z-50 max-h-[380px] overflow-y-auto rounded-[3px] border-[1.5px] border-ink bg-card shadow-[4px_4px_0_rgba(23,35,59,0.16)]"
+            className="absolute left-0 right-0 top-[calc(100%+6px)] z-50 max-h-[48vh] sm:max-h-[380px] overflow-y-auto rounded-[3px] border-[1.5px] border-ink bg-card shadow-[4px_4px_0_rgba(23,35,59,0.16)]"
           >
             {flatItems.length === 0 ? (
               <div className="px-4 py-5 text-center font-mono text-[13px] text-muted">

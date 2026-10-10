@@ -432,17 +432,17 @@ export function ShowSlip({ ud, showId, onSelectSong, onSelectShow, onSelectVenue
                 <button
                   type="button"
                   onClick={() => onSelectShow(prevShow.id)}
-                  className="group inline-flex items-center gap-1 font-semibold text-ink hover:text-pool cursor-pointer transition-colors"
+                  className="group inline-flex items-center gap-1 font-semibold text-ink hover:text-pool cursor-pointer transition-colors min-h-[38px] px-2 py-1 sm:min-h-0 sm:p-0 rounded active:bg-paper/80"
                   title={`上一場：${showDate(prevShow)} ${prevShow.city || prevShow.venue}`}
                 >
-                  <span aria-hidden="true">←</span>
+                  <span aria-hidden="true" className="text-base sm:text-xs">←</span>
                   <span>上一場</span>
                   <span className="hidden sm:inline text-muted group-hover:text-pool">
                     ({prevShow.date.slice(5)} {prevShow.city || prevShow.venue})
                   </span>
                 </button>
               ) : (
-                <span className="text-muted/40 cursor-not-allowed">← 首場</span>
+                <span className="text-muted/40 cursor-not-allowed min-h-[38px] px-2 py-1 sm:min-h-0 sm:p-0 flex items-center">← 首場</span>
               )}
 
               <span className="text-muted tabular-nums font-bold text-[12px] flex items-center gap-1.5">
@@ -463,42 +463,76 @@ export function ShowSlip({ ud, showId, onSelectSong, onSelectShow, onSelectVenue
                 <button
                   type="button"
                   onClick={() => onSelectShow(nextShow.id)}
-                  className="group inline-flex items-center gap-1 font-semibold text-ink hover:text-pool cursor-pointer transition-colors"
+                  className="group inline-flex items-center gap-1 font-semibold text-ink hover:text-pool cursor-pointer transition-colors min-h-[38px] px-2 py-1 sm:min-h-0 sm:p-0 rounded active:bg-paper/80"
                   title={`下一場：${showDate(nextShow)} ${nextShow.city || nextShow.venue}`}
                 >
                   <span className="hidden sm:inline text-muted group-hover:text-pool">
                     ({nextShow.date.slice(5)} {nextShow.city || nextShow.venue})
                   </span>
                   <span>下一場</span>
-                  <span aria-hidden="true">→</span>
+                  <span aria-hidden="true" className="text-base sm:text-xs">→</span>
                 </button>
               ) : (
-                <span className="text-muted/40 cursor-not-allowed">最終場 →</span>
+                <span className="text-muted/40 cursor-not-allowed min-h-[38px] px-2 py-1 sm:min-h-0 sm:p-0 flex items-center">最終場 →</span>
               )}
             </div>
           )}
         </div>
 
-        {/* Level 4: Action Toolbar (Clean & Unified) */}
-        <div className="mt-2.5 flex flex-wrap items-center justify-between gap-2 border-t border-line-soft/80 pt-2 slip-ignore-export">
-          <div className="flex flex-wrap items-center gap-2">
-            <button
-              type="button"
-              onClick={handleCopySetlist}
-              className={`inline-flex items-center gap-1 rounded px-2.5 py-1 text-[11px] font-mono font-bold transition-all cursor-pointer select-none border ${
-                copied
-                  ? "bg-band text-band-ink border-band shadow-xs"
-                  : "bg-paper text-ink border-line-soft hover:bg-tape-tint/50 hover:border-ink/60"
-              }`}
-              title="複製標準歌單純文字"
-            >
-              <span>{copied ? "✓ 已複製歌單" : "📋 複製歌單"}</span>
-            </button>
+        {/* Level 4: Action Toolbar (Two-Tier Clean Split: Primary Actions & Sources + Analysis Reel) */}
+        <div className="mt-2.5 flex flex-col gap-2 border-t border-line-soft/80 pt-2.5 slip-ignore-export">
+          {/* Row 1: Primary Export Actions & External Sources (Desktop: balanced ends, Mobile: stacked cleanly) */}
+          <div className="flex flex-wrap items-center justify-between gap-2">
+            <div className="grid grid-cols-2 sm:flex sm:items-center gap-2 w-full sm:w-auto">
+              <button
+                type="button"
+                onClick={() => setShowMemorialModal(true)}
+                className="inline-flex items-center justify-center gap-1.5 rounded bg-band px-3 py-2 sm:py-1.5 text-[12px] sm:text-[11px] font-mono font-bold text-band-ink border border-ink/40 shadow-xs hover:brightness-105 active:scale-[0.98] transition-all cursor-pointer select-none"
+                title="預覽並自訂下載本場巡演歌單紀念小卡"
+              >
+                <span aria-hidden="true">📸</span>
+                <span>產生紀念小卡</span>
+              </button>
 
+              <button
+                type="button"
+                onClick={handleCopySetlist}
+                className={`inline-flex items-center justify-center gap-1.5 rounded px-3 py-2 sm:py-1.5 text-[12px] sm:text-[11px] font-mono font-bold transition-all cursor-pointer select-none border active:scale-[0.98] ${
+                  copied
+                    ? "bg-band text-band-ink border-band shadow-xs"
+                    : "bg-paper text-ink border-line-soft hover:bg-tape-tint/50 hover:border-ink/60"
+                }`}
+                title="複製標準歌單純文字"
+              >
+                <span>{copied ? "✓ 已複製" : "📋 複製歌單"}</span>
+              </button>
+            </div>
+
+            {s.sourceUrls && s.sourceUrls.length > 0 && (
+              <div className="flex flex-wrap items-center gap-1.5 font-mono text-[11px]">
+                {s.sourceUrls.map((url, i) => (
+                  <a
+                    key={i}
+                    href={url}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-1 rounded border border-line-soft bg-paper px-2 py-1 font-bold text-ink hover:bg-band hover:border-band transition-colors no-underline"
+                    title={`查看原始演出紀錄來源：${getSourceLabel(url)}`}
+                  >
+                    <span aria-hidden="true">🔗</span>
+                    <span>{getSourceLabel(url)}</span>
+                  </a>
+                ))}
+              </div>
+            )}
+          </div>
+
+          {/* Row 2: Secondary Analysis & Comparison Reel (Dedicated scrollable/wrapping reel) */}
+          <div className="flex items-center gap-1.5 overflow-x-auto scrollbar-none py-0.5 -mx-1 px-1 sm:mx-0 sm:px-0 sm:flex-wrap border-t border-line-soft/60 pt-2">
             <button
               type="button"
               onClick={() => setShowLegend((v) => !v)}
-              className="inline-flex items-center gap-1 rounded bg-paper px-2.5 py-1 text-[11px] font-mono font-bold text-ink border border-line-soft hover:bg-tape-tint/50 transition-colors cursor-pointer select-none"
+              className="inline-flex shrink-0 items-center gap-1 rounded bg-paper px-2.5 py-1.5 sm:py-1 text-[11px] font-mono font-bold text-ink border border-line-soft hover:bg-tape-tint/50 transition-colors cursor-pointer select-none"
               aria-expanded={showLegend}
             >
               <span>{showLegend ? "▾ 記號圖例" : "▸ 記號圖例"}</span>
@@ -508,7 +542,7 @@ export function ShowSlip({ ud, showId, onSelectSong, onSelectShow, onSelectVenue
               <button
                 type="button"
                 onClick={() => setShowDiff((v) => !v)}
-                className="inline-flex items-center gap-1 rounded bg-paper px-2.5 py-1 text-[11px] font-mono font-bold text-ink border border-line-soft hover:bg-tape-tint/50 transition-colors cursor-pointer select-none"
+                className="inline-flex shrink-0 items-center gap-1 rounded bg-paper px-2.5 py-1.5 sm:py-1 text-[11px] font-mono font-bold text-ink border border-line-soft hover:bg-tape-tint/50 transition-colors cursor-pointer select-none"
                 aria-expanded={showDiff}
               >
                 <span>{showDiff ? "▾ 曲目更換" : "▸ 曲目更換"}</span>
@@ -522,7 +556,7 @@ export function ShowSlip({ ud, showId, onSelectSong, onSelectShow, onSelectVenue
               <button
                 type="button"
                 onClick={() => setShowAnalysis((v) => !v)}
-                className="inline-flex items-center gap-1 rounded bg-paper px-2.5 py-1 text-[11px] font-mono font-bold text-ink border border-line-soft hover:bg-tape-tint/50 transition-colors cursor-pointer select-none"
+                className="inline-flex shrink-0 items-center gap-1 rounded bg-paper px-2.5 py-1.5 sm:py-1 text-[11px] font-mono font-bold text-ink border border-line-soft hover:bg-tape-tint/50 transition-colors cursor-pointer select-none"
                 aria-expanded={showAnalysis}
               >
                 <span>{showAnalysis ? "▾ 專輯分佈" : "▸ 專輯分佈"}</span>
@@ -533,38 +567,13 @@ export function ShowSlip({ ud, showId, onSelectSong, onSelectShow, onSelectVenue
               <button
                 type="button"
                 onClick={() => setShowCompare((v) => !v)}
-                className="inline-flex items-center gap-1 rounded bg-paper px-2.5 py-1 text-[11px] font-mono font-bold text-ink border border-line-soft hover:bg-tape-tint/50 transition-colors cursor-pointer select-none"
+                className="inline-flex shrink-0 items-center gap-1 rounded bg-paper px-2.5 py-1.5 sm:py-1 text-[11px] font-mono font-bold text-ink border border-line-soft hover:bg-tape-tint/50 transition-colors cursor-pointer select-none"
                 aria-expanded={showCompare}
               >
                 <span>{showCompare ? "▾ 雙場對比" : "▸ ⚖️ 雙場對比"}</span>
               </button>
             )}
-
-            <button
-              type="button"
-              onClick={() => setShowMemorialModal(true)}
-              className="inline-flex items-center gap-1 rounded bg-paper px-2.5 py-1 text-[11px] font-mono font-bold text-ink border border-line-soft hover:bg-band hover:border-band transition-colors cursor-pointer select-none"
-              title="預覽並自訂下載本場巡演歌單紀念小卡"
-            >
-              <span>📸 產生紀念小卡</span>
-            </button>
           </div>
-
-          {s.sourceUrls && s.sourceUrls.length > 0 && (
-            <div className="flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-xs text-muted [&_a]:text-pool [&_a]:underline-offset-[3px]">
-              {s.sourceUrls.map((url, i) => (
-                <a
-                  key={i}
-                  href={url}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center gap-1 font-mono hover:underline"
-                >
-                  <span aria-hidden="true">🔗</span> {getSourceLabel(url)}
-                </a>
-              ))}
-            </div>
-          )}
         </div>
 
         {/* Collapsible Legend Details */}
@@ -741,7 +750,7 @@ export function ShowSlip({ ud, showId, onSelectSong, onSelectShow, onSelectVenue
 
       {/* Bottom Show Navigation Footer */}
       {showList.length > 1 && (
-        <div className="mt-7 pt-4 border-t border-line-soft flex flex-wrap items-center justify-between gap-2 font-mono text-[12px] slip-ignore-export">
+        <div className="mt-7 pt-4 border-t border-line-soft grid grid-cols-1 sm:grid-cols-2 gap-2 font-mono text-[12px] slip-ignore-export">
           {prevShow ? (
             <button
               type="button"
@@ -749,11 +758,11 @@ export function ShowSlip({ ud, showId, onSelectSong, onSelectShow, onSelectVenue
                 onSelectShow(prevShow.id);
                 window.scrollTo({ top: 0, behavior: "smooth" });
               }}
-              className="inline-flex items-center gap-1 rounded border border-line-soft bg-paper px-2.5 py-1 text-ink hover:bg-band hover:border-band transition-colors cursor-pointer"
+              className="inline-flex min-h-[42px] sm:min-h-0 items-center justify-center sm:justify-start gap-1 rounded border border-line-soft bg-paper px-3 py-2 sm:py-1 text-ink hover:bg-band hover:border-band active:bg-band transition-colors cursor-pointer truncate"
             >
-              <span>← 上一場：{showDate(prevShow)} {prevShow.city || prevShow.venue}</span>
+              <span className="truncate">← 上一場：{showDate(prevShow)} {prevShow.city || prevShow.venue}</span>
             </button>
-          ) : <div />}
+          ) : <div className="hidden sm:block" />}
           {nextShow ? (
             <button
               type="button"
@@ -761,9 +770,9 @@ export function ShowSlip({ ud, showId, onSelectSong, onSelectShow, onSelectVenue
                 onSelectShow(nextShow.id);
                 window.scrollTo({ top: 0, behavior: "smooth" });
               }}
-              className="inline-flex items-center gap-1 rounded border border-line-soft bg-paper px-2.5 py-1 text-ink hover:bg-band hover:border-band transition-colors cursor-pointer font-bold"
+              className="inline-flex min-h-[42px] sm:min-h-0 items-center justify-center sm:justify-end gap-1 rounded border border-line-soft bg-paper px-3 py-2 sm:py-1 text-ink hover:bg-band hover:border-band active:bg-band transition-colors cursor-pointer font-bold truncate"
             >
-              <span>下一場：{showDate(nextShow)} {nextShow.city || nextShow.venue} →</span>
+              <span className="truncate">下一場：{showDate(nextShow)} {nextShow.city || nextShow.venue} →</span>
             </button>
           ) : null}
         </div>
@@ -1106,50 +1115,52 @@ export function SongSlip({ songId, trackShows, showById, unitData, onSelectShow,
           )}
         </h2>
 
-        {/* Level 3: Summary stats, Role & Rarity */}
-        <div className="flex flex-wrap items-center justify-between gap-2.5 pt-1.5 border-t border-line-soft font-mono text-[12px]">
-          <div className="flex flex-wrap items-center gap-2 text-muted">
-            <span className="font-bold text-ink">
-              共出演 <span className="tabular-nums text-[14px] text-pool font-extrabold">{appearances.length}</span> 場
+        {/* Level 3a: Song Identity Summary Bar (Clean, single cohesive line) */}
+        <div className="flex flex-wrap items-center gap-2 pt-2 border-t border-line-soft font-mono text-[12px] text-muted">
+          <span className="font-bold text-ink">
+            共出演 <span className="tabular-nums text-[14px] text-pool font-extrabold">{appearances.length}</span> 場
+          </span>
+          {rarityTier && (
+            <span className={`rounded px-1.5 py-0.5 text-xs font-bold border ${rarityTier.cls}`}>
+              {rarityTier.label}
             </span>
-            {rarityTier && (
-              <span className={`rounded px-1.5 py-0.5 text-xs font-bold border ${rarityTier.cls}`}>
-                {rarityTier.label}
-              </span>
-            )}
-            {rarityTier?.isDormant && (
-              <span className="rounded bg-paper px-1.5 py-0.5 text-xs font-bold text-muted border border-line-soft">
-                📦 近年封箱中
-              </span>
-            )}
-            {hasSpecials && (
-              <span className="rounded bg-tape/20 px-1.5 py-0.5 font-bold text-ink border border-ink/20 text-xs">
-                ✨ 特殊版本 {specialVersionCounts.total}場
-              </span>
-            )}
-            {liveRole && (
-              <span className="hidden sm:inline-flex items-center gap-1 text-xs text-ink/80">
-                <span>· 🎯 {liveRole.positionText}</span>
-                {liveRole.avgOrder && <span>(平均M{liveRole.avgOrder})</span>}
-                {liveRole.encoreRate > 0 && <span>· 安可率{liveRole.encoreRate}%</span>}
-              </span>
-            )}
-          </div>
+          )}
+          {rarityTier?.isDormant && (
+            <span className="rounded bg-paper px-1.5 py-0.5 text-xs font-bold text-muted border border-line-soft">
+              📦 近年封箱中
+            </span>
+          )}
+          {hasSpecials && (
+            <span className="rounded bg-tape/20 px-1.5 py-0.5 font-bold text-ink border border-ink/20 text-xs">
+              ✨ 特殊版本 {specialVersionCounts.total}場
+            </span>
+          )}
+          {liveRole && (
+            <span className="inline-flex items-center gap-1 text-xs text-ink/80">
+              <span>· 🎯 {liveRole.positionText}</span>
+              {liveRole.avgOrder && <span>(平均M{liveRole.avgOrder})</span>}
+              {liveRole.encoreRate > 0 && <span>· 安可率{liveRole.encoreRate}%</span>}
+            </span>
+          )}
+        </div>
 
-          <div className="flex flex-wrap items-center gap-1.5">
-            <button
-              type="button"
-              onClick={handleCopyHistory}
-              className={`inline-flex items-center gap-1 rounded px-2.5 py-1 font-mono text-[11px] font-bold transition-all cursor-pointer select-none border ${
-                copied
-                  ? "bg-band text-band-ink border-band shadow-xs"
-                  : "bg-paper text-ink border-line-soft hover:bg-tape-tint/50 hover:border-ink/60"
-              }`}
-              title="複製這首歌曲的演出歷史摘要"
-            >
-              <span>{copied ? "✓ 已複製歷程" : "📋 複製歷程"}</span>
-            </button>
-            {yearBreakdown.length > 0 && (
+        {/* Level 3b: Action Toolbar (Separated clean row, no horizontal crowding) */}
+        <div className="mt-2 flex flex-wrap items-center justify-between gap-2 border-t border-line-soft/60 pt-2 font-mono text-[11px]">
+          <button
+            type="button"
+            onClick={handleCopyHistory}
+            className={`inline-flex items-center gap-1 rounded px-2.5 py-1 font-mono text-[11px] font-bold transition-all cursor-pointer select-none border ${
+              copied
+                ? "bg-band text-band-ink border-band shadow-xs"
+                : "bg-paper text-ink border-line-soft hover:bg-tape-tint/50 hover:border-ink/60"
+            }`}
+            title="複製這首歌曲的演出歷史摘要"
+          >
+            <span>{copied ? "✓ 已複製歷程" : "📋 複製歷程"}</span>
+          </button>
+
+          <div className="flex items-center gap-1.5">
+            {yearBreakdown.length >= 3 && (
               <button
                 type="button"
                 onClick={() => setShowYearBreakdown((v) => !v)}
@@ -1191,8 +1202,8 @@ export function SongSlip({ songId, trackShows, showById, unitData, onSelectShow,
           </div>
         </div>
 
-        {/* Level 4: Milestone Performance (Flattened 2-Column Split) */}
-        {sortedAppearances.length > 0 && (
+        {/* Level 4: Milestone Performance (Only when song has >= 2 shows & different show IDs) */}
+        {sortedAppearances.length >= 2 && firstApp && latestApp && firstApp.showId !== latestApp.showId && (
           <div className="mt-3 grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 border-t border-line-soft/80 pt-2.5 font-mono text-[12px]">
             {/* First Live */}
             <div className="flex flex-col gap-0.5">
@@ -1211,7 +1222,10 @@ export function SongSlip({ songId, trackShows, showById, unitData, onSelectShow,
                   }}
                   className="group flex flex-col text-ink no-underline hover:text-pool transition-colors"
                 >
-                  <span className="font-bold text-[13px] truncate group-hover:underline">
+                  <span
+                    className="font-bold text-[13px] break-words line-clamp-2 leading-snug group-hover:underline"
+                    title={firstApp.unitTitle}
+                  >
                     {firstApp.unitTitle}
                   </span>
                   <span className="text-muted text-[12px] mt-0.5 truncate flex items-center gap-1">
@@ -1254,7 +1268,10 @@ export function SongSlip({ songId, trackShows, showById, unitData, onSelectShow,
                   }}
                   className="group flex flex-col text-ink no-underline hover:text-pool transition-colors"
                 >
-                  <span className="font-bold text-[13px] truncate group-hover:underline">
+                  <span
+                    className="font-bold text-[13px] break-words line-clamp-2 leading-snug group-hover:underline"
+                    title={latestApp.unitTitle}
+                  >
                     {latestApp.unitTitle}
                   </span>
                   <span className="text-muted text-[12px] mt-0.5 truncate flex items-center gap-1">
@@ -1283,7 +1300,7 @@ export function SongSlip({ songId, trackShows, showById, unitData, onSelectShow,
         )}
 
         {/* Level 5: Collapsible Year-by-Year Performance Frequency */}
-        {showYearBreakdown && yearBreakdown.length > 0 && (
+        {showYearBreakdown && yearBreakdown.length >= 3 && (
           <div className="mt-2.5 border-t border-line-soft/80 pt-2 font-mono text-[11px]">
             <div className="flex items-center justify-between font-bold text-muted mb-1.5">
               <span className="flex items-center gap-1">
@@ -1398,7 +1415,7 @@ export function SongSlip({ songId, trackShows, showById, unitData, onSelectShow,
             return (
               <section key={g.unitId} className="flex flex-col">
                 <div
-                  className={`flex items-center justify-between gap-2.5 rounded-[4px] border border-line-soft bg-paper/70 px-3 py-2 transition-colors ${
+                  className={`flex flex-col gap-2 rounded-[4px] border border-line-soft bg-paper/70 px-3.5 py-2.5 transition-colors ${
                     isCollapsible
                       ? "cursor-pointer hover:bg-line-soft/80 hover:border-ink/30 select-none"
                       : ""
@@ -1418,35 +1435,81 @@ export function SongSlip({ songId, trackShows, showById, unitData, onSelectShow,
                   }
                   aria-expanded={isCollapsible ? !isCollapsed : undefined}
                 >
-                  <div className="flex min-w-0 items-center gap-2">
-                    <span className="shrink-0 rounded-[3px] border border-ink/20 bg-card px-1.5 py-0.5 font-mono text-[11px] font-bold text-ink">
-                      {g.unitType}
-                    </span>
-                    <h3 className="m-0 truncate font-display text-[15px] font-extrabold text-ink">
+                  {/* Desktop: Single Row Layout with Title on Left, Counts & Attendance at Line-End */}
+                  <div className="hidden sm:flex sm:items-center sm:justify-between sm:gap-3">
+                    <h3
+                      className="m-0 min-w-0 flex-1 break-words font-display text-[15px] font-extrabold leading-snug text-ink text-pretty"
+                      title={g.unitTitle}
+                    >
                       {g.unitTitle}
                     </h3>
+                    <div className="flex shrink-0 items-center gap-2 font-mono text-[11px] text-muted tabular-nums">
+                      <span className="font-bold text-ink">共 {g.items.length} 場</span>
+                      {totalShowsInTour > 1 && (
+                        <>
+                          {isFullAttendance && (
+                            <span className="rounded bg-tape-tint px-1.5 py-0.5 text-xs font-bold text-ink border border-ink/20">
+                              ★ 全勤 ({g.items.length}/{totalShowsInTour})
+                            </span>
+                          )}
+                          {isRotation && (
+                            <span className="rounded bg-paper px-1.5 py-0.5 text-xs font-medium text-pool border border-pool/30">
+                              🔄 輪替 ({g.items.length}/{totalShowsInTour})
+                            </span>
+                          )}
+                        </>
+                      )}
+                      {isCollapsible && (
+                        <span className="rounded border border-line-soft bg-card px-2 py-0.5 text-[11px] font-semibold text-muted hover:text-ink">
+                          {isCollapsed ? "▼ 展開" : "▲ 收合"}
+                        </span>
+                      )}
+                    </div>
                   </div>
-                  <div className="ml-auto flex shrink-0 items-center gap-2 font-mono text-[11px] text-muted tabular-nums">
-                    <span className="font-bold text-ink">共 {g.items.length} 場</span>
-                    {totalShowsInTour > 1 && (
-                      <>
-                        {isFullAttendance && (
-                          <span className="rounded bg-tape-tint px-1.5 py-0.5 text-xs font-bold text-ink border border-ink/20">
-                            ★ 全勤 ({g.items.length}/{totalShowsInTour})
-                          </span>
+
+                  {/* Mobile: Two-Tier Layout */}
+                  <div className="flex flex-col gap-2 sm:hidden">
+                    <div className="flex items-start justify-between gap-2">
+                      <h3
+                        className="m-0 min-w-0 flex-1 break-words font-display text-[14px] font-extrabold leading-snug text-ink text-pretty"
+                        title={g.unitTitle}
+                      >
+                        {g.unitTitle}
+                      </h3>
+                      {isCollapsible && (
+                        <span
+                          aria-hidden="true"
+                          className="shrink-0 text-muted/80 text-[13px] font-bold pt-0.5"
+                        >
+                          {isCollapsed ? "▾" : "▴"}
+                        </span>
+                      )}
+                    </div>
+
+                    <div className="flex items-center justify-between gap-2 border-t border-line-soft/60 pt-1.5 font-mono text-[11px]">
+                      <div className="flex flex-wrap items-center gap-2">
+                        <span className="font-bold text-ink tabular-nums">共 {g.items.length} 場</span>
+                        {totalShowsInTour > 1 && (
+                          <>
+                            {isFullAttendance && (
+                              <span className="rounded bg-tape-tint px-1.5 py-0.5 text-xs font-bold text-ink border border-ink/20">
+                                ★ 全勤 ({g.items.length}/{totalShowsInTour})
+                              </span>
+                            )}
+                            {isRotation && (
+                              <span className="rounded bg-paper px-1.5 py-0.5 text-xs font-medium text-pool border border-pool/30">
+                                🔄 輪替 ({g.items.length}/{totalShowsInTour})
+                              </span>
+                            )}
+                          </>
                         )}
-                        {isRotation && (
-                          <span className="rounded bg-paper px-1.5 py-0.5 text-xs font-medium text-pool border border-pool/30">
-                            🔄 輪替 ({g.items.length}/{totalShowsInTour})
-                          </span>
-                        )}
-                      </>
-                    )}
-                    {isCollapsible && (
-                      <span className="rounded border border-line-soft bg-card px-1.5 py-0.5 text-xs font-semibold text-muted">
-                        {isCollapsed ? "▼ 展開" : "▲ 收合"}
-                      </span>
-                    )}
+                      </div>
+                      {isCollapsible && (
+                        <span className="rounded border border-line-soft bg-card px-2 py-0.5 text-[11px] font-semibold text-muted hover:text-ink">
+                          {isCollapsed ? "▼ 展開清單" : "▲ 收合清單"}
+                        </span>
+                      )}
+                    </div>
                   </div>
                 </div>
                 {!isCollapsed && (
@@ -1697,10 +1760,53 @@ export function VenueSlip({ venueName, globalVenueShows, unitData, onSelectShow,
       }));
   }, [venueShows, unitData]);
 
+  // Category Counts & Available Types
+  const typeCounts = useMemo(() => {
+    const counts = new Map();
+    for (const app of venueShows) {
+      const t = app.unitType || "其他";
+      counts.set(t, (counts.get(t) || 0) + 1);
+    }
+    return counts;
+  }, [venueShows]);
+
+  const availableTypes = useMemo(() => {
+    const types = CATEGORY_ORDER.filter((t) => typeCounts.has(t));
+    for (const t of typeCounts.keys()) {
+      if (!types.includes(t)) types.push(t);
+    }
+    return types;
+  }, [typeCounts]);
+
+  const [selectedType, setSelectedType] = useState(() => availableTypes[0] ?? "巡演專場");
+
+  useEffect(() => {
+    if (availableTypes.length > 0) {
+      setSelectedType(availableTypes[0]);
+    }
+  }, [venueName]);
+
+  useEffect(() => {
+    if (availableTypes.length > 0 && !availableTypes.includes(selectedType)) {
+      setSelectedType(availableTypes[0]);
+    }
+  }, [availableTypes, selectedType]);
+
+  const effectiveType = availableTypes.includes(selectedType)
+    ? selectedType
+    : availableTypes[0];
+
+  const filteredVenueShows = useMemo(() => {
+    if (!effectiveType) return venueShows;
+    return venueShows.filter(
+      (app) => (app.unitType || "其他") === effectiveType
+    );
+  }, [venueShows, effectiveType]);
+
   // Group by Unit
   const groupedByUnit = useMemo(() => {
     const groupMap = new Map();
-    for (const app of venueShows) {
+    for (const app of filteredVenueShows) {
       if (!groupMap.has(app.unitId)) {
         groupMap.set(app.unitId, {
           unitId: app.unitId,
@@ -1715,7 +1821,7 @@ export function VenueSlip({ venueName, globalVenueShows, unitData, onSelectShow,
     return Array.from(groupMap.values()).sort((a, b) =>
       b.earliestDate.localeCompare(a.earliestDate)
     );
-  }, [venueShows]);
+  }, [filteredVenueShows]);
 
   const [collapsedMap, setCollapsedMap] = useState(() => new Map());
 
@@ -1727,7 +1833,7 @@ export function VenueSlip({ venueName, globalVenueShows, unitData, onSelectShow,
       }
     });
     setCollapsedMap(initial);
-  }, [venueName, groupedByUnit]);
+  }, [venueName, effectiveType, groupedByUnit]);
 
   const toggleUnit = (unitId) => {
     setCollapsedMap((prev) => {
@@ -1840,38 +1946,40 @@ export function VenueSlip({ venueName, globalVenueShows, unitData, onSelectShow,
           )}
         </h2>
 
-        {/* Level 3: Summary stats, Venue Tier & Action Toolbar */}
-        <div className="flex flex-wrap items-center justify-between gap-2.5 pt-1.5 border-t border-line-soft font-mono text-[12px]">
-          <div className="flex flex-wrap items-center gap-2 text-muted">
-            <span className="font-bold text-ink">
-              共舉辦過 <span className="tabular-nums text-[14px] text-pool font-extrabold">{venueShows.length}</span> 場演出
+        {/* Level 3a: Venue Identity Summary Bar (Clean, single cohesive line) */}
+        <div className="flex flex-wrap items-center gap-2 pt-2 border-t border-line-soft font-mono text-[12px] text-muted">
+          <span className="font-bold text-ink">
+            共舉辦過 <span className="tabular-nums text-[14px] text-pool font-extrabold">{venueShows.length}</span> 場演出
+          </span>
+          {venueTier && (
+            <span className={`rounded px-1.5 py-0.5 text-xs font-bold border ${venueTier.cls}`} title={venueTier.desc}>
+              {venueTier.label}
             </span>
-            {venueTier && (
-              <span className={`rounded px-1.5 py-0.5 text-xs font-bold border ${venueTier.cls}`} title={venueTier.desc}>
-                {venueTier.label}
-              </span>
-            )}
-            {spanYearsText && (
-              <span className="rounded bg-paper px-1.5 py-0.5 text-xs font-bold text-muted border border-line-soft">
-                📅 {spanYearsText}
-              </span>
-            )}
-          </div>
+          )}
+          {spanYearsText && (
+            <span className="rounded bg-paper px-1.5 py-0.5 text-xs font-bold text-muted border border-line-soft">
+              📅 {spanYearsText}
+            </span>
+          )}
+        </div>
 
-          <div className="flex flex-wrap items-center gap-1.5">
-            <button
-              type="button"
-              onClick={handleCopyVenueHistory}
-              className={`inline-flex items-center gap-1 rounded px-2.5 py-1 font-mono text-[11px] font-bold transition-all cursor-pointer select-none border ${
-                copied
-                  ? "bg-band text-band-ink border-band shadow-xs"
-                  : "bg-paper text-ink border-line-soft hover:bg-tape-tint/50 hover:border-ink/60"
-              }`}
-              title="複製此場地的演出歷史紀錄"
-            >
-              <span>{copied ? "✓ 已複製歷程" : "📋 複製歷程"}</span>
-            </button>
-            {yearBreakdown.length > 0 && (
+        {/* Level 3b: Action Toolbar (Separated clean row, no horizontal crowding) */}
+        <div className="mt-2 flex flex-wrap items-center justify-between gap-2 border-t border-line-soft/60 pt-2 font-mono text-[11px]">
+          <button
+            type="button"
+            onClick={handleCopyVenueHistory}
+            className={`inline-flex items-center gap-1 rounded px-2.5 py-1 font-mono text-[11px] font-bold transition-all cursor-pointer select-none border ${
+              copied
+                ? "bg-band text-band-ink border-band shadow-xs"
+                : "bg-paper text-ink border-line-soft hover:bg-tape-tint/50 hover:border-ink/60"
+            }`}
+            title="複製此場地的演出歷史紀錄"
+          >
+            <span>{copied ? "✓ 已複製歷程" : "📋 複製歷程"}</span>
+          </button>
+
+          <div className="flex items-center gap-1.5">
+            {yearBreakdown.length >= 3 && (
               <button
                 type="button"
                 onClick={() => setShowYearBreakdown((v) => !v)}
@@ -1902,8 +2010,8 @@ export function VenueSlip({ venueName, globalVenueShows, unitData, onSelectShow,
           </div>
         </div>
 
-        {/* Level 3.5: Top Songs Performed Here */}
-        {topSongs.length > 0 && (
+        {/* Level 3.5: Top Songs Performed Here (Only when >= 4 shows & has real repeat songs) */}
+        {topSongs.length > 0 && venueShows.length >= 4 && topSongs.some((s) => s.count >= 2) && (
           <div className="mt-2.5 flex flex-wrap items-center gap-1.5 border-t border-line-soft/60 pt-2 font-mono text-[11px]">
             <span className="font-bold text-muted flex items-center gap-1">
               <span>🏆 本場地常唱曲目：</span>
@@ -1926,8 +2034,8 @@ export function VenueSlip({ venueName, globalVenueShows, unitData, onSelectShow,
           </div>
         )}
 
-        {/* Level 4: Milestone Performance (Flattened 2-Column Split) */}
-        {sortedShows.length > 0 && (
+        {/* Level 4: Milestone Performance (Only when venue has >= 3 shows) */}
+        {sortedShows.length >= 3 && firstApp && latestApp && firstApp.showId !== latestApp.showId && (
           <div className="mt-3 grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 border-t border-line-soft/80 pt-2.5 font-mono text-[12px]">
             {/* First Live */}
             <div className="flex flex-col gap-0.5">
@@ -1946,11 +2054,11 @@ export function VenueSlip({ venueName, globalVenueShows, unitData, onSelectShow,
                   }}
                   className="group flex flex-col text-ink no-underline hover:text-pool transition-colors"
                 >
-                  <span className="font-bold text-[13px] truncate group-hover:underline">
+                  <span
+                    className="font-bold text-[13px] break-words line-clamp-2 leading-snug group-hover:underline"
+                    title={firstApp.unitTitle}
+                  >
                     {firstApp.unitTitle}
-                  </span>
-                  <span className="text-muted text-[12px] mt-0.5 truncate">
-                    🏷️ {firstApp.unitType}
                   </span>
                 </a>
               ) : (
@@ -1975,11 +2083,11 @@ export function VenueSlip({ venueName, globalVenueShows, unitData, onSelectShow,
                   }}
                   className="group flex flex-col text-ink no-underline hover:text-pool transition-colors"
                 >
-                  <span className="font-bold text-[13px] truncate group-hover:underline">
+                  <span
+                    className="font-bold text-[13px] break-words line-clamp-2 leading-snug group-hover:underline"
+                    title={latestApp.unitTitle}
+                  >
                     {latestApp.unitTitle}
-                  </span>
-                  <span className="text-muted text-[12px] mt-0.5 truncate">
-                    🏷️ {latestApp.unitType}
                   </span>
                 </a>
               ) : (
@@ -2011,6 +2119,37 @@ export function VenueSlip({ venueName, globalVenueShows, unitData, onSelectShow,
         )}
       </div>
 
+      {/* Category Tabs */}
+      {availableTypes.length > 0 && (
+        <div className="my-2 border-b border-line-soft pb-2.5">
+          <div
+            role="tablist"
+            aria-label="演出類型篩選"
+            className="grid grid-cols-2 min-[380px]:grid-cols-3 sm:grid-cols-4 md:flex md:flex-nowrap md:[&>*]:flex-1 gap-1.5"
+          >
+            {availableTypes.map((t) => {
+              const count = typeCounts.get(t) || 0;
+              const isActive = effectiveType === t;
+              return (
+                <button
+                  key={t}
+                  type="button"
+                  role="tab"
+                  aria-selected={isActive}
+                  className={songFilterPillClass(isActive)}
+                  onClick={() => setSelectedType(t)}
+                >
+                  <span>{t}</span>
+                  <span className="font-mono text-[11px] tabular-nums opacity-85">
+                    ({count})
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
       {hasCollapsible && (
         <div className="flex items-center justify-end gap-2 pt-1 pb-2 font-mono text-[11px] text-muted">
           <button
@@ -2033,7 +2172,7 @@ export function VenueSlip({ venueName, globalVenueShows, unitData, onSelectShow,
 
       {groupedByUnit.length === 0 ? (
         <p className="m-0 px-1 py-6 text-center font-mono text-[13px] text-muted">
-          此場地尚無演出紀錄
+          {venueShows.length === 0 ? "此場地尚無演出紀錄" : "此分類下無演出紀錄"}
         </p>
       ) : (
         <div className="space-y-4 pt-1">
@@ -2044,7 +2183,7 @@ export function VenueSlip({ venueName, globalVenueShows, unitData, onSelectShow,
             return (
               <section key={g.unitId} className="flex flex-col">
                 <div
-                  className={`flex items-center justify-between gap-2.5 rounded-[4px] border border-line-soft bg-paper/70 px-3 py-2 transition-colors ${
+                  className={`flex flex-col gap-2 rounded-[4px] border border-line-soft bg-paper/70 px-3.5 py-2.5 transition-colors ${
                     isCollapsible
                       ? "cursor-pointer hover:bg-line-soft/80 hover:border-ink/30 select-none"
                       : ""
@@ -2064,21 +2203,51 @@ export function VenueSlip({ venueName, globalVenueShows, unitData, onSelectShow,
                   }
                   aria-expanded={isCollapsible ? !isCollapsed : undefined}
                 >
-                  <div className="flex min-w-0 items-center gap-2">
-                    <span className="shrink-0 rounded-[3px] border border-ink/20 bg-card px-1.5 py-0.5 font-mono text-[11px] font-bold text-ink">
-                      {g.unitType}
-                    </span>
-                    <h3 className="m-0 truncate font-display text-[15px] font-extrabold text-ink">
+                  {/* Desktop: Single Row Layout with Title on Left, Counts at Line-End */}
+                  <div className="hidden sm:flex sm:items-center sm:justify-between sm:gap-3">
+                    <h3
+                      className="m-0 min-w-0 flex-1 break-words font-display text-[15px] font-extrabold leading-snug text-ink text-pretty"
+                      title={g.unitTitle}
+                    >
                       {g.unitTitle}
                     </h3>
+                    <div className="flex shrink-0 items-center gap-2 font-mono text-[11px] text-muted tabular-nums">
+                      <span className="font-bold text-ink">共 {g.items.length} 場</span>
+                      {isCollapsible && (
+                        <span className="rounded border border-line-soft bg-card px-2 py-0.5 text-[11px] font-semibold text-muted hover:text-ink">
+                          {isCollapsed ? "▼ 展開" : "▲ 收合"}
+                        </span>
+                      )}
+                    </div>
                   </div>
-                  <div className="ml-auto flex shrink-0 items-center gap-2 font-mono text-[11px] text-muted tabular-nums">
-                    <span className="font-bold text-ink">共 {g.items.length} 場</span>
-                    {isCollapsible && (
-                      <span className="rounded border border-line-soft bg-card px-1.5 py-0.5 text-[11px] font-semibold text-muted">
-                        {isCollapsed ? "▼ 展開" : "▲ 收合"}
-                      </span>
-                    )}
+
+                  {/* Mobile: Two-Tier Layout */}
+                  <div className="flex flex-col gap-2 sm:hidden">
+                    <div className="flex items-start justify-between gap-2">
+                      <h3
+                        className="m-0 min-w-0 flex-1 break-words font-display text-[14px] font-extrabold leading-snug text-ink text-pretty"
+                        title={g.unitTitle}
+                      >
+                        {g.unitTitle}
+                      </h3>
+                      {isCollapsible && (
+                        <span
+                          aria-hidden="true"
+                          className="shrink-0 text-muted/80 text-[13px] font-bold pt-0.5"
+                        >
+                          {isCollapsed ? "▾" : "▴"}
+                        </span>
+                      )}
+                    </div>
+
+                    <div className="flex items-center justify-between gap-2 border-t border-line-soft/60 pt-1.5 font-mono text-[11px]">
+                      <span className="font-bold text-ink tabular-nums">共 {g.items.length} 場</span>
+                      {isCollapsible && (
+                        <span className="rounded border border-line-soft bg-card px-2 py-0.5 text-[11px] font-semibold text-muted hover:text-ink">
+                          {isCollapsed ? "▼ 展開清單" : "▲ 收合清單"}
+                        </span>
+                      )}
+                    </div>
                   </div>
                 </div>
 
