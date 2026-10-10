@@ -1,17 +1,21 @@
 {
   "id": "gold-rush-2016",
   "title": "GOLD RUSH2016",
+  "shortTitle": "GOLD RUSH 2016",
   "type": "音樂祭",
   "shows": [
     {
       "id": "642149",
       "date": "2016-05-05",
+      "weekday": "木",
       "city": "名古屋",
       "venue": "RAD SEVEN",
       "region": "中部",
       "prefecture": "愛知縣",
       "title": "GOLD RUSH2016",
+      "startsAt": "16:15",
       "sourceUrls": [
+        "https://x.com/officialhige/status/725612106079309826",
         "https://higedan.com/news/3/?page=67",
         "https://www.livefans.jp/events/642149"
       ],

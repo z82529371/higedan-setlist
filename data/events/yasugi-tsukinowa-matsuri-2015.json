@@ -14,9 +14,46 @@
       "prefecture": "島根縣",
       "title": "安来月の輪祭り 2015",
       "sourceUrls": [
+        "https://x.com/officialhige/status/632219376117133312",
         "https://ja.wikipedia.org/wiki/Official%E9%AB%AD%E7%94%B7dism#出演イベント"
       ],
-      "setlist": []
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "songId": "ai-nandaga"
+        },
+        {
+          "order": 2,
+          "encore": false,
+          "songId": "asa-ni-nareba"
+        },
+        {
+          "order": 3,
+          "encore": false,
+          "songId": "koi-no-maenarae"
+        },
+        {
+          "order": 4,
+          "encore": false,
+          "songId": "shihatsu-ga-michibiku-kouhukuron"
+        },
+        {
+          "order": 5,
+          "encore": false,
+          "songId": "nichiyoubi-no-love-letter"
+        },
+        {
+          "order": 6,
+          "encore": false,
+          "songId": "sweet-tweet"
+        },
+        {
+          "order": 7,
+          "encore": false,
+          "songId": "itan-na-star"
+        }
+      ]
     }
   ]
 }

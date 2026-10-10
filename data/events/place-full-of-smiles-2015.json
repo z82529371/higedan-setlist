@@ -13,9 +13,41 @@
       "prefecture": "大阪府",
       "title": "Place full of smiles～色褪せない景色～",
       "sourceUrls": [
+        "https://x.com/officialhige/status/632583624060047360",
         "https://www.livefans.jp/events/477280"
       ],
-      "setlist": []
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "songId": "nichiyoubi-no-love-letter"
+        },
+        {
+          "order": 2,
+          "encore": false,
+          "songId": "koi-no-maenarae"
+        },
+        {
+          "order": 3,
+          "encore": false,
+          "songId": "shihatsu-ga-michibiku-kouhukuron"
+        },
+        {
+          "order": 4,
+          "encore": false,
+          "songId": "ai-nandaga"
+        },
+        {
+          "order": 5,
+          "encore": false,
+          "songId": "sweet-tweet"
+        },
+        {
+          "order": 6,
+          "encore": false,
+          "songId": "itan-na-star"
+        }
+      ]
     }
   ]
 }

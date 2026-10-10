@@ -1,0 +1,23 @@
+{
+  "id": "disk-garage-presents-space-age-rocks-2015",
+  "title": "DISK GARAGE presents 『SPACE AGE ROCKS』",
+  "shortTitle": "SPACE AGE ROCKS",
+  "type": "聯合專場",
+  "shows": [
+    {
+      "id": "disk-garage-space-age-rocks-2015-1112",
+      "date": "2015-11-12",
+      "weekday": "木",
+      "city": "東京",
+      "venue": "澀谷CLUB QUATTRO",
+      "region": "關東",
+      "prefecture": "東京都",
+      "title": "DISK GARAGE presents 『SPACE AGE ROCKS』",
+      "sourceUrls": [
+        "https://x.com/officialhige/status/656429420408758272"
+      ],
+      "opensAt": "18:00",
+      "setlist": []
+    }
+  ]
+}

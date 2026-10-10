@@ -14,10 +14,32 @@
       "prefecture": "愛知縣",
       "title": "「MAN IN THE MIRROR」発売記念ミニライブ＆サイン会",
       "sourceUrls": [
+        "https://ameblo.jp/tenyo-ru/entry-12175503739.html",
         "https://higedan.com/news/3/?page=66",
         "https://ja.wikipedia.org/wiki/Official%E9%AB%AD%E7%94%B7dism#インストアイベント"
       ],
-      "setlist": []
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "songId": "nichiyoubi-no-love-letter"
+        },
+        {
+          "order": 2,
+          "encore": false,
+          "songId": "koi-no-sarigiwa"
+        },
+        {
+          "order": 3,
+          "encore": false,
+          "songId": "coffee-to-syrup"
+        },
+        {
+          "order": 4,
+          "encore": false,
+          "songId": "koi-no-maenarae"
+        }
+      ]
     },
     {
       "id": "man-in-the-mirror-2016-0619",
@@ -35,19 +57,38 @@
       "setlist": []
     },
     {
-      "id": "man-in-the-mirror-2016-0625",
+      "id": "man-in-the-mirror-2016-0625-1",
       "date": "2016-06-25",
       "weekday": "土",
       "city": "橫濱",
       "venue": "橫濱World Porters 2F汽車道口特設會場",
       "region": "關東",
       "prefecture": "神奈川縣",
-      "title": "「MAN IN THE MIRROR」発売記念ミニライブ＆サイン会",
+      "title": "「MAN IN THE MIRROR」発売記念ミニライブ＆サイン会 第1部",
       "sourceUrls": [
+        "https://x.com/officialhige/status/746253081772326913",
         "https://higedan.com/news/3/?page=66",
         "https://ja.wikipedia.org/wiki/Official%E9%AB%AD%E7%94%B7dism#インストアイベント"
       ],
-      "setlist": []
+      "setlist": [],
+      "opensAt": "14:00"
+    },
+    {
+      "id": "man-in-the-mirror-2016-0625-2",
+      "date": "2016-06-25",
+      "weekday": "土",
+      "city": "橫濱",
+      "venue": "橫濱World Porters 2F汽車道口特設會場",
+      "region": "關東",
+      "prefecture": "神奈川縣",
+      "title": "「MAN IN THE MIRROR」発売記念ミニライブ＆サイン会 第2部",
+      "sourceUrls": [
+        "https://x.com/officialhige/status/746253081772326913",
+        "https://higedan.com/news/3/?page=66",
+        "https://ja.wikipedia.org/wiki/Official%E9%AB%AD%E7%94%B7dism#インストアイベント"
+      ],
+      "setlist": [],
+      "opensAt": "16:00"
     }
   ]
 }

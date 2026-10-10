@@ -1,20 +1,22 @@
 {
-  "id": "asunal-treasure-2016-1020",
+  "id": "asunal-treasure-2016-0505",
   "title": "アスナル金山 presents 「ケラケラ×アスナルトレジャー」",
   "shortTitle": "ケラケラ×アスナルトレジャー",
   "type": "聯合專場",
   "shows": [
     {
-      "id": "asunal-treasure-2016-1020",
-      "date": "2016-10-20",
+      "id": "asunal-treasure-2016-0505",
+      "date": "2016-05-05",
       "weekday": "木",
       "city": "名古屋",
       "venue": "アスナル金山 明日なる！広場",
       "region": "中部",
       "prefecture": "愛知縣",
       "title": "アスナル金山 presents 「ケラケラ×アスナルトレジャー」 公開収録",
+      "startsAt": "14:00",
       "sourceUrls": [
-        "https://higedan.com/news/3/?page=64"
+        "https://x.com/officialhige/status/725612106079309826",
+        "https://higedan.com/news/3751/"
       ],
       "setlist": []
     }

@@ -1637,6 +1637,18 @@
     "region": "中部",
     "prefecture": "愛知縣"
   },
+  "アスナル金山 明日なる！広場": {
+    "venue": "アスナル金山 明日なる！広場",
+    "city": "名古屋",
+    "region": "中部",
+    "prefecture": "愛知縣"
+  },
+  "明日なる！広場": {
+    "venue": "アスナル金山 明日なる！広場",
+    "city": "名古屋",
+    "region": "中部",
+    "prefecture": "愛知縣"
+  },
   "柏DOMe": {
     "venue": "柏DOMe",
     "city": "千葉",
@@ -2555,6 +2567,18 @@
     "region": "中國",
     "prefecture": "島根縣"
   },
+  "松江市川津公民館": {
+    "venue": "松江市川津公民館",
+    "city": "松江",
+    "region": "中國",
+    "prefecture": "島根縣"
+  },
+  "川津公民館": {
+    "venue": "松江市川津公民館",
+    "city": "松江",
+    "region": "中國",
+    "prefecture": "島根縣"
+  },
   "Flying Tiger Copenhagen京都河原町ストア 3F": {
     "venue": "Flying Tiger Copenhagen 京都河原町店 3F",
     "city": "京都",
@@ -2878,5 +2902,29 @@
     "city": "米子",
     "region": "中國",
     "prefecture": "鳥取縣"
+  },
+  "周南 RISING HALL": {
+    "venue": "周南 RISING HALL",
+    "city": "周南",
+    "region": "中國",
+    "prefecture": "山口縣"
+  },
+  "RISING HALL": {
+    "venue": "周南 RISING HALL",
+    "city": "周南",
+    "region": "中國",
+    "prefecture": "山口縣"
+  },
+  "岡山 PEPPERLAND": {
+    "venue": "岡山 PEPPERLAND",
+    "city": "岡山",
+    "region": "中國",
+    "prefecture": "岡山縣"
+  },
+  "PEPPERLAND": {
+    "venue": "岡山 PEPPERLAND",
+    "city": "岡山",
+    "region": "中國",
+    "prefecture": "岡山縣"
   }
 }

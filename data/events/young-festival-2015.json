@@ -1,0 +1,23 @@
+{
+  "id": "young-festival-2015",
+  "title": "第2回ヤングフェスティバル",
+  "shortTitle": "第2回ヤングフェスティバル",
+  "type": "音樂祭",
+  "shows": [
+    {
+      "id": "young-festival-2015-1205",
+      "date": "2015-12-05",
+      "weekday": "土",
+      "city": "松江",
+      "venue": "松江市川津公民館",
+      "region": "中國",
+      "prefecture": "島根縣",
+      "title": "第2回ヤングフェスティバル",
+      "startsAt": "15:00",
+      "sourceUrls": [
+        "https://x.com/officialhige/status/669816340874571776"
+      ],
+      "setlist": []
+    }
+  ]
+}

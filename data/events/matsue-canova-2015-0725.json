@@ -1,0 +1,91 @@
+{
+  "id": "matsue-canova-2015-0725",
+  "title": "モーモールルギャバン × PAN × Official髭男dism スリーマンライブ",
+  "shortTitle": "松江canova スリーマンライブ",
+  "type": "聯合專場",
+  "shows": [
+    {
+      "id": "matsue-canova-2015-0725-show",
+      "date": "2015-07-25",
+      "weekday": "土",
+      "city": "松江",
+      "venue": "松江AZTiC canova",
+      "region": "中國",
+      "prefecture": "島根縣",
+      "title": "モーモールルギャバン × PAN × Official髭男dism スリーマンライブ",
+      "sourceUrls": [
+        "https://x.com/officialhige/status/624941414997069824",
+        "https://x.com/officialhige/status/624535178220691457"
+      ],
+      "opensAt": "16:30",
+      "startsAt": "17:00",
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "songId": "koi-no-maenarae"
+        },
+        {
+          "order": 2,
+          "encore": false,
+          "songId": "yuki-seku-asa-ga-kuru"
+        },
+        {
+          "order": 3,
+          "encore": false,
+          "title": "どんなときも。 [槇原敬之]"
+        },
+        {
+          "order": 4,
+          "encore": false,
+          "songId": "yugure-zoi"
+        },
+        {
+          "order": 5,
+          "encore": false,
+          "songId": "egao-no-matsu-basho"
+        },
+        {
+          "order": 6,
+          "encore": false,
+          "songId": "triangle-wo-mawase"
+        },
+        {
+          "order": 7,
+          "encore": false,
+          "songId": "coffee-to-syrup"
+        },
+        {
+          "order": 8,
+          "encore": false,
+          "songId": "shihatsu-ga-michibiku-kouhukuron"
+        },
+        {
+          "order": 9,
+          "encore": false,
+          "songId": "nichiyoubi-no-love-letter"
+        },
+        {
+          "order": 10,
+          "encore": false,
+          "songId": "parade"
+        },
+        {
+          "order": 11,
+          "encore": false,
+          "songId": "itan-na-star"
+        },
+        {
+          "order": 12,
+          "encore": false,
+          "songId": "ai-nandaga"
+        },
+        {
+          "order": 13,
+          "encore": false,
+          "songId": "sweet-tweet"
+        }
+      ]
+    }
+  ]
+}

@@ -1,7 +1,8 @@
 {
   "id": "flying-tiger-hige-festival-2015",
   "title": "Flying Tiger Hige Festival 2015",
-  "type": "音樂祭",
+  "shortTitle": "ひげフェス京都 2015",
+  "type": "店家活動",
   "shows": [
     {
       "id": "flying-tiger-2015-0808",
@@ -27,9 +28,46 @@
       "prefecture": "京都府",
       "title": "Flying Tiger Hige Festival 2015 (Day 2)",
       "sourceUrls": [
+        "https://x.com/officialhige/status/630378584163520513",
         "https://ja.wikipedia.org/wiki/Official%E9%AB%AD%E7%94%B7dism#出演イベント"
       ],
-      "setlist": []
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "songId": "parade"
+        },
+        {
+          "order": 2,
+          "encore": false,
+          "songId": "yugure-zoi"
+        },
+        {
+          "order": 3,
+          "encore": false,
+          "songId": "koi-no-maenarae"
+        },
+        {
+          "order": 4,
+          "encore": false,
+          "songId": "nichiyoubi-no-love-letter"
+        },
+        {
+          "order": 5,
+          "encore": false,
+          "songId": "ai-nandaga"
+        },
+        {
+          "order": 6,
+          "encore": false,
+          "songId": "sweet-tweet"
+        },
+        {
+          "order": 7,
+          "encore": false,
+          "songId": "itan-na-star"
+        }
+      ]
     }
   ]
 }

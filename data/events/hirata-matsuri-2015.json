@@ -14,9 +14,31 @@
       "prefecture": "島根縣",
       "title": "平田祭り 2015",
       "sourceUrls": [
+        "https://x.com/officialhige/status/624938837836337152",
         "https://ja.wikipedia.org/wiki/Official%E9%AB%AD%E7%94%B7dism#出演イベント"
       ],
-      "setlist": []
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "songId": "yugure-zoi"
+        },
+        {
+          "order": 2,
+          "encore": false,
+          "songId": "ai-nandaga"
+        },
+        {
+          "order": 3,
+          "encore": false,
+          "songId": "egao-no-matsu-basho"
+        },
+        {
+          "order": 4,
+          "encore": false,
+          "songId": "koi-no-maenarae"
+        }
+      ]
     }
   ]
 }
