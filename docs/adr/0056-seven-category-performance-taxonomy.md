@@ -1,7 +1,7 @@
 # ADR-0056: 七大演出類型分類體系與學園祭／特別專場正規化規範
 
 ## Status
-Accepted
+部分已被替代 (Partially Superseded by [ADR-0078: 八大演出類型分類體系與店家活動正規化規範](0078-eight-category-performance-taxonomy-and-instore-events.md)：分類體系已正式擴充為八大分類，新增「店家活動」)
 
 ## Context
 

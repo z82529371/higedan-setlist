@@ -66,7 +66,7 @@
 | [ADR-0053: 聯合專場（Two-Man Live）系列活動聚合與腳本變數作用域修復](0053-joint-live-series-exemption-and-two-man-live-2019.md) | 已採納 (Accepted) | - |
 | [ADR-0054: 跨年份巡演 Slug 生成防拆機制、巡演目錄導向與 one-man tour 18/19 建模](0054-cross-year-tour-slug-and-container-routing.md) | 已採納 (Accepted) | - |
 | [ADR-0055: 非本家翻唱曲目與未發行作品庫邊界規範](0055-cover-songs-title-track-boundary.md) | 已採納 (Accepted) | - |
-| [ADR-0056: 七大演出類型分類體系與學園祭／特別專場正規化規範](0056-seven-category-performance-taxonomy.md) | 已採納 (Accepted) | - |
+| [ADR-0056: 七大演出類型分類體系與學園祭／特別專場正規化規範](0056-seven-category-performance-taxonomy.md) | 部分已被替代 (Partially Superseded) | 分類體系已被 ADR-0078 擴充為八大分類（新增店家活動） |
 | [ADR-0057: 巡演容器升格判定與 setlist 冗餘屬性清除機制](0057-tour-container-promotion-and-setlist-purge.md) | 已採納 (Accepted) | - |
 | [ADR-0058: 純樂團名稱事件標題回退為樂團名加日期規範](0058-bare-artist-event-title-fallback-to-band-and-date.md) | 已採納 (Accepted) | - |
 | [ADR-0059: 整輪巡演固定翻唱曲目納入共識模板規範](0059-tour-wide-fixed-cover-in-template-setlist.md) | 已採納 (Accepted) | - |
@@ -89,4 +89,15 @@
 | [ADR-0081: 全站正名、官方翹鬍子品牌識別與頂部 Micro-Hero 數據引導架構 (Brand Identity Normalization and Micro-Hero Architecture)](0081-brand-identity-normalization-and-micro-hero-architecture.md) | 已採納 (Accepted) | 拔除亞洲巡演舊標籤、全站正名、官方翹鬍子 Favicon 向量鏈、Header 去煽情化與 Micro-Hero 數據膠囊列 |
 | [ADR-0082: 行動端浮動導航抽屜、雙向喚起與全站 RWD 人體工學架構 (Mobile-First Bottom Sheet Navigation and RWD Architecture)](0082-mobile-first-bottom-sheet-navigation-and-rwd-architecture.md) | 已採納 (Accepted) | 解決窄螢幕四階導航壓迫、iOS Safari 防縮放、工具列分流與拇指友善巡演步進器 |
 | [ADR-0083: 場地票券演出類型分流標籤列與雙票券體驗一致性規範 (VenueSlip Category Filter Tabs and Slip Consistency)](0083-venue-category-filter-tabs-and-slip-consistency.md) | 已採納 (Accepted) | 場地票券新增動態演出類型分流標籤，與歌曲票券達成 100% 心智模型與架構對稱 |
+| [ADR-0084: 多階導航折疊手風琴與單據實用工具集成架構 (Collapsible Multi-Tier Navigators and Slip Utilities)](0084-collapsible-navigators-and-slip-utilities.md) | 已採納 (Accepted) | 解決多階導航佔據視窗高度問題，整合對比與分析工具抽屜 |
+| [ADR-0085: 行動端獨立雙操作 FAB 塢與聚光燈搜尋架構 (Mobile Dual Action Dock and Spotlight Search)](0085-mobile-dual-action-dock-and-spotlight-search.md) | 已採納 (Accepted) | 分離搜尋與篩選按鈕，建立滿版串流聚光燈搜尋體驗 |
+| [ADR-0086: 日系溫潤紙質色盤與全景網點背景架構 (Warm Paper Palette and Dot Grid Background Architecture)](0086-warm-paper-palette-and-dot-grid-background.md) | 部分已被替代 (Partially Superseded) | 暖米紙色盤保留；網點背景已被 ADR-0091（5mm 方眼手帳格線）替代 |
+| [ADR-0087: 頂部全寬吸頂動態狀態列架構 (Top Full-Width Sticky Dynamic Status Bar Architecture)](0087-top-full-width-sticky-status-bar.md) | 已採納 (Accepted) | 頂部黃條全寬置頂吸附，動態響應場次／歌曲／場地切換並支援點擊回跳 |
+| [ADR-0088: 實體演唱會門票擬物工藝：不透明封箱膠帶、雙側撕票缺口與典藏條碼 (Authentic Concert Ticket Notches, Opaque Gaffer Tape, and Vintage Barcode)](0088-authentic-ticket-notches-and-opaque-tape.md) | 部分已被替代 (Partially Superseded) | 撕票缺口與條碼底欄保留；膠帶部分已被 ADR-0089（手撕和紙膠帶）替代 |
+| [ADR-0089: 日系手撕和紙膠帶、微縮防偽線與實體票券雙色結構工藝 (Serrated Washi Tape, Microprint Security Stripe, and Two-Tone Ticket Stub Architecture)](0089-washi-tape-and-concert-stub-craftsmanship.md) | 已採納 (Accepted) | 膠帶升級齒刀鋸齒邊與微消光纖維，新增雙色票根分界與微縮文字安全帶 |
+| [ADR-0090: 日系典藏手感紙質有機微紋理與控台聚光微光架構 (Tactile Archival Paper Grain and Soundboard Lamp Ambient Spotlight Architecture)](0090-tactile-archival-paper-and-ambient-spotlight.md) | 已採納 (Accepted) | 導入有機紙漿微粒與檯燈柔光聚光暈 |
+| [ADR-0091: 日系 5mm 方眼手帳筆記本與檯燈聚光背景架構 (Japanese 5mm Graph Notebook and Desk Lamp Ambient Glow Architecture)](0091-japanese-graph-notebook-background.md) | 已採納 (Accepted) | 滿版鋪設 20px 方眼手帳格線與檯燈柔光，完美契合紙膠帶票券剪貼本隱喻 |
+| [ADR-0092: 暖米白原色卡紙全面替代純白與零刺眼白底決策 (Warm Ivory Cardstock and Zero Pure White Architecture)](0092-warm-ivory-cardstock-and-zero-pure-white.md) | 已廢止 (Superseded) | 前景卡色已被 ADR-0094（柔暖牛奶白 #f8f7f4）替代 |
+| [ADR-0093: 日系手帳同色卡紙純粹化與背景格線層級隔離架構 (Unified Notebook Cardstock and Background Stacking Context Architecture)](0093-unified-notebook-cardstock-and-stacking-context.md) | 部分已被替代 (Partially Superseded) | 背景格線層級隔離保留；卡色已被 ADR-0094（柔暖牛奶白 #f8f7f4）替代 |
+| [ADR-0094: 日系柔暖牛奶白卡紙與實體對比階梯決策 (Soft Milk White Cardstock and Physical Contrast Hierarchy Architecture)](0094-soft-milk-white-cardstock-and-contrast-hierarchy.md) | 已採納 (Accepted) | 鎖定 #f8f7f4 柔暖牛奶白，杜絕 #ffffff 死白刺眼眩光，建立清晰實體票券紙張對比階梯 |
 
