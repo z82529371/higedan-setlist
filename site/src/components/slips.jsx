@@ -61,6 +61,74 @@ const songFilterPillClass = (isActive) =>
       : "border-line bg-paper text-ink hover:bg-pool-wash hover:border-pool hover:text-pool"
   }`;
 
+
+function TicketPerforationDivider() {
+  return (
+    <div
+      className="relative -mx-[26px] max-sm:-mx-4 mb-4 sm:mb-5 select-none"
+      aria-hidden="true"
+    >
+      <div className="relative flex items-center">
+        {/* Left Inward Punch Notch */}
+        <span className="absolute -left-[2px] top-1/2 -translate-y-1/2 h-[22px] w-[13px] rounded-r-full bg-paper border-r-[1.5px] border-y-[1.5px] border-ink z-10" />
+        {/* Perforated Dashed Tear Line */}
+        <div className="w-full border-t-[2px] border-dashed border-ink/40" />
+        {/* Right Inward Punch Notch */}
+        <span className="absolute -right-[2px] top-1/2 -translate-y-1/2 h-[22px] w-[13px] rounded-l-full bg-paper border-l-[1.5px] border-y-[1.5px] border-ink z-10" />
+      </div>
+
+      {/* Microprint Security Stripe */}
+      <div className="mt-1 px-4 flex items-center justify-between overflow-hidden text-[8px] sm:text-[8.5px] font-mono tracking-[0.22em] uppercase text-muted/60 whitespace-nowrap opacity-85">
+        <span className="truncate">
+          •••• OFFICIAL HIGEDAN DISM STAGE ARCHIVE •••• ADMIT ONE ALL ACCESS •••• OFFICIAL HIGEDAN DISM ••••
+        </span>
+        <span className="hidden sm:inline shrink-0 font-bold ml-2">
+          SEC-PASS // VALIDATED
+        </span>
+      </div>
+    </div>
+  );
+}
+
+function TicketBarcodeFooter({ serial, label = "ADMIT ONE // STAGE SETLIST RUN SHEET" }) {
+  return (
+    <div className="mt-8 border-t border-line-soft pt-3.5 flex flex-wrap items-center justify-between gap-3 text-muted font-mono select-none">
+      <div className="flex flex-col gap-0.5 min-w-0">
+        <div className="flex items-center gap-1.5 text-[10px] sm:text-[11px] font-bold tracking-[0.16em] uppercase text-muted/80 truncate">
+          <span className="text-band font-black" aria-hidden="true">★</span>
+          <span>{label}</span>
+        </div>
+        <div className="text-[12px] sm:text-[13px] font-black tracking-wider text-ink tabular-nums truncate">
+          {serial}
+        </div>
+      </div>
+
+      {/* Decorative Vintage Barcode */}
+      <div className="shrink-0 flex items-center gap-2">
+        <div className="flex items-end gap-[2px] h-7 px-2 py-1 rounded bg-paper/80 border border-line-soft" aria-hidden="true">
+          <span className="w-[2px] h-full bg-ink" />
+          <span className="w-[1px] h-4 bg-ink" />
+          <span className="w-[3px] h-full bg-ink" />
+          <span className="w-[1px] h-3 bg-ink" />
+          <span className="w-[2px] h-5 bg-ink" />
+          <span className="w-[4px] h-full bg-ink" />
+          <span className="w-[1px] h-4 bg-ink" />
+          <span className="w-[2px] h-full bg-ink" />
+          <span className="w-[1px] h-5 bg-ink" />
+          <span className="w-[3px] h-full bg-ink" />
+          <span className="w-[1px] h-3 bg-ink" />
+          <span className="w-[2px] h-full bg-ink" />
+          <span className="w-[1px] h-4 bg-ink" />
+          <span className="w-[4px] h-full bg-ink" />
+          <span className="w-[2px] h-5 bg-ink" />
+          <span className="w-[1px] h-full bg-ink" />
+          <span className="w-[3px] h-4 bg-ink" />
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export function ShowSlip({ ud, showId, onSelectSong, onSelectShow, onSelectVenue }) {
   if (!ud) return null;
   const s = ud.unit.shows.find((x) => x.id === showId);
@@ -73,6 +141,7 @@ export function ShowSlip({ ud, showId, onSelectSong, onSelectShow, onSelectVenue
   const [compareShowId, setCompareShowId] = useState("");
   const [copied, setCopied] = useState(false);
   const [showMemorialModal, setShowMemorialModal] = useState(false);
+  const [showMoreTools, setShowMoreTools] = useState(false);
   const [isExporting, setIsExporting] = useState(false);
   const slipRef = useRef(null);
 
@@ -348,7 +417,8 @@ export function ShowSlip({ ud, showId, onSelectSong, onSelectShow, onSelectVenue
       aria-label="場次曲目清單"
     >
       <span aria-hidden="true" className={SLIP_TAPE} />
-      <div className="mb-4 border-b-2 border-ink pb-4">
+      <div className="relative rounded-t-[2px] bg-black/[0.025] dark:bg-white/[0.025] -mx-[26px] max-sm:-mx-4 -mt-[46px] max-sm:-mt-[42px] px-[26px] max-sm:px-4 pt-[46px] max-sm:pt-[42px] pb-3">
+
         {/* Monogram Stage Run Sheet Subtitle */}
         <div className="font-mono text-[10px] tracking-[0.22em] font-extrabold uppercase text-muted/70 pb-1.5 flex items-center justify-between">
           <span>OFFICIAL HIGEDAN DISM // STAGE SETLIST RUN SHEET</span>
@@ -363,7 +433,7 @@ export function ShowSlip({ ud, showId, onSelectSong, onSelectShow, onSelectVenue
             <span className="inline-block h-2 w-2 rounded-full border border-ink bg-tape" aria-hidden="true" />
             Official 髭男 dism
           </div>
-          <span className="inline-flex items-center rounded-[3px] border border-ink/30 bg-tape-soft/40 px-2 py-0.5 font-mono text-xs font-bold text-ink">
+          <span className="inline-flex items-center rounded-[3px] border border-ink/30 bg-band/15 px-2 py-0.5 font-mono text-xs font-bold text-band-ink">
             {ud.unit.type}
           </span>
         </div>
@@ -390,9 +460,10 @@ export function ShowSlip({ ud, showId, onSelectSong, onSelectShow, onSelectVenue
             )}
           </div>
 
-          {/* Venue & Song Count */}
-          <div className="mt-2 flex flex-wrap items-baseline justify-between gap-2">
-            <h3 className="m-0 font-display text-[20px] sm:text-[23px] font-black text-ink">
+          {/* Venue & Metadata Box */}
+          {/* Desktop: sm 以上尺寸維持單行流暢配置（若極端窄則自動折至次行行頭） */}
+          <div className="hidden sm:flex sm:flex-wrap sm:items-baseline sm:justify-between sm:gap-x-2 sm:gap-y-1 mt-2">
+            <h3 className="m-0 font-display text-[21px] lg:text-[23px] font-black text-ink min-w-0">
               {onSelectVenue && s.venue ? (
                 <a
                   href={routeHash.venue(s.venue)}
@@ -400,28 +471,85 @@ export function ShowSlip({ ud, showId, onSelectSong, onSelectShow, onSelectVenue
                     e.preventDefault();
                     onSelectVenue(s.venue);
                   }}
-                  className="group inline-flex items-baseline gap-1 text-ink no-underline hover:text-pool transition-colors cursor-pointer"
+                  className="group inline text-ink no-underline hover:text-pool transition-colors cursor-pointer"
                   title="查看此場地的全歷史演出檔案"
                 >
                   <span className="group-hover:underline">{s.venue}</span>
-                  <span className="text-[15px] font-normal text-muted group-hover:text-pool">
-                    （{s.city}）
-                  </span>
-                  <span className="font-mono text-[11px] font-bold text-pool opacity-80 group-hover:opacity-100" aria-hidden="true">
-                    🏛️ 檔案 →
+                  {s.city && (
+                    <span className="ml-1.5 text-[15px] font-normal text-muted group-hover:text-pool whitespace-nowrap">
+                      （{s.city}）
+                    </span>
+                  )}
+                  <span
+                    className="ml-2 inline-flex items-center gap-0.5 rounded border border-pool/30 bg-pool/5 px-1.5 py-0.5 font-mono text-[11px] font-bold text-pool align-middle whitespace-nowrap group-hover:bg-pool group-hover:text-white transition-colors"
+                    aria-hidden="true"
+                  >
+                    <span>🏛️ 檔案</span>
+                    <span>→</span>
                   </span>
                 </a>
               ) : (
                 <>
-                  {s.venue}
-                  <span className="ml-1.5 text-[15px] font-normal text-muted">
-                    （{s.city}）
-                  </span>
+                  <span>{s.venue}</span>
+                  {s.city && (
+                    <span className="ml-1.5 text-[15px] font-normal text-muted whitespace-nowrap">
+                      （{s.city}）
+                    </span>
+                  )}
                 </>
               )}
             </h3>
-            <div className="font-mono text-[12px] font-bold text-muted tabular-nums">
+            <div className="shrink-0 font-mono text-[12px] font-bold text-muted tabular-nums">
               {songCount > 0 ? `共 ${songCount} 首（本篇 ${mainCount} · 安可 ${encCount}）` : "尚無曲目紀錄"}
+            </div>
+          </div>
+
+          {/* Mobile: 小尺寸專用分行配置（第一行完整場地名，第二行 (長野) 放行頭、檔案放行尾） */}
+          <div className="sm:hidden mt-2.5 space-y-1.5">
+            <h3 className="m-0 font-display text-[18px] font-black leading-snug text-ink text-pretty">
+              {onSelectVenue && s.venue ? (
+                <a
+                  href={routeHash.venue(s.venue)}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    onSelectVenue(s.venue);
+                  }}
+                  className="text-ink hover:text-pool hover:underline transition-colors cursor-pointer"
+                  title="查看此場地的全歷史演出檔案"
+                >
+                  {s.venue}
+                </a>
+              ) : (
+                s.venue
+              )}
+            </h3>
+
+            <div className="flex flex-wrap items-center justify-between gap-x-2 gap-y-1.5 font-mono text-[12px]">
+              <div className="flex flex-wrap items-baseline gap-x-2 text-muted min-w-0">
+                {s.city && (
+                  <span className="font-bold text-ink whitespace-nowrap">
+                    （{s.city}）
+                  </span>
+                )}
+                <span className="tabular-nums">
+                  {songCount > 0 ? `共 ${songCount} 首（本篇 ${mainCount} · 安可 ${encCount}）` : "尚無曲目紀錄"}
+                </span>
+              </div>
+
+              {onSelectVenue && s.venue && (
+                <a
+                  href={routeHash.venue(s.venue)}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    onSelectVenue(s.venue);
+                  }}
+                  className="inline-flex items-center gap-1 rounded border border-pool/30 bg-pool/5 px-2 py-0.5 font-mono text-[11px] font-bold text-pool whitespace-nowrap hover:bg-pool hover:text-white transition-colors cursor-pointer"
+                  title="查看此場地的全歷史演出檔案"
+                >
+                  <span>🏛️ 檔案</span>
+                  <span aria-hidden="true">→</span>
+                </a>
+              )}
             </div>
           </div>
 
@@ -481,13 +609,13 @@ export function ShowSlip({ ud, showId, onSelectSong, onSelectShow, onSelectVenue
 
         {/* Level 4: Action Toolbar (Two-Tier Clean Split: Primary Actions & Sources + Analysis Reel) */}
         <div className="mt-2.5 flex flex-col gap-2 border-t border-line-soft/80 pt-2.5 slip-ignore-export">
-          {/* Row 1: Primary Export Actions & External Sources (Desktop: balanced ends, Mobile: stacked cleanly) */}
+          {/* Row 1: Primary Export Actions & Collapsible Tools Toggle */}
           <div className="flex flex-wrap items-center justify-between gap-2">
-            <div className="grid grid-cols-2 sm:flex sm:items-center gap-2 w-full sm:w-auto">
+            <div className="flex items-center gap-2">
               <button
                 type="button"
                 onClick={() => setShowMemorialModal(true)}
-                className="inline-flex items-center justify-center gap-1.5 rounded bg-band px-3 py-2 sm:py-1.5 text-[12px] sm:text-[11px] font-mono font-bold text-band-ink border border-ink/40 shadow-xs hover:brightness-105 active:scale-[0.98] transition-all cursor-pointer select-none"
+                className="inline-flex items-center justify-center gap-1.5 rounded bg-band px-3 py-1.5 text-[11px] font-mono font-bold text-band-ink border border-ink/40 shadow-xs hover:brightness-105 active:scale-[0.98] transition-all cursor-pointer select-none"
                 title="預覽並自訂下載本場巡演歌單紀念小卡"
               >
                 <span aria-hidden="true">📸</span>
@@ -497,7 +625,7 @@ export function ShowSlip({ ud, showId, onSelectSong, onSelectShow, onSelectVenue
               <button
                 type="button"
                 onClick={handleCopySetlist}
-                className={`inline-flex items-center justify-center gap-1.5 rounded px-3 py-2 sm:py-1.5 text-[12px] sm:text-[11px] font-mono font-bold transition-all cursor-pointer select-none border active:scale-[0.98] ${
+                className={`inline-flex items-center justify-center gap-1.5 rounded px-3 py-1.5 text-[11px] font-mono font-bold transition-all cursor-pointer select-none border active:scale-[0.98] ${
                   copied
                     ? "bg-band text-band-ink border-band shadow-xs"
                     : "bg-paper text-ink border-line-soft hover:bg-tape-tint/50 hover:border-ink/60"
@@ -508,27 +636,21 @@ export function ShowSlip({ ud, showId, onSelectSong, onSelectShow, onSelectVenue
               </button>
             </div>
 
-            {s.sourceUrls && s.sourceUrls.length > 0 && (
-              <div className="flex flex-wrap items-center gap-1.5 font-mono text-[11px]">
-                {s.sourceUrls.map((url, i) => (
-                  <a
-                    key={i}
-                    href={url}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="inline-flex items-center gap-1 rounded border border-line-soft bg-paper px-2 py-1 font-bold text-ink hover:bg-band hover:border-band transition-colors no-underline"
-                    title={`查看原始演出紀錄來源：${getSourceLabel(url)}`}
-                  >
-                    <span aria-hidden="true">🔗</span>
-                    <span>{getSourceLabel(url)}</span>
-                  </a>
-                ))}
-              </div>
-            )}
+            <button
+              type="button"
+              onClick={() => setShowMoreTools((v) => !v)}
+              className="inline-flex items-center justify-center gap-1 rounded bg-paper hover:bg-tape-tint/50 px-2.5 py-1.5 text-[11px] font-mono font-bold text-ink border border-line-soft hover:border-ink/60 transition-colors cursor-pointer select-none"
+              aria-expanded={showMoreTools}
+              title="展開更多工具（雙場曲目比對、專輯分佈、圖例與資料來源）"
+            >
+              <span>{showMoreTools ? "收合工具 ▴" : "🛠️ 更多工具 ▾"}</span>
+            </button>
           </div>
 
-          {/* Row 2: Secondary Analysis & Comparison Reel (Dedicated scrollable/wrapping reel) */}
-          <div className="flex items-center gap-1.5 overflow-x-auto scrollbar-none py-0.5 -mx-1 px-1 sm:mx-0 sm:px-0 sm:flex-wrap border-t border-line-soft/60 pt-2">
+          {/* Row 2: Secondary Analysis & Comparison Reel (Collapsible) */}
+          {showMoreTools && (
+            <div className="mt-1 flex flex-col gap-2 border-t border-line-soft/60 pt-2">
+              <div className="flex items-center gap-1.5 overflow-x-auto scrollbar-none py-0.5 -mx-1 px-1 sm:mx-0 sm:px-0 sm:flex-wrap">
             <button
               type="button"
               onClick={() => setShowLegend((v) => !v)}
@@ -574,7 +696,6 @@ export function ShowSlip({ ud, showId, onSelectSong, onSelectShow, onSelectVenue
               </button>
             )}
           </div>
-        </div>
 
         {/* Collapsible Legend Details */}
         {showLegend && (
@@ -710,7 +831,12 @@ export function ShowSlip({ ud, showId, onSelectSong, onSelectShow, onSelectVenue
             )}
           </div>
         )}
+          </div>
+        )}
       </div>
+    </div>
+
+    <TicketPerforationDivider />
 
       {items.length === 0 ? (
         <div className="my-8 rounded-[3px] border border-dashed border-line bg-paper px-6 py-8 text-center">
@@ -779,18 +905,10 @@ export function ShowSlip({ ud, showId, onSelectSong, onSelectShow, onSelectVenue
       )}
 
       {/* Soundboard Engineer Run Sheet Footer */}
-      <div className="mt-8 border-t border-line-soft pt-3.5 flex flex-wrap items-center justify-between gap-3 text-muted font-mono text-[12px]">
-        <div className="flex items-center gap-2">
-          <span className="font-bold tracking-wider text-ink">OFFICIAL HIGEDAN DISM</span>
-          <span className="opacity-40">|</span>
-          <span>STAGE RUN SHEET ARCHIVE</span>
-        </div>
-        <div className="flex items-center gap-2 tabular-nums">
-          <span>LOG REF: {showId.toUpperCase().slice(-8)}</span>
-          <span className="opacity-40">|</span>
-          <span className="font-extrabold tracking-tight text-ink/75" aria-hidden="true">||| | |||| | ||| ||</span>
-        </div>
-      </div>
+      <TicketBarcodeFooter
+        serial={`SN: HG-${(s.date || "").replace(/-/g, "")}-${showId.slice(-4).toUpperCase()}`}
+        label="OFFICIAL HIGEDAN DISM // STAGE SETLIST RUN SHEET"
+      />
 
       {/* Commemorative Setlist Card Preview Modal */}
       <MemorialCardModal
@@ -811,6 +929,7 @@ export function SongSlip({ songId, trackShows, showById, unitData, onSelectShow,
   const [copied, setCopied] = useState(false);
   const [onlySpecial, setOnlySpecial] = useState(false);
   const [showYearBreakdown, setShowYearBreakdown] = useState(false);
+  const [showMoreTools, setShowMoreTools] = useState(false);
 
   const appearances = useMemo(() => {
     return songId ? (trackShows.get(trackKey("song", songId)) ?? []) : [];
@@ -1088,7 +1207,7 @@ export function SongSlip({ songId, trackShows, showById, unitData, onSelectShow,
       aria-label="歌曲全域出現場次"
     >
       <span aria-hidden="true" className={SLIP_TAPE} />
-      <div className="mb-4 border-b-2 border-ink pb-4">
+      <div className="relative rounded-t-[2px] bg-black/[0.025] dark:bg-white/[0.025] -mx-[26px] max-sm:-mx-4 -mt-[46px] max-sm:-mt-[42px] px-[26px] max-sm:px-4 pt-[46px] max-sm:pt-[42px] pb-3">
         {/* Level 1: Artist branding & Album badge */}
         <div className="flex flex-wrap items-center justify-between gap-2">
           <div className="flex items-center gap-1.5 font-mono text-[12px] font-bold tracking-[0.2em] text-muted">
@@ -1099,7 +1218,7 @@ export function SongSlip({ songId, trackShows, showById, unitData, onSelectShow,
             <span className="rounded bg-paper px-2 py-0.5 font-mono text-[11px] font-bold text-muted border border-line-soft">
               {albumName}
             </span>
-            <span className="inline-flex items-center rounded-[3px] border border-ink/30 bg-tape-soft/40 px-2 py-0.5 font-mono text-[11px] font-bold text-ink">
+            <span className="inline-flex items-center rounded-[3px] border border-ink/30 bg-band/15 px-2 py-0.5 font-mono text-xs font-bold text-band-ink">
               SONG ARCHIVE
             </span>
           </div>
@@ -1144,184 +1263,206 @@ export function SongSlip({ songId, trackShows, showById, unitData, onSelectShow,
           )}
         </div>
 
-        {/* Level 3b: Action Toolbar (Separated clean row, no horizontal crowding) */}
-        <div className="mt-2 flex flex-wrap items-center justify-between gap-2 border-t border-line-soft/60 pt-2 font-mono text-[11px]">
-          <button
-            type="button"
-            onClick={handleCopyHistory}
-            className={`inline-flex items-center gap-1 rounded px-2.5 py-1 font-mono text-[11px] font-bold transition-all cursor-pointer select-none border ${
-              copied
-                ? "bg-band text-band-ink border-band shadow-xs"
-                : "bg-paper text-ink border-line-soft hover:bg-tape-tint/50 hover:border-ink/60"
-            }`}
-            title="複製這首歌曲的演出歷史摘要"
-          >
-            <span>{copied ? "✓ 已複製歷程" : "📋 複製歷程"}</span>
-          </button>
-
-          <div className="flex items-center gap-1.5">
-            {yearBreakdown.length >= 3 && (
+        {/* Level 3b: Action Toolbar & Collapsible Tools */}
+        <div className="mt-2.5 flex flex-col gap-2 border-t border-line-soft/80 pt-2 font-mono text-[11px] slip-ignore-export">
+          <div className="flex flex-wrap items-center justify-between gap-2">
+            <div className="flex flex-wrap items-center gap-1.5">
               <button
                 type="button"
-                onClick={() => setShowYearBreakdown((v) => !v)}
-                className="inline-flex items-center gap-1 rounded bg-paper px-2.5 py-1 text-[11px] font-mono font-bold text-ink border border-line-soft hover:bg-tape-tint/50 transition-colors cursor-pointer select-none"
-                aria-expanded={showYearBreakdown}
+                onClick={handleCopyHistory}
+                className={`inline-flex items-center gap-1 rounded px-2.5 py-1 font-mono text-[11px] font-bold transition-all cursor-pointer select-none border ${
+                  copied
+                    ? "bg-band text-band-ink border-band shadow-xs"
+                    : "bg-paper text-ink border-line-soft hover:bg-tape-tint/50 hover:border-ink/60"
+                }`}
+                title="複製這首歌曲的演出歷史摘要"
               >
-                <span>{showYearBreakdown ? "▾ 年度分佈" : "▸ 年度分佈"}</span>
+                <span>{copied ? "✓ 已複製歷程" : "📋 複製歷程"}</span>
               </button>
-            )}
-            <a
-              href={youtubeUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 rounded border border-line-soft bg-paper px-2 py-1 font-mono text-[11px] font-bold text-ink hover:bg-band hover:border-band transition-colors no-underline"
-              title="在 YouTube 搜尋現場 Live 影片"
-            >
-              <span>▶ YouTube</span>
-            </a>
-            <a
-              href={spotifyUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 rounded border border-line-soft bg-paper px-2 py-1 font-mono text-[11px] font-bold text-ink hover:bg-band hover:border-band transition-colors no-underline"
-              title="在 Spotify 聆聽官方音源"
-            >
-              <span>🎧 Spotify</span>
-            </a>
-            {livefansUrl && (
+
               <a
-                href={livefansUrl}
+                href={youtubeUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1 rounded border border-line-soft bg-paper px-2 py-1 font-mono text-[11px] font-bold text-muted hover:text-ink hover:bg-band hover:border-band transition-colors no-underline"
-                title="在 LiveFans 查看歌曲頁面"
+                className="inline-flex items-center gap-1 rounded border border-line-soft bg-paper px-2 py-1 font-mono text-[11px] font-bold text-ink hover:bg-band hover:border-band transition-colors no-underline"
+                title="在 YouTube 搜尋現場 Live 影片"
               >
-                <span>🎫 LiveFans</span>
+                <span>▶ YouTube</span>
               </a>
-            )}
+              <a
+                href={spotifyUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1 rounded border border-line-soft bg-paper px-2 py-1 font-mono text-[11px] font-bold text-ink hover:bg-band hover:border-band transition-colors no-underline"
+                title="在 Spotify 聆聽官方音源"
+              >
+                <span>🎧 Spotify</span>
+              </a>
+            </div>
+
+            <button
+              type="button"
+              onClick={() => setShowMoreTools((v) => !v)}
+              className="inline-flex items-center justify-center gap-1 rounded bg-paper hover:bg-tape-tint/50 px-2.5 py-1 text-[11px] font-mono font-bold text-ink border border-line-soft hover:border-ink/60 transition-colors cursor-pointer select-none"
+              aria-expanded={showMoreTools}
+              title="展開更多歷程（首演/最新出演里程碑、年度分佈與資料庫外鏈）"
+            >
+              <span>{showMoreTools ? "收合歷程 ▴" : "🛠️ 更多歷程 ▾"}</span>
+            </button>
           </div>
+
+          {/* Collapsible Milestone & Extra Tools Drawer */}
+          {showMoreTools && (
+            <div className="mt-1 flex flex-col gap-2.5 border-t border-line-soft/60 pt-2">
+              <div className="flex flex-wrap items-center gap-1.5">
+                {yearBreakdown.length >= 3 && (
+                  <button
+                    type="button"
+                    onClick={() => setShowYearBreakdown((v) => !v)}
+                    className="inline-flex items-center gap-1 rounded bg-paper px-2.5 py-1 text-[11px] font-mono font-bold text-ink border border-line-soft hover:bg-tape-tint/50 transition-colors cursor-pointer select-none"
+                    aria-expanded={showYearBreakdown}
+                  >
+                    <span>{showYearBreakdown ? "▾ 年度分佈" : "▸ 年度分佈"}</span>
+                  </button>
+                )}
+                {livefansUrl && (
+                  <a
+                    href={livefansUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 rounded border border-line-soft bg-paper px-2 py-1 font-mono text-[11px] font-bold text-muted hover:text-ink hover:bg-band hover:border-band transition-colors no-underline"
+                    title="在 LiveFans 查看歌曲頁面"
+                  >
+                    <span>🎫 LiveFans</span>
+                  </a>
+                )}
+              </div>
+
+              {/* Level 5: Collapsible Year-by-Year Performance Frequency */}
+              {showYearBreakdown && yearBreakdown.length >= 3 && (
+                <div className="mt-1 border-t border-line-soft/80 pt-2 font-mono text-[11px]">
+                  <div className="flex items-center justify-between font-bold text-muted mb-1.5">
+                    <span className="flex items-center gap-1">
+                      <span aria-hidden="true">📅</span> 年度演出頻率分佈
+                    </span>
+                    <span className="tabular-nums">歷年涵蓋 {yearBreakdown.length} 個演出年份</span>
+                  </div>
+                  <div className="flex flex-wrap gap-1.5">
+                    {yearBreakdown.map(([yr, count]) => (
+                      <span
+                        key={yr}
+                        className="inline-flex items-center gap-1 rounded border border-line-soft bg-paper px-2 py-0.5 tabular-nums text-ink"
+                      >
+                        <span className="text-muted">{yr}</span>
+                        <span className="font-bold">{count}場</span>
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Level 4: Milestone Performance (Only when song has >= 2 shows & different show IDs) */}
+              {sortedAppearances.length >= 2 && firstApp && latestApp && firstApp.showId !== latestApp.showId && (
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 border-t border-line-soft/80 pt-2.5 font-mono text-[12px]">
+                  {/* First Live */}
+                  <div className="flex flex-col gap-0.5">
+                    <div className="flex items-center justify-between text-xs font-bold text-muted">
+                      <span className="flex items-center gap-1 text-ink">
+                        <span className="text-band font-bold" aria-hidden="true">★</span> 首次披露 / 首演場次
+                      </span>
+                      <span className="tabular-nums font-semibold">{firstShow ? showDate(firstShow) : "—"}</span>
+                    </div>
+                    {firstApp && firstShow ? (
+                      <a
+                        href={routeHash.show(firstApp.showId)}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          onSelectShow(firstApp.showId);
+                        }}
+                        className="group flex flex-col text-ink no-underline hover:text-pool transition-colors"
+                      >
+                        <span
+                          className="font-bold text-[13px] break-words line-clamp-2 leading-snug group-hover:underline"
+                          title={firstApp.unitTitle}
+                        >
+                          {firstApp.unitTitle}
+                        </span>
+                        <span className="text-muted text-[12px] mt-0.5 truncate flex items-center gap-1">
+                          <span>📍 {firstShow.venue}（{firstShow.city}）</span>
+                          {onSelectVenue && firstShow.venue && (
+                            <button
+                              type="button"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                e.preventDefault();
+                                onSelectVenue(firstShow.venue);
+                              }}
+                              className="inline-flex items-center text-xs font-bold text-pool hover:underline cursor-pointer ml-1"
+                              title={`查看「${firstShow.venue}」場地檔案`}
+                            >
+                              [場地 →]
+                            </button>
+                          )}
+                        </span>
+                      </a>
+                    ) : (
+                      <span className="text-muted">暫無紀錄</span>
+                    )}
+                  </div>
+
+                  {/* Latest Live */}
+                  <div className="flex flex-col gap-0.5 sm:border-l sm:border-line-soft/80 sm:pl-4">
+                    <div className="flex items-center justify-between text-xs font-bold text-muted">
+                      <span className="flex items-center gap-1 text-ink">
+                        <span className="text-band font-bold" aria-hidden="true">★</span> 最新出演場次
+                      </span>
+                      <span className="tabular-nums font-semibold">{latestShow ? showDate(latestShow) : "—"}</span>
+                    </div>
+                    {latestApp && latestShow ? (
+                      <a
+                        href={routeHash.show(latestApp.showId)}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          onSelectShow(latestApp.showId);
+                        }}
+                        className="group flex flex-col text-ink no-underline hover:text-pool transition-colors"
+                      >
+                        <span
+                          className="font-bold text-[13px] break-words line-clamp-2 leading-snug group-hover:underline"
+                          title={latestApp.unitTitle}
+                        >
+                          {latestApp.unitTitle}
+                        </span>
+                        <span className="text-muted text-[12px] mt-0.5 truncate flex items-center gap-1">
+                          <span>📍 {latestShow.venue}（{latestShow.city}）</span>
+                          {onSelectVenue && latestShow.venue && (
+                            <button
+                              type="button"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                e.preventDefault();
+                                onSelectVenue(latestShow.venue);
+                              }}
+                              className="inline-flex items-center text-xs font-bold text-pool hover:underline cursor-pointer ml-1"
+                              title={`查看「${latestShow.venue}」場地檔案`}
+                            >
+                              [場地 →]
+                            </button>
+                          )}
+                        </span>
+                      </a>
+                    ) : (
+                      <span className="text-muted">暫無紀錄</span>
+                    )}
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
         </div>
-
-        {/* Level 4: Milestone Performance (Only when song has >= 2 shows & different show IDs) */}
-        {sortedAppearances.length >= 2 && firstApp && latestApp && firstApp.showId !== latestApp.showId && (
-          <div className="mt-3 grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 border-t border-line-soft/80 pt-2.5 font-mono text-[12px]">
-            {/* First Live */}
-            <div className="flex flex-col gap-0.5">
-              <div className="flex items-center justify-between text-xs font-bold text-muted">
-                <span className="flex items-center gap-1 text-ink">
-                  <span className="text-band font-bold" aria-hidden="true">★</span> 首次披露 / 首演場次
-                </span>
-                <span className="tabular-nums font-semibold">{firstShow ? showDate(firstShow) : "—"}</span>
-              </div>
-              {firstApp && firstShow ? (
-                <a
-                  href={routeHash.show(firstApp.showId)}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    onSelectShow(firstApp.showId);
-                  }}
-                  className="group flex flex-col text-ink no-underline hover:text-pool transition-colors"
-                >
-                  <span
-                    className="font-bold text-[13px] break-words line-clamp-2 leading-snug group-hover:underline"
-                    title={firstApp.unitTitle}
-                  >
-                    {firstApp.unitTitle}
-                  </span>
-                  <span className="text-muted text-[12px] mt-0.5 truncate flex items-center gap-1">
-                    <span>📍 {firstShow.venue}（{firstShow.city}）</span>
-                    {onSelectVenue && firstShow.venue && (
-                      <button
-                        type="button"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          e.preventDefault();
-                          onSelectVenue(firstShow.venue);
-                        }}
-                        className="inline-flex items-center text-xs font-bold text-pool hover:underline cursor-pointer ml-1"
-                        title={`查看「${firstShow.venue}」場地檔案`}
-                      >
-                        [場地 →]
-                      </button>
-                    )}
-                  </span>
-                </a>
-              ) : (
-                <span className="text-muted">暫無紀錄</span>
-              )}
-            </div>
-
-            {/* Latest Live */}
-            <div className="flex flex-col gap-0.5 sm:border-l sm:border-line-soft/80 sm:pl-4">
-              <div className="flex items-center justify-between text-xs font-bold text-muted">
-                <span className="flex items-center gap-1 text-ink">
-                  <span className="text-band font-bold" aria-hidden="true">★</span> 最新出演場次
-                </span>
-                <span className="tabular-nums font-semibold">{latestShow ? showDate(latestShow) : "—"}</span>
-              </div>
-              {latestApp && latestShow ? (
-                <a
-                  href={routeHash.show(latestApp.showId)}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    onSelectShow(latestApp.showId);
-                  }}
-                  className="group flex flex-col text-ink no-underline hover:text-pool transition-colors"
-                >
-                  <span
-                    className="font-bold text-[13px] break-words line-clamp-2 leading-snug group-hover:underline"
-                    title={latestApp.unitTitle}
-                  >
-                    {latestApp.unitTitle}
-                  </span>
-                  <span className="text-muted text-[12px] mt-0.5 truncate flex items-center gap-1">
-                    <span>📍 {latestShow.venue}（{latestShow.city}）</span>
-                    {onSelectVenue && latestShow.venue && (
-                      <button
-                        type="button"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          e.preventDefault();
-                          onSelectVenue(latestShow.venue);
-                        }}
-                        className="inline-flex items-center text-xs font-bold text-pool hover:underline cursor-pointer ml-1"
-                        title={`查看「${latestShow.venue}」場地檔案`}
-                      >
-                        [場地 →]
-                      </button>
-                    )}
-                  </span>
-                </a>
-              ) : (
-                <span className="text-muted">暫無紀錄</span>
-              )}
-            </div>
-          </div>
-        )}
-
-        {/* Level 5: Collapsible Year-by-Year Performance Frequency */}
-        {showYearBreakdown && yearBreakdown.length >= 3 && (
-          <div className="mt-2.5 border-t border-line-soft/80 pt-2 font-mono text-[11px]">
-            <div className="flex items-center justify-between font-bold text-muted mb-1.5">
-              <span className="flex items-center gap-1">
-                <span aria-hidden="true">📅</span> 年度演出頻率分佈
-              </span>
-              <span className="tabular-nums">歷年涵蓋 {yearBreakdown.length} 個演出年份</span>
-            </div>
-            <div className="flex flex-wrap gap-1.5">
-              {yearBreakdown.map(([yr, count]) => (
-                <span
-                  key={yr}
-                  className="inline-flex items-center gap-1 rounded border border-line-soft bg-paper px-2 py-0.5 tabular-nums text-ink"
-                >
-                  <span className="text-muted">{yr}</span>
-                  <span className="font-bold">{count}場</span>
-                </span>
-              ))}
-            </div>
-          </div>
-        )}
       </div>
+
+      <TicketPerforationDivider />
 
       {/* Category Tabs & Special Version Toggle */}
       <div className="my-2 space-y-2 border-b border-line-soft pb-2.5">
@@ -1573,18 +1714,10 @@ export function SongSlip({ songId, trackShows, showById, unitData, onSelectShow,
       )}
 
       {/* Soundboard Engineer Run Sheet Footer */}
-      <div className="mt-8 border-t border-line-soft pt-3.5 flex flex-wrap items-center justify-between gap-3 text-muted font-mono text-[12px]">
-        <div className="flex items-center gap-2">
-          <span className="font-bold tracking-wider text-ink">OFFICIAL HIGEDAN DISM</span>
-          <span className="opacity-40">|</span>
-          <span>SONG PERFORMANCE ARCHIVE</span>
-        </div>
-        <div className="flex items-center gap-2 tabular-nums">
-          <span>TRACK ID: {songId.toUpperCase()}</span>
-          <span className="opacity-40">|</span>
-          <span className="font-extrabold tracking-tight text-ink/75" aria-hidden="true">||| | |||| | ||| ||</span>
-        </div>
-      </div>
+      <TicketBarcodeFooter
+        serial={`TRACK: ${songId.toUpperCase()} // PERF-${appearances.length.toString().padStart(3, "0")}`}
+        label="OFFICIAL HIGEDAN DISM // TRACK PERFORMANCE ARCHIVE"
+      />
     </article>
   );
 }
@@ -1592,6 +1725,7 @@ export function SongSlip({ songId, trackShows, showById, unitData, onSelectShow,
 export function VenueSlip({ venueName, globalVenueShows, unitData, onSelectShow, onSelectSong }) {
   const [copied, setCopied] = useState(false);
   const [showYearBreakdown, setShowYearBreakdown] = useState(false);
+  const [showMoreTools, setShowMoreTools] = useState(false);
 
   const venueShows = useMemo(() => {
     return globalVenueShows?.get(venueName) ?? [];
@@ -1922,7 +2056,7 @@ export function VenueSlip({ venueName, globalVenueShows, unitData, onSelectShow,
       aria-label="場地全域場次"
     >
       <span aria-hidden="true" className={SLIP_TAPE} />
-      <div className="mb-4 border-b-2 border-ink pb-4">
+      <div className="relative rounded-t-[2px] bg-black/[0.025] dark:bg-white/[0.025] -mx-[26px] max-sm:-mx-4 -mt-[46px] max-sm:-mt-[42px] px-[26px] max-sm:px-4 pt-[46px] max-sm:pt-[42px] pb-3">
         {/* Level 1: Artist branding & category badge */}
         <div className="flex flex-wrap items-center justify-between gap-2">
           <div className="flex items-center gap-1.5 font-mono text-[12px] font-bold tracking-[0.2em] text-muted">
@@ -1930,7 +2064,7 @@ export function VenueSlip({ venueName, globalVenueShows, unitData, onSelectShow,
             Official 髭男 dism
           </div>
           <div className="flex items-center gap-1.5">
-            <span className="inline-flex items-center rounded-[3px] border border-ink/30 bg-tape-soft/40 px-2 py-0.5 font-mono text-[11px] font-bold text-ink">
+            <span className="inline-flex items-center rounded-[3px] border border-ink/30 bg-band/15 px-2 py-0.5 font-mono text-xs font-bold text-band-ink">
               VENUE ARCHIVE
             </span>
           </div>
@@ -1940,7 +2074,7 @@ export function VenueSlip({ venueName, globalVenueShows, unitData, onSelectShow,
         <h2 className="mt-2.5 mb-2 font-display text-[24px] sm:text-[27px] font-black leading-tight text-ink tracking-tight text-pretty">
           {venueName}{" "}
           {(venueCity || venuePref) && (
-            <span className="text-[17px] font-medium text-muted">
+            <span className="inline-block text-[16px] sm:text-[17px] font-medium text-muted whitespace-nowrap">
               （{venuePref ? `${venuePref} · ` : ""}{venueCity}）
             </span>
           )}
@@ -1963,161 +2097,185 @@ export function VenueSlip({ venueName, globalVenueShows, unitData, onSelectShow,
           )}
         </div>
 
-        {/* Level 3b: Action Toolbar (Separated clean row, no horizontal crowding) */}
-        <div className="mt-2 flex flex-wrap items-center justify-between gap-2 border-t border-line-soft/60 pt-2 font-mono text-[11px]">
-          <button
-            type="button"
-            onClick={handleCopyVenueHistory}
-            className={`inline-flex items-center gap-1 rounded px-2.5 py-1 font-mono text-[11px] font-bold transition-all cursor-pointer select-none border ${
-              copied
-                ? "bg-band text-band-ink border-band shadow-xs"
-                : "bg-paper text-ink border-line-soft hover:bg-tape-tint/50 hover:border-ink/60"
-            }`}
-            title="複製此場地的演出歷史紀錄"
-          >
-            <span>{copied ? "✓ 已複製歷程" : "📋 複製歷程"}</span>
-          </button>
-
-          <div className="flex items-center gap-1.5">
-            {yearBreakdown.length >= 3 && (
+        {/* Level 3b: Action Toolbar & Collapsible Tools */}
+        <div className="mt-2 flex flex-col gap-2 border-t border-line-soft/80 pt-2 font-mono text-[11px] slip-ignore-export">
+          <div className="flex flex-wrap items-center justify-between gap-2">
+            <div className="flex flex-wrap items-center gap-1.5">
               <button
                 type="button"
-                onClick={() => setShowYearBreakdown((v) => !v)}
-                className="inline-flex items-center gap-1 rounded bg-paper px-2.5 py-1 text-[11px] font-mono font-bold text-ink border border-line-soft hover:bg-tape-tint/50 transition-colors cursor-pointer select-none"
-                aria-expanded={showYearBreakdown}
+                onClick={handleCopyVenueHistory}
+                className={`inline-flex items-center gap-1 rounded px-2.5 py-1 font-mono text-[11px] font-bold transition-all cursor-pointer select-none border ${
+                  copied
+                    ? "bg-band text-band-ink border-band shadow-xs"
+                    : "bg-paper text-ink border-line-soft hover:bg-tape-tint/50 hover:border-ink/60"
+                }`}
+                title="複製此場地的演出歷史紀錄"
               >
-                <span>{showYearBreakdown ? "▾ 年度分佈" : "▸ 年度分佈"}</span>
+                <span>{copied ? "✓ 已複製歷程" : "📋 複製歷程"}</span>
               </button>
-            )}
-            <a
-              href={googleMapsUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 rounded border border-line-soft bg-paper px-2 py-1 font-mono text-[11px] font-bold text-ink hover:bg-band hover:border-band transition-colors no-underline"
-              title="在 Google 地圖查看場館位置"
-            >
-              <span>🗺️ Google Maps</span>
-            </a>
-            <a
-              href={livefansUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 rounded border border-line-soft bg-paper px-2 py-1 font-mono text-[11px] font-bold text-muted hover:text-ink hover:bg-band hover:border-band transition-colors no-underline"
-              title="在 LiveFans 查看場館歷史演算法"
-            >
-              <span>🎫 LiveFans</span>
-            </a>
-          </div>
-        </div>
 
-        {/* Level 3.5: Top Songs Performed Here (Only when >= 4 shows & has real repeat songs) */}
-        {topSongs.length > 0 && venueShows.length >= 4 && topSongs.some((s) => s.count >= 2) && (
-          <div className="mt-2.5 flex flex-wrap items-center gap-1.5 border-t border-line-soft/60 pt-2 font-mono text-[11px]">
-            <span className="font-bold text-muted flex items-center gap-1">
-              <span>🏆 本場地常唱曲目：</span>
-            </span>
-            {topSongs.map((s) => (
               <a
-                key={s.id}
-                href={routeHash.song(s.id)}
-                onClick={(e) => {
-                  e.preventDefault();
-                  onSelectSong?.(s.id);
-                }}
-                className="inline-flex items-center gap-1 rounded bg-paper px-2 py-0.5 border border-line-soft text-ink hover:bg-tape-tint/40 hover:border-ink/60 transition-colors no-underline cursor-pointer"
-                title={`查看歌曲《${s.title}》的全歷史演出紀錄`}
+                href={googleMapsUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1 rounded border border-line-soft bg-paper px-2 py-1 font-mono text-[11px] font-bold text-ink hover:bg-band hover:border-band transition-colors no-underline"
+                title="在 Google 地圖查看場館位置"
               >
-                <span className="font-medium">{s.title}</span>
-                <span className="font-bold text-pool tabular-nums">({s.count}次)</span>
+                <span>🗺️ Google Maps</span>
               </a>
-            ))}
-          </div>
-        )}
+            </div>
 
-        {/* Level 4: Milestone Performance (Only when venue has >= 3 shows) */}
-        {sortedShows.length >= 3 && firstApp && latestApp && firstApp.showId !== latestApp.showId && (
-          <div className="mt-3 grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 border-t border-line-soft/80 pt-2.5 font-mono text-[12px]">
-            {/* First Live */}
-            <div className="flex flex-col gap-0.5">
-              <div className="flex items-center justify-between text-xs font-bold text-muted">
-                <span className="flex items-center gap-1 text-ink">
-                  <span className="text-band font-bold" aria-hidden="true">★</span> 首次登台 / 首演場次
-                </span>
-                <span className="tabular-nums font-semibold">{firstShow ? showDate(firstShow) : "—"}</span>
-              </div>
-              {firstApp && firstShow ? (
-                <a
-                  href={routeHash.show(firstApp.showId)}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    onSelectShow(firstApp.showId);
-                  }}
-                  className="group flex flex-col text-ink no-underline hover:text-pool transition-colors"
-                >
-                  <span
-                    className="font-bold text-[13px] break-words line-clamp-2 leading-snug group-hover:underline"
-                    title={firstApp.unitTitle}
+            <button
+              type="button"
+              onClick={() => setShowMoreTools((v) => !v)}
+              className="inline-flex items-center justify-center gap-1 rounded bg-paper hover:bg-tape-tint/50 px-2.5 py-1 text-[11px] font-mono font-bold text-ink border border-line-soft hover:border-ink/60 transition-colors cursor-pointer select-none"
+              aria-expanded={showMoreTools}
+              title="展開更多紀錄（常唱曲目、首登台/最新出演里程碑、年度分佈與資料庫外鏈）"
+            >
+              <span>{showMoreTools ? "收合紀錄 ▴" : "🛠️ 更多紀錄 ▾"}</span>
+            </button>
+          </div>
+
+          {/* Collapsible Venue Extra Tools & Milestone Drawer */}
+          {showMoreTools && (
+            <div className="mt-1 flex flex-col gap-2.5 border-t border-line-soft/60 pt-2">
+              <div className="flex flex-wrap items-center gap-1.5">
+                {yearBreakdown.length >= 3 && (
+                  <button
+                    type="button"
+                    onClick={() => setShowYearBreakdown((v) => !v)}
+                    className="inline-flex items-center gap-1 rounded bg-paper px-2.5 py-1 text-[11px] font-mono font-bold text-ink border border-line-soft hover:bg-tape-tint/50 transition-colors cursor-pointer select-none"
+                    aria-expanded={showYearBreakdown}
                   >
-                    {firstApp.unitTitle}
-                  </span>
+                    <span>{showYearBreakdown ? "▾ 年度分佈" : "▸ 年度分佈"}</span>
+                  </button>
+                )}
+                <a
+                  href={livefansUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 rounded border border-line-soft bg-paper px-2 py-1 font-mono text-[11px] font-bold text-muted hover:text-ink hover:bg-band hover:border-band transition-colors no-underline"
+                  title="在 LiveFans 查看場館歷史演算法"
+                >
+                  <span>🎫 LiveFans</span>
                 </a>
-              ) : (
-                <span className="text-muted">暫無紀錄</span>
+              </div>
+
+              {/* Level 3.5: Top Songs Performed Here (Only when >= 4 shows & has real repeat songs) */}
+              {topSongs.length > 0 && venueShows.length >= 4 && topSongs.some((s) => s.count >= 2) && (
+                <div className="mt-1 flex flex-wrap items-center gap-1.5 border-t border-line-soft/60 pt-2 font-mono text-[11px]">
+                  <span className="font-bold text-muted flex items-center gap-1">
+                    <span>🏆 本場地常唱曲目：</span>
+                  </span>
+                  {topSongs.map((s) => (
+                    <a
+                      key={s.id}
+                      href={routeHash.song(s.id)}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        onSelectSong?.(s.id);
+                      }}
+                      className="inline-flex items-center gap-1 rounded bg-paper px-2 py-0.5 border border-line-soft text-ink hover:bg-tape-tint/40 hover:border-ink/60 transition-colors no-underline cursor-pointer"
+                      title={`查看歌曲《${s.title}》的全歷史演出紀錄`}
+                    >
+                      <span className="font-medium">{s.title}</span>
+                      <span className="font-bold text-pool tabular-nums">({s.count}次)</span>
+                    </a>
+                  ))}
+                </div>
+              )}
+
+              {/* Level 4: Milestone Performance (Only when venue has >= 3 shows) */}
+              {sortedShows.length >= 3 && firstApp && latestApp && firstApp.showId !== latestApp.showId && (
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 border-t border-line-soft/80 pt-2.5 font-mono text-[12px]">
+                  {/* First Live */}
+                  <div className="flex flex-col gap-0.5">
+                    <div className="flex items-center justify-between text-xs font-bold text-muted">
+                      <span className="flex items-center gap-1 text-ink">
+                        <span className="text-band font-bold" aria-hidden="true">★</span> 首次登台 / 首演場次
+                      </span>
+                      <span className="tabular-nums font-semibold">{firstShow ? showDate(firstShow) : "—"}</span>
+                    </div>
+                    {firstApp && firstShow ? (
+                      <a
+                        href={routeHash.show(firstApp.showId)}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          onSelectShow(firstApp.showId);
+                        }}
+                        className="group flex flex-col text-ink no-underline hover:text-pool transition-colors"
+                      >
+                        <span
+                          className="font-bold text-[13px] break-words line-clamp-2 leading-snug group-hover:underline"
+                          title={firstApp.unitTitle}
+                        >
+                          {firstApp.unitTitle}
+                        </span>
+                      </a>
+                    ) : (
+                      <span className="text-muted">暫無紀錄</span>
+                    )}
+                  </div>
+
+                  {/* Latest Live */}
+                  <div className="flex flex-col gap-0.5 sm:border-l sm:border-line-soft/80 sm:pl-4">
+                    <div className="flex items-center justify-between text-xs font-bold text-muted">
+                      <span className="flex items-center gap-1 text-ink">
+                        <span className="text-band font-bold" aria-hidden="true">★</span> 最新出演場次
+                      </span>
+                      <span className="tabular-nums font-semibold">{latestShow ? showDate(latestShow) : "—"}</span>
+                    </div>
+                    {latestApp && latestShow ? (
+                      <a
+                        href={routeHash.show(latestApp.showId)}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          onSelectShow(latestApp.showId);
+                        }}
+                        className="group flex flex-col text-ink no-underline hover:text-pool transition-colors"
+                      >
+                        <span
+                          className="font-bold text-[13px] break-words line-clamp-2 leading-snug group-hover:underline"
+                          title={latestApp.unitTitle}
+                        >
+                          {latestApp.unitTitle}
+                        </span>
+                      </a>
+                    ) : (
+                      <span className="text-muted">暫無紀錄</span>
+                    )}
+                  </div>
+                </div>
+              )}
+
+              {/* Collapsible Year-by-Year Performance Frequency Drawer */}
+              {showYearBreakdown && yearBreakdown.length > 0 && (
+                <div className="mt-1 border-t border-line-soft/80 pt-2 font-mono text-[11px]">
+                  <div className="text-muted font-bold mb-1.5 flex items-center justify-between">
+                    <span className="flex items-center gap-1">
+                      <span>📅 各年度演出頻率分佈：</span>
+                    </span>
+                    <span className="font-normal text-muted/70">（跨越 {yearBreakdown.length} 個年份）</span>
+                  </div>
+                  <div className="flex flex-wrap gap-1.5">
+                    {yearBreakdown.map(([yr, count]) => (
+                      <span
+                        key={yr}
+                        className="inline-flex items-center gap-1 rounded bg-paper px-2 py-0.5 border border-line-soft text-ink tabular-nums"
+                      >
+                        <span className="text-muted font-semibold">{yr}年</span>
+                        <span className="font-bold text-ink">{count}場</span>
+                      </span>
+                    ))}
+                  </div>
+                </div>
               )}
             </div>
-
-            {/* Latest Live */}
-            <div className="flex flex-col gap-0.5 sm:border-l sm:border-line-soft/80 sm:pl-4">
-              <div className="flex items-center justify-between text-xs font-bold text-muted">
-                <span className="flex items-center gap-1 text-ink">
-                  <span className="text-band font-bold" aria-hidden="true">★</span> 最新出演場次
-                </span>
-                <span className="tabular-nums font-semibold">{latestShow ? showDate(latestShow) : "—"}</span>
-              </div>
-              {latestApp && latestShow ? (
-                <a
-                  href={routeHash.show(latestApp.showId)}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    onSelectShow(latestApp.showId);
-                  }}
-                  className="group flex flex-col text-ink no-underline hover:text-pool transition-colors"
-                >
-                  <span
-                    className="font-bold text-[13px] break-words line-clamp-2 leading-snug group-hover:underline"
-                    title={latestApp.unitTitle}
-                  >
-                    {latestApp.unitTitle}
-                  </span>
-                </a>
-              ) : (
-                <span className="text-muted">暫無紀錄</span>
-              )}
-            </div>
-          </div>
-        )}
-
-        {/* Collapsible Year-by-Year Performance Frequency Drawer */}
-        {showYearBreakdown && yearBreakdown.length > 0 && (
-          <div className="mt-3 border-t border-line-soft/80 pt-2.5 font-mono text-[11px]">
-            <div className="text-muted font-bold mb-1.5 flex items-center gap-1">
-              <span>📅 各年度演出頻率分佈：</span>
-              <span className="font-normal text-muted/70">（跨越 {yearBreakdown.length} 個年份）</span>
-            </div>
-            <div className="flex flex-wrap gap-1.5">
-              {yearBreakdown.map(([yr, count]) => (
-                <span
-                  key={yr}
-                  className="inline-flex items-center gap-1 rounded bg-paper px-2 py-0.5 border border-line-soft text-ink"
-                >
-                  <span className="text-muted font-semibold">{yr}年</span>
-                  <span className="font-bold text-ink">{count}場</span>
-                </span>
-              ))}
-            </div>
-          </div>
-        )}
+          )}
+        </div>
       </div>
+
+      <TicketPerforationDivider />
 
       {/* Category Tabs */}
       {availableTypes.length > 0 && (
@@ -2338,18 +2496,10 @@ export function VenueSlip({ venueName, globalVenueShows, unitData, onSelectShow,
       )}
 
       {/* Soundboard Engineer Run Sheet Footer */}
-      <div className="mt-8 border-t border-line-soft pt-3.5 flex flex-wrap items-center justify-between gap-3 text-muted font-mono text-[12px]">
-        <div className="flex items-center gap-2">
-          <span className="font-bold tracking-wider text-ink">OFFICIAL HIGEDAN DISM</span>
-          <span className="opacity-40">|</span>
-          <span>VENUE PERFORMANCE ARCHIVE</span>
-        </div>
-        <div className="flex items-center gap-2 tabular-nums">
-          <span>VENUE: {venueName.slice(0, 10).toUpperCase()}</span>
-          <span className="opacity-40">|</span>
-          <span className="font-extrabold tracking-tight text-ink/75" aria-hidden="true">||| | |||| | ||| ||</span>
-        </div>
-      </div>
+      <TicketBarcodeFooter
+        serial={`VENUE: ${venueName.toUpperCase()} // PASS-${venueShows.length.toString().padStart(3, "0")}`}
+        label="OFFICIAL HIGEDAN DISM // VENUE ARCHIVE PASS"
+      />
     </article>
   );
 }

@@ -200,8 +200,32 @@ export default function App() {
   const [songPage, setSongPage] = useState(0);
   const [venuePage, setVenuePage] = useState(0);
 
+  // Desktop Collapsible Navigator state (default: collapsed/false, persisted in localStorage)
+  const [isDesktopNavOpen, setIsDesktopNavOpen] = useState(() => {
+    try {
+      const saved = localStorage.getItem("hg_desktop_nav_open");
+      if (saved !== null) return saved === "true";
+    } catch {
+      // fallback
+    }
+    return false;
+  });
+
+  const toggleDesktopNav = () => {
+    setIsDesktopNavOpen((prev) => {
+      const next = !prev;
+      try {
+        localStorage.setItem("hg_desktop_nav_open", String(next));
+      } catch {
+        // ignore
+      }
+      return next;
+    });
+  };
+
   // Mobile Filter Bottom Sheet state & Staged Draft State
   const [isFilterDrawerOpen, setIsFilterDrawerOpen] = useState(false);
+  const [isMobileSearchOpen, setIsMobileSearchOpen] = useState(false);
   const [draftState, setDraftState] = useState(null);
 
   const openFilterDrawer = () => {
@@ -285,16 +309,66 @@ export default function App() {
     return () => window.removeEventListener("hashchange", onHash);
   }, []);
 
-  // Close drawer on Escape
+  // Close drawer or mobile search modal on Escape
   useEffect(() => {
     const onKeyDown = (e) => {
-      if (e.key === "Escape" && isFilterDrawerOpen) {
-        handleCancelDrawer();
+      if (e.key === "Escape") {
+        if (isMobileSearchOpen) {
+          setIsMobileSearchOpen(false);
+          setQ("");
+        } else if (isFilterDrawerOpen) {
+          handleCancelDrawer();
+        }
       }
     };
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
-  }, [isFilterDrawerOpen]);
+  }, [isFilterDrawerOpen, isMobileSearchOpen]);
+
+  // Mobile Spotlight Modal: visualViewport height & position tracking (virtual keyboard avoidance)
+  const [visualViewportStyle, setVisualViewportStyle] = useState({
+    height: "100dvh",
+    top: 0,
+  });
+
+  useEffect(() => {
+    if (!isMobileSearchOpen) return;
+
+    const updateViewport = () => {
+      if (window.visualViewport) {
+        setVisualViewportStyle({
+          height: `${window.visualViewport.height}px`,
+          top: `${window.visualViewport.offsetTop}px`,
+        });
+      } else {
+        setVisualViewportStyle({
+          height: `${window.innerHeight}px`,
+          top: 0,
+        });
+      }
+    };
+
+    updateViewport();
+
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    if (window.visualViewport) {
+      window.visualViewport.addEventListener("resize", updateViewport);
+      window.visualViewport.addEventListener("scroll", updateViewport);
+      return () => {
+        document.body.style.overflow = prevOverflow;
+        window.visualViewport.removeEventListener("resize", updateViewport);
+        window.visualViewport.removeEventListener("scroll", updateViewport);
+      };
+    } else {
+      window.addEventListener("resize", updateViewport);
+      return () => {
+        document.body.style.overflow = prevOverflow;
+        window.removeEventListener("resize", updateViewport);
+      };
+    }
+  }, [isMobileSearchOpen]);
 
   const go = (hash) => {
     applyRoute(parseRoute(hash));
@@ -306,18 +380,21 @@ export default function App() {
   const handleSelectShow = (showId) => {
     setQ("");
     setIsFilterDrawerOpen(false);
+    setIsMobileSearchOpen(false);
     go(routeHash.show(showId));
   };
 
   const handleSelectSong = (songId) => {
     setQ("");
     setIsFilterDrawerOpen(false);
+    setIsMobileSearchOpen(false);
     go(routeHash.song(songId));
   };
 
   const handleSelectVenue = (venueName) => {
     setQ("");
     setIsFilterDrawerOpen(false);
+    setIsMobileSearchOpen(false);
     go(routeHash.venue(venueName));
   };
 
@@ -642,8 +719,8 @@ export default function App() {
 
     return (
       <div
-        className={`rounded-[6px] border-[1.5px] border-ink bg-card p-4 sm:p-5 shadow-sm space-y-4 ${
-          isDrawer ? "border-0 shadow-none p-0 sm:p-0 bg-transparent" : ""
+        className={`relative rounded-[6px] border-[1.5px] border-ink bg-card p-4 sm:p-5 shadow-sm space-y-4 ${
+          isDrawer ? "border-0 shadow-none p-0 sm:p-0" : ""
         }`}
       >
         {/* Step 1: 演出分類 */}
@@ -918,20 +995,25 @@ export default function App() {
 
     return (
       <div
-        className={`rounded-[6px] border-[1.5px] border-ink bg-card p-4 sm:p-5 shadow-sm space-y-4 ${
-          isDrawer ? "border-0 shadow-none p-0 sm:p-0 bg-transparent" : ""
+        className={`relative rounded-[6px] border-[1.5px] border-ink bg-card p-4 sm:p-5 shadow-sm space-y-4 ${
+          isDrawer ? "border-0 shadow-none p-0 sm:p-0" : ""
         }`}
       >
         {/* Step 1: 排序/分類方式 */}
-        <div className="flex items-center justify-between">
-          <span className="font-mono text-[11px] font-bold text-muted uppercase tracking-wider flex items-center gap-1.5">
-            <span aria-hidden="true">🎵</span>
-            <span>1. 歌曲分類方式</span>
-          </span>
-          <div className="flex flex-wrap gap-1.5">
+        <div>
+          <div className="flex items-center justify-between mb-2">
+            <span className="font-mono text-[11px] font-bold text-muted uppercase tracking-wider flex items-center gap-1.5">
+              <span aria-hidden="true">🎵</span>
+              <span>1. 歌曲分類方式</span>
+            </span>
+            <span className="font-mono text-[11px] text-muted tabular-nums">
+              共 {allUsedSongs.length} 首曲目
+            </span>
+          </div>
+          <div className="flex flex-wrap gap-1.5 sm:gap-2">
             <button
               type="button"
-              className={`rounded-full px-3 py-1 font-mono text-[11px] font-bold transition-colors cursor-pointer ${
+              className={`rounded-full px-3 py-1.5 text-[12px] sm:text-[13px] font-mono font-bold transition-colors cursor-pointer inline-flex items-center gap-1.5 focus-visible:ring-2 focus-visible:ring-band focus-visible:outline-none ${
                 curSortMode === "album"
                   ? "bg-band text-band-ink border border-ink/40 shadow-xs"
                   : "bg-paper text-ink border border-line-soft hover:bg-tape-tint/50"
@@ -945,11 +1027,11 @@ export default function App() {
                 }
               }}
             >
-              💿 依發行專輯分類
+              <span>💿 依發行專輯分類</span>
             </button>
             <button
               type="button"
-              className={`rounded-full px-3 py-1 font-mono text-[11px] font-bold transition-colors cursor-pointer ${
+              className={`rounded-full px-3 py-1.5 text-[12px] sm:text-[13px] font-mono font-bold transition-colors cursor-pointer inline-flex items-center gap-1.5 focus-visible:ring-2 focus-visible:ring-band focus-visible:outline-none ${
                 curSortMode === "count"
                   ? "bg-band text-band-ink border border-ink/40 shadow-xs"
                   : "bg-paper text-ink border border-line-soft hover:bg-tape-tint/50"
@@ -963,7 +1045,7 @@ export default function App() {
                 }
               }}
             >
-              🏆 依演唱次數排行
+              <span>🏆 依演唱次數排行</span>
             </button>
           </div>
         </div>
@@ -1108,20 +1190,25 @@ export default function App() {
 
     return (
       <div
-        className={`rounded-[6px] border-[1.5px] border-ink bg-card p-4 sm:p-5 shadow-sm space-y-4 ${
-          isDrawer ? "border-0 shadow-none p-0 sm:p-0 bg-transparent" : ""
+        className={`relative rounded-[6px] border-[1.5px] border-ink bg-card p-4 sm:p-5 shadow-sm space-y-4 ${
+          isDrawer ? "border-0 shadow-none p-0 sm:p-0" : ""
         }`}
       >
         {/* Step 1: 排序/分類方式 */}
-        <div className="flex items-center justify-between">
-          <span className="font-mono text-[11px] font-bold text-muted uppercase tracking-wider flex items-center gap-1.5">
-            <span aria-hidden="true">🏛️</span>
-            <span>1. 場地分類方式</span>
-          </span>
-          <div className="flex flex-wrap gap-1.5">
+        <div>
+          <div className="flex items-center justify-between mb-2">
+            <span className="font-mono text-[11px] font-bold text-muted uppercase tracking-wider flex items-center gap-1.5">
+              <span aria-hidden="true">🏛️</span>
+              <span>1. 場地分類方式</span>
+            </span>
+            <span className="font-mono text-[11px] text-muted tabular-nums">
+              共 {allVenues.length} 處場館
+            </span>
+          </div>
+          <div className="flex flex-wrap gap-1.5 sm:gap-2">
             <button
               type="button"
-              className={`rounded-full px-3 py-1 font-mono text-[11px] font-bold transition-colors cursor-pointer ${
+              className={`rounded-full px-3 py-1.5 text-[12px] sm:text-[13px] font-mono font-bold transition-colors cursor-pointer inline-flex items-center gap-1.5 focus-visible:ring-2 focus-visible:ring-band focus-visible:outline-none ${
                 curSortMode === "region"
                   ? "bg-band text-band-ink border border-ink/40 shadow-xs"
                   : "bg-paper text-ink border border-line-soft hover:bg-tape-tint/50"
@@ -1135,11 +1222,11 @@ export default function App() {
                 }
               }}
             >
-              📍 依日本地理分區
+              <span>📍 依日本地理分區</span>
             </button>
             <button
               type="button"
-              className={`rounded-full px-3 py-1 font-mono text-[11px] font-bold transition-colors cursor-pointer ${
+              className={`rounded-full px-3 py-1.5 text-[12px] sm:text-[13px] font-mono font-bold transition-colors cursor-pointer inline-flex items-center gap-1.5 focus-visible:ring-2 focus-visible:ring-band focus-visible:outline-none ${
                 curSortMode === "count"
                   ? "bg-band text-band-ink border border-ink/40 shadow-xs"
                   : "bg-paper text-ink border border-line-soft hover:bg-tape-tint/50"
@@ -1153,7 +1240,7 @@ export default function App() {
                 }
               }}
             >
-              🏆 依累積場次排行
+              <span>🏆 依累積場次排行</span>
             </button>
           </div>
         </div>
@@ -1275,33 +1362,98 @@ export default function App() {
 
   return (
     <Fragment>
-      {/* Top Banner (Responsive Sleek Status Ticker) */}
-      <div className="mx-[-16px] sm:mx-[-24px] flex items-center justify-between gap-2.5 bg-band px-3.5 sm:px-6 py-1 sm:py-2.5 font-mono text-[10px] sm:text-[12px] tracking-wider sm:tracking-[0.14em] text-band-ink whitespace-nowrap overflow-hidden">
-        <div className="truncate min-w-0 font-bold">
-          <span>{current?.unit.title ?? ""}</span>
-        </div>
-        <div className="shrink-0 flex items-center gap-1.5 sm:gap-4 font-bold opacity-90 sm:opacity-100">
-          <span className="hidden sm:inline opacity-45">●</span>
-          <span className="hidden sm:inline">
-            {current?.shows.length ?? 0} 場 · {current?.songShows.size ?? 0} 首歌曲
-          </span>
-          <span className="sm:hidden">
-            {current?.shows.length ?? 0} 場
-          </span>
-          <span className="opacity-45">●</span>
-          <span>來源 {sourceSummary}</span>
+      {/* Top Full-Width Sticky Status Bar (Dynamic across Show / Song / Venue) */}
+      <div
+        className="sticky top-0 z-40 w-full bg-band border-b border-ink/20 shadow-xs select-none"
+        onClick={() => {
+          slipRef.current?.scrollIntoView({ behavior: "smooth" }) ||
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        }}
+        role="button"
+        tabIndex={0}
+        title="點擊滾動回單據頂部"
+        aria-label="當前狀態導航列，點擊回單據頂部"
+      >
+        <div className="mx-auto max-w-[960px] px-4 sm:px-6 flex items-center justify-between gap-2.5 py-1 sm:py-2 font-mono text-[10px] sm:text-[12px] tracking-wider sm:tracking-[0.14em] text-band-ink whitespace-nowrap overflow-hidden cursor-pointer">
+          {/* Left: Dynamic Context Title */}
+          <div className="truncate min-w-0 font-bold flex items-center gap-1.5">
+            {tab === "show" && (
+              <span>{current?.unit.title ?? ""}</span>
+            )}
+            {tab === "song" && (
+              <span>
+                <span aria-hidden="true">🎵</span> {currentSongObj?.title || selSong}
+                {currentSongObj?.unreleased
+                  ? "（未發行）"
+                  : currentSongObj?.album
+                  ? `（${currentSongObj.album}）`
+                  : ""}
+              </span>
+            )}
+            {tab === "venue" && (
+              <span>
+                <span aria-hidden="true">🏛️</span> {selVenue}
+                {currentVenueObj?.city ? `（${currentVenueObj.city}）` : ""}
+              </span>
+            )}
+          </div>
+
+          {/* Right: Dynamic Summary Metadata */}
+          <div className="shrink-0 flex items-center gap-1.5 sm:gap-4 font-bold opacity-90 sm:opacity-100">
+            {tab === "show" && (
+              <>
+                <span className="hidden sm:inline opacity-45">●</span>
+                <span className="hidden sm:inline">
+                  {current?.shows.length ?? 0} 場 · {current?.songShows.size ?? 0} 首歌曲
+                </span>
+                <span className="sm:hidden">
+                  {current?.shows.length ?? 0} 場
+                </span>
+                <span className="opacity-45">●</span>
+                <span>來源 {sourceSummary}</span>
+              </>
+            )}
+            {tab === "song" && (
+              <>
+                <span className="hidden sm:inline opacity-45">●</span>
+                <span className="hidden sm:inline">
+                  累計演唱 {(trackShows.get(trackKey("song", selSong)) ?? []).length} 場
+                </span>
+                <span className="sm:hidden">
+                  累計 {(trackShows.get(trackKey("song", selSong)) ?? []).length} 場
+                </span>
+                <span className="opacity-45">●</span>
+                <span>歌曲檔案</span>
+              </>
+            )}
+            {tab === "venue" && (
+              <>
+                <span className="hidden sm:inline opacity-45">●</span>
+                <span className="hidden sm:inline">
+                  累計舉辦 {currentVenueObj?.shows?.length ?? 0} 場
+                </span>
+                <span className="sm:hidden">
+                  累計 {currentVenueObj?.shows?.length ?? 0} 場
+                </span>
+                <span className="opacity-45">●</span>
+                <span>場地檔案</span>
+              </>
+            )}
+          </div>
         </div>
       </div>
 
-      {/* Header */}
-      <header className="pb-2 pt-6 sm:pt-8">
+      {/* Main Page Container (Centered 960px) */}
+      <div className="mx-auto max-w-[960px] px-4 sm:px-6">
+        {/* Header */}
+      <header className="pb-0 pt-3.5 sm:pt-6">
         <p className="m-0 mb-1.5 sm:mb-2 font-mono text-[11px] sm:text-[12px] tracking-[0.2em] text-muted font-bold uppercase">
           LIVE PERFORMANCE &amp; SETLIST ARCHIVE
         </p>
-        <h1 className="m-0 font-display text-[clamp(24px,5.5vw,46px)] font-extrabold leading-[1.15] tracking-[0.01em]">
+        <h1 className="m-0 font-display text-[clamp(17px,4.5vw,44px)] font-extrabold leading-tight tracking-tight">
           Official髭男dism <span className="font-bold text-band-ink">Setlist 檔案庫</span>
         </h1>
-        <p className="mt-2 mb-0 text-[12px] sm:text-[14px] text-muted leading-relaxed line-clamp-1 sm:line-clamp-none">
+        <p className="mt-2 mb-0 text-[12px] sm:text-[14px] text-muted leading-relaxed">
           場次與曲目雙向檔案庫。收錄 2012 年地下獨立時期至當前巨蛋巡演的完整現場足跡。
         </p>
         <div className="mt-3 -mx-4 px-4 sm:mx-0 sm:px-0 flex items-center gap-2 overflow-x-auto sm:flex-wrap font-mono text-[11px] sm:text-[12px] text-ink scrollbar-none">
@@ -1325,7 +1477,7 @@ export default function App() {
 
       {/* Top 3 Query Tabs */}
       <div
-        className="mt-6 mb-3 grid w-full grid-cols-3 divide-x-[1.5px] divide-ink overflow-hidden rounded-[4px] border-[1.5px] border-ink bg-card shadow-sm"
+        className="mt-2.5 sm:mt-4 mb-3 grid w-full grid-cols-3 divide-x-[1.5px] divide-ink overflow-hidden rounded-[4px] border-[1.5px] border-ink bg-card shadow-sm"
         role="group"
         aria-label="查詢方向"
       >
@@ -1390,8 +1542,8 @@ export default function App() {
         </button>
       </div>
 
-      {/* Global SearchBox */}
-      <div className="mb-4 w-full">
+      {/* Global SearchBox (Desktop: 常駐展示；Mobile: 改由底部雙鍵 Dock Spotlight 喚起) */}
+      <div className="hidden sm:block mb-4 w-full">
         <SearchBox
           q={q}
           setQ={setQ}
@@ -1421,27 +1573,51 @@ export default function App() {
         <button
           type="button"
           onClick={openFilterDrawer}
-          className="w-full flex items-center justify-between gap-2.5 rounded-[6px] border-[1.5px] border-ink bg-card px-3.5 py-2.5 text-left shadow-xs active:bg-paper cursor-pointer transition-colors"
+          className="w-full flex items-center justify-between gap-2.5 rounded-[6px] border-[1.5px] border-ink bg-card px-3.5 py-2 text-left shadow-xs active:bg-paper cursor-pointer transition-colors"
           aria-label="點擊開啟篩選抽屜"
         >
           <div className="flex items-center gap-2.5 min-w-0">
-            <span className="text-lg shrink-0" aria-hidden="true">
+            <span className="text-xl shrink-0" aria-hidden="true">
               {tab === "show" ? "🎫" : tab === "song" ? "🎵" : "🏛️"}
             </span>
-            <div className="min-w-0">
-              <div className="text-[10px] font-mono font-bold text-muted uppercase tracking-wider">
-                {tab === "show" ? "目前演出場次" : tab === "song" ? "目前選定歌曲" : "目前選定場館"}
-              </div>
-              <div className="text-[13px] font-bold text-ink truncate">
-                {tab === "show"
-                  ? `${selYear} · ${selCategory} · ${current?.unit ? shortUnitTitle(current.unit) : ""} ${currentShowObj ? `(${currentShowObj.date.slice(5)} ${currentShowObj.city || currentShowObj.venue})` : ""}`
-                  : tab === "song"
-                  ? `${currentSongObj?.title || selSong} ${currentSongObj?.album ? `· ${currentSongObj.album}` : ""}`
-                  : `${selVenue} ${currentVenueObj ? `· ${currentVenueObj.city} (${currentVenueObj.shows?.length || 0}場)` : ""}`}
-              </div>
+            <div className="min-w-0 flex flex-col justify-center">
+              {tab === "show" && (
+                <>
+                  <div className="text-[10px] font-mono font-bold text-muted uppercase tracking-wider truncate">
+                    {selYear} · {selCategory} · {current?.unit ? shortUnitTitle(current.unit) : ""}
+                  </div>
+                  <div className="text-[13px] font-black text-ink truncate leading-tight pt-0.5">
+                    {currentShowObj
+                      ? `${currentShowObj.date} ${currentShowObj.city || currentShowObj.venue}`
+                      : current?.unit
+                      ? shortUnitTitle(current.unit)
+                      : "選擇場次"}
+                  </div>
+                </>
+              )}
+              {tab === "song" && (
+                <>
+                  <div className="text-[10px] font-mono font-bold text-muted uppercase tracking-wider truncate">
+                    目前選定歌曲 · {currentSongObj?.album ? currentSongObj.album : "歌曲檔案"}
+                  </div>
+                  <div className="text-[13px] font-black text-ink truncate leading-tight pt-0.5">
+                    {currentSongObj ? `《${currentSongObj.title}》` : selSong || "選擇歌曲"}
+                  </div>
+                </>
+              )}
+              {tab === "venue" && (
+                <>
+                  <div className="text-[10px] font-mono font-bold text-muted uppercase tracking-wider truncate">
+                    目前選定場館 · {currentVenueObj?.city ? currentVenueObj.city : "場地紀錄"}
+                  </div>
+                  <div className="text-[13px] font-black text-ink truncate leading-tight pt-0.5">
+                    {currentVenueObj ? `${selVenue} (${currentVenueObj.shows?.length || 0}場)` : selVenue || "選擇場地"}
+                  </div>
+                </>
+              )}
             </div>
           </div>
-          <span className="shrink-0 rounded bg-band px-2.5 py-1 font-mono text-[11px] font-extrabold text-band-ink border border-ink/30 shadow-2xs">
+          <span className="shrink-0 rounded bg-band px-2.5 py-1.5 font-mono text-[11px] font-extrabold text-band-ink border border-ink/30 shadow-2xs">
             變更 ▾
           </span>
         </button>
@@ -1452,13 +1628,57 @@ export default function App() {
         {/* ===================== TAB 1: SHOW ===================== */}
         {tab === "show" && (
           <div className="flex flex-col gap-4">
-            {/* Desktop Navigator */}
+            {/* Desktop Navigator (Collapsible) */}
             <div className="hidden sm:block">
-              {renderShowNavigator(false)}
+              {!isDesktopNavOpen ? (
+                <button
+                  type="button"
+                  onClick={toggleDesktopNav}
+                  className="w-full group flex items-center justify-between gap-3 rounded-[6px] border-[1.5px] border-ink bg-card px-4 py-2.5 text-left shadow-xs hover:border-pool hover:shadow-sm active:bg-paper cursor-pointer transition-all motion-reduce:transition-none"
+                  title="點擊展開演出場次篩選器"
+                  aria-expanded={false}
+                >
+                  <div className="flex items-center gap-2.5 min-w-0">
+                    <span className="text-lg shrink-0" aria-hidden="true">🎫</span>
+                    <div className="min-w-0 flex items-baseline gap-2 font-mono text-[12px]">
+                      <span className="font-bold text-ink truncate">
+                        {selCategory} · {selYear} · {current?.unit ? shortUnitTitle(current.unit) : ""}
+                      </span>
+                      {currentShowObj && (
+                        <span className="text-muted shrink-0">
+                          （{currentShowObj.date.slice(5)} {currentShowObj.city || currentShowObj.venue}）
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                  <span className="shrink-0 rounded bg-band px-3 py-1 font-mono text-[11px] font-extrabold text-band-ink border border-ink/40 shadow-2xs group-hover:bg-tape transition-colors">
+                    變更篩選 ▾
+                  </span>
+                </button>
+              ) : (
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between">
+                    <span className="font-mono text-[11px] font-bold text-muted uppercase tracking-wider flex items-center gap-1.5">
+                      <span>🎫 演出場次篩選器</span>
+                    </span>
+                    <button
+                      type="button"
+                      onClick={toggleDesktopNav}
+                      className="inline-flex items-center gap-1 rounded bg-paper hover:bg-tape-tint px-2.5 py-1 font-mono text-[11px] font-bold text-ink border border-line-soft hover:border-ink transition-colors cursor-pointer shadow-2xs"
+                      title="收合篩選器以專注查看下方歌單小卡"
+                      aria-expanded={true}
+                    >
+                      <span>收合篩選器</span>
+                      <span aria-hidden="true">▴</span>
+                    </button>
+                  </div>
+                  {renderShowNavigator(false)}
+                </div>
+              )}
             </div>
 
             {/* Setlist Slip Receipt */}
-            <section ref={slipRef} className="mt-4 sm:mt-6 scroll-mt-8 sm:scroll-mt-10">
+            <section ref={slipRef} className="mt-2 sm:mt-4 scroll-mt-8 sm:scroll-mt-10">
               <ShowSlip
                 ud={current}
                 showId={selShow}
@@ -1473,13 +1693,60 @@ export default function App() {
         {/* ===================== TAB 2: SONG ===================== */}
         {tab === "song" && (
           <div className="flex flex-col gap-4">
-            {/* Desktop Navigator */}
+            {/* Desktop Navigator (Collapsible) */}
             <div className="hidden sm:block">
-              {renderSongNavigator(false)}
+              {!isDesktopNavOpen ? (
+                <button
+                  type="button"
+                  onClick={toggleDesktopNav}
+                  className="w-full group flex items-center justify-between gap-3 rounded-[6px] border-[1.5px] border-ink bg-card px-4 py-2.5 text-left shadow-xs hover:border-pool hover:shadow-sm active:bg-paper cursor-pointer transition-all motion-reduce:transition-none"
+                  title="點擊展開歌曲檔案篩選器"
+                  aria-expanded={false}
+                >
+                  <div className="flex items-center gap-2.5 min-w-0">
+                    <span className="text-lg shrink-0" aria-hidden="true">🎵</span>
+                    <div className="min-w-0 flex items-baseline gap-2 font-mono text-[12px]">
+                      <span className="font-bold text-ink truncate">
+                        《{currentSongObj?.title || selSong}》
+                      </span>
+                      {currentSongObj?.album && (
+                        <span className="text-muted truncate">
+                          · {currentSongObj.album}
+                        </span>
+                      )}
+                      <span className="text-muted shrink-0 tabular-nums">
+                        · 累積出演 {(trackShows.get(trackKey("song", selSong)) ?? []).length} 場
+                      </span>
+                    </div>
+                  </div>
+                  <span className="shrink-0 rounded bg-band px-3 py-1 font-mono text-[11px] font-extrabold text-band-ink border border-ink/40 shadow-2xs group-hover:bg-tape transition-colors">
+                    變更篩選 ▾
+                  </span>
+                </button>
+              ) : (
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between">
+                    <span className="font-mono text-[11px] font-bold text-muted uppercase tracking-wider flex items-center gap-1.5">
+                      <span>🎵 歌曲檔案篩選器</span>
+                    </span>
+                    <button
+                      type="button"
+                      onClick={toggleDesktopNav}
+                      className="inline-flex items-center gap-1 rounded bg-paper hover:bg-tape-tint px-2.5 py-1 font-mono text-[11px] font-bold text-ink border border-line-soft hover:border-ink transition-colors cursor-pointer shadow-2xs"
+                      title="收合篩選器以專注查看下方歌曲檔案小卡"
+                      aria-expanded={true}
+                    >
+                      <span>收合篩選器</span>
+                      <span aria-hidden="true">▴</span>
+                    </button>
+                  </div>
+                  {renderSongNavigator(false)}
+                </div>
+              )}
             </div>
 
             {/* Song Slip Receipt */}
-            <section ref={slipRef} className="mt-4 sm:mt-6 scroll-mt-8 sm:scroll-mt-10">
+            <section ref={slipRef} className="mt-2 sm:mt-4 scroll-mt-8 sm:scroll-mt-10">
               <SongSlip
                 songId={selSong}
                 trackShows={trackShows}
@@ -1493,13 +1760,60 @@ export default function App() {
         {/* ===================== TAB 3: VENUE ===================== */}
         {tab === "venue" && (
           <div className="flex flex-col gap-4">
-            {/* Desktop Navigator */}
+            {/* Desktop Navigator (Collapsible) */}
             <div className="hidden sm:block">
-              {renderVenueNavigator(false)}
+              {!isDesktopNavOpen ? (
+                <button
+                  type="button"
+                  onClick={toggleDesktopNav}
+                  className="w-full group flex items-center justify-between gap-3 rounded-[6px] border-[1.5px] border-ink bg-card px-4 py-2.5 text-left shadow-xs hover:border-pool hover:shadow-sm active:bg-paper cursor-pointer transition-all motion-reduce:transition-none"
+                  title="點擊展開演出場館篩選器"
+                  aria-expanded={false}
+                >
+                  <div className="flex items-center gap-2.5 min-w-0">
+                    <span className="text-lg shrink-0" aria-hidden="true">🏛️</span>
+                    <div className="min-w-0 flex items-baseline gap-2 font-mono text-[12px]">
+                      <span className="font-bold text-ink truncate">
+                        {selVenue}
+                      </span>
+                      {currentVenueObj?.city && (
+                        <span className="text-muted truncate">
+                          · {currentVenueObj.pref ? `${currentVenueObj.pref} ` : ""}{currentVenueObj.city}
+                        </span>
+                      )}
+                      <span className="text-muted shrink-0 tabular-nums">
+                        · 舉辦過 {currentVenueObj?.shows?.length ?? 0} 場演出
+                      </span>
+                    </div>
+                  </div>
+                  <span className="shrink-0 rounded bg-band px-3 py-1 font-mono text-[11px] font-extrabold text-band-ink border border-ink/40 shadow-2xs group-hover:bg-tape transition-colors">
+                    變更篩選 ▾
+                  </span>
+                </button>
+              ) : (
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between">
+                    <span className="font-mono text-[11px] font-bold text-muted uppercase tracking-wider flex items-center gap-1.5">
+                      <span>🏛️ 演出場館篩選器</span>
+                    </span>
+                    <button
+                      type="button"
+                      onClick={toggleDesktopNav}
+                      className="inline-flex items-center gap-1 rounded bg-paper hover:bg-tape-tint px-2.5 py-1 font-mono text-[11px] font-bold text-ink border border-line-soft hover:border-ink transition-colors cursor-pointer shadow-2xs"
+                      title="收合篩選器以專注查看下方場地檔案小卡"
+                      aria-expanded={true}
+                    >
+                      <span>收合篩選器</span>
+                      <span aria-hidden="true">▴</span>
+                    </button>
+                  </div>
+                  {renderVenueNavigator(false)}
+                </div>
+              )}
             </div>
 
             {/* Venue Slip Receipt */}
-            <section ref={slipRef} className="mt-4 sm:mt-6 scroll-mt-8 sm:scroll-mt-10">
+            <section ref={slipRef} className="mt-2 sm:mt-4 scroll-mt-8 sm:scroll-mt-10">
               <VenueSlip
                 venueName={selVenue}
                 globalVenueShows={globalVenueShows}
@@ -1518,6 +1832,7 @@ export default function App() {
         <span>{current?.isTour ? "各場差異以 insert / skip 記錄" : ""}</span>
         <span>演出順序、安可標記逐場核對 {sourceSummary}</span>
       </footer>
+      </div>
 
       {/* Mobile Filter Bottom Sheet Modal */}
       {isFilterDrawerOpen && (
@@ -1584,12 +1899,26 @@ export default function App() {
         </div>
       )}
 
-      {/* Mobile Floating Action Button (FAB) */}
-      <div className="fixed bottom-5 right-4 z-40 sm:hidden">
+      {/* Mobile Floating Action Buttons (Vertical Stack: Top Round Search FAB + Bottom Filter Pill FAB) */}
+      <div className="fixed bottom-5 right-4 z-40 sm:hidden flex flex-col items-end gap-2.5 select-none">
+        {/* Secondary Action: Search Round FAB (Paper White with Ink Border) */}
+        <button
+          type="button"
+          onClick={() => {
+            setIsMobileSearchOpen(true);
+            setIsFilterDrawerOpen(false);
+          }}
+          className="flex h-11 w-11 items-center justify-center rounded-full border-[2px] border-ink bg-paper text-ink shadow-[2.5px_2.5px_0_#000] cursor-pointer hover:bg-tape-tint active:scale-95 transition-all text-base"
+          aria-label="開啟全域搜尋"
+        >
+          <span aria-hidden="true">🔍</span>
+        </button>
+
+        {/* Primary Action: Filter Pill FAB (Brand Yellow with Ink Border) */}
         <button
           type="button"
           onClick={openFilterDrawer}
-          className="flex items-center gap-1.5 rounded-full border-[2px] border-ink bg-band px-4 py-2.5 font-display text-[13px] font-black text-band-ink shadow-[3px_3px_0_#000] active:scale-95 transition-all cursor-pointer"
+          className="flex items-center gap-1.5 px-4 py-2.5 rounded-full border-[2px] border-ink bg-band text-band-ink shadow-[3px_3px_0_#000] font-display text-[13px] font-black cursor-pointer hover:brightness-105 active:scale-95 transition-all"
           aria-label="開啟篩選抽屜"
         >
           <span className="text-base" aria-hidden="true">
@@ -1600,6 +1929,51 @@ export default function App() {
           </span>
         </button>
       </div>
+
+      {/* Mobile Search Spotlight Modal */}
+      {isMobileSearchOpen && (
+        <div
+          className="fixed inset-x-0 z-50 flex flex-col bg-card/95 backdrop-blur-md sm:hidden overflow-hidden"
+          style={{
+            height: visualViewportStyle.height,
+            top: visualViewportStyle.top,
+          }}
+          role="dialog"
+          aria-modal="true"
+          aria-label="全域搜尋"
+        >
+          <SearchBox
+            q={q}
+            setQ={setQ}
+            allUsedSongs={allUsedSongs}
+            allUnits={allUnits}
+            allVenues={allVenues}
+            autoFocus={true}
+            isMobileModal={true}
+            onCloseModal={() => {
+              setIsMobileSearchOpen(false);
+              setQ("");
+            }}
+            onSelectSong={handleSelectSong}
+            onSelectUnit={(uId) => {
+              const u = unitData.get(uId)?.unit;
+              if (u) {
+                setSelUnitId(uId);
+                const defShow = defaultShowId(u);
+                setSelShow(defShow);
+                const cat = getUnitTypeLabel(u);
+                const yr = unitEarliest(u).split("-")[0];
+                setSelCategory(cat);
+                if (yr && yr !== "9999") setSelYear(yr);
+                setIsMobileSearchOpen(false);
+                setQ("");
+                go(routeHash.show(defShow));
+              }
+            }}
+            onSelectVenue={handleSelectVenue}
+          />
+        </div>
+      )}
 
       {/* Mobile Floating Return to Top (Left-aligned) */}
       <button

@@ -10,11 +10,20 @@ export default function SearchBox({
   onSelectSong,
   onSelectUnit,
   onSelectVenue,
+  autoFocus = false,
+  isMobileModal = false,
+  onCloseModal,
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const [activeIndex, setActiveIndex] = useState(-1);
   const containerRef = useRef(null);
   const inputRef = useRef(null);
+
+  useEffect(() => {
+    if (autoFocus && inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [autoFocus]);
 
   const needle = q.trim().toLowerCase();
 
@@ -175,8 +184,235 @@ export default function SearchBox({
     inputRef.current?.focus();
   };
 
-  let runningIndex = 0;
+  const renderResultsList = (isModal = false) => {
+    let runningIndex = 0;
 
+    if (flatItems.length === 0) {
+      return (
+        <div className="px-4 py-8 text-center font-mono text-[13px] text-muted">
+          無相符的歌曲、演出或場地
+        </div>
+      );
+    }
+
+    return (
+      <Fragment>
+        {/* 🎵 歌曲分組 */}
+        {matchedSongs.length > 0 && (
+          <div>
+            <div className="sticky top-0 z-[2] flex items-center justify-between border-b border-line-soft bg-paper/95 px-3 py-1.5 font-mono text-[11px] font-bold tracking-[0.1em] text-muted uppercase backdrop-blur-xs">
+              <span><span aria-hidden="true">🎵</span> 歌曲</span>
+              <span className="text-[11px] font-normal opacity-75">
+                {matchedSongs.length} 首
+              </span>
+            </div>
+            {matchedSongs.slice(0, 5).map((s) => {
+              const itemIdx = runningIndex++;
+              const isActive = activeIndex === itemIdx;
+              return (
+                <div
+                  key={`song-${s.type}-${s.id}`}
+                  role="option"
+                  aria-selected={isActive}
+                  className={`flex cursor-pointer items-center justify-between border-b border-line-soft/60 px-3.5 py-2.5 text-[14px] transition-colors last:border-b-0 ${
+                    isActive
+                      ? "bg-pool-wash font-semibold text-pool"
+                      : "text-ink hover:bg-paper"
+                  }`}
+                  onMouseEnter={() => setActiveIndex(itemIdx)}
+                  onClick={() => handleSelectItem(s)}
+                >
+                  <div className="flex min-w-0 flex-col">
+                    <span className="truncate">
+                      {s.title}
+                      {s.unreleased && (
+                        <span className="ml-1 text-[11px] font-normal text-muted">
+                          （未發行）
+                        </span>
+                      )}
+                    </span>
+                    {s.subTitle && (
+                      <span className="font-mono text-[11px] text-muted">
+                        {s.subTitle}
+                      </span>
+                    )}
+                  </div>
+                  <span className="ml-2 shrink-0 font-mono text-[11px] text-muted">
+                    {s.album}
+                  </span>
+                </div>
+              );
+            })}
+          </div>
+        )}
+
+        {/* 🎤 演出／巡演分組 */}
+        {matchedUnits.length > 0 && (
+          <div>
+            <div className="sticky top-0 z-[2] flex items-center justify-between border-b border-line-soft bg-paper/95 px-3 py-1.5 font-mono text-[11px] font-bold tracking-[0.1em] text-muted uppercase backdrop-blur-xs">
+              <span><span aria-hidden="true">🎤</span> 演出／巡演</span>
+              <span className="text-[11px] font-normal opacity-75">
+                {matchedUnits.length} 部
+              </span>
+            </div>
+            {matchedUnits.slice(0, 5).map((u) => {
+              const itemIdx = runningIndex++;
+              const isActive = activeIndex === itemIdx;
+              return (
+                <div
+                  key={`unit-${u.id}`}
+                  role="option"
+                  aria-selected={isActive}
+                  className={`flex cursor-pointer items-center justify-between border-b border-line-soft/60 px-3.5 py-2.5 text-[14px] transition-colors last:border-b-0 ${
+                    isActive
+                      ? "bg-pool-wash font-semibold text-pool"
+                      : "text-ink hover:bg-paper"
+                  }`}
+                  onMouseEnter={() => setActiveIndex(itemIdx)}
+                  onClick={() => handleSelectItem(u)}
+                >
+                  <div className="flex min-w-0 flex-col">
+                    <span className="truncate">{u.title}</span>
+                    <span className="font-mono text-[11px] text-muted">
+                      {u.year} 年
+                    </span>
+                  </div>
+                  <span className="ml-2 shrink-0 rounded-[2px] border border-line bg-paper px-1.5 py-0.5 font-mono text-[11px] text-muted">
+                    {u.badge}
+                  </span>
+                </div>
+              );
+            })}
+          </div>
+        )}
+
+        {/* 📍 場地分組 */}
+        {matchedVenues.length > 0 && (
+          <div>
+            <div className="sticky top-0 z-[2] flex items-center justify-between border-b border-line-soft bg-paper/95 px-3 py-1.5 font-mono text-[11px] font-bold tracking-[0.1em] text-muted uppercase backdrop-blur-xs">
+              <span><span aria-hidden="true">📍</span> 場地</span>
+              <span className="text-[11px] font-normal opacity-75">
+                {matchedVenues.length} 處
+              </span>
+            </div>
+            {matchedVenues.slice(0, 5).map((v) => {
+              const itemIdx = runningIndex++;
+              const isActive = activeIndex === itemIdx;
+              return (
+                <div
+                  key={`venue-${v.id}`}
+                  role="option"
+                  aria-selected={isActive}
+                  className={`flex cursor-pointer items-center justify-between border-b border-line-soft/60 px-3.5 py-2.5 text-[14px] transition-colors last:border-b-0 ${
+                    isActive
+                      ? "bg-pool-wash font-semibold text-pool"
+                      : "text-ink hover:bg-paper"
+                  }`}
+                  onMouseEnter={() => setActiveIndex(itemIdx)}
+                  onClick={() => handleSelectItem(v)}
+                >
+                  <div className="flex min-w-0 flex-col">
+                    <span className="truncate">{v.name}</span>
+                    <span className="font-mono text-[11px] text-muted">
+                      {v.city}
+                    </span>
+                  </div>
+                  <span className="ml-2 shrink-0 font-mono text-[11px] text-muted">
+                    {v.count} 場
+                  </span>
+                </div>
+              );
+            })}
+          </div>
+        )}
+
+        {/* 底部導航提示 */}
+        {!isModal && (
+          <div className="sticky bottom-0 border-t border-line-soft bg-paper px-3 py-1 font-mono text-[11px] text-muted flex items-center justify-between">
+            <span>↑↓ 選擇・Enter 跳轉・Esc 關閉</span>
+          </div>
+        )}
+      </Fragment>
+    );
+  };
+
+  // Mobile Spotlight Modal Mode: Full-screen Stream Body layout
+  if (isMobileModal) {
+    return (
+      <div ref={containerRef} className="flex flex-col h-full w-full bg-card">
+        {/* Top Input Bar */}
+        <div className="flex items-center gap-2 border-b border-line-soft bg-paper px-3 py-2.5 shadow-xs shrink-0">
+          <div className="relative flex-1 flex items-center">
+            <span className="absolute left-3 text-muted text-sm pointer-events-none select-none" aria-hidden="true">
+              🔍
+            </span>
+            <input
+              ref={inputRef}
+              id="mobile-spotlight-q"
+              type="search"
+              name="q"
+              spellCheck={false}
+              role="combobox"
+              aria-expanded={Boolean(needle)}
+              aria-autocomplete="list"
+              aria-controls="mobile-search-results-list"
+              className="w-full rounded-[3px] border-[1.5px] border-ink bg-card py-2 pl-8 pr-8 text-[16px] text-ink placeholder:text-muted focus:border-pool focus:ring-2 focus:ring-pool/30 focus:outline-none"
+              placeholder="搜尋歌曲、演出、場地…"
+              value={q}
+              onChange={(e) => setQ(e.target.value)}
+              onKeyDown={handleKeyDown}
+              autoComplete="off"
+            />
+            {q && (
+              <button
+                type="button"
+                className="absolute right-2 top-1/2 -translate-y-1/2 rounded px-1.5 py-0.5 font-mono text-[12px] text-muted hover:bg-paper hover:text-ink cursor-pointer"
+                onClick={handleClear}
+                title="清空搜尋"
+                aria-label="清空搜尋"
+              >
+                ✕
+              </button>
+            )}
+          </div>
+          {onCloseModal && (
+            <button
+              type="button"
+              onClick={onCloseModal}
+              className="shrink-0 flex h-9 w-9 items-center justify-center rounded-full bg-paper border border-line-soft font-bold text-muted hover:text-ink hover:bg-tape-tint active:scale-95 cursor-pointer text-sm"
+              aria-label="關閉搜尋"
+            >
+              ✕
+            </button>
+          )}
+        </div>
+
+        {/* Modal Stream Body */}
+        {!needle ? (
+          <div className="flex-1 p-6 flex flex-col items-center justify-center text-center text-muted select-none">
+            <span className="text-3xl mb-2" aria-hidden="true">🔍</span>
+            <p className="font-bold text-ink text-sm m-0 mb-1">搜尋全檔案庫</p>
+            <p className="text-xs text-muted m-0">輸入歌曲名、巡演名稱、年份或演出場館…</p>
+          </div>
+        ) : (
+          <div
+            id="mobile-search-results-list"
+            role="listbox"
+            onScroll={() => {
+              if (inputRef.current === document.activeElement) {
+                inputRef.current.blur();
+              }
+            }}
+            className="flex-1 min-h-0 overflow-y-auto overscroll-contain bg-card divide-y divide-line-soft/40"
+          >
+            {renderResultsList(true)}
+          </div>
+        )}
+      </div>
+    );
+  }
+
+  // Desktop In-Flow SearchBox Mode: Floating Dropdown
   return (
     <div
       ref={containerRef}
@@ -226,149 +462,9 @@ export default function SearchBox({
           <div
             id="search-dropdown-list"
             role="listbox"
-            className="absolute left-0 right-0 top-[calc(100%+6px)] z-50 max-h-[48vh] sm:max-h-[380px] overflow-y-auto rounded-[3px] border-[1.5px] border-ink bg-card shadow-[4px_4px_0_rgba(23,35,59,0.16)]"
+            className="absolute left-0 right-0 top-[calc(100%+6px)] z-50 overflow-y-auto rounded-[3px] border-[1.5px] border-ink bg-card shadow-[4px_4px_0_rgba(23,35,59,0.16)] max-h-[48vh] sm:max-h-[380px]"
           >
-            {flatItems.length === 0 ? (
-              <div className="px-4 py-5 text-center font-mono text-[13px] text-muted">
-                無相符的歌曲、演出或場地
-              </div>
-            ) : (
-              <Fragment>
-                {/* 🎵 歌曲分組 */}
-                {matchedSongs.length > 0 && (
-                  <div>
-                    <div className="sticky top-0 z-[2] flex items-center justify-between border-b border-line-soft bg-paper/95 px-3 py-1.5 font-mono text-[11px] font-bold tracking-[0.1em] text-muted uppercase backdrop-blur-xs">
-                      <span><span aria-hidden="true">🎵</span> 歌曲</span>
-                      <span className="text-[11px] font-normal opacity-75">
-                        {matchedSongs.length} 首
-                      </span>
-                    </div>
-                    {matchedSongs.slice(0, 5).map((s) => {
-                      const itemIdx = runningIndex++;
-                      const isActive = activeIndex === itemIdx;
-                      return (
-                        <div
-                          key={`song-${s.type}-${s.id}`}
-                          role="option"
-                          aria-selected={isActive}
-                          className={`flex cursor-pointer items-center justify-between border-b border-line-soft/60 px-3 py-2 text-[13px] transition-colors last:border-b-0 ${
-                            isActive
-                              ? "bg-pool-wash font-semibold text-pool"
-                              : "text-ink hover:bg-paper"
-                          }`}
-                          onMouseEnter={() => setActiveIndex(itemIdx)}
-                          onClick={() => handleSelectItem(s)}
-                        >
-                          <div className="flex min-w-0 flex-col">
-                            <span className="truncate">
-                              {s.title}
-                              {s.unreleased && (
-                                <span className="ml-1 text-[11px] font-normal text-muted">
-                                  （未發行）
-                                </span>
-                              )}
-                            </span>
-                            {s.subTitle && (
-                              <span className="font-mono text-[11px] text-muted">
-                                {s.subTitle}
-                              </span>
-                            )}
-                          </div>
-                          <span className="ml-2 shrink-0 font-mono text-[11px] text-muted">
-                            {s.album}
-                          </span>
-                        </div>
-                      );
-                    })}
-                  </div>
-                )}
-
-                {/* 🎤 演出／巡演分組 */}
-                {matchedUnits.length > 0 && (
-                  <div>
-                    <div className="sticky top-0 z-[2] flex items-center justify-between border-b border-line-soft bg-paper/95 px-3 py-1.5 font-mono text-[11px] font-bold tracking-[0.1em] text-muted uppercase backdrop-blur-xs">
-                      <span><span aria-hidden="true">🎤</span> 演出／巡演</span>
-                      <span className="text-[11px] font-normal opacity-75">
-                        {matchedUnits.length} 部
-                      </span>
-                    </div>
-                    {matchedUnits.slice(0, 5).map((u) => {
-                      const itemIdx = runningIndex++;
-                      const isActive = activeIndex === itemIdx;
-                      return (
-                        <div
-                          key={`unit-${u.id}`}
-                          role="option"
-                          aria-selected={isActive}
-                          className={`flex cursor-pointer items-center justify-between border-b border-line-soft/60 px-3 py-2 text-[13px] transition-colors last:border-b-0 ${
-                            isActive
-                              ? "bg-pool-wash font-semibold text-pool"
-                              : "text-ink hover:bg-paper"
-                          }`}
-                          onMouseEnter={() => setActiveIndex(itemIdx)}
-                          onClick={() => handleSelectItem(u)}
-                        >
-                          <div className="flex min-w-0 flex-col">
-                            <span className="truncate">{u.title}</span>
-                            <span className="font-mono text-[11px] text-muted">
-                              {u.year} 年
-                            </span>
-                          </div>
-                          <span className="ml-2 shrink-0 rounded-[2px] border border-line bg-paper px-1.5 py-0.5 font-mono text-[11px] text-muted">
-                            {u.badge}
-                          </span>
-                        </div>
-                      );
-                    })}
-                  </div>
-                )}
-
-                {/* 📍 場地分組 */}
-                {matchedVenues.length > 0 && (
-                  <div>
-                    <div className="sticky top-0 z-[2] flex items-center justify-between border-b border-line-soft bg-paper/95 px-3 py-1.5 font-mono text-[11px] font-bold tracking-[0.1em] text-muted uppercase backdrop-blur-xs">
-                      <span><span aria-hidden="true">📍</span> 場地</span>
-                      <span className="text-[11px] font-normal opacity-75">
-                        {matchedVenues.length} 處
-                      </span>
-                    </div>
-                    {matchedVenues.slice(0, 5).map((v) => {
-                      const itemIdx = runningIndex++;
-                      const isActive = activeIndex === itemIdx;
-                      return (
-                        <div
-                          key={`venue-${v.id}`}
-                          role="option"
-                          aria-selected={isActive}
-                          className={`flex cursor-pointer items-center justify-between border-b border-line-soft/60 px-3 py-2 text-[13px] transition-colors last:border-b-0 ${
-                            isActive
-                              ? "bg-pool-wash font-semibold text-pool"
-                              : "text-ink hover:bg-paper"
-                          }`}
-                          onMouseEnter={() => setActiveIndex(itemIdx)}
-                          onClick={() => handleSelectItem(v)}
-                        >
-                          <div className="flex min-w-0 flex-col">
-                            <span className="truncate">{v.name}</span>
-                            <span className="font-mono text-[11px] text-muted">
-                              {v.city}
-                            </span>
-                          </div>
-                          <span className="ml-2 shrink-0 font-mono text-[11px] text-muted">
-                            {v.count} 場
-                          </span>
-                        </div>
-                      );
-                    })}
-                  </div>
-                )}
-
-                {/* 底部導航提示 */}
-                <div className="sticky bottom-0 border-t border-line-soft bg-paper px-3 py-1 font-mono text-[11px] text-muted flex items-center justify-between">
-                  <span>↑↓ 選擇・Enter 跳轉・Esc 關閉</span>
-                </div>
-              </Fragment>
-            )}
+            {renderResultsList(false)}
           </div>
         )}
       </div>
