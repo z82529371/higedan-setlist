@@ -51,7 +51,7 @@ export const SETLIST_SONG =
 export const SLIP_ARTICLE =
   "relative rounded-[3px] border-[1.5px] border-ink bg-card px-[26px] pb-6 pt-[46px] shadow-[5px_5px_0_rgba(0,0,0,0.14)] max-sm:px-4 max-sm:pb-[18px] max-sm:pt-[42px]";
 export const SLIP_TAPE =
-  "pointer-events-none absolute left-1/2 top-[-13px] h-[26px] w-[136px] -translate-x-1/2 rotate-[1.5deg] border-x border-dashed border-ink/40 bg-tape-soft shadow-[0_1px_3px_rgba(0,0,0,0.12)] backdrop-blur-[0.5px]";
+  "pointer-events-none absolute left-1/2 top-[-14px] z-20 h-[28px] w-[142px] -translate-x-1/2 rotate-[1.5deg] washi-tape select-none";
 export const SLIP_CARD = {
   premiere:
     "relative rounded-[2px] border-[1.5px] border-premiere border-l-[7px] bg-premiere-bg px-[14px] py-[10px] -mx-2 my-[18px] -rotate-[0.6deg] shadow-[4px_6px_0_var(--color-premiere-wash)] max-sm:mx-[-4px] max-sm:my-3",
@@ -60,7 +60,7 @@ export const SLIP_CARD = {
   "satoshi-solo":
     "relative rounded-[2px] border-[1.5px] border-solo border-l-[7px] bg-solo-bg px-[14px] py-[10px] -mx-2 my-[18px] -rotate-[0.4deg] shadow-[4px_6px_0_var(--color-solo-wash)] max-sm:mx-[-4px] max-sm:my-3",
   request:
-    "relative rounded-[2px] border-[1.5px] border-request border-l-[7px] bg-white px-[14px] py-[10px] -mx-2 my-[18px] -rotate-[1.2deg] shadow-[4px_6px_0_var(--color-request-shadow)] max-sm:mx-[-4px] max-sm:my-3",
+    "relative rounded-[2px] border-[1.5px] border-request border-l-[7px] bg-card px-[14px] py-[10px] -mx-2 my-[18px] -rotate-[1.2deg] shadow-[4px_6px_0_var(--color-request-shadow)] max-sm:mx-[-4px] max-sm:my-3",
 };
 export const SLIP_TAB_COLOR = {
   premiere: "bg-premiere",

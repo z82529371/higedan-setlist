@@ -1,23 +1,23 @@
 /* 髭男 Setlist 檔案庫 — Tailwind v4 硬零自訂 CSS（ADR-0040 硬零共識）：
-   配色調色盤（ADR-0067）：全面精準對齊 higedan.com 官網 service.css 色系
-   - 背景紙色: #e6e6e6 (官網 body 背景)
+   配色調色盤（ADR-0067, ADR-0086）：
+   - 背景紙色: #f0eee8 (日式暖米紙色，典藏無酸紙溫潤基底)
    - 墨水文字: #000000 (官網主要文字與邊框)
    - 官方標誌金: #d19f00 (官網 accent、selection、hover 金)
-   - 實體票根: #ffffff (純白卡片)
-   - 分隔線條: #bdbebe (官網線條色)
+   - 卡片底色: #f8f7f4 (日系柔暖牛奶白卡紙 / Warm Milk White Cardstock，票根/搜尋/篩選/三列非死白且對比分明)
+   - 分隔線條: #b8b5ab (暖調微灰線條)
    - 次要文字: #6b6366 (高對比暖灰，符合 WCAG AA 4.5:1)
 */
 @import "tailwindcss";
 
 @theme {
-  --color-paper: #e6e6e6;
-  --color-card: #ffffff;
+  --color-paper: #f0eee8;
+  --color-card: #f8f7f4;
   --color-band: #d19f00;
   --color-band-ink: #000000;
   --color-ink: #000000;
   --color-muted: #6b6366;
-  --color-line: #bdbebe;
-  --color-line-soft: #e6e6e6;
+  --color-line: #b8b5ab;
+  --color-line-soft: #e4e1d8;
   --color-request: #d9261c;
   --color-request-wash: #fbe9e6;
   --color-request-shadow: rgba(217, 38, 28, 0.14);
@@ -37,7 +37,9 @@
   --color-tape-edge: #000000;
   --color-pool: #d19f00;
   --color-pool-wash: #faf5e6;
-  --color-grid-line: rgba(0, 0, 0, 0.04);
+  --color-grid-line: rgba(0, 0, 0, 0.06);
+  --color-ambient-glow: rgba(209, 159, 0, 0.06);
+  --color-notebook-grid: rgba(0, 0, 0, 0.045);
   --font-display: "M PLUS Rounded 1c", "Zen Kaku Gothic New", "Noto Sans TC", sans-serif;
   --font-body: "Noto Sans TC", "Zen Kaku Gothic New", system-ui, sans-serif;
   --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
@@ -82,6 +84,8 @@ html[data-theme="dark"] {
   --color-pool: #d49a00;
   --color-pool-wash: rgba(212, 154, 0, 0.18);
   --color-grid-line: rgba(255, 255, 255, 0.05);
+  --color-ambient-glow: rgba(212, 154, 0, 0.10);
+  --color-notebook-grid: rgba(255, 255, 255, 0.04);
 }
 
 @media print {
@@ -105,3 +109,36 @@ html[data-theme="dark"] {
     margin: 0 !important;
   }
 }
+
+/* 日系手撕和紙膠帶（Serrated Washi Tape, ADR-0089） */
+.washi-tape {
+  background-color: var(--color-band);
+  background-image: repeating-linear-gradient(
+    45deg,
+    rgba(255, 255, 255, 0.16) 0px,
+    rgba(255, 255, 255, 0.16) 2px,
+    transparent 2px,
+    transparent 5px
+  );
+  clip-path: polygon(
+    0% 0%, 4px 10%, 0% 20%, 4px 30%, 0% 40%, 4px 50%, 0% 60%, 4px 70%, 0% 80%, 4px 90%, 0% 100%,
+    100% 100%, calc(100% - 4px) 90%, 100% 80%, calc(100% - 4px) 70%, 100% 60%, calc(100% - 4px) 50%, 100% 40%, calc(100% - 4px) 30%, 100% 20%, calc(100% - 4px) 10%, 100% 0%
+  );
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.24));
+}
+
+/* 日系手感紙質有機微紋理（Tactile Archival Paper Grain, ADR-0090） */
+.paper-grain {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* 日系 5mm 方眼手帳筆記本格線（Japanese 5mm Graph Notebook Grid, ADR-0091） */
+.notebook-grid {
+  background-size: 20px 20px;
+  background-image:
+    linear-gradient(to right, var(--color-notebook-grid) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--color-notebook-grid) 1px, transparent 1px);
+}
+
+
+
