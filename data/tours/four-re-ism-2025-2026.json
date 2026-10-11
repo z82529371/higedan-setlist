@@ -1,7 +1,7 @@
 {
   "id": "four-re-ism-2025-2026",
   "title": "OFFICIAL HIGE DANDISM one-man tour FOUR-RE:ISM",
-  "type": "專場",
+  "type": "巡演專場",
   "templateBasis": "全自動提煉：基於 10 場演出提取 $\\ge 50\\%$ 多數共識歌單",
   "templateSetlist": [
     {
@@ -53,17 +53,13 @@
       "order": 10,
       "encore": false,
       "songId": "subtitle",
-      "kind": [
-        "satoshi-solo"
-      ]
+      "kind": ["satoshi-solo"]
     },
     {
       "order": 11,
       "encore": false,
       "songId": "knit-no-boushi",
-      "kind": [
-        "satoshi-solo"
-      ]
+      "kind": ["satoshi-solo"]
     },
     {
       "order": 12,
@@ -119,9 +115,7 @@
         "https://www.livefans.jp/events/1866409"
       ],
       "diff": {
-        "skip": [
-          18
-        ],
+        "skip": [18],
         "insert": [
           {
             "after": 9,
@@ -129,10 +123,7 @@
               "encore": false,
               "songId": "same-blue",
               "note": "弾き語り、リクエスト曲",
-              "kind": [
-                "satoshi-solo",
-                "request"
-              ]
+              "kind": ["satoshi-solo", "request"]
             }
           },
           {
@@ -141,10 +132,7 @@
               "encore": false,
               "songId": "vintage",
               "note": "弾き語り、リクエスト曲",
-              "kind": [
-                "satoshi-solo",
-                "request"
-              ]
+              "kind": ["satoshi-solo", "request"]
             }
           },
           {
@@ -153,10 +141,7 @@
               "encore": false,
               "songId": "i-love",
               "note": "弾き語り、リクエスト曲",
-              "kind": [
-                "satoshi-solo",
-                "request"
-              ]
+              "kind": ["satoshi-solo", "request"]
             }
           },
           {
@@ -165,9 +150,7 @@
               "encore": true,
               "songId": "make-me-wonder",
               "note": "新曲",
-              "kind": [
-                "premiere"
-              ]
+              "kind": ["premiere"]
             }
           }
         ]
@@ -187,9 +170,7 @@
         "https://www.livefans.jp/events/1866410"
       ],
       "diff": {
-        "skip": [
-          18
-        ],
+        "skip": [18],
         "insert": [
           {
             "after": 9,
@@ -197,10 +178,7 @@
               "encore": false,
               "songId": "yugure-zoi",
               "note": "リクエスト弾き語り",
-              "kind": [
-                "satoshi-solo",
-                "request"
-              ]
+              "kind": ["satoshi-solo", "request"]
             }
           },
           {
@@ -209,10 +187,7 @@
               "encore": false,
               "songId": "115man-kiro-no-film",
               "note": "リクエスト弾き語り",
-              "kind": [
-                "satoshi-solo",
-                "request"
-              ]
+              "kind": ["satoshi-solo", "request"]
             }
           },
           {
@@ -221,9 +196,7 @@
               "encore": true,
               "songId": "make-me-wonder",
               "note": "新曲",
-              "kind": [
-                "premiere"
-              ]
+              "kind": ["premiere"]
             }
           }
         ]
@@ -243,11 +216,7 @@
         "https://www.livefans.jp/events/1866411"
       ],
       "diff": {
-        "skip": [
-          5,
-          8,
-          18
-        ],
+        "skip": [5, 8, 18],
         "insert": [
           {
             "after": 4,
@@ -271,10 +240,7 @@
               "encore": false,
               "songId": "apoptosis",
               "note": "弾き語りリクエスト",
-              "kind": [
-                "satoshi-solo",
-                "request"
-              ]
+              "kind": ["satoshi-solo", "request"]
             }
           },
           {
@@ -283,10 +249,7 @@
               "encore": false,
               "songId": "dakuten",
               "note": "弾き語りリクエスト",
-              "kind": [
-                "satoshi-solo",
-                "request"
-              ]
+              "kind": ["satoshi-solo", "request"]
             }
           },
           {
@@ -295,10 +258,7 @@
               "encore": false,
               "songId": "koi-no-sarigiwa",
               "note": "弾き語りリクエスト",
-              "kind": [
-                "satoshi-solo",
-                "request"
-              ]
+              "kind": ["satoshi-solo", "request"]
             }
           },
           {
@@ -307,9 +267,7 @@
               "encore": true,
               "songId": "make-me-wonder",
               "note": "新曲",
-              "kind": [
-                "premiere"
-              ]
+              "kind": ["premiere"]
             }
           }
         ]
@@ -329,9 +287,7 @@
         "https://www.livefans.jp/events/1866412"
       ],
       "diff": {
-        "skip": [
-          8
-        ],
+        "skip": [8],
         "insert": [
           {
             "after": 7,
@@ -347,10 +303,7 @@
               "encore": false,
               "songId": "sousisouai",
               "note": "弾き語りリクエスト",
-              "kind": [
-                "satoshi-solo",
-                "request"
-              ]
+              "kind": ["satoshi-solo", "request"]
             }
           },
           {
@@ -359,10 +312,7 @@
               "encore": false,
               "songId": "universe",
               "note": "弾き語りリクエスト",
-              "kind": [
-                "satoshi-solo",
-                "request"
-              ]
+              "kind": ["satoshi-solo", "request"]
             }
           }
         ]
@@ -382,9 +332,7 @@
         "https://www.livefans.jp/events/1866413"
       ],
       "diff": {
-        "skip": [
-          8
-        ],
+        "skip": [8],
         "insert": [
           {
             "after": 7,
@@ -400,10 +348,7 @@
               "encore": false,
               "songId": "sharon",
               "note": "弾き語りリクエスト",
-              "kind": [
-                "satoshi-solo",
-                "request"
-              ]
+              "kind": ["satoshi-solo", "request"]
             }
           },
           {
@@ -412,10 +357,7 @@
               "encore": false,
               "songId": "laughter",
               "note": "弾き語りリクエスト",
-              "kind": [
-                "satoshi-solo",
-                "request"
-              ]
+              "kind": ["satoshi-solo", "request"]
             }
           }
         ]
@@ -435,11 +377,7 @@
         "https://www.livefans.jp/events/1866414"
       ],
       "diff": {
-        "skip": [
-          10,
-          11,
-          18
-        ],
+        "skip": [10, 11, 18],
         "insert": [
           {
             "after": 9,
@@ -447,9 +385,7 @@
               "encore": false,
               "songId": "lady",
               "note": "弾き語りver.",
-              "kind": [
-                "satoshi-solo"
-              ]
+              "kind": ["satoshi-solo"]
             }
           },
           {
@@ -458,10 +394,7 @@
               "encore": false,
               "songId": "i-love",
               "note": "(リクエスト)弾き語りSTADIUM ver.",
-              "kind": [
-                "satoshi-solo",
-                "request"
-              ]
+              "kind": ["satoshi-solo", "request"]
             }
           },
           {
@@ -470,9 +403,7 @@
               "encore": false,
               "songId": "subtitle",
               "note": "弾き語りver.",
-              "kind": [
-                "satoshi-solo"
-              ]
+              "kind": ["satoshi-solo"]
             }
           },
           {
@@ -481,9 +412,7 @@
               "encore": false,
               "songId": "knit-no-boushi",
               "note": "弾き語りver.",
-              "kind": [
-                "satoshi-solo"
-              ]
+              "kind": ["satoshi-solo"]
             }
           },
           {
@@ -511,10 +440,7 @@
         "https://www.livefans.jp/events/1866415"
       ],
       "diff": {
-        "skip": [
-          10,
-          11
-        ],
+        "skip": [10, 11],
         "insert": [
           {
             "after": 7,
@@ -530,10 +456,7 @@
               "encore": false,
               "songId": "rowan",
               "note": "聡ピアノ弾き語り、リクエスト曲",
-              "kind": [
-                "satoshi-solo",
-                "request"
-              ]
+              "kind": ["satoshi-solo", "request"]
             }
           },
           {
@@ -542,10 +465,7 @@
               "encore": false,
               "songId": "shihatsu-ga-michibiku-kouhukuron",
               "note": "聡ピアノ弾き語り、リクエスト曲",
-              "kind": [
-                "satoshi-solo",
-                "request"
-              ]
+              "kind": ["satoshi-solo", "request"]
             }
           },
           {
@@ -554,9 +474,7 @@
               "encore": false,
               "songId": "subtitle",
               "note": "聡ピアノ弾き語り",
-              "kind": [
-                "satoshi-solo"
-              ]
+              "kind": ["satoshi-solo"]
             }
           },
           {
@@ -565,9 +483,7 @@
               "encore": false,
               "songId": "knit-no-boushi",
               "note": "聡ピアノ弾き語り",
-              "kind": [
-                "satoshi-solo"
-              ]
+              "kind": ["satoshi-solo"]
             }
           }
         ]
@@ -587,10 +503,7 @@
         "https://www.livefans.jp/events/1866416"
       ],
       "diff": {
-        "skip": [
-          10,
-          11
-        ],
+        "skip": [10, 11],
         "insert": [
           {
             "after": 7,
@@ -606,10 +519,7 @@
               "encore": false,
               "songId": "coffee-to-syrup",
               "note": "聡ピアノ弾き語り、リクエスト曲",
-              "kind": [
-                "satoshi-solo",
-                "request"
-              ]
+              "kind": ["satoshi-solo", "request"]
             }
           },
           {
@@ -618,10 +528,7 @@
               "encore": false,
               "songId": "vintage",
               "note": "聡ピアノ弾き語り、リクエスト曲",
-              "kind": [
-                "satoshi-solo",
-                "request"
-              ]
+              "kind": ["satoshi-solo", "request"]
             }
           },
           {
@@ -630,9 +537,7 @@
               "encore": false,
               "songId": "subtitle",
               "note": "聡ピアノ弾き語り",
-              "kind": [
-                "satoshi-solo"
-              ]
+              "kind": ["satoshi-solo"]
             }
           },
           {
@@ -641,9 +546,7 @@
               "encore": false,
               "songId": "knit-no-boushi",
               "note": "聡ピアノ弾き語り",
-              "kind": [
-                "satoshi-solo"
-              ]
+              "kind": ["satoshi-solo"]
             }
           }
         ]
@@ -663,10 +566,7 @@
         "https://www.livefans.jp/events/1866417"
       ],
       "diff": {
-        "skip": [
-          10,
-          11
-        ],
+        "skip": [10, 11],
         "insert": [
           {
             "after": 7,
@@ -682,10 +582,7 @@
               "encore": false,
               "songId": "chessboard",
               "note": "聡ピアノ弾き語り、リクエスト曲",
-              "kind": [
-                "satoshi-solo",
-                "request"
-              ]
+              "kind": ["satoshi-solo", "request"]
             }
           },
           {
@@ -694,10 +591,7 @@
               "encore": false,
               "songId": "happy-birthday-to-you",
               "note": "聡ピアノ弾き語り、リクエスト曲",
-              "kind": [
-                "satoshi-solo",
-                "request"
-              ]
+              "kind": ["satoshi-solo", "request"]
             }
           },
           {
@@ -706,10 +600,7 @@
               "encore": false,
               "songId": "apoptosis",
               "note": "聡ピアノ弾き語り、リクエスト曲",
-              "kind": [
-                "satoshi-solo",
-                "request"
-              ]
+              "kind": ["satoshi-solo", "request"]
             }
           },
           {
@@ -718,9 +609,7 @@
               "encore": false,
               "songId": "subtitle",
               "note": "聡ピアノ弾き語り",
-              "kind": [
-                "satoshi-solo"
-              ]
+              "kind": ["satoshi-solo"]
             }
           },
           {
@@ -729,9 +618,7 @@
               "encore": false,
               "songId": "knit-no-boushi",
               "note": "聡ピアノ弾き語り",
-              "kind": [
-                "satoshi-solo"
-              ]
+              "kind": ["satoshi-solo"]
             }
           }
         ]
@@ -751,12 +638,7 @@
         "https://www.livefans.jp/events/1866418"
       ],
       "diff": {
-        "skip": [
-          10,
-          11,
-          12,
-          17
-        ],
+        "skip": [10, 11, 12, 17],
         "insert": [
           {
             "after": 7,
@@ -772,10 +654,7 @@
               "encore": false,
               "songId": "mikanseinamamade",
               "note": "聡ピアノ弾き語り、リクエスト曲、ワンコーラスのみ",
-              "kind": [
-                "satoshi-solo",
-                "request"
-              ]
+              "kind": ["satoshi-solo", "request"]
             }
           },
           {
@@ -784,10 +663,7 @@
               "encore": false,
               "songId": "takaga-i-love-you",
               "note": "聡ピアノ弾き語り、リクエスト曲、ワンコーラスのみ",
-              "kind": [
-                "satoshi-solo",
-                "request"
-              ]
+              "kind": ["satoshi-solo", "request"]
             }
           },
           {
@@ -796,10 +672,7 @@
               "encore": false,
               "songId": "shower",
               "note": "聡ピアノ弾き語り、リクエスト曲、ワンコーラスのみ",
-              "kind": [
-                "satoshi-solo",
-                "request"
-              ]
+              "kind": ["satoshi-solo", "request"]
             }
           },
           {
@@ -808,10 +681,7 @@
               "encore": false,
               "songId": "vintage",
               "note": "聡ピアノ弾き語り、リクエスト曲、ワンコーラスのみ",
-              "kind": [
-                "satoshi-solo",
-                "request"
-              ]
+              "kind": ["satoshi-solo", "request"]
             }
           },
           {
@@ -820,10 +690,7 @@
               "encore": false,
               "songId": "hakan",
               "note": "聡ピアノ弾き語り、aikoリクエスト曲、ワンコーラスのみ",
-              "kind": [
-                "satoshi-solo",
-                "request"
-              ]
+              "kind": ["satoshi-solo", "request"]
             }
           },
           {
@@ -832,10 +699,7 @@
               "encore": false,
               "songId": "nichiyoubi-no-love-letter",
               "note": "聡ピアノ弾き語り、リクエスト曲、1番のみ",
-              "kind": [
-                "satoshi-solo",
-                "request"
-              ]
+              "kind": ["satoshi-solo", "request"]
             }
           },
           {
@@ -844,10 +708,7 @@
               "encore": false,
               "songId": "shihatsu-ga-michibiku-kouhukuron",
               "note": "聡ピアノ弾き語り、リクエスト曲、ワンコーラスのみ",
-              "kind": [
-                "satoshi-solo",
-                "request"
-              ]
+              "kind": ["satoshi-solo", "request"]
             }
           },
           {
@@ -856,9 +717,7 @@
               "encore": false,
               "songId": "subtitle",
               "note": "聡ピアノ弾き語り",
-              "kind": [
-                "satoshi-solo"
-              ]
+              "kind": ["satoshi-solo"]
             }
           },
           {
@@ -867,9 +726,7 @@
               "encore": false,
               "songId": "knit-no-boushi",
               "note": "聡ピアノ弾き語り",
-              "kind": [
-                "satoshi-solo"
-              ]
+              "kind": ["satoshi-solo"]
             }
           },
           {
@@ -878,9 +735,7 @@
               "encore": false,
               "songId": "b-side-blues",
               "note": "1サビまで聡ピアノ弾き語り",
-              "kind": [
-                "satoshi-solo"
-              ]
+              "kind": ["satoshi-solo"]
             }
           },
           {

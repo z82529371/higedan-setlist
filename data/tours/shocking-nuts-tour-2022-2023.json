@@ -1,7 +1,7 @@
 {
   "id": "shocking-nuts-tour-2022-2023",
   "title": "Official髭男dism SHOCKING NUTS TOUR",
-  "type": "專場",
+  "type": "巡演專場",
   "shows": [
     {
       "id": "1419721",
@@ -16,9 +16,7 @@
         "https://www.livefans.jp/events/1419721"
       ],
       "diff": {
-        "skip": [
-          11
-        ],
+        "skip": [11],
         "insert": [
           {
             "after": 14,
@@ -33,9 +31,7 @@
               "encore": true,
               "songId": "subtitle",
               "note": "ピアノ弾き語りワンコーラス",
-              "kind": [
-                "satoshi-solo"
-              ]
+              "kind": ["satoshi-solo"]
             }
           }
         ]
@@ -55,16 +51,7 @@
         "https://www.livefans.jp/events/1419722"
       ],
       "diff": {
-        "skip": [
-          3,
-          4,
-          5,
-          6,
-          7,
-          11,
-          15,
-          19
-        ],
+        "skip": [3, 4, 5, 6, 7, 11, 15, 19],
         "insert": [
           {
             "after": 2,
@@ -121,9 +108,7 @@
               "encore": true,
               "songId": "subtitle",
               "note": "新曲",
-              "kind": [
-                "premiere"
-              ]
+              "kind": ["premiere"]
             }
           },
           {
@@ -165,16 +150,7 @@
         "https://www.livefans.jp/events/1419724"
       ],
       "diff": {
-        "skip": [
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          15,
-          19
-        ],
+        "skip": [3, 4, 5, 6, 7, 8, 15, 19],
         "insert": [
           {
             "after": 2,
@@ -249,9 +225,7 @@
         "https://www.livefans.jp/events/1419725"
       ],
       "diff": {
-        "skip": [
-          20
-        ],
+        "skip": [20],
         "insert": [
           {
             "after": 19,
@@ -278,15 +252,7 @@
         "https://www.livefans.jp/events/1419726"
       ],
       "diff": {
-        "skip": [
-          3,
-          4,
-          5,
-          6,
-          7,
-          15,
-          19
-        ],
+        "skip": [3, 4, 5, 6, 7, 15, 19],
         "insert": [
           {
             "after": 2,
@@ -354,9 +320,7 @@
         "https://www.livefans.jp/events/1419727"
       ],
       "diff": {
-        "skip": [
-          8
-        ],
+        "skip": [8],
         "insert": [
           {
             "after": 7,
@@ -382,9 +346,7 @@
         "https://www.livefans.jp/events/1419731"
       ],
       "diff": {
-        "skip": [
-          8
-        ],
+        "skip": [8],
         "insert": [
           {
             "after": 7,
@@ -410,15 +372,7 @@
         "https://www.livefans.jp/events/1419732"
       ],
       "diff": {
-        "skip": [
-          3,
-          4,
-          5,
-          6,
-          7,
-          15,
-          19
-        ],
+        "skip": [3, 4, 5, 6, 7, 15, 19],
         "insert": [
           {
             "after": 0,
@@ -494,9 +448,7 @@
         "https://www.livefans.jp/events/1419733"
       ],
       "diff": {
-        "skip": [
-          8
-        ],
+        "skip": [8],
         "insert": [
           {
             "after": 7,
@@ -522,16 +474,7 @@
         "https://www.livefans.jp/events/1419734"
       ],
       "diff": {
-        "skip": [
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          15,
-          19
-        ],
+        "skip": [3, 4, 5, 6, 7, 8, 15, 19],
         "insert": [
           {
             "after": 2,
@@ -606,10 +549,7 @@
         "https://www.livefans.jp/events/1419735"
       ],
       "diff": {
-        "skip": [
-          8,
-          9
-        ],
+        "skip": [8, 9],
         "insert": [
           {
             "after": 7,
@@ -642,15 +582,7 @@
         "https://www.livefans.jp/events/1419736"
       ],
       "diff": {
-        "skip": [
-          3,
-          4,
-          5,
-          6,
-          7,
-          15,
-          19
-        ],
+        "skip": [3, 4, 5, 6, 7, 15, 19],
         "insert": [
           {
             "after": 2,
@@ -718,9 +650,7 @@
         "https://www.livefans.jp/events/1419737"
       ],
       "diff": {
-        "skip": [
-          11
-        ],
+        "skip": [11],
         "insert": [
           {
             "after": 10,
@@ -728,9 +658,7 @@
               "encore": false,
               "songId": "subtitle",
               "note": "新曲",
-              "kind": [
-                "premiere"
-              ]
+              "kind": ["premiere"]
             }
           }
         ]
@@ -750,15 +678,7 @@
         "https://www.livefans.jp/events/1419738"
       ],
       "diff": {
-        "skip": [
-          3,
-          4,
-          5,
-          6,
-          7,
-          15,
-          19
-        ],
+        "skip": [3, 4, 5, 6, 7, 15, 19],
         "insert": [
           {
             "after": 2,
@@ -826,9 +746,7 @@
         "https://www.livefans.jp/events/1419739"
       ],
       "diff": {
-        "skip": [
-          8
-        ],
+        "skip": [8],
         "insert": [
           {
             "after": 7,
@@ -854,15 +772,7 @@
         "https://www.livefans.jp/events/1419740"
       ],
       "diff": {
-        "skip": [
-          3,
-          4,
-          5,
-          6,
-          7,
-          15,
-          19
-        ],
+        "skip": [3, 4, 5, 6, 7, 15, 19],
         "insert": [
           {
             "after": 2,
@@ -937,9 +847,7 @@
         "https://www.livefans.jp/events/1499382"
       ],
       "diff": {
-        "skip": [
-          8
-        ],
+        "skip": [8],
         "insert": [
           {
             "after": 7,
@@ -972,16 +880,7 @@
         "https://www.livefans.jp/events/1499383"
       ],
       "diff": {
-        "skip": [
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          15,
-          19
-        ],
+        "skip": [3, 4, 5, 6, 7, 8, 15, 19],
         "insert": [
           {
             "after": 2,
@@ -1063,10 +962,7 @@
         "https://www.livefans.jp/events/1499384"
       ],
       "diff": {
-        "skip": [
-          18,
-          19
-        ],
+        "skip": [18, 19],
         "insert": [
           {
             "after": 11,
@@ -1089,9 +985,7 @@
               "encore": true,
               "songId": "universe",
               "note": "弾き語り　ワンコーラス",
-              "kind": [
-                "satoshi-solo"
-              ]
+              "kind": ["satoshi-solo"]
             }
           },
           {
@@ -1118,16 +1012,7 @@
         "https://www.livefans.jp/events/1499381"
       ],
       "diff": {
-        "skip": [
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          15,
-          19
-        ],
+        "skip": [3, 4, 5, 6, 7, 8, 15, 19],
         "insert": [
           {
             "after": 2,
@@ -1253,9 +1138,7 @@
       "order": 8,
       "encore": false,
       "songId": "fuusen",
-      "kind": [
-        "premiere"
-      ]
+      "kind": ["premiere"]
     },
     {
       "order": 9,

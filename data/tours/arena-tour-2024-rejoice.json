@@ -1,7 +1,7 @@
 {
   "id": "arena-tour-2024-rejoice",
   "title": "Official髭男dism Arena Tour 2024 - Rejoice -",
-  "type": "專場",
+  "type": "巡演專場",
   "shows": [
     {
       "id": "1672269",
@@ -16,12 +16,7 @@
         "https://www.livefans.jp/events/1672269"
       ],
       "diff": {
-        "skip": [
-          1,
-          13,
-          16,
-          19
-        ],
+        "skip": [1, 13, 16, 19],
         "insert": [
           {
             "after": 0,
@@ -53,9 +48,7 @@
               "encore": false,
               "songId": "pretender",
               "note": "弾き語り(1コーラスのみ、みんなで合唱)",
-              "kind": [
-                "satoshi-solo"
-              ]
+              "kind": ["satoshi-solo"]
             }
           },
           {
@@ -64,9 +57,7 @@
               "encore": true,
               "songId": "same-blue",
               "note": "弾き語り(1コーラスのみ、初解禁)",
-              "kind": [
-                "satoshi-solo"
-              ]
+              "kind": ["satoshi-solo"]
             }
           },
           {
@@ -93,13 +84,7 @@
         "https://www.livefans.jp/events/1672270"
       ],
       "diff": {
-        "skip": [
-          1,
-          10,
-          12,
-          16,
-          19
-        ],
+        "skip": [1, 10, 12, 16, 19],
         "insert": [
           {
             "after": 0,
@@ -130,9 +115,7 @@
               "encore": true,
               "songId": "same-blue",
               "note": "弾き語り ver.",
-              "kind": [
-                "satoshi-solo"
-              ]
+              "kind": ["satoshi-solo"]
             }
           },
           {
@@ -159,12 +142,7 @@
         "https://www.livefans.jp/events/1672271"
       ],
       "diff": {
-        "skip": [
-          1,
-          13,
-          16,
-          19
-        ],
+        "skip": [1, 13, 16, 19],
         "insert": [
           {
             "after": 0,
@@ -188,9 +166,7 @@
               "encore": true,
               "songId": "same-blue",
               "note": "弾き語り",
-              "kind": [
-                "satoshi-solo"
-              ]
+              "kind": ["satoshi-solo"]
             }
           },
           {
@@ -217,13 +193,7 @@
         "https://www.livefans.jp/events/1672272"
       ],
       "diff": {
-        "skip": [
-          1,
-          12,
-          13,
-          16,
-          19
-        ],
+        "skip": [1, 12, 13, 16, 19],
         "insert": [
           {
             "after": 0,
@@ -255,9 +225,7 @@
               "encore": true,
               "title": "プラネタリウム [BUMP OF CHICKEN]",
               "note": "サビのみ 弾き語り",
-              "kind": [
-                "satoshi-solo"
-              ]
+              "kind": ["satoshi-solo"]
             }
           },
           {
@@ -266,9 +234,7 @@
               "encore": true,
               "songId": "same-blue",
               "note": "リリース前のため1コーラスのみ 弾き語り",
-              "kind": [
-                "satoshi-solo"
-              ]
+              "kind": ["satoshi-solo"]
             }
           },
           {
@@ -295,12 +261,7 @@
         "https://www.livefans.jp/events/1672273"
       ],
       "diff": {
-        "skip": [
-          1,
-          13,
-          16,
-          19
-        ],
+        "skip": [1, 13, 16, 19],
         "insert": [
           {
             "after": 0,
@@ -343,11 +304,7 @@
         "https://www.livefans.jp/events/1672274"
       ],
       "diff": {
-        "skip": [
-          1,
-          12,
-          16
-        ],
+        "skip": [1, 12, 16],
         "insert": [
           {
             "after": 0,
@@ -382,11 +339,7 @@
         "https://www.livefans.jp/events/1672275"
       ],
       "diff": {
-        "skip": [
-          1,
-          13,
-          16
-        ],
+        "skip": [1, 13, 16],
         "insert": [
           {
             "after": 0,
@@ -421,12 +374,7 @@
         "https://www.livefans.jp/events/1672276"
       ],
       "diff": {
-        "skip": [
-          1,
-          12,
-          13,
-          16
-        ],
+        "skip": [1, 12, 13, 16],
         "insert": [
           {
             "after": 0,
@@ -477,11 +425,7 @@
         "https://www.livefans.jp/events/1672277"
       ],
       "diff": {
-        "skip": [
-          1,
-          13,
-          16
-        ],
+        "skip": [1, 13, 16],
         "insert": [
           {
             "after": 0,
@@ -517,10 +461,7 @@
       ],
       "locked": true,
       "diff": {
-        "skip": [
-          12,
-          16
-        ],
+        "skip": [12, 16],
         "insert": [
           {
             "after": 15,
@@ -552,9 +493,7 @@
               "encore": true,
               "songId": "pretender",
               "note": "1番のみ。弾き語り合唱",
-              "kind": [
-                "satoshi-solo"
-              ]
+              "kind": ["satoshi-solo"]
             }
           },
           {

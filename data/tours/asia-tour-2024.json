@@ -1,7 +1,7 @@
 {
   "id": "asia-tour-2024",
   "title": "Official髭男dism Asia Tour 2024 - Rejoice -",
-  "type": "專場",
+  "type": "巡演專場",
   "shows": [
     {
       "id": "1720174",
@@ -17,11 +17,7 @@
       ],
       "opensAt": "19:00",
       "diff": {
-        "skip": [
-          1,
-          10,
-          13
-        ],
+        "skip": [1, 10, 13],
         "insert": [
           {
             "after": 0,
@@ -63,11 +59,7 @@
         "https://www.livefans.jp/events/1720175"
       ],
       "diff": {
-        "skip": [
-          1,
-          10,
-          13
-        ],
+        "skip": [1, 10, 13],
         "insert": [
           {
             "after": 0,
@@ -117,11 +109,7 @@
         "https://www.livefans.jp/events/1720176"
       ],
       "diff": {
-        "skip": [
-          1,
-          10,
-          13
-        ],
+        "skip": [1, 10, 13],
         "insert": [
           {
             "after": 0,

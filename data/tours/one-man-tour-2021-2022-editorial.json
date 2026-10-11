@@ -1,7 +1,7 @@
 {
   "id": "one-man-tour-2021-2022-editorial",
   "title": "Official髭男dism one - man tour 2021-2022 - Editorial -",
-  "type": "專場",
+  "type": "巡演專場",
   "shows": [
     {
       "id": "1310540",
@@ -13,9 +13,7 @@
       "opensAt": "17:00",
       "venue": "Pia Arena MM",
       "diff": {
-        "skip": [
-          4
-        ],
+        "skip": [4],
         "insert": [
           {
             "after": 3,
@@ -43,9 +41,7 @@
       "region": "關東",
       "prefecture": "神奈川縣",
       "diff": {
-        "skip": [
-          4
-        ],
+        "skip": [4],
         "insert": [
           {
             "after": 3,
@@ -70,9 +66,7 @@
       "region": "中部",
       "prefecture": "長野縣",
       "diff": {
-        "skip": [
-          4
-        ],
+        "skip": [4],
         "insert": [
           {
             "after": 3,
@@ -97,9 +91,7 @@
       "region": "中部",
       "prefecture": "長野縣",
       "diff": {
-        "skip": [
-          4
-        ],
+        "skip": [4],
         "insert": [
           {
             "after": 3,
@@ -124,11 +116,7 @@
       "region": "中部",
       "prefecture": "新潟縣",
       "diff": {
-        "skip": [
-          3,
-          4,
-          20
-        ],
+        "skip": [3, 4, 20],
         "insert": [
           {
             "after": 2,
@@ -193,9 +181,7 @@
       "region": "中部",
       "prefecture": "新潟縣",
       "diff": {
-        "skip": [
-          4
-        ],
+        "skip": [4],
         "insert": [
           {
             "after": 3,
@@ -220,9 +206,7 @@
       "region": "中部",
       "prefecture": "新潟縣",
       "diff": {
-        "skip": [
-          13
-        ],
+        "skip": [13],
         "insert": [
           {
             "after": 12,
@@ -247,9 +231,7 @@
       "region": "中國",
       "prefecture": "廣島縣",
       "diff": {
-        "skip": [
-          4
-        ],
+        "skip": [4],
         "insert": [
           {
             "after": 3,
@@ -288,9 +270,7 @@
       "region": "中國",
       "prefecture": "廣島縣",
       "diff": {
-        "skip": [
-          4
-        ],
+        "skip": [4],
         "insert": [
           {
             "after": 3,
@@ -315,9 +295,7 @@
       "region": "關西",
       "prefecture": "兵庫縣",
       "diff": {
-        "skip": [
-          4
-        ],
+        "skip": [4],
         "insert": [
           {
             "after": 3,
@@ -356,9 +334,7 @@
       "region": "關東",
       "prefecture": "神奈川縣",
       "diff": {
-        "skip": [
-          4
-        ],
+        "skip": [4],
         "insert": [
           {
             "after": 3,
@@ -397,9 +373,7 @@
       "region": "四國",
       "prefecture": "德島縣",
       "diff": {
-        "skip": [
-          4
-        ],
+        "skip": [4],
         "insert": [
           {
             "after": 3,
@@ -424,9 +398,7 @@
       "region": "四國",
       "prefecture": "德島縣",
       "diff": {
-        "skip": [
-          13
-        ],
+        "skip": [13],
         "insert": [
           {
             "after": 12,
@@ -476,9 +448,7 @@
       "region": "中部",
       "prefecture": "福井縣",
       "diff": {
-        "skip": [
-          4
-        ],
+        "skip": [4],
         "insert": [
           {
             "after": 3,
@@ -680,9 +650,7 @@
       "region": "九州",
       "prefecture": "福岡縣",
       "diff": {
-        "skip": [
-          19
-        ],
+        "skip": [19],
         "insert": [
           {
             "after": 15,
@@ -922,9 +890,7 @@
       "region": "九州",
       "prefecture": "沖繩縣",
       "diff": {
-        "skip": [
-          5
-        ],
+        "skip": [5],
         "insert": [
           {
             "after": 0,
@@ -940,9 +906,7 @@
               "encore": false,
               "songId": "shower",
               "note": "着席弾き語り",
-              "kind": [
-                "satoshi-solo"
-              ]
+              "kind": ["satoshi-solo"]
             }
           },
           {
@@ -1024,9 +988,7 @@
               "encore": false,
               "songId": "mixed-nuts",
               "note": "藤原聡/弾き語り",
-              "kind": [
-                "satoshi-solo"
-              ]
+              "kind": ["satoshi-solo"]
             }
           },
           {
@@ -1258,9 +1220,7 @@
               "encore": true,
               "songId": "mixed-nuts",
               "note": "新曲",
-              "kind": [
-                "premiere"
-              ]
+              "kind": ["premiere"]
             }
           }
         ]
@@ -1293,9 +1253,7 @@
               "encore": true,
               "songId": "mixed-nuts",
               "note": "新曲",
-              "kind": [
-                "premiere"
-              ]
+              "kind": ["premiere"]
             }
           }
         ]
@@ -1325,9 +1283,7 @@
               "encore": true,
               "songId": "mixed-nuts",
               "note": "新曲",
-              "kind": [
-                "premiere"
-              ]
+              "kind": ["premiere"]
             }
           }
         ]

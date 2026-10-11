@@ -1,7 +1,7 @@
 {
   "id": "asia-tour-2026",
   "title": "OFFICIAL HIGE DANDISM ASIA TOUR 2026",
-  "type": "專場",
+  "type": "巡演專場",
   "templateBasis": "全自動提煉：基於 6 場演出提取 $\\ge 50\\%$ 多數共識歌單",
   "templateSetlist": [
     {
@@ -167,9 +167,7 @@
               "encore": false,
               "songId": "nichijo",
               "note": "観客リクエスト(サビのみ)",
-              "kind": [
-                "request"
-              ]
+              "kind": ["request"]
             }
           }
         ]
@@ -204,9 +202,7 @@
               "encore": false,
               "songId": "115man-kiro-no-film",
               "note": "リクエスト、サビのみ",
-              "kind": [
-                "request"
-              ]
+              "kind": ["request"]
             }
           }
         ]
@@ -241,9 +237,7 @@
               "encore": false,
               "songId": "subtitle",
               "note": "リクエスト、ワンコーラス",
-              "kind": [
-                "request"
-              ]
+              "kind": ["request"]
             }
           }
         ]

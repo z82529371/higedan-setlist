@@ -2,7 +2,7 @@
   "id": "tour-19-20-hall-travelers",
   "title": "Tour 19/20 - Hall Travelers -",
   "shortTitle": "Tour 19/20 - Hall Travelers -",
-  "type": "專場",
+  "type": "巡演專場",
   "shows": [
     {
       "id": "1150083",
@@ -18,9 +18,7 @@
       "region": "關東",
       "prefecture": "千葉縣",
       "diff": {
-        "skip": [
-          9
-        ]
+        "skip": [9]
       }
     },
     {
@@ -37,9 +35,7 @@
       "region": "關西",
       "prefecture": "奈良縣",
       "diff": {
-        "skip": [
-          9
-        ],
+        "skip": [9],
         "insert": [
           {
             "after": 8,
@@ -74,10 +70,7 @@
       "region": "關西",
       "prefecture": "大阪府",
       "diff": {
-        "skip": [
-          9,
-          17
-        ],
+        "skip": [9, 17],
         "insert": [
           {
             "after": 8,
@@ -117,10 +110,7 @@
       "region": "關西",
       "prefecture": "大阪府",
       "diff": {
-        "skip": [
-          9,
-          17
-        ],
+        "skip": [9, 17],
         "insert": [
           {
             "after": 16,
@@ -146,10 +136,7 @@
       "region": "關東",
       "prefecture": "埼玉縣",
       "diff": {
-        "skip": [
-          9,
-          17
-        ],
+        "skip": [9, 17],
         "insert": [
           {
             "after": 8,
@@ -189,9 +176,7 @@
       "region": "中部",
       "prefecture": "石川縣",
       "diff": {
-        "skip": [
-          9
-        ]
+        "skip": [9]
       }
     },
     {
@@ -208,11 +193,7 @@
       "region": "北海道",
       "prefecture": "北海道",
       "diff": {
-        "skip": [
-          7,
-          9,
-          17
-        ],
+        "skip": [7, 9, 17],
         "insert": [
           {
             "after": 5,
@@ -274,9 +255,7 @@
       "region": "四國",
       "prefecture": "香川縣",
       "diff": {
-        "skip": [
-          17
-        ],
+        "skip": [17],
         "insert": [
           {
             "after": 16,
@@ -327,9 +306,7 @@
       "region": "中部",
       "prefecture": "愛知縣",
       "diff": {
-        "skip": [
-          17
-        ],
+        "skip": [17],
         "insert": [
           {
             "after": 16,
@@ -355,9 +332,7 @@
       "region": "關東",
       "prefecture": "東京都",
       "diff": {
-        "skip": [
-          17
-        ],
+        "skip": [17],
         "insert": [
           {
             "after": 16,
@@ -383,9 +358,7 @@
       "region": "中部",
       "prefecture": "岐阜縣",
       "diff": {
-        "skip": [
-          7
-        ],
+        "skip": [7],
         "insert": [
           {
             "after": 5,
@@ -426,9 +399,7 @@
       "region": "中國",
       "prefecture": "廣島縣",
       "diff": {
-        "skip": [
-          7
-        ],
+        "skip": [7],
         "insert": [
           {
             "after": 5,
@@ -469,9 +440,7 @@
       "region": "東北",
       "prefecture": "宮城縣",
       "diff": {
-        "skip": [
-          17
-        ],
+        "skip": [17],
         "insert": [
           {
             "after": 16,
@@ -497,9 +466,7 @@
       "region": "東北",
       "prefecture": "福島縣",
       "diff": {
-        "skip": [
-          9
-        ]
+        "skip": [9]
       }
     },
     {
@@ -516,9 +483,7 @@
       "region": "九州",
       "prefecture": "福岡縣",
       "diff": {
-        "skip": [
-          7
-        ],
+        "skip": [7],
         "insert": [
           {
             "after": 5,
@@ -544,9 +509,7 @@
       "region": "九州",
       "prefecture": "福岡縣",
       "diff": {
-        "skip": [
-          7
-        ],
+        "skip": [7],
         "insert": [
           {
             "after": 5,
@@ -595,10 +558,7 @@
       "region": "關東",
       "prefecture": "神奈川縣",
       "diff": {
-        "skip": [
-          5,
-          18
-        ],
+        "skip": [5, 18],
         "insert": [
           {
             "after": 3,
@@ -631,9 +591,7 @@
       "region": "關東",
       "prefecture": "神奈川縣",
       "diff": {
-        "skip": [
-          17
-        ],
+        "skip": [17],
         "insert": [
           {
             "after": 16,
@@ -666,9 +624,7 @@
       "region": "中部",
       "prefecture": "新潟縣",
       "diff": {
-        "skip": [
-          7
-        ],
+        "skip": [7],
         "insert": [
           {
             "after": 5,
@@ -710,10 +666,7 @@
       "region": "九州",
       "prefecture": "鹿兒島縣",
       "diff": {
-        "skip": [
-          7,
-          17
-        ],
+        "skip": [7, 17],
         "insert": [
           {
             "after": 5,
@@ -762,9 +715,7 @@
       "region": "九州",
       "prefecture": "熊本縣",
       "diff": {
-        "skip": [
-          17
-        ],
+        "skip": [17],
         "insert": [
           {
             "after": 9,
@@ -806,10 +757,7 @@
       "region": "關東",
       "prefecture": "神奈川縣",
       "diff": {
-        "skip": [
-          7,
-          17
-        ],
+        "skip": [7, 17],
         "insert": [
           {
             "after": 5,
@@ -842,10 +790,7 @@
       "region": "關東",
       "prefecture": "神奈川縣",
       "diff": {
-        "skip": [
-          7,
-          17
-        ],
+        "skip": [7, 17],
         "insert": [
           {
             "after": 5,
@@ -878,10 +823,7 @@
       "region": "中國",
       "prefecture": "岡山縣",
       "diff": {
-        "skip": [
-          7,
-          17
-        ],
+        "skip": [7, 17],
         "insert": [
           {
             "after": 3,
@@ -926,9 +868,7 @@
               "encore": true,
               "songId": "lady",
               "note": "1番だけ　(会場リクエスト)",
-              "kind": [
-                "request"
-              ]
+              "kind": ["request"]
             }
           },
           {
@@ -937,9 +877,7 @@
               "encore": true,
               "songId": "takaga-i-love-you",
               "note": "1番だけ　(会場リクエスト)",
-              "kind": [
-                "request"
-              ]
+              "kind": ["request"]
             }
           },
           {
@@ -948,9 +886,7 @@
               "encore": true,
               "songId": "nichiyoubi-no-love-letter",
               "note": "(会場リクエスト)",
-              "kind": [
-                "request"
-              ]
+              "kind": ["request"]
             }
           }
         ]
@@ -970,10 +906,7 @@
       "region": "中國",
       "prefecture": "鳥取縣",
       "diff": {
-        "skip": [
-          7,
-          17
-        ],
+        "skip": [7, 17],
         "insert": [
           {
             "after": 5,

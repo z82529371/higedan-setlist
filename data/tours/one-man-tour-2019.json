@@ -2,7 +2,7 @@
   "id": "one-man-tour-2019",
   "title": "official髭男dism one-man tour 2019",
   "shortTitle": "one-man tour 2019",
-  "type": "專場",
+  "type": "巡演專場",
   "shows": [
     {
       "id": "1049544",
@@ -19,13 +19,7 @@
       "prefecture": "宮城縣",
       "locked": true,
       "diff": {
-        "skip": [
-          3,
-          5,
-          7,
-          11,
-          13
-        ],
+        "skip": [3, 5, 7, 11, 13],
         "insert": [
           {
             "after": 1,
@@ -47,9 +41,7 @@
               "encore": false,
               "songId": "akegata-no-getaway",
               "note": "新曲",
-              "kind": [
-                "premiere"
-              ]
+              "kind": ["premiere"]
             }
           },
           {
@@ -76,14 +68,7 @@
       "region": "九州",
       "prefecture": "福岡縣",
       "diff": {
-        "skip": [
-          3,
-          5,
-          7,
-          10,
-          11,
-          13
-        ],
+        "skip": [3, 5, 7, 10, 11, 13],
         "insert": [
           {
             "after": 1,
@@ -138,12 +123,7 @@
       "region": "北海道",
       "prefecture": "北海道",
       "diff": {
-        "skip": [
-          3,
-          5,
-          7,
-          10
-        ],
+        "skip": [3, 5, 7, 10],
         "insert": [
           {
             "after": 1,
@@ -190,16 +170,7 @@
       "region": "關東",
       "prefecture": "東京都",
       "diff": {
-        "skip": [
-          2,
-          3,
-          4,
-          7,
-          9,
-          13,
-          14,
-          18
-        ],
+        "skip": [2, 3, 4, 7, 9, 13, 14, 18],
         "insert": [
           {
             "after": 0,
@@ -270,12 +241,7 @@
       "region": "關西",
       "prefecture": "大阪府",
       "diff": {
-        "skip": [
-          3,
-          5,
-          7,
-          10
-        ],
+        "skip": [3, 5, 7, 10],
         "insert": [
           {
             "after": 1,
@@ -322,13 +288,7 @@
       "region": "中部",
       "prefecture": "愛知縣",
       "diff": {
-        "skip": [
-          3,
-          5,
-          7,
-          10,
-          11
-        ],
+        "skip": [3, 5, 7, 10, 11],
         "insert": [
           {
             "after": 1,
@@ -375,12 +335,7 @@
       "region": "關東",
       "prefecture": "東京都",
       "diff": {
-        "skip": [
-          3,
-          5,
-          7,
-          10
-        ],
+        "skip": [3, 5, 7, 10],
         "insert": [
           {
             "after": 1,
@@ -427,13 +382,7 @@
       "region": "關東",
       "prefecture": "東京都",
       "diff": {
-        "skip": [
-          2,
-          5,
-          7,
-          10,
-          11
-        ],
+        "skip": [2, 5, 7, 10, 11],
         "insert": [
           {
             "after": 3,

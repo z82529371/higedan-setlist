@@ -1,7 +1,7 @@
 {
   "id": "one-man-tour-2026",
   "title": "OFFICIAL HIGE DANDISM one-man tour 2026",
-  "type": "專場",
+  "type": "巡演專場",
   "templateBasis": "全自動提煉：基於 26 場演出提取 $\\ge 50\\%$ 多數共識歌單",
   "templateSetlist": [
     {
@@ -118,9 +118,7 @@
         "https://www.livefans.jp/events/1866419"
       ],
       "diff": {
-        "skip": [
-          10
-        ],
+        "skip": [10],
         "insert": [
           {
             "after": 8,
@@ -146,9 +144,7 @@
         "https://www.livefans.jp/events/1866420"
       ],
       "diff": {
-        "skip": [
-          10
-        ],
+        "skip": [10],
         "insert": [
           {
             "after": 8,
@@ -174,9 +170,7 @@
         "https://www.livefans.jp/events/1866421"
       ],
       "diff": {
-        "skip": [
-          10
-        ],
+        "skip": [10],
         "insert": [
           {
             "after": 8,
@@ -217,9 +211,7 @@
         "https://www.livefans.jp/events/1866423"
       ],
       "diff": {
-        "skip": [
-          10
-        ],
+        "skip": [10],
         "insert": [
           {
             "after": 8,
@@ -245,9 +237,7 @@
         "https://www.livefans.jp/events/1866424"
       ],
       "diff": {
-        "skip": [
-          10
-        ],
+        "skip": [10],
         "insert": [
           {
             "after": 8,
@@ -303,10 +293,7 @@
         "https://www.livefans.jp/events/1866428"
       ],
       "diff": {
-        "skip": [
-          13,
-          20
-        ],
+        "skip": [13, 20],
         "insert": [
           {
             "after": 0,
@@ -349,9 +336,7 @@
         "https://www.livefans.jp/events/1866432"
       ],
       "diff": {
-        "skip": [
-          20
-        ],
+        "skip": [20],
         "insert": [
           {
             "after": 0,
@@ -386,10 +371,7 @@
         "https://www.livefans.jp/events/1866433"
       ],
       "diff": {
-        "skip": [
-          13,
-          20
-        ],
+        "skip": [13, 20],
         "insert": [
           {
             "after": 0,
@@ -432,10 +414,7 @@
         "https://www.livefans.jp/events/1866434"
       ],
       "diff": {
-        "skip": [
-          13,
-          20
-        ],
+        "skip": [13, 20],
         "insert": [
           {
             "after": 0,
@@ -583,9 +562,7 @@
         "https://www.livefans.jp/events/1866448"
       ],
       "diff": {
-        "skip": [
-          13
-        ],
+        "skip": [13],
         "insert": [
           {
             "after": 12,
@@ -642,10 +619,7 @@
         "https://www.livefans.jp/events/1866451"
       ],
       "diff": {
-        "skip": [
-          1,
-          6
-        ],
+        "skip": [1, 6],
         "insert": [
           {
             "after": 0,
@@ -687,9 +661,7 @@
         "https://www.livefans.jp/events/1866452"
       ],
       "diff": {
-        "skip": [
-          6
-        ],
+        "skip": [6],
         "insert": [
           {
             "after": 0,
@@ -723,9 +695,7 @@
         "https://www.livefans.jp/events/1866453"
       ],
       "diff": {
-        "skip": [
-          6
-        ],
+        "skip": [6],
         "insert": [
           {
             "after": 0,
@@ -759,11 +729,7 @@
         "https://www.livefans.jp/events/1866454"
       ],
       "diff": {
-        "skip": [
-          6,
-          8,
-          20
-        ],
+        "skip": [6, 8, 20],
         "insert": [
           {
             "after": 5,
