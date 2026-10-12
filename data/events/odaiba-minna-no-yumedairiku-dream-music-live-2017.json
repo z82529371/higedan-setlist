@@ -7,6 +7,7 @@
     {
       "id": "odaiba-yumedairiku-2017-0826",
       "date": "2017-08-26",
+      "weekday": "土",
       "city": "東京",
       "venue": "富士電視台本社大樓 大家之夢大陸 Mynavi Stage",
       "region": "關東",
@@ -14,9 +15,42 @@
       "title": "お台場みんなの夢大陸2017 ドリームミュージックライブ",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=59",
-        "https://ja.wikipedia.org/wiki/Official%E9%AB%AD%E7%94%B7dism"
+        "https://ja.wikipedia.org/wiki/Official%E9%AB%AD%E7%94%B7dism",
+        "http://payforward0227.blog.fc2.com/blog-entry-35.html"
       ],
-      "setlist": []
+      "opensAt": "14:30",
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "songId": "inu-ka-cat-ka-de-shinumade-kenka-shiyou"
+        },
+        {
+          "order": 2,
+          "encore": false,
+          "songId": "itan-na-star"
+        },
+        {
+          "order": 3,
+          "encore": false,
+          "songId": "tell-me-baby"
+        },
+        {
+          "order": 4,
+          "encore": false,
+          "songId": "coffee-to-syrup"
+        },
+        {
+          "order": 5,
+          "encore": false,
+          "songId": "brothers"
+        },
+        {
+          "order": 6,
+          "encore": false,
+          "songId": "sweet-tweet"
+        }
+      ]
     }
   ]
 }

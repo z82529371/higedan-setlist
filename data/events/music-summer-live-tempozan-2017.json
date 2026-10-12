@@ -5,18 +5,90 @@
   "type": "特別專場",
   "shows": [
     {
-      "id": "tempozan-summer-live-2017-0819",
+      "id": "tempozan-summer-live-2017-0819-1",
       "date": "2017-08-19",
+      "weekday": "土",
       "city": "大阪",
       "venue": "天保山Market Place 3F 圓形舞台 (Rotunda Stage)",
       "region": "關西",
       "prefecture": "大阪府",
-      "title": "ミュージックサマーライブ＠天保山マーケットプレース",
+      "title": "ミュージックサマーライブ＠天保山マーケットプレース 第1部",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=60",
-        "https://ja.wikipedia.org/wiki/Official%E9%AB%AD%E7%94%B7dism"
+        "https://ja.wikipedia.org/wiki/Official%E9%AB%AD%E7%94%B7dism",
+        "http://payforward0227.blog.fc2.com/blog-entry-37.html"
       ],
-      "setlist": []
+      "opensAt": "14:00",
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "songId": "ai-nandaga"
+        },
+        {
+          "order": 2,
+          "encore": false,
+          "songId": "itan-na-star"
+        },
+        {
+          "order": 3,
+          "encore": false,
+          "songId": "yugure-zoi"
+        },
+        {
+          "order": 4,
+          "encore": false,
+          "songId": "coffee-to-syrup"
+        },
+        {
+          "order": 5,
+          "encore": false,
+          "songId": "nichiyoubi-no-love-letter"
+        }
+      ]
+    },
+    {
+      "id": "tempozan-summer-live-2017-0819-2",
+      "date": "2017-08-19",
+      "weekday": "土",
+      "city": "大阪",
+      "venue": "天保山Market Place 3F 圓形舞台 (Rotunda Stage)",
+      "region": "關西",
+      "prefecture": "大阪府",
+      "title": "ミュージックサマーライブ＠天保山マーケットプレース 第2部",
+      "sourceUrls": [
+        "https://higedan.com/news/3/?page=60",
+        "https://ja.wikipedia.org/wiki/Official%E9%AB%AD%E7%94%B7dism",
+        "http://payforward0227.blog.fc2.com/blog-entry-37.html"
+      ],
+      "opensAt": "16:00",
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "songId": "ai-nandaga"
+        },
+        {
+          "order": 2,
+          "encore": false,
+          "songId": "itan-na-star"
+        },
+        {
+          "order": 3,
+          "encore": false,
+          "songId": "yugure-zoi"
+        },
+        {
+          "order": 4,
+          "encore": false,
+          "songId": "coffee-to-syrup"
+        },
+        {
+          "order": 5,
+          "encore": false,
+          "songId": "inu-ka-cat-ka-de-shinumade-kenka-shiyou"
+        }
+      ]
     }
   ]
 }

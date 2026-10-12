@@ -14,9 +14,38 @@
       "prefecture": "廣島縣",
       "title": "9ジラジ公開録音 with ケラケラ & Official髭男dism in エールエール",
       "sourceUrls": [
-        "https://ja.wikipedia.org/wiki/Official%E9%AB%AD%E7%94%B7dism#出演イベント"
+        "https://twitter.com/officialhige/status/646305453769527297",
+        "https://ja.wikipedia.org/wiki/Official%E9%AB%AD%E7%94%B7dism#出演イベント",
+        "http://payforward0227.blog.fc2.com/blog-entry-184.html"
       ],
-      "setlist": []
+      "opensAt": "14:00",
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "title": "LOVE LOVE LOVE [DREAMS COME TRUE]"
+        },
+        {
+          "order": 2,
+          "encore": false,
+          "title": "（曲目未詳）"
+        },
+        {
+          "order": 3,
+          "encore": false,
+          "title": "（曲目未詳）"
+        },
+        {
+          "order": 4,
+          "encore": false,
+          "title": "（曲目未詳）"
+        },
+        {
+          "order": 5,
+          "encore": false,
+          "songId": "koi-no-maenarae"
+        }
+      ]
     }
   ]
 }

@@ -14,25 +14,111 @@
       "prefecture": "大阪府",
       "title": "インストアミニライブ&サイン特典お渡し会",
       "sourceUrls": [
+        "https://mixi.jp/view_diary.pl?id=1958626756&owner_id=11778927",
         "https://higedan.com/news/3/?page=63",
         "https://ja.wikipedia.org/wiki/Official%E9%AB%AD%E7%94%B7dism#インストアイベント"
       ],
-      "setlist": []
+      "opensAt": "18:30",
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "songId": "whats-going-on"
+        },
+        {
+          "order": 2,
+          "encore": false,
+          "songId": "yugure-zoi"
+        },
+        {
+          "order": 3,
+          "encore": false,
+          "songId": "coffee-to-syrup"
+        },
+        {
+          "order": 4,
+          "encore": false,
+          "songId": "kiiroi-kuruma"
+        }
+      ]
     },
     {
-      "id": "whats-going-on-2017-0107",
+      "id": "whats-going-on-2017-0107-1",
       "date": "2017-01-07",
       "weekday": "土",
       "city": "堺",
       "venue": "Ario鳳 1F Ario Court",
       "region": "關西",
       "prefecture": "大阪府",
-      "title": "インストア ミニライブ&サイン会",
+      "title": "ミニライブ&特典会 in アリオ鳳 第1部",
       "sourceUrls": [
+        "https://x.com/officialhige/status/807133834277851136",
         "https://higedan.com/news/3/?page=63",
-        "https://ja.wikipedia.org/wiki/Official%E9%AB%AD%E7%94%B7dism#インストアイベント"
+        "https://ja.wikipedia.org/wiki/Official%E9%AB%AD%E7%94%B7dism#インストアイベント",
+        "http://payforward0227.blog.fc2.com/blog-entry-72.html"
       ],
-      "setlist": []
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "songId": "koi-no-maenarae"
+        },
+        {
+          "order": 2,
+          "encore": false,
+          "songId": "itan-na-star"
+        },
+        {
+          "order": 3,
+          "encore": false,
+          "songId": "yugure-zoi"
+        },
+        {
+          "order": 4,
+          "encore": false,
+          "songId": "whats-going-on"
+        }
+      ],
+      "opensAt": "12:30"
+    },
+    {
+      "id": "whats-going-on-2017-0107-2",
+      "date": "2017-01-07",
+      "weekday": "土",
+      "city": "堺",
+      "venue": "Ario鳳 1F Ario Court",
+      "region": "關西",
+      "prefecture": "大阪府",
+      "title": "ミニライブ&特典会 in アリオ鳳 第2部",
+      "sourceUrls": [
+        "https://x.com/officialhige/status/807133834277851136",
+        "https://higedan.com/news/3/?page=63",
+        "https://ja.wikipedia.org/wiki/Official%E9%AB%AD%E7%94%B7dism#インストアイベント",
+        "http://payforward0227.blog.fc2.com/blog-entry-72.html"
+      ],
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "songId": "nichiyoubi-no-love-letter"
+        },
+        {
+          "order": 2,
+          "encore": false,
+          "songId": "itan-na-star"
+        },
+        {
+          "order": 3,
+          "encore": false,
+          "songId": "yugure-zoi"
+        },
+        {
+          "order": 4,
+          "encore": false,
+          "songId": "kiiroi-kuruma"
+        }
+      ],
+      "opensAt": "15:30"
     },
     {
       "id": "whats-going-on-2017-0129",

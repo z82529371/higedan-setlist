@@ -138,7 +138,7 @@ export function validateAndCleanTours() {
       // Check if shows need date sorting
       const originalShowsStr = JSON.stringify(unit.shows.map((s) => s.id));
       unit.shows.sort((a, b) =>
-        a.date < b.date ? -1 : a.date > b.date ? 1 : (a.opensAt || "").localeCompare(b.opensAt || "")
+        a.date < b.date ? -1 : a.date > b.date ? 1 : (a.startsAt || a.opensAt || "").localeCompare(b.startsAt || b.opensAt || "")
       );
       if (JSON.stringify(unit.shows.map((s) => s.id)) !== originalShowsStr) {
         modified = true;
@@ -167,7 +167,7 @@ export function validateAndCleanTours() {
       if (unit.templateSetlist) {
         for (const item of unit.templateSetlist) {
           if (item.songId) usedSongIds.add(item.songId);
-          if (item.title && !item.title.includes("[") && !item.title.includes("～") && item.type !== "interlude") {
+          if (item.title && !item.title.includes("[") && !item.title.includes("～") && !item.title.includes("未詳") && !item.title.includes("不明") && item.type !== "interlude") {
             suspiciousTitleTracks.push({ file, title: item.title });
           }
         }
@@ -176,7 +176,7 @@ export function validateAndCleanTours() {
         if (show.setlist) {
           for (const item of show.setlist) {
             if (item.songId) usedSongIds.add(item.songId);
-            if (item.title && !item.title.includes("[") && !item.title.includes("～") && item.type !== "interlude") {
+            if (item.title && !item.title.includes("[") && !item.title.includes("～") && !item.title.includes("未詳") && !item.title.includes("不明") && item.type !== "interlude") {
               suspiciousTitleTracks.push({ file, showId: show.id, title: item.title });
             }
           }
@@ -184,7 +184,7 @@ export function validateAndCleanTours() {
         if (show.diff?.insert) {
           for (const ins of show.diff.insert) {
             if (ins.item?.songId) usedSongIds.add(ins.item.songId);
-            if (ins.item?.title && !ins.item.title.includes("[") && !ins.item.title.includes("～") && ins.item.type !== "interlude") {
+            if (ins.item?.title && !ins.item.title.includes("[") && !ins.item.title.includes("～") && !ins.item.title.includes("未詳") && !ins.item.title.includes("不明") && ins.item.type !== "interlude") {
               suspiciousTitleTracks.push({ file, showId: show.id, title: ins.item.title });
             }
           }

@@ -15,10 +15,28 @@
       "title": "アスナル金山 presents 「ケラケラ×アスナルトレジャー」 公開収録",
       "startsAt": "14:00",
       "sourceUrls": [
+        "https://x.com/officialhige/status/728183419557961729",
         "https://x.com/officialhige/status/725612106079309826",
-        "https://higedan.com/news/3751/"
+        "https://higedan.com/news/3751/",
+        "http://payforward0227.blog.fc2.com/blog-entry-139.html"
       ],
-      "setlist": []
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "songId": "parade"
+        },
+        {
+          "order": 2,
+          "encore": false,
+          "songId": "ai-nandaga"
+        },
+        {
+          "order": 3,
+          "encore": false,
+          "songId": "koi-no-maenarae"
+        }
+      ]
     }
   ]
 }
