@@ -26,10 +26,10 @@
    - 全站有效歌曲統計、歌曲演出履歷（`Track Shows Map`）與全域搜尋索引自動排除佔位曲目，絕不將「未詳」當作樂團已發表的正式曲目。
 
 5. **雙維度缺漏審查索引架構 (Dual Missing Data Audit Architecture)**：
-   - 在專案 [`docs/`](file:///C:/Users/User/髭男%20演唱會/docs) 與 [`docs/reports/`](file:///C:/Users/User/髭男%20演唱會/docs/reports) 落地兩份全域歷史追蹤文件：
-     - **[`docs/missing-setlists.md`](file:///C:/Users/User/髭男%20演唱會/docs/missing-setlists.md)**：列出全庫 155 場曲目完全空白或僅具佔位符之歷史場次，標註年份與性質。
-     - **[`docs/missing-times.md`](file:///C:/Users/User/髭男%20演唱會/docs/missing-times.md)**：列出全庫 207 場開場與開演時間皆缺之場次。
-   - 每次歷史資料補全與變更時，由腳本動態重新計算並雙向同步更新，作為持續考古的主工作索引。
+   - 在專案 [`docs/reports/`](file:///C:/Users/User/髭男%20演唱會/docs/reports) 落地兩份全域歷史追蹤文件（單一事實來源）：
+     - **[`docs/reports/missing-setlists.md`](file:///C:/Users/User/髭男%20演唱會/docs/reports/missing-setlists.md)**：列出全庫曲目完全空白（Stub 0 首）或僅具佔位符（全場皆未詳）之重度缺漏場次，標註年份與性質。
+     - **[`docs/reports/missing-times.md`](file:///C:/Users/User/髭男%20演唱會/docs/reports/missing-times.md)**：列出全庫開場（opensAt）與開演（startsAt）時間皆缺之雙缺場次。只要具備開演或登場時間即不列為缺失。
+   - 納入常態工程管線：由 [`site/scripts/generate-audit-reports.mjs`](file:///C:/Users/User/髭男%20演唱會/site/scripts/generate-audit-reports.mjs) 模組化實作，並原生串接於 `pnpm sync`（`site/scripts/sync-data.mjs`）管線尾端。每次歷史資料庫增修變更時自動重算最新年份分佈與排序清單，杜絕文檔與資料脫節。
 
 ## 後果 (Consequences)
 - **正面效益**：

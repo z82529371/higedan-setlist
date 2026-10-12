@@ -2,6 +2,7 @@ import { cpSync, existsSync, mkdirSync, rmSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { validateAndCleanTours } from "./validate-data.mjs";
+import { generateAuditReports } from "./generate-audit-reports.mjs";
 
 const here = dirname(fileURLToPath(import.meta.url));
 const root = resolve(here, "..", "..");
@@ -24,3 +25,6 @@ for (const sub of ["tours", "events"]) {
   cpSync(dir, resolve(dest, sub), { recursive: true });
   console.log("synced", sub);
 }
+
+// Automatically regenerate and sync audit reports
+generateAuditReports();

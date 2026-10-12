@@ -5,6 +5,7 @@
   "scripts": {
     "sync": "node scripts/sync-data.mjs",
     "test": "node scripts/smoke-test.mjs",
+    "audit:reports": "node scripts/generate-audit-reports.mjs",
     "dev": "pnpm sync && vite",
     "build": "pnpm sync && vite build",
     "preview": "pnpm sync && vite preview"

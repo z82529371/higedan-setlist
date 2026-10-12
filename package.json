@@ -5,6 +5,7 @@
   "scripts": {
     "sync": "pnpm --dir site sync",
     "test": "pnpm --dir site test",
+    "audit:reports": "pnpm --dir site audit:reports",
     "dev": "pnpm --dir site dev",
     "build": "pnpm --dir site install && pnpm --dir site build",
     "preview": "pnpm --dir site preview"
