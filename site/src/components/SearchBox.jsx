@@ -10,6 +10,9 @@ export default function SearchBox({
   onSelectSong,
   onSelectUnit,
   onSelectVenue,
+  onSelectShow,
+  onOpenCalendar,
+  size = "md", // "md" | "lg"
   autoFocus = false,
   isMobileModal = false,
   onCloseModal,
@@ -26,13 +29,49 @@ export default function SearchBox({
   }, [autoFocus]);
 
   const needle = q.trim().toLowerCase();
+  // Normalize date needle without delimiters (e.g. "2024-09-21" -> "20240921")
+  const dateRawNeedle = needle.replace(/[-/.]/g, "");
 
-  const { matchedSongs, matchedUnits, matchedVenues, flatItems } = useMemo(() => {
+  const { matchedSongs, matchedUnits, matchedVenues, matchedShows, flatItems } = useMemo(() => {
     if (!needle) {
-      return { matchedSongs: [], matchedUnits: [], matchedVenues: [], flatItems: [] };
+      return { matchedSongs: [], matchedUnits: [], matchedVenues: [], matchedShows: [], flatItems: [] };
     }
 
-    // 1. Songs & Title tracks
+    // 1. Shows matching date or show title (ADR-0096 Date-Aware Search)
+    const shows = [];
+    const isDatePattern = /^\d{2,4}([-/.]\d{1,2})?([-/.]\d{1,2})?$/.test(needle) || /^\d{4,8}$/.test(needle);
+
+    for (const u of allUnits) {
+      for (const s of u.shows || []) {
+        const sDate = s.date || "";
+        const sDateRaw = sDate.replace(/[-/.]/g, "");
+        const sTitle = (s.title || "").toLowerCase();
+
+        // Exact or prefix/contains matching on date formats
+        const matchDate =
+          sDate.includes(needle) ||
+          (dateRawNeedle.length >= 4 && sDateRaw.includes(dateRawNeedle)) ||
+          (isDatePattern && (sDate.startsWith(needle) || sDate.endsWith(needle)));
+
+        if (matchDate || (needle.length >= 3 && sTitle.includes(needle))) {
+          shows.push({
+            type: "show",
+            id: s.id,
+            date: sDate,
+            title: s.title || s.venue || "演出場次",
+            unitTitle: shortUnitTitle(u) || u.title,
+            venue: s.venue,
+            city: s.city,
+            badge: getUnitTypeLabel(u),
+          });
+        }
+      }
+    }
+
+    // Sort shows by date descending
+    shows.sort((a, b) => b.date.localeCompare(a.date));
+
+    // 2. Songs & Title tracks
     const songs = [];
     for (const s of allUsedSongs) {
       const title = (s.title || "").toLowerCase();
@@ -62,7 +101,7 @@ export default function SearchBox({
       }
     }
 
-    // 2. Units (Tours & Events)
+    // 3. Units (Tours & Events)
     const units = [];
     for (const u of allUnits) {
       const title = (u.title || "").toLowerCase();
@@ -85,7 +124,7 @@ export default function SearchBox({
       }
     }
 
-    // 3. Venues
+    // 4. Venues
     const venues = [];
     for (const v of allVenues) {
       const name = (v.name || "").toLowerCase();
@@ -108,19 +147,24 @@ export default function SearchBox({
       }
     }
 
+    const showsSlice = shows.slice(0, 5);
     const songsSlice = songs.slice(0, 5);
     const unitsSlice = units.slice(0, 5);
     const venuesSlice = venues.slice(0, 5);
 
-    const flat = [...songsSlice, ...unitsSlice, ...venuesSlice];
+    // If query looks like a date, prioritize shows first
+    const flat = isDatePattern
+      ? [...showsSlice, ...unitsSlice, ...songsSlice, ...venuesSlice]
+      : [...showsSlice, ...songsSlice, ...unitsSlice, ...venuesSlice];
 
     return {
+      matchedShows: shows,
       matchedSongs: songs,
       matchedUnits: units,
       matchedVenues: venues,
       flatItems: flat,
     };
-  }, [needle, allUsedSongs, allUnits, allVenues]);
+  }, [needle, dateRawNeedle, allUsedSongs, allUnits, allVenues]);
 
   // Reset activeIndex when query changes
   useEffect(() => {
@@ -145,7 +189,9 @@ export default function SearchBox({
     if (!item) return;
     setIsOpen(false);
     inputRef.current?.blur();
-    if (item.type === "song") {
+    if (item.type === "show") {
+      if (onSelectShow) onSelectShow(item.id);
+    } else if (item.type === "song") {
       onSelectSong(item.id);
     } else if (item.type === "unit") {
       onSelectUnit(item.id);
@@ -190,13 +236,60 @@ export default function SearchBox({
     if (flatItems.length === 0) {
       return (
         <div className="px-4 py-8 text-center font-mono text-[13px] text-muted">
-          無相符的歌曲、演出或場地
+          無相符的日期、歌曲、演出或場地
         </div>
       );
     }
 
     return (
       <Fragment>
+        {/* 📅 場次日期分組 (ADR-0096) */}
+        {matchedShows.length > 0 && (
+          <div>
+            <div className="sticky top-0 z-[2] flex items-center justify-between border-b border-line-soft bg-paper/95 px-3 py-1.5 font-mono text-[11px] font-bold tracking-[0.1em] text-muted uppercase backdrop-blur-xs">
+              <span><span aria-hidden="true">📅</span> 歷史場次日期</span>
+              <span className="text-[11px] font-normal opacity-75">
+                {matchedShows.length} 場
+              </span>
+            </div>
+            {matchedShows.slice(0, 5).map((sh) => {
+              const itemIdx = runningIndex++;
+              const isActive = activeIndex === itemIdx;
+              return (
+                <div
+                  key={`show-${sh.id}`}
+                  role="option"
+                  aria-selected={isActive}
+                  className={`flex cursor-pointer items-center justify-between border-b border-line-soft/60 px-3.5 py-2.5 text-[14px] transition-colors last:border-b-0 ${
+                    isActive
+                      ? "bg-pool-wash font-semibold text-pool"
+                      : "text-ink hover:bg-paper"
+                  }`}
+                  onMouseEnter={() => setActiveIndex(itemIdx)}
+                  onClick={() => handleSelectItem(sh)}
+                >
+                  <div className="flex min-w-0 flex-col">
+                    <div className="flex items-center gap-2">
+                      <span className="font-mono font-bold text-[13px] text-ink">
+                        {sh.date}
+                      </span>
+                      <span className="truncate text-[13px] text-muted">
+                        {sh.unitTitle}
+                      </span>
+                    </div>
+                    <span className="truncate font-mono text-[11px] text-muted">
+                      📍 {sh.city} {sh.venue}
+                    </span>
+                  </div>
+                  <span className="ml-2 shrink-0 font-mono text-[11px] px-1.5 py-0.5 rounded bg-paper border border-line-soft text-muted">
+                    {sh.badge}
+                  </span>
+                </div>
+              );
+            })}
+          </div>
+        )}
+
         {/* 🎵 歌曲分組 */}
         {matchedSongs.length > 0 && (
           <div>
@@ -250,7 +343,7 @@ export default function SearchBox({
         {matchedUnits.length > 0 && (
           <div>
             <div className="sticky top-0 z-[2] flex items-center justify-between border-b border-line-soft bg-paper/95 px-3 py-1.5 font-mono text-[11px] font-bold tracking-[0.1em] text-muted uppercase backdrop-blur-xs">
-              <span><span aria-hidden="true">🎤</span> 演出／巡演</span>
+              <span><span aria-hidden="true">🎤</span> 演出活動</span>
               <span className="text-[11px] font-normal opacity-75">
                 {matchedUnits.length} 部
               </span>
@@ -277,7 +370,7 @@ export default function SearchBox({
                       {u.year} 年
                     </span>
                   </div>
-                  <span className="ml-2 shrink-0 rounded-[2px] border border-line bg-paper px-1.5 py-0.5 font-mono text-[11px] text-muted">
+                  <span className="ml-2 shrink-0 font-mono text-[11px] text-muted">
                     {u.badge}
                   </span>
                 </div>
@@ -356,8 +449,8 @@ export default function SearchBox({
               aria-expanded={Boolean(needle)}
               aria-autocomplete="list"
               aria-controls="mobile-search-results-list"
-              className="w-full rounded-[3px] border-[1.5px] border-ink bg-card py-2 pl-8 pr-8 text-[16px] text-ink placeholder:text-muted focus:border-pool focus:ring-2 focus:ring-pool/30 focus:outline-none"
-              placeholder="搜尋歌曲、演出、場地…"
+              className="w-full rounded-[3px] border-[1.5px] border-ink bg-card py-2 pl-8 pr-16 text-[16px] text-ink placeholder:text-muted focus:border-pool focus:ring-2 focus:ring-pool/30 focus:outline-none"
+              placeholder="搜尋歌曲、日期、演出、場地…"
               value={q}
               onChange={(e) => setQ(e.target.value)}
               onKeyDown={handleKeyDown}
@@ -366,12 +459,23 @@ export default function SearchBox({
             {q && (
               <button
                 type="button"
-                className="absolute right-2 top-1/2 -translate-y-1/2 rounded px-1.5 py-0.5 font-mono text-[12px] text-muted hover:bg-paper hover:text-ink cursor-pointer"
+                className="absolute right-9 top-1/2 -translate-y-1/2 rounded px-1.5 py-0.5 font-mono text-[12px] text-muted hover:bg-paper hover:text-ink cursor-pointer"
                 onClick={handleClear}
                 title="清空搜尋"
                 aria-label="清空搜尋"
               >
                 ✕
+              </button>
+            )}
+            {onOpenCalendar && (
+              <button
+                type="button"
+                onClick={onOpenCalendar}
+                className="absolute right-2 top-1/2 -translate-y-1/2 flex h-7 w-7 items-center justify-center rounded-[4px] hover:bg-tape-tint text-ink cursor-pointer text-sm"
+                title="開啟演出日曆"
+                aria-label="開啟演出日曆"
+              >
+                📅
               </button>
             )}
           </div>
@@ -392,7 +496,17 @@ export default function SearchBox({
           <div className="flex-1 p-6 flex flex-col items-center justify-center text-center text-muted select-none">
             <span className="text-3xl mb-2" aria-hidden="true">🔍</span>
             <p className="font-bold text-ink text-sm m-0 mb-1">搜尋全檔案庫</p>
-            <p className="text-xs text-muted m-0">輸入歌曲名、巡演名稱、年份或演出場館…</p>
+            <p className="text-xs text-muted m-0">輸入歌曲名、日期（如 2024-09-21）、巡演或場館…</p>
+            {onOpenCalendar && (
+              <button
+                type="button"
+                onClick={onOpenCalendar}
+                className="mt-4 inline-flex items-center gap-1.5 rounded-lg border-[1.5px] border-ink bg-band px-3.5 py-1.5 text-xs font-bold text-band-ink shadow-2xs hover:brightness-95 active:scale-95 cursor-pointer"
+              >
+                <span>📅</span>
+                <span>依演出日曆瀏覽</span>
+              </button>
+            )}
           </div>
         ) : (
           <div
@@ -416,15 +530,23 @@ export default function SearchBox({
   return (
     <div
       ref={containerRef}
-      className="relative flex w-full items-center gap-2"
+      className="relative flex w-full items-center"
     >
       <label
         htmlFor="global-q"
-        className="shrink-0 whitespace-nowrap font-mono text-[12px] font-bold tracking-[0.08em] text-muted"
+        className="sr-only"
       >
-        全域搜尋
+        搜尋
       </label>
-      <div className="relative w-full">
+      <div className="relative w-full flex items-center">
+        <span
+          className={`absolute left-3.5 text-muted pointer-events-none select-none ${
+            size === "lg" ? "text-base sm:text-lg" : "text-sm"
+          }`}
+          aria-hidden="true"
+        >
+          🔍
+        </span>
         <input
           ref={inputRef}
           id="global-q"
@@ -435,8 +557,12 @@ export default function SearchBox({
           aria-expanded={isOpen && Boolean(needle)}
           aria-autocomplete="list"
           aria-controls="search-dropdown-list"
-          className="w-full rounded-[3px] border-[1.5px] border-ink bg-card py-2 pl-3 pr-8 text-[16px] sm:text-[14px] text-ink placeholder:text-muted focus:border-pool focus:ring-2 focus:ring-pool/30 focus:outline-none"
-          placeholder="搜尋歌曲、演出、場地…"
+          className={`w-full rounded-[6px] border-[1.5px] border-ink bg-card text-ink placeholder:text-muted focus:border-pool focus:ring-2 focus:ring-pool/30 focus:outline-none transition-shadow ${
+            size === "lg"
+              ? "py-3 sm:py-3.5 pl-10 sm:pl-11 pr-20 text-[16px] sm:text-[16px] shadow-sm font-sans"
+              : "py-2 pl-8 pr-16 text-[16px] sm:text-[14px]"
+          }`}
+          placeholder="搜尋歌曲、日期（如 2024-09）、演出、場地…"
           value={q}
           onChange={(e) => setQ(e.target.value)}
           onFocus={() => {
@@ -446,17 +572,35 @@ export default function SearchBox({
           autoComplete="off"
         />
 
-        {q && (
-          <button
-            type="button"
-            className="absolute right-2 top-1/2 -translate-y-1/2 rounded px-1.5 py-0.5 font-mono text-[12px] text-muted hover:bg-paper hover:text-ink cursor-pointer"
-            onClick={handleClear}
-            title="清空搜尋"
-            aria-label="清空搜尋"
-          >
-            ✕
-          </button>
-        )}
+        <div className={`absolute top-1/2 -translate-y-1/2 flex items-center gap-1.5 ${
+          size === "lg" ? "right-2 sm:right-2.5" : "right-1.5"
+        }`}>
+          {q && (
+            <button
+              type="button"
+              className="rounded px-1.5 py-0.5 font-mono text-[12px] text-muted hover:bg-paper hover:text-ink cursor-pointer"
+              onClick={handleClear}
+              title="清空搜尋"
+              aria-label="清空搜尋"
+            >
+              ✕
+            </button>
+          )}
+
+          {onOpenCalendar && (
+            <button
+              type="button"
+              onClick={onOpenCalendar}
+              className={`flex items-center justify-center rounded-[4px] border border-ink/20 bg-paper hover:bg-tape-tint text-ink cursor-pointer shadow-2xs active:scale-95 transition-transform ${
+                size === "lg" ? "h-8 w-8 text-base" : "h-7 w-7 text-sm"
+              }`}
+              title="開啟演出日曆 (ADR-0096)"
+              aria-label="開啟演出日曆"
+            >
+              📅
+            </button>
+          )}
+        </div>
 
         {isOpen && Boolean(needle) && (
           <div

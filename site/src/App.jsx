@@ -19,6 +19,8 @@ import {
 import { trackKey, parseRoute, routeHash } from "./lib/track.js";
 import { ShowSlip, SongSlip, VenueSlip } from "./components/slips.jsx";
 import SearchBox from "./components/SearchBox.jsx";
+import LandingHero from "./components/LandingHero.jsx";
+import CalendarModal from "./components/CalendarModal.jsx";
 import "./style.css";
 
 const PERFORMANCE_CATEGORIES = [
@@ -161,6 +163,13 @@ export default function App() {
     return fallback;
   };
   const [initial] = useState(initialSelection);
+  const [viewMode, setViewMode] = useState(() => {
+    const rawHash = window.location.hash;
+    const r =
+      parseRoute(rawHash) || parseRoute(window.location.pathname);
+    if (r || rawHash === "#/archive") return "archive";
+    return "landing";
+  });
 
   const [selUnitId, setSelUnitId] = useState(initial.selUnitId);
   const [tab, setTab] = useState(initial.tab);
@@ -226,6 +235,7 @@ export default function App() {
   // Mobile Filter Bottom Sheet state & Staged Draft State
   const [isFilterDrawerOpen, setIsFilterDrawerOpen] = useState(false);
   const [isMobileSearchOpen, setIsMobileSearchOpen] = useState(false);
+  const [isCalendarOpen, setIsCalendarOpen] = useState(false);
   const [draftState, setDraftState] = useState(null);
 
   const openFilterDrawer = () => {
@@ -260,6 +270,7 @@ export default function App() {
   // Hash is the single funnel: selections write hash, hashchange applies state.
   const applyRoute = (r) => {
     if (!r) return;
+    setViewMode("archive");
     setIsFilterDrawerOpen(false);
     if (r.kind === "song" && allUsedSongs.some((s) => s.id === r.value)) {
       setTab("song");
@@ -300,10 +311,23 @@ export default function App() {
 
   useEffect(() => {
     const onHash = () => {
+      const rawHash = window.location.hash;
       const r =
-        parseRoute(window.location.hash) ||
+        parseRoute(rawHash) ||
         parseRoute(window.location.pathname);
-      applyRoute(r);
+      if (!r && (!rawHash || rawHash === "#" || rawHash === "#/")) {
+        setViewMode("landing");
+        window.scrollTo({ top: 0, behavior: "instant" });
+        return;
+      }
+      if (rawHash === "#/archive") {
+        setViewMode("archive");
+        return;
+      }
+      if (r) {
+        setViewMode("archive");
+        applyRoute(r);
+      }
     };
     window.addEventListener("hashchange", onHash);
     return () => window.removeEventListener("hashchange", onHash);
@@ -371,6 +395,7 @@ export default function App() {
   }, [isMobileSearchOpen]);
 
   const go = (hash) => {
+    setViewMode("archive");
     applyRoute(parseRoute(hash));
     if (window.location.hash !== hash) {
       window.location.hash = hash;
@@ -396,6 +421,31 @@ export default function App() {
     setIsFilterDrawerOpen(false);
     setIsMobileSearchOpen(false);
     go(routeHash.venue(venueName));
+  };
+
+  const handleSelectUnit = (uId, explicitShowId = null) => {
+    setQ("");
+    setIsFilterDrawerOpen(false);
+    setIsMobileSearchOpen(false);
+    const u = unitData.get(uId)?.unit;
+    if (u) {
+      setSelUnitId(uId);
+      const targetShow = explicitShowId || defaultShowId(u);
+      setSelShow(targetShow);
+      const cat = getUnitTypeLabel(u);
+      const yr = unitEarliest(u).split("-")[0];
+      setSelCategory(cat);
+      if (yr && yr !== "9999") setSelYear(yr);
+      setTab("show");
+      go(routeHash.show(targetShow));
+    }
+  };
+
+  const handleReturnHome = () => {
+    setViewMode("landing");
+    setQ("");
+    window.location.hash = "#/";
+    window.scrollTo({ top: 0, behavior: "instant" });
   };
 
   const handleCommitDrawer = () => {
@@ -1362,118 +1412,168 @@ export default function App() {
 
   return (
     <Fragment>
-      {/* Top Full-Width Sticky Status Bar (Dynamic across Show / Song / Venue) */}
-      <div
-        className="sticky top-0 z-40 w-full bg-band border-b border-ink/20 shadow-xs select-none"
-        onClick={() => {
-          slipRef.current?.scrollIntoView({ behavior: "smooth" }) ||
-            window.scrollTo({ top: 0, behavior: "smooth" });
-        }}
-        role="button"
-        tabIndex={0}
-        title="點擊滾動回單據頂部"
-        aria-label="當前狀態導航列，點擊回單據頂部"
-      >
-        <div className="mx-auto max-w-[960px] px-4 sm:px-6 flex items-center justify-between gap-2.5 py-1 sm:py-2 font-mono text-[10px] sm:text-[12px] tracking-wider sm:tracking-[0.14em] text-band-ink whitespace-nowrap overflow-hidden cursor-pointer">
-          {/* Left: Dynamic Context Title */}
-          <div className="truncate min-w-0 font-bold flex items-center gap-1.5">
-            {tab === "show" && (
-              <span>{current?.unit.title ?? ""}</span>
-            )}
-            {tab === "song" && (
-              <span>
-                <span aria-hidden="true">🎵</span> {currentSongObj?.title || selSong}
-                {currentSongObj?.unreleased
-                  ? "（未發行）"
-                  : currentSongObj?.album
-                  ? `（${currentSongObj.album}）`
-                  : ""}
-              </span>
-            )}
-            {tab === "venue" && (
-              <span>
-                <span aria-hidden="true">🏛️</span> {selVenue}
-                {currentVenueObj?.city ? `（${currentVenueObj.city}）` : ""}
-              </span>
-            )}
+      {viewMode === "landing" ? (
+        <LandingHero
+          onEnterArchive={() => setViewMode("archive")}
+          onSelectSong={(sId) => {
+            setViewMode("archive");
+            handleSelectSong(sId);
+          }}
+          onSelectUnit={(uId, showId) => {
+            setViewMode("archive");
+            handleSelectUnit(uId, showId);
+          }}
+          onSelectVenue={(vName) => {
+            setViewMode("archive");
+            handleSelectVenue(vName);
+          }}
+          onSelectShow={(shId) => {
+            setViewMode("archive");
+            handleSelectShow(shId);
+          }}
+          onOpenCalendar={() => setIsCalendarOpen(true)}
+          onSelectTab={(newTab, options) => {
+            setViewMode("archive");
+            setTab(newTab);
+            if (newTab === "song" && options?.sortMode) setSongSortMode(options.sortMode);
+            if (newTab === "venue" && options?.sortMode) setVenueSortMode(options.sortMode);
+          }}
+          totalAllShows={totalAllShows}
+          allUsedSongs={allUsedSongs}
+          allVenues={allVenues}
+          allUnits={allUnits}
+          q={q}
+          setQ={setQ}
+        />
+      ) : (
+        <Fragment>
+          {/* Top Full-Width Sticky Status Bar (Dynamic across Show / Song / Venue) */}
+          <div
+            className="sticky top-0 z-40 w-full bg-band border-b border-ink/20 shadow-xs select-none"
+            onClick={() => {
+              slipRef.current?.scrollIntoView({ behavior: "smooth" }) ||
+                window.scrollTo({ top: 0, behavior: "smooth" });
+            }}
+            role="button"
+            tabIndex={0}
+            title="點擊滾動回單據頂部"
+            aria-label="當前狀態導航列，點擊回單據頂部"
+          >
+            <div className="mx-auto max-w-[960px] px-4 sm:px-6 flex items-center justify-between gap-3 py-1 sm:py-2 font-mono text-[10px] sm:text-[12px] tracking-wider sm:tracking-[0.14em] text-band-ink whitespace-nowrap overflow-hidden cursor-pointer">
+              {/* Left: Dynamic Context Title (Pure & Unobstructed) */}
+              <div className="truncate min-w-0 font-bold">
+                {tab === "show" && (
+                  <span>{current?.unit.title ?? ""}</span>
+                )}
+                {tab === "song" && (
+                  <span>
+                    <span aria-hidden="true">🎵</span> {currentSongObj?.title || selSong}
+                    {currentSongObj?.unreleased
+                      ? "（未發行）"
+                      : currentSongObj?.album
+                      ? `（${currentSongObj.album}）`
+                      : ""}
+                  </span>
+                )}
+                {tab === "venue" && (
+                  <span>
+                    <span aria-hidden="true">🏛️</span> {selVenue}
+                    {currentVenueObj?.city ? `（${currentVenueObj.city}）` : ""}
+                  </span>
+                )}
+              </div>
+
+              {/* Right: Dynamic Summary Metadata + Home Button on Far Right */}
+              <div className="shrink-0 flex items-center gap-1.5 sm:gap-3 font-bold opacity-90 sm:opacity-100">
+                {tab === "show" && (
+                  <>
+                    <span className="hidden sm:inline opacity-45">●</span>
+                    <span className="hidden sm:inline">
+                      {current?.shows.length ?? 0} 場 · {current?.songShows.size ?? 0} 首歌曲
+                    </span>
+                    <span className="sm:hidden">
+                      {current?.shows.length ?? 0} 場
+                    </span>
+                  </>
+                )}
+                {tab === "song" && (
+                  <>
+                    <span className="hidden sm:inline opacity-45">●</span>
+                    <span className="hidden sm:inline">
+                      累計演唱 {(trackShows.get(trackKey("song", selSong)) ?? []).length} 場
+                    </span>
+                    <span className="sm:hidden">
+                      累計 {(trackShows.get(trackKey("song", selSong)) ?? []).length} 場
+                    </span>
+                    <span className="opacity-45">●</span>
+                    <span>歌曲檔案</span>
+                  </>
+                )}
+                {tab === "venue" && (
+                  <>
+                    <span className="hidden sm:inline opacity-45">●</span>
+                    <span className="hidden sm:inline">
+                      累計舉辦 {currentVenueObj?.shows?.length ?? 0} 場
+                    </span>
+                    <span className="sm:hidden">
+                      累計 {currentVenueObj?.shows?.length ?? 0} 場
+                    </span>
+                    <span className="opacity-45">●</span>
+                    <span>場地檔案</span>
+                  </>
+                )}
+
+                <span className="hidden sm:inline opacity-35 select-none shrink-0">|</span>
+
+                {/* Home Action Button (Desktop only; on mobile, Floating Dock already has Home button) */}
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleReturnHome();
+                  }}
+                  className="hidden sm:inline-flex items-center gap-1 px-2 py-0.5 rounded-[4px] bg-band-ink/10 hover:bg-band-ink/20 active:scale-95 text-band-ink font-bold border border-band-ink/30 transition-all cursor-pointer text-[10px] sm:text-[11px] shrink-0 shadow-2xs"
+                  title="返回首頁"
+                  aria-label="返回首頁"
+                >
+                  <span aria-hidden="true">🏠</span>
+                  <span>首頁</span>
+                </button>
+              </div>
+            </div>
           </div>
 
-          {/* Right: Dynamic Summary Metadata */}
-          <div className="shrink-0 flex items-center gap-1.5 sm:gap-4 font-bold opacity-90 sm:opacity-100">
-            {tab === "show" && (
-              <>
-                <span className="hidden sm:inline opacity-45">●</span>
-                <span className="hidden sm:inline">
-                  {current?.shows.length ?? 0} 場 · {current?.songShows.size ?? 0} 首歌曲
+          {/* Main Page Container (Centered 960px) */}
+          <div className="mx-auto max-w-[960px] px-4 sm:px-6">
+            {/* Original Full Header */}
+            <header className="pb-0 pt-3.5 sm:pt-6">
+              <p className="m-0 mb-1.5 sm:mb-2 font-mono text-[11px] sm:text-[12px] tracking-[0.2em] text-muted font-bold uppercase">
+                LIVE PERFORMANCE &amp; SETLIST ARCHIVE
+              </p>
+              <h1 className="m-0 font-display text-[clamp(17px,4.5vw,44px)] font-extrabold leading-tight tracking-tight">
+                Official髭男dism <span className="font-bold text-band-ink">Setlist 檔案庫</span>
+              </h1>
+              <p className="mt-2 mb-0 text-[12px] sm:text-[14px] text-muted leading-relaxed">
+                場次與曲目雙向檔案庫。收錄 2012 年地下獨立時期至當前巡演的完整現場足跡。
+              </p>
+              <div className="mt-3 -mx-4 px-4 sm:mx-0 sm:px-0 flex items-center gap-2 overflow-x-auto sm:flex-wrap font-mono text-[11px] sm:text-[12px] text-ink scrollbar-none">
+                <span className="shrink-0 inline-flex items-center gap-1 rounded-[4px] border border-ink/20 bg-paper px-2.5 py-1 font-semibold shadow-2xs">
+                  <span aria-hidden="true">📅</span> 2012–2026 年
                 </span>
-                <span className="sm:hidden">
-                  {current?.shows.length ?? 0} 場
+                <span className="shrink-0 inline-flex items-center gap-1 rounded-[4px] border border-ink/20 bg-paper px-2.5 py-1 font-semibold shadow-2xs">
+                  <span aria-hidden="true">🎫</span> {totalAllShows} 場公開演出
                 </span>
-                <span className="opacity-45">●</span>
-                <span>來源 {sourceSummary}</span>
-              </>
-            )}
-            {tab === "song" && (
-              <>
-                <span className="hidden sm:inline opacity-45">●</span>
-                <span className="hidden sm:inline">
-                  累計演唱 {(trackShows.get(trackKey("song", selSong)) ?? []).length} 場
+                <span className="shrink-0 inline-flex items-center gap-1 rounded-[4px] border border-ink/20 bg-paper px-2.5 py-1 font-semibold shadow-2xs">
+                  <span aria-hidden="true">🎭</span> {PERFORMANCE_CATEGORIES.length} 大演出型態
                 </span>
-                <span className="sm:hidden">
-                  累計 {(trackShows.get(trackKey("song", selSong)) ?? []).length} 場
+                <span className="shrink-0 inline-flex items-center gap-1 rounded-[4px] border border-ink/20 bg-paper px-2.5 py-1 font-semibold shadow-2xs">
+                  <span aria-hidden="true">🎵</span> {allUsedSongs.length} 首原創曲目
                 </span>
-                <span className="opacity-45">●</span>
-                <span>歌曲檔案</span>
-              </>
-            )}
-            {tab === "venue" && (
-              <>
-                <span className="hidden sm:inline opacity-45">●</span>
-                <span className="hidden sm:inline">
-                  累計舉辦 {currentVenueObj?.shows?.length ?? 0} 場
+                <span className="shrink-0 inline-flex items-center gap-1 rounded-[4px] border border-ink/20 bg-paper px-2.5 py-1 font-semibold shadow-2xs">
+                  <span aria-hidden="true">📍</span> {allVenues.length} 處歷史場館
                 </span>
-                <span className="sm:hidden">
-                  累計 {currentVenueObj?.shows?.length ?? 0} 場
-                </span>
-                <span className="opacity-45">●</span>
-                <span>場地檔案</span>
-              </>
-            )}
-          </div>
-        </div>
-      </div>
-
-      {/* Main Page Container (Centered 960px) */}
-      <div className="mx-auto max-w-[960px] px-4 sm:px-6">
-        {/* Header */}
-      <header className="pb-0 pt-3.5 sm:pt-6">
-        <p className="m-0 mb-1.5 sm:mb-2 font-mono text-[11px] sm:text-[12px] tracking-[0.2em] text-muted font-bold uppercase">
-          LIVE PERFORMANCE &amp; SETLIST ARCHIVE
-        </p>
-        <h1 className="m-0 font-display text-[clamp(17px,4.5vw,44px)] font-extrabold leading-tight tracking-tight">
-          Official髭男dism <span className="font-bold text-band-ink">Setlist 檔案庫</span>
-        </h1>
-        <p className="mt-2 mb-0 text-[12px] sm:text-[14px] text-muted leading-relaxed">
-          場次與曲目雙向檔案庫。收錄 2012 年地下獨立時期至當前巨蛋巡演的完整現場足跡。
-        </p>
-        <div className="mt-3 -mx-4 px-4 sm:mx-0 sm:px-0 flex items-center gap-2 overflow-x-auto sm:flex-wrap font-mono text-[11px] sm:text-[12px] text-ink scrollbar-none">
-          <span className="shrink-0 inline-flex items-center gap-1 rounded-[4px] border border-ink/20 bg-paper px-2.5 py-1 font-semibold shadow-2xs">
-            <span aria-hidden="true">📅</span> 2012–2026 年
-          </span>
-          <span className="shrink-0 inline-flex items-center gap-1 rounded-[4px] border border-ink/20 bg-paper px-2.5 py-1 font-semibold shadow-2xs">
-            <span aria-hidden="true">🎫</span> {totalAllShows} 場公開演出
-          </span>
-          <span className="shrink-0 inline-flex items-center gap-1 rounded-[4px] border border-ink/20 bg-paper px-2.5 py-1 font-semibold shadow-2xs">
-            <span aria-hidden="true">🎭</span> {PERFORMANCE_CATEGORIES.length} 大演出型態
-          </span>
-          <span className="shrink-0 inline-flex items-center gap-1 rounded-[4px] border border-ink/20 bg-paper px-2.5 py-1 font-semibold shadow-2xs">
-            <span aria-hidden="true">🎵</span> {allUsedSongs.length} 首原創曲目
-          </span>
-          <span className="shrink-0 inline-flex items-center gap-1 rounded-[4px] border border-ink/20 bg-paper px-2.5 py-1 font-semibold shadow-2xs">
-            <span aria-hidden="true">📍</span> {allVenues.length} 處歷史場館
-          </span>
-        </div>
-      </header>
+              </div>
+            </header>
 
       {/* Top 3 Query Tabs */}
       <div
@@ -1551,20 +1651,10 @@ export default function App() {
           allUnits={allUnits}
           allVenues={allVenues}
           onSelectSong={handleSelectSong}
-          onSelectUnit={(uId) => {
-            const u = unitData.get(uId)?.unit;
-            if (u) {
-              setSelUnitId(uId);
-              const defShow = defaultShowId(u);
-              setSelShow(defShow);
-              const cat = getUnitTypeLabel(u);
-              const yr = unitEarliest(u).split("-")[0];
-              setSelCategory(cat);
-              if (yr && yr !== "9999") setSelYear(yr);
-              go(routeHash.show(defShow));
-            }
-          }}
+          onSelectUnit={handleSelectUnit}
           onSelectVenue={handleSelectVenue}
+          onSelectShow={handleSelectShow}
+          onOpenCalendar={() => setIsCalendarOpen(true)}
         />
       </div>
 
@@ -1955,35 +2045,46 @@ export default function App() {
               setQ("");
             }}
             onSelectSong={handleSelectSong}
-            onSelectUnit={(uId) => {
-              const u = unitData.get(uId)?.unit;
-              if (u) {
-                setSelUnitId(uId);
-                const defShow = defaultShowId(u);
-                setSelShow(defShow);
-                const cat = getUnitTypeLabel(u);
-                const yr = unitEarliest(u).split("-")[0];
-                setSelCategory(cat);
-                if (yr && yr !== "9999") setSelYear(yr);
-                setIsMobileSearchOpen(false);
-                setQ("");
-                go(routeHash.show(defShow));
-              }
-            }}
+            onSelectUnit={handleSelectUnit}
             onSelectVenue={handleSelectVenue}
+            onSelectShow={handleSelectShow}
+            onOpenCalendar={() => setIsCalendarOpen(true)}
           />
         </div>
       )}
 
-      {/* Mobile Floating Return to Top (Left-aligned) */}
-      <button
-        type="button"
-        onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-        className="fixed bottom-5 left-4 z-30 sm:hidden inline-flex items-center justify-center w-10 h-10 rounded-full bg-paper/90 text-ink font-bold shadow-md border border-ink text-[14px] cursor-pointer active:bg-tape-tint backdrop-blur-xs"
-        aria-label="回到頁首"
-      >
-        ↑
-      </button>
+      {/* Mobile Floating Action Cluster (Left-aligned: Home + Scroll to Top) */}
+      <div className="fixed bottom-5 left-4 z-30 sm:hidden flex items-center gap-2 select-none">
+        <button
+          type="button"
+          onClick={handleReturnHome}
+          className="inline-flex items-center gap-1 px-3 h-10 rounded-full bg-paper/95 text-ink font-bold shadow-md border-[1.5px] border-ink text-[12px] cursor-pointer hover:bg-tape-tint active:scale-95 transition-all backdrop-blur-xs"
+          aria-label="回到首頁門面"
+          title="回到首頁門面"
+        >
+          <span aria-hidden="true">🏠</span>
+          <span>首頁</span>
+        </button>
+        <button
+          type="button"
+          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+          className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-paper/95 text-ink font-bold shadow-md border border-ink text-[14px] cursor-pointer hover:bg-tape-tint active:scale-95 transition-all backdrop-blur-xs"
+          aria-label="回到頁首"
+          title="回到頁首"
+        >
+          ↑
+        </button>
+      </div>
+        </Fragment>
+      )}
+
+      {/* 📅 Global Calendar Modal (ADR-0096) */}
+      <CalendarModal
+        isOpen={isCalendarOpen}
+        onClose={() => setIsCalendarOpen(false)}
+        allUnits={allUnits}
+        onSelectShow={handleSelectShow}
+      />
     </Fragment>
   );
 }
