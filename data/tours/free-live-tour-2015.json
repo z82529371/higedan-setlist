@@ -186,10 +186,37 @@
       "title": "ひげだん Free Live Tour 2015 第1部",
       "sourceUrls": [
         "https://barks.jp/news/749613",
+        "https://x.com/nakanettea/status/645883387719233536",
         "https://ja.wikipedia.org/wiki/Official%E9%AB%AD%E7%94%B7dism#インストアイベント"
       ],
-      "setlist": [],
-      "opensAt": "14:00"
+      "startsAt": "14:00",
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "title": "LOVE LOVE LOVE [DREAMS COME TRUE]"
+        },
+        {
+          "order": 2,
+          "encore": false,
+          "songId": "sweet-tweet"
+        },
+        {
+          "order": 3,
+          "encore": false,
+          "songId": "yugure-zoi"
+        },
+        {
+          "order": 4,
+          "encore": false,
+          "songId": "ai-nandaga"
+        },
+        {
+          "order": 5,
+          "encore": false,
+          "songId": "koi-no-maenarae"
+        }
+      ]
     },
     {
       "id": "free-live-2015-0921-2",

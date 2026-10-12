@@ -6,6 +6,8 @@
     {
       "id": "1024882",
       "date": "2018-10-14",
+      "weekday": "日",
+      "startsAt": "16:00",
       "city": "川崎",
       "venue": "Lazona川崎廣場 Rufa廣場大舞台",
       "region": "關東",
@@ -13,36 +15,42 @@
       "title": "『Stand By You EP』Free Acoustic Live",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=49",
-        "https://www.livefans.jp/events/1024882"
+        "https://www.livefans.jp/events/1024882",
+        "https://x.com/yue_Onhsdcd_kk/status/1051493836462026753"
       ],
       "setlist": [
         {
           "order": 1,
           "encore": false,
-          "songId": "115man-kiro-no-film"
+          "type": "interlude",
+          "note": "リハ：日曜日のラブレター (1番)"
         },
         {
           "order": 2,
           "encore": false,
-          "songId": "itan-na-star"
+          "songId": "115man-kiro-no-film"
         },
         {
           "order": 3,
           "encore": false,
-          "songId": "bad-for-me"
+          "songId": "itan-na-star"
         },
         {
           "order": 4,
           "encore": false,
-          "songId": "no-doubt"
+          "songId": "bad-for-me"
         },
         {
           "order": 5,
           "encore": false,
+          "songId": "no-doubt"
+        },
+        {
+          "order": 6,
+          "encore": false,
           "songId": "stand-by-you"
         }
-      ],
-      "opensAt": "16:00"
+      ]
     }
   ]
 }

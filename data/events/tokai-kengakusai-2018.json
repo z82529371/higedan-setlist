@@ -7,16 +7,61 @@
     {
       "id": "1024890",
       "date": "2018-11-01",
+      "weekday": "木",
       "city": "平塚",
       "venue": "東海大學湘南校區體育館",
       "region": "關東",
       "prefecture": "神奈川縣",
       "title": "東海大学 第64回 建学祭コンサート",
+      "opensAt": "15:30",
+      "startsAt": "16:30",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=50",
-        "https://www.livefans.jp/events/1024890"
+        "https://www.livefans.jp/events/1024890",
+        "https://x.com/__29nce/status/1057913425869729795"
       ],
-      "setlist": []
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "songId": "coffee-to-syrup"
+        },
+        {
+          "order": 2,
+          "encore": false,
+          "songId": "itan-na-star"
+        },
+        {
+          "order": 3,
+          "encore": false,
+          "songId": "bad-for-me"
+        },
+        {
+          "order": 4,
+          "encore": false,
+          "songId": "tell-me-baby"
+        },
+        {
+          "order": 5,
+          "encore": false,
+          "songId": "fire-ground"
+        },
+        {
+          "order": 6,
+          "encore": false,
+          "songId": "stand-by-you"
+        },
+        {
+          "order": 7,
+          "encore": false,
+          "songId": "sweet-tweet"
+        },
+        {
+          "order": 8,
+          "encore": false,
+          "songId": "no-doubt"
+        }
+      ]
     }
   ]
 }

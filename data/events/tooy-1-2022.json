@@ -77,7 +77,10 @@
           "encore": false,
           "songId": "mixed-nuts"
         }
-      ]
+      ],
+      "weekday": "月",
+      "opensAt": "17:30",
+      "startsAt": "18:30"
     }
   ]
 }

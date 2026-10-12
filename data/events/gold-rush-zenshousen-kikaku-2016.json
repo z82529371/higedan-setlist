@@ -15,7 +15,10 @@
         "https://higedan.com/news/3/?page=68",
         "https://ja.wikipedia.org/wiki/Official%E9%AB%AD%E7%94%B7dism"
       ],
-      "setlist": []
+      "setlist": [],
+      "weekday": "月",
+      "opensAt": "18:00",
+      "startsAt": "18:30"
     }
   ]
 }

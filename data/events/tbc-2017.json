@@ -42,7 +42,9 @@
           "encore": false,
           "songId": "sweet-tweet"
         }
-      ]
+      ],
+      "weekday": "土",
+      "startsAt": "13:55"
     }
   ]
 }

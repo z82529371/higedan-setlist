@@ -14,9 +14,32 @@
       "title": "SUNSTAR presents J-WAVE LIVE SUMMER JAM 2016 PARK STAGE",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=65",
+        "https://x.com/beiketa/status/767235133015330816",
         "https://ja.wikipedia.org/wiki/Official%E9%AB%AD%E7%94%B7dism"
       ],
-      "setlist": []
+      "startsAt": "13:30",
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "songId": "koi-no-maenarae"
+        },
+        {
+          "order": 2,
+          "encore": false,
+          "songId": "itan-na-star"
+        },
+        {
+          "order": 3,
+          "encore": false,
+          "songId": "nichiyoubi-no-love-letter"
+        },
+        {
+          "order": 4,
+          "encore": false,
+          "songId": "coffee-to-syrup"
+        }
+      ]
     }
   ]
 }

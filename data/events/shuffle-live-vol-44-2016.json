@@ -6,15 +6,17 @@
     {
       "id": "shuffle-live-vol-44-2016-0630",
       "date": "2016-06-30",
+      "weekday": "木",
       "city": "東京",
       "venue": "吉祥寺SHUFFLE",
       "region": "關東",
       "prefecture": "東京都",
       "title": "SHUFFLE LIVE vol.44",
+      "opensAt": "18:00",
+      "startsAt": "18:30",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=66",
-        "https://ja.wikipedia.org/wiki/Official%E9%AB%AD%E7%94%B7dism",
-        "https://higedan.com/"
+        "https://ja.wikipedia.org/wiki/Official%E9%AB%AD%E7%94%B7dism"
       ],
       "setlist": []
     }

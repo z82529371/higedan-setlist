@@ -7,16 +7,45 @@
     {
       "id": "699961",
       "date": "2016-10-16",
-      "city": "福井",
-      "venue": "仁愛大學",
+      "weekday": "日",
+      "city": "越前",
+      "venue": "仁愛大學 野外特設舞台",
       "region": "中部",
       "prefecture": "福井縣",
       "title": "仁愛大学 世灯祭",
+      "startsAt": "13:00",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=64",
-        "https://www.livefans.jp/events/699961"
+        "https://www.livefans.jp/events/699961",
+        "https://x.com/_koji_h_/status/787512292141182976"
       ],
-      "setlist": []
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "songId": "sweet-tweet"
+        },
+        {
+          "order": 2,
+          "encore": false,
+          "songId": "itan-na-star"
+        },
+        {
+          "order": 3,
+          "encore": false,
+          "songId": "coffee-to-syrup"
+        },
+        {
+          "order": 4,
+          "encore": false,
+          "songId": "whats-going-on"
+        },
+        {
+          "order": 5,
+          "encore": false,
+          "songId": "clap-clap"
+        }
+      ]
     }
   ]
 }

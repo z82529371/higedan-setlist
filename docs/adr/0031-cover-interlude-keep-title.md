@@ -2,7 +2,7 @@
 
 > **Superseded by 0032**：翻唱改記無連結正式軌（`title` 軌）。本文保留作取捨史料。
 
-* Status: Accepted
+* Status: Superseded by [0032-cover-title-track.md](0032-cover-title-track.md)
 * Date: 2026-09-29
 
 ## Context & Problem Statement

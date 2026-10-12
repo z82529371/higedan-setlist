@@ -12,10 +12,39 @@
       "prefecture": "栃木縣",
       "title": "パレードパレード \"squall\" Release TOUR 2016",
       "sourceUrls": [
-        "https://ja.wikipedia.org/wiki/Official%E9%AB%AD%E7%94%B7dism",
-        "https://higedan.com/"
+        "https://higedan.com/news/3/?page=65",
+        "https://x.com/beiketa/status/773143977318985728",
+        "https://ja.wikipedia.org/wiki/Official%E9%AB%AD%E7%94%B7dism"
       ],
-      "setlist": []
+      "opensAt": "18:00",
+      "startsAt": "18:30",
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "songId": "parade"
+        },
+        {
+          "order": 2,
+          "encore": false,
+          "songId": "itan-na-star"
+        },
+        {
+          "order": 3,
+          "encore": false,
+          "songId": "coffee-to-syrup"
+        },
+        {
+          "order": 4,
+          "encore": false,
+          "songId": "sweet-tweet"
+        },
+        {
+          "order": 5,
+          "encore": false,
+          "songId": "clap-clap"
+        }
+      ]
     }
   ]
 }

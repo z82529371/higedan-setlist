@@ -25,7 +25,9 @@
           "encore": false,
           "songId": "inu-ka-cat-ka-de-shinumade-kenka-shiyou"
         }
-      ]
+      ],
+      "weekday": "日",
+      "startsAt": "17:30"
     }
   ]
 }

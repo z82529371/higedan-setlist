@@ -17,7 +17,48 @@
         "https://higedan.com/news/3/?page=60",
         "https://ja.wikipedia.org/wiki/Official%E9%AB%AD%E7%94%B7dism#インストアイベント"
       ],
-      "setlist": []
+      "setlist": [],
+      "startsAt": "13:00"
+    },
+    {
+      "id": "report-acoustic-2017-0820",
+      "date": "2017-08-20",
+      "weekday": "日",
+      "city": "名古屋",
+      "venue": "mozoワンダーシティ 1F イーストコート",
+      "region": "中部",
+      "prefecture": "愛知縣",
+      "title": "インストア アコースティックミニライブ&サイン会",
+      "sourceUrls": [
+        "https://ameblo.jp/tenyo-ru/entry-12305690727.html"
+      ],
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "songId": "nichiyoubi-no-love-letter"
+        },
+        {
+          "order": 2,
+          "encore": false,
+          "songId": "itan-na-star"
+        },
+        {
+          "order": 3,
+          "encore": false,
+          "songId": "yugure-zoi"
+        },
+        {
+          "order": 4,
+          "encore": false,
+          "songId": "coffee-to-syrup"
+        },
+        {
+          "order": 5,
+          "encore": false,
+          "songId": "inu-ka-cat-ka-de-shinumade-kenka-shiyou"
+        }
+      ]
     },
     {
       "id": "report-acoustic-2017-1014",
@@ -29,10 +70,12 @@
       "prefecture": "神奈川縣",
       "title": "インストア アコースティックミニライブ&サイン会",
       "sourceUrls": [
+        "https://higedan.com/news/3/?page=58",
         "https://higedan.com/news/3/?page=60",
         "https://ja.wikipedia.org/wiki/Official%E9%AB%AD%E7%94%B7dism#インストアイベント"
       ],
-      "setlist": []
+      "setlist": [],
+      "startsAt": "12:00"
     },
     {
       "id": "report-acoustic-2017-1022",
@@ -47,7 +90,8 @@
         "https://higedan.com/news/3/?page=60",
         "https://ja.wikipedia.org/wiki/Official%E9%AB%AD%E7%94%B7dism#インストアイベント"
       ],
-      "setlist": []
+      "setlist": [],
+      "startsAt": "13:00"
     },
     {
       "id": "report-acoustic-2017-1118",
@@ -59,10 +103,12 @@
       "prefecture": "愛知縣",
       "title": "インストア アコースティックミニライブ&サイン会",
       "sourceUrls": [
+        "https://higedan.com/news/3/?page=57",
         "https://higedan.com/news/3/?page=60",
         "https://ja.wikipedia.org/wiki/Official%E9%AB%AD%E7%94%B7dism#インストアイベント"
       ],
-      "setlist": []
+      "setlist": [],
+      "startsAt": "12:00"
     }
   ]
 }

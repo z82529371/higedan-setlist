@@ -6,16 +6,19 @@
     {
       "id": "1821570",
       "date": "2016-04-19",
+      "weekday": "火",
       "city": "東京",
       "venue": "SHIBUYA TAKE OFF 7",
       "region": "關東",
       "prefecture": "東京都",
       "title": "Official Showcase Live",
+      "opensAt": "19:00",
+      "startsAt": "19:30",
       "sourceUrls": [
+        "https://higedan.com/news/3/?page=67",
         "https://www.livefans.jp/events/1821570"
       ],
-      "setlist": [],
-      "opensAt": "19:30"
+      "setlist": []
     }
   ]
 }

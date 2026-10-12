@@ -61,7 +61,10 @@
           "encore": true,
           "songId": "nichiyoubi-no-love-letter"
         }
-      ]
+      ],
+      "weekday": "土",
+      "opensAt": "17:00",
+      "startsAt": "17:30"
     }
   ]
 }

@@ -16,7 +16,10 @@
         "https://higedan.com/news/3/?page=58",
         "https://www.livefans.jp/events/856642"
       ],
-      "setlist": []
+      "setlist": [],
+      "weekday": "土",
+      "opensAt": "17:30",
+      "startsAt": "18:00"
     }
   ]
 }

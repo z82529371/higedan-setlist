@@ -7,16 +7,63 @@
     {
       "id": "992670",
       "date": "2018-07-21",
+      "weekday": "土",
       "city": "仙台",
       "venue": "勾當台公園 市民廣場 WEST STAGE",
       "region": "東北",
       "prefecture": "宮城縣",
       "title": "TBC夏まつり2018",
+      "startsAt": "15:20",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=53",
-        "https://www.livefans.jp/events/992670"
+        "https://www.livefans.jp/events/992670",
+        "https://x.com/mai_ship/status/1020585562032390145"
       ],
-      "setlist": []
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "type": "interlude",
+          "note": "リハ：SWEET TWEET（1番のみ）"
+        },
+        {
+          "order": 2,
+          "encore": false,
+          "type": "interlude",
+          "note": "リハ：ESCAPADE（1番のみ）"
+        },
+        {
+          "order": 3,
+          "encore": false,
+          "songId": "coffee-to-syrup"
+        },
+        {
+          "order": 4,
+          "encore": false,
+          "songId": "itan-na-star"
+        },
+        {
+          "order": 5,
+          "encore": false,
+          "songId": "ai-nandaga"
+        },
+        {
+          "order": 6,
+          "encore": false,
+          "songId": "yugure-zoi",
+          "note": "Acoustic"
+        },
+        {
+          "order": 7,
+          "encore": false,
+          "songId": "nichiyoubi-no-love-letter"
+        },
+        {
+          "order": 8,
+          "encore": false,
+          "songId": "no-doubt"
+        }
+      ]
     }
   ]
 }

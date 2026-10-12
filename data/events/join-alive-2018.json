@@ -7,11 +7,13 @@
     {
       "id": "942486",
       "date": "2018-07-15",
+      "weekday": "日",
       "city": "岩見澤",
       "venue": "岩見澤公園 NEW WALTZ",
       "region": "北海道",
       "prefecture": "北海道",
       "title": "JOIN ALIVE 2018",
+      "startsAt": "20:10",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=54",
         "https://www.livefans.jp/events/942486"

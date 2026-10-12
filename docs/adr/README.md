@@ -4,10 +4,10 @@
 
 ---
 
-## 決策總覽清單（共 93 篇）
+## 決策總覽清單（共 95 篇）
 
 > [!NOTE]
-> **編號跳號說明**：本目錄編號自 ADR-0001 起至 ADR-0098 止。其中 ADR-0063、ADR-0064、ADR-0065、ADR-0068、ADR-0069 共 5 篇為早期介面排版草案，後續已被 ADR-0070 單欄聚焦架構完整吸收與替代，故無獨立保留歷史檔案；實體決策文件共計 93 篇。
+> **編號跳號說明**：本目錄編號自 ADR-0001 起至 ADR-0100 止。其中 ADR-0063、ADR-0064、ADR-0065、ADR-0068、ADR-0069 共 5 篇為早期介面排版草案，後續已被 ADR-0070 單欄聚焦架構完整吸收與替代，故無獨立保留歷史檔案；實體決策文件共計 95 篇。
 
 | 決策標題 | 狀態 | 日期 |
 | :--- | :---: | :---: |
@@ -41,7 +41,7 @@
 | [28. 同曲異註記的版本差異差異化與 kind 殘餘觸發規則](0028-same-song-version-note-diff.md) | Accepted | 2026-09-29 |
 | [29. 單格多 cmt 全收錄、排序次鍵與事件過場過濾修正](0029-multi-cmt-capture-and-rehearsal-normalization.md) | Accepted | 2026-09-29 |
 | [30. 安可分隔線語義：標記後全為安可（結構性分隔才傳染）](0030-encore-divider-propagation.md) | Accepted | 2026-09-29 |
-| [31. 未知翻唱過場保留曲名：note 合併曲名與現場備註](0031-cover-interlude-keep-title.md) | Accepted | 2026-09-29 |
+| [31. 未知翻唱過場保留曲名：note 合併曲名與現場備註](0031-cover-interlude-keep-title.md) | 已廢止 (Superseded by [ADR-0032](0032-cover-title-track.md)) | 2026-09-29 |
 | [32. 翻唱曲改記無連結正式軌（title 軌，不進主檔）](0032-cover-title-track.md) | Accepted | 2026-09-30 |
 | [33. 拼盤頁髭男過濾與未知匯入 TV 判別](0033-higedan-only-festival-filter.md) | Superseded by [0045-five-performance-categories-and-tv-parsing-boundary.md](0045-five-performance-categories-and-tv-parsing-boundary.md) (音樂祭過濾部分) | 2026-09-30 |
 | [34. 場館字典稽核修正與同步管線缺口修補](0034-venue-dictionary-audit.md) | Accepted | 2026-09-30 |
@@ -55,7 +55,7 @@
 | [42. 缺播放器索引曲目之模板對位排序規範](0042-missing-idx-template-anchoring.md) | Accepted | 2026-10-01 |
 | [43. Cover 軌看內容判定與手排位置鎖定](0043-cover-content-rule-and-locked.md) | Accepted | 2026-10-01 |
 | [44. LCS 最長公共子序列對齊與常駐 Smoke 測試](0044-lcs-optimal-diff-alignment-and-smoke-tests.md) | Accepted | 2026-10-01 |
-| [45. 五大演出分類體系與電視／音樂祭解析邊界隔離](0045-five-performance-categories-and-tv-parsing-boundary.md) | 部分已被替代 (Partially Superseded) | 分類體系已被 ADR-0056 擴充為七大類；電視與音樂祭解析隔離規範依然有效 |
+| [45. 五大演出分類體系與電視／音樂祭解析邊界隔離](0045-five-performance-categories-and-tv-parsing-boundary.md) | 部分已被替代 (Partially Superseded) | 分類體系已被 ADR-0056/ADR-0078 擴充為八大類；電視與音樂祭解析隔離規範依然有效 |
 | [ADR-0046: 單元完整標題保留與按鈕自訂簡稱（shortTitle）覆寫機制](0046-unit-short-title-override.md) | 已採納 (Accepted) | - |
 | [ADR-0047: 未收錄本家歌曲匯入警報（Tripwire）與曲庫雙向健康審計](0047-unregistered-song-import-tripwire.md) | 已採納 (Accepted) | - |
 | [ADR-0048: 同年同節目事件邊界劃分與 Slug 碰撞日期消歧義](0048-event-granularity-and-slug-collision-disambiguation.md) | 已採納 (Accepted) | - |
@@ -104,4 +104,7 @@
 | [ADR-0096: 日期智能檢索、日曆懸浮視窗與日期有場次受限交互規範 (Date Search and Calendar Modal Architecture)](0096-date-search-and-calendar-modal-architecture.md) | 已採納 (Accepted) | 支援多種日期格式全域搜尋直達場次，並提供有場次才可點選的專屬演出日曆懸浮視窗 |
 | [ADR-0097: 演出時間領域模型與開場開演雙時制對齊決策 (Performance Time Domain Model and Dual-Time Alignment)](0097-performance-time-domain-model-and-dual-time-alignment.md) | 已採納 (Accepted) | 統一雙時間與單時間開場開演領域模型（formatShowTime），消弭 320 場歷史單時誤標開場之歧義 |
 | [ADR-0098: 歷史缺漏歌單佔位曲目規範與雙維度審查索引架構 (Placeholder Track Specification and Dual Missing Data Audit Architecture)](0098-placeholder-track-specification-and-missing-data-audit-architecture.md) | 已採納 (Accepted) | 確立曲序缺漏以（曲目未詳）客觀佔位保留時序，並建立全庫 155 場缺歌單與 207 場缺時間之審查索引清單 |
+| [ADR-0099: 《Joanna》翻唱考證與歌曲主檔邊界校正 (Joanna Cover Attribution and Song Master Boundary Calibration)](0099-joanna-cover-attribution-and-song-master-boundary.md) | 已採納 (Accepted) | 考證藤原聰喜愛 Kool & The Gang 脈絡，將早期《Joanna》由地下原創主檔校正為純文字翻唱軌，貫徹 ADR-0055 邊界 |
+| [ADR-0100: 離屏隔離渲染與真透明圓角圖片匯出架構 (Offscreen Isolated Rendering and True Alpha Rounded Image Export Architecture)](0100-offscreen-rendering-and-true-alpha-rounded-image-export.md) | 已採納 (Accepted) | 建立離屏沙盒深層複製與固定寬度量測機制，消弭行動端小尺寸圖片跑版與底部留白，保留純淨 Alpha 透明圓角 |
+
 

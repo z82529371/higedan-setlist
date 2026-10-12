@@ -67,7 +67,9 @@
         }
       ],
       "region": "關東",
-      "prefecture": "東京都"
+      "prefecture": "東京都",
+      "opensAt": "17:00",
+      "startsAt": "18:00"
     }
   ]
 }

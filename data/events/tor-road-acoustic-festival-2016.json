@@ -13,9 +13,13 @@
       "prefecture": "兵庫縣",
       "title": "トアロード・アコースティック・フェスティバル 2016",
       "sourceUrls": [
+        "https://higedan.com/news/3/?page=68",
         "https://www.livefans.jp/events/613663"
       ],
-      "setlist": []
+      "setlist": [],
+      "weekday": "日",
+      "opensAt": "13:00",
+      "startsAt": "13:30"
     }
   ]
 }

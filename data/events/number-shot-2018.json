@@ -6,6 +6,8 @@
     {
       "id": "940194",
       "date": "2018-07-22",
+      "weekday": "日",
+      "startsAt": "14:20",
       "city": "福岡",
       "venue": "國營海之中道海濱公園 戶外劇場（Nobosemon STAGE）",
       "region": "九州",
@@ -13,31 +15,44 @@
       "title": "NUMBER SHOT 2018",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=54",
-        "https://www.livefans.jp/events/940194"
+        "https://www.livefans.jp/events/940194",
+        "https://x.com/hige_kana831/status/1020908773005594625"
       ],
       "setlist": [
         {
           "order": 1,
           "encore": false,
-          "songId": "coffee-to-syrup"
+          "type": "interlude",
+          "note": "リハ：愛なんだが"
         },
         {
           "order": 2,
           "encore": false,
-          "songId": "itan-na-star"
+          "type": "interlude",
+          "note": "リハ：ESCAPADE"
         },
         {
           "order": 3,
           "encore": false,
-          "songId": "tell-me-baby"
+          "songId": "coffee-to-syrup"
         },
         {
           "order": 4,
           "encore": false,
-          "songId": "no-doubt"
+          "songId": "itan-na-star"
         },
         {
           "order": 5,
+          "encore": false,
+          "songId": "tell-me-baby"
+        },
+        {
+          "order": 6,
+          "encore": false,
+          "songId": "no-doubt"
+        },
+        {
+          "order": 7,
           "encore": false,
           "songId": "sweet-tweet"
         }

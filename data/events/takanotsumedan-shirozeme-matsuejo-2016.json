@@ -12,9 +12,43 @@
       "prefecture": "島根縣",
       "title": "鷹の爪団のSHIROZEME in 国宝松江城 2016",
       "sourceUrls": [
+        "https://higedan.com/news/3/?page=65",
+        "https://x.com/_koji_h_/status/777065548836278273",
         "https://ja.wikipedia.org/wiki/Official%E9%AB%AD%E7%94%B7dism"
       ],
-      "setlist": []
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "type": "interlude",
+          "note": "リハ：恋の前ならえ"
+        },
+        {
+          "order": 2,
+          "encore": false,
+          "songId": "sweet-tweet"
+        },
+        {
+          "order": 3,
+          "encore": false,
+          "songId": "ai-nandaga"
+        },
+        {
+          "order": 4,
+          "encore": false,
+          "songId": "itan-na-star"
+        },
+        {
+          "order": 5,
+          "encore": false,
+          "songId": "whats-going-on"
+        },
+        {
+          "order": 6,
+          "encore": false,
+          "songId": "clap-clap"
+        }
+      ]
     }
   ]
 }

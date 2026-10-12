@@ -7,6 +7,8 @@
     {
       "id": "1034367",
       "date": "2018-10-08",
+      "weekday": "月",
+      "startsAt": "13:30",
       "city": "大阪",
       "venue": "心齋橋 BIG STEP",
       "region": "關西",
@@ -14,26 +16,33 @@
       "title": "Eggs presents FM802 MINAMI WHEEL 2018 OPENING FLASH!",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=49",
-        "https://www.livefans.jp/events/1034367"
+        "https://www.livefans.jp/events/1034367",
+        "https://x.com/moppy_abm/status/1049166140834906112"
       ],
       "setlist": [
         {
           "order": 1,
           "encore": false,
-          "songId": "yugure-zoi"
+          "type": "interlude",
+          "note": "リハ：犬かキャットかで死ぬまで喧嘩しよう"
         },
         {
           "order": 2,
           "encore": false,
-          "songId": "itan-na-star"
+          "songId": "yugure-zoi"
         },
         {
           "order": 3,
           "encore": false,
-          "songId": "115man-kiro-no-film"
+          "songId": "itan-na-star"
         },
         {
           "order": 4,
+          "encore": false,
+          "songId": "115man-kiro-no-film"
+        },
+        {
+          "order": 5,
           "encore": false,
           "songId": "no-doubt"
         }

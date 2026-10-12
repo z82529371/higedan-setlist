@@ -13,6 +13,7 @@
       "prefecture": "大阪府",
       "title": "10th Anniversary!! 『Mujack Dream Land 2017』",
       "sourceUrls": [
+        "https://higedan.com/news/3/?page=62",
         "https://www.livefans.jp/events/803070"
       ],
       "setlist": [
@@ -41,7 +42,10 @@
           "encore": false,
           "songId": "sweet-tweet"
         }
-      ]
+      ],
+      "weekday": "金",
+      "opensAt": "17:30",
+      "startsAt": "18:00"
     }
   ]
 }

@@ -7,11 +7,14 @@
     {
       "id": "live-burger-session-vol-1-2016-1219",
       "date": "2016-12-19",
+      "weekday": "月",
       "city": "大阪",
       "venue": "umeda AKASO (現 umeda TRAD)",
       "region": "關西",
       "prefecture": "大阪府",
       "title": "音エモンpresents LIVE BURGER session!! Vol.1",
+      "opensAt": "18:00",
+      "startsAt": "19:00",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=63",
         "https://ja.wikipedia.org/wiki/Official%E9%AB%AD%E7%94%B7dism"

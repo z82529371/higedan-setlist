@@ -1,19 +1,25 @@
 {
-  "id": "akahige-kikiippatsu-2017",
-  "title": "赤ひげ危機一髪",
+  "id": "akahige-kiki-ippatsu-2017",
+  "title": "赤ひげ危機一髪！",
+  "shortTitle": "赤ひげ危機一髪！",
   "type": "聯合專場",
   "shows": [
     {
-      "id": "789518",
+      "id": "789517",
       "date": "2017-05-05",
+      "weekday": "金",
       "city": "大阪",
       "venue": "梅田CLUB QUATTRO",
       "region": "關西",
       "prefecture": "大阪府",
-      "title": "赤ひげ危機一髪",
+      "title": "赤ひげ危機一髪！",
+      "opensAt": "16:00",
+      "startsAt": "17:00",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=62",
-        "https://www.livefans.jp/events/789518"
+        "https://www.livefans.jp/events/789517",
+        "https://www.livefans.jp/events/789518",
+        "https://x.com/dimr_tks/status/860446250113486848"
       ],
       "setlist": [
         {
@@ -54,20 +60,31 @@
         {
           "order": 8,
           "encore": false,
-          "songId": "coffee-to-syrup"
+          "songId": "rolling"
         },
         {
           "order": 9,
           "encore": false,
-          "songId": "rolling"
+          "songId": "coffee-to-syrup"
         },
         {
           "order": 10,
           "encore": false,
           "songId": "sweet-tweet"
+        },
+        {
+          "order": 11,
+          "encore": true,
+          "title": "Timing [BLACK BISCUITS]",
+          "note": "BLACK BISCUITS カバー（赤ひげ コラボ）"
+        },
+        {
+          "order": 12,
+          "encore": true,
+          "songId": "inu-ka-cat-ka-de-shinumade-kenka-shiyou",
+          "note": "赤ひげ コラボ"
         }
       ]
     }
-  ],
-  "shortTitle": "赤ひげ危機一髪"
+  ]
 }

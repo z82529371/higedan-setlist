@@ -7,42 +7,57 @@
     {
       "id": "841025",
       "date": "2017-10-07",
+      "weekday": "土",
       "city": "大阪",
       "venue": "Music Club JANUS",
       "region": "關西",
       "prefecture": "大阪府",
       "title": "MINAMI WHEEL 2017",
+      "startsAt": "17:15",
       "sourceUrls": [
-        "https://www.livefans.jp/events/841025"
+        "https://www.livefans.jp/events/841025",
+        "https://setlistserver.blog.fc2.com/blog-entry-3297.html"
       ],
       "setlist": [
         {
           "order": 1,
           "encore": false,
-          "songId": "inu-ka-cat-ka-de-shinumade-kenka-shiyou"
+          "type": "interlude",
+          "note": "リハ：コーヒーとシロップ"
         },
         {
           "order": 2,
           "encore": false,
-          "songId": "itan-na-star"
+          "type": "interlude",
+          "note": "リハ：Tell Me Baby"
         },
         {
           "order": 3,
           "encore": false,
-          "songId": "brothers"
+          "songId": "inu-ka-cat-ka-de-shinumade-kenka-shiyou"
         },
         {
           "order": 4,
           "encore": false,
-          "songId": "lady"
+          "songId": "itan-na-star"
         },
         {
           "order": 5,
           "encore": false,
-          "songId": "ai-nandaga"
+          "songId": "brothers"
         },
         {
           "order": 6,
+          "encore": false,
+          "songId": "lady"
+        },
+        {
+          "order": 7,
+          "encore": false,
+          "songId": "ai-nandaga"
+        },
+        {
+          "order": 8,
           "encore": false,
           "songId": "sweet-tweet"
         }

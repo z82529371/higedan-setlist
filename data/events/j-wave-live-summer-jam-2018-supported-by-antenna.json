@@ -32,7 +32,10 @@
           "encore": false,
           "songId": "no-doubt"
         }
-      ]
+      ],
+      "weekday": "土",
+      "opensAt": "14:00",
+      "startsAt": "15:00"
     }
   ]
 }

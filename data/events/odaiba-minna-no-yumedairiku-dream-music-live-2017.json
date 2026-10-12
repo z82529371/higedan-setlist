@@ -15,38 +15,52 @@
       "title": "お台場みんなの夢大陸2017 ドリームミュージックライブ",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=59",
+        "https://x.com/dimr_tks/status/901324834533068800",
         "https://ja.wikipedia.org/wiki/Official%E9%AB%AD%E7%94%B7dism",
         "http://payforward0227.blog.fc2.com/blog-entry-35.html"
       ],
-      "opensAt": "14:30",
+      "opensAt": "14:00",
+      "startsAt": "14:30",
       "setlist": [
         {
           "order": 1,
           "encore": false,
-          "songId": "inu-ka-cat-ka-de-shinumade-kenka-shiyou"
+          "type": "interlude",
+          "note": "リハ：始まりの朝"
         },
         {
           "order": 2,
           "encore": false,
-          "songId": "itan-na-star"
+          "type": "interlude",
+          "note": "リハ：愛なんだが…"
         },
         {
           "order": 3,
           "encore": false,
-          "songId": "tell-me-baby"
+          "songId": "inu-ka-cat-ka-de-shinumade-kenka-shiyou"
         },
         {
           "order": 4,
           "encore": false,
-          "songId": "coffee-to-syrup"
+          "songId": "itan-na-star"
         },
         {
           "order": 5,
           "encore": false,
-          "songId": "brothers"
+          "songId": "tell-me-baby"
         },
         {
           "order": 6,
+          "encore": false,
+          "songId": "coffee-to-syrup"
+        },
+        {
+          "order": 7,
+          "encore": false,
+          "songId": "brothers"
+        },
+        {
+          "order": 8,
           "encore": false,
           "songId": "sweet-tweet"
         }

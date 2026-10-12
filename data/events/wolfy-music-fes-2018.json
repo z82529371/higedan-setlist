@@ -14,9 +14,43 @@
       "title": "ウルフィ MUSIC フェス POWERED BY デルサタ",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=52",
-        "https://www.livefans.jp/events/978686"
+        "https://www.livefans.jp/events/978686",
+        "https://ameblo.jp/tenyo-ru/entry-12389403078.html"
       ],
-      "setlist": []
+      "opensAt": "18:00",
+      "startsAt": "19:00",
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "songId": "coffee-to-syrup"
+        },
+        {
+          "order": 2,
+          "encore": false,
+          "songId": "itan-na-star"
+        },
+        {
+          "order": 3,
+          "encore": false,
+          "songId": "tell-me-baby"
+        },
+        {
+          "order": 4,
+          "encore": false,
+          "songId": "driver"
+        },
+        {
+          "order": 5,
+          "encore": false,
+          "songId": "no-doubt"
+        },
+        {
+          "order": 6,
+          "encore": false,
+          "songId": "sweet-tweet"
+        }
+      ]
     }
   ]
 }

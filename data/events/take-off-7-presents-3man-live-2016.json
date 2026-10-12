@@ -13,9 +13,49 @@
       "prefecture": "東京都",
       "title": "TAKEOFF7presents GOODWARP×Official髭男dism×テスラは泣かない。3マンライブ",
       "sourceUrls": [
+        "https://higedan.com/news/3/?page=65",
+        "https://x.com/beiketa/status/773839920804667392",
         "https://ja.wikipedia.org/wiki/Official%E9%AB%AD%E7%94%B7dism"
       ],
-      "setlist": []
+      "opensAt": "18:00",
+      "startsAt": "18:30",
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "songId": "parade"
+        },
+        {
+          "order": 2,
+          "encore": false,
+          "songId": "clap-clap"
+        },
+        {
+          "order": 3,
+          "encore": false,
+          "songId": "koi-no-maenarae"
+        },
+        {
+          "order": 4,
+          "encore": false,
+          "songId": "coffee-to-syrup"
+        },
+        {
+          "order": 5,
+          "encore": false,
+          "songId": "zero-no-mama-de-iraterara"
+        },
+        {
+          "order": 6,
+          "encore": false,
+          "songId": "itan-na-star"
+        },
+        {
+          "order": 7,
+          "encore": false,
+          "songId": "sweet-tweet"
+        }
+      ]
     }
   ]
 }

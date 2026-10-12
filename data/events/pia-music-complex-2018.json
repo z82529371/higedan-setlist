@@ -6,6 +6,8 @@
     {
       "id": "994292",
       "date": "2018-09-29",
+      "weekday": "土",
+      "startsAt": "12:20",
       "city": "東京",
       "venue": "若洲公園 CAMP STAGE",
       "region": "關東",
@@ -13,36 +15,49 @@
       "title": "PIA MUSIC COMPLEX 2018",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=52",
-        "https://www.livefans.jp/events/994292"
+        "https://www.livefans.jp/events/994292",
+        "https://x.com/oga1207/status/1045884299407372288"
       ],
       "setlist": [
         {
           "order": 1,
           "encore": false,
-          "songId": "coffee-to-syrup"
+          "type": "interlude",
+          "note": "リハ：発明家"
         },
         {
           "order": 2,
           "encore": false,
-          "songId": "itan-na-star"
+          "type": "interlude",
+          "note": "リハ：愛なんだが"
         },
         {
           "order": 3,
           "encore": false,
-          "songId": "tell-me-baby"
+          "songId": "coffee-to-syrup"
         },
         {
           "order": 4,
           "encore": false,
-          "songId": "escapade"
+          "songId": "itan-na-star"
         },
         {
           "order": 5,
           "encore": false,
-          "songId": "no-doubt"
+          "songId": "tell-me-baby"
         },
         {
           "order": 6,
+          "encore": false,
+          "songId": "escapade"
+        },
+        {
+          "order": 7,
+          "encore": false,
+          "songId": "lady"
+        },
+        {
+          "order": 8,
           "encore": false,
           "songId": "sweet-tweet"
         }

@@ -7,11 +7,14 @@
     {
       "id": "1024196",
       "date": "2018-10-10",
+      "weekday": "水",
       "city": "東京",
       "venue": "新木場STUDIO COAST",
       "region": "關東",
       "prefecture": "東京都",
       "title": "MTV VMAJ 2018 -THE LIVE-",
+      "opensAt": "16:30",
+      "startsAt": "17:30",
       "sourceUrls": [
         "https://www.livefans.jp/events/1024196"
       ],

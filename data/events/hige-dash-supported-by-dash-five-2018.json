@@ -7,15 +7,77 @@
     {
       "id": "904556",
       "date": "2018-03-16",
+      "weekday": "金",
+      "opensAt": "18:30",
+      "startsAt": "19:00",
       "city": "大阪",
       "venue": "阿倍野ROCKTOWN",
       "region": "關西",
       "prefecture": "大阪府",
       "title": "ひげダッシュ! supported by DASH FIVE!",
       "sourceUrls": [
-        "https://www.livefans.jp/events/904556"
+        "https://www.livefans.jp/events/904556",
+        "https://x.com/higedan_55/status/974629974257750016"
       ],
-      "setlist": []
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "songId": "koi-no-mae-narae"
+        },
+        {
+          "order": 2,
+          "encore": false,
+          "songId": "ai-nandaga"
+        },
+        {
+          "order": 3,
+          "encore": false,
+          "songId": "brothers"
+        },
+        {
+          "order": 4,
+          "encore": false,
+          "songId": "tell-me-baby"
+        },
+        {
+          "order": 5,
+          "encore": false,
+          "songId": "yugure-zoi",
+          "note": "Acoustic"
+        },
+        {
+          "order": 6,
+          "encore": false,
+          "songId": "itan-na-star",
+          "note": "Acoustic"
+        },
+        {
+          "order": 7,
+          "encore": false,
+          "songId": "lady"
+        },
+        {
+          "order": 8,
+          "encore": false,
+          "songId": "coffee-to-syrup"
+        },
+        {
+          "order": 9,
+          "encore": false,
+          "songId": "nichiyoubi-no-love-letter"
+        },
+        {
+          "order": 10,
+          "encore": false,
+          "songId": "inu-ka-cat-ka-de-shinumade-kenka-shiyou"
+        },
+        {
+          "order": 11,
+          "encore": true,
+          "songId": "sweet-tweet"
+        }
+      ]
     }
   ]
 }

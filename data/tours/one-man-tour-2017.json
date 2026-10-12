@@ -6,12 +6,15 @@
     {
       "id": "778081",
       "date": "2017-06-09",
+      "weekday": "金",
       "city": "橫濱",
       "venue": "橫濱 BAYSIS",
       "region": "關東",
       "prefecture": "神奈川縣",
       "title": "Official髭男dism one-man tour 2017",
+      "startsAt": "19:30",
       "sourceUrls": [
+        "https://higedan.com/news/3/?page=62",
         "https://higedan.com/news/3/?page=61",
         "https://www.livefans.jp/events/778081"
       ],
@@ -21,12 +24,15 @@
     {
       "id": "778082",
       "date": "2017-06-16",
+      "weekday": "金",
       "city": "東京",
       "venue": "澀谷CLUB QUATTRO",
       "region": "關東",
       "prefecture": "東京都",
       "title": "Official髭男dism one-man tour 2017",
+      "startsAt": "19:30",
       "sourceUrls": [
+        "https://higedan.com/news/3/?page=62",
         "https://higedan.com/news/3/?page=61",
         "https://www.livefans.jp/events/778082"
       ],
@@ -36,14 +42,18 @@
     {
       "id": "778083",
       "date": "2017-06-24",
+      "weekday": "土",
       "city": "名古屋",
       "venue": "名古屋SPADE BOX",
       "region": "中部",
       "prefecture": "愛知縣",
       "title": "Official髭男dism one-man tour 2017",
+      "startsAt": "17:30",
       "sourceUrls": [
+        "https://higedan.com/news/3/?page=62",
         "https://higedan.com/news/3/?page=61",
-        "https://www.livefans.jp/events/778083"
+        "https://www.livefans.jp/events/778083",
+        "https://ameblo.jp/tenyo-ru/entry-12288977861.html"
       ],
       "diff": {},
       "locked": true
@@ -51,12 +61,15 @@
     {
       "id": "778084",
       "date": "2017-06-25",
+      "weekday": "日",
       "city": "廣島",
       "venue": "廣島CLUB QUATTRO",
       "region": "中國",
       "prefecture": "廣島縣",
       "title": "Official髭男dism one-man tour 2017",
+      "startsAt": "18:00",
       "sourceUrls": [
+        "https://higedan.com/news/3/?page=62",
         "https://higedan.com/news/3/?page=61",
         "https://www.livefans.jp/events/778084"
       ],
@@ -66,12 +79,15 @@
     {
       "id": "778085",
       "date": "2017-07-14",
+      "weekday": "金",
       "city": "大阪",
       "venue": "umeda TRAD",
       "region": "關西",
       "prefecture": "大阪府",
       "title": "Official髭男dism one-man tour 2017",
+      "startsAt": "19:30",
       "sourceUrls": [
+        "https://higedan.com/news/3/?page=62",
         "https://higedan.com/news/3/?page=61",
         "https://www.livefans.jp/events/778085"
       ],

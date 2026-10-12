@@ -6,15 +6,49 @@
     {
       "id": "681655",
       "date": "2016-10-09",
+      "weekday": "日",
       "city": "大阪",
       "venue": "美國村 DROP",
       "region": "關西",
       "prefecture": "大阪府",
       "title": "MINAMI WHEEL 2016",
+      "startsAt": "18:00",
       "sourceUrls": [
-        "https://www.livefans.jp/events/681655"
+        "https://www.livefans.jp/events/681655",
+        "https://www.instagram.com/p/BLVoI_ChTbT/"
       ],
-      "setlist": []
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "songId": "coffee-to-syrup"
+        },
+        {
+          "order": 2,
+          "encore": false,
+          "songId": "ai-nandaga"
+        },
+        {
+          "order": 3,
+          "encore": false,
+          "songId": "itan-na-star"
+        },
+        {
+          "order": 4,
+          "encore": false,
+          "songId": "whats-going-on"
+        },
+        {
+          "order": 5,
+          "encore": false,
+          "songId": "sweet-tweet"
+        },
+        {
+          "order": 6,
+          "encore": false,
+          "songId": "clap-clap"
+        }
+      ]
     }
   ]
 }

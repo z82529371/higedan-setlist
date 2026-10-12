@@ -6,16 +6,68 @@
     {
       "id": "sound-creator-natsuyasumi-2018-0816",
       "date": "2018-08-16",
+      "weekday": "木",
       "city": "大阪",
       "venue": "難波Hatch",
       "region": "關西",
       "prefecture": "大阪府",
       "title": "サンクリ夏休み! 2018",
+      "opensAt": "12:00",
+      "startsAt": "13:00",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=51",
+        "https://x.com/dimr_tks/status/1030027760943550464",
         "https://ja.wikipedia.org/wiki/Official%E9%AB%AD%E7%94%B7dism"
       ],
-      "setlist": []
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "type": "interlude",
+          "note": "リハ：愛なんだが…"
+        },
+        {
+          "order": 2,
+          "encore": false,
+          "type": "interlude",
+          "note": "リハ：発明家"
+        },
+        {
+          "order": 3,
+          "encore": false,
+          "songId": "coffee-to-syrup"
+        },
+        {
+          "order": 4,
+          "encore": false,
+          "songId": "itan-na-star"
+        },
+        {
+          "order": 5,
+          "encore": false,
+          "songId": "tell-me-baby"
+        },
+        {
+          "order": 6,
+          "encore": false,
+          "songId": "bad-for-me"
+        },
+        {
+          "order": 7,
+          "encore": false,
+          "songId": "escapade"
+        },
+        {
+          "order": 8,
+          "encore": false,
+          "songId": "no-doubt"
+        },
+        {
+          "order": 9,
+          "encore": false,
+          "songId": "sweet-tweet"
+        }
+      ]
     }
   ]
 }

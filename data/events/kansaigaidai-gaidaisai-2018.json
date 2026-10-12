@@ -56,7 +56,10 @@
           "encore": true,
           "songId": "sweet-tweet"
         }
-      ]
+      ],
+      "weekday": "金",
+      "opensAt": "14:30",
+      "startsAt": "15:30"
     }
   ]
 }

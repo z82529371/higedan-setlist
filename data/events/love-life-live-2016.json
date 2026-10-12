@@ -14,9 +14,38 @@
       "title": "LOVE!LIFE!LIVE! ~ライブ新体験!新しい音楽シーンをココから発信!~",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=65",
+        "https://x.com/kz90210_0612/status/788704248145977345",
         "https://ja.wikipedia.org/wiki/Official%E9%AB%AD%E7%94%B7dism"
       ],
-      "setlist": []
+      "opensAt": "18:30",
+      "startsAt": "19:00",
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "songId": "koi-no-maenarae"
+        },
+        {
+          "order": 2,
+          "encore": false,
+          "songId": "itan-na-star"
+        },
+        {
+          "order": 3,
+          "encore": false,
+          "songId": "coffee-to-syrup"
+        },
+        {
+          "order": 4,
+          "encore": false,
+          "songId": "whats-going-on"
+        },
+        {
+          "order": 5,
+          "encore": false,
+          "songId": "sweet-tweet"
+        }
+      ]
     }
   ]
 }

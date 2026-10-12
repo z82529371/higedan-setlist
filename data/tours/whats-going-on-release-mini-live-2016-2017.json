@@ -18,7 +18,6 @@
         "https://higedan.com/news/3/?page=63",
         "https://ja.wikipedia.org/wiki/Official%E9%AB%AD%E7%94%B7dism#インストアイベント"
       ],
-      "opensAt": "18:30",
       "setlist": [
         {
           "order": 1,
@@ -40,7 +39,8 @@
           "encore": false,
           "songId": "kiiroi-kuruma"
         }
-      ]
+      ],
+      "startsAt": "18:30"
     },
     {
       "id": "whats-going-on-2017-0107-1",
@@ -133,7 +133,8 @@
         "https://higedan.com/news/3/?page=63",
         "https://ja.wikipedia.org/wiki/Official%E9%AB%AD%E7%94%B7dism#インストアイベント"
       ],
-      "setlist": []
+      "setlist": [],
+      "startsAt": "13:00"
     }
   ]
 }

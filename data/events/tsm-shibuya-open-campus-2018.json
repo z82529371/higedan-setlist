@@ -13,10 +13,14 @@
       "prefecture": "東京都",
       "title": "東京スクールオブミュージック専門学校渋谷 オープンキャンパス スペシャルライブ",
       "sourceUrls": [
+        "https://higedan.com/news/3/?page=55",
         "https://ja.wikipedia.org/wiki/Official%E9%AB%AD%E7%94%B7dism",
         "https://higedan.com/"
       ],
-      "setlist": []
+      "setlist": [],
+      "weekday": "土",
+      "opensAt": "17:00",
+      "startsAt": "17:30"
     }
   ]
 }

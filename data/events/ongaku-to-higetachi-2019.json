@@ -13,6 +13,7 @@
       "prefecture": "新潟縣",
       "title": "音楽と髭達2019 -最後の花火-",
       "sourceUrls": [
+        "https://higedan.com/news/3/?page=45",
         "https://www.livefans.jp/events/1128155"
       ],
       "setlist": [
@@ -51,7 +52,10 @@
           "encore": false,
           "songId": "shukumei"
         }
-      ]
+      ],
+      "weekday": "土",
+      "opensAt": "08:30",
+      "startsAt": "11:00"
     }
   ]
 }

@@ -7,15 +7,46 @@
     {
       "id": "689075",
       "date": "2016-12-01",
+      "weekday": "木",
       "city": "水戶",
       "venue": "水戶LIGHT HOUSE",
       "region": "關東",
       "prefecture": "茨城縣",
       "title": "SKY-HI LIVE HOUSE TOUR2016 ～Round A Ground～",
+      "opensAt": "18:30",
+      "startsAt": "19:00",
       "sourceUrls": [
-        "https://www.livefans.jp/events/689075"
+        "https://www.livefans.jp/events/689075",
+        "https://x.com/beiketa/status/804272670455918592"
       ],
-      "setlist": []
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "songId": "sweet-tweet"
+        },
+        {
+          "order": 2,
+          "encore": false,
+          "songId": "itan-na-star"
+        },
+        {
+          "order": 3,
+          "encore": false,
+          "songId": "yugure-zoi",
+          "note": "Acoustic"
+        },
+        {
+          "order": 4,
+          "encore": false,
+          "songId": "zero-no-mama-de-iraterara"
+        },
+        {
+          "order": 5,
+          "encore": false,
+          "songId": "whats-going-on"
+        }
+      ]
     }
   ]
 }

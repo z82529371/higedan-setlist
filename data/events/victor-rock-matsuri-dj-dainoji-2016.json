@@ -13,9 +13,13 @@
       "prefecture": "東京都",
       "title": "ビクターロック祭り 番外編「DJダイノジ『犬とうどんとロック』」",
       "sourceUrls": [
+        "https://higedan.com/news/3/?page=65",
         "https://www.livefans.jp/events/675528"
       ],
-      "setlist": []
+      "setlist": [],
+      "weekday": "木",
+      "opensAt": "15:00",
+      "startsAt": "15:30"
     }
   ]
 }

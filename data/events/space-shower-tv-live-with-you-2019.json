@@ -81,7 +81,10 @@
           "encore": true,
           "songId": "stand-by-you"
         }
-      ]
+      ],
+      "weekday": "火",
+      "opensAt": "18:00",
+      "startsAt": "19:00"
     }
   ]
 }

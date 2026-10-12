@@ -8,6 +8,8 @@
       "id": "report-free-live-2017-0423",
       "date": "2017-04-23",
       "weekday": "日",
+      "opensAt": "13:00",
+      "startsAt": "14:00",
       "city": "東京",
       "venue": "duo MUSIC EXCHANGE",
       "region": "關東",
@@ -15,9 +17,62 @@
       "title": "「レポート」発売記念 FREE LIVE",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=61",
-        "https://ja.wikipedia.org/wiki/Official%E9%AB%AD%E7%94%B7dism#インストアイベント"
+        "https://ja.wikipedia.org/wiki/Official%E9%AB%AD%E7%94%B7dism#インストアイベント",
+        "https://ameblo.jp/tenyo-ru/entry-12270033368.html",
+        "https://www.tfm.co.jp/lock/staff/special/index.php@itemid=9694.html"
       ],
-      "setlist": []
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "songId": "inu-ka-cat-ka-de-shinumade-kenka-shiyou"
+        },
+        {
+          "order": 2,
+          "encore": false,
+          "songId": "ai-nandaga"
+        },
+        {
+          "order": 3,
+          "encore": false,
+          "songId": "itan-na-star"
+        },
+        {
+          "order": 4,
+          "encore": false,
+          "songId": "hajimari-no-asa"
+        },
+        {
+          "order": 5,
+          "encore": false,
+          "songId": "yugure-zoi"
+        },
+        {
+          "order": 6,
+          "encore": false,
+          "songId": "zero-no-mama-de-iraterara"
+        },
+        {
+          "order": 7,
+          "encore": false,
+          "songId": "nichiyoubi-no-love-letter"
+        },
+        {
+          "order": 8,
+          "encore": false,
+          "songId": "coffee-to-syrup"
+        },
+        {
+          "order": 9,
+          "encore": false,
+          "songId": "rolling"
+        },
+        {
+          "order": 10,
+          "encore": false,
+          "songId": "sweet-tweet"
+        }
+      ]
     }
   ]
 }

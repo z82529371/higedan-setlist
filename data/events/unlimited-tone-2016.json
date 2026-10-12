@@ -6,16 +6,19 @@
     {
       "id": "608761",
       "date": "2016-04-07",
+      "weekday": "木",
       "city": "大阪",
       "venue": "Music Club JANUS",
       "region": "關西",
       "prefecture": "大阪府",
       "title": "harmonics",
+      "opensAt": "18:30",
+      "startsAt": "19:00",
       "sourceUrls": [
+        "https://higedan.com/news/3/?page=69",
         "https://www.livefans.jp/events/608761"
       ],
-      "setlist": [],
-      "opensAt": "19:00"
+      "setlist": []
     }
   ]
 }

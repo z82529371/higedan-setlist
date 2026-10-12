@@ -1,6 +1,6 @@
 # 45. 五大演出分類體系與電視／音樂祭解析邊界隔離
 
-* Status: Accepted
+* Status: Superseded by [0056-seven-category-performance-taxonomy.md](0056-seven-category-performance-taxonomy.md) and [0078-eight-category-performance-taxonomy-and-instore-events.md](0078-eight-category-performance-taxonomy-and-instore-events.md) (分類體系擴充為八大分類)
 * Date: 2026-10-02
 * Supersedes: [0033-higedan-only-festival-filter.md](0033-higedan-only-festival-filter.md) (音樂祭過濾部分)
 * Related: [0015-grouped-sub-filter-pill-bars.md](0015-grouped-sub-filter-pill-bars.md), [0016-soundcheck-interlude-and-event-type-classification.md](0016-soundcheck-interlude-and-event-type-classification.md), [0032-cover-title-track.md](0032-cover-title-track.md), [0043-cover-content-rule-and-locked.md](0043-cover-content-rule-and-locked.md)

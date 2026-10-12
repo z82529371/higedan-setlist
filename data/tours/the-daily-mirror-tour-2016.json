@@ -16,7 +16,7 @@
         "https://higedan.com/news/3/?page=66",
         "https://www.livefans.jp/events/635486"
       ],
-      "opensAt": "18:00",
+      "opensAt": "17:30",
       "diff": {
         "skip": [
           1,
@@ -32,7 +32,8 @@
           11
         ]
       },
-      "locked": true
+      "locked": true,
+      "startsAt": "18:00"
     },
     {
       "id": "1943168",
@@ -48,7 +49,9 @@
         "https://www.livefans.jp/events/1943168"
       ],
       "diff": {},
-      "locked": true
+      "locked": true,
+      "opensAt": "17:30",
+      "startsAt": "18:00"
     },
     {
       "id": "727414",
@@ -64,7 +67,9 @@
         "https://www.livefans.jp/events/727414"
       ],
       "diff": {},
-      "locked": true
+      "locked": true,
+      "opensAt": "18:00",
+      "startsAt": "18:30"
     },
     {
       "id": "649475",
@@ -80,7 +85,7 @@
         "https://higedan.com/news/3/?page=66",
         "https://www.livefans.jp/events/649475"
       ],
-      "opensAt": "18:00",
+      "opensAt": "17:30",
       "diff": {
         "skip": [
           6
@@ -116,7 +121,8 @@
           }
         ]
       },
-      "locked": true
+      "locked": true,
+      "startsAt": "18:00"
     }
   ],
   "templateSetlist": [

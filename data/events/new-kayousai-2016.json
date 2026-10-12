@@ -7,15 +7,50 @@
     {
       "id": "691139",
       "date": "2016-08-14",
+      "weekday": "日",
       "city": "東京",
       "venue": "新宿LOFT",
       "region": "關東",
       "prefecture": "東京都",
       "title": "GOOD BYE APRIL presents「ニュー歌謡祭」",
+      "opensAt": "16:00",
+      "startsAt": "16:30",
       "sourceUrls": [
-        "https://www.livefans.jp/events/691139"
+        "https://www.livefans.jp/events/691139",
+        "https://x.com/beiketa/status/764768501923848192"
       ],
-      "setlist": []
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "songId": "coffee-to-syrup"
+        },
+        {
+          "order": 2,
+          "encore": false,
+          "songId": "itan-na-star"
+        },
+        {
+          "order": 3,
+          "encore": false,
+          "songId": "happy-birthday-to-you"
+        },
+        {
+          "order": 4,
+          "encore": false,
+          "songId": "zero-no-mama-de-iraterara"
+        },
+        {
+          "order": 5,
+          "encore": false,
+          "songId": "nichiyoubi-no-love-letter"
+        },
+        {
+          "order": 6,
+          "encore": false,
+          "songId": "clap-clap"
+        }
+      ]
     }
   ]
 }

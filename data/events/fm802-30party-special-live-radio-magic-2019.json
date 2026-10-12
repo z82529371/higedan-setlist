@@ -32,7 +32,10 @@
           "encore": false,
           "songId": "stand-by-you"
         }
-      ]
+      ],
+      "weekday": "日",
+      "opensAt": "16:00",
+      "startsAt": "17:00"
     }
   ]
 }

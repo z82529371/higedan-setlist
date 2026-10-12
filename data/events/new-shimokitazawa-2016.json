@@ -6,12 +6,16 @@
     {
       "id": "new-shimokitazawa-2016-0331",
       "date": "2016-03-31",
+      "weekday": "木",
       "city": "東京",
-      "venue": "下北澤GARDEN",
+      "venue": "下北沢BASEMENT BAR",
       "region": "關東",
       "prefecture": "東京都",
       "title": "ニューシモキタザワ",
+      "opensAt": "19:00",
+      "startsAt": "19:30",
       "sourceUrls": [
+        "https://higedan.com/news/3/?page=68",
         "https://ja.wikipedia.org/wiki/Official%E9%AB%AD%E7%94%B7dism"
       ],
       "setlist": []

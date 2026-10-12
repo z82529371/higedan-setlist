@@ -7,13 +7,17 @@
     {
       "id": "881917",
       "date": "2018-01-19",
+      "weekday": "金",
+      "opensAt": "18:30",
+      "startsAt": "19:00",
       "city": "金澤",
       "venue": "金澤 vanvan V4",
       "region": "中部",
       "prefecture": "石川縣",
       "title": "A FLOOD OF CIRCUS 大巡業 2018",
       "sourceUrls": [
-        "https://www.livefans.jp/events/881917"
+        "https://www.livefans.jp/events/881917",
+        "https://x.com/beiketa/status/954861235324960768"
       ],
       "setlist": [
         {
@@ -57,15 +61,57 @@
     {
       "id": "881919",
       "date": "2018-01-20",
+      "weekday": "土",
+      "opensAt": "17:30",
+      "startsAt": "18:00",
       "city": "新潟",
       "venue": "CLUB RIVERST",
       "region": "中部",
       "prefecture": "新潟縣",
       "title": "A FLOOD OF CIRCUS 大巡業 2018",
       "sourceUrls": [
-        "https://www.livefans.jp/events/881919"
+        "https://www.livefans.jp/events/881919",
+        "https://x.com/beiketa/status/954861235324960768"
       ],
-      "setlist": []
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "songId": "ai-nandaga",
+          "note": "+「世界は君のもの」カバー"
+        },
+        {
+          "order": 2,
+          "encore": false,
+          "songId": "itan-na-star"
+        },
+        {
+          "order": 3,
+          "encore": false,
+          "songId": "coffee-to-syrup"
+        },
+        {
+          "order": 4,
+          "encore": false,
+          "songId": "lady"
+        },
+        {
+          "order": 5,
+          "encore": false,
+          "songId": "whats-going-on",
+          "note": "原定「日曜日のラブレター」，現場劃掉改為點播歌曲「What's Going On?」"
+        },
+        {
+          "order": 6,
+          "encore": false,
+          "songId": "inu-ka-cat-ka-de-shinumade-kenka-shiyou"
+        },
+        {
+          "order": 7,
+          "encore": false,
+          "songId": "sweet-tweet"
+        }
+      ]
     }
   ]
 }

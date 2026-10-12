@@ -7,6 +7,7 @@
     {
       "id": "922224",
       "date": "2018-06-30",
+      "weekday": "土",
       "city": "仙台",
       "venue": "仙台Rensa",
       "region": "東北",
@@ -20,34 +21,48 @@
         {
           "order": 1,
           "encore": false,
-          "songId": "coffee-to-syrup"
+          "type": "interlude",
+          "note": "リハ：愛なんだが"
         },
         {
           "order": 2,
           "encore": false,
-          "songId": "itan-na-star"
+          "type": "interlude",
+          "note": "リハ：発明家"
         },
         {
           "order": 3,
           "encore": false,
-          "songId": "tell-me-baby"
+          "songId": "coffee-to-syrup"
         },
         {
           "order": 4,
           "encore": false,
-          "songId": "escapade"
+          "songId": "itan-na-star"
         },
         {
           "order": 5,
           "encore": false,
-          "songId": "no-doubt"
+          "songId": "tell-me-baby"
         },
         {
           "order": 6,
           "encore": false,
+          "songId": "escapade"
+        },
+        {
+          "order": 7,
+          "encore": false,
+          "songId": "no-doubt"
+        },
+        {
+          "order": 8,
+          "encore": false,
           "songId": "sweet-tweet"
         }
-      ]
+      ],
+      "opensAt": "11:00",
+      "startsAt": "11:30"
     }
   ]
 }
