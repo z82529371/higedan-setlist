@@ -1,5 +1,5 @@
 import { useState, useMemo, useEffect, useRef } from "react";
-import { toPng } from "html-to-image";
+import { exportElementToPng } from "../lib/image-export.js";
 import { MemorialCardModal } from "./MemorialCardModal.jsx";
 import {
   KIND_TAB,
@@ -269,9 +269,11 @@ export function ShowSlip({ ud, showId, onSelectSong, onSelectShow, onSelectVenue
     if (!slipRef.current || isExporting) return;
     setIsExporting(true);
     try {
-      const dataUrl = await toPng(slipRef.current, {
+      const dataUrl = await exportElementToPng(slipRef.current, {
+        width: 540,
         pixelRatio: 2,
-        skipFonts: true,
+        borderRadius: "8px",
+        topPadding: 18,
         filter: (node) => {
           if (node?.classList && node.classList.contains("slip-ignore-export")) {
             return false;
@@ -279,6 +281,7 @@ export function ShowSlip({ ud, showId, onSelectSong, onSelectShow, onSelectVenue
           return true;
         },
       });
+      if (!dataUrl) return;
       const link = document.createElement("a");
       const datePart = (s.date || "").replace(/\./g, "-");
       const venuePart = (s.city || s.venue || "slip").replace(

@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import { toPng } from "html-to-image";
+import { exportElementToPng } from "../lib/image-export.js";
 import { songTitle, showDate, formatShowTime } from "../lib/domain.js";
 
 // Session-level memory for theme choice across shows
@@ -10,7 +10,7 @@ let sessionMemorialTheme = "vintage";
  * 專為 Official 髭男 dism 巡演設計的精良歌單單欄紀念票券預覽與下載視窗
  * - 經典「單欄長條票券」排版，保證收錄全曲 (M1 ~ M20+ 及 安可)
  * - 支援「復古手感紙質」、「經典純白卡」與「暗夜舞台黑金」三種風格切換
- * - 高速 2x 原寸 PNG 匯出，絕不裁切截斷
+ * - 高速 2x 原寸 PNG 匯出，絕不裁切截斷，支援離屏獨立渲染與真實透明圓角
  */
 export function MemorialCardModal({
   isOpen,
@@ -54,29 +54,15 @@ export function MemorialCardModal({
     setIsExporting(true);
 
     try {
-      // 確保獲取無截斷的完整高度與固定標準 440px 票券寬度（不受手機螢幕縮減影響）
-      const exportWidth = 440;
-      const actualHeight = Math.ceil(node.scrollHeight || node.offsetHeight);
-
-      const dataUrl = await toPng(node, {
+      // 離屏獨立渲染：固定 440px 標準寬度，重新排版精準高度，消除外陰影，輸出真透明圓角
+      const dataUrl = await exportElementToPng(node, {
+        width: 440,
         pixelRatio: 2,
-        skipFonts: true,
-        backgroundColor: cardBgColor,
-        width: exportWidth,
-        height: actualHeight,
-        canvasWidth: exportWidth * 2,
-        canvasHeight: actualHeight * 2,
-        style: {
-          width: `${exportWidth}px`,
-          minWidth: `${exportWidth}px`,
-          maxWidth: `${exportWidth}px`,
-          transform: "none",
-          margin: "0",
-          maxHeight: "none",
-          height: `${actualHeight}px`,
-          overflow: "visible",
-        },
+        borderRadius: "16px",
+        cardBackground: cardBgColor,
       });
+
+      if (!dataUrl) return;
 
       const link = document.createElement("a");
       const datePart = (show.date || "").replace(/\./g, "-");
@@ -158,7 +144,7 @@ export function MemorialCardModal({
           >
             {p.cue}
           </span>
-          <span className="font-bold text-xs sm:text-[13px] truncate">
+          <span className="font-bold text-[13px] truncate">
             {title}
           </span>
         </div>
@@ -253,7 +239,7 @@ export function MemorialCardModal({
           {/* ==================== COMMEMORATIVE CARD (SINGLE COLUMN TICKET) ==================== */}
           <div
             ref={cardRef}
-            className={`rounded-xl transition-all duration-300 relative h-auto shrink-0 w-[440px] max-w-full ${
+            className={`rounded-2xl overflow-hidden transition-all duration-300 relative h-auto shrink-0 w-[440px] max-w-full ${
               isVintage
                 ? "bg-[#fcfaf2] text-[#1c1917] border-[2px] border-[#d6cebf] shadow-[0_16px_40px_rgba(0,0,0,0.5)]"
                 : isWhite
@@ -269,7 +255,7 @@ export function MemorialCardModal({
           >
             {/* Top Golden / Tape Bar */}
             <div
-              className={`h-2.5 w-full rounded-t-xl ${
+              className={`h-2.5 w-full ${
                 isVintage
                   ? "bg-[#d49a00]/70 border-b border-[#b38000]/30"
                   : isWhite
@@ -278,7 +264,7 @@ export function MemorialCardModal({
               }`}
             />
 
-            <div className="p-4 sm:p-6 space-y-4">
+            <div className="p-5 space-y-4">
               {/* Card Monogram Header */}
               <div className="flex items-center justify-between pb-2.5 border-b border-dashed border-current/20 gap-2">
                 <div className="flex flex-col min-w-0">
@@ -318,7 +304,7 @@ export function MemorialCardModal({
               {/* Tour & Show Titles */}
               <div className="space-y-1">
                 <h2
-                  className={`text-lg sm:text-xl font-black tracking-tight leading-snug ${
+                  className={`text-xl font-black tracking-tight leading-snug ${
                     isVintage
                       ? "text-[#1c1917]"
                       : isWhite
