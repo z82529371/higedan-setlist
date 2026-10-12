@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
 import { toPng } from "html-to-image";
-import { songTitle, showDate } from "../lib/domain.js";
+import { songTitle, showDate, formatShowTime } from "../lib/domain.js";
 
 // Session-level memory for theme choice across shows
 let sessionMemorialTheme = "vintage";
@@ -99,6 +99,10 @@ export function MemorialCardModal({
       `Official 髭男 dism - ${unit?.title || ""}`,
       `📅 日期：${dateFormatted}`,
       `📍 場地：${show.venue}（${show.city}）`,
+    ];
+    const timeStr = formatShowTime(show);
+    if (timeStr) lines.push(`⏰ 時間：${timeStr}`);
+    lines.push(
       `🎵 全曲收錄：共 ${totalSongsCount} 首（本篇 ${main.length} 首 · 安可 ${enc.length} 首）`,
       "",
       "【本篇 MAIN SET】",
@@ -107,8 +111,8 @@ export function MemorialCardModal({
         const t = it.title ?? songTitle[it.songId] ?? it.note ?? "";
         const noteStr = it.note && it.songId ? ` (${it.note})` : "";
         return `${p.cue} ${t}${noteStr}`;
-      }),
-    ];
+      })
+    );
 
     if (enc.length > 0) {
       lines.push("", "【安可 ENCORE】");
@@ -336,10 +340,10 @@ export function MemorialCardModal({
                   <span className="font-bold">📍 {show.venue}</span>
                   <span className="opacity-40">/</span>
                   <span>{show.city}</span>
-                  {show.opensAt && (
+                  {formatShowTime(show) && (
                     <>
                       <span className="opacity-40">/</span>
-                      <span className="font-mono">開演 {show.opensAt}</span>
+                      <span className="font-mono">⏰ {formatShowTime(show)}</span>
                     </>
                   )}
                 </div>

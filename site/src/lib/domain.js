@@ -25,6 +25,27 @@ export function getSongAlbum(song) {
   return ALBUM_MAP[song.id] ?? "EP / 單曲";
 }
 
+/**
+ * 格式化演出時間（開場／開演時間領域規範）
+ * 1. 雙時間俱備：`17:00 開場 / 18:00 開演`
+ * 2. 僅開演時刻（startsAt 或歷史單一時間 opensAt）：`18:00 開演`
+ * 3. 無時間：`null`
+ */
+export function formatShowTime(show) {
+  if (!show) return null;
+  const { opensAt, startsAt } = show;
+  if (opensAt && startsAt) {
+    return `${opensAt} 開場 / ${startsAt} 開演`;
+  }
+  if (startsAt) {
+    return `${startsAt} 開演`;
+  }
+  if (opensAt) {
+    return `${opensAt} 開演`;
+  }
+  return null;
+}
+
 export function getVenueRegion(v) {
   const r = v.region ?? "";
   const p = v.prefecture ?? "";

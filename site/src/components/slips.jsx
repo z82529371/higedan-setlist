@@ -25,6 +25,7 @@ import {
   showDate,
   getSongAlbum,
   songLiveFansId,
+  formatShowTime,
 } from "../lib/domain.js";
 import { trackKey, trackRoute, routeHash } from "../lib/track.js";
 import { assignCues } from "../lib/resolve.js";
@@ -233,7 +234,8 @@ export function ShowSlip({ ud, showId, onSelectSong, onSelectShow, onSelectVenue
     lines.push(`Official 髭男 dism - ${ud.unit.title}`);
     lines.push(`📅 日期：${showDate(s)}`);
     lines.push(`📍 場地：${s.venue}（${s.city}）`);
-    if (s.opensAt) lines.push(`⏰ 開演：${s.opensAt}`);
+    const timeStr = formatShowTime(s);
+    if (timeStr) lines.push(`⏰ 時間：${timeStr}`);
     lines.push("");
     lines.push("【本篇】");
     main.forEach((p) => {
@@ -296,7 +298,12 @@ export function ShowSlip({ ud, showId, onSelectSong, onSelectShow, onSelectVenue
   const unrel = (i) => songUnreleased.has(i.songId);
   const primaryOf = (i) => primaryKind(getKindArray(i.kind), unrel(i));
 
-  const cueColor = (i) => cueColorFor(primaryOf(i));
+  const cueColor = (i) => {
+    if (!i.songId && (i.title?.includes("未詳") || i.title?.includes("不明"))) {
+      return "text-muted/60 font-normal";
+    }
+    return cueColorFor(primaryOf(i));
+  };
 
   const songWeight = (i) => songWeightFor(primaryOf(i));
 
@@ -344,7 +351,12 @@ export function ShowSlip({ ud, showId, onSelectSong, onSelectShow, onSelectVenue
     const songLine = (it) => {
       const title = it.title ?? songTitle[it.songId];
       if (!it.songId) {
-        return <span className="font-medium text-ink">{title}</span>;
+        const isUnknown = title?.includes("未詳") || title?.includes("不明");
+        return (
+          <span className={isUnknown ? "font-normal italic text-muted" : "font-medium text-ink"}>
+            {title}
+          </span>
+        );
       }
       const link = trackRoute(it, songWeight(it));
       return (
@@ -450,12 +462,10 @@ export function ShowSlip({ ud, showId, onSelectSong, onSelectShow, onSelectVenue
               <span className="text-[13px] text-muted" aria-hidden="true">📅</span>
               {showDate(s)}
             </div>
-            {(s.opensAt || s.startsAt) && (
+            {formatShowTime(s) && (
               <span className="text-[12px] font-medium text-muted">
-                <span aria-hidden="true">⏰</span>
-                {s.opensAt && ` ${s.opensAt} 開場`}
-                {s.opensAt && s.startsAt && " /"}
-                {s.startsAt && ` ${s.startsAt} 開演`}
+                <span aria-hidden="true">⏰ </span>
+                {formatShowTime(s)}
               </span>
             )}
           </div>
@@ -694,6 +704,32 @@ export function ShowSlip({ ud, showId, onSelectSong, onSelectShow, onSelectVenue
               >
                 <span>{showCompare ? "▾ 雙場對比" : "▸ ⚖️ 雙場對比"}</span>
               </button>
+            )}
+          </div>
+
+          {/* Provenance Data Sources (Show-Level Verified Sources) */}
+          <div className="flex flex-wrap items-center gap-1.5 pt-1.5 border-t border-line-soft/60 text-[11px] font-mono">
+            <span className="text-muted font-bold flex items-center gap-1 shrink-0">
+              <span aria-hidden="true">🔍</span> 資料考證來源：
+            </span>
+            {s.sourceUrls && s.sourceUrls.length > 0 ? (
+              s.sourceUrls.map((url, idx) => (
+                <a
+                  key={idx}
+                  href={url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 rounded px-2 py-0.5 bg-paper text-ink border border-line-soft hover:border-ink hover:bg-band hover:text-band-ink transition-colors font-bold cursor-pointer"
+                  title={`開啟一手來源：${url}`}
+                >
+                  <span>🔗 {getSourceLabel(url)}</span>
+                  <span className="text-[10px] opacity-60" aria-hidden="true">↗</span>
+                </a>
+              ))
+            ) : (
+              <span className="inline-flex items-center gap-1 rounded px-2 py-0.5 bg-paper text-muted border border-line-soft font-medium">
+                LiveFans 公開檔案庫查證
+              </span>
             )}
           </div>
 
@@ -2446,9 +2482,9 @@ export function VenueSlip({ venueName, globalVenueShows, unitData, onSelectShow,
                                 <span className="font-mono text-[13px] font-bold text-ink group-hover:text-pool group-hover:underline">
                                   📅 {showDate(show)}
                                 </span>
-                                {show?.opensAt && (
+                                {formatShowTime(show) && (
                                   <span className="font-mono text-[11px] text-muted">
-                                    ⏰ {show.opensAt} 開演
+                                    ⏰ {formatShowTime(show)}
                                   </span>
                                 )}
                               </div>
