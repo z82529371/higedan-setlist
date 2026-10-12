@@ -28,11 +28,10 @@
 - 其他外部域名：自動提取主機名（例如 `hostname`）並格式化為 **`🔗 {domain} 來源紀錄`**。
 - 支援一場多來源：若一場演出並存 LiveFans 與 X 連結，依序並列渲染，不再僅截取第 0 個網址。
 
-### 2. 企劃層級動態出處宣告（Unit-Level Source Summary）
-在 `site/src/App.jsx` 頂部狀態列（Top Banner）與頁尾宣告（Footer）中：
-- 遍歷當前活動或巡演所有場次之 `sourceUrls`，聚合所有來源管道名稱集合（`Set`）。
-- 若全場來自 X，標記為 `資料來源 X`。
-- 若由 LiveFans 與 X 共同組成，標記為 `資料來源 LiveFans · X`。
+### 2. 企劃層級與單據工具出處宣告（Unit-Level & More Tools Provenance）
+- **頂部 Header 釋放空間**：頂部吸頂狀態列徹底拔除來源文字，專注展示場次與歌曲計數，徹底消除頂部視覺擁擠。
+- **票券「更多工具」收納一手來源**：在 `ShowSlip` 之「🛠️ 更多工具 ▾」面板中設置專屬「資料考證來源」標籤列，動態列出該場次的所有外部查證連結（官方公告、X 貼文、LiveFans），支援一鍵開新分頁直達原始網址。
+- **頁尾文獻宣告**：在頁尾完整保留巡演整體多渠道來源宣告。
 
 ### 3. 首例落地：RKB廣播 百道濱夏日音樂祭 2015
 收錄 `momochihama-summer-festa-2015.json`（2015-07-18），其 `sourceUrls` 指向官方推文 `https://x.com/officialhige/status/622325978291814400`，票券即刻動態呈現 `X 來源紀錄`。

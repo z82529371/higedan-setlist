@@ -4,10 +4,10 @@
 
 ---
 
-## 決策總覽清單（共 78 篇）
+## 決策總覽清單（共 93 篇）
 
 > [!NOTE]
-> **編號跳號說明**：本目錄編號自 ADR-0001 起至 ADR-0083 止。其中 ADR-0063、ADR-0064、ADR-0065、ADR-0068、ADR-0069 共 5 篇為早期介面排版草案，後續已被 ADR-0070 單欄聚焦架構完整吸收與替代，故無獨立保留歷史檔案；實體決策文件共計 78 篇。
+> **編號跳號說明**：本目錄編號自 ADR-0001 起至 ADR-0098 止。其中 ADR-0063、ADR-0064、ADR-0065、ADR-0068、ADR-0069 共 5 篇為早期介面排版草案，後續已被 ADR-0070 單欄聚焦架構完整吸收與替代，故無獨立保留歷史檔案；實體決策文件共計 93 篇。
 
 | 決策標題 | 狀態 | 日期 |
 | :--- | :---: | :---: |
@@ -100,4 +100,8 @@
 | [ADR-0092: 暖米白原色卡紙全面替代純白與零刺眼白底決策 (Warm Ivory Cardstock and Zero Pure White Architecture)](0092-warm-ivory-cardstock-and-zero-pure-white.md) | 已廢止 (Superseded) | 前景卡色已被 ADR-0094（柔暖牛奶白 #f8f7f4）替代 |
 | [ADR-0093: 日系手帳同色卡紙純粹化與背景格線層級隔離架構 (Unified Notebook Cardstock and Background Stacking Context Architecture)](0093-unified-notebook-cardstock-and-stacking-context.md) | 部分已被替代 (Partially Superseded) | 背景格線層級隔離保留；卡色已被 ADR-0094（柔暖牛奶白 #f8f7f4）替代 |
 | [ADR-0094: 日系柔暖牛奶白卡紙與實體對比階梯決策 (Soft Milk White Cardstock and Physical Contrast Hierarchy Architecture)](0094-soft-milk-white-cardstock-and-contrast-hierarchy.md) | 已採納 (Accepted) | 鎖定 #f8f7f4 柔暖牛奶白，杜絕 #ffffff 死白刺眼眩光，建立清晰實體票券紙張對比階梯 |
+| [ADR-0095: 純淨聚光燈首頁門面與雙模檔案庫檢索架構 (Spotlight Minimalist Landing Page and Dual-Mode Architecture)](0095-spotlight-minimalist-landing-page-and-dual-mode-architecture.md) | 已採納 (Accepted) | 建立純淨留白之聚光燈首頁門面，結合雙模切換、深層連結穿透與緊湊檔案庫 AppBar |
+| [ADR-0096: 日期智能檢索、日曆懸浮視窗與日期有場次受限交互規範 (Date Search and Calendar Modal Architecture)](0096-date-search-and-calendar-modal-architecture.md) | 已採納 (Accepted) | 支援多種日期格式全域搜尋直達場次，並提供有場次才可點選的專屬演出日曆懸浮視窗 |
+| [ADR-0097: 演出時間領域模型與開場開演雙時制對齊決策 (Performance Time Domain Model and Dual-Time Alignment)](0097-performance-time-domain-model-and-dual-time-alignment.md) | 已採納 (Accepted) | 統一雙時間與單時間開場開演領域模型（formatShowTime），消弭 320 場歷史單時誤標開場之歧義 |
+| [ADR-0098: 歷史缺漏歌單佔位曲目規範與雙維度審查索引架構 (Placeholder Track Specification and Dual Missing Data Audit Architecture)](0098-placeholder-track-specification-and-missing-data-audit-architecture.md) | 已採納 (Accepted) | 確立曲序缺漏以（曲目未詳）客觀佔位保留時序，並建立全庫 155 場缺歌單與 207 場缺時間之審查索引清單 |
 
