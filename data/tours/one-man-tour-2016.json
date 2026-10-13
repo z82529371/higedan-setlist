@@ -13,7 +13,8 @@
       "title": "Official髭男dism one-man tour 2016",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=64",
-        "https://www.livefans.jp/events/711143"
+        "https://www.livefans.jp/events/711143",
+        "https://higedan-setlist.net/live/2016-11-20/"
       ],
       "opensAt": "18:00",
       "diff": {
@@ -50,7 +51,8 @@
       "title": "Official髭男dism one-man tour 2016",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=64",
-        "https://www.livefans.jp/events/706768"
+        "https://www.livefans.jp/events/706768",
+        "https://higedan-setlist.net/live/2016-11-23/"
       ],
       "opensAt": "18:00",
       "diff": {
@@ -87,7 +89,9 @@
       "title": "Official髭男dism one-man tour 2016",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=64",
-        "https://www.livefans.jp/events/703936"
+        "https://www.livefans.jp/events/703936",
+        "https://diskgarage.com/digaonline/liverepo/20655",
+        "https://higedan-setlist.net/live/2016-11-26/"
       ],
       "opensAt": "18:00",
       "diff": {},
@@ -98,8 +102,7 @@
     {
       "order": 1,
       "encore": false,
-      "songId": "yugure-zoi",
-      "note": "Short ver"
+      "songId": "koi-no-maenarae"
     },
     {
       "order": 2,
@@ -109,7 +112,7 @@
     {
       "order": 3,
       "encore": false,
-      "songId": "mikanseinamamade"
+      "songId": "itan-na-star"
     },
     {
       "order": 4,
@@ -119,12 +122,12 @@
     {
       "order": 5,
       "encore": false,
-      "songId": "itan-na-star"
+      "songId": "mikanseinamamade"
     },
     {
       "order": 6,
       "encore": false,
-      "songId": "darin"
+      "songId": "zero-no-mama-de-iraterara"
     },
     {
       "order": 7,
@@ -134,12 +137,13 @@
     {
       "order": 8,
       "encore": false,
-      "songId": "zero-no-mama-de-iraterara"
+      "songId": "darin"
     },
     {
       "order": 9,
       "encore": false,
-      "songId": "koi-no-maenarae"
+      "songId": "yugure-zoi",
+      "note": "アコースティック編成のショートバージョン"
     },
     {
       "order": 10,
@@ -162,7 +166,8 @@
     {
       "order": 12,
       "encore": false,
-      "songId": "happy-birthday-to-you"
+      "songId": "happy-birthday-to-you",
+      "note": "アコースティックコーナー"
     },
     {
       "order": 13,
@@ -188,7 +193,7 @@
       "order": 17,
       "encore": true,
       "title": "What's Going On? [Marvin Gaye]",
-      "note": "Mash-up ver"
+      "note": "Mash-up ver（楢崎誠サックス演奏）"
     },
     {
       "order": 18,
@@ -196,5 +201,5 @@
       "songId": "kiiroi-kuruma"
     }
   ],
-  "templateBasis": "以東京代官山LOOP場（全巡演唯一完整記錄場次）為基準模板；名古屋與大阪無公開曲目紀錄保持無歌單存根"
+  "templateBasis": "以東京代官山LOOP場（全巡演唯一完整記錄場次，來源：DI:GA ONLINE 現場報導與 higedan-setlist.net）為基準模板；名古屋與大阪無公開曲目紀錄保持無歌單存根"
 }
