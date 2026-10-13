@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { exportElementToPng } from "../lib/image-export.js";
 import { songTitle, showDate, formatShowTime } from "../lib/domain.js";
 
@@ -7,10 +7,11 @@ let sessionMemorialTheme = "vintage";
 
 /**
  * MemorialCardModal
- * 專為 Official 髭男 dism 巡演設計的精良歌單單欄紀念票券預覽與下載視窗
+ * 專為 Official 髭男 dism 巡演設計的精良歌單單欄紀念票券預覽視窗
  * - 經典「單欄長條票券」排版，保證收錄全曲 (M1 ~ M20+ 及 安可)
  * - 支援「復古手感紙質」、「經典純白卡」與「暗夜舞台黑金」三種風格切換
- * - 高速 2x 原寸 PNG 匯出，絕不裁切截斷，支援離屏獨立渲染與真實透明圓角
+ * - 開窗即時 DOM 預覽零延遲，背景自動非同步產出 2x 高清真圖片覆蓋置頂
+ * - 支援手機長按直接存入相簿（Photos）與電腦右鍵另存圖片，無生硬下載按鈕
  */
 export function MemorialCardModal({
   isOpen,
@@ -23,7 +24,8 @@ export function MemorialCardModal({
   totalShows = 1,
 }) {
   const [theme, setTheme] = useState(sessionMemorialTheme); // 'vintage' | 'white' | 'noir'
-  const [isExporting, setIsExporting] = useState(false);
+  const [imageUrls, setImageUrls] = useState({}); // { [`${showId}-${theme}`]: dataUrl }
+  const [isGenerating, setIsGenerating] = useState(false);
   const [copiedText, setCopiedText] = useState(false);
   const cardRef = useRef(null);
 
@@ -31,6 +33,61 @@ export function MemorialCardModal({
     sessionMemorialTheme = newTheme;
     setTheme(newTheme);
   };
+
+  const isVintage = theme === "vintage";
+  const isWhite = theme === "white";
+  const isNoir = theme === "noir";
+
+  const cardBgColor = isVintage ? "#fcfaf2" : isWhite ? "#ffffff" : "#111319";
+
+  const showKey = show?.id || "show";
+  const currentImageKey = `${showKey}-${theme}`;
+  const currentImageUrl = imageUrls[currentImageKey];
+
+  useEffect(() => {
+    if (!isOpen || !show || currentImageUrl) return;
+
+    let isMounted = true;
+    setIsGenerating(true);
+
+    const generateImage = async () => {
+      // 離屏排版計算前等待瀏覽器完成 DOM 渲染幀
+      await new Promise((resolve) => requestAnimationFrame(resolve));
+      const node = cardRef.current;
+      if (!node) {
+        if (isMounted) setIsGenerating(false);
+        return;
+      }
+
+      try {
+        const dataUrl = await exportElementToPng(node, {
+          width: 440,
+          pixelRatio: 2,
+          borderRadius: "16px",
+          cardBackground: cardBgColor,
+        });
+
+        if (isMounted && dataUrl) {
+          setImageUrls((prev) => ({
+            ...prev,
+            [currentImageKey]: dataUrl,
+          }));
+        }
+      } catch (err) {
+        console.error("生成紀念小卡圖片失敗:", err);
+      } finally {
+        if (isMounted) {
+          setIsGenerating(false);
+        }
+      }
+    };
+
+    generateImage();
+
+    return () => {
+      isMounted = false;
+    };
+  }, [isOpen, show, showKey, theme, currentImageKey, cardBgColor, currentImageUrl]);
 
   if (!isOpen || !show) return null;
 
@@ -41,44 +98,6 @@ export function MemorialCardModal({
     : (unit?.type || "專場演出");
 
   const totalSongsCount = main.length + enc.length;
-
-  const isVintage = theme === "vintage";
-  const isWhite = theme === "white";
-  const isNoir = theme === "noir";
-
-  const cardBgColor = isVintage ? "#fcfaf2" : isWhite ? "#ffffff" : "#111319";
-
-  const handleDownload = async () => {
-    const node = cardRef.current;
-    if (!node || isExporting) return;
-    setIsExporting(true);
-
-    try {
-      // 離屏獨立渲染：固定 440px 標準寬度，重新排版精準高度，消除外陰影，輸出真透明圓角
-      const dataUrl = await exportElementToPng(node, {
-        width: 440,
-        pixelRatio: 2,
-        borderRadius: "16px",
-        cardBackground: cardBgColor,
-      });
-
-      if (!dataUrl) return;
-
-      const link = document.createElement("a");
-      const datePart = (show.date || "").replace(/\./g, "-");
-      const venuePart = (show.city || show.venue || "slip").replace(
-        /[^\w\u4e00-\u9fa5\u3040-\u30ff]/g,
-        "_"
-      );
-      link.download = `higedan-memorial-setlist-${datePart}-${venuePart}.png`;
-      link.href = dataUrl;
-      link.click();
-    } catch (err) {
-      console.error("下載紀念卡失敗:", err);
-    } finally {
-      setIsExporting(false);
-    }
-  };
 
   const handleCopyText = () => {
     const lines = [
@@ -236,204 +255,216 @@ export function MemorialCardModal({
 
         {/* Card Preview Scroll Area */}
         <div className="flex-1 overflow-y-auto p-3 sm:p-5 pb-8 sm:pb-12 flex justify-center items-start bg-[#0d0e14]/75">
-          {/* ==================== COMMEMORATIVE CARD (SINGLE COLUMN TICKET) ==================== */}
-          <div
-            ref={cardRef}
-            className={`rounded-2xl overflow-hidden transition-all duration-300 relative h-auto shrink-0 w-[440px] max-w-full ${
-              isVintage
-                ? "bg-[#fcfaf2] text-[#1c1917] border-[2px] border-[#d6cebf] shadow-[0_16px_40px_rgba(0,0,0,0.5)]"
-                : isWhite
-                ? "bg-white text-[#111827] border-[2px] border-[#d1d5db] shadow-[0_16px_40px_rgba(0,0,0,0.5)]"
-                : "bg-[#111319] text-[#f4f4f5] border-[2px] border-[#2e3444] shadow-[0_16px_40px_rgba(0,0,0,0.7)]"
-            }`}
-            style={{
-              backgroundColor: cardBgColor,
-              minHeight: "fit-content",
-              fontFamily:
-                '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans JP", sans-serif',
-            }}
-          >
-            {/* Top Golden / Tape Bar */}
+          {/* Card Host Container with Seamless Double-Layer */}
+          <div className="relative shrink-0 w-[440px] max-w-full">
+            {/* ==================== COMMEMORATIVE CARD (SINGLE COLUMN TICKET) ==================== */}
             <div
-              className={`h-2.5 w-full ${
+              ref={cardRef}
+              className={`rounded-2xl overflow-hidden transition-all duration-300 relative h-auto shrink-0 w-full ${
                 isVintage
-                  ? "bg-[#d49a00]/70 border-b border-[#b38000]/30"
+                  ? "bg-[#fcfaf2] text-[#1c1917] border-[2px] border-[#d6cebf] shadow-[0_16px_40px_rgba(0,0,0,0.5)]"
                   : isWhite
-                  ? "bg-[#d19f00] border-b border-[#b38000]/30"
-                  : "bg-gradient-to-r from-[#d49a00] via-[#f59e0b] to-[#d49a00]"
+                  ? "bg-white text-[#111827] border-[2px] border-[#d1d5db] shadow-[0_16px_40px_rgba(0,0,0,0.5)]"
+                  : "bg-[#111319] text-[#f4f4f5] border-[2px] border-[#2e3444] shadow-[0_16px_40px_rgba(0,0,0,0.7)]"
               }`}
-            />
+              style={{
+                backgroundColor: cardBgColor,
+                minHeight: "fit-content",
+                fontFamily:
+                  '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans JP", sans-serif',
+              }}
+            >
+              {/* Top Golden / Tape Bar */}
+              <div
+                className={`h-2.5 w-full ${
+                  isVintage
+                    ? "bg-[#d49a00]/70 border-b border-[#b38000]/30"
+                    : isWhite
+                    ? "bg-[#d19f00] border-b border-[#b38000]/30"
+                    : "bg-gradient-to-r from-[#d49a00] via-[#f59e0b] to-[#d49a00]"
+                }`}
+              />
 
-            <div className="p-5 space-y-4">
-              {/* Card Monogram Header */}
-              <div className="flex items-center justify-between pb-2.5 border-b border-dashed border-current/20 gap-2">
-                <div className="flex flex-col min-w-0">
-                  <span className="font-mono text-[10px] tracking-[0.2em] font-extrabold uppercase opacity-65 truncate">
-                    OFFICIAL HIGEDAN DISM
-                  </span>
-                  <span className="font-mono text-[9px] tracking-wide uppercase opacity-50 truncate">
-                    LIVE ARCHIVE
-                  </span>
+              <div className="p-5 space-y-4">
+                {/* Card Monogram Header */}
+                <div className="flex items-center justify-between pb-2.5 border-b border-dashed border-current/20 gap-2">
+                  <div className="flex flex-col min-w-0">
+                    <span className="font-mono text-[10px] tracking-[0.2em] font-extrabold uppercase opacity-65 truncate">
+                      OFFICIAL HIGEDAN DISM
+                    </span>
+                    <span className="font-mono text-[9px] tracking-wide uppercase opacity-50 truncate">
+                      LIVE ARCHIVE
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-1.5 shrink-0">
+                    <span
+                      className={`font-mono text-[10px] px-2 py-0.5 rounded font-bold border whitespace-nowrap shrink-0 ${
+                        isVintage
+                          ? "bg-[#f5ebd2] text-[#78350f] border-[#d6cebf]"
+                          : isWhite
+                          ? "bg-[#f3f4f6] text-[#1f2937] border-[#e5e7eb]"
+                          : "bg-[#1c202d] text-[#fbbf24] border-[#374151]"
+                      }`}
+                    >
+                      {showOrderText}
+                    </span>
+                    <span
+                      className={`font-mono text-[10px] px-1.5 py-0.5 rounded font-bold whitespace-nowrap shrink-0 ${
+                        isVintage
+                          ? "bg-[#e7dec6] text-[#44403c]"
+                          : isWhite
+                          ? "bg-[#f3f4f6] text-[#4b5563]"
+                          : "bg-[#252a36] text-[#9ca3af]"
+                      }`}
+                    >
+                      全 {totalSongsCount} 首
+                    </span>
+                  </div>
                 </div>
-                <div className="flex items-center gap-1.5 shrink-0">
-                  <span
-                    className={`font-mono text-[10px] px-2 py-0.5 rounded font-bold border whitespace-nowrap shrink-0 ${
-                      isVintage
-                        ? "bg-[#f5ebd2] text-[#78350f] border-[#d6cebf]"
-                        : isWhite
-                        ? "bg-[#f3f4f6] text-[#1f2937] border-[#e5e7eb]"
-                        : "bg-[#1c202d] text-[#fbbf24] border-[#374151]"
-                    }`}
-                  >
-                    {showOrderText}
-                  </span>
-                  <span
-                    className={`font-mono text-[10px] px-1.5 py-0.5 rounded font-bold whitespace-nowrap shrink-0 ${
-                      isVintage
-                        ? "bg-[#e7dec6] text-[#44403c]"
-                        : isWhite
-                        ? "bg-[#f3f4f6] text-[#4b5563]"
-                        : "bg-[#252a36] text-[#9ca3af]"
-                    }`}
-                  >
-                    全 {totalSongsCount} 首
-                  </span>
-                </div>
-              </div>
 
-              {/* Tour & Show Titles */}
-              <div className="space-y-1">
-                <h2
-                  className={`text-xl font-black tracking-tight leading-snug ${
-                    isVintage
-                      ? "text-[#1c1917]"
-                      : isWhite
-                      ? "text-[#111827]"
-                      : "text-[#ffffff]"
-                  }`}
-                >
-                  {unit?.title || "Live Performance"}
-                </h2>
-                <div
-                  className={`text-xs font-medium flex flex-wrap items-center gap-x-2 gap-y-0.5 pt-0.5 ${
-                    isVintage
-                      ? "text-[#57534e]"
-                      : isWhite
-                      ? "text-[#4b5563]"
-                      : "text-[#9ca3af]"
-                  }`}
-                >
-                  <span className="font-bold">📍 {show.venue}</span>
-                  <span className="opacity-40">/</span>
-                  <span>{show.city}</span>
-                  {formatShowTime(show) && (
-                    <>
-                      <span className="opacity-40">/</span>
-                      <span className="font-mono">⏰ {formatShowTime(show)}</span>
-                    </>
-                  )}
-                </div>
-                <div className="font-mono text-xs font-bold text-[#d19f00] pt-0.5">
-                  📅 {dateFormatted}
-                </div>
-              </div>
-
-              {/* Perforation Tear Line with Notches */}
-              <div className="relative py-0.5">
-                <div className="border-b-2 border-dashed border-current/20" />
-              </div>
-
-              {/* ================= SETLIST CONTENT (SINGLE COLUMN SLIP) ================= */}
-              <div className="space-y-3">
+                {/* Tour & Show Titles */}
                 <div className="space-y-1">
-                  <div className="flex items-center justify-between font-mono text-[11px] font-extrabold tracking-wider uppercase opacity-75">
-                    <span>◆ MAIN SETLIST // 本篇演奏曲目</span>
-                    <span className="text-[10px] tabular-nums">{main.length} SONGS</span>
+                  <h2
+                    className={`text-xl font-black tracking-tight leading-snug ${
+                      isVintage
+                        ? "text-[#1c1917]"
+                        : isWhite
+                        ? "text-[#111827]"
+                        : "text-[#ffffff]"
+                    }`}
+                  >
+                    {unit?.title || "Live Performance"}
+                  </h2>
+                  <div
+                    className={`text-xs font-medium flex flex-wrap items-center gap-x-2 gap-y-0.5 pt-0.5 ${
+                      isVintage
+                        ? "text-[#57534e]"
+                        : isWhite
+                        ? "text-[#4b5563]"
+                        : "text-[#9ca3af]"
+                    }`}
+                  >
+                    <span className="font-bold">📍 {show.venue}</span>
+                    <span className="opacity-40">/</span>
+                    <span>{show.city}</span>
+                    {formatShowTime(show) && (
+                      <>
+                        <span className="opacity-40">/</span>
+                        <span className="font-mono">⏰ {formatShowTime(show)}</span>
+                      </>
+                    )}
                   </div>
-                  <div className="flex flex-col">
-                    {main.map((p, idx) => renderTrackRow(p, idx))}
+                  <div className="font-mono text-xs font-bold text-[#d19f00] pt-0.5">
+                    📅 {dateFormatted}
                   </div>
                 </div>
 
-                {/* Encore Section */}
-                {enc.length > 0 && (
-                  <div
-                    className={`rounded-lg p-3 space-y-1 border ${
-                      isVintage
-                        ? "bg-[#f4eedf] border-[#ded4bf]"
-                        : isWhite
-                        ? "bg-[#f9fafb] border-[#e5e7eb]"
-                        : "bg-[#181a23] border-[#2a2f3f]"
-                    }`}
-                  >
-                    <div className="flex items-center justify-between font-mono text-[11px] font-extrabold tracking-wider uppercase opacity-80">
-                      <span className="text-[#d19f00]">◆ ENCORE // 安可曲目</span>
-                      <span className="text-[10px] tabular-nums">{enc.length} SONGS</span>
+                {/* Perforation Tear Line with Notches */}
+                <div className="relative py-0.5">
+                  <div className="border-b-2 border-dashed border-current/20" />
+                </div>
+
+                {/* ================= SETLIST CONTENT (SINGLE COLUMN SLIP) ================= */}
+                <div className="space-y-3">
+                  <div className="space-y-1">
+                    <div className="flex items-center justify-between font-mono text-[11px] font-extrabold tracking-wider uppercase opacity-75">
+                      <span>◆ MAIN SETLIST // 本篇演奏曲目</span>
+                      <span className="text-[10px] tabular-nums">{main.length} SONGS</span>
                     </div>
                     <div className="flex flex-col">
-                      {enc.map((p, idx) => renderTrackRow(p, idx, true))}
+                      {main.map((p, idx) => renderTrackRow(p, idx))}
                     </div>
                   </div>
-                )}
-              </div>
 
-              {/* Commemorative Footer Stamp & Barcode */}
-              <div className="pt-3 border-t border-current/20 flex items-end justify-between gap-3">
-                <div className="space-y-1">
-                  {/* Decorative Barcode */}
-                  <div className="font-mono text-[11px] tracking-[0.2em] font-extrabold opacity-70 select-none">
-                    ||| | |||| | ||| |||| | ||||| | |
-                  </div>
-                  <div className="font-mono text-[9px] opacity-60">
-                    ARCHIVE ID: HGDN-{show.id}
-                  </div>
-                  <div className="text-[9px] opacity-50">
-                    藤原聡 · 小笹大輔 · 楢﨑誠 · 松浦匡希
-                  </div>
+                  {/* Encore Section */}
+                  {enc.length > 0 && (
+                    <div
+                      className={`rounded-lg p-3 space-y-1 border ${
+                        isVintage
+                          ? "bg-[#f4eedf] border-[#ded4bf]"
+                          : isWhite
+                          ? "bg-[#f9fafb] border-[#e5e7eb]"
+                          : "bg-[#181a23] border-[#2a2f3f]"
+                      }`}
+                    >
+                      <div className="flex items-center justify-between font-mono text-[11px] font-extrabold tracking-wider uppercase opacity-80">
+                        <span className="text-[#d19f00]">◆ ENCORE // 安可曲目</span>
+                        <span className="text-[10px] tabular-nums">{enc.length} SONGS</span>
+                      </div>
+                      <div className="flex flex-col">
+                        {enc.map((p, idx) => renderTrackRow(p, idx, true))}
+                      </div>
+                    </div>
+                  )}
                 </div>
 
-                {/* Vermilion Stamp (朱印風格) */}
-                <div
-                  className={`w-14 h-14 rounded-full border-2 flex flex-col items-center justify-center p-1 text-center font-bold shrink-0 select-none ${
-                    isVintage
-                      ? "border-[#b91c1c] text-[#b91c1c] rotate-[-8deg]"
-                      : isWhite
-                      ? "border-[#dc2626] text-[#dc2626] rotate-[-8deg]"
-                      : "border-[#d49a00] text-[#d49a00] rotate-[-8deg]"
-                  }`}
-                >
-                  <span className="text-[8px] tracking-tighter leading-tight">HIGEDAN</span>
-                  <span className="text-[10px] leading-tight font-black">現場</span>
-                  <span className="text-[7px] tracking-widest leading-none">ARCHIVE</span>
+                {/* Commemorative Footer Stamp & Barcode */}
+                <div className="pt-3 border-t border-current/20 flex items-end justify-between gap-3">
+                  <div className="space-y-1">
+                    {/* Decorative Barcode */}
+                    <div className="font-mono text-[11px] tracking-[0.2em] font-extrabold opacity-70 select-none">
+                      ||| | |||| | ||| |||| | ||||| | |
+                    </div>
+                    <div className="font-mono text-[9px] opacity-60">
+                      ARCHIVE ID: HGDN-{show.id}
+                    </div>
+                    <div className="text-[9px] opacity-50">
+                      藤原聡 · 小笹大輔 · 楢﨑誠 · 松浦匡希
+                    </div>
+                  </div>
+
+                  {/* Vermilion Stamp (朱印風格) */}
+                  <div
+                    className={`w-14 h-14 rounded-full border-2 flex flex-col items-center justify-center p-1 text-center font-bold shrink-0 select-none ${
+                      isVintage
+                        ? "border-[#b91c1c] text-[#b91c1c] rotate-[-8deg]"
+                        : isWhite
+                        ? "border-[#dc2626] text-[#dc2626] rotate-[-8deg]"
+                        : "border-[#d49a00] text-[#d49a00] rotate-[-8deg]"
+                    }`}
+                  >
+                    <span className="text-[8px] tracking-tighter leading-tight">HIGEDAN</span>
+                    <span className="text-[10px] leading-tight font-black">現場</span>
+                    <span className="text-[7px] tracking-widest leading-none">ARCHIVE</span>
+                  </div>
                 </div>
               </div>
             </div>
+
+            {/* Seamless Real <img> overlay for native right-click / long-press saving */}
+            {currentImageUrl && (
+              <img
+                src={currentImageUrl}
+                alt={`Official 髭男 dism 巡演歌單紀念票券 - ${unit?.title || ""} ${dateFormatted}`}
+                className="absolute inset-0 w-full h-full rounded-2xl block object-top cursor-default z-10"
+                style={{
+                  WebkitTouchCallout: "default",
+                  userSelect: "auto",
+                  pointerEvents: "auto",
+                }}
+              />
+            )}
           </div>
         </div>
 
         {/* Modal Bottom Action Controls */}
         <div className="p-3 sm:p-4 bg-[#171922] border-t border-[#2d3446] flex flex-wrap items-center justify-between gap-2.5">
-          <div className="text-xs text-[#9ca3af] flex items-center gap-1.5 font-mono">
-            <span>✨ 全 {totalSongsCount} 首完整收錄</span>
-            <span className="opacity-40">·</span>
-            <span>2x 高解析無損 PNG 匯出</span>
+          <div className="flex items-center gap-2 text-xs text-[#d49a00] bg-[#d49a00]/10 border border-[#d49a00]/30 px-3 py-1.5 rounded-lg font-mono">
+            <span aria-hidden="true">{isGenerating ? "⏳" : "💡"}</span>
+            <span className="font-bold">
+              {isGenerating
+                ? "高清紀念卡生成中..."
+                : "手機長按小卡存入相簿 · 電腦點右鍵另存圖片"}
+            </span>
           </div>
 
-          <div className="flex items-center gap-2 ml-auto w-full sm:w-auto">
+          <div className="flex items-center gap-2 ml-auto">
             <button
               type="button"
               onClick={handleCopyText}
-              className="flex-1 sm:flex-initial px-3 py-2 rounded-lg bg-[#242936] text-[#e2e8f0] text-xs font-mono font-bold hover:bg-[#32394a] transition-all cursor-pointer"
+              className="px-3.5 py-2 rounded-lg bg-[#242936] text-[#e2e8f0] text-xs font-mono font-bold hover:bg-[#32394a] transition-all cursor-pointer inline-flex items-center gap-1.5 active:scale-[0.98]"
             >
-              {copiedText ? "✓ 已複製歌單" : "📋 複製歌單文字"}
-            </button>
-            <button
-              type="button"
-              onClick={handleDownload}
-              disabled={isExporting}
-              className="flex-1 sm:flex-initial px-4 py-2 rounded-lg bg-[#d49a00] text-[#111319] text-xs font-bold hover:bg-[#eab308] shadow-md transition-all cursor-pointer disabled:opacity-50 inline-flex items-center justify-center gap-1.5"
-            >
-              <span>{isExporting ? "⏳ 圖片生成中..." : "💾 下載原寸圖片 (PNG)"}</span>
+              <span>{copiedText ? "✓ 已複製歌單" : "📋 複製歌單文字"}</span>
             </button>
           </div>
         </div>

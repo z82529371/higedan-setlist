@@ -629,7 +629,7 @@ export function ShowSlip({ ud, showId, onSelectSong, onSelectShow, onSelectVenue
                 type="button"
                 onClick={() => setShowMemorialModal(true)}
                 className="inline-flex items-center justify-center gap-1.5 rounded bg-band px-3 py-1.5 text-[11px] font-mono font-bold text-band-ink border border-ink/40 shadow-xs hover:brightness-105 active:scale-[0.98] transition-all cursor-pointer select-none"
-                title="預覽並自訂下載本場巡演歌單紀念小卡"
+                title="預覽並自訂儲存本場巡演歌單紀念小卡"
               >
                 <span aria-hidden="true">📸</span>
                 <span>產生紀念小卡</span>
