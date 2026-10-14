@@ -1,7 +1,6 @@
 import { useState, useMemo } from "react";
 import {
   SETLIST_ITEM,
-  CUE_NO,
   SETLIST_SONG,
   SLIP_ARTICLE,
   SLIP_TAPE,
@@ -42,6 +41,11 @@ export function TourSlip({
   const [expandedTourId, setExpandedTourId] = useState(
     initialItineraryExpanded ? (statsResult?.tour?.id ?? null) : null
   );
+
+  const [isEncoreCollapsed, setIsEncoreCollapsed] = useState(false);
+  const [isRotatingCollapsed, setIsRotatingCollapsed] = useState(false);
+  const [isSurpriseCollapsed, setIsSurpriseCollapsed] = useState(false);
+  const [isInterludesCollapsed, setIsInterludesCollapsed] = useState(false);
 
   if (!statsResult || !statsResult.tour) return null;
 
@@ -120,9 +124,9 @@ export function TourSlip({
     const tierConfig =
       FREQUENCY_TIER_CONFIG[track.tier] || FREQUENCY_TIER_CONFIG.surprise;
     return (
-      <div className="flex shrink-0 items-center justify-end gap-2 pl-7 sm:pl-0">
+      <div className="flex shrink-0 items-center justify-end gap-1.5 sm:gap-2 ml-auto">
         <span
-          className={`inline-flex items-center gap-1.5 rounded px-2 py-0.5 text-[11px] font-mono select-none ${track.badgeClass}`}
+          className={`inline-flex items-center gap-1 sm:gap-1.5 rounded px-1.5 sm:px-2 py-0.5 text-[10px] sm:text-[11px] font-mono select-none ${track.badgeClass}`}
           title={`此巡演共登場 ${track.count} 場（全 ${track.totalShows} 場 · 登場率 ${track.percentage}%）`}
         >
           <span className={tierConfig.markerClass} aria-hidden="true">
@@ -131,7 +135,7 @@ export function TourSlip({
           <span>{track.tierBadgeLabel}</span>
         </span>
 
-        <span className="font-mono text-[11px] text-muted tabular-nums whitespace-nowrap">
+        <span className="font-mono text-[10px] sm:text-[11px] text-muted tabular-nums whitespace-nowrap">
           {track.count} / {totalShows} 場
         </span>
       </div>
@@ -141,10 +145,10 @@ export function TourSlip({
   const renderTrackItem = (track, cue) => (
     <li
       key={track.order || track.songId || track.title}
-      className={`${SETLIST_ITEM} flex-col sm:flex-row sm:items-center justify-between gap-2 py-2.5 px-2 hover:bg-black/[0.02] dark:hover:bg-white/[0.02] transition-colors`}
+      className={`${SETLIST_ITEM} flex-wrap sm:flex-nowrap items-baseline sm:items-center justify-between gap-x-2 gap-y-1.5 py-2.5 px-1 sm:px-2 hover:bg-black/[0.02] dark:hover:bg-white/[0.02] transition-colors`}
     >
-      <div className="flex min-w-0 items-baseline gap-2.5 sm:gap-3 flex-1">
-        <span className={CUE_NO}>{cue}</span>
+      <div className="flex min-w-0 items-baseline gap-1.5 sm:gap-2.5 flex-1">
+        <span className="min-w-[28px] sm:min-w-[36px] text-right font-mono text-[12px] font-semibold text-muted tabular-nums shrink-0">{cue}</span>
         {renderTrackTitleAndBadges(track)}
       </div>
       {renderFrequencyPill(track)}
@@ -154,18 +158,18 @@ export function TourSlip({
   const renderSurpriseTrackItem = (track) => (
     <li
       key={track.songId || track.title}
-      className={`${SETLIST_ITEM} flex-col gap-2 py-3 px-2 hover:bg-black/[0.02] dark:hover:bg-white/[0.02] transition-colors`}
+      className={`${SETLIST_ITEM} flex-col gap-2 py-3 px-1 sm:px-2 hover:bg-black/[0.02] dark:hover:bg-white/[0.02] transition-colors`}
     >
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 w-full">
-        <div className="flex min-w-0 items-baseline gap-2.5 sm:gap-3 flex-1">
-          <span className={`${CUE_NO} text-muted font-bold select-none`}>◆</span>
+      <div className="flex flex-wrap sm:flex-nowrap items-baseline sm:items-center justify-between gap-x-2 gap-y-1.5 w-full">
+        <div className="flex min-w-0 items-baseline gap-1.5 sm:gap-2.5 flex-1">
+          <span className="min-w-[28px] sm:min-w-[36px] text-right font-mono text-[12px] font-bold text-muted tabular-nums select-none shrink-0">◆</span>
           {renderTrackTitleAndBadges(track)}
         </div>
         {renderFrequencyPill(track)}
       </div>
 
       {track.shows && track.shows.length > 0 && (
-        <div className="pl-7 flex flex-wrap items-center gap-1.5 pt-1">
+        <div className="pl-1 sm:pl-2 flex flex-wrap items-center gap-1.5 pt-1">
           <span className="text-[11px] font-mono text-muted select-none">
             演出場次：
           </span>
@@ -179,7 +183,7 @@ export function TourSlip({
                   onSelectShow(s.id);
                 }
               }}
-              className="inline-flex items-center gap-1 rounded px-2 py-0.5 text-[11px] font-mono border border-line-soft bg-paper hover:border-ink hover:text-ink text-muted transition-colors"
+              className="inline-flex items-center gap-1 rounded px-2 py-0.5 text-[11px] font-mono border border-line-soft bg-paper hover:border-ink hover:text-ink text-muted transition-colors touch-stamp"
               title={`${s.date} ${s.venue}${s.city ? `（${s.city}）` : ""}`}
             >
               <span>🎫</span>
@@ -204,9 +208,9 @@ export function TourSlip({
       {/* Header Container */}
       <div className="relative rounded-t-[2px] bg-black/[0.025] dark:bg-white/[0.025] -mx-[26px] max-sm:-mx-4 -mt-[46px] max-sm:-mt-[42px] px-[26px] max-sm:px-4 pt-[46px] max-sm:pt-[42px] pb-4">
         {/* Monogram Stage Run Sheet Subtitle */}
-        <div className="font-mono text-[10px] tracking-[0.22em] font-extrabold uppercase text-muted/70 pb-1.5 flex items-center justify-between">
-          <span>OFFICIAL HIGEDAN DISM // TOUR CONSENSUS MASTER SHEET</span>
-          <span className="text-band font-bold">ALL ACCESS TOUR OVERVIEW</span>
+        <div className="font-mono text-[9.5px] sm:text-[10px] tracking-[0.16em] sm:tracking-[0.22em] font-extrabold uppercase text-muted/70 pb-1.5 flex flex-wrap items-center justify-between gap-1">
+          <span className="truncate">OFFICIAL HIGEDAN DISM // TOUR CONSENSUS MASTER SHEET</span>
+          <span className="text-band font-bold shrink-0">ALL ACCESS TOUR OVERVIEW</span>
         </div>
 
         {/* Level 1: Artist branding & Category badge */}
@@ -221,26 +225,26 @@ export function TourSlip({
         </div>
 
         {/* Level 2: Tour Full Headline */}
-        <h2 className="mt-2.5 mb-3 font-display text-[22px] sm:text-[26px] font-black leading-tight text-ink tracking-tight text-pretty">
+        <h2 className="mt-2 mb-2.5 sm:mt-2.5 sm:mb-3 font-display text-[20px] sm:text-[26px] font-black leading-tight text-ink tracking-tight text-pretty">
           {tour.title}
         </h2>
 
         {/* Level 3: Tour Metadata Stub Box */}
-        <div className="border-y border-line-soft py-3 my-2 space-y-2.5">
+        <div className="border-y border-line-soft py-2.5 sm:py-3 my-2 space-y-2 sm:space-y-2.5">
           {/* Date range & Scale */}
-          <div className="flex flex-wrap items-baseline justify-between gap-1 pb-1.5 font-mono text-[13px] text-muted border-b border-line-soft/80">
+          <div className="flex flex-wrap items-center justify-between gap-x-2 gap-y-1.5 pb-1.5 font-mono text-[12px] sm:text-[13px] text-muted border-b border-line-soft/80">
             <div className="flex items-center gap-1.5 font-bold text-ink">
-              <span className="text-[13px] text-muted" aria-hidden="true">📅</span>
+              <span className="text-[12px] sm:text-[13px] text-muted" aria-hidden="true">📅</span>
               <span>
                 {stats.dateStart} ～ {stats.dateEnd}
               </span>
             </div>
-            <div className="flex items-center gap-2 font-bold text-ink tabular-nums">
-              <span className="inline-flex items-center gap-1 rounded bg-tape-tint/70 px-2 py-0.5 text-xs text-ink border border-ink/30">
+            <div className="flex items-center gap-1.5 sm:gap-2 font-bold text-ink tabular-nums">
+              <span className="inline-flex items-center gap-1 rounded bg-tape-tint/70 px-2 py-0.5 text-[11px] sm:text-xs text-ink border border-ink/30">
                 全 {totalShows} 場次
               </span>
               {stats.prefecturesCount > 0 && (
-                <span className="inline-flex items-center gap-1 rounded bg-paper px-2 py-0.5 text-xs text-muted border border-line-soft">
+                <span className="inline-flex items-center gap-1 rounded bg-paper px-1.5 sm:px-2 py-0.5 text-[11px] sm:text-xs text-muted border border-line-soft">
                   {stats.prefecturesCount} 都道府縣 · {stats.citiesCount} 城市
                 </span>
               )}
@@ -248,8 +252,8 @@ export function TourSlip({
           </div>
 
           {/* Frequency Hierarchy Pills Bar */}
-          <div className="flex flex-wrap items-center gap-2 pt-1 font-mono text-[11px]">
-            <div className="flex items-center gap-1.5 text-muted font-bold shrink-0">
+          <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 pt-0.5 font-mono text-[10.5px] sm:text-[11px]">
+            <div className="flex items-center gap-1 text-muted font-bold shrink-0">
               <span aria-hidden="true">📊</span> 登場曲目統計：
             </div>
             <div className="flex flex-wrap items-center gap-1.5">
@@ -260,13 +264,13 @@ export function TourSlip({
                     .getElementById("consensus-template-section")
                     ?.scrollIntoView({ behavior: "smooth" });
                 }}
-                className={`inline-flex items-center gap-1.5 rounded px-2 py-0.5 cursor-pointer hover:border-ink transition-colors ${FREQUENCY_TIER_CONFIG.core.badgeClass}`}
+                className={`inline-flex items-center gap-1 sm:gap-1.5 rounded px-1.5 sm:px-2 py-0.5 cursor-pointer hover:border-ink transition-colors touch-stamp ${FREQUENCY_TIER_CONFIG.core.badgeClass}`}
                 title="點擊跳轉至巡演定番歌單"
               >
                 <span className={FREQUENCY_TIER_CONFIG.core.markerClass} aria-hidden="true">
                   {FREQUENCY_TIER_CONFIG.core.marker}
                 </span>
-                <span>核心全勤：{stats.coreCount} 首 (100%)</span>
+                <span>核心全勤：{stats.coreCount} 首</span>
               </button>
               {stats.regularCount > 0 && (
                 <button
@@ -276,13 +280,13 @@ export function TourSlip({
                       .getElementById("consensus-template-section")
                       ?.scrollIntoView({ behavior: "smooth" });
                   }}
-                  className={`inline-flex items-center gap-1.5 rounded px-2 py-0.5 cursor-pointer hover:border-ink transition-colors ${FREQUENCY_TIER_CONFIG.regular.badgeClass}`}
+                  className={`inline-flex items-center gap-1 sm:gap-1.5 rounded px-1.5 sm:px-2 py-0.5 cursor-pointer hover:border-ink transition-colors touch-stamp ${FREQUENCY_TIER_CONFIG.regular.badgeClass}`}
                   title="點擊跳轉至巡演定番歌單"
                 >
                   <span className={FREQUENCY_TIER_CONFIG.regular.markerClass} aria-hidden="true">
                     {FREQUENCY_TIER_CONFIG.regular.marker}
                   </span>
-                  <span>巡演定番：{stats.regularCount} 首 (≥70%)</span>
+                  <span>巡演定番：{stats.regularCount} 首</span>
                 </button>
               )}
               {stats.rotatingCount > 0 && (
@@ -294,13 +298,13 @@ export function TourSlip({
                       document.getElementById("consensus-template-section");
                     el?.scrollIntoView({ behavior: "smooth" });
                   }}
-                  className={`inline-flex items-center gap-1.5 rounded px-2 py-0.5 cursor-pointer hover:border-ink transition-colors ${FREQUENCY_TIER_CONFIG.rotating.badgeClass}`}
+                  className={`inline-flex items-center gap-1 sm:gap-1.5 rounded px-1.5 sm:px-2 py-0.5 cursor-pointer hover:border-ink transition-colors touch-stamp ${FREQUENCY_TIER_CONFIG.rotating.badgeClass}`}
                   title="點擊跳轉至雙日輪替曲目"
                 >
                   <span className={FREQUENCY_TIER_CONFIG.rotating.markerClass} aria-hidden="true">
                     {FREQUENCY_TIER_CONFIG.rotating.marker}
                   </span>
-                  <span>雙日輪替：{stats.rotatingCount} 首 (30-70%)</span>
+                  <span>雙日輪替：{stats.rotatingCount} 首</span>
                 </button>
               )}
               {stats.surpriseCount > 0 && (
@@ -311,7 +315,7 @@ export function TourSlip({
                       .getElementById("surprise-inserts-section")
                       ?.scrollIntoView({ behavior: "smooth" });
                   }}
-                  className={`inline-flex items-center gap-1.5 rounded px-2 py-0.5 cursor-pointer hover:border-ink transition-colors ${FREQUENCY_TIER_CONFIG.surprise.badgeClass}`}
+                  className={`inline-flex items-center gap-1 sm:gap-1.5 rounded px-1.5 sm:px-2 py-0.5 cursor-pointer hover:border-ink transition-colors touch-stamp ${FREQUENCY_TIER_CONFIG.surprise.badgeClass}`}
                   title="點擊跳轉至巡演場次限定曲專區"
                 >
                   <span className={FREQUENCY_TIER_CONFIG.surprise.markerClass} aria-hidden="true">
@@ -327,7 +331,7 @@ export function TourSlip({
                     .getElementById("tour-itinerary-section")
                     ?.scrollIntoView({ behavior: "smooth" });
                 }}
-                className="inline-flex items-center gap-1 rounded px-2 py-0.5 bg-paper text-muted border border-line-soft cursor-pointer hover:border-ink hover:text-ink transition-colors"
+                className="inline-flex items-center gap-1 rounded px-1.5 sm:px-2 py-0.5 bg-paper text-muted border border-line-soft cursor-pointer hover:border-ink hover:text-ink transition-colors touch-stamp"
                 title="點擊跳轉至全國巡演日程足跡"
               >
                 <span>總演出曲目：{stats.uniqueSongsCount} 首</span>
@@ -369,15 +373,25 @@ export function TourSlip({
           {/* Encore Setlist */}
           {encTracks.length > 0 && (
             <div className="rounded-[3px] p-3.5 sm:p-4 border border-line-soft bg-paper/50 space-y-2 mt-4">
-              <div className="flex items-center justify-between font-mono text-xs font-extrabold uppercase tracking-wider text-band pb-1.5 border-b border-line-soft/70">
+              <button
+                type="button"
+                onClick={() => setIsEncoreCollapsed((prev) => !prev)}
+                className="w-full flex items-center justify-between font-mono text-xs font-extrabold uppercase tracking-wider text-band pb-1.5 border-b border-line-soft/70 cursor-pointer select-none text-left touch-stamp rounded-sm"
+                aria-expanded={!isEncoreCollapsed}
+              >
                 <span className="flex items-center gap-1.5">
                   <span>◆</span> ENCORE // 安可定番歌單
                 </span>
-                <span className="tabular-nums text-xs text-muted font-mono">{encTracks.length} SONGS</span>
-              </div>
-              <ol className="m-0 list-none p-0 divide-y divide-line-soft/40">
-                {encTracks.map((t, idx) => renderTrackItem(t, `EN${idx + 1}`))}
-              </ol>
+                <span className="flex items-center gap-1.5 tabular-nums text-xs text-muted font-mono">
+                  <span>{encTracks.length} SONGS</span>
+                  <span>{isEncoreCollapsed ? "▸" : "▾"}</span>
+                </span>
+              </button>
+              {!isEncoreCollapsed && (
+                <ol className="m-0 list-none p-0 divide-y divide-line-soft/40">
+                  {encTracks.map((t, idx) => renderTrackItem(t, `EN${idx + 1}`))}
+                </ol>
+              )}
             </div>
           )}
         </div>
@@ -389,22 +403,32 @@ export function TourSlip({
           id="rotating-tracks-section"
           className="rounded-[3px] p-3.5 sm:p-4 border border-line-soft bg-paper/50 space-y-3 mt-6"
         >
-          <div className="flex items-center justify-between font-mono text-xs font-bold uppercase tracking-wider text-muted pb-1.5 mb-1 border-b border-line-soft">
+          <button
+            type="button"
+            onClick={() => setIsRotatingCollapsed((prev) => !prev)}
+            className="w-full flex items-center justify-between font-mono text-xs font-bold uppercase tracking-wider text-muted pb-1.5 mb-1 border-b border-line-soft cursor-pointer select-none text-left touch-stamp rounded-sm"
+            aria-expanded={!isRotatingCollapsed}
+          >
             <span className="flex items-center gap-1.5 text-ink font-extrabold">
               <span className="text-amber-600 dark:text-amber-400">▲</span> ROTATING TRACKS // 雙日輪替曲目
             </span>
-            <span className="tabular-nums text-xs text-muted font-mono">
-              {nonTemplateRotatingTracks.length} SONGS (30-70%)
+            <span className="flex items-center gap-1.5 tabular-nums text-xs text-muted font-mono">
+              <span>{nonTemplateRotatingTracks.length} SONGS (30-70%)</span>
+              <span>{isRotatingCollapsed ? "▸" : "▾"}</span>
             </span>
-          </div>
+          </button>
 
-          <p className="text-[12px] text-muted m-0">
-            巡演期間於不同場次（如 Day 2）常態切換登場之雙日輪替曲目：
-          </p>
+          {!isRotatingCollapsed && (
+            <>
+              <p className="text-[12px] text-muted m-0">
+                巡演期間於不同場次（如 Day 2）常態切換登場之雙日輪替曲目：
+              </p>
 
-          <ol className="m-0 list-none p-0 divide-y divide-line-soft/50">
-            {nonTemplateRotatingTracks.map((track) => renderTrackItem(track, "▲"))}
-          </ol>
+              <ol className="m-0 list-none p-0 divide-y divide-line-soft/50">
+                {nonTemplateRotatingTracks.map((track) => renderTrackItem(track, "▲"))}
+              </ol>
+            </>
+          )}
         </div>
       )}
 
@@ -414,69 +438,87 @@ export function TourSlip({
           id="surprise-inserts-section"
           className="rounded-[3px] p-3.5 sm:p-4 border border-line-soft bg-paper/60 space-y-3 mt-6"
         >
-          <div className="flex items-center justify-between font-mono text-xs font-bold uppercase tracking-wider text-muted pb-1.5 mb-1 border-b border-line-soft">
+          <button
+            type="button"
+            onClick={() => setIsSurpriseCollapsed((prev) => !prev)}
+            className="w-full flex items-center justify-between font-mono text-xs font-bold uppercase tracking-wider text-muted pb-1.5 mb-1 border-b border-line-soft cursor-pointer select-none text-left touch-stamp rounded-sm"
+            aria-expanded={!isSurpriseCollapsed}
+          >
             <span className="flex items-center gap-1.5 text-ink font-extrabold">
               <span className="text-band">◆</span> SPECIAL INSERTS // 巡演場次限定曲
             </span>
-            <span className="tabular-nums text-xs text-muted font-mono">
-              {surpriseTracks.length} SONGS
+            <span className="flex items-center gap-1.5 tabular-nums text-xs text-muted font-mono">
+              <span>{surpriseTracks.length} SONGS</span>
+              <span>{isSurpriseCollapsed ? "▸" : "▾"}</span>
             </span>
-          </div>
+          </button>
 
-          <p className="text-[12px] text-muted m-0">
-            未收錄於巡演定番歌單但於特定場次驚喜登場之限定曲目：
-          </p>
+          {!isSurpriseCollapsed && (
+            <>
+              <p className="text-[12px] text-muted m-0">
+                未收錄於巡演定番歌單但於特定場次驚喜登場之限定曲目：
+              </p>
 
-          <ol className="m-0 list-none p-0 divide-y divide-line-soft/50">
-            {surpriseTracks.map((track) => renderSurpriseTrackItem(track))}
-          </ol>
+              <ol className="m-0 list-none p-0 divide-y divide-line-soft/50">
+                {surpriseTracks.map((track) => renderSurpriseTrackItem(track))}
+              </ol>
+            </>
+          )}
         </div>
       )}
 
       {/* Special Interludes Section */}
       {interludes && interludes.length > 0 && (
         <div className="rounded-[3px] p-3.5 sm:p-4 border border-line-soft bg-paper/40 space-y-2 mt-4">
-          <div className="flex items-center justify-between font-mono text-xs font-extrabold uppercase tracking-wider text-muted pb-1.5 border-b border-line-soft">
+          <button
+            type="button"
+            onClick={() => setIsInterludesCollapsed((prev) => !prev)}
+            className="w-full flex items-center justify-between font-mono text-xs font-extrabold uppercase tracking-wider text-muted pb-1.5 border-b border-line-soft cursor-pointer select-none text-left touch-stamp rounded-sm"
+            aria-expanded={!isInterludesCollapsed}
+          >
             <span className="flex items-center gap-1.5 text-ink font-bold">
               <span className="font-mono text-line">—</span>
               <span>INTERLUDES // 特別彈唱與過場（不計入正式曲目）</span>
             </span>
-            <span className="tabular-nums text-xs text-muted font-mono">
-              {interludes.length} EVENTS
+            <span className="flex items-center gap-1.5 tabular-nums text-xs text-muted font-mono">
+              <span>{interludes.length} EVENTS</span>
+              <span>{isInterludesCollapsed ? "▸" : "▾"}</span>
             </span>
-          </div>
+          </button>
 
-          <ol className="m-0 list-none p-0 divide-y divide-line-soft/40">
-            {interludes.map((it, idx) => (
-              <li
-                key={`${it.showId}-${idx}`}
-                className={`${SETLIST_ITEM} flex-col sm:flex-row sm:items-center justify-between gap-2 py-2 px-2 hover:bg-black/[0.02] dark:hover:bg-white/[0.02] text-[13px] text-muted`}
-              >
-                <div className="flex min-w-0 items-baseline gap-2.5 sm:gap-3 flex-1">
-                  <span className={`${CUE_NO} text-line select-none font-mono`}>—</span>
-                  <span className="font-medium text-ink">
-                    {it.item.note || it.item.title || "特別過場"}
-                  </span>
-                </div>
-                <div className="pl-7 sm:pl-0 shrink-0">
-                  <a
-                    href={routeHash.show(it.showId)}
-                    onClick={(e) => {
-                      if (onSelectShow) {
-                        e.preventDefault();
-                        onSelectShow(it.showId);
-                      }
-                    }}
-                    className="inline-flex items-center gap-1 rounded px-2 py-0.5 text-[11px] font-mono border border-line-soft bg-paper hover:border-ink hover:text-ink text-muted transition-colors"
-                    title={`${it.show?.date || ""} ${it.show?.venue || ""}`}
-                  >
-                    <span>🎫</span>
-                    <span>{it.show ? formatShowBadgeLabel(it.show) : it.showId}</span>
-                  </a>
-                </div>
-              </li>
-            ))}
-          </ol>
+          {!isInterludesCollapsed && (
+            <ol className="m-0 list-none p-0 divide-y divide-line-soft/40">
+              {interludes.map((it, idx) => (
+                <li
+                  key={`${it.showId}-${idx}`}
+                  className={`${SETLIST_ITEM} flex-wrap items-baseline sm:items-center justify-between gap-x-2 gap-y-1 py-2 px-1 sm:px-2 hover:bg-black/[0.02] dark:hover:bg-white/[0.02] text-[13px] text-muted`}
+                >
+                  <div className="flex min-w-0 items-baseline gap-1.5 sm:gap-2.5 flex-1">
+                    <span className="min-w-[28px] sm:min-w-[36px] text-right text-line select-none font-mono text-[12px] tabular-nums shrink-0">—</span>
+                    <span className="font-medium text-ink">
+                      {it.item.note || it.item.title || "特別過場"}
+                    </span>
+                  </div>
+                  <div className="shrink-0 ml-auto">
+                    <a
+                      href={routeHash.show(it.showId)}
+                      onClick={(e) => {
+                        if (onSelectShow) {
+                          e.preventDefault();
+                          onSelectShow(it.showId);
+                        }
+                      }}
+                      className="inline-flex items-center gap-1 rounded px-2 py-0.5 text-[11px] font-mono border border-line-soft bg-paper hover:border-ink hover:text-ink text-muted transition-colors touch-stamp"
+                      title={`${it.show?.date || ""} ${it.show?.venue || ""}`}
+                    >
+                      <span>🎫</span>
+                      <span>{it.show ? formatShowBadgeLabel(it.show) : it.showId}</span>
+                    </a>
+                  </div>
+                </li>
+              ))}
+            </ol>
+          )}
         </div>
       )}
 
@@ -503,16 +545,21 @@ export function TourSlip({
             {displayedItinerary.map((stop) => (
               <li
                 key={stop.id}
-                className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 py-2.5 px-2 hover:bg-black/[0.02] dark:hover:bg-white/[0.02] transition-colors rounded-[2px]"
+                onClick={() => {
+                  if (onSelectShow) {
+                    onSelectShow(stop.id);
+                  }
+                }}
+                className="group flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 py-2.5 px-1 sm:px-2 hover:bg-black/[0.03] dark:hover:bg-white/[0.03] transition-colors rounded-[2px] cursor-pointer touch-stamp"
               >
-                <div className="flex items-start sm:items-center gap-2.5 sm:gap-3 flex-1 min-w-0">
-                  <span className="shrink-0 font-mono text-xs font-bold text-muted w-7 text-right">
+                <div className="flex items-start sm:items-center gap-1.5 sm:gap-2.5 flex-1 min-w-0">
+                  <span className="shrink-0 font-mono text-xs font-bold text-muted w-6 sm:w-7 text-right">
                     #{String(stop.index).padStart(2, "0")}
                   </span>
 
                   <div className="min-w-0 flex-1 space-y-0.5">
-                    <div className="flex flex-wrap items-center gap-2 font-mono text-xs">
-                      <span className="font-bold text-ink">
+                    <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 font-mono text-xs">
+                      <span className="font-bold text-ink group-hover:text-band-ink transition-colors">
                         {stop.weekday ? `${stop.date}（${stop.weekday}）` : stop.date}
                       </span>
                       {stop.isFirst && (
@@ -530,10 +577,28 @@ export function TourSlip({
                           [{stop.city}]
                         </span>
                       )}
+                      <div className="ml-auto shrink-0 flex items-center">
+                        <a
+                          href={routeHash.show(stop.id)}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            if (onSelectShow) {
+                              e.preventDefault();
+                              onSelectShow(stop.id);
+                            }
+                          }}
+                          className="inline-flex items-center gap-1 sm:gap-1.5 rounded-[3px] px-1.5 sm:px-2.5 py-0.5 sm:py-1 text-[11px] sm:text-xs font-mono font-bold border border-line-soft bg-paper group-hover:border-ink group-hover:text-ink text-muted transition-colors cursor-pointer touch-stamp"
+                          title={`查看 ${stop.date} ${stop.venue} 單場演出票根`}
+                        >
+                          <span>🎫</span>
+                          <span className="hidden sm:inline">查看票根</span>
+                          <span className="sm:hidden font-mono" aria-hidden="true">→</span>
+                        </a>
+                      </div>
                     </div>
 
-                    <div className="flex flex-wrap items-baseline gap-2 text-xs">
-                      <span className="font-medium text-ink break-words">
+                    <div className="flex flex-wrap items-baseline gap-x-2 gap-y-0.5 text-xs">
+                      <span className="font-medium text-ink break-words group-hover:underline">
                         {stop.venue}
                       </span>
                       {stop.time && (
@@ -591,23 +656,6 @@ export function TourSlip({
                     )}
                   </div>
                 </div>
-
-                <div className="shrink-0 pl-9 sm:pl-0 flex items-center justify-end">
-                  <a
-                    href={routeHash.show(stop.id)}
-                    onClick={(e) => {
-                      if (onSelectShow) {
-                        e.preventDefault();
-                        onSelectShow(stop.id);
-                      }
-                    }}
-                    className="inline-flex items-center gap-1.5 rounded-[3px] px-2.5 py-1 text-xs font-mono font-bold border border-line-soft bg-paper hover:border-ink hover:text-ink text-muted transition-colors"
-                    title={`查看 ${stop.date} ${stop.venue} 單場演出票根`}
-                  >
-                    <span>🎫</span>
-                    <span>查看票根</span>
-                  </a>
-                </div>
               </li>
             ))}
           </ol>
@@ -619,7 +667,7 @@ export function TourSlip({
                 onClick={() =>
                   setExpandedTourId(isItineraryExpanded ? null : tour.id)
                 }
-                className="inline-flex items-center justify-center gap-2 rounded-[3px] px-4 py-2 text-xs font-mono font-bold border border-line bg-paper hover:bg-black/[0.04] dark:hover:bg-white/[0.04] text-ink transition-colors cursor-pointer w-full sm:w-auto"
+                className="inline-flex items-center justify-center gap-2 rounded-[3px] px-4 py-2 text-xs font-mono font-bold border border-line bg-paper hover:bg-black/[0.04] dark:hover:bg-white/[0.04] text-ink transition-colors cursor-pointer w-full sm:w-auto touch-stamp"
                 aria-expanded={isItineraryExpanded}
               >
                 <span>
