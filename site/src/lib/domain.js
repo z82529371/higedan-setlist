@@ -1,7 +1,7 @@
 import songsData from "../data/songs.json";
 import { ALBUM_MAP } from "./constants.js";
 import { trackKeyOf, trackKey } from "./track.js";
-import { resolveShowItems } from "./resolve.js";
+import { resolveShowItems, assignCues } from "./resolve.js";
 
 const tourUnits = Object.values(
   import.meta.glob("../data/tours/*.json", { eager: true, import: "default" })
@@ -283,8 +283,8 @@ export const FREQUENCY_TIER_CONFIG = {
   },
   surprise: {
     tier: "surprise",
-    label: "限定突襲",
-    badgeLabel: "限定突襲",
+    label: "場次限定",
+    badgeLabel: "場次限定",
     badgeClass: "bg-card text-ink border border-unreleased/50 font-bold shadow-2xs",
     pillClass: "bg-card text-ink border border-unreleased/40 font-medium",
     marker: "◆",
@@ -295,6 +295,8 @@ export const FREQUENCY_TIER_CONFIG = {
 export function getTourFrequencyTier(count, totalShows) {
   if (totalShows <= 0) return "surprise";
   if (count === totalShows) return "core";
+  // In short tours (<= 4 shows), a song performed only once is an isolated special insert, not a rotating pattern
+  if (totalShows <= 4 && count === 1) return "surprise";
   const ratio = count / totalShows;
   const percentage = Math.round(ratio * 100);
   if (percentage >= 70) return "regular";
@@ -360,10 +362,21 @@ export function computeTourStatistics(tourUnitData) {
   const totalShows = shows.length;
   const full = tourUnitData.full;
 
-  const resolvedShows = shows.map((s) => ({
-    show: s,
-    items: full?.get?.(s.id) ?? resolveShowItems(unit, s),
-  }));
+  const resolvedShows = shows.map((s) => {
+    const rawItems = full?.get?.(s.id) ?? resolveShowItems(unit, s);
+    const rawMain = [];
+    const rawEnc = [];
+    for (const i of rawItems) (i.encore ? rawEnc : rawMain).push(i);
+    const main = assignCues(rawMain, "M");
+    const enc = assignCues(rawEnc, "EN");
+    const cuedItems = [...main, ...enc];
+    return {
+      show: s,
+      rawItems,
+      cuedItems,
+      items: rawItems,
+    };
+  });
 
   const uniquePrefectures = new Set();
   const uniqueCities = new Set();
@@ -379,6 +392,22 @@ export function computeTourStatistics(tourUnitData) {
     if (t.songId) tplSongSet.add(t.songId);
   }
 
+function isRequestItem(item) {
+  const note = item?.note || "";
+  return note.includes("リクエスト") || note.includes("request");
+}
+
+function isSoloItem(item) {
+  const note = item?.note || "";
+  const kind = Array.isArray(item?.kind) ? item.kind : [];
+  return (
+    kind.includes("satoshi-solo") ||
+    note.includes("弾き語り") ||
+    note.includes("ソロ") ||
+    note.includes("solo")
+  );
+}
+
   // 1. Consensus / Template Tracks calculation
   const consensusTracks = rawTpl.map((item) => {
     const songId = item.songId || null;
@@ -388,6 +417,9 @@ export function computeTourStatistics(tourUnitData) {
 
     const appearances = [];
     const variationNotes = new Set();
+    const cues = [];
+    let soloShowCount = 0;
+    let requestShowCount = 0;
 
     for (const rs of resolvedShows) {
       const matched = rs.items.filter((it) =>
@@ -397,14 +429,41 @@ export function computeTourStatistics(tourUnitData) {
 
       if (matched.length > 0) {
         appearances.push(rs.show.id);
+        if (matched.some(isSoloItem)) soloShowCount++;
+        if (matched.some(isRequestItem)) requestShowCount++;
         for (const m of matched) {
           if (m.note) variationNotes.add(m.note);
+          const cued = rs.cuedItems.find((p) => p.item === m);
+          if (cued?.cue) cues.push({ showId: rs.show.id, cue: cued.cue });
         }
       }
     }
 
+    const uniqueCues = Array.from(new Set(cues.map((c) => c.cue)));
+    const hasCueDrift = uniqueCues.length > 1;
+
     const count = appearances.length;
     const freq = formatFrequencyStats(count, totalShows);
+
+    // 100% Monolithic Arrangement Rule:
+    // Only if 100% of appearances in this tour carried the label do we badge it on the overview
+    const badges = [];
+    if (count > 0 && requestShowCount === count) {
+      badges.push({
+        type: "request",
+        label: "點歌",
+        dotClass: "bg-request",
+        borderClass: "border-request/50",
+      });
+    }
+    if (count > 0 && soloShowCount === count) {
+      badges.push({
+        type: "solo",
+        label: "自彈自唱",
+        dotClass: "bg-solo",
+        borderClass: "border-solo/50",
+      });
+    }
 
     return {
       order: item.order,
@@ -422,12 +481,16 @@ export function computeTourStatistics(tourUnitData) {
       pillClass: freq.pillClass,
       appearances,
       variations: Array.from(variationNotes),
+      badges,
+      cues,
+      hasCueDrift,
+      uniqueCues,
     };
   });
 
   const coreTracks = consensusTracks.filter((t) => t.tier === "core");
   const regularTracks = consensusTracks.filter((t) => t.tier === "regular");
-  const rotatingTracks = consensusTracks.filter((t) => t.tier === "rotating");
+  const templateRotatingTracks = consensusTracks.filter((t) => t.tier === "rotating");
   const surpriseTemplateTracks = consensusTracks.filter((t) => t.tier === "surprise");
 
   // 2. Surprise Non-Template Tracks & Interludes
@@ -454,6 +517,8 @@ export function computeTourStatistics(tourUnitData) {
       const isTemplateSong = sid ? tplSongSet.has(sid) : rawTpl.some((t) => t.title === stitle);
       if (!isTemplateSong) {
         const key = sid || stitle;
+        const cued = rs.cuedItems.find((p) => p.item === it);
+        const cue = cued?.cue || null;
         if (!nonTemplateSongMap.has(key)) {
           nonTemplateSongMap.set(key, {
             songId: sid || null,
@@ -461,13 +526,23 @@ export function computeTourStatistics(tourUnitData) {
             appearances: [],
             shows: [],
             notes: new Set(),
+            soloShows: new Set(),
+            requestShows: new Set(),
           });
         }
         const record = nonTemplateSongMap.get(key);
         if (!record.appearances.includes(rs.show.id)) {
           record.appearances.push(rs.show.id);
-          record.shows.push(rs.show);
+          record.shows.push({
+            id: rs.show.id,
+            date: rs.show.date,
+            venue: rs.show.venue,
+            city: rs.show.city,
+            cue,
+          });
         }
+        if (isSoloItem(it)) record.soloShows.add(rs.show.id);
+        if (isRequestItem(it)) record.requestShows.add(rs.show.id);
         if (it.note) record.notes.add(it.note);
       }
     }
@@ -477,6 +552,30 @@ export function computeTourStatistics(tourUnitData) {
     const count = rec.appearances.length;
     const freq = formatFrequencyStats(count, totalShows);
 
+    // 100% Monolithic Arrangement Rule:
+    const badges = [];
+    if (count > 0 && rec.requestShows.size === count) {
+      badges.push({
+        type: "request",
+        label: "點歌",
+        dotClass: "bg-request",
+        borderClass: "border-request/50",
+      });
+    }
+    if (count > 0 && rec.soloShows.size === count) {
+      badges.push({
+        type: "solo",
+        label: "自彈自唱",
+        dotClass: "bg-solo",
+        borderClass: "border-solo/50",
+      });
+    }
+
+    const tier = freq.tier;
+    const tierInfo = FREQUENCY_TIER_CONFIG[tier] || FREQUENCY_TIER_CONFIG.surprise;
+    const tierBadgeLabel =
+      tier === "core" ? "核心全勤 100%" : `${tierInfo.label} ${freq.percentage}%`;
+
     return {
       songId: rec.songId,
       title: rec.title,
@@ -484,36 +583,100 @@ export function computeTourStatistics(tourUnitData) {
       totalShows,
       ratio: freq.ratio,
       percentage: freq.percentage,
-      tier: freq.tier,
-      tierLabel: freq.tierLabel,
-      tierBadgeLabel: freq.tierBadgeLabel,
-      badgeClass: freq.badgeClass,
-      pillClass: freq.pillClass,
+      tier,
+      tierLabel: tierInfo.label,
+      tierBadgeLabel,
+      badgeClass: tierInfo.badgeClass,
+      pillClass: tierInfo.pillClass,
       appearances: rec.appearances,
       shows: rec.shows,
       variations: Array.from(rec.notes),
+      badges,
     };
   });
 
-  const surpriseTracks = allNonTemplateTracks
-    .filter((t) => t.ratio < 0.3 || t.tier === "surprise")
+  const nonTemplateRotatingTracks = allNonTemplateTracks
+    .filter((t) => t.tier === "rotating")
     .sort((a, b) => b.count - a.count || (a.title > b.title ? 1 : -1));
 
+  const nonTemplateSurpriseTracks = allNonTemplateTracks
+    .filter((t) => t.tier === "surprise")
+    .sort((a, b) => b.count - a.count || (a.title > b.title ? 1 : -1));
+
+  const surpriseTracks = [
+    ...surpriseTemplateTracks,
+    ...nonTemplateSurpriseTracks,
+  ].sort((a, b) => b.count - a.count || (a.title > b.title ? 1 : -1));
+
+  const rotatingTracks = [
+    ...templateRotatingTracks,
+    ...nonTemplateRotatingTracks,
+  ];
+
   // 3. Chronological Itinerary Timeline
-  const itinerary = shows.map((s, idx) => ({
-    id: s.id,
-    index: idx + 1,
-    date: s.date,
-    weekday: s.weekday || "",
-    venue: s.venue,
-    city: s.city,
-    prefecture: s.prefecture || "",
-    region: s.region || "",
-    time: formatShowTime(s),
-    sourceUrls: s.sourceUrls || [],
-    isFirst: idx === 0,
-    isFinal: idx === shows.length - 1,
-  }));
+  const itinerary = shows.map((s, idx) => {
+    const rs = resolvedShows.find((r) => r.show.id === s.id);
+    const nonInterludeItems = (rs?.cuedItems || []).filter((p) => p.cue !== null);
+    // Differentiate between rotating tracks and pure surprise tracks in highlights:
+    const showSurpriseItems = [];
+    const showRotatingInserts = [];
+
+    for (const p of nonInterludeItems) {
+      const sid = p.item.songId;
+      const stitle = (sid && songTitle[sid]) || p.item.title;
+      const isTpl = sid ? tplSongSet.has(sid) : rawTpl.some((t) => t.title === stitle);
+      if (!isTpl) {
+        const key = sid || stitle;
+        const rec = nonTemplateSongMap.get(key);
+        const count = rec?.appearances.length || 0;
+        const tier = getTourFrequencyTier(count, totalShows);
+        if (tier === "rotating") {
+          showRotatingInserts.push({ item: p, rec });
+        } else {
+          showSurpriseItems.push({ item: p, rec });
+        }
+      }
+    }
+
+    const surpriseHighlights = showSurpriseItems.map(({ item: p, rec }) => {
+      const sid = p.item.songId;
+      const stitle = (sid && songTitle[sid]) || p.item.title;
+      const isReq = rec && rec.appearances.length > 0 && rec.requestShows.size === rec.appearances.length;
+      const isSolo = rec && rec.appearances.length > 0 && rec.soloShows.size === rec.appearances.length;
+      const tagLabel = isReq && isSolo ? "點歌 自彈自唱" : isReq ? "點歌" : isSolo ? "自彈自唱" : null;
+
+      return {
+        songId: sid,
+        title: stitle,
+        cue: p.cue,
+        tagLabel,
+      };
+    });
+
+    const hasRotatingInserts = showRotatingInserts.length > 0;
+    const isStandard = surpriseHighlights.length === 0 && !hasRotatingInserts;
+    const isRotating = surpriseHighlights.length === 0 && hasRotatingInserts;
+
+    return {
+      id: s.id,
+      index: idx + 1,
+      date: s.date,
+      weekday: s.weekday || "",
+      venue: s.venue,
+      city: s.city,
+      prefecture: s.prefecture || "",
+      region: s.region || "",
+      time: formatShowTime(s),
+      sourceUrls: s.sourceUrls || [],
+      isFirst: idx === 0,
+      isFinal: idx === shows.length - 1,
+      totalSongs: nonInterludeItems.length,
+      surpriseHighlights,
+      hasRotatingInserts,
+      isRotating,
+      isStandard,
+    };
+  });
 
   const earliestDate = shows[0]?.date ?? "";
   const latestDate = shows.at(-1)?.date ?? "";
@@ -523,7 +686,7 @@ export function computeTourStatistics(tourUnitData) {
     coreCount: coreTracks.length,
     regularCount: regularTracks.length,
     rotatingCount: rotatingTracks.length,
-    surpriseCount: surpriseTemplateTracks.length + surpriseTracks.length,
+    surpriseCount: surpriseTracks.length,
     interludesCount: interludes.length,
     uniqueSongsCount: allUniqueSongKeys.size,
     prefecturesCount: uniquePrefectures.size,
@@ -542,6 +705,7 @@ export function computeTourStatistics(tourUnitData) {
     coreTracks,
     regularTracks,
     rotatingTracks,
+    nonTemplateRotatingTracks,
     surpriseTracks,
     nonTemplateTracks: allNonTemplateTracks,
     interludes,
