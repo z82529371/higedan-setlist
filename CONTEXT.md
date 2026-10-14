@@ -474,10 +474,10 @@ _Avoid_: 手機端直接抓取可視 DOM 節點導致文字折行後拉長並在
 1. **臨時腳本隔離存放**：所有探索性、對照性或臨時測試腳本（如網頁爬取、單場對照）一律嚴格存放於 `scratch/` 或 `.scratch/` 目錄（兩者皆已納入 `.gitignore`），嚴禁直接散落於專案根目錄。
 2. **並行工作樹保護**：嚴禁執行全域破壞性指令（如清除非本任務之 untracked 檔案或 reset 正在由其他 Agent 考證修訂中的 `data/tours/`、`data/events/` 檔案）；執行 `git status` 與 `git diff` 時務必附加路徑限定。
 3. **驗證防線優先執行**：在交付前端與組件改動前，一律先行執行 `pnpm check`（結合 `oxlint` 靜態語法未定義檢查與 `smoke-test.mjs` 領域模型斷言），保證任何識別碼缺陷或行數超標在本地立刻被阻斷。
-_Avoid_: 探索性腳本隨意堆放根目錄污染 git status、誤刪或修改其他 Agent 正在考證修訂之 JSON 資料檔、跳過 pnpm check 逕行提交導致運行期拋出 ReferenceError。
 
-
-
-
-
-
+**React Hooks 領域狀態與極端路由安全回退（Hooks Domain State & Hash Fallback Invariants，ADR-0101）**:
+全站狀態與 URL Hash 雙向同步（`#/show/:id`, `#/song/:id`, `#/venue/:name`）由 `useArchiveRoute` 與 `useArchiveFilter` 集中接管：
+1. **深層連結合法性校驗與優雅降級**：當 Hash 帶入之目標實體不存在於當前資料庫（如不存在之 `songId`、未收錄場次或非法路徑）時，系統一律安全回退至純淨聚光燈首頁（`landing`），嚴禁停留在半加載或曲目空白之崩潰狀態。
+2. **行動端抽屜草稿隔離機制**：行動端篩選抽屜在使用者未點擊「確認套用」前，所有切換僅暫存於 `draftState`；點擊取消或關閉時 100% 乾淨回滾至開啟前狀態，避免誤觸污染主視圖。
+3. **無頭 SSR 測試探針防護網（Zero-Dependency In-Process SSR Test Harness）**：煙道測試（`smoke-test.mjs`）透過 Vite SSR Probe 在 Node.js 原生環境內掛載 Hooks，在毫秒級速度下完整驗證 Hash 穿透、八大分類統計與極端回退機制，完全不引入外部肥大之 JSDOM 或第三方測試庫。
+_Avoid_: 非法 Hash 導致頁面崩潰或停留在無效空卡片、抽屜取消後未還原選項、引入肥大 JSDOM 拖慢本機與 CI 反饋速度。

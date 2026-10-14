@@ -67,9 +67,13 @@ export function useArchiveRoute({
   const [initial] = useState(initialSelection);
   const [viewMode, setViewMode] = useState(() => {
     const rawHash = window.location.hash;
+    if (rawHash === "#/archive") return "archive";
     const r =
       parseRoute(rawHash) || parseRoute(window.location.pathname);
-    if (r || rawHash === "#/archive") return "archive";
+    if (!r) return "landing";
+    if (r.kind === "song" && allUsedSongs.some((s) => s.id === r.value)) return "archive";
+    if (r.kind === "show" && unitIdByShowId.has(r.value)) return "archive";
+    if (r.kind === "venue" && allVenues.some((v) => v.name === r.value)) return "archive";
     return "landing";
   });
 

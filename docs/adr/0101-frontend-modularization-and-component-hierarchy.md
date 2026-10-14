@@ -46,12 +46,17 @@ Accepted
    - `ArchiveLayout.jsx`：檔案庫模式專用版面容器（整合狀態列、標頭、導航切換、票券流與行動端抽屜）。
    - `App.jsx`：瘦身為純粹的 Top-level Coordinator 與雙模路由器，自 2,091 行劇降至約 110 行（遠低於 200 行上限），職責一目了然。
 
+5. **領域狀態防護網與無頭 SSR 探針架構 (`site/scripts/smoke-test.mjs`)**：
+   - **無頭 Hooks 測試探針（Zero-Dependency Probe Harness）**：利用 Vite SSR runner 原生在 Node 22 環境下掛載微型 React 探針，在 60ms 內驗證 `useArchiveRoute` 與 `useArchiveFilter` 之極端路由穿透與草稿機制，完全不引入外部 JSDOM 依賴。
+   - **Watcher 隔離與並行安全**：透過 `before` 與 `after` 生命週期精確控制 Vite 實例，主動關閉 watcher 避免與多代理人資料同步衝突。
+   - **非法 Hash 優雅降級**：確立領域不變量——凡帶入未收錄歌曲、場次或格式錯誤 Hash，一律安全回退至 `landing` 模式，杜絕空白或崩潰。
+
 ## Consequences
 
 - **正面影響**：
   - **模組職責清晰（Single Responsibility）**：視圖（Slips）、導航（Navigators）、狀態（Hooks）、佈局（Layout）各自獨立，單檔行數全數控制在 200～800 行之健康範圍。
   - **修改邊界安全（Isolated Blast Radius）**：調整票券 UI 絕不影響導航邏輯；調整篩選演算法絕不破壞視圖 JSX。
-  - **100% 綠燈回歸驗證**：重構後 `pnpm build` 與全套管道 Smoke Tests（11 個子測試）皆為 0 錯誤通過，完全無 DOM 打亂或深層連結失效之虞。
+  - **100% 綠燈回歸驗證**：重構後 `pnpm check`（oxlint 40ms + 7 大套件 25 個煙道測試）皆為 0 錯誤通過，完全無 DOM 打亂或深層連結失效之虞。
   - **大幅提升 AI Agent 與工程師之協作效率**：後續任務可精準鎖定單一子模組，大幅節省上下文 Token 消耗。
 
 - **潛在限制與權衡**：
