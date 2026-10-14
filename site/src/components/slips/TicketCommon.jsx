@@ -12,7 +12,7 @@ export function getSourceLabel(url) {
   }
 }
 import { CATEGORY_ORDER } from "../../lib/constants.js";
-import { routeHash } from "../../lib/track.js";
+import { routeHash } from "../../lib/routes.js";
 export { CATEGORY_ORDER };
 
 const CAPSULE_MODES = [

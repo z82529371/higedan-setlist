@@ -21,6 +21,7 @@ export function validateAndCleanTours() {
 
   const dirs = ["tours", "events"];
   let totalIssuesFixed = 0;
+  const stubShows = [];
 
   for (const dirName of dirs) {
     const targetDir = resolve(root, "data", dirName);
@@ -119,9 +120,7 @@ export function validateAndCleanTours() {
         } else if (show.setlist) {
           // Validation for Single Event setlists
           if (show.setlist.length === 0) {
-            console.log(
-              `[Stub Event Notice] Single Event ${file} has show ${show.id} (${show.title || ""}) with empty setlist (0 songs)`
-            );
+            stubShows.push({ file, id: show.id, title: show.title || "" });
           }
           for (let i = 0; i < show.setlist.length; i++) {
             const item = show.setlist[i];
@@ -148,6 +147,20 @@ export function validateAndCleanTours() {
         writeFileSync(filePath, JSON.stringify(unit, null, 2) + "\n");
         console.log(`Updated ${file} with validation/venue fixes.`);
       }
+    }
+  }
+
+  if (stubShows.length > 0) {
+    if (process.env.VERBOSE || process.argv.includes("--verbose")) {
+      for (const s of stubShows) {
+        console.log(
+          `[Stub Event Notice] Single Event ${s.file} has show ${s.id} (${s.title}) with empty setlist (0 songs)`
+        );
+      }
+    } else {
+      console.log(
+        `[Stub Event Notice] Found ${stubShows.length} single events with empty setlists (run with --verbose for detailed show IDs)`
+      );
     }
   }
 

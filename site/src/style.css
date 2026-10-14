@@ -43,6 +43,14 @@
   --font-display: "M PLUS Rounded 1c", "Zen Kaku Gothic New", "Noto Sans TC", sans-serif;
   --font-body: "Noto Sans TC", "Zen Kaku Gothic New", system-ui, sans-serif;
   --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+  /* DESIGN.md: Zero-Blur Hard Cast Shadows */
+  --shadow-2xs: 1px 1px 0 rgba(0, 0, 0, 0.14);
+  --shadow-xs: 1px 1px 0 rgba(0, 0, 0, 0.25);
+  --shadow-sm: 2px 2px 0 #000000;
+  --shadow-md: 3px 3px 0 #000000;
+  --shadow-lg: 4px 4px 0 #000000;
+  --shadow-xl: 5px 5px 0 #000000;
+  --shadow-2xl: 6px 6px 0 #000000;
 }
 
 ::selection {
@@ -86,6 +94,14 @@ html[data-theme="dark"] {
   --color-grid-line: rgba(255, 255, 255, 0.05);
   --color-ambient-glow: rgba(212, 154, 0, 0.10);
   --color-notebook-grid: rgba(255, 255, 255, 0.04);
+  /* DESIGN.md: Zero-Blur Hard Cast Shadows (Dark) */
+  --shadow-2xs: 1px 1px 0 rgba(255, 255, 255, 0.14);
+  --shadow-xs: 1px 1px 0 rgba(255, 255, 255, 0.25);
+  --shadow-sm: 2px 2px 0 #000000;
+  --shadow-md: 3px 3px 0 #000000;
+  --shadow-lg: 4px 4px 0 #000000;
+  --shadow-xl: 5px 5px 0 #000000;
+  --shadow-2xl: 6px 6px 0 #000000;
 }
 
 @media print {

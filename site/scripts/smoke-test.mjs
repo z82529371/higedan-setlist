@@ -1575,7 +1575,53 @@ describe("Pipeline Smoke Tests", () => {
       assert.ok(!festivalHtml.includes("單場即時票根"));
     });
   });
+
+  describe("9. Design Token Invariants & Dedicated URL Routes Seam (DESIGN.md, ADR-0101)", () => {
+    it("exports parseRoute and routeHash from dedicated routes.js module with full bidirectional parity", async () => {
+      const routesMod = await server.ssrLoadModule("/src/lib/routes.js");
+      assert.ok(typeof routesMod.parseRoute === "function");
+      assert.ok(typeof routesMod.routeHash === "object");
+      assert.equal(routesMod.routeHash.song("pretender"), "#/song/pretender");
+      assert.equal(routesMod.routeHash.show("1672276"), "#/show/1672276");
+      assert.equal(routesMod.routeHash.venue("日本武道館"), "#/venue/%E6%97%A5%E6%9C%AC%E6%AD%A6%E9%81%93%E9%A4%A8");
+      assert.equal(routesMod.routeHash.tour("arena-tour-2024-rejoice"), "#/tour/arena-tour-2024-rejoice");
+
+      assert.deepEqual(routesMod.parseRoute("#/song/pretender"), { kind: "song", value: "pretender" });
+      assert.deepEqual(routesMod.parseRoute("#/show/1672276"), { kind: "show", value: "1672276" });
+      assert.deepEqual(routesMod.parseRoute("#/venue/%E6%97%A5%E6%9C%AC%E6%AD%A6%E9%81%93%E9%A4%A8"), { kind: "venue", value: "日本武道館" });
+      assert.deepEqual(routesMod.parseRoute("#/tour/arena-tour-2024-rejoice"), { kind: "tour", value: "arena-tour-2024-rejoice" });
+      assert.equal(routesMod.parseRoute(""), null);
+      assert.equal(routesMod.parseRoute("#/unknown/123"), null);
+    });
+
+    it("ensures track.js re-exports parseRoute and routeHash for backwards compatibility", async () => {
+      const trackMod = await server.ssrLoadModule("/src/lib/track.js");
+      const routesMod = await server.ssrLoadModule("/src/lib/routes.js");
+      assert.equal(trackMod.parseRoute, routesMod.parseRoute);
+      assert.equal(trackMod.routeHash, routesMod.routeHash);
+    });
+
+    it("verifies style.css defines zero-blur shadow tokens under @theme and dark theme", async () => {
+      const fs = await import("node:fs");
+      const path = await import("node:path");
+      const url = await import("node:url");
+      const here = path.dirname(url.fileURLToPath(import.meta.url));
+      const stylePath = path.resolve(here, "..", "src", "style.css");
+      const cssContent = fs.readFileSync(stylePath, "utf8");
+
+      // Verify all shadow tokens are configured with 0 blur
+      const shadowTokens = ["2xs", "xs", "sm", "md", "lg", "xl", "2xl"];
+      for (const token of shadowTokens) {
+        const regex = new RegExp(`--shadow-${token}:\\s*\\d+(?:\\.\\d+)?px\\s+\\d+(?:\\.\\d+)?px\\s+0\\b`);
+        assert.ok(
+          regex.test(cssContent),
+          `style.css must define zero-blur --shadow-${token} with 0 blur radius`
+        );
+      }
+    });
+  });
 });
+
 
 
 

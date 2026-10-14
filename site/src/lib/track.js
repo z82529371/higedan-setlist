@@ -25,26 +25,6 @@ export function trackRoute(item, weightCls) {
   return null;
 }
 
-// Hash routes (no router dep; static hosting safe):
-// #/song/<songId> #/show/<showId> #/venue/<name>
-// Robust against /#/..., #/..., #..., /..., and trailing slashes
-export function parseRoute(hash) {
-  if (!hash) return null;
-  const cleaned = (hash ?? "")
-    .replace(/^(?:\/|#)+/, "/")
-    .replace(/\/+$/, "");
-  const m = cleaned.match(/^\/(song|show|venue|tour)\/(.+)$/);
-  if (!m) return null;
-  try {
-    return { kind: m[1], value: decodeURIComponent(m[2]) };
-  } catch {
-    return null;
-  }
-}
+// URL Hash routes re-exported from dedicated routes module for backwards compatibility
+export { parseRoute, routeHash } from "./routes.js";
 
-export const routeHash = {
-  song: (id) => `#/song/${id}`,
-  show: (id) => `#/show/${id}`,
-  venue: (name) => `#/venue/${encodeURIComponent(name)}`,
-  tour: (id) => `#/tour/${id}`,
-};
