@@ -295,4 +295,167 @@ describe("Pipeline Smoke Tests", () => {
       assert.equal(cues[2].cue, "M3");
     });
   });
+
+  describe("5. Frontend Modularization Invariants (ADR-0101)", () => {
+    it("preserves canonical 8 performance categories and category order", async () => {
+      const { PERFORMANCE_CATEGORIES, CATEGORY_ORDER } = await import(
+        "../src/lib/constants.js"
+      );
+      assert.equal(PERFORMANCE_CATEGORIES.length, 8);
+      assert.deepEqual(PERFORMANCE_CATEGORIES, [
+        "巡演專場",
+        "特別專場",
+        "聯合專場",
+        "店家活動",
+        "音樂祭",
+        "學園祭",
+        "電視演出",
+        "線上直播",
+      ]);
+      assert.deepEqual(PERFORMANCE_CATEGORIES, CATEGORY_ORDER);
+    });
+
+    it("ensures all modularized slip and navigator components stay under 800 lines", async () => {
+      const fs = await import("node:fs");
+      const path = await import("node:path");
+      const checkDirs = [
+        "../src/components/slips",
+        "../src/components/navigators",
+      ];
+      for (const dir of checkDirs) {
+        const fullDir = path.resolve(import.meta.dirname, dir);
+        const files = fs.readdirSync(fullDir).filter((f) => f.endsWith(".jsx"));
+        for (const file of files) {
+          const content = fs.readFileSync(path.join(fullDir, file), "utf-8");
+          const lineCount = content.split(/\r?\n/).length;
+          assert.ok(
+            lineCount <= 800,
+            `File ${file} exceeds 800 lines (current: ${lineCount})`
+          );
+        }
+      }
+    });
+  });
+
+  describe("6. Component Mount & SSR Render Smoke Test", () => {
+    let server;
+    let React;
+    let renderToStaticMarkup;
+
+    it("initializes Vite SSR test runner", async () => {
+      const vite = await import("vite");
+      server = await vite.createServer({
+        server: { middlewareMode: true },
+        appType: "custom",
+      });
+      const reactMod = await import("react");
+      React = reactMod.default;
+      const rdomMod = await import("react-dom/server");
+      renderToStaticMarkup = rdomMod.renderToStaticMarkup;
+      assert.ok(server);
+      assert.ok(React);
+      assert.ok(renderToStaticMarkup);
+    });
+
+    it("renders PaginationPills without runtime exception", async () => {
+      const { PaginationPills } = await server.ssrLoadModule(
+        "./src/components/navigators/PaginationPills.jsx"
+      );
+      const html = renderToStaticMarkup(
+        React.createElement(PaginationPills, {
+          total: 30,
+          pageSize: 10,
+          page: 0,
+          onPageChange: () => {},
+        })
+      );
+      assert.ok(html.length > 0);
+    });
+
+    it("renders ShowNavigator without ReferenceError", async () => {
+      const { ShowNavigator } = await server.ssrLoadModule(
+        "./src/components/navigators/ShowNavigator.jsx"
+      );
+      const html = renderToStaticMarkup(
+        React.createElement(ShowNavigator, {
+          selCategory: "巡演專場",
+          selYear: "2024",
+          selUnitId: "",
+          selShow: "",
+          unitPage: 0,
+          setUnitPage: () => {},
+          showPage: 0,
+          setShowPage: () => {},
+          unitsByCategory: { "巡演專場": [] },
+          categoryStats: {},
+          availableYears: ["2024"],
+          yearStats: new Map(),
+          filteredUnits: [],
+          pagedUnits: [],
+          current: null,
+          unitData: new Map(),
+          handleCategoryClick: () => {},
+          handleSelectUnit: () => {},
+          handleSelectShow: () => {},
+        })
+      );
+      assert.ok(html.length > 0);
+      assert.ok(html.includes("選擇演出類型"));
+    });
+
+    it("renders SongNavigator without ReferenceError", async () => {
+      const { SongNavigator } = await server.ssrLoadModule(
+        "./src/components/navigators/SongNavigator.jsx"
+      );
+      const html = renderToStaticMarkup(
+        React.createElement(SongNavigator, {
+          songSortMode: "album",
+          setSongSortMode: () => {},
+          selAlbum: "Rejoice (2024)",
+          setSelAlbum: () => {},
+          selSong: "",
+          songPage: 0,
+          setSongPage: () => {},
+          allUsedSongs: [],
+          songsSortedByCount: [],
+          filteredSongs: [],
+          pagedSongs: [],
+          trackShows: new Map(),
+          handleSelectSong: () => {},
+        })
+      );
+      assert.ok(html.length > 0);
+      assert.ok(html.includes("歌曲分類方式"));
+    });
+
+    it("renders VenueNavigator without ReferenceError", async () => {
+      const { VenueNavigator } = await server.ssrLoadModule(
+        "./src/components/navigators/VenueNavigator.jsx"
+      );
+      const html = renderToStaticMarkup(
+        React.createElement(VenueNavigator, {
+          venueSortMode: "region",
+          setVenueSortMode: () => {},
+          selRegion: "日本 - 關東",
+          setSelRegion: () => {},
+          selVenue: "",
+          venuePage: 0,
+          setVenuePage: () => {},
+          allVenues: [],
+          venuesSortedByCount: [],
+          filteredVenues: [],
+          pagedVenues: [],
+          handleSelectVenue: () => {},
+        })
+      );
+      assert.ok(html.length > 0);
+      assert.ok(html.includes("場地分類方式"));
+    });
+
+    it("safely closes Vite SSR test runner", async () => {
+      if (server) await server.close();
+    });
+  });
 });
+
+

@@ -1,7 +1,7 @@
 import songsData from "../data/songs.json";
 import { ALBUM_MAP } from "./constants.js";
 import { trackKeyOf, trackKey } from "./track.js";
-import { resolve, resolveShowItems } from "./resolve.js";
+import { resolveShowItems } from "./resolve.js";
 
 const tourUnits = Object.values(
   import.meta.glob("../data/tours/*.json", { eager: true, import: "default" })

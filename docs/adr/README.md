@@ -4,10 +4,10 @@
 
 ---
 
-## 決策總覽清單（共 95 篇）
+## 決策總覽清單（共 96 篇）
 
 > [!NOTE]
-> **編號跳號說明**：本目錄編號自 ADR-0001 起至 ADR-0100 止。其中 ADR-0063、ADR-0064、ADR-0065、ADR-0068、ADR-0069 共 5 篇為早期介面排版草案，後續已被 ADR-0070 單欄聚焦架構完整吸收與替代，故無獨立保留歷史檔案；實體決策文件共計 95 篇。
+> **編號跳號說明**：本目錄編號自 ADR-0001 起至 ADR-0101 止。其中 ADR-0063、ADR-0064、ADR-0065、ADR-0068、ADR-0069 共 5 篇為早期介面排版草案，後續已被 ADR-0070 單欄聚焦架構完整吸收與替代，故無獨立保留歷史檔案；實體決策文件共計 96 篇。
 
 | 決策標題 | 狀態 | 日期 |
 | :--- | :---: | :---: |
@@ -106,5 +106,6 @@
 | [ADR-0098: 歷史缺漏歌單佔位曲目規範與雙維度審查索引架構 (Placeholder Track Specification and Dual Missing Data Audit Architecture)](0098-placeholder-track-specification-and-missing-data-audit-architecture.md) | 已採納 (Accepted) | 確立曲序缺漏以（曲目未詳）客觀佔位保留時序，並建立全庫 155 場缺歌單與 207 場缺時間之審查索引清單 |
 | [ADR-0099: 《Joanna》翻唱考證與歌曲主檔邊界校正 (Joanna Cover Attribution and Song Master Boundary Calibration)](0099-joanna-cover-attribution-and-song-master-boundary.md) | 已採納 (Accepted) | 考證藤原聰喜愛 Kool & The Gang 脈絡，將早期《Joanna》由地下原創主檔校正為純文字翻唱軌，貫徹 ADR-0055 邊界 |
 | [ADR-0100: 離屏隔離渲染與真透明圓角圖片匯出架構 (Offscreen Isolated Rendering and True Alpha Rounded Image Export Architecture)](0100-offscreen-rendering-and-true-alpha-rounded-image-export.md) | 已採納 (Accepted) | 建立離屏沙盒深層複製與固定寬度量測機制，消弭行動端小尺寸圖片跑版與底部留白，保留純淨 Alpha 透明圓角 |
+| [ADR-0101: 前端巨石檔案模組化與架構分層重構決策 (Frontend Modularization and Component Hierarchy Architecture)](0101-frontend-modularization-and-component-hierarchy.md) | 已採納 (Accepted) | 解耦 slips.jsx 與 App.jsx 兩大巨石檔案，建立 Slips、Navigators、Hooks、Layout 清晰四層架構 |
 
 
