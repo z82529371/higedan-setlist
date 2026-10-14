@@ -358,6 +358,27 @@ describe("Pipeline Smoke Tests", () => {
         }
       }
     });
+
+    it("ensures slip components adhere to DESIGN.md card radius (< 8px) rules", async () => {
+      const fs = await import("node:fs");
+      const path = await import("node:path");
+      const slipsDir = path.resolve(
+        import.meta.dirname,
+        "../src/components/slips"
+      );
+      const files = fs.readdirSync(slipsDir).filter((f) => f.endsWith(".jsx"));
+      const bannedRadiusRegex = /\brounded-(?:xl|2xl|3xl)\b/g;
+
+      for (const file of files) {
+        const content = fs.readFileSync(path.join(slipsDir, file), "utf-8");
+        const matches = content.match(bannedRadiusRegex);
+        assert.equal(
+          matches,
+          null,
+          `File ${file} contains banned large radius (> 8px) classes: ${matches?.join(", ")}`
+        );
+      }
+    });
   });
 
   describe("6. Component Mount & SSR Render Smoke Test", () => {

@@ -624,7 +624,7 @@ export function ShowSlip({ ud, showId, onSelectSong, onSelectShow, onSelectVenue
             </ol>
           </div>
           {enc.length > 0 && (
-            <div className="rounded-xl p-3.5 sm:p-4 border border-line-soft bg-paper/50 space-y-2 mt-4 shadow-xs">
+            <div className="rounded-[3px] p-3.5 sm:p-4 border border-line-soft bg-paper/50 space-y-2 mt-4">
               <div className="flex items-center justify-between font-mono text-xs font-extrabold uppercase tracking-wider text-band pb-1.5 border-b border-line-soft/70">
                 <span className="flex items-center gap-1.5">
                   <span>◆</span> ENCORE // 安可曲目
