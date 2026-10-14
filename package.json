@@ -2,14 +2,15 @@
   "name": "higedan-setlist",
   "private": true,
   "type": "module",
+  "packageManager": "pnpm@11.18.0",
   "scripts": {
-    "sync": "pnpm --dir site sync",
-    "lint": "pnpm --dir site lint",
-    "test": "pnpm --dir site test",
-    "check": "pnpm --dir site check",
-    "audit:reports": "pnpm --dir site audit:reports",
-    "dev": "pnpm --dir site dev",
-    "build": "pnpm --dir site install && pnpm --dir site build",
-    "preview": "pnpm --dir site preview"
+    "sync": "pnpm --filter ./site sync",
+    "lint": "pnpm --filter ./site lint",
+    "test": "pnpm --filter ./site test",
+    "check": "pnpm --filter ./site check",
+    "audit:reports": "pnpm --filter ./site audit:reports",
+    "dev": "pnpm --filter ./site dev",
+    "build": "pnpm --filter ./site build",
+    "preview": "pnpm --filter ./site preview"
   }
 }
