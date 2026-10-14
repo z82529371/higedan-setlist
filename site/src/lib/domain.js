@@ -363,7 +363,7 @@ export function computeTourStatistics(tourUnitData) {
 
   const uniquePrefectures = new Set();
   const uniqueCities = new Set();
-  const allUniqueSongIds = new Set();
+  const allUniqueSongKeys = new Set();
 
   for (const s of shows) {
     if (s.prefecture) uniquePrefectures.add(s.prefecture);
@@ -379,7 +379,8 @@ export function computeTourStatistics(tourUnitData) {
   const consensusTracks = rawTpl.map((item) => {
     const songId = item.songId || null;
     const title = (songId && songTitle[songId]) || item.title || "";
-    if (songId) allUniqueSongIds.add(songId);
+    const songKey = songId || item.title;
+    if (songKey) allUniqueSongKeys.add(songKey);
 
     const appearances = [];
     const variationNotes = new Set();
@@ -436,20 +437,22 @@ export function computeTourStatistics(tourUnitData) {
           showId: rs.show.id,
           show: rs.show,
           item: it,
+          cue: "—",
         });
         continue;
       }
 
       const sid = it.songId;
       const stitle = (sid && songTitle[sid]) || it.title;
-      if (sid) allUniqueSongIds.add(sid);
+      const songKey = sid || stitle;
+      if (songKey) allUniqueSongKeys.add(songKey);
 
       const isTemplateSong = sid ? tplSongSet.has(sid) : rawTpl.some((t) => t.title === stitle);
       if (!isTemplateSong) {
         const key = sid || stitle;
         if (!nonTemplateSongMap.has(key)) {
           nonTemplateSongMap.set(key, {
-            songId: sid,
+            songId: sid || null,
             title: stitle,
             appearances: [],
             shows: [],
@@ -466,7 +469,7 @@ export function computeTourStatistics(tourUnitData) {
     }
   }
 
-  const surpriseTracks = Array.from(nonTemplateSongMap.values()).map((rec) => {
+  const allNonTemplateTracks = Array.from(nonTemplateSongMap.values()).map((rec) => {
     const count = rec.appearances.length;
     const freq = formatFrequencyStats(count, totalShows);
 
@@ -481,11 +484,16 @@ export function computeTourStatistics(tourUnitData) {
       tierLabel: freq.tierLabel,
       tierBadgeLabel: freq.tierBadgeLabel,
       badgeClass: freq.badgeClass,
+      pillClass: freq.pillClass,
       appearances: rec.appearances,
       shows: rec.shows,
       variations: Array.from(rec.notes),
     };
   });
+
+  const surpriseTracks = allNonTemplateTracks
+    .filter((t) => t.ratio < 0.3 || t.tier === "surprise")
+    .sort((a, b) => b.count - a.count || (a.title > b.title ? 1 : -1));
 
   // 3. Chronological Itinerary Timeline
   const itinerary = shows.map((s, idx) => ({
@@ -512,7 +520,8 @@ export function computeTourStatistics(tourUnitData) {
     regularCount: regularTracks.length,
     rotatingCount: rotatingTracks.length,
     surpriseCount: surpriseTemplateTracks.length + surpriseTracks.length,
-    uniqueSongsCount: allUniqueSongIds.size,
+    interludesCount: interludes.length,
+    uniqueSongsCount: allUniqueSongKeys.size,
     prefecturesCount: uniquePrefectures.size,
     citiesCount: uniqueCities.size,
     dateStart: earliestDate,
@@ -530,6 +539,7 @@ export function computeTourStatistics(tourUnitData) {
     regularTracks,
     rotatingTracks,
     surpriseTracks,
+    nonTemplateTracks: allNonTemplateTracks,
     interludes,
     itinerary,
     stats,

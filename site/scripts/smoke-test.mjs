@@ -768,6 +768,7 @@ describe("Pipeline Smoke Tests", () => {
         React.createElement(TourSlip, {
           tourUnitData: rejoiceTour,
           onSelectSong: () => {},
+          onSelectShow: () => {},
         })
       );
 
@@ -784,6 +785,202 @@ describe("Pipeline Smoke Tests", () => {
       assert.ok(html.includes("OFFICIAL HIGEDAN DISM STAGE ARCHIVE"));
       assert.ok(html.includes("SN: TOUR-"));
       assert.ok(html.includes("TOUR CONSENSUS MASTER SHEET"));
+    });
+
+    it("accurately identifies surprise inserts (< 30% play rate) and associates them with show IDs (Ticket 2)", () => {
+      const travelersTour = allUnits.find(
+        (u) => u.id === "tour-19-20-hall-travelers"
+      );
+      assert.ok(travelersTour);
+
+      const stats = computeTourStatistics(travelersTour);
+      assert.equal(stats.totalShows, 29);
+      assert.ok(stats.surpriseTracks.length > 0);
+
+      // All surprise tracks must strictly have ratio < 0.3
+      for (const track of stats.surpriseTracks) {
+        assert.ok(
+          track.ratio < 0.3,
+          `Track ${track.title} ratio ${track.ratio} must be < 0.3`
+        );
+        assert.equal(track.tier, "surprise");
+        assert.equal(track.tierLabel, "限定突襲");
+        assert.ok(track.appearances.length > 0);
+        assert.equal(track.appearances.length, track.count);
+        assert.equal(track.shows.length, track.count);
+        for (const show of track.shows) {
+          assert.ok(show.id);
+          assert.ok(show.venue);
+        }
+      }
+
+      // Check specific surprise track Sweet Tweet (6/29 = 21%)
+      const sweetTweet = stats.surpriseTracks.find(
+        (t) => t.songId === "sweet-tweet"
+      );
+      assert.ok(sweetTweet);
+      assert.equal(sweetTweet.count, 6);
+      assert.equal(sweetTweet.percentage, 21);
+      assert.deepEqual(sweetTweet.appearances, [
+        "1150086",
+        "1150087",
+        "1150094",
+        "1150099",
+        "1150102",
+        "1150104",
+      ]);
+
+      // Check specific surprise track I LOVE... (6/29 = 21%)
+      const iLove = stats.surpriseTracks.find((t) => t.songId === "i-love");
+      assert.ok(iLove);
+      assert.equal(iLove.count, 6);
+
+      // Check non-songId cover title track Don't Stop Me Now [Queen] (1/29)
+      const queenCover = stats.surpriseTracks.find(
+        (t) => t.title === "Don't Stop Me Now [Queen]"
+      );
+      assert.ok(queenCover);
+      assert.equal(queenCover.count, 1);
+      assert.equal(queenCover.songId, null);
+      assert.deepEqual(queenCover.appearances, ["1150092"]);
+      // uniqueSongsCount must include cover song (21 template + 8 surprise = 29)
+      assert.equal(stats.stats.uniqueSongsCount, 29);
+
+      // Check request variations attached to surprise track
+      const ladyTrack = stats.surpriseTracks.find((t) => t.songId === "lady");
+      assert.ok(ladyTrack);
+      assert.ok(
+        ladyTrack.variations.some((v) => v.includes("会場リクエスト"))
+      );
+    });
+
+    it("properly filters and numbers interludes with dash (—) without counting towards formal songs (Ticket 2)", () => {
+      const rejoiceTour = allUnits.find(
+        (u) => u.id === "arena-tour-2024-rejoice"
+      );
+      assert.ok(rejoiceTour);
+
+      const stats = computeTourStatistics(rejoiceTour);
+      assert.equal(stats.interludes.length, 4);
+
+      for (const interlude of stats.interludes) {
+        assert.equal(interlude.cue, "—");
+        assert.ok(interlude.showId);
+        assert.ok(interlude.item.note);
+        // Interludes must have type: "interlude"
+        assert.equal(interlude.item.type, "interlude");
+      }
+
+      // Check specific interlude notes in Rejoice
+      const mcInterlude = stats.interludes.find(
+        (it) => it.item.note === "ピアノ弾きMC"
+      );
+      assert.ok(mcInterlude);
+      assert.equal(mcInterlude.showId, "1672276");
+
+      const coverInterlude = stats.interludes.find(
+        (it) => it.item.note === "Supernova (ELLEGARDEN) 大輔ボーカル"
+      );
+      assert.ok(coverInterlude);
+      assert.equal(coverInterlude.showId, "1672278");
+
+      // Verify assignCues gives null cue to interludes
+      const rawWithInterlude = [
+        { songId: "pretender", title: "Pretender" },
+        { type: "interlude", note: "メンバーソロ" },
+        { songId: "subtitle", title: "Subtitle" },
+      ];
+      const assigned = assignCues(rawWithInterlude, "M");
+      assert.equal(assigned[0].cue, "M1");
+      assert.equal(assigned[1].cue, null);
+      assert.equal(assigned[2].cue, "M2");
+    });
+
+    it("merges version variations and satoshi-solo into master tracks without splitting (Ticket 2)", () => {
+      // 1. In Editorial Tour (49 shows), mixed-nuts was inserted in 4 shows with solo & premiere notes
+      const editorialTour = allUnits.find(
+        (u) => u.id === "one-man-tour-2021-2022-editorial"
+      );
+      assert.ok(editorialTour);
+
+      const editorialStats = computeTourStatistics(editorialTour);
+      const mixedNutsEntries = editorialStats.surpriseTracks.filter(
+        (t) => t.songId === "mixed-nuts"
+      );
+      // Must not split into multiple entries
+      assert.equal(mixedNutsEntries.length, 1);
+      const mixedNuts = mixedNutsEntries[0];
+      assert.equal(mixedNuts.count, 4);
+      assert.equal(mixedNuts.totalShows, 49);
+      assert.ok(mixedNuts.ratio < 0.3);
+      // Both notes must be captured in variations
+      assert.ok(
+        mixedNuts.variations.some((v) => v.includes("藤原聡/弾き語り"))
+      );
+      assert.ok(mixedNuts.variations.some((v) => v.includes("新曲")));
+
+      // 2. In Shocking Nuts Tour, template track Subtitle had satoshi-solo & premiere versions
+      const shockingNuts = allUnits.find(
+        (u) => u.id === "shocking-nuts-tour-2022-2023"
+      );
+      assert.ok(shockingNuts);
+      const shockingStats = computeTourStatistics(shockingNuts);
+      const subtitleEntries = shockingStats.consensusTracks.filter(
+        (t) => t.songId === "subtitle"
+      );
+      assert.equal(subtitleEntries.length, 1);
+      const subtitle = subtitleEntries[0];
+      assert.equal(subtitle.count, 21);
+      assert.equal(subtitle.tier, "core");
+      assert.ok(
+        subtitle.variations.some((v) => v.includes("ピアノ弾き語り"))
+      );
+      assert.ok(subtitle.variations.some((v) => v.includes("新曲")));
+    });
+
+    it("renders TourSlip component with complete Surprise Inserts and Interludes SSR markup", () => {
+      // Test 1: Hall Travelers Tour has Surprise Inserts
+      const travelersTour = allUnits.find(
+        (u) => u.id === "tour-19-20-hall-travelers"
+      );
+      assert.ok(travelersTour);
+
+      const travelersHtml = renderToStaticMarkup(
+        React.createElement(TourSlip, {
+          tourUnitData: travelersTour,
+          onSelectSong: () => {},
+          onSelectShow: () => {},
+        })
+      );
+
+      assert.ok(travelersHtml.includes("SURPRISE INSERTS // 巡演限定突襲曲"));
+      assert.ok(travelersHtml.includes("Sweet Tweet"));
+      assert.ok(travelersHtml.includes("I LOVE..."));
+      assert.ok(travelersHtml.includes("愛なんだが…"));
+      // Direct ticket links for shows
+      assert.ok(travelersHtml.includes("#/show/1150086"));
+      assert.ok(travelersHtml.includes("🎫"));
+
+      // Test 2: Rejoice Arena Tour has Interludes
+      const rejoiceTour = allUnits.find(
+        (u) => u.id === "arena-tour-2024-rejoice"
+      );
+      assert.ok(rejoiceTour);
+
+      const rejoiceHtml = renderToStaticMarkup(
+        React.createElement(TourSlip, {
+          tourUnitData: rejoiceTour,
+          onSelectSong: () => {},
+          onSelectShow: () => {},
+        })
+      );
+
+      assert.ok(
+        rejoiceHtml.includes("INTERLUDES // 特別彈唱與過場（不計入正式曲目）")
+      );
+      assert.ok(rejoiceHtml.includes("ピアノ弾きMC"));
+      assert.ok(rejoiceHtml.includes("Supernova (ELLEGARDEN) 大輔ボーカル"));
+      assert.ok(rejoiceHtml.includes("#/show/1672276"));
     });
   });
 });

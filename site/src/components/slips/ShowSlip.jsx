@@ -38,8 +38,8 @@ export function ShowSlip({ ud, showId, onSelectSong, onSelectShow, onSelectVenue
   const main = assignCues(rawMain, "M");
   const enc = assignCues(rawEnc, "EN");
 
-  const mainCount = main.filter((p) => p.item.songId || p.item.title).length;
-  const encCount = enc.filter((p) => p.item.songId || p.item.title).length;
+  const mainCount = main.filter((p) => p.cue !== null).length;
+  const encCount = enc.filter((p) => p.cue !== null).length;
   const songCount = mainCount + encCount;
 
   // Album era breakdown in this show
@@ -179,7 +179,7 @@ export function ShowSlip({ ud, showId, onSelectSong, onSelectShow, onSelectVenue
 
   const renderRun = (g, prefix) => {
     const first = g.items[0].item;
-    if (!first.songId && !first.title) {
+    if (first.type === "interlude" || (!first.songId && !first.title)) {
       return (
         <li
           key={prefix}
@@ -188,7 +188,7 @@ export function ShowSlip({ ud, showId, onSelectSong, onSelectShow, onSelectVenue
           <span className="cue-no min-w-[42px] text-right font-mono text-[12px] text-line">
             —
           </span>
-          <span>{first.note ?? ""}</span>
+          <span>{first.note || first.title || ""}</span>
         </li>
       );
     }

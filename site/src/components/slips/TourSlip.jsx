@@ -16,11 +16,34 @@ import {
   TicketBarcodeFooter,
 } from "./TicketCommon.jsx";
 
+function getVariationBadgeClass(note) {
+  if (!note) return "bg-tape-soft/30 text-ink/80 border-ink/20";
+  if (note.includes("弾き語り") || note.includes("ソロ") || note.includes("solo")) {
+    return "bg-[#f2fbf8] text-[#0e7a66] border-[#0e7a66]/30 dark:bg-[#0e7a66]/20 dark:text-[#5eead4] dark:border-[#0e7a66]/50";
+  }
+  if (note.includes("リクエスト") || note.includes("request")) {
+    return "bg-[#fbe9e6] text-[#d9261c] border-[#d9261c]/30 dark:bg-[#d9261c]/20 dark:text-[#fca5a5] dark:border-[#d9261c]/50";
+  }
+  if (note.includes("新曲") || note.includes("初") || note.includes("premiere")) {
+    return "bg-[#fffdf5] text-[#8a5a0a] border-[#8a5a0a]/30 dark:bg-[#8a5a0a]/20 dark:text-[#fde68a] dark:border-[#8a5a0a]/50";
+  }
+  return "bg-tape-soft/30 text-ink/80 border-ink/20";
+}
+
+function formatShowBadgeLabel(show) {
+  if (!show) return "";
+  const dateStr = show.date ? show.date.slice(5).replace("-", "/") : "";
+  const place = show.city || show.venue || "";
+  if (place && dateStr) return `${place} ${dateStr}`;
+  return place || dateStr || show.id || "";
+}
+
 export function TourSlip({
   tourUnitData,
   ud,
   tourData,
   onSelectSong,
+  onSelectShow,
 }) {
   const targetData = tourUnitData || ud || tourData;
 
@@ -34,6 +57,8 @@ export function TourSlip({
     tour,
     totalShows,
     consensusTracks,
+    surpriseTracks,
+    interludes,
     stats,
   } = statsResult;
 
@@ -46,64 +71,114 @@ export function TourSlip({
     return `SN: TOUR-${rawDate || "2024"}-${rawId || "MASTER"}`;
   };
 
-  const renderTrackItem = (track, cue) => {
+  const renderTrackTitleAndBadges = (track) => {
     const isClickable = !!(onSelectSong && track.songId);
 
     return (
-      <li
-        key={track.order || track.songId || track.title}
-        className={`${SETLIST_ITEM} flex-col sm:flex-row sm:items-center justify-between gap-2 py-2.5 px-2 hover:bg-black/[0.02] dark:hover:bg-white/[0.02] transition-colors`}
-      >
-        <div className="flex min-w-0 items-baseline gap-2.5 sm:gap-3 flex-1">
-          <span className={CUE_NO}>{cue}</span>
-          <div className="min-w-0 flex-1">
-            {isClickable ? (
-              <a
-                href={routeHash.song(track.songId)}
-                onClick={(e) => {
-                  e.preventDefault();
-                  onSelectSong(track.songId);
-                }}
-                className={SETLIST_SONG}
-                title={`查看歌曲檔案：《${track.title}》`}
-              >
-                <span className="font-bold text-[14px] sm:text-[15px]">{track.title}</span>
-              </a>
-            ) : (
-              <span className="font-bold text-[14px] sm:text-[15px] text-ink">{track.title}</span>
-            )}
+      <div className="min-w-0 flex-1">
+        <div className="flex flex-wrap items-baseline gap-2">
+          {isClickable ? (
+            <a
+              href={routeHash.song(track.songId)}
+              onClick={(e) => {
+                e.preventDefault();
+                onSelectSong(track.songId);
+              }}
+              className={SETLIST_SONG}
+              title={`查看歌曲檔案：《${track.title}》`}
+            >
+              <span className="font-bold text-[14px] sm:text-[15px]">{track.title}</span>
+            </a>
+          ) : (
+            <span className="font-bold text-[14px] sm:text-[15px] text-ink">{track.title}</span>
+          )}
 
-            {track.variations && track.variations.length > 0 && (
-              <div className="mt-0.5 flex flex-wrap gap-1">
-                {track.variations.map((note, idx) => (
-                  <span
-                    key={idx}
-                    className="inline-flex items-center rounded bg-tape-soft/30 px-1.5 py-0.2 text-[10px] font-mono text-ink/80 border border-ink/20"
-                  >
-                    {note}
-                  </span>
-                ))}
-              </div>
-            )}
-          </div>
+          {track.variations && track.variations.length > 0 && (
+            <div className="inline-flex flex-wrap gap-1 align-middle">
+              {track.variations.map((note, idx) => (
+                <span
+                  key={idx}
+                  className={`inline-flex items-center rounded px-1.5 py-0.2 text-[10px] font-mono border ${getVariationBadgeClass(
+                    note
+                  )}`}
+                >
+                  {note}
+                </span>
+              ))}
+            </div>
+          )}
         </div>
-
-        {/* Frequency Tier Badge & Appearances Rate */}
-        <div className="flex shrink-0 items-center justify-end gap-2 pl-9 sm:pl-0">
-          <span
-            className={`inline-flex items-center gap-1 rounded px-2 py-0.5 text-[11px] font-mono select-none ${track.badgeClass}`}
-            title={`此巡演共登場 ${track.count} 場（全 ${track.totalShows} 場 · 出賽率 ${track.percentage}%）`}
-          >
-            <span>{track.tierBadgeLabel}</span>
-          </span>
-
-          <span className="font-mono text-[11px] text-muted tabular-nums whitespace-nowrap">
-            {track.count} / {totalShows} 場
-          </span>
-        </div>
-      </li>
+      </div>
     );
   };
+
+  const renderFrequencyPill = (track) => (
+    <div className="flex shrink-0 items-center justify-end gap-2 pl-7 sm:pl-0">
+      <span
+        className={`inline-flex items-center gap-1 rounded px-2 py-0.5 text-[11px] font-mono select-none ${track.badgeClass}`}
+        title={`此巡演共登場 ${track.count} 場（全 ${track.totalShows} 場 · 出賽率 ${track.percentage}%）`}
+      >
+        <span>{track.tierBadgeLabel}</span>
+      </span>
+
+      <span className="font-mono text-[11px] text-muted tabular-nums whitespace-nowrap">
+        {track.count} / {totalShows} 場
+      </span>
+    </div>
+  );
+
+  const renderTrackItem = (track, cue) => (
+    <li
+      key={track.order || track.songId || track.title}
+      className={`${SETLIST_ITEM} flex-col sm:flex-row sm:items-center justify-between gap-2 py-2.5 px-2 hover:bg-black/[0.02] dark:hover:bg-white/[0.02] transition-colors`}
+    >
+      <div className="flex min-w-0 items-baseline gap-2.5 sm:gap-3 flex-1">
+        <span className={CUE_NO}>{cue}</span>
+        {renderTrackTitleAndBadges(track)}
+      </div>
+      {renderFrequencyPill(track)}
+    </li>
+  );
+
+  const renderSurpriseTrackItem = (track) => (
+    <li
+      key={track.songId || track.title}
+      className={`${SETLIST_ITEM} flex-col gap-2 py-3 px-2 hover:bg-black/[0.02] dark:hover:bg-white/[0.02] transition-colors`}
+    >
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 w-full">
+        <div className="flex min-w-0 items-baseline gap-2.5 sm:gap-3 flex-1">
+          <span className={`${CUE_NO} text-muted font-bold select-none`}>◆</span>
+          {renderTrackTitleAndBadges(track)}
+        </div>
+        {renderFrequencyPill(track)}
+      </div>
+
+      {track.shows && track.shows.length > 0 && (
+        <div className="pl-7 flex flex-wrap items-center gap-1.5 pt-1">
+          <span className="text-[11px] font-mono text-muted select-none">
+            演出場次：
+          </span>
+          {track.shows.map((s) => (
+            <a
+              key={s.id}
+              href={routeHash.show(s.id)}
+              onClick={(e) => {
+                if (onSelectShow) {
+                  e.preventDefault();
+                  onSelectShow(s.id);
+                }
+              }}
+              className="inline-flex items-center gap-1 rounded px-2 py-0.5 text-[11px] font-mono border border-line-soft bg-paper hover:border-ink hover:text-ink text-muted transition-colors"
+              title={`${s.date} ${s.venue}${s.city ? `（${s.city}）` : ""}`}
+            >
+              <span>🎫</span>
+              <span>{formatShowBadgeLabel(s)}</span>
+            </a>
+          ))}
+        </div>
+      )}
+    </li>
+  );
 
   return (
     <article
@@ -230,6 +305,75 @@ export function TourSlip({
               </ol>
             </div>
           )}
+        </div>
+      )}
+
+      {/* Surprise Inserts Section */}
+      {surpriseTracks && surpriseTracks.length > 0 && (
+        <div className="rounded-[3px] p-3.5 sm:p-4 border border-line-soft bg-paper/60 space-y-3 mt-6">
+          <div className="flex items-center justify-between font-mono text-xs font-bold uppercase tracking-wider text-muted pb-1.5 mb-1 border-b border-line-soft">
+            <span className="flex items-center gap-1.5 text-ink font-extrabold">
+              <span className="text-band">◆</span> SURPRISE INSERTS // 巡演限定突襲曲
+            </span>
+            <span className="tabular-nums text-xs text-muted font-mono">
+              {surpriseTracks.length} SONGS (&lt;30%)
+            </span>
+          </div>
+
+          <p className="text-[12px] text-muted m-0">
+            未收錄於巡演共識母單但於特定場次驚喜登場之稀有曲目（出賽率 &lt; 30%）：
+          </p>
+
+          <ol className="m-0 list-none p-0 divide-y divide-line-soft/50">
+            {surpriseTracks.map((track) => renderSurpriseTrackItem(track))}
+          </ol>
+        </div>
+      )}
+
+      {/* Special Interludes Section */}
+      {interludes && interludes.length > 0 && (
+        <div className="rounded-[3px] p-3.5 sm:p-4 border border-line-soft bg-paper/40 space-y-2 mt-4">
+          <div className="flex items-center justify-between font-mono text-xs font-extrabold uppercase tracking-wider text-muted pb-1.5 border-b border-line-soft">
+            <span className="flex items-center gap-1.5 text-ink font-bold">
+              <span className="font-mono text-line">—</span>
+              <span>INTERLUDES // 特別彈唱與過場（不計入正式曲目）</span>
+            </span>
+            <span className="tabular-nums text-xs text-muted font-mono">
+              {interludes.length} EVENTS
+            </span>
+          </div>
+
+          <ol className="m-0 list-none p-0 divide-y divide-line-soft/40">
+            {interludes.map((it, idx) => (
+              <li
+                key={`${it.showId}-${idx}`}
+                className={`${SETLIST_ITEM} flex-col sm:flex-row sm:items-center justify-between gap-2 py-2 px-2 hover:bg-black/[0.02] dark:hover:bg-white/[0.02] text-[13px] text-muted`}
+              >
+                <div className="flex min-w-0 items-baseline gap-2.5 sm:gap-3 flex-1">
+                  <span className={`${CUE_NO} text-line select-none font-mono`}>—</span>
+                  <span className="font-medium text-ink">
+                    {it.item.note || it.item.title || "特別過場"}
+                  </span>
+                </div>
+                <div className="pl-7 sm:pl-0 shrink-0">
+                  <a
+                    href={routeHash.show(it.showId)}
+                    onClick={(e) => {
+                      if (onSelectShow) {
+                        e.preventDefault();
+                        onSelectShow(it.showId);
+                      }
+                    }}
+                    className="inline-flex items-center gap-1 rounded px-2 py-0.5 text-[11px] font-mono border border-line-soft bg-paper hover:border-ink hover:text-ink text-muted transition-colors"
+                    title={`${it.show?.date || ""} ${it.show?.venue || ""}`}
+                  >
+                    <span>🎫</span>
+                    <span>{it.show ? formatShowBadgeLabel(it.show) : it.showId}</span>
+                  </a>
+                </div>
+              </li>
+            ))}
+          </ol>
         </div>
       )}
 

@@ -57,7 +57,9 @@ export function isEncorePosition(after, startOrder) {
 export function assignCues(list, prefix) {
   let n = 0;
   return (list ?? []).map((item) => {
-    if (!item.songId && !item.title) return { item, cue: null };
+    if (item.type === "interlude" || (!item.songId && !item.title)) {
+      return { item, cue: null };
+    }
     n += 1;
     return { item, cue: `${prefix}${n}` };
   });
