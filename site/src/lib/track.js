@@ -33,7 +33,7 @@ export function parseRoute(hash) {
   const cleaned = (hash ?? "")
     .replace(/^(?:\/|#)+/, "/")
     .replace(/\/+$/, "");
-  const m = cleaned.match(/^\/(song|show|venue)\/(.+)$/);
+  const m = cleaned.match(/^\/(song|show|venue|tour)\/(.+)$/);
   if (!m) return null;
   try {
     return { kind: m[1], value: decodeURIComponent(m[2]) };
@@ -46,4 +46,5 @@ export const routeHash = {
   song: (id) => `#/song/${id}`,
   show: (id) => `#/show/${id}`,
   venue: (name) => `#/venue/${encodeURIComponent(name)}`,
+  tour: (id) => `#/tour/${id}`,
 };

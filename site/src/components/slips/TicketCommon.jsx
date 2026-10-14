@@ -12,7 +12,99 @@ export function getSourceLabel(url) {
   }
 }
 import { CATEGORY_ORDER } from "../../lib/constants.js";
+import { routeHash } from "../../lib/track.js";
 export { CATEGORY_ORDER };
+
+const CAPSULE_MODES = [
+  {
+    key: "tour",
+    label: "巡演總覽大票",
+    icon: "📜",
+    title: "切換至巡演總覽大票，檢視全巡演共識母單與出賽統計",
+  },
+  {
+    key: "show",
+    label: "單場即時票根",
+    icon: "🎫",
+    title: "切換至單場即時票根，檢視特定場次實際歌單與演出細節",
+  },
+];
+
+export function DualModeCapsuleToggle({
+  isTour,
+  mode = "show",
+  unitId,
+  showId,
+  onToggleMode,
+  onSelectTour,
+  onSelectShow,
+}) {
+  if (!isTour) return null;
+
+  const handleClick = (e, targetKey) => {
+    e.preventDefault();
+    if (onToggleMode) {
+      onToggleMode(targetKey);
+    } else if (targetKey === "tour" && onSelectTour && unitId) {
+      onSelectTour(unitId);
+    } else if (targetKey === "show" && onSelectShow && showId) {
+      onSelectShow(showId);
+    }
+  };
+
+  return (
+    <div
+      className="my-3 flex items-center justify-center select-none"
+      aria-label="檢視模式切換"
+    >
+      <div
+        role="tablist"
+        aria-label="票券檢視模式切換"
+        className="inline-flex items-center gap-1 rounded-full border border-ink/40 bg-paper/95 p-1 shadow-[1px_1px_0_rgba(0,0,0,0.14)]"
+      >
+        {CAPSULE_MODES.map((item, index) => {
+          const isActive = mode === item.key;
+          const href =
+            item.key === "tour"
+              ? unitId
+                ? routeHash.tour(unitId)
+                : "#/tour"
+              : showId
+                ? routeHash.show(showId)
+                : "#/show";
+
+          return (
+            <span key={item.key} className="inline-flex items-center gap-1">
+              {index > 0 && (
+                <span
+                  className="text-muted/40 font-mono text-[10px] select-none"
+                  aria-hidden="true"
+                >
+                  ⟷
+                </span>
+              )}
+              <a
+                role="tab"
+                aria-selected={isActive}
+                href={href}
+                onClick={(e) => handleClick(e, item.key)}
+                className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-[11px] sm:text-[12px] font-mono font-bold transition-all cursor-pointer ${
+                  isActive
+                    ? "bg-band text-band-ink border border-ink/40 shadow-[1px_1px_0_#000000]"
+                    : "text-muted hover:text-ink hover:bg-tape-tint/50 border border-transparent"
+                }`}
+                title={item.title}
+              >
+                <span>{item.icon}</span>
+                <span>{item.label}</span>
+              </a>
+            </span>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
 
 export const songFilterPillClass = (isActive) =>
   `appearance-none w-full flex items-center justify-center gap-1 rounded border-[1.5px] px-1.5 py-[5px] sm:px-2 text-[12px] font-semibold cursor-pointer whitespace-nowrap transition-colors motion-reduce:transition-none text-center focus-visible:outline-[2px] focus-visible:outline-pool focus-visible:outline-offset-2 ${

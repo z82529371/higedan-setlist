@@ -15,6 +15,7 @@ import { routeHash } from "../../lib/track.js";
 import {
   TicketPerforationDivider,
   TicketBarcodeFooter,
+  DualModeCapsuleToggle,
 } from "./TicketCommon.jsx";
 
 function getVariationBadgeClass(note) {
@@ -45,7 +46,10 @@ export function TourSlip({
   tourData,
   onSelectSong,
   onSelectShow,
+  onSelectTour,
   initialItineraryExpanded = false,
+  showSubMode = "tour",
+  onToggleSubMode,
 }) {
   const targetData = tourUnitData || ud || tourData;
 
@@ -278,6 +282,17 @@ export function TourSlip({
             </div>
           </div>
         </div>
+
+        {/* Dual-Mode Capsule Toggle */}
+        <DualModeCapsuleToggle
+          isTour={true}
+          mode={showSubMode}
+          unitId={tour?.id}
+          showId={tour?.shows?.[0]?.id}
+          onToggleMode={onToggleSubMode}
+          onSelectTour={onSelectTour}
+          onSelectShow={onSelectShow}
+        />
       </div>
 
       {/* Ticket Perforation Divider */}

@@ -7,6 +7,7 @@ import {
   getSongAlbum,
   getVenueRegion,
   songTitle,
+  shortUnitTitle,
 } from "../lib/domain.js";
 import { parseRoute, routeHash } from "../lib/track.js";
 
@@ -16,6 +17,7 @@ export function useArchiveRoute({
   allVenues,
   unitIdByShowId,
   filterState,
+  initialDraftState = null,
 }) {
   const {
     selCategory,
@@ -43,6 +45,7 @@ export function useArchiveRoute({
   const initialSelection = () => {
     const fallback = {
       tab: "show",
+      showSubMode: allUnits[0]?.templateSetlist ? "tour" : "show",
       selUnitId: allUnits[0]?.id ?? null,
       selSong: allUsedSongs[0]?.id ?? null,
       selVenue: allVenues[0]?.name ?? null,
@@ -56,11 +59,36 @@ export function useArchiveRoute({
     if (r.kind === "show" && unitIdByShowId.has(r.value))
       return {
         ...fallback,
+        tab: "show",
+        showSubMode: "show",
         selUnitId: unitIdByShowId.get(r.value),
         selShow: r.value,
       };
     if (r.kind === "venue" && allVenues.some((v) => v.name === r.value))
       return { ...fallback, tab: "venue", selVenue: r.value };
+    if (r.kind === "tour") {
+      const uEntry = unitData.get(r.value);
+      if (uEntry) {
+        const defShow = defaultShowId(uEntry.unit);
+        if (uEntry.isTour) {
+          return {
+            ...fallback,
+            tab: "show",
+            showSubMode: "tour",
+            selUnitId: r.value,
+            selShow: defShow,
+          };
+        } else {
+          return {
+            ...fallback,
+            tab: "show",
+            showSubMode: "show",
+            selUnitId: r.value,
+            selShow: defShow,
+          };
+        }
+      }
+    }
     return fallback;
   };
 
@@ -74,11 +102,17 @@ export function useArchiveRoute({
     if (r.kind === "song" && allUsedSongs.some((s) => s.id === r.value)) return "archive";
     if (r.kind === "show" && unitIdByShowId.has(r.value)) return "archive";
     if (r.kind === "venue" && allVenues.some((v) => v.name === r.value)) return "archive";
+    if (r.kind === "tour") {
+      const uEntry = unitData.get(r.value);
+      if (uEntry) return "archive";
+      return "landing";
+    }
     return "landing";
   });
 
   const [selUnitId, setSelUnitId] = useState(initial.selUnitId);
   const [tab, setTab] = useState(initial.tab);
+  const [showSubMode, setShowSubMode] = useState(initial.showSubMode || "show");
   const [selSong, setSelSong] = useState(initial.selSong);
   const [selVenue, setSelVenue] = useState(initial.selVenue);
   const [selShow, setSelShow] = useState(initial.selShow);
@@ -111,7 +145,7 @@ export function useArchiveRoute({
   const [isFilterDrawerOpen, setIsFilterDrawerOpen] = useState(false);
   const [isMobileSearchOpen, setIsMobileSearchOpen] = useState(false);
   const [isCalendarOpen, setIsCalendarOpen] = useState(false);
-  const [draftState, setDraftState] = useState(null);
+  const [draftState, setDraftState] = useState(initialDraftState);
 
   const openFilterDrawer = () => {
     setDraftState({
@@ -119,6 +153,7 @@ export function useArchiveRoute({
       year: selYear,
       unitId: selUnitId,
       showId: selShow,
+      showSubMode: showSubMode,
       unitPage: unitPage,
       showPage: showPage,
       songSortMode: songSortMode,
@@ -158,6 +193,7 @@ export function useArchiveRoute({
       const targetUnit = unitData.get(uId)?.unit;
       setSelUnitId(uId);
       setTab("show");
+      setShowSubMode("show");
       setSelShow(r.value);
       setQ("");
       if (targetUnit) {
@@ -166,6 +202,40 @@ export function useArchiveRoute({
         setSelCategory(cat);
         if (yr && yr !== "9999") {
           setSelYear(yr);
+        }
+      }
+    } else if (r.kind === "tour") {
+      const uEntry = unitData.get(r.value);
+      if (!uEntry) {
+        setViewMode("landing");
+        window.location.hash = "#/";
+        return;
+      }
+      setTab("show");
+      setSelUnitId(r.value);
+      setQ("");
+      const targetUnit = uEntry.unit;
+      if (targetUnit) {
+        const cat = getUnitTypeLabel(targetUnit);
+        const yr = unitEarliest(targetUnit).split("-")[0];
+        setSelCategory(cat);
+        if (yr && yr !== "9999") {
+          setSelYear(yr);
+        }
+      }
+      const defShow = defaultShowId(targetUnit);
+      if (defShow) {
+        setSelShow(defShow);
+      }
+      if (!uEntry.isTour) {
+        setShowSubMode("show");
+        if (defShow && window.location.hash !== routeHash.show(defShow)) {
+          window.location.hash = routeHash.show(defShow);
+        }
+      } else {
+        setShowSubMode("tour");
+        if (window.location.hash !== routeHash.tour(r.value)) {
+          window.location.hash = routeHash.tour(r.value);
         }
       }
     } else if (
@@ -198,13 +268,55 @@ export function useArchiveRoute({
         return;
       }
       if (r) {
+        if (r.kind === "tour" && !unitData.get(r.value)) {
+          setViewMode("landing");
+          window.location.hash = "#/";
+          window.scrollTo({ top: 0, behavior: "instant" });
+          return;
+        }
+        if (r.kind === "show" && !unitIdByShowId.has(r.value)) {
+          setViewMode("landing");
+          window.location.hash = "#/";
+          window.scrollTo({ top: 0, behavior: "instant" });
+          return;
+        }
+        if (r.kind === "song" && !allUsedSongs.some((s) => s.id === r.value)) {
+          setViewMode("landing");
+          window.location.hash = "#/";
+          window.scrollTo({ top: 0, behavior: "instant" });
+          return;
+        }
+        if (r.kind === "venue" && !allVenues.some((v) => v.name === r.value)) {
+          setViewMode("landing");
+          window.location.hash = "#/";
+          window.scrollTo({ top: 0, behavior: "instant" });
+          return;
+        }
         setViewMode("archive");
         applyRoute(r);
+      } else {
+        setViewMode("landing");
+        window.location.hash = "#/";
+        window.scrollTo({ top: 0, behavior: "instant" });
       }
     };
     window.addEventListener("hashchange", onHash);
     return () => window.removeEventListener("hashchange", onHash);
-  }, []);
+  }, [unitData, unitIdByShowId, allUsedSongs, allVenues]);
+
+  useEffect(() => {
+    const rawHash = window.location.hash;
+    const r = parseRoute(rawHash);
+    if (r && r.kind === "tour") {
+      const uEntry = unitData.get(r.value);
+      if (uEntry && !uEntry.isTour) {
+        const defShow = defaultShowId(uEntry.unit);
+        if (defShow && window.location.hash !== routeHash.show(defShow)) {
+          window.location.hash = routeHash.show(defShow);
+        }
+      }
+    }
+  }, [unitData]);
 
   // Close drawer or mobile search modal on Escape
   useEffect(() => {
@@ -279,6 +391,7 @@ export function useArchiveRoute({
     setQ("");
     setIsFilterDrawerOpen(false);
     setIsMobileSearchOpen(false);
+    setShowSubMode("show");
     go(routeHash.show(showId));
   };
 
@@ -300,17 +413,55 @@ export function useArchiveRoute({
     setQ("");
     setIsFilterDrawerOpen(false);
     setIsMobileSearchOpen(false);
-    const u = unitData.get(uId)?.unit;
+    const uEntry = unitData.get(uId);
+    const u = uEntry?.unit;
     if (u) {
       setSelUnitId(uId);
-      const targetShow = explicitShowId || defaultShowId(u);
-      setSelShow(targetShow);
       const cat = getUnitTypeLabel(u);
       const yr = unitEarliest(u).split("-")[0];
       setSelCategory(cat);
       if (yr && yr !== "9999") setSelYear(yr);
       setTab("show");
+
+      if (explicitShowId) {
+        setShowSubMode("show");
+        setSelShow(explicitShowId);
+        go(routeHash.show(explicitShowId));
+      } else if (uEntry?.isTour) {
+        setShowSubMode("tour");
+        const targetShow = defaultShowId(u);
+        setSelShow(targetShow);
+        go(routeHash.tour(uId));
+      } else {
+        setShowSubMode("show");
+        const targetShow = defaultShowId(u);
+        setSelShow(targetShow);
+        go(routeHash.show(targetShow));
+      }
+    }
+  };
+
+  const handleSelectTourMode = () => {
+    const currentUnit = unitData.get(selUnitId);
+    if (currentUnit?.isTour) {
+      setShowSubMode("tour");
+      go(routeHash.tour(selUnitId));
+    }
+  };
+
+  const handleSelectShowMode = () => {
+    setShowSubMode("show");
+    const targetShow = selShow || defaultShowId(unitData.get(selUnitId)?.unit);
+    if (targetShow) {
       go(routeHash.show(targetShow));
+    }
+  };
+
+  const handleToggleSubMode = (nextMode) => {
+    if (nextMode === "tour") {
+      handleSelectTourMode();
+    } else {
+      handleSelectShowMode();
     }
   };
 
@@ -332,7 +483,15 @@ export function useArchiveRoute({
       setSelUnitId(draftState.unitId);
       setUnitPage(draftState.unitPage);
       setShowPage(draftState.showPage);
-      handleSelectShow(draftState.showId);
+      const isTour = unitData.get(draftState.unitId)?.isTour;
+      if (draftState.showSubMode === "tour" && isTour) {
+        setShowSubMode("tour");
+        setSelShow(draftState.showId);
+        go(routeHash.tour(draftState.unitId));
+      } else {
+        setShowSubMode("show");
+        handleSelectShow(draftState.showId);
+      }
     } else if (tab === "song") {
       setSongSortMode(draftState.songSortMode);
       setSelAlbum(draftState.album);
@@ -354,7 +513,12 @@ export function useArchiveRoute({
   const confirmButtonLabel = useMemo(() => {
     if (!draftState) return "確認套用";
     if (tab === "show") {
-      const u = unitData.get(draftState.unitId)?.unit;
+      const uEntry = unitData.get(draftState.unitId);
+      const u = uEntry?.unit;
+      const isTour = uEntry?.isTour;
+      if (draftState.showSubMode === "tour" && isTour) {
+        return `確認套用：${shortUnitTitle(u)}（巡演總覽大票）`;
+      }
       const s = (u?.shows || []).find((x) => x.id === draftState.showId);
       if (s) {
         return `確認套用：${s.date.slice(5)} ${s.city || s.venue}`;
@@ -380,6 +544,8 @@ export function useArchiveRoute({
     setViewMode,
     tab,
     setTab,
+    showSubMode,
+    setShowSubMode,
     selUnitId,
     setSelUnitId,
     selShow,
@@ -410,6 +576,9 @@ export function useArchiveRoute({
     handleSelectSong,
     handleSelectVenue,
     handleSelectUnit,
+    handleSelectTourMode,
+    handleSelectShowMode,
+    handleToggleSubMode,
     handleReturnHome,
     visualViewportStyle,
   };

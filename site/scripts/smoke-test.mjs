@@ -663,7 +663,15 @@ describe("Pipeline Smoke Tests", () => {
     let getTourFrequencyTier;
     let FREQUENCY_TIER_CONFIG;
     let TourSlip;
+    let ShowSlip;
+    let DualModeCapsuleToggle;
+    let ArchiveLayout;
+    let useArchiveFilter;
+    let useArchiveRoute;
+    let parseRoute;
+    let routeHash;
     let allUnits;
+    let index;
 
     it("loads tour statistics engine and TourSlip component from Vite SSR", async () => {
       const domainMod = await server.ssrLoadModule("./src/lib/domain.js");
@@ -671,16 +679,53 @@ describe("Pipeline Smoke Tests", () => {
       getTourFrequencyTier = domainMod.getTourFrequencyTier;
       FREQUENCY_TIER_CONFIG = domainMod.FREQUENCY_TIER_CONFIG;
       allUnits = domainMod.allUnits;
+      index = domainMod.buildIndex();
+
+      const trackMod = await server.ssrLoadModule("./src/lib/track.js");
+      parseRoute = trackMod.parseRoute;
+      routeHash = trackMod.routeHash;
 
       const slipMod = await server.ssrLoadModule(
         "./src/components/slips/TourSlip.jsx"
       );
       TourSlip = slipMod.TourSlip;
 
+      const showSlipMod = await server.ssrLoadModule(
+        "./src/components/slips/ShowSlip.jsx"
+      );
+      ShowSlip = showSlipMod.ShowSlip;
+
+      const ticketCommonMod = await server.ssrLoadModule(
+        "./src/components/slips/TicketCommon.jsx"
+      );
+      DualModeCapsuleToggle = ticketCommonMod.DualModeCapsuleToggle;
+
+      const layoutMod = await server.ssrLoadModule(
+        "./src/components/layout/ArchiveLayout.jsx"
+      );
+      ArchiveLayout = layoutMod.ArchiveLayout;
+
+      const filterMod = await server.ssrLoadModule(
+        "./src/hooks/useArchiveFilter.js"
+      );
+      useArchiveFilter = filterMod.useArchiveFilter;
+
+      const routeMod = await server.ssrLoadModule(
+        "./src/hooks/useArchiveRoute.js"
+      );
+      useArchiveRoute = routeMod.useArchiveRoute;
+
       assert.ok(computeTourStatistics);
       assert.ok(getTourFrequencyTier);
       assert.ok(FREQUENCY_TIER_CONFIG);
       assert.ok(TourSlip);
+      assert.ok(ShowSlip);
+      assert.ok(DualModeCapsuleToggle);
+      assert.ok(ArchiveLayout);
+      assert.ok(useArchiveFilter);
+      assert.ok(useArchiveRoute);
+      assert.ok(parseRoute);
+      assert.ok(routeHash);
     });
 
     it("accurately calculates consensus statistics across all 16 headline tours", () => {
@@ -1177,6 +1222,357 @@ describe("Pipeline Smoke Tests", () => {
       assert.ok(!asiaHtml.includes("#04"));
       assert.ok(!asiaHtml.includes("展開全部日程"));
       assert.ok(!asiaHtml.includes("收合巡演日程"));
+    });
+
+    it("parses and generates #/tour/:unitId route hashes bidirectionally (Ticket 4)", () => {
+      // 1. parseRoute
+      const parsed1 = parseRoute("#/tour/arena-tour-2024-rejoice");
+      assert.deepEqual(parsed1, {
+        kind: "tour",
+        value: "arena-tour-2024-rejoice",
+      });
+
+      const parsed2 = parseRoute("/tour/one-man-tour-2021-2022-editorial");
+      assert.deepEqual(parsed2, {
+        kind: "tour",
+        value: "one-man-tour-2021-2022-editorial",
+      });
+
+      // 2. routeHash.tour
+      assert.equal(
+        routeHash.tour("arena-tour-2024-rejoice"),
+        "#/tour/arena-tour-2024-rejoice"
+      );
+    });
+
+    it("penetrates direct deep link for tours (#/tour/:unitId) with showSubMode 'tour' and category/year sync (Ticket 4)", () => {
+      const runProbeWithRoute = (hash = "") => {
+        globalThis.window.location.hash = hash;
+        let capturedFilter = null;
+        let capturedRoute = null;
+
+        function ProbeComponent() {
+          const filterState = useArchiveFilter({
+            unitData: index.unitData,
+            trackShows: index.trackShows,
+            globalVenueShows: index.globalVenueShows,
+            allUsedSongs: index.allUsedSongs,
+            allVenues: index.allVenues,
+            initialUnitId: allUnits[0]?.id ?? null,
+            initialSongId: index.allUsedSongs[0]?.id ?? null,
+            initialVenueName: index.allVenues[0]?.name ?? null,
+          });
+          const routeState = useArchiveRoute({
+            unitData: index.unitData,
+            allUsedSongs: index.allUsedSongs,
+            allVenues: index.allVenues,
+            unitIdByShowId: index.unitIdByShowId,
+            filterState,
+          });
+          capturedFilter = filterState;
+          capturedRoute = routeState;
+          return null;
+        }
+
+        renderToStaticMarkup(React.createElement(ProbeComponent));
+        return { filter: capturedFilter, route: capturedRoute };
+      };
+
+      // Test 1: Rejoice Arena Tour
+      const { route: r1, filter: f1 } = runProbeWithRoute(
+        "#/tour/arena-tour-2024-rejoice"
+      );
+      assert.equal(r1.viewMode, "archive");
+      assert.equal(r1.tab, "show");
+      assert.equal(r1.showSubMode, "tour");
+      assert.equal(r1.selUnitId, "arena-tour-2024-rejoice");
+      assert.ok(f1.selCategory);
+      assert.ok(f1.selYear);
+
+      // Test 2: Show direct deep link (#/show/:id) maintains showSubMode "show"
+      const { route: r2 } = runProbeWithRoute("#/show/1672276");
+      assert.equal(r2.viewMode, "archive");
+      assert.equal(r2.tab, "show");
+      assert.equal(r2.showSubMode, "show");
+      assert.equal(r2.selShow, "1672276");
+      assert.equal(r2.selUnitId, "arena-tour-2024-rejoice");
+
+      // Test 3: Gracefully falls back to landing on invalid tour ID
+      const { route: r3 } = runProbeWithRoute("#/tour/invalid-tour-non-existent-xyz");
+      assert.equal(r3.viewMode, "landing");
+
+      // Test 4: Single event accessed via #/tour/:unitId safely redirects to show mode
+      const singleEvent = allUnits.find((u) => !u.templateSetlist);
+      assert.ok(singleEvent);
+      const { route: r4 } = runProbeWithRoute(`#/tour/${singleEvent.id}`);
+      assert.equal(r4.viewMode, "archive");
+      assert.equal(r4.tab, "show");
+      assert.equal(r4.showSubMode, "show");
+      assert.equal(r4.selUnitId, singleEvent.id);
+      assert.equal(r4.selShow, singleEvent.shows[0]?.id);
+    });
+
+    it("verifies mobile drawer draftState supports tour slip staging, cancel rollback, and commit (Ticket 4)", () => {
+      const runProbeWithDraft = (hash = "#/show/1672276", initialDraft = null) => {
+        globalThis.window.location.hash = hash;
+        let capturedRoute = null;
+
+        function ProbeComponent() {
+          const filterState = useArchiveFilter({
+            unitData: index.unitData,
+            trackShows: index.trackShows,
+            globalVenueShows: index.globalVenueShows,
+            allUsedSongs: index.allUsedSongs,
+            allVenues: index.allVenues,
+            initialUnitId: allUnits[0]?.id ?? null,
+            initialSongId: index.allUsedSongs[0]?.id ?? null,
+            initialVenueName: index.allVenues[0]?.name ?? null,
+          });
+          const routeState = useArchiveRoute({
+            unitData: index.unitData,
+            allUsedSongs: index.allUsedSongs,
+            allVenues: index.allVenues,
+            unitIdByShowId: index.unitIdByShowId,
+            filterState,
+            initialDraftState: initialDraft,
+          });
+          capturedRoute = routeState;
+          return null;
+        }
+
+        renderToStaticMarkup(React.createElement(ProbeComponent));
+        return capturedRoute;
+      };
+
+      // 1. Default route without draftState
+      const defaultRoute = runProbeWithDraft("#/show/1672276", null);
+      assert.equal(defaultRoute.showSubMode, "show");
+      assert.equal(defaultRoute.draftState, null);
+      assert.equal(defaultRoute.confirmButtonLabel, "確認套用");
+
+      // 2. Staged tour selection in draftState
+      const stagedTourRoute = runProbeWithDraft("#/show/1672276", {
+        category: "巡演專場",
+        year: "2024",
+        unitId: "arena-tour-2024-rejoice",
+        showId: "1672276",
+        showSubMode: "tour",
+      });
+      assert.ok(stagedTourRoute.draftState);
+      assert.equal(stagedTourRoute.draftState.showSubMode, "tour");
+      assert.ok(stagedTourRoute.confirmButtonLabel.includes("巡演總覽大票"));
+
+      // 3. Staged show selection in draftState
+      const stagedShowRoute = runProbeWithDraft("#/tour/arena-tour-2024-rejoice", {
+        category: "巡演專場",
+        year: "2024",
+        unitId: "arena-tour-2024-rejoice",
+        showId: "1672276",
+        showSubMode: "show",
+      });
+      assert.ok(stagedShowRoute.draftState);
+      assert.equal(stagedShowRoute.draftState.showSubMode, "show");
+      assert.ok(stagedShowRoute.confirmButtonLabel.includes("確認套用："));
+    });
+
+    it("renders ArchiveLayout conditionally: TourSlip when showSubMode === 'tour' and isTour === true, else ShowSlip (Ticket 4)", () => {
+      const rejoiceTour = index.unitData.get("arena-tour-2024-rejoice");
+      assert.ok(rejoiceTour);
+
+      // Render 1: showSubMode === "tour" -> renders TourSlip
+      const tourLayoutHtml = renderToStaticMarkup(
+        React.createElement(ArchiveLayout, {
+          filterState: {
+            selCategory: "巡演專場",
+            selYear: "2024",
+            setSelYear: () => {},
+            unitPage: 0,
+            setUnitPage: () => {},
+            showPage: 0,
+            setShowPage: () => {},
+            unitsByCategory: { "巡演專場": [rejoiceTour.unit] },
+            categoryStats: {},
+            availableYears: ["2024"],
+            yearStats: new Map(),
+            filteredUnits: [rejoiceTour.unit],
+            pagedUnits: [rejoiceTour.unit],
+            totalAllShows: 10,
+            handleCategoryClick: () => {},
+          },
+          routeState: {
+            tab: "show",
+            setTab: () => {},
+            showSubMode: "tour",
+            setShowSubMode: () => {},
+            selUnitId: "arena-tour-2024-rejoice",
+            selShow: "1672276",
+            selSong: "",
+            selVenue: "",
+            q: "",
+            setQ: () => {},
+            isDesktopNavOpen: false,
+            toggleDesktopNav: () => {},
+            isFilterDrawerOpen: false,
+            setIsFilterDrawerOpen: () => {},
+            isMobileSearchOpen: false,
+            setIsMobileSearchOpen: () => {},
+            isCalendarOpen: false,
+            setIsCalendarOpen: () => {},
+            draftState: null,
+            setDraftState: () => {},
+            openFilterDrawer: () => {},
+            handleCancelDrawer: () => {},
+            handleCommitDrawer: () => {},
+            confirmButtonLabel: "確認套用",
+            slipRef: { current: null },
+            handleSelectShow: () => {},
+            handleSelectSong: () => {},
+            handleSelectVenue: () => {},
+            handleSelectUnit: () => {},
+            handleReturnHome: () => {},
+            handleSelectTourMode: () => {},
+            handleSelectShowMode: () => {},
+            handleToggleSubMode: () => {},
+            visualViewportStyle: { height: "100dvh", top: 0 },
+          },
+          unitData: index.unitData,
+          trackShows: index.trackShows,
+          globalVenueShows: index.globalVenueShows,
+          allUsedSongs: index.allUsedSongs,
+          allVenues: index.allVenues,
+          allUnits: allUnits,
+          showById: new Map(),
+        })
+      );
+
+      // Must render TourSlip markup
+      assert.ok(tourLayoutHtml.includes("TOUR CONSENSUS MASTER SHEET"));
+      assert.ok(tourLayoutHtml.includes("CONSENSUS TEMPLATE // 巡演標準母單"));
+      assert.ok(tourLayoutHtml.includes("巡演總覽大票"));
+      assert.ok(tourLayoutHtml.includes("單場即時票根"));
+
+      // Render 2: showSubMode === "show" -> renders ShowSlip
+      const showLayoutHtml = renderToStaticMarkup(
+        React.createElement(ArchiveLayout, {
+          filterState: {
+            selCategory: "巡演專場",
+            selYear: "2024",
+            setSelYear: () => {},
+            unitPage: 0,
+            setUnitPage: () => {},
+            showPage: 0,
+            setShowPage: () => {},
+            unitsByCategory: { "巡演專場": [rejoiceTour.unit] },
+            categoryStats: {},
+            availableYears: ["2024"],
+            yearStats: new Map(),
+            filteredUnits: [rejoiceTour.unit],
+            pagedUnits: [rejoiceTour.unit],
+            totalAllShows: 10,
+            handleCategoryClick: () => {},
+          },
+          routeState: {
+            tab: "show",
+            setTab: () => {},
+            showSubMode: "show",
+            setShowSubMode: () => {},
+            selUnitId: "arena-tour-2024-rejoice",
+            selShow: "1672276",
+            selSong: "",
+            selVenue: "",
+            q: "",
+            setQ: () => {},
+            isDesktopNavOpen: false,
+            toggleDesktopNav: () => {},
+            isFilterDrawerOpen: false,
+            setIsFilterDrawerOpen: () => {},
+            isMobileSearchOpen: false,
+            setIsMobileSearchOpen: () => {},
+            isCalendarOpen: false,
+            setIsCalendarOpen: () => {},
+            draftState: null,
+            setDraftState: () => {},
+            openFilterDrawer: () => {},
+            handleCancelDrawer: () => {},
+            handleCommitDrawer: () => {},
+            confirmButtonLabel: "確認套用",
+            slipRef: { current: null },
+            handleSelectShow: () => {},
+            handleSelectSong: () => {},
+            handleSelectVenue: () => {},
+            handleSelectUnit: () => {},
+            handleReturnHome: () => {},
+            handleSelectTourMode: () => {},
+            handleSelectShowMode: () => {},
+            handleToggleSubMode: () => {},
+            visualViewportStyle: { height: "100dvh", top: 0 },
+          },
+          unitData: index.unitData,
+          trackShows: index.trackShows,
+          globalVenueShows: index.globalVenueShows,
+          allUsedSongs: index.allUsedSongs,
+          allVenues: index.allVenues,
+          allUnits: allUnits,
+          showById: new Map(),
+        })
+      );
+
+      // Must render ShowSlip markup
+      assert.ok(showLayoutHtml.includes("STAGE SETLIST RUN SHEET"));
+      assert.ok(showLayoutHtml.includes("MAIN SETLIST // 本篇演奏曲目"));
+      assert.ok(showLayoutHtml.includes("巡演總覽大票"));
+      assert.ok(showLayoutHtml.includes("單場即時票根"));
+    });
+
+    it("renders dual-mode capsule toggle only when isTour === true and hides for single events (Ticket 4)", () => {
+      // 1. TourSlip contains capsule toggle
+      const rejoiceTour = allUnits.find((u) => u.id === "arena-tour-2024-rejoice");
+      assert.ok(rejoiceTour);
+      const tourHtml = renderToStaticMarkup(
+        React.createElement(TourSlip, {
+          tourUnitData: rejoiceTour,
+          showSubMode: "tour",
+          onSelectSong: () => {},
+          onSelectShow: () => {},
+        })
+      );
+      assert.ok(tourHtml.includes("巡演總覽大票"));
+      assert.ok(tourHtml.includes("單場即時票根"));
+      assert.ok(tourHtml.includes("⟷"));
+
+      // 2. ShowSlip for tour contains capsule toggle
+      const rejoiceUd = index.unitData.get("arena-tour-2024-rejoice");
+      const showHtml = renderToStaticMarkup(
+        React.createElement(ShowSlip, {
+          ud: rejoiceUd,
+          showId: "1672276",
+          showSubMode: "show",
+          onSelectSong: () => {},
+          onSelectShow: () => {},
+          onSelectVenue: () => {},
+        })
+      );
+      assert.ok(showHtml.includes("巡演總覽大票"));
+      assert.ok(showHtml.includes("單場即時票根"));
+      assert.ok(showHtml.includes("⟷"));
+
+      // 3. ShowSlip for non-tour single event (music festival) MUST HIDE capsule toggle
+      const festivalUnit = allUnits.find((u) => !u.templateSetlist);
+      assert.ok(festivalUnit);
+      const festivalUd = index.unitData.get(festivalUnit.id);
+      assert.ok(festivalUd);
+      const festivalHtml = renderToStaticMarkup(
+        React.createElement(ShowSlip, {
+          ud: festivalUd,
+          showId: festivalUd.shows[0]?.id,
+          showSubMode: "show",
+          onSelectSong: () => {},
+          onSelectShow: () => {},
+          onSelectVenue: () => {},
+        })
+      );
+      assert.ok(!festivalHtml.includes("巡演總覽大票"));
+      assert.ok(!festivalHtml.includes("單場即時票根"));
     });
   });
 });

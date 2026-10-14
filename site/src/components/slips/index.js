@@ -8,4 +8,5 @@ export {
   songFilterPillClass,
   TicketPerforationDivider,
   TicketBarcodeFooter,
+  DualModeCapsuleToggle,
 } from "./TicketCommon.jsx";

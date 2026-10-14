@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import { shortUnitTitle } from "../../lib/domain.js";
 import { trackKey } from "../../lib/track.js";
 import { PERFORMANCE_CATEGORIES } from "../../lib/constants.js";
-import { ShowSlip, SongSlip, VenueSlip } from "../slips/index.js";
+import { ShowSlip, SongSlip, VenueSlip, TourSlip } from "../slips/index.js";
 import {
   ShowNavigator,
   SongNavigator,
@@ -29,6 +29,7 @@ export function ArchiveLayout({
   const {
     tab,
     setTab,
+    showSubMode,
     selUnitId,
     selShow,
     selSong,
@@ -53,6 +54,8 @@ export function ArchiveLayout({
     handleSelectSong,
     handleSelectVenue,
     handleSelectUnit,
+    handleSelectTourMode,
+    handleToggleSubMode,
     handleReturnHome,
     visualViewportStyle,
   } = routeState;
@@ -104,6 +107,7 @@ export function ArchiveLayout({
       isDrawer={isDrawer}
       draftState={draftState}
       setDraftState={setDraftState}
+      showSubMode={showSubMode}
       selCategory={filterState.selCategory}
       selYear={filterState.selYear}
       setSelYear={filterState.setSelYear}
@@ -124,6 +128,7 @@ export function ArchiveLayout({
       handleCategoryClick={filterState.handleCategoryClick}
       handleSelectUnit={handleSelectUnit}
       handleSelectShow={handleSelectShow}
+      handleSelectTourMode={handleSelectTourMode}
     />
   );
 
@@ -232,7 +237,9 @@ export function ArchiveLayout({
                       {filterState.selYear} · {filterState.selCategory} · {current?.unit ? shortUnitTitle(current.unit) : ""}
                     </div>
                     <div className="text-[13px] font-black text-ink truncate leading-tight pt-0.5">
-                      {currentShowObj
+                      {showSubMode === "tour" && current?.isTour
+                        ? `📜 ${shortUnitTitle(current.unit)}（巡演總覽大票）`
+                        : currentShowObj
                         ? `${currentShowObj.date} ${currentShowObj.city || currentShowObj.venue}`
                         : current?.unit
                         ? shortUnitTitle(current.unit)
@@ -289,11 +296,15 @@ export function ArchiveLayout({
                         <span className="font-bold text-ink truncate">
                           {filterState.selCategory} · {filterState.selYear} · {current?.unit ? shortUnitTitle(current.unit) : ""}
                         </span>
-                        {currentShowObj && (
+                        {showSubMode === "tour" && current?.isTour ? (
+                          <span className="text-band font-bold shrink-0">
+                            （📜 巡演總覽大票 · 全 {current.shows?.length || 0} 場）
+                          </span>
+                        ) : currentShowObj ? (
                           <span className="text-muted shrink-0">
                             （{currentShowObj.date.slice(5)} {currentShowObj.city || currentShowObj.venue}）
                           </span>
-                        )}
+                        ) : null}
                       </div>
                     </div>
                     <span className="shrink-0 rounded bg-band px-3 py-1 font-mono text-[11px] font-extrabold text-band-ink border border-ink/40 shadow-2xs group-hover:bg-tape transition-colors">
@@ -324,13 +335,29 @@ export function ArchiveLayout({
 
               {/* Setlist Slip Receipt */}
               <section ref={slipRef} className="mt-2 sm:mt-4 scroll-mt-8 sm:scroll-mt-10">
-                <ShowSlip
-                  ud={current}
-                  showId={selShow}
-                  onSelectSong={handleSelectSong}
-                  onSelectShow={handleSelectShow}
-                  onSelectVenue={handleSelectVenue}
-                />
+                {showSubMode === "tour" && current?.isTour ? (
+                  <TourSlip
+                    tourUnitData={current?.unit}
+                    ud={current}
+                    showSubMode={showSubMode}
+                    onToggleSubMode={handleToggleSubMode}
+                    onSelectSong={handleSelectSong}
+                    onSelectShow={handleSelectShow}
+                    onSelectVenue={handleSelectVenue}
+                    onSelectTour={handleSelectUnit}
+                  />
+                ) : (
+                  <ShowSlip
+                    ud={current}
+                    showId={selShow}
+                    showSubMode={showSubMode}
+                    onToggleSubMode={handleToggleSubMode}
+                    onSelectSong={handleSelectSong}
+                    onSelectShow={handleSelectShow}
+                    onSelectVenue={handleSelectVenue}
+                    onSelectTour={handleSelectUnit}
+                  />
+                )}
               </section>
             </div>
           )}

@@ -6,6 +6,7 @@ export function ShowNavigator({
   isDrawer = false,
   draftState,
   setDraftState,
+  showSubMode = "show",
   selCategory,
   selYear,
   setSelYear,
@@ -26,6 +27,7 @@ export function ShowNavigator({
   handleCategoryClick,
   handleSelectUnit,
   handleSelectShow,
+  handleSelectTourMode,
 }) {
     const curCategory = isDrawer && draftState ? draftState.category : selCategory;
     const curYear = isDrawer && draftState ? draftState.year : selYear;
@@ -225,10 +227,12 @@ export function ShowNavigator({
                   onClick={() => {
                     if (isDrawer && draftState) {
                       const targetShowId = defaultShowId(u);
+                      const isTour = !!u.templateSetlist;
                       setDraftState((prev) => ({
                         ...prev,
                         unitId: u.id,
                         showId: targetShowId,
+                        showSubMode: isTour ? "tour" : "show",
                         showPage: 0,
                       }));
                     } else {
@@ -283,8 +287,36 @@ export function ShowNavigator({
               }}
             />
             <div className="flex flex-wrap gap-1.5 sm:gap-2">
+              {dCurrentUnitData?.isTour && (
+                <button
+                  type="button"
+                  onClick={() => {
+                    if (isDrawer && draftState) {
+                      setDraftState((prev) => ({
+                        ...prev,
+                        showSubMode: "tour",
+                      }));
+                    } else if (handleSelectTourMode) {
+                      handleSelectTourMode();
+                    }
+                  }}
+                  className={`rounded-full px-3.5 py-1.5 text-[12px] font-bold font-mono transition-colors motion-reduce:transition-none cursor-pointer inline-flex items-center gap-1.5 focus-visible:ring-2 focus-visible:ring-band focus-visible:outline-none ${
+                    (isDrawer && draftState ? draftState.showSubMode === "tour" : showSubMode === "tour")
+                      ? "bg-band text-band-ink font-bold shadow-xs border border-ink/40"
+                      : "bg-paper text-ink border border-line-soft hover:bg-tape-tint/50 hover:border-ink/60"
+                  }`}
+                  title="查看此巡演的共識母單與出賽統計"
+                >
+                  <span>📜</span>
+                  <span>巡演總覽大票</span>
+                </button>
+              )}
               {dPagedShows.map((s) => {
-                const isCur = s.id === curShowId;
+                const isCur =
+                  s.id === curShowId &&
+                  (isDrawer && draftState
+                    ? draftState.showSubMode !== "tour"
+                    : showSubMode !== "tour");
                 const songCnt = (dCurrentUnitData.full?.get(s.id) || []).filter(
                   (i) => i.songId || i.title
                 ).length;
@@ -297,6 +329,7 @@ export function ShowNavigator({
                         setDraftState((prev) => ({
                           ...prev,
                           showId: s.id,
+                          showSubMode: "show",
                         }));
                       } else {
                         handleSelectShow(s.id);
