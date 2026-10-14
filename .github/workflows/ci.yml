@@ -26,6 +26,9 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
+      - name: Sync data artifacts
+        run: pnpm sync
+
       - name: Run fast checks (oxlint + smoke tests)
         run: pnpm check
 

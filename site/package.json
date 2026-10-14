@@ -5,7 +5,7 @@
   "scripts": {
     "sync": "node scripts/sync-data.mjs",
     "lint": "oxlint src -c .oxlintrc.json",
-    "test": "oxlint src -c .oxlintrc.json && node scripts/smoke-test.mjs",
+    "test": "pnpm sync && oxlint src -c .oxlintrc.json && node scripts/smoke-test.mjs",
     "check": "pnpm lint && pnpm test",
     "audit:reports": "node scripts/generate-audit-reports.mjs",
     "dev": "pnpm sync && vite",
