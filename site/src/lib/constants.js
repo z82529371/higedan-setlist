@@ -198,3 +198,17 @@ export const REGION_ORDER = [
   "日本 - 東北 / 北海道",
   "日本 - 中部 / 九州 / 其他",
 ];
+
+export const PERFORMANCE_CATEGORIES = [
+  "巡演專場",
+  "特別專場",
+  "聯合專場",
+  "店家活動",
+  "音樂祭",
+  "學園祭",
+  "電視演出",
+  "線上直播",
+];
+
+export const CATEGORY_ORDER = PERFORMANCE_CATEGORIES;
+
