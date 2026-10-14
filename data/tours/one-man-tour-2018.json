@@ -88,7 +88,8 @@
       "sourceUrls": [
         "https://higedan.com/news/3/?page=56",
         "https://x.com/beiketa/status/1015012261125951488",
-        "https://www.livefans.jp/events/889697"
+        "https://www.livefans.jp/events/889697",
+        "https://higedan-setlist.net/live/2018-05-25/"
       ],
       "opensAt": "19:00",
       "diff": {
@@ -140,7 +141,8 @@
             }
           }
         ]
-      }
+      },
+      "note": "higedan-setlist.net 記載正規安可為 2 首（What's Going On? / 異端なスター），現場一手推特考證本場安可加碼點歌合計 5 首"
     },
     {
       "id": "889701",
@@ -450,7 +452,8 @@
       "sourceUrls": [
         "https://higedan.com/news/3/?page=56",
         "https://x.com/beiketa/status/1015012261125951488",
-        "https://www.livefans.jp/events/889716"
+        "https://www.livefans.jp/events/889716",
+        "https://higedan-setlist.net/live/2018-07-05/"
       ],
       "opensAt": "19:00",
       "diff": {
@@ -459,7 +462,8 @@
             "after": 15,
             "item": {
               "encore": true,
-              "songId": "yugure-zoi"
+              "songId": "yugure-zoi",
+              "note": "アコースティック編成"
             }
           },
           {
@@ -467,7 +471,7 @@
             "item": {
               "encore": true,
               "songId": "ai-nandaga",
-              "note": "サビのみ"
+              "note": "弾き語り・観客リクエスト（サビのみ）"
             }
           },
           {
@@ -475,7 +479,7 @@
             "item": {
               "encore": true,
               "songId": "koi-no-sarigiwa",
-              "note": "去りたくないver."
+              "note": "去りたくないver.（弾き語り・観客リクエスト / サビのみ）"
             }
           }
         ]

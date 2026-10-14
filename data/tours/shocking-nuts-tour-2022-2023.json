@@ -13,10 +13,13 @@
       "title": "Official髭男dism SHOCKING NUTS TOUR",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=20",
-        "https://www.livefans.jp/events/1419721"
+        "https://www.livefans.jp/events/1419721",
+        "https://higedan-setlist.net/live/2022-09-28/"
       ],
       "diff": {
-        "skip": [11],
+        "skip": [
+          11
+        ],
         "insert": [
           {
             "after": 14,
@@ -31,7 +34,9 @@
               "encore": true,
               "songId": "subtitle",
               "note": "ピアノ弾き語りワンコーラス",
-              "kind": ["satoshi-solo"]
+              "kind": [
+                "satoshi-solo"
+              ]
             }
           }
         ]
@@ -48,10 +53,20 @@
       "title": "Official髭男dism SHOCKING NUTS TOUR",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=20",
-        "https://www.livefans.jp/events/1419722"
+        "https://www.livefans.jp/events/1419722",
+        "https://higedan-setlist.net/live/2022-09-29/"
       ],
       "diff": {
-        "skip": [3, 4, 5, 6, 7, 11, 15, 19],
+        "skip": [
+          3,
+          4,
+          5,
+          6,
+          7,
+          11,
+          15,
+          19
+        ],
         "insert": [
           {
             "after": 2,
@@ -108,7 +123,9 @@
               "encore": true,
               "songId": "subtitle",
               "note": "新曲",
-              "kind": ["premiere"]
+              "kind": [
+                "premiere"
+              ]
             }
           },
           {
@@ -132,7 +149,8 @@
       "title": "Official髭男dism SHOCKING NUTS TOUR",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=20",
-        "https://www.livefans.jp/events/1419723"
+        "https://www.livefans.jp/events/1419723",
+        "https://higedan-setlist.net/live/2022-10-13/"
       ],
       "diff": {},
       "opensAt": "18:00"
@@ -147,23 +165,26 @@
       "title": "Official髭男dism SHOCKING NUTS TOUR",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=20",
-        "https://www.livefans.jp/events/1419724"
+        "https://www.livefans.jp/events/1419724",
+        "https://higedan-setlist.net/live/2022-10-14/"
       ],
       "diff": {
-        "skip": [3, 4, 5, 6, 7, 8, 15, 19],
+        "skip": [
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          15,
+          19
+        ],
         "insert": [
           {
             "after": 2,
             "item": {
               "encore": false,
-              "songId": "tell-me-baby"
-            }
-          },
-          {
-            "after": 2,
-            "item": {
-              "encore": false,
-              "songId": "second-line"
+              "songId": "lady"
             }
           },
           {
@@ -177,7 +198,14 @@
             "after": 2,
             "item": {
               "encore": false,
-              "songId": "lady"
+              "songId": "tell-me-baby"
+            }
+          },
+          {
+            "after": 2,
+            "item": {
+              "encore": false,
+              "songId": "second-line"
             }
           },
           {
@@ -210,7 +238,8 @@
           }
         ]
       },
-      "opensAt": "18:00"
+      "opensAt": "18:00",
+      "note": "3〜6曲目の順は出典が割れており、現地レポート多数派の並び（LADY → ビンテージ → Tell Me Baby → Second LINE）に校正"
     },
     {
       "id": "1419725",
@@ -222,10 +251,13 @@
       "title": "Official髭男dism SHOCKING NUTS TOUR",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=20",
-        "https://www.livefans.jp/events/1419725"
+        "https://www.livefans.jp/events/1419725",
+        "https://higedan-setlist.net/live/2022-10-25/"
       ],
       "diff": {
-        "skip": [20],
+        "skip": [
+          20
+        ],
         "insert": [
           {
             "after": 19,
@@ -249,10 +281,19 @@
       "title": "Official髭男dism SHOCKING NUTS TOUR",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=20",
-        "https://www.livefans.jp/events/1419726"
+        "https://www.livefans.jp/events/1419726",
+        "https://higedan-setlist.net/live/2022-10-26/"
       ],
       "diff": {
-        "skip": [3, 4, 5, 6, 7, 15, 19],
+        "skip": [
+          3,
+          4,
+          5,
+          6,
+          7,
+          15,
+          19
+        ],
         "insert": [
           {
             "after": 2,
@@ -317,10 +358,13 @@
       "title": "Official髭男dism SHOCKING NUTS TOUR",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=20",
-        "https://www.livefans.jp/events/1419727"
+        "https://www.livefans.jp/events/1419727",
+        "https://higedan-setlist.net/live/2022-10-29/"
       ],
       "diff": {
-        "skip": [8],
+        "skip": [
+          8
+        ],
         "insert": [
           {
             "after": 7,
@@ -343,10 +387,13 @@
       "title": "Official髭男dism SHOCKING NUTS TOUR",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=20",
-        "https://www.livefans.jp/events/1419731"
+        "https://www.livefans.jp/events/1419731",
+        "https://higedan-setlist.net/live/2022-11-16/"
       ],
       "diff": {
-        "skip": [8],
+        "skip": [
+          8
+        ],
         "insert": [
           {
             "after": 7,
@@ -369,10 +416,19 @@
       "title": "Official髭男dism SHOCKING NUTS TOUR",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=20",
-        "https://www.livefans.jp/events/1419732"
+        "https://www.livefans.jp/events/1419732",
+        "https://higedan-setlist.net/live/2022-11-17/"
       ],
       "diff": {
-        "skip": [3, 4, 5, 6, 7, 15, 19],
+        "skip": [
+          3,
+          4,
+          5,
+          6,
+          7,
+          15,
+          19
+        ],
         "insert": [
           {
             "after": 0,
@@ -445,10 +501,13 @@
       "title": "Official髭男dism SHOCKING NUTS TOUR",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=20",
-        "https://www.livefans.jp/events/1419733"
+        "https://www.livefans.jp/events/1419733",
+        "https://higedan-setlist.net/live/2022-11-28/"
       ],
       "diff": {
-        "skip": [8],
+        "skip": [
+          8
+        ],
         "insert": [
           {
             "after": 7,
@@ -471,10 +530,20 @@
       "title": "Official髭男dism SHOCKING NUTS TOUR",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=20",
-        "https://www.livefans.jp/events/1419734"
+        "https://www.livefans.jp/events/1419734",
+        "https://higedan-setlist.net/live/2022-11-29/"
       ],
       "diff": {
-        "skip": [3, 4, 5, 6, 7, 8, 15, 19],
+        "skip": [
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          15,
+          19
+        ],
         "insert": [
           {
             "after": 2,
@@ -546,28 +615,12 @@
       "title": "Official髭男dism SHOCKING NUTS TOUR",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=20",
-        "https://www.livefans.jp/events/1419735"
+        "https://www.livefans.jp/events/1419735",
+        "https://higedan-setlist.net/live/2022-12-06/"
       ],
-      "diff": {
-        "skip": [8, 9],
-        "insert": [
-          {
-            "after": 7,
-            "item": {
-              "encore": false,
-              "songId": "choral-a"
-            }
-          },
-          {
-            "after": 7,
-            "item": {
-              "encore": false,
-              "songId": "fuusen"
-            }
-          }
-        ]
-      },
-      "opensAt": "18:00"
+      "diff": {},
+      "opensAt": "18:00",
+      "note": "8・9曲目の順は他公演と同じ並び（風船 → Choral A）に校正"
     },
     {
       "id": "1419736",
@@ -579,10 +632,19 @@
       "title": "Official髭男dism SHOCKING NUTS TOUR",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=20",
-        "https://www.livefans.jp/events/1419736"
+        "https://www.livefans.jp/events/1419736",
+        "https://higedan-setlist.net/live/2022-12-07/"
       ],
       "diff": {
-        "skip": [3, 4, 5, 6, 7, 15, 19],
+        "skip": [
+          3,
+          4,
+          5,
+          6,
+          7,
+          15,
+          19
+        ],
         "insert": [
           {
             "after": 2,
@@ -647,10 +709,13 @@
       "title": "Official髭男dism SHOCKING NUTS TOUR",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=20",
-        "https://www.livefans.jp/events/1419737"
+        "https://www.livefans.jp/events/1419737",
+        "https://higedan-setlist.net/live/2022-12-13/"
       ],
       "diff": {
-        "skip": [11],
+        "skip": [
+          11
+        ],
         "insert": [
           {
             "after": 10,
@@ -658,7 +723,9 @@
               "encore": false,
               "songId": "subtitle",
               "note": "新曲",
-              "kind": ["premiere"]
+              "kind": [
+                "premiere"
+              ]
             }
           }
         ]
@@ -675,10 +742,19 @@
       "title": "Official髭男dism SHOCKING NUTS TOUR",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=20",
-        "https://www.livefans.jp/events/1419738"
+        "https://www.livefans.jp/events/1419738",
+        "https://higedan-setlist.net/live/2022-12-14/"
       ],
       "diff": {
-        "skip": [3, 4, 5, 6, 7, 15, 19],
+        "skip": [
+          3,
+          4,
+          5,
+          6,
+          7,
+          15,
+          19
+        ],
         "insert": [
           {
             "after": 2,
@@ -743,10 +819,13 @@
       "title": "Official髭男dism SHOCKING NUTS TOUR",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=20",
-        "https://www.livefans.jp/events/1419739"
+        "https://www.livefans.jp/events/1419739",
+        "https://higedan-setlist.net/live/2022-12-21/"
       ],
       "diff": {
-        "skip": [8],
+        "skip": [
+          8
+        ],
         "insert": [
           {
             "after": 7,
@@ -769,10 +848,19 @@
       "title": "Official髭男dism SHOCKING NUTS TOUR",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=20",
-        "https://www.livefans.jp/events/1419740"
+        "https://www.livefans.jp/events/1419740",
+        "https://higedan-setlist.net/live/2022-12-22/"
       ],
       "diff": {
-        "skip": [3, 4, 5, 6, 7, 15, 19],
+        "skip": [
+          3,
+          4,
+          5,
+          6,
+          7,
+          15,
+          19
+        ],
         "insert": [
           {
             "after": 2,
@@ -844,10 +932,13 @@
       "title": "Official髭男dism SHOCKING NUTS TOUR",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=20",
-        "https://www.livefans.jp/events/1499382"
+        "https://www.livefans.jp/events/1499382",
+        "https://higedan-setlist.net/live/2023-01-30/"
       ],
       "diff": {
-        "skip": [8],
+        "skip": [
+          8
+        ],
         "insert": [
           {
             "after": 7,
@@ -877,10 +968,20 @@
       "title": "Official髭男dism SHOCKING NUTS TOUR",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=20",
-        "https://www.livefans.jp/events/1499383"
+        "https://www.livefans.jp/events/1499383",
+        "https://higedan-setlist.net/live/2023-01-31/"
       ],
       "diff": {
-        "skip": [3, 4, 5, 6, 7, 8, 15, 19],
+        "skip": [
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          15,
+          19
+        ],
         "insert": [
           {
             "after": 2,
@@ -959,10 +1060,14 @@
       "title": "Official髭男dism SHOCKING NUTS TOUR",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=20",
-        "https://www.livefans.jp/events/1499384"
+        "https://www.livefans.jp/events/1499384",
+        "https://higedan-setlist.net/live/2023-02-15/"
       ],
       "diff": {
-        "skip": [18, 19],
+        "skip": [
+          18,
+          19
+        ],
         "insert": [
           {
             "after": 11,
@@ -985,7 +1090,9 @@
               "encore": true,
               "songId": "universe",
               "note": "弾き語り　ワンコーラス",
-              "kind": ["satoshi-solo"]
+              "kind": [
+                "satoshi-solo"
+              ]
             }
           },
           {
@@ -1009,10 +1116,20 @@
       "title": "Official髭男dism SHOCKING NUTS TOUR",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=20",
-        "https://www.livefans.jp/events/1499381"
+        "https://www.livefans.jp/events/1499381",
+        "https://higedan-setlist.net/live/2023-02-16/"
       ],
       "diff": {
-        "skip": [3, 4, 5, 6, 7, 8, 15, 19],
+        "skip": [
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          15,
+          19
+        ],
         "insert": [
           {
             "after": 2,
@@ -1138,7 +1255,9 @@
       "order": 8,
       "encore": false,
       "songId": "fuusen",
-      "kind": ["premiere"]
+      "kind": [
+        "premiere"
+      ]
     },
     {
       "order": 9,

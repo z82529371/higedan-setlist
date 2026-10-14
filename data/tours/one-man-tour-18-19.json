@@ -63,7 +63,9 @@
       "order": 12,
       "encore": false,
       "songId": "akegata-no-getaway",
-      "kind": ["premiere"]
+      "kind": [
+        "premiere"
+      ]
     },
     {
       "order": 13,
@@ -84,19 +86,25 @@
       "order": 16,
       "encore": true,
       "songId": "koi-no-maenarae",
-      "kind": ["request"]
+      "kind": [
+        "request"
+      ]
     },
     {
       "order": 17,
       "encore": true,
       "songId": "trailer",
-      "kind": ["request"]
+      "kind": [
+        "request"
+      ]
     },
     {
       "order": 18,
       "encore": true,
       "songId": "clap-clap",
-      "kind": ["request"]
+      "kind": [
+        "request"
+      ]
     },
     {
       "order": 19,
@@ -115,7 +123,8 @@
       "title": "Official髭男dism one-man tour 18/19",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=49",
-        "https://www.livefans.jp/events/949977"
+        "https://www.livefans.jp/events/949977",
+        "https://higedan-setlist.net/live/2018-11-07/"
       ],
       "date": "2018-11-07",
       "venue": "橫濱灣會館",
@@ -124,7 +133,11 @@
       "prefecture": "神奈川縣",
       "opensAt": "19:00",
       "diff": {
-        "skip": [16, 17, 18],
+        "skip": [
+          16,
+          17,
+          18
+        ],
         "insert": [
           {
             "after": 15,
@@ -132,7 +145,9 @@
               "encore": true,
               "songId": "koi-no-maenarae",
               "note": "リクエストコーナー",
-              "kind": ["request"]
+              "kind": [
+                "request"
+              ]
             }
           },
           {
@@ -141,7 +156,9 @@
               "encore": true,
               "songId": "trailer",
               "note": "リクエストコーナー",
-              "kind": ["request"]
+              "kind": [
+                "request"
+              ]
             }
           },
           {
@@ -150,7 +167,9 @@
               "encore": true,
               "songId": "clap-clap",
               "note": "リクエストコーナー",
-              "kind": ["request"]
+              "kind": [
+                "request"
+              ]
             }
           }
         ]
@@ -170,7 +189,11 @@
       "prefecture": "北海道",
       "opensAt": "19:00",
       "diff": {
-        "skip": [16, 17, 18],
+        "skip": [
+          16,
+          17,
+          18
+        ],
         "insert": [
           {
             "after": 15,
@@ -178,7 +201,9 @@
               "encore": true,
               "songId": "koi-no-maenarae",
               "note": "リクエストコーナー",
-              "kind": ["request"]
+              "kind": [
+                "request"
+              ]
             }
           },
           {
@@ -187,7 +212,9 @@
               "encore": true,
               "songId": "trailer",
               "note": "リクエストコーナー",
-              "kind": ["request"]
+              "kind": [
+                "request"
+              ]
             }
           },
           {
@@ -196,7 +223,9 @@
               "encore": true,
               "songId": "clap-clap",
               "note": "リクエストコーナー",
-              "kind": ["request"]
+              "kind": [
+                "request"
+              ]
             }
           }
         ]
@@ -216,7 +245,11 @@
       "prefecture": "北海道",
       "opensAt": "18:00",
       "diff": {
-        "skip": [16, 17, 18],
+        "skip": [
+          16,
+          17,
+          18
+        ],
         "insert": [
           {
             "after": 15,
@@ -224,7 +257,9 @@
               "encore": true,
               "songId": "koi-no-maenarae",
               "note": "リクエストコーナー",
-              "kind": ["request"]
+              "kind": [
+                "request"
+              ]
             }
           },
           {
@@ -233,7 +268,9 @@
               "encore": true,
               "songId": "trailer",
               "note": "リクエストコーナー",
-              "kind": ["request"]
+              "kind": [
+                "request"
+              ]
             }
           },
           {
@@ -242,7 +279,9 @@
               "encore": true,
               "songId": "clap-clap",
               "note": "リクエストコーナー",
-              "kind": ["request"]
+              "kind": [
+                "request"
+              ]
             }
           }
         ]
@@ -262,7 +301,17 @@
       "prefecture": "香川縣",
       "opensAt": "18:00",
       "diff": {
-        "skip": [6, 7, 8, 10, 11, 14, 16, 17, 18],
+        "skip": [
+          6,
+          7,
+          8,
+          10,
+          11,
+          14,
+          16,
+          17,
+          18
+        ],
         "insert": [
           {
             "after": 5,
@@ -313,7 +362,10 @@
               "encore": true,
               "songId": "coffee-to-syrup",
               "note": "リクエスト、サビのみ、キーボード弾き語り",
-              "kind": ["satoshi-solo", "request"]
+              "kind": [
+                "satoshi-solo",
+                "request"
+              ]
             }
           },
           {
@@ -322,7 +374,10 @@
               "encore": true,
               "songId": "koi-no-maenarae",
               "note": "リクエスト、サビのみ、キーボード弾き語り",
-              "kind": ["satoshi-solo", "request"]
+              "kind": [
+                "satoshi-solo",
+                "request"
+              ]
             }
           },
           {
@@ -331,7 +386,10 @@
               "encore": true,
               "songId": "nichiyoubi-no-love-letter",
               "note": "リクエスト、サビのみ、キーボード弾き語り",
-              "kind": ["satoshi-solo", "request"]
+              "kind": [
+                "satoshi-solo",
+                "request"
+              ]
             }
           }
         ]
@@ -351,7 +409,11 @@
       "prefecture": "愛媛縣",
       "opensAt": "17:30",
       "diff": {
-        "skip": [16, 17, 18],
+        "skip": [
+          16,
+          17,
+          18
+        ],
         "insert": [
           {
             "after": 15,
@@ -359,7 +421,9 @@
               "encore": true,
               "songId": "koi-no-maenarae",
               "note": "リクエストコーナー",
-              "kind": ["request"]
+              "kind": [
+                "request"
+              ]
             }
           },
           {
@@ -368,7 +432,9 @@
               "encore": true,
               "songId": "trailer",
               "note": "リクエストコーナー",
-              "kind": ["request"]
+              "kind": [
+                "request"
+              ]
             }
           },
           {
@@ -377,7 +443,9 @@
               "encore": true,
               "songId": "clap-clap",
               "note": "リクエストコーナー",
-              "kind": ["request"]
+              "kind": [
+                "request"
+              ]
             }
           }
         ]
@@ -397,7 +465,11 @@
       "prefecture": "島根縣",
       "opensAt": "19:00",
       "diff": {
-        "skip": [16, 17, 18],
+        "skip": [
+          16,
+          17,
+          18
+        ],
         "insert": [
           {
             "after": 15,
@@ -405,7 +477,9 @@
               "encore": true,
               "songId": "koi-no-maenarae",
               "note": "リクエストコーナー",
-              "kind": ["request"]
+              "kind": [
+                "request"
+              ]
             }
           },
           {
@@ -414,7 +488,9 @@
               "encore": true,
               "songId": "trailer",
               "note": "リクエストコーナー",
-              "kind": ["request"]
+              "kind": [
+                "request"
+              ]
             }
           },
           {
@@ -423,7 +499,9 @@
               "encore": true,
               "songId": "clap-clap",
               "note": "リクエストコーナー",
-              "kind": ["request"]
+              "kind": [
+                "request"
+              ]
             }
           }
         ]
@@ -443,7 +521,11 @@
       "prefecture": "鳥取縣",
       "opensAt": "18:00",
       "diff": {
-        "skip": [16, 17, 18],
+        "skip": [
+          16,
+          17,
+          18
+        ],
         "insert": [
           {
             "after": 15,
@@ -451,7 +533,9 @@
               "encore": true,
               "songId": "koi-no-maenarae",
               "note": "リクエストコーナー",
-              "kind": ["request"]
+              "kind": [
+                "request"
+              ]
             }
           },
           {
@@ -460,7 +544,9 @@
               "encore": true,
               "songId": "trailer",
               "note": "リクエストコーナー",
-              "kind": ["request"]
+              "kind": [
+                "request"
+              ]
             }
           },
           {
@@ -469,7 +555,9 @@
               "encore": true,
               "songId": "clap-clap",
               "note": "リクエストコーナー",
-              "kind": ["request"]
+              "kind": [
+                "request"
+              ]
             }
           }
         ]
@@ -480,7 +568,8 @@
       "title": "Official髭男dism one-man tour 18/19",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=49",
-        "https://www.livefans.jp/events/949984"
+        "https://www.livefans.jp/events/949984",
+        "https://higedan-setlist.net/live/2018-11-25/"
       ],
       "date": "2018-11-25",
       "venue": "廣島CLUB QUATTRO",
@@ -489,33 +578,58 @@
       "prefecture": "廣島縣",
       "opensAt": "17:30",
       "diff": {
-        "skip": [16, 17, 18],
+        "skip": [
+          4,
+          5,
+          17,
+          18
+        ],
         "insert": [
           {
-            "after": 15,
+            "after": 3,
             "item": {
-              "encore": true,
-              "songId": "koi-no-maenarae",
-              "note": "リクエストコーナー",
-              "kind": ["request"]
+              "encore": false,
+              "songId": "ai-nandaga"
+            }
+          },
+          {
+            "after": 3,
+            "item": {
+              "encore": false,
+              "songId": "coffee-to-syrup"
             }
           },
           {
             "after": 16,
             "item": {
               "encore": true,
-              "songId": "trailer",
-              "note": "リクエストコーナー",
-              "kind": ["request"]
+              "songId": "furidasu-ame-gokigen-na-kimi",
+              "note": "リクエストコーナー（ツアー唯一）",
+              "kind": [
+                "request"
+              ]
             }
           },
           {
-            "after": 17,
+            "after": 16,
             "item": {
               "encore": true,
-              "songId": "clap-clap",
+              "songId": "yugure-zoi",
               "note": "リクエストコーナー",
-              "kind": ["request"]
+              "kind": [
+                "request"
+              ]
+            }
+          },
+          {
+            "after": 16,
+            "item": {
+              "encore": true,
+              "songId": "kiiroi-kuruma",
+              "note": "リクエストコーナー",
+              "kind": [
+                "request"
+              ]
             }
           }
         ]
@@ -535,7 +649,11 @@
       "prefecture": "埼玉縣",
       "opensAt": "19:00",
       "diff": {
-        "skip": [16, 17, 18],
+        "skip": [
+          16,
+          17,
+          18
+        ],
         "insert": [
           {
             "after": 15,
@@ -543,7 +661,9 @@
               "encore": true,
               "songId": "koi-no-maenarae",
               "note": "リクエストコーナー",
-              "kind": ["request"]
+              "kind": [
+                "request"
+              ]
             }
           },
           {
@@ -552,7 +672,9 @@
               "encore": true,
               "songId": "trailer",
               "note": "リクエストコーナー",
-              "kind": ["request"]
+              "kind": [
+                "request"
+              ]
             }
           },
           {
@@ -561,7 +683,9 @@
               "encore": true,
               "songId": "clap-clap",
               "note": "リクエストコーナー",
-              "kind": ["request"]
+              "kind": [
+                "request"
+              ]
             }
           }
         ]
@@ -572,7 +696,8 @@
       "title": "Official髭男dism one-man tour 18/19",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=49",
-        "https://www.livefans.jp/events/949986"
+        "https://www.livefans.jp/events/949986",
+        "https://higedan-setlist.net/live/2018-12-01/"
       ],
       "date": "2018-12-01",
       "venue": "仙台PIT",
@@ -582,7 +707,14 @@
       "opensAt": "18:00",
       "locked": true,
       "diff": {
-        "skip": [4, 5, 12, 16, 17, 18],
+        "skip": [
+          4,
+          5,
+          12,
+          16,
+          17,
+          18
+        ],
         "insert": [
           {
             "after": 3,
@@ -608,33 +740,34 @@
           {
             "after": 15,
             "item": {
-              "encore": false,
-              "type": "interlude",
-              "note": "リクエスト曲"
-            }
-          },
-          {
-            "after": 15,
-            "item": {
-              "encore": false,
+              "encore": true,
               "songId": "hajimari-no-asa",
-              "kind": ["request"]
+              "note": "リクエストコーナー",
+              "kind": [
+                "request"
+              ]
             }
           },
           {
             "after": 15,
             "item": {
-              "encore": false,
+              "encore": true,
               "songId": "driver",
-              "kind": ["request"]
+              "note": "リクエストコーナー",
+              "kind": [
+                "request"
+              ]
             }
           },
           {
             "after": 15,
             "item": {
-              "encore": false,
+              "encore": true,
               "songId": "55",
-              "kind": ["request"]
+              "note": "リクエストコーナー",
+              "kind": [
+                "request"
+              ]
             }
           }
         ]
@@ -654,7 +787,11 @@
       "prefecture": "福島縣",
       "opensAt": "17:30",
       "diff": {
-        "skip": [16, 17, 18],
+        "skip": [
+          16,
+          17,
+          18
+        ],
         "insert": [
           {
             "after": 15,
@@ -662,7 +799,9 @@
               "encore": true,
               "songId": "koi-no-maenarae",
               "note": "リクエストコーナー",
-              "kind": ["request"]
+              "kind": [
+                "request"
+              ]
             }
           },
           {
@@ -671,7 +810,9 @@
               "encore": true,
               "songId": "trailer",
               "note": "リクエストコーナー",
-              "kind": ["request"]
+              "kind": [
+                "request"
+              ]
             }
           },
           {
@@ -680,7 +821,9 @@
               "encore": true,
               "songId": "clap-clap",
               "note": "リクエストコーナー",
-              "kind": ["request"]
+              "kind": [
+                "request"
+              ]
             }
           }
         ]
@@ -700,7 +843,11 @@
       "prefecture": "茨城縣",
       "opensAt": "17:30",
       "diff": {
-        "skip": [16, 17, 18],
+        "skip": [
+          16,
+          17,
+          18
+        ],
         "insert": [
           {
             "after": 15,
@@ -708,7 +855,9 @@
               "encore": true,
               "songId": "koi-no-maenarae",
               "note": "リクエストコーナー",
-              "kind": ["request"]
+              "kind": [
+                "request"
+              ]
             }
           },
           {
@@ -717,7 +866,9 @@
               "encore": true,
               "songId": "trailer",
               "note": "リクエストコーナー",
-              "kind": ["request"]
+              "kind": [
+                "request"
+              ]
             }
           },
           {
@@ -726,7 +877,9 @@
               "encore": true,
               "songId": "clap-clap",
               "note": "リクエストコーナー",
-              "kind": ["request"]
+              "kind": [
+                "request"
+              ]
             }
           }
         ]
@@ -746,7 +899,11 @@
       "prefecture": "新潟縣",
       "opensAt": "18:00",
       "diff": {
-        "skip": [16, 17, 18],
+        "skip": [
+          16,
+          17,
+          18
+        ],
         "insert": [
           {
             "after": 15,
@@ -754,7 +911,9 @@
               "encore": true,
               "songId": "koi-no-maenarae",
               "note": "リクエストコーナー",
-              "kind": ["request"]
+              "kind": [
+                "request"
+              ]
             }
           },
           {
@@ -763,7 +922,9 @@
               "encore": true,
               "songId": "trailer",
               "note": "リクエストコーナー",
-              "kind": ["request"]
+              "kind": [
+                "request"
+              ]
             }
           },
           {
@@ -772,7 +933,9 @@
               "encore": true,
               "songId": "clap-clap",
               "note": "リクエストコーナー",
-              "kind": ["request"]
+              "kind": [
+                "request"
+              ]
             }
           }
         ]
@@ -792,7 +955,11 @@
       "prefecture": "長野縣",
       "opensAt": "17:30",
       "diff": {
-        "skip": [16, 17, 18],
+        "skip": [
+          16,
+          17,
+          18
+        ],
         "insert": [
           {
             "after": 15,
@@ -800,7 +967,9 @@
               "encore": true,
               "songId": "koi-no-maenarae",
               "note": "リクエストコーナー",
-              "kind": ["request"]
+              "kind": [
+                "request"
+              ]
             }
           },
           {
@@ -809,7 +978,9 @@
               "encore": true,
               "songId": "trailer",
               "note": "リクエストコーナー",
-              "kind": ["request"]
+              "kind": [
+                "request"
+              ]
             }
           },
           {
@@ -818,7 +989,9 @@
               "encore": true,
               "songId": "clap-clap",
               "note": "リクエストコーナー",
-              "kind": ["request"]
+              "kind": [
+                "request"
+              ]
             }
           }
         ]
@@ -838,7 +1011,21 @@
       "prefecture": "大阪府",
       "opensAt": "19:00",
       "diff": {
-        "skip": [1, 3, 4, 5, 6, 10, 12, 13, 14, 16, 17, 18, 20],
+        "skip": [
+          1,
+          3,
+          4,
+          5,
+          6,
+          10,
+          12,
+          13,
+          14,
+          16,
+          17,
+          18,
+          20
+        ],
         "insert": [
           {
             "after": 0,
@@ -934,7 +1121,21 @@
       "prefecture": "鳥取縣",
       "opensAt": "18:00",
       "diff": {
-        "skip": [1, 3, 4, 5, 6, 10, 12, 13, 14, 16, 17, 18, 20],
+        "skip": [
+          1,
+          3,
+          4,
+          5,
+          6,
+          10,
+          12,
+          13,
+          14,
+          16,
+          17,
+          18,
+          20
+        ],
         "insert": [
           {
             "after": 0,
@@ -1030,7 +1231,21 @@
       "prefecture": "愛知縣",
       "opensAt": "19:00",
       "diff": {
-        "skip": [1, 3, 4, 5, 6, 10, 12, 13, 14, 16, 17, 18, 20],
+        "skip": [
+          1,
+          3,
+          4,
+          5,
+          6,
+          10,
+          12,
+          13,
+          14,
+          16,
+          17,
+          18,
+          20
+        ],
         "insert": [
           {
             "after": 0,
@@ -1126,7 +1341,11 @@
       "prefecture": "靜岡縣",
       "opensAt": "19:00",
       "diff": {
-        "skip": [16, 17, 18],
+        "skip": [
+          16,
+          17,
+          18
+        ],
         "insert": [
           {
             "after": 15,
@@ -1134,7 +1353,9 @@
               "encore": true,
               "songId": "koi-no-maenarae",
               "note": "リクエストコーナー",
-              "kind": ["request"]
+              "kind": [
+                "request"
+              ]
             }
           },
           {
@@ -1143,7 +1364,9 @@
               "encore": true,
               "songId": "trailer",
               "note": "リクエストコーナー",
-              "kind": ["request"]
+              "kind": [
+                "request"
+              ]
             }
           },
           {
@@ -1152,7 +1375,9 @@
               "encore": true,
               "songId": "clap-clap",
               "note": "リクエストコーナー",
-              "kind": ["request"]
+              "kind": [
+                "request"
+              ]
             }
           }
         ]
@@ -1163,7 +1388,8 @@
       "title": "Official髭男dism one-man tour 18/19",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=49",
-        "https://www.livefans.jp/events/949994"
+        "https://www.livefans.jp/events/949994",
+        "https://higedan-setlist.net/live/2019-01-19/"
       ],
       "date": "2019-01-19",
       "venue": "日本特殊陶業市民會館 Village Hall",
@@ -1172,7 +1398,21 @@
       "prefecture": "愛知縣",
       "opensAt": "18:00",
       "diff": {
-        "skip": [1, 3, 4, 5, 6, 10, 12, 13, 14, 16, 17, 18, 20],
+        "skip": [
+          1,
+          3,
+          4,
+          5,
+          6,
+          10,
+          12,
+          13,
+          14,
+          16,
+          17,
+          18,
+          20
+        ],
         "insert": [
           {
             "after": 0,
@@ -1259,7 +1499,8 @@
       "title": "Official髭男dism one-man tour 18/19",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=49",
-        "https://www.livefans.jp/events/949995"
+        "https://www.livefans.jp/events/949995",
+        "https://higedan-setlist.net/live/2019-01-24/"
       ],
       "date": "2019-01-24",
       "venue": "NHK會館",
@@ -1268,7 +1509,21 @@
       "prefecture": "東京都",
       "opensAt": "19:00",
       "diff": {
-        "skip": [1, 3, 4, 5, 6, 10, 12, 13, 14, 16, 17, 18, 20],
+        "skip": [
+          1,
+          3,
+          4,
+          5,
+          6,
+          10,
+          12,
+          13,
+          14,
+          16,
+          17,
+          18,
+          20
+        ],
         "insert": [
           {
             "after": 0,
@@ -1372,7 +1627,11 @@
       "prefecture": "福岡縣",
       "opensAt": "18:00",
       "diff": {
-        "skip": [16, 17, 18],
+        "skip": [
+          16,
+          17,
+          18
+        ],
         "insert": [
           {
             "after": 15,
@@ -1380,7 +1639,9 @@
               "encore": true,
               "songId": "koi-no-maenarae",
               "note": "リクエストコーナー",
-              "kind": ["request"]
+              "kind": [
+                "request"
+              ]
             }
           },
           {
@@ -1389,7 +1650,9 @@
               "encore": true,
               "songId": "trailer",
               "note": "リクエストコーナー",
-              "kind": ["request"]
+              "kind": [
+                "request"
+              ]
             }
           },
           {
@@ -1398,7 +1661,9 @@
               "encore": true,
               "songId": "clap-clap",
               "note": "リクエストコーナー",
-              "kind": ["request"]
+              "kind": [
+                "request"
+              ]
             }
           }
         ]
@@ -1418,7 +1683,11 @@
       "prefecture": "鹿兒島縣",
       "opensAt": "17:30",
       "diff": {
-        "skip": [16, 17, 18],
+        "skip": [
+          16,
+          17,
+          18
+        ],
         "insert": [
           {
             "after": 15,
@@ -1426,7 +1695,9 @@
               "encore": true,
               "songId": "koi-no-maenarae",
               "note": "リクエストコーナー",
-              "kind": ["request"]
+              "kind": [
+                "request"
+              ]
             }
           },
           {
@@ -1435,7 +1706,9 @@
               "encore": true,
               "songId": "trailer",
               "note": "リクエストコーナー",
-              "kind": ["request"]
+              "kind": [
+                "request"
+              ]
             }
           },
           {
@@ -1444,7 +1717,9 @@
               "encore": true,
               "songId": "clap-clap",
               "note": "リクエストコーナー",
-              "kind": ["request"]
+              "kind": [
+                "request"
+              ]
             }
           }
         ]
@@ -1455,7 +1730,8 @@
       "title": "Official髭男dism one-man tour 18/19",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=49",
-        "https://www.livefans.jp/events/1014636"
+        "https://www.livefans.jp/events/1014636",
+        "https://higedan-setlist.net/live/2019-01-31/"
       ],
       "date": "2019-01-31",
       "venue": "NHK大阪會館",
@@ -1464,7 +1740,21 @@
       "prefecture": "大阪府",
       "opensAt": "19:00",
       "diff": {
-        "skip": [1, 3, 4, 5, 6, 10, 12, 13, 14, 16, 17, 18, 20],
+        "skip": [
+          1,
+          3,
+          4,
+          5,
+          6,
+          10,
+          12,
+          13,
+          14,
+          16,
+          17,
+          18,
+          20
+        ],
         "insert": [
           {
             "after": 0,
@@ -1551,7 +1841,8 @@
       "title": "Official髭男dism one-man tour 18/19",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=49",
-        "https://www.livefans.jp/events/949998"
+        "https://www.livefans.jp/events/949998",
+        "https://higedan-setlist.net/live/2019-02-02/"
       ],
       "date": "2019-02-02",
       "venue": "島根縣民會館 大會堂",
@@ -1560,7 +1851,21 @@
       "prefecture": "島根縣",
       "opensAt": "18:00",
       "diff": {
-        "skip": [1, 3, 4, 5, 6, 10, 12, 13, 14, 16, 17, 18, 20],
+        "skip": [
+          1,
+          3,
+          4,
+          5,
+          6,
+          10,
+          12,
+          13,
+          14,
+          16,
+          17,
+          18,
+          20
+        ],
         "insert": [
           {
             "after": 0,

@@ -115,10 +115,13 @@
       "opensAt": "18:00",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=5",
-        "https://www.livefans.jp/events/1866419"
+        "https://www.livefans.jp/events/1866419",
+        "https://higedan-setlist.net/live/2026-04-04/"
       ],
       "diff": {
-        "skip": [10],
+        "skip": [
+          10
+        ],
         "insert": [
           {
             "after": 8,
@@ -141,20 +144,10 @@
       "opensAt": "18:00",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=5",
-        "https://www.livefans.jp/events/1866420"
+        "https://www.livefans.jp/events/1866420",
+        "https://higedan-setlist.net/live/2026-04-05/"
       ],
-      "diff": {
-        "skip": [10],
-        "insert": [
-          {
-            "after": 8,
-            "item": {
-              "encore": false,
-              "songId": "elder-flower"
-            }
-          }
-        ]
-      },
+      "diff": {},
       "region": "東北",
       "prefecture": "宮城縣"
     },
@@ -167,20 +160,10 @@
       "opensAt": "19:00",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=5",
-        "https://www.livefans.jp/events/1866421"
+        "https://www.livefans.jp/events/1866421",
+        "https://higedan-setlist.net/live/2026-04-17/"
       ],
-      "diff": {
-        "skip": [10],
-        "insert": [
-          {
-            "after": 8,
-            "item": {
-              "encore": false,
-              "songId": "elder-flower"
-            }
-          }
-        ]
-      },
+      "diff": {},
       "region": "九州",
       "prefecture": "福岡縣"
     },
@@ -193,7 +176,8 @@
       "opensAt": "19:00",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=5",
-        "https://www.livefans.jp/events/1866422"
+        "https://www.livefans.jp/events/1866422",
+        "https://higedan-setlist.net/live/2026-04-18/"
       ],
       "diff": {},
       "region": "九州",
@@ -208,20 +192,10 @@
       "opensAt": "18:00",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=5",
-        "https://www.livefans.jp/events/1866423"
+        "https://www.livefans.jp/events/1866423",
+        "https://higedan-setlist.net/live/2026-04-25/"
       ],
-      "diff": {
-        "skip": [10],
-        "insert": [
-          {
-            "after": 8,
-            "item": {
-              "encore": false,
-              "songId": "elder-flower"
-            }
-          }
-        ]
-      },
+      "diff": {},
       "region": "四國",
       "prefecture": "高知縣"
     },
@@ -234,20 +208,10 @@
       "opensAt": "19:00",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=5",
-        "https://www.livefans.jp/events/1866424"
+        "https://www.livefans.jp/events/1866424",
+        "https://higedan-setlist.net/live/2026-04-27/"
       ],
-      "diff": {
-        "skip": [10],
-        "insert": [
-          {
-            "after": 8,
-            "item": {
-              "encore": false,
-              "songId": "elder-flower"
-            }
-          }
-        ]
-      },
+      "diff": {},
       "region": "四國",
       "prefecture": "愛媛縣"
     },
@@ -260,7 +224,8 @@
       "opensAt": "18:00",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=5",
-        "https://www.livefans.jp/events/1866426"
+        "https://www.livefans.jp/events/1866426",
+        "https://higedan-setlist.net/live/2026-05-03/"
       ],
       "diff": {},
       "region": "中部",
@@ -275,7 +240,8 @@
       "opensAt": "18:00",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=5",
-        "https://www.livefans.jp/events/1866427"
+        "https://www.livefans.jp/events/1866427",
+        "https://higedan-setlist.net/live/2026-05-04/"
       ],
       "diff": {},
       "region": "中部",
@@ -290,10 +256,14 @@
       "opensAt": "18:00",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=5",
-        "https://www.livefans.jp/events/1866428"
+        "https://www.livefans.jp/events/1866428",
+        "https://higedan-setlist.net/live/2026-05-10/"
       ],
       "diff": {
-        "skip": [13, 20],
+        "skip": [
+          13,
+          20
+        ],
         "insert": [
           {
             "after": 0,
@@ -333,10 +303,13 @@
       "opensAt": "19:00",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=5",
-        "https://www.livefans.jp/events/1866432"
+        "https://www.livefans.jp/events/1866432",
+        "https://higedan-setlist.net/live/2026-05-12/"
       ],
       "diff": {
-        "skip": [20],
+        "skip": [
+          20
+        ],
         "insert": [
           {
             "after": 0,
@@ -368,10 +341,14 @@
       "opensAt": "19:00",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=5",
-        "https://www.livefans.jp/events/1866433"
+        "https://www.livefans.jp/events/1866433",
+        "https://higedan-setlist.net/live/2026-05-21/"
       ],
       "diff": {
-        "skip": [13, 20],
+        "skip": [
+          13,
+          20
+        ],
         "insert": [
           {
             "after": 0,
@@ -411,10 +388,14 @@
       "opensAt": "18:00",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=5",
-        "https://www.livefans.jp/events/1866434"
+        "https://www.livefans.jp/events/1866434",
+        "https://higedan-setlist.net/live/2026-05-23/"
       ],
       "diff": {
-        "skip": [13, 20],
+        "skip": [
+          13,
+          20
+        ],
         "insert": [
           {
             "after": 0,
@@ -454,7 +435,8 @@
       "opensAt": "18:00",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=5",
-        "https://www.livefans.jp/events/1866438"
+        "https://www.livefans.jp/events/1866438",
+        "https://higedan-setlist.net/live/2026-05-30/"
       ],
       "diff": {},
       "region": "中國",
@@ -469,7 +451,8 @@
       "opensAt": "18:00",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=5",
-        "https://www.livefans.jp/events/1866439"
+        "https://www.livefans.jp/events/1866439",
+        "https://higedan-setlist.net/live/2026-05-31/"
       ],
       "diff": {},
       "region": "中國",
@@ -484,7 +467,8 @@
       "opensAt": "19:00",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=5",
-        "https://www.livefans.jp/events/1866443"
+        "https://www.livefans.jp/events/1866443",
+        "https://higedan-setlist.net/live/2026-06-11/"
       ],
       "diff": {},
       "region": "北海道",
@@ -499,7 +483,8 @@
       "opensAt": "18:00",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=5",
-        "https://www.livefans.jp/events/1866444"
+        "https://www.livefans.jp/events/1866444",
+        "https://higedan-setlist.net/live/2026-06-13/"
       ],
       "diff": {},
       "region": "北海道",
@@ -514,7 +499,8 @@
       "opensAt": "18:00",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=5",
-        "https://www.livefans.jp/events/1866445"
+        "https://www.livefans.jp/events/1866445",
+        "https://higedan-setlist.net/live/2026-06-20/"
       ],
       "diff": {},
       "region": "北海道",
@@ -529,7 +515,8 @@
       "opensAt": "18:00",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=5",
-        "https://www.livefans.jp/events/1866446"
+        "https://www.livefans.jp/events/1866446",
+        "https://higedan-setlist.net/live/2026-06-21/"
       ],
       "diff": {},
       "region": "北海道",
@@ -544,7 +531,8 @@
       "opensAt": "19:00",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=5",
-        "https://www.livefans.jp/events/1866447"
+        "https://www.livefans.jp/events/1866447",
+        "https://higedan-setlist.net/live/2026-07-03/"
       ],
       "diff": {},
       "region": "中部",
@@ -559,10 +547,13 @@
       "opensAt": "19:00",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=5",
-        "https://www.livefans.jp/events/1866448"
+        "https://www.livefans.jp/events/1866448",
+        "https://higedan-setlist.net/live/2026-07-04/"
       ],
       "diff": {
-        "skip": [13],
+        "skip": [
+          13
+        ],
         "insert": [
           {
             "after": 12,
@@ -586,7 +577,8 @@
       "opensAt": "18:00",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=5",
-        "https://www.livefans.jp/events/1866449"
+        "https://www.livefans.jp/events/1866449",
+        "https://higedan-setlist.net/live/2026-07-11/"
       ],
       "diff": {},
       "region": "關東",
@@ -601,7 +593,8 @@
       "opensAt": "18:00",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=5",
-        "https://www.livefans.jp/events/1866450"
+        "https://www.livefans.jp/events/1866450",
+        "https://higedan-setlist.net/live/2026-07-12/"
       ],
       "diff": {},
       "region": "關東",
@@ -616,10 +609,14 @@
       "opensAt": "18:00",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=5",
-        "https://www.livefans.jp/events/1866451"
+        "https://www.livefans.jp/events/1866451",
+        "https://higedan-setlist.net/live/2026-07-18/"
       ],
       "diff": {
-        "skip": [1, 6],
+        "skip": [
+          1,
+          6
+        ],
         "insert": [
           {
             "after": 0,
@@ -658,10 +655,13 @@
       "opensAt": "18:00",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=5",
-        "https://www.livefans.jp/events/1866452"
+        "https://www.livefans.jp/events/1866452",
+        "https://higedan-setlist.net/live/2026-07-19/"
       ],
       "diff": {
-        "skip": [6],
+        "skip": [
+          6
+        ],
         "insert": [
           {
             "after": 0,
@@ -692,10 +692,13 @@
       "opensAt": "18:00",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=5",
-        "https://www.livefans.jp/events/1866453"
+        "https://www.livefans.jp/events/1866453",
+        "https://higedan-setlist.net/live/2026-07-25/"
       ],
       "diff": {
-        "skip": [6],
+        "skip": [
+          6
+        ],
         "insert": [
           {
             "after": 0,
@@ -726,10 +729,15 @@
       "opensAt": "18:00",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=5",
-        "https://www.livefans.jp/events/1866454"
+        "https://www.livefans.jp/events/1866454",
+        "https://higedan-setlist.net/live/2026-07-26/"
       ],
       "diff": {
-        "skip": [6, 8, 20],
+        "skip": [
+          6,
+          8,
+          20
+        ],
         "insert": [
           {
             "after": 5,

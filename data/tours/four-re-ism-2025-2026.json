@@ -53,13 +53,17 @@
       "order": 10,
       "encore": false,
       "songId": "subtitle",
-      "kind": ["satoshi-solo"]
+      "kind": [
+        "satoshi-solo"
+      ]
     },
     {
       "order": 11,
       "encore": false,
       "songId": "knit-no-boushi",
-      "kind": ["satoshi-solo"]
+      "kind": [
+        "satoshi-solo"
+      ]
     },
     {
       "order": 12,
@@ -112,10 +116,13 @@
       "opensAt": "19:00",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=5",
-        "https://www.livefans.jp/events/1866409"
+        "https://www.livefans.jp/events/1866409",
+        "https://higedan-setlist.net/live/2025-12-10/"
       ],
       "diff": {
-        "skip": [18],
+        "skip": [
+          18
+        ],
         "insert": [
           {
             "after": 9,
@@ -123,7 +130,10 @@
               "encore": false,
               "songId": "same-blue",
               "note": "弾き語り、リクエスト曲",
-              "kind": ["satoshi-solo", "request"]
+              "kind": [
+                "satoshi-solo",
+                "request"
+              ]
             }
           },
           {
@@ -132,7 +142,10 @@
               "encore": false,
               "songId": "vintage",
               "note": "弾き語り、リクエスト曲",
-              "kind": ["satoshi-solo", "request"]
+              "kind": [
+                "satoshi-solo",
+                "request"
+              ]
             }
           },
           {
@@ -141,7 +154,10 @@
               "encore": false,
               "songId": "i-love",
               "note": "弾き語り、リクエスト曲",
-              "kind": ["satoshi-solo", "request"]
+              "kind": [
+                "satoshi-solo",
+                "request"
+              ]
             }
           },
           {
@@ -150,7 +166,9 @@
               "encore": true,
               "songId": "make-me-wonder",
               "note": "新曲",
-              "kind": ["premiere"]
+              "kind": [
+                "premiere"
+              ]
             }
           }
         ]
@@ -167,10 +185,13 @@
       "opensAt": "19:00",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=5",
-        "https://www.livefans.jp/events/1866410"
+        "https://www.livefans.jp/events/1866410",
+        "https://higedan-setlist.net/live/2025-12-11/"
       ],
       "diff": {
-        "skip": [18],
+        "skip": [
+          18
+        ],
         "insert": [
           {
             "after": 9,
@@ -178,7 +199,10 @@
               "encore": false,
               "songId": "yugure-zoi",
               "note": "リクエスト弾き語り",
-              "kind": ["satoshi-solo", "request"]
+              "kind": [
+                "satoshi-solo",
+                "request"
+              ]
             }
           },
           {
@@ -187,7 +211,10 @@
               "encore": false,
               "songId": "115man-kiro-no-film",
               "note": "リクエスト弾き語り",
-              "kind": ["satoshi-solo", "request"]
+              "kind": [
+                "satoshi-solo",
+                "request"
+              ]
             }
           },
           {
@@ -196,7 +223,9 @@
               "encore": true,
               "songId": "make-me-wonder",
               "note": "新曲",
-              "kind": ["premiere"]
+              "kind": [
+                "premiere"
+              ]
             }
           }
         ]
@@ -213,10 +242,15 @@
       "opensAt": "19:00",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=5",
-        "https://www.livefans.jp/events/1866411"
+        "https://www.livefans.jp/events/1866411",
+        "https://higedan-setlist.net/live/2025-12-15/"
       ],
       "diff": {
-        "skip": [5, 8, 18],
+        "skip": [
+          5,
+          8,
+          18
+        ],
         "insert": [
           {
             "after": 4,
@@ -240,7 +274,10 @@
               "encore": false,
               "songId": "apoptosis",
               "note": "弾き語りリクエスト",
-              "kind": ["satoshi-solo", "request"]
+              "kind": [
+                "satoshi-solo",
+                "request"
+              ]
             }
           },
           {
@@ -249,7 +286,10 @@
               "encore": false,
               "songId": "dakuten",
               "note": "弾き語りリクエスト",
-              "kind": ["satoshi-solo", "request"]
+              "kind": [
+                "satoshi-solo",
+                "request"
+              ]
             }
           },
           {
@@ -258,7 +298,10 @@
               "encore": false,
               "songId": "koi-no-sarigiwa",
               "note": "弾き語りリクエスト",
-              "kind": ["satoshi-solo", "request"]
+              "kind": [
+                "satoshi-solo",
+                "request"
+              ]
             }
           },
           {
@@ -267,7 +310,9 @@
               "encore": true,
               "songId": "make-me-wonder",
               "note": "新曲",
-              "kind": ["premiere"]
+              "kind": [
+                "premiere"
+              ]
             }
           }
         ]
@@ -284,10 +329,13 @@
       "opensAt": "19:00",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=5",
-        "https://www.livefans.jp/events/1866412"
+        "https://www.livefans.jp/events/1866412",
+        "https://higedan-setlist.net/live/2025-12-16/"
       ],
       "diff": {
-        "skip": [8],
+        "skip": [
+          8
+        ],
         "insert": [
           {
             "after": 7,
@@ -303,7 +351,10 @@
               "encore": false,
               "songId": "sousisouai",
               "note": "弾き語りリクエスト",
-              "kind": ["satoshi-solo", "request"]
+              "kind": [
+                "satoshi-solo",
+                "request"
+              ]
             }
           },
           {
@@ -312,7 +363,10 @@
               "encore": false,
               "songId": "universe",
               "note": "弾き語りリクエスト",
-              "kind": ["satoshi-solo", "request"]
+              "kind": [
+                "satoshi-solo",
+                "request"
+              ]
             }
           }
         ]
@@ -329,10 +383,13 @@
       "opensAt": "19:00",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=5",
-        "https://www.livefans.jp/events/1866413"
+        "https://www.livefans.jp/events/1866413",
+        "https://higedan-setlist.net/live/2025-12-22/"
       ],
       "diff": {
-        "skip": [8],
+        "skip": [
+          8
+        ],
         "insert": [
           {
             "after": 7,
@@ -346,18 +403,24 @@
             "after": 9,
             "item": {
               "encore": false,
-              "songId": "sharon",
-              "note": "弾き語りリクエスト",
-              "kind": ["satoshi-solo", "request"]
+              "songId": "laughter",
+              "note": "弾き語りリクエスト (LiveFans 記為 Sharon 後披露)",
+              "kind": [
+                "satoshi-solo",
+                "request"
+              ]
             }
           },
           {
             "after": 9,
             "item": {
               "encore": false,
-              "songId": "laughter",
+              "songId": "sharon",
               "note": "弾き語りリクエスト",
-              "kind": ["satoshi-solo", "request"]
+              "kind": [
+                "satoshi-solo",
+                "request"
+              ]
             }
           }
         ]
@@ -374,10 +437,15 @@
       "opensAt": "19:00",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=5",
-        "https://www.livefans.jp/events/1866414"
+        "https://www.livefans.jp/events/1866414",
+        "https://higedan-setlist.net/live/2025-12-23/"
       ],
       "diff": {
-        "skip": [10, 11, 18],
+        "skip": [
+          10,
+          11,
+          18
+        ],
         "insert": [
           {
             "after": 9,
@@ -385,7 +453,9 @@
               "encore": false,
               "songId": "lady",
               "note": "弾き語りver.",
-              "kind": ["satoshi-solo"]
+              "kind": [
+                "satoshi-solo"
+              ]
             }
           },
           {
@@ -394,7 +464,10 @@
               "encore": false,
               "songId": "i-love",
               "note": "(リクエスト)弾き語りSTADIUM ver.",
-              "kind": ["satoshi-solo", "request"]
+              "kind": [
+                "satoshi-solo",
+                "request"
+              ]
             }
           },
           {
@@ -403,7 +476,9 @@
               "encore": false,
               "songId": "subtitle",
               "note": "弾き語りver.",
-              "kind": ["satoshi-solo"]
+              "kind": [
+                "satoshi-solo"
+              ]
             }
           },
           {
@@ -412,7 +487,9 @@
               "encore": false,
               "songId": "knit-no-boushi",
               "note": "弾き語りver.",
-              "kind": ["satoshi-solo"]
+              "kind": [
+                "satoshi-solo"
+              ]
             }
           },
           {
@@ -437,10 +514,14 @@
       "opensAt": "19:00",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=5",
-        "https://www.livefans.jp/events/1866415"
+        "https://www.livefans.jp/events/1866415",
+        "https://higedan-setlist.net/live/2026-01-13/"
       ],
       "diff": {
-        "skip": [10, 11],
+        "skip": [
+          10,
+          11
+        ],
         "insert": [
           {
             "after": 7,
@@ -456,7 +537,10 @@
               "encore": false,
               "songId": "rowan",
               "note": "聡ピアノ弾き語り、リクエスト曲",
-              "kind": ["satoshi-solo", "request"]
+              "kind": [
+                "satoshi-solo",
+                "request"
+              ]
             }
           },
           {
@@ -465,7 +549,10 @@
               "encore": false,
               "songId": "shihatsu-ga-michibiku-kouhukuron",
               "note": "聡ピアノ弾き語り、リクエスト曲",
-              "kind": ["satoshi-solo", "request"]
+              "kind": [
+                "satoshi-solo",
+                "request"
+              ]
             }
           },
           {
@@ -474,7 +561,9 @@
               "encore": false,
               "songId": "subtitle",
               "note": "聡ピアノ弾き語り",
-              "kind": ["satoshi-solo"]
+              "kind": [
+                "satoshi-solo"
+              ]
             }
           },
           {
@@ -483,7 +572,9 @@
               "encore": false,
               "songId": "knit-no-boushi",
               "note": "聡ピアノ弾き語り",
-              "kind": ["satoshi-solo"]
+              "kind": [
+                "satoshi-solo"
+              ]
             }
           }
         ]
@@ -500,10 +591,14 @@
       "opensAt": "19:00",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=5",
-        "https://www.livefans.jp/events/1866416"
+        "https://www.livefans.jp/events/1866416",
+        "https://higedan-setlist.net/live/2026-01-14/"
       ],
       "diff": {
-        "skip": [10, 11],
+        "skip": [
+          10,
+          11
+        ],
         "insert": [
           {
             "after": 7,
@@ -519,7 +614,10 @@
               "encore": false,
               "songId": "coffee-to-syrup",
               "note": "聡ピアノ弾き語り、リクエスト曲",
-              "kind": ["satoshi-solo", "request"]
+              "kind": [
+                "satoshi-solo",
+                "request"
+              ]
             }
           },
           {
@@ -528,7 +626,10 @@
               "encore": false,
               "songId": "vintage",
               "note": "聡ピアノ弾き語り、リクエスト曲",
-              "kind": ["satoshi-solo", "request"]
+              "kind": [
+                "satoshi-solo",
+                "request"
+              ]
             }
           },
           {
@@ -537,7 +638,9 @@
               "encore": false,
               "songId": "subtitle",
               "note": "聡ピアノ弾き語り",
-              "kind": ["satoshi-solo"]
+              "kind": [
+                "satoshi-solo"
+              ]
             }
           },
           {
@@ -546,7 +649,9 @@
               "encore": false,
               "songId": "knit-no-boushi",
               "note": "聡ピアノ弾き語り",
-              "kind": ["satoshi-solo"]
+              "kind": [
+                "satoshi-solo"
+              ]
             }
           }
         ]
@@ -563,10 +668,14 @@
       "opensAt": "19:00",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=5",
-        "https://www.livefans.jp/events/1866417"
+        "https://www.livefans.jp/events/1866417",
+        "https://higedan-setlist.net/live/2026-01-21/"
       ],
       "diff": {
-        "skip": [10, 11],
+        "skip": [
+          10,
+          11
+        ],
         "insert": [
           {
             "after": 7,
@@ -582,7 +691,10 @@
               "encore": false,
               "songId": "chessboard",
               "note": "聡ピアノ弾き語り、リクエスト曲",
-              "kind": ["satoshi-solo", "request"]
+              "kind": [
+                "satoshi-solo",
+                "request"
+              ]
             }
           },
           {
@@ -591,7 +703,10 @@
               "encore": false,
               "songId": "happy-birthday-to-you",
               "note": "聡ピアノ弾き語り、リクエスト曲",
-              "kind": ["satoshi-solo", "request"]
+              "kind": [
+                "satoshi-solo",
+                "request"
+              ]
             }
           },
           {
@@ -600,7 +715,10 @@
               "encore": false,
               "songId": "apoptosis",
               "note": "聡ピアノ弾き語り、リクエスト曲",
-              "kind": ["satoshi-solo", "request"]
+              "kind": [
+                "satoshi-solo",
+                "request"
+              ]
             }
           },
           {
@@ -609,7 +727,9 @@
               "encore": false,
               "songId": "subtitle",
               "note": "聡ピアノ弾き語り",
-              "kind": ["satoshi-solo"]
+              "kind": [
+                "satoshi-solo"
+              ]
             }
           },
           {
@@ -618,7 +738,9 @@
               "encore": false,
               "songId": "knit-no-boushi",
               "note": "聡ピアノ弾き語り",
-              "kind": ["satoshi-solo"]
+              "kind": [
+                "satoshi-solo"
+              ]
             }
           }
         ]
@@ -635,10 +757,16 @@
       "opensAt": "19:00",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=5",
-        "https://www.livefans.jp/events/1866418"
+        "https://www.livefans.jp/events/1866418",
+        "https://higedan-setlist.net/live/2026-01-22/"
       ],
       "diff": {
-        "skip": [10, 11, 12, 17],
+        "skip": [
+          10,
+          11,
+          12,
+          17
+        ],
         "insert": [
           {
             "after": 7,
@@ -654,7 +782,10 @@
               "encore": false,
               "songId": "mikanseinamamade",
               "note": "聡ピアノ弾き語り、リクエスト曲、ワンコーラスのみ",
-              "kind": ["satoshi-solo", "request"]
+              "kind": [
+                "satoshi-solo",
+                "request"
+              ]
             }
           },
           {
@@ -663,7 +794,10 @@
               "encore": false,
               "songId": "takaga-i-love-you",
               "note": "聡ピアノ弾き語り、リクエスト曲、ワンコーラスのみ",
-              "kind": ["satoshi-solo", "request"]
+              "kind": [
+                "satoshi-solo",
+                "request"
+              ]
             }
           },
           {
@@ -672,7 +806,10 @@
               "encore": false,
               "songId": "shower",
               "note": "聡ピアノ弾き語り、リクエスト曲、ワンコーラスのみ",
-              "kind": ["satoshi-solo", "request"]
+              "kind": [
+                "satoshi-solo",
+                "request"
+              ]
             }
           },
           {
@@ -681,7 +818,10 @@
               "encore": false,
               "songId": "vintage",
               "note": "聡ピアノ弾き語り、リクエスト曲、ワンコーラスのみ",
-              "kind": ["satoshi-solo", "request"]
+              "kind": [
+                "satoshi-solo",
+                "request"
+              ]
             }
           },
           {
@@ -690,7 +830,10 @@
               "encore": false,
               "songId": "hakan",
               "note": "聡ピアノ弾き語り、aikoリクエスト曲、ワンコーラスのみ",
-              "kind": ["satoshi-solo", "request"]
+              "kind": [
+                "satoshi-solo",
+                "request"
+              ]
             }
           },
           {
@@ -699,7 +842,10 @@
               "encore": false,
               "songId": "nichiyoubi-no-love-letter",
               "note": "聡ピアノ弾き語り、リクエスト曲、1番のみ",
-              "kind": ["satoshi-solo", "request"]
+              "kind": [
+                "satoshi-solo",
+                "request"
+              ]
             }
           },
           {
@@ -708,7 +854,10 @@
               "encore": false,
               "songId": "shihatsu-ga-michibiku-kouhukuron",
               "note": "聡ピアノ弾き語り、リクエスト曲、ワンコーラスのみ",
-              "kind": ["satoshi-solo", "request"]
+              "kind": [
+                "satoshi-solo",
+                "request"
+              ]
             }
           },
           {
@@ -717,7 +866,9 @@
               "encore": false,
               "songId": "subtitle",
               "note": "聡ピアノ弾き語り",
-              "kind": ["satoshi-solo"]
+              "kind": [
+                "satoshi-solo"
+              ]
             }
           },
           {
@@ -726,7 +877,9 @@
               "encore": false,
               "songId": "knit-no-boushi",
               "note": "聡ピアノ弾き語り",
-              "kind": ["satoshi-solo"]
+              "kind": [
+                "satoshi-solo"
+              ]
             }
           },
           {
@@ -735,7 +888,9 @@
               "encore": false,
               "songId": "b-side-blues",
               "note": "1サビまで聡ピアノ弾き語り",
-              "kind": ["satoshi-solo"]
+              "kind": [
+                "satoshi-solo"
+              ]
             }
           },
           {

@@ -9,7 +9,8 @@
       "title": "Tour 19/20 - Hall Travelers -",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=42",
-        "https://www.livefans.jp/events/1150083"
+        "https://www.livefans.jp/events/1150083",
+        "https://higedan-setlist.net/live/2019-10-26/"
       ],
       "date": "2019-10-26",
       "opensAt": "18:00",
@@ -18,7 +19,27 @@
       "region": "關東",
       "prefecture": "千葉縣",
       "diff": {
-        "skip": [9]
+        "skip": [
+          9
+        ],
+        "insert": [
+          {
+            "after": 8,
+            "item": {
+              "encore": false,
+              "songId": "zero-no-mama-de-iraterara",
+              "note": "Overture"
+            }
+          },
+          {
+            "after": 8,
+            "item": {
+              "encore": false,
+              "songId": "yugure-zoi",
+              "note": "Overture"
+            }
+          }
+        ]
       }
     },
     {
@@ -26,7 +47,8 @@
       "title": "Tour 19/20 - Hall Travelers -",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=42",
-        "https://www.livefans.jp/events/1150084"
+        "https://www.livefans.jp/events/1150084",
+        "https://higedan-setlist.net/live/2019-10-30/"
       ],
       "date": "2019-10-30",
       "opensAt": "19:00",
@@ -35,7 +57,9 @@
       "region": "關西",
       "prefecture": "奈良縣",
       "diff": {
-        "skip": [9],
+        "skip": [
+          9
+        ],
         "insert": [
           {
             "after": 8,
@@ -61,7 +85,8 @@
       "title": "Tour 19/20 - Hall Travelers -",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=42",
-        "https://www.livefans.jp/events/1150085"
+        "https://www.livefans.jp/events/1150085",
+        "https://higedan-setlist.net/live/2019-11-01/"
       ],
       "date": "2019-11-01",
       "opensAt": "19:00",
@@ -70,7 +95,10 @@
       "region": "關西",
       "prefecture": "大阪府",
       "diff": {
-        "skip": [9, 17],
+        "skip": [
+          9,
+          17
+        ],
         "insert": [
           {
             "after": 8,
@@ -101,7 +129,8 @@
       "title": "Tour 19/20 - Hall Travelers -",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=42",
-        "https://www.livefans.jp/events/1150086"
+        "https://www.livefans.jp/events/1150086",
+        "https://higedan-setlist.net/live/2019-11-02/"
       ],
       "date": "2019-11-02",
       "opensAt": "17:00",
@@ -110,7 +139,10 @@
       "region": "關西",
       "prefecture": "大阪府",
       "diff": {
-        "skip": [9, 17],
+        "skip": [
+          9,
+          17
+        ],
         "insert": [
           {
             "after": 16,
@@ -127,7 +159,8 @@
       "title": "Tour 19/20 - Hall Travelers -",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=42",
-        "https://www.livefans.jp/events/1150087"
+        "https://www.livefans.jp/events/1150087",
+        "https://higedan-setlist.net/live/2019-11-07/"
       ],
       "date": "2019-11-07",
       "opensAt": "19:00",
@@ -136,7 +169,10 @@
       "region": "關東",
       "prefecture": "埼玉縣",
       "diff": {
-        "skip": [9, 17],
+        "skip": [
+          9,
+          17
+        ],
         "insert": [
           {
             "after": 8,
@@ -167,7 +203,8 @@
       "title": "Tour 19/20 - Hall Travelers -",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=42",
-        "https://www.livefans.jp/events/1150088"
+        "https://www.livefans.jp/events/1150088",
+        "https://higedan-setlist.net/live/2019-11-10/"
       ],
       "date": "2019-11-10",
       "opensAt": "17:00",
@@ -176,7 +213,9 @@
       "region": "中部",
       "prefecture": "石川縣",
       "diff": {
-        "skip": [9]
+        "skip": [
+          9
+        ]
       }
     },
     {
@@ -184,7 +223,8 @@
       "title": "Tour 19/20 - Hall Travelers -",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=42",
-        "https://www.livefans.jp/events/1150089"
+        "https://www.livefans.jp/events/1150089",
+        "https://higedan-setlist.net/live/2019-11-15/"
       ],
       "date": "2019-11-15",
       "opensAt": "19:00",
@@ -193,7 +233,11 @@
       "region": "北海道",
       "prefecture": "北海道",
       "diff": {
-        "skip": [7, 9, 17],
+        "skip": [
+          7,
+          9,
+          17
+        ],
         "insert": [
           {
             "after": 5,
@@ -231,7 +275,8 @@
       "title": "Tour 19/20 - Hall Travelers -",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=42",
-        "https://www.livefans.jp/events/1150090"
+        "https://www.livefans.jp/events/1150090",
+        "https://higedan-setlist.net/live/2019-11-17/"
       ],
       "date": "2019-11-17",
       "opensAt": "17:00",
@@ -246,7 +291,8 @@
       "title": "Tour 19/20 - Hall Travelers -",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=42",
-        "https://www.livefans.jp/events/1150091"
+        "https://www.livefans.jp/events/1150091",
+        "https://higedan-setlist.net/live/2019-11-23/"
       ],
       "date": "2019-11-23",
       "opensAt": "17:00",
@@ -255,7 +301,9 @@
       "region": "四國",
       "prefecture": "香川縣",
       "diff": {
-        "skip": [17],
+        "skip": [
+          17
+        ],
         "insert": [
           {
             "after": 16,
@@ -272,7 +320,8 @@
       "title": "Tour 19/20 - Hall Travelers -",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=42",
-        "https://www.livefans.jp/events/1150092"
+        "https://www.livefans.jp/events/1150092",
+        "https://higedan-setlist.net/live/2019-11-24/"
       ],
       "date": "2019-11-24",
       "opensAt": "17:00",
@@ -297,7 +346,8 @@
       "title": "Tour 19/20 - Hall Travelers -",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=42",
-        "https://www.livefans.jp/events/1150093"
+        "https://www.livefans.jp/events/1150093",
+        "https://higedan-setlist.net/live/2019-11-29/"
       ],
       "date": "2019-11-29",
       "opensAt": "19:00",
@@ -306,7 +356,9 @@
       "region": "中部",
       "prefecture": "愛知縣",
       "diff": {
-        "skip": [17],
+        "skip": [
+          17
+        ],
         "insert": [
           {
             "after": 16,
@@ -323,7 +375,8 @@
       "title": "Tour 19/20 - Hall Travelers -",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=42",
-        "https://www.livefans.jp/events/1150094"
+        "https://www.livefans.jp/events/1150094",
+        "https://higedan-setlist.net/live/2019-11-30/"
       ],
       "date": "2019-11-30",
       "opensAt": "18:00",
@@ -332,7 +385,9 @@
       "region": "關東",
       "prefecture": "東京都",
       "diff": {
-        "skip": [17],
+        "skip": [
+          17
+        ],
         "insert": [
           {
             "after": 16,
@@ -349,7 +404,8 @@
       "title": "Tour 19/20 - Hall Travelers -",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=42",
-        "https://www.livefans.jp/events/1150095"
+        "https://www.livefans.jp/events/1150095",
+        "https://higedan-setlist.net/live/2019-12-07/"
       ],
       "date": "2019-12-07",
       "opensAt": "17:00",
@@ -358,7 +414,9 @@
       "region": "中部",
       "prefecture": "岐阜縣",
       "diff": {
-        "skip": [7],
+        "skip": [
+          7
+        ],
         "insert": [
           {
             "after": 5,
@@ -375,7 +433,8 @@
       "title": "Tour 19/20 - Hall Travelers -",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=42",
-        "https://www.livefans.jp/events/1150096"
+        "https://www.livefans.jp/events/1150096",
+        "https://higedan-setlist.net/live/2019-12-08/"
       ],
       "date": "2019-12-08",
       "opensAt": "17:00",
@@ -390,7 +449,8 @@
       "title": "Tour 19/20 - Hall Travelers -",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=42",
-        "https://www.livefans.jp/events/1150097"
+        "https://www.livefans.jp/events/1150097",
+        "https://higedan-setlist.net/live/2019-12-13/"
       ],
       "date": "2019-12-13",
       "opensAt": "19:00",
@@ -399,7 +459,9 @@
       "region": "中國",
       "prefecture": "廣島縣",
       "diff": {
-        "skip": [7],
+        "skip": [
+          7
+        ],
         "insert": [
           {
             "after": 5,
@@ -416,7 +478,8 @@
       "title": "Tour 19/20 - Hall Travelers -",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=42",
-        "https://www.livefans.jp/events/1150098"
+        "https://www.livefans.jp/events/1150098",
+        "https://higedan-setlist.net/live/2019-12-15/"
       ],
       "date": "2019-12-15",
       "opensAt": "17:00",
@@ -431,7 +494,8 @@
       "title": "Tour 19/20 - Hall Travelers -",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=42",
-        "https://www.livefans.jp/events/1150099"
+        "https://www.livefans.jp/events/1150099",
+        "https://higedan-setlist.net/live/2019-12-20/"
       ],
       "date": "2019-12-20",
       "opensAt": "19:00",
@@ -440,7 +504,9 @@
       "region": "東北",
       "prefecture": "宮城縣",
       "diff": {
-        "skip": [17],
+        "skip": [
+          17
+        ],
         "insert": [
           {
             "after": 16,
@@ -457,7 +523,8 @@
       "title": "Tour 19/20 - Hall Travelers -",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=42",
-        "https://www.livefans.jp/events/1150100"
+        "https://www.livefans.jp/events/1150100",
+        "https://higedan-setlist.net/live/2019-12-22/"
       ],
       "date": "2019-12-22",
       "opensAt": "17:00",
@@ -466,7 +533,9 @@
       "region": "東北",
       "prefecture": "福島縣",
       "diff": {
-        "skip": [9]
+        "skip": [
+          9
+        ]
       }
     },
     {
@@ -474,7 +543,8 @@
       "title": "Tour 19/20 - Hall Travelers -",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=42",
-        "https://www.livefans.jp/events/1150101"
+        "https://www.livefans.jp/events/1150101",
+        "https://higedan-setlist.net/live/2020-01-04/"
       ],
       "date": "2020-01-04",
       "opensAt": "17:00",
@@ -483,7 +553,9 @@
       "region": "九州",
       "prefecture": "福岡縣",
       "diff": {
-        "skip": [7],
+        "skip": [
+          7
+        ],
         "insert": [
           {
             "after": 5,
@@ -500,7 +572,8 @@
       "title": "Tour 19/20 - Hall Travelers -",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=42",
-        "https://www.livefans.jp/events/1150102"
+        "https://www.livefans.jp/events/1150102",
+        "https://higedan-setlist.net/live/2020-01-05/"
       ],
       "date": "2020-01-05",
       "opensAt": "17:00",
@@ -509,7 +582,9 @@
       "region": "九州",
       "prefecture": "福岡縣",
       "diff": {
-        "skip": [7],
+        "skip": [
+          7
+        ],
         "insert": [
           {
             "after": 5,
@@ -549,7 +624,8 @@
       "title": "Tour 19/20 - Hall Travelers -",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=42",
-        "https://www.livefans.jp/events/1150103"
+        "https://www.livefans.jp/events/1150103",
+        "https://higedan-setlist.net/live/2020-01-12/"
       ],
       "date": "2020-01-12",
       "opensAt": "17:00",
@@ -558,7 +634,10 @@
       "region": "關東",
       "prefecture": "神奈川縣",
       "diff": {
-        "skip": [5, 18],
+        "skip": [
+          5,
+          18
+        ],
         "insert": [
           {
             "after": 3,
@@ -582,7 +661,8 @@
       "title": "Tour 19/20 - Hall Travelers -",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=42",
-        "https://www.livefans.jp/events/1150104"
+        "https://www.livefans.jp/events/1150104",
+        "https://higedan-setlist.net/live/2020-01-13/"
       ],
       "date": "2020-01-13",
       "opensAt": "17:00",
@@ -591,7 +671,9 @@
       "region": "關東",
       "prefecture": "神奈川縣",
       "diff": {
-        "skip": [17],
+        "skip": [
+          17
+        ],
         "insert": [
           {
             "after": 16,
@@ -615,7 +697,8 @@
       "title": "Tour 19/20 - Hall Travelers -",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=42",
-        "https://www.livefans.jp/events/1150107"
+        "https://www.livefans.jp/events/1150107",
+        "https://higedan-setlist.net/live/2020-01-26/"
       ],
       "date": "2020-01-26",
       "opensAt": "17:00",
@@ -624,7 +707,9 @@
       "region": "中部",
       "prefecture": "新潟縣",
       "diff": {
-        "skip": [7],
+        "skip": [
+          7
+        ],
         "insert": [
           {
             "after": 5,
@@ -657,7 +742,8 @@
       "title": "Tour 19/20 - Hall Travelers -",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=42",
-        "https://www.livefans.jp/events/1150108"
+        "https://www.livefans.jp/events/1150108",
+        "https://higedan-setlist.net/live/2020-01-31/"
       ],
       "date": "2020-01-31",
       "opensAt": "19:00",
@@ -666,7 +752,10 @@
       "region": "九州",
       "prefecture": "鹿兒島縣",
       "diff": {
-        "skip": [7, 17],
+        "skip": [
+          7,
+          17
+        ],
         "insert": [
           {
             "after": 5,
@@ -706,7 +795,8 @@
       "title": "Tour 19/20 - Hall Travelers -",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=42",
-        "https://www.livefans.jp/events/1150109"
+        "https://www.livefans.jp/events/1150109",
+        "https://higedan-setlist.net/live/2020-02-02/"
       ],
       "date": "2020-02-02",
       "opensAt": "17:00",
@@ -715,7 +805,9 @@
       "region": "九州",
       "prefecture": "熊本縣",
       "diff": {
-        "skip": [17],
+        "skip": [
+          17
+        ],
         "insert": [
           {
             "after": 9,
@@ -748,7 +840,8 @@
       "title": "Tour 19/20 - Hall Travelers -",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=42",
-        "https://www.livefans.jp/events/1150110"
+        "https://www.livefans.jp/events/1150110",
+        "https://higedan-setlist.net/live/2020-02-10/"
       ],
       "date": "2020-02-10",
       "opensAt": "19:00",
@@ -757,7 +850,10 @@
       "region": "關東",
       "prefecture": "神奈川縣",
       "diff": {
-        "skip": [7, 17],
+        "skip": [
+          7,
+          17
+        ],
         "insert": [
           {
             "after": 5,
@@ -781,7 +877,8 @@
       "title": "Tour 19/20 - Hall Travelers -",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=42",
-        "https://www.livefans.jp/events/1150111"
+        "https://www.livefans.jp/events/1150111",
+        "https://higedan-setlist.net/live/2020-02-11/"
       ],
       "date": "2020-02-11",
       "opensAt": "17:00",
@@ -790,7 +887,10 @@
       "region": "關東",
       "prefecture": "神奈川縣",
       "diff": {
-        "skip": [7, 17],
+        "skip": [
+          7,
+          17
+        ],
         "insert": [
           {
             "after": 5,
@@ -814,7 +914,8 @@
       "title": "Tour 19/20 - Hall Travelers -",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=42",
-        "https://www.livefans.jp/events/1150106"
+        "https://www.livefans.jp/events/1150106",
+        "https://higedan-setlist.net/live/2020-02-21/"
       ],
       "date": "2020-02-21",
       "opensAt": "19:00",
@@ -823,7 +924,10 @@
       "region": "中國",
       "prefecture": "岡山縣",
       "diff": {
-        "skip": [7, 17],
+        "skip": [
+          7,
+          17
+        ],
         "insert": [
           {
             "after": 3,
@@ -868,7 +972,9 @@
               "encore": true,
               "songId": "lady",
               "note": "1番だけ　(会場リクエスト)",
-              "kind": ["request"]
+              "kind": [
+                "request"
+              ]
             }
           },
           {
@@ -877,7 +983,9 @@
               "encore": true,
               "songId": "takaga-i-love-you",
               "note": "1番だけ　(会場リクエスト)",
-              "kind": ["request"]
+              "kind": [
+                "request"
+              ]
             }
           },
           {
@@ -886,7 +994,9 @@
               "encore": true,
               "songId": "nichiyoubi-no-love-letter",
               "note": "(会場リクエスト)",
-              "kind": ["request"]
+              "kind": [
+                "request"
+              ]
             }
           }
         ]
@@ -897,7 +1007,8 @@
       "title": "Tour 19/20 - Hall Travelers -",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=42",
-        "https://www.livefans.jp/events/1150105"
+        "https://www.livefans.jp/events/1150105",
+        "https://higedan-setlist.net/live/2020-02-22/"
       ],
       "date": "2020-02-22",
       "opensAt": "17:00",
@@ -906,7 +1017,10 @@
       "region": "中國",
       "prefecture": "鳥取縣",
       "diff": {
-        "skip": [7, 17],
+        "skip": [
+          7,
+          17
+        ],
         "insert": [
           {
             "after": 5,

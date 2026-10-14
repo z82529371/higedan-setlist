@@ -9,7 +9,8 @@
       "title": "official髭男dism one-man tour 2019",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=44",
-        "https://www.livefans.jp/events/1049544"
+        "https://www.livefans.jp/events/1049544",
+        "https://higedan-setlist.net/live/2019-06-22/"
       ],
       "date": "2019-06-22",
       "opensAt": "18:00",
@@ -19,7 +20,13 @@
       "prefecture": "宮城縣",
       "locked": true,
       "diff": {
-        "skip": [3, 5, 7, 11, 13],
+        "skip": [
+          3,
+          5,
+          7,
+          11,
+          13
+        ],
         "insert": [
           {
             "after": 1,
@@ -41,7 +48,9 @@
               "encore": false,
               "songId": "akegata-no-getaway",
               "note": "新曲",
-              "kind": ["premiere"]
+              "kind": [
+                "premiere"
+              ]
             }
           },
           {
@@ -59,7 +68,8 @@
       "title": "official髭男dism one-man tour 2019",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=44",
-        "https://www.livefans.jp/events/1049545"
+        "https://www.livefans.jp/events/1049545",
+        "https://higedan-setlist.net/live/2019-06-30/"
       ],
       "date": "2019-06-30",
       "opensAt": "18:00",
@@ -68,7 +78,14 @@
       "region": "九州",
       "prefecture": "福岡縣",
       "diff": {
-        "skip": [3, 5, 7, 10, 11, 13],
+        "skip": [
+          3,
+          5,
+          7,
+          10,
+          11,
+          13
+        ],
         "insert": [
           {
             "after": 1,
@@ -123,7 +140,12 @@
       "region": "北海道",
       "prefecture": "北海道",
       "diff": {
-        "skip": [3, 5, 7, 10],
+        "skip": [
+          3,
+          5,
+          7,
+          10
+        ],
         "insert": [
           {
             "after": 1,
@@ -161,7 +183,8 @@
       "title": "official髭男dism one-man tour 2019",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=44",
-        "https://www.livefans.jp/events/1078251"
+        "https://www.livefans.jp/events/1078251",
+        "https://higedan-setlist.net/live/2019-07-08/"
       ],
       "date": "2019-07-08",
       "opensAt": "19:00",
@@ -170,7 +193,16 @@
       "region": "關東",
       "prefecture": "東京都",
       "diff": {
-        "skip": [2, 3, 4, 7, 9, 13, 14, 18],
+        "skip": [
+          2,
+          3,
+          4,
+          7,
+          9,
+          13,
+          14,
+          18
+        ],
         "insert": [
           {
             "after": 0,
@@ -241,7 +273,12 @@
       "region": "關西",
       "prefecture": "大阪府",
       "diff": {
-        "skip": [3, 5, 7, 10],
+        "skip": [
+          3,
+          5,
+          7,
+          10
+        ],
         "insert": [
           {
             "after": 1,
@@ -279,7 +316,8 @@
       "title": "official髭男dism one-man tour 2019",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=44",
-        "https://www.livefans.jp/events/1049558"
+        "https://www.livefans.jp/events/1049558",
+        "https://higedan-setlist.net/live/2019-07-14/"
       ],
       "date": "2019-07-14",
       "opensAt": "18:00",
@@ -288,7 +326,13 @@
       "region": "中部",
       "prefecture": "愛知縣",
       "diff": {
-        "skip": [3, 5, 7, 10, 11],
+        "skip": [
+          3,
+          5,
+          7,
+          10,
+          11
+        ],
         "insert": [
           {
             "after": 1,
@@ -326,7 +370,8 @@
       "title": "official髭男dism one-man tour 2019",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=44",
-        "https://www.livefans.jp/events/1049559"
+        "https://www.livefans.jp/events/1049559",
+        "https://higedan-setlist.net/live/2019-07-21/"
       ],
       "date": "2019-07-21",
       "opensAt": "18:00",
@@ -335,7 +380,13 @@
       "region": "關東",
       "prefecture": "東京都",
       "diff": {
-        "skip": [3, 5, 7, 10],
+        "skip": [
+          3,
+          5,
+          7,
+          10,
+          11
+        ],
         "insert": [
           {
             "after": 1,
@@ -366,14 +417,16 @@
             }
           }
         ]
-      }
+      },
+      "note": "LiveFans 將此場誤植為包含 LADY 的 19 首（實為複製 7/5 札幌報導），依現場共識考證校正為標準 18 首"
     },
     {
       "id": "1049560",
       "title": "official髭男dism one-man tour 2019",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=44",
-        "https://www.livefans.jp/events/1049560"
+        "https://www.livefans.jp/events/1049560",
+        "https://higedan-setlist.net/live/2019-07-22/"
       ],
       "date": "2019-07-22",
       "opensAt": "19:00",
@@ -382,7 +435,13 @@
       "region": "關東",
       "prefecture": "東京都",
       "diff": {
-        "skip": [2, 5, 7, 10, 11],
+        "skip": [
+          2,
+          5,
+          7,
+          10,
+          11
+        ],
         "insert": [
           {
             "after": 3,

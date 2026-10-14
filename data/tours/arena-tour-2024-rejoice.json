@@ -13,10 +13,16 @@
       "title": "Official髭男dism Arena Tour 2024 - Rejoice -",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=12",
-        "https://www.livefans.jp/events/1672269"
+        "https://www.livefans.jp/events/1672269",
+        "https://higedan-setlist.net/live/2024-09-20/"
       ],
       "diff": {
-        "skip": [1, 13, 16, 19],
+        "skip": [
+          1,
+          13,
+          16,
+          19
+        ],
         "insert": [
           {
             "after": 0,
@@ -48,7 +54,9 @@
               "encore": false,
               "songId": "pretender",
               "note": "弾き語り(1コーラスのみ、みんなで合唱)",
-              "kind": ["satoshi-solo"]
+              "kind": [
+                "satoshi-solo"
+              ]
             }
           },
           {
@@ -57,7 +65,9 @@
               "encore": true,
               "songId": "same-blue",
               "note": "弾き語り(1コーラスのみ、初解禁)",
-              "kind": ["satoshi-solo"]
+              "kind": [
+                "satoshi-solo"
+              ]
             }
           },
           {
@@ -81,10 +91,17 @@
       "title": "Official髭男dism Arena Tour 2024 - Rejoice -",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=12",
-        "https://www.livefans.jp/events/1672270"
+        "https://www.livefans.jp/events/1672270",
+        "https://higedan-setlist.net/live/2024-09-21/"
       ],
       "diff": {
-        "skip": [1, 10, 12, 16, 19],
+        "skip": [
+          1,
+          10,
+          12,
+          16,
+          19
+        ],
         "insert": [
           {
             "after": 0,
@@ -115,7 +132,9 @@
               "encore": true,
               "songId": "same-blue",
               "note": "弾き語り ver.",
-              "kind": ["satoshi-solo"]
+              "kind": [
+                "satoshi-solo"
+              ]
             }
           },
           {
@@ -139,10 +158,16 @@
       "title": "Official髭男dism Arena Tour 2024 - Rejoice -",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=12",
-        "https://www.livefans.jp/events/1672271"
+        "https://www.livefans.jp/events/1672271",
+        "https://higedan-setlist.net/live/2024-09-28/"
       ],
       "diff": {
-        "skip": [1, 13, 16, 19],
+        "skip": [
+          1,
+          13,
+          16,
+          19
+        ],
         "insert": [
           {
             "after": 0,
@@ -166,7 +191,9 @@
               "encore": true,
               "songId": "same-blue",
               "note": "弾き語り",
-              "kind": ["satoshi-solo"]
+              "kind": [
+                "satoshi-solo"
+              ]
             }
           },
           {
@@ -190,10 +217,17 @@
       "title": "Official髭男dism Arena Tour 2024 - Rejoice -",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=12",
-        "https://www.livefans.jp/events/1672272"
+        "https://www.livefans.jp/events/1672272",
+        "https://higedan-setlist.net/live/2024-09-29/"
       ],
       "diff": {
-        "skip": [1, 12, 13, 16, 19],
+        "skip": [
+          1,
+          12,
+          13,
+          16,
+          19
+        ],
         "insert": [
           {
             "after": 0,
@@ -225,7 +259,9 @@
               "encore": true,
               "title": "プラネタリウム [BUMP OF CHICKEN]",
               "note": "サビのみ 弾き語り",
-              "kind": ["satoshi-solo"]
+              "kind": [
+                "satoshi-solo"
+              ]
             }
           },
           {
@@ -234,7 +270,9 @@
               "encore": true,
               "songId": "same-blue",
               "note": "リリース前のため1コーラスのみ 弾き語り",
-              "kind": ["satoshi-solo"]
+              "kind": [
+                "satoshi-solo"
+              ]
             }
           },
           {
@@ -258,10 +296,16 @@
       "title": "Official髭男dism Arena Tour 2024 - Rejoice -",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=12",
-        "https://www.livefans.jp/events/1672273"
+        "https://www.livefans.jp/events/1672273",
+        "https://higedan-setlist.net/live/2024-10-18/"
       ],
       "diff": {
-        "skip": [1, 13, 16, 19],
+        "skip": [
+          1,
+          13,
+          16,
+          19
+        ],
         "insert": [
           {
             "after": 0,
@@ -301,10 +345,15 @@
       "title": "Official髭男dism Arena Tour 2024 - Rejoice -",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=12",
-        "https://www.livefans.jp/events/1672274"
+        "https://www.livefans.jp/events/1672274",
+        "https://higedan-setlist.net/live/2024-10-19/"
       ],
       "diff": {
-        "skip": [1, 12, 16],
+        "skip": [
+          1,
+          12,
+          16
+        ],
         "insert": [
           {
             "after": 0,
@@ -336,10 +385,15 @@
       "title": "Official髭男dism Arena Tour 2024 - Rejoice -",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=12",
-        "https://www.livefans.jp/events/1672275"
+        "https://www.livefans.jp/events/1672275",
+        "https://higedan-setlist.net/live/2024-11-12/"
       ],
       "diff": {
-        "skip": [1, 13, 16],
+        "skip": [
+          1,
+          13,
+          16
+        ],
         "insert": [
           {
             "after": 0,
@@ -371,10 +425,16 @@
       "title": "Official髭男dism Arena Tour 2024 - Rejoice -",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=12",
-        "https://www.livefans.jp/events/1672276"
+        "https://www.livefans.jp/events/1672276",
+        "https://higedan-setlist.net/live/2024-11-13/"
       ],
       "diff": {
-        "skip": [1, 12, 13, 16],
+        "skip": [
+          1,
+          12,
+          13,
+          16
+        ],
         "insert": [
           {
             "after": 0,
@@ -422,10 +482,15 @@
       "title": "Official髭男dism Arena Tour 2024 - Rejoice -",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=12",
-        "https://www.livefans.jp/events/1672277"
+        "https://www.livefans.jp/events/1672277",
+        "https://higedan-setlist.net/live/2024-11-19/"
       ],
       "diff": {
-        "skip": [1, 13, 16],
+        "skip": [
+          1,
+          13,
+          16
+        ],
         "insert": [
           {
             "after": 0,
@@ -457,11 +522,15 @@
       "title": "Official髭男dism Arena Tour 2024 - Rejoice -",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=12",
-        "https://www.livefans.jp/events/1672278"
+        "https://www.livefans.jp/events/1672278",
+        "https://higedan-setlist.net/live/2024-11-20/"
       ],
       "locked": true,
       "diff": {
-        "skip": [12, 16],
+        "skip": [
+          12,
+          16
+        ],
         "insert": [
           {
             "after": 15,
@@ -493,7 +562,9 @@
               "encore": true,
               "songId": "pretender",
               "note": "1番のみ。弾き語り合唱",
-              "kind": ["satoshi-solo"]
+              "kind": [
+                "satoshi-solo"
+              ]
             }
           },
           {

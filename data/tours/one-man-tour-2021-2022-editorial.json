@@ -7,13 +7,16 @@
       "id": "1310540",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=29",
-        "https://www.livefans.jp/events/1310540"
+        "https://www.livefans.jp/events/1310540",
+        "https://higedan-setlist.net/live/2021-09-04/"
       ],
       "date": "2021-09-04",
       "opensAt": "17:00",
       "venue": "Pia Arena MM",
       "diff": {
-        "skip": [4],
+        "skip": [
+          4
+        ],
         "insert": [
           {
             "after": 3,
@@ -32,7 +35,8 @@
       "id": "1310541",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=29",
-        "https://www.livefans.jp/events/1310541"
+        "https://www.livefans.jp/events/1310541",
+        "https://higedan-setlist.net/live/2021-09-05/"
       ],
       "date": "2021-09-05",
       "opensAt": "17:00",
@@ -41,7 +45,9 @@
       "region": "關東",
       "prefecture": "神奈川縣",
       "diff": {
-        "skip": [4],
+        "skip": [
+          4
+        ],
         "insert": [
           {
             "after": 3,
@@ -57,7 +63,8 @@
       "id": "1310545",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=29",
-        "https://www.livefans.jp/events/1310545"
+        "https://www.livefans.jp/events/1310545",
+        "https://higedan-setlist.net/live/2021-10-02/"
       ],
       "date": "2021-10-02",
       "opensAt": "17:00",
@@ -66,7 +73,9 @@
       "region": "中部",
       "prefecture": "長野縣",
       "diff": {
-        "skip": [4],
+        "skip": [
+          4
+        ],
         "insert": [
           {
             "after": 3,
@@ -82,7 +91,8 @@
       "id": "1310546",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=29",
-        "https://www.livefans.jp/events/1310546"
+        "https://www.livefans.jp/events/1310546",
+        "https://higedan-setlist.net/live/2021-10-03/"
       ],
       "date": "2021-10-03",
       "opensAt": "17:00",
@@ -91,7 +101,9 @@
       "region": "中部",
       "prefecture": "長野縣",
       "diff": {
-        "skip": [4],
+        "skip": [
+          4
+        ],
         "insert": [
           {
             "after": 3,
@@ -107,7 +119,8 @@
       "id": "1310547",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=29",
-        "https://www.livefans.jp/events/1310547"
+        "https://www.livefans.jp/events/1310547",
+        "https://higedan-setlist.net/live/2021-10-08/"
       ],
       "date": "2021-10-08",
       "opensAt": "18:00",
@@ -116,7 +129,11 @@
       "region": "中部",
       "prefecture": "新潟縣",
       "diff": {
-        "skip": [3, 4, 20],
+        "skip": [
+          3,
+          4,
+          20
+        ],
         "insert": [
           {
             "after": 2,
@@ -172,7 +189,8 @@
       "id": "1310548",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=29",
-        "https://www.livefans.jp/events/1310548"
+        "https://www.livefans.jp/events/1310548",
+        "https://higedan-setlist.net/live/2021-10-09/"
       ],
       "date": "2021-10-09",
       "opensAt": "17:00",
@@ -181,7 +199,9 @@
       "region": "中部",
       "prefecture": "新潟縣",
       "diff": {
-        "skip": [4],
+        "skip": [
+          4
+        ],
         "insert": [
           {
             "after": 3,
@@ -197,7 +217,8 @@
       "id": "1310549",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=29",
-        "https://www.livefans.jp/events/1310549"
+        "https://www.livefans.jp/events/1310549",
+        "https://higedan-setlist.net/live/2021-10-10/"
       ],
       "date": "2021-10-10",
       "opensAt": "17:00",
@@ -206,7 +227,9 @@
       "region": "中部",
       "prefecture": "新潟縣",
       "diff": {
-        "skip": [13],
+        "skip": [
+          13
+        ],
         "insert": [
           {
             "after": 12,
@@ -222,7 +245,8 @@
       "id": "1310550",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=29",
-        "https://www.livefans.jp/events/1310550"
+        "https://www.livefans.jp/events/1310550",
+        "https://higedan-setlist.net/live/2021-10-15/"
       ],
       "date": "2021-10-15",
       "opensAt": "18:00",
@@ -231,7 +255,9 @@
       "region": "中國",
       "prefecture": "廣島縣",
       "diff": {
-        "skip": [4],
+        "skip": [
+          4
+        ],
         "insert": [
           {
             "after": 3,
@@ -247,7 +273,8 @@
       "id": "1310551",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=29",
-        "https://www.livefans.jp/events/1310551"
+        "https://www.livefans.jp/events/1310551",
+        "https://higedan-setlist.net/live/2021-10-16/"
       ],
       "date": "2021-10-16",
       "opensAt": "17:00",
@@ -261,7 +288,8 @@
       "id": "1310552",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=29",
-        "https://www.livefans.jp/events/1310552"
+        "https://www.livefans.jp/events/1310552",
+        "https://higedan-setlist.net/live/2021-10-17/"
       ],
       "date": "2021-10-17",
       "opensAt": "17:00",
@@ -270,7 +298,9 @@
       "region": "中國",
       "prefecture": "廣島縣",
       "diff": {
-        "skip": [4],
+        "skip": [
+          4
+        ],
         "insert": [
           {
             "after": 3,
@@ -286,7 +316,8 @@
       "id": "1310553",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=29",
-        "https://www.livefans.jp/events/1310553"
+        "https://www.livefans.jp/events/1310553",
+        "https://higedan-setlist.net/live/2021-10-27/"
       ],
       "date": "2021-10-27",
       "opensAt": "18:00",
@@ -295,7 +326,9 @@
       "region": "關西",
       "prefecture": "兵庫縣",
       "diff": {
-        "skip": [4],
+        "skip": [
+          4
+        ],
         "insert": [
           {
             "after": 3,
@@ -311,7 +344,8 @@
       "id": "1310554",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=29",
-        "https://www.livefans.jp/events/1310554"
+        "https://www.livefans.jp/events/1310554",
+        "https://higedan-setlist.net/live/2021-10-28/"
       ],
       "date": "2021-10-28",
       "opensAt": "18:00",
@@ -325,7 +359,8 @@
       "id": "1310555",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=29",
-        "https://www.livefans.jp/events/1310555"
+        "https://www.livefans.jp/events/1310555",
+        "https://higedan-setlist.net/live/2021-11-02/"
       ],
       "date": "2021-11-02",
       "opensAt": "18:00",
@@ -334,7 +369,9 @@
       "region": "關東",
       "prefecture": "神奈川縣",
       "diff": {
-        "skip": [4],
+        "skip": [
+          4
+        ],
         "insert": [
           {
             "after": 3,
@@ -350,7 +387,8 @@
       "id": "1310556",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=29",
-        "https://www.livefans.jp/events/1310556"
+        "https://www.livefans.jp/events/1310556",
+        "https://higedan-setlist.net/live/2021-11-03/"
       ],
       "date": "2021-11-03",
       "opensAt": "17:00",
@@ -364,7 +402,8 @@
       "id": "1310557",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=29",
-        "https://www.livefans.jp/events/1310557"
+        "https://www.livefans.jp/events/1310557",
+        "https://higedan-setlist.net/live/2021-11-12/"
       ],
       "date": "2021-11-12",
       "opensAt": "18:00",
@@ -373,7 +412,9 @@
       "region": "四國",
       "prefecture": "德島縣",
       "diff": {
-        "skip": [4],
+        "skip": [
+          4
+        ],
         "insert": [
           {
             "after": 3,
@@ -389,7 +430,8 @@
       "id": "1310558",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=29",
-        "https://www.livefans.jp/events/1310558"
+        "https://www.livefans.jp/events/1310558",
+        "https://higedan-setlist.net/live/2021-11-13/"
       ],
       "date": "2021-11-13",
       "opensAt": "17:00",
@@ -398,7 +440,9 @@
       "region": "四國",
       "prefecture": "德島縣",
       "diff": {
-        "skip": [13],
+        "skip": [
+          13
+        ],
         "insert": [
           {
             "after": 12,
@@ -415,7 +459,8 @@
       "id": "1310559",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=29",
-        "https://www.livefans.jp/events/1310559"
+        "https://www.livefans.jp/events/1310559",
+        "https://higedan-setlist.net/live/2021-11-14/"
       ],
       "date": "2021-11-14",
       "opensAt": "17:00",
@@ -439,7 +484,8 @@
       "id": "1310560",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=29",
-        "https://www.livefans.jp/events/1310560"
+        "https://www.livefans.jp/events/1310560",
+        "https://higedan-setlist.net/live/2021-11-20/"
       ],
       "date": "2021-11-20",
       "opensAt": "17:00",
@@ -448,7 +494,9 @@
       "region": "中部",
       "prefecture": "福井縣",
       "diff": {
-        "skip": [4],
+        "skip": [
+          4
+        ],
         "insert": [
           {
             "after": 3,
@@ -464,7 +512,8 @@
       "id": "1310561",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=29",
-        "https://www.livefans.jp/events/1310561"
+        "https://www.livefans.jp/events/1310561",
+        "https://higedan-setlist.net/live/2021-11-21/"
       ],
       "date": "2021-11-21",
       "opensAt": "17:00",
@@ -489,7 +538,8 @@
       "id": "1310562",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=29",
-        "https://www.livefans.jp/events/1310562"
+        "https://www.livefans.jp/events/1310562",
+        "https://higedan-setlist.net/live/2021-11-30/"
       ],
       "date": "2021-11-30",
       "opensAt": "18:00",
@@ -500,20 +550,22 @@
       "diff": {
         "insert": [
           {
-            "after": 4,
+            "after": 3,
             "item": {
               "encore": false,
               "songId": "parabola"
             }
           }
         ]
-      }
+      },
+      "note": "大阪 3 公演現場考證曲序為先 M4 パラボラ 後 M5 115万キロのフィルム"
     },
     {
       "id": "1310563",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=29",
-        "https://www.livefans.jp/events/1310563"
+        "https://www.livefans.jp/events/1310563",
+        "https://higedan-setlist.net/live/2021-12-01/"
       ],
       "date": "2021-12-01",
       "opensAt": "18:00",
@@ -524,20 +576,22 @@
       "diff": {
         "insert": [
           {
-            "after": 4,
+            "after": 3,
             "item": {
               "encore": false,
               "songId": "parabola"
             }
           }
         ]
-      }
+      },
+      "note": "大阪 3 公演現場考證曲序為先 M4 パラボラ 後 M5 115万キロのフィルム"
     },
     {
       "id": "1353487",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=29",
-        "https://www.livefans.jp/events/1353487"
+        "https://www.livefans.jp/events/1353487",
+        "https://higedan-setlist.net/live/2021-12-02/"
       ],
       "date": "2021-12-02",
       "opensAt": "18:00",
@@ -548,7 +602,7 @@
       "diff": {
         "insert": [
           {
-            "after": 4,
+            "after": 3,
             "item": {
               "encore": false,
               "songId": "parabola"
@@ -563,13 +617,15 @@
             }
           }
         ]
-      }
+      },
+      "note": "大阪 3 公演現場考證曲序為先 M4 パラボラ 後 M5 115万キロのフィルム"
     },
     {
       "id": "1310564",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=29",
-        "https://www.livefans.jp/events/1310564"
+        "https://www.livefans.jp/events/1310564",
+        "https://higedan-setlist.net/live/2021-12-17/"
       ],
       "date": "2021-12-17",
       "opensAt": "18:00",
@@ -593,7 +649,8 @@
       "id": "1310565",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=29",
-        "https://www.livefans.jp/events/1310565"
+        "https://www.livefans.jp/events/1310565",
+        "https://higedan-setlist.net/live/2021-12-18/"
       ],
       "date": "2021-12-18",
       "opensAt": "17:00",
@@ -617,7 +674,8 @@
       "id": "1310566",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=29",
-        "https://www.livefans.jp/events/1310566"
+        "https://www.livefans.jp/events/1310566",
+        "https://higedan-setlist.net/live/2021-12-19/"
       ],
       "date": "2021-12-19",
       "opensAt": "17:00",
@@ -641,7 +699,8 @@
       "id": "1310567",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=29",
-        "https://www.livefans.jp/events/1310567"
+        "https://www.livefans.jp/events/1310567",
+        "https://higedan-setlist.net/live/2022-01-04/"
       ],
       "date": "2022-01-04",
       "opensAt": "18:00",
@@ -650,7 +709,9 @@
       "region": "九州",
       "prefecture": "福岡縣",
       "diff": {
-        "skip": [19],
+        "skip": [
+          19
+        ],
         "insert": [
           {
             "after": 15,
@@ -673,7 +734,8 @@
       "id": "1310568",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=29",
-        "https://www.livefans.jp/events/1310568"
+        "https://www.livefans.jp/events/1310568",
+        "https://higedan-setlist.net/live/2022-01-05/"
       ],
       "date": "2022-01-05",
       "opensAt": "18:00",
@@ -697,7 +759,8 @@
       "id": "1310569",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=29",
-        "https://www.livefans.jp/events/1310569"
+        "https://www.livefans.jp/events/1310569",
+        "https://higedan-setlist.net/live/2022-01-06/"
       ],
       "date": "2022-01-06",
       "opensAt": "18:00",
@@ -721,7 +784,8 @@
       "id": "1310570",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=29",
-        "https://www.livefans.jp/events/1310570"
+        "https://www.livefans.jp/events/1310570",
+        "https://higedan-setlist.net/live/2022-01-15/"
       ],
       "date": "2022-01-15",
       "opensAt": "17:00",
@@ -745,7 +809,8 @@
       "id": "1310571",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=29",
-        "https://www.livefans.jp/events/1310571"
+        "https://www.livefans.jp/events/1310571",
+        "https://higedan-setlist.net/live/2022-01-16/"
       ],
       "date": "2022-01-16",
       "opensAt": "17:00",
@@ -777,7 +842,8 @@
       "id": "1310572",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=29",
-        "https://www.livefans.jp/events/1310572"
+        "https://www.livefans.jp/events/1310572",
+        "https://higedan-setlist.net/live/2022-01-22/"
       ],
       "date": "2022-01-22",
       "opensAt": "17:00",
@@ -809,7 +875,8 @@
       "id": "1310573",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=29",
-        "https://www.livefans.jp/events/1310573"
+        "https://www.livefans.jp/events/1310573",
+        "https://higedan-setlist.net/live/2022-01-23/"
       ],
       "date": "2022-01-23",
       "opensAt": "17:00",
@@ -833,7 +900,8 @@
       "id": "1310574",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=29",
-        "https://www.livefans.jp/events/1310574"
+        "https://www.livefans.jp/events/1310574",
+        "https://higedan-setlist.net/live/2022-02-15/"
       ],
       "date": "2022-02-15",
       "opensAt": "18:00",
@@ -857,7 +925,8 @@
       "id": "1310575",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=29",
-        "https://www.livefans.jp/events/1310575"
+        "https://www.livefans.jp/events/1310575",
+        "https://higedan-setlist.net/live/2022-02-16/"
       ],
       "date": "2022-02-16",
       "opensAt": "18:00",
@@ -881,7 +950,8 @@
       "id": "1310576",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=29",
-        "https://www.livefans.jp/events/1310576"
+        "https://www.livefans.jp/events/1310576",
+        "https://higedan-setlist.net/live/2022-02-26/"
       ],
       "date": "2022-02-26",
       "opensAt": "17:00",
@@ -890,7 +960,9 @@
       "region": "九州",
       "prefecture": "沖繩縣",
       "diff": {
-        "skip": [5],
+        "skip": [
+          5
+        ],
         "insert": [
           {
             "after": 0,
@@ -906,7 +978,9 @@
               "encore": false,
               "songId": "shower",
               "note": "着席弾き語り",
-              "kind": ["satoshi-solo"]
+              "kind": [
+                "satoshi-solo"
+              ]
             }
           },
           {
@@ -931,7 +1005,8 @@
       "id": "1310577",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=29",
-        "https://www.livefans.jp/events/1310577"
+        "https://www.livefans.jp/events/1310577",
+        "https://higedan-setlist.net/live/2022-02-27/"
       ],
       "date": "2022-02-27",
       "opensAt": "17:00",
@@ -955,7 +1030,8 @@
       "id": "1353359",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=29",
-        "https://www.livefans.jp/events/1353359"
+        "https://www.livefans.jp/events/1353359",
+        "https://higedan-setlist.net/live/2022-03-19/"
       ],
       "locked": true,
       "date": "2022-03-19",
@@ -988,7 +1064,9 @@
               "encore": false,
               "songId": "mixed-nuts",
               "note": "藤原聡/弾き語り",
-              "kind": ["satoshi-solo"]
+              "kind": [
+                "satoshi-solo"
+              ]
             }
           },
           {
@@ -1005,7 +1083,8 @@
       "id": "1353360",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=29",
-        "https://www.livefans.jp/events/1353360"
+        "https://www.livefans.jp/events/1353360",
+        "https://higedan-setlist.net/live/2022-03-20/"
       ],
       "date": "2022-03-20",
       "opensAt": "17:00",
@@ -1029,7 +1108,8 @@
       "id": "1353361",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=29",
-        "https://www.livefans.jp/events/1353361"
+        "https://www.livefans.jp/events/1353361",
+        "https://higedan-setlist.net/live/2022-03-21/"
       ],
       "date": "2022-03-21",
       "opensAt": "17:00",
@@ -1053,7 +1133,8 @@
       "id": "1310583",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=29",
-        "https://www.livefans.jp/events/1310583"
+        "https://www.livefans.jp/events/1310583",
+        "https://higedan-setlist.net/live/2022-03-24/"
       ],
       "date": "2022-03-24",
       "opensAt": "18:00",
@@ -1077,7 +1158,8 @@
       "id": "1310578",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=29",
-        "https://www.livefans.jp/events/1310578"
+        "https://www.livefans.jp/events/1310578",
+        "https://higedan-setlist.net/live/2022-03-25/"
       ],
       "date": "2022-03-25",
       "opensAt": "18:00",
@@ -1101,7 +1183,8 @@
       "id": "1310579",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=29",
-        "https://www.livefans.jp/events/1310579"
+        "https://www.livefans.jp/events/1310579",
+        "https://higedan-setlist.net/live/2022-03-26/"
       ],
       "date": "2022-03-26",
       "opensAt": "17:00",
@@ -1125,7 +1208,8 @@
       "id": "1310580",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=29",
-        "https://www.livefans.jp/events/1310580"
+        "https://www.livefans.jp/events/1310580",
+        "https://higedan-setlist.net/live/2022-04-01/"
       ],
       "date": "2022-04-01",
       "opensAt": "18:00",
@@ -1149,7 +1233,8 @@
       "id": "1310581",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=29",
-        "https://www.livefans.jp/events/1310581"
+        "https://www.livefans.jp/events/1310581",
+        "https://higedan-setlist.net/live/2022-04-02/"
       ],
       "date": "2022-04-02",
       "opensAt": "17:00",
@@ -1173,7 +1258,8 @@
       "id": "1310582",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=29",
-        "https://www.livefans.jp/events/1310582"
+        "https://www.livefans.jp/events/1310582",
+        "https://higedan-setlist.net/live/2022-04-03/"
       ],
       "date": "2022-04-03",
       "opensAt": "17:00",
@@ -1197,7 +1283,8 @@
       "id": "1353362",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=29",
-        "https://www.livefans.jp/events/1353362"
+        "https://www.livefans.jp/events/1353362",
+        "https://higedan-setlist.net/live/2022-04-15/"
       ],
       "date": "2022-04-15",
       "opensAt": "18:00",
@@ -1220,7 +1307,9 @@
               "encore": true,
               "songId": "mixed-nuts",
               "note": "新曲",
-              "kind": ["premiere"]
+              "kind": [
+                "premiere"
+              ]
             }
           }
         ]
@@ -1230,7 +1319,8 @@
       "id": "1310584",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=29",
-        "https://www.livefans.jp/events/1310584"
+        "https://www.livefans.jp/events/1310584",
+        "https://higedan-setlist.net/live/2022-04-16/"
       ],
       "date": "2022-04-16",
       "opensAt": "17:00",
@@ -1253,7 +1343,9 @@
               "encore": true,
               "songId": "mixed-nuts",
               "note": "新曲",
-              "kind": ["premiere"]
+              "kind": [
+                "premiere"
+              ]
             }
           }
         ]
@@ -1263,7 +1355,8 @@
       "id": "1310585",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=29",
-        "https://www.livefans.jp/events/1310585"
+        "https://www.livefans.jp/events/1310585",
+        "https://higedan-setlist.net/live/2022-04-17/"
       ],
       "date": "2022-04-17",
       "opensAt": "17:00",
@@ -1283,7 +1376,9 @@
               "encore": true,
               "songId": "mixed-nuts",
               "note": "新曲",
-              "kind": ["premiere"]
+              "kind": [
+                "premiere"
+              ]
             }
           }
         ]

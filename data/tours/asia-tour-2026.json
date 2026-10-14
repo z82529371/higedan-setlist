@@ -105,7 +105,8 @@
       "opensAt": "19:00",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=3",
-        "https://www.livefans.jp/events/1981868"
+        "https://www.livefans.jp/events/1981868",
+        "https://higedan-setlist.net/live/2026-08-08/"
       ],
       "diff": {
         "insert": [
@@ -131,7 +132,8 @@
       "opensAt": "19:00",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=3",
-        "https://www.livefans.jp/events/1981869"
+        "https://www.livefans.jp/events/1981869",
+        "https://higedan-setlist.net/live/2026-08-09/"
       ],
       "diff": {
         "insert": [
@@ -157,7 +159,8 @@
       "opensAt": "20:00",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=3",
-        "https://www.livefans.jp/events/1981870"
+        "https://www.livefans.jp/events/1981870",
+        "https://higedan-setlist.net/live/2026-08-21/"
       ],
       "diff": {
         "insert": [
@@ -167,7 +170,9 @@
               "encore": false,
               "songId": "nichijo",
               "note": "観客リクエスト(サビのみ)",
-              "kind": ["request"]
+              "kind": [
+                "request"
+              ]
             }
           }
         ]
@@ -184,7 +189,8 @@
       "opensAt": "18:00",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=3",
-        "https://www.livefans.jp/events/1981871"
+        "https://www.livefans.jp/events/1981871",
+        "https://higedan-setlist.net/live/2026-08-29/"
       ],
       "diff": {
         "insert": [
@@ -202,7 +208,9 @@
               "encore": false,
               "songId": "115man-kiro-no-film",
               "note": "リクエスト、サビのみ",
-              "kind": ["request"]
+              "kind": [
+                "request"
+              ]
             }
           }
         ]
@@ -219,7 +227,8 @@
       "opensAt": "18:00",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=3",
-        "https://www.livefans.jp/events/1934873"
+        "https://www.livefans.jp/events/1934873",
+        "https://higedan-setlist.net/live/2026-08-30/"
       ],
       "diff": {
         "insert": [
@@ -237,7 +246,9 @@
               "encore": false,
               "songId": "subtitle",
               "note": "リクエスト、ワンコーラス",
-              "kind": ["request"]
+              "kind": [
+                "request"
+              ]
             }
           }
         ]
@@ -254,7 +265,8 @@
       "opensAt": "18:00",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=3",
-        "https://www.livefans.jp/events/1981872"
+        "https://www.livefans.jp/events/1981872",
+        "https://higedan-setlist.net/live/2026-09-06/"
       ],
       "locked": true,
       "diff": {
