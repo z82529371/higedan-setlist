@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useState, useMemo } from "react";
 import {
   SETLIST_ITEM,
   CUE_NO,
@@ -45,12 +45,17 @@ export function TourSlip({
   tourData,
   onSelectSong,
   onSelectShow,
+  initialItineraryExpanded = false,
 }) {
   const targetData = tourUnitData || ud || tourData;
 
   const statsResult = useMemo(() => {
     return computeTourStatistics(targetData);
   }, [targetData]);
+
+  const [expandedTourId, setExpandedTourId] = useState(
+    initialItineraryExpanded ? (statsResult?.tour?.id ?? null) : null
+  );
 
   if (!statsResult || !statsResult.tour) return null;
 
@@ -60,8 +65,17 @@ export function TourSlip({
     consensusTracks,
     surpriseTracks,
     interludes,
+    itinerary = [],
     stats,
   } = statsResult;
+
+  const isItineraryExpanded = expandedTourId === tour.id;
+  const ITINERARY_COLLAPSE_THRESHOLD = 10;
+  const isLongTour = itinerary.length > ITINERARY_COLLAPSE_THRESHOLD;
+  const displayedItinerary =
+    !isLongTour || isItineraryExpanded
+      ? itinerary
+      : itinerary.slice(0, ITINERARY_COLLAPSE_THRESHOLD);
 
   const mainTracks = consensusTracks.filter((t) => !t.encore);
   const encTracks = consensusTracks.filter((t) => t.encore);
@@ -375,6 +389,111 @@ export function TourSlip({
               </li>
             ))}
           </ol>
+        </div>
+      )}
+
+      {/* Chronological Tour Itinerary Timeline */}
+      {itinerary && itinerary.length > 0 && (
+        <div className="rounded-[3px] p-3.5 sm:p-4 border border-line-soft bg-paper/50 space-y-3 mt-6">
+          <div className="flex items-center justify-between font-mono text-xs font-bold uppercase tracking-wider text-muted pb-1.5 mb-1 border-b border-line-soft">
+            <span className="flex items-center gap-1.5 text-ink font-extrabold">
+              <span className="text-band">◆</span> TOUR ITINERARY // 全國巡演日程足跡
+            </span>
+            <span className="tabular-nums text-xs text-muted font-mono">
+              {itinerary.length} STOPS
+            </span>
+          </div>
+
+          <p className="text-[12px] text-muted m-0">
+            按時序排列之巡迴站點、演出場館、所在城市與開演時刻（點擊直達該場單場票根）：
+          </p>
+
+          <ol className="m-0 list-none p-0 divide-y divide-line-soft/50">
+            {displayedItinerary.map((stop) => (
+              <li
+                key={stop.id}
+                className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 py-2.5 px-2 hover:bg-black/[0.02] dark:hover:bg-white/[0.02] transition-colors rounded-[2px]"
+              >
+                <div className="flex items-start sm:items-center gap-2.5 sm:gap-3 flex-1 min-w-0">
+                  <span className="shrink-0 font-mono text-xs font-bold text-muted w-7 text-right">
+                    #{String(stop.index).padStart(2, "0")}
+                  </span>
+
+                  <div className="min-w-0 flex-1 space-y-0.5">
+                    <div className="flex flex-wrap items-center gap-2 font-mono text-xs">
+                      <span className="font-bold text-ink">
+                        {stop.weekday ? `${stop.date}（${stop.weekday}）` : stop.date}
+                      </span>
+                      {stop.isFirst && (
+                        <span className="inline-flex items-center rounded px-1.5 py-0.5 text-[10px] font-mono font-bold bg-tape-tint text-ink border border-ink/30">
+                          初日
+                        </span>
+                      )}
+                      {stop.isFinal && (
+                        <span className="inline-flex items-center rounded px-1.5 py-0.5 text-[10px] font-mono font-bold bg-band/15 text-band-ink border border-band/50">
+                          千秋樂
+                        </span>
+                      )}
+                      {stop.city && (
+                        <span className="text-muted text-[11px]">
+                          [{stop.city}]
+                        </span>
+                      )}
+                    </div>
+
+                    <div className="flex flex-wrap items-baseline gap-2 text-xs">
+                      <span className="font-medium text-ink break-words">
+                        {stop.venue}
+                      </span>
+                      {stop.time && (
+                        <span className="font-mono text-[11px] text-muted whitespace-nowrap">
+                          ⏰ {stop.time}
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="shrink-0 pl-9 sm:pl-0 flex items-center justify-end">
+                  <a
+                    href={routeHash.show(stop.id)}
+                    onClick={(e) => {
+                      if (onSelectShow) {
+                        e.preventDefault();
+                        onSelectShow(stop.id);
+                      }
+                    }}
+                    className="inline-flex items-center gap-1.5 rounded-[3px] px-2.5 py-1 text-xs font-mono font-bold border border-line-soft bg-paper hover:border-ink hover:text-ink text-muted transition-colors"
+                    title={`查看 ${stop.date} ${stop.venue} 單場演出票根`}
+                  >
+                    <span>🎫</span>
+                    <span>查看票根</span>
+                  </a>
+                </div>
+              </li>
+            ))}
+          </ol>
+
+          {isLongTour && (
+            <div className="pt-2 flex justify-center">
+              <button
+                type="button"
+                onClick={() =>
+                  setExpandedTourId(isItineraryExpanded ? null : tour.id)
+                }
+                className="inline-flex items-center justify-center gap-2 rounded-[3px] px-4 py-2 text-xs font-mono font-bold border border-line bg-paper hover:bg-black/[0.04] dark:hover:bg-white/[0.04] text-ink transition-colors cursor-pointer w-full sm:w-auto"
+                aria-expanded={isItineraryExpanded}
+              >
+                <span>
+                  {isItineraryExpanded
+                    ? "▲ 收合巡演日程（僅顯示前 10 場）"
+                    : `▼ 展開全部日程（全 ${itinerary.length} 場 · 尚有 ${
+                        itinerary.length - ITINERARY_COLLAPSE_THRESHOLD
+                      } 場）`}
+                </span>
+              </button>
+            </div>
+          )}
         </div>
       )}
 

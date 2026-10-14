@@ -351,7 +351,7 @@ export function computeTourStatistics(tourUnitData) {
   const isTour = !!(unit.templateSetlist || unit.isTour || tourUnitData.isTour);
   const rawTpl = tourUnitData.tpl || unit.templateSetlist || [];
   const shows = [...(tourUnitData.shows || unit.shows || [])].sort((a, b) =>
-    a.date < b.date ? -1 : 1
+    (a.date || "").localeCompare(b.date || "") || (a.id || "").localeCompare(b.id || "")
   );
   const totalShows = shows.length;
   const full = tourUnitData.full;

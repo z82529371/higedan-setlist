@@ -1004,6 +1004,158 @@ describe("Pipeline Smoke Tests", () => {
       assert.ok(rejoiceHtml.includes("Supernova (ELLEGARDEN) 大輔ボーカル"));
       assert.ok(rejoiceHtml.includes("#/show/1672276"));
     });
+
+    it("accurately outputs chronological itinerary timeline with all required fields (Ticket 3)", () => {
+      // 1. Long tour: Hall Travelers (29 shows)
+      const travelersTour = allUnits.find(
+        (u) => u.id === "tour-19-20-hall-travelers"
+      );
+      assert.ok(travelersTour);
+      const travelersStats = computeTourStatistics(travelersTour);
+      assert.equal(travelersStats.itinerary.length, 29);
+
+      // Verify strictly chronological ordering
+      for (let i = 0; i < travelersStats.itinerary.length - 1; i++) {
+        const curr = travelersStats.itinerary[i];
+        const next = travelersStats.itinerary[i + 1];
+        assert.ok(
+          curr.date <= next.date,
+          `Itinerary must be sorted chronologically: ${curr.date} <= ${next.date}`
+        );
+        assert.equal(curr.index, i + 1);
+      }
+
+      // Verify first and last milestones
+      assert.equal(travelersStats.itinerary[0].isFirst, true);
+      assert.equal(travelersStats.itinerary[0].isFinal, false);
+      assert.equal(travelersStats.itinerary[0].index, 1);
+      assert.equal(travelersStats.itinerary[0].id, "1150083");
+      assert.equal(travelersStats.itinerary[0].date, "2019-10-26");
+      assert.equal(travelersStats.itinerary[0].city, "市川");
+      assert.equal(travelersStats.itinerary[0].venue, "市川市文化會館 大會堂");
+      assert.ok(travelersStats.itinerary[0].time); // e.g. "18:00 開演"
+
+      const lastTraveler = travelersStats.itinerary[28];
+      assert.equal(lastTraveler.isFirst, false);
+      assert.equal(lastTraveler.isFinal, true);
+      assert.equal(lastTraveler.index, 29);
+
+      // 2. Exact 10-show tour: Rejoice Arena Tour
+      const rejoiceTour = allUnits.find(
+        (u) => u.id === "arena-tour-2024-rejoice"
+      );
+      assert.ok(rejoiceTour);
+      const rejoiceStats = computeTourStatistics(rejoiceTour);
+      assert.equal(rejoiceStats.itinerary.length, 10);
+      assert.equal(rejoiceStats.itinerary[0].isFirst, true);
+      assert.equal(rejoiceStats.itinerary[9].isFinal, true);
+      assert.equal(rejoiceStats.itinerary[0].city, "福岡");
+      assert.equal(rejoiceStats.itinerary[0].venue, "福岡海洋展覽館 A館");
+      assert.equal(rejoiceStats.itinerary[0].time, "19:00 開演");
+
+      // 3. Short tour: Asia Tour 2024 (3 shows)
+      const asiaTour = allUnits.find((u) => u.id === "asia-tour-2024");
+      assert.ok(asiaTour);
+      const asiaStats = computeTourStatistics(asiaTour);
+      assert.equal(asiaStats.itinerary.length, 3);
+      assert.equal(asiaStats.itinerary[0].city, "高陽");
+      assert.equal(asiaStats.itinerary[2].city, "台北");
+    });
+
+    it("renders TourSlip with Itinerary, collapsing long tours (>10 shows) and expanding on demand (Ticket 3)", () => {
+      const travelersTour = allUnits.find(
+        (u) => u.id === "tour-19-20-hall-travelers"
+      );
+      assert.ok(travelersTour);
+
+      // Collapsed render (default): shows first 10, contains expand button
+      const collapsedHtml = renderToStaticMarkup(
+        React.createElement(TourSlip, {
+          tourUnitData: travelersTour,
+          onSelectSong: () => {},
+          onSelectShow: () => {},
+        })
+      );
+
+      assert.ok(collapsedHtml.includes("TOUR ITINERARY // 全國巡演日程足跡"));
+      assert.ok(collapsedHtml.includes("29 STOPS"));
+      assert.ok(collapsedHtml.includes("#01"));
+      assert.ok(collapsedHtml.includes("#10"));
+      // In collapsed mode, #11 must NOT be rendered in itinerary
+      assert.ok(!collapsedHtml.includes("#11"));
+      // Expand button present
+      assert.ok(collapsedHtml.includes("展開全部日程"));
+      assert.ok(collapsedHtml.includes("全 29 場"));
+      // First show has 初日 badge
+      assert.ok(collapsedHtml.includes("初日"));
+      // View ticket stub shortcut
+      assert.ok(collapsedHtml.includes("查看票根"));
+      assert.ok(collapsedHtml.includes("#/show/1150083"));
+
+      // Expanded render: shows all 29, contains collapse button
+      const expandedHtml = renderToStaticMarkup(
+        React.createElement(TourSlip, {
+          tourUnitData: travelersTour,
+          onSelectSong: () => {},
+          onSelectShow: () => {},
+          initialItineraryExpanded: true,
+        })
+      );
+
+      assert.ok(expandedHtml.includes("#01"));
+      assert.ok(expandedHtml.includes("#10"));
+      assert.ok(expandedHtml.includes("#11"));
+      assert.ok(expandedHtml.includes("#29"));
+      assert.ok(expandedHtml.includes("千秋樂"));
+      assert.ok(expandedHtml.includes("收合巡演日程"));
+      assert.ok(!expandedHtml.includes("展開全部日程"));
+    });
+
+    it("renders TourSlip with full itinerary without collapse button for tours <= 10 shows (Ticket 3)", () => {
+      // 1. Exactly 10 shows: Rejoice Arena Tour
+      const rejoiceTour = allUnits.find(
+        (u) => u.id === "arena-tour-2024-rejoice"
+      );
+      assert.ok(rejoiceTour);
+
+      const rejoiceHtml = renderToStaticMarkup(
+        React.createElement(TourSlip, {
+          tourUnitData: rejoiceTour,
+          onSelectSong: () => {},
+          onSelectShow: () => {},
+        })
+      );
+
+      assert.ok(rejoiceHtml.includes("TOUR ITINERARY // 全國巡演日程足跡"));
+      assert.ok(rejoiceHtml.includes("10 STOPS"));
+      assert.ok(rejoiceHtml.includes("#01"));
+      assert.ok(rejoiceHtml.includes("#10"));
+      assert.ok(rejoiceHtml.includes("初日"));
+      assert.ok(rejoiceHtml.includes("千秋樂"));
+      // Must NOT contain expand/collapse toggle
+      assert.ok(!rejoiceHtml.includes("展開全部日程"));
+      assert.ok(!rejoiceHtml.includes("收合巡演日程"));
+
+      // 2. Short tour (3 shows): Asia Tour 2024
+      const asiaTour = allUnits.find((u) => u.id === "asia-tour-2024");
+      assert.ok(asiaTour);
+
+      const asiaHtml = renderToStaticMarkup(
+        React.createElement(TourSlip, {
+          tourUnitData: asiaTour,
+          onSelectSong: () => {},
+          onSelectShow: () => {},
+        })
+      );
+
+      assert.ok(asiaHtml.includes("3 STOPS"));
+      assert.ok(asiaHtml.includes("#01"));
+      assert.ok(asiaHtml.includes("#02"));
+      assert.ok(asiaHtml.includes("#03"));
+      assert.ok(!asiaHtml.includes("#04"));
+      assert.ok(!asiaHtml.includes("展開全部日程"));
+      assert.ok(!asiaHtml.includes("收合巡演日程"));
+    });
   });
 });
 
