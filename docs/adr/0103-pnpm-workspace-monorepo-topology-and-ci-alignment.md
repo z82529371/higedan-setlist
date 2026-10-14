@@ -39,7 +39,7 @@ Accepted
 
 3. **指令轉發與 CI 快取機制**：
    - 根目錄外層腳本採用標準 Workspace 語法：`pnpm --filter ./site <cmd>`。
-   - CI 的 `pnpm/action-setup@v4` 移除硬編碼版本，自動依賴 `packageManager` 解析；`actions/setup-node@v4` 之 `cache: 'pnpm'` 直接快取根目錄之 Lockfile 雜湊。
+   - CI 的 `pnpm/action-setup@v4` 移除硬編碼版本，自動依賴 `packageManager` 解析；`actions/setup-node@v4` 之 `cache: 'pnpm'` 直接快取根目錄之 Lockfile 雜湊。CI 之 Node.js 運行環境同步對齊 Node.js 22（滿足 pnpm 11 原生依賴 `node:sqlite` 之版本門檻）。
 
 ## Consequences
 
