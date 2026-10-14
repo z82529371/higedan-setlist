@@ -18,6 +18,7 @@ Multiple autonomous agents frequently operate concurrently in this repository:
 2. **Concurrent File Protection**: Never delete, restore, or modify working tree files outside your explicit task scope (e.g. data JSON files under active audit or other agents' temporary scripts).
 3. **Task-Scoped Git Operations**: Always inspect `git status` with path filters (`git diff -- site/` or target files) rather than unstaging or wiping untracked files wholesale.
 4. **Data Inspection**: Use `node -e` or scripts under `site/scripts/` rather than PowerShell `ConvertFrom-Json` to avoid Windows UTF-8 encoding distortion.
+5. **Vite SSR & Scratch Scripts**: Scratch scripts importing frontend modules must run inside `site/` or resolve `site/node_modules`, and configure Vite with `server: { middlewareMode: true, watch: null }` in `createServer()` to avoid Chokidar file-watcher hangs on Windows.
 
 ## Verification Commands
 

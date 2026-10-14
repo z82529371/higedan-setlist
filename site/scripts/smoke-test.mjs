@@ -379,6 +379,28 @@ describe("Pipeline Smoke Tests", () => {
         );
       }
     });
+
+    it("ensures slip components adhere to DESIGN.md closed palette rules", async () => {
+      const fs = await import("node:fs");
+      const path = await import("node:path");
+      const slipsDir = path.resolve(
+        import.meta.dirname,
+        "../src/components/slips"
+      );
+      const files = fs.readdirSync(slipsDir).filter((f) => f.endsWith(".jsx"));
+      const bannedPaletteRegex =
+        /\b(?:text|bg|border)-(?:blue|sky|cyan|indigo|teal|purple|violet)(?:-\w+)?\b/g;
+
+      for (const file of files) {
+        const content = fs.readFileSync(path.join(slipsDir, file), "utf-8");
+        const matches = content.match(bannedPaletteRegex);
+        assert.equal(
+          matches,
+          null,
+          `File ${file} contains banned raw SaaS palette classes: ${matches?.join(", ")}`
+        );
+      }
+    });
   });
 
   describe("6. Component Mount & SSR Render Smoke Test", () => {

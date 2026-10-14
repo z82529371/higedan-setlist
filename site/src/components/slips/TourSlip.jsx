@@ -9,6 +9,7 @@ import {
 import {
   getUnitTypeLabel,
   computeTourStatistics,
+  FREQUENCY_TIER_CONFIG,
 } from "../../lib/domain.js";
 import { routeHash } from "../../lib/track.js";
 import {
@@ -239,21 +240,21 @@ export function TourSlip({
               <span aria-hidden="true">📊</span> 出賽概況：
             </div>
             <div className="flex flex-wrap items-center gap-1.5">
-              <span className="inline-flex items-center gap-1 rounded px-2 py-0.5 bg-[#8a5a0a] text-[#f8f7f4] font-bold border border-[#8a5a0a]/50">
+              <span className={`inline-flex items-center gap-1 rounded px-2 py-0.5 ${FREQUENCY_TIER_CONFIG.core.badgeClass}`}>
                 ★ 核心全勤：{stats.coreCount} 首 (100%)
               </span>
               {stats.regularCount > 0 && (
-                <span className="inline-flex items-center gap-1 rounded px-2 py-0.5 bg-paper text-ink font-bold border border-line">
+                <span className={`inline-flex items-center gap-1 rounded px-2 py-0.5 ${FREQUENCY_TIER_CONFIG.regular.badgeClass}`}>
                   ● 高頻常駐：{stats.regularCount} 首 (≥70%)
                 </span>
               )}
               {stats.rotatingCount > 0 && (
-                <span className="inline-flex items-center gap-1 rounded px-2 py-0.5 bg-amber-100 text-amber-900 font-bold border border-amber-300 dark:bg-amber-950/40 dark:text-amber-200 dark:border-amber-800">
+                <span className={`inline-flex items-center gap-1 rounded px-2 py-0.5 ${FREQUENCY_TIER_CONFIG.rotating.badgeClass}`}>
                   ▲ 雙日輪替：{stats.rotatingCount} 首 (30-70%)
                 </span>
               )}
               {stats.surpriseCount > 0 && (
-                <span className="inline-flex items-center gap-1 rounded px-2 py-0.5 bg-indigo-100 text-indigo-900 font-bold border border-indigo-200 dark:bg-indigo-950/40 dark:text-indigo-200 dark:border-indigo-800">
+                <span className={`inline-flex items-center gap-1 rounded px-2 py-0.5 ${FREQUENCY_TIER_CONFIG.surprise.badgeClass}`}>
                   ◆ 限定突襲：{stats.surpriseCount} 首 (&lt;30%)
                 </span>
               )}
