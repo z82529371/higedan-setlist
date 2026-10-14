@@ -592,7 +592,181 @@ describe("Pipeline Smoke Tests", () => {
       assert.ok(filter.totalAllShows > 0);
     });
   });
+
+  describe("8. Tour Statistics Engine & Core TourSlip Presentation (Ticket 1 / ADR-0102)", () => {
+    let computeTourStatistics;
+    let getTourFrequencyTier;
+    let FREQUENCY_TIER_CONFIG;
+    let TourSlip;
+    let allUnits;
+
+    it("loads tour statistics engine and TourSlip component from Vite SSR", async () => {
+      const domainMod = await server.ssrLoadModule("./src/lib/domain.js");
+      computeTourStatistics = domainMod.computeTourStatistics;
+      getTourFrequencyTier = domainMod.getTourFrequencyTier;
+      FREQUENCY_TIER_CONFIG = domainMod.FREQUENCY_TIER_CONFIG;
+      allUnits = domainMod.allUnits;
+
+      const slipMod = await server.ssrLoadModule(
+        "./src/components/slips/TourSlip.jsx"
+      );
+      TourSlip = slipMod.TourSlip;
+
+      assert.ok(computeTourStatistics);
+      assert.ok(getTourFrequencyTier);
+      assert.ok(FREQUENCY_TIER_CONFIG);
+      assert.ok(TourSlip);
+    });
+
+    it("accurately calculates consensus statistics across all 16 headline tours", () => {
+      const headlineTours = allUnits.filter(
+        (u) => u.templateSetlist && u.type !== "店家活動"
+      );
+      assert.ok(
+        headlineTours.length >= 16,
+        `Expected at least 16 headline tours, found ${headlineTours.length}`
+      );
+
+      for (const tour of headlineTours) {
+        const stats = computeTourStatistics(tour);
+        assert.equal(stats.totalShows, tour.shows.length);
+        assert.equal(stats.consensusTracks.length, tour.templateSetlist.length);
+
+        for (const track of stats.consensusTracks) {
+          assert.ok(track.count >= 0 && track.count <= stats.totalShows);
+          assert.ok(track.ratio >= 0 && track.ratio <= 1);
+          assert.equal(track.percentage, Math.round(track.ratio * 100));
+
+          if (track.count === stats.totalShows && stats.totalShows > 0) {
+            assert.equal(track.tier, "core");
+            assert.equal(track.tierLabel, "核心全勤");
+            assert.equal(track.tierBadgeLabel, "核心全勤 100%");
+          } else if (track.ratio >= 0.7) {
+            assert.equal(track.tier, "regular");
+            assert.equal(track.tierLabel, "高頻常駐");
+          } else if (track.ratio >= 0.3) {
+            assert.equal(track.tier, "rotating");
+            assert.equal(track.tierLabel, "雙日輪替");
+          } else {
+            assert.equal(track.tier, "surprise");
+            assert.equal(track.tierLabel, "限定突襲");
+          }
+
+          assert.ok(track.badgeClass);
+          assert.ok(track.pillClass);
+        }
+      }
+    });
+
+    it("verifies Rejoice Arena Tour 2024 exact frequency classification", () => {
+      const rejoiceTour = allUnits.find(
+        (u) => u.id === "arena-tour-2024-rejoice"
+      );
+      assert.ok(rejoiceTour);
+
+      const stats = computeTourStatistics(rejoiceTour);
+      assert.equal(stats.totalShows, 10);
+      assert.equal(stats.coreTracks.length, 18);
+      assert.equal(stats.regularTracks.length, 1);
+      assert.equal(stats.rotatingTracks.length, 2);
+
+      // Check specific regular track: 115萬キロのフィルム was skipped in 1 show
+      const filmTrack = stats.consensusTracks.find(
+        (t) => t.songId === "115man-kiro-no-film"
+      );
+      assert.ok(filmTrack);
+      assert.equal(filmTrack.count, 9);
+      assert.equal(filmTrack.tier, "regular");
+      assert.equal(filmTrack.tierLabel, "高頻常駐");
+
+      // Check A/B rotating tracks: fire-ground & no-doubt
+      const fireGround = stats.consensusTracks.find(
+        (t) => t.songId === "fire-ground"
+      );
+      assert.ok(fireGround);
+      assert.equal(fireGround.count, 5);
+      assert.equal(fireGround.tier, "rotating");
+      assert.equal(fireGround.tierLabel, "雙日輪替");
+
+      const noDoubt = stats.consensusTracks.find((t) => t.songId === "no-doubt");
+      assert.ok(noDoubt);
+      assert.equal(noDoubt.count, 5);
+      assert.equal(noDoubt.tier, "rotating");
+      assert.equal(noDoubt.tierLabel, "雙日輪替");
+    });
+
+    it("verifies Shocking Nuts Tour 2022-2023 exact rotating classification", () => {
+      const shockingNuts = allUnits.find(
+        (u) => u.id === "shocking-nuts-tour-2022-2023"
+      );
+      assert.ok(shockingNuts);
+
+      const stats = computeTourStatistics(shockingNuts);
+      assert.equal(stats.totalShows, 21);
+      assert.equal(stats.coreTracks.length, 13);
+      assert.equal(stats.rotatingTracks.length, 7);
+      assert.equal(stats.regularTracks.length, 0);
+    });
+
+    it("gracefully handles null or empty input without mutating parameters", () => {
+      const emptyResult = computeTourStatistics(null);
+      assert.equal(emptyResult.totalShows, 0);
+      assert.equal(emptyResult.consensusTracks.length, 0);
+
+      const dummyTour = Object.freeze({
+        id: "dummy-tour",
+        title: "Dummy Tour",
+        templateSetlist: Object.freeze([
+          Object.freeze({ order: 1, songId: "pretender", encore: false }),
+        ]),
+        shows: Object.freeze([
+          Object.freeze({
+            id: "dummy-1",
+            date: "2024-01-01",
+            venue: "Dummy Hall",
+            diff: Object.freeze({ skip: [], insert: [] }),
+          }),
+        ]),
+      });
+
+      // Pure invocation on frozen object must succeed without attempting mutation
+      const pureResult = computeTourStatistics(dummyTour);
+      assert.equal(pureResult.totalShows, 1);
+      assert.equal(pureResult.consensusTracks.length, 1);
+      assert.equal(pureResult.consensusTracks[0].count, 1);
+      assert.equal(pureResult.consensusTracks[0].tier, "core");
+    });
+
+    it("renders TourSlip component with complete SSR markup invariants", () => {
+      const rejoiceTour = allUnits.find(
+        (u) => u.id === "arena-tour-2024-rejoice"
+      );
+      assert.ok(rejoiceTour);
+
+      const html = renderToStaticMarkup(
+        React.createElement(TourSlip, {
+          tourUnitData: rejoiceTour,
+          onSelectSong: () => {},
+        })
+      );
+
+      // Invariants check
+      assert.ok(html.length > 0);
+      assert.ok(html.includes("Arena Tour 2024 - Rejoice -"));
+      assert.ok(html.includes("CONSENSUS TEMPLATE // 巡演標準母單"));
+      assert.ok(html.includes("全 10 場次"));
+      assert.ok(html.includes("核心全勤 100%"));
+      assert.ok(html.includes("高頻常駐 90%"));
+      assert.ok(html.includes("雙日輪替 50%"));
+      assert.ok(html.includes("max-w-[960px] mx-auto"));
+      // Perforation divider & barcode footer presence
+      assert.ok(html.includes("OFFICIAL HIGEDAN DISM STAGE ARCHIVE"));
+      assert.ok(html.includes("SN: TOUR-"));
+      assert.ok(html.includes("TOUR CONSENSUS MASTER SHEET"));
+    });
+  });
 });
+
 
 
 

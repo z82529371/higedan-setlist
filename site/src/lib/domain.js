@@ -252,3 +252,286 @@ export function buildIndex() {
     unitIdByShowId: unitByShow,
   };
 }
+
+export const FREQUENCY_TIER_CONFIG = {
+  core: {
+    tier: "core",
+    label: "核心全勤",
+    badgeLabel: "核心全勤 100%",
+    badgeClass: "bg-[#8a5a0a] text-[#f8f7f4] border border-[#8a5a0a]/50 font-bold",
+    pillClass: "bg-band/15 text-band-ink border border-band/50 font-bold",
+    marker: "★",
+  },
+  regular: {
+    tier: "regular",
+    label: "高頻常駐",
+    badgeLabel: "高頻常駐",
+    badgeClass: "bg-paper text-ink border border-line font-bold",
+    pillClass: "bg-paper text-ink border border-line-soft font-medium",
+    marker: "●",
+  },
+  rotating: {
+    tier: "rotating",
+    label: "雙日輪替",
+    badgeLabel: "雙日輪替",
+    badgeClass: "bg-amber-100 text-amber-900 border border-amber-300 dark:bg-amber-950/40 dark:text-amber-200 dark:border-amber-800 font-bold",
+    pillClass: "bg-amber-50 text-amber-900 border border-amber-200 font-medium",
+    marker: "▲",
+  },
+  surprise: {
+    tier: "surprise",
+    label: "限定突襲",
+    badgeLabel: "限定突襲",
+    badgeClass: "bg-indigo-100 text-indigo-900 border border-indigo-200 dark:bg-indigo-950/40 dark:text-indigo-200 dark:border-indigo-800 font-bold",
+    pillClass: "bg-indigo-50 text-indigo-900 border border-indigo-200 font-medium",
+    marker: "◆",
+  },
+};
+
+export function getTourFrequencyTier(count, totalShows) {
+  if (totalShows <= 0) return "surprise";
+  if (count === totalShows) return "core";
+  const ratio = count / totalShows;
+  const percentage = Math.round(ratio * 100);
+  if (percentage >= 70) return "regular";
+  if (percentage >= 30) return "rotating";
+  return "surprise";
+}
+
+export function formatFrequencyStats(count, totalShows) {
+  const ratio = totalShows > 0 ? count / totalShows : 0;
+  const percentage = totalShows > 0 ? Math.round(ratio * 100) : 0;
+  const tier = getTourFrequencyTier(count, totalShows);
+  const tierInfo = FREQUENCY_TIER_CONFIG[tier] || FREQUENCY_TIER_CONFIG.surprise;
+  const tierBadgeLabel =
+    tier === "core" ? "核心全勤 100%" : `${tierInfo.label} ${percentage}%`;
+
+  return {
+    ratio,
+    percentage,
+    tier,
+    tierLabel: tierInfo.label,
+    tierBadgeLabel,
+    badgeClass: tierInfo.badgeClass,
+    pillClass: tierInfo.pillClass,
+  };
+}
+
+export function computeTourStatistics(tourUnitData) {
+  if (!tourUnitData) {
+    return {
+      unit: null,
+      tour: null,
+      isTour: false,
+      totalShows: 0,
+      consensusTracks: [],
+      templateTracks: [],
+      coreTracks: [],
+      regularTracks: [],
+      rotatingTracks: [],
+      surpriseTracks: [],
+      interludes: [],
+      itinerary: [],
+      stats: {
+        totalShows: 0,
+        coreCount: 0,
+        regularCount: 0,
+        rotatingCount: 0,
+        surpriseCount: 0,
+        uniqueSongsCount: 0,
+        prefecturesCount: 0,
+        citiesCount: 0,
+        dateStart: "",
+        dateEnd: "",
+      },
+    };
+  }
+
+  const unit = tourUnitData.unit || tourUnitData;
+  const isTour = !!(unit.templateSetlist || unit.isTour || tourUnitData.isTour);
+  const rawTpl = tourUnitData.tpl || unit.templateSetlist || [];
+  const shows = [...(tourUnitData.shows || unit.shows || [])].sort((a, b) =>
+    a.date < b.date ? -1 : 1
+  );
+  const totalShows = shows.length;
+  const full = tourUnitData.full;
+
+  const resolvedShows = shows.map((s) => ({
+    show: s,
+    items: full?.get?.(s.id) ?? resolveShowItems(unit, s),
+  }));
+
+  const uniquePrefectures = new Set();
+  const uniqueCities = new Set();
+  const allUniqueSongIds = new Set();
+
+  for (const s of shows) {
+    if (s.prefecture) uniquePrefectures.add(s.prefecture);
+    if (s.city) uniqueCities.add(s.city);
+  }
+
+  const tplSongSet = new Set();
+  for (const t of rawTpl) {
+    if (t.songId) tplSongSet.add(t.songId);
+  }
+
+  // 1. Consensus / Template Tracks calculation
+  const consensusTracks = rawTpl.map((item) => {
+    const songId = item.songId || null;
+    const title = (songId && songTitle[songId]) || item.title || "";
+    if (songId) allUniqueSongIds.add(songId);
+
+    const appearances = [];
+    const variationNotes = new Set();
+
+    for (const rs of resolvedShows) {
+      const matched = rs.items.filter((it) =>
+        (songId && it.songId === songId) ||
+        (!songId && item.title && (it.title === item.title || it.name === item.title))
+      );
+
+      if (matched.length > 0) {
+        appearances.push(rs.show.id);
+        for (const m of matched) {
+          if (m.note) variationNotes.add(m.note);
+        }
+      }
+    }
+
+    const count = appearances.length;
+    const freq = formatFrequencyStats(count, totalShows);
+
+    return {
+      order: item.order,
+      songId,
+      title,
+      encore: !!item.encore,
+      count,
+      totalShows,
+      ratio: freq.ratio,
+      percentage: freq.percentage,
+      tier: freq.tier,
+      tierLabel: freq.tierLabel,
+      tierBadgeLabel: freq.tierBadgeLabel,
+      badgeClass: freq.badgeClass,
+      pillClass: freq.pillClass,
+      appearances,
+      variations: Array.from(variationNotes),
+    };
+  });
+
+  const coreTracks = consensusTracks.filter((t) => t.tier === "core");
+  const regularTracks = consensusTracks.filter((t) => t.tier === "regular");
+  const rotatingTracks = consensusTracks.filter((t) => t.tier === "rotating");
+  const surpriseTemplateTracks = consensusTracks.filter((t) => t.tier === "surprise");
+
+  // 2. Surprise Non-Template Tracks & Interludes
+  const nonTemplateSongMap = new Map();
+  const interludes = [];
+
+  for (const rs of resolvedShows) {
+    for (const it of rs.items) {
+      if (it.type === "interlude" || (!it.songId && !it.title)) {
+        interludes.push({
+          showId: rs.show.id,
+          show: rs.show,
+          item: it,
+        });
+        continue;
+      }
+
+      const sid = it.songId;
+      const stitle = (sid && songTitle[sid]) || it.title;
+      if (sid) allUniqueSongIds.add(sid);
+
+      const isTemplateSong = sid ? tplSongSet.has(sid) : rawTpl.some((t) => t.title === stitle);
+      if (!isTemplateSong) {
+        const key = sid || stitle;
+        if (!nonTemplateSongMap.has(key)) {
+          nonTemplateSongMap.set(key, {
+            songId: sid,
+            title: stitle,
+            appearances: [],
+            shows: [],
+            notes: new Set(),
+          });
+        }
+        const record = nonTemplateSongMap.get(key);
+        if (!record.appearances.includes(rs.show.id)) {
+          record.appearances.push(rs.show.id);
+          record.shows.push(rs.show);
+        }
+        if (it.note) record.notes.add(it.note);
+      }
+    }
+  }
+
+  const surpriseTracks = Array.from(nonTemplateSongMap.values()).map((rec) => {
+    const count = rec.appearances.length;
+    const freq = formatFrequencyStats(count, totalShows);
+
+    return {
+      songId: rec.songId,
+      title: rec.title,
+      count,
+      totalShows,
+      ratio: freq.ratio,
+      percentage: freq.percentage,
+      tier: freq.tier,
+      tierLabel: freq.tierLabel,
+      tierBadgeLabel: freq.tierBadgeLabel,
+      badgeClass: freq.badgeClass,
+      appearances: rec.appearances,
+      shows: rec.shows,
+      variations: Array.from(rec.notes),
+    };
+  });
+
+  // 3. Chronological Itinerary Timeline
+  const itinerary = shows.map((s, idx) => ({
+    id: s.id,
+    index: idx + 1,
+    date: s.date,
+    weekday: s.weekday || "",
+    venue: s.venue,
+    city: s.city,
+    prefecture: s.prefecture || "",
+    region: s.region || "",
+    time: formatShowTime(s),
+    sourceUrls: s.sourceUrls || [],
+    isFirst: idx === 0,
+    isFinal: idx === shows.length - 1,
+  }));
+
+  const earliestDate = shows[0]?.date ?? "";
+  const latestDate = shows.at(-1)?.date ?? "";
+
+  const stats = {
+    totalShows,
+    coreCount: coreTracks.length,
+    regularCount: regularTracks.length,
+    rotatingCount: rotatingTracks.length,
+    surpriseCount: surpriseTemplateTracks.length + surpriseTracks.length,
+    uniqueSongsCount: allUniqueSongIds.size,
+    prefecturesCount: uniquePrefectures.size,
+    citiesCount: uniqueCities.size,
+    dateStart: earliestDate,
+    dateEnd: latestDate,
+  };
+
+  return {
+    unit,
+    tour: unit,
+    isTour,
+    totalShows,
+    consensusTracks,
+    templateTracks: consensusTracks,
+    coreTracks,
+    regularTracks,
+    rotatingTracks,
+    surpriseTracks,
+    interludes,
+    itinerary,
+    stats,
+  };
+}
