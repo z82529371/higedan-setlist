@@ -12,6 +12,8 @@
     "test": "pnpm --filter ./site test",
     "check": "pnpm --filter ./site check",
     "audit:reports": "pnpm --filter ./site audit:reports",
+    "eval": "pnpm --filter ./site eval",
+    "check:staged": "node site/scripts/check-staged.mjs",
     "dev": "pnpm --filter ./site dev",
     "build": "pnpm --filter ./site build",
     "preview": "pnpm --filter ./site preview"

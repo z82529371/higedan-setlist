@@ -20,8 +20,9 @@ Multiple autonomous agents frequently operate concurrently in this repository:
 2. **Concurrent File Protection**: Never delete, restore, or modify working tree files outside your explicit task scope (e.g. data JSON files under active audit or other agents' temporary scripts).
 3. **Task-Scoped Git Operations**: Always inspect git diff with `git --no-pager diff -- <path>` or path filters rather than unstaging or wiping untracked files wholesale, preventing Windows terminal pager hangs.
 4. **Data Inspection**: Use `node -e` or scripts under `site/scripts/` rather than PowerShell `ConvertFrom-Json` to avoid Windows UTF-8 encoding distortion.
-5. **Vite SSR & Scratch Scripts**: Scratch scripts importing frontend modules (e.g. `domain.js` importing JSON assets) must run inside `site/` or resolve `site/node_modules`, and configure Vite with `server: { middlewareMode: true, watch: null }` in `createServer()` to avoid Node.js strict ESM JSON attribute errors and Windows Chokidar file-watcher hangs.
+5. **Vite SSR & Scratch Scripts**: Execute ad-hoc snippets importing frontend modules (e.g. `domain.js`) via `pnpm eval "<code>"` or `site/scripts/eval.mjs`, avoiding Node.js strict ESM JSON attribute errors (`ERR_IMPORT_ATTRIBUTE_MISSING`).
 6. **pnpm Monorepo Workspace Topology (ADR-0103)**: Repository uses root `pnpm-workspace.yaml` targeting `packages: ['site']` with root `pnpm-lock.yaml`. Never create rogue `pnpm-workspace.yaml` inside subdirectories, and invoke workspace scripts from root using `pnpm --filter ./site <cmd>`.
+7. **Staging Hygiene Guardrail**: Run `pnpm check:staged` before committing to verify no concurrent agent files (`data/events/*.json`, `docs/reports/*.md`) were mistakenly staged.
 
 ## Verification Commands
 

@@ -8,6 +8,7 @@
     "test": "pnpm sync && oxlint src -c .oxlintrc.json && node scripts/smoke-test.mjs",
     "check": "pnpm lint && pnpm test",
     "audit:reports": "node scripts/generate-audit-reports.mjs",
+    "eval": "node scripts/eval.mjs",
     "dev": "pnpm sync && vite",
     "build": "pnpm sync && vite build",
     "preview": "pnpm sync && vite preview"

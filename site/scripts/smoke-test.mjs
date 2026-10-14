@@ -67,6 +67,30 @@ describe("Pipeline Smoke Tests", () => {
     renderToStaticMarkup = rdomMod.renderToStaticMarkup;
   });
 
+  const failureLog = [];
+  process.on("test:fail", (data) => {
+    failureLog.push({
+      name: data.name,
+      file: data.file,
+      line: data.line,
+      error: data.details?.error?.message || data.details?.error || "Assertion failed",
+    });
+  });
+
+  process.on("exit", (code) => {
+    if (code !== 0 && failureLog.length > 0) {
+      console.error("\n" + "=".repeat(60));
+      console.error(`💥 [Smoke Test Failures Summary: ${failureLog.length} failed]`);
+      console.error("=".repeat(60));
+      for (const f of failureLog) {
+        console.error(`❌ ${f.name}`);
+        if (f.line) console.error(`   at line ${f.line}`);
+        console.error(`   Error: ${f.error}`);
+        console.error("-".repeat(60));
+      }
+    }
+  });
+
   after(async () => {
     if (server) await server.close();
   });
