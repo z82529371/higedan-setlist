@@ -158,5 +158,19 @@ html[data-theme="dark"] {
     linear-gradient(to bottom, var(--color-notebook-grid) 1px, transparent 1px);
 }
 
+/* 觸控壓印手感（Flat Ink Stamp Touch Feedback, ADR-0102 / DESIGN.md） */
+.touch-stamp {
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-user-select: none;
+  transition-property: color, background-color, border-color, opacity;
+  transition-duration: 100ms;
+}
 
+.touch-stamp:active {
+  background-color: rgba(0, 0, 0, 0.05);
+}
 
+html[data-theme="dark"] .touch-stamp:active {
+  background-color: rgba(255, 255, 255, 0.10);
+}

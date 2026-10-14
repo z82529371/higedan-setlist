@@ -12,22 +12,24 @@ export const KIND_TAB = {
 };
 export const KIND_ORDER = ["premiere", "unreleased", "satoshi-solo", "request"];
 
+export const TOUCH_STAMP = "touch-stamp cursor-pointer";
+
 export const queryTabClass = (isOn) =>
-  `appearance-none w-full py-2.5 px-3 text-[14px] sm:text-[15px] font-bold cursor-pointer select-none transition-colors motion-reduce:transition-none flex items-center justify-center gap-1.5 focus-visible:outline-2 focus-visible:outline-tape focus-visible:outline-offset-[-2px] ${
+  `appearance-none w-full py-2.5 px-3 text-[14px] sm:text-[15px] font-bold cursor-pointer select-none transition-colors motion-reduce:transition-none flex items-center justify-center gap-1.5 focus-visible:outline-2 focus-visible:outline-tape focus-visible:outline-offset-[-2px] touch-stamp ${
     isOn
       ? "bg-ink text-white font-extrabold"
       : "bg-card text-ink hover:bg-band/10"
   }`;
 
 export const filterPillClass = (isActive) =>
-  `appearance-none rounded border-[1.5px] px-[14px] py-[6px] text-[13px] font-semibold cursor-pointer whitespace-nowrap transition-colors motion-reduce:transition-none focus-visible:outline-[3px] focus-visible:outline-pool focus-visible:outline-offset-2 ${
+  `appearance-none rounded border-[1.5px] px-[14px] py-[6px] text-[13px] font-semibold cursor-pointer whitespace-nowrap transition-colors motion-reduce:transition-none focus-visible:outline-[3px] focus-visible:outline-pool focus-visible:outline-offset-2 touch-stamp ${
     isActive
       ? "bg-band text-band-ink border-band shadow-[2px_2px_0_#d5a200] font-bold"
       : "border-line bg-paper text-ink hover:bg-pool-wash hover:border-pool hover:text-pool"
   }`;
 
 export const unitPillClass = (isOn, isEmpty = false) =>
-  `appearance-none rounded-full border px-3 py-1 text-[12px] font-semibold cursor-pointer transition-colors motion-reduce:transition-none focus-visible:outline-[3px] focus-visible:outline-pool focus-visible:outline-offset-2 ${
+  `appearance-none rounded-full border px-3 py-1 text-[12px] font-semibold cursor-pointer transition-colors motion-reduce:transition-none focus-visible:outline-[3px] focus-visible:outline-pool focus-visible:outline-offset-2 touch-stamp ${
     isOn
       ? "bg-tape text-ink border-ink font-bold shadow-[1px_1px_0_var(--color-ink)]"
       : isEmpty
@@ -47,7 +49,7 @@ export const CUE_COLOR = {
 };
 export const TRACK_NOTE = "text-[13px] text-muted";
 export const SETLIST_SONG =
-  "border-b border-transparent font-medium text-ink no-underline transition-colors hover:border-pool hover:text-pool focus-visible:outline-[3px] focus-visible:outline-pool focus-visible:outline-offset-2 motion-reduce:transition-none";
+  "border-b border-transparent font-medium text-ink no-underline transition-colors hover:border-pool hover:text-pool focus-visible:outline-[3px] focus-visible:outline-pool focus-visible:outline-offset-2 motion-reduce:transition-none touch-stamp rounded-sm px-1 -mx-1 py-0.5 inline-block";
 export const SLIP_ARTICLE =
   "relative rounded-[3px] border-[1.5px] border-ink bg-card px-[26px] pb-6 pt-[46px] shadow-[5px_5px_0_rgba(0,0,0,0.14)] max-sm:px-4 max-sm:pb-[18px] max-sm:pt-[42px]";
 export const SLIP_TAPE =

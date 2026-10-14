@@ -423,7 +423,7 @@ export function ShowSlip({
                 <button
                   type="button"
                   onClick={() => onSelectShow(prevShow.id)}
-                  className="group inline-flex items-center gap-1 font-semibold text-ink hover:text-pool cursor-pointer transition-colors min-h-[38px] px-2 py-1 sm:min-h-0 sm:p-0 rounded active:bg-paper/80"
+                  className="group inline-flex items-center gap-1 font-semibold text-ink hover:text-pool cursor-pointer transition-colors min-h-[38px] px-2 py-1 sm:min-h-0 sm:p-0 rounded touch-stamp"
                   title={`上一場：${showDate(prevShow)} ${prevShow.city || prevShow.venue}`}
                 >
                   <span aria-hidden="true" className="text-base sm:text-xs">←</span>
@@ -454,7 +454,7 @@ export function ShowSlip({
                 <button
                   type="button"
                   onClick={() => onSelectShow(nextShow.id)}
-                  className="group inline-flex items-center gap-1 font-semibold text-ink hover:text-pool cursor-pointer transition-colors min-h-[38px] px-2 py-1 sm:min-h-0 sm:p-0 rounded active:bg-paper/80"
+                  className="group inline-flex items-center gap-1 font-semibold text-ink hover:text-pool cursor-pointer transition-colors min-h-[38px] px-2 py-1 sm:min-h-0 sm:p-0 rounded touch-stamp"
                   title={`下一場：${showDate(nextShow)} ${nextShow.city || nextShow.venue}`}
                 >
                   <span className="hidden sm:inline text-muted group-hover:text-pool">

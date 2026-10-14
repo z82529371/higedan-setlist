@@ -202,3 +202,22 @@ components:
 - **Don't** 引入 8px 以上的大圓角按鈕或卡片（膠囊標籤 full 圓角除外），避免流失樂團工作現場的粗獷俐落感。
 - **Don't** 建立雙欄獨立滾動條或多重內部抽屜滾動。
 - **Don't** 在場次標題中自創城市後綴或模糊演出八大類型分類。
+
+## Touch Affordance & Active Feedback (小尺寸觸控認知與按壓反饋)
+
+行動裝置觸控螢幕缺乏桌面端之懸浮（Hover）預覽能力。為平衡實體印刷美學與流暢的操作認知，本系統制定全域觸控反饋與熱區規範：
+
+### 1. 墨水壓印回饋 (Flat Ink Stamp)
+- **Token 與 Utility**: `.touch-stamp`（對應 `site/src/style.css` 與 `site/src/lib/constants.js` 的 `TOUCH_STAMP`）。
+- **物理表現**: 手指按下瞬間呈現淡墨印痕（`active:bg-black/5`，深色模式 `dark:active:bg-white/10`），模擬將印章蓋在厚磅卡紙上的觸感。
+- **Zero Shift 原則**: 嚴禁在小尺寸按壓時引發版面位移或晃動（零 micro-scale、零跳動），確保滑動或連點時極致穩定。
+- **觸控延遲消除**: 強制搭配 `touch-action: manipulation` 與 `user-select: none`，消除行動瀏覽器 300ms 雙擊縮放延遲與文字誤選。
+
+### 2. 漸進式實體暗示 (Progressive Affordance)
+- **拒絕滿版超連結底線**: 舞台歌單曲目保持乾淨俐落的黑墨印刷字重（`font-semibold`），避免整頁充滿超連結藍字或下劃線。
+- **實體標籤作為點擊靶點**: 跨場次導航與跳轉由右側明確的 `[🎫 →]` 或 `[🎫 城市 日期]` 實體膠囊承擔；收合區域固定以 `▸ / ▾` 三角指示符提示狀態。
+
+### 3. 歌名精準熱區與防誤觸 (Title-Focused Scroll Safety)
+- **熱區範圍**: 單場歌單（`ShowSlip`）的曲目點擊僅收斂於歌名文字區塊（搭配 `px-1 -mx-1 py-0.5 inline-block touch-stamp` 提供舒適的按壓範圍）。
+- **滑動緩衝保護**: 左側演出序號（如 `M01`、`EN1`）及右側留白不綁定點擊事件，保留作為使用者大拇指上下滑動檢索時的安全非觸發區，徹底杜絕滑動時頻繁誤開彈窗。
+
