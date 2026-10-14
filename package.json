@@ -3,6 +3,9 @@
   "private": true,
   "type": "module",
   "packageManager": "pnpm@11.18.0",
+  "engines": {
+    "node": ">=22.13.0"
+  },
   "scripts": {
     "sync": "pnpm --filter ./site sync",
     "lint": "pnpm --filter ./site lint",
