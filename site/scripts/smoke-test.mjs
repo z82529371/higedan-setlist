@@ -401,6 +401,28 @@ describe("Pipeline Smoke Tests", () => {
         );
       }
     });
+
+    it("ensures slip components adhere to DESIGN.md zero-blur shadow rules", async () => {
+      const fs = await import("node:fs");
+      const path = await import("node:path");
+      const slipsDir = path.resolve(
+        import.meta.dirname,
+        "../src/components/slips"
+      );
+      const files = fs.readdirSync(slipsDir).filter((f) => f.endsWith(".jsx"));
+      const bannedBlurryShadowRegex =
+        /\bshadow-(?:sm|md|lg|xl|2xl)\b|\bshadow\b(?!\S)/g;
+
+      for (const file of files) {
+        const content = fs.readFileSync(path.join(slipsDir, file), "utf-8");
+        const matches = content.match(bannedBlurryShadowRegex);
+        assert.equal(
+          matches,
+          null,
+          `File ${file} contains banned blurry drop-shadow classes: ${matches?.join(", ")}`
+        );
+      }
+    });
   });
 
   describe("6. Component Mount & SSR Render Smoke Test", () => {
