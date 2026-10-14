@@ -55,7 +55,6 @@ export function ArchiveLayout({
     handleSelectVenue,
     handleSelectUnit,
     handleSelectTourMode,
-    handleToggleSubMode,
     handleReturnHome,
     visualViewportStyle,
   } = routeState;
@@ -238,7 +237,7 @@ export function ArchiveLayout({
                     </div>
                     <div className="text-[13px] font-black text-ink truncate leading-tight pt-0.5">
                       {showSubMode === "tour" && current?.isTour
-                        ? `📜 ${shortUnitTitle(current.unit)}（巡演總覽大票）`
+                        ? `📜 ${shortUnitTitle(current.unit)}（巡演總覽）`
                         : currentShowObj
                         ? `${currentShowObj.date} ${currentShowObj.city || currentShowObj.venue}`
                         : current?.unit
@@ -298,7 +297,7 @@ export function ArchiveLayout({
                         </span>
                         {showSubMode === "tour" && current?.isTour ? (
                           <span className="text-band font-bold shrink-0">
-                            （📜 巡演總覽大票 · 全 {current.shows?.length || 0} 場）
+                            （📜 巡演總覽 · 全 {current.shows?.length || 0} 場）
                           </span>
                         ) : currentShowObj ? (
                           <span className="text-muted shrink-0">
@@ -339,23 +338,16 @@ export function ArchiveLayout({
                   <TourSlip
                     tourUnitData={current?.unit}
                     ud={current}
-                    showSubMode={showSubMode}
-                    onToggleSubMode={handleToggleSubMode}
                     onSelectSong={handleSelectSong}
                     onSelectShow={handleSelectShow}
-                    onSelectVenue={handleSelectVenue}
-                    onSelectTour={handleSelectUnit}
                   />
                 ) : (
                   <ShowSlip
                     ud={current}
                     showId={selShow}
-                    showSubMode={showSubMode}
-                    onToggleSubMode={handleToggleSubMode}
                     onSelectSong={handleSelectSong}
                     onSelectShow={handleSelectShow}
                     onSelectVenue={handleSelectVenue}
-                    onSelectTour={handleSelectUnit}
                   />
                 )}
               </section>

@@ -18,9 +18,9 @@ export { CATEGORY_ORDER };
 const CAPSULE_MODES = [
   {
     key: "tour",
-    label: "巡演總覽大票",
+    label: "巡演總覽",
     icon: "📜",
-    title: "切換至巡演總覽大票，檢視全巡演共識母單與出賽統計",
+    title: "切換至巡演總覽，檢視全巡演定番歌單與出賽統計",
   },
   {
     key: "show",

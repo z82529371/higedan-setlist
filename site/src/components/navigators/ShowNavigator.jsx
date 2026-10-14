@@ -305,10 +305,10 @@ export function ShowNavigator({
                       ? "bg-band text-band-ink font-bold shadow-xs border border-ink/40"
                       : "bg-paper text-ink border border-line-soft hover:bg-tape-tint/50 hover:border-ink/60"
                   }`}
-                  title="查看此巡演的共識母單與出賽統計"
+                  title="查看此巡演的定番歌單與出賽統計"
                 >
                   <span>📜</span>
-                  <span>巡演總覽大票</span>
+                  <span>巡演總覽</span>
                 </button>
               )}
               {dPagedShows.map((s) => {

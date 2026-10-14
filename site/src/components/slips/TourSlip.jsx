@@ -15,80 +15,7 @@ import { routeHash } from "../../lib/track.js";
 import {
   TicketPerforationDivider,
   TicketBarcodeFooter,
-  DualModeCapsuleToggle,
 } from "./TicketCommon.jsx";
-
-export function parseTrackVariation(rawNote) {
-  if (!rawNote) return null;
-  const s = rawNote.trim();
-
-  // Extract excerpt notes: (サビのみ), (ワンコーラス), (1番のみ), etc.
-  let excerpt = null;
-  let clean = s;
-  const exMatch = clean.match(
-    /(?:[（(]?(サビのみ|ワンコーラス(?:のみ)?|1コーラス(?:のみ)?|1番のみ(?:。弾き語り合唱)?|1サビまで|2サビで[^）)]+)[）)]?)/
-  );
-  if (exMatch) {
-    excerpt = exMatch[1];
-    clean = clean.replace(exMatch[0], "").replace(/^[、,・\s/／]+|[、,・\s/／]+$/g, "").trim();
-  }
-
-  const tags = [];
-  if (clean.includes("リクエスト") || clean.includes("request")) {
-    tags.push({
-      type: "request",
-      label: "點歌",
-      dotClass: "bg-request",
-      borderClass: "border-request/50",
-    });
-    clean = clean
-      .replace(/(?:観客|会場)?リクエスト(?:曲|コーナー(?:（ツアー唯一）)?)?/, "")
-      .replace(/^[、,・\s/／]+|[、,・\s/／]+$/g, "")
-      .trim();
-  }
-  if (clean.includes("弾き語り") || clean.includes("ソロ") || clean.includes("solo")) {
-    tags.push({
-      type: "solo",
-      label: "自彈自唱",
-      dotClass: "bg-solo",
-      borderClass: "border-solo/50",
-    });
-    clean = clean
-      .replace(
-        /(?:聡ピアノ|藤原聡\/|キーボード|着席)?(?:弾き語り|ソロ|solo)(?:STADIUM ver\.|合唱|ver\.?)?/,
-        ""
-      )
-      .replace(/^[、,・\s/／]+|[、,・\s/／]+$/g, "")
-      .trim();
-  }
-  if (
-    clean.includes("新曲") ||
-    clean.includes("初披露") ||
-    clean.includes("初解禁") ||
-    clean.includes("未発表曲") ||
-    clean.includes("premiere")
-  ) {
-    tags.push({
-      type: "premiere",
-      label: "新歌",
-      dotClass: "bg-premiere",
-      borderClass: "border-premiere/50",
-    });
-    clean = clean
-      .replace(/(?:フル)?初披露|初解禁|新曲|未発表曲|premiere/i, "")
-      .replace(/^[、,・\s/／]+|[、,・\s/／]+$/g, "")
-      .trim();
-  }
-
-  // Any remaining meaningful text is a version/arrangement note
-  clean = clean.replace(/^[、,・\s/／()（）]+|[、,・\s/／()（）]+$/g, "").trim();
-  let versionNote = null;
-  if (clean && clean !== "ver" && clean !== "ver.") {
-    versionNote = clean;
-  }
-
-  return { tags, versionNote, excerpt, original: rawNote };
-}
 
 function formatShowBadgeLabel(show) {
   if (!show) return "";
@@ -104,10 +31,7 @@ export function TourSlip({
   tourData,
   onSelectSong,
   onSelectShow,
-  onSelectTour,
   initialItineraryExpanded = false,
-  showSubMode = "tour",
-  onToggleSubMode,
 }) {
   const targetData = tourUnitData || ud || tourData;
 
@@ -125,6 +49,7 @@ export function TourSlip({
     tour,
     totalShows,
     consensusTracks,
+    nonTemplateRotatingTracks = [],
     surpriseTracks,
     interludes,
     itinerary = [],
@@ -170,45 +95,20 @@ export function TourSlip({
             <span className="font-bold text-[14px] sm:text-[15px] text-ink">{track.title}</span>
           )}
 
-          {track.variations && track.variations.length > 0 && (
+          {track.badges && track.badges.length > 0 && (
             <div className="inline-flex flex-wrap items-center gap-1.5 align-middle">
-              {track.variations.map((note, idx) => {
-                const parsed = parseTrackVariation(note);
-                if (!parsed) return null;
-                return (
-                  <span key={idx} className="inline-flex flex-wrap items-center gap-1">
-                    {parsed.tags.map((t, tIdx) => (
-                      <span
-                        key={tIdx}
-                        className={`inline-flex items-center rounded px-1.5 py-0.5 text-[11px] font-mono font-bold bg-card text-ink border ${t.borderClass} shadow-2xs select-none`}
-                        title={parsed.original}
-                      >
-                        <span
-                          className={`inline-block h-1.5 w-1.5 rounded-full ${t.dotClass} mr-1`}
-                          aria-hidden="true"
-                        />
-                        <span>{t.label}</span>
-                      </span>
-                    ))}
-                    {parsed.versionNote && (
-                      <span
-                        className="inline-flex items-center rounded px-1.5 py-0.5 text-[11px] font-mono font-bold bg-card text-ink border border-line shadow-2xs select-none"
-                        title={parsed.original}
-                      >
-                        <span>{parsed.versionNote}</span>
-                      </span>
-                    )}
-                    {parsed.excerpt && (
-                      <span
-                        className="font-mono text-[11px] text-muted font-medium select-none"
-                        title={`演奏規格：${parsed.excerpt}`}
-                      >
-                        ({parsed.excerpt})
-                      </span>
-                    )}
-                  </span>
-                );
-              })}
+              {track.badges.map((b) => (
+                <span
+                  key={b.type}
+                  className={`inline-flex items-center rounded px-1.5 py-0.5 text-[11px] font-mono font-bold bg-card text-ink border ${b.borderClass} shadow-2xs select-none`}
+                >
+                  <span
+                    className={`inline-block h-1.5 w-1.5 rounded-full ${b.dotClass} mr-1`}
+                    aria-hidden="true"
+                  />
+                  <span>{b.label}</span>
+                </span>
+              ))}
             </div>
           )}
         </div>
@@ -223,7 +123,7 @@ export function TourSlip({
       <div className="flex shrink-0 items-center justify-end gap-2 pl-7 sm:pl-0">
         <span
           className={`inline-flex items-center gap-1.5 rounded px-2 py-0.5 text-[11px] font-mono select-none ${track.badgeClass}`}
-          title={`此巡演共登場 ${track.count} 場（全 ${track.totalShows} 場 · 出賽率 ${track.percentage}%）`}
+          title={`此巡演共登場 ${track.count} 場（全 ${track.totalShows} 場 · 登場率 ${track.percentage}%）`}
         >
           <span className={tierConfig.markerClass} aria-hidden="true">
             {tierConfig.marker}
@@ -284,6 +184,9 @@ export function TourSlip({
             >
               <span>🎫</span>
               <span>{formatShowBadgeLabel(s)}</span>
+              {s.cue && (
+                <span className="font-bold text-ink ml-0.5">({s.cue})</span>
+              )}
             </a>
           ))}
         </div>
@@ -294,7 +197,7 @@ export function TourSlip({
   return (
     <article
       className={`${SLIP_ARTICLE} max-w-[960px] mx-auto`}
-      aria-label="巡演總覽大票"
+      aria-label="巡演總覽"
     >
       <span aria-hidden="true" className={SLIP_TAPE} />
 
@@ -347,64 +250,91 @@ export function TourSlip({
           {/* Frequency Hierarchy Pills Bar */}
           <div className="flex flex-wrap items-center gap-2 pt-1 font-mono text-[11px]">
             <div className="flex items-center gap-1.5 text-muted font-bold shrink-0">
-              <span aria-hidden="true">📊</span> 出賽概況：
+              <span aria-hidden="true">📊</span> 登場曲目統計：
             </div>
             <div className="flex flex-wrap items-center gap-1.5">
-              <span
-                className={`inline-flex items-center gap-1.5 rounded px-2 py-0.5 ${FREQUENCY_TIER_CONFIG.core.badgeClass}`}
+              <button
+                type="button"
+                onClick={() => {
+                  document
+                    .getElementById("consensus-template-section")
+                    ?.scrollIntoView({ behavior: "smooth" });
+                }}
+                className={`inline-flex items-center gap-1.5 rounded px-2 py-0.5 cursor-pointer hover:border-ink transition-colors ${FREQUENCY_TIER_CONFIG.core.badgeClass}`}
+                title="點擊跳轉至巡演定番歌單"
               >
                 <span className={FREQUENCY_TIER_CONFIG.core.markerClass} aria-hidden="true">
                   {FREQUENCY_TIER_CONFIG.core.marker}
                 </span>
                 <span>核心全勤：{stats.coreCount} 首 (100%)</span>
-              </span>
+              </button>
               {stats.regularCount > 0 && (
-                <span
-                  className={`inline-flex items-center gap-1.5 rounded px-2 py-0.5 ${FREQUENCY_TIER_CONFIG.regular.badgeClass}`}
+                <button
+                  type="button"
+                  onClick={() => {
+                    document
+                      .getElementById("consensus-template-section")
+                      ?.scrollIntoView({ behavior: "smooth" });
+                  }}
+                  className={`inline-flex items-center gap-1.5 rounded px-2 py-0.5 cursor-pointer hover:border-ink transition-colors ${FREQUENCY_TIER_CONFIG.regular.badgeClass}`}
+                  title="點擊跳轉至巡演定番歌單"
                 >
                   <span className={FREQUENCY_TIER_CONFIG.regular.markerClass} aria-hidden="true">
                     {FREQUENCY_TIER_CONFIG.regular.marker}
                   </span>
                   <span>巡演定番：{stats.regularCount} 首 (≥70%)</span>
-                </span>
+                </button>
               )}
               {stats.rotatingCount > 0 && (
-                <span
-                  className={`inline-flex items-center gap-1.5 rounded px-2 py-0.5 ${FREQUENCY_TIER_CONFIG.rotating.badgeClass}`}
+                <button
+                  type="button"
+                  onClick={() => {
+                    const el =
+                      document.getElementById("rotating-tracks-section") ||
+                      document.getElementById("consensus-template-section");
+                    el?.scrollIntoView({ behavior: "smooth" });
+                  }}
+                  className={`inline-flex items-center gap-1.5 rounded px-2 py-0.5 cursor-pointer hover:border-ink transition-colors ${FREQUENCY_TIER_CONFIG.rotating.badgeClass}`}
+                  title="點擊跳轉至雙日輪替曲目"
                 >
                   <span className={FREQUENCY_TIER_CONFIG.rotating.markerClass} aria-hidden="true">
                     {FREQUENCY_TIER_CONFIG.rotating.marker}
                   </span>
                   <span>雙日輪替：{stats.rotatingCount} 首 (30-70%)</span>
-                </span>
+                </button>
               )}
               {stats.surpriseCount > 0 && (
-                <span
-                  className={`inline-flex items-center gap-1.5 rounded px-2 py-0.5 ${FREQUENCY_TIER_CONFIG.surprise.badgeClass}`}
+                <button
+                  type="button"
+                  onClick={() => {
+                    document
+                      .getElementById("surprise-inserts-section")
+                      ?.scrollIntoView({ behavior: "smooth" });
+                  }}
+                  className={`inline-flex items-center gap-1.5 rounded px-2 py-0.5 cursor-pointer hover:border-ink transition-colors ${FREQUENCY_TIER_CONFIG.surprise.badgeClass}`}
+                  title="點擊跳轉至巡演場次限定曲專區"
                 >
                   <span className={FREQUENCY_TIER_CONFIG.surprise.markerClass} aria-hidden="true">
                     {FREQUENCY_TIER_CONFIG.surprise.marker}
                   </span>
-                  <span>限定突襲：{stats.surpriseCount} 首 (&lt;30%)</span>
-                </span>
+                  <span>場次限定：{stats.surpriseCount} 首</span>
+                </button>
               )}
-              <span className="inline-flex items-center gap-1 rounded px-2 py-0.5 bg-paper text-muted border border-line-soft">
-                總演出曲目：{stats.uniqueSongsCount} 首
-              </span>
+              <button
+                type="button"
+                onClick={() => {
+                  document
+                    .getElementById("tour-itinerary-section")
+                    ?.scrollIntoView({ behavior: "smooth" });
+                }}
+                className="inline-flex items-center gap-1 rounded px-2 py-0.5 bg-paper text-muted border border-line-soft cursor-pointer hover:border-ink hover:text-ink transition-colors"
+                title="點擊跳轉至全國巡演日程足跡"
+              >
+                <span>總演出曲目：{stats.uniqueSongsCount} 首</span>
+              </button>
             </div>
           </div>
         </div>
-
-        {/* Dual-Mode Capsule Toggle */}
-        <DualModeCapsuleToggle
-          isTour={true}
-          mode={showSubMode}
-          unitId={tour?.id}
-          showId={tour?.shows?.[0]?.id}
-          onToggleMode={onToggleSubMode}
-          onSelectTour={onSelectTour}
-          onSelectShow={onSelectShow}
-        />
       </div>
 
       {/* Ticket Perforation Divider */}
@@ -412,19 +342,22 @@ export function TourSlip({
 
       {/* Consensus Template Setlist */}
       {consensusTracks.length === 0 ? (
-        <div className="my-8 rounded-[3px] border border-dashed border-line bg-paper px-6 py-8 text-center">
-          <p className="m-0 text-[16px] font-bold text-ink">🔍 母單情報未明</p>
+        <div
+          id="consensus-template-section"
+          className="my-8 rounded-[3px] border border-dashed border-line bg-paper px-6 py-8 text-center"
+        >
+          <p className="m-0 text-[16px] font-bold text-ink">🔍 歌單情報未明</p>
           <p className="m-0 mt-2 text-[13px] text-muted">
-            此巡演目前尚無標準母單模板紀錄
+            此巡演目前尚無定番歌單紀錄
           </p>
         </div>
       ) : (
-        <div className="space-y-6">
+        <div id="consensus-template-section" className="space-y-6">
           {/* Main Setlist */}
           <div>
             <div className="flex items-center justify-between font-mono text-xs font-bold uppercase tracking-wider text-muted pb-1.5 mb-1 border-b border-line-soft">
               <span className="flex items-center gap-1.5 text-ink font-extrabold">
-                <span className="text-band">◆</span> CONSENSUS TEMPLATE // 巡演標準母單
+                <span className="text-band">◆</span> CONSENSUS TEMPLATE // 巡演定番歌單
               </span>
               <span className="tabular-nums text-xs font-mono">{mainTracks.length} SONGS</span>
             </div>
@@ -438,7 +371,7 @@ export function TourSlip({
             <div className="rounded-[3px] p-3.5 sm:p-4 border border-line-soft bg-paper/50 space-y-2 mt-4">
               <div className="flex items-center justify-between font-mono text-xs font-extrabold uppercase tracking-wider text-band pb-1.5 border-b border-line-soft/70">
                 <span className="flex items-center gap-1.5">
-                  <span>◆</span> ENCORE // 安可共識母單
+                  <span>◆</span> ENCORE // 安可定番歌單
                 </span>
                 <span className="tabular-nums text-xs text-muted font-mono">{encTracks.length} SONGS</span>
               </div>
@@ -450,20 +383,48 @@ export function TourSlip({
         </div>
       )}
 
-      {/* Surprise Inserts Section */}
-      {surpriseTracks && surpriseTracks.length > 0 && (
-        <div className="rounded-[3px] p-3.5 sm:p-4 border border-line-soft bg-paper/60 space-y-3 mt-6">
+      {/* Rotating Tracks Section (Non-Template A/B Alternate Songs) */}
+      {nonTemplateRotatingTracks && nonTemplateRotatingTracks.length > 0 && (
+        <div
+          id="rotating-tracks-section"
+          className="rounded-[3px] p-3.5 sm:p-4 border border-line-soft bg-paper/50 space-y-3 mt-6"
+        >
           <div className="flex items-center justify-between font-mono text-xs font-bold uppercase tracking-wider text-muted pb-1.5 mb-1 border-b border-line-soft">
             <span className="flex items-center gap-1.5 text-ink font-extrabold">
-              <span className="text-band">◆</span> SURPRISE INSERTS // 巡演限定突襲曲
+              <span className="text-amber-600 dark:text-amber-400">▲</span> ROTATING TRACKS // 雙日輪替曲目
             </span>
             <span className="tabular-nums text-xs text-muted font-mono">
-              {surpriseTracks.length} SONGS (&lt;30%)
+              {nonTemplateRotatingTracks.length} SONGS (30-70%)
             </span>
           </div>
 
           <p className="text-[12px] text-muted m-0">
-            未收錄於巡演共識母單但於特定場次驚喜登場之稀有曲目（出賽率 &lt; 30%）：
+            巡演期間於不同場次（如 Day 2）常態切換登場之雙日輪替曲目：
+          </p>
+
+          <ol className="m-0 list-none p-0 divide-y divide-line-soft/50">
+            {nonTemplateRotatingTracks.map((track) => renderTrackItem(track, "▲"))}
+          </ol>
+        </div>
+      )}
+
+      {/* Surprise Inserts Section */}
+      {surpriseTracks && surpriseTracks.length > 0 && (
+        <div
+          id="surprise-inserts-section"
+          className="rounded-[3px] p-3.5 sm:p-4 border border-line-soft bg-paper/60 space-y-3 mt-6"
+        >
+          <div className="flex items-center justify-between font-mono text-xs font-bold uppercase tracking-wider text-muted pb-1.5 mb-1 border-b border-line-soft">
+            <span className="flex items-center gap-1.5 text-ink font-extrabold">
+              <span className="text-band">◆</span> SPECIAL INSERTS // 巡演場次限定曲
+            </span>
+            <span className="tabular-nums text-xs text-muted font-mono">
+              {surpriseTracks.length} SONGS
+            </span>
+          </div>
+
+          <p className="text-[12px] text-muted m-0">
+            未收錄於巡演定番歌單但於特定場次驚喜登場之限定曲目：
           </p>
 
           <ol className="m-0 list-none p-0 divide-y divide-line-soft/50">
@@ -521,7 +482,10 @@ export function TourSlip({
 
       {/* Chronological Tour Itinerary Timeline */}
       {itinerary && itinerary.length > 0 && (
-        <div className="rounded-[3px] p-3.5 sm:p-4 border border-line-soft bg-paper/50 space-y-3 mt-6">
+        <div
+          id="tour-itinerary-section"
+          className="rounded-[3px] p-3.5 sm:p-4 border border-line-soft bg-paper/50 space-y-3 mt-6"
+        >
           <div className="flex items-center justify-between font-mono text-xs font-bold uppercase tracking-wider text-muted pb-1.5 mb-1 border-b border-line-soft">
             <span className="flex items-center gap-1.5 text-ink font-extrabold">
               <span className="text-band">◆</span> TOUR ITINERARY // 全國巡演日程足跡
@@ -578,6 +542,53 @@ export function TourSlip({
                         </span>
                       )}
                     </div>
+
+                    {stop.totalSongs > 0 && (
+                      <div className="flex flex-wrap items-center gap-1.5 pt-1 font-mono text-[11px]">
+                        {stop.isStandard ? (
+                          <span className="inline-flex items-center gap-1 text-muted">
+                            <span className="text-[9px] text-line-soft select-none">●</span>
+                            <span>定番歌單場</span>
+                            <span className="text-muted/60 select-none">·</span>
+                            <span>全 {stop.totalSongs} 首</span>
+                          </span>
+                        ) : stop.isRotating ? (
+                          <span className="inline-flex items-center gap-1 text-amber-600 dark:text-amber-400 font-medium">
+                            <span className="text-[9px] select-none">▲</span>
+                            <span>輪替歌單場</span>
+                            <span className="text-muted/60 select-none">·</span>
+                            <span className="text-muted tabular-nums">全 {stop.totalSongs} 首</span>
+                          </span>
+                        ) : (
+                          <div className="flex flex-wrap items-center gap-1.5">
+                            {stop.hasRotatingInserts && (
+                              <span className="inline-flex items-center gap-1 text-amber-600 dark:text-amber-400 font-medium mr-1">
+                                <span className="text-[9px] select-none">▲</span>
+                                <span>輪替歌單場</span>
+                                <span className="text-muted/60 select-none">·</span>
+                              </span>
+                            )}
+                            <span className="inline-flex items-center gap-1 text-ink font-semibold">
+                              <span className="text-band select-none">◆</span>
+                              <span>限定：</span>
+                            </span>
+                            {stop.surpriseHighlights.map((h, hIdx) => (
+                              <span
+                                key={`${stop.id}-${h.songId || h.title}-${hIdx}`}
+                                className="inline-flex items-center gap-1 rounded px-1.5 py-0.5 bg-card text-ink font-bold border border-line shadow-2xs"
+                              >
+                                <span>{h.title}</span>
+                                <span className="text-muted font-normal">
+                                  ({h.cue}{h.tagLabel ? ` ${h.tagLabel}` : ""})
+                                </span>
+                              </span>
+                            ))}
+                            <span className="text-muted/60 select-none">·</span>
+                            <span className="text-muted tabular-nums">全 {stop.totalSongs} 首</span>
+                          </div>
+                        )}
+                      </div>
+                    )}
                   </div>
                 </div>
 

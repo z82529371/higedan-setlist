@@ -5,7 +5,7 @@ import { getKindArray, primaryKind, kindTabs, slipClassFor, cueColorFor, songWei
 import { songTitle, songUnreleased, showDate, getSongAlbum, formatShowTime } from "../../lib/domain.js";
 import { trackRoute, routeHash } from "../../lib/track.js";
 import { assignCues } from "../../lib/resolve.js";
-import { getSourceLabel, TicketPerforationDivider, TicketBarcodeFooter, DualModeCapsuleToggle } from "./TicketCommon.jsx";
+import { getSourceLabel, TicketPerforationDivider, TicketBarcodeFooter } from "./TicketCommon.jsx";
 import { ShowSlipPanels } from "./ShowSlipPanels.jsx";
 
 export function ShowSlip({
@@ -14,9 +14,6 @@ export function ShowSlip({
   onSelectSong,
   onSelectShow,
   onSelectVenue,
-  showSubMode = "show",
-  onToggleSubMode,
-  onSelectTour,
 }) {
   if (!ud) return null;
   const s = ud.unit.shows.find((x) => x.id === showId);
@@ -607,17 +604,6 @@ export function ShowSlip({
         />
           </div>
         )}
-
-        {/* Dual-Mode Capsule Toggle */}
-        <DualModeCapsuleToggle
-          isTour={ud?.isTour}
-          mode={showSubMode}
-          unitId={ud?.unit?.id}
-          showId={showId}
-          onToggleMode={onToggleSubMode}
-          onSelectTour={onSelectTour}
-          onSelectShow={onSelectShow}
-        />
       </div>
     </div>
 

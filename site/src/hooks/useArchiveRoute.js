@@ -517,7 +517,7 @@ export function useArchiveRoute({
       const u = uEntry?.unit;
       const isTour = uEntry?.isTour;
       if (draftState.showSubMode === "tour" && isTour) {
-        return `確認套用：${shortUnitTitle(u)}（巡演總覽大票）`;
+        return `確認套用：${shortUnitTitle(u)}（巡演總覽）`;
       }
       const s = (u?.shows || []).find((x) => x.id === draftState.showId);
       if (s) {
