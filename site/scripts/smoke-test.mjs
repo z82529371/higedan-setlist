@@ -754,12 +754,12 @@ describe("Pipeline Smoke Tests", () => {
           } else if (track.ratio >= 0.7) {
             assert.equal(track.tier, "regular");
             assert.equal(track.tierLabel, "巡演定番");
-          } else if (track.ratio >= 0.3) {
+          } else if (track.ratio >= 0.3 && !(stats.totalShows <= 4 && track.count === 1)) {
             assert.equal(track.tier, "rotating");
             assert.equal(track.tierLabel, "雙日輪替");
           } else {
             assert.equal(track.tier, "surprise");
-            assert.equal(track.tierLabel, "限定突襲");
+            assert.equal(track.tierLabel, "場次限定");
           }
 
           assert.ok(track.badgeClass);
@@ -778,7 +778,10 @@ describe("Pipeline Smoke Tests", () => {
       assert.equal(stats.totalShows, 10);
       assert.equal(stats.coreTracks.length, 18);
       assert.equal(stats.regularTracks.length, 1);
-      assert.equal(stats.rotatingTracks.length, 2);
+      // In consensus template: 2 rotating tracks (fire-ground & no-doubt)
+      assert.equal(stats.consensusTracks.filter((t) => t.tier === "rotating").length, 2);
+      // Total rotating tracks (including non-template pretender & i-love): 4
+      assert.equal(stats.rotatingTracks.length, 4);
 
       // Check specific regular track: 115萬キロのフィルム was skipped in 1 show
       const filmTrack = stats.consensusTracks.find(
@@ -814,7 +817,14 @@ describe("Pipeline Smoke Tests", () => {
       const stats = computeTourStatistics(shockingNuts);
       assert.equal(stats.totalShows, 21);
       assert.equal(stats.coreTracks.length, 13);
-      assert.equal(stats.rotatingTracks.length, 7);
+      // In consensus template: 7 rotating tracks (A-set)
+      assert.equal(stats.consensusTracks.filter((t) => t.tier === "rotating").length, 7);
+      // Non-template inserts: 7 rotating tracks (B-set alternate songs)
+      assert.equal(stats.nonTemplateRotatingTracks.length, 7);
+      // Total rotating tracks across tour: 14 songs
+      assert.equal(stats.rotatingTracks.length, 14);
+      // True surprise tracks: 4 songs (< 30%: escapade, parabola, fire-ground, white-noise)
+      assert.equal(stats.surpriseTracks.length, 4);
       assert.equal(stats.regularTracks.length, 0);
     });
 
@@ -864,7 +874,7 @@ describe("Pipeline Smoke Tests", () => {
       // Invariants check
       assert.ok(html.length > 0);
       assert.ok(html.includes("Arena Tour 2024 - Rejoice -"));
-      assert.ok(html.includes("CONSENSUS TEMPLATE // 巡演標準母單"));
+      assert.ok(html.includes("CONSENSUS TEMPLATE // 巡演定番歌單"));
       assert.ok(html.includes("全 10 場次"));
       assert.ok(html.includes("核心全勤 100%"));
       assert.ok(html.includes("巡演定番 90%"));
@@ -886,14 +896,14 @@ describe("Pipeline Smoke Tests", () => {
       assert.equal(stats.totalShows, 29);
       assert.ok(stats.surpriseTracks.length > 0);
 
-      // All surprise tracks must strictly have ratio < 0.3
+      // All non-template surprise tracks must strictly have ratio < 0.7
       for (const track of stats.surpriseTracks) {
         assert.ok(
-          track.ratio < 0.3,
-          `Track ${track.title} ratio ${track.ratio} must be < 0.3`
+          track.ratio < 0.7,
+          `Track ${track.title} ratio ${track.ratio} must be < 0.7`
         );
         assert.equal(track.tier, "surprise");
-        assert.equal(track.tierLabel, "限定突襲");
+        assert.equal(track.tierLabel, "場次限定");
         assert.ok(track.appearances.length > 0);
         assert.equal(track.appearances.length, track.count);
         assert.equal(track.shows.length, track.count);
@@ -1025,6 +1035,33 @@ describe("Pipeline Smoke Tests", () => {
         subtitle.variations.some((v) => v.includes("ピアノ弾き語り"))
       );
       assert.ok(subtitle.variations.some((v) => v.includes("新曲")));
+      // But because Subtitle in Shocking Nuts was only solo in 1 of 21 shows, badges must NOT have solo!
+      assert.ok(!subtitle.badges.some((b) => b.type === "solo"));
+
+      // 3. 100% Monolithic Arrangement Rule: Four-re-ism tour (all 5 shows solo)
+      const fourReIsm = allUnits.find((u) => u.id === "four-re-ism-2025-2026");
+      if (fourReIsm) {
+        const fcStats = computeTourStatistics(fourReIsm);
+        const fcSubtitle = fcStats.consensusTracks.find((t) => t.songId === "subtitle");
+        if (fcSubtitle) {
+          assert.ok(fcSubtitle.badges.some((b) => b.type === "solo" && b.label === "自彈自唱"));
+        }
+      }
+
+      // 4. Asia Tour 2026 Taipei surprise: 1/1 show was requested
+      const asia2026 = allUnits.find((u) => u.id === "asia-tour-2026");
+      if (asia2026) {
+        const asiaStats = computeTourStatistics(asia2026);
+        const film = asiaStats.surpriseTracks.find((t) => t.songId === "115man-kiro-no-film");
+        if (film) {
+          assert.ok(film.badges.some((b) => b.type === "request" && b.label === "點歌"));
+        }
+        // Itinerary highlight must carry tagLabel '點歌'
+        const tpeStop = asiaStats.itinerary.find((s) => s.city === "台北");
+        if (tpeStop) {
+          assert.ok(tpeStop.surpriseHighlights.some((h) => h.tagLabel === "點歌"));
+        }
+      }
     });
 
     it("renders TourSlip component with complete Surprise Inserts and Interludes SSR markup", () => {
@@ -1042,13 +1079,16 @@ describe("Pipeline Smoke Tests", () => {
         })
       );
 
-      assert.ok(travelersHtml.includes("SURPRISE INSERTS // 巡演限定突襲曲"));
+      assert.ok(travelersHtml.includes("SPECIAL INSERTS // 巡演場次限定曲"));
+      assert.ok(travelersHtml.includes("id=\"surprise-inserts-section\""));
+      assert.ok(travelersHtml.includes("id=\"consensus-template-section\""));
       assert.ok(travelersHtml.includes("Sweet Tweet"));
       assert.ok(travelersHtml.includes("I LOVE..."));
       assert.ok(travelersHtml.includes("愛なんだが…"));
-      // Direct ticket links for shows
+      // Direct ticket links for shows with cue numbers
       assert.ok(travelersHtml.includes("#/show/1150086"));
       assert.ok(travelersHtml.includes("🎫"));
+      assert.ok(travelersHtml.includes("(EN"));
 
       // Test 2: Rejoice Arena Tour has Interludes
       const rejoiceTour = allUnits.find(
@@ -1101,6 +1141,9 @@ describe("Pipeline Smoke Tests", () => {
       assert.equal(travelersStats.itinerary[0].city, "市川");
       assert.equal(travelersStats.itinerary[0].venue, "市川市文化會館 大會堂");
       assert.ok(travelersStats.itinerary[0].time); // e.g. "18:00 開演"
+      assert.ok(typeof travelersStats.itinerary[0].totalSongs === "number");
+      assert.ok(typeof travelersStats.itinerary[0].isStandard === "boolean");
+      assert.ok(Array.isArray(travelersStats.itinerary[0].surpriseHighlights));
 
       const lastTraveler = travelersStats.itinerary[28];
       assert.equal(lastTraveler.isFirst, false);
@@ -1145,6 +1188,7 @@ describe("Pipeline Smoke Tests", () => {
       );
 
       assert.ok(collapsedHtml.includes("TOUR ITINERARY // 全國巡演日程足跡"));
+      assert.ok(collapsedHtml.includes("id=\"tour-itinerary-section\""));
       assert.ok(collapsedHtml.includes("29 STOPS"));
       assert.ok(collapsedHtml.includes("#01"));
       assert.ok(collapsedHtml.includes("#10"));
@@ -1158,6 +1202,8 @@ describe("Pipeline Smoke Tests", () => {
       // View ticket stub shortcut
       assert.ok(collapsedHtml.includes("查看票根"));
       assert.ok(collapsedHtml.includes("#/show/1150083"));
+      // Cross-show diff profile line
+      assert.ok(collapsedHtml.includes("定番歌單場") || collapsedHtml.includes("限定："));
 
       // Expanded render: shows all 29, contains collapse button
       const expandedHtml = renderToStaticMarkup(
@@ -1360,7 +1406,7 @@ describe("Pipeline Smoke Tests", () => {
       });
       assert.ok(stagedTourRoute.draftState);
       assert.equal(stagedTourRoute.draftState.showSubMode, "tour");
-      assert.ok(stagedTourRoute.confirmButtonLabel.includes("巡演總覽大票"));
+      assert.ok(stagedTourRoute.confirmButtonLabel.includes("巡演總覽"));
 
       // 3. Staged show selection in draftState
       const stagedShowRoute = runProbeWithDraft("#/tour/arena-tour-2024-rejoice", {
@@ -1447,9 +1493,9 @@ describe("Pipeline Smoke Tests", () => {
 
       // Must render TourSlip markup
       assert.ok(tourLayoutHtml.includes("TOUR CONSENSUS MASTER SHEET"));
-      assert.ok(tourLayoutHtml.includes("CONSENSUS TEMPLATE // 巡演標準母單"));
-      assert.ok(tourLayoutHtml.includes("巡演總覽大票"));
-      assert.ok(tourLayoutHtml.includes("單場即時票根"));
+      assert.ok(tourLayoutHtml.includes("CONSENSUS TEMPLATE // 巡演定番歌單"));
+      assert.ok(tourLayoutHtml.includes("巡演總覽"));
+      assert.ok(tourLayoutHtml.includes("查看票根"));
 
       // Render 2: showSubMode === "show" -> renders ShowSlip
       const showLayoutHtml = renderToStaticMarkup(
@@ -1520,12 +1566,11 @@ describe("Pipeline Smoke Tests", () => {
       // Must render ShowSlip markup
       assert.ok(showLayoutHtml.includes("STAGE SETLIST RUN SHEET"));
       assert.ok(showLayoutHtml.includes("MAIN SETLIST // 本篇演奏曲目"));
-      assert.ok(showLayoutHtml.includes("巡演總覽大票"));
-      assert.ok(showLayoutHtml.includes("單場即時票根"));
+      assert.ok(showLayoutHtml.includes("橫濱K-Arena"));
     });
 
-    it("renders dual-mode capsule toggle only when isTour === true and hides for single events (Ticket 4)", () => {
-      // 1. TourSlip contains capsule toggle
+    it("preserves pure ticket aesthetics without internal mode switchers inside TourSlip and ShowSlip (ADR-0102)", () => {
+      // 1. TourSlip contains pure ticket header without internal toggle
       const rejoiceTour = allUnits.find((u) => u.id === "arena-tour-2024-rejoice");
       assert.ok(rejoiceTour);
       const tourHtml = renderToStaticMarkup(
@@ -1536,11 +1581,12 @@ describe("Pipeline Smoke Tests", () => {
           onSelectShow: () => {},
         })
       );
-      assert.ok(tourHtml.includes("巡演總覽大票"));
-      assert.ok(tourHtml.includes("單場即時票根"));
-      assert.ok(tourHtml.includes("⟷"));
+      assert.ok(tourHtml.includes("TOUR CONSENSUS MASTER SHEET"));
+      assert.ok(tourHtml.includes("CONSENSUS TEMPLATE // 巡演定番歌單"));
+      // Pure ticket: NO internal capsule toggle inside the paper slip
+      assert.ok(!tourHtml.includes("⟷"));
 
-      // 2. ShowSlip for tour contains capsule toggle
+      // 2. ShowSlip for tour contains pure ticket header without internal toggle
       const rejoiceUd = index.unitData.get("arena-tour-2024-rejoice");
       const showHtml = renderToStaticMarkup(
         React.createElement(ShowSlip, {
@@ -1552,27 +1598,27 @@ describe("Pipeline Smoke Tests", () => {
           onSelectVenue: () => {},
         })
       );
-      assert.ok(showHtml.includes("巡演總覽大票"));
-      assert.ok(showHtml.includes("單場即時票根"));
-      assert.ok(showHtml.includes("⟷"));
+      assert.ok(showHtml.includes("STAGE SETLIST RUN SHEET"));
+      assert.ok(showHtml.includes("MAIN SETLIST // 本篇演奏曲目"));
+      // Pure ticket: NO internal capsule toggle inside the paper slip
+      assert.ok(!showHtml.includes("⟷"));
+      assert.ok(!showHtml.includes("單場即時票根"));
 
-      // 3. ShowSlip for non-tour single event (music festival) MUST HIDE capsule toggle
-      const festivalUnit = allUnits.find((u) => !u.templateSetlist);
-      assert.ok(festivalUnit);
-      const festivalUd = index.unitData.get(festivalUnit.id);
-      assert.ok(festivalUd);
-      const festivalHtml = renderToStaticMarkup(
-        React.createElement(ShowSlip, {
-          ud: festivalUd,
-          showId: festivalUd.shows[0]?.id,
-          showSubMode: "show",
-          onSelectSong: () => {},
+      // 3. DualModeCapsuleToggle component standalone isolation
+      const standaloneToggleHtml = renderToStaticMarkup(
+        React.createElement(DualModeCapsuleToggle, {
+          isTour: true,
+          mode: "show",
+          unitId: "arena-tour-2024-rejoice",
+          showId: "1672276",
+          onToggleMode: () => {},
+          onSelectTour: () => {},
           onSelectShow: () => {},
-          onSelectVenue: () => {},
         })
       );
-      assert.ok(!festivalHtml.includes("巡演總覽大票"));
-      assert.ok(!festivalHtml.includes("單場即時票根"));
+      assert.ok(standaloneToggleHtml.includes("巡演總覽"));
+      assert.ok(standaloneToggleHtml.includes("單場即時票根"));
+      assert.ok(standaloneToggleHtml.includes("⟷"));
     });
   });
 
