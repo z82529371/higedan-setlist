@@ -15,9 +15,26 @@
       "title": "「エスカパレード」発売記念スペシャルフリーライブ",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=54",
+        "https://barks.jp/news/814066/",
         "https://ja.wikipedia.org/wiki/Official%E9%AB%AD%E7%94%B7dism#インストアイベント"
       ],
-      "setlist": [],
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "songId": "koi-no-maenarae"
+        },
+        {
+          "order": 2,
+          "encore": false,
+          "songId": "tell-me-baby"
+        },
+        {
+          "order": 3,
+          "encore": false,
+          "songId": "no-doubt"
+        }
+      ],
       "opensAt": "17:30",
       "startsAt": "19:00"
     }

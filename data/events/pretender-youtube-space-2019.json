@@ -16,9 +16,19 @@
       "startsAt": "18:30",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=45",
+        "https://www.billboard-japan.com/d_news/detail/75517/2",
+        "https://skream.jp/news/2019/05/higedan_new_single_youtube_space_tokyo.php",
+        "https://www.youtube.com/watch?v=kYkyX8_W-dE",
         "https://ja.wikipedia.org/wiki/Official%E9%AB%AD%E7%94%B7dism#インストアイベント"
       ],
-      "setlist": []
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "songId": "pretender",
+          "note": "Acoustic ver."
+        }
+      ]
     }
   ]
 }

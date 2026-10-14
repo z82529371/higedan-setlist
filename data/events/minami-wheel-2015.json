@@ -6,11 +6,13 @@
     {
       "id": "530307",
       "date": "2015-10-10",
+      "weekday": "土",
       "city": "大阪",
       "venue": "心齋橋VARON",
       "region": "關西",
       "prefecture": "大阪府",
       "title": "MINAMI WHEEL 2015",
+      "startsAt": "21:00",
       "sourceUrls": [
         "https://www.livefans.jp/events/530307"
       ],
