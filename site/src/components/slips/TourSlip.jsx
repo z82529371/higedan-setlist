@@ -18,18 +18,76 @@ import {
   DualModeCapsuleToggle,
 } from "./TicketCommon.jsx";
 
-function getVariationBadgeClass(note) {
-  if (!note) return "bg-tape-soft/30 text-ink/80 border-ink/20";
-  if (note.includes("弾き語り") || note.includes("ソロ") || note.includes("solo")) {
-    return "bg-[#f2fbf8] text-[#0e7a66] border-[#0e7a66]/30 dark:bg-[#0e7a66]/20 dark:text-[#5eead4] dark:border-[#0e7a66]/50";
+export function parseTrackVariation(rawNote) {
+  if (!rawNote) return null;
+  const s = rawNote.trim();
+
+  // Extract excerpt notes: (サビのみ), (ワンコーラス), (1番のみ), etc.
+  let excerpt = null;
+  let clean = s;
+  const exMatch = clean.match(
+    /(?:[（(]?(サビのみ|ワンコーラス(?:のみ)?|1コーラス(?:のみ)?|1番のみ(?:。弾き語り合唱)?|1サビまで|2サビで[^）)]+)[）)]?)/
+  );
+  if (exMatch) {
+    excerpt = exMatch[1];
+    clean = clean.replace(exMatch[0], "").replace(/^[、,・\s/／]+|[、,・\s/／]+$/g, "").trim();
   }
-  if (note.includes("リクエスト") || note.includes("request")) {
-    return "bg-[#fbe9e6] text-[#d9261c] border-[#d9261c]/30 dark:bg-[#d9261c]/20 dark:text-[#fca5a5] dark:border-[#d9261c]/50";
+
+  const tags = [];
+  if (clean.includes("リクエスト") || clean.includes("request")) {
+    tags.push({
+      type: "request",
+      label: "點歌",
+      dotClass: "bg-request",
+      borderClass: "border-request/50",
+    });
+    clean = clean
+      .replace(/(?:観客|会場)?リクエスト(?:曲|コーナー(?:（ツアー唯一）)?)?/, "")
+      .replace(/^[、,・\s/／]+|[、,・\s/／]+$/g, "")
+      .trim();
   }
-  if (note.includes("新曲") || note.includes("初") || note.includes("premiere")) {
-    return "bg-[#fffdf5] text-[#8a5a0a] border-[#8a5a0a]/30 dark:bg-[#8a5a0a]/20 dark:text-[#fde68a] dark:border-[#8a5a0a]/50";
+  if (clean.includes("弾き語り") || clean.includes("ソロ") || clean.includes("solo")) {
+    tags.push({
+      type: "solo",
+      label: "自彈自唱",
+      dotClass: "bg-solo",
+      borderClass: "border-solo/50",
+    });
+    clean = clean
+      .replace(
+        /(?:聡ピアノ|藤原聡\/|キーボード|着席)?(?:弾き語り|ソロ|solo)(?:STADIUM ver\.|合唱|ver\.?)?/,
+        ""
+      )
+      .replace(/^[、,・\s/／]+|[、,・\s/／]+$/g, "")
+      .trim();
   }
-  return "bg-tape-soft/30 text-ink/80 border-ink/20";
+  if (
+    clean.includes("新曲") ||
+    clean.includes("初披露") ||
+    clean.includes("初解禁") ||
+    clean.includes("未発表曲") ||
+    clean.includes("premiere")
+  ) {
+    tags.push({
+      type: "premiere",
+      label: "新歌",
+      dotClass: "bg-premiere",
+      borderClass: "border-premiere/50",
+    });
+    clean = clean
+      .replace(/(?:フル)?初披露|初解禁|新曲|未発表曲|premiere/i, "")
+      .replace(/^[、,・\s/／]+|[、,・\s/／]+$/g, "")
+      .trim();
+  }
+
+  // Any remaining meaningful text is a version/arrangement note
+  clean = clean.replace(/^[、,・\s/／()（）]+|[、,・\s/／()（）]+$/g, "").trim();
+  let versionNote = null;
+  if (clean && clean !== "ver" && clean !== "ver.") {
+    versionNote = clean;
+  }
+
+  return { tags, versionNote, excerpt, original: rawNote };
 }
 
 function formatShowBadgeLabel(show) {
@@ -113,17 +171,44 @@ export function TourSlip({
           )}
 
           {track.variations && track.variations.length > 0 && (
-            <div className="inline-flex flex-wrap gap-1 align-middle">
-              {track.variations.map((note, idx) => (
-                <span
-                  key={idx}
-                  className={`inline-flex items-center rounded px-1.5 py-0.2 text-[10px] font-mono border ${getVariationBadgeClass(
-                    note
-                  )}`}
-                >
-                  {note}
-                </span>
-              ))}
+            <div className="inline-flex flex-wrap items-center gap-1.5 align-middle">
+              {track.variations.map((note, idx) => {
+                const parsed = parseTrackVariation(note);
+                if (!parsed) return null;
+                return (
+                  <span key={idx} className="inline-flex flex-wrap items-center gap-1">
+                    {parsed.tags.map((t, tIdx) => (
+                      <span
+                        key={tIdx}
+                        className={`inline-flex items-center rounded px-1.5 py-0.5 text-[11px] font-mono font-bold bg-card text-ink border ${t.borderClass} shadow-2xs select-none`}
+                        title={parsed.original}
+                      >
+                        <span
+                          className={`inline-block h-1.5 w-1.5 rounded-full ${t.dotClass} mr-1`}
+                          aria-hidden="true"
+                        />
+                        <span>{t.label}</span>
+                      </span>
+                    ))}
+                    {parsed.versionNote && (
+                      <span
+                        className="inline-flex items-center rounded px-1.5 py-0.5 text-[11px] font-mono font-bold bg-card text-ink border border-line shadow-2xs select-none"
+                        title={parsed.original}
+                      >
+                        <span>{parsed.versionNote}</span>
+                      </span>
+                    )}
+                    {parsed.excerpt && (
+                      <span
+                        className="font-mono text-[11px] text-muted font-medium select-none"
+                        title={`演奏規格：${parsed.excerpt}`}
+                      >
+                        ({parsed.excerpt})
+                      </span>
+                    )}
+                  </span>
+                );
+              })}
             </div>
           )}
         </div>
@@ -131,20 +216,27 @@ export function TourSlip({
     );
   };
 
-  const renderFrequencyPill = (track) => (
-    <div className="flex shrink-0 items-center justify-end gap-2 pl-7 sm:pl-0">
-      <span
-        className={`inline-flex items-center gap-1 rounded px-2 py-0.5 text-[11px] font-mono select-none ${track.badgeClass}`}
-        title={`此巡演共登場 ${track.count} 場（全 ${track.totalShows} 場 · 出賽率 ${track.percentage}%）`}
-      >
-        <span>{track.tierBadgeLabel}</span>
-      </span>
+  const renderFrequencyPill = (track) => {
+    const tierConfig =
+      FREQUENCY_TIER_CONFIG[track.tier] || FREQUENCY_TIER_CONFIG.surprise;
+    return (
+      <div className="flex shrink-0 items-center justify-end gap-2 pl-7 sm:pl-0">
+        <span
+          className={`inline-flex items-center gap-1.5 rounded px-2 py-0.5 text-[11px] font-mono select-none ${track.badgeClass}`}
+          title={`此巡演共登場 ${track.count} 場（全 ${track.totalShows} 場 · 出賽率 ${track.percentage}%）`}
+        >
+          <span className={tierConfig.markerClass} aria-hidden="true">
+            {tierConfig.marker}
+          </span>
+          <span>{track.tierBadgeLabel}</span>
+        </span>
 
-      <span className="font-mono text-[11px] text-muted tabular-nums whitespace-nowrap">
-        {track.count} / {totalShows} 場
-      </span>
-    </div>
-  );
+        <span className="font-mono text-[11px] text-muted tabular-nums whitespace-nowrap">
+          {track.count} / {totalShows} 場
+        </span>
+      </div>
+    );
+  };
 
   const renderTrackItem = (track, cue) => (
     <li
@@ -258,22 +350,42 @@ export function TourSlip({
               <span aria-hidden="true">📊</span> 出賽概況：
             </div>
             <div className="flex flex-wrap items-center gap-1.5">
-              <span className={`inline-flex items-center gap-1 rounded px-2 py-0.5 ${FREQUENCY_TIER_CONFIG.core.badgeClass}`}>
-                ★ 核心全勤：{stats.coreCount} 首 (100%)
+              <span
+                className={`inline-flex items-center gap-1.5 rounded px-2 py-0.5 ${FREQUENCY_TIER_CONFIG.core.badgeClass}`}
+              >
+                <span className={FREQUENCY_TIER_CONFIG.core.markerClass} aria-hidden="true">
+                  {FREQUENCY_TIER_CONFIG.core.marker}
+                </span>
+                <span>核心全勤：{stats.coreCount} 首 (100%)</span>
               </span>
               {stats.regularCount > 0 && (
-                <span className={`inline-flex items-center gap-1 rounded px-2 py-0.5 ${FREQUENCY_TIER_CONFIG.regular.badgeClass}`}>
-                  ● 高頻常駐：{stats.regularCount} 首 (≥70%)
+                <span
+                  className={`inline-flex items-center gap-1.5 rounded px-2 py-0.5 ${FREQUENCY_TIER_CONFIG.regular.badgeClass}`}
+                >
+                  <span className={FREQUENCY_TIER_CONFIG.regular.markerClass} aria-hidden="true">
+                    {FREQUENCY_TIER_CONFIG.regular.marker}
+                  </span>
+                  <span>巡演定番：{stats.regularCount} 首 (≥70%)</span>
                 </span>
               )}
               {stats.rotatingCount > 0 && (
-                <span className={`inline-flex items-center gap-1 rounded px-2 py-0.5 ${FREQUENCY_TIER_CONFIG.rotating.badgeClass}`}>
-                  ▲ 雙日輪替：{stats.rotatingCount} 首 (30-70%)
+                <span
+                  className={`inline-flex items-center gap-1.5 rounded px-2 py-0.5 ${FREQUENCY_TIER_CONFIG.rotating.badgeClass}`}
+                >
+                  <span className={FREQUENCY_TIER_CONFIG.rotating.markerClass} aria-hidden="true">
+                    {FREQUENCY_TIER_CONFIG.rotating.marker}
+                  </span>
+                  <span>雙日輪替：{stats.rotatingCount} 首 (30-70%)</span>
                 </span>
               )}
               {stats.surpriseCount > 0 && (
-                <span className={`inline-flex items-center gap-1 rounded px-2 py-0.5 ${FREQUENCY_TIER_CONFIG.surprise.badgeClass}`}>
-                  ◆ 限定突襲：{stats.surpriseCount} 首 (&lt;30%)
+                <span
+                  className={`inline-flex items-center gap-1.5 rounded px-2 py-0.5 ${FREQUENCY_TIER_CONFIG.surprise.badgeClass}`}
+                >
+                  <span className={FREQUENCY_TIER_CONFIG.surprise.markerClass} aria-hidden="true">
+                    {FREQUENCY_TIER_CONFIG.surprise.marker}
+                  </span>
+                  <span>限定突襲：{stats.surpriseCount} 首 (&lt;30%)</span>
                 </span>
               )}
               <span className="inline-flex items-center gap-1 rounded px-2 py-0.5 bg-paper text-muted border border-line-soft">

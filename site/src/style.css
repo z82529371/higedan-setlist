@@ -33,6 +33,7 @@
   --color-occasion: #6d5a99;
   --color-occasion-wash: rgba(109, 90, 153, 0.14);
   --color-tape: #d19f00;
+  --color-tape-tint: rgba(209, 159, 0, 0.20);
   --color-tape-soft: rgba(209, 159, 0, 0.45);
   --color-tape-edge: #000000;
   --color-pool: #d19f00;
@@ -87,6 +88,7 @@ html[data-theme="dark"] {
   --color-occasion: #9b82d4;
   --color-occasion-wash: rgba(155, 130, 212, 0.2);
   --color-tape: #d49a00;
+  --color-tape-tint: rgba(212, 154, 0, 0.20);
   --color-tape-soft: rgba(212, 154, 0, 0.45);
   --color-tape-edge: #f4f4f5;
   --color-pool: #d49a00;

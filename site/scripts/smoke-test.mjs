@@ -753,7 +753,7 @@ describe("Pipeline Smoke Tests", () => {
             assert.equal(track.tierBadgeLabel, "核心全勤 100%");
           } else if (track.ratio >= 0.7) {
             assert.equal(track.tier, "regular");
-            assert.equal(track.tierLabel, "高頻常駐");
+            assert.equal(track.tierLabel, "巡演定番");
           } else if (track.ratio >= 0.3) {
             assert.equal(track.tier, "rotating");
             assert.equal(track.tierLabel, "雙日輪替");
@@ -787,7 +787,7 @@ describe("Pipeline Smoke Tests", () => {
       assert.ok(filmTrack);
       assert.equal(filmTrack.count, 9);
       assert.equal(filmTrack.tier, "regular");
-      assert.equal(filmTrack.tierLabel, "高頻常駐");
+      assert.equal(filmTrack.tierLabel, "巡演定番");
 
       // Check A/B rotating tracks: fire-ground & no-doubt
       const fireGround = stats.consensusTracks.find(
@@ -867,7 +867,7 @@ describe("Pipeline Smoke Tests", () => {
       assert.ok(html.includes("CONSENSUS TEMPLATE // 巡演標準母單"));
       assert.ok(html.includes("全 10 場次"));
       assert.ok(html.includes("核心全勤 100%"));
-      assert.ok(html.includes("高頻常駐 90%"));
+      assert.ok(html.includes("巡演定番 90%"));
       assert.ok(html.includes("雙日輪替 50%"));
       assert.ok(html.includes("max-w-[960px] mx-auto"));
       // Perforation divider & barcode footer presence
@@ -1616,6 +1616,72 @@ describe("Pipeline Smoke Tests", () => {
         assert.ok(
           regex.test(cssContent),
           `style.css must define zero-blur --shadow-${token} with 0 blur radius`
+        );
+      }
+    });
+
+    it("verifies all custom theme color tokens are declared in style.css under @theme and dark mode", async () => {
+      const fs = await import("node:fs");
+      const path = await import("node:path");
+      const url = await import("node:url");
+      const here = path.dirname(url.fileURLToPath(import.meta.url));
+      const stylePath = path.resolve(here, "..", "src", "style.css");
+      const cssContent = fs.readFileSync(stylePath, "utf8");
+
+      // Extract tokens declared in @theme
+      const themeBlockMatch = cssContent.match(/@theme\s*\{([^}]+)\}/s);
+      assert.ok(themeBlockMatch, "style.css must contain @theme block");
+      const themeBlock = themeBlockMatch[1];
+
+      const declaredColors = new Set();
+      for (const match of themeBlock.matchAll(/--color-([a-z0-9-]+):/g)) {
+        declaredColors.add(match[1]);
+      }
+
+      // Extract tokens declared in dark mode html[data-theme="dark"]
+      const darkBlockMatch = cssContent.match(/html\[data-theme=["']dark["']\]\s*\{([^}]+)\}/s);
+      assert.ok(darkBlockMatch, "style.css must contain html[data-theme='dark'] block");
+      const darkBlock = darkBlockMatch[1];
+
+      const darkColors = new Set();
+      for (const match of darkBlock.matchAll(/--color-([a-z0-9-]+):/g)) {
+        darkColors.add(match[1]);
+      }
+
+      // Design system core tokens that must exist in both light and dark theme
+      const requiredCoreTokens = [
+        "paper",
+        "card",
+        "band",
+        "band-ink",
+        "ink",
+        "muted",
+        "line",
+        "line-soft",
+        "tape",
+        "tape-tint",
+        "tape-soft",
+        "tape-edge",
+        "request",
+        "request-wash",
+        "unreleased",
+        "unreleased-wash",
+        "premiere",
+        "premiere-wash",
+        "solo",
+        "solo-wash",
+        "pool",
+        "pool-wash",
+      ];
+
+      for (const token of requiredCoreTokens) {
+        assert.ok(
+          declaredColors.has(token),
+          `style.css @theme must declare --color-${token}`
+        );
+        assert.ok(
+          darkColors.has(token),
+          `style.css html[data-theme="dark"] must declare --color-${token}`
         );
       }
     });
