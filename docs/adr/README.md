@@ -109,6 +109,7 @@
 | [ADR-0101: 前端巨石檔案模組化與架構分層重構決策 (Frontend Modularization and Component Hierarchy Architecture)](0101-frontend-modularization-and-component-hierarchy.md) | 已採納 (Accepted) | 解耦 slips.jsx 與 App.jsx 兩大巨石檔案，建立 Slips、Navigators、Hooks、Layout 清晰四層架構 |
 | [ADR-0102: 巡演總覽領域實體與雙模切換架構 (Tour Summary Slip and Shared Route Architecture)](0102-tour-slip-and-shared-route-architecture.md) | 已採納 (Accepted) | 建立巡演總覽（TourSlip）、四級登場頻率、非模板雙日輪替對稱專區、純淨票券排版與 #/tour/:unitId 雙向路由 |
 | [ADR-0103: pnpm Monorepo Workspace 拓撲正規化與 CI 對齊 (pnpm Monorepo Workspace Topology and CI Alignment)](0103-pnpm-workspace-monorepo-topology-and-ci-alignment.md) | 已採納 (Accepted) | 建立根目錄 pnpm-workspace.yaml、整合統一 pnpm-lock.yaml，聲明 packageManager 對齊 GitHub Actions CI 與快取 |
+| [ADR-0104: 全域小尺寸觸控認知與墨水壓印架構 (Global Mobile Touch Affordance and Flat Ink Stamp Architecture)](0104-mobile-touch-affordance-and-flat-ink-stamp.md) | 已採納 (Accepted) | 建立全域 .touch-stamp 墨水壓印反饋、漸進式實體暗示與歌名精準熱區防誤觸架構 |
 
 
 
