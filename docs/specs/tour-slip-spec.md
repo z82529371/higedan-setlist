@@ -1,52 +1,101 @@
-# Specification: 巡演總覽大票與雙模切換架構 (Tour Summary Slip & Dual-Mode Toggle)
+# Specification: 巡演總覽大票領域實體與雙模切換架構 (Tour Summary Slip & Dual-Mode Toggle Architecture)
 
 ## Problem Statement
 
-當前 Official 髭男 dism Setlist 檔案庫在演出檢索維度上，僅提供「單場演出票根（`ShowSlip`）」與「巡演母單差異（`diff.skip` / `diff.insert`）」。歌迷在瀏覽經典長篇巡演（如 Major 1st 的 *Hall Travelers* 或 2024–2025 的 *Rejoice Arena Tour*）時，只能看到特定某一場的孤立紀錄，缺乏站在「整趟巡演（Tour as a Whole）」高度的宏觀聚合視角：
-1. **曲目穩定度與演化不可見**：無法一眼看出哪些歌是這趟巡演每場必唱的「100% 核心全勤曲」、哪些是雙日連開時交替的「A/B 輪替曲」。
-2. **限定驚喜曲湮沒於單場中**：特定場次突襲加碼的非樣板曲（如橫濱限定曲、千秋樂特別曲）分散在各站 diff 中，難以全面縱覽。
+當前 Official 髭男 dism Setlist 檔案庫在演出檢索維度上，長期以「單場演出票根（`ShowSlip`）」與「巡演母單差異（`diff.skip` / `diff.insert`）」為核心。歌迷在瀏覽經典長篇巡迴（如 Major 1st 的 *Hall Travelers*、*Editorial Arena Tour*、2024–2025 的 *Rejoice Arena Tour*）時，只能看到特定某一場的孤立紀錄，缺乏站在「整趟巡演（Tour as a Whole）」高度的宏觀聚合視角：
+
+1. **曲目穩定度與演化不可見**：無法一眼洞悉哪些歌曲是這趟巡演 100% 登場的「核心全勤骨幹曲」、哪些是雙日連開時交替的「A/B 輪替曲」。
+2. **限定驚喜曲湮沒於單場中**：特定場次突襲加碼的非樣板曲（如橫濱限定曲、千秋樂特別曲）分散在各站 diff 中，難以全面縱覽其出賽全貌與驚喜亮點。
 3. **巡演整體缺乏獨立分享錨點**：社群分享時只能傳送某一場的網址（`#/show/:id`），缺乏代表整趟巡演的專屬深層連結（`#/tour/:unitId`）。
+4. **單一視角限制探索深度**：歌迷必須在多個場次之間頻繁切換點擊，才能拼湊出整趟巡演的足跡與歌單變化脈絡，造成嚴重的認知負荷與滾動疲勞。
 
 ## Solution
 
-建立第四大領域票券視圖——「**巡演總覽大票（Tour Summary Slip，`TourSlip.jsx`）**」，並在既有 `show` 檢索流內無縫提供單場票根與巡演大票的平滑切換：
+建立第四大領域票券視圖——「**巡演總覽大票（Tour Summary Slip，`TourSlip`）**」，並在既有 `show` 演出檢索流內無縫整合單場票根與巡演大票的雙模切換：
+
 1. **四級語意出賽頻率階層（Frequency Tiers）**：
-   - 核心全勤（Core 100%）：`count === totalShows`。
-   - 高頻常駐（Regular $\ge 70\%$）：絕大部分場次登場。
-   - 雙日輪替（Rotating $30\% \sim 70\%$）：雙日 A/B 歌單互換曲。
-   - 限定突襲（Rare / Surprise $< 30\%$）：少數場次突襲加碼。
+   - **核心全勤（Core 100%）**：`count === totalShows`，每場必唱的骨幹歌曲（金棕底柔暖牛奶字標籤）。
+   - **高頻常駐（Regular >= 70%）**：絕大部分場次穩定演出，僅少數 1~2 場置換（深灰文字米白底標籤）。
+   - **雙日輪替（Rotating 30% ~ 70%）**：連開兩日之 A/B 歌單互換曲目（柔和琥珀底標籤）。
+   - **限定突襲（Rare / Surprise < 30%）**：少數場次突襲登場之珍稀曲目（低飽和靛藍底標籤）。
 2. **三態突襲與版本歸納**：
-   - 原創突襲曲（Surprise Originals）：獨立專區呈現，標註演出場次直通連結。
-   - 特別彈唱／翻唱過場（Interludes & Solos）：序號為 `—`，不計入正式曲目數。
-   - 同曲特殊版本（Version Variations）：自彈自唱或特定站點 note 與主曲目合併計算累積次數，附註歷程標籤。
+   - **原創突襲曲（Surprise Originals）**：獨立於「巡演驚喜突襲曲」專區呈現，標註演出場次直通連結。
+   - **特別彈唱／翻唱過場（Interludes & Solos）**：序號標記為 `—`，不計入正式曲目累計。
+   - **同曲特殊版本（Version Variations）**：自彈自唱或特定站點 note 與主曲目合併計算累積次數，於曲名旁附註版本歷程標籤，不分裂歌曲。
 3. **經典手帳連續票券版型（Continuous Slip Flow）**：
-   - 頂部巡演票頭（全名、起訖時間、站點數、跨都道府縣規模徽章、影音標註）。
-   - 打孔撕裂線（`TicketPerforationDivider`）與復古條碼頁尾（`TicketBarcodeFooter`）。
-   - 直式全國日程足跡表（超過 10 場預設折疊，可一鍵展開全部，每站可直達單場票根）。
+   - **巡演票頭（Header）**：全名、起訖時間、站點總數、跨都道府縣規模徽章、官方影音收錄標註。
+   - **打孔撕裂線與條碼頁尾**：複用既有裝飾元件，嚴格遵循單欄聚焦流（`max-w-[960px]`）。
+   - **直式全國日程足跡表（Tour Itinerary）**：按時序羅列所有巡演站點、場館與開演時間；超過 10 場預設折疊並支援一鍵展開／收合，每站皆可點擊直達單場票根。
 4. **雙模切換與完備狀態機（`#/tour/:unitId`）**：
    - 票券頂部提供微型分段開關：`[ 📜 巡演總覽大票 ]` ⟷ `[ 🎫 單場即時票根 ]`。
-   - 點巡演單元預設看總覽大票；點場次或外部分享直達單場票根。
-   - 帶入無效巡演 ID 時 100% 優雅降級回首頁（`landing`）。
+   - 點選巡演單元預設開啟總覽大票；點選場次或外部分享直達單場票根。
+   - 完備容錯防線：無效巡演 ID 100% 優雅降級回首頁（`landing`）；單發活動自動隱藏切換鈕，杜絕空白母單。
 
 ## User Stories
 
-1. As a fan reviewing a tour, I want to see the complete consensus setlist with play frequency badges, so that I can understand which songs formed the backbone of the tour.
-2. As a fan investigating rare live moments, I want surprise inserts listed in a dedicated section with links to the exact shows where they were played, so that I can discover unique tour highlights.
-3. As a fan following a multi-city tour, I want a chronological itinerary of all tour stops with venue names and start times, so that I can retrace the band's travel footsteps.
-4. As a fan switching between tour overview and single show view, I want a clean toggle at the top of the ticket slip, so that I can transition without scrolling away or losing context.
-5. As a fan sharing a tour on social media, I want the URL `#/tour/:unitId` to directly open the tour summary slip, so that friends immediately see the full tour chronicles.
-6. As a developer maintaining the codebase, I want tour statistics to be calculated by a pure function (`computeTourStatistics`) in `domain.js`, so that it can be tested in Node without modifying raw JSON data.
-7. As a mobile fan, I want the tour slip to adhere strictly to the single-column focus stream (`max-w-[960px]`), so that it scrolls smoothly on a phone with zero horizontal overflow.
+1. 作為回顧整趟巡演的歌迷，我希望在巡演總覽大票上看到完整的共識母單與每首歌曲的出賽頻率徽章，以便於一眼理解這趟巡演的核心骨架歌曲。
+2. 作為分析歌單變化的歌迷，我希望出賽率達 70% 以上的歌曲被標記為常駐歌曲，以便於知道哪些歌曲是標準曲目但有少數場次進行了置換。
+3. 作為研究兩日連開體育館場次的歌迷，我希望出賽率在 30% 至 70% 之間的歌曲被標記為輪替歌曲，以便於識別雙日場次間的 A/B 歌單互換設計。
+4. 作為追蹤罕見現場演出的歌迷，我希望出賽率低於 30% 的非母單曲目被歸納在獨立的「巡演驚喜突襲曲」專區，並附帶演出站點連結，以便於探索限定場次的特別驚喜。
+5. 作為欣賞歌曲不同編曲版本的歌迷，我希望特定場次的自彈自唱或特別版本能合併在原曲下並附註歷程標籤，以便於清楚看見編曲演化而不造成曲目統計分裂。
+6. 作為記錄演出細節的歌迷，我希望簡短的自彈自唱過場或團員獨奏曲目序號標記為破折號（`—`），以便於保留演出紀錄同時不灌水正式曲目計數。
+7. 作為跟隨樂團巡演軌跡的歌迷，我希望看到全國日程足跡表依時序排列所有巡演站點、演出日期、場館與開演時刻，以便於重溫樂團的全國足跡。
+8. 作為使用手機瀏覽長篇巡演的歌迷，我希望超過 10 場的日程表預設折疊並提供展開開關，以便於瀏覽時免於面對冗長的直向滾動疲勞。
+9. 作為在巡演全貌與單站細節間切換的歌迷，我希望在票券頂部有一個分段切換膠囊開關，以便於在巡演總覽大票與單場即時票根間順暢往返而不丟失上下文。
+10. 作為瀏覽單發活動或音樂祭的歌迷，我希望系統自動隱藏巡演總覽切換開關，以便於在單日演出中保持乾淨、不受干擾的閱讀體驗。
+11. 作為從巡演專場導航區點擊巡演單元的歌迷，我希望系統預設開啟該巡演的總覽大票，以便於在深入個別單場前先掌握宏觀巡演面貌。
+12. 作為從導航區直接點選特定場次或城市的歌迷，我希望系統直達該場次的單場票根，以便於立即查閱特定當晚的真實演出歌單。
+13. 作為在社群分享巡演紀錄的歌迷，我希望網址列的 `#/tour/:unitId` 能夠作為深層連結直接開啟巡演總覽大票，以便於朋友點開即能瀏覽整趟巡演的紀錄。
+14. 作為點擊到過期或無效巡演連結的歌迷，我希望路由系統 100% 優雅降級回到首頁聚光燈視圖，以便於避免頁面白屏、死循環或錯誤拋出。
+15. 作為使用行動端裝置的歌迷，我希望巡演大票嚴格維持單欄手帳串流（`max-w-[960px]`），以便於在手機直向滾動時獲得極致流暢且零水平溢出的視覺體驗。
+16. 作為在行動端開啟篩選抽屜的歌迷，我希望抽屜暫存狀態（`draftState`）完整支援巡演大票的暫存、取消回滾與確認套用，以便於在小螢幕上精準操作過濾條件。
+17. 作為維護領域模型的開發者，我希望巡演出賽統計邏輯封裝為純函數（`computeTourStatistics`），以便於在 Node.js 環境中直接進行純邏輯驗證且零侵入底層原始資料。
+18. 作為維護狀態機與路由的開發者，我希望雙模切換狀態（`showSubMode`）整合於既有路由 Hook 中，以便於完全相容瀏覽器上一頁／下一頁之歷史導航。
+19. 作為維護視覺組件的開發者，我希望巡演大票組件獨立拆分且不超過 800 行，並完整複用打孔撕裂線與防偽條碼裝飾，以便於維持代碼可維護性與一致的手帳溫度。
+20. 作為 CI 自動化測試管道，我希望在 Vite SSR 探針環境中自動驗證雙向路由跳轉、巡演頻率計算與大票標記渲染，以便於在合併前攔截所有回歸問題。
 
 ## Implementation Decisions
 
-- **Domain Model Seam (`domain.js`)**: Export a pure, memoized helper `computeTourStatistics(tourUnitData)` that aggregates `tpl`, `shows`, `full`, and `songShows` into structured template tracks, surprise tracks, interludes, and itinerary.
-- **Component Seam (`TourSlip.jsx`)**: Decompose into a dedicated slip module under `site/src/components/slips/TourSlip.jsx` (< 800 lines), reusing `TicketPerforationDivider` and `TicketBarcodeFooter`.
-- **Router Seam (`useArchiveRoute.js`)**: Extend `parseRoute` to recognize `#/tour/:unitId`, sync active tour selection, and gracefully fall back to `landing` mode if the unit is invalid.
-- **Layout Seam (`ArchiveLayout.jsx`)**: In `tab === "show"`, render `TourSlip` when `showSubMode === "tour"` and `current.isTour === true`, otherwise render `ShowSlip`.
+- **領域計算層純函數封裝（Domain Model Seam）**：
+  - 於領域邏輯層導出純函數 `computeTourStatistics(tourUnitData)`，接收單一巡演單元物件，輸出結構化之母單出賽次數、四級頻率標籤、驚喜突襲曲清單、過場清單與時序日程表。
+  - 完全不侵入或修改 `data/tours/*.json` 底層原始資料結構，保護多代理人工作區資料完整性。
+- **組件解耦與視覺邊界（Component Seam）**：
+  - 於票券展示層新增獨立的 `TourSlip` 組件（維持單檔 < 800 行），複用既有之實體打孔撕裂線（`TicketPerforationDivider`）與復古條碼頁尾（`TicketBarcodeFooter`）。
+  - 嚴格遵守 `DESIGN.md` 單欄聚焦串流（`max-w-[960px] mx-auto`），手機端維持充足點擊熱區與字級層次，禁止雙欄或多 Tab 分裂。
+- **頂部微型分段開關（Segmented Capsule Toggle）**：
+  - 於票券頂部打孔線上方嵌入雙模切換膠囊：`[ 📜 巡演總覽大票 ]` ⟷ `[ 🎫 單場即時票根 ]`。
+  - 僅當 `current.isTour === true` 時渲染，單發活動（音樂祭／學園祭）自動優雅隱藏。
+- **雙向 URL Hash 路由與狀態機（Router Seam）**：
+  - 擴充 `useArchiveRoute` 支援 `#/tour/:unitId`，並維護 `showSubMode` 狀態（`"tour"` | `"show"`）。
+  - 進入 `#/tour/:unitId` 時啟用 `"tour"` 模式並同步選取該巡演；進入 `#/show/:id` 時啟用 `"show"` 模式並同步選取該場次與所屬巡演。
+- **完備容錯與邊界守衛（Boundary Guards）**：
+  - 若 URL 輸入不存在或格式錯誤之 `unitId`，100% 優雅降級回首頁（`landing`）。
+  - 若在單發活動嘗試訪問 `#/tour/:unitId`，自動安全轉向該活動之單場票根（`#/show/:defaultShowId`），防止空白母單產生。
+  - 行動端篩選抽屜之 `draftState` 完整支援巡演大票模式之暫存、取消回滾與確認套用。
+- **佈局整合（Layout Seam）**：
+  - 在主歸檔佈局（`ArchiveLayout`）之 `show` 標籤頁內，當 `showSubMode === "tour"` 且 `isTour === true` 時渲染 `TourSlip`，其餘情況渲染 `ShowSlip`。
+
+## Testing Decisions
+
+- **良好測試的特徵（Good Test Characteristics）**：
+  - 僅測試外部可觀察之黑箱行為（精確出賽率計算、正確日程排序、雙向路由 Hash 狀態機轉移、優雅降級回退與 SSR 靜態標記渲染），絕不綁定內部組件 state 或私有變數命名。
+- **被測模組（Tested Modules）**：
+  - 領域統計純函數（`computeTourStatistics`）。
+  - 路由與篩選狀態機（`useArchiveRoute`）。
+  - 巡演總覽大票渲染無害性（`TourSlip`）。
+  - 靜態語法檢查與生產構建編譯（`oxlint` 與 `vite build`）。
+- **單一最高測試接縫與既有先例（Single Highest Seam & Prior Art）**：
+  - 採用既有之 **Vite 運行時 SSR 探針煙霧測試接縫（Runtime SSR Smoke Test Seam）**，於 `site/scripts/smoke-test.mjs` 新增 `Suite 8: Tour Slip & Dual-Mode Routing Integration`。
+  - 複用既有之 Vite SSR `ProbeComponent` 架構，在單一測試接縫下同時覆蓋領域計算、路由狀態機、降級回退與 SSR 標記渲染，實現全代碼庫單一最高測試接縫。
 
 ## Out of Scope
 
-- V1 PNG canvas image export for the entire tour slip (deferred to V2 passport cards to prevent mobile memory exhaustion).
-- Adding a 4th standalone navigation tab (preserved inside `show` tab).
-- Modifying underlying `data/tours/*.json` files.
+- 修改底層 `data/tours/*.json` 或 `data/events/*.json` 資料結構或改動 LiveFans 爬蟲腳本。
+- 在頂層導航列增加第四個獨立的大 Tab（維持 `show`、`song`、`venue` 三維度心智模型）。
+- V1 實作超長（>2500px）全票 PNG 畫布離屏圖片匯出（避免行動端 Canvas 記憶體溢出，留待 V2 巡演護照卡規格演進）。
+- 引入 Redux、Zustand 等外部全域狀態管理庫（維持原生 React hooks 與純淨單向資料流）。
+
+## Further Notes
+
+- 本規格書架構決策已完整定錨於 `ADR-0102`。
+- 本規格書發布至 GitHub Issues 後，將標註 `ready-for-agent` 標籤，供後續實作票券與代理人接續執行。
