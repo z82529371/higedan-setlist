@@ -107,5 +107,7 @@
 | [ADR-0099: 《Joanna》翻唱考證與歌曲主檔邊界校正 (Joanna Cover Attribution and Song Master Boundary Calibration)](0099-joanna-cover-attribution-and-song-master-boundary.md) | 已採納 (Accepted) | 考證藤原聰喜愛 Kool & The Gang 脈絡，將早期《Joanna》由地下原創主檔校正為純文字翻唱軌，貫徹 ADR-0055 邊界 |
 | [ADR-0100: 離屏隔離渲染與真透明圓角圖片匯出架構 (Offscreen Isolated Rendering and True Alpha Rounded Image Export Architecture)](0100-offscreen-rendering-and-true-alpha-rounded-image-export.md) | 已採納 (Accepted) | 建立離屏沙盒深層複製與固定寬度量測機制，消弭行動端小尺寸圖片跑版與底部留白，保留純淨 Alpha 透明圓角 |
 | [ADR-0101: 前端巨石檔案模組化與架構分層重構決策 (Frontend Modularization and Component Hierarchy Architecture)](0101-frontend-modularization-and-component-hierarchy.md) | 已採納 (Accepted) | 解耦 slips.jsx 與 App.jsx 兩大巨石檔案，建立 Slips、Navigators、Hooks、Layout 清晰四層架構 |
+| [ADR-0102: 巡演總覽大票領域實體與雙模切換架構 (Tour Summary Slip and Shared Route Architecture)](0102-tour-slip-and-shared-route-architecture.md) | 已採納 (Accepted) | 建立巡演總覽大票（TourSlip）、四級出賽頻率階層、雙模切換膠囊與 #/tour/:unitId 雙向路由 |
+
 
 
