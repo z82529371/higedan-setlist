@@ -4,7 +4,9 @@
   "type": "module",
   "scripts": {
     "sync": "node scripts/sync-data.mjs",
-    "test": "node scripts/smoke-test.mjs",
+    "lint": "oxlint src -c .oxlintrc.json",
+    "test": "oxlint src -c .oxlintrc.json && node scripts/smoke-test.mjs",
+    "check": "pnpm lint && pnpm test",
     "audit:reports": "node scripts/generate-audit-reports.mjs",
     "dev": "pnpm sync && vite",
     "build": "pnpm sync && vite build",
@@ -13,6 +15,7 @@
   "devDependencies": {
     "@tailwindcss/vite": "^4.3.3",
     "@vitejs/plugin-react": "^4.7.0",
+    "oxlint": "^1.87.0",
     "tailwindcss": "^4.3.3",
     "vite": "^6.0.0"
   },

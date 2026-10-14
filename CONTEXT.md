@@ -469,6 +469,14 @@ _Avoid_: 首頁預設堆疊密密麻麻的四層導航按鈕牆造成新手認�
 3. **無損邊緣與投影淨化（Clean Border & No Shadow Bleed）**：匯出時抹除外層投影，杜絕外擴陰影超出 Canvas 邊緣造成的硬切截斷；針對頂部突出之手撕和紙膠帶給予動態補償，確保鋸齒輪廓完整無損。
 _Avoid_: 手機端直接抓取可視 DOM 節點導致文字折行後拉長並在展開時留出底部空白空洞、傳入不透明 backgroundColor 塗黑四角產生偽圓角、保留外層 box-shadow 導致圖片邊緣產生生硬色階截線、和紙膠帶頂端被 Canvas 邊界削掉。
 
+**多代理人工作區與暫存隔離規範（Agent Workspace Hygiene，ADR-0101）**:
+本專案常態性由多個自主 Agent 並行執行巡演考證、管線同步與前端開發：
+1. **臨時腳本隔離存放**：所有探索性、對照性或臨時測試腳本（如網頁爬取、單場對照）一律嚴格存放於 `scratch/` 或 `.scratch/` 目錄（兩者皆已納入 `.gitignore`），嚴禁直接散落於專案根目錄。
+2. **並行工作樹保護**：嚴禁執行全域破壞性指令（如清除非本任務之 untracked 檔案或 reset 正在由其他 Agent 考證修訂中的 `data/tours/`、`data/events/` 檔案）；執行 `git status` 與 `git diff` 時務必附加路徑限定。
+3. **驗證防線優先執行**：在交付前端與組件改動前，一律先行執行 `pnpm check`（結合 `oxlint` 靜態語法未定義檢查與 `smoke-test.mjs` 領域模型斷言），保證任何識別碼缺陷或行數超標在本地立刻被阻斷。
+_Avoid_: 探索性腳本隨意堆放根目錄污染 git status、誤刪或修改其他 Agent 正在考證修訂之 JSON 資料檔、跳過 pnpm check 逕行提交導致運行期拋出 ReferenceError。
+
+
 
 
 

@@ -4,7 +4,9 @@
   "type": "module",
   "scripts": {
     "sync": "pnpm --dir site sync",
+    "lint": "pnpm --dir site lint",
     "test": "pnpm --dir site test",
+    "check": "pnpm --dir site check",
     "audit:reports": "pnpm --dir site audit:reports",
     "dev": "pnpm --dir site dev",
     "build": "pnpm --dir site install && pnpm --dir site build",

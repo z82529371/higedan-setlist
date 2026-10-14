@@ -5,3 +5,6 @@ site/src/data/
 .DS_Store
 .impeccable/
 scratch/
+.scratch/
+check_*.mjs
+compare_*.mjs
