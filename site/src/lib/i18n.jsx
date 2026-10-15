@@ -22,9 +22,9 @@ export const DICTIONARIES = {
 const I18nContext = createContext(null);
 
 export function resolveInitialLocale(env) {
-  const win = env?.window !== undefined ? env.window : (typeof window !== "undefined" ? window : null);
-  const storage = env?.localStorage !== undefined ? env.localStorage : (typeof localStorage !== "undefined" ? localStorage : null);
-  const nav = env?.navigator !== undefined ? env.navigator : (typeof navigator !== "undefined" ? navigator : null);
+  const win = env ? (env.window ?? null) : (typeof window !== "undefined" ? window : null);
+  const storage = env ? (env.localStorage ?? null) : (typeof localStorage !== "undefined" ? localStorage : null);
+  const nav = env ? (env.navigator ?? null) : (typeof window !== "undefined" && typeof navigator !== "undefined" ? navigator : null);
 
   // 1. Explicit URL hash query parameter
   if (win?.location?.hash) {

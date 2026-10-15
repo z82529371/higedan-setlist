@@ -2097,6 +2097,11 @@ describe("Pipeline Smoke Tests", () => {
         resolveInitialLocale({}),
         DEFAULT_LOCALE
       );
+
+      assert.equal(
+        resolveInitialLocale(),
+        DEFAULT_LOCALE
+      );
     });
 
     it("provides complete dictionaries and translation lookup via I18nProvider and useI18n across all 4 locales", async () => {
