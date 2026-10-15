@@ -75,17 +75,21 @@ export default function SearchBox({
     const songs = [];
     for (const s of allUsedSongs) {
       const title = (s.title || "").toLowerCase();
+      const alias = (s.alias || "").toLowerCase();
       const titleJa = (s.titleJa || "").toLowerCase();
       const titleEn = (s.titleEn || "").toLowerCase();
       const ruby = (s.ruby || "").toLowerCase();
       if (
         title.includes(needle) ||
+        alias.includes(needle) ||
         titleJa.includes(needle) ||
         titleEn.includes(needle) ||
         ruby.includes(needle)
       ) {
         let sub = null;
-        if (s.titleJa && s.titleJa !== s.title && s.titleJa.toLowerCase().includes(needle)) {
+        if (s.alias) {
+          sub = `別名：${s.alias}`;
+        } else if (s.titleJa && s.titleJa !== s.title && s.titleJa.toLowerCase().includes(needle)) {
           sub = s.titleJa;
         } else if (s.titleEn && s.titleEn !== s.title && s.titleEn.toLowerCase().includes(needle)) {
           sub = s.titleEn;

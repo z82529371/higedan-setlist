@@ -1,7 +1,7 @@
 import { useState, useMemo, useEffect } from "react";
 import { SLIP_ARTICLE, SLIP_TAPE } from "../../lib/constants.js";
 import { visibleBadges } from "../../lib/kind.js";
-import { songTitle, songUnreleased, showDate, getSongAlbum, songLiveFansId } from "../../lib/domain.js";
+import { songTitle, songAlias, songUnreleased, showDate, getSongAlbum, songLiveFansId } from "../../lib/domain.js";
 import { trackKey, routeHash } from "../../lib/track.js";
 import { CATEGORY_ORDER, songFilterPillClass, TicketPerforationDivider, TicketBarcodeFooter } from "./TicketCommon.jsx";
 
@@ -246,7 +246,7 @@ export function SongSlip({ songId, trackShows, showById, unitData, onSelectShow,
     const title = songTitle[songId] || songId;
     const lines = [
       `【Official 髭男 dism 演唱會檔案】`,
-      `🎵 歌曲：《${title}》`,
+      `🎵 歌曲：《${title}》${songAlias[songId] ? `（別名：${songAlias[songId]}）` : ""}`,
       `💿 專輯：${albumName}`,
       `📊 演出統計：全檔案庫共出演 ${appearances.length} 場`,
     ];
@@ -293,7 +293,7 @@ export function SongSlip({ songId, trackShows, showById, unitData, onSelectShow,
         </div>
 
         {/* Level 2: Song Title Headline */}
-        <h2 className="mt-2.5 mb-2 font-display text-[26px] sm:text-[30px] font-black leading-tight text-ink tracking-tight text-pretty">
+        <h2 className="mt-2.5 mb-1 font-display text-[26px] sm:text-[30px] font-black leading-tight text-ink tracking-tight text-pretty">
           {songTitle[songId] || songId}
           {songUnreleased.has(songId) && (
             <span className="ml-2 inline-block rounded border border-unreleased/40 bg-unreleased-wash px-2 py-0.5 font-mono text-[12px] font-semibold text-unreleased align-middle">
@@ -301,6 +301,11 @@ export function SongSlip({ songId, trackShows, showById, unitData, onSelectShow,
             </span>
           )}
         </h2>
+        {songAlias[songId] && (
+          <div className="-mt-0.5 mb-2 font-mono text-[13px] text-muted font-medium">
+            別名：{songAlias[songId]}
+          </div>
+        )}
 
         {/* Level 3a: Song Identity Summary Bar (Clean, single cohesive line) */}
         <div className="flex flex-wrap items-center gap-2 pt-2 border-t border-line-soft font-mono text-[12px] text-muted">

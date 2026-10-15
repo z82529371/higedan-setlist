@@ -19,6 +19,9 @@ export const songUnreleased = new Set(
 export const songLiveFansId = Object.fromEntries(
   songsData.songs.filter((s) => s.livefansId).map((s) => [s.id, s.livefansId])
 );
+export const songAlias = Object.fromEntries(
+  songsData.songs.filter((s) => s.alias).map((s) => [s.id, s.alias])
+);
 
 export function getSongAlbum(song) {
   if (song.unreleased || songUnreleased.has(song.id)) return "未發行曲目";
@@ -164,6 +167,18 @@ export function defaultShowId(unit) {
   return (withSongs.length > 0 ? withSongs.at(-1) : shows.at(-1))?.id ?? null;
 }
 
+/**
+ * 構建全站跨單元之演出、歌曲與場地索引
+ * @returns {{
+ *   unitData: Map<string, { unit: object, isTour: boolean, tpl: Array, shows: Array, full: Map, songShows: Map }>,
+ *   trackShows: Map<string, Array<{ showId: string, unitId: string, unitTitle: string, unitType: string, item: object, isTemplateSong?: boolean }>>,
+ *   globalVenueShows: Map<string, Array<{ showId: string, unitId: string, unitTitle: string, unitType: string, show: object }>>,
+ *   allUsedSongs: Array<object>,
+ *   allVenues: Array<{ name: string, city: string, region: string, prefecture: string, shows: Array }>,
+ *   showById: Map<string, object>,
+ *   unitIdByShowId: Map<string, string>
+ * }}
+ */
 export function buildIndex() {
   const unitDataMap = new Map();
   const trackShowsMap = new Map();
