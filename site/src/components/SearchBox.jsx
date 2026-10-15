@@ -216,7 +216,7 @@ export default function SearchBox({
             type: "show",
             id: s.id,
             date: sDate,
-            title: s.title || s.venue || "演出場次",
+            title: s.title || s.venue || t("search.fallbackShow", "演出場次"),
             unitTitle: shortUnitTitle(u) || u.title,
             venue: s.venue,
             city: s.city,
@@ -256,7 +256,7 @@ export default function SearchBox({
       if (isTextMatch || isUnreleasedBadgeMatch || matchedArrangementBadge) {
         let sub = null;
         if (songAliasVal) {
-          sub = `別名：${songAliasVal}`;
+          sub = `${t("search.aliasPrefix", "別名：")}${songAliasVal}`;
         } else if (s.titleJa && s.titleJa !== s.title && s.titleJa.toLowerCase().includes(needle)) {
           sub = s.titleJa;
         } else if (s.titleEn && s.titleEn !== s.title && s.titleEn.toLowerCase().includes(needle)) {
@@ -427,7 +427,7 @@ export default function SearchBox({
     if (flatItems.length === 0) {
       return (
         <div className="px-4 py-8 text-center font-mono text-[13px] text-muted">
-          無相符的日期、歌曲、演出或場地
+          {t("search.noResults", "無相符的日期、歌曲、演出或場地")}
         </div>
       );
     }
@@ -438,9 +438,9 @@ export default function SearchBox({
         {matchedShows.length > 0 && (
           <div>
             <div className="sticky top-0 z-[2] flex items-center justify-between border-b border-line-soft bg-paper/95 px-3 py-1.5 font-mono text-[11px] font-bold tracking-[0.1em] text-muted uppercase backdrop-blur-xs">
-              <span><span aria-hidden="true">📅</span> 歷史場次日期</span>
+              <span><span aria-hidden="true">📅</span> {t("search.groupShows", "歷史場次日期")}</span>
               <span className="text-[11px] font-normal opacity-75">
-                {matchedShows.length} 場
+                {matchedShows.length} {t("navigators.showsUnit", "場")}
               </span>
             </div>
             {matchedShows.slice(0, 5).map((sh) => {
@@ -485,9 +485,9 @@ export default function SearchBox({
         {matchedSongs.length > 0 && (
           <div>
             <div className="sticky top-0 z-[2] flex items-center justify-between border-b border-line-soft bg-paper/95 px-3 py-1.5 font-mono text-[11px] font-bold tracking-[0.1em] text-muted uppercase backdrop-blur-xs">
-              <span><span aria-hidden="true">🎵</span> 歌曲</span>
+              <span><span aria-hidden="true">🎵</span> {t("search.groupSongs", "歌曲")}</span>
               <span className="text-[11px] font-normal opacity-75">
-                {matchedSongs.length} 首
+                {matchedSongs.length} {t("navigators.songsUnit", "首")}
               </span>
             </div>
             {matchedSongs.slice(0, 5).map((s) => {
@@ -511,7 +511,7 @@ export default function SearchBox({
                       {s.title}
                       {s.unreleased && (
                         <span className="ml-1 text-[11px] font-normal text-muted">
-                          （未發行）
+                          {t("search.unreleasedSuffix", "（未發行）")}
                         </span>
                       )}
                     </span>
@@ -534,9 +534,9 @@ export default function SearchBox({
         {matchedUnits.length > 0 && (
           <div>
             <div className="sticky top-0 z-[2] flex items-center justify-between border-b border-line-soft bg-paper/95 px-3 py-1.5 font-mono text-[11px] font-bold tracking-[0.1em] text-muted uppercase backdrop-blur-xs">
-              <span><span aria-hidden="true">🎤</span> 演出活動</span>
+              <span><span aria-hidden="true">🎤</span> {t("search.groupUnits", "演出活動")}</span>
               <span className="text-[11px] font-normal opacity-75">
-                {matchedUnits.length} 部
+                {matchedUnits.length} {t("search.unitsUnit", "部")}
               </span>
             </div>
             {matchedUnits.slice(0, 5).map((u) => {
@@ -558,7 +558,7 @@ export default function SearchBox({
                   <div className="flex min-w-0 flex-col">
                     <span className="truncate">{u.title}</span>
                     <span className="font-mono text-[11px] text-muted">
-                      {u.year} 年
+                      {u.year} {t("search.yearSuffix", "年")}
                     </span>
                   </div>
                   <span className="ml-2 shrink-0 font-mono text-[11px] text-muted">
@@ -574,9 +574,9 @@ export default function SearchBox({
         {matchedVenues.length > 0 && (
           <div>
             <div className="sticky top-0 z-[2] flex items-center justify-between border-b border-line-soft bg-paper/95 px-3 py-1.5 font-mono text-[11px] font-bold tracking-[0.1em] text-muted uppercase backdrop-blur-xs">
-              <span><span aria-hidden="true">📍</span> 場地</span>
+              <span><span aria-hidden="true">📍</span> {t("search.groupVenues", "場地")}</span>
               <span className="text-[11px] font-normal opacity-75">
-                {matchedVenues.length} 處
+                {matchedVenues.length} {t("search.venuesUnit", "處")}
               </span>
             </div>
             {matchedVenues.slice(0, 5).map((v) => {
@@ -602,7 +602,7 @@ export default function SearchBox({
                     </span>
                   </div>
                   <span className="ml-2 shrink-0 font-mono text-[11px] text-muted">
-                    {v.count} 場
+                    {v.count} {t("navigators.showsUnit", "場")}
                   </span>
                 </div>
               );
@@ -613,7 +613,7 @@ export default function SearchBox({
         {/* 底部導航提示 */}
         {!isModal && (
           <div className="sticky bottom-0 border-t border-line-soft bg-paper px-3 py-1 font-mono text-[11px] text-muted flex items-center justify-between">
-            <span>↑↓ 選擇・Enter 跳轉・Esc 關閉</span>
+            <span>{t("search.keyboardHint", "↑↓ 選擇・Enter 跳轉・Esc 關閉")}</span>
           </div>
         )}
       </Fragment>
@@ -652,8 +652,8 @@ export default function SearchBox({
                 type="button"
                 className="absolute right-9 top-1/2 -translate-y-1/2 rounded px-1.5 py-0.5 font-mono text-[12px] text-muted hover:bg-paper hover:text-ink cursor-pointer"
                 onClick={handleClear}
-                title="清空搜尋"
-                aria-label="清空搜尋"
+                title={t("search.clearTitle", "清空搜尋")}
+                aria-label={t("search.clearAria", "清空搜尋")}
               >
                 ✕
               </button>
@@ -663,8 +663,8 @@ export default function SearchBox({
                 type="button"
                 onClick={onOpenCalendar}
                 className="absolute right-2 top-1/2 -translate-y-1/2 flex h-7 w-7 items-center justify-center rounded-[4px] hover:bg-tape-tint text-ink cursor-pointer text-sm"
-                title="開啟演出日曆"
-                aria-label="開啟演出日曆"
+                title={t("search.openCalendarTitle", "開啟演出日曆")}
+                aria-label={t("search.openCalendarAria", "開啟演出日曆")}
               >
                 📅
               </button>
@@ -675,7 +675,7 @@ export default function SearchBox({
               type="button"
               onClick={onCloseModal}
               className="shrink-0 flex h-9 w-9 items-center justify-center rounded-full bg-paper border border-line-soft font-bold text-muted hover:text-ink hover:bg-tape-tint active:scale-95 cursor-pointer text-sm"
-              aria-label="關閉搜尋"
+              aria-label={t("search.closeSearchAria", "關閉搜尋")}
             >
               ✕
             </button>
@@ -686,8 +686,8 @@ export default function SearchBox({
         {!needle ? (
           <div className="flex-1 p-6 flex flex-col items-center justify-center text-center text-muted select-none">
             <span className="text-3xl mb-2" aria-hidden="true">🔍</span>
-            <p className="font-bold text-ink text-sm m-0 mb-1">搜尋全檔案庫</p>
-            <p className="text-xs text-muted m-0">輸入歌曲名、日期（如 2024-09-21）、巡演或場館…</p>
+            <p className="font-bold text-ink text-sm m-0 mb-1">{t("search.title", "搜尋全檔案庫")}</p>
+            <p className="text-xs text-muted m-0">{t("search.subtitle", "輸入歌曲名、日期（如 2024-09-21）、巡演或場館…")}</p>
             {onOpenCalendar && (
               <button
                 type="button"
@@ -695,7 +695,7 @@ export default function SearchBox({
                 className="mt-4 inline-flex items-center gap-1.5 rounded-lg border-[1.5px] border-ink bg-band px-3.5 py-1.5 text-xs font-bold text-band-ink shadow-2xs hover:brightness-95 active:scale-95 cursor-pointer"
               >
                 <span>📅</span>
-                <span>依演出日曆瀏覽</span>
+                <span>{t("search.browseCalendar", "依演出日曆瀏覽")}</span>
               </button>
             )}
           </div>
@@ -727,7 +727,7 @@ export default function SearchBox({
         htmlFor="global-q"
         className="sr-only"
       >
-        搜尋
+        {t("search.searchLabel", "搜尋")}
       </label>
       <div className="relative w-full flex items-center">
         <span
@@ -771,8 +771,8 @@ export default function SearchBox({
               type="button"
               className="rounded px-1.5 py-0.5 font-mono text-[12px] text-muted hover:bg-paper hover:text-ink cursor-pointer"
               onClick={handleClear}
-              title="清空搜尋"
-              aria-label="清空搜尋"
+              title={t("search.clearTitle", "清空搜尋")}
+              aria-label={t("search.clearAria", "清空搜尋")}
             >
               ✕
             </button>
@@ -785,8 +785,8 @@ export default function SearchBox({
               className={`flex items-center justify-center rounded-[4px] border border-ink/20 bg-paper hover:bg-tape-tint text-ink cursor-pointer shadow-2xs active:scale-95 transition-transform ${
                 size === "lg" ? "h-8 w-8 text-base" : "h-7 w-7 text-sm"
               }`}
-              title="開啟演出日曆 (ADR-0096)"
-              aria-label="開啟演出日曆"
+              title={t("search.openCalendarTitle", "開啟演出日曆")}
+              aria-label={t("search.openCalendarAria", "開啟演出日曆")}
             >
               📅
             </button>

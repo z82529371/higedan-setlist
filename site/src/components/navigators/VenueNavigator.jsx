@@ -54,7 +54,7 @@ export function VenueNavigator({
               <span>{t("navigators.venueSortModeTitle", "1. 場地分類方式")}</span>
             </span>
             <span className="font-mono text-[11px] text-muted tabular-nums">
-              共 {allVenues.length} 處場館
+              {t("navigators.venuesCount", "共 {count} 處場館", { count: allVenues.length })}
             </span>
           </div>
           <div className="flex flex-wrap gap-1.5 sm:gap-2">
@@ -149,8 +149,13 @@ export function VenueNavigator({
               <span aria-hidden="true">🏟️</span>
               <span>
                 {curSortMode === "region"
-                  ? `3. 選擇場地（${curRegion} · 共 ${dFilteredVenues.length} 處）`
-                  : `2. 登場次數排行（共 ${dFilteredVenues.length} 處）`}
+                  ? t("navigators.selectVenueStep", `3. 選擇場地（${t(`regions.${curRegion}`, curRegion)} · 共 ${dFilteredVenues.length} 處）`, {
+                      region: t(`regions.${curRegion}`, curRegion),
+                      count: dFilteredVenues.length,
+                    })
+                  : t("navigators.venueCountRankingStep", `2. 登場次數排行（共 ${dFilteredVenues.length} 處）`, {
+                      count: dFilteredVenues.length,
+                    })}
               </span>
             </span>
           </div>
@@ -201,7 +206,7 @@ export function VenueNavigator({
                   )}
                   <span className="font-bold">{v.name}</span>
                   <span className="text-[11px] opacity-75">
-                    （{v.city} · {v.shows.length}場）
+                    （{v.city} · {v.shows.length}{t("navigators.showsUnit", "場")}）
                   </span>
                 </button>
               );

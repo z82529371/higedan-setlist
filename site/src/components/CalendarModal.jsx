@@ -1,5 +1,6 @@
 import React, { useState, useMemo, useEffect } from "react";
-import { getUnitTypeLabel, shortUnitTitle } from "../lib/domain.js";
+import { getUnitTypeLabel, shortUnitTitle, WEEKDAYS } from "../lib/domain.js";
+import { useI18n } from "../lib/i18n.jsx";
 
 /**
  * CalendarModal
@@ -15,6 +16,7 @@ export default function CalendarModal({
   allUnits,
   onSelectShow,
 }) {
+  const { t, locale } = useI18n();
   // Compute date map: "YYYY-MM-DD" -> array of { show, unit }, plus ordered active months list
   const {
     dateShowsMap,
@@ -169,14 +171,14 @@ export default function CalendarModal({
     }
   }
 
-  const weekdays = ["日", "一", "二", "三", "四", "五", "六"];
+  const weekdays = WEEKDAYS[locale] || WEEKDAYS["zh-TW"];
 
   return (
     <div
       className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-ink/60 backdrop-blur-xs select-none animate-fade-in"
       role="dialog"
       aria-modal="true"
-      aria-label="演出日曆"
+      aria-label={t("calendar.ariaLabel", "演出日曆")}
       onClick={(e) => {
         if (e.target === e.currentTarget) onClose();
       }}
@@ -191,10 +193,10 @@ export default function CalendarModal({
             <span className="text-xl" aria-hidden="true">📅</span>
             <div>
               <h3 className="m-0 text-[16px] font-bold tracking-tight text-ink">
-                歷史演出日曆
+                {t("calendar.title", "歷史演出日曆")}
               </h3>
               <p className="m-0 text-[11px] font-mono text-muted">
-                僅點選標示之有場次日期
+                {t("calendar.hint", "僅點選標示之有場次日期")}
               </p>
             </div>
           </div>
@@ -202,7 +204,7 @@ export default function CalendarModal({
             type="button"
             onClick={onClose}
             className="flex h-8 w-8 items-center justify-center rounded-full bg-paper border border-line-soft text-muted hover:text-ink hover:bg-tape-tint active:scale-95 cursor-pointer font-bold text-sm transition-transform"
-            aria-label="關閉日曆"
+            aria-label={t("calendar.closeAria", "關閉日曆")}
           >
             ✕
           </button>
@@ -218,7 +220,7 @@ export default function CalendarModal({
           >
             {availableYears.map((y) => (
               <option key={y} value={y}>
-                {y} 年
+                {y} {t("calendar.yearSuffix", "年")}
               </option>
             ))}
           </select>
@@ -230,7 +232,7 @@ export default function CalendarModal({
               onClick={prevMonth}
               disabled={!canGoPrev}
               className="flex h-7 w-7 items-center justify-center rounded-[4px] border border-ink/20 bg-paper hover:bg-tape-tint disabled:opacity-30 disabled:cursor-not-allowed cursor-pointer font-mono font-bold text-xs"
-              title="上一個有演出的月份"
+              title={t("calendar.prevMonthTitle", "上一個有演出的月份")}
             >
               ◀
             </button>
@@ -243,7 +245,7 @@ export default function CalendarModal({
             >
               {activeMonthsInYear.map((m) => (
                 <option key={m} value={m}>
-                  {m} 月
+                  {m} {t("calendar.monthSuffix", "月")}
                 </option>
               ))}
             </select>
@@ -253,7 +255,7 @@ export default function CalendarModal({
               onClick={nextMonth}
               disabled={!canGoNext}
               className="flex h-7 w-7 items-center justify-center rounded-[4px] border border-ink/20 bg-paper hover:bg-tape-tint disabled:opacity-30 disabled:cursor-not-allowed cursor-pointer font-mono font-bold text-xs"
-              title="下一個有演出的月份"
+              title={t("calendar.nextMonthTitle", "下一個有演出的月份")}
             >
               ▶
             </button>
@@ -261,7 +263,7 @@ export default function CalendarModal({
 
           {/* Month show count pill */}
           <span className="font-mono text-[11px] text-muted rounded-[3px] bg-paper px-2 py-1 border border-line-soft/60 shrink-0">
-            {monthShowsCount} 場
+            {monthShowsCount} {t("calendar.showsUnit", "場")}
           </span>
         </div>
 
@@ -301,13 +303,13 @@ export default function CalendarModal({
                     type="button"
                     onClick={() => handleDayClick(dateStr, dayShows)}
                     className="relative flex flex-col items-center justify-center h-9 sm:h-10 rounded-lg border-[1.5px] border-band-ink/60 bg-band hover:bg-band-ink hover:text-band active:scale-95 text-ink font-bold cursor-pointer transition-all shadow-2xs group"
-                    title={`${dateStr}（${count}場演出）點擊跳轉`}
+                    title={t("calendar.dayTitle", "{date}（{count}場演出）點擊跳轉", { date: dateStr, count })}
                   >
                     <span className="font-mono text-[12px] sm:text-[13px] leading-none">
                       {day}
                     </span>
                     <span className="text-[9px] font-mono leading-none mt-0.5 opacity-90">
-                      {count > 1 ? `${count}場` : "●"}
+                      {count > 1 ? t("calendar.multiBadge", "{count}場", { count }) : t("calendar.multiDot", "●")}
                     </span>
                   </button>
                 );
@@ -331,9 +333,9 @@ export default function CalendarModal({
         <div className="mt-3 flex items-center justify-between text-[11px] font-mono text-muted px-1">
           <div className="flex items-center gap-1.5">
             <span className="inline-block w-2.5 h-2.5 rounded-full bg-band border border-ink/40" />
-            <span>黃色標記＝有演出（可點選）</span>
+            <span>{t("calendar.legendHasShow", "黃色標記＝有演出（可點選）")}</span>
           </div>
-          <span>全庫 520+ 歷史場次</span>
+          <span>{t("calendar.totalArchive", "全庫 520+ 歷史場次")}</span>
         </div>
 
         {/* Multi-show Picker Popover overlay (when a date has >= 2 shows) */}
@@ -342,7 +344,7 @@ export default function CalendarModal({
             <div className="rounded-xl border-[1.5px] border-ink bg-card p-3 shadow-lg flex flex-col gap-2">
               <div className="flex items-center justify-between border-b border-line-soft pb-2">
                 <span className="font-mono text-xs font-bold text-ink">
-                  📅 {selectedDayShows.date} 共 {selectedDayShows.shows.length} 場演出
+                  📅 {t("calendar.selectedDay", "{date} 共 {count} 場演出", { date: selectedDayShows.date, count: selectedDayShows.shows.length })}
                 </span>
                 <button
                   type="button"
@@ -371,7 +373,7 @@ export default function CalendarModal({
                       </span>
                     </div>
                     <span className="text-[12px] font-semibold text-ink mt-0.5 truncate">
-                      {show.title || show.venue || "演出場次"}
+                      {show.title || show.venue || t("calendar.fallbackShow", "演出場次")}
                     </span>
                     <span className="font-mono text-[10px] text-muted truncate">
                       📍 {show.city} {show.venue}

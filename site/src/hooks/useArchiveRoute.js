@@ -20,7 +20,7 @@ export function useArchiveRoute({
   filterState,
   initialDraftState = null,
 }) {
-  const { locale } = useI18n();
+  const { t, locale } = useI18n();
 
   const appendLang = (h) => {
     if (!h || !locale || locale === DEFAULT_LOCALE) return h;
@@ -528,32 +528,32 @@ export function useArchiveRoute({
   };
 
   const confirmButtonLabel = useMemo(() => {
-    if (!draftState) return "確認套用";
+    if (!draftState) return t("confirm.apply", "確認套用");
     if (tab === "show") {
       const uEntry = unitData.get(draftState.unitId);
       const u = uEntry?.unit;
       const isTour = uEntry?.isTour;
       if (draftState.showSubMode === "tour" && isTour) {
-        return `確認套用：${shortUnitTitle(u)}（巡演總覽）`;
+        return t("confirm.applyTour", "確認套用：{title}（巡演總覽）", { title: shortUnitTitle(u) });
       }
       const s = (u?.shows || []).find((x) => x.id === draftState.showId);
       if (s) {
-        return `確認套用：${s.date.slice(5)} ${s.city || s.venue}`;
+        return t("confirm.applyShow", "確認套用：{date} {place}", { date: s.date.slice(5), place: s.city || s.venue });
       }
-      return "確認套用場次";
+      return t("confirm.applyShowFallback", "確認套用場次");
     }
     if (tab === "song") {
       const s = allUsedSongs.find((x) => x.id === draftState.songId);
       if (s) {
-        return `確認套用：《${songTitle[s.id] || s.title || s.id}》`;
+        return t("confirm.applySong", "確認套用：《{title}》", { title: songTitle[s.id] || s.title || s.id });
       }
-      return "確認套用歌曲";
+      return t("confirm.applySongFallback", "確認套用歌曲");
     }
     if (tab === "venue") {
-      return draftState.venueName ? `確認套用：${draftState.venueName}` : "確認套用場地";
+      return draftState.venueName ? t("confirm.applyVenue", "確認套用：{venue}", { venue: draftState.venueName }) : t("confirm.applyVenueFallback", "確認套用場地");
     }
-    return "確認套用";
-  }, [draftState, tab, unitData, allUsedSongs]);
+    return t("confirm.apply", "確認套用");
+  }, [draftState, tab, unitData, allUsedSongs, t]);
 
   return {
     initial,

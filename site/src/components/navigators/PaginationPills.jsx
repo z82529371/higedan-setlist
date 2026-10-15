@@ -1,3 +1,5 @@
+import { useI18n } from "../../lib/i18n.jsx";
+
 export const PAGE_SIZE = 10;
 export const CHUNK_SIZE = 50;
 
@@ -8,8 +10,11 @@ export function PaginationPills({
   chunkSize = CHUNK_SIZE,
   page,
   onPageChange,
-  label = "分段",
+  label,
 }) {
+  const { t } = useI18n();
+  const defaultLabel = t("navigators.pagination.segment", "分段");
+  const displayLabel = label || defaultLabel;
   const pageCount = Math.ceil(total / pageSize);
   if (pageCount <= 1) return null;
 
@@ -30,7 +35,7 @@ export function PaginationPills({
       {needsChunks && (
         <div className="flex flex-wrap items-center gap-1.5">
           <span className="text-muted font-sans text-xs font-bold w-[52px] shrink-0 text-right">
-            大區間：
+            {t("navigators.pagination.broadRange", "大區間：")}
           </span>
           <div className="flex flex-wrap items-center gap-1">
             {Array.from({ length: chunkCount }, (_, c) => {
@@ -63,7 +68,7 @@ export function PaginationPills({
       {/* Tier 2: 10-item sub-pages (always at most 5 buttons when chunked, or at most 5 buttons when total <= 50) */}
       <div className="flex flex-wrap items-center gap-1.5">
         <span className="text-muted font-sans text-xs font-bold w-[52px] shrink-0 text-right">
-          {needsChunks ? "細分頁：" : `${label}：`}
+          {needsChunks ? t("navigators.pagination.subPage", "細分頁：") : `${displayLabel}：`}
         </span>
         <div className="flex flex-wrap items-center gap-1">
           {Array.from({ length: endPageIndex - startPageIndex }, (_, offset) => {

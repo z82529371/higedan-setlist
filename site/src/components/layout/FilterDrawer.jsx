@@ -1,3 +1,5 @@
+import { useI18n } from "../../lib/i18n.jsx";
+
 export function FilterDrawer({
   isOpen,
   tab,
@@ -8,6 +10,7 @@ export function FilterDrawer({
   renderSongNavigator,
   renderVenueNavigator,
 }) {
+  const { t } = useI18n();
   if (!isOpen) return null;
 
   return (
@@ -15,7 +18,7 @@ export function FilterDrawer({
       className="fixed inset-0 z-50 flex flex-col justify-end bg-ink/60 backdrop-blur-xs sm:hidden"
       role="dialog"
       aria-modal="true"
-      aria-label="篩選抽屜"
+      aria-label={t("navigators.drawer.drawerAria", "篩選抽屜")}
     >
       <div
         className="fixed inset-0"
@@ -37,17 +40,17 @@ export function FilterDrawer({
             </span>
             <span>
               {tab === "show"
-                ? "篩選演出場次"
+                ? t("navigators.drawer.showFilterTitle", "篩選演出場次")
                 : tab === "song"
-                ? "挑選歌曲演出檔案"
-                : "挑選場地歷史紀錄"}
+                ? t("navigators.drawer.songFilterTitle", "挑選歌曲演出檔案")
+                : t("navigators.drawer.venueFilterTitle", "挑選場地歷史紀錄")}
             </span>
           </div>
           <button
             type="button"
             onClick={onClose}
             className="flex h-7 w-7 items-center justify-center rounded-full bg-paper border border-line-soft text-muted hover:text-ink hover:bg-tape-tint cursor-pointer font-bold"
-            aria-label="關閉抽屜"
+            aria-label={t("navigators.drawer.closeAria", "關閉抽屜")}
           >
             ✕
           </button>
@@ -67,7 +70,7 @@ export function FilterDrawer({
             onClick={onClose}
             className="w-1/3 rounded bg-card py-2.5 font-mono text-[13px] font-bold text-ink border border-line-soft hover:bg-tape-tint/50 transition-colors cursor-pointer active:scale-[0.98]"
           >
-            取消
+            {t("navigators.drawer.cancel", "取消")}
           </button>
           <button
             type="button"

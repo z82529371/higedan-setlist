@@ -1,4 +1,5 @@
 import { trackKey } from "../../lib/track.js";
+import { useI18n } from "../../lib/i18n.jsx";
 
 export function ArchiveStatusBar({
   tab,
@@ -11,6 +12,7 @@ export function ArchiveStatusBar({
   slipRef,
   handleReturnHome,
 }) {
+  const { t } = useI18n();
   return (
     <div
       className="sticky top-0 z-40 w-full bg-band border-b border-ink/20 shadow-xs select-none"
@@ -23,8 +25,8 @@ export function ArchiveStatusBar({
       }}
       role="button"
       tabIndex={0}
-      title="點擊滾動回單據頂部"
-      aria-label="當前狀態導航列，點擊回單據頂部"
+      title={t("statusBar.backToTopTitle", "點擊滾動回單據頂部")}
+      aria-label={t("statusBar.backToTopAria", "當前狀態導航列，點擊回單據頂部")}
     >
       <div className="mx-auto max-w-[960px] px-4 sm:px-6 flex items-center justify-between gap-3 py-1 sm:py-2 font-mono text-[10px] sm:text-[12px] tracking-wider sm:tracking-[0.14em] text-band-ink whitespace-nowrap overflow-hidden cursor-pointer">
         {/* Left: Dynamic Context Title */}
@@ -34,7 +36,7 @@ export function ArchiveStatusBar({
             <span>
               <span aria-hidden="true">🎵</span> {currentSongObj?.title || selSong}
               {currentSongObj?.unreleased
-                ? "（未發行）"
+                ? t("statusBar.unreleasedSuffix", "（未發行）")
                 : currentSongObj?.album
                 ? `（${currentSongObj.album}）`
                 : ""}
@@ -54,35 +56,35 @@ export function ArchiveStatusBar({
             <>
               <span className="hidden sm:inline opacity-45">●</span>
               <span className="hidden sm:inline">
-                {current?.shows.length ?? 0} 場 · {current?.songShows.size ?? 0} 首歌曲
+                {t("statusBar.showSummary", "{shows} 場 · {songs} 首歌曲", { shows: current?.shows.length ?? 0, songs: current?.songShows.size ?? 0 })}
               </span>
-              <span className="sm:hidden">{current?.shows.length ?? 0} 場</span>
+              <span className="sm:hidden">{t("statusBar.showSummaryMobile", "{shows} 場", { shows: current?.shows.length ?? 0 })}</span>
             </>
           )}
           {tab === "song" && (
             <>
               <span className="hidden sm:inline opacity-45">●</span>
               <span className="hidden sm:inline">
-                累計演唱 {(trackShows.get(trackKey("song", selSong)) ?? []).length} 場
+                {t("statusBar.songTotal", "累計演唱 {count} 場", { count: (trackShows.get(trackKey("song", selSong)) ?? []).length })}
               </span>
               <span className="sm:hidden">
-                累計 {(trackShows.get(trackKey("song", selSong)) ?? []).length} 場
+                {t("statusBar.songTotalMobile", "累計 {count} 場", { count: (trackShows.get(trackKey("song", selSong)) ?? []).length })}
               </span>
               <span className="opacity-45">●</span>
-              <span>歌曲檔案</span>
+              <span>{t("statusBar.songArchive", "歌曲檔案")}</span>
             </>
           )}
           {tab === "venue" && (
             <>
               <span className="hidden sm:inline opacity-45">●</span>
               <span className="hidden sm:inline">
-                累計舉辦 {currentVenueObj?.shows?.length ?? 0} 場
+                {t("statusBar.venueTotal", "累計舉辦 {count} 場", { count: currentVenueObj?.shows?.length ?? 0 })}
               </span>
               <span className="sm:hidden">
-                累計 {currentVenueObj?.shows?.length ?? 0} 場
+                {t("statusBar.venueTotalMobile", "累計 {count} 場", { count: currentVenueObj?.shows?.length ?? 0 })}
               </span>
               <span className="opacity-45">●</span>
-              <span>場地檔案</span>
+              <span>{t("statusBar.venueArchive", "場地檔案")}</span>
             </>
           )}
 
@@ -96,11 +98,11 @@ export function ArchiveStatusBar({
               handleReturnHome();
             }}
             className="hidden sm:inline-flex items-center gap-1 px-2 py-0.5 rounded-[4px] bg-band-ink/10 hover:bg-band-ink/20 active:scale-95 text-band-ink font-bold border border-band-ink/30 transition-all cursor-pointer text-[10px] sm:text-[11px] shrink-0 shadow-2xs"
-            title="返回首頁"
-            aria-label="返回首頁"
+            title={t("statusBar.backHomeTitle", "返回首頁")}
+            aria-label={t("statusBar.backHomeAria", "返回首頁")}
           >
             <span aria-hidden="true">🏠</span>
-            <span>首頁</span>
+            <span>{t("statusBar.home", "首頁")}</span>
           </button>
         </div>
       </div>

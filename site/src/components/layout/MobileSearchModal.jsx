@@ -1,4 +1,5 @@
 import SearchBox from "../SearchBox.jsx";
+import { useI18n } from "../../lib/i18n.jsx";
 
 export function MobileSearchModal({
   isOpen,
@@ -15,6 +16,7 @@ export function MobileSearchModal({
   onSelectShow,
   onOpenCalendar,
 }) {
+  const { t } = useI18n();
   if (!isOpen) return null;
 
   return (
@@ -26,7 +28,7 @@ export function MobileSearchModal({
       }}
       role="dialog"
       aria-modal="true"
-      aria-label="全域搜尋"
+      aria-label={t("mobile.globalSearchAria", "全域搜尋")}
     >
       <SearchBox
         q={q}
