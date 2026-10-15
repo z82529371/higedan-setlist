@@ -151,8 +151,8 @@ export function SongNavigator({
               <span aria-hidden="true">🎶</span>
               <span>
                 {curSortMode === "album"
-                  ? `${t("navigators.selectSong", "3. 選擇歌曲")}（${t("albumGroups." + curAlbum, curAlbum)} · 共 ${dFilteredSongs.length} 首）`
-                  : `${t("navigators.songRankTitle", "2. 演唱次數排行")}（共 ${dFilteredSongs.length} 首）`}
+                  ? t("songNav.selectWithAlbum", "{select}（{album} · 共 {count} 首）", { select: t("navigators.selectSong", "3. 選擇歌曲"), album: t("albumGroups." + curAlbum, curAlbum), count: dFilteredSongs.length })
+                  : t("songNav.rankWithCount", "{rank}（共 {count} 首）", { rank: t("navigators.songRankTitle", "2. 演唱次數排行"), count: dFilteredSongs.length })}
               </span>
             </span>
           </div>

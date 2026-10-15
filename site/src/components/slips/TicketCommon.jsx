@@ -1,14 +1,14 @@
-export function getSourceLabel(url) {
-  if (!url) return "來源紀錄";
-  if (/higedan\.com/i.test(url)) return "官方網站 來源紀錄";
-  if (/x\.com|twitter\.com/i.test(url)) return "X 來源紀錄";
-  if (/livefans\.jp/i.test(url)) return "LiveFans 來源紀錄";
-  if (/wikipedia\.org/i.test(url)) return "維基百科 來源紀錄";
+export function getSourceLabel(url, t) {
+  if (!url) return t ? t("slips.panels.sourceRecord", "來源紀錄") : "來源紀錄";
+  if (/higedan\.com/i.test(url)) return t ? t("slips.panels.officialSiteRecord", "官方網站 來源紀錄") : "官方網站 來源紀錄";
+  if (/x\.com|twitter\.com/i.test(url)) return t ? t("slips.panels.xRecord", "X 來源紀錄") : "X 來源紀錄";
+  if (/livefans\.jp/i.test(url)) return t ? t("slips.panels.livefansRecord", "LiveFans 來源紀錄") : "LiveFans 來源紀錄";
+  if (/wikipedia\.org/i.test(url)) return t ? t("slips.panels.wikipediaRecord", "維基百科 來源紀錄") : "維基百科 來源紀錄";
   try {
     const host = new URL(url).hostname.replace(/^www\./, "");
-    return `${host} 來源紀錄`;
+    return t ? `${host} ${t("slips.panels.sourceRecord", "來源紀錄")}` : `${host} 來源紀錄`;
   } catch {
-    return "來源紀錄";
+    return t ? t("slips.panels.sourceRecord", "來源紀錄") : "來源紀錄";
   }
 }
 import { CATEGORY_ORDER } from "../../lib/constants.js";
@@ -16,18 +16,14 @@ import { routeHash } from "../../lib/routes.js";
 import { useI18n } from "../../lib/i18n.jsx";
 export { CATEGORY_ORDER };
 
-const CAPSULE_MODES = [
+const CAPSULE_MODE_META = [
   {
     key: "tour",
-    label: "巡演總覽",
     icon: "📜",
-    title: "切換至巡演總覽，檢視全巡演定番歌單與出賽統計",
   },
   {
     key: "show",
-    label: "單場即時票根",
     icon: "🎫",
-    title: "切換至單場即時票根，檢視特定場次實際歌單與演出細節",
   },
 ];
 
@@ -64,7 +60,7 @@ export function DualModeCapsuleToggle({
         aria-label={t("slips.toggleModeAria", "票券檢視模式切換")}
         className="inline-flex items-center gap-1 rounded-full border border-ink/40 bg-paper/95 p-1 shadow-[1px_1px_0_rgba(0,0,0,0.14)]"
       >
-        {CAPSULE_MODES.map((item, index) => {
+        {CAPSULE_MODE_META.map((item, index) => {
           const isActive = mode === item.key;
           const href =
             item.key === "tour"
@@ -79,6 +75,10 @@ export function DualModeCapsuleToggle({
             item.key === "tour"
               ? t("slips.modeTour", "巡演總覽")
               : t("slips.modeShow", "單場票根");
+          const itemTitle =
+            item.key === "tour"
+              ? t("slips.modeTourTitle", "切換至巡演總覽，檢視全巡演定番歌單與出賽統計")
+              : t("slips.modeShowTitle", "切換至單場即時票根，檢視特定場次實際歌單與演出細節");
 
           return (
             <span key={item.key} className="inline-flex items-center gap-1">
@@ -100,7 +100,7 @@ export function DualModeCapsuleToggle({
                     ? "bg-band text-band-ink border border-ink/40 shadow-[1px_1px_0_#000000]"
                     : "text-muted hover:text-ink hover:bg-tape-tint/50 border border-transparent"
                 }`}
-                title={item.title}
+                title={itemTitle}
               >
                 <span>{item.icon}</span>
                 <span>{itemLabel}</span>

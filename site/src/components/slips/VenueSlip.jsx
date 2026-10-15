@@ -3,6 +3,7 @@ import { useI18n } from "../../lib/i18n.jsx";
 import { SLIP_ARTICLE, SLIP_TAPE } from "../../lib/constants.js";
 import { getKindArray } from "../../lib/kind.js";
 import { songTitle, showDate, formatShowTime } from "../../lib/domain.js";
+import { buildVenueHistoryText } from "../../lib/venue-history-text.js";
 import { routeHash } from "../../lib/track.js";
 import { CATEGORY_ORDER, songFilterPillClass, TicketPerforationDivider, TicketBarcodeFooter } from "./TicketCommon.jsx";
 
@@ -55,7 +56,7 @@ export function VenueSlip({ venueName, globalVenueShows, unitData, onSelectShow,
       return {
         label: t("slips.saninSanctuary", "🌱 山陰發跡聖地"),
         cls: "text-band-ink bg-tape-tint border-ink/40 font-bold",
-        desc: "樂團成軍發跡地與早期重要現場據點",
+        desc: t("venueExtra.sanctuaryDesc", "樂團成軍發跡地與早期重要現場據點"),
       };
     }
 
@@ -73,7 +74,7 @@ export function VenueSlip({ venueName, globalVenueShows, unitData, onSelectShow,
       return {
         label: t("slips.overseasTour", "✈️ 海外遠征巡演"),
         cls: "text-pool bg-pool-wash border-pool/40 font-bold",
-        desc: "世界巡演重要海外公演舞台",
+        desc: t("venueExtra.overseasDesc", "世界巡演重要海外公演舞台"),
       };
     }
 
@@ -91,7 +92,7 @@ export function VenueSlip({ venueName, globalVenueShows, unitData, onSelectShow,
       return {
         label: t("slips.arenaDome", "🏟️ 巨蛋 / 競技場 (Arena & Dome)"),
         cls: "text-request bg-request-wash border-request/40 font-bold",
-        desc: "萬人級大型指標指標場館",
+        desc: t("venueExtra.arenaDesc", "萬人級大型指標場館"),
       };
     }
 
@@ -103,9 +104,9 @@ export function VenueSlip({ venueName, globalVenueShows, unitData, onSelectShow,
       venueName.includes("PARK");
     if (isFestival) {
       return {
-        label: "🎪 音樂節 / 戶外舞台",
+        label: t("slips.venue.festivalsOutdoor", "🎪 音樂節 / 戶外舞台"),
         cls: "text-solo bg-solo-wash border-solo/40 font-bold",
-        desc: "大型音樂祭與特設野外舞台",
+        desc: t("venueExtra.festivalDesc", "大型音樂祭與特設野外舞台"),
       };
     }
 
@@ -117,17 +118,17 @@ export function VenueSlip({ venueName, globalVenueShows, unitData, onSelectShow,
       venueName.includes("講堂");
     if (isCampus) {
       return {
-        label: "🏫 校園巡迴舞台",
+        label: t("slips.venue.campusStage", "🏫 校園巡迴舞台"),
         cls: "text-ink bg-paper border-line-soft font-bold",
-        desc: "學園祭與校園文化演出",
+        desc: t("venueExtra.campusDesc", "學園祭與校園文化演出"),
       };
     }
 
     // 6. Standard Hall / Livehouse
     return {
-      label: "🏠 Livehouse / 演奏廳 (Hall)",
+      label: t("slips.venue.livehouseHall", "🏠 Livehouse / 演奏廳 (Hall)"),
       cls: "text-ink bg-paper border-line-soft font-bold",
-      desc: "全國巡演專場公演舞台",
+      desc: t("venueExtra.hallDesc", "全國巡演專場公演舞台"),
     };
   }, [venueName, venueCity, venuePref, venueRegion, venueShows, t]);
 
@@ -136,10 +137,10 @@ export function VenueSlip({ venueName, globalVenueShows, unitData, onSelectShow,
     if (!firstShow?.date || !latestShow?.date) return null;
     const y1 = firstShow.date.slice(0, 4);
     const y2 = latestShow.date.slice(0, 4);
-    if (y1 === y2) return `${y1} 年`;
+    if (y1 === y2) return locale === "en" ? String(y1) : y1 + t("venueExtra.yearSuffix", "年");
     const diff = parseInt(y2, 10) - parseInt(y1, 10);
-    return `${y1} ～ ${y2}（跨越 ${diff + 1} 年足跡）`;
-  }, [firstShow, latestShow]);
+    return `${y1} ～ ${y2} ${t("slips.venue.spanningYears", "（跨越 {years} 個年份）", { years: diff + 1 })}`;
+  }, [firstShow, latestShow, locale, t]);
 
   // Year breakdown for performance frequency
   const yearBreakdown = useMemo(() => {
@@ -255,19 +256,13 @@ export function VenueSlip({ venueName, globalVenueShows, unitData, onSelectShow,
   }, [venueName, effectiveType, groupedByUnit]);
 
   const toggleUnit = (unitId) => {
-    setCollapsedMap((prev) => {
-      const next = new Map(prev);
-      next.set(unitId, !next.get(unitId));
-      return next;
-    });
+    setCollapsedMap((prev) => new Map(prev).set(unitId, !prev.get(unitId)));
   };
 
   const expandAll = () => {
     setCollapsedMap((prev) => {
       const next = new Map(prev);
-      for (const g of groupedByUnit) {
-        if (g.items.length > 1) next.set(g.unitId, false);
-      }
+      for (const g of groupedByUnit) if (g.items.length > 1) next.set(g.unitId, false);
       return next;
     });
   };
@@ -275,9 +270,7 @@ export function VenueSlip({ venueName, globalVenueShows, unitData, onSelectShow,
   const collapseAll = () => {
     setCollapsedMap((prev) => {
       const next = new Map(prev);
-      for (const g of groupedByUnit) {
-        if (g.items.length > 1) next.set(g.unitId, true);
-      }
+      for (const g of groupedByUnit) if (g.items.length > 1) next.set(g.unitId, true);
       return next;
     });
   };
@@ -285,36 +278,21 @@ export function VenueSlip({ venueName, globalVenueShows, unitData, onSelectShow,
   const hasCollapsible = groupedByUnit.some((g) => g.items.length > 1);
 
   const handleCopyVenueHistory = () => {
-    const lines = [
-      `【Official 髭男 dism @ ${venueName} 演出歷程】`,
-      `📍 地點：${venuePref ? `${venuePref} · ` : ""}${venueCity}`,
-      `🏛️ 累計演出：${venueShows.length} 場`,
-    ];
-    if (spanYearsText) {
-      lines.push(`📅 年份跨度：${spanYearsText}`);
-    }
-    if (topSongs.length > 0) {
-      lines.push(`🏆 常唱曲目：${topSongs.map((s) => `${s.title} (${s.count}次)`).join("、")}`);
-    }
-    lines.push("");
-    lines.push("【歷史演出場次】");
-
-    sortedShows.forEach((app) => {
-      const d = app.show?.date ? showDate(app.show) : "";
-      lines.push(`- ${d}｜${app.unitTitle}`);
+    const lines = buildVenueHistoryText({
+      venueName,
+      venuePref,
+      venueCity,
+      showsCount: venueShows.length,
+      spanYearsText,
+      topSongs,
+      sortedShows,
+      locale,
     });
-
-    lines.push("");
-    lines.push("#Official髭男dism #ヒゲダン #聖地巡礼");
-
     if (navigator?.clipboard?.writeText) {
-      navigator.clipboard
-        .writeText(lines.join("\n"))
-        .then(() => {
-          setCopied(true);
-          setTimeout(() => setCopied(false), 2200);
-        })
-        .catch(() => {});
+      navigator.clipboard.writeText(lines.join("\n")).then(() => {
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2200);
+      }).catch(() => {});
     }
   };
 
@@ -323,7 +301,7 @@ export function VenueSlip({ venueName, globalVenueShows, unitData, onSelectShow,
       <div className={SLIP_ARTICLE}>
         <span aria-hidden="true" className={SLIP_TAPE} />
         <p className="m-0 px-1 py-[18px] text-[14px] text-muted">
-          選一個場地，看在該場地舉行過哪些場次。
+          {t("slips.selectVenueHint", "選一個場地，看在該場地舉行過哪些場次。")}
         </p>
       </div>
     );
@@ -338,7 +316,7 @@ export function VenueSlip({ venueName, globalVenueShows, unitData, onSelectShow,
   return (
     <article
       className={SLIP_ARTICLE}
-      aria-label="場地全域場次"
+      aria-label={t("venueExtra.ariaVenueShows", "場地全域場次")}
     >
       <span aria-hidden="true" className={SLIP_TAPE} />
       <div className="relative rounded-t-[2px] bg-black/[0.025] dark:bg-white/[0.025] -mx-[26px] max-sm:-mx-4 -mt-[46px] max-sm:-mt-[42px] px-[26px] max-sm:px-4 pt-[46px] max-sm:pt-[42px] pb-3">
@@ -368,7 +346,7 @@ export function VenueSlip({ venueName, globalVenueShows, unitData, onSelectShow,
         {/* Level 3a: Venue Identity Summary Bar (Clean, single cohesive line) */}
         <div className="flex flex-wrap items-center gap-2 pt-2 border-t border-line-soft font-mono text-[12px] text-muted">
           <span className="font-bold text-ink">
-            共舉辦過 <span className="tabular-nums text-[14px] text-pool font-extrabold">{venueShows.length}</span> 場演出
+            {t("slips.venue.hostedShowsCount", "共舉辦過 {count} 場演出", { count: venueShows.length })}
           </span>
           {venueTier && (
             <span className={`rounded px-1.5 py-0.5 text-xs font-bold border ${venueTier.cls}`} title={venueTier.desc}>
@@ -394,9 +372,9 @@ export function VenueSlip({ venueName, globalVenueShows, unitData, onSelectShow,
                     ? "bg-band text-band-ink border-band shadow-xs"
                     : "bg-paper text-ink border-line-soft hover:bg-tape-tint/50 hover:border-ink/60"
                 }`}
-                title="複製此場地的演出歷史紀錄"
+                title={t("venueExtra.copyTitle", "複製此場地的演出歷史紀錄")}
               >
-                <span>{copied ? "✓ 已複製歷程" : "📋 複製歷程"}</span>
+                <span>{copied ? t("slips.copied", "✓ 已複製") : t("slips.copyHistory", "📋 複製歷程")}</span>
               </button>
 
               <a
@@ -404,7 +382,7 @@ export function VenueSlip({ venueName, globalVenueShows, unitData, onSelectShow,
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-1 rounded border border-line-soft bg-paper px-2 py-1 font-mono text-[11px] font-bold text-ink hover:bg-band hover:border-band transition-colors no-underline"
-                title="在 Google 地圖查看場館位置"
+                title={t("venueExtra.mapTitle", "在 Google 地圖查看場館位置")}
               >
                 <span>🗺️ Google Maps</span>
               </a>
@@ -415,9 +393,9 @@ export function VenueSlip({ venueName, globalVenueShows, unitData, onSelectShow,
               onClick={() => setShowMoreTools((v) => !v)}
               className="inline-flex items-center justify-center gap-1 rounded bg-paper hover:bg-tape-tint/50 px-2.5 py-1 text-[11px] font-mono font-bold text-ink border border-line-soft hover:border-ink/60 transition-colors cursor-pointer select-none"
               aria-expanded={showMoreTools}
-              title="展開更多紀錄（常唱曲目、首登台/最新出演里程碑、年度分佈與資料庫外鏈）"
+              title={t("venueExtra.expandToolsTitle", "展開更多紀錄（常唱曲目、首登台/最新出演里程碑、年度分佈與資料庫外鏈）")}
             >
-              <span>{showMoreTools ? "收合紀錄 ▴" : "🛠️ 更多紀錄 ▾"}</span>
+              <span>{showMoreTools ? t("slips.venue.collapseRecords", "收合紀錄 ▴") : t("slips.venue.moreRecords", "🛠️ 更多紀錄 ▾")}</span>
             </button>
           </div>
 
@@ -432,7 +410,7 @@ export function VenueSlip({ venueName, globalVenueShows, unitData, onSelectShow,
                     className="inline-flex items-center gap-1 rounded bg-paper px-2.5 py-1 text-[11px] font-mono font-bold text-ink border border-line-soft hover:bg-tape-tint/50 transition-colors cursor-pointer select-none"
                     aria-expanded={showYearBreakdown}
                   >
-                    <span>{showYearBreakdown ? "▾ 年度分佈" : "▸ 年度分佈"}</span>
+                    <span>{showYearBreakdown ? "▾ " + t("slips.common.yearDistribution", "年度分佈") : "▸ " + t("slips.common.yearDistribution", "年度分佈")}</span>
                   </button>
                 )}
                 <a
@@ -440,7 +418,7 @@ export function VenueSlip({ venueName, globalVenueShows, unitData, onSelectShow,
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-1 rounded border border-line-soft bg-paper px-2 py-1 font-mono text-[11px] font-bold text-muted hover:text-ink hover:bg-band hover:border-band transition-colors no-underline"
-                  title="在 LiveFans 查看場館歷史演算法"
+                  title={t("venueExtra.livefansTitle", "在 LiveFans 查看場館歷史")}
                 >
                   <span>🎫 LiveFans</span>
                 </a>
@@ -450,7 +428,7 @@ export function VenueSlip({ venueName, globalVenueShows, unitData, onSelectShow,
               {topSongs.length > 0 && venueShows.length >= 4 && topSongs.some((s) => s.count >= 2) && (
                 <div className="mt-1 flex flex-wrap items-center gap-1.5 border-t border-line-soft/60 pt-2 font-mono text-[11px]">
                   <span className="font-bold text-muted flex items-center gap-1">
-                    <span>🏆 本場地常唱曲目：</span>
+                    <span>{t("slips.venue.frequentTracks", "🏆 本場地常唱曲目：")}</span>
                   </span>
                   {topSongs.map((s) => (
                     <a
@@ -461,10 +439,10 @@ export function VenueSlip({ venueName, globalVenueShows, unitData, onSelectShow,
                         onSelectSong?.(s.id);
                       }}
                       className="inline-flex items-center gap-1 rounded bg-paper px-2 py-0.5 border border-line-soft text-ink hover:bg-tape-tint/40 hover:border-ink/60 transition-colors no-underline cursor-pointer"
-                      title={`查看歌曲《${s.title}》的全歷史演出紀錄`}
+                      title={t("venueExtra.viewSongHistory", "查看歌曲《{title}》的全歷史演出紀錄", { title: s.title })}
                     >
                       <span className="font-medium">{s.title}</span>
-                      <span className="font-bold text-pool tabular-nums">({s.count}次)</span>
+                      <span className="font-bold text-pool tabular-nums">{t("venueExtra.timesSuffix", "({count}次)", { count: s.count })}</span>
                     </a>
                   ))}
                 </div>
@@ -477,7 +455,7 @@ export function VenueSlip({ venueName, globalVenueShows, unitData, onSelectShow,
                   <div className="flex flex-col gap-0.5">
                     <div className="flex items-center justify-between text-xs font-bold text-muted">
                       <span className="flex items-center gap-1 text-ink">
-                        <span className="text-band font-bold" aria-hidden="true">★</span> 首次登台 / 首演場次
+                        <span className="text-band font-bold" aria-hidden="true">★</span> {t("slips.venue.debutShow", "首次登台 / 首演場次")}
                       </span>
                       <span className="tabular-nums font-semibold">{firstShow ? showDate(firstShow, locale) : "—"}</span>
                     </div>
@@ -498,7 +476,7 @@ export function VenueSlip({ venueName, globalVenueShows, unitData, onSelectShow,
                         </span>
                       </a>
                     ) : (
-                      <span className="text-muted">暫無紀錄</span>
+                      <span className="text-muted">{t("venueExtra.noRecord", "暫無紀錄")}</span>
                     )}
                   </div>
 
@@ -527,7 +505,7 @@ export function VenueSlip({ venueName, globalVenueShows, unitData, onSelectShow,
                         </span>
                       </a>
                     ) : (
-                      <span className="text-muted">暫無紀錄</span>
+                      <span className="text-muted">{t("venueExtra.noRecord", "暫無紀錄")}</span>
                     )}
                   </div>
                 </div>
@@ -538,9 +516,9 @@ export function VenueSlip({ venueName, globalVenueShows, unitData, onSelectShow,
                 <div className="mt-1 border-t border-line-soft/80 pt-2 font-mono text-[11px]">
                   <div className="text-muted font-bold mb-1.5 flex items-center justify-between">
                     <span className="flex items-center gap-1">
-                      <span>📅 各年度演出頻率分佈：</span>
+                      <span>{t("slips.venue.yearlyFreqDistribution", "📅 各年度演出頻率分佈：")}</span>
                     </span>
-                    <span className="font-normal text-muted/70">（跨越 {yearBreakdown.length} 個年份）</span>
+                    <span className="font-normal text-muted/70">{t("slips.venue.spanningYears", "（跨越 {years} 個年份）", { years: yearBreakdown.length })}</span>
                   </div>
                   <div className="flex flex-wrap gap-1.5">
                     {yearBreakdown.map(([yr, count]) => (
@@ -548,8 +526,8 @@ export function VenueSlip({ venueName, globalVenueShows, unitData, onSelectShow,
                         key={yr}
                         className="inline-flex items-center gap-1 rounded bg-paper px-2 py-0.5 border border-line-soft text-ink tabular-nums"
                       >
-                        <span className="text-muted font-semibold">{yr}年</span>
-                        <span className="font-bold text-ink">{count}場</span>
+                        <span className="text-muted font-semibold">{yr}</span>
+                        <span className="font-bold text-ink">{count} {t("navigators.showsUnit", "場")}</span>
                       </span>
                     ))}
                   </div>
@@ -567,7 +545,7 @@ export function VenueSlip({ venueName, globalVenueShows, unitData, onSelectShow,
         <div className="my-2 border-b border-line-soft pb-2.5">
           <div
             role="tablist"
-            aria-label="演出類型篩選"
+            aria-label={t("venueExtra.filterAria", "演出類型篩選")}
             className="grid grid-cols-2 min-[380px]:grid-cols-3 sm:grid-cols-4 md:flex md:flex-nowrap md:[&>*]:flex-1 gap-1.5"
           >
             {availableTypes.map((cat) => {
@@ -600,7 +578,7 @@ export function VenueSlip({ venueName, globalVenueShows, unitData, onSelectShow,
             className="cursor-pointer border-0 bg-transparent p-0 text-muted transition-colors hover:text-ink hover:underline"
             onClick={expandAll}
           >
-            全部展開
+            {t("slips.common.expandAll", "全部展開")}
           </button>
           <span aria-hidden="true">・</span>
           <button
@@ -608,14 +586,16 @@ export function VenueSlip({ venueName, globalVenueShows, unitData, onSelectShow,
             className="cursor-pointer border-0 bg-transparent p-0 text-muted transition-colors hover:text-ink hover:underline"
             onClick={collapseAll}
           >
-            全部收合
+            {t("slips.common.collapseAll", "全部收合")}
           </button>
         </div>
       )}
 
       {groupedByUnit.length === 0 ? (
         <p className="m-0 px-1 py-6 text-center font-mono text-[13px] text-muted">
-          {venueShows.length === 0 ? "此場地尚無演出紀錄" : "此分類下無演出紀錄"}
+          {venueShows.length === 0
+            ? t("slips.venue.noShowsRecorded", "此場地尚無演出紀錄")
+            : t("slips.noShowsInCategory", "此分類下無演出紀錄")}
         </p>
       ) : (
         <div className="space-y-4 pt-1">
@@ -655,10 +635,14 @@ export function VenueSlip({ venueName, globalVenueShows, unitData, onSelectShow,
                       {g.unitTitle}
                     </h3>
                     <div className="flex shrink-0 items-center gap-2 font-mono text-[11px] text-muted tabular-nums">
-                      <span className="font-bold text-ink">共 {g.items.length} 場</span>
+                      <span className="font-bold text-ink">
+                        {t("slips.showsCount", "共 {count} 場", { count: g.items.length })}
+                      </span>
                       {isCollapsible && (
                         <span className="rounded border border-line-soft bg-card px-2 py-0.5 text-[11px] font-semibold text-muted hover:text-ink">
-                          {isCollapsed ? "▼ 展開" : "▲ 收合"}
+                          {isCollapsed
+                            ? "▼ " + t("slips.common.expand", "展開")
+                            : "▲ " + t("slips.common.collapse", "收合")}
                         </span>
                       )}
                     </div>
@@ -684,10 +668,14 @@ export function VenueSlip({ venueName, globalVenueShows, unitData, onSelectShow,
                     </div>
 
                     <div className="flex items-center justify-between gap-2 border-t border-line-soft/60 pt-1.5 font-mono text-[11px]">
-                      <span className="font-bold text-ink tabular-nums">共 {g.items.length} 場</span>
+                      <span className="font-bold text-ink tabular-nums">
+                        {t("slips.showsCount", "共 {count} 場", { count: g.items.length })}
+                      </span>
                       {isCollapsible && (
                         <span className="rounded border border-line-soft bg-card px-2 py-0.5 text-[11px] font-semibold text-muted hover:text-ink">
-                          {isCollapsed ? "▼ 展開清單" : "▲ 收合清單"}
+                          {isCollapsed
+                            ? "▼ " + t("slips.common.expandList", "展開清單")
+                            : "▲ " + t("slips.common.collapseList", "收合清單")}
                         </span>
                       )}
                     </div>
@@ -759,13 +747,15 @@ export function VenueSlip({ venueName, globalVenueShows, unitData, onSelectShow,
                             </div>
                             <div className="flex shrink-0 items-center gap-2 font-mono text-[11px] tabular-nums">
                               <span className="rounded bg-paper px-2 py-0.5 font-semibold text-muted border border-line-soft">
-                                {songCount > 0 ? `${songCount} 首曲目` : "尚無曲目"}
+                                {songCount > 0
+                                  ? t("navigators.songsCount", "共 {count} 首曲目", { count: songCount })
+                                  : t("slips.noSongsRecorded", "尚無曲目")}
                               </span>
                               <span
                                 className="font-bold text-pool opacity-80 group-hover:translate-x-0.5 transition-transform"
                                 aria-hidden="true"
                               >
-                                檢視歌單 →
+                                {t("slips.venue.viewSetlist", "檢視歌單 →")}
                               </span>
                             </div>
                           </a>

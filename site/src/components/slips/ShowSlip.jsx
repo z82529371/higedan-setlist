@@ -329,7 +329,7 @@ export function ShowSlip({
     <article
       ref={slipRef}
       className={SLIP_ARTICLE}
-      aria-label="場次曲目清單"
+      aria-label={t("showExtra.setlistAria", "場次曲目清單")}
     >
       <span aria-hidden="true" className={SLIP_TAPE} />
       <div className="relative rounded-t-[2px] bg-black/[0.025] dark:bg-white/[0.025] -mx-[26px] max-sm:-mx-4 -mt-[46px] max-sm:-mt-[42px] px-[26px] max-sm:px-4 pt-[46px] max-sm:pt-[42px] pb-3">
@@ -345,7 +345,7 @@ export function ShowSlip({
                 ? `第 ${currentIdx + 1} / ${showList.length} 公演`
                 : locale === "ko"
                 ? `제 ${currentIdx + 1} / ${showList.length} 회`
-                : `TOUR SHOW ${currentIdx + 1} / ${showList.length}`}
+                : `第 ${currentIdx + 1} / ${showList.length} 場`}
             </span>
           )}
         </div>
@@ -393,7 +393,7 @@ export function ShowSlip({
                     onSelectVenue(s.venue);
                   }}
                   className="group inline text-ink no-underline hover:text-pool transition-colors cursor-pointer"
-                  title="查看此場地的全歷史演出檔案"
+                  title={t("showExtra.venueFileTitle", "查看此場地的全歷史演出檔案")}
                 >
                   <span className="group-hover:underline">{s.venue}</span>
                   {s.city && (
@@ -405,7 +405,7 @@ export function ShowSlip({
                     className="ml-2 inline-flex items-center gap-0.5 rounded border border-pool/30 bg-pool/5 px-1.5 py-0.5 font-mono text-[11px] font-bold text-pool align-middle whitespace-nowrap group-hover:bg-pool group-hover:text-white transition-colors"
                     aria-hidden="true"
                   >
-                    <span>🏛️ 檔案</span>
+                    <span>🏛️ {t("showExtra.venueFileLabel", "檔案")}</span>
                     <span>→</span>
                   </span>
                 </a>
@@ -437,7 +437,7 @@ export function ShowSlip({
                     onSelectVenue(s.venue);
                   }}
                   className="text-ink hover:text-pool hover:underline transition-colors cursor-pointer"
-                  title="查看此場地的全歷史演出檔案"
+                  title={t("showExtra.venueFileTitle", "查看此場地的全歷史演出檔案")}
                 >
                   {s.venue}
                 </a>
@@ -467,9 +467,9 @@ export function ShowSlip({
                     onSelectVenue(s.venue);
                   }}
                   className="inline-flex items-center gap-1 rounded border border-pool/30 bg-pool/5 px-2 py-0.5 font-mono text-[11px] font-bold text-pool whitespace-nowrap hover:bg-pool hover:text-white transition-colors cursor-pointer"
-                  title="查看此場地的全歷史演出檔案"
+                  title={t("showExtra.venueFileTitle", "查看此場地的全歷史演出檔案")}
                 >
-                  <span>🏛️ 檔案</span>
+                  <span>🏛️ {t("showExtra.venueFileLabel", "檔案")}</span>
                   <span aria-hidden="true">→</span>
                 </a>
               )}
@@ -484,7 +484,7 @@ export function ShowSlip({
                   type="button"
                   onClick={() => onSelectShow(prevShow.id)}
                   className="group inline-flex items-center gap-1 font-semibold text-ink hover:text-pool cursor-pointer transition-colors min-h-[38px] px-2 py-1 sm:min-h-0 sm:p-0 rounded touch-stamp"
-                  title={`上一場：${showDate(prevShow, locale)} ${prevShow.city || prevShow.venue}`}
+                  title={t("showExtra.prevTitle", `上一場：${showDate(prevShow, locale)} ${prevShow.city || prevShow.venue}`, { date: showDate(prevShow, locale), place: prevShow.city || prevShow.venue })}
                 >
                   <span aria-hidden="true" className="text-base sm:text-xs">←</span>
                   <span>{t("actions.prev", "上一場")}</span>
@@ -523,7 +523,7 @@ export function ShowSlip({
                   type="button"
                   onClick={() => onSelectShow(nextShow.id)}
                   className="group inline-flex items-center gap-1 font-semibold text-ink hover:text-pool cursor-pointer transition-colors min-h-[38px] px-2 py-1 sm:min-h-0 sm:p-0 rounded touch-stamp"
-                  title={`下一場：${showDate(nextShow)} ${nextShow.city || nextShow.venue}`}
+                  title={t("showExtra.nextTitle", `下一場：${showDate(nextShow, locale)} ${nextShow.city || nextShow.venue}`, { date: showDate(nextShow, locale), place: nextShow.city || nextShow.venue })}
                 >
                   <span className="hidden sm:inline text-muted group-hover:text-pool">
                     ({nextShow.date.slice(5)} {nextShow.city || nextShow.venue})
@@ -547,10 +547,10 @@ export function ShowSlip({
                 type="button"
                 onClick={() => setShowMemorialModal(true)}
                 className="inline-flex items-center justify-center gap-1.5 rounded bg-band px-3 py-1.5 text-[11px] font-mono font-bold text-band-ink border border-ink/40 shadow-xs hover:brightness-105 active:scale-[0.98] transition-all cursor-pointer select-none"
-                title="預覽並自訂儲存本場巡演歌單紀念小卡"
+                title={t("showExtra.previewMemorialTitle", "預覽並自訂儲存本場巡演歌單紀念小卡")}
               >
                 <span aria-hidden="true">📸</span>
-                <span>產生紀念小卡</span>
+                <span>{t("slips.generateMemorialCard", "產生紀念小卡")}</span>
               </button>
 
               <button
@@ -561,9 +561,9 @@ export function ShowSlip({
                     ? "bg-band text-band-ink border-band shadow-xs"
                     : "bg-paper text-ink border-line-soft hover:bg-tape-tint/50 hover:border-ink/60"
                 }`}
-                title="複製標準歌單純文字"
+                title={t("showExtra.copyPlainTitle", "複製標準歌單純文字")}
               >
-                <span>{copied ? "✓ 已複製" : "📋 複製歌單"}</span>
+                <span>{copied ? t("slips.copied", "✓ 已複製") : t("slips.copySetlist", "📋 複製歌單")}</span>
               </button>
             </div>
 
@@ -572,9 +572,9 @@ export function ShowSlip({
               onClick={() => setShowMoreTools((v) => !v)}
               className="inline-flex items-center justify-center gap-1 rounded bg-paper hover:bg-tape-tint/50 px-2.5 py-1.5 text-[11px] font-mono font-bold text-ink border border-line-soft hover:border-ink/60 transition-colors cursor-pointer select-none"
               aria-expanded={showMoreTools}
-              title="展開更多工具（雙場曲目比對、專輯分佈、圖例與資料來源）"
+              title={t("showExtra.expandToolsTitle", "展開更多工具（雙場曲目比對、專輯分佈、圖例與資料來源）")}
             >
-              <span>{showMoreTools ? "收合工具 ▴" : "🛠️ 更多工具 ▾"}</span>
+              <span>{showMoreTools ? t("slips.panels.collapseTools", "收合工具 ▴") : t("slips.panels.moreTools", "🛠️ 更多工具 ▾")}</span>
             </button>
           </div>
 
@@ -588,7 +588,7 @@ export function ShowSlip({
               className="inline-flex shrink-0 items-center gap-1 rounded bg-paper px-2.5 py-1.5 sm:py-1 text-[11px] font-mono font-bold text-ink border border-line-soft hover:bg-tape-tint/50 transition-colors cursor-pointer select-none"
               aria-expanded={showLegend}
             >
-              <span>{showLegend ? "▾ 記號圖例" : "▸ 記號圖例"}</span>
+              <span>{showLegend ? "▾ " + t("slips.panels.badgeLegend", "記號圖例") : "▸ " + t("slips.panels.badgeLegend", "記號圖例")}</span>
             </button>
 
             {setlistDiff && !setlistDiff.identical && (
@@ -598,9 +598,9 @@ export function ShowSlip({
                 className="inline-flex shrink-0 items-center gap-1 rounded bg-paper px-2.5 py-1.5 sm:py-1 text-[11px] font-mono font-bold text-ink border border-line-soft hover:bg-tape-tint/50 transition-colors cursor-pointer select-none"
                 aria-expanded={showDiff}
               >
-                <span>{showDiff ? "▾ 曲目更換" : "▸ 曲目更換"}</span>
+                <span>{showDiff ? "▾ " + t("slips.panels.trackDiff", "曲目更換") : "▸ " + t("slips.panels.trackDiff", "曲目更換")}</span>
                 <span className="text-request font-bold">
-                  ({setlistDiff.added.length}首)
+                  ({setlistDiff.added.length}{t("slips.panels.songUnit", "首")})
                 </span>
               </button>
             )}
@@ -612,7 +612,7 @@ export function ShowSlip({
                 className="inline-flex shrink-0 items-center gap-1 rounded bg-paper px-2.5 py-1.5 sm:py-1 text-[11px] font-mono font-bold text-ink border border-line-soft hover:bg-tape-tint/50 transition-colors cursor-pointer select-none"
                 aria-expanded={showAnalysis}
               >
-                <span>{showAnalysis ? "▾ 專輯分佈" : "▸ 專輯分佈"}</span>
+                <span>{showAnalysis ? "▾ " + t("slips.panels.albumBreakdown", "專輯分佈") : "▸ " + t("slips.panels.albumBreakdown", "專輯分佈")}</span>
               </button>
             )}
 
@@ -623,7 +623,7 @@ export function ShowSlip({
                 className="inline-flex shrink-0 items-center gap-1 rounded bg-paper px-2.5 py-1.5 sm:py-1 text-[11px] font-mono font-bold text-ink border border-line-soft hover:bg-tape-tint/50 transition-colors cursor-pointer select-none"
                 aria-expanded={showCompare}
               >
-                <span>{showCompare ? "▾ 雙場對比" : "▸ ⚖️ 雙場對比"}</span>
+                <span>{showCompare ? "▾ " + t("slips.panels.showComparison", "雙場對比") : "▸ ⚖️ " + t("slips.panels.showComparison", "雙場對比")}</span>
               </button>
             )}
           </div>
@@ -631,7 +631,7 @@ export function ShowSlip({
           {/* Provenance Data Sources (Show-Level Verified Sources) */}
           <div className="flex flex-wrap items-center gap-1.5 pt-1.5 border-t border-line-soft/60 text-[11px] font-mono">
             <span className="text-muted font-bold flex items-center gap-1 shrink-0">
-              <span aria-hidden="true">🔍</span> 資料考證來源：
+              <span aria-hidden="true">🔍</span> {t("slips.panels.verifiedSources", "資料考證來源：")}
             </span>
             {s.sourceUrls && s.sourceUrls.length > 0 ? (
               s.sourceUrls.map((url, idx) => (
@@ -641,15 +641,15 @@ export function ShowSlip({
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-1 rounded px-2 py-0.5 bg-paper text-ink border border-line-soft hover:border-ink hover:bg-band hover:text-band-ink transition-colors font-bold cursor-pointer"
-                  title={`開啟一手來源：${url}`}
+                  title={t("showExtra.sourceOpenTitle", `開啟一手來源：${url}`, { url })}
                 >
-                  <span>🔗 {getSourceLabel(url)}</span>
+                  <span>🔗 {getSourceLabel(url, t)}</span>
                   <span className="text-[10px] opacity-60" aria-hidden="true">↗</span>
                 </a>
               ))
             ) : (
               <span className="inline-flex items-center gap-1 rounded px-2 py-0.5 bg-paper text-muted border border-line-soft font-medium">
-                LiveFans 公開檔案庫查證
+                {t("slips.panels.livefansVerified", "LiveFans 公開檔案庫查證")}
               </span>
             )}
           </div>
@@ -679,9 +679,9 @@ export function ShowSlip({
 
       {items.length === 0 ? (
         <div className="my-8 rounded-[3px] border border-dashed border-line bg-paper px-6 py-8 text-center">
-          <p className="m-0 text-[16px] font-bold text-ink">🔍 歌單情報未明</p>
+          <p className="m-0 text-[16px] font-bold text-ink">🔍 {t("slips.setlistInfoUnknown", "歌單情報未明")}</p>
           <p className="m-0 mt-2 text-[13px] text-muted">
-            本場演出目前尚無公開曲目紀錄
+            {t("slips.noPublicSetlist", "本場演出目前尚無公開曲目紀錄")}
           </p>
         </div>
       ) : (

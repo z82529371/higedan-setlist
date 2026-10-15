@@ -95,7 +95,7 @@ export function TourSlip({
                 onSelectSong(track.songId);
               }}
               className={SETLIST_SONG}
-              title={`查看歌曲檔案：《${track.title}》`}
+              title={t("tourExtra.viewSongFile", "查看歌曲檔案：《{title}》", { title: track.title })}
             >
               <span className="font-bold text-[14px] sm:text-[15px]">{track.title}</span>
             </a>
@@ -137,7 +137,7 @@ export function TourSlip({
       <div className="flex shrink-0 items-center justify-end gap-1.5 sm:gap-2 ml-auto">
         <span
           className={`inline-flex items-center gap-1 sm:gap-1.5 rounded px-1.5 sm:px-2 py-0.5 text-[10px] sm:text-[11px] font-mono select-none ${track.badgeClass}`}
-          title={`此巡演共登場 ${track.count} 場（全 ${track.totalShows} 場 · 登場率 ${track.percentage}%）`}
+          title={t("tourExtra.attendanceRate", "此巡演共登場 {count} 場（全 {total} 場 · 登場率 {rate}%）", { count: track.count, total: track.totalShows, rate: track.percentage })}
         >
           <span className={tierConfig.markerClass} aria-hidden="true">
             {tierConfig.marker}
@@ -181,7 +181,7 @@ export function TourSlip({
       {track.shows && track.shows.length > 0 && (
         <div className="pl-1 sm:pl-2 flex flex-wrap items-center gap-1.5 pt-1">
           <span className="text-[11px] font-mono text-muted select-none">
-            演出場次：
+            {t("slips.tour.showsLabel", "演出場次：")}
           </span>
           {track.shows.map((s) => (
             <a
@@ -211,7 +211,7 @@ export function TourSlip({
   return (
     <article
       className={`${SLIP_ARTICLE} max-w-[960px] mx-auto`}
-      aria-label="巡演總覽"
+      aria-label={t("tourExtra.ariaTourOverview", "巡演總覽")}
     >
       <span aria-hidden="true" className={SLIP_TAPE} />
 
@@ -255,7 +255,14 @@ export function TourSlip({
               </span>
               {stats.prefecturesCount > 0 && (
                 <span className="inline-flex items-center gap-1 rounded bg-paper px-1.5 sm:px-2 py-0.5 text-[11px] sm:text-xs text-muted border border-line-soft">
-                  {stats.prefecturesCount} 都道府縣 · {stats.citiesCount} 城市
+                  {t(
+                    "slips.tour.prefecturesCities",
+                    `${stats.prefecturesCount} 都道府縣 · ${stats.citiesCount} 城市`,
+                    {
+                      prefecturesCount: stats.prefecturesCount,
+                      citiesCount: stats.citiesCount,
+                    }
+                  )}
                 </span>
               )}
             </div>
@@ -264,7 +271,7 @@ export function TourSlip({
           {/* Frequency Hierarchy Pills Bar */}
           <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 pt-0.5 font-mono text-[10.5px] sm:text-[11px]">
             <div className="flex items-center gap-1 text-muted font-bold shrink-0">
-              <span aria-hidden="true">📊</span> 登場曲目統計：
+              <span aria-hidden="true">📊</span> {t("slips.tour.trackStatsTitle", "登場曲目統計：")}
             </div>
             <div className="flex flex-wrap items-center gap-1.5">
               <button
@@ -275,7 +282,7 @@ export function TourSlip({
                     ?.scrollIntoView({ behavior: "smooth" });
                 }}
                 className={`inline-flex items-center gap-1 sm:gap-1.5 rounded px-1.5 sm:px-2 py-0.5 cursor-pointer hover:border-ink transition-colors touch-stamp ${FREQUENCY_TIER_CONFIG.core.badgeClass}`}
-                title="點擊跳轉至巡演定番歌單"
+                title={t("tourExtra.jumpConsensus", "點擊跳轉至巡演定番歌單")}
               >
                 <span className={FREQUENCY_TIER_CONFIG.core.markerClass} aria-hidden="true">
                   {FREQUENCY_TIER_CONFIG.core.marker}
@@ -291,7 +298,7 @@ export function TourSlip({
                       ?.scrollIntoView({ behavior: "smooth" });
                   }}
                   className={`inline-flex items-center gap-1 sm:gap-1.5 rounded px-1.5 sm:px-2 py-0.5 cursor-pointer hover:border-ink transition-colors touch-stamp ${FREQUENCY_TIER_CONFIG.regular.badgeClass}`}
-                  title="點擊跳轉至巡演定番歌單"
+                  title={t("tourExtra.jumpConsensus", "點擊跳轉至巡演定番歌單")}
                 >
                   <span className={FREQUENCY_TIER_CONFIG.regular.markerClass} aria-hidden="true">
                     {FREQUENCY_TIER_CONFIG.regular.marker}
@@ -309,7 +316,7 @@ export function TourSlip({
                     el?.scrollIntoView({ behavior: "smooth" });
                   }}
                   className={`inline-flex items-center gap-1 sm:gap-1.5 rounded px-1.5 sm:px-2 py-0.5 cursor-pointer hover:border-ink transition-colors touch-stamp ${FREQUENCY_TIER_CONFIG.rotating.badgeClass}`}
-                  title="點擊跳轉至雙日輪替曲目"
+                  title={t("tourExtra.jumpRotating", "點擊跳轉至雙日輪替曲目")}
                 >
                   <span className={FREQUENCY_TIER_CONFIG.rotating.markerClass} aria-hidden="true">
                     {FREQUENCY_TIER_CONFIG.rotating.marker}
@@ -326,7 +333,7 @@ export function TourSlip({
                       ?.scrollIntoView({ behavior: "smooth" });
                   }}
                   className={`inline-flex items-center gap-1 sm:gap-1.5 rounded px-1.5 sm:px-2 py-0.5 cursor-pointer hover:border-ink transition-colors touch-stamp ${FREQUENCY_TIER_CONFIG.surprise.badgeClass}`}
-                  title="點擊跳轉至巡演場次限定曲專區"
+                  title={t("tourExtra.jumpSurprise", "點擊跳轉至巡演場次限定曲專區")}
                 >
                   <span className={FREQUENCY_TIER_CONFIG.surprise.markerClass} aria-hidden="true">
                     {FREQUENCY_TIER_CONFIG.surprise.marker}
@@ -342,9 +349,9 @@ export function TourSlip({
                     ?.scrollIntoView({ behavior: "smooth" });
                 }}
                 className="inline-flex items-center gap-1 rounded px-1.5 sm:px-2 py-0.5 bg-paper text-muted border border-line-soft cursor-pointer hover:border-ink hover:text-ink transition-colors touch-stamp"
-                title="點擊跳轉至全國巡演日程足跡"
+                title={t("tourExtra.jumpItinerary", "點擊跳轉至全國巡演日程足跡")}
               >
-                <span>總演出曲目：{stats.uniqueSongsCount} {t("navigators.songsUnit", "首")}</span>
+                <span>{t("tourExtra.totalTracks", "總演出曲目：{count} 首", { count: stats.uniqueSongsCount })}</span>
               </button>
             </div>
           </div>
@@ -360,9 +367,9 @@ export function TourSlip({
           id="consensus-template-section"
           className="my-8 rounded-[3px] border border-dashed border-line bg-paper px-6 py-8 text-center"
         >
-          <p className="m-0 text-[16px] font-bold text-ink">🔍 歌單情報未明</p>
+          <p className="m-0 text-[16px] font-bold text-ink">🔍 {t("tourExtra.emptyTitle", "歌單情報未明")}</p>
           <p className="m-0 mt-2 text-[13px] text-muted">
-            此巡演目前尚無定番歌單紀錄
+            {t("tourExtra.emptyDesc", "此巡演目前尚無定番歌單紀錄")}
           </p>
         </div>
       ) : (
@@ -431,7 +438,7 @@ export function TourSlip({
           {!isRotatingCollapsed && (
             <>
               <p className="text-[12px] text-muted m-0">
-                巡演期間於不同場次（如 Day 2）常態切換登場之雙日輪替曲目：
+                {t("tourExtra.rotatingDesc", "巡演期間於不同場次（如 Day 2）常態切換登場之雙日輪替曲目：")}
               </p>
 
               <ol className="m-0 list-none p-0 divide-y divide-line-soft/50">
@@ -466,7 +473,10 @@ export function TourSlip({
           {!isSurpriseCollapsed && (
             <>
               <p className="text-[12px] text-muted m-0">
-                未收錄於巡演定番歌單但於特定場次驚喜登場之限定曲目：
+                {t(
+                  "slips.tour.specialTracksDesc",
+                  "未收錄於巡演定番歌單但於特定場次驚喜登場之限定曲目："
+                )}
               </p>
 
               <ol className="m-0 list-none p-0 divide-y divide-line-soft/50">
@@ -506,7 +516,7 @@ export function TourSlip({
                   <div className="flex min-w-0 items-baseline gap-1.5 sm:gap-2.5 flex-1">
                     <span className="min-w-[28px] sm:min-w-[36px] text-right text-line select-none font-mono text-[12px] tabular-nums shrink-0">—</span>
                     <span className="font-medium text-ink">
-                      {it.item.note || it.item.title || "特別過場"}
+                      {it.item.note || it.item.title || t("tourExtra.interludeFallback", "特別過場")}
                     </span>
                   </div>
                   <div className="shrink-0 ml-auto">
@@ -548,7 +558,10 @@ export function TourSlip({
           </div>
 
           <p className="text-[12px] text-muted m-0">
-            按時序排列之巡迴站點、演出場館、所在城市與開演時刻（點擊直達該場單場票根）：
+            {t(
+              "slips.tour.itineraryDesc",
+              "按時序排列之巡迴站點、演出場館、所在城市與開演時刻（點擊直達該場單場票根）："
+            )}
           </p>
 
           <ol className="m-0 list-none p-0 divide-y divide-line-soft/50">
@@ -598,7 +611,7 @@ export function TourSlip({
                             }
                           }}
                           className="inline-flex items-center gap-1 sm:gap-1.5 rounded-[3px] px-1.5 sm:px-2.5 py-0.5 sm:py-1 text-[11px] sm:text-xs font-mono font-bold border border-line-soft bg-paper group-hover:border-ink group-hover:text-ink text-muted transition-colors cursor-pointer touch-stamp"
-                          title={`查看 ${stop.date} ${stop.venue} 單場演出票根`}
+                          title={t("tourExtra.viewShowTicket", "查看 {date} {venue} 單場演出票根", { date: stop.date, venue: stop.venue })}
                         >
                           <span>🎫</span>
                           <span className="hidden sm:inline">{t("slips.viewTicket", "查看票根")}</span>
@@ -682,10 +695,8 @@ export function TourSlip({
               >
                 <span>
                   {isItineraryExpanded
-                    ? "▲ 收合巡演日程（僅顯示前 10 場）"
-                    : `▼ 展開全部日程（全 ${itinerary.length} 場 · 尚有 ${
-                        itinerary.length - ITINERARY_COLLAPSE_THRESHOLD
-                      } 場）`}
+                    ? t("tourExtra.itineraryCollapse", "▲ 收合巡演日程（僅顯示前 10 場）")
+                    : t("tourExtra.itineraryExpand", "▼ 展開全部日程（全 {total} 場 · 尚有 {rest} 場）", { total: itinerary.length, rest: itinerary.length - 10 })}
                 </span>
               </button>
             </div>
