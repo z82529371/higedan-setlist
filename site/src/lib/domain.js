@@ -30,24 +30,28 @@ export function getSongAlbum(song) {
 
 /**
  * 格式化演出時間（開場／開演時間領域規範）
- * 1. 雙時間俱備：`17:00 開場 / 18:00 開演`
- * 2. 僅開演時刻（startsAt 或歷史單一時間 opensAt）：`18:00 開演`
- * 3. 無時間：`null`
+ * en: `Doors 17:00 / Start 18:00` 或 `Start 18:00`
+ * ko: `17:00 입장 / 18:00 시작` 或 `18:00 시작`
+ * zh-TW / ja: `17:00 開場 / 18:00 開演` 或 `18:00 開演`
  */
-export function formatShowTime(show) {
+export function formatShowTime(show, locale = "zh-TW") {
   if (!show) return null;
   const { opensAt, startsAt } = show;
-  if (opensAt && startsAt) {
-    return `${opensAt} 開場 / ${startsAt} 開演`;
+  if (!opensAt && !startsAt) return null;
+
+  if (locale === "en") {
+    if (opensAt && startsAt) return `Doors ${opensAt} / Start ${startsAt}`;
+    return `Start ${startsAt || opensAt}`;
   }
-  if (startsAt) {
-    return `${startsAt} 開演`;
+  if (locale === "ko") {
+    if (opensAt && startsAt) return `${opensAt} 입장 / ${startsAt} 시작`;
+    return `${startsAt || opensAt} 시작`;
   }
-  if (opensAt) {
-    return `${opensAt} 開演`;
-  }
-  return null;
+  // zh-TW and ja share 開場 / 開演 notation
+  if (opensAt && startsAt) return `${opensAt} 開場 / ${startsAt} 開演`;
+  return `${startsAt || opensAt} 開演`;
 }
+
 
 export function getVenueRegion(v) {
   const r = v.region ?? "";
@@ -57,6 +61,7 @@ export function getVenueRegion(v) {
 
   if (
     r === "海外" ||
+    r === "海外（台灣 / 韓國 / 東南亞）" ||
     p.includes("台灣") ||
     p.includes("韓國") ||
     p.includes("泰國") ||
@@ -75,20 +80,26 @@ export function getVenueRegion(v) {
 
   if (
     r === "關東" ||
+    r === "日本 - 關東" ||
     p.includes("東京") ||
     p.includes("神奈川") ||
     p.includes("埼玉") ||
-    p.includes("千葉")
+    p.includes("千葉") ||
+    c.includes("東京") ||
+    c.includes("橫濱")
   ) {
     return "日本 - 關東";
   }
 
   if (
     r === "關西" ||
+    r === "日本 - 關西" ||
     p.includes("大阪") ||
     p.includes("兵庫") ||
     p.includes("京都") ||
-    p.includes("奈良")
+    p.includes("奈良") ||
+    c.includes("大阪") ||
+    c.includes("神戶")
   ) {
     return "日本 - 關西";
   }
@@ -96,13 +107,16 @@ export function getVenueRegion(v) {
   if (
     r === "東北" ||
     r === "北海道" ||
+    r === "日本 - 東北 / 北海道" ||
     p.includes("北海道") ||
     p.includes("宮城") ||
     p.includes("青森") ||
     p.includes("岩手") ||
     p.includes("秋田") ||
     p.includes("山形") ||
-    p.includes("福島")
+    p.includes("福島") ||
+    c.includes("札幌") ||
+    c.includes("仙台")
   ) {
     return "日本 - 東北 / 北海道";
   }
@@ -110,12 +124,36 @@ export function getVenueRegion(v) {
   return "日本 - 中部 / 九州 / 其他";
 }
 
-export function showDate(s) {
-  return s.weekday ? `${s.date}（${s.weekday}）` : s.date;
+export const WEEKDAYS = {
+  "zh-TW": ["日", "一", "二", "三", "四", "五", "六"],
+  ja: ["日", "月", "火", "水", "木", "金", "土"],
+  en: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+  ko: ["일", "월", "화", "수", "목", "금", "토"],
+};
+
+export function getWeekdayIndex(dateStr) {
+  if (!dateStr || typeof dateStr !== "string") return -1;
+  const normalized = dateStr.replace(/\./g, "-");
+  const d = new Date(normalized + "T00:00:00Z");
+  return isNaN(d.getTime()) ? -1 : d.getUTCDay();
 }
 
-export function showLabel(s) {
-  return `${showDate(s)} ${s.venue}（${s.city}）`;
+export function showDate(s, locale = "zh-TW") {
+  if (!s || !s.date) return "";
+  const dayIdx = getWeekdayIndex(s.date);
+  if (dayIdx === -1) {
+    return s.weekday ? `${s.date}（${s.weekday}）` : s.date;
+  }
+  const days = WEEKDAYS[locale] || WEEKDAYS["zh-TW"];
+  const w = days[dayIdx];
+  if (locale === "en") {
+    return `${s.date} (${w})`;
+  }
+  return `${s.date}（${w}）`;
+}
+
+export function showLabel(s, locale = "zh-TW") {
+  return `${showDate(s, locale)} ${s.venue}（${s.city}）`;
 }
 
 export function shortUnitTitle(unit) {

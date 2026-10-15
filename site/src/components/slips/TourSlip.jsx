@@ -9,12 +9,15 @@ import {
   getUnitTypeLabel,
   computeTourStatistics,
   FREQUENCY_TIER_CONFIG,
+  showDate,
+  formatShowTime,
 } from "../../lib/domain.js";
 import { routeHash } from "../../lib/track.js";
 import {
   TicketPerforationDivider,
   TicketBarcodeFooter,
 } from "./TicketCommon.jsx";
+import { useI18n } from "../../lib/i18n.jsx";
 
 function formatShowBadgeLabel(show) {
   if (!show) return "";
@@ -32,6 +35,7 @@ export function TourSlip({
   onSelectShow,
   initialItineraryExpanded = false,
 }) {
+  const { t, locale } = useI18n();
   const targetData = tourUnitData || ud || tourData;
 
   const statsResult = useMemo(() => {
@@ -110,7 +114,7 @@ export function TourSlip({
                     className={`inline-block h-1.5 w-1.5 rounded-full ${b.dotClass} mr-1`}
                     aria-hidden="true"
                   />
-                  <span>{b.label}</span>
+                  <span>{t(`badges.${b.type === "solo" ? "satoshi-solo" : b.type}`, b.label)}</span>
                 </span>
               ))}
             </div>
@@ -123,6 +127,12 @@ export function TourSlip({
   const renderFrequencyPill = (track) => {
     const tierConfig =
       FREQUENCY_TIER_CONFIG[track.tier] || FREQUENCY_TIER_CONFIG.surprise;
+    const tierLabel = t(`tiers.${track.tier}`, track.tierLabel);
+    const tierBadgeLabel =
+      track.tier === "core"
+        ? (locale === "en" ? "Core 100%" : `${tierLabel} 100%`)
+        : `${tierLabel} ${track.percentage}%`;
+
     return (
       <div className="flex shrink-0 items-center justify-end gap-1.5 sm:gap-2 ml-auto">
         <span
@@ -132,11 +142,11 @@ export function TourSlip({
           <span className={tierConfig.markerClass} aria-hidden="true">
             {tierConfig.marker}
           </span>
-          <span>{track.tierBadgeLabel}</span>
+          <span>{tierBadgeLabel}</span>
         </span>
 
         <span className="font-mono text-[10px] sm:text-[11px] text-muted tabular-nums whitespace-nowrap">
-          {track.count} / {totalShows} 場
+          {track.count} / {totalShows} {t("navigators.showsUnit", "場")}
         </span>
       </div>
     );
@@ -209,8 +219,8 @@ export function TourSlip({
       <div className="relative rounded-t-[2px] bg-black/[0.025] dark:bg-white/[0.025] -mx-[26px] max-sm:-mx-4 -mt-[46px] max-sm:-mt-[42px] px-[26px] max-sm:px-4 pt-[46px] max-sm:pt-[42px] pb-4">
         {/* Monogram Stage Run Sheet Subtitle */}
         <div className="font-mono text-[9.5px] sm:text-[10px] tracking-[0.16em] sm:tracking-[0.22em] font-extrabold uppercase text-muted/70 pb-1.5 flex flex-wrap items-center justify-between gap-1">
-          <span className="truncate">OFFICIAL HIGEDAN DISM // TOUR CONSENSUS MASTER SHEET</span>
-          <span className="text-band font-bold shrink-0">ALL ACCESS TOUR OVERVIEW</span>
+          <span className="truncate">{t("slips.tourConsensusMasterSheet", "OFFICIAL HIGEDAN DISM // TOUR CONSENSUS MASTER SHEET")}</span>
+          <span className="text-band font-bold shrink-0">{t("slips.allAccessTourOverview", "ALL ACCESS TOUR OVERVIEW")}</span>
         </div>
 
         {/* Level 1: Artist branding & Category badge */}
@@ -220,7 +230,7 @@ export function TourSlip({
             Official 髭男 dism
           </div>
           <span className="inline-flex items-center rounded-[3px] border border-ink/30 bg-band/15 px-2 py-0.5 font-mono text-xs font-bold text-band-ink">
-            {getUnitTypeLabel(tour)}
+            {t(`categories.${getUnitTypeLabel(tour)}`, getUnitTypeLabel(tour))}
           </span>
         </div>
 
@@ -241,7 +251,7 @@ export function TourSlip({
             </div>
             <div className="flex items-center gap-1.5 sm:gap-2 font-bold text-ink tabular-nums">
               <span className="inline-flex items-center gap-1 rounded bg-tape-tint/70 px-2 py-0.5 text-[11px] sm:text-xs text-ink border border-ink/30">
-                全 {totalShows} 場次
+                {t("slips.totalShows", `全 ${totalShows} 場次`).replace("{count}", totalShows)}
               </span>
               {stats.prefecturesCount > 0 && (
                 <span className="inline-flex items-center gap-1 rounded bg-paper px-1.5 sm:px-2 py-0.5 text-[11px] sm:text-xs text-muted border border-line-soft">
@@ -270,7 +280,7 @@ export function TourSlip({
                 <span className={FREQUENCY_TIER_CONFIG.core.markerClass} aria-hidden="true">
                   {FREQUENCY_TIER_CONFIG.core.marker}
                 </span>
-                <span>核心全勤：{stats.coreCount} 首</span>
+                <span>{t("tiers.core", "核心全勤")}：{stats.coreCount} {t("navigators.songsUnit", "首")}</span>
               </button>
               {stats.regularCount > 0 && (
                 <button
@@ -286,7 +296,7 @@ export function TourSlip({
                   <span className={FREQUENCY_TIER_CONFIG.regular.markerClass} aria-hidden="true">
                     {FREQUENCY_TIER_CONFIG.regular.marker}
                   </span>
-                  <span>巡演定番：{stats.regularCount} 首</span>
+                  <span>{t("tiers.regular", "巡演定番")}：{stats.regularCount} {t("navigators.songsUnit", "首")}</span>
                 </button>
               )}
               {stats.rotatingCount > 0 && (
@@ -304,7 +314,7 @@ export function TourSlip({
                   <span className={FREQUENCY_TIER_CONFIG.rotating.markerClass} aria-hidden="true">
                     {FREQUENCY_TIER_CONFIG.rotating.marker}
                   </span>
-                  <span>雙日輪替：{stats.rotatingCount} 首</span>
+                  <span>{t("tiers.rotating", "雙日輪替")}：{stats.rotatingCount} {t("navigators.songsUnit", "首")}</span>
                 </button>
               )}
               {stats.surpriseCount > 0 && (
@@ -321,7 +331,7 @@ export function TourSlip({
                   <span className={FREQUENCY_TIER_CONFIG.surprise.markerClass} aria-hidden="true">
                     {FREQUENCY_TIER_CONFIG.surprise.marker}
                   </span>
-                  <span>場次限定：{stats.surpriseCount} 首</span>
+                  <span>{t("tiers.surprise", "場次限定")}：{stats.surpriseCount} {t("navigators.songsUnit", "首")}</span>
                 </button>
               )}
               <button
@@ -334,7 +344,7 @@ export function TourSlip({
                 className="inline-flex items-center gap-1 rounded px-1.5 sm:px-2 py-0.5 bg-paper text-muted border border-line-soft cursor-pointer hover:border-ink hover:text-ink transition-colors touch-stamp"
                 title="點擊跳轉至全國巡演日程足跡"
               >
-                <span>總演出曲目：{stats.uniqueSongsCount} 首</span>
+                <span>總演出曲目：{stats.uniqueSongsCount} {t("navigators.songsUnit", "首")}</span>
               </button>
             </div>
           </div>
@@ -361,7 +371,7 @@ export function TourSlip({
           <div>
             <div className="flex items-center justify-between font-mono text-xs font-bold uppercase tracking-wider text-muted pb-1.5 mb-1 border-b border-line-soft">
               <span className="flex items-center gap-1.5 text-ink font-extrabold">
-                <span className="text-band">◆</span> CONSENSUS TEMPLATE // 巡演定番歌單
+                <span className="text-band">◆</span> {t("slips.consensusTemplate", "CONSENSUS TEMPLATE // 巡演定番歌單")}
               </span>
               <span className="tabular-nums text-xs font-mono">{mainTracks.length} SONGS</span>
             </div>
@@ -380,7 +390,7 @@ export function TourSlip({
                 aria-expanded={!isEncoreCollapsed}
               >
                 <span className="flex items-center gap-1.5">
-                  <span>◆</span> ENCORE // 安可定番歌單
+                  <span>◆</span> {t("slips.encoreTemplate", "ENCORE // 安可定番歌單")}
                 </span>
                 <span className="flex items-center gap-1.5 tabular-nums text-xs text-muted font-mono">
                   <span>{encTracks.length} SONGS</span>
@@ -410,7 +420,7 @@ export function TourSlip({
             aria-expanded={!isRotatingCollapsed}
           >
             <span className="flex items-center gap-1.5 text-ink font-extrabold">
-              <span className="text-amber-600 dark:text-amber-400">▲</span> ROTATING TRACKS // 雙日輪替曲目
+              <span className="text-amber-600 dark:text-amber-400">▲</span> {t("slips.rotatingTracks", "ROTATING TRACKS // 雙日輪替曲目")}
             </span>
             <span className="flex items-center gap-1.5 tabular-nums text-xs text-muted font-mono">
               <span>{nonTemplateRotatingTracks.length} SONGS (30-70%)</span>
@@ -445,7 +455,7 @@ export function TourSlip({
             aria-expanded={!isSurpriseCollapsed}
           >
             <span className="flex items-center gap-1.5 text-ink font-extrabold">
-              <span className="text-band">◆</span> SPECIAL INSERTS // 巡演場次限定曲
+              <span className="text-band">◆</span> {t("slips.specialInserts", "SPECIAL INSERTS // 巡演場次限定曲")}
             </span>
             <span className="flex items-center gap-1.5 tabular-nums text-xs text-muted font-mono">
               <span>{surpriseTracks.length} SONGS</span>
@@ -478,7 +488,7 @@ export function TourSlip({
           >
             <span className="flex items-center gap-1.5 text-ink font-bold">
               <span className="font-mono text-line">—</span>
-              <span>INTERLUDES // 特別彈唱與過場（不計入正式曲目）</span>
+              <span>{t("slips.interludes", "INTERLUDES // 特別彈唱與過場（不計入正式曲目）")}</span>
             </span>
             <span className="flex items-center gap-1.5 tabular-nums text-xs text-muted font-mono">
               <span>{interludes.length} EVENTS</span>
@@ -530,7 +540,7 @@ export function TourSlip({
         >
           <div className="flex items-center justify-between font-mono text-xs font-bold uppercase tracking-wider text-muted pb-1.5 mb-1 border-b border-line-soft">
             <span className="flex items-center gap-1.5 text-ink font-extrabold">
-              <span className="text-band">◆</span> TOUR ITINERARY // 全國巡演日程足跡
+              <span className="text-band">◆</span> {t("slips.tourItinerary", "TOUR ITINERARY // 全國巡演日程足跡")}
             </span>
             <span className="tabular-nums text-xs text-muted font-mono">
               {itinerary.length} STOPS
@@ -560,16 +570,16 @@ export function TourSlip({
                   <div className="min-w-0 flex-1 space-y-0.5">
                     <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 font-mono text-xs">
                       <span className="font-bold text-ink group-hover:text-band-ink transition-colors">
-                        {stop.weekday ? `${stop.date}（${stop.weekday}）` : stop.date}
+                        {showDate(stop, locale)}
                       </span>
                       {stop.isFirst && (
                         <span className="inline-flex items-center rounded px-1.5 py-0.5 text-[10px] font-mono font-bold bg-tape-tint text-ink border border-ink/30">
-                          初日
+                          {t("slips.tourOpener", "初日")}
                         </span>
                       )}
                       {stop.isFinal && (
                         <span className="inline-flex items-center rounded px-1.5 py-0.5 text-[10px] font-mono font-bold bg-band/15 text-band-ink border border-band/50">
-                          千秋樂
+                          {t("slips.tourFinale", "千秋樂")}
                         </span>
                       )}
                       {stop.city && (
@@ -591,7 +601,7 @@ export function TourSlip({
                           title={`查看 ${stop.date} ${stop.venue} 單場演出票根`}
                         >
                           <span>🎫</span>
-                          <span className="hidden sm:inline">查看票根</span>
+                          <span className="hidden sm:inline">{t("slips.viewTicket", "查看票根")}</span>
                           <span className="sm:hidden font-mono" aria-hidden="true">→</span>
                         </a>
                       </div>
@@ -601,9 +611,9 @@ export function TourSlip({
                       <span className="font-medium text-ink break-words group-hover:underline">
                         {stop.venue}
                       </span>
-                      {stop.time && (
+                      {(formatShowTime(stop, locale) || stop.time) && (
                         <span className="font-mono text-[11px] text-muted whitespace-nowrap">
-                          ⏰ {stop.time}
+                          ⏰ {formatShowTime(stop, locale) || stop.time}
                         </span>
                       )}
                     </div>
@@ -613,29 +623,29 @@ export function TourSlip({
                         {stop.isStandard ? (
                           <span className="inline-flex items-center gap-1 text-muted">
                             <span className="text-[9px] text-line-soft select-none">●</span>
-                            <span>定番歌單場</span>
+                            <span>{t("slips.standardSet", "定番歌單場")}</span>
                             <span className="text-muted/60 select-none">·</span>
-                            <span>全 {stop.totalSongs} 首</span>
+                            <span>{t("slips.totalSongs", `全 ${stop.totalSongs} 首`).replace("{count}", stop.totalSongs)}</span>
                           </span>
                         ) : stop.isRotating ? (
                           <span className="inline-flex items-center gap-1 text-amber-600 dark:text-amber-400 font-medium">
                             <span className="text-[9px] select-none">▲</span>
-                            <span>輪替歌單場</span>
+                            <span>{t("slips.rotatingSet", "輪替歌單場")}</span>
                             <span className="text-muted/60 select-none">·</span>
-                            <span className="text-muted tabular-nums">全 {stop.totalSongs} 首</span>
+                            <span className="text-muted tabular-nums">{t("slips.totalSongs", `全 ${stop.totalSongs} 首`).replace("{count}", stop.totalSongs)}</span>
                           </span>
                         ) : (
                           <div className="flex flex-wrap items-center gap-1.5">
                             {stop.hasRotatingInserts && (
                               <span className="inline-flex items-center gap-1 text-amber-600 dark:text-amber-400 font-medium mr-1">
                                 <span className="text-[9px] select-none">▲</span>
-                                <span>輪替歌單場</span>
+                                <span>{t("slips.rotatingSet", "輪替歌單場")}</span>
                                 <span className="text-muted/60 select-none">·</span>
                               </span>
                             )}
                             <span className="inline-flex items-center gap-1 text-ink font-semibold">
                               <span className="text-band select-none">◆</span>
-                              <span>限定：</span>
+                              <span>{t("slips.specialBadge", "限定：")}</span>
                             </span>
                             {stop.surpriseHighlights.map((h, hIdx) => (
                               <span
@@ -649,7 +659,7 @@ export function TourSlip({
                               </span>
                             ))}
                             <span className="text-muted/60 select-none">·</span>
-                            <span className="text-muted tabular-nums">全 {stop.totalSongs} 首</span>
+                            <span className="text-muted tabular-nums">{t("slips.totalSongs", `全 ${stop.totalSongs} 首`).replace("{count}", stop.totalSongs)}</span>
                           </div>
                         )}
                       </div>

@@ -1,6 +1,7 @@
 import { PaginationPills, PAGE_SIZE } from "./PaginationPills.jsx";
 import { PERFORMANCE_CATEGORIES } from "../../lib/constants.js";
 import { unitEarliest, shortUnitTitle, defaultShowId } from "../../lib/domain.js";
+import { useI18n } from "../../lib/i18n.jsx";
 
 export function ShowNavigator({
   isDrawer = false,
@@ -29,6 +30,7 @@ export function ShowNavigator({
   handleSelectShow,
   handleSelectTourMode,
 }) {
+    const { t } = useI18n();
     const curCategory = isDrawer && draftState ? draftState.category : selCategory;
     const curYear = isDrawer && draftState ? draftState.year : selYear;
     const curUnitId = isDrawer && draftState ? draftState.unitId : selUnitId;
@@ -86,10 +88,10 @@ export function ShowNavigator({
           <div className="flex items-center justify-between mb-2">
             <span className="font-mono text-[11px] font-bold text-muted uppercase tracking-wider flex items-center gap-1.5">
               <span aria-hidden="true">🏷️</span>
-              <span>1. 選擇演出類型</span>
+              <span>{t("navigators.selectCategory", "1. 選擇演出類型")}</span>
             </span>
             <span className="font-mono text-[11px] text-muted tabular-nums">
-              {categoryStats[curCategory]?.shows || 0} 場演出
+              {categoryStats[curCategory]?.shows || 0} {t("navigators.showsCountUnit", "場演出")}
             </span>
           </div>
           <div className="flex flex-wrap gap-1.5 sm:gap-2">
@@ -129,9 +131,9 @@ export function ShowNavigator({
                       : "bg-paper text-ink border border-line-soft hover:bg-tape-tint/50 hover:border-ink/60"
                   }`}
                 >
-                  <span>{cat}</span>
+                  <span>{t(`categories.${cat}`, cat)}</span>
                   <span className="font-mono text-[11px] opacity-75 tabular-nums">
-                    ({stat.shows}場)
+                    ({stat.shows}{t("navigators.showsUnit", "場")})
                   </span>
                 </button>
               );

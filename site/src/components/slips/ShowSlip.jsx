@@ -7,6 +7,7 @@ import { trackRoute, routeHash } from "../../lib/track.js";
 import { assignCues } from "../../lib/resolve.js";
 import { getSourceLabel, TicketPerforationDivider, TicketBarcodeFooter } from "./TicketCommon.jsx";
 import { ShowSlipPanels } from "./ShowSlipPanels.jsx";
+import { useI18n } from "../../lib/i18n.jsx";
 
 export function ShowSlip({
   ud,
@@ -15,6 +16,7 @@ export function ShowSlip({
   onSelectShow,
   onSelectVenue,
 }) {
+  const { t, locale } = useI18n();
   if (!ud) return null;
   const s = ud.unit.shows.find((x) => x.id === showId);
   if (!s) return null;
@@ -235,7 +237,7 @@ export function ShowSlip({
                 k
               )}`}
             >
-              {KIND_TAB[k]}
+              {t(`badges.${k}`, KIND_TAB[k])}
             </span>
           ))}
         </span>
@@ -286,9 +288,17 @@ export function ShowSlip({
 
         {/* Monogram Stage Run Sheet Subtitle */}
         <div className="font-mono text-[10px] tracking-[0.22em] font-extrabold uppercase text-muted/70 pb-1.5 flex items-center justify-between">
-          <span>OFFICIAL HIGEDAN DISM // STAGE SETLIST RUN SHEET</span>
+          <span>{t("slips.stageSetlistRunSheet", "OFFICIAL HIGEDAN DISM // STAGE SETLIST RUN SHEET")}</span>
           {ud.unit.isTour && showList.length > 0 && (
-            <span className="text-band font-bold">TOUR SHOW {currentIdx + 1} / {showList.length}</span>
+            <span className="text-band font-bold">
+              {locale === "en"
+                ? `TOUR SHOW ${currentIdx + 1} / ${showList.length}`
+                : locale === "ja"
+                ? `第 ${currentIdx + 1} / ${showList.length} 公演`
+                : locale === "ko"
+                ? `제 ${currentIdx + 1} / ${showList.length} 회`
+                : `TOUR SHOW ${currentIdx + 1} / ${showList.length}`}
+            </span>
           )}
         </div>
 
@@ -299,7 +309,7 @@ export function ShowSlip({
             Official 髭男 dism
           </div>
           <span className="inline-flex items-center rounded-[3px] border border-ink/30 bg-band/15 px-2 py-0.5 font-mono text-xs font-bold text-band-ink">
-            {ud.unit.type}
+            {t(`categories.${ud.unit.type}`, ud.unit.type)}
           </span>
         </div>
 
@@ -313,12 +323,12 @@ export function ShowSlip({
           <div className="flex flex-wrap items-baseline justify-between gap-1 pb-1.5 font-mono text-[13px] text-muted border-b border-line-soft/80">
             <div className="flex items-center gap-1.5 font-bold text-ink">
               <span className="text-[13px] text-muted" aria-hidden="true">📅</span>
-              {showDate(s)}
+              {showDate(s, locale)}
             </div>
-            {formatShowTime(s) && (
+            {formatShowTime(s, locale) && (
               <span className="text-[12px] font-medium text-muted">
                 <span aria-hidden="true">⏰ </span>
-                {formatShowTime(s)}
+                {formatShowTime(s, locale)}
               </span>
             )}
           </div>
@@ -363,7 +373,15 @@ export function ShowSlip({
               )}
             </h3>
             <div className="shrink-0 font-mono text-[12px] font-bold text-muted tabular-nums">
-              {songCount > 0 ? `共 ${songCount} 首（本篇 ${mainCount} · 安可 ${encCount}）` : "尚無曲目紀錄"}
+              {songCount > 0
+                ? (locale === "en"
+                    ? `Total ${songCount} Songs (Main ${mainCount} · Encore ${encCount})`
+                    : locale === "ja"
+                    ? `全 ${songCount} 曲（本編 ${mainCount} · アンコール ${encCount}）`
+                    : locale === "ko"
+                    ? `총 ${songCount}곡 (본편 ${mainCount} · 앙코르 ${encCount})`
+                    : `共 ${songCount} 首（本篇 ${mainCount} · 安可 ${encCount}）`)
+                : t("slips.noSongsRecorded", "尚無曲目紀錄")}
             </div>
           </div>
 
@@ -395,7 +413,15 @@ export function ShowSlip({
                   </span>
                 )}
                 <span className="tabular-nums">
-                  {songCount > 0 ? `共 ${songCount} 首（本篇 ${mainCount} · 安可 ${encCount}）` : "尚無曲目紀錄"}
+                  {songCount > 0
+                    ? (locale === "en"
+                        ? `Total ${songCount} Songs (Main ${mainCount} · Encore ${encCount})`
+                        : locale === "ja"
+                        ? `全 ${songCount} 曲（本編 ${mainCount} · アンコール ${encCount}）`
+                        : locale === "ko"
+                        ? `총 ${songCount}곡 (본편 ${mainCount} · 앙코르 ${encCount})`
+                        : `共 ${songCount} 首（本篇 ${mainCount} · 安可 ${encCount}）`)
+                    : t("slips.noSongsRecorded", "尚無曲目紀錄")}
                 </span>
               </div>
 
@@ -424,28 +450,36 @@ export function ShowSlip({
                   type="button"
                   onClick={() => onSelectShow(prevShow.id)}
                   className="group inline-flex items-center gap-1 font-semibold text-ink hover:text-pool cursor-pointer transition-colors min-h-[38px] px-2 py-1 sm:min-h-0 sm:p-0 rounded touch-stamp"
-                  title={`上一場：${showDate(prevShow)} ${prevShow.city || prevShow.venue}`}
+                  title={`上一場：${showDate(prevShow, locale)} ${prevShow.city || prevShow.venue}`}
                 >
                   <span aria-hidden="true" className="text-base sm:text-xs">←</span>
-                  <span>上一場</span>
+                  <span>{locale === "en" ? "Previous" : locale === "ja" ? "前へ" : locale === "ko" ? "이전" : "上一場"}</span>
                   <span className="hidden sm:inline text-muted group-hover:text-pool">
                     ({prevShow.date.slice(5)} {prevShow.city || prevShow.venue})
                   </span>
                 </button>
               ) : (
-                <span className="text-muted/40 cursor-not-allowed min-h-[38px] px-2 py-1 sm:min-h-0 sm:p-0 flex items-center">← 首場</span>
+                <span className="text-muted/40 cursor-not-allowed min-h-[38px] px-2 py-1 sm:min-h-0 sm:p-0 flex items-center">← {t("slips.tourOpener", "首日")}</span>
               )}
 
               <span className="text-muted tabular-nums font-bold text-[12px] flex items-center gap-1.5">
-                <span>第 {currentIdx + 1} / {showList.length} 場</span>
+                <span>
+                  {locale === "en"
+                    ? `Show ${currentIdx + 1} of ${showList.length}`
+                    : locale === "ja"
+                    ? `第 ${currentIdx + 1} / ${showList.length} 公演`
+                    : locale === "ko"
+                    ? `제 ${currentIdx + 1} / ${showList.length} 회`
+                    : `第 ${currentIdx + 1} / ${showList.length} 場`}
+                </span>
                 {currentIdx === 0 && (
                   <span className="rounded bg-tape-tint px-1.5 py-0.5 text-xs text-ink font-bold border border-ink/30">
-                    首日
+                    {t("slips.tourOpener", "首日")}
                   </span>
                 )}
                 {currentIdx === showList.length - 1 && (
                   <span className="rounded bg-band px-1.5 py-0.5 text-xs text-band-ink font-bold border border-ink/40">
-                    千秋樂
+                    {t("slips.tourFinale", "千秋樂")}
                   </span>
                 )}
               </span>
@@ -621,7 +655,7 @@ export function ShowSlip({
           <div>
             <div className="flex items-center justify-between font-mono text-xs font-bold uppercase tracking-wider text-muted pb-1.5 mb-1 border-b border-line-soft">
               <span className="flex items-center gap-1.5 text-ink font-extrabold">
-                <span className="text-band">◆</span> MAIN SETLIST // 本篇演奏曲目
+                <span className="text-band">◆</span> {t("slips.mainSetlist", "MAIN SETLIST // 本篇演奏曲目")}
               </span>
               <span className="tabular-nums text-xs font-mono">{mainCount} SONGS</span>
             </div>
@@ -633,7 +667,7 @@ export function ShowSlip({
             <div className="rounded-[3px] p-3.5 sm:p-4 border border-line-soft bg-paper/50 space-y-2 mt-4">
               <div className="flex items-center justify-between font-mono text-xs font-extrabold uppercase tracking-wider text-band pb-1.5 border-b border-line-soft/70">
                 <span className="flex items-center gap-1.5">
-                  <span>◆</span> ENCORE // 安可曲目
+                  <span>◆</span> {t("slips.encore", "ENCORE // 安可曲目")}
                 </span>
                 <span className="tabular-nums text-xs text-muted font-mono">{encCount} SONGS</span>
               </div>
@@ -657,7 +691,7 @@ export function ShowSlip({
               }}
               className="inline-flex min-h-[42px] sm:min-h-0 items-center justify-center sm:justify-start gap-1 rounded border border-line-soft bg-paper px-3 py-2 sm:py-1 text-ink hover:bg-band hover:border-band active:bg-band transition-colors cursor-pointer truncate"
             >
-              <span className="truncate">← 上一場：{showDate(prevShow)} {prevShow.city || prevShow.venue}</span>
+              <span className="truncate">← {locale === "en" ? "Previous" : locale === "ja" ? "前へ" : locale === "ko" ? "이전" : "上一場"}：{showDate(prevShow, locale)} {prevShow.city || prevShow.venue}</span>
             </button>
           ) : <div className="hidden sm:block" />}
           {nextShow ? (
@@ -669,7 +703,7 @@ export function ShowSlip({
               }}
               className="inline-flex min-h-[42px] sm:min-h-0 items-center justify-center sm:justify-end gap-1 rounded border border-line-soft bg-paper px-3 py-2 sm:py-1 text-ink hover:bg-band hover:border-band active:bg-band transition-colors cursor-pointer font-bold truncate"
             >
-              <span className="truncate">下一場：{showDate(nextShow)} {nextShow.city || nextShow.venue} →</span>
+              <span className="truncate">{locale === "en" ? "Next" : locale === "ja" ? "次へ" : locale === "ko" ? "다음" : "下一場"}：{showDate(nextShow, locale)} {nextShow.city || nextShow.venue} →</span>
             </button>
           ) : null}
         </div>

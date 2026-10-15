@@ -1,4 +1,5 @@
 import { useState, useMemo, useEffect } from "react";
+import { useI18n } from "../../lib/i18n.jsx";
 import { SLIP_ARTICLE, SLIP_TAPE } from "../../lib/constants.js";
 import { visibleBadges } from "../../lib/kind.js";
 import { songTitle, songAlias, songUnreleased, showDate, getSongAlbum, songLiveFansId } from "../../lib/domain.js";
@@ -6,6 +7,7 @@ import { trackKey, routeHash } from "../../lib/track.js";
 import { CATEGORY_ORDER, songFilterPillClass, TicketPerforationDivider, TicketBarcodeFooter } from "./TicketCommon.jsx";
 
 export function SongSlip({ songId, trackShows, showById, unitData, onSelectShow, onSelectVenue }) {
+  const { locale, t } = useI18n();
   const [copied, setCopied] = useState(false);
   const [onlySpecial, setOnlySpecial] = useState(false);
   const [showYearBreakdown, setShowYearBreakdown] = useState(false);
@@ -441,9 +443,9 @@ export function SongSlip({ songId, trackShows, showById, unitData, onSelectShow,
                   <div className="flex flex-col gap-0.5">
                     <div className="flex items-center justify-between text-xs font-bold text-muted">
                       <span className="flex items-center gap-1 text-ink">
-                        <span className="text-band font-bold" aria-hidden="true">★</span> 首次披露 / 首演場次
+                        <span className="text-band font-bold" aria-hidden="true">★</span> {t("slips.firstPerformed", "首次披露 / 首演場次")}
                       </span>
-                      <span className="tabular-nums font-semibold">{firstShow ? showDate(firstShow) : "—"}</span>
+                      <span className="tabular-nums font-semibold">{firstShow ? showDate(firstShow, locale) : "—"}</span>
                     </div>
                     {firstApp && firstShow ? (
                       <a
@@ -487,9 +489,9 @@ export function SongSlip({ songId, trackShows, showById, unitData, onSelectShow,
                   <div className="flex flex-col gap-0.5 sm:border-l sm:border-line-soft/80 sm:pl-4">
                     <div className="flex items-center justify-between text-xs font-bold text-muted">
                       <span className="flex items-center gap-1 text-ink">
-                        <span className="text-band font-bold" aria-hidden="true">★</span> 最新出演場次
+                        <span className="text-band font-bold" aria-hidden="true">★</span> {t("slips.latestPerformed", "最新出演場次")}
                       </span>
-                      <span className="tabular-nums font-semibold">{latestShow ? showDate(latestShow) : "—"}</span>
+                      <span className="tabular-nums font-semibold">{latestShow ? showDate(latestShow, locale) : "—"}</span>
                     </div>
                     {latestApp && latestShow ? (
                       <a
@@ -544,22 +546,22 @@ export function SongSlip({ songId, trackShows, showById, unitData, onSelectShow,
           aria-label="演出類型篩選"
           className="grid grid-cols-2 min-[380px]:grid-cols-3 sm:grid-cols-4 md:flex md:flex-nowrap md:[&>*]:flex-1 gap-1.5"
         >
-          {availableTypes.map((t) => {
-            const count = typeCounts.get(t) || 0;
-            const isActive = !onlySpecial && effectiveType === t;
+          {availableTypes.map((cat) => {
+            const count = typeCounts.get(cat) || 0;
+            const isActive = !onlySpecial && effectiveType === cat;
             return (
               <button
-                key={t}
+                key={cat}
                 type="button"
                 role="tab"
                 aria-selected={isActive}
                 className={songFilterPillClass(isActive)}
                 onClick={() => {
                   setOnlySpecial(false);
-                  setSelectedType(t);
+                  setSelectedType(cat);
                 }}
               >
-                <span>{t}</span>
+                <span>{t("categories." + cat, cat)}</span>
                 <span className="font-mono text-[11px] tabular-nums opacity-85">
                   ({count})
                 </span>
@@ -748,7 +750,7 @@ export function SongSlip({ songId, trackShows, showById, unitData, onSelectShow,
                           >
                             <div className="flex flex-wrap items-baseline gap-x-2 leading-snug">
                               <span className="shrink-0 font-mono text-[12px] font-semibold text-muted">
-                                {showDate(s)}
+                                {showDate(s, locale)}
                               </span>
                               <span className="show-link-venue text-[14px] font-bold text-ink group-hover:text-pool group-hover:underline">
                                 {s.venue}
@@ -764,7 +766,7 @@ export function SongSlip({ songId, trackShows, showById, unitData, onSelectShow,
                                     key={key}
                                     className={`inline-block rounded-[3px] border px-1.5 py-0.5 align-middle font-mono text-[11px] font-bold leading-none tracking-wide ${cls}`}
                                   >
-                                    ♪ {label}
+                                    ♪ {t("badges." + key, label)}
                                   </span>
                                 ))}
                                 {item.note && (

@@ -1,4 +1,5 @@
 import { useState, useMemo, useEffect } from "react";
+import { useI18n } from "../../lib/i18n.jsx";
 import { SLIP_ARTICLE, SLIP_TAPE } from "../../lib/constants.js";
 import { getKindArray } from "../../lib/kind.js";
 import { songTitle, showDate, formatShowTime } from "../../lib/domain.js";
@@ -6,6 +7,7 @@ import { routeHash } from "../../lib/track.js";
 import { CATEGORY_ORDER, songFilterPillClass, TicketPerforationDivider, TicketBarcodeFooter } from "./TicketCommon.jsx";
 
 export function VenueSlip({ venueName, globalVenueShows, unitData, onSelectShow, onSelectSong }) {
+  const { locale, t } = useI18n();
   const [copied, setCopied] = useState(false);
   const [showYearBreakdown, setShowYearBreakdown] = useState(false);
   const [showMoreTools, setShowMoreTools] = useState(false);
@@ -51,7 +53,7 @@ export function VenueSlip({ venueName, globalVenueShows, unitData, onSelectShow,
       nameLower.includes("pianoman")
     ) {
       return {
-        label: "🌱 山陰發跡聖地",
+        label: t("slips.saninSanctuary", "🌱 山陰發跡聖地"),
         cls: "text-band-ink bg-tape-tint border-ink/40 font-bold",
         desc: "樂團成軍發跡地與早期重要現場據點",
       };
@@ -69,7 +71,7 @@ export function VenueSlip({ venueName, globalVenueShows, unitData, onSelectShow,
       nameLower.includes("uob")
     ) {
       return {
-        label: "✈️ 海外遠征巡演",
+        label: t("slips.overseasTour", "✈️ 海外遠征巡演"),
         cls: "text-pool bg-pool-wash border-pool/40 font-bold",
         desc: "世界巡演重要海外公演舞台",
       };
@@ -87,7 +89,7 @@ export function VenueSlip({ venueName, globalVenueShows, unitData, onSelectShow,
       venueName.includes("代々木第一")
     ) {
       return {
-        label: "🏟️ 巨蛋 / 競技場 (Arena & Dome)",
+        label: t("slips.arenaDome", "🏟️ 巨蛋 / 競技場 (Arena & Dome)"),
         cls: "text-request bg-request-wash border-request/40 font-bold",
         desc: "萬人級大型指標指標場館",
       };
@@ -127,7 +129,7 @@ export function VenueSlip({ venueName, globalVenueShows, unitData, onSelectShow,
       cls: "text-ink bg-paper border-line-soft font-bold",
       desc: "全國巡演專場公演舞台",
     };
-  }, [venueName, venueCity, venuePref, venueRegion, venueShows]);
+  }, [venueName, venueCity, venuePref, venueRegion, venueShows, t]);
 
   // Career span years text
   const spanYearsText = useMemo(() => {
@@ -504,9 +506,9 @@ export function VenueSlip({ venueName, globalVenueShows, unitData, onSelectShow,
                   <div className="flex flex-col gap-0.5 sm:border-l sm:border-line-soft/80 sm:pl-4">
                     <div className="flex items-center justify-between text-xs font-bold text-muted">
                       <span className="flex items-center gap-1 text-ink">
-                        <span className="text-band font-bold" aria-hidden="true">★</span> 最新出演場次
+                        <span className="text-band font-bold" aria-hidden="true">★</span> {t("slips.latestPerformed", "最新出演場次")}
                       </span>
-                      <span className="tabular-nums font-semibold">{latestShow ? showDate(latestShow) : "—"}</span>
+                      <span className="tabular-nums font-semibold">{latestShow ? showDate(latestShow, locale) : "—"}</span>
                     </div>
                     {latestApp && latestShow ? (
                       <a
@@ -568,19 +570,19 @@ export function VenueSlip({ venueName, globalVenueShows, unitData, onSelectShow,
             aria-label="演出類型篩選"
             className="grid grid-cols-2 min-[380px]:grid-cols-3 sm:grid-cols-4 md:flex md:flex-nowrap md:[&>*]:flex-1 gap-1.5"
           >
-            {availableTypes.map((t) => {
-              const count = typeCounts.get(t) || 0;
-              const isActive = effectiveType === t;
+            {availableTypes.map((cat) => {
+              const count = typeCounts.get(cat) || 0;
+              const isActive = effectiveType === cat;
               return (
                 <button
-                  key={t}
+                  key={cat}
                   type="button"
                   role="tab"
                   aria-selected={isActive}
                   className={songFilterPillClass(isActive)}
-                  onClick={() => setSelectedType(t)}
+                  onClick={() => setSelectedType(cat)}
                 >
-                  <span>{t}</span>
+                  <span>{t("categories." + cat, cat)}</span>
                   <span className="font-mono text-[11px] tabular-nums opacity-85">
                     ({count})
                   </span>
@@ -727,11 +729,11 @@ export function VenueSlip({ venueName, globalVenueShows, unitData, onSelectShow,
                             <div className="flex min-w-0 flex-1 flex-col">
                               <div className="flex flex-wrap items-baseline gap-x-2.5 leading-snug">
                                 <span className="font-mono text-[13px] font-bold text-ink group-hover:text-pool group-hover:underline">
-                                  📅 {showDate(show)}
+                                  📅 {showDate(show, locale)}
                                 </span>
-                                {formatShowTime(show) && (
+                                {formatShowTime(show, locale) && (
                                   <span className="font-mono text-[11px] text-muted">
-                                    ⏰ {formatShowTime(show)}
+                                    ⏰ {formatShowTime(show, locale)}
                                   </span>
                                 )}
                               </div>
@@ -739,17 +741,17 @@ export function VenueSlip({ venueName, globalVenueShows, unitData, onSelectShow,
                                 <div className="flex flex-wrap items-center gap-1.5 mt-1">
                                   {hasSolo && (
                                     <span className="inline-block rounded-[3px] border border-solo/30 bg-solo/10 px-1.5 py-0.5 font-mono text-[11px] font-bold text-solo leading-none">
-                                      ♪ 自彈自唱
+                                      ♪ {t("badges.satoshi-solo", "自彈自唱")}
                                     </span>
                                   )}
                                   {hasRequest && (
                                     <span className="inline-block rounded-[3px] border border-request/30 bg-request/10 px-1.5 py-0.5 font-mono text-[11px] font-bold text-request leading-none">
-                                      ♪ 現場點歌
+                                      ♪ {t("badges.request", "現場點歌")}
                                     </span>
                                   )}
                                   {hasPremiere && (
                                     <span className="inline-block rounded-[3px] border border-premiere/30 bg-premiere/10 px-1.5 py-0.5 font-mono text-[11px] font-bold text-premiere leading-none">
-                                      ♪ 新歌初演
+                                      ♪ {t("badges.premiere", "新歌初演")}
                                     </span>
                                   )}
                                 </div>
