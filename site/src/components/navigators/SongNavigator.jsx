@@ -2,6 +2,7 @@ import { PaginationPills, PAGE_SIZE } from "./PaginationPills.jsx";
 import { ALBUM_ORDER } from "../../lib/constants.js";
 import { getSongAlbum } from "../../lib/domain.js";
 import { trackKey } from "../../lib/track.js";
+import { useI18n } from "../../lib/i18n.jsx";
 
 export function SongNavigator({
   isDrawer = false,
@@ -21,6 +22,7 @@ export function SongNavigator({
   trackShows,
   handleSelectSong,
 }) {
+    const { t } = useI18n();
     const curSortMode = isDrawer && draftState ? draftState.songSortMode : songSortMode;
     const curAlbum = isDrawer && draftState ? draftState.album : selAlbum;
     const curSongId = isDrawer && draftState ? draftState.songId : selSong;
@@ -51,10 +53,10 @@ export function SongNavigator({
           <div className="flex items-center justify-between mb-2">
             <span className="font-mono text-[11px] font-bold text-muted uppercase tracking-wider flex items-center gap-1.5">
               <span aria-hidden="true">🎵</span>
-              <span>1. 歌曲分類方式</span>
+              <span>{t("navigators.songSortModeTitle", "1. 歌曲分類方式")}</span>
             </span>
             <span className="font-mono text-[11px] text-muted tabular-nums">
-              共 {allUsedSongs.length} 首曲目
+              {t("navigators.songsCount", "共 {count} 首曲目").replace("{count}", String(allUsedSongs.length))}
             </span>
           </div>
           <div className="flex flex-wrap gap-1.5 sm:gap-2">
@@ -74,7 +76,7 @@ export function SongNavigator({
                 }
               }}
             >
-              <span>💿 依發行專輯分類</span>
+              <span>{t("navigators.byAlbum", "💿 依發行專輯分類")}</span>
             </button>
             <button
               type="button"
@@ -92,7 +94,7 @@ export function SongNavigator({
                 }
               }}
             >
-              <span>🏆 依演唱次數排行</span>
+              <span>{t("navigators.bySongCount", "🏆 依演唱次數排行")}</span>
             </button>
           </div>
         </div>
@@ -103,7 +105,7 @@ export function SongNavigator({
             <div className="flex items-center justify-between mb-2">
               <span className="font-mono text-[11px] font-bold text-muted uppercase tracking-wider flex items-center gap-1.5">
                 <span aria-hidden="true">💿</span>
-                <span>2. 選擇發行專輯</span>
+                <span>{t("navigators.selectAlbum", "2. 選擇發行專輯")}</span>
               </span>
             </div>
             <div className="flex flex-wrap gap-1.5 sm:gap-2">
@@ -131,7 +133,7 @@ export function SongNavigator({
                         : "bg-paper text-ink border border-line-soft hover:bg-tape-tint/50 hover:border-ink/60"
                     }`}
                   >
-                    <span>{alb}</span>
+                    <span>{t("albumGroups." + alb, alb)}</span>
                     <span className="font-mono text-[11px] opacity-75 tabular-nums">
                       ({sCount})
                     </span>
@@ -149,8 +151,8 @@ export function SongNavigator({
               <span aria-hidden="true">🎶</span>
               <span>
                 {curSortMode === "album"
-                  ? `3. 選擇歌曲（${curAlbum} · 共 ${dFilteredSongs.length} 首）`
-                  : `2. 演唱次數排行（共 ${dFilteredSongs.length} 首）`}
+                  ? `${t("navigators.selectSong", "3. 選擇歌曲")}（${t("albumGroups." + curAlbum, curAlbum)} · 共 ${dFilteredSongs.length} 首）`
+                  : `${t("navigators.songRankTitle", "2. 演唱次數排行")}（共 ${dFilteredSongs.length} 首）`}
               </span>
             </span>
           </div>
@@ -204,7 +206,7 @@ export function SongNavigator({
                   )}
                   <span className="font-bold">{s.title}</span>
                   <span className="font-mono text-[11px] opacity-75 tabular-nums">
-                    ({cnt}場)
+                    ({cnt}{t("navigators.showsUnit", "場")})
                   </span>
                 </button>
               );

@@ -449,7 +449,7 @@ export function SongSlip({ songId, trackShows, showById, unitData, onSelectShow,
                     </div>
                     {firstApp && firstShow ? (
                       <a
-                        href={routeHash.show(firstApp.showId)}
+                        href={routeHash.show(firstApp.showId, locale)}
                         onClick={(e) => {
                           e.preventDefault();
                           onSelectShow(firstApp.showId);
@@ -495,7 +495,7 @@ export function SongSlip({ songId, trackShows, showById, unitData, onSelectShow,
                     </div>
                     {latestApp && latestShow ? (
                       <a
-                        href={routeHash.show(latestApp.showId)}
+                        href={routeHash.show(latestApp.showId, locale)}
                         onClick={(e) => {
                           e.preventDefault();
                           onSelectShow(latestApp.showId);
@@ -742,7 +742,7 @@ export function SongSlip({ songId, trackShows, showById, unitData, onSelectShow,
                         >
                           <a
                             className="group flex flex-col text-ink no-underline transition-colors hover:text-request focus-visible:outline-[3px] focus-visible:outline-pool focus-visible:outline-offset-2 motion-reduce:transition-none"
-                            href={routeHash.show(showId)}
+                            href={routeHash.show(showId, locale)}
                             onClick={(e) => {
                               e.preventDefault();
                               onSelectShow(showId);

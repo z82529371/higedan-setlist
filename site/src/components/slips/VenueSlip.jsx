@@ -455,7 +455,7 @@ export function VenueSlip({ venueName, globalVenueShows, unitData, onSelectShow,
                   {topSongs.map((s) => (
                     <a
                       key={s.id}
-                      href={routeHash.song(s.id)}
+                      href={routeHash.song(s.id, locale)}
                       onClick={(e) => {
                         e.preventDefault();
                         onSelectSong?.(s.id);
@@ -479,11 +479,11 @@ export function VenueSlip({ venueName, globalVenueShows, unitData, onSelectShow,
                       <span className="flex items-center gap-1 text-ink">
                         <span className="text-band font-bold" aria-hidden="true">★</span> 首次登台 / 首演場次
                       </span>
-                      <span className="tabular-nums font-semibold">{firstShow ? showDate(firstShow) : "—"}</span>
+                      <span className="tabular-nums font-semibold">{firstShow ? showDate(firstShow, locale) : "—"}</span>
                     </div>
                     {firstApp && firstShow ? (
                       <a
-                        href={routeHash.show(firstApp.showId)}
+                        href={routeHash.show(firstApp.showId, locale)}
                         onClick={(e) => {
                           e.preventDefault();
                           onSelectShow(firstApp.showId);
@@ -512,7 +512,7 @@ export function VenueSlip({ venueName, globalVenueShows, unitData, onSelectShow,
                     </div>
                     {latestApp && latestShow ? (
                       <a
-                        href={routeHash.show(latestApp.showId)}
+                        href={routeHash.show(latestApp.showId, locale)}
                         onClick={(e) => {
                           e.preventDefault();
                           onSelectShow(latestApp.showId);
@@ -720,7 +720,7 @@ export function VenueSlip({ venueName, globalVenueShows, unitData, onSelectShow,
                         >
                           <a
                             className="group flex items-center justify-between gap-3 text-ink no-underline transition-colors focus-visible:outline-[3px] focus-visible:outline-pool focus-visible:outline-offset-2 motion-reduce:transition-none"
-                            href={routeHash.show(showId)}
+                            href={routeHash.show(showId, locale)}
                             onClick={(e) => {
                               e.preventDefault();
                               onSelectShow(showId);

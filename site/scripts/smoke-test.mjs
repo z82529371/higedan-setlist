@@ -3098,6 +3098,152 @@ describe("Pipeline Smoke Tests", () => {
       assert.ok(htmlPropKo.includes("라이브"), "Must respect direct locale='ko' prop for vermilion stamp");
       assert.ok(htmlPropKo.includes("기념 티켓 미리보기"), "Must respect direct locale='ko' prop for title");
     });
+
+    it("exports and uses resolveTranslation fallback correctly", async () => {
+      const { resolveTranslation } = await server.ssrLoadModule("/src/lib/i18n.jsx");
+      assert.ok(typeof resolveTranslation === "function", "resolveTranslation must be exported as a function");
+
+      const dict = {
+        nested: {
+          title: "Found Value",
+        },
+      };
+      assert.strictEqual(resolveTranslation(dict, "nested.title", "Fallback"), "Found Value");
+      assert.strictEqual(resolveTranslation(dict, "missing.key", "Fallback"), "Fallback");
+      assert.strictEqual(resolveTranslation(null, "any.key", "Fallback"), "Fallback");
+      assert.strictEqual(resolveTranslation(dict, "nested.missing", "Fallback"), "Fallback");
+    });
+
+    it("formats show song breakdown across locales with formatShowSongBreakdown", async () => {
+      const { formatShowSongBreakdown } = await server.ssrLoadModule("/src/lib/domain.js");
+      assert.ok(typeof formatShowSongBreakdown === "function", "formatShowSongBreakdown must be exported");
+
+      assert.strictEqual(formatShowSongBreakdown(20, 17, 3, "ja"), "全 20 曲（本編 17 · アンコール 3）");
+      assert.strictEqual(formatShowSongBreakdown(20, 17, 3, "en"), "Total 20 Songs (Main 17 · Encore 3)");
+      assert.strictEqual(formatShowSongBreakdown(20, 17, 3, "ko"), "총 20곡 (본편 17 · 앙코르 3)");
+      assert.strictEqual(formatShowSongBreakdown(20, 17, 3, "zh-TW"), "共 20 首（本篇 17 · 安可 3）");
+
+      // No songs
+      assert.strictEqual(formatShowSongBreakdown(0, 0, 0, "ja"), "");
+    });
+
+    it("formats non-tour formatShowOrderText with localized category in MemorialCardModal", async () => {
+      const { MemorialCardModal } = await server.ssrLoadModule("/src/components/MemorialCardModal.jsx");
+      const { I18nProvider } = await server.ssrLoadModule("/src/lib/i18n.jsx");
+
+      const mockFestUnit = {
+        id: "summer-sonic-2024",
+        title: "SUMMER SONIC 2024",
+        isTour: false,
+        type: "音樂祭",
+        shows: [{ id: "ss-show-1", date: "2024-08-18", venue: "ZOZO Marine Stadium", city: "Chiba" }],
+      };
+
+      const htmlEn = renderToStaticMarkup(
+        React.createElement(
+          I18nProvider,
+          { initialLocale: "en" },
+          React.createElement(MemorialCardModal, {
+            isOpen: true,
+            onClose: () => {},
+            show: mockFestUnit.shows[0],
+            unit: mockFestUnit,
+            main: [],
+            enc: [],
+            showIndex: 0,
+            totalShows: 1,
+          })
+        )
+      );
+      assert.ok(htmlEn.includes("Festival"), "Must render localized category 'Festival' in en formatShowOrderText");
+
+      const htmlJa = renderToStaticMarkup(
+        React.createElement(
+          I18nProvider,
+          { initialLocale: "ja" },
+          React.createElement(MemorialCardModal, {
+            isOpen: true,
+            onClose: () => {},
+            show: mockFestUnit.shows[0],
+            unit: mockFestUnit,
+            main: [],
+            enc: [],
+            showIndex: 0,
+            totalShows: 1,
+          })
+        )
+      );
+      assert.ok(htmlJa.includes("フェス"), "Must render localized category 'フェス' in ja formatShowOrderText");
+    });
+
+    it("matches individual shows for taxonomy keyword searches in SearchBox", async () => {
+      const SearchBoxModule = await server.ssrLoadModule("/src/components/SearchBox.jsx");
+      const SearchBox = SearchBoxModule.default;
+      const { I18nProvider } = await server.ssrLoadModule("/src/lib/i18n.jsx");
+
+      const mockUnits = [
+        {
+          id: "fest-unit-1",
+          title: "Rock Festival 2024",
+          isTour: false,
+          type: "音樂祭",
+          shows: [
+            { id: "fest-show-1", date: "2024-08-01", title: "Day 1 Stage", venue: "Tokyo Big Sight", city: "Tokyo" },
+          ],
+        },
+      ];
+
+      // Search with "フェス" (Japanese taxonomy keyword for 音樂祭)
+      const htmlJa = renderToStaticMarkup(
+        React.createElement(
+          I18nProvider,
+          { initialLocale: "ja" },
+          React.createElement(SearchBox, {
+            q: "フェス",
+            setQ: () => {},
+            allUsedSongs: [],
+            allUnits: mockUnits,
+            allVenues: [],
+            isMobileModal: true,
+          })
+        )
+      );
+      assert.ok(htmlJa.includes("歷史場次日期"), "Must display 歷史場次日期 section for taxonomy search 'フェス'");
+      assert.ok(htmlJa.includes("Day 1 Stage") || htmlJa.includes("2024-08-01"), "Must match individual shows when searching taxonomy keyword 'フェス'");
+
+      // Search with "Festival" (English taxonomy keyword for 音樂祭)
+      const htmlEn = renderToStaticMarkup(
+        React.createElement(
+          I18nProvider,
+          { initialLocale: "en" },
+          React.createElement(SearchBox, {
+            q: "Festival",
+            setQ: () => {},
+            allUsedSongs: [],
+            allUnits: mockUnits,
+            allVenues: [],
+            isMobileModal: true,
+          })
+        )
+      );
+      assert.ok(htmlEn.includes("歷史場次日期"), "Must display 歷史場次日期 section for taxonomy search 'Festival'");
+      assert.ok(htmlEn.includes("Day 1 Stage") || htmlEn.includes("2024-08-01"), "Must match individual shows when searching taxonomy keyword 'Festival'");
+    });
+
+    it("verifies getVenueRegion canonical output without speculative city checks", async () => {
+      const { getVenueRegion } = await server.ssrLoadModule("/src/lib/domain.js");
+      assert.ok(typeof getVenueRegion === "function", "getVenueRegion must be exported");
+
+      // Canonical region and prefecture mappings
+      assert.strictEqual(getVenueRegion({ name: "K-Arena Yokohama", prefecture: "神奈川縣" }), "日本 - 關東");
+      assert.strictEqual(getVenueRegion({ name: "Tokyo Dome", prefecture: "東京都" }), "日本 - 關東");
+      assert.strictEqual(getVenueRegion({ name: "Osaka-jo Hall", prefecture: "大阪府" }), "日本 - 關西");
+      assert.strictEqual(getVenueRegion({ name: "Taipei Arena", region: "海外" }), "海外（台灣 / 韓國 / 東南亞）");
+      assert.strictEqual(getVenueRegion({ name: "Unknown Arena", city: "首爾" }), "海外（台灣 / 韓國 / 東南亞）");
+
+      // Speculative city substrings must NOT map to Japanese domestic regions
+      assert.strictEqual(getVenueRegion({ name: "Generic Center", city: "SomeCity" }), "日本 - 中部 / 九州 / 其他");
+    });
   });
 });
 

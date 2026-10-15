@@ -2,7 +2,7 @@ import { useState, useMemo, useRef } from "react";
 import { MemorialCardModal } from "../MemorialCardModal.jsx";
 import { KIND_TAB, SETLIST_ITEM, CUE_NO, TRACK_NOTE, SLIP_ARTICLE, SLIP_TAPE } from "../../lib/constants.js";
 import { getKindArray, primaryKind, kindTabs, slipClassFor, cueColorFor, songWeightFor, tabColorFor } from "../../lib/kind.js";
-import { songTitle, songUnreleased, showDate, getSongAlbum, formatShowTime } from "../../lib/domain.js";
+import { songTitle, songUnreleased, showDate, getSongAlbum, formatShowTime, formatShowSongBreakdown } from "../../lib/domain.js";
 import { trackRoute, routeHash } from "../../lib/track.js";
 import { assignCues } from "../../lib/resolve.js";
 import { getSourceLabel, TicketPerforationDivider, TicketBarcodeFooter } from "./TicketCommon.jsx";
@@ -117,12 +117,46 @@ export function ShowSlip({
   const handleCopySetlist = () => {
     const lines = [];
     lines.push(`Official 髭男 dism - ${ud.unit.title}`);
-    lines.push(`📅 日期：${showDate(s)}`);
-    lines.push(`📍 場地：${s.venue}（${s.city}）`);
-    const timeStr = formatShowTime(s);
-    if (timeStr) lines.push(`⏰ 時間：${timeStr}`);
+    lines.push(
+      locale === "en"
+        ? `📅 Date: ${showDate(s, locale)}`
+        : locale === "ja"
+        ? `📅 日程：${showDate(s, locale)}`
+        : locale === "ko"
+        ? `📅 일시: ${showDate(s, locale)}`
+        : `📅 日期：${showDate(s, locale)}`
+    );
+    lines.push(
+      locale === "en"
+        ? `📍 Venue: ${s.venue} (${s.city})`
+        : locale === "ja"
+        ? `📍 会場：${s.venue}（${s.city}）`
+        : locale === "ko"
+        ? `📍 공연장: ${s.venue} (${s.city})`
+        : `📍 場地：${s.venue}（${s.city}）`
+    );
+    const timeStr = formatShowTime(s, locale);
+    if (timeStr) {
+      lines.push(
+        locale === "en"
+          ? `⏰ Time: ${timeStr}`
+          : locale === "ja"
+          ? `⏰ 時間：${timeStr}`
+          : locale === "ko"
+          ? `⏰ 시간: ${timeStr}`
+          : `⏰ 時間：${timeStr}`
+      );
+    }
     lines.push("");
-    lines.push("【本篇】");
+    lines.push(
+      locale === "en"
+        ? "【MAIN SET】"
+        : locale === "ja"
+        ? "【本編】"
+        : locale === "ko"
+        ? "【본편】"
+        : "【本篇】"
+    );
     main.forEach((p) => {
       const it = p.item;
       const t = it.title ?? songTitle[it.songId] ?? it.note ?? "";
@@ -131,7 +165,15 @@ export function ShowSlip({
     });
     if (enc.length > 0) {
       lines.push("");
-      lines.push("【安可】");
+      lines.push(
+        locale === "en"
+          ? "【ENCORE】"
+          : locale === "ja"
+          ? "【アンコール】"
+          : locale === "ko"
+          ? "【앙코르】"
+          : "【安可】"
+      );
       enc.forEach((p) => {
         const it = p.item;
         const t = it.title ?? songTitle[it.songId] ?? it.note ?? "";
@@ -140,7 +182,13 @@ export function ShowSlip({
       });
     }
     lines.push("");
-    lines.push("#Official髭男dism #ヒゲダン #セットリスト");
+    lines.push(
+      locale === "en"
+        ? "#OfficialHigedanDism #Higedan #Setlist #LiveArchive"
+        : locale === "ko"
+        ? "#Official히게단dism #히게단 #셋리스트"
+        : "#Official髭男dism #ヒゲダン #セットリスト"
+    );
 
     if (navigator?.clipboard?.writeText) {
       navigator.clipboard.writeText(lines.join("\n")).then(() => {
@@ -213,7 +261,7 @@ export function ShowSlip({
           </span>
         );
       }
-      const link = trackRoute(it, songWeight(it));
+      const link = trackRoute(it, songWeight(it), locale);
       return (
         <a
           className={link.cls}
@@ -339,7 +387,7 @@ export function ShowSlip({
             <h3 className="m-0 font-display text-[21px] lg:text-[23px] font-black text-ink min-w-0">
               {onSelectVenue && s.venue ? (
                 <a
-                  href={routeHash.venue(s.venue)}
+                  href={routeHash.venue(s.venue, locale)}
                   onClick={(e) => {
                     e.preventDefault();
                     onSelectVenue(s.venue);
@@ -373,15 +421,8 @@ export function ShowSlip({
               )}
             </h3>
             <div className="shrink-0 font-mono text-[12px] font-bold text-muted tabular-nums">
-              {songCount > 0
-                ? (locale === "en"
-                    ? `Total ${songCount} Songs (Main ${mainCount} · Encore ${encCount})`
-                    : locale === "ja"
-                    ? `全 ${songCount} 曲（本編 ${mainCount} · アンコール ${encCount}）`
-                    : locale === "ko"
-                    ? `총 ${songCount}곡 (본편 ${mainCount} · 앙코르 ${encCount})`
-                    : `共 ${songCount} 首（本篇 ${mainCount} · 安可 ${encCount}）`)
-                : t("slips.noSongsRecorded", "尚無曲目紀錄")}
+              {formatShowSongBreakdown(songCount, mainCount, encCount, locale) ||
+                t("slips.noSongsRecorded", "尚無曲目紀錄")}
             </div>
           </div>
 
@@ -390,7 +431,7 @@ export function ShowSlip({
             <h3 className="m-0 font-display text-[18px] font-black leading-snug text-ink text-pretty">
               {onSelectVenue && s.venue ? (
                 <a
-                  href={routeHash.venue(s.venue)}
+                  href={routeHash.venue(s.venue, locale)}
                   onClick={(e) => {
                     e.preventDefault();
                     onSelectVenue(s.venue);
@@ -413,21 +454,14 @@ export function ShowSlip({
                   </span>
                 )}
                 <span className="tabular-nums">
-                  {songCount > 0
-                    ? (locale === "en"
-                        ? `Total ${songCount} Songs (Main ${mainCount} · Encore ${encCount})`
-                        : locale === "ja"
-                        ? `全 ${songCount} 曲（本編 ${mainCount} · アンコール ${encCount}）`
-                        : locale === "ko"
-                        ? `총 ${songCount}곡 (본편 ${mainCount} · 앙코르 ${encCount})`
-                        : `共 ${songCount} 首（本篇 ${mainCount} · 安可 ${encCount}）`)
-                    : t("slips.noSongsRecorded", "尚無曲目紀錄")}
+                  {formatShowSongBreakdown(songCount, mainCount, encCount, locale) ||
+                    t("slips.noSongsRecorded", "尚無曲目紀錄")}
                 </span>
               </div>
 
               {onSelectVenue && s.venue && (
                 <a
-                  href={routeHash.venue(s.venue)}
+                  href={routeHash.venue(s.venue, locale)}
                   onClick={(e) => {
                     e.preventDefault();
                     onSelectVenue(s.venue);
@@ -453,7 +487,7 @@ export function ShowSlip({
                   title={`上一場：${showDate(prevShow, locale)} ${prevShow.city || prevShow.venue}`}
                 >
                   <span aria-hidden="true" className="text-base sm:text-xs">←</span>
-                  <span>{locale === "en" ? "Previous" : locale === "ja" ? "前へ" : locale === "ko" ? "이전" : "上一場"}</span>
+                  <span>{t("actions.prev", "上一場")}</span>
                   <span className="hidden sm:inline text-muted group-hover:text-pool">
                     ({prevShow.date.slice(5)} {prevShow.city || prevShow.venue})
                   </span>
@@ -494,11 +528,11 @@ export function ShowSlip({
                   <span className="hidden sm:inline text-muted group-hover:text-pool">
                     ({nextShow.date.slice(5)} {nextShow.city || nextShow.venue})
                   </span>
-                  <span>下一場</span>
+                  <span>{t("actions.next", "下一場")}</span>
                   <span aria-hidden="true" className="text-base sm:text-xs">→</span>
                 </button>
               ) : (
-                <span className="text-muted/40 cursor-not-allowed min-h-[38px] px-2 py-1 sm:min-h-0 sm:p-0 flex items-center">最終場 →</span>
+                <span className="text-muted/40 cursor-not-allowed min-h-[38px] px-2 py-1 sm:min-h-0 sm:p-0 flex items-center">{t("slips.tourFinale", "千秋樂")} →</span>
               )}
             </div>
           )}
@@ -691,7 +725,7 @@ export function ShowSlip({
               }}
               className="inline-flex min-h-[42px] sm:min-h-0 items-center justify-center sm:justify-start gap-1 rounded border border-line-soft bg-paper px-3 py-2 sm:py-1 text-ink hover:bg-band hover:border-band active:bg-band transition-colors cursor-pointer truncate"
             >
-              <span className="truncate">← {locale === "en" ? "Previous" : locale === "ja" ? "前へ" : locale === "ko" ? "이전" : "上一場"}：{showDate(prevShow, locale)} {prevShow.city || prevShow.venue}</span>
+              <span className="truncate">← {t("actions.prev", "上一場")}：{showDate(prevShow, locale)} {prevShow.city || prevShow.venue}</span>
             </button>
           ) : <div className="hidden sm:block" />}
           {nextShow ? (
@@ -703,7 +737,7 @@ export function ShowSlip({
               }}
               className="inline-flex min-h-[42px] sm:min-h-0 items-center justify-center sm:justify-end gap-1 rounded border border-line-soft bg-paper px-3 py-2 sm:py-1 text-ink hover:bg-band hover:border-band active:bg-band transition-colors cursor-pointer font-bold truncate"
             >
-              <span className="truncate">{locale === "en" ? "Next" : locale === "ja" ? "次へ" : locale === "ko" ? "다음" : "下一場"}：{showDate(nextShow, locale)} {nextShow.city || nextShow.venue} →</span>
+              <span className="truncate">{t("actions.next", "下一場")}：{showDate(nextShow, locale)} {nextShow.city || nextShow.venue} →</span>
             </button>
           ) : null}
         </div>

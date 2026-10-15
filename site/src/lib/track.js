@@ -1,4 +1,5 @@
 import { SETLIST_SONG } from "./constants.js";
+import { routeHash } from "./routes.js";
 
 // Internal key namespace: song slugs share one map.
 export function trackKey(kind, value) {
@@ -13,11 +14,12 @@ export function trackKeyOf(item) {
 }
 
 // Rendering branch for songs (render as anchors; non-songs are plain text).
-export function trackRoute(item, weightCls) {
+export function trackRoute(item, weightCls, options = {}) {
   if (item.songId) {
+    const opts = typeof options === "string" ? { lang: options } : options;
     return {
       key: trackKey("song", item.songId),
-      hash: `#/song/${item.songId}`,
+      hash: routeHash.song(item.songId, opts),
       cls: `${SETLIST_SONG} ${weightCls}`,
       isSong: true,
     };

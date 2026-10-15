@@ -89,7 +89,7 @@ export function TourSlip({
         <div className="flex flex-wrap items-baseline gap-2">
           {isClickable ? (
             <a
-              href={routeHash.song(track.songId)}
+              href={routeHash.song(track.songId, locale)}
               onClick={(e) => {
                 e.preventDefault();
                 onSelectSong(track.songId);
@@ -186,7 +186,7 @@ export function TourSlip({
           {track.shows.map((s) => (
             <a
               key={s.id}
-              href={routeHash.show(s.id)}
+              href={routeHash.show(s.id, locale)}
               onClick={(e) => {
                 if (onSelectShow) {
                   e.preventDefault();
@@ -511,7 +511,7 @@ export function TourSlip({
                   </div>
                   <div className="shrink-0 ml-auto">
                     <a
-                      href={routeHash.show(it.showId)}
+                      href={routeHash.show(it.showId, locale)}
                       onClick={(e) => {
                         if (onSelectShow) {
                           e.preventDefault();
@@ -589,7 +589,7 @@ export function TourSlip({
                       )}
                       <div className="ml-auto shrink-0 flex items-center">
                         <a
-                          href={routeHash.show(stop.id)}
+                          href={routeHash.show(stop.id, locale)}
                           onClick={(e) => {
                             e.stopPropagation();
                             if (onSelectShow) {

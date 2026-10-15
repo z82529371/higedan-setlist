@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { exportElementToPng } from "../lib/image-export.js";
 import { songTitle, showDate, formatShowTime, songUnreleased } from "../lib/domain.js";
 import { getKindArray, kindTabs } from "../lib/kind.js";
-import { useI18n, DICTIONARIES, DEFAULT_LOCALE } from "../lib/i18n.jsx";
+import { useI18n, DICTIONARIES, DEFAULT_LOCALE, resolveTranslation } from "../lib/i18n.jsx";
 
 // Session-level memory for theme choice across shows
 let sessionMemorialTheme = "vintage";
@@ -24,7 +24,12 @@ export function formatShowOrderText(unit, showIndex, totalShows, locale = "zh-TW
     if (locale === "ko") return `제 ${idx} / ${totalShows} 회`;
     return `第 ${idx} / ${totalShows} 場`;
   }
-  return unit?.type || "專場演出";
+  const dict = DICTIONARIES[locale] || DICTIONARIES[DEFAULT_LOCALE];
+  const typeKey = unit?.type;
+  if (typeKey && dict?.categories?.[typeKey]) {
+    return dict.categories[typeKey];
+  }
+  return unit?.type || (dict?.categories?.["特別專場"] || "專場演出");
 }
 
 export function formatTicketSongCount(totalSongsCount, locale = "zh-TW") {
@@ -88,17 +93,8 @@ export function MemorialCardModal({
   const { locale: ctxLocale } = useI18n();
   const locale = propLocale || ctxLocale || DEFAULT_LOCALE;
 
-  const t = (key, fallback) => {
-    const activeDict = DICTIONARIES[locale] || DICTIONARIES[DEFAULT_LOCALE];
-    if (!key || typeof key !== "string") return fallback ?? "";
-    const keys = key.split(".");
-    let cur = activeDict;
-    for (const k of keys) {
-      if (!cur || typeof cur !== "object") return fallback ?? key;
-      cur = cur[k];
-    }
-    return cur !== undefined ? cur : (fallback ?? key);
-  };
+  const activeDict = DICTIONARIES[locale] || DICTIONARIES[DEFAULT_LOCALE];
+  const t = (key, fallback) => resolveTranslation(activeDict, key, fallback);
 
   const [theme, setTheme] = useState(sessionMemorialTheme); // 'vintage' | 'white' | 'noir'
   const [imageUrls, setImageUrls] = useState({}); // { [`${showId}-${theme}-${locale}`]: dataUrl }
@@ -290,10 +286,8 @@ export function MemorialCardModal({
               key={k}
               className={`font-mono text-[9px] px-1 py-0.2 rounded-[2px] font-bold shrink-0 leading-tight ${
                 isNoir
-                  ? "bg-[#252a36] text-[#facc15] border border-[#d49a00]/40"
-                  : isWhite
-                  ? "bg-[#f3f4f6] text-[#78350f] border border-[#d1d5db]"
-                  : "bg-[#f5ebd2] text-[#78350f] border border-[#d6cebf]"
+                  ? "bg-tape-tint/50 text-white border border-line-soft"
+                  : "bg-tape-tint/50 text-ink border border-line-soft"
               }`}
             >
               {t(`badges.${k}`, k)}

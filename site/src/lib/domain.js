@@ -52,6 +52,19 @@ export function formatShowTime(show, locale = "zh-TW") {
   return `${startsAt || opensAt} 開演`;
 }
 
+export function formatShowSongBreakdown(songCount, mainCount, encCount, locale = "zh-TW") {
+  if (songCount <= 0) return "";
+  if (locale === "en") {
+    return `Total ${songCount} Songs (Main ${mainCount} · Encore ${encCount})`;
+  }
+  if (locale === "ja") {
+    return `全 ${songCount} 曲（本編 ${mainCount} · アンコール ${encCount}）`;
+  }
+  if (locale === "ko") {
+    return `총 ${songCount}곡 (본편 ${mainCount} · 앙코르 ${encCount})`;
+  }
+  return `共 ${songCount} 首（本篇 ${mainCount} · 安可 ${encCount}）`;
+}
 
 export function getVenueRegion(v) {
   const r = v.region ?? "";
@@ -84,9 +97,7 @@ export function getVenueRegion(v) {
     p.includes("東京") ||
     p.includes("神奈川") ||
     p.includes("埼玉") ||
-    p.includes("千葉") ||
-    c.includes("東京") ||
-    c.includes("橫濱")
+    p.includes("千葉")
   ) {
     return "日本 - 關東";
   }
@@ -97,9 +108,7 @@ export function getVenueRegion(v) {
     p.includes("大阪") ||
     p.includes("兵庫") ||
     p.includes("京都") ||
-    p.includes("奈良") ||
-    c.includes("大阪") ||
-    c.includes("神戶")
+    p.includes("奈良")
   ) {
     return "日本 - 關西";
   }
@@ -114,9 +123,7 @@ export function getVenueRegion(v) {
     p.includes("岩手") ||
     p.includes("秋田") ||
     p.includes("山形") ||
-    p.includes("福島") ||
-    c.includes("札幌") ||
-    c.includes("仙台")
+    p.includes("福島")
   ) {
     return "日本 - 東北 / 北海道";
   }

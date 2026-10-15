@@ -146,7 +146,7 @@ export function ShowNavigator({
           <div className="flex items-center justify-between mb-2">
             <span className="font-mono text-[11px] font-bold text-muted uppercase tracking-wider flex items-center gap-1.5">
               <span aria-hidden="true">📅</span>
-              <span>2. 選擇年份</span>
+              <span>{t("navigators.selectYear", "2. 選擇演出年份")}</span>
             </span>
           </div>
           <div className="flex flex-wrap gap-1.5 sm:gap-2">
@@ -186,7 +186,7 @@ export function ShowNavigator({
                 >
                   <span>{yr}</span>
                   <span className="text-[11px] opacity-75 tabular-nums">
-                    ({count}場)
+                    ({count}{t("navigators.showsUnit", "場")})
                   </span>
                 </button>
               );
@@ -199,9 +199,10 @@ export function ShowNavigator({
           <div className="flex items-center justify-between mb-2">
             <span className="font-mono text-[11px] font-bold text-muted uppercase tracking-wider flex items-center gap-1.5">
               <span aria-hidden="true">🎪</span>
-              <span>
-                3. 選擇活動／巡演（{curYear} 年 · 共 {dFilteredUnits.length} 部）
-              </span>
+              <span>{t("navigators.selectUnit", "3. 選擇活動／巡演")}</span>
+            </span>
+            <span className="font-mono text-[11px] text-muted tabular-nums">
+              {curYear} · {dFilteredUnits.length}
             </span>
           </div>
           <PaginationPills
@@ -254,11 +255,11 @@ export function ShowNavigator({
                   </span>
                   {showCnt > 1 ? (
                     <span className="font-mono text-[11px] opacity-80 tabular-nums">
-                      ({showCnt}場{!hasSongs ? "·無歌單" : ""})
+                      ({showCnt}{t("navigators.showsUnit", "場")}{!hasSongs ? "·" + t("navigators.noSetlist", "無歌單") : ""})
                     </span>
                   ) : !hasSongs ? (
                     <span className="font-mono text-[11px] opacity-80 tabular-nums">
-                      (無歌單)
+                      ({t("navigators.noSetlist", "無歌單")})
                     </span>
                   ) : null}
                 </button>
@@ -273,7 +274,10 @@ export function ShowNavigator({
             <div className="flex items-center justify-between mb-2">
               <span className="font-mono text-[11px] font-bold text-muted uppercase tracking-wider flex items-center gap-1.5">
                 <span aria-hidden="true">🎫</span>
-                <span>4. 切換場次日期（全 {dCurrentUnitData.shows.length} 場）</span>
+                <span>{t("navigators.selectShow", "4. 切換場次日期")}</span>
+              </span>
+              <span className="font-mono text-[11px] text-muted tabular-nums">
+                {dCurrentUnitData.shows.length} {t("navigators.showsCountUnit", "場演出")}
               </span>
             </div>
             <PaginationPills
@@ -310,7 +314,7 @@ export function ShowNavigator({
                   title="查看此巡演的定番歌單與出賽統計"
                 >
                   <span>📜</span>
-                  <span>巡演總覽</span>
+                  <span>{t("navigators.tourOverview", "巡演總覽")}</span>
                 </button>
               )}
               {dPagedShows.map((s) => {
@@ -350,7 +354,7 @@ export function ShowNavigator({
                     </span>
                     <span className="font-bold">{s.city || s.venue}</span>
                     <span className="font-mono text-[10px] opacity-75 tabular-nums">
-                      {songCnt > 0 ? `${songCnt}首` : "無歌單"}
+                      {songCnt > 0 ? `${songCnt}${t("navigators.songsUnit", "首")}` : t("navigators.noSetlist", "無歌單")}
                     </span>
                   </button>
                 );

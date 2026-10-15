@@ -10,6 +10,7 @@ import {
   shortUnitTitle,
 } from "../lib/domain.js";
 import { parseRoute, routeHash } from "../lib/routes.js";
+import { useI18n, DEFAULT_LOCALE } from "../lib/i18n.jsx";
 
 export function useArchiveRoute({
   unitData,
@@ -19,6 +20,18 @@ export function useArchiveRoute({
   filterState,
   initialDraftState = null,
 }) {
+  const { locale } = useI18n();
+
+  const appendLang = (h) => {
+    if (!h || !locale || locale === DEFAULT_LOCALE) return h;
+    const [path, qs] = h.split("?");
+    const params = new URLSearchParams(qs || "");
+    if (!params.has("lang")) {
+      params.set("lang", locale);
+    }
+    const newQs = params.toString();
+    return newQs ? `${path}?${newQs}` : path;
+  };
   const {
     selCategory,
     setSelCategory,
@@ -208,7 +221,7 @@ export function useArchiveRoute({
       const uEntry = unitData.get(r.value);
       if (!uEntry) {
         setViewMode("landing");
-        window.location.hash = "#/";
+        window.location.hash = appendLang("#/");
         return;
       }
       setTab("show");
@@ -229,13 +242,15 @@ export function useArchiveRoute({
       }
       if (!uEntry.isTour) {
         setShowSubMode("show");
-        if (defShow && window.location.hash !== routeHash.show(defShow)) {
-          window.location.hash = routeHash.show(defShow);
+        const targetHash = appendLang(routeHash.show(defShow));
+        if (defShow && window.location.hash !== targetHash) {
+          window.location.hash = targetHash;
         }
       } else {
         setShowSubMode("tour");
-        if (window.location.hash !== routeHash.tour(r.value)) {
-          window.location.hash = routeHash.tour(r.value);
+        const targetHash = appendLang(routeHash.tour(r.value));
+        if (window.location.hash !== targetHash) {
+          window.location.hash = targetHash;
         }
       }
     } else if (
@@ -270,25 +285,25 @@ export function useArchiveRoute({
       if (r) {
         if (r.kind === "tour" && !unitData.get(r.value)) {
           setViewMode("landing");
-          window.location.hash = "#/";
+          window.location.hash = appendLang("#/");
           window.scrollTo({ top: 0, behavior: "instant" });
           return;
         }
         if (r.kind === "show" && !unitIdByShowId.has(r.value)) {
           setViewMode("landing");
-          window.location.hash = "#/";
+          window.location.hash = appendLang("#/");
           window.scrollTo({ top: 0, behavior: "instant" });
           return;
         }
         if (r.kind === "song" && !allUsedSongs.some((s) => s.id === r.value)) {
           setViewMode("landing");
-          window.location.hash = "#/";
+          window.location.hash = appendLang("#/");
           window.scrollTo({ top: 0, behavior: "instant" });
           return;
         }
         if (r.kind === "venue" && !allVenues.some((v) => v.name === r.value)) {
           setViewMode("landing");
-          window.location.hash = "#/";
+          window.location.hash = appendLang("#/");
           window.scrollTo({ top: 0, behavior: "instant" });
           return;
         }
@@ -296,7 +311,7 @@ export function useArchiveRoute({
         applyRoute(r);
       } else {
         setViewMode("landing");
-        window.location.hash = "#/";
+        window.location.hash = appendLang("#/");
         window.scrollTo({ top: 0, behavior: "instant" });
       }
     };
@@ -311,8 +326,9 @@ export function useArchiveRoute({
       const uEntry = unitData.get(r.value);
       if (uEntry && !uEntry.isTour) {
         const defShow = defaultShowId(uEntry.unit);
-        if (defShow && window.location.hash !== routeHash.show(defShow)) {
-          window.location.hash = routeHash.show(defShow);
+        const targetHash = appendLang(routeHash.show(defShow));
+        if (defShow && window.location.hash !== targetHash) {
+          window.location.hash = targetHash;
         }
       }
     }
@@ -381,9 +397,10 @@ export function useArchiveRoute({
 
   const go = (hash) => {
     setViewMode("archive");
-    applyRoute(parseRoute(hash));
-    if (window.location.hash !== hash) {
-      window.location.hash = hash;
+    const targetHash = appendLang(hash);
+    applyRoute(parseRoute(targetHash));
+    if (window.location.hash !== targetHash) {
+      window.location.hash = targetHash;
     }
   };
 
@@ -468,7 +485,7 @@ export function useArchiveRoute({
   const handleReturnHome = () => {
     setViewMode("landing");
     setQ("");
-    window.location.hash = "#/";
+    window.location.hash = appendLang("#/");
     window.scrollTo({ top: 0, behavior: "instant" });
   };
 

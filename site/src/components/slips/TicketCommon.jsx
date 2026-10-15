@@ -13,6 +13,7 @@ export function getSourceLabel(url) {
 }
 import { CATEGORY_ORDER } from "../../lib/constants.js";
 import { routeHash } from "../../lib/routes.js";
+import { useI18n } from "../../lib/i18n.jsx";
 export { CATEGORY_ORDER };
 
 const CAPSULE_MODES = [
@@ -39,6 +40,7 @@ export function DualModeCapsuleToggle({
   onSelectTour,
   onSelectShow,
 }) {
+  const { t, locale } = useI18n();
   if (!isTour) return null;
 
   const handleClick = (e, targetKey) => {
@@ -55,11 +57,11 @@ export function DualModeCapsuleToggle({
   return (
     <div
       className="my-3 flex items-center justify-center select-none"
-      aria-label="檢視模式切換"
+      aria-label={t("slips.toggleModeAria", "票券檢視模式切換")}
     >
       <div
         role="tablist"
-        aria-label="票券檢視模式切換"
+        aria-label={t("slips.toggleModeAria", "票券檢視模式切換")}
         className="inline-flex items-center gap-1 rounded-full border border-ink/40 bg-paper/95 p-1 shadow-[1px_1px_0_rgba(0,0,0,0.14)]"
       >
         {CAPSULE_MODES.map((item, index) => {
@@ -67,11 +69,16 @@ export function DualModeCapsuleToggle({
           const href =
             item.key === "tour"
               ? unitId
-                ? routeHash.tour(unitId)
-                : "#/tour"
+                ? routeHash.tour(unitId, locale)
+                : routeHash.tour("", locale)
               : showId
-                ? routeHash.show(showId)
-                : "#/show";
+                ? routeHash.show(showId, locale)
+                : routeHash.show("", locale);
+
+          const itemLabel =
+            item.key === "tour"
+              ? t("slips.modeTour", "巡演總覽")
+              : t("slips.modeShow", "單場票根");
 
           return (
             <span key={item.key} className="inline-flex items-center gap-1">
@@ -96,7 +103,7 @@ export function DualModeCapsuleToggle({
                 title={item.title}
               >
                 <span>{item.icon}</span>
-                <span>{item.label}</span>
+                <span>{itemLabel}</span>
               </a>
             </span>
           );

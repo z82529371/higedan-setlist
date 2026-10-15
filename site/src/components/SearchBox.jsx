@@ -181,6 +181,20 @@ export default function SearchBox({
     for (const u of allUnits) {
       const cat = getUnitTypeLabel(u);
       const localizedBadge = t("categories." + cat, cat);
+      const canonicalCat = cat.toLowerCase();
+      const locCat = localizedBadge.toLowerCase();
+      const categoryKeywords = TAXONOMY_KEYWORDS[cat] || [];
+
+      const matchTaxonomy =
+        canonicalCat.includes(needle) ||
+        locCat.includes(needle) ||
+        categoryKeywords.some((kw) => {
+          const k = kw.toLowerCase();
+          if (needle === k) return true;
+          if (needle.length >= 2 && k.includes(needle)) return true;
+          if (k.length >= 3 && needle.includes(k)) return true;
+          return false;
+        });
 
       for (const s of u.shows || []) {
         const sDate = s.date || "";
@@ -197,7 +211,7 @@ export default function SearchBox({
           (bKey) => badgeIndex[bKey]?.shows.has(s.id)
         );
 
-        if (matchDate || (needle.length >= 3 && sTitle.includes(needle)) || matchBadge) {
+        if (matchDate || (needle.length >= 3 && sTitle.includes(needle)) || matchBadge || matchTaxonomy) {
           shows.push({
             type: "show",
             id: s.id,
@@ -627,7 +641,7 @@ export default function SearchBox({
               aria-autocomplete="list"
               aria-controls="mobile-search-results-list"
               className="w-full rounded-[3px] border-[1.5px] border-ink bg-card py-2 pl-8 pr-16 text-[16px] text-ink placeholder:text-muted focus:border-pool focus:ring-2 focus:ring-pool/30 focus:outline-none"
-              placeholder="搜尋歌曲、日期、演出、場地…"
+              placeholder={t("search.placeholder", "搜尋歌曲、日期（如 2024-09）、演出、場地…")}
               value={q}
               onChange={(e) => setQ(e.target.value)}
               onKeyDown={handleKeyDown}
@@ -739,7 +753,7 @@ export default function SearchBox({
               ? "py-3 sm:py-3.5 pl-10 sm:pl-11 pr-20 text-[16px] sm:text-[16px] shadow-sm font-sans"
               : "py-2 pl-8 pr-16 text-[16px] sm:text-[14px]"
           }`}
-          placeholder="搜尋歌曲、日期（如 2024-09）、演出、場地…"
+          placeholder={t("search.placeholder", "搜尋歌曲、日期（如 2024-09）、演出、場地…")}
           value={q}
           onChange={(e) => setQ(e.target.value)}
           onFocus={() => {

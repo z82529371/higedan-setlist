@@ -58,6 +58,17 @@ export function resolveInitialLocale(env) {
   return DEFAULT_LOCALE;
 }
 
+export function resolveTranslation(dict, key, fallback) {
+  if (!key || typeof key !== "string") return fallback ?? "";
+  const keys = key.split(".");
+  let cur = dict;
+  for (const k of keys) {
+    if (!cur || typeof cur !== "object") return fallback ?? key;
+    cur = cur[k];
+  }
+  return cur !== undefined ? cur : (fallback ?? key);
+}
+
 export function I18nProvider({ children, initialLocale }) {
   const [locale, setLocaleState] = useState(() => initialLocale || resolveInitialLocale());
 
@@ -111,16 +122,7 @@ export function I18nProvider({ children, initialLocale }) {
   const dict = useMemo(() => DICTIONARIES[locale] || DICTIONARIES[DEFAULT_LOCALE], [locale]);
 
   const t = useCallback(
-    (key, fallback) => {
-      if (!key || typeof key !== "string") return fallback ?? "";
-      const keys = key.split(".");
-      let cur = dict;
-      for (const k of keys) {
-        if (!cur || typeof cur !== "object") return fallback ?? key;
-        cur = cur[k];
-      }
-      return cur !== undefined ? cur : (fallback ?? key);
-    },
+    (key, fallback) => resolveTranslation(dict, key, fallback),
     [dict]
   );
 
