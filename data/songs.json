@@ -22,8 +22,9 @@
     },
     {
       "id": "elder-flower",
-      "title": "Elderflower",
-      "livefansId": "942242"
+      "title": "エルダーフラワー",
+      "livefansId": "942242",
+      "alias": "Elderflower"
     },
     {
       "id": "laughter",
@@ -72,13 +73,15 @@
     },
     {
       "id": "mixed-nuts",
-      "title": "Mixed Nuts",
-      "livefansId": "712993"
+      "title": "ミックスナッツ",
+      "livefansId": "712993",
+      "alias": "Mixed Nuts"
     },
     {
       "id": "white-noise",
-      "title": "White Noise",
-      "livefansId": "754448"
+      "title": "ホワイトノイズ",
+      "livefansId": "754448",
+      "alias": "White Noise"
     },
     {
       "id": "rashisa",
@@ -88,7 +91,8 @@
     {
       "id": "stardust",
       "title": "スターダスト",
-      "livefansId": "941961"
+      "livefansId": "941961",
+      "alias": "Stardust"
     },
     {
       "id": "stand-by-you",
@@ -107,8 +111,9 @@
     },
     {
       "id": "yesterday",
-      "title": "Yesterday",
-      "livefansId": "620336"
+      "title": "イエスタデイ",
+      "livefansId": "620336",
+      "alias": "Yesterday"
     },
     {
       "id": "editorial",
@@ -133,8 +138,9 @@
     },
     {
       "id": "apoptosis",
-      "title": "Apoptosis",
-      "livefansId": "686673"
+      "title": "アポトーシス",
+      "livefansId": "686673",
+      "alias": "Apoptosis"
     },
     {
       "id": "anarchy",
@@ -143,8 +149,9 @@
     },
     {
       "id": "no-doubt",
-      "title": "No Doubt",
-      "livefansId": "537222"
+      "title": "ノーダウト",
+      "livefansId": "537222",
+      "alias": "No Doubt"
     },
     {
       "id": "rolling",
@@ -158,8 +165,9 @@
     },
     {
       "id": "parabola",
-      "title": "Parabola",
-      "livefansId": "651487"
+      "title": "パラボラ",
+      "livefansId": "651487",
+      "alias": "Parabola"
     },
     {
       "id": "ai-nandaga",
@@ -188,7 +196,7 @@
     },
     {
       "id": "sweet-tweet",
-      "title": "Sweet Tweet",
+      "title": "SWEET TWEET",
       "livefansId": "511535"
     },
     {
@@ -198,8 +206,9 @@
     },
     {
       "id": "vintage",
-      "title": "Vintage",
-      "livefansId": "626357"
+      "title": "ビンテージ",
+      "livefansId": "626357",
+      "alias": "Vintage"
     },
     {
       "id": "tabi-wa-michizure",
@@ -288,8 +297,9 @@
     },
     {
       "id": "pending-machine",
-      "title": "Pending Machine",
-      "livefansId": "687567"
+      "title": "ペンディングマシーン",
+      "livefansId": "687567",
+      "alias": "Pending Machine"
     },
     {
       "id": "get-back-to-jinsei",
@@ -298,13 +308,15 @@
     },
     {
       "id": "brothers",
-      "title": "Brothers",
-      "livefansId": "509545"
+      "title": "ブラザーズ",
+      "livefansId": "509545",
+      "alias": "Brothers"
     },
     {
       "id": "bad-for-me",
-      "title": "Bad for Me",
-      "livefansId": "551593"
+      "title": "バッドフォーミー",
+      "livefansId": "551593",
+      "alias": "Bad for Me"
     },
     {
       "id": "second-line",
@@ -313,8 +325,9 @@
     },
     {
       "id": "last-song",
-      "title": "Last Song",
-      "livefansId": "626361"
+      "title": "ラストソング",
+      "livefansId": "626361",
+      "alias": "Last Song"
     },
     {
       "id": "soulsoup",
@@ -353,8 +366,9 @@
     },
     {
       "id": "catchball",
-      "title": "Catch Ball",
-      "livefansId": "851685"
+      "title": "キャッチボール",
+      "livefansId": "851685",
+      "alias": "Catch Ball"
     },
     {
       "id": "choral-a",
@@ -364,7 +378,8 @@
     {
       "id": "filament",
       "title": "フィラメント",
-      "livefansId": "687566"
+      "livefansId": "687566",
+      "alias": "Filament"
     },
     {
       "id": "escapade",
@@ -419,7 +434,8 @@
     {
       "id": "equal",
       "title": "イコール",
-      "livefansId": "649508"
+      "livefansId": "649508",
+      "alias": "Equal"
     },
     {
       "id": "kiiroi-kuruma",
