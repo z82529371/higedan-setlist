@@ -30,3 +30,17 @@ Multiple autonomous agents frequently operate concurrently in this repository:
 - `pnpm check`: Runs ultra-fast static linting (`oxlint`, checks undeclared variables and dead code in <20ms) and the full domain smoke test suite (`smoke-test.mjs`). Run after every code modification.
 - `pnpm test`: Runs `oxlint` + `smoke-test.mjs` (13 invariant checks).
 - `pnpm build`: Production build via Vite compiler (`site/dist/`).
+
+## Agent skills
+
+### Issue tracker
+
+Issues live as GitHub issues via the `gh` CLI. See `docs/agents/issue-tracker.md`.
+
+### Triage labels
+
+Default five canonical labels used as-is. See `docs/agents/triage-labels.md`.
+
+### Domain docs
+
+Single-context with root `docs/adr/`. See `docs/agents/domain.md`.
