@@ -98,4 +98,22 @@ export const dictJa = {
     overseasTour: "✈️ 海外遠征・ワールドツアー",
     arenaDome: "🏟️ アリーナ・ドーム (Arena & Dome)",
   },
+  memorial: {
+    modalTitle: "記念チケットプレビュー",
+    songsRecorded: "全 {count} 曲収録",
+    closePreview: "プレビューを閉じる",
+    styleLabel: "スタイル：",
+    themeVintage: "📄 クラフト紙",
+    themeWhite: "✉️ ホワイトカード",
+    themeNoir: "🖤 ステージゴールド",
+    ticketFormat: "📜 シングルカラムチケット",
+    generating: "高画質チケット生成中...",
+    saveHint: "スマホは長押しで保存・PCは右クリックで保存",
+    copySetlist: "📋 セットリストをコピー",
+    copied: "✓ コピー完了",
+    mainSetlist: "◆ MAIN SETLIST // 本編演奏曲目",
+    encore: "◆ ENCORE // アンコール曲目",
+    stamp: "現場",
+  },
 };
+

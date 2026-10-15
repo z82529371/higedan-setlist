@@ -2564,7 +2564,230 @@ describe("Pipeline Smoke Tests", () => {
       assert.ok(venueSlipHtmlEn.includes("Arena &amp; Dome") || venueSlipHtmlEn.includes("Arena & Dome"), "VenueSlip must render localized tier badge in en");
     });
   });
+
+  describe("16. Localized Commemorative Ticket Image Export (Issue #19)", () => {
+    it("generates cache key with locale discriminator to prevent cross-language cache collisions", async () => {
+      const { getMemorialImageKey } = await server.ssrLoadModule("/src/components/MemorialCardModal.jsx");
+      assert.ok(typeof getMemorialImageKey === "function", "getMemorialImageKey must be exported");
+
+      const keyZh = getMemorialImageKey("show-20241112", "vintage", "zh-TW");
+      const keyJa = getMemorialImageKey("show-20241112", "vintage", "ja");
+      const keyEn = getMemorialImageKey("show-20241112", "vintage", "en");
+      const keyKo = getMemorialImageKey("show-20241112", "vintage", "ko");
+
+      assert.strictEqual(keyZh, "show-20241112-vintage-zh-TW");
+      assert.strictEqual(keyJa, "show-20241112-vintage-ja");
+      assert.strictEqual(keyEn, "show-20241112-vintage-en");
+      assert.strictEqual(keyKo, "show-20241112-vintage-ko");
+
+      const allKeys = new Set([keyZh, keyJa, keyEn, keyKo]);
+      assert.strictEqual(allKeys.size, 4, "All 4 locale cache keys must be strictly distinct");
+    });
+
+    it("renders MemorialCardModal with localized tokens across ja, en, ko, and zh-TW", async () => {
+      const { I18nProvider } = await server.ssrLoadModule("/src/lib/i18n.jsx");
+      const { MemorialCardModal } = await server.ssrLoadModule("/src/components/MemorialCardModal.jsx");
+
+      const mockTourUnit = {
+        id: "arena-tour-2024-rejoice",
+        title: "Official髭男dism Arena Tour 2024 -Rejoice-",
+        isTour: true,
+        type: "巡演專場",
+        shows: [
+          {
+            id: "show-20241112",
+            date: "2024-11-12",
+            opensAt: "17:00",
+            startsAt: "18:00",
+            venue: "K-Arena Yokohama",
+            city: "橫濱",
+          },
+        ],
+      };
+
+      const mockMain = [
+        { cue: "M1", item: { songId: "pretender", kind: ["premiere"] } },
+        { cue: "M2", item: { songId: "subtitle", kind: ["satoshi-solo"] } },
+      ];
+      const mockEnc = [
+        { cue: "EN1", item: { songId: "no-doubt", kind: ["request"] } },
+      ];
+
+      // 1. Japanese (ja)
+      const htmlJa = renderToStaticMarkup(
+        React.createElement(
+          I18nProvider,
+          { initialLocale: "ja" },
+          React.createElement(MemorialCardModal, {
+            isOpen: true,
+            onClose: () => {},
+            show: mockTourUnit.shows[0],
+            unit: mockTourUnit,
+            main: mockMain,
+            enc: mockEnc,
+            showIndex: 0,
+            totalShows: 10,
+          })
+        )
+      );
+      assert.ok(htmlJa.includes("第 1 / 10 公演"), "Must render Japanese show index '第 1 / 10 公演'");
+      assert.ok(htmlJa.includes("全 3 曲"), "Must render Japanese song count '全 3 曲'");
+      assert.ok(htmlJa.includes("◆ MAIN SETLIST // 本編演奏曲目"), "Must render Japanese main setlist header");
+      assert.ok(htmlJa.includes("◆ ENCORE // アンコール曲目"), "Must render Japanese encore setlist header");
+      assert.ok(htmlJa.includes("現場"), "Must render '現場' in vermilion stamp in ja");
+      assert.ok(htmlJa.includes("新曲"), "Must render '新曲' arrangement badge in ja");
+      assert.ok(htmlJa.includes("弾き語り"), "Must render '弾き語り' arrangement badge in ja");
+      assert.ok(htmlJa.includes("リクエスト"), "Must render 'リクエスト' arrangement badge in ja");
+      assert.ok(htmlJa.includes("17:00 開場 / 18:00 開演"), "Must render Japanese door/start time in ja");
+      assert.ok(htmlJa.includes("2024-11-12（火）"), "Must render Japanese date in ja");
+      assert.ok(htmlJa.includes("記念チケットプレビュー"), "Must render localized modal title in ja");
+      assert.ok(htmlJa.includes("クラフト紙"), "Must render localized theme button 'クラフト紙' in ja");
+      assert.ok(htmlJa.includes("ホワイトカード"), "Must render localized theme button 'ホワイトカード' in ja");
+      assert.ok(htmlJa.includes("ステージゴールド"), "Must render localized theme button 'ステージゴールド' in ja");
+      // Canonical Invariant
+      assert.ok(htmlJa.includes("Pretender"), "Canonical song title must remain intact");
+      assert.ok(htmlJa.includes("Arena Tour 2024 -Rejoice-"), "Master tour title must remain intact");
+
+      // 2. English (en)
+      const htmlEn = renderToStaticMarkup(
+        React.createElement(
+          I18nProvider,
+          { initialLocale: "en" },
+          React.createElement(MemorialCardModal, {
+            isOpen: true,
+            onClose: () => {},
+            show: mockTourUnit.shows[0],
+            unit: mockTourUnit,
+            main: mockMain,
+            enc: mockEnc,
+            showIndex: 0,
+            totalShows: 10,
+          })
+        )
+      );
+      assert.ok(htmlEn.includes("Show 1 of 10"), "Must render English show index 'Show 1 of 10'");
+      assert.ok(htmlEn.includes("3 Songs"), "Must render English song count '3 Songs'");
+      assert.ok(htmlEn.includes("◆ MAIN SETLIST // MAIN SET"), "Must render English main setlist header");
+      assert.ok(htmlEn.includes("◆ ENCORE // ENCORE"), "Must render English encore setlist header");
+      assert.ok(htmlEn.includes("LIVE"), "Must render 'LIVE' in vermilion stamp in en");
+      assert.ok(htmlEn.includes("New Song"), "Must render 'New Song' arrangement badge in en");
+      assert.ok(htmlEn.includes("Satoshi Solo"), "Must render 'Satoshi Solo' arrangement badge in en");
+      assert.ok(htmlEn.includes("Request"), "Must render 'Request' arrangement badge in en");
+      assert.ok(htmlEn.includes("Doors 17:00 / Start 18:00"), "Must render English door/start time in en");
+      assert.ok(htmlEn.includes("2024-11-12 (Tue)"), "Must render English date with (Tue) in en");
+      assert.ok(htmlEn.includes("Commemorative Ticket Preview"), "Must render localized modal title in en");
+      assert.ok(htmlEn.includes("Vintage Paper"), "Must render localized theme button 'Vintage Paper' in en");
+      assert.ok(htmlEn.includes("White Card"), "Must render localized theme button 'White Card' in en");
+      assert.ok(htmlEn.includes("Stage Gold"), "Must render localized theme button 'Stage Gold' in en");
+
+      // 3. Korean (ko)
+      const htmlKo = renderToStaticMarkup(
+        React.createElement(
+          I18nProvider,
+          { initialLocale: "ko" },
+          React.createElement(MemorialCardModal, {
+            isOpen: true,
+            onClose: () => {},
+            show: mockTourUnit.shows[0],
+            unit: mockTourUnit,
+            main: mockMain,
+            enc: mockEnc,
+            showIndex: 0,
+            totalShows: 10,
+          })
+        )
+      );
+      assert.ok(htmlKo.includes("제 1 / 10 회"), "Must render Korean show index '제 1 / 10 회'");
+      assert.ok(htmlKo.includes("전 3 곡"), "Must render Korean song count '전 3 곡'");
+      assert.ok(htmlKo.includes("◆ MAIN SETLIST // 본편 연주곡"), "Must render Korean main setlist header");
+      assert.ok(htmlKo.includes("◆ ENCORE // 앙코르곡"), "Must render Korean encore setlist header");
+      assert.ok(htmlKo.includes("라이브"), "Must render '라이브' in vermilion stamp in ko");
+      assert.ok(htmlKo.includes("신곡"), "Must render '신곡' arrangement badge in ko");
+      assert.ok(htmlKo.includes("단독 연주"), "Must render '단독 연주' arrangement badge in ko");
+      assert.ok(htmlKo.includes("리퀘스트"), "Must render '리퀘스트' arrangement badge in ko");
+      assert.ok(htmlKo.includes("17:00 입장 / 18:00 시작"), "Must render Korean door/start time in ko");
+      assert.ok(htmlKo.includes("2024-11-12（화）"), "Must render Korean date with （화） in ko");
+      assert.ok(htmlKo.includes("기념 티켓 미리보기"), "Must render localized modal title in ko");
+      assert.ok(htmlKo.includes("빈티지 페이퍼"), "Must render localized theme button '빈티지 페이퍼' in ko");
+
+      // 4. Traditional Chinese (zh-TW)
+      const htmlZh = renderToStaticMarkup(
+        React.createElement(
+          I18nProvider,
+          { initialLocale: "zh-TW" },
+          React.createElement(MemorialCardModal, {
+            isOpen: true,
+            onClose: () => {},
+            show: mockTourUnit.shows[0],
+            unit: mockTourUnit,
+            main: mockMain,
+            enc: mockEnc,
+            showIndex: 0,
+            totalShows: 10,
+          })
+        )
+      );
+      assert.ok(htmlZh.includes("第 1 / 10 場"), "Must render Traditional Chinese show index '第 1 / 10 場'");
+      assert.ok(htmlZh.includes("全 3 首"), "Must render Traditional Chinese song count '全 3 首'");
+      assert.ok(htmlZh.includes("◆ MAIN SETLIST // 本篇演奏曲目"), "Must render zh-TW main setlist header");
+      assert.ok(htmlZh.includes("◆ ENCORE // 安可曲目"), "Must render zh-TW encore setlist header");
+      assert.ok(htmlZh.includes("現場"), "Must render '現場' in vermilion stamp in zh-TW");
+      assert.ok(htmlZh.includes("新歌"), "Must render '新歌' arrangement badge in zh-TW");
+      assert.ok(htmlZh.includes("自彈自唱"), "Must render '自彈自唱' arrangement badge in zh-TW");
+      assert.ok(htmlZh.includes("點歌"), "Must render '點歌' arrangement badge in zh-TW");
+      assert.ok(htmlZh.includes("17:00 開場 / 18:00 開演"), "Must render door/start time in zh-TW");
+      assert.ok(htmlZh.includes("2024-11-12（二）"), "Must render date with （二） in zh-TW");
+      assert.ok(htmlZh.includes("巡演歌單紀念票券預覽"), "Must render localized modal title in zh-TW");
+      assert.ok(htmlZh.includes("復古手感紙"), "Must render localized theme button '復古手感紙' in zh-TW");
+    });
+
+    it("supports direct locale prop override on MemorialCardModal", async () => {
+      const { MemorialCardModal } = await server.ssrLoadModule("/src/components/MemorialCardModal.jsx");
+
+      const mockTourUnit = {
+        id: "tour-override",
+        title: "Test Tour",
+        isTour: true,
+        shows: [{ id: "show-override", date: "2024-11-12", venue: "Test Venue", city: "Tokyo" }],
+      };
+
+      const htmlPropEn = renderToStaticMarkup(
+        React.createElement(MemorialCardModal, {
+          isOpen: true,
+          onClose: () => {},
+          show: mockTourUnit.shows[0],
+          unit: mockTourUnit,
+          main: [],
+          enc: [],
+          showIndex: 0,
+          totalShows: 5,
+          locale: "en",
+        })
+      );
+      assert.ok(htmlPropEn.includes("Show 1 of 5"), "Must respect direct locale='en' prop");
+      assert.ok(htmlPropEn.includes("LIVE"), "Must respect direct locale='en' prop for vermilion stamp");
+      assert.ok(htmlPropEn.includes("Commemorative Ticket Preview"), "Must respect direct locale='en' prop for title");
+
+      const htmlPropKo = renderToStaticMarkup(
+        React.createElement(MemorialCardModal, {
+          isOpen: true,
+          onClose: () => {},
+          show: mockTourUnit.shows[0],
+          unit: mockTourUnit,
+          main: [],
+          enc: [],
+          showIndex: 0,
+          totalShows: 5,
+          locale: "ko",
+        })
+      );
+      assert.ok(htmlPropKo.includes("제 1 / 5 회"), "Must respect direct locale='ko' prop");
+      assert.ok(htmlPropKo.includes("라이브"), "Must respect direct locale='ko' prop for vermilion stamp");
+      assert.ok(htmlPropKo.includes("기념 티켓 미리보기"), "Must respect direct locale='ko' prop for title");
+    });
+  });
 });
+
 
 
 

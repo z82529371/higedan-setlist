@@ -98,4 +98,22 @@ export const dictZhTw = {
     overseasTour: "✈️ 海外遠征巡演",
     arenaDome: "🏟️ 巨蛋 / 競技場 (Arena & Dome)",
   },
+  memorial: {
+    modalTitle: "巡演歌單紀念票券預覽",
+    songsRecorded: "全 {count} 首收錄",
+    closePreview: "關閉預覽",
+    styleLabel: "風格：",
+    themeVintage: "📄 復古手感紙",
+    themeWhite: "✉️ 經典純白卡",
+    themeNoir: "🖤 暗夜舞台金",
+    ticketFormat: "📜 單欄長條票券",
+    generating: "高清紀念卡生成中...",
+    saveHint: "手機長按小卡存入相簿 · 電腦點右鍵另存圖片",
+    copySetlist: "📋 複製歌單文字",
+    copied: "✓ 已複製歌單",
+    mainSetlist: "◆ MAIN SETLIST // 本篇演奏曲目",
+    encore: "◆ ENCORE // 安可曲目",
+    stamp: "現場",
+  },
 };
+

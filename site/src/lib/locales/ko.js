@@ -98,4 +98,22 @@ export const dictKo = {
     overseasTour: "✈️ 해외 원정 투어",
     arenaDome: "🏟️ 아레나 & 돔 (Arena & Dome)",
   },
+  memorial: {
+    modalTitle: "기념 티켓 미리보기",
+    songsRecorded: "전 {count}곡 수록",
+    closePreview: "미리보기 닫기",
+    styleLabel: "스타일:",
+    themeVintage: "📄 빈티지 페이퍼",
+    themeWhite: "✉️ 화이트 카드",
+    themeNoir: "🖤 스테이지 골드",
+    ticketFormat: "📜 단일 컬럼 티켓",
+    generating: "고화질 티켓 생성 중...",
+    saveHint: "모바일은 길게 눌러 저장 · PC는 우클릭하여 저장",
+    copySetlist: "📋 셋리스트 복사",
+    copied: "✓ 복사 완료",
+    mainSetlist: "◆ MAIN SETLIST // 본편 연주곡",
+    encore: "◆ ENCORE // 앙코르곡",
+    stamp: "라이브",
+  },
 };
+

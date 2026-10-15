@@ -98,4 +98,22 @@ export const dictEn = {
     overseasTour: "✈️ Overseas World Tour",
     arenaDome: "🏟️ Arena & Dome",
   },
+  memorial: {
+    modalTitle: "Commemorative Ticket Preview",
+    songsRecorded: "{count} Songs Recorded",
+    closePreview: "Close Preview",
+    styleLabel: "Style:",
+    themeVintage: "📄 Vintage Paper",
+    themeWhite: "✉️ White Card",
+    themeNoir: "🖤 Stage Gold",
+    ticketFormat: "📜 Single-Column Ticket",
+    generating: "Generating HD ticket...",
+    saveHint: "Long press to save on mobile · Right click to save on desktop",
+    copySetlist: "📋 Copy Setlist",
+    copied: "✓ Copied",
+    mainSetlist: "◆ MAIN SETLIST // MAIN SET",
+    encore: "◆ ENCORE // ENCORE",
+    stamp: "LIVE",
+  },
 };
+

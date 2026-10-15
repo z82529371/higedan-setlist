@@ -1,9 +1,69 @@
 import React, { useState, useRef, useEffect } from "react";
 import { exportElementToPng } from "../lib/image-export.js";
-import { songTitle, showDate, formatShowTime } from "../lib/domain.js";
+import { songTitle, showDate, formatShowTime, songUnreleased } from "../lib/domain.js";
+import { getKindArray, kindTabs } from "../lib/kind.js";
+import { useI18n, DICTIONARIES, DEFAULT_LOCALE } from "../lib/i18n.jsx";
 
 // Session-level memory for theme choice across shows
 let sessionMemorialTheme = "vintage";
+
+
+/**
+ * Generates offscreen cache key with locale discriminator to prevent cross-language cache collisions
+ */
+export function getMemorialImageKey(showKey, theme, locale = "zh-TW") {
+  return `${showKey}-${theme}-${locale}`;
+}
+
+export function formatShowOrderText(unit, showIndex, totalShows, locale = "zh-TW") {
+  const isTour = Boolean(unit?.isTour);
+  if (isTour && totalShows > 0) {
+    const idx = showIndex + 1;
+    if (locale === "en") return `Show ${idx} of ${totalShows}`;
+    if (locale === "ja") return `第 ${idx} / ${totalShows} 公演`;
+    if (locale === "ko") return `제 ${idx} / ${totalShows} 회`;
+    return `第 ${idx} / ${totalShows} 場`;
+  }
+  return unit?.type || "專場演出";
+}
+
+export function formatTicketSongCount(totalSongsCount, locale = "zh-TW") {
+  if (locale === "en") return `${totalSongsCount} Songs`;
+  if (locale === "ja") return `全 ${totalSongsCount} 曲`;
+  if (locale === "ko") return `전 ${totalSongsCount} 곡`;
+  return `全 ${totalSongsCount} 首`;
+}
+
+export function getMemorialSectionHeaders(locale = "zh-TW") {
+  if (locale === "en") {
+    return {
+      main: "◆ MAIN SETLIST // MAIN SET",
+      encore: "◆ ENCORE // ENCORE",
+    };
+  }
+  if (locale === "ja") {
+    return {
+      main: "◆ MAIN SETLIST // 本編演奏曲目",
+      encore: "◆ ENCORE // アンコール曲目",
+    };
+  }
+  if (locale === "ko") {
+    return {
+      main: "◆ MAIN SETLIST // 본편 연주곡",
+      encore: "◆ ENCORE // 앙코르곡",
+    };
+  }
+  return {
+    main: "◆ MAIN SETLIST // 本篇演奏曲目",
+    encore: "◆ ENCORE // 安可曲目",
+  };
+}
+
+export function getMemorialStampText(locale = "zh-TW") {
+  if (locale === "en") return "LIVE";
+  if (locale === "ko") return "라이브";
+  return "現場";
+}
 
 /**
  * MemorialCardModal
@@ -11,6 +71,7 @@ let sessionMemorialTheme = "vintage";
  * - 經典「單欄長條票券」排版，保證收錄全曲 (M1 ~ M20+ 及 安可)
  * - 支援「復古手感紙質」、「經典純白卡」與「暗夜舞台黑金」三種風格切換
  * - 開窗即時 DOM 預覽零延遲，背景自動非同步產出 2x 高清真圖片覆蓋置頂
+ * - 支援多國語言 (zh-TW, ja, en, ko) 本地化票券排版與專屬朱印風格印章
  * - 支援手機長按直接存入相簿（Photos）與電腦右鍵另存圖片，無生硬下載按鈕
  */
 export function MemorialCardModal({
@@ -22,9 +83,25 @@ export function MemorialCardModal({
   enc = [],
   showIndex = 0,
   totalShows = 1,
+  locale: propLocale,
 }) {
+  const { locale: ctxLocale } = useI18n();
+  const locale = propLocale || ctxLocale || DEFAULT_LOCALE;
+
+  const t = (key, fallback) => {
+    const activeDict = DICTIONARIES[locale] || DICTIONARIES[DEFAULT_LOCALE];
+    if (!key || typeof key !== "string") return fallback ?? "";
+    const keys = key.split(".");
+    let cur = activeDict;
+    for (const k of keys) {
+      if (!cur || typeof cur !== "object") return fallback ?? key;
+      cur = cur[k];
+    }
+    return cur !== undefined ? cur : (fallback ?? key);
+  };
+
   const [theme, setTheme] = useState(sessionMemorialTheme); // 'vintage' | 'white' | 'noir'
-  const [imageUrls, setImageUrls] = useState({}); // { [`${showId}-${theme}`]: dataUrl }
+  const [imageUrls, setImageUrls] = useState({}); // { [`${showId}-${theme}-${locale}`]: dataUrl }
   const [isGenerating, setIsGenerating] = useState(false);
   const [copiedText, setCopiedText] = useState(false);
   const cardRef = useRef(null);
@@ -41,7 +118,7 @@ export function MemorialCardModal({
   const cardBgColor = isVintage ? "#fcfaf2" : isWhite ? "#ffffff" : "#111319";
 
   const showKey = show?.id || "show";
-  const currentImageKey = `${showKey}-${theme}`;
+  const currentImageKey = getMemorialImageKey(showKey, theme, locale);
   const currentImageUrl = imageUrls[currentImageKey];
 
   useEffect(() => {
@@ -87,46 +164,86 @@ export function MemorialCardModal({
     return () => {
       isMounted = false;
     };
-  }, [isOpen, show, showKey, theme, currentImageKey, cardBgColor, currentImageUrl]);
+  }, [isOpen, show, showKey, theme, locale, currentImageKey, cardBgColor, currentImageUrl]);
 
   if (!isOpen || !show) return null;
 
-  const dateFormatted = showDate(show);
-  const isTour = Boolean(unit?.isTour);
-  const showOrderText = isTour && totalShows > 0
-    ? `第 ${showIndex + 1} / ${totalShows} 場`
-    : (unit?.type || "專場演出");
-
+  const dateFormatted = showDate(show, locale);
+  const showOrderText = formatShowOrderText(unit, showIndex, totalShows, locale);
   const totalSongsCount = main.length + enc.length;
+  const songCountBadgeText = formatTicketSongCount(totalSongsCount, locale);
+  const sectionHeaders = getMemorialSectionHeaders(locale);
+  const stampText = getMemorialStampText(locale);
+  const timeFormatted = formatShowTime(show, locale);
 
   const handleCopyText = () => {
     const lines = [
       `Official 髭男 dism - ${unit?.title || ""}`,
-      `📅 日期：${dateFormatted}`,
-      `📍 場地：${show.venue}（${show.city}）`,
+      locale === "en"
+        ? `📅 Date: ${dateFormatted}`
+        : locale === "ja"
+        ? `📅 日程：${dateFormatted}`
+        : locale === "ko"
+        ? `📅 일시: ${dateFormatted}`
+        : `📅 日期：${dateFormatted}`,
+      locale === "en"
+        ? `📍 Venue: ${show.venue} (${show.city})`
+        : locale === "ja"
+        ? `📍 会場：${show.venue}（${show.city}）`
+        : locale === "ko"
+        ? `📍 공연장: ${show.venue} (${show.city})`
+        : `📍 場地：${show.venue}（${show.city}）`,
     ];
-    const timeStr = formatShowTime(show);
-    if (timeStr) lines.push(`⏰ 時間：${timeStr}`);
+    if (timeFormatted) {
+      lines.push(
+        locale === "en"
+          ? `⏰ Time: ${timeFormatted}`
+          : locale === "ja"
+          ? `⏰ 時間：${timeFormatted}`
+          : locale === "ko"
+          ? `⏰ 시간: ${timeFormatted}`
+          : `⏰ 時間：${timeFormatted}`
+      );
+    }
     lines.push(
-      `🎵 全曲收錄：共 ${totalSongsCount} 首（本篇 ${main.length} 首 · 安可 ${enc.length} 首）`,
+      locale === "en"
+        ? `🎵 Total ${totalSongsCount} Songs (Main ${main.length} · Encore ${enc.length})`
+        : locale === "ja"
+        ? `🎵 全曲収録：全 ${totalSongsCount} 曲（本編 ${main.length} 曲 · アンコール ${enc.length} 曲）`
+        : locale === "ko"
+        ? `🎵 전곡 수록: 총 ${totalSongsCount}곡 (본편 ${main.length}곡 · 앙코르 ${enc.length}곡)`
+        : `🎵 全曲收錄：共 ${totalSongsCount} 首（本篇 ${main.length} 首 · 安可 ${enc.length} 首）`,
       "",
-      "【本篇 MAIN SET】",
+      locale === "en"
+        ? "【MAIN SET】"
+        : locale === "ja"
+        ? "【本編 MAIN SET】"
+        : locale === "ko"
+        ? "【본편 MAIN SET】"
+        : "【本篇 MAIN SET】",
       ...main.map((p) => {
         const it = p.item;
-        const t = it.title ?? songTitle[it.songId] ?? it.note ?? "";
+        const tTitle = it.title ?? songTitle[it.songId] ?? it.note ?? "";
         const noteStr = it.note && it.songId ? ` (${it.note})` : "";
-        return `${p.cue} ${t}${noteStr}`;
+        return `${p.cue} ${tTitle}${noteStr}`;
       })
     );
 
     if (enc.length > 0) {
-      lines.push("", "【安可 ENCORE】");
       lines.push(
+        "",
+        locale === "en"
+          ? "【ENCORE】"
+          : locale === "ja"
+          ? "【アンコール ENCORE】"
+          : locale === "ko"
+          ? "【앙코르 ENCORE】"
+          : "【安可 ENCORE】",
         ...enc.map((p) => {
           const it = p.item;
-          const t = it.title ?? songTitle[it.songId] ?? it.note ?? "";
+          const tTitle = it.title ?? songTitle[it.songId] ?? it.note ?? "";
           const noteStr = it.note && it.songId ? ` (${it.note})` : "";
-          return `${p.cue} ${t}${noteStr}`;
+          return `${p.cue} ${tTitle}${noteStr}`;
         })
       );
     }
@@ -143,13 +260,15 @@ export function MemorialCardModal({
   const renderTrackRow = (p, idx, isEncore = false) => {
     const it = p.item;
     const title = it.title ?? songTitle[it.songId] ?? it.note ?? "Untitled";
+    const isUnrel = Boolean(it.songId && songUnreleased.has(it.songId));
+    const tabs = kindTabs(getKindArray(it.kind), isUnrel);
 
     return (
       <div
         key={idx}
         className="flex items-center justify-between gap-1.5 py-1 border-b border-current/10 last:border-b-0"
       >
-        <div className="flex items-center gap-1.5 min-w-0">
+        <div className="flex items-center gap-1.5 min-w-0 flex-1">
           <span
             className={`font-mono text-xs font-bold w-6 shrink-0 tabular-nums ${
               isEncore
@@ -166,6 +285,20 @@ export function MemorialCardModal({
           <span className="font-bold text-[13px] truncate">
             {title}
           </span>
+          {tabs.map((k) => (
+            <span
+              key={k}
+              className={`font-mono text-[9px] px-1 py-0.2 rounded-[2px] font-bold shrink-0 leading-tight ${
+                isNoir
+                  ? "bg-[#252a36] text-[#facc15] border border-[#d49a00]/40"
+                  : isWhite
+                  ? "bg-[#f3f4f6] text-[#78350f] border border-[#d1d5db]"
+                  : "bg-[#f5ebd2] text-[#78350f] border border-[#d6cebf]"
+              }`}
+            >
+              {t(`badges.${k}`, k)}
+            </span>
+          ))}
         </div>
 
         {it.note && (
@@ -183,7 +316,7 @@ export function MemorialCardModal({
       onClick={onClose}
       role="dialog"
       aria-modal="true"
-      aria-label="巡演歌單紀念小卡預覽"
+      aria-label={t("memorial.modalTitle", "巡演歌單紀念票券預覽")}
     >
       <div
         className="relative w-full max-w-[500px] max-h-[94vh] flex flex-col rounded-2xl bg-[#1e212b] border border-[#374151] shadow-2xl overflow-hidden my-auto"
@@ -194,17 +327,17 @@ export function MemorialCardModal({
           <div className="flex items-center gap-2">
             <span className="text-base" aria-hidden="true">📸</span>
             <span className="font-bold text-sm tracking-wide">
-              巡演歌單紀念票券預覽
+              {t("memorial.modalTitle", "巡演歌單紀念票券預覽")}
             </span>
             <span className="rounded bg-[#d49a00]/20 px-2 py-0.5 text-xs font-mono font-bold text-[#facc15] border border-[#d49a00]/40">
-              全 {totalSongsCount} 首收錄
+              {(t("memorial.songsRecorded") || "全 {count} 首收錄").replace("{count}", String(totalSongsCount))}
             </span>
           </div>
           <button
             type="button"
             onClick={onClose}
             className="w-8 h-8 rounded-full flex items-center justify-center text-[#9ca3af] hover:text-white hover:bg-[#2d3446] transition-colors cursor-pointer text-lg leading-none"
-            aria-label="關閉預覽"
+            aria-label={t("memorial.closePreview", "關閉預覽")}
           >
             ✕
           </button>
@@ -213,7 +346,7 @@ export function MemorialCardModal({
         {/* Toolbar: Theme Switcher */}
         <div className="flex items-center justify-between gap-2 px-4 py-2.5 bg-[#12131a] border-b border-[#2d3446] text-xs">
           <div className="flex items-center gap-1.5">
-            <span className="text-[#9ca3af] font-mono">風格：</span>
+            <span className="text-[#9ca3af] font-mono">{t("memorial.styleLabel", "風格：")}</span>
             <button
               type="button"
               onClick={() => handleThemeChange("vintage")}
@@ -223,7 +356,7 @@ export function MemorialCardModal({
                   : "bg-[#202432] text-[#9ca3af] hover:text-white"
               }`}
             >
-              📄 復古手感紙
+              {t("memorial.themeVintage", "📄 復古手感紙")}
             </button>
             <button
               type="button"
@@ -234,7 +367,7 @@ export function MemorialCardModal({
                   : "bg-[#202432] text-[#9ca3af] hover:text-white"
               }`}
             >
-              ✉️ 經典純白卡
+              {t("memorial.themeWhite", "✉️ 經典純白卡")}
             </button>
             <button
               type="button"
@@ -245,11 +378,11 @@ export function MemorialCardModal({
                   : "bg-[#202432] text-[#9ca3af] hover:text-white"
               }`}
             >
-              🖤 暗夜舞台金
+              {t("memorial.themeNoir", "🖤 暗夜舞台金")}
             </button>
           </div>
           <span className="font-mono text-[11px] text-[#9ca3af] opacity-80 hidden sm:inline">
-            📜 單欄長條票券
+            {t("memorial.ticketFormat", "📜 單欄長條票券")}
           </span>
         </div>
 
@@ -317,7 +450,7 @@ export function MemorialCardModal({
                           : "bg-[#252a36] text-[#9ca3af]"
                       }`}
                     >
-                      全 {totalSongsCount} 首
+                      {songCountBadgeText}
                     </span>
                   </div>
                 </div>
@@ -347,10 +480,10 @@ export function MemorialCardModal({
                     <span className="font-bold">📍 {show.venue}</span>
                     <span className="opacity-40">/</span>
                     <span>{show.city}</span>
-                    {formatShowTime(show) && (
+                    {timeFormatted && (
                       <>
                         <span className="opacity-40">/</span>
-                        <span className="font-mono">⏰ {formatShowTime(show)}</span>
+                        <span className="font-mono">⏰ {timeFormatted}</span>
                       </>
                     )}
                   </div>
@@ -368,7 +501,7 @@ export function MemorialCardModal({
                 <div className="space-y-3">
                   <div className="space-y-1">
                     <div className="flex items-center justify-between font-mono text-[11px] font-extrabold tracking-wider uppercase opacity-75">
-                      <span>◆ MAIN SETLIST // 本篇演奏曲目</span>
+                      <span>{sectionHeaders.main}</span>
                       <span className="text-[10px] tabular-nums">{main.length} SONGS</span>
                     </div>
                     <div className="flex flex-col">
@@ -388,7 +521,7 @@ export function MemorialCardModal({
                       }`}
                     >
                       <div className="flex items-center justify-between font-mono text-[11px] font-extrabold tracking-wider uppercase opacity-80">
-                        <span className="text-[#d19f00]">◆ ENCORE // 安可曲目</span>
+                        <span className="text-[#d19f00]">{sectionHeaders.encore}</span>
                         <span className="text-[10px] tabular-nums">{enc.length} SONGS</span>
                       </div>
                       <div className="flex flex-col">
@@ -424,7 +557,7 @@ export function MemorialCardModal({
                     }`}
                   >
                     <span className="text-[8px] tracking-tighter leading-tight">HIGEDAN</span>
-                    <span className="text-[10px] leading-tight font-black">現場</span>
+                    <span className="text-[10px] leading-tight font-black">{stampText}</span>
                     <span className="text-[7px] tracking-widest leading-none">ARCHIVE</span>
                   </div>
                 </div>
@@ -435,7 +568,15 @@ export function MemorialCardModal({
             {currentImageUrl && (
               <img
                 src={currentImageUrl}
-                alt={`Official 髭男 dism 巡演歌單紀念票券 - ${unit?.title || ""} ${dateFormatted}`}
+                alt={
+                  locale === "en"
+                    ? `Official HIGEDAN DISM Commemorative Ticket - ${unit?.title || ""} ${dateFormatted}`
+                    : locale === "ja"
+                    ? `Official髭男dism 記念チケット - ${unit?.title || ""} ${dateFormatted}`
+                    : locale === "ko"
+                    ? `Official HIGEDAN DISM 기념 티켓 - ${unit?.title || ""} ${dateFormatted}`
+                    : `Official 髭男 dism 巡演歌單紀念票券 - ${unit?.title || ""} ${dateFormatted}`
+                }
                 className="absolute inset-0 w-full h-full rounded-2xl block object-top cursor-default z-10"
                 style={{
                   WebkitTouchCallout: "default",
@@ -453,8 +594,8 @@ export function MemorialCardModal({
             <span aria-hidden="true">{isGenerating ? "⏳" : "💡"}</span>
             <span className="font-bold">
               {isGenerating
-                ? "高清紀念卡生成中..."
-                : "手機長按小卡存入相簿 · 電腦點右鍵另存圖片"}
+                ? t("memorial.generating", "高清紀念卡生成中...")
+                : t("memorial.saveHint", "手機長按小卡存入相簿 · 電腦點右鍵另存圖片")}
             </span>
           </div>
 
@@ -464,7 +605,7 @@ export function MemorialCardModal({
               onClick={handleCopyText}
               className="px-3.5 py-2 rounded-lg bg-[#242936] text-[#e2e8f0] text-xs font-mono font-bold hover:bg-[#32394a] transition-all cursor-pointer inline-flex items-center gap-1.5 active:scale-[0.98]"
             >
-              <span>{copiedText ? "✓ 已複製歌單" : "📋 複製歌單文字"}</span>
+              <span>{copiedText ? t("memorial.copied", "✓ 已複製歌單") : t("memorial.copySetlist", "📋 複製歌單文字")}</span>
             </button>
           </div>
         </div>
