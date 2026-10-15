@@ -58,7 +58,7 @@ export function resolveInitialLocale(env) {
   return DEFAULT_LOCALE;
 }
 
-export function resolveTranslation(dict, key, fallback) {
+export function resolveTranslation(dict, key, fallback, params) {
   if (!key || typeof key !== "string") return fallback ?? "";
   const keys = key.split(".");
   let cur = dict;
@@ -66,7 +66,19 @@ export function resolveTranslation(dict, key, fallback) {
     if (!cur || typeof cur !== "object") return fallback ?? key;
     cur = cur[k];
   }
-  return cur !== undefined ? cur : (fallback ?? key);
+  let res = cur !== undefined ? cur : (fallback ?? key);
+  const actualParams =
+    params && typeof params === "object"
+      ? params
+      : fallback && typeof fallback === "object"
+      ? fallback
+      : null;
+  if (typeof res === "string" && actualParams) {
+    for (const [pk, pv] of Object.entries(actualParams)) {
+      res = res.replaceAll(`{${pk}}`, String(pv));
+    }
+  }
+  return res;
 }
 
 export function I18nProvider({ children, initialLocale }) {
@@ -122,7 +134,7 @@ export function I18nProvider({ children, initialLocale }) {
   const dict = useMemo(() => DICTIONARIES[locale] || DICTIONARIES[DEFAULT_LOCALE], [locale]);
 
   const t = useCallback(
-    (key, fallback) => resolveTranslation(dict, key, fallback),
+    (key, fallback, params) => resolveTranslation(dict, key, fallback, params),
     [dict]
   );
 
@@ -147,7 +159,7 @@ export function useI18n() {
     return {
       locale: DEFAULT_LOCALE,
       setLocale: () => {},
-      t: (key, fallback) => fallback ?? key,
+      t: (key, fallback, params) => resolveTranslation(dictZhTw, key, fallback, params),
       dict: dictZhTw,
       supportedLocales: SUPPORTED_LOCALES,
     };

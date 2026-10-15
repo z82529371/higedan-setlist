@@ -111,7 +111,7 @@ export default function LandingHero({
       {/* Spotlight Central Search Box (Single Clean Layer ADR-0095/0096) */}
       <section
         className="w-full max-w-[640px] mt-8 sm:mt-10 text-left"
-        aria-label="即時檢索"
+        aria-label={t("landing.instantSearchAria", "即時檢索")}
       >
         <SearchBox
           q={q}
@@ -137,7 +137,7 @@ export default function LandingHero({
 
         {/* 4 Hot exploration pills */}
         <div className="mt-3.5 flex flex-wrap items-center justify-center gap-1.5 sm:gap-2 text-[12px] sm:text-[13px]">
-          <span className="text-muted font-bold mr-0.5 text-xs">熱門探索：</span>
+          <span className="text-muted font-bold mr-0.5 text-xs">{t("landing.hotExploration", "熱門探索：")}</span>
           <button
             type="button"
             onClick={() => {
@@ -149,7 +149,7 @@ export default function LandingHero({
             }}
             className="rounded-[4px] border border-ink/25 bg-card hover:bg-band hover:text-band-ink px-2.5 py-1 font-medium transition-colors motion-reduce:transition-none cursor-pointer shadow-2xs flex items-center gap-1"
           >
-            <span aria-hidden="true">🎫</span> 2024 Rejoice 巡演
+            <span aria-hidden="true">🎫</span> {t("landing.hotPrompts.rejoiceTour", "2024 Rejoice 巡演")}
           </button>
 
           <button
@@ -165,7 +165,7 @@ export default function LandingHero({
             }}
             className="rounded-[4px] border border-ink/25 bg-card hover:bg-band hover:text-band-ink px-2.5 py-1 font-medium transition-colors motion-reduce:transition-none cursor-pointer shadow-2xs flex items-center gap-1"
           >
-            <span aria-hidden="true">📍</span> 台北小巨蛋專場
+            <span aria-hidden="true">📍</span> {t("landing.hotPrompts.taipeiShow", "台北小巨蛋專場")}
           </button>
 
           <button
@@ -175,7 +175,7 @@ export default function LandingHero({
             }}
             className="rounded-[4px] border border-ink/25 bg-card hover:bg-band hover:text-band-ink px-2.5 py-1 font-medium transition-colors motion-reduce:transition-none cursor-pointer shadow-2xs flex items-center gap-1"
           >
-            <span aria-hidden="true">🏆</span> 歌曲演唱排行
+            <span aria-hidden="true">🏆</span> {t("landing.hotPrompts.songRanking", "歌曲演唱排行")}
           </button>
 
           <button
@@ -197,7 +197,7 @@ export default function LandingHero({
       {/* 3 Feature Spotlight Cards */}
       <section
         className="grid grid-cols-1 md:grid-cols-3 gap-3.5 sm:gap-5 mt-10 sm:mt-12 w-full text-left"
-        aria-label="三大核心特色"
+        aria-label={t("landing.features.sectionAria", "三大核心特色")}
       >
         {/* Card 1: Bi-directional Archive */}
         <button
@@ -215,14 +215,14 @@ export default function LandingHero({
               </span>
             </div>
             <h3 className="m-0 font-display text-[16px] sm:text-[17px] font-bold text-ink">
-              雙向深度檢索
+              {t("landing.features.bidirectionalTitle", "雙向深度檢索")}
             </h3>
             <p className="mt-2 mb-0 text-[13px] text-muted leading-relaxed">
-              查場次看完整歌單與版本差異；查歌曲秒速透視其全歷史演出場次、累計次數與初登場。
+              {t("landing.features.bidirectionalDesc", "查場次看完整歌單與版本差異；查歌曲秒速透視其全歷史演出場次、累計次數與初登場。")}
             </p>
           </div>
           <div className="mt-4 pt-3 border-t border-line-soft flex items-center justify-between text-[12px] font-bold text-ink group-hover:text-band-ink">
-            <span>瀏覽歌曲歷史庫</span>
+            <span>{t("landing.features.bidirectionalAction", "瀏覽歌曲歷史庫")}</span>
             <span className="transition-transform group-hover:translate-x-1" aria-hidden="true">
               →
             </span>
@@ -245,14 +245,14 @@ export default function LandingHero({
               </span>
             </div>
             <h3 className="m-0 font-display text-[16px] sm:text-[17px] font-bold text-ink">
-              實體票券與舞台單據
+              {t("landing.features.ticketStubTitle", "實體票券與舞台單據")}
             </h3>
             <p className="mt-2 mb-0 text-[13px] text-muted leading-relaxed">
-              手撕和紙膠帶、雙側撕票缺口、典藏條碼與現場舞台 Run-Sheet 擬真，重現每場巡演的實體溫度。
+              {t("landing.features.ticketStubDesc", "手撕和紙膠帶、雙側撕票缺口、典藏條碼與現場舞台 Run-Sheet 擬真，重現每場巡演的實體溫度。")}
             </p>
           </div>
           <div className="mt-4 pt-3 border-t border-line-soft flex items-center justify-between text-[12px] font-bold text-ink group-hover:text-band-ink">
-            <span>檢視現場票根</span>
+            <span>{t("landing.features.ticketStubAction", "檢視現場票根")}</span>
             <span className="transition-transform group-hover:translate-x-1" aria-hidden="true">
               →
             </span>
@@ -275,14 +275,16 @@ export default function LandingHero({
               </span>
             </div>
             <h3 className="m-0 font-display text-[16px] sm:text-[17px] font-bold text-ink">
-              2012–2026 全域足跡
+              {t("landing.features.provenanceTitle", "2012–2026 全域足跡")}
             </h3>
             <p className="mt-2 mb-0 text-[13px] text-muted leading-relaxed">
-              收錄 8 大演出型態、194 處歷史場館與未發行地下原創曲，100% 一手官方資料嚴謹查證。
+              {t("landing.features.provenanceDesc", "收錄 8 大演出型態、{venueCount} 處歷史場館與未發行地下原創曲，100% 一手官方資料嚴謹查證。", {
+                venueCount: allVenues.length,
+              })}
             </p>
           </div>
           <div className="mt-4 pt-3 border-t border-line-soft flex items-center justify-between text-[12px] font-bold text-ink group-hover:text-band-ink">
-            <span>探索歷史場館</span>
+            <span>{t("landing.features.provenanceAction", "探索歷史場館")}</span>
             <span className="transition-transform group-hover:translate-x-1" aria-hidden="true">
               →
             </span>
@@ -297,20 +299,23 @@ export default function LandingHero({
           onClick={onEnterArchive}
           className="inline-flex items-center gap-2.5 px-8 py-3.5 rounded-xl bg-band text-band-ink font-bold text-[15px] sm:text-[17px] border-2 border-ink shadow-md hover:brightness-105 active:scale-[0.99] transition-all motion-reduce:transition-none cursor-pointer focus-visible:ring-2 focus-visible:ring-band focus-visible:outline-none"
         >
-          <span>進入完整檔案庫探索</span>
+          <span>{t("landing.primaryCta", "進入完整檔案庫探索")}</span>
           <span aria-hidden="true" className="font-mono text-lg">
             →
           </span>
         </button>
         <p className="mt-2.5 text-[12px] text-muted">
-          支援場次、歌曲與場館全方位切換與雙層智能導航
+          {t("landing.primaryCtaSubtitle", "支援場次、歌曲與場館全方位切換與雙層智能導航")}
         </p>
       </div>
 
       {/* Minimalist Disclaimer Footer */}
       <footer className="mt-14 sm:mt-20 pt-6 border-t border-line-soft/80 w-full text-center">
         <p className="m-0 text-[11px] sm:text-[12px] text-muted leading-relaxed font-sans">
-          Official 髭男 dism 歌迷非官方非營利演出歷史檔案庫 · 資料源自官方公告、演出現場一手記錄與 LiveFans 查證
+          {t(
+            "landing.footerDisclaimer",
+            "Official 髭男 dism 歌迷非官方非營利演出歷史檔案庫 · 資料源自官方公告、演出現場一手記錄與 LiveFans 查證"
+          )}
         </p>
       </footer>
     </div>

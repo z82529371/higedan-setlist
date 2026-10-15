@@ -1,5 +1,6 @@
 import React from "react";
 import { songTitle } from "../../lib/domain.js";
+import { useI18n } from "../../lib/i18n.jsx";
 
 export function ShowSlipPanels({
   showLegend,
@@ -17,6 +18,7 @@ export function ShowSlipPanels({
   setCompareShowId,
   customCompareDiff,
 }) {
+  const { t } = useI18n();
   return (
     <>
       {/* Collapsible Legend Details */}
@@ -26,25 +28,25 @@ export function ShowSlipPanels({
             <span className="shrink-0 px-1.5 py-0.5 rounded bg-solo text-white text-[11px] font-bold">
               SOLO
             </span>
-            <span className="text-ink">自彈自唱</span>
+            <span className="text-ink">{t("slips.panels.legendSolo", "自彈自唱")}</span>
           </div>
           <div className="flex items-start gap-1.5">
             <span className="shrink-0 px-1.5 py-0.5 rounded bg-request text-white text-[11px] font-bold">
               REQUEST
             </span>
-            <span className="text-ink">現場點歌</span>
+            <span className="text-ink">{t("slips.panels.legendRequest", "現場點歌")}</span>
           </div>
           <div className="flex items-start gap-1.5">
             <span className="shrink-0 px-1.5 py-0.5 rounded bg-unreleased text-white text-[11px] font-bold">
               UNRELEASED
             </span>
-            <span className="text-ink">未發行曲</span>
+            <span className="text-ink">{t("slips.panels.legendUnreleased", "未發行曲")}</span>
           </div>
           <div className="flex items-start gap-1.5">
             <span className="shrink-0 px-1.5 py-0.5 rounded bg-premiere text-white text-[11px] font-bold">
               PREMIERE
             </span>
-            <span className="text-ink">新歌初披露</span>
+            <span className="text-ink">{t("slips.panels.legendPremiere", "新歌初披露")}</span>
           </div>
         </div>
       )}
@@ -54,18 +56,23 @@ export function ShowSlipPanels({
         <div className="mt-2.5 border-t border-line-soft/80 pt-2 font-mono text-[11px] slip-ignore-export">
           <div className="text-ink font-bold mb-1 flex items-center gap-1">
             <span>
-              🔄 與前一場（{prevShow.date.slice(5)} {prevShow.city || prevShow.venue}）曲目更換：
+              {t("slips.panels.diffWithPrevious", "🔄 與前一場（{date} {venue}）曲目更換：", {
+                date: prevShow.date.slice(5),
+                venue: prevShow.city || prevShow.venue,
+              })}
             </span>
           </div>
           <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
             {setlistDiff.added.length > 0 && (
               <span className="text-request font-semibold">
-                換入（＋）：{setlistDiff.added.map((id) => songTitle[id] || id).join("、")}
+                {t("slips.panels.diffAdded", "換入（＋）：")}
+                {setlistDiff.added.map((id) => songTitle[id] || id).join("、")}
               </span>
             )}
             {setlistDiff.removed.length > 0 && (
               <span className="text-muted font-medium">
-                換出（－）：{setlistDiff.removed.map((id) => songTitle[id] || id).join("、")}
+                {t("slips.panels.diffRemoved", "換出（－）：")}
+                {setlistDiff.removed.map((id) => songTitle[id] || id).join("、")}
               </span>
             )}
           </div>
@@ -76,9 +83,12 @@ export function ShowSlipPanels({
       {showAnalysis && albumBreakdown.length > 0 && (
         <div className="mt-2.5 border-t border-line-soft/80 pt-2 font-mono text-[11px] slip-ignore-export">
           <div className="text-muted font-bold mb-1.5 flex items-center gap-1">
-            <span>💿 演出曲目專輯構成：</span>
+            <span>💿 {t("slips.panels.albumCompositionTitle", "演出曲目專輯構成：")}</span>
             <span className="font-normal text-muted/70">
-              （本篇 {mainCount} 首 · 安可 {encCount} 首）
+              {t("slips.panels.mainEncoreBreakdown", "（本篇 {mainCount} 首 · 安可 {encCount} 首）", {
+                mainCount,
+                encCount,
+              })}
             </span>
           </div>
           <div className="flex flex-wrap gap-1.5">
@@ -88,7 +98,9 @@ export function ShowSlipPanels({
                 className="inline-flex items-center gap-1 rounded bg-paper px-2 py-0.5 border border-line-soft text-ink"
               >
                 <span className="text-muted">{alb}</span>
-                <span className="font-bold">{count}首</span>
+                <span className="font-bold">
+                  {count}{t("slips.panels.songUnit", "首")}
+                </span>
               </span>
             ))}
           </div>
@@ -100,10 +112,10 @@ export function ShowSlipPanels({
         <div className="mt-2.5 border-t border-line-soft/80 pt-2 font-mono text-[11px] space-y-2 slip-ignore-export">
           <div className="flex flex-wrap items-center justify-between gap-2">
             <span className="font-bold text-ink flex items-center gap-1">
-              <span>⚖️ 巡演任意雙場對比：</span>
+              <span>{t("slips.panels.anyShowCompareTitle", "⚖️ 巡演任意雙場對比：")}</span>
             </span>
             <label className="flex items-center gap-1.5 text-muted">
-              <span>對比目標：</span>
+              <span>{t("slips.panels.compareTarget", "對比目標：")}</span>
               <select
                 value={activeCompareId}
                 onChange={(e) => setCompareShowId(e.target.value)}
@@ -124,13 +136,17 @@ export function ShowSlipPanels({
             <div className="space-y-1">
               {customCompareDiff.isIdentical ? (
                 <p className="text-muted m-0">
-                  ✓ 兩場合計 {customCompareDiff.commonCount} 首曲目完全一致。
+                  {t("slips.panels.compareIdentical", "✓ 兩場合計 {count} 首曲目完全一致。", {
+                    count: customCompareDiff.commonCount,
+                  })}
                 </p>
               ) : (
                 <>
                   <div className="flex flex-wrap items-baseline gap-1.5">
                     <span className="font-bold text-request">
-                      本場限定（＋{customCompareDiff.onlyThis.length} 首）：
+                      {t("slips.panels.thisShowExclusive", "本場限定（＋{count} 首）：", {
+                        count: customCompareDiff.onlyThis.length,
+                      })}
                     </span>
                     {customCompareDiff.onlyThis.length > 0 ? (
                       <span className="text-ink">
@@ -139,12 +155,14 @@ export function ShowSlipPanels({
                           .join("、")}
                       </span>
                     ) : (
-                      <span className="text-muted">無</span>
+                      <span className="text-muted">{t("slips.panels.none", "無")}</span>
                     )}
                   </div>
                   <div className="flex flex-wrap items-baseline gap-1.5">
                     <span className="font-bold text-muted">
-                      對比場限定（－{customCompareDiff.onlyOther.length} 首）：
+                      {t("slips.panels.otherShowExclusive", "對比場限定（－{count} 首）：", {
+                        count: customCompareDiff.onlyOther.length,
+                      })}
                     </span>
                     {customCompareDiff.onlyOther.length > 0 ? (
                       <span className="text-muted">
@@ -153,11 +171,13 @@ export function ShowSlipPanels({
                           .join("、")}
                       </span>
                     ) : (
-                      <span className="text-muted">無</span>
+                      <span className="text-muted">{t("slips.panels.none", "無")}</span>
                     )}
                   </div>
                   <div className="text-muted/80 text-[10px]">
-                    共通演出曲目：{customCompareDiff.commonCount} 首
+                    {t("slips.panels.commonTracks", "共通演出曲目：{count} 首", {
+                      count: customCompareDiff.commonCount,
+                    })}
                   </div>
                 </>
               )}
