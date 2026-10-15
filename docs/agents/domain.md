@@ -2,6 +2,17 @@
 
 How the engineering skills should consume this repo's domain documentation when exploring the codebase.
 
+## This repo's domain docs
+
+This repo has no `GLOSSARY.md`; its ubiquitous language lives in:
+
+- **`CONTEXT.md`** at the repo root — the glossary equivalent: tour vs event vs show boundaries, 8 performance categories, `opensAt`/`startsAt` time model, data invariants, and `Avoid` lists. Read the sections relevant to your topic before exploring.
+- **`PRODUCT.md`** — product architecture (spotlight landing, archive modes, search ergonomics).
+- **`DESIGN.md`** — visual tokens and contrast rules.
+- **`docs/adr/`** — 100+ ADRs (`0001`–`0107`), single location, no per-package ADRs.
+
+When this file says `GLOSSARY.md`, read `CONTEXT.md` instead.
+
 ## Before exploring, read these
 
 - **`GLOSSARY.md`** at the repo root, or
