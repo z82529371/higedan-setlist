@@ -5,7 +5,8 @@
   "scripts": {
     "sync": "node scripts/sync-data.mjs",
     "lint": "oxlint src -c .oxlintrc.json",
-    "test": "pnpm sync && oxlint src -c .oxlintrc.json && node scripts/smoke-test.mjs",
+    "check:i18n": "node scripts/check-i18n.mjs --self-test && node scripts/check-i18n.mjs",
+    "test": "pnpm sync && oxlint src -c .oxlintrc.json && node scripts/check-i18n.mjs && node scripts/smoke-test.mjs",
     "check": "pnpm lint && pnpm test",
     "audit:reports": "node scripts/generate-audit-reports.mjs",
     "eval": "node scripts/eval.mjs",

@@ -2107,13 +2107,31 @@ describe("Pipeline Smoke Tests", () => {
       assert.ok(DICTIONARIES, "DICTIONARIES table must be exported");
 
       // Verify all 4 locales have required dictionary sections
-      const sections = ["nav", "header", "categories", "badges", "regions", "tiers", "actions"];
+      const sections = ["nav", "header", "categories", "badges", "regions", "tiers", "actions", "landing"];
       for (const loc of SUPPORTED_LOCALES) {
         const dict = DICTIONARIES[loc];
         assert.ok(dict, `Dictionary for ${loc} must exist`);
         for (const sec of sections) {
           assert.ok(dict[sec], `Dictionary for ${loc} must contain section '${sec}'`);
         }
+
+        // Check landing keys
+        assert.ok(dict.landing.hotExploration, `landing.hotExploration must exist in ${loc}`);
+        assert.ok(dict.landing.hotPrompts?.rejoiceTour, `landing.hotPrompts.rejoiceTour must exist in ${loc}`);
+        assert.ok(dict.landing.hotPrompts?.taipeiShow, `landing.hotPrompts.taipeiShow must exist in ${loc}`);
+        assert.ok(dict.landing.hotPrompts?.songRanking, `landing.hotPrompts.songRanking must exist in ${loc}`);
+        assert.ok(dict.landing.features?.bidirectionalTitle, `landing.features.bidirectionalTitle must exist in ${loc}`);
+        assert.ok(dict.landing.features?.bidirectionalDesc, `landing.features.bidirectionalDesc must exist in ${loc}`);
+        assert.ok(dict.landing.features?.bidirectionalAction, `landing.features.bidirectionalAction must exist in ${loc}`);
+        assert.ok(dict.landing.features?.ticketStubTitle, `landing.features.ticketStubTitle must exist in ${loc}`);
+        assert.ok(dict.landing.features?.ticketStubDesc, `landing.features.ticketStubDesc must exist in ${loc}`);
+        assert.ok(dict.landing.features?.ticketStubAction, `landing.features.ticketStubAction must exist in ${loc}`);
+        assert.ok(dict.landing.features?.provenanceTitle, `landing.features.provenanceTitle must exist in ${loc}`);
+        assert.ok(dict.landing.features?.provenanceDesc, `landing.features.provenanceDesc must exist in ${loc}`);
+        assert.ok(dict.landing.features?.provenanceAction, `landing.features.provenanceAction must exist in ${loc}`);
+        assert.ok(dict.landing.primaryCta, `landing.primaryCta must exist in ${loc}`);
+        assert.ok(dict.landing.primaryCtaSubtitle, `landing.primaryCtaSubtitle must exist in ${loc}`);
+        assert.ok(dict.landing.footerDisclaimer, `landing.footerDisclaimer must exist in ${loc}`);
 
         // Check 8 categories
         const expectedCategories = [
@@ -2232,6 +2250,82 @@ describe("Pipeline Smoke Tests", () => {
       assert.ok(archiveHtmlKo.includes("곡"), "ArchiveHeader tab must render 곡 for songs in ko");
       assert.ok(archiveHtmlKo.includes("공연장"), "ArchiveHeader tab must render 공연장 for venues in ko");
       assert.ok(archiveHtmlKo.includes("셋리스트 아카이브"), "ArchiveHeader brandTitle must be localized in ko");
+    });
+
+    it("renders LandingHero with full localized content, dynamic venueCount, and preserved tokens across all 4 locales", async () => {
+      const LandingHeroMod = await server.ssrLoadModule("/src/components/LandingHero.jsx");
+      const LandingHero = LandingHeroMod.default;
+      const { I18nProvider } = await server.ssrLoadModule("/src/lib/i18n.jsx");
+
+      const props = {
+        totalAllShows: 100,
+        allUsedSongs: [{ id: "pretender", title: "Pretender" }],
+        allVenues: new Array(194).fill({ name: "Venue" }),
+        allUnits: [
+          { id: "arena-tour-2024-rejoice", title: "Arena Tour 2024 - Rejoice -" },
+          { id: "taipei-show", shows: [{ id: "taipei-1", venue: { name: "台北小巨蛋" } }] },
+        ],
+        q: "",
+        setQ: () => {},
+        onEnterArchive: () => {},
+        onSelectSong: () => {},
+        onSelectUnit: () => {},
+        onSelectVenue: () => {},
+        onSelectShow: () => {},
+        onOpenCalendar: () => {},
+        onSelectTab: () => {},
+      };
+
+      // 1. Japanese (ja)
+      const htmlJa = renderToStaticMarkup(
+        React.createElement(I18nProvider, { initialLocale: "ja" }, React.createElement(LandingHero, props))
+      );
+      assert.ok(htmlJa.includes("双方向ディープ検索"), "ja must render 双方向ディープ検索");
+      assert.ok(htmlJa.includes("人気の探索："), "ja must render 人気の探索：");
+      assert.ok(htmlJa.includes("2024 Rejoice ツアー"), "ja must render 2024 Rejoice ツアー");
+      assert.ok(htmlJa.includes("台北アリーナ公演"), "ja must render 台北アリーナ公演");
+      assert.ok(htmlJa.includes("演奏回数ランキング"), "ja must render 演奏回数ランキング");
+      assert.ok(htmlJa.includes("実物チケット＆ステージRun-Sheet"), "ja must render ticket stub title");
+      assert.ok(htmlJa.includes("2012–2026 全軌跡"), "ja must render provenance title");
+      assert.ok(htmlJa.includes("194"), "ja must interpolate dynamic venueCount");
+      assert.ok(htmlJa.includes("アーカイブを探索する"), "ja must render primary CTA");
+      assert.ok(htmlJa.includes("Official髭男dism ファンによる非公式・非営利のライブ履歴アーカイブ"), "ja must render localized footer");
+
+      // 2. English (en)
+      const htmlEn = renderToStaticMarkup(
+        React.createElement(I18nProvider, { initialLocale: "en" }, React.createElement(LandingHero, props))
+      );
+      assert.ok(htmlEn.includes("Bi-Directional Archive"), "en must render Bi-Directional Archive");
+      assert.ok(htmlEn.includes("Trending:"), "en must render Trending:");
+      assert.ok(htmlEn.includes("2024 Rejoice Tour"), "en must render 2024 Rejoice Tour");
+      assert.ok(htmlEn.includes("Taipei Arena Show"), "en must render Taipei Arena Show");
+      assert.ok(htmlEn.includes("Top Performed Songs"), "en must render Top Performed Songs");
+      assert.ok(htmlEn.includes("Authentic Ticket Stubs"), "en must render ticket stub title");
+      assert.ok(htmlEn.includes("2012–2026 Provenance"), "en must render provenance title");
+      assert.ok(htmlEn.includes("Explore Full Archive"), "en must render primary CTA");
+      assert.ok(htmlEn.includes("Unofficial non-profit Official HIGEDAN Dism"), "en must render localized footer");
+
+      // 3. Korean (ko)
+      const htmlKo = renderToStaticMarkup(
+        React.createElement(I18nProvider, { initialLocale: "ko" }, React.createElement(LandingHero, props))
+      );
+      assert.ok(htmlKo.includes("양방향 심층 아카이브"), "ko must render 양방향 심층 아카이브");
+      assert.ok(htmlKo.includes("인기 탐색:"), "ko must render 인기 탐색:");
+      assert.ok(htmlKo.includes("2024 Rejoice 투어"), "ko must render 2024 Rejoice 투어");
+      assert.ok(htmlKo.includes("타이베이 아레나 공연"), "ko must render 타이베이 아레나 공연");
+      assert.ok(htmlKo.includes("곡 연주 랭킹"), "ko must render 곡 연주 랭킹");
+      assert.ok(htmlKo.includes("실물 티켓") && htmlKo.includes("무대 전표"), "ko must render ticket stub title");
+      assert.ok(htmlKo.includes("2012–2026 전체 족적"), "ko must render provenance title");
+      assert.ok(htmlKo.includes("전체 아카이브 탐색하기"), "ko must render primary CTA");
+      assert.ok(htmlKo.includes("Official 히게단 dism 팬 비공식"), "ko must render localized footer");
+
+      // 4. Preserved Design Tokens across all locales
+      for (const html of [htmlJa, htmlEn, htmlKo]) {
+        assert.ok(html.includes("BI-DIRECTIONAL"), "must preserve BI-DIRECTIONAL token");
+        assert.ok(html.includes("TICKET STUB"), "must preserve TICKET STUB token");
+        assert.ok(html.includes("PROVENANCE"), "must preserve PROVENANCE token");
+        assert.ok(html.includes("Pretender"), "must preserve official song name Pretender");
+      }
     });
   });
 
@@ -3255,7 +3349,12 @@ describe("Pipeline Smoke Tests", () => {
     it("matches individual shows for taxonomy keyword searches in SearchBox", async () => {
       const SearchBoxModule = await server.ssrLoadModule("/src/components/SearchBox.jsx");
       const SearchBox = SearchBoxModule.default;
-      const { I18nProvider } = await server.ssrLoadModule("/src/lib/i18n.jsx");
+      const { I18nProvider, DICTIONARIES } = await server.ssrLoadModule("/src/lib/i18n.jsx");
+
+      // Rule: cross-locale assertions must resolve expected copy from
+      // DICTIONARIES, never hardcode one locale's strings. Hardcoded copy
+      // goes stale on the next translation pass and locks the bug in
+      // (regression: this test once asserted zh-TW copy under ja/en renders).
 
       const mockUnits = [
         {
@@ -3284,7 +3383,7 @@ describe("Pipeline Smoke Tests", () => {
           })
         )
       );
-      assert.ok(htmlJa.includes("歷史場次日期"), "Must display 歷史場次日期 section for taxonomy search 'フェス'");
+      assert.ok(htmlJa.includes(DICTIONARIES.ja.search.groupShows), "Must display localized show-date section for taxonomy search 'フェス'");
       assert.ok(htmlJa.includes("Day 1 Stage") || htmlJa.includes("2024-08-01"), "Must match individual shows when searching taxonomy keyword 'フェス'");
 
       // Search with "Festival" (English taxonomy keyword for 音樂祭)
@@ -3302,7 +3401,7 @@ describe("Pipeline Smoke Tests", () => {
           })
         )
       );
-      assert.ok(htmlEn.includes("歷史場次日期"), "Must display 歷史場次日期 section for taxonomy search 'Festival'");
+      assert.ok(htmlEn.includes(DICTIONARIES.en.search.groupShows), "Must display localized show-date section for taxonomy search 'Festival'");
       assert.ok(htmlEn.includes("Day 1 Stage") || htmlEn.includes("2024-08-01"), "Must match individual shows when searching taxonomy keyword 'Festival'");
     });
 
