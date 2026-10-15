@@ -74,9 +74,9 @@ export default function LandingHero({
           {t("header.livePerformanceArchive")}
         </p>
 
-        <h1 className="m-0 font-display text-[clamp(24px,5.5vw,48px)] font-black leading-tight tracking-tight text-ink">
-          Official髭男dism{" "}
-          <span className="font-extrabold text-band-ink bg-band/40 px-2 py-0.5 rounded-[4px] border border-ink/20">
+        <h1 className="m-0 max-w-full font-display text-[clamp(24px,5.5vw,48px)] font-black leading-tight tracking-tight text-ink text-balance">
+          <span className="whitespace-nowrap">Official髭男dism</span>{" "}
+          <span className="inline-block whitespace-nowrap font-extrabold text-band-ink bg-band/40 px-2 py-0.5 rounded-[4px] border border-ink/20 [box-decoration-break:clone]">
             {t("header.brandTitle")}
           </span>
         </h1>
