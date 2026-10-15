@@ -1759,6 +1759,58 @@ describe("Pipeline Smoke Tests", () => {
         );
       }
     });
+
+    it("prohibits arbitrary unvetted hex color classes in UI components (DESIGN.md)", async () => {
+      const fs = await import("node:fs");
+      const path = await import("node:path");
+      const url = await import("node:url");
+      const here = path.dirname(url.fileURLToPath(import.meta.url));
+      const componentsDir = path.resolve(here, "..", "src", "components");
+
+      function findJsxFiles(dir) {
+        let results = [];
+        for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+          const fullPath = path.join(dir, entry.name);
+          if (entry.isDirectory()) {
+            results = results.concat(findJsxFiles(fullPath));
+          } else if (entry.name.endsWith(".jsx")) {
+            results.push(fullPath);
+          }
+        }
+        return results;
+      }
+
+      const files = findJsxFiles(componentsDir);
+      const violations = [];
+      const hexClassRegex = /\b(?:text|bg|border|ring|outline)-\[#[0-9a-fA-F]{3,8}\]/g;
+
+      for (const file of files) {
+        const basename = path.basename(file);
+        // MemorialCardModal defines physical offscreen cardstock raster styles (ADR-0100), but its badges must strictly use design tokens
+        if (basename === "MemorialCardModal.jsx") {
+          const content = fs.readFileSync(file, "utf8");
+          const badgeSection = content.slice(content.indexOf("tabs.map"), content.indexOf("return ("));
+          const badgeHexMatches = badgeSection.match(hexClassRegex);
+          if (badgeHexMatches) {
+            violations.push(`${basename} (badges): ${badgeHexMatches.join(", ")}`);
+          }
+          continue;
+        }
+
+        const content = fs.readFileSync(file, "utf8");
+        const matches = content.match(hexClassRegex);
+        if (matches) {
+          const relPath = path.relative(componentsDir, file).replace(/\\/g, "/");
+          violations.push(`${relPath}: ${matches.join(", ")}`);
+        }
+      }
+
+      assert.deepEqual(
+        violations,
+        [],
+        `Found unvetted arbitrary hex classes in UI components. Use semantic design tokens from DESIGN.md instead:\n${violations.join("\n")}`
+      );
+    });
   });
 
   describe("10. Workspace Topology & Runtime Version Invariants (ADR-0103)", () => {
@@ -1843,6 +1895,30 @@ describe("Pipeline Smoke Tests", () => {
         siteContent,
         rootContent,
         "site/src/data/songs.json must be byte-identical to data/songs.json (run 'pnpm sync')"
+      );
+    });
+
+    it("guarantees all ADR documents in docs/adr/ are indexed in docs/adr/README.md", async () => {
+      const fs = await import("node:fs");
+      const path = await import("node:path");
+      const url = await import("node:url");
+      const here = path.dirname(url.fileURLToPath(import.meta.url));
+      const repoRoot = path.resolve(here, "..", "..");
+      const adrDir = path.resolve(repoRoot, "docs", "adr");
+      const readmePath = path.resolve(adrDir, "README.md");
+
+      assert.ok(fs.existsSync(readmePath), "docs/adr/README.md must exist");
+      const readmeContent = fs.readFileSync(readmePath, "utf8");
+
+      const adrFiles = fs
+        .readdirSync(adrDir)
+        .filter((f) => /^0\d{3}-.*\.md$/.test(f));
+
+      const missing = adrFiles.filter((f) => !readmeContent.includes(f));
+      assert.deepEqual(
+        missing,
+        [],
+        `The following ADR files are missing from docs/adr/README.md index:\n${missing.join("\n")}`
       );
     });
   });
