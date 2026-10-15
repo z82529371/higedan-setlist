@@ -1,5 +1,91 @@
 import { Fragment, useEffect, useMemo, useRef, useState } from "react";
-import { getSongAlbum, getUnitTypeLabel, shortUnitTitle, songUnreleased, unitEarliest } from "../lib/domain.js";
+import {
+  getSongAlbum,
+  getUnitTypeLabel,
+  shortUnitTitle,
+  songAlias,
+  songUnreleased,
+  unitEarliest,
+} from "../lib/domain.js";
+import { resolveShowItems } from "../lib/resolve.js";
+import { useI18n } from "../lib/i18n.jsx";
+
+export const TAXONOMY_KEYWORDS = {
+  "巡演專場": [
+    "巡演專場", "巡演", "專場", "ツアー", "tour", "oneman", "one-man", "ワンマン", "투어",
+  ],
+  "特別專場": [
+    "特別專場", "特別公演", "special show", "special live", "special", "特別", "특별 공연", "특별공연",
+  ],
+  "聯合專場": [
+    "聯合專場", "對バン", "対バン", "対バンライブ", "joint gig", "joint live", "joint", "대반",
+  ],
+  "店家活動": [
+    "店家活動", "インストア", "インストアライブ", "in-store event", "in-store", "instore", "매장 이벤트", "매장이벤트",
+  ],
+  "音樂祭": [
+    "音樂祭", "音樂節", "音樂祭典", "フェス", "フェスティバル", "festival", "fest", "fes", "페스티벌",
+  ],
+  "學園祭": [
+    "學園祭", "学園祭", "campus festival", "campus", "school festival", "대학 축제", "대학축제",
+  ],
+  "電視演出": [
+    "電視演出", "電視", "tv出演", "tv", "tv performance", "tv show", "tv 출연",
+  ],
+  "線上直播": [
+    "線上直播", "線上", "直播", "配信ライブ", "配信", "livestream", "live stream", "online", "온라인 라이브",
+  ],
+};
+
+export const BADGE_KEYWORDS = {
+  "satoshi-solo": [
+    "弾き語り", "ひきがたり", "自彈自唱", "自弹自唱", "彈唱", "弹唱",
+    "satoshi solo", "solo", "ソロ", "단독 연주", "단독연주", "솔로",
+  ],
+  request: [
+    "リクエスト", "點歌", "点歌", "現場點歌", "request", "리퀘스트",
+  ],
+  premiere: [
+    "新曲", "新歌", "新歌首演", "初披露", "首演", "premiere", "new song", "newsong", "신곡",
+  ],
+  unreleased: [
+    "未發行", "未发行", "未音源化", "未発表", "unreleased", "미발매곡",
+  ],
+};
+
+function isSoloItem(item) {
+  const kind = Array.isArray(item?.kind) ? item.kind : (item?.kind ? [item.kind] : []);
+  const note = (item?.note || "").toLowerCase();
+  return (
+    kind.includes("satoshi-solo") ||
+    note.includes("弾き語り") ||
+    note.includes("ソロ") ||
+    note.includes("solo") ||
+    note.includes("自彈自唱")
+  );
+}
+
+function isRequestItem(item) {
+  const kind = Array.isArray(item?.kind) ? item.kind : (item?.kind ? [item.kind] : []);
+  const note = (item?.note || "").toLowerCase();
+  return (
+    kind.includes("request") ||
+    note.includes("リクエスト") ||
+    note.includes("request") ||
+    note.includes("點歌")
+  );
+}
+
+function isPremiereItem(item) {
+  const kind = Array.isArray(item?.kind) ? item.kind : (item?.kind ? [item.kind] : []);
+  const note = (item?.note || "").toLowerCase();
+  return (
+    kind.includes("premiere") ||
+    note.includes("新曲") ||
+    note.includes("新歌") ||
+    note.includes("premiere")
+  );
+}
 
 export default function SearchBox({
   q,
@@ -15,9 +101,11 @@ export default function SearchBox({
   size = "md", // "md" | "lg"
   autoFocus = false,
   isMobileModal = false,
+  initialOpen = false,
   onCloseModal,
 }) {
-  const [isOpen, setIsOpen] = useState(false);
+  const { t } = useI18n();
+  const [isOpen, setIsOpen] = useState(initialOpen);
   const [activeIndex, setActiveIndex] = useState(-1);
   const containerRef = useRef(null);
   const inputRef = useRef(null);
@@ -32,16 +120,68 @@ export default function SearchBox({
   // Normalize date needle without delimiters (e.g. "2024-09-21" -> "20240921")
   const dateRawNeedle = needle.replace(/[-/.]/g, "");
 
+  // Pre-index arrangement badge occurrences across all units and shows
+  const badgeIndex = useMemo(() => {
+    const soloSongs = new Set();
+    const reqSongs = new Set();
+    const premSongs = new Set();
+    const soloShows = new Set();
+    const reqShows = new Set();
+    const premShows = new Set();
+
+    for (const u of allUnits || []) {
+      for (const s of u.shows || []) {
+        const items = resolveShowItems(u, s);
+        for (const it of items) {
+          if (isSoloItem(it)) {
+            if (it.songId) soloSongs.add(it.songId);
+            soloShows.add(s.id);
+          }
+          if (isRequestItem(it)) {
+            if (it.songId) reqSongs.add(it.songId);
+            reqShows.add(s.id);
+          }
+          if (isPremiereItem(it)) {
+            if (it.songId) premSongs.add(it.songId);
+            premShows.add(s.id);
+          }
+        }
+      }
+    }
+
+    return {
+      "satoshi-solo": { songs: soloSongs, shows: soloShows },
+      request: { songs: reqSongs, shows: reqShows },
+      premiere: { songs: premSongs, shows: premShows },
+    };
+  }, [allUnits]);
+
   const { matchedSongs, matchedUnits, matchedVenues, matchedShows, flatItems } = useMemo(() => {
     if (!needle) {
       return { matchedSongs: [], matchedUnits: [], matchedVenues: [], matchedShows: [], flatItems: [] };
     }
 
-    // 1. Shows matching date or show title (ADR-0096 Date-Aware Search)
+    // Determine if active search matches any arrangement badge keywords
+    const activeBadgeKeys = [];
+    for (const [badgeKey, kws] of Object.entries(BADGE_KEYWORDS)) {
+      const isMatch = kws.some((kw) => {
+        const k = kw.toLowerCase();
+        if (needle === k) return true;
+        if (needle.length >= 2 && k.includes(needle)) return true;
+        if (k.length >= 3 && needle.includes(k)) return true;
+        return false;
+      });
+      if (isMatch) activeBadgeKeys.push(badgeKey);
+    }
+
+    // 1. Shows matching date, show title, or arrangement badge keywords (ADR-0096)
     const shows = [];
     const isDatePattern = /^\d{2,4}([-/.]\d{1,2})?([-/.]\d{1,2})?$/.test(needle) || /^\d{4,8}$/.test(needle);
 
     for (const u of allUnits) {
+      const cat = getUnitTypeLabel(u);
+      const localizedBadge = t("categories." + cat, cat);
+
       for (const s of u.shows || []) {
         const sDate = s.date || "";
         const sDateRaw = sDate.replace(/[-/.]/g, "");
@@ -53,7 +193,11 @@ export default function SearchBox({
           (dateRawNeedle.length >= 4 && sDateRaw.includes(dateRawNeedle)) ||
           (isDatePattern && (sDate.startsWith(needle) || sDate.endsWith(needle)));
 
-        if (matchDate || (needle.length >= 3 && sTitle.includes(needle))) {
+        const matchBadge = activeBadgeKeys.some(
+          (bKey) => badgeIndex[bKey]?.shows.has(s.id)
+        );
+
+        if (matchDate || (needle.length >= 3 && sTitle.includes(needle)) || matchBadge) {
           shows.push({
             type: "show",
             id: s.id,
@@ -62,7 +206,7 @@ export default function SearchBox({
             unitTitle: shortUnitTitle(u) || u.title,
             venue: s.venue,
             city: s.city,
-            badge: getUnitTypeLabel(u),
+            badge: localizedBadge,
           });
         }
       }
@@ -71,28 +215,42 @@ export default function SearchBox({
     // Sort shows by date descending
     shows.sort((a, b) => b.date.localeCompare(a.date));
 
-    // 2. Songs & Title tracks
+    // 2. Songs & Title tracks with ADR-0105 dual-language indexing and badge keyword search
     const songs = [];
     for (const s of allUsedSongs) {
       const title = (s.title || "").toLowerCase();
-      const alias = (s.alias || "").toLowerCase();
+      const songAliasVal = songAlias[s.id] || s.alias || "";
+      const alias = songAliasVal.toLowerCase();
       const titleJa = (s.titleJa || "").toLowerCase();
       const titleEn = (s.titleEn || "").toLowerCase();
       const ruby = (s.ruby || "").toLowerCase();
-      if (
+
+      const isUnreleased = Boolean(s.unreleased || songUnreleased.has(s.id));
+      const isUnreleasedBadgeMatch = activeBadgeKeys.includes("unreleased") && isUnreleased;
+
+      const matchedArrangementBadge = activeBadgeKeys.find(
+        (bKey) => bKey !== "unreleased" && badgeIndex[bKey]?.songs.has(s.id)
+      );
+
+      const isTextMatch =
         title.includes(needle) ||
         alias.includes(needle) ||
         titleJa.includes(needle) ||
         titleEn.includes(needle) ||
-        ruby.includes(needle)
-      ) {
+        ruby.includes(needle);
+
+      if (isTextMatch || isUnreleasedBadgeMatch || matchedArrangementBadge) {
         let sub = null;
-        if (s.alias) {
-          sub = `別名：${s.alias}`;
+        if (songAliasVal) {
+          sub = `別名：${songAliasVal}`;
         } else if (s.titleJa && s.titleJa !== s.title && s.titleJa.toLowerCase().includes(needle)) {
           sub = s.titleJa;
         } else if (s.titleEn && s.titleEn !== s.title && s.titleEn.toLowerCase().includes(needle)) {
           sub = s.titleEn;
+        } else if (matchedArrangementBadge) {
+          sub = `♪ ${t("badges." + matchedArrangementBadge, matchedArrangementBadge)}`;
+        } else if (isUnreleasedBadgeMatch) {
+          sub = `♪ ${t("badges.unreleased", "未發行")}`;
         }
         songs.push({
           type: "song",
@@ -100,22 +258,37 @@ export default function SearchBox({
           title: s.title,
           subTitle: sub,
           album: getSongAlbum(s),
-          unreleased: s.unreleased || songUnreleased.has(s.id),
+          unreleased: isUnreleased,
         });
       }
     }
 
-    // 3. Units (Tours & Events)
+    // 3. Units (Tours & Events) with active-locale taxonomy keywords
     const units = [];
     for (const u of allUnits) {
       const title = (u.title || "").toLowerCase();
       const shortTitle = (shortUnitTitle(u) || "").toLowerCase();
       const year = unitEarliest(u).split("-")[0];
-      const type = (u.type || (u.isTour ? "巡演專場" : "特別專場")).toLowerCase();
+      const cat = getUnitTypeLabel(u);
+      const canonicalCat = cat.toLowerCase();
+      const locCat = t("categories." + cat, cat).toLowerCase();
+      const categoryKeywords = TAXONOMY_KEYWORDS[cat] || [];
+
+      const matchTaxonomy =
+        canonicalCat.includes(needle) ||
+        locCat.includes(needle) ||
+        categoryKeywords.some((kw) => {
+          const k = kw.toLowerCase();
+          if (needle === k) return true;
+          if (needle.length >= 2 && k.includes(needle)) return true;
+          if (k.length >= 3 && needle.includes(k)) return true;
+          return false;
+        });
+
       if (
         title.includes(needle) ||
         shortTitle.includes(needle) ||
-        type.includes(needle) ||
+        matchTaxonomy ||
         (needle.length >= 4 && year.includes(needle))
       ) {
         units.push({
@@ -123,7 +296,7 @@ export default function SearchBox({
           id: u.id,
           title: shortUnitTitle(u) || u.title,
           year,
-          badge: getUnitTypeLabel(u),
+          badge: t("categories." + cat, cat),
         });
       }
     }
@@ -168,7 +341,7 @@ export default function SearchBox({
       matchedVenues: venues,
       flatItems: flat,
     };
-  }, [needle, dateRawNeedle, allUsedSongs, allUnits, allVenues]);
+  }, [needle, dateRawNeedle, allUsedSongs, allUnits, allVenues, badgeIndex, t]);
 
   // Reset activeIndex when query changes
   useEffect(() => {
