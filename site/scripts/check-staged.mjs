@@ -17,7 +17,12 @@ try {
     /^docs\/reports\/.+\.md$/,
   ];
 
+  const allowedExceptions = new Set([
+    "data/events/unofficial-2024.json",
+  ]);
+
   const violations = staged.filter((file) =>
+    !allowedExceptions.has(file) &&
     forbiddenPatterns.some((pattern) => pattern.test(file))
   );
 

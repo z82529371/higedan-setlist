@@ -20,8 +20,7 @@
       "diff": {
         "skip": [
           1,
-          10,
-          13
+          10
         ],
         "insert": [
           {
@@ -38,14 +37,6 @@
               "encore": false,
               "songId": "no-doubt",
               "note": "Editorialツアーver"
-            }
-          },
-          {
-            "after": 12,
-            "item": {
-              "encore": false,
-              "songId": "anarchy",
-              "note": "Rejoice ver."
             }
           }
         ]
@@ -67,8 +58,7 @@
       "diff": {
         "skip": [
           1,
-          10,
-          13
+          10
         ],
         "insert": [
           {
@@ -85,14 +75,6 @@
               "encore": false,
               "songId": "no-doubt",
               "note": "Editorialツアーver"
-            }
-          },
-          {
-            "after": 12,
-            "item": {
-              "encore": false,
-              "songId": "anarchy",
-              "note": "Rejoice ver."
             }
           },
           {
@@ -122,8 +104,7 @@
       "diff": {
         "skip": [
           1,
-          10,
-          13
+          10
         ],
         "insert": [
           {
@@ -148,14 +129,6 @@
               "encore": false,
               "type": "interlude",
               "note": "楢崎さんと一緒に合唱:Pretender"
-            }
-          },
-          {
-            "after": 12,
-            "item": {
-              "encore": false,
-              "songId": "anarchy",
-              "note": "Rejoice ver."
             }
           }
         ]
@@ -227,7 +200,7 @@
     {
       "order": 13,
       "encore": false,
-      "songId": "anarchy"
+      "songId": "anarchy-rejoice-ver"
     },
     {
       "order": 14,

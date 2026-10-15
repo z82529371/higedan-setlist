@@ -247,19 +247,10 @@
       ],
       "diff": {
         "skip": [
-          5,
           8,
           18
         ],
         "insert": [
-          {
-            "after": 4,
-            "item": {
-              "encore": false,
-              "songId": "anarchy",
-              "note": "通常ver."
-            }
-          },
           {
             "after": 7,
             "item": {

@@ -20,7 +20,6 @@
         "skip": [
           1,
           13,
-          16,
           19
         ],
         "insert": [
@@ -30,14 +29,6 @@
               "encore": false,
               "songId": "finder",
               "note": "(映像)"
-            }
-          },
-          {
-            "after": 15,
-            "item": {
-              "encore": false,
-              "songId": "anarchy",
-              "note": "Rejoice ver."
             }
           },
           {
@@ -99,7 +90,6 @@
           1,
           10,
           12,
-          16,
           19
         ],
         "insert": [
@@ -116,14 +106,6 @@
             "item": {
               "encore": false,
               "songId": "pretender"
-            }
-          },
-          {
-            "after": 15,
-            "item": {
-              "encore": false,
-              "songId": "anarchy",
-              "note": "Rejoice ver."
             }
           },
           {
@@ -165,7 +147,6 @@
         "skip": [
           1,
           13,
-          16,
           19
         ],
         "insert": [
@@ -175,14 +156,6 @@
               "encore": false,
               "songId": "finder",
               "note": "映像"
-            }
-          },
-          {
-            "after": 15,
-            "item": {
-              "encore": false,
-              "songId": "anarchy",
-              "note": "Rejoice ver."
             }
           },
           {
@@ -225,7 +198,6 @@
           1,
           12,
           13,
-          16,
           19
         ],
         "insert": [
@@ -243,14 +215,6 @@
               "encore": false,
               "songId": "no-doubt",
               "note": "Editorialツアーアレンジver"
-            }
-          },
-          {
-            "after": 15,
-            "item": {
-              "encore": false,
-              "songId": "anarchy",
-              "note": "Rejoice ver."
             }
           },
           {
@@ -303,7 +267,6 @@
         "skip": [
           1,
           13,
-          16,
           19
         ],
         "insert": [
@@ -313,14 +276,6 @@
               "encore": false,
               "songId": "finder",
               "note": "映像"
-            }
-          },
-          {
-            "after": 15,
-            "item": {
-              "encore": false,
-              "songId": "anarchy",
-              "note": "Rejoice ver."
             }
           },
           {
@@ -351,8 +306,7 @@
       "diff": {
         "skip": [
           1,
-          12,
-          16
+          12
         ],
         "insert": [
           {
@@ -361,14 +315,6 @@
               "encore": false,
               "songId": "finder",
               "note": "映像"
-            }
-          },
-          {
-            "after": 15,
-            "item": {
-              "encore": false,
-              "songId": "anarchy",
-              "note": "Rejoice ver."
             }
           }
         ]
@@ -391,8 +337,7 @@
       "diff": {
         "skip": [
           1,
-          13,
-          16
+          13
         ],
         "insert": [
           {
@@ -401,14 +346,6 @@
               "encore": false,
               "songId": "finder",
               "note": "※映像"
-            }
-          },
-          {
-            "after": 15,
-            "item": {
-              "encore": false,
-              "songId": "anarchy",
-              "note": "Rejoice ver."
             }
           }
         ]
@@ -432,8 +369,7 @@
         "skip": [
           1,
           12,
-          13,
-          16
+          13
         ],
         "insert": [
           {
@@ -459,14 +395,6 @@
               "songId": "no-doubt",
               "note": "スカアレンジ"
             }
-          },
-          {
-            "after": 15,
-            "item": {
-              "encore": false,
-              "songId": "anarchy",
-              "note": "Rejoice ver."
-            }
           }
         ]
       },
@@ -488,8 +416,7 @@
       "diff": {
         "skip": [
           1,
-          13,
-          16
+          13
         ],
         "insert": [
           {
@@ -498,14 +425,6 @@
               "encore": false,
               "songId": "finder",
               "note": "※映像"
-            }
-          },
-          {
-            "after": 15,
-            "item": {
-              "encore": false,
-              "songId": "anarchy",
-              "note": "Rejoice ver."
             }
           }
         ]
@@ -528,8 +447,7 @@
       "locked": true,
       "diff": {
         "skip": [
-          12,
-          16
+          12
         ],
         "insert": [
           {
@@ -546,14 +464,6 @@
               "encore": false,
               "type": "interlude",
               "note": "思ひ出 (鈴木常吉) 楢ちゃんソロ"
-            }
-          },
-          {
-            "after": 15,
-            "item": {
-              "encore": false,
-              "songId": "anarchy",
-              "note": "Rejoice ver."
             }
           },
           {
@@ -658,7 +568,7 @@
     {
       "order": 16,
       "encore": false,
-      "songId": "anarchy"
+      "songId": "anarchy-rejoice-ver"
     },
     {
       "order": 17,

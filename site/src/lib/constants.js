@@ -95,7 +95,7 @@ export const ALBUM_MAP = {
   sharon: "Rejoice (2024)",
   dakuten: "Rejoice (2024)",
   subtitle: "Rejoice (2024)",
-  anarchy: "Rejoice (2024)",
+  "anarchy-rejoice-ver": "Rejoice (2024)",
   "white-noise": "Rejoice (2024)",
   uramitsuramikiwami: "Rejoice (2024)",
   chessboard: "Rejoice (2024)",

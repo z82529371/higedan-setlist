@@ -261,7 +261,6 @@
       ],
       "diff": {
         "skip": [
-          13,
           20
         ],
         "insert": [
@@ -271,14 +270,6 @@
               "encore": false,
               "type": "interlude",
               "note": "Opening Movie"
-            }
-          },
-          {
-            "after": 12,
-            "item": {
-              "encore": false,
-              "songId": "anarchy",
-              "note": "通常ver"
             }
           },
           {
@@ -346,7 +337,6 @@
       ],
       "diff": {
         "skip": [
-          13,
           20
         ],
         "insert": [
@@ -356,14 +346,6 @@
               "encore": false,
               "type": "interlude",
               "note": "Opening Movie"
-            }
-          },
-          {
-            "after": 12,
-            "item": {
-              "encore": false,
-              "songId": "anarchy",
-              "note": "通常ver"
             }
           },
           {
@@ -393,7 +375,6 @@
       ],
       "diff": {
         "skip": [
-          13,
           20
         ],
         "insert": [
@@ -403,14 +384,6 @@
               "encore": false,
               "type": "interlude",
               "note": "Opening Movie"
-            }
-          },
-          {
-            "after": 12,
-            "item": {
-              "encore": false,
-              "songId": "anarchy",
-              "note": "通常ver"
             }
           },
           {
@@ -550,21 +523,7 @@
         "https://www.livefans.jp/events/1866448",
         "https://higedan-setlist.net/live/2026-07-04/"
       ],
-      "diff": {
-        "skip": [
-          13
-        ],
-        "insert": [
-          {
-            "after": 12,
-            "item": {
-              "encore": false,
-              "songId": "anarchy",
-              "note": "通常ver"
-            }
-          }
-        ]
-      },
+      "diff": {},
       "region": "中部",
       "prefecture": "愛知縣"
     },
