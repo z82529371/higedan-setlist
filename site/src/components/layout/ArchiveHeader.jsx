@@ -1,4 +1,6 @@
 import { queryTabClass } from "../../lib/constants.js";
+import { useI18n } from "../../lib/i18n.jsx";
+import LanguageSwitcher from "../LanguageSwitcher.jsx";
 
 export function ArchiveHeader({
   totalAllShows,
@@ -10,33 +12,38 @@ export function ArchiveHeader({
   setQ,
   setIsFilterDrawerOpen,
 }) {
+  const { t } = useI18n();
+
   return (
     <>
       <header className="pb-0 pt-3.5 sm:pt-6">
-        <p className="m-0 mb-1.5 sm:mb-2 font-mono text-[11px] sm:text-[12px] tracking-[0.2em] text-muted font-bold uppercase">
-          LIVE PERFORMANCE &amp; SETLIST ARCHIVE
-        </p>
-        <h1 className="m-0 font-display text-[clamp(17px,4.5vw,44px)] font-extrabold leading-tight tracking-tight">
-          Official髭男dism <span className="font-bold text-band-ink">Setlist 檔案庫</span>
+        <div className="flex items-center justify-between gap-2">
+          <p className="m-0 font-mono text-[11px] sm:text-[12px] tracking-[0.2em] text-muted font-bold uppercase">
+            {t("header.livePerformanceArchive")}
+          </p>
+          <LanguageSwitcher />
+        </div>
+        <h1 className="m-0 mt-1.5 font-display text-[clamp(17px,4.5vw,44px)] font-extrabold leading-tight tracking-tight">
+          Official髭男dism <span className="font-bold text-band-ink">{t("header.brandTitle")}</span>
         </h1>
         <p className="mt-2 mb-0 text-[12px] sm:text-[14px] text-muted leading-relaxed">
-          場次與曲目雙向檔案庫。收錄 2012 年地下獨立時期至當前巡演的完整現場足跡。
+          {t("header.archiveSubtitle")}
         </p>
         <div className="mt-3 -mx-4 px-4 sm:mx-0 sm:px-0 flex items-center gap-2 overflow-x-auto sm:flex-wrap font-mono text-[11px] sm:text-[12px] text-ink scrollbar-none">
           <span className="shrink-0 inline-flex items-center gap-1 rounded-[4px] border border-ink/20 bg-paper px-2.5 py-1 font-semibold shadow-2xs">
-            <span aria-hidden="true">📅</span> 2012–2026 年
+            <span aria-hidden="true">📅</span> {t("header.years")}
           </span>
           <span className="shrink-0 inline-flex items-center gap-1 rounded-[4px] border border-ink/20 bg-paper px-2.5 py-1 font-semibold shadow-2xs">
-            <span aria-hidden="true">🎫</span> {totalAllShows} 場公開演出
+            <span aria-hidden="true">🎫</span> {totalAllShows} {t("header.publicShows")}
           </span>
           <span className="shrink-0 inline-flex items-center gap-1 rounded-[4px] border border-ink/20 bg-paper px-2.5 py-1 font-semibold shadow-2xs">
-            <span aria-hidden="true">🎭</span> {categoriesCount} 大演出型態
+            <span aria-hidden="true">🎭</span> {categoriesCount} {t("header.performanceTypes")}
           </span>
           <span className="shrink-0 inline-flex items-center gap-1 rounded-[4px] border border-ink/20 bg-paper px-2.5 py-1 font-semibold shadow-2xs">
-            <span aria-hidden="true">🎵</span> {allUsedSongs.length} 首原創曲目
+            <span aria-hidden="true">🎵</span> {allUsedSongs.length} {t("header.originalSongs")}
           </span>
           <span className="shrink-0 inline-flex items-center gap-1 rounded-[4px] border border-ink/20 bg-paper px-2.5 py-1 font-semibold shadow-2xs">
-            <span aria-hidden="true">📍</span> {allVenues.length} 處歷史場館
+            <span aria-hidden="true">📍</span> {allVenues.length} {t("header.historicVenues")}
           </span>
         </div>
       </header>
@@ -45,7 +52,7 @@ export function ArchiveHeader({
       <div
         className="mt-2.5 sm:mt-4 mb-3 grid w-full grid-cols-3 divide-x-[1.5px] divide-ink overflow-hidden rounded-[4px] border-[1.5px] border-ink bg-card shadow-sm"
         role="group"
-        aria-label="查詢方向"
+        aria-label={t("nav.directionLabel")}
       >
         <button
           type="button"
@@ -58,7 +65,7 @@ export function ArchiveHeader({
           aria-pressed={tab === "show"}
         >
           <span aria-hidden="true">🎫</span>
-          <span>場次</span>
+          <span>{t("nav.shows")}</span>
           <span className="font-mono text-[11px] opacity-75 tabular-nums">
             ({totalAllShows})
           </span>
@@ -75,7 +82,7 @@ export function ArchiveHeader({
           aria-pressed={tab === "song"}
         >
           <span aria-hidden="true">🎵</span>
-          <span>歌曲</span>
+          <span>{t("nav.songs")}</span>
           <span className="font-mono text-[11px] opacity-75 tabular-nums">
             ({allUsedSongs.length})
           </span>
@@ -92,7 +99,7 @@ export function ArchiveHeader({
           aria-pressed={tab === "venue"}
         >
           <span aria-hidden="true">🏛️</span>
-          <span>場地</span>
+          <span>{t("nav.venues")}</span>
           <span className="font-mono text-[11px] opacity-75 tabular-nums">
             ({allVenues.length})
           </span>

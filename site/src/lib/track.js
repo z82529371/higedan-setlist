@@ -26,5 +26,12 @@ export function trackRoute(item, weightCls) {
 }
 
 // URL Hash routes re-exported from dedicated routes module for backwards compatibility
-export { parseRoute, routeHash } from "./routes.js";
+export {
+  parseRoute,
+  routeHash,
+  buildRouteHash,
+  SUPPORTED_LOCALES,
+  DEFAULT_LOCALE,
+  normalizeLocale,
+} from "./routes.js";
 

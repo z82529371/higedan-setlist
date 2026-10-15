@@ -1938,6 +1938,226 @@ describe("Pipeline Smoke Tests", () => {
       }
     });
   });
+
+  describe("13. i18n Foundation, Hash Route Query Parameter Seam, and Header Switcher (#16)", () => {
+    it("parses hash routes with optional ?lang= query param while preserving naked route backwards compatibility", async () => {
+      const routesMod = await server.ssrLoadModule("/src/lib/routes.js");
+      const trackMod = await server.ssrLoadModule("/src/lib/track.js");
+
+      // Backward compatibility for naked hash routes
+      assert.deepEqual(routesMod.parseRoute("#/song/pretender"), { kind: "song", value: "pretender" });
+      assert.deepEqual(routesMod.parseRoute("#/show/1672276"), { kind: "show", value: "1672276" });
+      assert.deepEqual(routesMod.parseRoute("#/venue/%E6%97%A5%E6%9C%AC%E6%AD%A6%E9%81%93%E9%A4%A8"), { kind: "venue", value: "日本武道館" });
+      assert.deepEqual(routesMod.parseRoute("#/tour/arena-tour-2024-rejoice"), { kind: "tour", value: "arena-tour-2024-rejoice" });
+
+      // Extraction of ?lang= query param
+      assert.deepEqual(routesMod.parseRoute("#/song/pretender?lang=ja"), { kind: "song", value: "pretender", lang: "ja" });
+      assert.deepEqual(routesMod.parseRoute("#/show/1672276?lang=en"), { kind: "show", value: "1672276", lang: "en" });
+      assert.deepEqual(routesMod.parseRoute("#/venue/%E6%97%A5%E6%9C%AC%E6%AD%A6%E9%81%93%E9%A4%A8?lang=ko"), { kind: "venue", value: "日本武道館", lang: "ko" });
+      assert.deepEqual(routesMod.parseRoute("#/tour/arena-tour-2024-rejoice?lang=zh-TW"), { kind: "tour", value: "arena-tour-2024-rejoice", lang: "zh-TW" });
+
+      // Case insensitivity & normalization for query param
+      assert.deepEqual(routesMod.parseRoute("#/song/pretender?lang=JA"), { kind: "song", value: "pretender", lang: "ja" });
+      assert.deepEqual(routesMod.parseRoute("#/song/pretender?lang=en-US"), { kind: "song", value: "pretender", lang: "en" });
+
+      // Unknown or unsupported lang is ignored
+      assert.deepEqual(routesMod.parseRoute("#/song/pretender?lang=fr"), { kind: "song", value: "pretender" });
+
+      // Route builder generates ?lang= when requested
+      assert.equal(routesMod.routeHash.song("pretender", { lang: "en" }), "#/song/pretender?lang=en");
+      assert.equal(routesMod.routeHash.song("pretender", "ja"), "#/song/pretender?lang=ja");
+      assert.equal(routesMod.routeHash.song("pretender", { lang: "zh-TW" }), "#/song/pretender");
+      assert.equal(routesMod.routeHash.song("pretender"), "#/song/pretender");
+
+      // Backwards compatibility via track.js re-export
+      assert.equal(trackMod.parseRoute, routesMod.parseRoute);
+      assert.equal(trackMod.routeHash, routesMod.routeHash);
+    });
+
+    it("resolves initial locale following priority waterfall (URL param > localStorage > navigator.language > default zh-TW)", async () => {
+      const { resolveInitialLocale, DEFAULT_LOCALE } = await server.ssrLoadModule("/src/lib/i18n.jsx");
+
+      // 1. URL hash query param takes precedence
+      assert.equal(
+        resolveInitialLocale({
+          window: { location: { hash: "#/song/pretender?lang=ja" } },
+          localStorage: { getItem: () => "en" },
+          navigator: { language: "ko-KR" },
+        }),
+        "ja"
+      );
+
+      // 2. localStorage takes precedence when no hash param
+      assert.equal(
+        resolveInitialLocale({
+          window: { location: { hash: "#/song/pretender" } },
+          localStorage: { getItem: (k) => (k === "hg_locale" ? "en" : null) },
+          navigator: { language: "ko-KR" },
+        }),
+        "en"
+      );
+
+      // 3. navigator.language takes precedence when no localStorage
+      assert.equal(
+        resolveInitialLocale({
+          window: { location: { hash: "" } },
+          localStorage: { getItem: () => null },
+          navigator: { language: "ko-KR" },
+        }),
+        "ko"
+      );
+
+      // 4. Default fallback to zh-TW
+      assert.equal(
+        resolveInitialLocale({
+          window: { location: { hash: "" } },
+          localStorage: { getItem: () => null },
+          navigator: { language: "fr-FR" },
+        }),
+        DEFAULT_LOCALE
+      );
+
+      assert.equal(
+        resolveInitialLocale({}),
+        DEFAULT_LOCALE
+      );
+    });
+
+    it("provides complete dictionaries and translation lookup via I18nProvider and useI18n across all 4 locales", async () => {
+      const i18nMod = await server.ssrLoadModule("/src/lib/i18n.jsx");
+      const { I18nProvider, useI18n, SUPPORTED_LOCALES, DICTIONARIES } = i18nMod;
+
+      assert.deepEqual(SUPPORTED_LOCALES, ["zh-TW", "ja", "en", "ko"]);
+      assert.ok(DICTIONARIES, "DICTIONARIES table must be exported");
+
+      // Verify all 4 locales have required dictionary sections
+      const sections = ["nav", "header", "categories", "badges", "regions", "tiers", "actions"];
+      for (const loc of SUPPORTED_LOCALES) {
+        const dict = DICTIONARIES[loc];
+        assert.ok(dict, `Dictionary for ${loc} must exist`);
+        for (const sec of sections) {
+          assert.ok(dict[sec], `Dictionary for ${loc} must contain section '${sec}'`);
+        }
+
+        // Check 8 categories
+        const expectedCategories = [
+          "巡演專場", "特別專場", "聯合專場", "店家活動",
+          "音樂祭", "學園祭", "電視演出", "線上直播"
+        ];
+        for (const cat of expectedCategories) {
+          assert.ok(dict.categories[cat], `categories.${cat} must exist in ${loc}`);
+        }
+
+        // Check 4 badges
+        for (const badge of ["premiere", "satoshi-solo", "request", "unreleased"]) {
+          assert.ok(dict.badges[badge], `badges.${badge} must exist in ${loc}`);
+        }
+      }
+
+      // Verify SSR rendering with I18nProvider
+      function Consumer() {
+        const { locale, t } = useI18n();
+        return React.createElement(
+          "div",
+          { id: "test-consumer" },
+          `${locale}:${t("nav.shows")}:${t("categories.巡演專場")}:${t("non.existent", "Fallback")}`
+        );
+      }
+
+      for (const loc of SUPPORTED_LOCALES) {
+        const expectedShows = loc === "zh-TW" ? "場次" : loc === "ja" ? "公演" : loc === "en" ? "Shows" : "공연";
+        const expectedTour = loc === "zh-TW" ? "巡演專場" : loc === "ja" ? "ツアー" : loc === "en" ? "Tour" : "투어";
+        const html = renderToStaticMarkup(
+          React.createElement(
+            I18nProvider,
+            { initialLocale: loc },
+            React.createElement(Consumer)
+          )
+        );
+        assert.ok(html.includes(`${loc}:${expectedShows}:${expectedTour}:Fallback`), `SSR markup for ${loc} must match`);
+      }
+    });
+
+    it("renders ticket-styled LanguageSwitcher in LandingHero and ArchiveHeader with localized chrome labels", async () => {
+      const { LanguageSwitcher } = await server.ssrLoadModule("/src/components/LanguageSwitcher.jsx");
+      const { I18nProvider } = await server.ssrLoadModule("/src/lib/i18n.jsx");
+      const { ArchiveHeader } = await server.ssrLoadModule("/src/components/layout/ArchiveHeader.jsx");
+      const LandingHeroMod = await server.ssrLoadModule("/src/components/LandingHero.jsx");
+      const LandingHero = LandingHeroMod.default;
+
+      // 1. LanguageSwitcher standalone ticket aesthetic tokens & ARIA
+      const swHtmlZh = renderToStaticMarkup(
+        React.createElement(I18nProvider, { initialLocale: "zh-TW" }, React.createElement(LanguageSwitcher))
+      );
+      assert.ok(swHtmlZh.includes("繁中"), "must render active locale label '繁中'");
+      assert.ok(swHtmlZh.includes("🌐"), "must contain globe icon");
+      assert.ok(swHtmlZh.includes("border-[1.5px]"), "must adhere to ticket border-1.5px token");
+      assert.ok(swHtmlZh.includes("bg-card"), "must use card background token");
+      assert.ok(swHtmlZh.includes("touch-stamp"), "must apply mobile touch-stamp class");
+      assert.ok(swHtmlZh.includes('aria-haspopup="true"'), "must have aria-haspopup");
+
+      const swHtmlJa = renderToStaticMarkup(
+        React.createElement(I18nProvider, { initialLocale: "ja" }, React.createElement(LanguageSwitcher))
+      );
+      assert.ok(swHtmlJa.includes("日本語"), "must render active locale label '日本語'");
+
+      // 2. Integration into LandingHero
+      const landingHtml = renderToStaticMarkup(
+        React.createElement(
+          I18nProvider,
+          { initialLocale: "en" },
+          React.createElement(LandingHero, {
+            totalAllShows: 100,
+            allUsedSongs: [{ id: "pretender", title: "Pretender" }],
+            allVenues: [{ name: "Budokan" }],
+            allUnits: [],
+            q: "",
+            setQ: () => {},
+          })
+        )
+      );
+      assert.ok(landingHtml.includes("EN"), "LandingHero must render LanguageSwitcher with EN active");
+      assert.ok(landingHtml.includes("Public Shows"), "LandingHero stats must be localized in EN");
+
+      // 3. Integration into ArchiveHeader across locales
+      const archiveProps = {
+        totalAllShows: 150,
+        allUsedSongs: new Array(50).fill({ id: "x" }),
+        allVenues: new Array(20).fill({ name: "v" }),
+        categoriesCount: 8,
+        tab: "show",
+        setTab: () => {},
+        setQ: () => {},
+        setIsFilterDrawerOpen: () => {},
+      };
+
+      const archiveHtmlJa = renderToStaticMarkup(
+        React.createElement(
+          I18nProvider,
+          { initialLocale: "ja" },
+          React.createElement(ArchiveHeader, archiveProps)
+        )
+      );
+      assert.ok(archiveHtmlJa.includes("日本語"), "ArchiveHeader must render LanguageSwitcher with 日本語 active");
+      assert.ok(archiveHtmlJa.includes("公演"), "ArchiveHeader tab must render 公演 for shows in ja");
+      assert.ok(archiveHtmlJa.includes("楽曲"), "ArchiveHeader tab must render 楽曲 for songs in ja");
+      assert.ok(archiveHtmlJa.includes("会場"), "ArchiveHeader tab must render 会場 for venues in ja");
+      assert.ok(archiveHtmlJa.includes("セットリスト図鑑"), "ArchiveHeader brandTitle must be localized in ja");
+
+      const archiveHtmlKo = renderToStaticMarkup(
+        React.createElement(
+          I18nProvider,
+          { initialLocale: "ko" },
+          React.createElement(ArchiveHeader, archiveProps)
+        )
+      );
+      assert.ok(archiveHtmlKo.includes("한국어"), "ArchiveHeader must render LanguageSwitcher with 한국어 active");
+      assert.ok(archiveHtmlKo.includes("공연"), "ArchiveHeader tab must render 공연 for shows in ko");
+      assert.ok(archiveHtmlKo.includes("곡"), "ArchiveHeader tab must render 곡 for songs in ko");
+      assert.ok(archiveHtmlKo.includes("공연장"), "ArchiveHeader tab must render 공연장 for venues in ko");
+      assert.ok(archiveHtmlKo.includes("셋리스트 아카이브"), "ArchiveHeader brandTitle must be localized in ko");
+    });
+  });
 });
 
 

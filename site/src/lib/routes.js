@@ -11,23 +11,83 @@
  * - /#/..., #/..., #..., /..., trailing slashes, and URI encoding.
  */
 
+export const SUPPORTED_LOCALES = ["zh-TW", "ja", "en", "ko"];
+export const DEFAULT_LOCALE = "zh-TW";
+
+export function normalizeLocale(raw) {
+  if (!raw || typeof raw !== "string") return null;
+  const clean = raw.trim().toLowerCase();
+  if (
+    clean === "zh" ||
+    clean === "zh-tw" ||
+    clean === "zh-hant" ||
+    clean.startsWith("zh-tw") ||
+    clean.startsWith("zh-hk") ||
+    clean.startsWith("zh-mo")
+  ) {
+    return "zh-TW";
+  }
+  if (clean.startsWith("ja")) return "ja";
+  if (clean.startsWith("en")) return "en";
+  if (clean.startsWith("ko")) return "ko";
+  return null;
+}
+
 export function parseRoute(hash) {
   if (!hash) return null;
-  const cleaned = (hash ?? "")
-    .replace(/^(?:\/|#)+/, "/")
-    .replace(/\/+$/, "");
-  const m = cleaned.match(/^\/(song|show|venue|tour)\/(.+)$/);
-  if (!m) return null;
+  const raw = hash ?? "";
+  const cleaned = raw.replace(/^(?:\/|#)+/, "/");
+
+  // Separate pathname and query string
+  const [pathPart, queryPart] = cleaned.split("?");
+  const normalizedPath = (pathPart || "").replace(/\/+$/, "");
+
+  // Parse query params safely
+  const params = new URLSearchParams(queryPart || "");
+  const langParam = params.get("lang");
+  const lang = normalizeLocale(langParam);
+
+  const m = normalizedPath.match(/^\/(song|show|venue|tour)\/(.+)$/);
+  if (!m) {
+    if (normalizedPath === "/archive") {
+      const res = { kind: "archive", value: null };
+      if (lang) res.lang = lang;
+      return res;
+    }
+    return null;
+  }
+
   try {
-    return { kind: m[1], value: decodeURIComponent(m[2]) };
+    const res = { kind: m[1], value: decodeURIComponent(m[2]) };
+    if (lang) res.lang = lang;
+    return res;
   } catch {
     return null;
   }
 }
 
+export function buildRouteHash(kind, value, options = {}) {
+  const opts = typeof options === "string" ? { lang: options } : (options || {});
+  const base =
+    kind === "song"
+      ? `#/song/${value}`
+      : kind === "show"
+      ? `#/show/${value}`
+      : kind === "venue"
+      ? `#/venue/${encodeURIComponent(value)}`
+      : kind === "tour"
+      ? `#/tour/${value}`
+      : "#/";
+
+  const lang = opts.lang && opts.lang !== DEFAULT_LOCALE && SUPPORTED_LOCALES.includes(opts.lang)
+    ? opts.lang
+    : null;
+  return lang ? `${base}?lang=${lang}` : base;
+}
+
 export const routeHash = {
-  song: (id) => `#/song/${id}`,
-  show: (id) => `#/show/${id}`,
-  venue: (name) => `#/venue/${encodeURIComponent(name)}`,
-  tour: (id) => `#/tour/${id}`,
+  song: (id, opts) => buildRouteHash("song", id, opts),
+  show: (id, opts) => buildRouteHash("show", id, opts),
+  venue: (name, opts) => buildRouteHash("venue", name, opts),
+  tour: (id, opts) => buildRouteHash("tour", id, opts),
 };

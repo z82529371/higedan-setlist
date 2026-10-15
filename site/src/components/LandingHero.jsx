@@ -1,5 +1,7 @@
 import { useMemo } from "react";
 import SearchBox from "./SearchBox.jsx";
+import LanguageSwitcher from "./LanguageSwitcher.jsx";
+import { useI18n } from "../lib/i18n.jsx";
 
 export default function LandingHero({
   onEnterArchive,
@@ -16,6 +18,8 @@ export default function LandingHero({
   q,
   setQ,
 }) {
+  const { t } = useI18n();
+
   // Find indicators for hot prompts
   const rejoiceUnit = useMemo(() => {
     return allUnits.find(
@@ -50,7 +54,12 @@ export default function LandingHero({
   }, [allUsedSongs]);
 
   return (
-    <div className="mx-auto max-w-[960px] px-4 sm:px-6 py-8 sm:py-14 flex flex-col items-center text-center animate-fade-in">
+    <div className="mx-auto max-w-[960px] px-4 sm:px-6 py-8 sm:py-14 flex flex-col items-center text-center animate-fade-in relative">
+      {/* Top Utility Bar (Language Switcher) */}
+      <div className="w-full flex justify-end items-center mb-3 sm:mb-5">
+        <LanguageSwitcher />
+      </div>
+
       {/* Brand Logo & Header */}
       <header className="flex flex-col items-center">
         <div className="mb-4 inline-flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-band border-[1.5px] border-ink shadow-xs">
@@ -62,39 +71,39 @@ export default function LandingHero({
         </div>
 
         <p className="m-0 mb-2 font-mono text-[11px] sm:text-[13px] tracking-[0.22em] text-muted font-bold uppercase">
-          LIVE PERFORMANCE &amp; SETLIST ARCHIVE
+          {t("header.livePerformanceArchive")}
         </p>
 
         <h1 className="m-0 font-display text-[clamp(24px,5.5vw,48px)] font-black leading-tight tracking-tight text-ink">
           Official髭男dism{" "}
           <span className="font-extrabold text-band-ink bg-band/40 px-2 py-0.5 rounded-[4px] border border-ink/20">
-            Setlist 檔案庫
+            {t("header.brandTitle")}
           </span>
         </h1>
 
         <p className="mt-3 sm:mt-4 mb-0 text-[13px] sm:text-[16px] text-muted max-w-[620px] mx-auto leading-relaxed font-sans">
-          2012–2026 全域現場演出與曲目雙向檔案館。收錄地下獨立時期至當前巡演的完整歷史足跡。
+          {t("header.landingSubtitle")}
         </p>
 
         {/* 5 Stats Pills */}
         <div className="mt-5 flex flex-wrap items-center justify-center gap-1.5 sm:gap-2 font-mono text-[11px] sm:text-[12px] text-ink">
           <span className="inline-flex items-center gap-1 rounded-[4px] border border-ink/20 bg-card px-2.5 py-1 font-semibold shadow-2xs">
-            <span aria-hidden="true">📅</span> 2012–2026 年
+            <span aria-hidden="true">📅</span> {t("header.years")}
           </span>
           <span className="inline-flex items-center gap-1 rounded-[4px] border border-ink/20 bg-card px-2.5 py-1 font-semibold shadow-2xs">
             <span aria-hidden="true">🎫</span>{" "}
-            <span className="tabular-nums">{totalAllShows}</span> 場公開演出
+            <span className="tabular-nums">{totalAllShows}</span> {t("header.publicShows")}
           </span>
           <span className="inline-flex items-center gap-1 rounded-[4px] border border-ink/20 bg-card px-2.5 py-1 font-semibold shadow-2xs">
-            <span aria-hidden="true">🎭</span> 8 大演出型態
+            <span aria-hidden="true">🎭</span> 8 {t("header.performanceTypes")}
           </span>
           <span className="inline-flex items-center gap-1 rounded-[4px] border border-ink/20 bg-card px-2.5 py-1 font-semibold shadow-2xs">
             <span aria-hidden="true">🎵</span>{" "}
-            <span className="tabular-nums">{allUsedSongs.length}</span> 首原創曲目
+            <span className="tabular-nums">{allUsedSongs.length}</span> {t("header.originalSongs")}
           </span>
           <span className="inline-flex items-center gap-1 rounded-[4px] border border-ink/20 bg-card px-2.5 py-1 font-semibold shadow-2xs">
             <span aria-hidden="true">📍</span>{" "}
-            <span className="tabular-nums">{allVenues.length}</span> 處歷史場館
+            <span className="tabular-nums">{allVenues.length}</span> {t("header.historicVenues")}
           </span>
         </div>
       </header>
