@@ -1,7 +1,7 @@
 {
   "id": "tsm-shibuya-open-campus-2018",
   "title": "東京スクールオブミュージック専門学校渋谷 オープンキャンパス",
-  "shortTitle": "TSM渋谷 オープンキャンパス 2017",
+  "shortTitle": "TSM渋谷 オープンキャンパス 2018",
   "type": "學園祭",
   "shows": [
     {
@@ -13,11 +13,70 @@
       "prefecture": "東京都",
       "title": "東京スクールオブミュージック専門学校渋谷 オープンキャンパス スペシャルライブ",
       "sourceUrls": [
+        "https://mitosan.jp/higedansp01/",
         "https://higedan.com/news/3/?page=55",
         "https://ja.wikipedia.org/wiki/Official%E9%AB%AD%E7%94%B7dism",
         "https://higedan.com/"
       ],
-      "setlist": [],
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "songId": "koi-no-maenarae"
+        },
+        {
+          "order": 2,
+          "encore": false,
+          "songId": "ai-nandaga"
+        },
+        {
+          "order": 3,
+          "encore": false,
+          "songId": "brothers"
+        },
+        {
+          "order": 4,
+          "encore": false,
+          "songId": "tell-me-baby"
+        },
+        {
+          "order": 5,
+          "encore": false,
+          "songId": "yugure-zoi",
+          "note": "Acoustic"
+        },
+        {
+          "order": 6,
+          "encore": false,
+          "songId": "itan-na-star",
+          "note": "Acoustic ver."
+        },
+        {
+          "order": 7,
+          "encore": false,
+          "songId": "lady"
+        },
+        {
+          "order": 8,
+          "encore": false,
+          "songId": "coffee-to-syrup"
+        },
+        {
+          "order": 9,
+          "encore": false,
+          "songId": "nichiyoubi-no-love-letter"
+        },
+        {
+          "order": 10,
+          "encore": false,
+          "songId": "inu-ka-cat-ka-de-shinumade-kenka-shiyou"
+        },
+        {
+          "order": 11,
+          "encore": false,
+          "songId": "sweet-tweet"
+        }
+      ],
       "weekday": "土",
       "opensAt": "17:00",
       "startsAt": "17:30"
