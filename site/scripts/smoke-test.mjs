@@ -54,7 +54,11 @@ describe("Pipeline Smoke Tests", () => {
 
   before(async () => {
     const vite = await import("vite");
+    const path = await import("node:path");
+    const url = await import("node:url");
+    const here = path.dirname(url.fileURLToPath(import.meta.url));
     server = await vite.createServer({
+      root: path.resolve(here, ".."),
       server: { middlewareMode: true, watch: null },
       appType: "custom",
     });

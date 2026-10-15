@@ -4,7 +4,7 @@ import { execSync } from "node:child_process";
 try {
   const staged = execSync("git diff --name-only --cached", { encoding: "utf8" })
     .split(/\r?\n/)
-    .map((s) => s.trim())
+    .map((s) => s.trim().replace(/\\/g, "/"))
     .filter(Boolean);
 
   if (staged.length === 0) {
@@ -17,8 +17,14 @@ try {
     /^docs\/reports\/.+\.md$/,
   ];
 
+  const envAllowed = (process.env.STAGED_ALLOW_EVENTS || "")
+    .split(",")
+    .map((s) => s.trim().replace(/\\/g, "/"))
+    .filter(Boolean);
+
   const allowedExceptions = new Set([
     "data/events/unofficial-2024.json",
+    ...envAllowed,
   ]);
 
   const violations = staged.filter((file) =>
@@ -32,7 +38,8 @@ try {
     for (const v of violations) {
       console.error(`  - ${v}`);
     }
-    console.error("\nRun: git reset -- <files> to unstage them before committing.");
+    console.error("\nRun: git reset -- <files> to unstage them before committing,");
+    console.error("or specify STAGED_ALLOW_EVENTS=\"<file1>,<file2>\" if intentionally modifying them for this task.");
     process.exit(1);
   }
 
