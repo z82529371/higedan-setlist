@@ -1472,23 +1472,27 @@ describe("Pipeline Smoke Tests", () => {
       assert.ok(stagedShowRoute.confirmButtonLabel.includes("確認套用："));
 
       // 4. Staged selection across all 4 locales (ja, en, ko, zh-TW)
-      const jaRoute = runProbeWithDraft("#/show/1672276", stagedShowRoute.draftState, "ja");
-      assert.ok(jaRoute.confirmButtonLabel.startsWith("適用確定："), `ja route must start with 適用確定：, got: ${jaRoute.confirmButtonLabel}`);
+      const localeCases = [
+        { loc: "zh-TW", stagedPrefix: "確認套用：", defaultLabel: "確認套用" },
+        { loc: "ja", stagedPrefix: "適用確定：", defaultLabel: "適用を確定" },
+        { loc: "en", stagedPrefix: "Apply:", defaultLabel: "Apply" },
+        { loc: "ko", stagedPrefix: "적용 확정:", defaultLabel: "적용 확정" },
+      ];
 
-      const enRoute = runProbeWithDraft("#/show/1672276", stagedShowRoute.draftState, "en");
-      assert.ok(enRoute.confirmButtonLabel.startsWith("Apply:"), `en route must start with Apply:, got: ${enRoute.confirmButtonLabel}`);
+      for (const { loc, stagedPrefix, defaultLabel } of localeCases) {
+        const stagedRoute = runProbeWithDraft("#/show/1672276", stagedShowRoute.draftState, loc);
+        assert.ok(
+          stagedRoute.confirmButtonLabel.startsWith(stagedPrefix),
+          `${loc} staged route must start with '${stagedPrefix}', got: '${stagedRoute.confirmButtonLabel}'`
+        );
 
-      const koRoute = runProbeWithDraft("#/show/1672276", stagedShowRoute.draftState, "ko");
-      assert.ok(koRoute.confirmButtonLabel.startsWith("적용 확정:"), `ko route must start with 적용 확정:, got: ${koRoute.confirmButtonLabel}`);
-
-      const jaDefault = runProbeWithDraft("#/show/1672276", null, "ja");
-      assert.strictEqual(jaDefault.confirmButtonLabel, "適用を確定");
-
-      const enDefault = runProbeWithDraft("#/show/1672276", null, "en");
-      assert.strictEqual(enDefault.confirmButtonLabel, "Apply");
-
-      const koDefault = runProbeWithDraft("#/show/1672276", null, "ko");
-      assert.strictEqual(koDefault.confirmButtonLabel, "적용 확정");
+        const defaultRouteForLoc = runProbeWithDraft("#/show/1672276", null, loc);
+        assert.strictEqual(
+          defaultRouteForLoc.confirmButtonLabel,
+          defaultLabel,
+          `${loc} default route must match '${defaultLabel}', got: '${defaultRouteForLoc.confirmButtonLabel}'`
+        );
+      }
     });
 
     it("renders ArchiveLayout conditionally: TourSlip when showSubMode === 'tour' and isTour === true, else ShowSlip (Ticket 4)", () => {

@@ -43,7 +43,10 @@ try {
     process.exit(1);
   }
 
-  console.log(`✓ Staged files hygiene check passed (${staged.length} files staged).`);
+  console.log(`✓ Staged files hygiene check passed (${staged.length} file${staged.length === 1 ? "" : "s"} staged):`);
+  for (const file of staged) {
+    console.log(`  • ${file}`);
+  }
 } catch (err) {
   console.error("Failed to check staged files:", err.message);
   process.exit(1);
