@@ -20,7 +20,7 @@ Multiple autonomous agents frequently operate concurrently in this repository:
 1. **Scratch Files Isolation**: Write all exploratory or temporary scripts to `scratch/` or `.scratch/` (both are git-ignored). Never commit or scatter ad-hoc verification scripts in repository root.
 2. **Concurrent File Protection**: Never delete, restore, or modify working tree files outside your explicit task scope (e.g. data JSON files under active audit or other agents' temporary scripts).
 3. **Task-Scoped Git Operations**: Always inspect git diff with `git --no-pager diff -- <path>` or path filters rather than unstaging or wiping untracked files wholesale, preventing Windows terminal pager hangs.
-4. **Data Inspection & Script Hygiene**: Use `node -e` or scripts under `site/scripts/` rather than PowerShell `ConvertFrom-Json` to avoid Windows UTF-8 encoding distortion. In PowerShell, avoid inline nested quote escaping issues by writing multi-line logic directly to `.scratch/temp.mjs` and running `node .scratch/temp.mjs`. Never chain shell commands with `&&` in tool calls on Windows; invoke single commands sequentially.
+4. **Data Inspection & Script Hygiene**: Use `node -e` or scripts under `site/scripts/` rather than PowerShell `ConvertFrom-Json` to avoid Windows UTF-8 encoding distortion. In PowerShell, avoid inline nested quote escaping issues by writing multi-line logic directly to `.scratch/temp.mjs` and running `node .scratch/temp.mjs`. Never wrap the entire `CommandLine` parameter in outer escaped quotes (e.g. `\"git status\"` will be treated by PowerShell as a single nonexistent executable path); pass clean command strings like `git status`. Never chain shell commands with `&&` in tool calls on Windows; invoke single commands sequentially.
 5. **Vite SSR & Scratch Scripts**: Execute ad-hoc snippets importing frontend modules (e.g. `domain.js`) via `pnpm eval "<code>"` or `site/scripts/eval.mjs` (which injects `loadModule('/src/lib/domain.js')` and `readJson('../data/...')`), avoiding Node.js strict ESM JSON attribute errors (`ERR_IMPORT_ATTRIBUTE_MISSING`).
 6. **pnpm Monorepo Workspace Topology (ADR-0103)**: Repository uses root `pnpm-workspace.yaml` targeting `packages: ['site']` with root `pnpm-lock.yaml`. Never create rogue `pnpm-workspace.yaml` inside subdirectories, and invoke workspace scripts from root using `pnpm --filter ./site <cmd>`.
 7. **Staging Hygiene Guardrail**: Run `pnpm check:staged` before committing to verify no concurrent agent files (`data/events/*.json`, `docs/reports/*.md`) were mistakenly staged, and review the echoed staged files manifest.
@@ -30,8 +30,11 @@ Multiple autonomous agents frequently operate concurrently in this repository:
 
 ## Verification Commands
 
-- `pnpm check`: Runs ultra-fast static linting (`oxlint`, checks undeclared variables and dead code in <20ms) and the full domain smoke test suite (`smoke-test.mjs`). Run after every code modification.
-- `pnpm test`: Runs `oxlint` + `smoke-test.mjs` (13 invariant checks).
+- `pnpm check`: Runs ultra-fast static linting (`oxlint`, checks undeclared variables and dead code in <20ms), i18n checks, and the full domain test suite across all modules. Run after every code modification.
+- `pnpm test`: Runs `oxlint` + `check-i18n` + all 17 test suites (88 invariant assertions).
+- `pnpm test:pipeline`: Runs pure data pipeline & consensus algorithm tests in <50ms (`site/tests/pipeline/`).
+- `pnpm test:invariants`: Runs repository structure, design tokens, and AST invariant tests in ~120ms (`site/tests/invariants/`).
+- `pnpm test:ui`: Runs headless React SSR, route state machine, and localization tests (`site/tests/ui/`).
 - `pnpm build`: Production build via Vite compiler (`site/dist/`).
 
 ## Agent skills

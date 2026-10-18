@@ -513,12 +513,12 @@ _Avoid_: 手機端直接抓取可視 DOM 節點導致文字折行後拉長並在
 本專案常態性由多個自主 Agent 並行執行巡演考證、管線同步與前端開發：
 1. **臨時腳本隔離存放**：所有探索性、對照性或臨時測試腳本（如網頁爬取、單場對照）一律嚴格存放於 `scratch/` 或 `.scratch/` 目錄（兩者皆已納入 `.gitignore`），嚴禁直接散落於專案根目錄。
 2. **並行工作樹保護**：嚴禁執行全域破壞性指令（如清除非本任務之 untracked 檔案或 reset 正在由其他 Agent 考證修訂中的 `data/tours/`、`data/events/` 檔案）；執行 `git status` 與 `git diff` 時務必附加路徑限定。
-3. **驗證防線優先執行**：在交付前端與組件改動前，一律先行執行 `pnpm check`（結合 `oxlint` 靜態語法未定義檢查與 `smoke-test.mjs` 領域模型斷言），保證任何識別碼缺陷或行數超標在本地立刻被阻斷。
+3. **驗證防線優先執行**：在交付前端與組件改動前，一律先行執行 `pnpm check`（結合 `oxlint` 靜態語法未定義檢查、`check-i18n.mjs` 語系守衛與 `site/tests/` 模組化領域模型斷言），或針對改動領域執行細粒度分流指令（如純管線 `pnpm test:pipeline`、規範守衛 `pnpm test:invariants`、UI/SSR `pnpm test:ui`），保證任何缺陷在本地立刻被阻斷。
 
 **React Hooks 領域狀態與極端路由安全回退（Hooks Domain State & Hash Fallback Invariants，ADR-0101）**:
 全站狀態與 URL Hash 雙向同步（`#/show/:id`, `#/song/:id`, `#/venue/:name`）由 `useArchiveRoute` 與 `useArchiveFilter` 集中接管：
 1. **深層連結合法性校驗與優雅降級**：當 Hash 帶入之目標實體不存在於當前資料庫（如不存在之 `songId`、未收錄場次或非法路徑）時，系統一律安全回退至純淨聚光燈首頁（`landing`），嚴禁停留在半加載或曲目空白之崩潰狀態。
 2. **行動端抽屜草稿隔離機制**：行動端篩選抽屜在使用者未點擊「確認套用」前，所有切換僅暫存於 `draftState`；點擊取消或關閉時 100% 乾淨回滾至開啟前狀態，避免誤觸污染主視圖。
-3. **無頭 SSR 測試探針防護網（Zero-Dependency In-Process SSR Test Harness）**：煙道測試（`smoke-test.mjs`）透過 Vite SSR Probe 在 Node.js 原生環境內掛載 Hooks，在毫秒級速度下完整驗證 Hash 穿透、八大分類統計與極端回退機制，完全不引入外部肥大之 JSDOM 或第三方測試庫。
+3. **無頭 SSR 測試探針防護網（Zero-Dependency In-Process SSR Test Harness，ADR-0109）**：模組化測試套件（`site/tests/ui/`）透過 `site/tests/helpers/vite-server.js` 之 Vite SSR 惰性單例在 Node.js 原生環境內掛載 Hooks，在毫秒級速度下完整驗證 Hash 穿透、八大分類統計與極端回退機制，完全不引入外部肥大之 JSDOM 或第三方測試庫。舊有 `smoke-test.mjs` 則作為透明轉發 Facade 維持 100% 向後相容。
 4. **國際化上下文邊界與按鈕響應不變式（I18n Context Boundary & Confirm Label Invariant）**：`I18nProvider` 必須置於 `App.jsx` 最外層包裹主應用 Hook（`AppContent`），使 `useArchiveRoute` 能無縫訂閱即時的 `I18nContext`。抽屜底部之動態確認標籤（`confirmButtonLabel`）與路由切換時之語系參數同步（`appendLang`）皆嚴格具備全語系響應能力（`zh-TW` 確認套用、`ja` 適用を確定、`en` Apply、`ko` 적용 확정），嚴禁將依賴 i18n 之 Hook 置於 Provider 之外導致語系退回寫死之預設繁中。
 _Avoid_: 非法 Hash 導致頁面崩潰或停留在無效空卡片、抽屜取消後未還原選項、引入肥大 JSDOM 拖慢本機與 CI 反饋速度、將依賴多語系的領域 Hook 掛載在 I18nProvider 外部導致行動抽屜操作按鈕漏翻。
