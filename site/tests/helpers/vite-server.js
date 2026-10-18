@@ -51,10 +51,29 @@ export async function loadModule(specifier) {
   return server.ssrLoadModule(specifier);
 }
 
+let consoleErrorHooked = false;
+function installReactWarningGuardrail() {
+  if (consoleErrorHooked) return;
+  consoleErrorHooked = true;
+  const originalConsoleError = console.error;
+  console.error = function (...args) {
+    const message = args.map((a) => (typeof a === "string" ? a : (a?.message || ""))).join(" ");
+    if (
+      message.includes('Each child in a list should have a unique "key" prop') ||
+      message.includes("https://react.dev/link/warning-keys")
+    ) {
+      originalConsoleError.apply(console, args);
+      throw new Error(`[React Key Invariant Violation]: ${message}`);
+    }
+    originalConsoleError.apply(console, args);
+  };
+}
+
 /**
  * Returns React and renderToStaticMarkup.
  */
 export async function getReactAndRenderer() {
+  installReactWarningGuardrail();
   if (!reactModule || !renderToStaticMarkupFn) {
     const reactMod = await import("react");
     reactModule = reactMod.default || reactMod;

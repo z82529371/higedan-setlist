@@ -489,12 +489,13 @@ export function VenueSlip({ venueName, globalVenueShows, unitData, onSelectShow,
         </p>
       ) : (
         <div className="space-y-4 pt-1">
-          {groupedByUnit.map((g) => {
+          {groupedByUnit.map((g, gIdx) => {
             const isCollapsible = g.items.length > 1;
             const isCollapsed = isCollapsible && (collapsedMap.get(g.unitId) ?? false);
+            const groupKey = g.unitId || g.unitTitle || `unit-group-${gIdx}`;
 
             return (
-              <section key={g.unitId} className="flex flex-col">
+              <section key={groupKey} className="flex flex-col">
                 <div
                   className={`flex flex-col gap-2 rounded-[4px] border border-line-soft bg-paper/70 px-3.5 py-2.5 transition-colors ${
                     isCollapsible
@@ -574,9 +575,10 @@ export function VenueSlip({ venueName, globalVenueShows, unitData, onSelectShow,
 
                 {!isCollapsed && (
                   <ul className="m-0 mt-1 list-none p-0">
-                    {g.items.map(({ showId, show }) => {
+                    {g.items.map(({ showId, show }, showIdx) => {
+                      const effectiveShowId = showId || show?.id || `show-${showIdx}`;
                       const ud = unitData?.get(g.unitId);
-                      const fullItems = ud?.full?.get(showId) || [];
+                      const fullItems = ud?.full?.get(effectiveShowId) || [];
                       const songCount = fullItems.filter(
                         (i) => i.songId || i.title
                       ).length;
@@ -593,15 +595,15 @@ export function VenueSlip({ venueName, globalVenueShows, unitData, onSelectShow,
 
                       return (
                         <li
-                          key={showId}
+                          key={effectiveShowId}
                           className="border-b border-line-soft/80 px-2.5 py-2.5 last:border-b-0 hover:bg-paper/40 transition-colors"
                         >
                           <a
                             className="group flex items-center justify-between gap-3 text-ink no-underline transition-colors focus-visible:outline-[3px] focus-visible:outline-pool focus-visible:outline-offset-2 motion-reduce:transition-none"
-                            href={routeHash.show(showId, locale)}
+                            href={routeHash.show(effectiveShowId, locale)}
                             onClick={(e) => {
                               e.preventDefault();
-                              onSelectShow(showId);
+                              onSelectShow(effectiveShowId);
                             }}
                           >
                             <div className="flex min-w-0 flex-1 flex-col">

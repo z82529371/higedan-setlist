@@ -12,6 +12,7 @@ Repository conventions and navigation pointers for AI agents working in this cod
 - **Test Harness & Modular Suites**: Consult [`site/tests/`](./site/tests/) and [`ADR-0109`](./docs/adr/0109-modular-test-architecture-and-headless-ssr-singleton.md) for 3-tier modular test suites (`pipeline/`, `invariants/`, `ui/`) and headless Vite SSR singleton harness (`site/tests/helpers/vite-server.js`).
 - **CI/CD & Deployment Target**: Consult [`.github/workflows/ci.yml`](./.github/workflows/ci.yml) and [`.nvmrc`](./.nvmrc) for runtime version alignment (Cloudflare Pages builds depend on `.nvmrc` and `engines.node >= 22.13.0` for pnpm 11 compatibility).
 - **i18n & Context Providers Boundary**: Consult [`CONTEXT.md`](./CONTEXT.md#react-hooks-領域狀態與極端路由安全回退hooks-domain-state--hash-fallback-invariantsadr-0101), [`site/src/App.jsx`](./site/src/App.jsx), [`ADR-0107`](./docs/adr/0107-multi-language-localization-and-taxonomy-boundary.md), and [`ADR-0108`](./docs/adr/0108-administrative-geography-localization-and-venue-integrity.md) for the `<I18nProvider>` root wrapper requirement (`AppContent` pattern), the responsive switcher dichotomy, and administrative geography localization boundaries.
+- **Venue & Geography Presentation Boundaries**: Consult [`ADR-0108`](./docs/adr/0108-administrative-geography-localization-and-venue-integrity.md) and [`ADR-0110`](./docs/adr/0110-official-venue-localization-and-cross-lingual-presentation.md) for official venue localization dictionaries (`site/src/lib/locales/venues.js`), graceful fallback, cross-lingual search indexing (`matchVenue`), and the 8 presentation touchpoints (`VenueNavigator`, `ShowMetadataBox`, `TourSlip`, `VenueSlip`, `SongSlip`, `SongMilestonesDrawer`, `MemorialCardModal`, `SearchBox`).
 - **Issue Tracking**: Consult GitHub Issues via `gh issue view <number>` or `gh issue list` for feature specs and task acceptance criteria.
 
 ## Multi-Agent Workspace Hygiene
@@ -27,18 +28,19 @@ Multiple autonomous agents frequently operate concurrently in this repository:
 7. **Staging Hygiene Guardrail**: Run `pnpm check:staged` before committing to verify no concurrent agent files (`data/events/*.json`, `docs/reports/*.md`) were mistakenly staged, and review the echoed staged files manifest.
 8. **Parallel Subagent Discipline**: Fan out subagents only across independent files; related files sharing locales or imports are edited sequentially by one agent. Subagent writes persist even when its response is lost to a restart — always re-verify with `grep`/`git diff -- <path>` instead of assuming completion, and never repeat an edit without first reading the current file state.
 9. **Solo Developer Workflow**: This is a solo developer repository. Commit or merge integration branches directly into `master` and push to origin; never open GitHub Pull Requests or Draft PRs unless explicitly instructed by the user.
-10. **Synchronous Tool Timeout & Inner Loop Discipline**: When developing, use sub-second inner loop test runners (`pnpm test:pipeline`, `pnpm test:invariants`) to achieve instant <200ms synchronous validation within a single turn. For full outer loop validation (`pnpm check`, `pnpm test`, `pnpm build`), always set `WaitMsBeforeAsync` to `10000ms` (maximum) to minimize background task roundtrips.
+10. **Synchronous Tool Timeout & Anti-Polling Discipline**: For all terminal commands expected to finish quickly (including git operations `git commit`, `git push`, `git add`, `pnpm check`, `pnpm test`, `pnpm build`, `pnpm test:ui`), always set `WaitMsBeforeAsync` to `10000ms` (maximum) to complete synchronously and minimize background task roundtrips. When any command does enter the background, strictly adhere to reactive wakeup: NEVER poll or loop on `manage_task status`; stop calling tools immediately and await the system notification.
 
 ## Verification Commands
 
 ### Inner Loop (Sub-Second Rapid Iteration)
+- `pnpm lint`: Runs `oxlint` static linting in ~20ms (`oxlint src -c .oxlintrc.json`). Run immediately after editing any component to catch undeclared variables (`no-undef`) or unused variables (`no-unused-vars`) before heavier SSR test execution.
 - `pnpm test:pipeline`: Runs pure data pipeline & consensus algorithm tests in <50ms (`site/tests/pipeline/`).
 - `pnpm test:invariants`: Runs repository structure, design tokens, cross-platform quoting, and AST invariant tests in ~120ms (`site/tests/invariants/`).
 
 ### Outer Loop (Integration & Pre-Commit Verification)
 - `pnpm test:ui`: Runs headless React SSR, route state machine, and localization tests (`site/tests/ui/`).
-- `pnpm check`: Master verification gate running `oxlint`, `check-i18n`, and all 17 test suites (88 invariant assertions). Run before every commit.
-- `pnpm test`: Runs data sync, `check-i18n`, and all 17 test suites (88 invariant assertions).
+- `pnpm check`: Master verification gate running `oxlint`, `check-i18n`, and all 22 test suites (107 invariant assertions). Run before every commit.
+- `pnpm test`: Runs data sync, `check-i18n`, and all 22 test suites (107 invariant assertions).
 - `pnpm build`: Production build via Vite compiler (`site/dist/`).
 
 ## Agent skills

@@ -260,6 +260,10 @@ describe("17. Administrative Geography Localization & Venue Integrity Boundary (
     it("renders VenueSlip headline with localized prefecture and city across locales", () => {
       const mockShows = [
         {
+          showId: "show-1",
+          unitId: "tour-2024",
+          unitTitle: "Tour 2024",
+          unitType: "巡演專場",
           show: {
             id: "show-1",
             date: "2024-09-28",

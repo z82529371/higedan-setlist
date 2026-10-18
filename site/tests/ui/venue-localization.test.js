@@ -296,6 +296,10 @@ describe("18. Official Venue Localization & Cross-Lingual Presentation (ADR-0110
     it("renders VenueSlip header with localized venue name", () => {
       const mockShows = [
         {
+          showId: "show-1",
+          unitId: "rejoice-tour",
+          unitTitle: "Rejoice Tour",
+          unitType: "巡演專場",
           show: {
             id: "show-1",
             date: "2024-12-14",
