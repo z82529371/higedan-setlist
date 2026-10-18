@@ -32,10 +32,16 @@ export function LanguageSwitcher({ className = "", menuPosition = "down", fab = 
     };
   }, []);
 
+  const hasDisplayClass = /(?:^|\s)(?:[a-z0-9-]+:)?(?:hidden|block|inline-block|inline|flex|inline-flex|grid)(?:\s|$)/.test(className);
+  const displayClass = hasDisplayClass ? "" : "inline-block";
+  const rootClass = ["relative", displayClass, "text-left select-none font-mono", className]
+    .filter(Boolean)
+    .join(" ");
+
   return (
     <div
       ref={containerRef}
-      className={`relative inline-block text-left select-none font-mono ${className}`}
+      className={rootClass}
       data-testid="language-switcher"
     >
       <button

@@ -2303,6 +2303,24 @@ describe("Pipeline Smoke Tests", () => {
 
       // ArchiveHeader MUST hide LanguageSwitcher on small screens to yield space for mobile chrome
       assert.ok(archiveHtmlJa.includes("hidden sm:inline-block"), "ArchiveHeader must hide switcher on mobile via hidden sm:inline-block");
+      // Anti-regression: LanguageSwitcher root element must NOT contain unconditional inline-block when hidden is passed
+      assert.ok(
+        !archiveHtmlJa.includes('class="relative inline-block text-left select-none font-mono hidden sm:inline-block'),
+        "ArchiveHeader LanguageSwitcher must NOT have conflicting inline-block preceding hidden"
+      );
+      assert.ok(
+        archiveHtmlJa.includes('class="relative text-left select-none font-mono hidden sm:inline-block shrink-0"'),
+        "ArchiveHeader LanguageSwitcher must render clean display classes without conflicting inline-block"
+      );
+
+      // Verify standalone LanguageSwitcher fallback vs override behavior
+      const defaultSwitcherHtml = renderToStaticMarkup(
+        React.createElement(I18nProvider, { initialLocale: "ja" }, React.createElement(LanguageSwitcher))
+      );
+      assert.ok(
+        defaultSwitcherHtml.includes('class="relative inline-block text-left select-none font-mono"'),
+        "Default LanguageSwitcher without custom display class must include inline-block"
+      );
 
       // MobileFloatingControls MUST render LanguageSwitcher as a round floating FAB on mobile
       const { MobileFloatingControls } = await server.ssrLoadModule("/src/components/layout/MobileFloatingControls.jsx");
