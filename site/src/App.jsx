@@ -7,7 +7,7 @@ import LandingHero from "./components/LandingHero.jsx";
 import CalendarModal from "./components/CalendarModal.jsx";
 import "./style.css";
 
-export default function App() {
+export function AppContent({ probeRoute } = {}) {
   const {
     unitData,
     trackShows,
@@ -43,6 +43,10 @@ export default function App() {
     filterState,
   });
 
+  if (probeRoute) {
+    probeRoute(routeState);
+  }
+
   const {
     viewMode,
     setViewMode,
@@ -58,63 +62,69 @@ export default function App() {
   } = routeState;
 
   return (
-    <I18nProvider>
-      <Fragment>
-        {viewMode === "landing" ? (
-          <LandingHero
-            onEnterArchive={() => setViewMode("archive")}
-            onSelectSong={(sId) => {
-              setViewMode("archive");
-              handleSelectSong(sId);
-            }}
-            onSelectUnit={(uId, showId) => {
-              setViewMode("archive");
-              handleSelectUnit(uId, showId);
-            }}
-            onSelectVenue={(vName) => {
-              setViewMode("archive");
-              handleSelectVenue(vName);
-            }}
-            onSelectShow={(shId) => {
-              setViewMode("archive");
-              handleSelectShow(shId);
-            }}
-            onOpenCalendar={() => setIsCalendarOpen(true)}
-            onSelectTab={(newTab, options) => {
-              setViewMode("archive");
-              setTab(newTab);
-              if (newTab === "song" && options?.sortMode) filterState.setSongSortMode(options.sortMode);
-              if (newTab === "venue" && options?.sortMode) filterState.setVenueSortMode(options.sortMode);
-            }}
-            totalAllShows={filterState.totalAllShows}
-            allUsedSongs={allUsedSongs}
-            allVenues={allVenues}
-            allUnits={allUnits}
-            q={q}
-            setQ={setQ}
-          />
-        ) : (
-          <ArchiveLayout
-            filterState={filterState}
-            routeState={routeState}
-            unitData={unitData}
-            trackShows={trackShows}
-            globalVenueShows={globalVenueShows}
-            allUsedSongs={allUsedSongs}
-            allVenues={allVenues}
-            allUnits={allUnits}
-            showById={showById}
-          />
-        )}
-
-        {/* 📅 Global Calendar Modal (ADR-0096) */}
-        <CalendarModal
-          isOpen={isCalendarOpen}
-          onClose={() => setIsCalendarOpen(false)}
+    <Fragment>
+      {viewMode === "landing" ? (
+        <LandingHero
+          onEnterArchive={() => setViewMode("archive")}
+          onSelectSong={(sId) => {
+            setViewMode("archive");
+            handleSelectSong(sId);
+          }}
+          onSelectUnit={(uId, showId) => {
+            setViewMode("archive");
+            handleSelectUnit(uId, showId);
+          }}
+          onSelectVenue={(vName) => {
+            setViewMode("archive");
+            handleSelectVenue(vName);
+          }}
+          onSelectShow={(shId) => {
+            setViewMode("archive");
+            handleSelectShow(shId);
+          }}
+          onOpenCalendar={() => setIsCalendarOpen(true)}
+          onSelectTab={(newTab, options) => {
+            setViewMode("archive");
+            setTab(newTab);
+            if (newTab === "song" && options?.sortMode) filterState.setSongSortMode(options.sortMode);
+            if (newTab === "venue" && options?.sortMode) filterState.setVenueSortMode(options.sortMode);
+          }}
+          totalAllShows={filterState.totalAllShows}
+          allUsedSongs={allUsedSongs}
+          allVenues={allVenues}
           allUnits={allUnits}
-          onSelectShow={handleSelectShow}
+          q={q}
+          setQ={setQ}
         />
-      </Fragment>
+      ) : (
+        <ArchiveLayout
+          filterState={filterState}
+          routeState={routeState}
+          unitData={unitData}
+          trackShows={trackShows}
+          globalVenueShows={globalVenueShows}
+          allUsedSongs={allUsedSongs}
+          allVenues={allVenues}
+          allUnits={allUnits}
+          showById={showById}
+        />
+      )}
+
+      {/* 📅 Global Calendar Modal (ADR-0096) */}
+      <CalendarModal
+        isOpen={isCalendarOpen}
+        onClose={() => setIsCalendarOpen(false)}
+        allUnits={allUnits}
+        onSelectShow={handleSelectShow}
+      />
+    </Fragment>
+  );
+}
+
+export default function App({ initialLocale, probeRoute } = {}) {
+  return (
+    <I18nProvider initialLocale={initialLocale}>
+      <AppContent probeRoute={probeRoute} />
     </I18nProvider>
   );
 }

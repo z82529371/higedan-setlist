@@ -597,6 +597,7 @@ export function useArchiveRoute({
     handleSelectShowMode,
     handleToggleSubMode,
     handleReturnHome,
+    appendLang,
     visualViewportStyle,
   };
 }

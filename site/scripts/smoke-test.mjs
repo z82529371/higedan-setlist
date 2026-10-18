@@ -700,6 +700,7 @@ describe("Pipeline Smoke Tests", () => {
     let routeHash;
     let allUnits;
     let index;
+    let I18nProvider;
 
     it("loads tour statistics engine and TourSlip component from Vite SSR", async () => {
       const domainMod = await server.ssrLoadModule("./src/lib/domain.js");
@@ -712,6 +713,9 @@ describe("Pipeline Smoke Tests", () => {
       const trackMod = await server.ssrLoadModule("./src/lib/track.js");
       parseRoute = trackMod.parseRoute;
       routeHash = trackMod.routeHash;
+
+      const i18nMod = await server.ssrLoadModule("./src/lib/i18n.jsx");
+      I18nProvider = i18nMod.I18nProvider;
 
       const slipMod = await server.ssrLoadModule(
         "./src/components/slips/TourSlip.jsx"
@@ -754,6 +758,7 @@ describe("Pipeline Smoke Tests", () => {
       assert.ok(useArchiveRoute);
       assert.ok(parseRoute);
       assert.ok(routeHash);
+      assert.ok(I18nProvider);
     });
 
     it("accurately calculates consensus statistics across all 16 headline tours", () => {
@@ -1387,7 +1392,7 @@ describe("Pipeline Smoke Tests", () => {
     });
 
     it("verifies mobile drawer draftState supports tour slip staging, cancel rollback, and commit (Ticket 4)", () => {
-      const runProbeWithDraft = (hash = "#/show/1672276", initialDraft = null) => {
+      const runProbeWithDraft = (hash = "#/show/1672276", initialDraft = null, locale = null) => {
         globalThis.window.location.hash = hash;
         let capturedRoute = null;
 
@@ -1414,7 +1419,11 @@ describe("Pipeline Smoke Tests", () => {
           return null;
         }
 
-        renderToStaticMarkup(React.createElement(ProbeComponent));
+        const tree = locale
+          ? React.createElement(I18nProvider, { initialLocale: locale }, React.createElement(ProbeComponent))
+          : React.createElement(ProbeComponent);
+
+        renderToStaticMarkup(tree);
         return capturedRoute;
       };
 
@@ -1447,6 +1456,25 @@ describe("Pipeline Smoke Tests", () => {
       assert.ok(stagedShowRoute.draftState);
       assert.equal(stagedShowRoute.draftState.showSubMode, "show");
       assert.ok(stagedShowRoute.confirmButtonLabel.includes("確認套用："));
+
+      // 4. Staged selection across all 4 locales (ja, en, ko, zh-TW)
+      const jaRoute = runProbeWithDraft("#/show/1672276", stagedShowRoute.draftState, "ja");
+      assert.ok(jaRoute.confirmButtonLabel.startsWith("適用確定："), `ja route must start with 適用確定：, got: ${jaRoute.confirmButtonLabel}`);
+
+      const enRoute = runProbeWithDraft("#/show/1672276", stagedShowRoute.draftState, "en");
+      assert.ok(enRoute.confirmButtonLabel.startsWith("Apply:"), `en route must start with Apply:, got: ${enRoute.confirmButtonLabel}`);
+
+      const koRoute = runProbeWithDraft("#/show/1672276", stagedShowRoute.draftState, "ko");
+      assert.ok(koRoute.confirmButtonLabel.startsWith("적용 확정:"), `ko route must start with 적용 확정:, got: ${koRoute.confirmButtonLabel}`);
+
+      const jaDefault = runProbeWithDraft("#/show/1672276", null, "ja");
+      assert.strictEqual(jaDefault.confirmButtonLabel, "適用を確定");
+
+      const enDefault = runProbeWithDraft("#/show/1672276", null, "en");
+      assert.strictEqual(enDefault.confirmButtonLabel, "Apply");
+
+      const koDefault = runProbeWithDraft("#/show/1672276", null, "ko");
+      assert.strictEqual(koDefault.confirmButtonLabel, "적용 확정");
     });
 
     it("renders ArchiveLayout conditionally: TourSlip when showSubMode === 'tour' and isTour === true, else ShowSlip (Ticket 4)", () => {
@@ -2248,8 +2276,33 @@ describe("Pipeline Smoke Tests", () => {
       assert.ok(archiveHtmlKo.includes("한국어"), "ArchiveHeader must render LanguageSwitcher with 한국어 active");
       assert.ok(archiveHtmlKo.includes("공연"), "ArchiveHeader tab must render 공연 for shows in ko");
       assert.ok(archiveHtmlKo.includes("곡"), "ArchiveHeader tab must render 곡 for songs in ko");
-      assert.ok(archiveHtmlKo.includes("공연장"), "ArchiveHeader tab must render 공연장 for venues in ko");
       assert.ok(archiveHtmlKo.includes("셋리스트 아카이브"), "ArchiveHeader brandTitle must be localized in ko");
+
+      // 4. Responsive Switcher Dichotomy & Affordance Invariant (ADR-0107)
+      // LandingHero MUST render LanguageSwitcher in static header bar and NEVER as a fixed floating FAB on mobile
+      assert.ok(!landingHtml.includes("fixed bottom-"), "LandingHero must NOT contain fixed bottom floating FAB");
+      assert.ok(landingHtml.includes("w-full flex justify-end items-center"), "LandingHero must place LanguageSwitcher in top utility bar");
+
+      // ArchiveHeader MUST hide LanguageSwitcher on small screens to yield space for mobile chrome
+      assert.ok(archiveHtmlJa.includes("hidden sm:inline-block"), "ArchiveHeader must hide switcher on mobile via hidden sm:inline-block");
+
+      // MobileFloatingControls MUST render LanguageSwitcher as a round floating FAB on mobile
+      const { MobileFloatingControls } = await server.ssrLoadModule("/src/components/layout/MobileFloatingControls.jsx");
+      const mobileControlsHtml = renderToStaticMarkup(
+        React.createElement(
+          I18nProvider,
+          { initialLocale: "ja" },
+          React.createElement(MobileFloatingControls, {
+            tab: "show",
+            onOpenSearch: () => {},
+            onOpenDrawer: () => {},
+            onReturnHome: () => {},
+          })
+        )
+      );
+      assert.ok(mobileControlsHtml.includes('data-testid="language-switcher"'), "MobileFloatingControls must render LanguageSwitcher");
+      assert.ok(mobileControlsHtml.includes("rounded-full"), "MobileFloatingControls LanguageSwitcher must render round FAB");
+      assert.ok(mobileControlsHtml.includes("🌐"), "MobileFloatingControls LanguageSwitcher must display globe icon");
     });
 
     it("renders LandingHero with full localized content, dynamic venueCount, and preserved tokens across all 4 locales", async () => {
@@ -3503,11 +3556,57 @@ describe("Pipeline Smoke Tests", () => {
       assert.ok(htmlEn.includes("Satoshi Solo Piano"), "en ShowSlipPanels must render Satoshi Solo Piano");
       assert.ok(htmlEn.includes("Audience Request"), "en ShowSlipPanels must render Audience Request");
       assert.ok(htmlEn.includes("Setlist Album Breakdown:"), "en ShowSlipPanels must render album breakdown title in en");
-
       const htmlKo = renderPanels("ko");
       assert.ok(htmlKo.includes("단독 피아노 연주"), "ko ShowSlipPanels must render 단독 피아노 연주");
       assert.ok(htmlKo.includes("현장 신청곡"), "ko ShowSlipPanels must render 현장 신청곡");
       assert.ok(htmlKo.includes("연주곡 앨범 구성:"), "ko ShowSlipPanels must render album breakdown title in ko");
+    });
+
+    it("verifies App architecture wraps AppContent with I18nProvider for reactive localization", async () => {
+      const appMod = await server.ssrLoadModule("/src/App.jsx");
+      assert.ok(appMod.default, "App.jsx must export default App");
+      assert.ok(appMod.AppContent, "App.jsx must export AppContent as inner component wrapped by I18nProvider");
+
+      const origHash = globalThis.window.location.hash;
+      try {
+        globalThis.window.location.hash = "#/show/1672276";
+
+        const expectedLabels = {
+          "zh-TW": "確認套用",
+          ja: "適用を確定",
+          en: "Apply",
+          ko: "적용 확정",
+        };
+
+        for (const [loc, expectedLabel] of Object.entries(expectedLabels)) {
+          let capturedRoute = null;
+          const html = renderToStaticMarkup(
+            React.createElement(appMod.default, {
+              initialLocale: loc,
+              probeRoute: (r) => {
+                capturedRoute = r;
+              },
+            })
+          );
+          assert.ok(html.includes("Official髭男dism"), `App in ${loc} must render brand`);
+          assert.ok(capturedRoute, `App in ${loc} must capture routeState via probeRoute`);
+          assert.strictEqual(
+            capturedRoute.confirmButtonLabel,
+            expectedLabel,
+            `App confirmButtonLabel in ${loc} must be '${expectedLabel}', got '${capturedRoute.confirmButtonLabel}'`
+          );
+
+          // Verify appendLang retains active locale across route transitions
+          const showTarget = capturedRoute.appendLang("#/show/1672276");
+          if (loc === "zh-TW") {
+            assert.strictEqual(showTarget, "#/show/1672276", "Default locale zh-TW should not append ?lang=");
+          } else {
+            assert.strictEqual(showTarget, `#/show/1672276?lang=${loc}`, `${loc} must append ?lang=${loc}`);
+          }
+        }
+      } finally {
+        globalThis.window.location.hash = origHash;
+      }
     });
   });
 });

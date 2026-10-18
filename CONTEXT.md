@@ -520,4 +520,5 @@ _Avoid_: 手機端直接抓取可視 DOM 節點導致文字折行後拉長並在
 1. **深層連結合法性校驗與優雅降級**：當 Hash 帶入之目標實體不存在於當前資料庫（如不存在之 `songId`、未收錄場次或非法路徑）時，系統一律安全回退至純淨聚光燈首頁（`landing`），嚴禁停留在半加載或曲目空白之崩潰狀態。
 2. **行動端抽屜草稿隔離機制**：行動端篩選抽屜在使用者未點擊「確認套用」前，所有切換僅暫存於 `draftState`；點擊取消或關閉時 100% 乾淨回滾至開啟前狀態，避免誤觸污染主視圖。
 3. **無頭 SSR 測試探針防護網（Zero-Dependency In-Process SSR Test Harness）**：煙道測試（`smoke-test.mjs`）透過 Vite SSR Probe 在 Node.js 原生環境內掛載 Hooks，在毫秒級速度下完整驗證 Hash 穿透、八大分類統計與極端回退機制，完全不引入外部肥大之 JSDOM 或第三方測試庫。
-_Avoid_: 非法 Hash 導致頁面崩潰或停留在無效空卡片、抽屜取消後未還原選項、引入肥大 JSDOM 拖慢本機與 CI 反饋速度。
+4. **國際化上下文邊界與按鈕響應不變式（I18n Context Boundary & Confirm Label Invariant）**：`I18nProvider` 必須置於 `App.jsx` 最外層包裹主應用 Hook（`AppContent`），使 `useArchiveRoute` 能無縫訂閱即時的 `I18nContext`。抽屜底部之動態確認標籤（`confirmButtonLabel`）與路由切換時之語系參數同步（`appendLang`）皆嚴格具備全語系響應能力（`zh-TW` 確認套用、`ja` 適用を確定、`en` Apply、`ko` 적용 확정），嚴禁將依賴 i18n 之 Hook 置於 Provider 之外導致語系退回寫死之預設繁中。
+_Avoid_: 非法 Hash 導致頁面崩潰或停留在無效空卡片、抽屜取消後未還原選項、引入肥大 JSDOM 拖慢本機與 CI 反饋速度、將依賴多語系的領域 Hook 掛載在 I18nProvider 外部導致行動抽屜操作按鈕漏翻。
