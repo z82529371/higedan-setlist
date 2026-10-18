@@ -161,6 +161,21 @@ function collectFiles() {
   return out;
 }
 
+export function checkI18nContextBoundary(appSrc) {
+  const violations = [];
+  const defaultAppMatch = appSrc.match(/export\s+default\s+function\s+App\b[\s\S]*?\{([\s\S]*?)\}\s*$/m);
+  if (defaultAppMatch) {
+    const body = defaultAppMatch[1];
+    if (body.includes("useArchiveRoute(") || body.includes("useArchiveFilter(")) {
+      violations.push("App() must not call useArchiveRoute/useArchiveFilter directly outside I18nProvider. Split App into AppContent wrapped by I18nProvider.");
+    }
+    if (!body.includes("<I18nProvider") || !body.includes("<AppContent")) {
+      violations.push("App() must render <I18nProvider><AppContent ... /></I18nProvider> to preserve reactive context.");
+    }
+  }
+  return violations;
+}
+
 function selfTest() {
   const cases = [
     // [source, expectViolation]
@@ -210,11 +225,24 @@ function selfTest() {
       console.error(`self-test case ${idx} FAILED (expected violation=${expectViolation}): ${src.split("\n")[0]}`);
     }
   });
+
+  // Boundary check self-test
+  const badApp = `export default function App() {\n  const route = useArchiveRoute();\n  return <I18nProvider><div /></I18nProvider>;\n}`;
+  if (checkI18nContextBoundary(badApp).length === 0) {
+    failed++;
+    console.error("self-test: checkI18nContextBoundary failed to catch bad App calling hook outside provider");
+  }
+  const goodApp = `export function AppContent() { return <div />; }\nexport default function App() {\n  return <I18nProvider><AppContent /></I18nProvider>;\n}`;
+  if (checkI18nContextBoundary(goodApp).length > 0) {
+    failed++;
+    console.error("self-test: checkI18nContextBoundary false positive on good App");
+  }
+
   if (failed > 0) {
     console.error(`${failed} self-test case(s) failed`);
     process.exit(1);
   }
-  console.log(`self-test: ${cases.length} cases passed`);
+  console.log(`self-test: ${cases.length + 2} cases passed`);
 }
 
 if (process.argv.includes("--self-test")) {
@@ -226,10 +254,18 @@ const files = collectFiles();
 let total = 0;
 for (const file of files) {
   const rel = path.relative(root, file).replace(/\\/g, "/");
-  const violations = checkLines(rel, fs.readFileSync(file, "utf8"));
+  const content = fs.readFileSync(file, "utf8");
+  const violations = checkLines(rel, content);
   for (const v of violations) {
     total++;
     console.error(`${rel}:${v.line}: bare CJK UI string without t(): ${v.text}`);
+  }
+  if (rel === "src/App.jsx") {
+    const boundaryViolations = checkI18nContextBoundary(content);
+    for (const bv of boundaryViolations) {
+      total++;
+      console.error(`${rel}: context boundary violation: ${bv}`);
+    }
   }
 }
 if (total > 0) {

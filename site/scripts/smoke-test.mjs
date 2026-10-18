@@ -99,6 +99,20 @@ describe("Pipeline Smoke Tests", () => {
     if (server) await server.close();
   });
 
+  const withHash = async (hash, fn) => {
+    const prev = globalThis.window?.location?.hash ?? "";
+    try {
+      if (globalThis.window?.location) {
+        globalThis.window.location.hash = hash;
+      }
+      return await fn();
+    } finally {
+      if (globalThis.window?.location) {
+        globalThis.window.location.hash = prev;
+      }
+    }
+  };
+
   describe("1. Bangkok Reordering & Missing-Idx Template Anchoring (ADR-0042)", () => {
     const template = [
       { order: 1, songId: "宿命", encore: false },
@@ -3567,10 +3581,7 @@ describe("Pipeline Smoke Tests", () => {
       assert.ok(appMod.default, "App.jsx must export default App");
       assert.ok(appMod.AppContent, "App.jsx must export AppContent as inner component wrapped by I18nProvider");
 
-      const origHash = globalThis.window.location.hash;
-      try {
-        globalThis.window.location.hash = "#/show/1672276";
-
+      await withHash("#/show/1672276", async () => {
         const expectedLabels = {
           "zh-TW": "確認套用",
           ja: "適用を確定",
@@ -3604,9 +3615,7 @@ describe("Pipeline Smoke Tests", () => {
             assert.strictEqual(showTarget, `#/show/1672276?lang=${loc}`, `${loc} must append ?lang=${loc}`);
           }
         }
-      } finally {
-        globalThis.window.location.hash = origHash;
-      }
+      });
     });
   });
 });
