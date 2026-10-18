@@ -16,7 +16,7 @@ export function SongMilestonesDrawer({
   onSelectShow,
   onSelectVenue,
 }) {
-  const { locale, t } = useI18n();
+  const { locale, t, localizeVenue } = useI18n();
 
   if (!showMoreTools) return null;
 
@@ -96,7 +96,7 @@ export function SongMilestonesDrawer({
                   {firstApp.unitTitle}
                 </span>
                 <span className="text-muted text-[12px] mt-0.5 truncate flex items-center gap-1">
-                  <span>📍 {firstShow.venue}{firstShow.city ? `（${t("cities." + firstShow.city, firstShow.city)}）` : ""}</span>
+                  <span>📍 {localizeVenue(firstShow.venue)}{firstShow.city ? `（${t("cities." + firstShow.city, firstShow.city)}）` : ""}</span>
                   {onSelectVenue && firstShow.venue && (
                     <button
                       type="button"
@@ -106,7 +106,7 @@ export function SongMilestonesDrawer({
                         onSelectVenue(firstShow.venue);
                       }}
                       className="inline-flex items-center text-xs font-bold text-pool hover:underline cursor-pointer ml-1"
-                      title={t("songExtra.viewVenueFile", "查看「{venue}」場地檔案", { venue: firstShow.venue })}
+                      title={t("songExtra.viewVenueFile", "查看「{venue}」場地檔案", { venue: localizeVenue(firstShow.venue) })}
                     >
                       {t("songExtra.venueLinkSuffix", "[場地 →]")}
                     </button>
@@ -142,7 +142,7 @@ export function SongMilestonesDrawer({
                   {latestApp.unitTitle}
                 </span>
                 <span className="text-muted text-[12px] mt-0.5 truncate flex items-center gap-1">
-                  <span>📍 {latestShow.venue}{latestShow.city ? `（${t("cities." + latestShow.city, latestShow.city)}）` : ""}</span>
+                  <span>📍 {localizeVenue(latestShow.venue)}{latestShow.city ? `（${t("cities." + latestShow.city, latestShow.city)}）` : ""}</span>
                   {onSelectVenue && latestShow.venue && (
                     <button
                       type="button"
@@ -152,7 +152,7 @@ export function SongMilestonesDrawer({
                         onSelectVenue(latestShow.venue);
                       }}
                       className="inline-flex items-center text-xs font-bold text-pool hover:underline cursor-pointer ml-1"
-                      title={t("songExtra.viewVenueFile", "查看「{venue}」場地檔案", { venue: latestShow.venue })}
+                      title={t("songExtra.viewVenueFile", "查看「{venue}」場地檔案", { venue: localizeVenue(latestShow.venue) })}
                     >
                       {t("songExtra.venueLinkSuffix", "[場地 →]")}
                     </button>

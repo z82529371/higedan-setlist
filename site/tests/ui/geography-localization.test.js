@@ -221,7 +221,7 @@ describe("17. Administrative Geography Localization & Venue Integrity Boundary (
       );
       assert.ok(htmlEn.includes("[Yokohama]"), "TourSlip in en must render [Yokohama]");
       assert.ok(htmlEn.includes("[Taipei]"), "TourSlip in en must render [Taipei]");
-      assert.ok(htmlEn.includes("橫濱Arena"), "TourSlip in en must preserve original venue name");
+      assert.ok(htmlEn.includes("Yokohama Arena"), "TourSlip in en must render localized venue name (ADR-0110)");
 
       // Japanese
       const htmlJa = renderToStaticMarkup(
@@ -289,7 +289,7 @@ describe("17. Administrative Geography Localization & Venue Integrity Boundary (
         )
       );
       assert.ok(htmlEn.includes("Kanagawa · Yokohama"), "VenueSlip in en must display Kanagawa · Yokohama");
-      assert.ok(htmlEn.includes("橫濱Arena"), "VenueSlip in en must preserve primary source venue name");
+      assert.ok(htmlEn.includes("Yokohama Arena"), "VenueSlip in en must render localized venue name (ADR-0110)");
 
       // Japanese
       const htmlJa = renderToStaticMarkup(
@@ -374,7 +374,7 @@ describe("17. Administrative Geography Localization & Venue Integrity Boundary (
           })
         )
       );
-      assert.ok(htmlSearchEn.includes("橫濱Arena"), "SearchBox must match 橫濱Arena when querying Yokohama");
+      assert.ok(htmlSearchEn.includes("Yokohama Arena"), "SearchBox must match and display Yokohama Arena when querying Yokohama");
       assert.ok(htmlSearchEn.includes("Yokohama"), "SearchBox venue candidate must display localized city 'Yokohama'");
 
       // Search "横浜" in SearchBox
@@ -392,7 +392,7 @@ describe("17. Administrative Geography Localization & Venue Integrity Boundary (
           })
         )
       );
-      assert.ok(htmlSearchJa.includes("橫濱Arena"), "SearchBox must match 橫濱Arena when querying 横浜");
+      assert.ok(htmlSearchJa.includes("横浜アリーナ"), "SearchBox must match and display 横浜アリーナ when querying 横浜");
       assert.ok(htmlSearchJa.includes("横浜"), "SearchBox venue candidate must display localized city '横浜'");
     });
 

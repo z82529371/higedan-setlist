@@ -1,4 +1,5 @@
 import { showDate } from "./domain.js";
+import { localizeVenue } from "./locales/venues.js";
 
 /**
  * Builds the locale-aware plain-text venue history for clipboard copy.
@@ -15,15 +16,16 @@ export function buildVenueHistoryText({
   sortedShows,
   locale = "zh-TW",
 }) {
+  const locVenue = localizeVenue(venueName, locale);
   const locText = `${venuePref ? `${venuePref} · ` : ""}${venueCity}`;
   const lines = [
     locale === "en"
-      ? `【Official Hige Dandism @ ${venueName} Live History】`
+      ? `【Official Hige Dandism @ ${locVenue} Live History】`
       : locale === "ja"
-        ? `【Official 髭男 dism @ ${venueName} 公演履歴】`
+        ? `【Official 髭男 dism @ ${locVenue} 公演履歴】`
         : locale === "ko"
-          ? `【Official 히게단 dism @ ${venueName} 공연 히스토리】`
-          : `【Official 髭男 dism @ ${venueName} 演出歷程】`,
+          ? `【Official 히게단 dism @ ${locVenue} 공연 히스토리】`
+          : `【Official 髭男 dism @ ${locVenue} 演出歷程】`,
     locale === "en"
       ? `📍 Location: ${locText}`
       : locale === "ja"

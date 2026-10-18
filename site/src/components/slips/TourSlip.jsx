@@ -36,7 +36,7 @@ export function TourSlip({
   onSelectShow,
   initialItineraryExpanded = false,
 }) {
-  const { t, locale } = useI18n();
+  const { t, locale, localizeVenue } = useI18n();
   const targetData = tourUnitData || ud || tourData;
 
   const statsResult = useMemo(() => {
@@ -195,7 +195,7 @@ export function TourSlip({
                 }
               }}
               className="inline-flex items-center gap-1 rounded px-2 py-0.5 text-[11px] font-mono border border-line-soft bg-paper hover:border-ink hover:text-ink text-muted transition-colors touch-stamp"
-              title={`${s.date} ${s.venue}${s.city ? `（${t("cities." + s.city, s.city)}）` : ""}`}
+              title={`${s.date} ${localizeVenue(s.venue)}${s.city ? `（${t("cities." + s.city, s.city)}）` : ""}`}
             >
               <span>🎫</span>
               <span>{formatShowBadgeLabel(s, t)}</span>
@@ -530,7 +530,7 @@ export function TourSlip({
                         }
                       }}
                       className="inline-flex items-center gap-1 rounded px-2 py-0.5 text-[11px] font-mono border border-line-soft bg-paper hover:border-ink hover:text-ink text-muted transition-colors touch-stamp"
-                      title={`${it.show?.date || ""} ${it.show?.venue || ""}`}
+                      title={`${it.show?.date || ""} ${localizeVenue(it.show?.venue) || ""}`}
                     >
                       <span>🎫</span>
                       <span>{it.show ? formatShowBadgeLabel(it.show) : it.showId}</span>
@@ -612,7 +612,7 @@ export function TourSlip({
                             }
                           }}
                           className="inline-flex items-center gap-1 sm:gap-1.5 rounded-[3px] px-1.5 sm:px-2.5 py-0.5 sm:py-1 text-[11px] sm:text-xs font-mono font-bold border border-line-soft bg-paper group-hover:border-ink group-hover:text-ink text-muted transition-colors cursor-pointer touch-stamp"
-                          title={t("tourExtra.viewShowTicket", "查看 {date} {venue} 單場演出票根", { date: stop.date, venue: stop.venue })}
+                          title={t("tourExtra.viewShowTicket", "查看 {date} {venue} 單場演出票根", { date: stop.date, venue: localizeVenue(stop.venue) })}
                         >
                           <span>🎫</span>
                           <span className="hidden sm:inline">{t("slips.viewTicket", "查看票根")}</span>
@@ -623,7 +623,7 @@ export function TourSlip({
 
                     <div className="flex flex-wrap items-baseline gap-x-2 gap-y-0.5 text-xs">
                       <span className="font-medium text-ink break-words group-hover:underline">
-                        {stop.venue}
+                        {localizeVenue(stop.venue)}
                       </span>
                       {(formatShowTime(stop, locale) || stop.time) && (
                         <span className="font-mono text-[11px] text-muted whitespace-nowrap">

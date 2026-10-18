@@ -2,6 +2,7 @@ import songsData from "../data/songs.json";
 import { ALBUM_MAP } from "./constants.js";
 import { trackKeyOf, trackKey } from "./track.js";
 import { resolveShowItems, assignCues } from "./resolve.js";
+import { localizeVenue } from "./locales/venues.js";
 
 const tourUnits = Object.values(
   import.meta.glob("../data/tours/*.json", { eager: true, import: "default" })
@@ -160,27 +161,30 @@ export function showDate(s, locale = "zh-TW") {
 }
 
 export function showLabel(s, locale = "zh-TW") {
-  return `${showDate(s, locale)} ${s.venue}（${s.city}）`;
+  const locVenue = localizeVenue(s?.venue, locale);
+  return `${showDate(s, locale)} ${locVenue}（${s?.city || ""}）`;
 }
 
 /**
- * Formats show place for display with optional i18n translation (ADR-0108).
- * Falls back to show.venue when city is not defined.
+ * Formats show place for display with optional i18n translation (ADR-0108, ADR-0110).
+ * Falls back to localized show.venue when city is not defined.
  */
-export function formatShowPlace(s, t) {
+export function formatShowPlace(s, t, locale = "zh-TW") {
   if (!s) return "";
-  return s.city && t ? t("cities." + s.city, s.city) : (s.city || s.venue || "");
+  const locVenue = localizeVenue(s.venue, locale);
+  return s.city && t ? t("cities." + s.city, s.city) : (s.city || locVenue || "");
 }
 
 /**
- * Formats show venue and city with locale-aware parentheses for tickets, copy, and modals (ADR-0108).
+ * Formats show venue and city with locale-aware parentheses for tickets, copy, and modals (ADR-0108, ADR-0110).
  */
 export function formatShowVenueCity(s, t, locale = "zh-TW") {
   if (!s) return "";
   const locCity = s.city && t ? t("cities." + s.city, s.city) : (s.city || "");
-  if (!locCity) return s.venue || "";
+  const locVenue = localizeVenue(s.venue, locale);
+  if (!locCity) return locVenue || "";
   const isHalfWidth = locale === "en" || locale === "ko";
-  return isHalfWidth ? `${s.venue} (${locCity})` : `${s.venue}（${locCity}）`;
+  return isHalfWidth ? `${locVenue} (${locCity})` : `${locVenue}（${locCity}）`;
 }
 
 export function shortUnitTitle(unit) {

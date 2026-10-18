@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { exportElementToPng } from "../lib/image-export.js";
 import { songTitle, showDate, formatShowTime, songUnreleased, formatShowVenueCity } from "../lib/domain.js";
+import { localizeVenue } from "../lib/locales/venues.js";
 import { getKindArray, kindTabs } from "../lib/kind.js";
 import { useI18n, DICTIONARIES, DEFAULT_LOCALE, resolveTranslation } from "../lib/i18n.jsx";
 
@@ -472,7 +473,7 @@ export function MemorialCardModal({
                         : "text-[#9ca3af]"
                     }`}
                   >
-                    <span className="font-bold">📍 {show.venue}</span>
+                    <span className="font-bold">📍 {localizeVenue(show.venue, locale)}</span>
                     {show.city && (
                       <>
                         <span className="opacity-40">/</span>

@@ -14,7 +14,7 @@ export function ShowMetadataBox({
   nextShow,
   onSelectShow,
 }) {
-  const { locale, t } = useI18n();
+  const { locale, t, localizeVenue } = useI18n();
 
   return (
     <div className="border-y border-line-soft py-3 my-2">
@@ -46,7 +46,7 @@ export function ShowMetadataBox({
               className="group inline text-ink no-underline hover:text-pool transition-colors cursor-pointer"
               title={t("showExtra.venueFileTitle", "查看此場地的全歷史演出檔案")}
             >
-              <span className="group-hover:underline">{s.venue}</span>
+              <span className="group-hover:underline">{localizeVenue(s.venue)}</span>
               {s.city && (
                 <span className="ml-1.5 text-[15px] font-normal text-muted group-hover:text-pool whitespace-nowrap">
                   （{t("cities." + s.city, s.city)}）
@@ -62,7 +62,7 @@ export function ShowMetadataBox({
             </a>
           ) : (
             <>
-              <span>{s.venue}</span>
+              <span>{localizeVenue(s.venue)}</span>
               {s.city && (
                 <span className="ml-1.5 text-[15px] font-normal text-muted whitespace-nowrap">
                   （{t("cities." + s.city, s.city)}）
@@ -90,10 +90,10 @@ export function ShowMetadataBox({
               className="text-ink hover:text-pool hover:underline transition-colors cursor-pointer"
               title={t("showExtra.venueFileTitle", "查看此場地的全歷史演出檔案")}
             >
-              {s.venue}
+              {localizeVenue(s.venue)}
             </a>
           ) : (
-            s.venue
+            localizeVenue(s.venue)
           )}
         </h3>
 

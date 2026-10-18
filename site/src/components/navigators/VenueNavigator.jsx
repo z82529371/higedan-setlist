@@ -20,7 +20,7 @@ export function VenueNavigator({
   pagedVenues,
   handleSelectVenue,
 }) {
-    const { t } = useI18n();
+    const { t, localizeVenue } = useI18n();
     const curSortMode = isDrawer && draftState ? draftState.venueSortMode : venueSortMode;
     const curRegion = isDrawer && draftState ? draftState.region : selRegion;
     const curVenueName = isDrawer && draftState ? draftState.venueName : selVenue;
@@ -204,7 +204,7 @@ export function VenueNavigator({
                       #{String(rankNum).padStart(2, "0")}
                     </span>
                   )}
-                  <span className="font-bold">{v.name}</span>
+                  <span className="font-bold">{localizeVenue(v.name)}</span>
                   <span className="text-[11px] opacity-75">
                     （{v.city ? `${t("cities." + v.city, v.city)} · ` : ""}{v.shows.length}{t("navigators.showsUnit", "場")}）
                   </span>

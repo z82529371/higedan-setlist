@@ -9,7 +9,7 @@ import { CATEGORY_ORDER, songFilterPillClass, TicketPerforationDivider, TicketBa
 import { SongMilestonesDrawer } from "./SongMilestonesDrawer.jsx";
 
 export function SongSlip({ songId, trackShows, showById, unitData, onSelectShow, onSelectVenue }) {
-  const { locale, t } = useI18n();
+  const { locale, t, localizeVenue } = useI18n();
   const [copied, setCopied] = useState(false);
   const [onlySpecial, setOnlySpecial] = useState(false);
   const [showYearBreakdown, setShowYearBreakdown] = useState(false);
@@ -608,7 +608,7 @@ export function SongSlip({ songId, trackShows, showById, unitData, onSelectShow,
                                 {showDate(s, locale)}
                               </span>
                               <span className="show-link-venue text-[14px] font-bold text-ink group-hover:text-pool group-hover:underline">
-                                {s.venue}
+                                {localizeVenue(s.venue)}
                               </span>
                               {s.city && (
                                 <span className="shrink-0 text-[13px] text-muted">

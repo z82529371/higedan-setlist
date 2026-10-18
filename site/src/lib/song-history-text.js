@@ -1,4 +1,5 @@
 import { songTitle, songAlias, showDate } from "./domain.js";
+import { localizeVenue } from "./locales/venues.js";
 
 /**
  * Builds the locale-aware plain-text song history for clipboard copy.
@@ -49,26 +50,30 @@ export function buildSongHistoryText({
           ? `📊 공연 통계: 총 ${appearancesCount}회`
           : `📊 演出統計：全檔案庫共出演 ${appearancesCount} 場`,
   ];
-  if (firstShow && firstApp)
+  if (firstShow && firstApp) {
+    const locFirstVenue = localizeVenue(firstShow.venue, locale);
     lines.push(
       locale === "en"
-        ? `🚩 First: ${showDate(firstShow, locale)} ${firstApp.unitTitle} (${firstShow.venue})`
+        ? `🚩 First: ${showDate(firstShow, locale)} ${firstApp.unitTitle} (${locFirstVenue})`
         : locale === "ja"
-          ? `🚩 初披露：${showDate(firstShow, locale)} ${firstApp.unitTitle}（${firstShow.venue}）`
+          ? `🚩 初披露：${showDate(firstShow, locale)} ${firstApp.unitTitle}（${locFirstVenue}）`
           : locale === "ko"
-            ? `🚩 첫 공연: ${showDate(firstShow, locale)} ${firstApp.unitTitle} (${firstShow.venue})`
-            : `🚩 初次演出：${showDate(firstShow, locale)} ${firstApp.unitTitle}（${firstShow.venue}）`
+            ? `🚩 첫 공연: ${showDate(firstShow, locale)} ${firstApp.unitTitle} (${locFirstVenue})`
+            : `🚩 初次演出：${showDate(firstShow, locale)} ${firstApp.unitTitle}（${locFirstVenue}）`
     );
-  if (latestShow && latestApp)
+  }
+  if (latestShow && latestApp) {
+    const locLatestVenue = localizeVenue(latestShow.venue, locale);
     lines.push(
       locale === "en"
-        ? `🚩 Latest: ${showDate(latestShow, locale)} ${latestApp.unitTitle} (${latestShow.venue})`
+        ? `🚩 Latest: ${showDate(latestShow, locale)} ${latestApp.unitTitle} (${locLatestVenue})`
         : locale === "ja"
-          ? `🚩 最新公演：${showDate(latestShow, locale)} ${latestApp.unitTitle}（${latestShow.venue}）`
+          ? `🚩 最新公演：${showDate(latestShow, locale)} ${latestApp.unitTitle}（${locLatestVenue}）`
           : locale === "ko"
-            ? `🚩 최근 공연: ${showDate(latestShow, locale)} ${latestApp.unitTitle} (${latestShow.venue})`
-            : `🚩 最新演出：${showDate(latestShow, locale)} ${latestApp.unitTitle}（${latestShow.venue}）`
+            ? `🚩 최근 공연: ${showDate(latestShow, locale)} ${latestApp.unitTitle} (${locLatestVenue})`
+            : `🚩 最新演出：${showDate(latestShow, locale)} ${latestApp.unitTitle}（${locLatestVenue}）`
     );
+  }
   if (hasSpecials) {
     const parts = [];
     if (specialVersionCounts.solo)

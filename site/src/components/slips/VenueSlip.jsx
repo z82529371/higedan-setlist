@@ -17,7 +17,7 @@ import { VenueMilestonesDrawer } from "./VenueMilestonesDrawer.jsx";
  * @param {function} [props.onSelectSong] - Callback on song selection
  */
 export function VenueSlip({ venueName, globalVenueShows, unitData, onSelectShow, onSelectSong }) {
-  const { locale, t } = useI18n();
+  const { locale, t, localizeVenue } = useI18n();
   const [copied, setCopied] = useState(false);
   const [showYearBreakdown, setShowYearBreakdown] = useState(false);
   const [showMoreTools, setShowMoreTools] = useState(false);
@@ -344,7 +344,7 @@ export function VenueSlip({ venueName, globalVenueShows, unitData, onSelectShow,
 
         {/* Level 2: Venue Title Headline */}
         <h2 className="mt-2.5 mb-2 font-display text-[24px] sm:text-[27px] font-black leading-tight text-ink tracking-tight text-pretty">
-          {venueName}{" "}
+          {localizeVenue(venueName)}{" "}
           {(venueCity || venuePref) && (
             <span className="inline-block text-[16px] sm:text-[17px] font-medium text-muted whitespace-nowrap">
               （{venuePref ? `${t("prefectures." + venuePref, venuePref)} · ` : ""}{t("cities." + venueCity, venueCity)}）

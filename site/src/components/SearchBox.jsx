@@ -10,6 +10,7 @@ import {
 import { resolveShowItems } from "../lib/resolve.js";
 import { useI18n } from "../lib/i18n.jsx";
 import { matchGeography } from "../lib/locales/geography.js";
+import { matchVenue } from "../lib/locales/venues.js";
 
 export const TAXONOMY_KEYWORDS = {
   "巡演專場": [
@@ -87,7 +88,7 @@ export default function SearchBox({
   initialOpen = false,
   onCloseModal,
 }) {
-  const { t } = useI18n();
+  const { t, localizeVenue } = useI18n();
   const [isOpen, setIsOpen] = useState(initialOpen);
   const [activeIndex, setActiveIndex] = useState(-1);
   const containerRef = useRef(null);
@@ -194,14 +195,22 @@ export default function SearchBox({
           (bKey) => badgeIndex[bKey]?.shows.has(s.id)
         );
 
-        if (matchDate || (needle.length >= 3 && sTitle.includes(needle)) || matchBadge || matchTaxonomy) {
+        const matchVenueQuery = matchVenue(needle, s.venue);
+
+        if (
+          matchDate ||
+          (needle.length >= 3 && sTitle.includes(needle)) ||
+          matchBadge ||
+          matchTaxonomy ||
+          matchVenueQuery
+        ) {
           shows.push({
             type: "show",
             id: s.id,
             date: sDate,
-            title: s.title || s.venue || t("search.fallbackShow", "演出場次"),
+            title: s.title || localizeVenue(s.venue) || t("search.fallbackShow", "演出場次"),
             unitTitle: shortUnitTitle(u) || u.title,
-            venue: s.venue,
+            venue: localizeVenue(s.venue),
             city: s.city,
             badge: localizedBadge,
           });
@@ -304,12 +313,13 @@ export default function SearchBox({
       const name = (v.name || "").toLowerCase();
       if (
         name.includes(needle) ||
+        matchVenue(needle, v.name) ||
         matchGeography(needle, v.city, v.prefecture, v.region)
       ) {
         venues.push({
           type: "venue",
           id: v.name,
-          name: v.name,
+          name: localizeVenue(v.name),
           city: v.city,
           count: v.shows?.length ?? 0,
         });
