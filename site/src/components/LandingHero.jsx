@@ -54,7 +54,7 @@ export default function LandingHero({
   }, [allUsedSongs]);
 
   return (
-    <div className="mx-auto max-w-[960px] px-4 sm:px-6 py-8 sm:py-14 flex flex-col items-center text-center animate-fade-in relative">
+    <div className="mx-auto max-w-[960px] px-4 sm:px-6 py-6 sm:py-12 flex flex-col items-center text-center animate-fade-in relative">
       {/* Top Utility Bar (Language Switcher) */}
       <div className="w-full flex justify-end items-center mb-3 sm:mb-5">
         <LanguageSwitcher />

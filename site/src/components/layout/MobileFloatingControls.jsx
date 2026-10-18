@@ -1,4 +1,5 @@
 import { useI18n } from "../../lib/i18n.jsx";
+import LanguageSwitcher from "../LanguageSwitcher.jsx";
 
 export function MobileFloatingControls({
   tab,
@@ -9,8 +10,11 @@ export function MobileFloatingControls({
   const { t } = useI18n();
   return (
     <>
-      {/* Mobile Floating Action Buttons (Vertical Stack: Top Round Search FAB + Bottom Filter Pill FAB) */}
+      {/* Mobile Floating Action Buttons (Vertical Stack: Top Language FAB + Middle Round Search FAB + Bottom Filter Pill FAB) */}
       <div className="fixed bottom-5 right-4 z-40 sm:hidden flex flex-col items-end gap-2.5 select-none">
+        {/* Language FAB (drop-up menu, round silhouette matching Search FAB) */}
+        <LanguageSwitcher fab menuPosition="up" />
+
         {/* Secondary Action: Search Round FAB (Paper White with Ink Border) */}
         <button
           type="button"

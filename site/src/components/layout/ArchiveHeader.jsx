@@ -18,10 +18,10 @@ export function ArchiveHeader({
     <>
       <header className="pb-0 pt-3.5 sm:pt-6">
         <div className="flex items-center justify-between gap-2">
-          <p className="m-0 font-mono text-[11px] sm:text-[12px] tracking-[0.2em] text-muted font-bold uppercase">
+          <p className="m-0 font-mono text-[11px] sm:text-[12px] tracking-[0.2em] text-muted font-bold uppercase truncate">
             {t("header.livePerformanceArchive")}
           </p>
-          <LanguageSwitcher />
+          <LanguageSwitcher className="hidden sm:inline-block shrink-0" />
         </div>
         <h1 className="m-0 mt-1.5 font-display text-[clamp(17px,4.5vw,44px)] font-extrabold leading-tight tracking-tight">
           Official髭男dism <span className="font-bold text-band-ink">{t("header.brandTitle")}</span>

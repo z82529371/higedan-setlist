@@ -3419,6 +3419,96 @@ describe("Pipeline Smoke Tests", () => {
       // Speculative city substrings must NOT map to Japanese domestic regions
       assert.strictEqual(getVenueRegion({ name: "Generic Center", city: "SomeCity" }), "日本 - 中部 / 九州 / 其他");
     });
+
+    it("verifies complete slip and panel localization and dictionary symmetry across all 4 locales", async () => {
+      const { DICTIONARIES, I18nProvider } = await server.ssrLoadModule("/src/lib/i18n.jsx");
+      const { ShowSlipPanels } = await server.ssrLoadModule("/src/components/slips/ShowSlipPanels.jsx");
+
+      const requiredSongKeys = [
+        "coreStaple", "mainstayTrack", "rareGem", "phantomSpecial", "activeLive",
+        "dormantRecent", "encoreStaple", "fullAttendanceBadge", "rotationBadge",
+        "collapseHistory", "moreHistory", "onlySpecialVersions",
+      ];
+      const requiredVenueKeys = [
+        "hostedShowsCount", "frequentTracks", "debutShow", "yearlyFreqDistribution",
+        "spanningYears", "viewSetlist", "festivalsOutdoor", "campusStage",
+        "livehouseHall", "collapseRecords", "moreRecords", "noShowsRecorded",
+      ];
+      const requiredPanelKeys = [
+        "verifiedSources", "sourceRecord", "officialSiteRecord", "xRecord",
+        "livefansRecord", "wikipediaRecord", "collapseTools", "moreTools",
+        "badgeLegend", "albumBreakdown", "showComparison", "albumCompositionTitle",
+        "legendPremiere", "legendUnreleased", "legendRequest", "legendSolo",
+        "songUnit", "trackDiff", "diffWithPrevious", "diffAdded", "diffRemoved",
+        "anyShowCompareTitle", "compareTarget", "compareIdentical", "thisShowExclusive",
+        "otherShowExclusive", "none", "commonTracks",
+      ];
+      const requiredCommonKeys = [
+        "expand", "collapse", "expandList", "collapseList", "expandAll", "collapseAll",
+        "yearDistribution", "yearlyFreqDistribution",
+      ];
+
+      for (const [lang, dict] of Object.entries(DICTIONARIES)) {
+        assert.ok(dict.slips, `Dictionary ${lang} must contain slips namespace`);
+        for (const k of requiredSongKeys) {
+          assert.ok(dict.slips.song?.[k], `Dictionary ${lang} missing slips.song.${k}`);
+        }
+        for (const k of requiredVenueKeys) {
+          assert.ok(dict.slips.venue?.[k], `Dictionary ${lang} missing slips.venue.${k}`);
+        }
+        for (const k of requiredPanelKeys) {
+          assert.ok(dict.slips.panels?.[k], `Dictionary ${lang} missing slips.panels.${k}`);
+        }
+        for (const k of requiredCommonKeys) {
+          assert.ok(dict.slips.common?.[k], `Dictionary ${lang} missing slips.common.${k}`);
+        }
+      }
+
+      // SSR Render ShowSlipPanels across 4 locales
+      const renderPanels = (loc) =>
+        renderToStaticMarkup(
+          React.createElement(
+            I18nProvider,
+            { initialLocale: loc },
+            React.createElement(ShowSlipPanels, {
+              showLegend: true,
+              showDiff: false,
+              setlistDiff: null,
+              prevShow: null,
+              showAnalysis: true,
+              albumBreakdown: [["Rejoice", 10]],
+              mainCount: 8,
+              encCount: 2,
+              showCompare: false,
+              showList: [],
+              showId: "test",
+              activeCompareId: "",
+              setCompareShowId: () => {},
+              customCompareDiff: null,
+            })
+          )
+        );
+
+      const htmlZh = renderPanels("zh-TW");
+      assert.ok(htmlZh.includes("自彈自唱"), "zh-TW ShowSlipPanels must render 自彈自唱");
+      assert.ok(htmlZh.includes("現場點歌"), "zh-TW ShowSlipPanels must render 現場點歌");
+      assert.ok(htmlZh.includes("演出曲目專輯構成："), "zh-TW ShowSlipPanels must render album breakdown title");
+
+      const htmlJa = renderPanels("ja");
+      assert.ok(htmlJa.includes("弾き語り"), "ja ShowSlipPanels must render 弾き語り");
+      assert.ok(htmlJa.includes("リクエスト曲"), "ja ShowSlipPanels must render リクエスト曲");
+      assert.ok(htmlJa.includes("演奏曲のアルバム構成："), "ja ShowSlipPanels must render album breakdown title in ja");
+
+      const htmlEn = renderPanels("en");
+      assert.ok(htmlEn.includes("Satoshi Solo Piano"), "en ShowSlipPanels must render Satoshi Solo Piano");
+      assert.ok(htmlEn.includes("Audience Request"), "en ShowSlipPanels must render Audience Request");
+      assert.ok(htmlEn.includes("Setlist Album Breakdown:"), "en ShowSlipPanels must render album breakdown title in en");
+
+      const htmlKo = renderPanels("ko");
+      assert.ok(htmlKo.includes("단독 피아노 연주"), "ko ShowSlipPanels must render 단독 피아노 연주");
+      assert.ok(htmlKo.includes("현장 신청곡"), "ko ShowSlipPanels must render 현장 신청곡");
+      assert.ok(htmlKo.includes("연주곡 앨범 구성:"), "ko ShowSlipPanels must render album breakdown title in ko");
+    });
   });
 });
 

@@ -8,7 +8,7 @@ export const LOCALE_LABELS = {
   ko: "한국어",
 };
 
-export function LanguageSwitcher({ className = "" }) {
+export function LanguageSwitcher({ className = "", menuPosition = "down", fab = false }) {
   const { locale, setLocale, supportedLocales } = useI18n();
   const [isOpen, setIsOpen] = useState(false);
   const containerRef = useRef(null);
@@ -41,21 +41,33 @@ export function LanguageSwitcher({ className = "" }) {
       <button
         type="button"
         onClick={() => setIsOpen((v) => !v)}
-        className="inline-flex items-center gap-1.5 px-2.5 py-1 min-h-[36px] sm:min-h-[38px] rounded-[4px] border-[1.5px] border-ink/30 bg-card text-ink hover:border-ink hover:bg-tape-tint/50 text-xs font-bold shadow-2xs transition-colors cursor-pointer touch-stamp focus-visible:outline-2 focus-visible:outline-band-ink"
+        className={
+          fab
+            ? "flex h-11 w-11 items-center justify-center rounded-full border-[2px] border-ink bg-paper text-ink shadow-[2.5px_2.5px_0_#000] cursor-pointer hover:bg-tape-tint active:scale-95 transition-all text-base touch-stamp focus-visible:outline-2 focus-visible:outline-band-ink"
+            : "inline-flex items-center gap-1.5 px-2.5 py-1 min-h-[36px] sm:min-h-[38px] rounded-[4px] border-[1.5px] border-ink/30 bg-card text-ink hover:border-ink hover:bg-tape-tint/50 text-xs font-bold shadow-2xs transition-colors cursor-pointer touch-stamp focus-visible:outline-2 focus-visible:outline-band-ink"
+        }
         aria-haspopup="true"
         aria-expanded={isOpen}
-        aria-label="切換語系 / Switch Language / 言語切替 / 언어 선택"
+        aria-label={`切換語系 / Switch Language / 言語切替 / 언어 선택（${LOCALE_LABELS[locale] || locale}）`}
       >
-        <span aria-hidden="true" className="text-sm">🌐</span>
-        <span>{LOCALE_LABELS[locale] || locale}</span>
-        <span aria-hidden="true" className="text-[10px] opacity-70">▾</span>
+        <span aria-hidden="true" className={fab ? "text-lg" : "text-sm"}>🌐</span>
+        {!fab && (
+          <>
+            <span>{LOCALE_LABELS[locale] || locale}</span>
+            <span aria-hidden="true" className="text-[10px] opacity-70">▾</span>
+          </>
+        )}
       </button>
 
       {isOpen && (
         <div
           role="menu"
           aria-label="Language selection"
-          className="absolute right-0 mt-1 w-28 rounded-[4px] border-[1.5px] border-ink bg-card shadow-md py-1 z-50 divide-y divide-line-soft/60"
+          className={
+            menuPosition === "up"
+              ? "absolute bottom-full mb-2 right-0 w-28 rounded-[4px] border-[1.5px] border-ink bg-card shadow-md py-1 z-50 divide-y divide-line-soft/60"
+              : "absolute right-0 mt-1 w-28 rounded-[4px] border-[1.5px] border-ink bg-card shadow-md py-1 z-50 divide-y divide-line-soft/60"
+          }
         >
           {supportedLocales.map((code) => {
             const isCur = code === locale;
