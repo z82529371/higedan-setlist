@@ -24,11 +24,19 @@ export async function getViteServer() {
     const vite = await import("vite");
     serverInstance = await vite.createServer({
       root: siteRoot,
-      server: { middlewareMode: true, watch: null },
+      server: { middlewareMode: true, watch: null, hmr: false, ws: false },
       appType: "custom",
     });
     if (serverInstance.watcher) {
       await serverInstance.watcher.close();
+    }
+    try {
+      const { after } = await import("node:test");
+      after(async () => {
+        await closeViteServer();
+      });
+    } catch {
+      // Ignore if called outside describe block
     }
   }
   return serverInstance;
