@@ -1,4 +1,8 @@
+import { geoEn } from "./geography.js";
+
 export const dictEn = {
+  prefectures: geoEn.prefectures,
+  cities: geoEn.cities,
   nav: {
     shows: "Shows",
     songs: "Songs",

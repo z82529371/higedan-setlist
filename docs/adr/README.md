@@ -113,3 +113,4 @@
 | [ADR-0105: 官方一手歌曲主標題與雙語別名檢索架構 (Song Canonical Titles and Dual-Language Alias System)](0105-song-canonical-titles-and-alias-system.md) | 已採納 (Accepted) | 嚴守日本官方一手原創曲名為不可變主檔，結合官方英文別名索引與副標展示，嚴禁民間自創俗稱 |
 | [ADR-0106: 官方正式商業發行重編版本之獨立歌曲邊界判定準則 (Official Re-recorded Version Song Entity Boundary)](0106-official-re-recorded-version-song-boundary.md) | 已採納 (Accepted) | 以官方商業發行 Tracklist 作為獨立歌曲客觀判準，修正 Rejoice ver. 實體並清除巡演模板冗餘虛擬差異 |
 | [ADR-0107: 多國語言在地化架構與實體領域邊界 (Multi-Language Localization and Taxonomy Boundary)](0107-multi-language-localization-and-taxonomy-boundary.md) | 已採納 (Accepted) | 建立四語系 UI 與分類層在地化架構、?lang= 路由縫合、票券美學切換器、搜尋框多語索引與實體不可變邊界 |
+| [ADR-0108: 行政地名多語在地化與場館一手真實邊界 (Administrative Geography Localization & Venue Integrity Boundary)](0108-administrative-geography-localization-and-venue-integrity.md) | 已採納 (Accepted) | 確立城市與都道府縣四語在地化、全域搜尋跨語檢索，守護場館建築實體一手真理不可變邊界 |

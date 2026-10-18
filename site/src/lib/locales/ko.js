@@ -1,4 +1,8 @@
+import { geoKo } from "./geography.js";
+
 export const dictKo = {
+  prefectures: geoKo.prefectures,
+  cities: geoKo.cities,
   nav: {
     shows: "공연",
     songs: "곡",

@@ -1,4 +1,8 @@
+import { geoJa } from "./geography.js";
+
 export const dictJa = {
+  prefectures: geoJa.prefectures,
+  cities: geoJa.cities,
   nav: {
     shows: "公演",
     songs: "楽曲",

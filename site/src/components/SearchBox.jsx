@@ -9,6 +9,7 @@ import {
 } from "../lib/domain.js";
 import { resolveShowItems } from "../lib/resolve.js";
 import { useI18n } from "../lib/i18n.jsx";
+import { matchGeography } from "../lib/locales/geography.js";
 
 export const TAXONOMY_KEYWORDS = {
   "巡演專場": [
@@ -54,37 +55,19 @@ export const BADGE_KEYWORDS = {
 };
 
 function isSoloItem(item) {
-  const kind = Array.isArray(item?.kind) ? item.kind : (item?.kind ? [item.kind] : []);
-  const note = (item?.note || "").toLowerCase();
-  return (
-    kind.includes("satoshi-solo") ||
-    note.includes("弾き語り") ||
-    note.includes("ソロ") ||
-    note.includes("solo") ||
-    note.includes("自彈自唱")
-  );
+  const k = Array.isArray(item?.kind) ? item.kind : (item?.kind ? [item.kind] : []);
+  const n = (item?.note || "").toLowerCase();
+  return k.includes("satoshi-solo") || n.includes("弾き語り") || n.includes("ソロ") || n.includes("solo") || n.includes("自彈自唱");
 }
-
 function isRequestItem(item) {
-  const kind = Array.isArray(item?.kind) ? item.kind : (item?.kind ? [item.kind] : []);
-  const note = (item?.note || "").toLowerCase();
-  return (
-    kind.includes("request") ||
-    note.includes("リクエスト") ||
-    note.includes("request") ||
-    note.includes("點歌")
-  );
+  const k = Array.isArray(item?.kind) ? item.kind : (item?.kind ? [item.kind] : []);
+  const n = (item?.note || "").toLowerCase();
+  return k.includes("request") || n.includes("リクエスト") || n.includes("request") || n.includes("點歌");
 }
-
 function isPremiereItem(item) {
-  const kind = Array.isArray(item?.kind) ? item.kind : (item?.kind ? [item.kind] : []);
-  const note = (item?.note || "").toLowerCase();
-  return (
-    kind.includes("premiere") ||
-    note.includes("新曲") ||
-    note.includes("新歌") ||
-    note.includes("premiere")
-  );
+  const k = Array.isArray(item?.kind) ? item.kind : (item?.kind ? [item.kind] : []);
+  const n = (item?.note || "").toLowerCase();
+  return k.includes("premiere") || n.includes("新曲") || n.includes("新歌") || n.includes("premiere");
 }
 
 export default function SearchBox({
@@ -319,14 +302,9 @@ export default function SearchBox({
     const venues = [];
     for (const v of allVenues) {
       const name = (v.name || "").toLowerCase();
-      const city = (v.city || "").toLowerCase();
-      const region = (v.region || "").toLowerCase();
-      const pref = (v.prefecture || "").toLowerCase();
       if (
         name.includes(needle) ||
-        city.includes(needle) ||
-        region.includes(needle) ||
-        pref.includes(needle)
+        matchGeography(needle, v.city, v.prefecture, v.region)
       ) {
         venues.push({
           type: "venue",
@@ -469,7 +447,7 @@ export default function SearchBox({
                       </span>
                     </div>
                     <span className="truncate font-mono text-[11px] text-muted">
-                      📍 {sh.city} {sh.venue}
+                      📍 {t("cities." + sh.city, sh.city)} {sh.venue}
                     </span>
                   </div>
                   <span className="ml-2 shrink-0 font-mono text-[11px] px-1.5 py-0.5 rounded bg-paper border border-line-soft text-muted">
@@ -598,7 +576,7 @@ export default function SearchBox({
                   <div className="flex min-w-0 flex-col">
                     <span className="truncate">{v.name}</span>
                     <span className="font-mono text-[11px] text-muted">
-                      {v.city}
+                      {t("cities." + v.city, v.city)}
                     </span>
                   </div>
                   <span className="ml-2 shrink-0 font-mono text-[11px] text-muted">

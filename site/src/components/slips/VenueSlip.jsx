@@ -281,8 +281,8 @@ export function VenueSlip({ venueName, globalVenueShows, unitData, onSelectShow,
   const handleCopyVenueHistory = () => {
     const lines = buildVenueHistoryText({
       venueName,
-      venuePref,
-      venueCity,
+      venuePref: venuePref ? t("prefectures." + venuePref, venuePref) : "",
+      venueCity: venueCity ? t("cities." + venueCity, venueCity) : "",
       showsCount: venueShows.length,
       spanYearsText,
       topSongs,
@@ -339,7 +339,7 @@ export function VenueSlip({ venueName, globalVenueShows, unitData, onSelectShow,
           {venueName}{" "}
           {(venueCity || venuePref) && (
             <span className="inline-block text-[16px] sm:text-[17px] font-medium text-muted whitespace-nowrap">
-              （{venuePref ? `${venuePref} · ` : ""}{venueCity}）
+              （{venuePref ? `${t("prefectures." + venuePref, venuePref)} · ` : ""}{t("cities." + venueCity, venueCity)}）
             </span>
           )}
         </h2>

@@ -19,10 +19,11 @@ import {
 } from "./TicketCommon.jsx";
 import { useI18n } from "../../lib/i18n.jsx";
 
-function formatShowBadgeLabel(show) {
+function formatShowBadgeLabel(show, t) {
   if (!show) return "";
   const dateStr = show.date ? show.date.slice(5).replace("-", "/") : "";
-  const place = show.city || show.venue || "";
+  const locCity = show.city ? (t ? t("cities." + show.city, show.city) : show.city) : "";
+  const place = locCity || show.venue || "";
   if (place && dateStr) return `${place} ${dateStr}`;
   return place || dateStr || show.id || "";
 }
@@ -194,10 +195,10 @@ export function TourSlip({
                 }
               }}
               className="inline-flex items-center gap-1 rounded px-2 py-0.5 text-[11px] font-mono border border-line-soft bg-paper hover:border-ink hover:text-ink text-muted transition-colors touch-stamp"
-              title={`${s.date} ${s.venue}${s.city ? `（${s.city}）` : ""}`}
+              title={`${s.date} ${s.venue}${s.city ? `（${t("cities." + s.city, s.city)}）` : ""}`}
             >
               <span>🎫</span>
-              <span>{formatShowBadgeLabel(s)}</span>
+              <span>{formatShowBadgeLabel(s, t)}</span>
               {s.cue && (
                 <span className="font-bold text-ink ml-0.5">({s.cue})</span>
               )}
@@ -597,7 +598,7 @@ export function TourSlip({
                       )}
                       {stop.city && (
                         <span className="text-muted text-[11px]">
-                          [{stop.city}]
+                          [{t("cities." + stop.city, stop.city)}]
                         </span>
                       )}
                       <div className="ml-auto shrink-0 flex items-center">

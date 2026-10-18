@@ -1,4 +1,8 @@
+import { geoZhTw } from "./geography.js";
+
 export const dictZhTw = {
+  prefectures: geoZhTw.prefectures,
+  cities: geoZhTw.cities,
   nav: {
     shows: "場次",
     songs: "歌曲",
