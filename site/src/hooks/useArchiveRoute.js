@@ -8,6 +8,7 @@ import {
   getVenueRegion,
   songTitle,
   shortUnitTitle,
+  formatShowPlace,
 } from "../lib/domain.js";
 import { parseRoute, routeHash } from "../lib/routes.js";
 import { useI18n, DEFAULT_LOCALE } from "../lib/i18n.jsx";
@@ -538,7 +539,7 @@ export function useArchiveRoute({
       }
       const s = (u?.shows || []).find((x) => x.id === draftState.showId);
       if (s) {
-        const place = s.city ? t("cities." + s.city, s.city) : s.venue;
+        const place = formatShowPlace(s, t);
         return t("confirm.applyShow", "確認套用：{date} {place}", { date: s.date.slice(5), place });
       }
       return t("confirm.applyShowFallback", "確認套用場次");

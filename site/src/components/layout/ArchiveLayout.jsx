@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { shortUnitTitle } from "../../lib/domain.js";
+import { shortUnitTitle, formatShowPlace } from "../../lib/domain.js";
 import { trackKey } from "../../lib/track.js";
 import { PERFORMANCE_CATEGORIES } from "../../lib/constants.js";
 import { ShowSlip, SongSlip, VenueSlip, TourSlip } from "../slips/index.js";
@@ -241,7 +241,7 @@ export function ArchiveLayout({
                       {showSubMode === "tour" && current?.isTour
                         ? `📜 ${shortUnitTitle(current.unit)}（${t("slips.modeTour", "巡演總覽")}）`
                         : currentShowObj
-                        ? `${currentShowObj.date} ${currentShowObj.city ? t("cities." + currentShowObj.city, currentShowObj.city) : currentShowObj.venue}`
+                        ? `${currentShowObj.date} ${formatShowPlace(currentShowObj, t)}`
                         : current?.unit
                         ? shortUnitTitle(current.unit)
                         : t("navigators.selectShow", t("layout.selectShowFallback", "選擇場次"))}
@@ -303,7 +303,7 @@ export function ArchiveLayout({
                           </span>
                         ) : currentShowObj ? (
                           <span className="text-muted shrink-0">
-                            （{currentShowObj.date.slice(5)} {currentShowObj.city ? t("cities." + currentShowObj.city, currentShowObj.city) : currentShowObj.venue}）
+                            （{currentShowObj.date.slice(5)} {formatShowPlace(currentShowObj, t)}）
                           </span>
                         ) : null}
                       </div>
@@ -446,7 +446,7 @@ export function ArchiveLayout({
                         </span>
                         {currentVenueObj?.city && (
                           <span className="text-muted truncate">
-                            · {(currentVenueObj.prefecture || currentVenueObj.pref) ? `${t("prefectures." + (currentVenueObj.prefecture || currentVenueObj.pref), currentVenueObj.prefecture || currentVenueObj.pref)} ` : ""}{t("cities." + currentVenueObj.city, currentVenueObj.city)}
+                            · {currentVenueObj.prefecture ? `${t("prefectures." + currentVenueObj.prefecture, currentVenueObj.prefecture)} ` : ""}{t("cities." + currentVenueObj.city, currentVenueObj.city)}
                           </span>
                         )}
                         <span className="text-muted shrink-0 tabular-nums">

@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { exportElementToPng } from "../lib/image-export.js";
-import { songTitle, showDate, formatShowTime, songUnreleased } from "../lib/domain.js";
+import { songTitle, showDate, formatShowTime, songUnreleased, formatShowVenueCity } from "../lib/domain.js";
 import { getKindArray, kindTabs } from "../lib/kind.js";
 import { useI18n, DICTIONARIES, DEFAULT_LOCALE, resolveTranslation } from "../lib/i18n.jsx";
 
@@ -173,9 +173,7 @@ export function MemorialCardModal({
   const timeFormatted = formatShowTime(show, locale);
 
   const handleCopyText = () => {
-    const locCity = show.city ? t("cities." + show.city, show.city) : "";
-    const venueText = locCity ? `${show.venue} (${locCity})` : show.venue;
-    const venueTextParen = locCity ? `${show.venue}（${locCity}）` : show.venue;
+    const venueText = formatShowVenueCity(show, t, locale);
     const lines = [
       `Official 髭男 dism - ${unit?.title || ""}`,
       locale === "en"
@@ -188,10 +186,10 @@ export function MemorialCardModal({
       locale === "en"
         ? `📍 Venue: ${venueText}`
         : locale === "ja"
-        ? `📍 会場：${venueTextParen}`
+        ? `📍 会場：${venueText}`
         : locale === "ko"
         ? `📍 공연장: ${venueText}`
-        : `📍 場地：${venueTextParen}`,
+        : `📍 場地：${venueText}`,
     ];
     if (timeFormatted) {
       lines.push(

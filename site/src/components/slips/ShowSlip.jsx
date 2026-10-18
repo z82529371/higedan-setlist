@@ -2,7 +2,7 @@ import { useState, useMemo, useRef } from "react";
 import { MemorialCardModal } from "../MemorialCardModal.jsx";
 import { KIND_TAB, SETLIST_ITEM, CUE_NO, TRACK_NOTE, SLIP_ARTICLE, SLIP_TAPE } from "../../lib/constants.js";
 import { getKindArray, primaryKind, kindTabs, slipClassFor, cueColorFor, songWeightFor, tabColorFor } from "../../lib/kind.js";
-import { songTitle, songUnreleased, showDate, getSongAlbum, formatShowTime } from "../../lib/domain.js";
+import { songTitle, songUnreleased, showDate, getSongAlbum, formatShowTime, formatShowPlace, formatShowVenueCity } from "../../lib/domain.js";
 import { trackRoute } from "../../lib/track.js";
 import { assignCues } from "../../lib/resolve.js";
 import { getSourceLabel, TicketPerforationDivider, TicketBarcodeFooter } from "./TicketCommon.jsx";
@@ -127,17 +127,15 @@ export function ShowSlip({
         ? `📅 일시: ${showDate(s, locale)}`
         : `📅 日期：${showDate(s, locale)}`
     );
-    const locCity = s.city ? t("cities." + s.city, s.city) : "";
-    const venueText = locCity ? `${s.venue} (${locCity})` : s.venue;
-    const venueTextParen = locCity ? `${s.venue}（${locCity}）` : s.venue;
+    const venueText = formatShowVenueCity(s, t, locale);
     lines.push(
       locale === "en"
         ? `📍 Venue: ${venueText}`
         : locale === "ja"
-        ? `📍 会場：${venueTextParen}`
+        ? `📍 会場：${venueText}`
         : locale === "ko"
         ? `📍 공연장: ${venueText}`
-        : `📍 場地：${venueTextParen}`
+        : `📍 場地：${venueText}`
     );
     const timeStr = formatShowTime(s, locale);
     if (timeStr) {
@@ -570,7 +568,7 @@ export function ShowSlip({
               }}
               className="inline-flex min-h-[42px] sm:min-h-0 items-center justify-center sm:justify-start gap-1 rounded border border-line-soft bg-paper px-3 py-2 sm:py-1 text-ink hover:bg-band hover:border-band active:bg-band transition-colors cursor-pointer truncate"
             >
-              <span className="truncate">← {t("actions.prev", "上一場")}：{showDate(prevShow, locale)} {prevShow.city ? t("cities." + prevShow.city, prevShow.city) : prevShow.venue}</span>
+              <span className="truncate">← {t("actions.prev", "上一場")}：{showDate(prevShow, locale)} {formatShowPlace(prevShow, t)}</span>
             </button>
           ) : <div className="hidden sm:block" />}
           {nextShow ? (
@@ -582,7 +580,7 @@ export function ShowSlip({
               }}
               className="inline-flex min-h-[42px] sm:min-h-0 items-center justify-center sm:justify-end gap-1 rounded border border-line-soft bg-paper px-3 py-2 sm:py-1 text-ink hover:bg-band hover:border-band active:bg-band transition-colors cursor-pointer font-bold truncate"
             >
-              <span className="truncate">{t("actions.next", "下一場")}：{showDate(nextShow, locale)} {nextShow.city ? t("cities." + nextShow.city, nextShow.city) : nextShow.venue} →</span>
+              <span className="truncate">{t("actions.next", "下一場")}：{showDate(nextShow, locale)} {formatShowPlace(nextShow, t)} →</span>
             </button>
           ) : null}
         </div>

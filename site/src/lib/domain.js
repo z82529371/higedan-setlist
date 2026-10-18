@@ -163,6 +163,26 @@ export function showLabel(s, locale = "zh-TW") {
   return `${showDate(s, locale)} ${s.venue}（${s.city}）`;
 }
 
+/**
+ * Formats show place for display with optional i18n translation (ADR-0108).
+ * Falls back to show.venue when city is not defined.
+ */
+export function formatShowPlace(s, t) {
+  if (!s) return "";
+  return s.city && t ? t("cities." + s.city, s.city) : (s.city || s.venue || "");
+}
+
+/**
+ * Formats show venue and city with locale-aware parentheses for tickets, copy, and modals (ADR-0108).
+ */
+export function formatShowVenueCity(s, t, locale = "zh-TW") {
+  if (!s) return "";
+  const locCity = s.city && t ? t("cities." + s.city, s.city) : (s.city || "");
+  if (!locCity) return s.venue || "";
+  const isHalfWidth = locale === "en" || locale === "ko";
+  return isHalfWidth ? `${s.venue} (${locCity})` : `${s.venue}（${locCity}）`;
+}
+
 export function shortUnitTitle(unit) {
   if (!unit) return "";
   if (unit.shortTitle) return unit.shortTitle;

@@ -37,6 +37,21 @@ web
 - **Hash 路由穿透**：全域搜尋與分類切換與 URL Hash 雙向同步，支援深層連結直達特定歌曲或場次，外部深層連結自動直達檢索票券而不受首頁阻擋。
 - **資料保護約束**：同步腳本嚴格保護使用者自訂 `shortTitle`，不允許無序覆寫。
 
+## Component & Domain Terminology Mapping
+
+| 領域概念 / 介面元素 | 職責與展現內容 | 對應前端模組 |
+| :--- | :--- | :--- |
+| **場次篩選器**（Show Navigator） | 演出類型 → 年份 → 巡演專場 → 場次日期切換 | `site/src/components/navigators/ShowNavigator.jsx` |
+| **歌曲篩選器**（Song Navigator） | 專輯分類 / 登場次數排行 → 歌曲切換 | `site/src/components/navigators/SongNavigator.jsx` |
+| **場地篩選器**（Venue Navigator） | 日本地理分區 / 登場次數排行 → 場館切換 | `site/src/components/navigators/VenueNavigator.jsx` |
+| **場次票根**（Show Slip） | 單場演出票根、本篇/安可曲目單、前場曲目 Diff | `site/src/components/slips/ShowSlip.jsx` + `ShowMetadataBox.jsx` |
+| **巡演總覽票券**（Tour Slip） | 巡演定番歌曲、輪換曲、驚喜曲目與巡演足跡日程 | `site/src/components/slips/TourSlip.jsx` |
+| **歌曲詳情票券**（Song Slip） | 歌曲出賽履歷、版本統計、首演/最新演出里程碑 | `site/src/components/slips/SongSlip.jsx` + `SongMilestonesDrawer.jsx` |
+| **場館詳情票券**（Venue Slip） | 場館歷史演出編年史、地理標籤與初次/最近登場 | `site/src/components/slips/VenueSlip.jsx` |
+| **行動版篩選抽屜**（Filter Drawer） | 手機版底層彈出之階層篩選面板與麵包屑指示 | `site/src/components/layout/FilterDrawer.jsx` |
+| **全域搜尋彈窗**（Search Modal） | 四語系無阻力跨語檢索歌曲、場館、巡演與日期 | `site/src/components/SearchBox.jsx` |
+| **紀念卡片彈窗**（Memorial Card Modal） | 專場紀念票根點陣/懷舊視覺卡片渲染與 PNG 匯出 | `site/src/components/MemorialCardModal.jsx` |
+
 ## Brand Commitments
 
 - 繁體中文為核心介面語系，尊重日語音樂圈專用術語與原始標題（如 弾き語り 對應「自彈自唱」、アレンジ 對應「版本差異」）。

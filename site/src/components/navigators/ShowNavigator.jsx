@@ -1,6 +1,6 @@
 import { PaginationPills, PAGE_SIZE } from "./PaginationPills.jsx";
 import { PERFORMANCE_CATEGORIES } from "../../lib/constants.js";
-import { unitEarliest, shortUnitTitle, defaultShowId } from "../../lib/domain.js";
+import { unitEarliest, shortUnitTitle, defaultShowId, formatShowPlace } from "../../lib/domain.js";
 import { useI18n } from "../../lib/i18n.jsx";
 
 export function ShowNavigator({
@@ -353,7 +353,7 @@ export function ShowNavigator({
                       {s.date.slice(5)}
                     </span>
                     <span className="font-bold">
-                      {s.city ? t("cities." + s.city, s.city) : s.venue}
+                      {formatShowPlace(s, t)}
                     </span>
                     <span className="font-mono text-[10px] opacity-75 tabular-nums">
                       {songCnt > 0 ? `${songCnt}${t("navigators.songsUnit", "首")}` : t("navigators.noSetlist", "無歌單")}

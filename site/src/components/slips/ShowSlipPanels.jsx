@@ -1,5 +1,5 @@
 import React from "react";
-import { songTitle } from "../../lib/domain.js";
+import { songTitle, formatShowPlace } from "../../lib/domain.js";
 import { useI18n } from "../../lib/i18n.jsx";
 
 export function ShowSlipPanels({
@@ -58,7 +58,7 @@ export function ShowSlipPanels({
             <span>
               {t("slips.panels.diffWithPrevious", "🔄 與前一場（{date} {venue}）曲目更換：", {
                 date: prevShow.date.slice(5),
-                venue: prevShow.city ? t("cities." + prevShow.city, prevShow.city) : prevShow.venue,
+                venue: formatShowPlace(prevShow, t),
               })}
             </span>
           </div>
@@ -125,7 +125,7 @@ export function ShowSlipPanels({
                   .filter((x) => x.id !== showId)
                   .map((x) => (
                     <option key={x.id} value={x.id}>
-                      {x.date.slice(5)} {x.city ? t("cities." + x.city, x.city) : x.venue}
+                      {x.date.slice(5)} {formatShowPlace(x, t)}
                     </option>
                   ))}
               </select>

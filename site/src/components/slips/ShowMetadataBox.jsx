@@ -1,4 +1,4 @@
-import { showDate, formatShowTime, formatShowSongBreakdown } from "../../lib/domain.js";
+import { showDate, formatShowTime, formatShowSongBreakdown, formatShowPlace } from "../../lib/domain.js";
 import { routeHash } from "../../lib/track.js";
 import { useI18n } from "../../lib/i18n.jsx";
 
@@ -135,12 +135,12 @@ export function ShowMetadataBox({
               type="button"
               onClick={() => onSelectShow(prevShow.id)}
               className="group inline-flex items-center gap-1 font-semibold text-ink hover:text-pool cursor-pointer transition-colors min-h-[38px] px-2 py-1 sm:min-h-0 sm:p-0 rounded touch-stamp"
-              title={t("showExtra.prevTitle", `上一場：${showDate(prevShow, locale)} ${prevShow.city ? t("cities." + prevShow.city, prevShow.city) : prevShow.venue}`, { date: showDate(prevShow, locale), place: prevShow.city ? t("cities." + prevShow.city, prevShow.city) : prevShow.venue })}
+              title={t("showExtra.prevTitle", `上一場：${showDate(prevShow, locale)} ${formatShowPlace(prevShow, t)}`, { date: showDate(prevShow, locale), place: formatShowPlace(prevShow, t) })}
             >
               <span aria-hidden="true" className="text-base sm:text-xs">←</span>
               <span>{t("actions.prev", "上一場")}</span>
               <span className="hidden sm:inline text-muted group-hover:text-pool">
-                ({prevShow.date.slice(5)} {prevShow.city ? t("cities." + prevShow.city, prevShow.city) : prevShow.venue})
+                ({prevShow.date.slice(5)} {formatShowPlace(prevShow, t)})
               </span>
             </button>
           ) : (
@@ -174,10 +174,10 @@ export function ShowMetadataBox({
               type="button"
               onClick={() => onSelectShow(nextShow.id)}
               className="group inline-flex items-center gap-1 font-semibold text-ink hover:text-pool cursor-pointer transition-colors min-h-[38px] px-2 py-1 sm:min-h-0 sm:p-0 rounded touch-stamp"
-              title={t("showExtra.nextTitle", `下一場：${showDate(nextShow, locale)} ${nextShow.city ? t("cities." + nextShow.city, nextShow.city) : nextShow.venue}`, { date: showDate(nextShow, locale), place: nextShow.city ? t("cities." + nextShow.city, nextShow.city) : nextShow.venue })}
+              title={t("showExtra.nextTitle", `下一場：${showDate(nextShow, locale)} ${formatShowPlace(nextShow, t)}`, { date: showDate(nextShow, locale), place: formatShowPlace(nextShow, t) })}
             >
               <span className="hidden sm:inline text-muted group-hover:text-pool">
-                ({nextShow.date.slice(5)} {nextShow.city ? t("cities." + nextShow.city, nextShow.city) : nextShow.venue})
+                ({nextShow.date.slice(5)} {formatShowPlace(nextShow, t)})
               </span>
               <span>{t("actions.next", "下一場")}</span>
               <span aria-hidden="true" className="text-base sm:text-xs">→</span>
