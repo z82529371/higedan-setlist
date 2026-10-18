@@ -21,15 +21,20 @@ Accepted
 2. **儲存層與展現層職責分離（Decoupled Storage & Presentation）**：
    - 底層 [`data/venues.json`](../../data/venues.json) 與歷史場次 JSON 維持現行繁體中文正體標籤作為單一真理來源，存儲結構 100% 保持穩定，完全不更動。
    - 地名翻譯完全收納於前端 UI 展現層，由獨立模組 [`site/src/lib/locales/geography.js`](../../site/src/lib/locales/geography.js) 提供 78 個城市與 47 個都道府縣／國別之四語對稱字典，注入各語系字典（`dict.cities` 與 `dict.prefectures`）。
-3. **全站三大核心展示面全面在地化**：
+3. **全站展示層與導航器全面在地化（Universal Presentation & Navigator Coverage）**：
    - **巡演日程足跡（`TourSlip`）**：各站巡演城市改以 `t("cities." + stop.city, stop.city)` 渲染（如 `en: [Yokohama]`、`ja: [横浜]`、`ko: [요코하마]`、`zh-TW: [橫濱]`）。
    - **場館詳情票券（`VenueSlip`）**：標頭地理副標改以 `（{t("prefectures." + pref, pref)} · {t("cities." + city, city)}）` 渲染，並在複製文字管線中注入在地化文字。
+   - **場次篩選器（`ShowNavigator`）**：第 4 步場次切換按鈕渲染城市標籤時呼叫 `t("cities." + s.city, s.city)`（如韓文 `08-08 서울`、英文 `08-08 Seoul`）。
+   - **場地篩選器（`VenueNavigator`）**：場地按鈕副標題渲染 `（{t("cities." + v.city, v.city)} · N場）`（如英文 `台北小巨蛋（Taipei · 2 shows）`）。
+   - **場次票根標頭（`ShowMetadataBox`）與導覽**：票根標頭場館右側城市 `（{t("cities." + s.city, s.city)}）`、前一場／後一場步進導覽提示、以及 `ShowSlip` / `MemorialCardModal` 複製歌單與紀念卡片匯出字串全面統一在地化。
+   - **歌曲與輔助展現層**：`SongSlip` 出賽清單、`SongMilestonesDrawer` 歌曲里程碑、`ArchiveStatusBar` 狀態列、`ArchiveLayout` 行動抽屜與麵包屑、以及 `CalendarModal` 日曆彈窗全面套用。
    - **全域搜尋結果（`SearchBox`）**：場次與場館候選副標改以在地化城市呈現。
 4. **全域搜尋多語地名零阻力跨語檢索（Cross-Lingual Search Indexing）**：
    - `SearchBox` 引進 `matchGeography(needle, city, prefecture, region)`，無差別索引四語系之城市與行政區變體。使用者無論身處哪種介面語系，鍵入 `Yokohama`、`横浜`、`요코하마` 或 `橫濱` 均可即時精準檢索並命中對應場館。
 5. **海外地名與特殊場次譯名標準**：
-   - 台灣：`Taipei` / `Taiwan`（繁中：台北 / 台灣，日：台北 / 台湾，韓：타이베이 / 대만）。
-   - 韓國：`Goyang` / `South Korea`（繁中：高陽 / 韓國，日：高陽 / 韓国，韓：고양 / 한국）。
+   - 台灣（台北）：`Taipei` / `Taiwan`（繁中：台北 / 台灣，日：台北 / 台湾，韓：타이베이 / 대만）。
+   - 韓國（首爾）：`Seoul` / `South Korea`（繁中：首爾 / 韓國，日：ソウル / 韓国，韓：서울 / 한국）。
+   - 韓國（高陽）：`Goyang` / `South Korea`（繁中：高陽 / 韓國，日：高陽 / 韓国，韓：고양 / 한국）。
    - 線上直播：`Livestream`（繁中：線上直播，日：配信ライブ，韓：온라인 라이브）。
 6. **優雅安全回退不變量（Graceful Fallback Invariant）**：
    - 查表統一依循 `t("cities." + city, city)` 與 `t("prefectures." + pref, pref)`。若日後新增未知城鎮且尚未登錄字典，系統安全回退原字串，絕不報錯或破版。

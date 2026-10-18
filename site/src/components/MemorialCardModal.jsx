@@ -173,6 +173,9 @@ export function MemorialCardModal({
   const timeFormatted = formatShowTime(show, locale);
 
   const handleCopyText = () => {
+    const locCity = show.city ? t("cities." + show.city, show.city) : "";
+    const venueText = locCity ? `${show.venue} (${locCity})` : show.venue;
+    const venueTextParen = locCity ? `${show.venue}（${locCity}）` : show.venue;
     const lines = [
       `Official 髭男 dism - ${unit?.title || ""}`,
       locale === "en"
@@ -183,12 +186,12 @@ export function MemorialCardModal({
         ? `📅 일시: ${dateFormatted}`
         : `📅 日期：${dateFormatted}`,
       locale === "en"
-        ? `📍 Venue: ${show.venue} (${show.city})`
+        ? `📍 Venue: ${venueText}`
         : locale === "ja"
-        ? `📍 会場：${show.venue}（${show.city}）`
+        ? `📍 会場：${venueTextParen}`
         : locale === "ko"
-        ? `📍 공연장: ${show.venue} (${show.city})`
-        : `📍 場地：${show.venue}（${show.city}）`,
+        ? `📍 공연장: ${venueText}`
+        : `📍 場地：${venueTextParen}`,
     ];
     if (timeFormatted) {
       lines.push(
@@ -472,8 +475,12 @@ export function MemorialCardModal({
                     }`}
                   >
                     <span className="font-bold">📍 {show.venue}</span>
-                    <span className="opacity-40">/</span>
-                    <span>{show.city}</span>
+                    {show.city && (
+                      <>
+                        <span className="opacity-40">/</span>
+                        <span>{t("cities." + show.city, show.city)}</span>
+                      </>
+                    )}
                     {timeFormatted && (
                       <>
                         <span className="opacity-40">/</span>

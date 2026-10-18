@@ -376,7 +376,7 @@ export default function CalendarModal({
                       {show.title || show.venue || t("calendar.fallbackShow", "演出場次")}
                     </span>
                     <span className="font-mono text-[10px] text-muted truncate">
-                      📍 {show.city} {show.venue}
+                      📍 {show.city ? `${t("cities." + show.city, show.city)} ` : ""}{show.venue}
                     </span>
                   </button>
                 ))}

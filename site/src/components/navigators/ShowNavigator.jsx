@@ -352,7 +352,9 @@ export function ShowNavigator({
                     <span className="font-mono tabular-nums">
                       {s.date.slice(5)}
                     </span>
-                    <span className="font-bold">{s.city || s.venue}</span>
+                    <span className="font-bold">
+                      {s.city ? t("cities." + s.city, s.city) : s.venue}
+                    </span>
                     <span className="font-mono text-[10px] opacity-75 tabular-nums">
                       {songCnt > 0 ? `${songCnt}${t("navigators.songsUnit", "首")}` : t("navigators.noSetlist", "無歌單")}
                     </span>

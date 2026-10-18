@@ -610,9 +610,11 @@ export function SongSlip({ songId, trackShows, showById, unitData, onSelectShow,
                               <span className="show-link-venue text-[14px] font-bold text-ink group-hover:text-pool group-hover:underline">
                                 {s.venue}
                               </span>
-                              <span className="shrink-0 text-[13px] text-muted">
-                                （{s.city}）
-                              </span>
+                              {s.city && (
+                                <span className="shrink-0 text-[13px] text-muted">
+                                  （{t("cities." + s.city, s.city)}）
+                                </span>
+                              )}
                             </div>
                             {hasMeta && (
                               <div className="mt-1.5 flex flex-wrap items-center gap-1.5 pl-0.5">

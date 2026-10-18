@@ -96,7 +96,7 @@ export function SongMilestonesDrawer({
                   {firstApp.unitTitle}
                 </span>
                 <span className="text-muted text-[12px] mt-0.5 truncate flex items-center gap-1">
-                  <span>📍 {firstShow.venue}（{firstShow.city}）</span>
+                  <span>📍 {firstShow.venue}{firstShow.city ? `（${t("cities." + firstShow.city, firstShow.city)}）` : ""}</span>
                   {onSelectVenue && firstShow.venue && (
                     <button
                       type="button"
@@ -142,7 +142,7 @@ export function SongMilestonesDrawer({
                   {latestApp.unitTitle}
                 </span>
                 <span className="text-muted text-[12px] mt-0.5 truncate flex items-center gap-1">
-                  <span>📍 {latestShow.venue}（{latestShow.city}）</span>
+                  <span>📍 {latestShow.venue}{latestShow.city ? `（${t("cities." + latestShow.city, latestShow.city)}）` : ""}</span>
                   {onSelectVenue && latestShow.venue && (
                     <button
                       type="button"

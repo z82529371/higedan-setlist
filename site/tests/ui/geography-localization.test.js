@@ -27,6 +27,9 @@ describe("17. Administrative Geography Localization & Venue Integrity Boundary (
     let VenueSlip;
     let SearchBox;
     let I18nProvider;
+    let ShowNavigator;
+    let VenueNavigator;
+    let ShowMetadataBox;
 
     before(async () => {
       const i18nMod = await loadModule("/src/lib/i18n.jsx");
@@ -44,6 +47,15 @@ describe("17. Administrative Geography Localization & Venue Integrity Boundary (
 
       const searchMod = await loadModule("/src/components/SearchBox.jsx");
       SearchBox = searchMod.default;
+
+      const showNavMod = await loadModule("/src/components/navigators/ShowNavigator.jsx");
+      ShowNavigator = showNavMod.ShowNavigator;
+
+      const venueNavMod = await loadModule("/src/components/navigators/VenueNavigator.jsx");
+      VenueNavigator = venueNavMod.VenueNavigator;
+
+      const metaMod = await loadModule("/src/components/slips/ShowMetadataBox.jsx");
+      ShowMetadataBox = metaMod.ShowMetadataBox;
     });
 
     it("verifies dictionary completeness and 4-locale symmetry for all cities and prefectures", async () => {
@@ -395,5 +407,209 @@ describe("17. Administrative Geography Localization & Venue Integrity Boundary (
       const unknownPref = "未知虛擬縣";
       const fallbackPref = resolveTranslation(testDict, "prefectures." + unknownPref, unknownPref);
       assert.strictEqual(fallbackPref, unknownPref, "Unmapped prefecture must fall back to original string");
+    });
+
+    it("renders ShowNavigator, VenueNavigator, and ShowMetadataBox with localized cities across all 4 locales", () => {
+      // 1. ShowNavigator: show button with city "首爾" in Korean and English
+      const mockUnitWithSeoul = {
+        id: "tour-asia-2024",
+        title: "Asia Tour 2024",
+        shows: [
+          {
+            id: "show-seoul-1",
+            date: "2024-08-08",
+            venue: "Olympic Hall",
+            city: "首爾",
+            prefecture: "韓國",
+            region: "海外",
+          },
+          {
+            id: "show-seoul-2",
+            date: "2024-08-09",
+            venue: "Olympic Hall",
+            city: "首爾",
+            prefecture: "韓國",
+            region: "海外",
+          },
+        ],
+        full: new Map([
+          ["show-seoul-1", [{ songId: "pretender" }]],
+          ["show-seoul-2", [{ songId: "pretender" }]],
+        ]),
+      };
+
+      const htmlShowNavKo = renderToStaticMarkup(
+        React.createElement(
+          I18nProvider,
+          { initialLocale: "ko" },
+          React.createElement(ShowNavigator, {
+            selCategory: "巡演專場",
+            selYear: "2024",
+            selUnitId: "tour-asia-2024",
+            selShow: "show-seoul-1",
+            unitPage: 0,
+            showPage: 0,
+            unitsByCategory: { "巡演專場": [mockUnitWithSeoul] },
+            categoryStats: {},
+            availableYears: ["2024"],
+            yearStats: new Map(),
+            filteredUnits: [mockUnitWithSeoul],
+            pagedUnits: [mockUnitWithSeoul],
+            current: mockUnitWithSeoul,
+            unitData: new Map([["tour-asia-2024", mockUnitWithSeoul]]),
+            handleCategoryClick: () => {},
+            handleSelectUnit: () => {},
+            handleSelectShow: () => {},
+          })
+        )
+      );
+      assert.ok(htmlShowNavKo.includes("서울"), "ShowNavigator in ko must display '서울' for 08-08 show");
+      assert.ok(!htmlShowNavKo.includes("首爾"), "ShowNavigator in ko must not display untranslated '首爾'");
+
+      const htmlShowNavEn = renderToStaticMarkup(
+        React.createElement(
+          I18nProvider,
+          { initialLocale: "en" },
+          React.createElement(ShowNavigator, {
+            selCategory: "巡演專場",
+            selYear: "2024",
+            selUnitId: "tour-asia-2024",
+            selShow: "show-seoul-1",
+            unitPage: 0,
+            showPage: 0,
+            unitsByCategory: { "巡演專場": [mockUnitWithSeoul] },
+            categoryStats: {},
+            availableYears: ["2024"],
+            yearStats: new Map(),
+            filteredUnits: [mockUnitWithSeoul],
+            pagedUnits: [mockUnitWithSeoul],
+            current: mockUnitWithSeoul,
+            unitData: new Map([["tour-asia-2024", mockUnitWithSeoul]]),
+            handleCategoryClick: () => {},
+            handleSelectUnit: () => {},
+            handleSelectShow: () => {},
+          })
+        )
+      );
+      assert.ok(htmlShowNavEn.includes("Seoul"), "ShowNavigator in en must display 'Seoul' for 08-08 show");
+      assert.ok(!htmlShowNavEn.includes("首爾"), "ShowNavigator in en must not display untranslated '首爾'");
+
+      // 2. VenueNavigator: venue button for "台北小巨蛋" with city "台北"
+      const mockTaipeiVenue = {
+        name: "台北小巨蛋",
+        city: "台北",
+        prefecture: "台灣",
+        region: "海外",
+        shows: [{ id: "show-1" }, { id: "show-2" }],
+      };
+
+      const htmlVenueNavEn = renderToStaticMarkup(
+        React.createElement(
+          I18nProvider,
+          { initialLocale: "en" },
+          React.createElement(VenueNavigator, {
+            venueSortMode: "count",
+            setVenueSortMode: () => {},
+            selRegion: "海外",
+            setSelRegion: () => {},
+            selVenue: "台北小巨蛋",
+            venuePage: 0,
+            setVenuePage: () => {},
+            allVenues: [mockTaipeiVenue],
+            venuesSortedByCount: [mockTaipeiVenue],
+            filteredVenues: [mockTaipeiVenue],
+            pagedVenues: [mockTaipeiVenue],
+            handleSelectVenue: () => {},
+          })
+        )
+      );
+      assert.ok(htmlVenueNavEn.includes("Taipei"), "VenueNavigator in en must display 'Taipei'");
+      assert.ok(!htmlVenueNavEn.includes("（台北"), "VenueNavigator in en must not display untranslated '（台北'");
+
+      const htmlVenueNavKo = renderToStaticMarkup(
+        React.createElement(
+          I18nProvider,
+          { initialLocale: "ko" },
+          React.createElement(VenueNavigator, {
+            venueSortMode: "count",
+            setVenueSortMode: () => {},
+            selRegion: "海外",
+            setSelRegion: () => {},
+            selVenue: "台北小巨蛋",
+            venuePage: 0,
+            setVenuePage: () => {},
+            allVenues: [mockTaipeiVenue],
+            venuesSortedByCount: [mockTaipeiVenue],
+            filteredVenues: [mockTaipeiVenue],
+            pagedVenues: [mockTaipeiVenue],
+            handleSelectVenue: () => {},
+          })
+        )
+      );
+      assert.ok(htmlVenueNavKo.includes("타이베이"), "VenueNavigator in ko must display '타이베이'");
+
+      // 3. ShowMetadataBox: show ticket stub header for "台北小巨蛋" with city "台北"
+      const mockShowTaipei = {
+        id: "show-taipei-1",
+        date: "2024-12-14",
+        venue: "台北小巨蛋",
+        city: "台北",
+        prefecture: "台灣",
+        region: "海外",
+      };
+      const mockPrevShow = {
+        id: "show-seoul-1",
+        date: "2024-08-08",
+        venue: "Olympic Hall",
+        city: "首爾",
+      };
+      const mockNextShow = {
+        id: "show-yokohama-1",
+        date: "2024-12-28",
+        venue: "橫濱Arena",
+        city: "橫濱",
+      };
+
+      const htmlMetaEn = renderToStaticMarkup(
+        React.createElement(
+          I18nProvider,
+          { initialLocale: "en" },
+          React.createElement(ShowMetadataBox, {
+            s: mockShowTaipei,
+            songCount: 20,
+            mainCount: 16,
+            encCount: 4,
+            showList: [mockPrevShow, mockShowTaipei, mockNextShow],
+            currentIdx: 1,
+            prevShow: mockPrevShow,
+            nextShow: mockNextShow,
+          })
+        )
+      );
+      assert.ok(htmlMetaEn.includes("Taipei"), "ShowMetadataBox in en must display 'Taipei'");
+      assert.ok(!htmlMetaEn.includes("（台北）"), "ShowMetadataBox in en must not display untranslated '（台北）'");
+      assert.ok(htmlMetaEn.includes("Seoul"), "ShowMetadataBox in en must display 'Seoul' for prev show");
+      assert.ok(htmlMetaEn.includes("Yokohama"), "ShowMetadataBox in en must display 'Yokohama' for next show");
+
+      const htmlMetaKo = renderToStaticMarkup(
+        React.createElement(
+          I18nProvider,
+          { initialLocale: "ko" },
+          React.createElement(ShowMetadataBox, {
+            s: mockShowTaipei,
+            songCount: 20,
+            mainCount: 16,
+            encCount: 4,
+            showList: [mockPrevShow, mockShowTaipei, mockNextShow],
+            currentIdx: 1,
+            prevShow: mockPrevShow,
+            nextShow: mockNextShow,
+          })
+        )
+      );
+      assert.ok(htmlMetaKo.includes("타이베이"), "ShowMetadataBox in ko must display '타이베이'");
+      assert.ok(!htmlMetaKo.includes("（台北）"), "ShowMetadataBox in ko must not display untranslated '（台北）'");
+      assert.ok(htmlMetaKo.includes("서울"), "ShowMetadataBox in ko must display '서울' for prev show");
+      assert.ok(htmlMetaKo.includes("요코하마"), "ShowMetadataBox in ko must display '요코하마' for next show");
     });
   });

@@ -49,7 +49,7 @@ export function ShowMetadataBox({
               <span className="group-hover:underline">{s.venue}</span>
               {s.city && (
                 <span className="ml-1.5 text-[15px] font-normal text-muted group-hover:text-pool whitespace-nowrap">
-                  （{s.city}）
+                  （{t("cities." + s.city, s.city)}）
                 </span>
               )}
               <span
@@ -65,7 +65,7 @@ export function ShowMetadataBox({
               <span>{s.venue}</span>
               {s.city && (
                 <span className="ml-1.5 text-[15px] font-normal text-muted whitespace-nowrap">
-                  （{s.city}）
+                  （{t("cities." + s.city, s.city)}）
                 </span>
               )}
             </>
@@ -101,7 +101,7 @@ export function ShowMetadataBox({
           <div className="flex flex-wrap items-baseline gap-x-2 text-muted min-w-0">
             {s.city && (
               <span className="font-bold text-ink whitespace-nowrap">
-                （{s.city}）
+                （{t("cities." + s.city, s.city)}）
               </span>
             )}
             <span className="tabular-nums">
@@ -135,12 +135,12 @@ export function ShowMetadataBox({
               type="button"
               onClick={() => onSelectShow(prevShow.id)}
               className="group inline-flex items-center gap-1 font-semibold text-ink hover:text-pool cursor-pointer transition-colors min-h-[38px] px-2 py-1 sm:min-h-0 sm:p-0 rounded touch-stamp"
-              title={t("showExtra.prevTitle", `上一場：${showDate(prevShow, locale)} ${prevShow.city || prevShow.venue}`, { date: showDate(prevShow, locale), place: prevShow.city || prevShow.venue })}
+              title={t("showExtra.prevTitle", `上一場：${showDate(prevShow, locale)} ${prevShow.city ? t("cities." + prevShow.city, prevShow.city) : prevShow.venue}`, { date: showDate(prevShow, locale), place: prevShow.city ? t("cities." + prevShow.city, prevShow.city) : prevShow.venue })}
             >
               <span aria-hidden="true" className="text-base sm:text-xs">←</span>
               <span>{t("actions.prev", "上一場")}</span>
               <span className="hidden sm:inline text-muted group-hover:text-pool">
-                ({prevShow.date.slice(5)} {prevShow.city || prevShow.venue})
+                ({prevShow.date.slice(5)} {prevShow.city ? t("cities." + prevShow.city, prevShow.city) : prevShow.venue})
               </span>
             </button>
           ) : (
@@ -174,10 +174,10 @@ export function ShowMetadataBox({
               type="button"
               onClick={() => onSelectShow(nextShow.id)}
               className="group inline-flex items-center gap-1 font-semibold text-ink hover:text-pool cursor-pointer transition-colors min-h-[38px] px-2 py-1 sm:min-h-0 sm:p-0 rounded touch-stamp"
-              title={t("showExtra.nextTitle", `下一場：${showDate(nextShow, locale)} ${nextShow.city || nextShow.venue}`, { date: showDate(nextShow, locale), place: nextShow.city || nextShow.venue })}
+              title={t("showExtra.nextTitle", `下一場：${showDate(nextShow, locale)} ${nextShow.city ? t("cities." + nextShow.city, nextShow.city) : nextShow.venue}`, { date: showDate(nextShow, locale), place: nextShow.city ? t("cities." + nextShow.city, nextShow.city) : nextShow.venue })}
             >
               <span className="hidden sm:inline text-muted group-hover:text-pool">
-                ({nextShow.date.slice(5)} {nextShow.city || nextShow.venue})
+                ({nextShow.date.slice(5)} {nextShow.city ? t("cities." + nextShow.city, nextShow.city) : nextShow.venue})
               </span>
               <span>{t("actions.next", "下一場")}</span>
               <span aria-hidden="true" className="text-base sm:text-xs">→</span>

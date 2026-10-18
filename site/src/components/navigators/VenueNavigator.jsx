@@ -206,7 +206,7 @@ export function VenueNavigator({
                   )}
                   <span className="font-bold">{v.name}</span>
                   <span className="text-[11px] opacity-75">
-                    （{v.city} · {v.shows.length}{t("navigators.showsUnit", "場")}）
+                    （{v.city ? `${t("cities." + v.city, v.city)} · ` : ""}{v.shows.length}{t("navigators.showsUnit", "場")}）
                   </span>
                 </button>
               );

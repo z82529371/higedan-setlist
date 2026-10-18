@@ -241,7 +241,7 @@ export function ArchiveLayout({
                       {showSubMode === "tour" && current?.isTour
                         ? `📜 ${shortUnitTitle(current.unit)}（${t("slips.modeTour", "巡演總覽")}）`
                         : currentShowObj
-                        ? `${currentShowObj.date} ${currentShowObj.city || currentShowObj.venue}`
+                        ? `${currentShowObj.date} ${currentShowObj.city ? t("cities." + currentShowObj.city, currentShowObj.city) : currentShowObj.venue}`
                         : current?.unit
                         ? shortUnitTitle(current.unit)
                         : t("navigators.selectShow", t("layout.selectShowFallback", "選擇場次"))}
@@ -261,7 +261,7 @@ export function ArchiveLayout({
                 {tab === "venue" && (
                   <>
                     <div className="text-[10px] font-mono font-bold text-muted uppercase tracking-wider truncate">
-                      {t("nav.venues", t("layout.currentVenue", "目前選定場館"))} · {currentVenueObj?.city ? currentVenueObj.city : t("nav.venues", t("layout.venueRecordFallback", "場地紀錄"))}
+                      {t("nav.venues", t("layout.currentVenue", "目前選定場館"))} · {currentVenueObj?.city ? t("cities." + currentVenueObj.city, currentVenueObj.city) : t("nav.venues", t("layout.venueRecordFallback", "場地紀錄"))}
                     </div>
                     <div className="text-[13px] font-black text-ink truncate leading-tight pt-0.5">
                       {currentVenueObj ? `${selVenue} ${t("layout.venueCountSuffix", "({count}場)", { count: currentVenueObj.shows?.length || 0 })}` : selVenue || t("navigators.selectVenue", t("layout.selectVenueFallback", "選擇場地"))}
@@ -303,7 +303,7 @@ export function ArchiveLayout({
                           </span>
                         ) : currentShowObj ? (
                           <span className="text-muted shrink-0">
-                            （{currentShowObj.date.slice(5)} {currentShowObj.city || currentShowObj.venue}）
+                            （{currentShowObj.date.slice(5)} {currentShowObj.city ? t("cities." + currentShowObj.city, currentShowObj.city) : currentShowObj.venue}）
                           </span>
                         ) : null}
                       </div>
@@ -446,7 +446,7 @@ export function ArchiveLayout({
                         </span>
                         {currentVenueObj?.city && (
                           <span className="text-muted truncate">
-                            · {currentVenueObj.pref ? `${currentVenueObj.pref} ` : ""}{currentVenueObj.city}
+                            · {(currentVenueObj.prefecture || currentVenueObj.pref) ? `${t("prefectures." + (currentVenueObj.prefecture || currentVenueObj.pref), currentVenueObj.prefecture || currentVenueObj.pref)} ` : ""}{t("cities." + currentVenueObj.city, currentVenueObj.city)}
                           </span>
                         )}
                         <span className="text-muted shrink-0 tabular-nums">

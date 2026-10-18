@@ -58,7 +58,7 @@ export function ShowSlipPanels({
             <span>
               {t("slips.panels.diffWithPrevious", "🔄 與前一場（{date} {venue}）曲目更換：", {
                 date: prevShow.date.slice(5),
-                venue: prevShow.city || prevShow.venue,
+                venue: prevShow.city ? t("cities." + prevShow.city, prevShow.city) : prevShow.venue,
               })}
             </span>
           </div>
@@ -125,7 +125,7 @@ export function ShowSlipPanels({
                   .filter((x) => x.id !== showId)
                   .map((x) => (
                     <option key={x.id} value={x.id}>
-                      {x.date.slice(5)} {x.city || x.venue}
+                      {x.date.slice(5)} {x.city ? t("cities." + x.city, x.city) : x.venue}
                     </option>
                   ))}
               </select>

@@ -538,7 +538,8 @@ export function useArchiveRoute({
       }
       const s = (u?.shows || []).find((x) => x.id === draftState.showId);
       if (s) {
-        return t("confirm.applyShow", "確認套用：{date} {place}", { date: s.date.slice(5), place: s.city || s.venue });
+        const place = s.city ? t("cities." + s.city, s.city) : s.venue;
+        return t("confirm.applyShow", "確認套用：{date} {place}", { date: s.date.slice(5), place });
       }
       return t("confirm.applyShowFallback", "確認套用場次");
     }

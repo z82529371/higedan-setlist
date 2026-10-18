@@ -45,7 +45,7 @@ export function ArchiveStatusBar({
           {tab === "venue" && (
             <span>
               <span aria-hidden="true">🏛️</span> {selVenue}
-              {currentVenueObj?.city ? `（${currentVenueObj.city}）` : ""}
+              {currentVenueObj?.city ? `（${t("cities." + currentVenueObj.city, currentVenueObj.city)}）` : ""}
             </span>
           )}
         </div>

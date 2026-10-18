@@ -127,14 +127,17 @@ export function ShowSlip({
         ? `📅 일시: ${showDate(s, locale)}`
         : `📅 日期：${showDate(s, locale)}`
     );
+    const locCity = s.city ? t("cities." + s.city, s.city) : "";
+    const venueText = locCity ? `${s.venue} (${locCity})` : s.venue;
+    const venueTextParen = locCity ? `${s.venue}（${locCity}）` : s.venue;
     lines.push(
       locale === "en"
-        ? `📍 Venue: ${s.venue} (${s.city})`
+        ? `📍 Venue: ${venueText}`
         : locale === "ja"
-        ? `📍 会場：${s.venue}（${s.city}）`
+        ? `📍 会場：${venueTextParen}`
         : locale === "ko"
-        ? `📍 공연장: ${s.venue} (${s.city})`
-        : `📍 場地：${s.venue}（${s.city}）`
+        ? `📍 공연장: ${venueText}`
+        : `📍 場地：${venueTextParen}`
     );
     const timeStr = formatShowTime(s, locale);
     if (timeStr) {
@@ -567,7 +570,7 @@ export function ShowSlip({
               }}
               className="inline-flex min-h-[42px] sm:min-h-0 items-center justify-center sm:justify-start gap-1 rounded border border-line-soft bg-paper px-3 py-2 sm:py-1 text-ink hover:bg-band hover:border-band active:bg-band transition-colors cursor-pointer truncate"
             >
-              <span className="truncate">← {t("actions.prev", "上一場")}：{showDate(prevShow, locale)} {prevShow.city || prevShow.venue}</span>
+              <span className="truncate">← {t("actions.prev", "上一場")}：{showDate(prevShow, locale)} {prevShow.city ? t("cities." + prevShow.city, prevShow.city) : prevShow.venue}</span>
             </button>
           ) : <div className="hidden sm:block" />}
           {nextShow ? (
@@ -579,7 +582,7 @@ export function ShowSlip({
               }}
               className="inline-flex min-h-[42px] sm:min-h-0 items-center justify-center sm:justify-end gap-1 rounded border border-line-soft bg-paper px-3 py-2 sm:py-1 text-ink hover:bg-band hover:border-band active:bg-band transition-colors cursor-pointer font-bold truncate"
             >
-              <span className="truncate">{t("actions.next", "下一場")}：{showDate(nextShow, locale)} {nextShow.city || nextShow.venue} →</span>
+              <span className="truncate">{t("actions.next", "下一場")}：{showDate(nextShow, locale)} {nextShow.city ? t("cities." + nextShow.city, nextShow.city) : nextShow.venue} →</span>
             </button>
           ) : null}
         </div>
