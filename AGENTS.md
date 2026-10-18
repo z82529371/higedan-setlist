@@ -10,7 +10,7 @@ Repository conventions and navigation pointers for AI agents working in this cod
 - **URL Routing & Deep Links**: Consult [`site/src/lib/routes.js`](./site/src/lib/routes.js) and [`ADR-0101`](./docs/adr/0101-url-hash-deep-linking-and-route-state-machine.md) for bidirectional hash schemes (`#/song`, `#/show`, `#/venue`, `#/tour`).
 - **Architectural Decision Records**: Consult [`docs/adr/`](./docs/adr/) for all historical architectural records (0001–0107).
 - **CI/CD & Deployment Target**: Consult [`.github/workflows/ci.yml`](./.github/workflows/ci.yml) and [`.nvmrc`](./.nvmrc) for runtime version alignment (Cloudflare Pages builds depend on `.nvmrc` and `engines.node >= 22.13.0` for pnpm 11 compatibility).
-- **i18n & Context Providers Boundary**: Consult [`CONTEXT.md`](./CONTEXT.md#react-hooks-領域狀態與極端路由安全回退hooks-domain-state--hash-fallback-invariantsadr-0101) and [`site/src/App.jsx`](./site/src/App.jsx) for the `<I18nProvider>` root wrapper requirement (`AppContent` pattern) ensuring `useArchiveRoute`, `appendLang`, and `confirmButtonLabel` remain reactive.
+- **i18n & Context Providers Boundary**: Consult [`CONTEXT.md`](./CONTEXT.md#react-hooks-領域狀態與極端路由安全回退hooks-domain-state--hash-fallback-invariantsadr-0101), [`site/src/App.jsx`](./site/src/App.jsx), and [`ADR-0107`](./docs/adr/0107-multi-language-localization-and-taxonomy-boundary.md) for the `<I18nProvider>` root wrapper requirement (`AppContent` pattern) and the responsive switcher dichotomy (Landing top utility dropdown vs Archive mobile FAB).
 - **Issue Tracking**: Consult GitHub Issues via `gh issue view <number>` or `gh issue list` for feature specs and task acceptance criteria.
 
 ## Multi-Agent Workspace Hygiene

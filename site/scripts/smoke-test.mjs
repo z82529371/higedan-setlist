@@ -2322,6 +2322,24 @@ describe("Pipeline Smoke Tests", () => {
         "Default LanguageSwitcher without custom display class must include inline-block"
       );
 
+      // Mechanical guardrail: verify zero display class collisions (e.g. inline-block coexisting with hidden)
+      function assertNoConflictingDisplayClasses(html, label) {
+        for (const m of html.matchAll(/class="([^"]+)"/g)) {
+          const list = m[1].split(/\s+/);
+          const hasHidden = list.includes("hidden");
+          const hasUnqualifiedDisplay = list.some((c) =>
+            ["block", "inline-block", "inline", "flex", "inline-flex", "grid"].includes(c)
+          );
+          assert.ok(
+            !(hasHidden && hasUnqualifiedDisplay),
+            `${label}: detected conflicting display classes on same element: "${m[1]}"`
+          );
+        }
+      }
+      assertNoConflictingDisplayClasses(archiveHtmlJa, "ArchiveHeader (ja)");
+      assertNoConflictingDisplayClasses(archiveHtmlKo, "ArchiveHeader (ko)");
+      assertNoConflictingDisplayClasses(landingHtml, "LandingHero");
+
       // MobileFloatingControls MUST render LanguageSwitcher as a round floating FAB on mobile
       const { MobileFloatingControls } = await server.ssrLoadModule("/src/components/layout/MobileFloatingControls.jsx");
       const mobileControlsHtml = renderToStaticMarkup(
