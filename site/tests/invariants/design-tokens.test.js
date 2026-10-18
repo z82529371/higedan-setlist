@@ -1,0 +1,154 @@
+import { describe, it } from "node:test";
+import assert from "node:assert/strict";
+import fs from "node:fs";
+import path from "node:path";
+import { parseRoute, routeHash } from "../../src/lib/routes.js";
+import * as trackMod from "../../src/lib/track.js";
+
+describe("9. Design Token Invariants & Dedicated URL Routes Seam (DESIGN.md, ADR-0101)", () => {
+  it("exports parseRoute and routeHash from dedicated routes.js module with full bidirectional parity", () => {
+    assert.ok(typeof parseRoute === "function");
+    assert.ok(typeof routeHash === "object");
+    assert.equal(routeHash.song("pretender"), "#/song/pretender");
+    assert.equal(routeHash.show("1672276"), "#/show/1672276");
+    assert.equal(routeHash.venue("日本武道館"), "#/venue/%E6%97%A5%E6%9C%AC%E6%AD%A6%E9%81%93%E9%A4%A8");
+    assert.equal(routeHash.tour("arena-tour-2024-rejoice"), "#/tour/arena-tour-2024-rejoice");
+
+    assert.deepEqual(parseRoute("#/song/pretender"), { kind: "song", value: "pretender" });
+    assert.deepEqual(parseRoute("#/show/1672276"), { kind: "show", value: "1672276" });
+    assert.deepEqual(parseRoute("#/venue/%E6%97%A5%E6%9C%AC%E6%AD%A6%E9%81%93%E9%A4%A8"), { kind: "venue", value: "日本武道館" });
+    assert.deepEqual(parseRoute("#/tour/arena-tour-2024-rejoice"), { kind: "tour", value: "arena-tour-2024-rejoice" });
+    assert.equal(parseRoute(""), null);
+    assert.equal(parseRoute("#/unknown/123"), null);
+  });
+
+  it("ensures track.js re-exports parseRoute and routeHash for backwards compatibility", () => {
+    assert.equal(trackMod.parseRoute, parseRoute);
+    assert.equal(trackMod.routeHash, routeHash);
+  });
+
+  it("verifies style.css defines zero-blur shadow tokens under @theme and dark theme", () => {
+    const stylePath = path.resolve(import.meta.dirname, "../../src/style.css");
+    const cssContent = fs.readFileSync(stylePath, "utf8");
+
+    // Verify all shadow tokens are configured with 0 blur
+    const shadowTokens = ["2xs", "xs", "sm", "md", "lg", "xl", "2xl"];
+    for (const token of shadowTokens) {
+      const regex = new RegExp(`--shadow-${token}:\\s*\\d+(?:\\.\\d+)?px\\s+\\d+(?:\\.\\d+)?px\\s+0\\b`);
+      assert.ok(
+        regex.test(cssContent),
+        `style.css must define zero-blur --shadow-${token} with 0 blur radius`
+      );
+    }
+  });
+
+  it("verifies all custom theme color tokens are declared in style.css under @theme and dark mode", () => {
+    const stylePath = path.resolve(import.meta.dirname, "../../src/style.css");
+    const cssContent = fs.readFileSync(stylePath, "utf8");
+
+    // Extract tokens declared in @theme
+    const themeBlockMatch = cssContent.match(/@theme\s*\{([^}]+)\}/s);
+    assert.ok(themeBlockMatch, "style.css must contain @theme block");
+    const themeBlock = themeBlockMatch[1];
+
+    const declaredColors = new Set();
+    for (const match of themeBlock.matchAll(/--color-([a-z0-9-]+):/g)) {
+      declaredColors.add(match[1]);
+    }
+
+    // Extract tokens declared in dark mode html[data-theme="dark"]
+    const darkBlockMatch = cssContent.match(/html\[data-theme=["']dark["']\]\s*\{([^}]+)\}/s);
+    assert.ok(darkBlockMatch, "style.css must contain html[data-theme='dark'] block");
+    const darkBlock = darkBlockMatch[1];
+
+    const darkColors = new Set();
+    for (const match of darkBlock.matchAll(/--color-([a-z0-9-]+):/g)) {
+      darkColors.add(match[1]);
+    }
+
+    // Design system core tokens that must exist in both light and dark theme
+    const requiredCoreTokens = [
+      "paper",
+      "card",
+      "band",
+      "band-ink",
+      "ink",
+      "muted",
+      "line",
+      "line-soft",
+      "tape",
+      "tape-tint",
+      "tape-soft",
+      "tape-edge",
+      "request",
+      "request-wash",
+      "unreleased",
+      "unreleased-wash",
+      "premiere",
+      "premiere-wash",
+      "solo",
+      "solo-wash",
+      "pool",
+      "pool-wash",
+    ];
+
+    for (const token of requiredCoreTokens) {
+      assert.ok(
+        declaredColors.has(token),
+        `style.css @theme must declare --color-${token}`
+      );
+      assert.ok(
+        darkColors.has(token),
+        `style.css html[data-theme="dark"] must declare --color-${token}`
+      );
+    }
+  });
+
+  it("prohibits arbitrary unvetted hex color classes in UI components (DESIGN.md)", () => {
+    const componentsDir = path.resolve(import.meta.dirname, "../../src/components");
+
+    function findJsxFiles(dir) {
+      let results = [];
+      for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+        const fullPath = path.join(dir, entry.name);
+        if (entry.isDirectory()) {
+          results = results.concat(findJsxFiles(fullPath));
+        } else if (entry.name.endsWith(".jsx")) {
+          results.push(fullPath);
+        }
+      }
+      return results;
+    }
+
+    const files = findJsxFiles(componentsDir);
+    const violations = [];
+    const hexClassRegex = /\b(?:text|bg|border|ring|outline)-\[#[0-9a-fA-F]{3,8}\]/g;
+
+    for (const file of files) {
+      const basename = path.basename(file);
+      // MemorialCardModal defines physical offscreen cardstock raster styles (ADR-0100), but its badges must strictly use design tokens
+      if (basename === "MemorialCardModal.jsx") {
+        const content = fs.readFileSync(file, "utf8");
+        const badgeSection = content.slice(content.indexOf("tabs.map"), content.indexOf("return ("));
+        const badgeHexMatches = badgeSection.match(hexClassRegex);
+        if (badgeHexMatches) {
+          violations.push(`${basename} (badges): ${badgeHexMatches.join(", ")}`);
+        }
+        continue;
+      }
+
+      const content = fs.readFileSync(file, "utf8");
+      const matches = content.match(hexClassRegex);
+      if (matches) {
+        const relPath = path.relative(componentsDir, file).replace(/\\/g, "/");
+        violations.push(`${relPath}: ${matches.join(", ")}`);
+      }
+    }
+
+    assert.deepEqual(
+      violations,
+      [],
+      `Found unvetted arbitrary hex classes in UI components. Use semantic design tokens from DESIGN.md instead:\n${violations.join("\n")}`
+    );
+  });
+});
