@@ -269,7 +269,10 @@ for (const file of files) {
   }
 }
 if (total > 0) {
-  console.error(`\ncheck-i18n: ${total} violation(s). Route UI strings through t() (ADR-0107).`);
+  console.error(
+    `\ncheck-i18n: ${total} violation(s). Route UI strings through t() (ADR-0107).\n` +
+    `Hint: If this is entity data matching, use .includes("...") or declare keywords within TAXONOMY_KEYWORDS / BADGE_KEYWORDS.`
+  );
   process.exit(1);
 }
 console.log(`check-i18n: clean (${files.length} files)`);

@@ -8,6 +8,14 @@ import { routeHash } from "../../lib/track.js";
 import { CATEGORY_ORDER, songFilterPillClass, TicketPerforationDivider, TicketBarcodeFooter } from "./TicketCommon.jsx";
 import { VenueMilestonesDrawer } from "./VenueMilestonesDrawer.jsx";
 
+/**
+ * @param {object} props
+ * @param {string} props.venueName - Primary source venue name
+ * @param {Map<string, Array<{ show: object, unit: object, resolvedItems: Array }>>} props.globalVenueShows - Global map of venue name to show appearances
+ * @param {object} [props.unitData] - Optional active tour/unit context
+ * @param {function} [props.onSelectShow] - Callback on show selection
+ * @param {function} [props.onSelectSong] - Callback on song selection
+ */
 export function VenueSlip({ venueName, globalVenueShows, unitData, onSelectShow, onSelectSong }) {
   const { locale, t } = useI18n();
   const [copied, setCopied] = useState(false);
