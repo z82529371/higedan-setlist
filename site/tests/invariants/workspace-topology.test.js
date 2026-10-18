@@ -91,4 +91,20 @@ describe("10. Workspace Topology & Runtime Version Invariants (ADR-0103)", () =>
       `The following ADR files are missing from docs/adr/README.md index:\n${missing.join("\n")}`
     );
   });
+
+  it("guarantees all node:test glob arguments in package.json use escaped double quotes for Windows cross-platform compatibility", () => {
+    const sitePkgPath = path.join(repoRoot, "site", "package.json");
+    const sitePkg = JSON.parse(fs.readFileSync(sitePkgPath, "utf8"));
+    const scripts = sitePkg.scripts || {};
+
+    for (const [name, cmd] of Object.entries(scripts)) {
+      if (cmd.includes("--test")) {
+        // Must NOT contain single quotes around globs like 'tests/...', which breaks Windows cmd/PowerShell globbing
+        assert.ok(
+          !/'tests\/[^']*'/.test(cmd),
+          `Script "${name}" in site/package.json contains single-quoted glob pattern ('tests/...'). Use escaped double quotes (\\"tests/...\\") for Windows compatibility.`
+        );
+      }
+    }
+  });
 });

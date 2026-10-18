@@ -1,0 +1,2 @@
+#!/bin/sh
+node site/scripts/check-staged.mjs

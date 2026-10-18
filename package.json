@@ -19,6 +19,7 @@
     "check:staged": "node site/scripts/check-staged.mjs",
     "dev": "pnpm --filter ./site dev",
     "build": "pnpm --filter ./site build",
-    "preview": "pnpm --filter ./site preview"
+    "preview": "pnpm --filter ./site preview",
+    "prepare": "git config core.hooksPath .githooks 2>/dev/null || true"
   }
 }
