@@ -30,17 +30,23 @@ Accepted
 3. **URL Hash 查詢參數縫合（`?lang=`）與狀態同步階層**：
    - 擴充 `parseRoute` 與 `routeHash` 解析與注入 `?lang=`（如 `#/song/pretender?lang=ja`），對歷史裸露 hash 路由 100% 向後相容。
    - 初始語系判定順序：(1) URL `?lang=` 參數 -> (2) `localStorage('hg_locale')` -> (3) 瀏覽器 `navigator.language` -> (4) 預設回退 `zh-TW`。
-4. **票券美學語言切換器（`LanguageSwitcher`）**：
-   - 於 Landing 頁頂部與全域標頭整合緊湊型票券切換鈕，具備 `1.5px border-ink/30`、深淺色對比、無模糊硬陰影與 ARIA 無障礙屬性，並符合 AAA 對比度。
+4. **票券美學語言切換器與響應式情境分流（Responsive Switcher Dichotomy & Affordance）**：
+   - **首頁門面（Landing Page）**：無論桌面端或行動端，均維持於頂部工具列之緊湊型平貼下拉式選單（Dropdown），具備 `1.5px border-ink/30`、深淺色對比、無模糊硬陰影與 ARIA 無障礙屬性，並符合 AAA 對比度。首頁嚴格禁止出現懸浮按鈕，避免遮擋三大特色卡片或進入檔案庫之主要 CTA。
+   - **檔案庫視圖（Archive View）**：
+     - 桌面端（`>= sm`）：維持於全域 Header 標題列右側之標準下拉式選單。
+     - 行動端（`< sm`）：Header 標題列隱藏語系選單以釋放橫向空間；轉化為右下角浮動控制列（`MobileFloatingControls`）頂部之獨立圓形懸浮球（`🌐 FAB`, `h-11 w-11`，與 `🔍` 搜尋 FAB 同款白底粗墨框造形），點擊後選單向上彈出（`menuPosition="up"`），兼顧單手操作人體工學。
 5. **全域搜尋多語分類索引**：
    - 全域搜尋框（`SearchBox`）擴充索引各語系演出分類與特別標籤關鍵字，輸入日文、英文或韓文均可即時匹配對應巡演與場次，並與 ADR-0105 官方雙語別名索引無縫共存。
 6. **紀念票券匯出快取隔離**：
    - 票卡渲染快取鍵納入語系識別碼 `${showKey}-${theme}-${locale}`，徹底杜絕切換語言後的跨語系快取污染。
 7. **語系分支複製文字住 `lib/` 純函式（800 行模組化上限連動）**：
    - 四語 `locale === "en" / "ja" / "ko" / "zh-TW"` 三元分支天然膨脹行數，會撐破 ADR-0101 之 slip／navigator 單檔 800 行不變量。票根複製文字一律抽為 `site/src/lib/*-text.js` 純函式（如 `buildSongHistoryText`、`buildVenueHistoryText`，吃 `locale` 回傳字串陣列），slip 元件只留呼叫與剪貼簿寫入。`site/scripts/check-i18n.mjs` 認得此慣例（locale 三元分支視為合法在地化分支，不報錯）。
+8. **深層票根、分析面板與導覽元件全量在地化（Deep Slips & Panels Localization）**：
+   - 抽屜篩選器（`FilterDrawer` / `ArchiveLayout`）、區間分頁（`PaginationPills`）、巡演票根足跡與非定番限定曲（`TourSlip`）、歌曲主力曲／特殊版本／出席率／歷年頻率（`SongSlip`）、場地常唱曲／首演／歷年頻率（`VenueSlip`）、單場考證來源與分析面板（`ShowSlip`、`ShowSlipPanels`、`TicketCommon`）全面納入四語字典。
+   - 測試套件新增 Suite 16 Subtest 9，以 Node SSR 靜態渲染針對四語系即時驗證深層面板字串對稱性與關鍵標籤正確性。
 
 ## Consequences
 - 全面支援繁體中文、日語、英語、韓語四種語言，為海外歌迷提供無縫的母語體驗。
 - 嚴格守護實體領域模型的歷史一手性與文獻真實度。
-- 全站 static build 保持次秒級，全量 77 項端對端與不變量測試（17 suites）於 2.1 秒內全數通過。
+- 全站 static build 保持次秒級，全量 81 項端對端與不變量測試（17 suites）於 2.7 秒內全數通過。
 - UI 層新增 `pnpm check:i18n`（含自測 fixtures）掃描 `components/`、`hooks/` 之裸 CJK 未經 `t()` 文案，漏翻在 CI 即紅燈；跨語系測試斷言一律走 `DICTIONARIES` 取期望文案，禁止寫死任一語系字串。
