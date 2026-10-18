@@ -73,6 +73,23 @@ export async function renderComponent(element) {
 }
 
 /**
+ * Runs an async callback scoped to a temporary URL hash.
+ */
+export async function withHash(hash, fn) {
+  const prev = globalThis.window?.location?.hash ?? "";
+  try {
+    if (globalThis.window?.location) {
+      globalThis.window.location.hash = hash;
+    }
+    return await fn();
+  } finally {
+    if (globalThis.window?.location) {
+      globalThis.window.location.hash = prev;
+    }
+  }
+}
+
+/**
  * Explicitly terminates the Vite dev server instance.
  */
 export async function closeViteServer() {
