@@ -26,7 +26,7 @@ Multiple autonomous agents frequently operate concurrently in this repository:
 4. **Data Inspection & Script Hygiene**: Use `node -e` or scripts under `site/scripts/` rather than PowerShell `ConvertFrom-Json` to avoid Windows UTF-8 encoding distortion. In PowerShell, strictly avoid inline nested quote escaping issues: never run inline `node -e` containing backticks (`) or multiline template literals; always write logic directly to `.scratch/temp.mjs` and run `node .scratch/temp.mjs`. For codebase code/text searches, always prefer `git grep -n "<pattern>" -- <path>` over PowerShell `Select-String` (sub-100ms vs 15-30s). Never wrap the entire `CommandLine` parameter in outer escaped quotes (e.g. `\"git status\"` will be treated by PowerShell as a single nonexistent executable path); pass clean command strings like `git status`. Never chain shell commands with `&&` in tool calls on Windows; invoke single commands sequentially.
 5. **Vite SSR & Scratch Scripts**: Execute ad-hoc snippets importing frontend modules (e.g. `domain.js`) via `pnpm eval "<code>"` or `site/scripts/eval.mjs` (which injects `loadModule('/src/lib/domain.js')` and `readJson('../data/...')`), avoiding Node.js strict ESM JSON attribute errors (`ERR_IMPORT_ATTRIBUTE_MISSING`).
 6. **pnpm Monorepo Workspace Topology (ADR-0103)**: Repository uses root `pnpm-workspace.yaml` targeting `packages: ['site']` with root `pnpm-lock.yaml`. Never create rogue `pnpm-workspace.yaml` inside subdirectories, and invoke workspace scripts from root using `pnpm --filter ./site <cmd>`.
-7. **Staging Hygiene Guardrail**: Run `pnpm check:staged` before committing to verify no concurrent agent files (`data/events/*.json`, `docs/reports/*.md`) were mistakenly staged, and verify ADR indexing integrity. If sharing files touched by concurrent agents (e.g. `i18n.jsx`), use surgical staging via patch (`git apply --cached .scratch/*.patch`) or explicit hunk staging instead of blanket `git add <file>`.
+7. **Staging Hygiene Guardrail**: Run `pnpm check:staged` before committing to verify no concurrent agent files (`data/events/*.json`, `docs/reports/*.md`) were mistakenly staged, and verify ADR indexing integrity. ADRs in `docs/adr/` are immutable historical records; never mutate accepted decision text in-place. If sharing files touched by concurrent agents (e.g. `i18n.jsx`), use surgical staging via patch (`git apply --cached .scratch/*.patch`) or explicit hunk staging instead of blanket `git add <file>`.
 8. **Parallel Subagent Discipline**: Fan out subagents only across independent files; related files sharing locales or imports are edited sequentially by one agent. Subagent writes persist even when its response is lost to a restart — always re-verify with `grep`/`git diff -- <path>` instead of assuming completion, and never repeat an edit without first reading the current file state.
 9. **Solo Developer Workflow**: This is a solo developer repository. Commit or merge integration branches directly into `master` and push to origin; never open GitHub Pull Requests or Draft PRs unless explicitly instructed by the user.
 10. **Synchronous Tool Timeout & Anti-Polling Discipline**: For all terminal commands expected to finish quickly (including git operations `git commit`, `git push`, `git add`, `pnpm check`, `pnpm test`, `pnpm build`, `pnpm test:ui`), always set `WaitMsBeforeAsync` to `10000ms` (maximum) to complete synchronously and minimize background task roundtrips. When any command does enter the background, strictly adhere to reactive wakeup: NEVER poll or loop on `manage_task status`; stop calling tools immediately and await the system notification.
@@ -34,14 +34,15 @@ Multiple autonomous agents frequently operate concurrently in this repository:
 ## Verification Commands
 
 ### Inner Loop (Sub-Second Rapid Iteration)
+- `pnpm sync`: Compiles and syncs `data/*.json` and `data/{tours,events}` into `site/src/data/` and updates audit reports. Run whenever data files are updated.
 - `pnpm lint`: Runs `oxlint` static linting in ~20ms (`oxlint src -c .oxlintrc.json`). Run immediately after editing any component to catch undeclared variables (`no-undef`) or unused variables (`no-unused-vars`) before heavier SSR test execution.
 - `pnpm test:pipeline`: Runs pure data pipeline & consensus algorithm tests in <50ms (`site/tests/pipeline/`).
 - `pnpm test:invariants`: Runs repository structure, design tokens, cross-platform quoting, and AST invariant tests in ~120ms (`site/tests/invariants/`).
 
 ### Outer Loop (Integration & Pre-Commit Verification)
 - `pnpm test:ui`: Runs headless React SSR, route state machine, and localization tests (`site/tests/ui/`).
-- `pnpm check`: Master verification gate running `oxlint`, `check-i18n`, and all 24 test suites (114 invariant assertions). Run before every commit.
-- `pnpm test`: Runs data sync, `check-i18n`, and all 24 test suites (114 invariant assertions).
+- `pnpm check`: Master verification gate running `oxlint`, `check-i18n`, and all 24 test suites (116 invariant assertions). Run before every commit.
+- `pnpm test`: Runs data sync, `check-i18n`, and all 24 test suites (116 invariant assertions).
 - `pnpm build`: Production build via Vite compiler (`site/dist/`).
 
 ## Agent skills
