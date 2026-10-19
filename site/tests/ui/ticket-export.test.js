@@ -522,4 +522,206 @@ describe("16. Localized Commemorative Ticket Image Export (Issue #19)", () => {
         }
       });
     });
+
+    it("renders custom seat, notes, stamp, and privacy controls in MemorialCardModal (Issue #36)", async () => {
+      const { MemorialCardModal } = await loadModule("/src/components/MemorialCardModal.jsx");
+      const { MemoryStorageAdapter, recordAttendance } = await loadModule("/src/lib/passport.js");
+      const { I18nProvider } = await loadModule("/src/lib/i18n.jsx");
+
+      const storage = new MemoryStorageAdapter();
+      const mockShow = {
+        id: "show-k-arena",
+        date: "2024-11-12",
+        venue: "K-Arena Yokohama",
+        city: "橫濱",
+      };
+      const mockUnit = {
+        id: "rejoice-tour",
+        title: "Arena Tour 2024 -Rejoice-",
+        isTour: true,
+        shows: [mockShow],
+      };
+
+      // 1. Pre-record attendance with seat, notes, stampId
+      recordAttendance(
+        "show-k-arena",
+        {
+          date: "2024-11-12",
+          seat: "Arena A Block Row 12 Seat 34",
+          notes: "Incredible live rendition of Subtitle and Pretender!",
+          stampId: "stamp-rejoice",
+          includeSeat: true,
+          includeNotes: true,
+        },
+        storage
+      );
+
+      // 2. Render MemorialCardModal with storage
+      const htmlCustom = renderToStaticMarkup(
+        React.createElement(
+          I18nProvider,
+          { initialLocale: "zh-TW" },
+          React.createElement(MemorialCardModal, {
+            isOpen: true,
+            onClose: () => {},
+            show: mockShow,
+            unit: mockUnit,
+            main: [{ cue: "M1", item: { songId: "pretender" } }],
+            enc: [],
+            storage,
+          })
+        )
+      );
+
+      // Verify custom inputs exist in drawer
+      assert.ok(htmlCustom.includes('data-testid="memorial-seat-input"'), "Seat input must be rendered");
+      assert.ok(htmlCustom.includes('data-testid="memorial-notes-input"'), "Notes input must be rendered");
+      assert.ok(htmlCustom.includes('data-testid="memorial-stamp-picker"'), "Stamp picker must be rendered");
+      assert.ok(htmlCustom.includes('data-testid="memorial-include-seat-toggle"'), "Include seat toggle must be rendered");
+      assert.ok(htmlCustom.includes('data-testid="memorial-include-notes-toggle"'), "Include notes toggle must be rendered");
+      assert.ok(htmlCustom.includes('data-testid="memorial-download-btn"'), "Download PNG button must be rendered");
+
+      // Verify ticket elements rendered on card
+      assert.ok(htmlCustom.includes('data-testid="ticket-seat-badge"'), "Seat badge must be rendered on ticket");
+      assert.ok(htmlCustom.includes("Arena A Block Row 12 Seat 34"), "Seat value must be rendered in ticket");
+      assert.ok(htmlCustom.includes('data-testid="ticket-notes-memo"'), "Notes memo must be rendered on ticket");
+      assert.ok(htmlCustom.includes("Incredible live rendition of Subtitle and Pretender!"), "Notes content must be rendered");
+      assert.ok(htmlCustom.includes('data-testid="ticket-stamp"'), "Custom stamp must be rendered");
+      assert.ok(htmlCustom.includes('data-stamp-id="stamp-rejoice"'), "Stamp id must match selected stamp");
+      assert.ok(htmlCustom.includes("歓喜"), "Rejoice stamp text must be rendered");
+    });
+
+    it("respects privacy controls by omitting seat or notes when toggled off (Issue #36)", async () => {
+      const { MemorialCardModal } = await loadModule("/src/components/MemorialCardModal.jsx");
+      const { MemoryStorageAdapter, recordAttendance } = await loadModule("/src/lib/passport.js");
+      const { I18nProvider } = await loadModule("/src/lib/i18n.jsx");
+
+      const storage = new MemoryStorageAdapter();
+      const mockShow = {
+        id: "show-privacy",
+        date: "2024-11-13",
+        venue: "K-Arena Yokohama",
+        city: "橫濱",
+      };
+      const mockUnit = {
+        id: "rejoice-tour",
+        title: "Arena Tour 2024 -Rejoice-",
+        isTour: true,
+        shows: [mockShow],
+      };
+
+      // Pre-record with includeSeat: false and includeNotes: false
+      recordAttendance(
+        "show-privacy",
+        {
+          date: "2024-11-13",
+          seat: "Confidential VIP Seat 1",
+          notes: "Private personal memo",
+          stampId: "stamp-attended",
+          includeSeat: false,
+          includeNotes: false,
+        },
+        storage
+      );
+
+      const htmlPrivacy = renderToStaticMarkup(
+        React.createElement(
+          I18nProvider,
+          { initialLocale: "zh-TW" },
+          React.createElement(MemorialCardModal, {
+            isOpen: true,
+            onClose: () => {},
+            show: mockShow,
+            unit: mockUnit,
+            main: [{ cue: "M1", item: { songId: "pretender" } }],
+            enc: [],
+            storage,
+          })
+        )
+      );
+
+      // Card must NOT contain seat badge or notes memo
+      assert.ok(!htmlPrivacy.includes('data-testid="ticket-seat-badge"'), "Seat badge must be omitted when includeSeat is false");
+      assert.ok(!htmlPrivacy.includes('data-testid="ticket-notes-memo"'), "Notes memo must be omitted when includeNotes is false");
+
+      // But drawer controls still retain the values for editing
+      assert.ok(htmlPrivacy.includes('value="Confidential VIP Seat 1"'), "Drawer seat input retains value");
+      assert.ok(htmlPrivacy.includes("Private personal memo"), "Drawer notes textarea retains value");
+
+      // Stamp is still rendered
+      assert.ok(htmlPrivacy.includes('data-testid="ticket-stamp"'), "Stamp is rendered");
+      assert.ok(htmlPrivacy.includes('data-stamp-id="stamp-attended"'), "Stamp id matches attended proof");
+    });
+
+    it("renders attendance quick-bar and inline editor on ShowSlip when attended (Issue #36)", async () => {
+      const { ShowSlip } = await loadModule("/src/components/slips/ShowSlip.jsx");
+      const { MemoryStorageAdapter, recordAttendance } = await loadModule("/src/lib/passport.js");
+      const { I18nProvider } = await loadModule("/src/lib/i18n.jsx");
+
+      const storage = new MemoryStorageAdapter();
+      const showId = "show-slip-36";
+      const mockShow = {
+        id: showId,
+        date: "2024-11-20",
+        venue: "Budokan",
+        city: "東京",
+      };
+      const mockUnit = {
+        id: "budokan-tour",
+        title: "Budokan Special",
+        isTour: true,
+        shows: [mockShow],
+      };
+      const mockUd = {
+        unit: mockUnit,
+        full: new Map([[showId, [{ songId: "pretender", cue: "M1" }]]]),
+        isTour: true,
+      };
+
+      // 1. When not attended: no attendance box
+      const htmlUnattended = renderToStaticMarkup(
+        React.createElement(
+          I18nProvider,
+          { initialLocale: "zh-TW" },
+          React.createElement(ShowSlip, {
+            ud: mockUd,
+            showId,
+            storage,
+          })
+        )
+      );
+      assert.ok(!htmlUnattended.includes('data-testid="showslip-attendance-box"'), "Attendance box should not render when unattended");
+      assert.ok(htmlUnattended.includes('data-testid="generate-memorial-card-btn"'), "Generate memorial card button exists");
+
+      // 2. When attended: attendance box and custom card button rendered
+      recordAttendance(
+        showId,
+        {
+          date: "2024-11-20",
+          seat: "Arena 1F Row 3",
+          notes: "Unbelievable encore performance!",
+          stampId: "stamp-special",
+        },
+        storage
+      );
+
+      const htmlAttended = renderToStaticMarkup(
+        React.createElement(
+          I18nProvider,
+          { initialLocale: "zh-TW" },
+          React.createElement(ShowSlip, {
+            ud: mockUd,
+            showId,
+            storage,
+          })
+        )
+      );
+      assert.ok(htmlAttended.includes('data-testid="showslip-attendance-box"'), "Attendance box must render when attended");
+      assert.ok(htmlAttended.includes('data-testid="showslip-seat-display"'), "Seat display badge must render");
+      assert.ok(htmlAttended.includes("Arena 1F Row 3"), "Seat text must render");
+      assert.ok(htmlAttended.includes('data-testid="showslip-notes-display"'), "Notes display must render");
+      assert.ok(htmlAttended.includes("Unbelievable encore performance!"), "Notes content must render");
+      assert.ok(htmlAttended.includes('data-testid="custom-memorial-card-btn"'), "Custom memorial card button must render");
+    });
   });
+

@@ -133,6 +133,18 @@ export function recordAttendance(showKey, showMeta = {}, storage = getSafeStorag
     seat: (showMeta.seat !== undefined ? String(showMeta.seat) : existing.seat || "").slice(0, 50),
     notes: (showMeta.notes !== undefined ? String(showMeta.notes) : existing.notes || "").slice(0, 300),
     stampId: showMeta.stampId || existing.stampId || "default",
+    includeSeat:
+      showMeta.includeSeat !== undefined
+        ? Boolean(showMeta.includeSeat)
+        : existing.includeSeat !== undefined
+        ? Boolean(existing.includeSeat)
+        : true,
+    includeNotes:
+      showMeta.includeNotes !== undefined
+        ? Boolean(showMeta.includeNotes)
+        : existing.includeNotes !== undefined
+        ? Boolean(existing.includeNotes)
+        : true,
     favorite: Boolean(showMeta.favorite !== undefined ? showMeta.favorite : existing.favorite),
     updatedAt: nowIso,
     isOrphaned: Boolean(

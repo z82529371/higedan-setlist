@@ -4,16 +4,17 @@ import { songTitle, showDate, formatShowTime, songUnreleased, formatShowVenueCit
 import { localizeVenue } from "../lib/locales/venues.js";
 import { getKindArray, kindTabs } from "../lib/kind.js";
 import { useI18n, DICTIONARIES, DEFAULT_LOCALE, resolveTranslation } from "../lib/i18n.jsx";
+import { COMMEMORATIVE_STAMPS, getStampById } from "../lib/stamps.js";
+import { getAttendedShow, recordAttendance, getSafeStorage } from "../lib/passport.js";
 
 // Session-level memory for theme choice across shows
 let sessionMemorialTheme = "vintage";
 
-
 /**
  * Generates offscreen cache key with locale discriminator to prevent cross-language cache collisions
  */
-export function getMemorialImageKey(showKey, theme, locale = "zh-TW") {
-  return `${showKey}-${theme}-${locale}`;
+export function getMemorialImageKey(showKey, theme, locale = "zh-TW", customKey = "") {
+  return `${showKey}-${theme}-${locale}${customKey ? `-${customKey}` : ""}`;
 }
 
 export function formatShowOrderText(unit, showIndex, totalShows, locale = "zh-TW") {
@@ -78,7 +79,8 @@ export function getMemorialStampText(locale = "zh-TW") {
  * - 支援「復古手感紙質」、「經典純白卡」與「暗夜舞台黑金」三種風格切換
  * - 開窗即時 DOM 預覽零延遲，背景自動非同步產出 2x 高清真圖片覆蓋置頂
  * - 支援多國語言 (zh-TW, ja, en, ko) 本地化票券排版與專屬朱印風格印章
- * - 支援手機長按直接存入相簿（Photos）與電腦右鍵另存圖片，無生硬下載按鈕
+ * - 支援座席（Seat）、個人心得（Notes）與專屬紀念章款式（Stamp）即時客製與隱私切換
+ * - 支援下載 440px 復古實體感透明圓角 PNG 圖片
  */
 export function MemorialCardModal({
   isOpen,
@@ -90,6 +92,10 @@ export function MemorialCardModal({
   showIndex = 0,
   totalShows = 1,
   locale: propLocale,
+  storage: propStorage,
+  initialSeat,
+  initialNotes,
+  initialStampId,
 }) {
   const { locale: ctxLocale } = useI18n();
   const locale = propLocale || ctxLocale || DEFAULT_LOCALE;
@@ -97,11 +103,87 @@ export function MemorialCardModal({
   const activeDict = DICTIONARIES[locale] || DICTIONARIES[DEFAULT_LOCALE];
   const t = (key, fallback) => resolveTranslation(activeDict, key, fallback);
 
+  const storage = propStorage || getSafeStorage();
+  const showKey = show?.id || "show";
+
+  const initialAttended = show ? getAttendedShow(showKey, storage) : null;
+  const [seat, setSeat] = useState(() => (initialSeat !== undefined ? initialSeat : initialAttended?.seat || ""));
+  const [notes, setNotes] = useState(() => (initialNotes !== undefined ? initialNotes : initialAttended?.notes || ""));
+  const [stampId, setStampId] = useState(() => (initialStampId !== undefined ? initialStampId : initialAttended?.stampId || "default"));
+  const [includeSeat, setIncludeSeat] = useState(() =>
+    initialAttended?.includeSeat !== undefined ? Boolean(initialAttended.includeSeat) : true
+  );
+  const [includeNotes, setIncludeNotes] = useState(() =>
+    initialAttended?.includeNotes !== undefined ? Boolean(initialAttended.includeNotes) : true
+  );
+  const [showCustomizer, setShowCustomizer] = useState(true);
+
   const [theme, setTheme] = useState(sessionMemorialTheme); // 'vintage' | 'white' | 'noir'
   const [imageUrls, setImageUrls] = useState({}); // { [`${showId}-${theme}-${locale}`]: dataUrl }
   const [isGenerating, setIsGenerating] = useState(false);
   const [copiedText, setCopiedText] = useState(false);
   const cardRef = useRef(null);
+
+  // Sync state if modal opens or showKey changes
+  useEffect(() => {
+    if (!isOpen || !show) return;
+    const currentEntry = getAttendedShow(showKey, storage);
+    if (currentEntry) {
+      if (initialSeat === undefined) setSeat(currentEntry.seat || "");
+      if (initialNotes === undefined) setNotes(currentEntry.notes || "");
+      if (initialStampId === undefined) setStampId(currentEntry.stampId || "default");
+      setIncludeSeat(currentEntry.includeSeat !== undefined ? Boolean(currentEntry.includeSeat) : true);
+      setIncludeNotes(currentEntry.includeNotes !== undefined ? Boolean(currentEntry.includeNotes) : true);
+    }
+  }, [isOpen, showKey, storage, initialSeat, initialNotes, initialStampId]);
+
+  const persistCustomization = (updates = {}) => {
+    const newSeat = updates.seat !== undefined ? updates.seat : seat;
+    const newNotes = updates.notes !== undefined ? updates.notes : notes;
+    const newStampId = updates.stampId !== undefined ? updates.stampId : stampId;
+    const newIncSeat = updates.includeSeat !== undefined ? updates.includeSeat : includeSeat;
+    const newIncNotes = updates.includeNotes !== undefined ? updates.includeNotes : includeNotes;
+
+    recordAttendance(
+      showKey,
+      {
+        date: show?.date,
+        seat: newSeat,
+        notes: newNotes,
+        stampId: newStampId,
+        includeSeat: newIncSeat,
+        includeNotes: newIncNotes,
+      },
+      storage
+    );
+  };
+
+  const handleSeatChange = (val) => {
+    const trimmed = val.slice(0, 50);
+    setSeat(trimmed);
+    persistCustomization({ seat: trimmed });
+  };
+
+  const handleNotesChange = (val) => {
+    const trimmed = val.slice(0, 300);
+    setNotes(trimmed);
+    persistCustomization({ notes: trimmed });
+  };
+
+  const handleStampChange = (id) => {
+    setStampId(id);
+    persistCustomization({ stampId: id });
+  };
+
+  const handleIncludeSeatChange = (val) => {
+    setIncludeSeat(val);
+    persistCustomization({ includeSeat: val });
+  };
+
+  const handleIncludeNotesChange = (val) => {
+    setIncludeNotes(val);
+    persistCustomization({ includeNotes: val });
+  };
 
   const handleThemeChange = (newTheme) => {
     sessionMemorialTheme = newTheme;
@@ -114,8 +196,8 @@ export function MemorialCardModal({
 
   const cardBgColor = isVintage ? "#fcfaf2" : isWhite ? "#ffffff" : "#111319";
 
-  const showKey = show?.id || "show";
-  const currentImageKey = getMemorialImageKey(showKey, theme, locale);
+  const customKey = `${includeSeat ? seat : ""}_${includeNotes ? notes : ""}_${stampId}`;
+  const currentImageKey = getMemorialImageKey(showKey, theme, locale, customKey);
   const currentImageUrl = imageUrls[currentImageKey];
 
   useEffect(() => {
@@ -163,6 +245,42 @@ export function MemorialCardModal({
     };
   }, [isOpen, show, showKey, theme, locale, currentImageKey, cardBgColor, currentImageUrl]);
 
+  const handleDownloadPng = async () => {
+    let url = currentImageUrl;
+    if (!url) {
+      const node = cardRef.current;
+      if (!node) return;
+      setIsGenerating(true);
+      try {
+        url = await exportElementToPng(node, {
+          width: 440,
+          pixelRatio: 2,
+          borderRadius: "16px",
+          cardBackground: cardBgColor,
+        });
+        if (url) {
+          setImageUrls((prev) => ({
+            ...prev,
+            [currentImageKey]: url,
+          }));
+        }
+      } catch (err) {
+        console.error("下載小卡失敗:", err);
+      } finally {
+        setIsGenerating(false);
+      }
+    }
+
+    if (url && typeof document !== "undefined" && typeof document.createElement === "function") {
+      const link = document.createElement("a");
+      link.download = `higedan-memorial-${showKey}-${theme}.png`;
+      link.href = url;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+  };
+
   if (!isOpen || !show) return null;
 
   const dateFormatted = showDate(show, locale);
@@ -170,7 +288,8 @@ export function MemorialCardModal({
   const totalSongsCount = main.length + enc.length;
   const songCountBadgeText = formatTicketSongCount(totalSongsCount, locale);
   const sectionHeaders = getMemorialSectionHeaders(locale);
-  const stampText = getMemorialStampText(locale);
+  const currentStamp = getStampById(stampId);
+  const stampText = t(currentStamp.stampTextKey, currentStamp.stampTextDefault || getMemorialStampText(locale));
   const timeFormatted = formatShowTime(show, locale);
 
   const handleCopyText = () => {
@@ -202,6 +321,12 @@ export function MemorialCardModal({
           ? `⏰ 시간: ${timeFormatted}`
           : `⏰ 時間：${timeFormatted}`
       );
+    }
+    if (seat && includeSeat) {
+      lines.push(`💺 ${t("memorial.seatLabel", "座位席次")}：${seat}`);
+    }
+    if (notes && includeNotes) {
+      lines.push(`💬 ${t("memorial.notesLabel", "觀演隨筆")}：${notes}`);
     }
     lines.push(
       locale === "en"
@@ -306,6 +431,35 @@ export function MemorialCardModal({
     );
   };
 
+  const renderStamp = () => {
+    const stampColorClass = isVintage
+      ? "border-[#b91c1c] text-[#b91c1c]"
+      : isWhite
+      ? "border-[#dc2626] text-[#dc2626]"
+      : "border-[#d49a00] text-[#d49a00]";
+
+    const shapeBorder =
+      currentStamp.shape === "pass"
+        ? "rounded-[6px] border-2"
+        : currentStamp.shape === "star"
+        ? "rounded-full border-2 border-dashed"
+        : currentStamp.shape === "box"
+        ? "rounded-[2px] border-2"
+        : "rounded-full border-2 border-double";
+
+    return (
+      <div
+        data-testid="ticket-stamp"
+        data-stamp-id={stampId}
+        className={`w-14 h-14 flex flex-col items-center justify-center p-1 text-center font-bold shrink-0 select-none ${shapeBorder} ${currentStamp.rotationClass || "rotate-[-8deg]"} ${stampColorClass}`}
+      >
+        <span className="text-[7.5px] tracking-tighter leading-tight font-extrabold">{currentStamp.headerText || "HIGEDAN"}</span>
+        <span className="text-[10px] leading-tight font-black">{stampText}</span>
+        <span className="text-[6.5px] tracking-widest leading-none font-bold">{currentStamp.subText || "ARCHIVE"}</span>
+      </div>
+    );
+  };
+
   return (
     <div
       className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/80 backdrop-blur-sm overflow-y-auto"
@@ -340,13 +494,13 @@ export function MemorialCardModal({
         </div>
 
         {/* Toolbar: Theme Switcher */}
-        <div className="flex items-center justify-between gap-2 px-4 py-2.5 bg-[#12131a] border-b border-[#2d3446] text-xs">
+        <div className="flex items-center justify-between gap-2 px-4 py-2 bg-[#12131a] border-b border-[#2d3446] text-xs">
           <div className="flex items-center gap-1.5">
             <span className="text-[#9ca3af] font-mono">{t("memorial.styleLabel", "風格：")}</span>
             <button
               type="button"
               onClick={() => handleThemeChange("vintage")}
-              className={`px-2.5 py-1 rounded text-xs font-bold transition-all cursor-pointer ${
+              className={`px-2 py-1 rounded text-xs font-bold transition-all cursor-pointer ${
                 isVintage
                   ? "bg-[#e5d8b8] text-[#292524] shadow-xs"
                   : "bg-[#202432] text-[#9ca3af] hover:text-white"
@@ -357,7 +511,7 @@ export function MemorialCardModal({
             <button
               type="button"
               onClick={() => handleThemeChange("white")}
-              className={`px-2.5 py-1 rounded text-xs font-bold transition-all cursor-pointer ${
+              className={`px-2 py-1 rounded text-xs font-bold transition-all cursor-pointer ${
                 isWhite
                   ? "bg-white text-[#111827] shadow-xs"
                   : "bg-[#202432] text-[#9ca3af] hover:text-white"
@@ -368,7 +522,7 @@ export function MemorialCardModal({
             <button
               type="button"
               onClick={() => handleThemeChange("noir")}
-              className={`px-2.5 py-1 rounded text-xs font-bold transition-all cursor-pointer ${
+              className={`px-2 py-1 rounded text-xs font-bold transition-all cursor-pointer ${
                 isNoir
                   ? "bg-[#d49a00] text-[#111319] shadow-xs"
                   : "bg-[#202432] text-[#9ca3af] hover:text-white"
@@ -380,6 +534,120 @@ export function MemorialCardModal({
           <span className="font-mono text-[11px] text-[#9ca3af] opacity-80 hidden sm:inline">
             {t("memorial.ticketFormat", "📜 單欄長條票券")}
           </span>
+        </div>
+
+        {/* Customization Drawer (Seat, Notes, Stamp, Privacy Controls) */}
+        <div className="bg-[#151720] border-b border-[#2d3446] px-4 py-2.5 text-xs">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-1.5 font-mono font-bold text-[#e2e8f0]">
+              <span aria-hidden="true">✏️</span>
+              <span>{t("memorial.editTitle", "自訂紀念票券")}</span>
+              <span className="text-[10px] text-[#9ca3af] font-normal hidden sm:inline">
+                ({t("memorial.customized", "已自動同步打卡資料")})
+              </span>
+            </div>
+            <button
+              type="button"
+              onClick={() => setShowCustomizer((v) => !v)}
+              className="text-[#9ca3af] hover:text-white font-mono text-[11px] cursor-pointer"
+            >
+              {showCustomizer ? t("slips.common.collapse", "收合 ▴") : t("slips.common.expand", "展開 ▾")}
+            </button>
+          </div>
+
+          {showCustomizer && (
+            <div className="space-y-2 pt-2 border-t border-[#2d3446]/60 mt-2">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                {/* Seat Input & Privacy Toggle */}
+                <div>
+                  <div className="flex items-center justify-between pb-1">
+                    <label htmlFor="memorial-seat-input" className="font-mono text-[#9ca3af] font-bold">
+                      💺 {t("memorial.seatLabel", "座位席次")}
+                    </label>
+                    <label className="flex items-center gap-1 font-mono text-[10px] text-[#cbd5e1] cursor-pointer select-none">
+                      <input
+                        type="checkbox"
+                        data-testid="memorial-include-seat-toggle"
+                        checked={includeSeat}
+                        onChange={(e) => handleIncludeSeatChange(e.target.checked)}
+                        className="rounded accent-[#d49a00] cursor-pointer"
+                      />
+                      <span>{t("memorial.includeSeat", "在小卡上印出座席")}</span>
+                    </label>
+                  </div>
+                  <input
+                    id="memorial-seat-input"
+                    type="text"
+                    data-testid="memorial-seat-input"
+                    maxLength={50}
+                    value={seat}
+                    onChange={(e) => handleSeatChange(e.target.value)}
+                    placeholder={t("memorial.seatPlaceholder", "例如：搖滾 A 區 12 排 34 號")}
+                    className="w-full bg-[#1c202d] text-[#f3f4f6] border border-[#374151] rounded px-2.5 py-1 text-xs placeholder:text-[#6b7280] focus:border-[#d49a00] focus:outline-none font-mono"
+                  />
+                </div>
+
+                {/* Stamp Picker */}
+                <div>
+                  <span className="block font-mono text-[#9ca3af] font-bold pb-1">
+                    💮 {t("memorial.stampLabel", "紀念印章款式")}
+                  </span>
+                  <div
+                    data-testid="memorial-stamp-picker"
+                    className="flex flex-wrap items-center gap-1"
+                  >
+                    {COMMEMORATIVE_STAMPS.map((stamp) => {
+                      const isSelected = stampId === stamp.id;
+                      return (
+                        <button
+                          key={stamp.id}
+                          type="button"
+                          data-testid={`stamp-option-${stamp.id}`}
+                          onClick={() => handleStampChange(stamp.id)}
+                          className={`px-2 py-0.5 rounded text-[11px] font-mono font-bold transition-all cursor-pointer border ${
+                            isSelected
+                              ? "bg-[#d49a00] text-[#111319] border-[#d49a00] shadow-xs"
+                              : "bg-[#202432] text-[#9ca3af] border-[#374151] hover:text-white hover:border-[#4b5563]"
+                          }`}
+                        >
+                          <span>{t(stamp.nameKey, stamp.id)}</span>
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+              </div>
+
+              {/* Notes Input & Privacy Toggle */}
+              <div>
+                <div className="flex items-center justify-between pb-1">
+                  <label htmlFor="memorial-notes-input" className="font-mono text-[#9ca3af] font-bold">
+                    💬 {t("memorial.notesLabel", "觀演隨筆・心得")}
+                  </label>
+                  <label className="flex items-center gap-1 font-mono text-[10px] text-[#cbd5e1] cursor-pointer select-none">
+                    <input
+                      type="checkbox"
+                      data-testid="memorial-include-notes-toggle"
+                      checked={includeNotes}
+                      onChange={(e) => handleIncludeNotesChange(e.target.checked)}
+                      className="rounded accent-[#d49a00] cursor-pointer"
+                    />
+                    <span>{t("memorial.includeNotes", "在小卡上印出隨筆心得")}</span>
+                  </label>
+                </div>
+                <textarea
+                  id="memorial-notes-input"
+                  data-testid="memorial-notes-input"
+                  maxLength={300}
+                  rows={2}
+                  value={notes}
+                  onChange={(e) => handleNotesChange(e.target.value)}
+                  placeholder={t("memorial.notesPlaceholder", "寫下本場演出的難忘回憶（最多 300 字）...")}
+                  className="w-full bg-[#1c202d] text-[#f3f4f6] border border-[#374151] rounded px-2.5 py-1 text-xs placeholder:text-[#6b7280] focus:border-[#d49a00] focus:outline-none"
+                />
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Card Preview Scroll Area */}
@@ -490,12 +758,48 @@ export function MemorialCardModal({
                   <div className="font-mono text-xs font-bold text-[#d19f00] pt-0.5">
                     📅 {dateFormatted}
                   </div>
+
+                  {/* Seat Badge (Privacy controlled, >=7:1 AAA contrast) */}
+                  {seat && includeSeat && (
+                    <div
+                      data-testid="ticket-seat-badge"
+                      className={`inline-flex items-center gap-1.5 px-2 py-0.5 rounded-[3px] font-mono text-[11px] font-bold border mt-1 ${
+                        isVintage
+                          ? "bg-[#f5ebd2] text-[#78350f] border-[#d6cebf]"
+                          : isWhite
+                          ? "bg-[#f3f4f6] text-[#111827] border-[#d1d5db]"
+                          : "bg-[#1c202d] text-[#fbbf24] border-[#374151]"
+                      }`}
+                    >
+                      <span className="font-bold text-[10px]">💺 SEAT:</span>
+                      <span className="font-black">{seat}</span>
+                    </div>
+                  )}
                 </div>
 
                 {/* Perforation Tear Line with Notches */}
                 <div className="relative py-0.5">
                   <div className="border-b-2 border-dashed border-current/20" />
                 </div>
+
+                {/* Notes Memo Block (Privacy controlled, >=7:1 AAA contrast, radius <8px) */}
+                {notes && includeNotes && (
+                  <div
+                    data-testid="ticket-notes-memo"
+                    className={`rounded-[4px] p-2.5 text-[11px] leading-relaxed border border-dashed ${
+                      isVintage
+                        ? "bg-[#f7f2e4] text-[#1c1917] border-[#d6cebf]"
+                        : isWhite
+                        ? "bg-[#f9fafb] text-[#111827] border-[#d1d5db]"
+                        : "bg-[#161922] text-[#f4f4f5] border-[#2e3444]"
+                    }`}
+                  >
+                    <div className="flex items-center justify-between font-mono text-[9px] font-extrabold uppercase tracking-wider pb-1 border-b border-current/20 mb-1">
+                      <span>◆ FAN MEMO // {t("memorial.notesLabel", "觀演隨筆")}</span>
+                    </div>
+                    <p className="whitespace-pre-wrap break-words italic m-0 font-medium">"{notes}"</p>
+                  </div>
+                )}
 
                 {/* ================= SETLIST CONTENT (SINGLE COLUMN SLIP) ================= */}
                 <div className="space-y-3">
@@ -546,20 +850,8 @@ export function MemorialCardModal({
                     </div>
                   </div>
 
-                  {/* Vermilion Stamp (朱印風格) */}
-                  <div
-                    className={`w-14 h-14 rounded-full border-2 flex flex-col items-center justify-center p-1 text-center font-bold shrink-0 select-none ${
-                      isVintage
-                        ? "border-[#b91c1c] text-[#b91c1c] rotate-[-8deg]"
-                        : isWhite
-                        ? "border-[#dc2626] text-[#dc2626] rotate-[-8deg]"
-                        : "border-[#d49a00] text-[#d49a00] rotate-[-8deg]"
-                    }`}
-                  >
-                    <span className="text-[8px] tracking-tighter leading-tight">HIGEDAN</span>
-                    <span className="text-[10px] leading-tight font-black">{stampText}</span>
-                    <span className="text-[7px] tracking-widest leading-none">ARCHIVE</span>
-                  </div>
+                  {/* Dynamic Commemorative Stamp */}
+                  {renderStamp()}
                 </div>
               </div>
             </div>
@@ -600,6 +892,17 @@ export function MemorialCardModal({
           </div>
 
           <div className="flex items-center gap-2 ml-auto">
+            <button
+              type="button"
+              data-testid="memorial-download-btn"
+              onClick={handleDownloadPng}
+              disabled={isGenerating}
+              className="px-3.5 py-2 rounded-[4px] bg-[#d49a00] text-[#111319] text-xs font-mono font-bold hover:brightness-110 transition-all cursor-pointer inline-flex items-center gap-1.5 border border-[#b38000] active:scale-[0.98] disabled:opacity-50"
+            >
+              <span aria-hidden="true">📸</span>
+              <span>{isGenerating ? t("memorial.exporting", "匯出中...") : t("memorial.downloadPng", "下載透明圓角 PNG")}</span>
+            </button>
+
             <button
               type="button"
               onClick={handleCopyText}

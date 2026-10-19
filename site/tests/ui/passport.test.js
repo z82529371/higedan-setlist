@@ -178,8 +178,24 @@ describe("22. ShowSlip Attendance Check-in & Resilient LocalStorage Persistence 
       assert.strictEqual(res1.entry.notes, "Amazing live performance!");
       assert.strictEqual(res1.entry.stampId, "stamp-rejoice");
       assert.strictEqual(res1.entry.favorite, true);
+      assert.strictEqual(res1.entry.includeSeat, true);
+      assert.strictEqual(res1.entry.includeNotes, true);
       assert.strictEqual(res1.entry.isOrphaned, false);
       assert.ok(res1.entry.updatedAt);
+
+      // 1b. Privacy controls (includeSeat: false, includeNotes: false)
+      const resPrivacy = recordAttendance(
+        showId,
+        {
+          includeSeat: false,
+          includeNotes: false,
+        },
+        storage
+      );
+      assert.strictEqual(resPrivacy.entry.includeSeat, false);
+      assert.strictEqual(resPrivacy.entry.includeNotes, false);
+      assert.strictEqual(resPrivacy.entry.seat, "Arena A 12-34"); // preserves seat
+      assert.strictEqual(resPrivacy.entry.notes, "Amazing live performance!"); // preserves notes
 
       assert.strictEqual(isAttended(showId, storage), true);
       assert.strictEqual(getAttendedShow(showId, storage)?.showKey, showId);

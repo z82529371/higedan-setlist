@@ -199,4 +199,30 @@ describe("9. Design Token Invariants & Dedicated URL Routes Seam (DESIGN.md, ADR
       "venue-native-subtitle must not use font-mono (The Cue Monospace Rule, DESIGN.md)"
     );
   });
+
+  it("verifies commemorative card custom seat, notes, and stamp ink tokens and contrast invariants (Issue #36)", () => {
+    const memorialModalPath = path.resolve(import.meta.dirname, "../../src/components/MemorialCardModal.jsx");
+    const content = fs.readFileSync(memorialModalPath, "utf8");
+
+    // 1. Must define data-testid elements for seat, notes, and stamp
+    assert.ok(content.includes('data-testid="ticket-seat-badge"'), "MemorialCardModal must define ticket-seat-badge");
+    assert.ok(content.includes('data-testid="ticket-notes-memo"'), "MemorialCardModal must define ticket-notes-memo");
+    assert.ok(content.includes('data-testid="ticket-stamp"'), "MemorialCardModal must define ticket-stamp");
+
+    // 2. Verified ticket custom note cards must have radius < 8px
+    const noteMemoMatch = content.match(/data-testid=["']ticket-notes-memo["'][\s\S]*?className=\{`([^`]+)`\}/);
+    assert.ok(noteMemoMatch, "Must find ticket-notes-memo className");
+    assert.ok(
+      !noteMemoMatch[1].includes("rounded-xl") && !noteMemoMatch[1].includes("rounded-2xl") && !noteMemoMatch[1].includes("rounded-lg"),
+      "ticket-notes-memo must adhere to DESIGN.md card radius < 8px"
+    );
+
+    // 3. High-contrast ink tokens: small seat text (<14px) must strictly use high-contrast ink
+    const seatBadgeMatch = content.match(/data-testid=["']ticket-seat-badge["'][\s\S]*?className=\{`([^`]+)`\}/);
+    assert.ok(seatBadgeMatch, "Must find ticket-seat-badge className");
+    assert.ok(
+      seatBadgeMatch[1].includes("text-[#78350f]") && seatBadgeMatch[1].includes("text-[#111827]"),
+      "ticket-seat-badge must use AAA high-contrast ink tokens (>=7:1 contrast)"
+    );
+  });
 });
