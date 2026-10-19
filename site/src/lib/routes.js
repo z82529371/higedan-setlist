@@ -54,6 +54,11 @@ export function parseRoute(hash) {
       if (lang) res.lang = lang;
       return res;
     }
+    if (normalizedPath === "/passport") {
+      const res = { kind: "passport", value: null };
+      if (lang) res.lang = lang;
+      return res;
+    }
     return null;
   }
 
@@ -77,6 +82,10 @@ export function buildRouteHash(kind, value, options = {}) {
       ? `#/venue/${encodeURIComponent(value)}`
       : kind === "tour"
       ? `#/tour/${value}`
+      : kind === "passport"
+      ? `#/passport`
+      : kind === "archive"
+      ? `#/archive`
       : "#/";
 
   const lang = opts.lang && opts.lang !== DEFAULT_LOCALE && SUPPORTED_LOCALES.includes(opts.lang)
@@ -90,4 +99,6 @@ export const routeHash = {
   show: (id, opts) => buildRouteHash("show", id, opts),
   venue: (name, opts) => buildRouteHash("venue", name, opts),
   tour: (id, opts) => buildRouteHash("tour", id, opts),
+  passport: (opts) => buildRouteHash("passport", null, opts),
+  archive: (opts) => buildRouteHash("archive", null, opts),
 };

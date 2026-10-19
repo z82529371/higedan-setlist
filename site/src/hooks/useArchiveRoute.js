@@ -75,6 +75,7 @@ export function useArchiveRoute({
     const r =
       parseRoute(window.location.hash) || parseRoute(window.location.pathname);
     if (!r) return fallback;
+    if (r.kind === "passport") return fallback;
     if (r.kind === "song" && allUsedSongs.some((s) => s.id === r.value))
       return { ...fallback, tab: "song", selSong: r.value };
     if (r.kind === "show" && unitIdByShowId.has(r.value))
@@ -120,6 +121,7 @@ export function useArchiveRoute({
     const r =
       parseRoute(rawHash) || parseRoute(window.location.pathname);
     if (!r) return "landing";
+    if (r.kind === "passport") return "passport";
     if (r.kind === "song" && allUsedSongs.some((s) => s.id === r.value)) return "archive";
     if (r.kind === "show" && unitIdByShowId.has(r.value)) return "archive";
     if (r.kind === "venue" && resolveVenueKey(r.value, allVenues)) return "archive";
@@ -199,6 +201,11 @@ export function useArchiveRoute({
   // Hash is the single funnel: selections write hash, hashchange applies state.
   const applyRoute = (r) => {
     if (!r) return;
+    if (r.kind === "passport") {
+      setViewMode("passport");
+      setIsFilterDrawerOpen(false);
+      return;
+    }
     setViewMode("archive");
     setIsFilterDrawerOpen(false);
     if (r.kind === "song" && allUsedSongs.some((s) => s.id === r.value)) {
@@ -294,6 +301,11 @@ export function useArchiveRoute({
       }
       if (rawHash === "#/archive") {
         setViewMode("archive");
+        return;
+      }
+      if (rawHash.startsWith("#/passport") || r?.kind === "passport") {
+        setViewMode("passport");
+        setIsFilterDrawerOpen(false);
         return;
       }
       if (r) {
@@ -503,6 +515,19 @@ export function useArchiveRoute({
     window.scrollTo({ top: 0, behavior: "instant" });
   };
 
+  const handleSelectPassport = () => {
+    setQ("");
+    setIsFilterDrawerOpen(false);
+    setIsMobileSearchOpen(false);
+    go(routeHash.passport());
+  };
+
+  const handleReturnArchive = () => {
+    setViewMode("archive");
+    setQ("");
+    go(routeHash.archive());
+  };
+
   const handleCommitDrawer = () => {
     if (!draftState) {
       setIsFilterDrawerOpen(false);
@@ -612,6 +637,8 @@ export function useArchiveRoute({
     handleSelectShowMode,
     handleToggleSubMode,
     handleReturnHome,
+    handleSelectPassport,
+    handleReturnArchive,
     appendLang,
     visualViewportStyle,
   };

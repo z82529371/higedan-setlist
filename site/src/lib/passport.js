@@ -10,7 +10,7 @@
  * 3. Conforms to PassportStoragePayload (v1) and PassportShowEntry specifications.
  */
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useMemo } from "react";
 import { getSafeStorage, MemoryStorageAdapter, SafeStorage } from "./storage.js";
 
 export { getSafeStorage, MemoryStorageAdapter, SafeStorage };
@@ -247,5 +247,54 @@ export function usePassportAttendance(showKey, showMeta = null, options = {}) {
     toggle,
     checkIn,
     checkOut,
+  };
+}
+
+/**
+ * React hook providing the entire passport state, total attended count,
+ * attended shows array, and atomic removal with cross-component reactivity.
+ */
+export function usePassport(options = {}) {
+  const storage = options.storage || getSafeStorage(options.env);
+  const [payload, setPayload] = useState(() => loadPassport(storage));
+
+  useEffect(() => {
+    const syncState = () => {
+      setPayload(loadPassport(storage));
+    };
+
+    syncState();
+
+    if (typeof window !== "undefined" && typeof window.addEventListener === "function") {
+      window.addEventListener(PASSPORT_EVENT_UPDATED, syncState);
+      window.addEventListener("storage", syncState);
+      return () => {
+        window.removeEventListener(PASSPORT_EVENT_UPDATED, syncState);
+        window.removeEventListener("storage", syncState);
+      };
+    }
+  }, [storage]);
+
+  const count = Object.keys(payload.attendedShows || {}).length;
+  const attendedShows = useMemo(
+    () => Object.values(payload.attendedShows || {}),
+    [payload]
+  );
+
+  const remove = useCallback(
+    (showKey) => {
+      if (!showKey) return;
+      const res = removeAttendance(showKey, storage);
+      setPayload(res.payload);
+      return res;
+    },
+    [storage]
+  );
+
+  return {
+    payload,
+    count,
+    attendedShows,
+    remove,
   };
 }

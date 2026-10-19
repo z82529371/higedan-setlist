@@ -2,6 +2,7 @@ import { useMemo } from "react";
 import SearchBox from "./SearchBox.jsx";
 import LanguageSwitcher from "./LanguageSwitcher.jsx";
 import { useI18n } from "../lib/i18n.jsx";
+import { usePassport } from "../lib/passport.js";
 
 export default function LandingHero({
   onEnterArchive,
@@ -11,14 +12,17 @@ export default function LandingHero({
   onSelectShow,
   onOpenCalendar,
   onSelectTab,
+  onSelectPassport,
   totalAllShows,
   allUsedSongs,
   allVenues,
   allUnits,
   q,
   setQ,
+  storage,
 }) {
   const { t } = useI18n();
+  const { count: passportCount } = usePassport({ storage });
 
   // Find indicators for hot prompts
   const rejoiceUnit = useMemo(() => {
@@ -55,8 +59,25 @@ export default function LandingHero({
 
   return (
     <div className="mx-auto max-w-[960px] px-4 sm:px-6 py-6 sm:py-12 flex flex-col items-center text-center animate-fade-in relative">
-      {/* Top Utility Bar (Language Switcher) */}
-      <div className="w-full flex justify-end items-center mb-3 sm:mb-5">
+      {/* Top Utility Bar (Passport & Language Switcher) */}
+      <div className="w-full flex justify-end items-center gap-2 mb-3 sm:mb-5">
+        <button
+          type="button"
+          data-testid="landing-passport-btn"
+          onClick={onSelectPassport}
+          className="inline-flex items-center gap-1.5 rounded-[4px] border border-ink/30 bg-card px-2.5 py-1 text-[11px] sm:text-[12px] font-bold text-ink shadow-2xs hover:bg-tape-tint transition-colors cursor-pointer touch-stamp"
+          title={t("passport.title", "我的巡演護照")}
+          aria-label={t("passport.title", "我的巡演護照")}
+        >
+          <span aria-hidden="true">🛂</span>
+          <span className="hidden xs:inline">{t("nav.passport", "護照")}</span>
+          <span
+            data-testid="landing-passport-badge-count"
+            className="inline-flex items-center justify-center rounded-full bg-tape text-ink font-mono font-bold text-[10px] min-w-[18px] h-[18px] px-1 border border-ink/30 tabular-nums shadow-2xs"
+          >
+            {passportCount}
+          </span>
+        </button>
         <LanguageSwitcher />
       </div>
 

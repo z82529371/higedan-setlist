@@ -1,5 +1,6 @@
 import { queryTabClass } from "../../lib/constants.js";
 import { useI18n } from "../../lib/i18n.jsx";
+import { usePassport } from "../../lib/passport.js";
 import LanguageSwitcher from "../LanguageSwitcher.jsx";
 
 export function ArchiveHeader({
@@ -11,8 +12,11 @@ export function ArchiveHeader({
   setTab,
   setQ,
   setIsFilterDrawerOpen,
+  onSelectPassport,
+  storage,
 }) {
   const { t } = useI18n();
+  const { count: passportCount } = usePassport({ storage });
 
   return (
     <>
@@ -21,7 +25,26 @@ export function ArchiveHeader({
           <p className="m-0 font-mono text-[11px] sm:text-[12px] tracking-[0.2em] text-muted font-bold uppercase truncate">
             {t("header.livePerformanceArchive")}
           </p>
-          <LanguageSwitcher className="hidden sm:inline-block shrink-0" />
+          <div className="flex items-center gap-2 shrink-0">
+            <button
+              type="button"
+              data-testid="header-passport-btn"
+              onClick={onSelectPassport}
+              className="inline-flex items-center gap-1.5 rounded-[4px] border border-ink/30 bg-card px-2.5 py-1 text-[11px] sm:text-[12px] font-bold text-ink shadow-2xs hover:bg-tape-tint transition-colors cursor-pointer touch-stamp"
+              title={t("passport.title", "我的巡演護照")}
+              aria-label={t("passport.title", "我的巡演護照")}
+            >
+              <span aria-hidden="true">🛂</span>
+              <span className="hidden xs:inline">{t("nav.passport", "護照")}</span>
+              <span
+                data-testid="passport-badge-count"
+                className="inline-flex items-center justify-center rounded-full bg-tape text-ink font-mono font-bold text-[10px] min-w-[18px] h-[18px] px-1 border border-ink/30 tabular-nums shadow-2xs"
+              >
+                {passportCount}
+              </span>
+            </button>
+            <LanguageSwitcher className="hidden sm:inline-block shrink-0" />
+          </div>
         </div>
         <h1 className="m-0 mt-1.5 font-display text-[clamp(17px,4.5vw,44px)] font-extrabold leading-tight tracking-tight">
           Official髭男dism <span className="font-bold text-band-ink">{t("header.brandTitle")}</span>

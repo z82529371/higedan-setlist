@@ -1,4 +1,5 @@
 import { useI18n } from "../../lib/i18n.jsx";
+import { usePassport } from "../../lib/passport.js";
 
 export function FilterDrawer({
   isOpen,
@@ -9,8 +10,11 @@ export function FilterDrawer({
   renderShowNavigator,
   renderSongNavigator,
   renderVenueNavigator,
+  onSelectPassport,
+  storage,
 }) {
   const { t } = useI18n();
+  const { count: passportCount } = usePassport({ storage });
   if (!isOpen) return null;
 
   return (
@@ -53,6 +57,30 @@ export function FilterDrawer({
             aria-label={t("navigators.drawer.closeAria", "關閉抽屜")}
           >
             ✕
+          </button>
+        </div>
+
+        {/* Passport Quick Entrance */}
+        <div className="px-4 py-2 border-b border-line-soft bg-paper/30">
+          <button
+            type="button"
+            data-testid="drawer-passport-btn"
+            onClick={() => {
+              onClose();
+              if (onSelectPassport) onSelectPassport();
+            }}
+            className="w-full flex items-center justify-between rounded-[6px] border border-ink/30 bg-card px-3.5 py-2 font-display text-[13px] font-bold text-ink shadow-2xs hover:bg-tape-tint active:scale-[0.99] transition-all cursor-pointer"
+          >
+            <div className="flex items-center gap-2">
+              <span aria-hidden="true" className="text-base">🛂</span>
+              <span>{t("passport.title", "我的巡演護照")}</span>
+            </div>
+            <span
+              data-testid="drawer-passport-badge-count"
+              className="inline-flex items-center justify-center rounded-full bg-tape text-ink font-mono font-bold text-[11px] min-w-[20px] h-[20px] px-1.5 border border-ink/30 tabular-nums shadow-2xs"
+            >
+              {passportCount}
+            </span>
           </button>
         </div>
 

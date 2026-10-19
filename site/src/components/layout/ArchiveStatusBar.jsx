@@ -11,6 +11,7 @@ export function ArchiveStatusBar({
   trackShows,
   slipRef,
   handleReturnHome,
+  handleSelectPassport,
 }) {
   const { t } = useI18n();
   return (
@@ -89,6 +90,23 @@ export function ArchiveStatusBar({
           )}
 
           <span className="hidden sm:inline opacity-35 select-none shrink-0">|</span>
+
+          {/* Passport Action Button (Desktop) */}
+          {handleSelectPassport && (
+            <button
+              type="button"
+              onClick={(e) => {
+                e.stopPropagation();
+                handleSelectPassport();
+              }}
+              className="hidden sm:inline-flex items-center gap-1 px-2 py-0.5 rounded-[4px] bg-band-ink/10 hover:bg-band-ink/20 active:scale-95 text-band-ink font-bold border border-band-ink/30 transition-all cursor-pointer text-[10px] sm:text-[11px] shrink-0 shadow-2xs"
+              title={t("passport.title", "我的巡演護照")}
+              aria-label={t("passport.title", "我的巡演護照")}
+            >
+              <span aria-hidden="true">🛂</span>
+              <span>{t("nav.passport", "護照")}</span>
+            </button>
+          )}
 
           {/* Home Action Button (Desktop only; on mobile, Floating Dock already has Home button) */}
           <button
