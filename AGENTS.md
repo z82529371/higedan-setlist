@@ -13,7 +13,7 @@ Repository conventions and navigation pointers for AI agents working in this cod
 - **Test Harness & Modular Suites**: Consult [`site/tests/`](./site/tests/) and [`ADR-0109`](./docs/adr/0109-modular-test-architecture-and-headless-ssr-singleton.md) for 3-tier modular test suites (`pipeline/`, `invariants/`, `ui/`) and headless Vite SSR singleton harness (`site/tests/helpers/vite-server.js`).
 - **CI/CD & Deployment Target**: Consult [`.github/workflows/ci.yml`](./.github/workflows/ci.yml) and [`.nvmrc`](./.nvmrc) for runtime version alignment (Cloudflare Pages builds depend on `.nvmrc` and `engines.node >= 22.13.0` for pnpm 11 compatibility).
 - **i18n & Context Providers Boundary**: Consult [`CONTEXT.md`](./CONTEXT.md#react-hooks-領域狀態與極端路由安全回退hooks-domain-state--hash-fallback-invariantsadr-0101), [`site/src/App.jsx`](./site/src/App.jsx), [`ADR-0107`](./docs/adr/0107-multi-language-localization-and-taxonomy-boundary.md), and [`ADR-0108`](./docs/adr/0108-administrative-geography-localization-and-venue-integrity.md) for the `<I18nProvider>` root wrapper requirement (`AppContent` pattern), the responsive switcher dichotomy, and administrative geography localization boundaries.
-- **Venue & Geography Presentation Boundaries**: Consult [`ADR-0108`](./docs/adr/0108-administrative-geography-localization-and-venue-integrity.md) and [`ADR-0110`](./docs/adr/0110-official-venue-localization-and-cross-lingual-presentation.md) for official venue localization dictionaries (`site/src/lib/locales/venues.js`), graceful fallback, cross-lingual search indexing (`matchVenue`), and the 8 presentation touchpoints (`VenueNavigator`, `ShowMetadataBox`, `TourSlip`, `VenueSlip`, `SongSlip`, `SongMilestonesDrawer`, `MemorialCardModal`, `SearchBox`).
+- **Venue & Geography Presentation Boundaries**: Consult [`ADR-0108`](./docs/adr/0108-administrative-geography-localization-and-venue-integrity.md), [`ADR-0110`](./docs/adr/0110-official-venue-localization-and-cross-lingual-presentation.md), and [`ADR-0111`](./docs/adr/0111-venue-master-profiles-native-fallback-and-deep-link-resolution.md) for venue master profiles (`data/venue-profiles.json` as SSOT vs `data/venues.json` as crawler aliases), official venue localization dictionaries (`site/src/lib/locales/venues.js`), native name fallbacks, cross-lingual route resolution (`resolveVenueCanonical`), and the presentation touchpoints (`VenueNavigator`, `ShowMetadataBox`, `TourSlip`, `VenueSlip`, `SongSlip`, `SongMilestonesDrawer`, `MemorialCardModal`, `SearchBox`).
 - **Issue Tracking**: Consult GitHub Issues via `gh issue view <number>` or `gh issue list` for feature specs and task acceptance criteria.
 
 ## Multi-Agent Workspace Hygiene
@@ -40,8 +40,8 @@ Multiple autonomous agents frequently operate concurrently in this repository:
 
 ### Outer Loop (Integration & Pre-Commit Verification)
 - `pnpm test:ui`: Runs headless React SSR, route state machine, and localization tests (`site/tests/ui/`).
-- `pnpm check`: Master verification gate running `oxlint`, `check-i18n`, and all 22 test suites (107 invariant assertions). Run before every commit.
-- `pnpm test`: Runs data sync, `check-i18n`, and all 22 test suites (107 invariant assertions).
+- `pnpm check`: Master verification gate running `oxlint`, `check-i18n`, and all 24 test suites (114 invariant assertions). Run before every commit.
+- `pnpm test`: Runs data sync, `check-i18n`, and all 24 test suites (114 invariant assertions).
 - `pnpm build`: Production build via Vite compiler (`site/dist/`).
 
 ## Agent skills

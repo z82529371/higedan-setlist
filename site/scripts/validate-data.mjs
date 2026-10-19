@@ -16,6 +16,11 @@ export function validateAndCleanTours() {
   const venuesPath = resolve(root, "data", "venues.json");
   const venueTranslationMap = JSON.parse(readFileSync(venuesPath, "utf8"));
 
+  const venueProfilesPath = resolve(root, "data", "venue-profiles.json");
+  const registeredVenues = existsSync(venueProfilesPath)
+    ? new Set(JSON.parse(readFileSync(venueProfilesPath, "utf8")).venues.map((v) => v.canonical))
+    : new Set();
+
   const songsPath = resolve(root, "data", "songs.json");
   const validSongIds = new Set(JSON.parse(readFileSync(songsPath, "utf8")).songs.map((s) => s.id));
 
@@ -62,6 +67,11 @@ export function validateAndCleanTours() {
             console.log(`[Venue Sync] ${show.id}: Normalized venue '${beforeVenue}' -> '${venuePatch.venue}'`);
           }
           modified = true;
+        }
+
+        const finalVenue = show.venue;
+        if (finalVenue && registeredVenues.size > 0 && !registeredVenues.has(finalVenue)) {
+          console.warn(`[Validation Warning] Show ${show.id} (${show.date}) references unregistered venue: '${finalVenue}' in ${file}`);
         }
 
         if (unit.templateSetlist && show.diff && !show.locked) {

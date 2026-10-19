@@ -186,4 +186,17 @@ describe("9. Design Token Invariants & Dedicated URL Routes Seam (DESIGN.md, ADR
     assert.ok(indexContent.includes("family=Plus+Jakarta+Sans"), "index.html must load Plus Jakarta Sans");
     assert.ok(indexContent.includes("family=Zen+Kaku+Gothic+New"), "index.html must load Zen Kaku Gothic New");
   });
+
+  it("verifies venue-native-subtitle adheres to The Cue Monospace Rule (no font-mono on subtitles)", () => {
+    const venueSlipPath = path.resolve(import.meta.dirname, "../../src/components/slips/VenueSlip.jsx");
+    const content = fs.readFileSync(venueSlipPath, "utf8");
+    const subtitleMatch =
+      content.match(/data-testid=["']venue-native-subtitle["'][^>]*className=["']([^"']*)["']/) ||
+      content.match(/className=["']([^"']*)["'][^>]*data-testid=["']venue-native-subtitle["']/);
+    assert.ok(subtitleMatch, "venue-native-subtitle element must exist");
+    assert.ok(
+      !subtitleMatch[1].includes("font-mono"),
+      "venue-native-subtitle must not use font-mono (The Cue Monospace Rule, DESIGN.md)"
+    );
+  });
 });
