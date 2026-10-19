@@ -421,6 +421,17 @@ export const dictKo = {
     expandToolsTitle: "도구 펼치기 (비교·앨범 구성·범례·출처)",
     sourceOpenTitle: "1차 출처 열기: {url}",
   },
+  passport: {
+    markAttended: "나도 갔어요",
+    attended: "참석 완료",
+    checkIn: "체크인",
+    checkedIn: "기록 완료",
+    unmarkAttended: "참석 취소",
+    checkinTitle: "이 공연 참석 기록 남기기 (투어 패스포트에 등록)",
+    attendedTitle: "참석 완료! 클릭하여 기록 취소",
+    checkinNotice: "투어 패스포트에 기록되었습니다",
+    uncheckNotice: "투어 패스포트에서 삭제되었습니다",
+  },
   landing: {
     instantSearchAria: "실시간 검색",
     hotExploration: "인기 탐색:",

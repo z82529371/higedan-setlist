@@ -421,6 +421,17 @@ export const dictEn = {
     expandToolsTitle: "Expand tools (compare, album breakdown, legend, sources)",
     sourceOpenTitle: "Open primary source: {url}",
   },
+  passport: {
+    markAttended: "I Was There",
+    attended: "Attended",
+    checkIn: "Check In",
+    checkedIn: "Checked In",
+    unmarkAttended: "Cancel Attendance",
+    checkinTitle: "Record attendance for this show (save to Tour Passport)",
+    attendedTitle: "Attended! Click to cancel attendance",
+    checkinNotice: "Recorded to Tour Passport",
+    uncheckNotice: "Removed from Tour Passport",
+  },
   landing: {
     instantSearchAria: "Instant Search",
     hotExploration: "Trending:",

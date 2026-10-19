@@ -421,6 +421,17 @@ export const dictJa = {
     expandToolsTitle: "ツール展開（比較・アルバム構成・凡例・出典）",
     sourceOpenTitle: "一次ソースを開く：{url}",
   },
+  passport: {
+    markAttended: "参加した！",
+    attended: "参加済み",
+    checkIn: "チェックイン",
+    checkedIn: "参加記録済み",
+    unmarkAttended: "参加記録を解除",
+    checkinTitle: "この公演の参加記録をつける（パスポートに登録）",
+    attendedTitle: "参加記録済み。クリックで解除",
+    checkinNotice: "パスポートに記録しました",
+    uncheckNotice: "パスポートから削除しました",
+  },
   landing: {
     instantSearchAria: "リアルタイム検索",
     hotExploration: "人気の探索：",

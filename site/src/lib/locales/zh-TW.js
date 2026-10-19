@@ -421,6 +421,17 @@ export const dictZhTw = {
     expandToolsTitle: "展開更多工具（雙場曲目比對、專輯分佈、圖例與資料來源）",
     sourceOpenTitle: "開啟一手來源：{url}",
   },
+  passport: {
+    markAttended: "我參加過",
+    attended: "已參加",
+    checkIn: "參加打卡",
+    checkedIn: "已打卡",
+    unmarkAttended: "取消打卡",
+    checkinTitle: "記錄我參加過這場演出（登錄至巡演護照）",
+    attendedTitle: "已記錄參加，點擊可取消打卡",
+    checkinNotice: "已登錄至我的巡演護照",
+    uncheckNotice: "已自巡演護照移除",
+  },
   landing: {
     instantSearchAria: "即時檢索",
     hotExploration: "熱門探索：",

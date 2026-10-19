@@ -9,6 +9,7 @@ import { getSourceLabel, TicketPerforationDivider, TicketBarcodeFooter } from ".
 import { ShowSlipPanels } from "./ShowSlipPanels.jsx";
 import { ShowMetadataBox } from "./ShowMetadataBox.jsx";
 import { useI18n } from "../../lib/i18n.jsx";
+import { usePassportAttendance } from "../../lib/passport.js";
 
 export function ShowSlip({
   ud,
@@ -23,6 +24,7 @@ export function ShowSlip({
   if (!s) return null;
 
   const [showLegend, setShowLegend] = useState(false);
+  const { attended, toggle: toggleAttendance } = usePassportAttendance(showId, s);
   const [showAnalysis, setShowAnalysis] = useState(false);
   const [showDiff, setShowDiff] = useState(false);
   const [showCompare, setShowCompare] = useState(false);
@@ -385,7 +387,32 @@ export function ShowSlip({
         <div className="mt-2.5 flex flex-col gap-2 border-t border-line-soft/80 pt-2.5 slip-ignore-export">
           {/* Row 1: Primary Export Actions & Collapsible Tools Toggle */}
           <div className="flex flex-wrap items-center justify-between gap-2">
-            <div className="flex items-center gap-2">
+            <div className="flex flex-wrap items-center gap-2">
+              <button
+                type="button"
+                data-testid="passport-toggle-btn"
+                data-attended={attended ? "true" : "false"}
+                aria-pressed={attended}
+                onClick={toggleAttendance}
+                className={`inline-flex items-center justify-center gap-1.5 rounded px-3 py-1.5 text-[11px] font-bold transition-all cursor-pointer select-none border active:scale-[0.98] ${
+                  attended
+                    ? "bg-tape text-ink border-ink font-extrabold shadow-xs hover:brightness-95"
+                    : "bg-paper text-ink border-line-soft hover:bg-tape-tint/50 hover:border-ink/60"
+                }`}
+                title={
+                  attended
+                    ? t("passport.attendedTitle", "已記錄參加，點擊可取消打卡")
+                    : t("passport.checkinTitle", "記錄我參加過這場演出（登錄至巡演護照）")
+                }
+              >
+                <span aria-hidden="true">{attended ? "✓" : "🎟️"}</span>
+                <span>
+                  {attended
+                    ? t("passport.attended", "已參加")
+                    : t("passport.markAttended", "我參加過")}
+                </span>
+              </button>
+
               <button
                 type="button"
                 onClick={() => setShowMemorialModal(true)}
