@@ -9,9 +9,9 @@ import { dictZhTw } from "./locales/zh-TW.js";
 import { dictJa } from "./locales/ja.js";
 import { dictEn } from "./locales/en.js";
 import { dictKo } from "./locales/ko.js";
-import { localizeVenue } from "./locales/venues.js";
+import { localizeVenue, getNativeVenue } from "./locales/venues.js";
 
-export { SUPPORTED_LOCALES, DEFAULT_LOCALE, localizeVenue };
+export { SUPPORTED_LOCALES, DEFAULT_LOCALE, localizeVenue, getNativeVenue };
 
 export const DICTIONARIES = {
   "zh-TW": dictZhTw,
@@ -158,6 +158,7 @@ export function I18nProvider({ children, initialLocale }) {
       t,
       dict,
       localizeVenue: localizeVenueFn,
+      getNativeVenue,
       supportedLocales: SUPPORTED_LOCALES,
     }),
     [locale, setLocale, t, dict, localizeVenueFn]
@@ -176,6 +177,7 @@ export function useI18n() {
       t: (key, fallback, params) => resolveTranslation(dictZhTw, key, fallback, params),
       dict: dictZhTw,
       localizeVenue: (rawVenue) => localizeVenue(rawVenue, DEFAULT_LOCALE),
+      getNativeVenue,
       supportedLocales: SUPPORTED_LOCALES,
     };
   }

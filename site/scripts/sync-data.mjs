@@ -18,6 +18,11 @@ mkdirSync(dest, { recursive: true });
 cpSync(resolve(src, "songs.json"), resolve(dest, "songs.json"));
 console.log("synced songs.json");
 
+if (existsSync(resolve(src, "venue-profiles.json"))) {
+  cpSync(resolve(src, "venue-profiles.json"), resolve(dest, "venue-profiles.json"));
+  console.log("synced venue-profiles.json");
+}
+
 for (const sub of ["tours", "events"]) {
   const dir = resolve(src, sub);
   if (!existsSync(dir)) continue;

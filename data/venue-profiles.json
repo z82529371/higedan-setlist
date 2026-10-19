@@ -1,0 +1,4391 @@
+{
+  "venues": [
+    {
+      "id": "三井outlet-park-札幌北廣島",
+      "canonical": "三井OUTLET PARK 札幌北廣島",
+      "native": "三井アウトレットパーク 札幌北広島",
+      "region": "北海道",
+      "prefecture": "北海道",
+      "city": "北廣島",
+      "names": {
+        "zh-TW": "三井OUTLET PARK 札幌北廣島",
+        "ja": "三井アウトレットパーク 札幌北広島",
+        "en": "Mitsui Outlet Park Sapporo Kitahiroshima"
+      }
+    },
+    {
+      "id": "shimokitazawa-basement-bar",
+      "canonical": "下北沢BASEMENT BAR",
+      "native": "下北沢BASEMENT BAR",
+      "region": "關東",
+      "prefecture": "東京都",
+      "city": "東京",
+      "names": {
+        "zh-TW": "下北沢BASEMENT BAR",
+        "ja": "下北沢BASEMENT BAR",
+        "en": "Shimokitazawa BASEMENT BAR"
+      }
+    },
+    {
+      "id": "下北澤garden",
+      "canonical": "下北澤GARDEN",
+      "native": "下北沢GARDEN",
+      "region": "關東",
+      "prefecture": "東京都",
+      "city": "東京",
+      "names": {
+        "zh-TW": "下北澤GARDEN",
+        "ja": "下北沢GARDEN"
+      }
+    },
+    {
+      "id": "久屋大通公園",
+      "canonical": "久屋大通公園",
+      "native": "久屋大通公園",
+      "region": "中部",
+      "prefecture": "愛知縣",
+      "city": "名古屋",
+      "names": {
+        "zh-TW": "久屋大通公園",
+        "ja": "久屋大通公園"
+      }
+    },
+    {
+      "id": "久屋大通公園-久屋廣場",
+      "canonical": "久屋大通公園 久屋廣場",
+      "native": "久屋大通公園 久屋広場",
+      "region": "中部",
+      "prefecture": "愛知縣",
+      "city": "名古屋",
+      "names": {
+        "zh-TW": "久屋大通公園 久屋廣場",
+        "ja": "久屋大通公園 久屋広場"
+      }
+    },
+    {
+      "id": "久留米市-兩替町公園-特設舞台",
+      "canonical": "久留米市 兩替町公園 特設舞台",
+      "native": "久留米市 両替町公園 特設ステージ",
+      "region": "九州",
+      "prefecture": "福岡縣",
+      "city": "久留米",
+      "names": {
+        "zh-TW": "久留米市 兩替町公園 特設舞台",
+        "ja": "久留米市 両替町公園 特設ステージ"
+      }
+    },
+    {
+      "id": "千葉市蘇我體育公園-lotus-stage",
+      "canonical": "千葉市蘇我體育公園 LOTUS STAGE",
+      "native": "千葉市蘇我スポーツ公園 LOTUS STAGE",
+      "region": "關東",
+      "prefecture": "千葉縣",
+      "city": "千葉",
+      "names": {
+        "zh-TW": "千葉市蘇我體育公園 LOTUS STAGE",
+        "ja": "千葉市蘇我スポーツ公園 LOTUS STAGE"
+      }
+    },
+    {
+      "id": "千葉海洋球場",
+      "canonical": "千葉海洋球場（ZOZO Marine Stadium）",
+      "native": "ZOZOマリンスタジアム",
+      "region": "關東",
+      "prefecture": "千葉縣",
+      "city": "千葉",
+      "names": {
+        "zh-TW": "千葉海洋球場（ZOZO Marine Stadium）",
+        "ja": "ZOZOマリンスタジアム",
+        "en": "ZOZO Marine Stadium",
+        "ko": "ZOZO 마린 스타디움"
+      }
+    },
+    {
+      "id": "大手前大學-伊丹稻野校區-體育館",
+      "canonical": "大手前大學 伊丹稻野校區 體育館",
+      "native": "大手前大学 伊丹稲野キャンパス 体育館",
+      "region": "關西",
+      "prefecture": "兵庫縣",
+      "city": "神戶",
+      "names": {
+        "zh-TW": "大手前大學 伊丹稻野校區 體育館",
+        "ja": "大手前大学 伊丹稲野キャンパス 体育館"
+      }
+    },
+    {
+      "id": "大阪城公園-城天街頭live",
+      "canonical": "大阪城公園 城天街頭Live",
+      "native": "大阪城公園 城天ストリートライブ",
+      "region": "關西",
+      "prefecture": "大阪府",
+      "city": "大阪",
+      "names": {
+        "zh-TW": "大阪城公園 城天街頭Live",
+        "ja": "大阪城公園 城天ストリートライブ"
+      }
+    },
+    {
+      "id": "大阪城會館",
+      "canonical": "大阪城會館",
+      "native": "大阪城ホール",
+      "region": "關西",
+      "prefecture": "大阪府",
+      "city": "大阪",
+      "names": {
+        "zh-TW": "大阪城會館",
+        "ja": "大阪城ホール",
+        "en": "Osaka-Jo Hall",
+        "ko": "오사카성 홀"
+      }
+    },
+    {
+      "id": "大阪節慶音樂廳",
+      "canonical": "大阪節慶音樂廳 (Festival Hall)",
+      "native": "フェスティバルホール",
+      "region": "關西",
+      "prefecture": "大阪府",
+      "city": "大阪",
+      "names": {
+        "zh-TW": "大阪節慶音樂廳 (Festival Hall)",
+        "ja": "フェスティバルホール",
+        "en": "Festival Hall Osaka",
+        "ko": "페스티벌 홀"
+      }
+    },
+    {
+      "id": "大宮-sonic-city-大會堂",
+      "canonical": "大宮 Sonic City 大會堂",
+      "native": "大宮ソニックシティ 大ホール",
+      "region": "關東",
+      "prefecture": "埼玉縣",
+      "city": "埼玉",
+      "names": {
+        "zh-TW": "大宮 Sonic City 大會堂",
+        "ja": "大宮ソニックシティ 大ホール",
+        "en": "Omiya Sonic City Main Hall"
+      }
+    },
+    {
+      "id": "小田原-dynacity",
+      "canonical": "小田原 Dynacity",
+      "native": "小田原ダイナシティ",
+      "region": "關東",
+      "prefecture": "神奈川縣",
+      "city": "小田原",
+      "names": {
+        "zh-TW": "小田原 Dynacity",
+        "ja": "小田原ダイナシティ",
+        "en": "Odawara Dynacity"
+      }
+    },
+    {
+      "id": "小田原-dynacity-west",
+      "canonical": "小田原 Dynacity West",
+      "native": "小田原ダイナシティ ウエスト",
+      "region": "關東",
+      "prefecture": "神奈川縣",
+      "city": "小田原",
+      "names": {
+        "zh-TW": "小田原 Dynacity West",
+        "ja": "小田原ダイナシティ ウエスト",
+        "en": "Odawara Dynacity West"
+      }
+    },
+    {
+      "id": "小田原-dynacity-west-1f-canyon-stage",
+      "canonical": "小田原 Dynacity West 1F Canyon Stage",
+      "native": "小田原ダイナシティ ウエスト 1F キャニオンステージ",
+      "region": "關東",
+      "prefecture": "神奈川縣",
+      "city": "小田原",
+      "names": {
+        "zh-TW": "小田原 Dynacity West 1F Canyon Stage",
+        "ja": "小田原ダイナシティ ウエスト 1F キャニオンステージ",
+        "en": "Odawara Dynacity West 1F Canyon Stage"
+      }
+    },
+    {
+      "id": "小樽市民會館",
+      "canonical": "小樽市民會館",
+      "native": "小樽市民会館",
+      "region": "北海道",
+      "prefecture": "北海道",
+      "city": "小樽",
+      "names": {
+        "zh-TW": "小樽市民會館",
+        "ja": "小樽市民会館"
+      }
+    },
+    {
+      "id": "山口kirara博紀念公園-alley-oop-stage",
+      "canonical": "山口Kirara博紀念公園 Alley oop STAGE",
+      "native": "山口きらら博記念公園 Alley oop STAGE",
+      "region": "中國",
+      "prefecture": "山口縣",
+      "city": "山口",
+      "names": {
+        "zh-TW": "山口Kirara博紀念公園 Alley oop STAGE",
+        "ja": "山口きらら博記念公園 Alley oop STAGE"
+      }
+    },
+    {
+      "id": "山中湖交流廣場-kirara-lakeside-stage",
+      "canonical": "山中湖交流廣場 Kirara LAKESIDE STAGE",
+      "native": "山中湖交流プラザ きらら LAKESIDE STAGE",
+      "region": "中部",
+      "prefecture": "山梨縣",
+      "city": "山梨",
+      "names": {
+        "zh-TW": "山中湖交流廣場 Kirara LAKESIDE STAGE",
+        "ja": "山中湖交流プラザ きらら LAKESIDE STAGE"
+      }
+    },
+    {
+      "id": "山中湖交流廣場-kirara-mtfuji-stage",
+      "canonical": "山中湖交流廣場 Kirara Mt.FUJI STAGE",
+      "native": "山中湖交流プラザ きらら Mt.FUJI STAGE",
+      "region": "中部",
+      "prefecture": "山梨縣",
+      "city": "山梨",
+      "names": {
+        "zh-TW": "山中湖交流廣場 Kirara Mt.FUJI STAGE",
+        "ja": "山中湖交流プラザ きらら Mt.FUJI STAGE"
+      }
+    },
+    {
+      "id": "山形縣民會館",
+      "canonical": "山形縣民會館",
+      "native": "やまぎん県民ホール",
+      "region": "東北",
+      "prefecture": "山形縣",
+      "city": "山形",
+      "names": {
+        "zh-TW": "山形縣民會館",
+        "ja": "やまぎん県民ホール",
+        "en": "Yamagin Prefectural Hall"
+      }
+    },
+    {
+      "id": "工學院大學八王子校區體育館",
+      "canonical": "工學院大學八王子校區體育館",
+      "native": "工学院大学 八王子キャンパス 体育館",
+      "region": "關東",
+      "prefecture": "東京都",
+      "city": "東京",
+      "names": {
+        "zh-TW": "工學院大學八王子校區體育館",
+        "ja": "工学院大学 八王子キャンパス 体育館"
+      }
+    },
+    {
+      "id": "中野太陽廣場會館",
+      "canonical": "中野太陽廣場會館",
+      "native": "中野サンプラザホール",
+      "region": "關東",
+      "prefecture": "東京都",
+      "city": "東京",
+      "names": {
+        "zh-TW": "中野太陽廣場會館",
+        "ja": "中野サンプラザホール",
+        "en": "Nakano Sunplaza Hall"
+      }
+    },
+    {
+      "id": "仁愛大學",
+      "canonical": "仁愛大學",
+      "native": "仁愛大学",
+      "region": "中部",
+      "prefecture": "福井縣",
+      "city": "福井",
+      "names": {
+        "zh-TW": "仁愛大學",
+        "ja": "仁愛大学"
+      }
+    },
+    {
+      "id": "jin-ai-u-outdoor-stage",
+      "canonical": "仁愛大學 野外特設舞台",
+      "native": "仁愛大学 野外特設ステージ",
+      "region": "中部",
+      "prefecture": "福井縣",
+      "city": "越前",
+      "names": {
+        "zh-TW": "仁愛大學 野外特設舞台",
+        "ja": "仁愛大学 野外特設ステージ",
+        "en": "Jin-ai University Outdoor Special Stage"
+      }
+    },
+    {
+      "id": "六本木之丘-arena",
+      "canonical": "六本木之丘 Arena",
+      "native": "六本木ヒルズアリーナ",
+      "region": "關東",
+      "prefecture": "東京都",
+      "city": "東京",
+      "names": {
+        "zh-TW": "六本木之丘 Arena",
+        "ja": "六本木ヒルズアリーナ"
+      }
+    },
+    {
+      "id": "勾當台公園-市民廣場-north-stage",
+      "canonical": "勾當台公園 市民廣場 NORTH STAGE",
+      "native": "勾当台公園 市民広場 NORTH STAGE",
+      "region": "東北",
+      "prefecture": "宮城縣",
+      "city": "仙台",
+      "names": {
+        "zh-TW": "勾當台公園 市民廣場 NORTH STAGE",
+        "ja": "勾当台公園 市民広場 NORTH STAGE"
+      }
+    },
+    {
+      "id": "勾當台公園-市民廣場-west-stage",
+      "canonical": "勾當台公園 市民廣場 WEST STAGE",
+      "native": "勾当台公園 市民広場 WEST STAGE",
+      "region": "東北",
+      "prefecture": "宮城縣",
+      "city": "仙台",
+      "names": {
+        "zh-TW": "勾當台公園 市民廣場 WEST STAGE",
+        "ja": "勾当台公園 市民広場 WEST STAGE"
+      }
+    },
+    {
+      "id": "天保山market-place-3f-圓形舞台",
+      "canonical": "天保山Market Place 3F 圓形舞台 (Rotunda Stage)",
+      "native": "天保山マーケットプレース 3F ロタンダステージ",
+      "region": "關西",
+      "prefecture": "大阪府",
+      "city": "大阪",
+      "names": {
+        "zh-TW": "天保山Market Place 3F 圓形舞台 (Rotunda Stage)",
+        "ja": "天保山マーケットプレース 3F ロタンダステージ"
+      }
+    },
+    {
+      "id": "天神queblick",
+      "canonical": "天神Queblick",
+      "native": "天神Queblick",
+      "region": "九州",
+      "prefecture": "福岡縣",
+      "city": "福岡",
+      "names": {
+        "zh-TW": "天神Queblick",
+        "ja": "天神Queblick"
+      }
+    },
+    {
+      "id": "心齋橋-big-step",
+      "canonical": "心齋橋 BIG STEP",
+      "native": "心斎橋 BIG STEP",
+      "region": "關西",
+      "prefecture": "大阪府",
+      "city": "大阪",
+      "names": {
+        "zh-TW": "心齋橋 BIG STEP",
+        "ja": "心斎橋 BIG STEP"
+      }
+    },
+    {
+      "id": "心齋橋-big-step-大階梯",
+      "canonical": "心齋橋 BIG STEP 大階梯",
+      "native": "心斎橋 BIG STEP 大階段",
+      "region": "關西",
+      "prefecture": "大阪府",
+      "city": "大阪",
+      "names": {
+        "zh-TW": "心齋橋 BIG STEP 大階梯",
+        "ja": "心斎橋 BIG STEP 大階段"
+      }
+    },
+    {
+      "id": "心齋橋fanj",
+      "canonical": "心齋橋FANJ",
+      "native": "心斎橋FANJ",
+      "region": "關西",
+      "prefecture": "大阪府",
+      "city": "大阪",
+      "names": {
+        "zh-TW": "心齋橋FANJ",
+        "ja": "心斎橋FANJ",
+        "en": "Shinsaibashi FANJ"
+      }
+    },
+    {
+      "id": "心齋橋live-house-pangea",
+      "canonical": "心齋橋Live House Pangea",
+      "native": "心斎橋Live House Pangea",
+      "region": "關西",
+      "prefecture": "大阪府",
+      "city": "大阪",
+      "names": {
+        "zh-TW": "心齋橋Live House Pangea",
+        "ja": "心斎橋Live House Pangea",
+        "en": "Live House Pangea"
+      }
+    },
+    {
+      "id": "心齋橋varon",
+      "canonical": "心齋橋VARON",
+      "native": "心斎橋VARON",
+      "region": "關西",
+      "prefecture": "大阪府",
+      "city": "大阪",
+      "names": {
+        "zh-TW": "心齋橋VARON",
+        "ja": "心斎橋VARON",
+        "en": "Shinsaibashi VARON"
+      }
+    },
+    {
+      "id": "日比谷野外大音樂堂",
+      "canonical": "日比谷野外大音樂堂",
+      "native": "日比谷野外大音楽堂",
+      "region": "關東",
+      "prefecture": "東京都",
+      "city": "東京",
+      "names": {
+        "zh-TW": "日比谷野外大音樂堂",
+        "ja": "日比谷野外大音楽堂",
+        "en": "Hibiya Open-Air Concert Hall",
+        "ko": "히비야 야외 대음악당"
+      }
+    },
+    {
+      "id": "日本武道館",
+      "canonical": "日本武道館",
+      "native": "日本武道館",
+      "region": "關東",
+      "prefecture": "東京都",
+      "city": "東京",
+      "names": {
+        "zh-TW": "日本武道館",
+        "ja": "日本武道館",
+        "en": "Nippon Budokan",
+        "ko": "일본 무도관"
+      }
+    },
+    {
+      "id": "日本特殊陶業市民會館-forest-hall",
+      "canonical": "日本特殊陶業市民會館 Forest Hall",
+      "native": "日本特殊陶業市民会館 フォレストホール",
+      "region": "中部",
+      "prefecture": "愛知縣",
+      "city": "名古屋",
+      "names": {
+        "zh-TW": "日本特殊陶業市民會館 Forest Hall",
+        "ja": "日本特殊陶業市民会館 フォレストホール",
+        "en": "Forest Hall"
+      }
+    },
+    {
+      "id": "日本特殊陶業市民會館-village-hall",
+      "canonical": "日本特殊陶業市民會館 Village Hall",
+      "native": "日本特殊陶業市民会館 ビレッジホール",
+      "region": "中部",
+      "prefecture": "愛知縣",
+      "city": "名古屋",
+      "names": {
+        "zh-TW": "日本特殊陶業市民會館 Village Hall",
+        "ja": "日本特殊陶業市民会館 ビレッジホール",
+        "en": "Village Hall"
+      }
+    },
+    {
+      "id": "日本電視台",
+      "canonical": "日本電視台",
+      "native": "日本テレビ",
+      "region": "關東",
+      "prefecture": "東京都",
+      "city": "東京",
+      "names": {
+        "zh-TW": "日本電視台",
+        "ja": "日本テレビ"
+      }
+    },
+    {
+      "id": "日產體育場",
+      "canonical": "日產體育場",
+      "native": "日産スタジアム",
+      "region": "關東",
+      "prefecture": "神奈川縣",
+      "city": "橫濱",
+      "names": {
+        "zh-TW": "日產體育場",
+        "ja": "日産スタジアム",
+        "en": "Nissan Stadium",
+        "ko": "닛산 스타디움"
+      }
+    },
+    {
+      "id": "水戶light-house",
+      "canonical": "水戶LIGHT HOUSE",
+      "native": "水戸LIGHT HOUSE",
+      "region": "關東",
+      "prefecture": "茨城縣",
+      "city": "水戶",
+      "names": {
+        "zh-TW": "水戶LIGHT HOUSE",
+        "ja": "水戸LIGHT HOUSE"
+      }
+    },
+    {
+      "id": "世界紀念館",
+      "canonical": "世界紀念館",
+      "native": "ワールド記念ホール",
+      "region": "關西",
+      "prefecture": "兵庫縣",
+      "city": "神戶",
+      "names": {
+        "zh-TW": "世界紀念館",
+        "ja": "ワールド記念ホール",
+        "en": "World Memorial Hall",
+        "ko": "월드 기념홀"
+      }
+    },
+    {
+      "id": "仙台太陽廣場會館",
+      "canonical": "仙台太陽廣場會館",
+      "native": "仙台サンプラザ ホール",
+      "region": "東北",
+      "prefecture": "宮城縣",
+      "city": "仙台",
+      "names": {
+        "zh-TW": "仙台太陽廣場會館",
+        "ja": "仙台サンプラザ ホール",
+        "en": "Sendai Sunplaza Hall"
+      }
+    },
+    {
+      "id": "仙台club-junk-box",
+      "canonical": "仙台CLUB JUNK BOX",
+      "native": "仙台CLUB JUNK BOX at MEGA☆ROCKS 2017会場 [仙台Rensa / 仙台darwin / 仙台CLUB JUNK BOX / 仙台MACANA / HooK SENDAI / LIVE HOUSE enn 2nd / LIVE HOUSE enn 3rd / 仙台Space Zero / HIGHBURY / TOWER RECORDS仙台パルコ]",
+      "region": "東北",
+      "prefecture": "宮城縣",
+      "city": "仙台",
+      "names": {
+        "zh-TW": "仙台CLUB JUNK BOX",
+        "ja": "仙台CLUB JUNK BOX at MEGA☆ROCKS 2017会場 [仙台Rensa / 仙台darwin / 仙台CLUB JUNK BOX / 仙台MACANA / HooK SENDAI / LIVE HOUSE enn 2nd / LIVE HOUSE enn 3rd / 仙台Space Zero / HIGHBURY / TOWER RECORDS仙台パルコ]"
+      }
+    },
+    {
+      "id": "仙台darwin",
+      "canonical": "仙台darwin",
+      "native": "仙台darwin",
+      "region": "東北",
+      "prefecture": "宮城縣",
+      "city": "仙台",
+      "names": {
+        "zh-TW": "仙台darwin",
+        "ja": "仙台darwin",
+        "en": "Sendai darwin"
+      }
+    },
+    {
+      "id": "仙台pit",
+      "canonical": "仙台PIT",
+      "native": "仙台PIT",
+      "region": "東北",
+      "prefecture": "宮城縣",
+      "city": "仙台",
+      "names": {
+        "zh-TW": "仙台PIT",
+        "ja": "仙台PIT",
+        "en": "Sendai PIT",
+        "ko": "센다이 PIT"
+      }
+    },
+    {
+      "id": "仙台rensa",
+      "canonical": "仙台Rensa",
+      "native": "仙台Rensa",
+      "region": "東北",
+      "prefecture": "宮城縣",
+      "city": "仙台",
+      "names": {
+        "zh-TW": "仙台Rensa",
+        "ja": "仙台Rensa",
+        "en": "Sendai Rensa"
+      }
+    },
+    {
+      "id": "仙台space-zero",
+      "canonical": "仙台Space Zero",
+      "native": "仙台Space Zero",
+      "region": "東北",
+      "prefecture": "宮城縣",
+      "city": "仙台",
+      "names": {
+        "zh-TW": "仙台Space Zero",
+        "ja": "仙台Space Zero"
+      }
+    },
+    {
+      "id": "代官山loop",
+      "canonical": "代官山LOOP",
+      "native": "代官山LOOP",
+      "region": "關東",
+      "prefecture": "東京都",
+      "city": "東京",
+      "names": {
+        "zh-TW": "代官山LOOP",
+        "ja": "代官山LOOP"
+      }
+    },
+    {
+      "id": "台北小巨蛋",
+      "canonical": "台北小巨蛋",
+      "native": "台北小巨蛋",
+      "region": "海外",
+      "prefecture": "台灣",
+      "city": "台北",
+      "names": {
+        "zh-TW": "台北小巨蛋",
+        "ja": "台北アリーナ",
+        "en": "Taipei Arena",
+        "ko": "타이베이 아레나"
+      }
+    },
+    {
+      "id": "市川市文化會館-大會堂",
+      "canonical": "市川市文化會館 大會堂",
+      "native": "市川市文化会館 大ホール",
+      "region": "關東",
+      "prefecture": "千葉縣",
+      "city": "市川",
+      "names": {
+        "zh-TW": "市川市文化會館 大會堂",
+        "ja": "市川市文化会館 大ホール",
+        "en": "Ichikawa City Cultural Hall Main Hall"
+      }
+    },
+    {
+      "id": "平田本町通步行者天國-特設舞台",
+      "canonical": "平田本町通步行者天國 特設舞台",
+      "native": "平田本町通り歩行者天国 特設ステージ",
+      "region": "中國",
+      "prefecture": "島根縣",
+      "city": "出雲",
+      "names": {
+        "zh-TW": "平田本町通步行者天國 特設舞台",
+        "ja": "平田本町通り歩行者天国 特設ステージ"
+      }
+    },
+    {
+      "id": "本多之森會館",
+      "canonical": "本多之森會館",
+      "native": "本多の森ホール",
+      "region": "中部",
+      "prefecture": "石川縣",
+      "city": "金澤",
+      "names": {
+        "zh-TW": "本多之森會館",
+        "ja": "本多の森ホール",
+        "en": "Hondanomori Hall"
+      }
+    },
+    {
+      "id": "札幌文化藝術劇場-hitaru",
+      "canonical": "札幌文化藝術劇場 hitaru",
+      "native": "札幌文化芸術劇場 hitaru",
+      "region": "北海道",
+      "prefecture": "北海道",
+      "city": "札幌",
+      "names": {
+        "zh-TW": "札幌文化藝術劇場 hitaru",
+        "ja": "札幌文化芸術劇場 hitaru",
+        "en": "Sapporo Cultural Arts Theater hitaru"
+      }
+    },
+    {
+      "id": "札幌cube-garden",
+      "canonical": "札幌cube garden",
+      "native": "cube garden",
+      "region": "北海道",
+      "prefecture": "北海道",
+      "city": "札幌",
+      "names": {
+        "zh-TW": "札幌cube garden",
+        "ja": "cube garden",
+        "en": "Sapporo cube garden"
+      }
+    },
+    {
+      "id": "札幌kraps-hall",
+      "canonical": "札幌KRAPS HALL",
+      "native": "札幌KRAPS HALL",
+      "region": "北海道",
+      "prefecture": "北海道",
+      "city": "札幌",
+      "names": {
+        "zh-TW": "札幌KRAPS HALL",
+        "ja": "札幌KRAPS HALL",
+        "en": "Sapporo KRAPS HALL"
+      }
+    },
+    {
+      "id": "永旺夢樂城大日",
+      "canonical": "永旺夢樂城大日",
+      "native": "イオンモール大日",
+      "region": "關西",
+      "prefecture": "大阪府",
+      "city": "守口",
+      "names": {
+        "zh-TW": "永旺夢樂城大日",
+        "ja": "イオンモール大日"
+      }
+    },
+    {
+      "id": "永旺夢樂城大日-1f-sunny-court",
+      "canonical": "永旺夢樂城大日 1F Sunny Court",
+      "native": "イオンモール大日 1F サニーコート",
+      "region": "關西",
+      "prefecture": "大阪府",
+      "city": "守口",
+      "names": {
+        "zh-TW": "永旺夢樂城大日 1F Sunny Court",
+        "ja": "イオンモール大日 1F サニーコート"
+      }
+    },
+    {
+      "id": "永旺夢樂城大高",
+      "canonical": "永旺夢樂城大高",
+      "native": "イオンモール大高",
+      "region": "中部",
+      "prefecture": "愛知縣",
+      "city": "名古屋",
+      "names": {
+        "zh-TW": "永旺夢樂城大高",
+        "ja": "イオンモール大高",
+        "en": "AEON MALL Otaka"
+      }
+    },
+    {
+      "id": "永旺夢樂城大高-1f-center-court",
+      "canonical": "永旺夢樂城大高 1F Center Court",
+      "native": "イオンモール大高 1F センターコート",
+      "region": "中部",
+      "prefecture": "愛知縣",
+      "city": "名古屋",
+      "names": {
+        "zh-TW": "永旺夢樂城大高 1F Center Court",
+        "ja": "イオンモール大高 1F センターコート",
+        "en": "AEON MALL Otaka 1F Center Court"
+      }
+    },
+    {
+      "id": "永旺夢樂城日吉津",
+      "canonical": "永旺夢樂城日吉津",
+      "native": "イオンモール日吉津",
+      "region": "中國",
+      "prefecture": "鳥取縣",
+      "city": "日吉津",
+      "names": {
+        "zh-TW": "永旺夢樂城日吉津",
+        "ja": "イオンモール日吉津",
+        "en": "AEON MALL Hiezu"
+      }
+    },
+    {
+      "id": "永旺夢樂城日吉津-鬱金香廣場",
+      "canonical": "永旺夢樂城日吉津 鬱金香廣場",
+      "native": "イオンモール日吉津 チューリップコート",
+      "region": "中國",
+      "prefecture": "鳥取縣",
+      "city": "日吉津",
+      "names": {
+        "zh-TW": "永旺夢樂城日吉津 鬱金香廣場",
+        "ja": "イオンモール日吉津 チューリップコート",
+        "en": "AEON MALL Hiezu (Tulip Court)"
+      }
+    },
+    {
+      "id": "永旺夢樂城利府店",
+      "canonical": "永旺夢樂城利府店",
+      "native": "イオンモール利府",
+      "region": "東北",
+      "prefecture": "宮城縣",
+      "city": "利府",
+      "names": {
+        "zh-TW": "永旺夢樂城利府店",
+        "ja": "イオンモール利府"
+      }
+    },
+    {
+      "id": "永旺夢樂城利府店-1f戶外特設會場",
+      "canonical": "永旺夢樂城利府店 1F戶外特設會場",
+      "native": "イオンモール利府 1F 屋外特設会場",
+      "region": "東北",
+      "prefecture": "宮城縣",
+      "city": "利府",
+      "names": {
+        "zh-TW": "永旺夢樂城利府店 1F戶外特設會場",
+        "ja": "イオンモール利府 1F 屋外特設会場"
+      }
+    },
+    {
+      "id": "永旺夢樂城堺北花田",
+      "canonical": "永旺夢樂城堺北花田",
+      "native": "イオンモール堺北花田",
+      "region": "關西",
+      "prefecture": "大阪府",
+      "city": "堺",
+      "names": {
+        "zh-TW": "永旺夢樂城堺北花田",
+        "ja": "イオンモール堺北花田"
+      }
+    },
+    {
+      "id": "永旺夢樂城堺北花田-1f-center-court",
+      "canonical": "永旺夢樂城堺北花田 1F Center Court",
+      "native": "イオンモール堺北花田 1F センターコート",
+      "region": "關西",
+      "prefecture": "大阪府",
+      "city": "堺",
+      "names": {
+        "zh-TW": "永旺夢樂城堺北花田 1F Center Court",
+        "ja": "イオンモール堺北花田 1F センターコート"
+      }
+    },
+    {
+      "id": "永旺夢樂城橿原",
+      "canonical": "永旺夢樂城橿原",
+      "native": "イオンモール橿原",
+      "region": "關西",
+      "prefecture": "奈良縣",
+      "city": "橿原",
+      "names": {
+        "zh-TW": "永旺夢樂城橿原",
+        "ja": "イオンモール橿原",
+        "en": "AEON MALL Kashihara"
+      }
+    },
+    {
+      "id": "永旺夢樂城橿原-sunshine-court",
+      "canonical": "永旺夢樂城橿原 Sunshine Court",
+      "native": "イオンモール橿原 サンシャインコート",
+      "region": "關西",
+      "prefecture": "奈良縣",
+      "city": "橿原",
+      "names": {
+        "zh-TW": "永旺夢樂城橿原 Sunshine Court",
+        "ja": "イオンモール橿原 サンシャインコート",
+        "en": "AEON MALL Kashihara Sunshine Court"
+      }
+    },
+    {
+      "id": "永旺夢樂城濱松志都呂",
+      "canonical": "永旺夢樂城濱松志都呂",
+      "native": "イオンモール浜松志都呂",
+      "region": "中部",
+      "prefecture": "靜岡縣",
+      "city": "濱松",
+      "names": {
+        "zh-TW": "永旺夢樂城濱松志都呂",
+        "ja": "イオンモール浜松志都呂",
+        "en": "AEON MALL Hamamatsu Shitoro"
+      }
+    },
+    {
+      "id": "永旺夢樂城濱松志都呂-1f-central-court",
+      "canonical": "永旺夢樂城濱松志都呂 1F Central Court",
+      "native": "イオンモール浜松志都呂 1F セントラルコート",
+      "region": "中部",
+      "prefecture": "靜岡縣",
+      "city": "濱松",
+      "names": {
+        "zh-TW": "永旺夢樂城濱松志都呂 1F Central Court",
+        "ja": "イオンモール浜松志都呂 1F セントラルコート",
+        "en": "AEON MALL Hamamatsu Shitoro 1F Central Court"
+      }
+    },
+    {
+      "id": "永旺夢樂城鶴見綠地",
+      "canonical": "永旺夢樂城鶴見綠地",
+      "native": "イオンモール鶴見緑地",
+      "region": "關西",
+      "prefecture": "大阪府",
+      "city": "大阪",
+      "names": {
+        "zh-TW": "永旺夢樂城鶴見綠地",
+        "ja": "イオンモール鶴見緑地",
+        "en": "AEON MALL Tsurumi Ryokuchi"
+      }
+    },
+    {
+      "id": "永旺夢樂城鶴見綠地-3f-sunshine-court",
+      "canonical": "永旺夢樂城鶴見綠地 3F Sunshine Court",
+      "native": "イオンモール鶴見緑地 3F サンシャインコート",
+      "region": "關西",
+      "prefecture": "大阪府",
+      "city": "大阪",
+      "names": {
+        "zh-TW": "永旺夢樂城鶴見綠地 3F Sunshine Court",
+        "ja": "イオンモール鶴見緑地 3F サンシャインコート",
+        "en": "AEON MALL Tsurumi Ryokuchi 3F Sunshine Court"
+      }
+    },
+    {
+      "id": "永旺laketown-mori",
+      "canonical": "永旺LakeTown mori",
+      "native": "イオンレイクタウンmori",
+      "region": "關東",
+      "prefecture": "埼玉縣",
+      "city": "越谷",
+      "names": {
+        "zh-TW": "永旺LakeTown mori",
+        "ja": "イオンレイクタウンmori"
+      }
+    },
+    {
+      "id": "永旺laketown-mori-1f-木之廣場",
+      "canonical": "永旺LakeTown mori 1F 木之廣場",
+      "native": "イオンレイクタウンmori 1F 木の広場",
+      "region": "關東",
+      "prefecture": "埼玉縣",
+      "city": "越谷",
+      "names": {
+        "zh-TW": "永旺LakeTown mori 1F 木之廣場",
+        "ja": "イオンレイクタウンmori 1F 木の広場"
+      }
+    },
+    {
+      "id": "石川縣產業展示館-4號館",
+      "canonical": "石川縣產業展示館 4號館",
+      "native": "石川県産業展示館 4号館",
+      "region": "中部",
+      "prefecture": "石川縣",
+      "city": "金澤",
+      "names": {
+        "zh-TW": "石川縣產業展示館 4號館",
+        "ja": "石川県産業展示館 4号館"
+      }
+    },
+    {
+      "id": "立川babel",
+      "canonical": "立川BABEL",
+      "native": "立川BABEL",
+      "region": "關東",
+      "prefecture": "東京都",
+      "city": "東京",
+      "names": {
+        "zh-TW": "立川BABEL",
+        "ja": "立川BABEL"
+      }
+    },
+    {
+      "id": "伏見jammin",
+      "canonical": "伏見JAMMIN'",
+      "native": "伏見JAMMIN&#039;",
+      "region": "中部",
+      "prefecture": "愛知縣",
+      "city": "名古屋",
+      "names": {
+        "zh-TW": "伏見JAMMIN'",
+        "ja": "伏見JAMMIN&#039;"
+      }
+    },
+    {
+      "id": "吉祥寺shuffle",
+      "canonical": "吉祥寺SHUFFLE",
+      "native": "吉祥寺 SHUFFLE",
+      "region": "關東",
+      "prefecture": "東京都",
+      "city": "東京",
+      "names": {
+        "zh-TW": "吉祥寺SHUFFLE",
+        "ja": "吉祥寺 SHUFFLE",
+        "en": "Kichijoji SHUFFLE"
+      }
+    },
+    {
+      "id": "名古屋日本礙子會館",
+      "canonical": "名古屋日本礙子會館",
+      "native": "日本ガイシホール",
+      "region": "中部",
+      "prefecture": "愛知縣",
+      "city": "名古屋",
+      "names": {
+        "zh-TW": "名古屋日本礙子會館",
+        "ja": "日本ガイシホール",
+        "en": "Nippon Gaishi Hall",
+        "ko": "니혼 가이시 홀"
+      }
+    },
+    {
+      "id": "名古屋國際會議場-世紀廳",
+      "canonical": "名古屋國際會議場 世紀廳",
+      "native": "名古屋国際会議場 センチュリーホール",
+      "region": "中部",
+      "prefecture": "愛知縣",
+      "city": "名古屋",
+      "names": {
+        "zh-TW": "名古屋國際會議場 世紀廳",
+        "ja": "名古屋国際会議場 センチュリーホール",
+        "en": "Nagoya Congress Center Century Hall",
+        "ko": "나고야 국제회의장 센추리 홀"
+      }
+    },
+    {
+      "id": "名古屋港灣展覽館-第1展示館",
+      "canonical": "名古屋港灣展覽館 第1展示館",
+      "native": "ポートメッセなごや 第1展示館",
+      "region": "中部",
+      "prefecture": "愛知縣",
+      "city": "名古屋",
+      "names": {
+        "zh-TW": "名古屋港灣展覽館 第1展示館",
+        "ja": "ポートメッセなごや 第1展示館",
+        "en": "Port Messe Nagoya Exhibition Hall 1",
+        "ko": "포트 메세 나고야 제1전시관"
+      }
+    },
+    {
+      "id": "名古屋電視台-b-studio",
+      "canonical": "名古屋電視台 B Studio (BOMBER-E 公開收錄)",
+      "native": "メ〜テレ Bスタジオ (BOMBER-E 公開収録)",
+      "region": "中部",
+      "prefecture": "愛知縣",
+      "city": "名古屋",
+      "names": {
+        "zh-TW": "名古屋電視台 B Studio (BOMBER-E 公開收錄)",
+        "ja": "メ〜テレ Bスタジオ (BOMBER-E 公開収録)"
+      }
+    },
+    {
+      "id": "名古屋heartland",
+      "canonical": "名古屋HeartLand",
+      "native": "名古屋HeartLand",
+      "region": "中部",
+      "prefecture": "愛知縣",
+      "city": "名古屋",
+      "names": {
+        "zh-TW": "名古屋HeartLand",
+        "ja": "名古屋HeartLand",
+        "en": "Nagoya HeartLand"
+      }
+    },
+    {
+      "id": "名古屋parco西館",
+      "canonical": "名古屋PARCO西館",
+      "native": "名古屋PARCO 西館",
+      "region": "中部",
+      "prefecture": "愛知縣",
+      "city": "名古屋",
+      "names": {
+        "zh-TW": "名古屋PARCO西館",
+        "ja": "名古屋PARCO 西館"
+      }
+    },
+    {
+      "id": "名古屋parco西館-1f活動空間",
+      "canonical": "名古屋PARCO西館 1F活動空間",
+      "native": "名古屋PARCO 西館 1F イベントスペース",
+      "region": "中部",
+      "prefecture": "愛知縣",
+      "city": "名古屋",
+      "names": {
+        "zh-TW": "名古屋PARCO西館 1F活動空間",
+        "ja": "名古屋PARCO 西館 1F イベントスペース"
+      }
+    },
+    {
+      "id": "名古屋spade-box",
+      "canonical": "名古屋SPADE BOX",
+      "native": "名古屋SPADE BOX",
+      "region": "中部",
+      "prefecture": "愛知縣",
+      "city": "名古屋",
+      "names": {
+        "zh-TW": "名古屋SPADE BOX",
+        "ja": "名古屋SPADE BOX",
+        "en": "Nagoya SPADE BOX"
+      }
+    },
+    {
+      "id": "名古屋スクールオブミュージック",
+      "canonical": "名古屋スクールオブミュージック",
+      "native": "スクールオブミュージック at SAKAE SP-RING 2015会場 [Diamond Hall / APOLLO BASE / 名古屋CLUB QUATTRO / HOLIDAY NEXT NAGOYA / RAD HALL / TIGHT ROPE / 栄R.A.D / 新栄CLUB ROCK&#039;N ROLL / 名古屋LIVE HALL M.I.D / 名古屋ビジュアルアーツ Air Hall / SCHOOL OF MUSIC / FLEX LOUNGE / club JB&#039;S / EDITS / MUJICA]",
+      "region": "中部",
+      "prefecture": "愛知縣",
+      "city": "名古屋",
+      "names": {
+        "zh-TW": "名古屋スクールオブミュージック",
+        "ja": "スクールオブミュージック at SAKAE SP-RING 2015会場 [Diamond Hall / APOLLO BASE / 名古屋CLUB QUATTRO / HOLIDAY NEXT NAGOYA / RAD HALL / TIGHT ROPE / 栄R.A.D / 新栄CLUB ROCK&#039;N ROLL / 名古屋LIVE HALL M.I.D / 名古屋ビジュアルアーツ Air Hall / SCHOOL OF MUSIC / FLEX LOUNGE / club JB&#039;S / EDITS / MUJICA]"
+      }
+    },
+    {
+      "id": "安來港周邊特設舞台",
+      "canonical": "安來港周邊特設舞台",
+      "native": "安来港周辺特設ステージ",
+      "region": "中國",
+      "prefecture": "島根縣",
+      "city": "安來",
+      "names": {
+        "zh-TW": "安來港周邊特設舞台",
+        "ja": "安来港周辺特設ステージ"
+      }
+    },
+    {
+      "id": "旭川市民文化會館",
+      "canonical": "旭川市民文化會館",
+      "native": "旭川市民文化会館",
+      "region": "北海道",
+      "prefecture": "北海道",
+      "city": "旭川",
+      "names": {
+        "zh-TW": "旭川市民文化會館",
+        "ja": "旭川市民文化会館"
+      }
+    },
+    {
+      "id": "有明sgc會館",
+      "canonical": "有明SGC會館",
+      "native": "有明SGC会館",
+      "region": "關東",
+      "prefecture": "東京都",
+      "city": "東京",
+      "names": {
+        "zh-TW": "有明SGC會館",
+        "ja": "有明SGC会館"
+      }
+    },
+    {
+      "id": "米子工業高等專門學校",
+      "canonical": "米子工業高等專門學校",
+      "native": "米子工業高等専門学校",
+      "region": "中國",
+      "prefecture": "鳥取縣",
+      "city": "米子",
+      "names": {
+        "zh-TW": "米子工業高等專門學校",
+        "ja": "米子工業高等専門学校"
+      }
+    },
+    {
+      "id": "米子工業高等專門學校-體育館",
+      "canonical": "米子工業高等專門學校 體育館",
+      "native": "米子工業高等専門学校 体育館",
+      "region": "中國",
+      "prefecture": "鳥取縣",
+      "city": "米子",
+      "names": {
+        "zh-TW": "米子工業高等專門學校 體育館",
+        "ja": "米子工業高等専門学校 体育館"
+      }
+    },
+    {
+      "id": "米子市公會堂",
+      "canonical": "米子市公會堂",
+      "native": "米子市公会堂",
+      "region": "中國",
+      "prefecture": "鳥取縣",
+      "city": "米子",
+      "names": {
+        "zh-TW": "米子市公會堂",
+        "ja": "米子市公会堂",
+        "en": "Yonago City Public Hall"
+      }
+    },
+    {
+      "id": "yonago-public-hall-front-plaza-stage",
+      "canonical": "米子市公會堂前廣場 野外特設舞台",
+      "native": "米子市公会堂前広場 野外特設ステージ",
+      "region": "中國",
+      "prefecture": "鳥取縣",
+      "city": "米子",
+      "names": {
+        "zh-TW": "米子市公會堂前廣場 野外特設舞台",
+        "ja": "米子市公会堂前広場 野外特設ステージ",
+        "en": "Yonago City Public Hall Front Plaza Outdoor Special Stage"
+      }
+    },
+    {
+      "id": "米子市文化會館-主廳",
+      "canonical": "米子市文化會館 主廳",
+      "native": "米子市文化会館 メインホール",
+      "region": "中國",
+      "prefecture": "鳥取縣",
+      "city": "米子",
+      "names": {
+        "zh-TW": "米子市文化會館 主廳",
+        "ja": "米子市文化会館 メインホール",
+        "en": "Yonago City Cultural Hall Main Hall"
+      }
+    },
+    {
+      "id": "米子市文化會館-前-多目的廣場",
+      "canonical": "米子市文化會館 前 多目的廣場",
+      "native": "米子市文化会館 前 多目的広場",
+      "region": "中國",
+      "prefecture": "鳥取縣",
+      "city": "米子",
+      "names": {
+        "zh-TW": "米子市文化會館 前 多目的廣場",
+        "ja": "米子市文化会館 前 多目的広場"
+      }
+    },
+    {
+      "id": "米子aztic-laughs",
+      "canonical": "米子AZTiC laughs",
+      "native": "米子ラフズ",
+      "region": "中國",
+      "prefecture": "鳥取縣",
+      "city": "米子",
+      "names": {
+        "zh-TW": "米子AZTiC laughs",
+        "ja": "米子ラフズ",
+        "en": "Yonago AZTiC laughs"
+      }
+    },
+    {
+      "id": "沖繩會議中心展覽館",
+      "canonical": "沖繩會議中心展覽館",
+      "native": "沖縄コンベンションセンター展示棟",
+      "region": "九州",
+      "prefecture": "沖繩縣",
+      "city": "沖繩",
+      "names": {
+        "zh-TW": "沖繩會議中心展覽館",
+        "ja": "沖縄コンベンションセンター展示棟",
+        "en": "Okinawa Convention Center Exhibition Hall"
+      }
+    },
+    {
+      "id": "京都rad-mini",
+      "canonical": "京都RAD mini",
+      "native": "京都RAD mini",
+      "region": "關西",
+      "prefecture": "京都府",
+      "city": "京都",
+      "names": {
+        "zh-TW": "京都RAD mini",
+        "ja": "京都RAD mini"
+      }
+    },
+    {
+      "id": "京橋beronica",
+      "canonical": "京橋BERONICA",
+      "native": "京橋BERONICA",
+      "region": "關西",
+      "prefecture": "大阪府",
+      "city": "大阪",
+      "names": {
+        "zh-TW": "京橋BERONICA",
+        "ja": "京橋BERONICA"
+      }
+    },
+    {
+      "id": "周南-rising-hall",
+      "canonical": "周南 RISING HALL",
+      "native": "RISING HALL",
+      "region": "中國",
+      "prefecture": "山口縣",
+      "city": "周南",
+      "names": {
+        "zh-TW": "周南 RISING HALL",
+        "ja": "RISING HALL",
+        "en": "Shunan RISING HALL"
+      }
+    },
+    {
+      "id": "奈良-neverland",
+      "canonical": "奈良 NEVERLAND",
+      "native": "奈良NEVERLAND",
+      "region": "關西",
+      "prefecture": "奈良縣",
+      "city": "奈良",
+      "names": {
+        "zh-TW": "奈良 NEVERLAND",
+        "ja": "奈良NEVERLAND"
+      }
+    },
+    {
+      "id": "奈良100年會館-大會堂",
+      "canonical": "奈良100年會館 大會堂",
+      "native": "なら100年会館 大ホール",
+      "region": "關西",
+      "prefecture": "奈良縣",
+      "city": "奈良",
+      "names": {
+        "zh-TW": "奈良100年會館 大會堂",
+        "ja": "なら100年会館 大ホール",
+        "en": "Nara Centennial Hall Main Hall"
+      }
+    },
+    {
+      "id": "岡山-pepperland",
+      "canonical": "岡山 PEPPERLAND",
+      "native": "岡山PEPPERLAND",
+      "region": "中國",
+      "prefecture": "岡山縣",
+      "city": "岡山",
+      "names": {
+        "zh-TW": "岡山 PEPPERLAND",
+        "ja": "岡山PEPPERLAND",
+        "en": "Okayama PEPPERLAND"
+      }
+    },
+    {
+      "id": "岩田屋本館前-stage",
+      "canonical": "岩田屋本館前 STAGE",
+      "native": "岩田屋本館前 ステージ",
+      "region": "九州",
+      "prefecture": "福岡縣",
+      "city": "福岡",
+      "names": {
+        "zh-TW": "岩田屋本館前 STAGE",
+        "ja": "岩田屋本館前 ステージ"
+      }
+    },
+    {
+      "id": "岩見澤公園-new-waltz",
+      "canonical": "岩見澤公園 NEW WALTZ",
+      "native": "いわみざわ公園 NEW WALTZ",
+      "region": "北海道",
+      "prefecture": "北海道",
+      "city": "岩見澤",
+      "names": {
+        "zh-TW": "岩見澤公園 NEW WALTZ",
+        "ja": "いわみざわ公園 NEW WALTZ"
+      }
+    },
+    {
+      "id": "拓殖大學-文京校區-後藤新平・新渡戶稻造紀念講堂",
+      "canonical": "拓殖大學 文京校區 後藤新平・新渡戶稻造紀念講堂",
+      "native": "拓殖大学 文京キャンパス 後藤新平・新渡戸稲造記念講堂",
+      "region": "關東",
+      "prefecture": "東京都",
+      "city": "東京",
+      "names": {
+        "zh-TW": "拓殖大學 文京校區 後藤新平・新渡戶稻造紀念講堂",
+        "ja": "拓殖大学 文京キャンパス 後藤新平・新渡戸稲造記念講堂"
+      }
+    },
+    {
+      "id": "東京花園劇院",
+      "canonical": "東京花園劇院",
+      "native": "東京ガーデンシアター",
+      "region": "關東",
+      "prefecture": "東京都",
+      "city": "東京",
+      "names": {
+        "zh-TW": "東京花園劇院",
+        "ja": "東京ガーデンシアター",
+        "en": "Tokyo Garden Theater",
+        "ko": "도쿄 가든 시어터"
+      }
+    },
+    {
+      "id": "東京音樂與舞蹈專門學校澀谷-10f活動大廳",
+      "canonical": "東京音樂與舞蹈專門學校澀谷 (TSM澀谷) 10F活動大廳",
+      "native": "東京スクールオブミュージック&ダンス専門学校 (TSM渋谷) 10Fイベントホール",
+      "region": "關東",
+      "prefecture": "東京都",
+      "city": "東京",
+      "names": {
+        "zh-TW": "東京音樂與舞蹈專門學校澀谷 (TSM澀谷) 10F活動大廳",
+        "ja": "東京スクールオブミュージック&ダンス専門学校 (TSM渋谷) 10Fイベントホール"
+      }
+    },
+    {
+      "id": "東京hulic-hall",
+      "canonical": "東京Hulic Hall",
+      "native": "ヒューリックホール東京",
+      "region": "關東",
+      "prefecture": "東京都",
+      "city": "東京",
+      "names": {
+        "zh-TW": "東京Hulic Hall",
+        "ja": "ヒューリックホール東京",
+        "en": "Hulic Hall Tokyo"
+      }
+    },
+    {
+      "id": "東海大學湘南校區體育館",
+      "canonical": "東海大學湘南校區體育館",
+      "native": "東海大学 湘南キャンパス 体育館",
+      "region": "關東",
+      "prefecture": "神奈川縣",
+      "city": "平塚",
+      "names": {
+        "zh-TW": "東海大學湘南校區體育館",
+        "ja": "東海大学 湘南キャンパス 体育館"
+      }
+    },
+    {
+      "id": "松山salonkitty",
+      "canonical": "松山SALONKITTY",
+      "native": "松山SALONKITTY",
+      "region": "四國",
+      "prefecture": "愛媛縣",
+      "city": "松山",
+      "names": {
+        "zh-TW": "松山SALONKITTY",
+        "ja": "松山SALONKITTY",
+        "en": "Matsuyama SALONKITTY"
+      }
+    },
+    {
+      "id": "松江工業高等專門學校",
+      "canonical": "松江工業高等專門學校",
+      "native": "松江工業高等専門学校",
+      "region": "中國",
+      "prefecture": "島根縣",
+      "city": "松江",
+      "names": {
+        "zh-TW": "松江工業高等專門學校",
+        "ja": "松江工業高等専門学校"
+      }
+    },
+    {
+      "id": "松江工業高等專門學校-第一體育館",
+      "canonical": "松江工業高等專門學校 第一體育館",
+      "native": "松江工業高等専門学校 第一体育館",
+      "region": "中國",
+      "prefecture": "島根縣",
+      "city": "松江",
+      "names": {
+        "zh-TW": "松江工業高等專門學校 第一體育館",
+        "ja": "松江工業高等専門学校 第一体育館"
+      }
+    },
+    {
+      "id": "松江市川津公民館",
+      "canonical": "松江市川津公民館",
+      "native": "川津公民館",
+      "region": "中國",
+      "prefecture": "島根縣",
+      "city": "松江",
+      "names": {
+        "zh-TW": "松江市川津公民館",
+        "ja": "川津公民館"
+      }
+    },
+    {
+      "id": "松江市白潟公園-東側特設舞台",
+      "canonical": "松江市白潟公園 東側特設舞台",
+      "native": "松江市白潟公園 東側特設ステージ",
+      "region": "中國",
+      "prefecture": "島根縣",
+      "city": "松江",
+      "names": {
+        "zh-TW": "松江市白潟公園 東側特設舞台",
+        "ja": "松江市白潟公園 東側特設ステージ"
+      }
+    },
+    {
+      "id": "松江市綜合體育館",
+      "canonical": "松江市綜合體育館",
+      "native": "松江市総合体育館",
+      "region": "中國",
+      "prefecture": "島根縣",
+      "city": "松江",
+      "names": {
+        "zh-TW": "松江市綜合體育館",
+        "ja": "松江市総合体育館"
+      }
+    },
+    {
+      "id": "松江學園teddys",
+      "canonical": "松江學園Teddy's",
+      "native": "松江学園Teddy's",
+      "region": "中國",
+      "prefecture": "島根縣",
+      "city": "松江",
+      "names": {
+        "zh-TW": "松江學園Teddy's",
+        "ja": "松江学園Teddy's"
+      }
+    },
+    {
+      "id": "松江aztic-canova",
+      "canonical": "松江AZTiC canova",
+      "native": "松江canova",
+      "region": "中國",
+      "prefecture": "島根縣",
+      "city": "松江",
+      "names": {
+        "zh-TW": "松江AZTiC canova",
+        "ja": "松江canova",
+        "en": "Matsue AZTiC canova"
+      }
+    },
+    {
+      "id": "松江b1",
+      "canonical": "松江B1",
+      "native": "松江B1",
+      "region": "中國",
+      "prefecture": "島根縣",
+      "city": "松江",
+      "names": {
+        "zh-TW": "松江B1",
+        "ja": "松江B1"
+      }
+    },
+    {
+      "id": "松江pianoman",
+      "canonical": "松江Pianoman",
+      "native": "Pianoman",
+      "region": "中國",
+      "prefecture": "島根縣",
+      "city": "松江",
+      "names": {
+        "zh-TW": "松江Pianoman",
+        "ja": "Pianoman"
+      }
+    },
+    {
+      "id": "松江terrsa-テルサホール",
+      "canonical": "松江TERRSA テルサホール",
+      "native": "松江テルサ テルサホール",
+      "region": "中國",
+      "prefecture": "島根縣",
+      "city": "松江",
+      "names": {
+        "zh-TW": "松江TERRSA テルサホール",
+        "ja": "松江テルサ テルサホール"
+      }
+    },
+    {
+      "id": "金澤-vanvan-v4",
+      "canonical": "金澤 vanvan V4",
+      "native": "金沢vanvan V4",
+      "region": "中部",
+      "prefecture": "石川縣",
+      "city": "金澤",
+      "names": {
+        "zh-TW": "金澤 vanvan V4",
+        "ja": "金沢vanvan V4"
+      }
+    },
+    {
+      "id": "長良川國際會議場-大會堂",
+      "canonical": "長良川國際會議場 大會堂",
+      "native": "長良川国際会議場 メインホール",
+      "region": "中部",
+      "prefecture": "岐阜縣",
+      "city": "岐阜",
+      "names": {
+        "zh-TW": "長良川國際會議場 大會堂",
+        "ja": "長良川国際会議場 メインホール",
+        "en": "Nagaragawa Convention Center Main Hall"
+      }
+    },
+    {
+      "id": "長居陸上競技場",
+      "canonical": "長居陸上競技場 (Yanmar Stadium 長居)",
+      "native": "ヤンマースタジアム長居",
+      "region": "關西",
+      "prefecture": "大阪府",
+      "city": "大阪",
+      "names": {
+        "zh-TW": "長居陸上競技場 (Yanmar Stadium 長居)",
+        "ja": "ヤンマースタジアム長居",
+        "en": "Yanmar Stadium Nagai",
+        "ko": "얀마 스타디움 나가이"
+      }
+    },
+    {
+      "id": "長野市若里多目的體育館",
+      "canonical": "長野市若里多目的體育館 (Big Hat)",
+      "native": "長野市若里多目的スポーツアリーナ (ビッグハット)",
+      "region": "中部",
+      "prefecture": "長野縣",
+      "city": "長野",
+      "names": {
+        "zh-TW": "長野市若里多目的體育館 (Big Hat)",
+        "ja": "長野市若里多目的スポーツアリーナ (ビッグハット)",
+        "en": "Big Hat (Nagano Wakasato Multipurpose Sports Arena)"
+      }
+    },
+    {
+      "id": "長野club-junk-box",
+      "canonical": "長野CLUB JUNK BOX",
+      "native": "長野CLUB JUNK BOX",
+      "region": "中部",
+      "prefecture": "長野縣",
+      "city": "長野",
+      "names": {
+        "zh-TW": "長野CLUB JUNK BOX",
+        "ja": "長野CLUB JUNK BOX",
+        "en": "Nagano CLUB JUNK BOX"
+      }
+    },
+    {
+      "id": "阿倍野rocktown",
+      "canonical": "阿倍野ROCKTOWN",
+      "native": "阿倍野ROCKTOWN",
+      "region": "關西",
+      "prefecture": "大阪府",
+      "city": "大阪",
+      "names": {
+        "zh-TW": "阿倍野ROCKTOWN",
+        "ja": "阿倍野ROCKTOWN",
+        "en": "Abeno ROCKTOWN"
+      }
+    },
+    {
+      "id": "青森市文化會館",
+      "canonical": "青森市文化會館 (Linkstation Hall 青森)",
+      "native": "リンクステーションホール青森",
+      "region": "東北",
+      "prefecture": "青森縣",
+      "city": "青森",
+      "names": {
+        "zh-TW": "青森市文化會館 (Linkstation Hall 青森)",
+        "ja": "リンクステーションホール青森",
+        "en": "Linkstation Hall Aomori"
+      }
+    },
+    {
+      "id": "星宇表演藝術中心",
+      "canonical": "星宇表演藝術中心",
+      "native": "The Star Theatre",
+      "region": "海外",
+      "prefecture": "新加坡",
+      "city": "新加坡",
+      "names": {
+        "zh-TW": "星宇表演藝術中心",
+        "ja": "The Star Theatre",
+        "en": "The Star Theatre",
+        "ko": "더 스타 시어터"
+      }
+    },
+    {
+      "id": "柏-palooza",
+      "canonical": "柏 PALOOZA",
+      "native": "柏PALOOZA",
+      "region": "關東",
+      "prefecture": "千葉縣",
+      "city": "千葉",
+      "names": {
+        "zh-TW": "柏 PALOOZA",
+        "ja": "柏PALOOZA"
+      }
+    },
+    {
+      "id": "柏dome",
+      "canonical": "柏DOMe",
+      "native": "柏DOMe at 柏 MUSIC SUN 2016会場 [柏DOMe / Studio WUU / 柏PALOOZA / 柏616 / 柏駅東口ファミリー広場ウッドデッキステージ / 高島屋エントランスステージ]",
+      "region": "關東",
+      "prefecture": "千葉縣",
+      "city": "千葉",
+      "names": {
+        "zh-TW": "柏DOMe",
+        "ja": "柏DOMe at 柏 MUSIC SUN 2016会場 [柏DOMe / Studio WUU / 柏PALOOZA / 柏616 / 柏駅東口ファミリー広場ウッドデッキステージ / 高島屋エントランスステージ]"
+      }
+    },
+    {
+      "id": "秋田藝術劇場-milhas",
+      "canonical": "秋田藝術劇場 Milhas",
+      "native": "あきた芸術劇場ミルハス",
+      "region": "東北",
+      "prefecture": "秋田縣",
+      "city": "秋田",
+      "names": {
+        "zh-TW": "秋田藝術劇場 Milhas",
+        "ja": "あきた芸術劇場ミルハス",
+        "en": "Akita Arts Theater Milhas"
+      }
+    },
+    {
+      "id": "美國村-drop",
+      "canonical": "美國村 DROP",
+      "native": "アメリカ村 DROP",
+      "region": "關西",
+      "prefecture": "大阪府",
+      "city": "大阪",
+      "names": {
+        "zh-TW": "美國村 DROP",
+        "ja": "アメリカ村 DROP",
+        "en": "Americamura DROP"
+      }
+    },
+    {
+      "id": "若洲公園-camp-stage",
+      "canonical": "若洲公園 CAMP STAGE",
+      "native": "CAMP STAGE at 若洲公園",
+      "region": "關東",
+      "prefecture": "東京都",
+      "city": "東京",
+      "names": {
+        "zh-TW": "若洲公園 CAMP STAGE",
+        "ja": "CAMP STAGE at 若洲公園"
+      }
+    },
+    {
+      "id": "若洲公園-new-beat-square",
+      "canonical": "若洲公園 NEW BEAT SQUARE",
+      "native": "NEW BEAT SQUARE at 若洲公園",
+      "region": "關東",
+      "prefecture": "東京都",
+      "city": "東京",
+      "names": {
+        "zh-TW": "若洲公園 NEW BEAT SQUARE",
+        "ja": "NEW BEAT SQUARE at 若洲公園"
+      }
+    },
+    {
+      "id": "若洲公園-seaside-park",
+      "canonical": "若洲公園 SEASIDE PARK",
+      "native": "SEASIDE PARK at 若洲公園",
+      "region": "關東",
+      "prefecture": "東京都",
+      "city": "東京",
+      "names": {
+        "zh-TW": "若洲公園 SEASIDE PARK",
+        "ja": "SEASIDE PARK at 若洲公園"
+      }
+    },
+    {
+      "id": "倉敷市民會館",
+      "canonical": "倉敷市民會館",
+      "native": "倉敷市民会館",
+      "region": "中國",
+      "prefecture": "岡山縣",
+      "city": "倉敷",
+      "names": {
+        "zh-TW": "倉敷市民會館",
+        "ja": "倉敷市民会館",
+        "en": "Kurashiki City Auditorium"
+      }
+    },
+    {
+      "id": "原宿strobe-cafe",
+      "canonical": "原宿Strobe Cafe",
+      "native": "原宿ストロボカフェ",
+      "region": "關東",
+      "prefecture": "東京都",
+      "city": "東京",
+      "names": {
+        "zh-TW": "原宿Strobe Cafe",
+        "ja": "原宿ストロボカフェ"
+      }
+    },
+    {
+      "id": "宮城積水海姆超級競技場",
+      "canonical": "宮城積水海姆超級競技場",
+      "native": "セキスイハイムスーパーアリーナ",
+      "region": "東北",
+      "prefecture": "宮城縣",
+      "city": "仙台",
+      "names": {
+        "zh-TW": "宮城積水海姆超級競技場",
+        "ja": "セキスイハイムスーパーアリーナ",
+        "en": "Sekisui Heim Super Arena",
+        "ko": "세키스이하임 슈퍼 아레나"
+      }
+    },
+    {
+      "id": "島根大學-松江校區",
+      "canonical": "島根大學 松江校區",
+      "native": "島根大学 松江キャンパス",
+      "region": "中國",
+      "prefecture": "島根縣",
+      "city": "松江",
+      "names": {
+        "zh-TW": "島根大學 松江校區",
+        "ja": "島根大学 松江キャンパス"
+      }
+    },
+    {
+      "id": "島根縣民會館-大會堂",
+      "canonical": "島根縣民會館 大會堂",
+      "native": "島根県民会館 大ホール",
+      "region": "中國",
+      "prefecture": "島根縣",
+      "city": "松江",
+      "names": {
+        "zh-TW": "島根縣民會館 大會堂",
+        "ja": "島根県民会館 大ホール",
+        "en": "Shimane Prefectural Hall Main Hall"
+      }
+    },
+    {
+      "id": "島根縣民會館-中會堂",
+      "canonical": "島根縣民會館 中會堂",
+      "native": "島根県民会館 中ホール",
+      "region": "中國",
+      "prefecture": "島根縣",
+      "city": "松江",
+      "names": {
+        "zh-TW": "島根縣民會館 中會堂",
+        "ja": "島根県民会館 中ホール",
+        "en": "Shimane Prefectural Hall Medium Hall"
+      }
+    },
+    {
+      "id": "島根縣立大學-出雲校區",
+      "canonical": "島根縣立大學 出雲校區",
+      "native": "島根県立大学 出雲キャンパス",
+      "region": "中國",
+      "prefecture": "島根縣",
+      "city": "出雲",
+      "names": {
+        "zh-TW": "島根縣立大學 出雲校區",
+        "ja": "島根県立大学 出雲キャンパス"
+      }
+    },
+    {
+      "id": "浜大津b-flat",
+      "canonical": "浜大津B-flat",
+      "native": "浜大津 B-flat",
+      "region": "關西",
+      "prefecture": "滋賀縣",
+      "city": "大津",
+      "names": {
+        "zh-TW": "浜大津B-flat",
+        "ja": "浜大津 B-flat"
+      }
+    },
+    {
+      "id": "海之交流廣場-green-hill",
+      "canonical": "海之交流廣場 GREEN HILL",
+      "native": "海の交流広場 GREEN HILL",
+      "region": "關西",
+      "prefecture": "大阪府",
+      "city": "大阪",
+      "names": {
+        "zh-TW": "海之交流廣場 GREEN HILL",
+        "ja": "海の交流広場 GREEN HILL"
+      }
+    },
+    {
+      "id": "海辺のcafe-home",
+      "canonical": "海辺のcafe HOME",
+      "native": "大根島 HOME",
+      "region": "中國",
+      "prefecture": "島根縣",
+      "city": "松江",
+      "names": {
+        "zh-TW": "海辺のcafe HOME",
+        "ja": "大根島 HOME"
+      }
+    },
+    {
+      "id": "真駒內積水海姆冰上競技場",
+      "canonical": "真駒內積水海姆冰上競技場",
+      "native": "真駒内セキスイハイムアイスアリーナ",
+      "region": "北海道",
+      "prefecture": "北海道",
+      "city": "札幌",
+      "names": {
+        "zh-TW": "真駒內積水海姆冰上競技場",
+        "ja": "真駒内セキスイハイムアイスアリーナ",
+        "en": "Makomanai Sekisui Heim Ice Arena",
+        "ko": "마코마나이 세키스이하임 아이스 아레나"
+      }
+    },
+    {
+      "id": "神戶國際會館-國際廳",
+      "canonical": "神戶國際會館 國際廳",
+      "native": "神戸国際会館 こくさいホール",
+      "region": "關西",
+      "prefecture": "兵庫縣",
+      "city": "神戶",
+      "names": {
+        "zh-TW": "神戶國際會館 國際廳",
+        "ja": "神戸国際会館 こくさいホール",
+        "en": "Kobe International House Kokusai Hall"
+      }
+    },
+    {
+      "id": "神戶varit",
+      "canonical": "神戶VARIT.",
+      "native": "神戸VARIT.",
+      "region": "關西",
+      "prefecture": "兵庫縣",
+      "city": "神戶",
+      "names": {
+        "zh-TW": "神戶VARIT.",
+        "ja": "神戸VARIT."
+      }
+    },
+    {
+      "id": "郡山club-9",
+      "canonical": "郡山CLUB #9",
+      "native": "郡山CLUB #9",
+      "region": "東北",
+      "prefecture": "福島縣",
+      "city": "郡山",
+      "names": {
+        "zh-TW": "郡山CLUB #9",
+        "ja": "郡山CLUB #9",
+        "en": "Koriyama CLUB #9"
+      }
+    },
+    {
+      "id": "高松-olive-hall",
+      "canonical": "高松 Olive Hall",
+      "native": "高松オリーブホール",
+      "region": "四國",
+      "prefecture": "香川縣",
+      "city": "高松",
+      "names": {
+        "zh-TW": "高松 Olive Hall",
+        "ja": "高松オリーブホール"
+      }
+    },
+    {
+      "id": "高松dime",
+      "canonical": "高松DIME",
+      "native": "高松DIME",
+      "region": "四國",
+      "prefecture": "香川縣",
+      "city": "高松",
+      "names": {
+        "zh-TW": "高松DIME",
+        "ja": "高松DIME",
+        "en": "Takamatsu DIME"
+      }
+    },
+    {
+      "id": "高松festhalle",
+      "canonical": "高松festhalle",
+      "native": "高松festhalle",
+      "region": "四國",
+      "prefecture": "香川縣",
+      "city": "高松",
+      "names": {
+        "zh-TW": "高松festhalle",
+        "ja": "高松festhalle",
+        "en": "Takamatsu festhalle"
+      }
+    },
+    {
+      "id": "高知縣立縣民文化會館-orange-hall",
+      "canonical": "高知縣立縣民文化會館 Orange Hall",
+      "native": "高知県立県民文化ホール オレンジホール",
+      "region": "四國",
+      "prefecture": "高知縣",
+      "city": "高知",
+      "names": {
+        "zh-TW": "高知縣立縣民文化會館 Orange Hall",
+        "ja": "高知県立県民文化ホール オレンジホール",
+        "en": "Kochi Prefectural Culture Hall Orange Hall"
+      }
+    },
+    {
+      "id": "高崎opa",
+      "canonical": "高崎OPA",
+      "native": "高崎オーパ",
+      "region": "關東",
+      "prefecture": "群馬縣",
+      "city": "高崎",
+      "names": {
+        "zh-TW": "高崎OPA",
+        "ja": "高崎オーパ"
+      }
+    },
+    {
+      "id": "高崎opa-2f活動空間",
+      "canonical": "高崎OPA 2F活動空間",
+      "native": "高崎OPA 2F イベントスペース",
+      "region": "關東",
+      "prefecture": "群馬縣",
+      "city": "高崎",
+      "names": {
+        "zh-TW": "高崎OPA 2F活動空間",
+        "ja": "高崎OPA 2F イベントスペース"
+      }
+    },
+    {
+      "id": "啦啦寶都甲子園",
+      "canonical": "啦啦寶都甲子園",
+      "native": "ららぽーと甲子園",
+      "region": "關西",
+      "prefecture": "兵庫縣",
+      "city": "西宮",
+      "names": {
+        "zh-TW": "啦啦寶都甲子園",
+        "ja": "ららぽーと甲子園"
+      }
+    },
+    {
+      "id": "啦啦寶都甲子園-1f-park-walk-court",
+      "canonical": "啦啦寶都甲子園 1F Park Walk Court",
+      "native": "ららぽーと甲子園 1F パークウォークコート",
+      "region": "關西",
+      "prefecture": "兵庫縣",
+      "city": "西宮",
+      "names": {
+        "zh-TW": "啦啦寶都甲子園 1F Park Walk Court",
+        "ja": "ららぽーと甲子園 1F パークウォークコート"
+      }
+    },
+    {
+      "id": "國立代代木競技場",
+      "canonical": "國立代代木競技場",
+      "native": "国立代々木競技場",
+      "region": "關東",
+      "prefecture": "東京都",
+      "city": "東京",
+      "names": {
+        "zh-TW": "國立代代木競技場",
+        "ja": "国立代々木競技場",
+        "en": "Yoyogi National Stadium",
+        "ko": "국립 요요기 경기장"
+      }
+    },
+    {
+      "id": "國立代代木競技場-第一體育館",
+      "canonical": "國立代代木競技場 第一體育館",
+      "native": "国立代々木競技場 第一体育館",
+      "region": "關東",
+      "prefecture": "東京都",
+      "city": "東京",
+      "names": {
+        "zh-TW": "國立代代木競技場 第一體育館",
+        "ja": "国立代々木競技場 第一体育館",
+        "en": "Yoyogi National Stadium 1st Gymnasium",
+        "ko": "국립 요요기 경기장 제1체육관"
+      }
+    },
+    {
+      "id": "國立代代木競技場第一體育館",
+      "canonical": "國立代代木競技場第一體育館",
+      "native": "国立代々木競技場 第一体育館",
+      "region": "關東",
+      "prefecture": "東京都",
+      "city": "東京",
+      "names": {
+        "zh-TW": "國立代代木競技場第一體育館",
+        "ja": "国立代々木競技場 第一体育館",
+        "en": "Yoyogi National Stadium 1st Gymnasium",
+        "ko": "국립 요요기 경기장 제1체육관"
+      }
+    },
+    {
+      "id": "國營海之中道海濱公園-戶外劇場",
+      "canonical": "國營海之中道海濱公園 戶外劇場（Nobosemon STAGE）",
+      "native": "国営海の中道海浜公園 野外劇場",
+      "region": "九州",
+      "prefecture": "福岡縣",
+      "city": "福岡",
+      "names": {
+        "zh-TW": "國營海之中道海濱公園 戶外劇場（Nobosemon STAGE）",
+        "ja": "国営海の中道海浜公園 野外劇場"
+      }
+    },
+    {
+      "id": "國營常陸海濱公園-hillside-stage",
+      "canonical": "國營常陸海濱公園 HILLSIDE STAGE",
+      "native": "国営ひたち海浜公園 HILLSIDE STAGE",
+      "region": "關東",
+      "prefecture": "茨城縣",
+      "city": "水戶",
+      "names": {
+        "zh-TW": "國營常陸海濱公園 HILLSIDE STAGE",
+        "ja": "国営ひたち海浜公園 HILLSIDE STAGE"
+      }
+    },
+    {
+      "id": "國營常陸海濱公園-park-stage",
+      "canonical": "國營常陸海濱公園 PARK STAGE",
+      "native": "国営ひたち海浜公園 PARK STAGE",
+      "region": "關東",
+      "prefecture": "茨城縣",
+      "city": "水戶",
+      "names": {
+        "zh-TW": "國營常陸海濱公園 PARK STAGE",
+        "ja": "国営ひたち海浜公園 PARK STAGE"
+      }
+    },
+    {
+      "id": "國寶松江城-馬出曲輪",
+      "canonical": "國寶松江城 馬出曲輪",
+      "native": "国宝松江城 馬出曲輪",
+      "region": "中國",
+      "prefecture": "島根縣",
+      "city": "松江",
+      "names": {
+        "zh-TW": "國寶松江城 馬出曲輪",
+        "ja": "国宝松江城 馬出曲輪"
+      }
+    },
+    {
+      "id": "埼玉超級競技場",
+      "canonical": "埼玉超級競技場",
+      "native": "さいたまスーパーアリーナ",
+      "region": "關東",
+      "prefecture": "埼玉縣",
+      "city": "埼玉",
+      "names": {
+        "zh-TW": "埼玉超級競技場",
+        "ja": "さいたまスーパーアリーナ",
+        "en": "Saitama Super Arena",
+        "ko": "사이타마 슈퍼 아레나"
+      }
+    },
+    {
+      "id": "埼玉超級競技場-viva-stage",
+      "canonical": "埼玉超級競技場 VIVA! STAGE",
+      "native": "さいたまスーパーアリーナ VIVA! STAGE",
+      "region": "關東",
+      "prefecture": "埼玉縣",
+      "city": "埼玉",
+      "names": {
+        "zh-TW": "埼玉超級競技場 VIVA! STAGE",
+        "ja": "さいたまスーパーアリーナ VIVA! STAGE",
+        "en": "Saitama Super Arena (VIVA! STAGE)",
+        "ko": "사이타마 슈퍼 아레나 (VIVA! STAGE)"
+      }
+    },
+    {
+      "id": "帶廣市民文化會館",
+      "canonical": "帶廣市民文化會館",
+      "native": "帯広市民文化ホール",
+      "region": "北海道",
+      "prefecture": "北海道",
+      "city": "帶廣",
+      "names": {
+        "zh-TW": "帶廣市民文化會館",
+        "ja": "帯広市民文化ホール",
+        "en": "Obihiro Civic Cultural Hall"
+      }
+    },
+    {
+      "id": "梅田club-quattro",
+      "canonical": "梅田CLUB QUATTRO",
+      "native": "梅田CLUB QUATTRO",
+      "region": "關西",
+      "prefecture": "大阪府",
+      "city": "大阪",
+      "names": {
+        "zh-TW": "梅田CLUB QUATTRO",
+        "ja": "梅田CLUB QUATTRO",
+        "en": "Umeda CLUB QUATTRO"
+      }
+    },
+    {
+      "id": "釧路市民文化會館",
+      "canonical": "釧路市民文化會館",
+      "native": "釧路市民文化ホール",
+      "region": "北海道",
+      "prefecture": "北海道",
+      "city": "釧路",
+      "names": {
+        "zh-TW": "釧路市民文化會館",
+        "ja": "釧路市民文化ホール",
+        "en": "Kushiro Civic Cultural Hall"
+      }
+    },
+    {
+      "id": "鹿兒島縣文化中心-寶山會館",
+      "canonical": "鹿兒島縣文化中心 寶山會館",
+      "native": "宝山ホール",
+      "region": "九州",
+      "prefecture": "鹿兒島縣",
+      "city": "鹿兒島",
+      "names": {
+        "zh-TW": "鹿兒島縣文化中心 寶山會館",
+        "ja": "宝山ホール",
+        "en": "Hozan Hall"
+      }
+    },
+    {
+      "id": "鹿兒島sr-hall",
+      "canonical": "鹿兒島SR HALL",
+      "native": "鹿児島SR HALL",
+      "region": "九州",
+      "prefecture": "鹿兒島縣",
+      "city": "鹿兒島",
+      "names": {
+        "zh-TW": "鹿兒島SR HALL",
+        "ja": "鹿児島SR HALL"
+      }
+    },
+    {
+      "id": "富士電視台",
+      "canonical": "富士電視台",
+      "native": "フジテレビ",
+      "region": "關東",
+      "prefecture": "東京都",
+      "city": "東京",
+      "names": {
+        "zh-TW": "富士電視台",
+        "ja": "フジテレビ"
+      }
+    },
+    {
+      "id": "富士電視台本社大樓-大家之夢大陸-mynavi-stage",
+      "canonical": "富士電視台本社大樓 大家之夢大陸 Mynavi Stage",
+      "native": "フジテレビ本社屋 お台場みんなの夢大陸 マイナビステージ",
+      "region": "關東",
+      "prefecture": "東京都",
+      "city": "東京",
+      "names": {
+        "zh-TW": "富士電視台本社大樓 大家之夢大陸 Mynavi Stage",
+        "ja": "フジテレビ本社屋 お台場みんなの夢大陸 マイナビステージ"
+      }
+    },
+    {
+      "id": "富山市藝術文化館-aubade-hall",
+      "canonical": "富山市藝術文化館 Aubade Hall",
+      "native": "オーバード・ホール",
+      "region": "中部",
+      "prefecture": "富山縣",
+      "city": "富山",
+      "names": {
+        "zh-TW": "富山市藝術文化館 Aubade Hall",
+        "ja": "オーバード・ホール",
+        "en": "Aubade Hall"
+      }
+    },
+    {
+      "id": "惠比壽liquidroom",
+      "canonical": "惠比壽LIQUIDROOM",
+      "native": "LIQUIDROOM",
+      "region": "關東",
+      "prefecture": "東京都",
+      "city": "東京",
+      "names": {
+        "zh-TW": "惠比壽LIQUIDROOM",
+        "ja": "LIQUIDROOM",
+        "en": "LIQUIDROOM"
+      }
+    },
+    {
+      "id": "朝日電視台",
+      "canonical": "朝日電視台",
+      "native": "テレビ朝日",
+      "region": "關東",
+      "prefecture": "東京都",
+      "city": "東京",
+      "names": {
+        "zh-TW": "朝日電視台",
+        "ja": "テレビ朝日"
+      }
+    },
+    {
+      "id": "滋賀ustone",
+      "canonical": "滋賀U★STONE",
+      "native": "滋賀USTONE",
+      "region": "關西",
+      "prefecture": "滋賀縣",
+      "city": "大津",
+      "names": {
+        "zh-TW": "滋賀U★STONE",
+        "ja": "滋賀USTONE",
+        "en": "Shiga U-STONE"
+      }
+    },
+    {
+      "id": "愛知淑德大學-長久手校區-體育館",
+      "canonical": "愛知淑德大學 長久手校區 體育館",
+      "native": "愛知淑徳大学 長久手キャンパス 体育館",
+      "region": "中部",
+      "prefecture": "愛知縣",
+      "city": "名古屋",
+      "names": {
+        "zh-TW": "愛知淑德大學 長久手校區 體育館",
+        "ja": "愛知淑徳大学 長久手キャンパス 体育館"
+      }
+    },
+    {
+      "id": "愛知縣藝術劇場-大會堂",
+      "canonical": "愛知縣藝術劇場 大會堂",
+      "native": "愛知県芸術劇場 大ホール",
+      "region": "中部",
+      "prefecture": "愛知縣",
+      "city": "名古屋",
+      "names": {
+        "zh-TW": "愛知縣藝術劇場 大會堂",
+        "ja": "愛知県芸術劇場 大ホール",
+        "en": "Aichi Prefectural Art Theater Main Hall"
+      }
+    },
+    {
+      "id": "愛媛縣縣民文化會館",
+      "canonical": "愛媛縣縣民文化會館",
+      "native": "愛媛県県民文化会館",
+      "region": "四國",
+      "prefecture": "愛媛縣",
+      "city": "松山",
+      "names": {
+        "zh-TW": "愛媛縣縣民文化會館",
+        "ja": "愛媛県県民文化会館",
+        "en": "Ehime Prefectural Cultural Center"
+      }
+    },
+    {
+      "id": "新木場studio-coast",
+      "canonical": "新木場STUDIO COAST",
+      "native": "STUDIO COAST",
+      "region": "關東",
+      "prefecture": "東京都",
+      "city": "東京",
+      "names": {
+        "zh-TW": "新木場STUDIO COAST",
+        "ja": "STUDIO COAST",
+        "en": "STUDIO COAST"
+      }
+    },
+    {
+      "id": "新代田fever",
+      "canonical": "新代田FEVER",
+      "native": "MAIN STAGE at 新代田FEVER",
+      "region": "關東",
+      "prefecture": "東京都",
+      "city": "東京",
+      "names": {
+        "zh-TW": "新代田FEVER",
+        "ja": "MAIN STAGE at 新代田FEVER",
+        "en": "Shindaita FEVER"
+      }
+    },
+    {
+      "id": "新風館",
+      "canonical": "新風館",
+      "native": "新風館",
+      "region": "關西",
+      "prefecture": "京都府",
+      "city": "京都",
+      "names": {
+        "zh-TW": "新風館",
+        "ja": "新風館"
+      }
+    },
+    {
+      "id": "新宿-marz",
+      "canonical": "新宿 MARZ",
+      "native": "新宿MARZ",
+      "region": "關東",
+      "prefecture": "東京都",
+      "city": "東京",
+      "names": {
+        "zh-TW": "新宿 MARZ",
+        "ja": "新宿MARZ"
+      }
+    },
+    {
+      "id": "新宿loft",
+      "canonical": "新宿LOFT",
+      "native": "新宿LOFT",
+      "region": "關東",
+      "prefecture": "東京都",
+      "city": "東京",
+      "names": {
+        "zh-TW": "新宿LOFT",
+        "ja": "新宿LOFT",
+        "en": "Shinjuku LOFT"
+      }
+    },
+    {
+      "id": "新榮rad-seven",
+      "canonical": "新榮RAD SEVEN",
+      "native": "新栄RAD SEVEN",
+      "region": "中部",
+      "prefecture": "愛知縣",
+      "city": "名古屋",
+      "names": {
+        "zh-TW": "新榮RAD SEVEN",
+        "ja": "新栄RAD SEVEN"
+      }
+    },
+    {
+      "id": "新潟-terrsa",
+      "canonical": "新潟 TERRSA",
+      "native": "新潟テルサ",
+      "region": "中部",
+      "prefecture": "新潟縣",
+      "city": "新潟",
+      "names": {
+        "zh-TW": "新潟 TERRSA",
+        "ja": "新潟テルサ",
+        "en": "Niigata Terrsa"
+      }
+    },
+    {
+      "id": "新潟朱鷺展覽館",
+      "canonical": "新潟朱鷺展覽館",
+      "native": "朱鷺メッセ",
+      "region": "中部",
+      "prefecture": "新潟縣",
+      "city": "新潟",
+      "names": {
+        "zh-TW": "新潟朱鷺展覽館",
+        "ja": "朱鷺メッセ",
+        "en": "Toki Messe"
+      }
+    },
+    {
+      "id": "新潟縣民會館",
+      "canonical": "新潟縣民會館",
+      "native": "新潟県民会館",
+      "region": "中部",
+      "prefecture": "新潟縣",
+      "city": "新潟",
+      "names": {
+        "zh-TW": "新潟縣民會館",
+        "ja": "新潟県民会館",
+        "en": "Niigata Prefectural Civic Center"
+      }
+    },
+    {
+      "id": "新潟golden-pigs-red-stage",
+      "canonical": "新潟GOLDEN PIGS RED STAGE",
+      "native": "GOLDEN PIGS RED STAGE",
+      "region": "中部",
+      "prefecture": "新潟縣",
+      "city": "新潟",
+      "names": {
+        "zh-TW": "新潟GOLDEN PIGS RED STAGE",
+        "ja": "GOLDEN PIGS RED STAGE",
+        "en": "Niigata GOLDEN PIGS RED STAGE"
+      }
+    },
+    {
+      "id": "萬博紀念公園",
+      "canonical": "萬博紀念公園",
+      "native": "万博記念公園",
+      "region": "關西",
+      "prefecture": "大阪府",
+      "city": "大阪",
+      "names": {
+        "zh-TW": "萬博紀念公園",
+        "ja": "万博記念公園",
+        "en": "Expo '70 Commemorative Park"
+      }
+    },
+    {
+      "id": "expo-70-park-lower-plaza",
+      "canonical": "萬博紀念公園 下之廣場",
+      "native": "万博記念公園 下の広場",
+      "region": "關西",
+      "prefecture": "大阪府",
+      "city": "大阪",
+      "names": {
+        "zh-TW": "萬博紀念公園 下之廣場",
+        "ja": "万博記念公園 下の広場",
+        "en": "Expo '70 Commemorative Park Lower Plaza"
+      }
+    },
+    {
+      "id": "萬博紀念公園-air-stage",
+      "canonical": "萬博紀念公園 AIR STAGE",
+      "native": "万博記念公園 AIR STAGE",
+      "region": "關西",
+      "prefecture": "大阪府",
+      "city": "大阪",
+      "names": {
+        "zh-TW": "萬博紀念公園 AIR STAGE",
+        "ja": "万博記念公園 AIR STAGE",
+        "en": "Expo '70 Commemorative Park (AIR STAGE)"
+      }
+    },
+    {
+      "id": "幕張展覽館-國際展示場-911號館",
+      "canonical": "幕張展覽館 國際展示場 9~11號館",
+      "native": "幕張メッセ 国際展示場 9〜11ホール",
+      "region": "關東",
+      "prefecture": "千葉縣",
+      "city": "千葉",
+      "names": {
+        "zh-TW": "幕張展覽館 國際展示場 9~11號館",
+        "ja": "幕張メッセ 国際展示場 9〜11ホール",
+        "en": "Makuhari Messe International Exhibition Halls 9-11",
+        "ko": "마쿠하리 멧세 국제전시장 9-11홀"
+      }
+    },
+    {
+      "id": "幕張展覽館-cosmo-stage",
+      "canonical": "幕張展覽館 COSMO STAGE",
+      "native": "幕張メッセ COSMO STAGE",
+      "region": "關東",
+      "prefecture": "千葉縣",
+      "city": "千葉",
+      "names": {
+        "zh-TW": "幕張展覽館 COSMO STAGE",
+        "ja": "幕張メッセ COSMO STAGE",
+        "en": "Makuhari Messe (COSMO STAGE)",
+        "ko": "마쿠하리 멧세 (COSMO STAGE)"
+      }
+    },
+    {
+      "id": "幕張展覽館-earth-stage",
+      "canonical": "幕張展覽館 EARTH STAGE",
+      "native": "幕張メッセ EARTH STAGE",
+      "region": "關東",
+      "prefecture": "千葉縣",
+      "city": "千葉",
+      "names": {
+        "zh-TW": "幕張展覽館 EARTH STAGE",
+        "ja": "幕張メッセ EARTH STAGE",
+        "en": "Makuhari Messe (EARTH STAGE)",
+        "ko": "마쿠하리 멧세 (EARTH STAGE)"
+      }
+    },
+    {
+      "id": "幕張展覽館-moon-stage",
+      "canonical": "幕張展覽館 MOON STAGE",
+      "native": "幕張メッセ MOON STAGE",
+      "region": "關東",
+      "prefecture": "千葉縣",
+      "city": "千葉",
+      "names": {
+        "zh-TW": "幕張展覽館 MOON STAGE",
+        "ja": "幕張メッセ MOON STAGE",
+        "en": "Makuhari Messe (MOON STAGE)",
+        "ko": "마쿠하리 멧세 (MOON STAGE)"
+      }
+    },
+    {
+      "id": "幕張展覽館-sonic-stage",
+      "canonical": "幕張展覽館 SONIC STAGE",
+      "native": "幕張メッセ SONIC STAGE",
+      "region": "關東",
+      "prefecture": "千葉縣",
+      "city": "千葉",
+      "names": {
+        "zh-TW": "幕張展覽館 SONIC STAGE",
+        "ja": "幕張メッセ SONIC STAGE",
+        "en": "Makuhari Messe (SONIC STAGE)",
+        "ko": "마쿠하리 멧세 (SONIC STAGE)"
+      }
+    },
+    {
+      "id": "幕張展覽館活動廳",
+      "canonical": "幕張展覽館活動廳",
+      "native": "幕張イベントホール",
+      "region": "關東",
+      "prefecture": "千葉縣",
+      "city": "千葉",
+      "names": {
+        "zh-TW": "幕張展覽館活動廳",
+        "ja": "幕張イベントホール",
+        "en": "Makuhari Event Hall",
+        "ko": "마쿠하리 이벤트 홀"
+      }
+    },
+    {
+      "id": "榮partyz",
+      "canonical": "榮Party'z",
+      "native": "栄Party'z",
+      "region": "中部",
+      "prefecture": "愛知縣",
+      "city": "名古屋",
+      "names": {
+        "zh-TW": "榮Party'z",
+        "ja": "栄Party'z"
+      }
+    },
+    {
+      "id": "榮rad",
+      "canonical": "榮R.A.D",
+      "native": "栄R.A.D",
+      "region": "中部",
+      "prefecture": "愛知縣",
+      "city": "名古屋",
+      "names": {
+        "zh-TW": "榮R.A.D",
+        "ja": "栄R.A.D"
+      }
+    },
+    {
+      "id": "熊本縣立劇場-演劇會館",
+      "canonical": "熊本縣立劇場 演劇會館",
+      "native": "熊本県立劇場 演劇ホール",
+      "region": "九州",
+      "prefecture": "熊本縣",
+      "city": "熊本",
+      "names": {
+        "zh-TW": "熊本縣立劇場 演劇會館",
+        "ja": "熊本県立劇場 演劇ホール",
+        "en": "Kumamoto Prefectural Theater"
+      }
+    },
+    {
+      "id": "熊本縣農業公園-country-park",
+      "canonical": "熊本縣農業公園 Country Park",
+      "native": "熊本県農業公園カントリーパーク",
+      "region": "九州",
+      "prefecture": "熊本縣",
+      "city": "熊本",
+      "names": {
+        "zh-TW": "熊本縣農業公園 Country Park",
+        "ja": "熊本県農業公園カントリーパーク"
+      }
+    },
+    {
+      "id": "熊本b9",
+      "canonical": "熊本B.9",
+      "native": "B.9 at HAPPY JACK 2019 H-FINAL EDITION LIVE CIRCUIT会場 [熊本B.9 / 熊本B.9 V2 / 熊本Django / ぺいあのPLUS]",
+      "region": "九州",
+      "prefecture": "熊本縣",
+      "city": "熊本",
+      "names": {
+        "zh-TW": "熊本B.9",
+        "ja": "B.9 at HAPPY JACK 2019 H-FINAL EDITION LIVE CIRCUIT会場 [熊本B.9 / 熊本B.9 V2 / 熊本Django / ぺいあのPLUS]"
+      }
+    },
+    {
+      "id": "kumamoto-b9-v1",
+      "canonical": "熊本B.9 V1",
+      "native": "熊本B.9 V1",
+      "region": "九州",
+      "prefecture": "熊本縣",
+      "city": "熊本",
+      "names": {
+        "zh-TW": "熊本B.9 V1",
+        "ja": "熊本B.9 V1",
+        "en": "Kumamoto B.9 V1"
+      }
+    },
+    {
+      "id": "熊本b9-v2",
+      "canonical": "熊本B.9 V2",
+      "native": "熊本B.9 V2",
+      "region": "九州",
+      "prefecture": "熊本縣",
+      "city": "熊本",
+      "names": {
+        "zh-TW": "熊本B.9 V2",
+        "ja": "熊本B.9 V2"
+      }
+    },
+    {
+      "id": "福山藝術文化會館-reed--rose",
+      "canonical": "福山藝術文化會館 Reed & Rose",
+      "native": "ふくやま芸術文化ホール リーデンローズ",
+      "region": "中國",
+      "prefecture": "廣島縣",
+      "city": "福山",
+      "names": {
+        "zh-TW": "福山藝術文化會館 Reed & Rose",
+        "ja": "ふくやま芸術文化ホール リーデンローズ",
+        "en": "Reed & Rose (Fukuyama Arts & Culture Hall)"
+      }
+    },
+    {
+      "id": "福山cable",
+      "canonical": "福山Cable",
+      "native": "福山Cable",
+      "region": "中國",
+      "prefecture": "廣島縣",
+      "city": "福山",
+      "names": {
+        "zh-TW": "福山Cable",
+        "ja": "福山Cable"
+      }
+    },
+    {
+      "id": "福山music-factory",
+      "canonical": "福山MUSIC FACTORY",
+      "native": "福山MUSICFACTORY",
+      "region": "中國",
+      "prefecture": "廣島縣",
+      "city": "福山",
+      "names": {
+        "zh-TW": "福山MUSIC FACTORY",
+        "ja": "福山MUSICFACTORY"
+      }
+    },
+    {
+      "id": "福井太陽巨蛋",
+      "canonical": "福井太陽巨蛋",
+      "native": "サンドーム福井",
+      "region": "中部",
+      "prefecture": "福井縣",
+      "city": "福井",
+      "names": {
+        "zh-TW": "福井太陽巨蛋",
+        "ja": "サンドーム福井",
+        "en": "Sun Dome Fukui"
+      }
+    },
+    {
+      "id": "福岡太陽宮殿會館",
+      "canonical": "福岡太陽宮殿會館",
+      "native": "福岡サンパレス",
+      "region": "九州",
+      "prefecture": "福岡縣",
+      "city": "福岡",
+      "names": {
+        "zh-TW": "福岡太陽宮殿會館",
+        "ja": "福岡サンパレス",
+        "en": "Fukuoka Sunpalace",
+        "ko": "후쿠오카 선팰리스"
+      }
+    },
+    {
+      "id": "福岡海洋展覽館",
+      "canonical": "福岡海洋展覽館",
+      "native": "マリンメッセ福岡",
+      "region": "九州",
+      "prefecture": "福岡縣",
+      "city": "福岡",
+      "names": {
+        "zh-TW": "福岡海洋展覽館",
+        "ja": "マリンメッセ福岡",
+        "en": "Marine Messe Fukuoka",
+        "ko": "마린멧세 후쿠오카"
+      }
+    },
+    {
+      "id": "福岡海洋展覽館-a館",
+      "canonical": "福岡海洋展覽館 A館",
+      "native": "マリンメッセ福岡 A館",
+      "region": "九州",
+      "prefecture": "福岡縣",
+      "city": "福岡",
+      "names": {
+        "zh-TW": "福岡海洋展覽館 A館",
+        "ja": "マリンメッセ福岡 A館",
+        "en": "Marine Messe Fukuoka Hall A",
+        "ko": "마린멧세 후쿠오카 A관"
+      }
+    },
+    {
+      "id": "福岡國際中心",
+      "canonical": "福岡國際中心",
+      "native": "福岡国際センター",
+      "region": "九州",
+      "prefecture": "福岡縣",
+      "city": "福岡",
+      "names": {
+        "zh-TW": "福岡國際中心",
+        "ja": "福岡国際センター",
+        "en": "Fukuoka International Center",
+        "ko": "후쿠오카 국제센터"
+      }
+    },
+    {
+      "id": "福岡drum-be-1",
+      "canonical": "福岡DRUM Be-1",
+      "native": "福岡DRUM Be-1",
+      "region": "九州",
+      "prefecture": "福岡縣",
+      "city": "福岡",
+      "names": {
+        "zh-TW": "福岡DRUM Be-1",
+        "ja": "福岡DRUM Be-1",
+        "en": "Fukuoka DRUM Be-1"
+      }
+    },
+    {
+      "id": "福岡drum-logos",
+      "canonical": "福岡DRUM LOGOS",
+      "native": "福岡DRUM LOGOS",
+      "region": "九州",
+      "prefecture": "福岡縣",
+      "city": "福岡",
+      "names": {
+        "zh-TW": "福岡DRUM LOGOS",
+        "ja": "福岡DRUM LOGOS",
+        "en": "Fukuoka DRUM LOGOS"
+      }
+    },
+    {
+      "id": "福島夢之音樂堂",
+      "canonical": "福島夢之音樂堂",
+      "native": "ふくしん夢の音楽堂",
+      "region": "東北",
+      "prefecture": "福島縣",
+      "city": "福島",
+      "names": {
+        "zh-TW": "福島夢之音樂堂",
+        "ja": "ふくしん夢の音楽堂",
+        "en": "Fukushin Yume no Ongakudo"
+      }
+    },
+    {
+      "id": "舞洲體育島-sonic-stage",
+      "canonical": "舞洲體育島 SONIC STAGE",
+      "native": "舞洲スポーツアイランド SONIC STAGE",
+      "region": "關西",
+      "prefecture": "大阪府",
+      "city": "大阪",
+      "names": {
+        "zh-TW": "舞洲體育島 SONIC STAGE",
+        "ja": "舞洲スポーツアイランド SONIC STAGE"
+      }
+    },
+    {
+      "id": "鳳凰廣場-大會堂-phoenix-stage",
+      "canonical": "鳳凰廣場 大會堂 PHOENIX STAGE",
+      "native": "フェニックス・プラザ 大ホール",
+      "region": "中部",
+      "prefecture": "福井縣",
+      "city": "福井",
+      "names": {
+        "zh-TW": "鳳凰廣場 大會堂 PHOENIX STAGE",
+        "ja": "フェニックス・プラザ 大ホール",
+        "en": "Phoenix Plaza Main Hall"
+      }
+    },
+    {
+      "id": "廣島-alice-garden",
+      "canonical": "廣島 Alice Garden",
+      "native": "広島アリスガーデン",
+      "region": "中國",
+      "prefecture": "廣島縣",
+      "city": "廣島",
+      "names": {
+        "zh-TW": "廣島 Alice Garden",
+        "ja": "広島アリスガーデン",
+        "en": "Hiroshima Alice Garden"
+      }
+    },
+    {
+      "id": "廣島文化學園-hbg會館",
+      "canonical": "廣島文化學園 HBG會館",
+      "native": "広島文化学園HBGホール",
+      "region": "中國",
+      "prefecture": "廣島縣",
+      "city": "廣島",
+      "names": {
+        "zh-TW": "廣島文化學園 HBG會館",
+        "ja": "広島文化学園HBGホール",
+        "en": "Hiroshima Bunka Gakuen HBG Hall",
+        "ko": "히로시마 문화학원 HBG 홀"
+      }
+    },
+    {
+      "id": "廣島站南口地下廣場",
+      "canonical": "廣島站南口地下廣場 (ALE-ALE A-City)",
+      "native": "広島駅南口地下広場 (エールエール A-City)",
+      "region": "中國",
+      "prefecture": "廣島縣",
+      "city": "廣島",
+      "names": {
+        "zh-TW": "廣島站南口地下廣場 (ALE-ALE A-City)",
+        "ja": "広島駅南口地下広場 (エールエール A-City)"
+      }
+    },
+    {
+      "id": "廣島經濟大學-特設主舞台",
+      "canonical": "廣島經濟大學 特設主舞台",
+      "native": "広島経済大学 特設メインステージ",
+      "region": "中國",
+      "prefecture": "廣島縣",
+      "city": "廣島",
+      "names": {
+        "zh-TW": "廣島經濟大學 特設主舞台",
+        "ja": "広島経済大学 特設メインステージ"
+      }
+    },
+    {
+      "id": "廣島縣立綜合體育館-廣島綠色競技場",
+      "canonical": "廣島縣立綜合體育館 廣島綠色競技場",
+      "native": "広島県立総合体育館 広島グリーンアリーナ",
+      "region": "中國",
+      "prefecture": "廣島縣",
+      "city": "廣島",
+      "names": {
+        "zh-TW": "廣島縣立綜合體育館 廣島綠色競技場",
+        "ja": "広島県立総合体育館 広島グリーンアリーナ",
+        "en": "Hiroshima Green Arena",
+        "ko": "히로시마 그린 아레나"
+      }
+    },
+    {
+      "id": "廣島cave-be",
+      "canonical": "廣島CAVE-BE",
+      "native": "広島CAVE-BE",
+      "region": "中國",
+      "prefecture": "廣島縣",
+      "city": "廣島",
+      "names": {
+        "zh-TW": "廣島CAVE-BE",
+        "ja": "広島CAVE-BE",
+        "en": "Hiroshima CAVE-BE"
+      }
+    },
+    {
+      "id": "廣島club-quattro",
+      "canonical": "廣島CLUB QUATTRO",
+      "native": "広島CLUB QUATTRO",
+      "region": "中國",
+      "prefecture": "廣島縣",
+      "city": "廣島",
+      "names": {
+        "zh-TW": "廣島CLUB QUATTRO",
+        "ja": "広島CLUB QUATTRO",
+        "en": "Hiroshima CLUB QUATTRO"
+      }
+    },
+    {
+      "id": "磐城藝術文化交流館-alios",
+      "canonical": "磐城藝術文化交流館 Alios",
+      "native": "いわき芸術文化交流館アリオス",
+      "region": "東北",
+      "prefecture": "福島縣",
+      "city": "磐城",
+      "names": {
+        "zh-TW": "磐城藝術文化交流館 Alios",
+        "ja": "いわき芸術文化交流館アリオス"
+      }
+    },
+    {
+      "id": "線上直播",
+      "canonical": "線上直播",
+      "native": "配信ライブ",
+      "region": "其他",
+      "prefecture": "",
+      "city": "線上直播",
+      "names": {
+        "zh-TW": "線上直播",
+        "ja": "配信ライブ",
+        "en": "Livestream",
+        "ko": "온라인 라이브"
+      }
+    },
+    {
+      "id": "online-live-youtube-twitter-line",
+      "canonical": "線上直播 (YouTube / Twitter / LINE)",
+      "native": "配信ライブ (YouTube / Twitter / LINE)",
+      "region": "線上",
+      "prefecture": "線上",
+      "city": "線上",
+      "names": {
+        "zh-TW": "線上直播 (YouTube / Twitter / LINE)",
+        "ja": "配信ライブ (YouTube / Twitter / LINE)",
+        "en": "Livestream (YouTube / Twitter / LINE)",
+        "ko": "온라인 라이브 (YouTube / Twitter / LINE)"
+      }
+    },
+    {
+      "id": "橫濱-baysis",
+      "canonical": "橫濱 BAYSIS",
+      "native": "横浜BAYSIS",
+      "region": "關東",
+      "prefecture": "神奈川縣",
+      "city": "橫濱",
+      "names": {
+        "zh-TW": "橫濱 BAYSIS",
+        "ja": "横浜BAYSIS"
+      }
+    },
+    {
+      "id": "橫濱灣會館",
+      "canonical": "橫濱灣會館",
+      "native": "横浜ベイホール",
+      "region": "關東",
+      "prefecture": "神奈川縣",
+      "city": "橫濱",
+      "names": {
+        "zh-TW": "橫濱灣會館",
+        "ja": "横浜ベイホール"
+      }
+    },
+    {
+      "id": "橫濱arena",
+      "canonical": "橫濱Arena",
+      "native": "横浜アリーナ",
+      "region": "關東",
+      "prefecture": "神奈川縣",
+      "city": "橫濱",
+      "names": {
+        "zh-TW": "橫濱Arena",
+        "ja": "横浜アリーナ",
+        "en": "Yokohama Arena",
+        "ko": "요코하마 아레나"
+      }
+    },
+    {
+      "id": "橫濱k-arena",
+      "canonical": "橫濱K-Arena",
+      "native": "Kアリーナ横浜",
+      "region": "關東",
+      "prefecture": "神奈川縣",
+      "city": "橫濱",
+      "names": {
+        "zh-TW": "橫濱K-Arena",
+        "ja": "Kアリーナ横浜",
+        "en": "K-Arena Yokohama",
+        "ko": "K-아레나 요코하마"
+      }
+    },
+    {
+      "id": "橫濱world-porters",
+      "canonical": "橫濱World Porters",
+      "native": "横浜ワールドポーターズ",
+      "region": "關東",
+      "prefecture": "神奈川縣",
+      "city": "橫濱",
+      "names": {
+        "zh-TW": "橫濱World Porters",
+        "ja": "横浜ワールドポーターズ"
+      }
+    },
+    {
+      "id": "橫濱world-porters-2f汽車道口特設會場",
+      "canonical": "橫濱World Porters 2F汽車道口特設會場",
+      "native": "横浜ワールドポーターズ 2F 汽車道側ゲート特設会場",
+      "region": "關東",
+      "prefecture": "神奈川縣",
+      "city": "橫濱",
+      "names": {
+        "zh-TW": "橫濱World Porters 2F汽車道口特設會場",
+        "ja": "横浜ワールドポーターズ 2F 汽車道側ゲート特設会場"
+      }
+    },
+    {
+      "id": "篠島芝生廣場",
+      "canonical": "篠島芝生廣場",
+      "native": "篠島芝生広場",
+      "region": "中部",
+      "prefecture": "愛知縣",
+      "city": "知多",
+      "names": {
+        "zh-TW": "篠島芝生廣場",
+        "ja": "篠島芝生広場"
+      }
+    },
+    {
+      "id": "shinojima-grass-plaza-main-stage",
+      "canonical": "篠島芝生廣場 メインステージ",
+      "native": "篠島芝生広場 メインステージ",
+      "region": "中部",
+      "prefecture": "愛知縣",
+      "city": "知多",
+      "names": {
+        "zh-TW": "篠島芝生廣場 メインステージ",
+        "ja": "篠島芝生広場 メインステージ",
+        "en": "Shinojima Grass Plaza Main Stage"
+      }
+    },
+    {
+      "id": "澀谷club-quattro",
+      "canonical": "澀谷CLUB QUATTRO",
+      "native": "渋谷CLUB QUATTRO",
+      "region": "關東",
+      "prefecture": "東京都",
+      "city": "東京",
+      "names": {
+        "zh-TW": "澀谷CLUB QUATTRO",
+        "ja": "渋谷CLUB QUATTRO",
+        "en": "Shibuya CLUB QUATTRO"
+      }
+    },
+    {
+      "id": "澀谷lamama",
+      "canonical": "澀谷La.mama",
+      "native": "渋谷La.mama",
+      "region": "關東",
+      "prefecture": "東京都",
+      "city": "東京",
+      "names": {
+        "zh-TW": "澀谷La.mama",
+        "ja": "渋谷La.mama"
+      }
+    },
+    {
+      "id": "澀谷modi",
+      "canonical": "澀谷MODI",
+      "native": "渋谷MODI",
+      "region": "關東",
+      "prefecture": "東京都",
+      "city": "東京",
+      "names": {
+        "zh-TW": "澀谷MODI",
+        "ja": "渋谷MODI"
+      }
+    },
+    {
+      "id": "澀谷modi-1f店頭廣場",
+      "canonical": "澀谷MODI 1F店頭廣場",
+      "native": "渋谷MODI 1F 店頭プラザ",
+      "region": "關東",
+      "prefecture": "東京都",
+      "city": "東京",
+      "names": {
+        "zh-TW": "澀谷MODI 1F店頭廣場",
+        "ja": "渋谷MODI 1F 店頭プラザ"
+      }
+    },
+    {
+      "id": "豐洲pit",
+      "canonical": "豐洲PIT",
+      "native": "豊洲PIT",
+      "region": "關東",
+      "prefecture": "東京都",
+      "city": "東京",
+      "names": {
+        "zh-TW": "豐洲PIT",
+        "ja": "豊洲PIT",
+        "en": "Toyosu PIT",
+        "ko": "도요스 PIT"
+      }
+    },
+    {
+      "id": "關西外國語大學-谷本紀念講堂",
+      "canonical": "關西外國語大學 谷本紀念講堂",
+      "native": "関西外国語大学 谷本記念講堂",
+      "region": "關西",
+      "prefecture": "大阪府",
+      "city": "大阪",
+      "names": {
+        "zh-TW": "關西外國語大學 谷本紀念講堂",
+        "ja": "関西外国語大学 谷本記念講堂"
+      }
+    },
+    {
+      "id": "難波hatch",
+      "canonical": "難波Hatch",
+      "native": "なんばHatch",
+      "region": "關西",
+      "prefecture": "大阪府",
+      "city": "大阪",
+      "names": {
+        "zh-TW": "難波Hatch",
+        "ja": "なんばHatch",
+        "en": "Namba Hatch",
+        "ko": "난바 Hatch"
+      }
+    },
+    {
+      "id": "難波parks",
+      "canonical": "難波Parks",
+      "native": "なんばパークス",
+      "region": "關西",
+      "prefecture": "大阪府",
+      "city": "大阪",
+      "names": {
+        "zh-TW": "難波Parks",
+        "ja": "なんばパークス"
+      }
+    },
+    {
+      "id": "難波parks-2f-canyon-court特設活動空間",
+      "canonical": "難波Parks 2F Canyon Court特設活動空間",
+      "native": "なんばパークス 2F キャニオンコート特設イベントスペース",
+      "region": "關西",
+      "prefecture": "大阪府",
+      "city": "大阪",
+      "names": {
+        "zh-TW": "難波Parks 2F Canyon Court特設活動空間",
+        "ja": "なんばパークス 2F キャニオンコート特設イベントスペース"
+      }
+    },
+    {
+      "id": "戀之浦-夕日之丘野外舞台",
+      "canonical": "戀之浦 夕日之丘野外舞台",
+      "native": "恋の浦 夕日の丘野外ステージ",
+      "region": "九州",
+      "prefecture": "福岡縣",
+      "city": "福津",
+      "names": {
+        "zh-TW": "戀之浦 夕日之丘野外舞台",
+        "ja": "恋の浦 夕日の丘野外ステージ"
+      }
+    },
+    {
+      "id": "aeon-mall-松江",
+      "canonical": "AEON MALL 松江",
+      "native": "イオンモール松江",
+      "region": "中國",
+      "prefecture": "島根縣",
+      "city": "松江",
+      "names": {
+        "zh-TW": "AEON MALL 松江",
+        "ja": "イオンモール松江",
+        "en": "AEON MALL Matsue"
+      }
+    },
+    {
+      "id": "aichi-sky-expo-hall-a",
+      "canonical": "Aichi Sky Expo Hall A",
+      "native": "Aichi Sky Expo ホールA",
+      "region": "中部",
+      "prefecture": "愛知縣",
+      "city": "名古屋",
+      "names": {
+        "zh-TW": "Aichi Sky Expo Hall A",
+        "ja": "Aichi Sky Expo ホールA",
+        "en": "Aichi Sky Expo Hall A"
+      }
+    },
+    {
+      "id": "airport-walk名古屋",
+      "canonical": "Airport Walk名古屋",
+      "native": "エアポートウォーク名古屋",
+      "region": "中部",
+      "prefecture": "愛知縣",
+      "city": "豐山",
+      "names": {
+        "zh-TW": "Airport Walk名古屋",
+        "ja": "エアポートウォーク名古屋"
+      }
+    },
+    {
+      "id": "airport-walk名古屋-3f活動舞台",
+      "canonical": "Airport Walk名古屋 3F活動舞台",
+      "native": "エアポートウォーク名古屋 3Fイベントステージ",
+      "region": "中部",
+      "prefecture": "愛知縣",
+      "city": "豐山",
+      "names": {
+        "zh-TW": "Airport Walk名古屋 3F活動舞台",
+        "ja": "エアポートウォーク名古屋 3Fイベントステージ"
+      }
+    },
+    {
+      "id": "ario鳳",
+      "canonical": "Ario鳳",
+      "native": "アリオ鳳",
+      "region": "關西",
+      "prefecture": "大阪府",
+      "city": "堺",
+      "names": {
+        "zh-TW": "Ario鳳",
+        "ja": "アリオ鳳"
+      }
+    },
+    {
+      "id": "ario鳳-1f-ario-court",
+      "canonical": "Ario鳳 1F Ario Court",
+      "native": "アリオ鳳 1F アリオコート",
+      "region": "關西",
+      "prefecture": "大阪府",
+      "city": "堺",
+      "names": {
+        "zh-TW": "Ario鳳 1F Ario Court",
+        "ja": "アリオ鳳 1F アリオコート"
+      }
+    },
+    {
+      "id": "arkas佐世保",
+      "canonical": "ARKAS佐世保",
+      "native": "アルカスSASEBO",
+      "region": "九州",
+      "prefecture": "長崎縣",
+      "city": "佐世保",
+      "names": {
+        "zh-TW": "ARKAS佐世保",
+        "ja": "アルカスSASEBO",
+        "en": "ARKAS SASEBO"
+      }
+    },
+    {
+      "id": "asty德島",
+      "canonical": "ASTY德島",
+      "native": "アスティとくしま",
+      "region": "四國",
+      "prefecture": "德島縣",
+      "city": "德島",
+      "names": {
+        "zh-TW": "ASTY德島",
+        "ja": "アスティとくしま",
+        "en": "ASTY Tokushima"
+      }
+    },
+    {
+      "id": "bigcat",
+      "canonical": "BIGCAT",
+      "native": "MINAMI WHEEL 2018",
+      "region": "關西",
+      "prefecture": "大阪府",
+      "city": "大阪",
+      "names": {
+        "zh-TW": "BIGCAT",
+        "ja": "MINAMI WHEEL 2018",
+        "en": "BIGCAT"
+      }
+    },
+    {
+      "id": "blcafe",
+      "canonical": "BLcafe",
+      "native": "BLcafe",
+      "region": "中部",
+      "prefecture": "愛知縣",
+      "city": "名古屋",
+      "names": {
+        "zh-TW": "BLcafe",
+        "ja": "BLcafe"
+      }
+    },
+    {
+      "id": "blue-live-廣島",
+      "canonical": "BLUE LIVE 廣島",
+      "native": "BLUE LIVE 広島",
+      "region": "中國",
+      "prefecture": "廣島縣",
+      "city": "廣島",
+      "names": {
+        "zh-TW": "BLUE LIVE 廣島",
+        "ja": "BLUE LIVE 広島",
+        "en": "BLUE LIVE Hiroshima"
+      }
+    },
+    {
+      "id": "bss山陰放送本社-特設會場",
+      "canonical": "BSS山陰放送本社 特設會場",
+      "native": "BSS山陰放送本社 特設会場",
+      "region": "中國",
+      "prefecture": "鳥取縣",
+      "city": "米子",
+      "names": {
+        "zh-TW": "BSS山陰放送本社 特設會場",
+        "ja": "BSS山陰放送本社 特設会場"
+      }
+    },
+    {
+      "id": "bsスカパー-特別音樂祭舞台",
+      "canonical": "BSスカパー! 特別音樂祭舞台 (電視生放送)",
+      "native": "BSスカパー!",
+      "region": "關東",
+      "prefecture": "東京都",
+      "city": "東京",
+      "names": {
+        "zh-TW": "BSスカパー! 特別音樂祭舞台 (電視生放送)",
+        "ja": "BSスカパー!"
+      }
+    },
+    {
+      "id": "club-riverst",
+      "canonical": "CLUB RIVERST",
+      "native": "CLUB RIVERST",
+      "region": "中部",
+      "prefecture": "新潟縣",
+      "city": "新潟",
+      "names": {
+        "zh-TW": "CLUB RIVERST",
+        "ja": "CLUB RIVERST",
+        "en": "CLUB RIVERST"
+      }
+    },
+    {
+      "id": "club-rocknroll",
+      "canonical": "CLUB ROCK'n'ROLL",
+      "native": "名古屋Club Rock 'n' Roll",
+      "region": "中部",
+      "prefecture": "愛知縣",
+      "city": "名古屋",
+      "names": {
+        "zh-TW": "CLUB ROCK'n'ROLL",
+        "ja": "名古屋Club Rock 'n' Roll"
+      }
+    },
+    {
+      "id": "conpass",
+      "canonical": "CONPASS",
+      "native": "CONPASS at MINAMI WHEEL 2014会場",
+      "region": "關西",
+      "prefecture": "大阪府",
+      "city": "大阪",
+      "names": {
+        "zh-TW": "CONPASS",
+        "ja": "CONPASS at MINAMI WHEEL 2014会場",
+        "en": "CONPASS"
+      }
+    },
+    {
+      "id": "crazymama-2nd-room",
+      "canonical": "CRAZYMAMA 2nd Room",
+      "native": "CRAZYMAMA 2nd Room",
+      "region": "中國",
+      "prefecture": "岡山縣",
+      "city": "岡山",
+      "names": {
+        "zh-TW": "CRAZYMAMA 2nd Room",
+        "ja": "CRAZYMAMA 2nd Room"
+      }
+    },
+    {
+      "id": "diamond-hall",
+      "canonical": "Diamond Hall",
+      "native": "Diamond Hall",
+      "region": "中部",
+      "prefecture": "愛知縣",
+      "city": "名古屋",
+      "names": {
+        "zh-TW": "Diamond Hall",
+        "ja": "Diamond Hall",
+        "en": "Diamond Hall"
+      }
+    },
+    {
+      "id": "divercity東京-節慶廣場",
+      "canonical": "DiverCity東京 節慶廣場",
+      "native": "ダイバーシティ東京プラザ フェスティバル広場",
+      "region": "關東",
+      "prefecture": "東京都",
+      "city": "東京",
+      "names": {
+        "zh-TW": "DiverCity東京 節慶廣場",
+        "ja": "ダイバーシティ東京プラザ フェスティバル広場",
+        "en": "DiverCity Tokyo Plaza Festival Square"
+      }
+    },
+    {
+      "id": "duo-music-exchange",
+      "canonical": "duo MUSIC EXCHANGE",
+      "native": "duo MUSIC EXCHANGE",
+      "region": "關東",
+      "prefecture": "東京都",
+      "city": "東京",
+      "names": {
+        "zh-TW": "duo MUSIC EXCHANGE",
+        "ja": "duo MUSIC EXCHANGE",
+        "en": "duo MUSIC EXCHANGE"
+      }
+    },
+    {
+      "id": "ell-size",
+      "canonical": "ell. SIZE",
+      "native": "ell. SIZE",
+      "region": "中部",
+      "prefecture": "愛知縣",
+      "city": "名古屋",
+      "names": {
+        "zh-TW": "ell. SIZE",
+        "ja": "ell. SIZE"
+      }
+    },
+    {
+      "id": "ex-theater-roppongi",
+      "canonical": "EX THEATER ROPPONGI",
+      "native": "EX THEATER ROPPONGI",
+      "region": "關東",
+      "prefecture": "東京都",
+      "city": "東京",
+      "names": {
+        "zh-TW": "EX THEATER ROPPONGI",
+        "ja": "EX THEATER ROPPONGI",
+        "en": "EX THEATER ROPPONGI"
+      }
+    },
+    {
+      "id": "flying-tiger-copenhagen-京都河原町店-3f",
+      "canonical": "Flying Tiger Copenhagen 京都河原町店 3F",
+      "native": "Flying Tiger Copenhagen京都河原町ストア 3F",
+      "region": "關西",
+      "prefecture": "京都府",
+      "city": "京都",
+      "names": {
+        "zh-TW": "Flying Tiger Copenhagen 京都河原町店 3F",
+        "ja": "Flying Tiger Copenhagen京都河原町ストア 3F"
+      }
+    },
+    {
+      "id": "gainax-theater",
+      "canonical": "GAINAX THEATER (永旺米子站前店)",
+      "native": "ガイナックスシアター (イオン米子駅前店)",
+      "region": "中國",
+      "prefecture": "鳥取縣",
+      "city": "米子",
+      "names": {
+        "zh-TW": "GAINAX THEATER (永旺米子站前店)",
+        "ja": "ガイナックスシアター (イオン米子駅前店)"
+      }
+    },
+    {
+      "id": "grand-cube大阪-大會堂",
+      "canonical": "Grand Cube大阪 大會堂",
+      "native": "グランキューブ大阪 メインホール",
+      "region": "關西",
+      "prefecture": "大阪府",
+      "city": "大阪",
+      "names": {
+        "zh-TW": "Grand Cube大阪 大會堂",
+        "ja": "グランキューブ大阪 メインホール",
+        "en": "Grand Cube Osaka Main Hall"
+      }
+    },
+    {
+      "id": "hard-off新潟生態體育場",
+      "canonical": "HARD OFF新潟生態體育場",
+      "native": "HARD OFF ECOスタジアム新潟",
+      "region": "中部",
+      "prefecture": "新潟縣",
+      "city": "新潟",
+      "names": {
+        "zh-TW": "HARD OFF新潟生態體育場",
+        "ja": "HARD OFF ECOスタジアム新潟"
+      }
+    },
+    {
+      "id": "heavens-rock-宇都宮-vj-2",
+      "canonical": "HEAVEN'S ROCK 宇都宮 VJ-2",
+      "native": "HEAVEN'S ROCK 宇都宮",
+      "region": "關東",
+      "prefecture": "栃木縣",
+      "city": "宇都宮",
+      "names": {
+        "zh-TW": "HEAVEN'S ROCK 宇都宮 VJ-2",
+        "ja": "HEAVEN'S ROCK 宇都宮",
+        "en": "HEAVEN'S ROCK Utsunomiya VJ-2"
+      }
+    },
+    {
+      "id": "heavens-rock-埼玉新都心-vj-3",
+      "canonical": "HEAVEN'S ROCK 埼玉新都心 VJ-3",
+      "native": "HEAVEN&#039;S ROCK さいたま新都心 VJ-3",
+      "region": "關東",
+      "prefecture": "埼玉縣",
+      "city": "埼玉",
+      "names": {
+        "zh-TW": "HEAVEN'S ROCK 埼玉新都心 VJ-3",
+        "ja": "HEAVEN&#039;S ROCK さいたま新都心 VJ-3",
+        "en": "HEAVEN'S ROCK Saitama-Shintoshin VJ-3"
+      }
+    },
+    {
+      "id": "holiday-next-nagoya",
+      "canonical": "HOLIDAY NEXT NAGOYA",
+      "native": "HOLIDAY NEXT NAGOYA at SAKAE SP-RING 2016 会場",
+      "region": "中部",
+      "prefecture": "愛知縣",
+      "city": "名古屋",
+      "names": {
+        "zh-TW": "HOLIDAY NEXT NAGOYA",
+        "ja": "HOLIDAY NEXT NAGOYA at SAKAE SP-RING 2016 会場"
+      }
+    },
+    {
+      "id": "hyundai-card-understage",
+      "canonical": "HYUNDAI CARD UNDERSTAGE",
+      "native": "HYUNDAI CARD UNDERSTAGE",
+      "region": "海外",
+      "prefecture": "韓國",
+      "city": "首爾",
+      "names": {
+        "zh-TW": "HYUNDAI CARD UNDERSTAGE",
+        "ja": "ソウルUNDERSTAGE",
+        "en": "HYUNDAI CARD UNDERSTAGE",
+        "ko": "현대카드 언더스테이지"
+      }
+    },
+    {
+      "id": "iichiko綜合文化中心-gran-theater",
+      "canonical": "iichiko綜合文化中心 Gran Theater",
+      "native": "iichiko総合文化センター グランシアタ",
+      "region": "九州",
+      "prefecture": "大分縣",
+      "city": "大分",
+      "names": {
+        "zh-TW": "iichiko綜合文化中心 Gran Theater",
+        "ja": "iichiko総合文化センター グランシアタ",
+        "en": "iichiko Grand Theater"
+      }
+    },
+    {
+      "id": "image",
+      "canonical": "IMAGE",
+      "native": "IMAGE",
+      "region": "中國",
+      "prefecture": "岡山縣",
+      "city": "岡山",
+      "names": {
+        "zh-TW": "IMAGE",
+        "ja": "IMAGE"
+      }
+    },
+    {
+      "id": "intex大阪-r-stage",
+      "canonical": "INTEX大阪 R-STAGE",
+      "native": "R-STAGE at インテックス大阪",
+      "region": "關西",
+      "prefecture": "大阪府",
+      "city": "大阪",
+      "names": {
+        "zh-TW": "INTEX大阪 R-STAGE",
+        "ja": "R-STAGE at インテックス大阪"
+      }
+    },
+    {
+      "id": "intex大阪-z-stage-6號館",
+      "canonical": "INTEX大阪 Z-STAGE 6號館",
+      "native": "Z-STAGE 6号館 at インテックス大阪",
+      "region": "關西",
+      "prefecture": "大阪府",
+      "city": "大阪",
+      "names": {
+        "zh-TW": "INTEX大阪 Z-STAGE 6號館",
+        "ja": "Z-STAGE 6号館 at インテックス大阪"
+      }
+    },
+    {
+      "id": "karakoro工房",
+      "canonical": "Karakoro工房",
+      "native": "カラコロ工房",
+      "region": "中國",
+      "prefecture": "島根縣",
+      "city": "松江",
+      "names": {
+        "zh-TW": "Karakoro工房",
+        "ja": "カラコロ工房"
+      }
+    },
+    {
+      "id": "karakoro工房-24小時tv活動特設會場",
+      "canonical": "Karakoro工房 24小時TV活動特設會場",
+      "native": "カラコロ工房 24時間テレビイベント松江会場",
+      "region": "中國",
+      "prefecture": "島根縣",
+      "city": "松江",
+      "names": {
+        "zh-TW": "Karakoro工房 24小時TV活動特設會場",
+        "ja": "カラコロ工房 24時間テレビイベント松江会場"
+      }
+    },
+    {
+      "id": "kintex-hall-5",
+      "canonical": "KINTEX Hall 5",
+      "native": "KINTEX Hall 5",
+      "region": "海外",
+      "prefecture": "韓國",
+      "city": "高陽",
+      "names": {
+        "zh-TW": "KINTEX Hall 5",
+        "ja": "KINTEX Hall 5",
+        "en": "KINTEX Hall 5",
+        "ko": "킨텍스 제5홀"
+      }
+    },
+    {
+      "id": "kspo-dome",
+      "canonical": "KSPO DOME (奧林匹克體操競技場)",
+      "native": "KSPO DOME (올림픽체조경기장)",
+      "region": "海外",
+      "prefecture": "韓國",
+      "city": "首爾",
+      "names": {
+        "zh-TW": "KSPO DOME (奧林匹克體操競技場)",
+        "ja": "KSPO DOME (オリンピック体操競技場)",
+        "en": "KSPO DOME",
+        "ko": "KSPO DOME (올림픽체조경기장)"
+      }
+    },
+    {
+      "id": "kt-zepp-yokohama",
+      "canonical": "KT Zepp Yokohama",
+      "native": "KT Zepp Yokohama",
+      "region": "關東",
+      "prefecture": "神奈川縣",
+      "city": "橫濱",
+      "names": {
+        "zh-TW": "KT Zepp Yokohama",
+        "ja": "KT Zepp Yokohama",
+        "en": "KT Zepp Yokohama"
+      }
+    },
+    {
+      "id": "kyoto-muse",
+      "canonical": "KYOTO MUSE",
+      "native": "京都MUSE",
+      "region": "關西",
+      "prefecture": "京都府",
+      "city": "京都",
+      "names": {
+        "zh-TW": "KYOTO MUSE",
+        "ja": "京都MUSE",
+        "en": "KYOTO MUSE"
+      }
+    },
+    {
+      "id": "lazona川崎廣場-rufa廣場大舞台",
+      "canonical": "Lazona川崎廣場 Rufa廣場大舞台",
+      "native": "ラゾーナ川崎プラザ ルーファ広場 グランドステージ",
+      "region": "關東",
+      "prefecture": "神奈川縣",
+      "city": "川崎",
+      "names": {
+        "zh-TW": "Lazona川崎廣場 Rufa廣場大舞台",
+        "ja": "ラゾーナ川崎プラザ ルーファ広場 グランドステージ",
+        "en": "Lazona Kawasaki Plaza Rufa Grand Stage"
+      }
+    },
+    {
+      "id": "live-house-濱松窓枠",
+      "canonical": "Live House 濱松窓枠",
+      "native": "浜松窓枠",
+      "region": "中部",
+      "prefecture": "靜岡縣",
+      "city": "濱松",
+      "names": {
+        "zh-TW": "Live House 濱松窓枠",
+        "ja": "浜松窓枠",
+        "en": "Live House Hamamatsu Madowaku"
+      }
+    },
+    {
+      "id": "live-square-2nd-line",
+      "canonical": "LIVE SQUARE 2nd LINE",
+      "native": "LIVE SQUARE 2nd LINE",
+      "region": "關西",
+      "prefecture": "大阪府",
+      "city": "大阪",
+      "names": {
+        "zh-TW": "LIVE SQUARE 2nd LINE",
+        "ja": "LIVE SQUARE 2nd LINE"
+      }
+    },
+    {
+      "id": "mallage佐賀",
+      "canonical": "Mallage佐賀",
+      "native": "モラージュ佐賀",
+      "region": "九州",
+      "prefecture": "佐賀縣",
+      "city": "佐賀",
+      "names": {
+        "zh-TW": "Mallage佐賀",
+        "ja": "モラージュ佐賀",
+        "en": "Mallage Saga"
+      }
+    },
+    {
+      "id": "mallage佐賀-北館1f-mallage-plaza",
+      "canonical": "Mallage佐賀 北館1F Mallage Plaza",
+      "native": "モラージュ佐賀 北館1F モラージュプラザ",
+      "region": "九州",
+      "prefecture": "佐賀縣",
+      "city": "佐賀",
+      "names": {
+        "zh-TW": "Mallage佐賀 北館1F Mallage Plaza",
+        "ja": "モラージュ佐賀 北館1F モラージュプラザ",
+        "en": "Mallage Saga North Building 1F Mallage Plaza"
+      }
+    },
+    {
+      "id": "mozo-wonder-city-1f-east-court",
+      "canonical": "mozoワンダーシティ 1F イーストコート",
+      "native": "mozoワンダーシティ 1F イーストコート",
+      "region": "中部",
+      "prefecture": "愛知縣",
+      "city": "名古屋",
+      "names": {
+        "zh-TW": "mozoワンダーシティ 1F イーストコート",
+        "ja": "mozoワンダーシティ 1F イーストコート",
+        "en": "mozo Wonder City 1F East Court"
+      }
+    },
+    {
+      "id": "mtrainier-hall-shibuya-pleasure-pleasure",
+      "canonical": "Mt.RAINIER HALL SHIBUYA PLEASURE PLEASURE",
+      "native": "Mt.RAINIER HALL SHIBUYA PLEASURE PLEASURE",
+      "region": "關東",
+      "prefecture": "東京都",
+      "city": "東京",
+      "names": {
+        "zh-TW": "Mt.RAINIER HALL SHIBUYA PLEASURE PLEASURE",
+        "ja": "Mt.RAINIER HALL SHIBUYA PLEASURE PLEASURE"
+      }
+    },
+    {
+      "id": "music-club-janus",
+      "canonical": "Music Club JANUS",
+      "native": "JANUS at MINAMI WHEEL 2017会場",
+      "region": "關西",
+      "prefecture": "大阪府",
+      "city": "大阪",
+      "names": {
+        "zh-TW": "Music Club JANUS",
+        "ja": "JANUS at MINAMI WHEEL 2017会場",
+        "en": "Music Club JANUS"
+      }
+    },
+    {
+      "id": "mynavi-blitz-赤坂",
+      "canonical": "MYNAVI BLITZ 赤坂",
+      "native": "マイナビBLITZ赤坂",
+      "region": "關東",
+      "prefecture": "東京都",
+      "city": "東京",
+      "names": {
+        "zh-TW": "MYNAVI BLITZ 赤坂",
+        "ja": "マイナビBLITZ赤坂"
+      }
+    },
+    {
+      "id": "nhk大阪會館",
+      "canonical": "NHK大阪會館",
+      "native": "NHK大阪ホール",
+      "region": "關西",
+      "prefecture": "大阪府",
+      "city": "大阪",
+      "names": {
+        "zh-TW": "NHK大阪會館",
+        "ja": "NHK大阪ホール"
+      }
+    },
+    {
+      "id": "nhk放送中心",
+      "canonical": "NHK放送中心",
+      "native": "NHK放送センター",
+      "region": "關東",
+      "prefecture": "東京都",
+      "city": "東京",
+      "names": {
+        "zh-TW": "NHK放送中心",
+        "ja": "NHK放送センター"
+      }
+    },
+    {
+      "id": "nhk會館",
+      "canonical": "NHK會館",
+      "native": "NHKホール",
+      "region": "關東",
+      "prefecture": "東京都",
+      "city": "東京",
+      "names": {
+        "zh-TW": "NHK會館",
+        "ja": "NHKホール"
+      }
+    },
+    {
+      "id": "niterra日本特殊陶業市民會館-forest-hall",
+      "canonical": "Niterra日本特殊陶業市民會館 Forest Hall",
+      "native": "Niterra日本特殊陶業市民会館 フォレストホール",
+      "region": "中部",
+      "prefecture": "愛知縣",
+      "city": "名古屋",
+      "names": {
+        "zh-TW": "Niterra日本特殊陶業市民會館 Forest Hall",
+        "ja": "Niterra日本特殊陶業市民会館 フォレストホール",
+        "en": "Niterra Forest Hall"
+      }
+    },
+    {
+      "id": "olympus-hall-八王子",
+      "canonical": "OLYMPUS HALL 八王子",
+      "native": "オリンパスホール八王子",
+      "region": "關東",
+      "prefecture": "東京都",
+      "city": "東京",
+      "names": {
+        "zh-TW": "OLYMPUS HALL 八王子",
+        "ja": "オリンパスホール八王子"
+      }
+    },
+    {
+      "id": "pacifico橫濱-國立大會堂",
+      "canonical": "PACIFICO橫濱 國立大會堂",
+      "native": "パシフィコ横浜 国立大ホール",
+      "region": "關東",
+      "prefecture": "神奈川縣",
+      "city": "橫濱",
+      "names": {
+        "zh-TW": "PACIFICO橫濱 國立大會堂",
+        "ja": "パシフィコ横浜 国立大ホール"
+      }
+    },
+    {
+      "id": "pia-arena-mm",
+      "canonical": "Pia Arena MM",
+      "native": "ぴあアリーナMM",
+      "region": "關東",
+      "prefecture": "神奈川縣",
+      "city": "橫濱",
+      "names": {
+        "zh-TW": "Pia Arena MM",
+        "ja": "ぴあアリーナMM",
+        "en": "Pia Arena MM"
+      }
+    },
+    {
+      "id": "rad-seven",
+      "canonical": "RAD SEVEN",
+      "native": "RAD SEVEN at GOLD RUSH2016会場 [APOLLO BASE / DAYTRIVE / 新栄RAD SEVEN / 栄R.A.D / 栄Party&#039;z / TIGHT ROPE / Red Dragon / 新栄CLUB ROCK&#039;N ROLL /名古屋RAD HALL / 名古屋X-HALL / Curry Cafe &amp; Music Bar TOYS / Carnival☆Stars]",
+      "region": "中部",
+      "prefecture": "愛知縣",
+      "city": "名古屋",
+      "names": {
+        "zh-TW": "RAD SEVEN",
+        "ja": "RAD SEVEN at GOLD RUSH2016会場 [APOLLO BASE / DAYTRIVE / 新栄RAD SEVEN / 栄R.A.D / 栄Party&#039;z / TIGHT ROPE / Red Dragon / 新栄CLUB ROCK&#039;N ROLL /名古屋RAD HALL / 名古屋X-HALL / Curry Cafe &amp; Music Bar TOYS / Carnival☆Stars]",
+        "en": "RAD SEVEN"
+      }
+    },
+    {
+      "id": "sankei-hall-breeze",
+      "canonical": "Sankei Hall Breeze",
+      "native": "サンケイホールブリーゼ",
+      "region": "關西",
+      "prefecture": "大阪府",
+      "city": "大阪",
+      "names": {
+        "zh-TW": "Sankei Hall Breeze",
+        "ja": "サンケイホールブリーゼ"
+      }
+    },
+    {
+      "id": "seaside百道海濱公園",
+      "canonical": "Seaside百道海濱公園",
+      "native": "シーサイドももち海浜公園",
+      "region": "九州",
+      "prefecture": "福岡縣",
+      "city": "福岡",
+      "names": {
+        "zh-TW": "Seaside百道海濱公園",
+        "ja": "シーサイドももち海浜公園"
+      }
+    },
+    {
+      "id": "sendai-gigs",
+      "canonical": "SENDAI GIGS",
+      "native": "SENDAI GIGS",
+      "region": "東北",
+      "prefecture": "宮城縣",
+      "city": "仙台",
+      "names": {
+        "zh-TW": "SENDAI GIGS",
+        "ja": "SENDAI GIGS",
+        "en": "SENDAI GIGS"
+      }
+    },
+    {
+      "id": "shibuya-take-off-7",
+      "canonical": "SHIBUYA TAKE OFF 7",
+      "native": "渋谷TAKE OFF 7",
+      "region": "關東",
+      "prefecture": "東京都",
+      "city": "東京",
+      "names": {
+        "zh-TW": "SHIBUYA TAKE OFF 7",
+        "ja": "渋谷TAKE OFF 7",
+        "en": "SHIBUYA TAKE OFF 7"
+      }
+    },
+    {
+      "id": "sunport-hall-高松-大會堂",
+      "canonical": "Sunport Hall 高松 大會堂",
+      "native": "サンポートホール高松 大ホール",
+      "region": "四國",
+      "prefecture": "香川縣",
+      "city": "高松",
+      "names": {
+        "zh-TW": "Sunport Hall 高松 大會堂",
+        "ja": "サンポートホール高松 大ホール"
+      }
+    },
+    {
+      "id": "tbs電視台",
+      "canonical": "TBS電視台",
+      "native": "TBSテレビ",
+      "region": "關東",
+      "prefecture": "東京都",
+      "city": "東京",
+      "names": {
+        "zh-TW": "TBS電視台",
+        "ja": "TBSテレビ"
+      }
+    },
+    {
+      "id": "tbs電視台-b攝影棚",
+      "canonical": "TBS電視台 B攝影棚",
+      "native": "TBSテレビ Bスタジオ",
+      "region": "關東",
+      "prefecture": "東京都",
+      "city": "東京",
+      "names": {
+        "zh-TW": "TBS電視台 B攝影棚",
+        "ja": "TBSテレビ Bスタジオ"
+      }
+    },
+    {
+      "id": "the-bottom-line",
+      "canonical": "THE BOTTOM LINE",
+      "native": "THE BOTTOM LINE",
+      "region": "中部",
+      "prefecture": "愛知縣",
+      "city": "名古屋",
+      "names": {
+        "zh-TW": "THE BOTTOM LINE",
+        "ja": "THE BOTTOM LINE",
+        "en": "THE BOTTOM LINE"
+      }
+    },
+    {
+      "id": "tokyo-dome-city-hall",
+      "canonical": "TOKYO DOME CITY HALL",
+      "native": "TOKYO DOME CITY HALL",
+      "region": "關東",
+      "prefecture": "東京都",
+      "city": "東京",
+      "names": {
+        "zh-TW": "TOKYO DOME CITY HALL",
+        "ja": "TOKYO DOME CITY HALL",
+        "en": "TOKYO DOME CITY HALL"
+      }
+    },
+    {
+      "id": "tokyo-fm-studio-iris",
+      "canonical": "TOKYO FM STUDIO IRIS (錄音棚公開生放送)",
+      "native": "TOKYO FM STUDIO IRIS",
+      "region": "關東",
+      "prefecture": "東京都",
+      "city": "東京",
+      "names": {
+        "zh-TW": "TOKYO FM STUDIO IRIS (錄音棚公開生放送)",
+        "ja": "TOKYO FM STUDIO IRIS"
+      }
+    },
+    {
+      "id": "tower-records-名古屋parco店",
+      "canonical": "TOWER RECORDS 名古屋PARCO店",
+      "native": "タワーレコード名古屋パルコ店",
+      "region": "中部",
+      "prefecture": "愛知縣",
+      "city": "名古屋",
+      "names": {
+        "zh-TW": "TOWER RECORDS 名古屋PARCO店",
+        "ja": "タワーレコード名古屋パルコ店"
+      }
+    },
+    {
+      "id": "tower-records-名古屋parco店-西館1f活動空間",
+      "canonical": "TOWER RECORDS 名古屋PARCO店 西館1F活動空間",
+      "native": "タワーレコード名古屋パルコ店 西館1Fイベントスペース",
+      "region": "中部",
+      "prefecture": "愛知縣",
+      "city": "名古屋",
+      "names": {
+        "zh-TW": "TOWER RECORDS 名古屋PARCO店 西館1F活動空間",
+        "ja": "タワーレコード名古屋パルコ店 西館1Fイベントスペース"
+      }
+    },
+    {
+      "id": "tower-records-阿倍野hoop店",
+      "canonical": "TOWER RECORDS 阿倍野Hoop店",
+      "native": "タワーレコードあべのHoop店",
+      "region": "關西",
+      "prefecture": "大阪府",
+      "city": "大阪",
+      "names": {
+        "zh-TW": "TOWER RECORDS 阿倍野Hoop店",
+        "ja": "タワーレコードあべのHoop店"
+      }
+    },
+    {
+      "id": "tower-records-阿倍野hoop店-1f露天廣場",
+      "canonical": "TOWER RECORDS 阿倍野Hoop店 1F露天廣場",
+      "native": "タワーレコードあべのHoop店 1Fオープンエアプラザ",
+      "region": "關西",
+      "prefecture": "大阪府",
+      "city": "大阪",
+      "names": {
+        "zh-TW": "TOWER RECORDS 阿倍野Hoop店 1F露天廣場",
+        "ja": "タワーレコードあべのHoop店 1Fオープンエアプラザ"
+      }
+    },
+    {
+      "id": "tower-records-梅田nu茶屋町店",
+      "canonical": "TOWER RECORDS 梅田NU茶屋町店",
+      "native": "タワーレコード梅田NU茶屋町店",
+      "region": "關西",
+      "prefecture": "大阪府",
+      "city": "大阪",
+      "names": {
+        "zh-TW": "TOWER RECORDS 梅田NU茶屋町店",
+        "ja": "タワーレコード梅田NU茶屋町店"
+      }
+    },
+    {
+      "id": "tower-records-梅田nu茶屋町店-活動空間",
+      "canonical": "TOWER RECORDS 梅田NU茶屋町店 活動空間",
+      "native": "タワーレコード梅田NU茶屋町店 イベントスペース",
+      "region": "關西",
+      "prefecture": "大阪府",
+      "city": "大阪",
+      "names": {
+        "zh-TW": "TOWER RECORDS 梅田NU茶屋町店 活動空間",
+        "ja": "タワーレコード梅田NU茶屋町店 イベントスペース"
+      }
+    },
+    {
+      "id": "tower-records-新宿店",
+      "canonical": "TOWER RECORDS 新宿店",
+      "native": "TOWER RECORDS新宿",
+      "region": "關東",
+      "prefecture": "東京都",
+      "city": "東京",
+      "names": {
+        "zh-TW": "TOWER RECORDS 新宿店",
+        "ja": "TOWER RECORDS新宿"
+      }
+    },
+    {
+      "id": "tower-records-廣島店",
+      "canonical": "TOWER RECORDS 廣島店",
+      "native": "TOWER RECORDS 広島店",
+      "region": "中國",
+      "prefecture": "廣島縣",
+      "city": "廣島",
+      "names": {
+        "zh-TW": "TOWER RECORDS 廣島店",
+        "ja": "TOWER RECORDS 広島店"
+      }
+    },
+    {
+      "id": "tower-records-橫濱vivre店",
+      "canonical": "TOWER RECORDS 橫濱VIVRE店",
+      "native": "タワーレコード横浜ビブレ店",
+      "region": "關東",
+      "prefecture": "神奈川縣",
+      "city": "橫濱",
+      "names": {
+        "zh-TW": "TOWER RECORDS 橫濱VIVRE店",
+        "ja": "タワーレコード横浜ビブレ店"
+      }
+    },
+    {
+      "id": "tower-records-橫濱vivre店-店內活動空間",
+      "canonical": "TOWER RECORDS 橫濱VIVRE店 店內活動空間",
+      "native": "タワーレコード横浜ビブレ店 店内イベントスペース",
+      "region": "關東",
+      "prefecture": "神奈川縣",
+      "city": "橫濱",
+      "names": {
+        "zh-TW": "TOWER RECORDS 橫濱VIVRE店 店內活動空間",
+        "ja": "タワーレコード横浜ビブレ店 店内イベントスペース"
+      }
+    },
+    {
+      "id": "tower-records-難波店",
+      "canonical": "TOWER RECORDS 難波店",
+      "native": "タワーレコード難波店",
+      "region": "關西",
+      "prefecture": "大阪府",
+      "city": "大阪",
+      "names": {
+        "zh-TW": "TOWER RECORDS 難波店",
+        "ja": "タワーレコード難波店"
+      }
+    },
+    {
+      "id": "toyota-arena-tokyo",
+      "canonical": "TOYOTA ARENA TOKYO",
+      "native": "TOYOTA ARENA TOKYO",
+      "region": "關東",
+      "prefecture": "東京都",
+      "city": "東京",
+      "names": {
+        "zh-TW": "TOYOTA ARENA TOKYO",
+        "ja": "TOYOTA ARENA TOKYO",
+        "en": "TOYOTA ARENA TOKYO"
+      }
+    },
+    {
+      "id": "tsutaya-出雲店",
+      "canonical": "TSUTAYA 出雲店",
+      "native": "TSUTAYA 出雲店",
+      "region": "中國",
+      "prefecture": "島根縣",
+      "city": "出雲",
+      "names": {
+        "zh-TW": "TSUTAYA 出雲店",
+        "ja": "TSUTAYA 出雲店"
+      }
+    },
+    {
+      "id": "tsutaya-o-crest",
+      "canonical": "TSUTAYA O-Crest (Spotify O-Crest)",
+      "native": "TSUTAYA O-Crest",
+      "region": "關東",
+      "prefecture": "東京都",
+      "city": "東京",
+      "names": {
+        "zh-TW": "TSUTAYA O-Crest (Spotify O-Crest)",
+        "ja": "TSUTAYA O-Crest",
+        "en": "TSUTAYA O-Crest (Spotify O-Crest)"
+      }
+    },
+    {
+      "id": "tsutaya-o-west",
+      "canonical": "TSUTAYA O-WEST",
+      "native": "TSUTAYA O-WEST",
+      "region": "關東",
+      "prefecture": "東京都",
+      "city": "東京",
+      "names": {
+        "zh-TW": "TSUTAYA O-WEST",
+        "ja": "TSUTAYA O-WEST",
+        "en": "TSUTAYA O-WEST"
+      }
+    },
+    {
+      "id": "umeda-akaso",
+      "canonical": "umeda AKASO (現 umeda TRAD)",
+      "native": "umeda AKASO",
+      "region": "關西",
+      "prefecture": "大阪府",
+      "city": "大阪",
+      "names": {
+        "zh-TW": "umeda AKASO (現 umeda TRAD)",
+        "ja": "umeda AKASO"
+      }
+    },
+    {
+      "id": "umeda-trad",
+      "canonical": "umeda TRAD",
+      "native": "umeda TRAD",
+      "region": "關西",
+      "prefecture": "大阪府",
+      "city": "大阪",
+      "names": {
+        "zh-TW": "umeda TRAD",
+        "ja": "umeda TRAD",
+        "en": "umeda TRAD"
+      }
+    },
+    {
+      "id": "uob-live",
+      "canonical": "UOB LIVE",
+      "native": "UOB LIVE",
+      "region": "海外",
+      "prefecture": "泰國",
+      "city": "曼谷",
+      "names": {
+        "zh-TW": "UOB LIVE",
+        "ja": "UOB LIVE",
+        "en": "UOB LIVE",
+        "ko": "UOB LIVE"
+      }
+    },
+    {
+      "id": "xebio-arena-仙台",
+      "canonical": "Xebio Arena 仙台",
+      "native": "ゼビオアリーナ仙台",
+      "region": "東北",
+      "prefecture": "宮城縣",
+      "city": "仙台",
+      "names": {
+        "zh-TW": "Xebio Arena 仙台",
+        "ja": "ゼビオアリーナ仙台"
+      }
+    },
+    {
+      "id": "youtube-space-tokyo",
+      "canonical": "YouTube Space Tokyo (六本木)",
+      "native": "港区六本木",
+      "region": "關東",
+      "prefecture": "東京都",
+      "city": "東京",
+      "names": {
+        "zh-TW": "YouTube Space Tokyo (六本木)",
+        "ja": "港区六本木"
+      }
+    },
+    {
+      "id": "zepp-divercity",
+      "canonical": "Zepp DiverCity",
+      "native": "Zepp DiverCity",
+      "region": "關東",
+      "prefecture": "東京都",
+      "city": "東京",
+      "names": {
+        "zh-TW": "Zepp DiverCity",
+        "ja": "Zepp DiverCity",
+        "en": "Zepp DiverCity"
+      }
+    },
+    {
+      "id": "zepp-fukuoka",
+      "canonical": "Zepp Fukuoka",
+      "native": "Zepp Fukuoka",
+      "region": "九州",
+      "prefecture": "福岡縣",
+      "city": "福岡",
+      "names": {
+        "zh-TW": "Zepp Fukuoka",
+        "ja": "Zepp Fukuoka",
+        "en": "Zepp Fukuoka"
+      }
+    },
+    {
+      "id": "zepp-haneda",
+      "canonical": "Zepp Haneda",
+      "native": "Zepp Haneda",
+      "region": "關東",
+      "prefecture": "東京都",
+      "city": "東京",
+      "names": {
+        "zh-TW": "Zepp Haneda",
+        "ja": "Zepp Haneda",
+        "en": "Zepp Haneda"
+      }
+    },
+    {
+      "id": "zepp-nagoya",
+      "canonical": "Zepp Nagoya",
+      "native": "Zepp Nagoya",
+      "region": "中部",
+      "prefecture": "愛知縣",
+      "city": "名古屋",
+      "names": {
+        "zh-TW": "Zepp Nagoya",
+        "ja": "Zepp Nagoya",
+        "en": "Zepp Nagoya"
+      }
+    },
+    {
+      "id": "zepp-namba",
+      "canonical": "Zepp Namba",
+      "native": "Zepp Namba",
+      "region": "關西",
+      "prefecture": "大阪府",
+      "city": "大阪",
+      "names": {
+        "zh-TW": "Zepp Namba",
+        "ja": "Zepp Namba",
+        "en": "Zepp Namba"
+      }
+    },
+    {
+      "id": "zepp-osaka-bayside",
+      "canonical": "Zepp Osaka Bayside",
+      "native": "Zepp Osaka Bayside",
+      "region": "關西",
+      "prefecture": "大阪府",
+      "city": "大阪",
+      "names": {
+        "zh-TW": "Zepp Osaka Bayside",
+        "ja": "Zepp Osaka Bayside",
+        "en": "Zepp Osaka Bayside"
+      }
+    },
+    {
+      "id": "zepp-sapporo",
+      "canonical": "Zepp Sapporo",
+      "native": "Zepp Sapporo",
+      "region": "北海道",
+      "prefecture": "北海道",
+      "city": "札幌",
+      "names": {
+        "zh-TW": "Zepp Sapporo",
+        "ja": "Zepp Sapporo",
+        "en": "Zepp Sapporo"
+      }
+    },
+    {
+      "id": "アスナル金山-明日なる広場",
+      "canonical": "アスナル金山 明日なる！広場",
+      "native": "明日なる！広場",
+      "region": "中部",
+      "prefecture": "愛知縣",
+      "city": "名古屋",
+      "names": {
+        "zh-TW": "アスナル金山 明日なる！広場",
+        "ja": "明日なる！広場"
+      }
+    },
+    {
+      "id": "カラダよろこぶ米工房こめや",
+      "canonical": "カラダよろこぶ米工房こめや",
+      "native": "カラダよろこぶ米工房こめや",
+      "region": "中國",
+      "prefecture": "島根縣",
+      "city": "奧出雲",
+      "names": {
+        "zh-TW": "カラダよろこぶ米工房こめや",
+        "ja": "カラダよろこぶ米工房こめや"
+      }
+    },
+    {
+      "id": "きらめき通り-特設舞台",
+      "canonical": "きらめき通り 特設舞台",
+      "native": "きらめき通り 特設ステージ",
+      "region": "九州",
+      "prefecture": "福岡縣",
+      "city": "福岡",
+      "names": {
+        "zh-TW": "きらめき通り 特設舞台",
+        "ja": "きらめき通り 特設ステージ"
+      }
+    }
+  ]
+}

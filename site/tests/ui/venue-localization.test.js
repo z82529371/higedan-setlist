@@ -22,6 +22,8 @@ if (!globalThis.document) {
 describe("18. Official Venue Localization & Cross-Lingual Presentation (ADR-0110)", () => {
   let venuesMod;
   let localizeVenue;
+  let getNativeVenue;
+  let resolveVenueCanonical;
   let matchVenue;
   let domainMod;
   let formatShowVenueCity;
@@ -38,6 +40,8 @@ describe("18. Official Venue Localization & Cross-Lingual Presentation (ADR-0110
   before(async () => {
     venuesMod = await loadModule("/src/lib/locales/venues.js");
     localizeVenue = venuesMod.localizeVenue;
+    getNativeVenue = venuesMod.getNativeVenue;
+    resolveVenueCanonical = venuesMod.resolveVenueCanonical;
     matchVenue = venuesMod.matchVenue;
 
     domainMod = await loadModule("/src/lib/domain.js");
@@ -84,9 +88,29 @@ describe("18. Official Venue Localization & Cross-Lingual Presentation (ADR-0110
       assert.strictEqual(localizeVenue("愛媛縣縣民文化會館", "zh-TW"), "愛媛縣縣民文化會館");
       assert.strictEqual(localizeVenue("愛媛縣縣民文化會館", "ja"), "愛媛県県民文化会館");
       assert.strictEqual(localizeVenue("愛媛縣縣民文化會館", "en"), "Ehime Prefectural Cultural Center");
+      // ADR-0111: In Korean without Korean translation, must fall back to native Japanese, NOT Traditional Chinese
+      assert.strictEqual(localizeVenue("愛媛縣縣民文化會館", "ko"), "愛媛県県民文化会館");
     });
 
-    it("gracefully falls back to raw venue string when no official localization exists", () => {
+    it("verifies getNativeVenue returns authentic native names (ADR-0111)", () => {
+      assert.strictEqual(getNativeVenue("愛媛縣縣民文化會館"), "愛媛県県民文化会館");
+      assert.strictEqual(getNativeVenue("橫濱Arena"), "横浜アリーナ");
+      assert.strictEqual(getNativeVenue("台北小巨蛋"), "台北小巨蛋");
+      assert.strictEqual(getNativeVenue("米子市公會堂"), "米子市公会堂");
+    });
+
+    it("resolves cross-lingual inbound route strings to canonical key (ADR-0111)", () => {
+      assert.strictEqual(resolveVenueCanonical("横浜アリーナ"), "橫濱Arena");
+      assert.strictEqual(resolveVenueCanonical("Yokohama Arena"), "橫濱Arena");
+      assert.strictEqual(resolveVenueCanonical("yokohama arena"), "橫濱Arena");
+      assert.strictEqual(resolveVenueCanonical("橫濱Arena"), "橫濱Arena");
+      assert.strictEqual(resolveVenueCanonical("台北アリーナ"), "台北小巨蛋");
+      assert.strictEqual(resolveVenueCanonical("Taipei Arena"), "台北小巨蛋");
+      assert.strictEqual(resolveVenueCanonical("타이베이 아레나"), "台北小巨蛋");
+      assert.strictEqual(resolveVenueCanonical("NonexistentVenue"), null);
+    });
+
+    it("gracefully falls back to authentic native venue string when no official localization exists", () => {
       const indieVenue = "松江 canova (地下空間)";
       assert.strictEqual(localizeVenue(indieVenue, "en"), indieVenue);
       assert.strictEqual(localizeVenue(indieVenue, "ko"), indieVenue);
@@ -323,6 +347,8 @@ describe("18. Official Venue Localization & Cross-Lingual Presentation (ADR-0110
         )
       );
       assert.ok(htmlEn.includes("Taipei Arena"), "VenueSlip in en must render 'Taipei Arena'");
+      assert.ok(htmlEn.includes("data-testid=\"venue-native-subtitle\""), "VenueSlip in en must render native subtitle");
+      assert.ok(htmlEn.includes("Native: 台北小巨蛋"), "VenueSlip in en must display 'Native: 台北小巨蛋'");
 
       const htmlJa = renderToStaticMarkup(
         React.createElement(
@@ -335,6 +361,64 @@ describe("18. Official Venue Localization & Cross-Lingual Presentation (ADR-0110
         )
       );
       assert.ok(htmlJa.includes("台北アリーナ"), "VenueSlip in ja must render '台北アリーナ'");
+
+      // ADR-0111: Test Japanese arena with authentic native subtitle & map queries
+      const mockYokohamaShows = [
+        {
+          unitId: "arena-tour",
+          unitTitle: "Arena Tour",
+          unitType: "巡演專場",
+          show: {
+            id: "show-yokohama",
+            date: "2024-11-20",
+            venue: "橫濱Arena",
+            city: "橫濱",
+            prefecture: "神奈川縣",
+          },
+          unit: { title: "Arena Tour" },
+          resolvedItems: [],
+        },
+      ];
+
+      const htmlYokohamaEn = renderToStaticMarkup(
+        React.createElement(
+          I18nProvider,
+          { initialLocale: "en" },
+          React.createElement(VenueSlip, {
+            venueName: "橫濱Arena",
+            globalVenueShows: new Map([["橫濱Arena", mockYokohamaShows]]),
+          })
+        )
+      );
+      assert.ok(htmlYokohamaEn.includes("Yokohama Arena"), "VenueSlip in en must render 'Yokohama Arena'");
+      assert.ok(htmlYokohamaEn.includes("Native: 横浜アリーナ"), "VenueSlip in en must display 'Native: 横浜アリーナ'");
+      assert.ok(htmlYokohamaEn.includes(encodeURIComponent("横浜アリーナ")), "Google Maps & LiveFans query must use native name '横浜アリーナ'");
+
+      const htmlYokohamaZh = renderToStaticMarkup(
+        React.createElement(
+          I18nProvider,
+          { initialLocale: "zh-TW" },
+          React.createElement(VenueSlip, {
+            venueName: "橫濱Arena",
+            globalVenueShows: new Map([["橫濱Arena", mockYokohamaShows]]),
+          })
+        )
+      );
+      assert.ok(htmlYokohamaZh.includes("橫濱Arena"), "VenueSlip in zh-TW must render '橫濱Arena'");
+      assert.ok(htmlYokohamaZh.includes("日文原名：横浜アリーナ"), "VenueSlip in zh-TW must display '日文原名：横浜アリーナ'");
+
+      // When localized name equals native name (e.g. 台北小巨蛋 in zh-TW), no redundant subtitle
+      const htmlTaipeiZh = renderToStaticMarkup(
+        React.createElement(
+          I18nProvider,
+          { initialLocale: "zh-TW" },
+          React.createElement(VenueSlip, {
+            venueName: "台北小巨蛋",
+            globalVenueShows: new Map([["台北小巨蛋", mockShows]]),
+          })
+        )
+      );
+      assert.ok(!htmlTaipeiZh.includes("data-testid=\"venue-native-subtitle\""), "VenueSlip must not render subtitle when localized equals native");
     });
 
     it("matches cross-lingual venue queries in SearchBox and renders localized venue name", () => {
