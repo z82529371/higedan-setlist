@@ -75,4 +75,46 @@ describe("19. Venue Master Profiles & Invariant Gates (ADR-0111)", () => {
       `Japanese venue native names must not contain forbidden Traditional Chinese characters: ${JSON.stringify(violativeVenues)}`
     );
   });
+
+  it("ensures venue profiles are free of circuit festival leakage, brackets, unescaped HTML entities, and address placeholders", () => {
+    // Venues should never contain circuit livehouse lists [...] or crawler 'at' connection strings
+    const bracketRegex = /\[.*\]/;
+    const atRegex = /\bat\b/i;
+    const htmlEntityRegex = /&#\d+;|&amp;|&quot;/i;
+    const violations = [];
+
+    for (const p of profiles) {
+      const textsToCheck = [
+        p.native,
+        p.canonical,
+        p.names?.ja,
+        p.names?.en,
+        p.names?.ko,
+        p.names?.["zh-TW"],
+      ].filter(Boolean);
+
+      for (const text of textsToCheck) {
+        if (bracketRegex.test(text)) {
+          violations.push({ id: p.id, text, reason: "circuit festival / bracket leakage" });
+        }
+        if (atRegex.test(text)) {
+          violations.push({ id: p.id, text, reason: "crawler 'at' leakage or inverted stage naming" });
+        }
+        if (htmlEntityRegex.test(text)) {
+          violations.push({ id: p.id, text, reason: "unescaped HTML entity" });
+        }
+      }
+
+      if (p.native === "港区六本木") {
+        violations.push({ id: p.id, text: p.native, reason: "address instead of venue name" });
+      }
+    }
+
+    assert.strictEqual(
+      violations.length,
+      0,
+      `Venue profiles must not contain formatting defects or circuit leakage: ${JSON.stringify(violations, null, 2)}`
+    );
+  });
 });
+

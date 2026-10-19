@@ -560,13 +560,13 @@
     {
       "id": "仙台club-junk-box",
       "canonical": "仙台CLUB JUNK BOX",
-      "native": "仙台CLUB JUNK BOX at MEGA☆ROCKS 2017会場 [仙台Rensa / 仙台darwin / 仙台CLUB JUNK BOX / 仙台MACANA / HooK SENDAI / LIVE HOUSE enn 2nd / LIVE HOUSE enn 3rd / 仙台Space Zero / HIGHBURY / TOWER RECORDS仙台パルコ]",
+      "native": "仙台CLUB JUNK BOX",
       "region": "東北",
       "prefecture": "宮城縣",
       "city": "仙台",
       "names": {
         "zh-TW": "仙台CLUB JUNK BOX",
-        "ja": "仙台CLUB JUNK BOX at MEGA☆ROCKS 2017会場 [仙台Rensa / 仙台darwin / 仙台CLUB JUNK BOX / 仙台MACANA / HooK SENDAI / LIVE HOUSE enn 2nd / LIVE HOUSE enn 3rd / 仙台Space Zero / HIGHBURY / TOWER RECORDS仙台パルコ]"
+        "ja": "仙台CLUB JUNK BOX"
       }
     },
     {
@@ -977,13 +977,13 @@
     {
       "id": "伏見jammin",
       "canonical": "伏見JAMMIN'",
-      "native": "伏見JAMMIN&#039;",
+      "native": "伏見JAMMIN'",
       "region": "中部",
       "prefecture": "愛知縣",
       "city": "名古屋",
       "names": {
         "zh-TW": "伏見JAMMIN'",
-        "ja": "伏見JAMMIN&#039;"
+        "ja": "伏見JAMMIN'"
       }
     },
     {
@@ -1106,13 +1106,13 @@
     {
       "id": "名古屋スクールオブミュージック",
       "canonical": "名古屋スクールオブミュージック",
-      "native": "スクールオブミュージック at SAKAE SP-RING 2015会場 [Diamond Hall / APOLLO BASE / 名古屋CLUB QUATTRO / HOLIDAY NEXT NAGOYA / RAD HALL / TIGHT ROPE / 栄R.A.D / 新栄CLUB ROCK&#039;N ROLL / 名古屋LIVE HALL M.I.D / 名古屋ビジュアルアーツ Air Hall / SCHOOL OF MUSIC / FLEX LOUNGE / club JB&#039;S / EDITS / MUJICA]",
+      "native": "名古屋スクールオブミュージック",
       "region": "中部",
       "prefecture": "愛知縣",
       "city": "名古屋",
       "names": {
         "zh-TW": "名古屋スクールオブミュージック",
-        "ja": "スクールオブミュージック at SAKAE SP-RING 2015会場 [Diamond Hall / APOLLO BASE / 名古屋CLUB QUATTRO / HOLIDAY NEXT NAGOYA / RAD HALL / TIGHT ROPE / 栄R.A.D / 新栄CLUB ROCK&#039;N ROLL / 名古屋LIVE HALL M.I.D / 名古屋ビジュアルアーツ Air Hall / SCHOOL OF MUSIC / FLEX LOUNGE / club JB&#039;S / EDITS / MUJICA]"
+        "ja": "名古屋スクールオブミュージック"
       }
     },
     {
@@ -1668,13 +1668,13 @@
     {
       "id": "柏dome",
       "canonical": "柏DOMe",
-      "native": "柏DOMe at 柏 MUSIC SUN 2016会場 [柏DOMe / Studio WUU / 柏PALOOZA / 柏616 / 柏駅東口ファミリー広場ウッドデッキステージ / 高島屋エントランスステージ]",
+      "native": "柏DOMe",
       "region": "關東",
       "prefecture": "千葉縣",
       "city": "千葉",
       "names": {
         "zh-TW": "柏DOMe",
-        "ja": "柏DOMe at 柏 MUSIC SUN 2016会場 [柏DOMe / Studio WUU / 柏PALOOZA / 柏616 / 柏駅東口ファミリー広場ウッドデッキステージ / 高島屋エントランスステージ]"
+        "ja": "柏DOMe"
       }
     },
     {
@@ -1706,37 +1706,37 @@
     {
       "id": "若洲公園-camp-stage",
       "canonical": "若洲公園 CAMP STAGE",
-      "native": "CAMP STAGE at 若洲公園",
+      "native": "若洲公園 CAMP STAGE",
       "region": "關東",
       "prefecture": "東京都",
       "city": "東京",
       "names": {
         "zh-TW": "若洲公園 CAMP STAGE",
-        "ja": "CAMP STAGE at 若洲公園"
+        "ja": "若洲公園 CAMP STAGE"
       }
     },
     {
       "id": "若洲公園-new-beat-square",
       "canonical": "若洲公園 NEW BEAT SQUARE",
-      "native": "NEW BEAT SQUARE at 若洲公園",
+      "native": "若洲公園 NEW BEAT SQUARE",
       "region": "關東",
       "prefecture": "東京都",
       "city": "東京",
       "names": {
         "zh-TW": "若洲公園 NEW BEAT SQUARE",
-        "ja": "NEW BEAT SQUARE at 若洲公園"
+        "ja": "若洲公園 NEW BEAT SQUARE"
       }
     },
     {
       "id": "若洲公園-seaside-park",
       "canonical": "若洲公園 SEASIDE PARK",
-      "native": "SEASIDE PARK at 若洲公園",
+      "native": "若洲公園 SEASIDE PARK",
       "region": "關東",
       "prefecture": "東京都",
       "city": "東京",
       "names": {
         "zh-TW": "若洲公園 SEASIDE PARK",
-        "ja": "SEASIDE PARK at 若洲公園"
+        "ja": "若洲公園 SEASIDE PARK"
       }
     },
     {
@@ -2326,13 +2326,13 @@
     {
       "id": "新代田fever",
       "canonical": "新代田FEVER",
-      "native": "MAIN STAGE at 新代田FEVER",
+      "native": "新代田FEVER",
       "region": "關東",
       "prefecture": "東京都",
       "city": "東京",
       "names": {
         "zh-TW": "新代田FEVER",
-        "ja": "MAIN STAGE at 新代田FEVER",
+        "ja": "新代田FEVER",
         "en": "Shindaita FEVER"
       }
     },
@@ -2612,13 +2612,13 @@
     {
       "id": "熊本b9",
       "canonical": "熊本B.9",
-      "native": "B.9 at HAPPY JACK 2019 H-FINAL EDITION LIVE CIRCUIT会場 [熊本B.9 / 熊本B.9 V2 / 熊本Django / ぺいあのPLUS]",
+      "native": "熊本B.9",
       "region": "九州",
       "prefecture": "熊本縣",
       "city": "熊本",
       "names": {
         "zh-TW": "熊本B.9",
-        "ja": "B.9 at HAPPY JACK 2019 H-FINAL EDITION LIVE CIRCUIT会場 [熊本B.9 / 熊本B.9 V2 / 熊本Django / ぺいあのPLUS]"
+        "ja": "熊本B.9"
       }
     },
     {
@@ -3363,13 +3363,13 @@
     {
       "id": "conpass",
       "canonical": "CONPASS",
-      "native": "CONPASS at MINAMI WHEEL 2014会場",
+      "native": "CONPASS",
       "region": "關西",
       "prefecture": "大阪府",
       "city": "大阪",
       "names": {
         "zh-TW": "CONPASS",
-        "ja": "CONPASS at MINAMI WHEEL 2014会場",
+        "ja": "CONPASS",
         "en": "CONPASS"
       }
     },
@@ -3514,26 +3514,26 @@
     {
       "id": "heavens-rock-埼玉新都心-vj-3",
       "canonical": "HEAVEN'S ROCK 埼玉新都心 VJ-3",
-      "native": "HEAVEN&#039;S ROCK さいたま新都心 VJ-3",
+      "native": "HEAVEN'S ROCK さいたま新都心 VJ-3",
       "region": "關東",
       "prefecture": "埼玉縣",
       "city": "埼玉",
       "names": {
         "zh-TW": "HEAVEN'S ROCK 埼玉新都心 VJ-3",
-        "ja": "HEAVEN&#039;S ROCK さいたま新都心 VJ-3",
+        "ja": "HEAVEN'S ROCK さいたま新都心 VJ-3",
         "en": "HEAVEN'S ROCK Saitama-Shintoshin VJ-3"
       }
     },
     {
       "id": "holiday-next-nagoya",
       "canonical": "HOLIDAY NEXT NAGOYA",
-      "native": "HOLIDAY NEXT NAGOYA at SAKAE SP-RING 2016 会場",
+      "native": "HOLIDAY NEXT NAGOYA",
       "region": "中部",
       "prefecture": "愛知縣",
       "city": "名古屋",
       "names": {
         "zh-TW": "HOLIDAY NEXT NAGOYA",
-        "ja": "HOLIDAY NEXT NAGOYA at SAKAE SP-RING 2016 会場"
+        "ja": "HOLIDAY NEXT NAGOYA"
       }
     },
     {
@@ -3578,25 +3578,25 @@
     {
       "id": "intex大阪-r-stage",
       "canonical": "INTEX大阪 R-STAGE",
-      "native": "R-STAGE at インテックス大阪",
+      "native": "インテックス大阪 R-STAGE",
       "region": "關西",
       "prefecture": "大阪府",
       "city": "大阪",
       "names": {
         "zh-TW": "INTEX大阪 R-STAGE",
-        "ja": "R-STAGE at インテックス大阪"
+        "ja": "インテックス大阪 R-STAGE"
       }
     },
     {
       "id": "intex大阪-z-stage-6號館",
       "canonical": "INTEX大阪 Z-STAGE 6號館",
-      "native": "Z-STAGE 6号館 at インテックス大阪",
+      "native": "インテックス大阪 Z-STAGE 6号館",
       "region": "關西",
       "prefecture": "大阪府",
       "city": "大阪",
       "names": {
         "zh-TW": "INTEX大阪 Z-STAGE 6號館",
-        "ja": "Z-STAGE 6号館 at インテックス大阪"
+        "ja": "インテックス大阪 Z-STAGE 6号館"
       }
     },
     {
@@ -3769,13 +3769,13 @@
     {
       "id": "music-club-janus",
       "canonical": "Music Club JANUS",
-      "native": "JANUS at MINAMI WHEEL 2017会場",
+      "native": "Music Club JANUS",
       "region": "關西",
       "prefecture": "大阪府",
       "city": "大阪",
       "names": {
         "zh-TW": "Music Club JANUS",
-        "ja": "JANUS at MINAMI WHEEL 2017会場",
+        "ja": "Music Club JANUS",
         "en": "Music Club JANUS"
       }
     },
@@ -3880,13 +3880,13 @@
     {
       "id": "rad-seven",
       "canonical": "RAD SEVEN",
-      "native": "RAD SEVEN at GOLD RUSH2016会場 [APOLLO BASE / DAYTRIVE / 新栄RAD SEVEN / 栄R.A.D / 栄Party&#039;z / TIGHT ROPE / Red Dragon / 新栄CLUB ROCK&#039;N ROLL /名古屋RAD HALL / 名古屋X-HALL / Curry Cafe &amp; Music Bar TOYS / Carnival☆Stars]",
+      "native": "RAD SEVEN",
       "region": "中部",
       "prefecture": "愛知縣",
       "city": "名古屋",
       "names": {
         "zh-TW": "RAD SEVEN",
-        "ja": "RAD SEVEN at GOLD RUSH2016会場 [APOLLO BASE / DAYTRIVE / 新栄RAD SEVEN / 栄R.A.D / 栄Party&#039;z / TIGHT ROPE / Red Dragon / 新栄CLUB ROCK&#039;N ROLL /名古屋RAD HALL / 名古屋X-HALL / Curry Cafe &amp; Music Bar TOYS / Carnival☆Stars]",
+        "ja": "RAD SEVEN",
         "en": "RAD SEVEN"
       }
     },
@@ -4251,13 +4251,13 @@
     {
       "id": "youtube-space-tokyo",
       "canonical": "YouTube Space Tokyo (六本木)",
-      "native": "港区六本木",
+      "native": "YouTube Space Tokyo",
       "region": "關東",
       "prefecture": "東京都",
       "city": "東京",
       "names": {
         "zh-TW": "YouTube Space Tokyo (六本木)",
-        "ja": "港区六本木"
+        "ja": "YouTube Space Tokyo"
       }
     },
     {
