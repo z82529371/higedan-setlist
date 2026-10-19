@@ -14,6 +14,12 @@ import { parseRoute, routeHash } from "../lib/routes.js";
 import { useI18n, DEFAULT_LOCALE } from "../lib/i18n.jsx";
 import { resolveVenueCanonical } from "../lib/locales/venues.js";
 
+function resolveVenueKey(routeValue, allVenues) {
+  if (!routeValue || typeof routeValue !== "string") return null;
+  const canonical = resolveVenueCanonical(routeValue) || routeValue;
+  return allVenues.some((v) => v.name === canonical) ? canonical : null;
+}
+
 export function useArchiveRoute({
   unitData,
   allUsedSongs,
@@ -79,9 +85,8 @@ export function useArchiveRoute({
         selUnitId: unitIdByShowId.get(r.value),
         selShow: r.value,
       };
-    const resolvedVenue = r.kind === "venue" ? (resolveVenueCanonical(r.value) || r.value) : null;
-    if (r.kind === "venue" && allVenues.some((v) => v.name === resolvedVenue))
-      return { ...fallback, tab: "venue", selVenue: resolvedVenue };
+    const vKey = r.kind === "venue" ? resolveVenueKey(r.value, allVenues) : null;
+    if (vKey) return { ...fallback, tab: "venue", selVenue: vKey };
     if (r.kind === "tour") {
       const uEntry = unitData.get(r.value);
       if (uEntry) {
@@ -117,7 +122,7 @@ export function useArchiveRoute({
     if (!r) return "landing";
     if (r.kind === "song" && allUsedSongs.some((s) => s.id === r.value)) return "archive";
     if (r.kind === "show" && unitIdByShowId.has(r.value)) return "archive";
-    if (r.kind === "venue" && allVenues.some((v) => v.name === (resolveVenueCanonical(r.value) || r.value))) return "archive";
+    if (r.kind === "venue" && resolveVenueKey(r.value, allVenues)) return "archive";
     if (r.kind === "tour") {
       const uEntry = unitData.get(r.value);
       if (uEntry) return "archive";
@@ -257,8 +262,8 @@ export function useArchiveRoute({
         }
       }
     } else if (r.kind === "venue") {
-      const resolvedVenue = resolveVenueCanonical(r.value) || r.value;
-      if (allVenues.some((v) => v.name === resolvedVenue)) {
+      const resolvedVenue = resolveVenueKey(r.value, allVenues);
+      if (resolvedVenue) {
         setTab("venue");
         setSelVenue(resolvedVenue);
         setQ("");
@@ -310,14 +315,11 @@ export function useArchiveRoute({
           window.scrollTo({ top: 0, behavior: "instant" });
           return;
         }
-        if (r.kind === "venue") {
-          const resolvedVenue = resolveVenueCanonical(r.value) || r.value;
-          if (!allVenues.some((v) => v.name === resolvedVenue)) {
-            setViewMode("landing");
-            window.location.hash = appendLang("#/");
-            window.scrollTo({ top: 0, behavior: "instant" });
-            return;
-          }
+        if (r.kind === "venue" && !resolveVenueKey(r.value, allVenues)) {
+          setViewMode("landing");
+          window.location.hash = appendLang("#/");
+          window.scrollTo({ top: 0, behavior: "instant" });
+          return;
         }
         setViewMode("archive");
         applyRoute(r);

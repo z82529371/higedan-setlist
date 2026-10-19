@@ -321,8 +321,9 @@ export function VenueSlip({ venueName, globalVenueShows, unitData, onSelectShow,
   const showNativeSubtitle = nativeName && localizedTitle !== nativeName;
 
   const mapSearchQuery = nativeName || venueName;
+  const localizedPref = venuePref ? t("prefectures." + venuePref, venuePref) : "";
   const mapQuery = encodeURIComponent(
-    `${venuePref ? venuePref + " " : ""}${venueCity ? venueCity + " " : ""}${mapSearchQuery}`
+    `${localizedPref ? localizedPref + " " : ""}${mapSearchQuery}`
   );
   const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${mapQuery}`;
   const livefansUrl = `https://www.livefans.jp/search?q=${encodeURIComponent(mapSearchQuery)}`;
@@ -359,11 +360,8 @@ export function VenueSlip({ venueName, globalVenueShows, unitData, onSelectShow,
 
         {/* Level 2b: Native Venue Subtitle (ADR-0111) */}
         {showNativeSubtitle && (
-          <div className="mb-2 font-mono text-[13px] text-muted tracking-wide" data-testid="venue-native-subtitle">
-            {locale === "en" && `Native: ${nativeName}`}
-            {locale === "zh-TW" && `日文原名：${nativeName}`}
-            {locale === "ko" && `원어 명칭: ${nativeName}`}
-            {locale === "ja" && `原表記：${nativeName}`}
+          <div className="mb-2 text-[13px] text-muted tracking-wide" data-testid="venue-native-subtitle">
+            {t("slips.venue.nativeName", "原名：{name}", { name: nativeName })}
           </div>
         )}
 

@@ -203,6 +203,7 @@ export const dictEn = {
       onlySpecialVersions: "✨ Show Special Versions Only",
     },
     venue: {
+      nativeName: "Native: {name}",
       hostedShowsCount: "Hosted {count} Shows Total",
       frequentTracks: "🏆 Top Performed Songs at this Venue:",
       debutShow: "Debut Performance at Venue",

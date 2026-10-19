@@ -203,6 +203,7 @@ export const dictKo = {
       onlySpecialVersions: "✨ 특수 공연 버전만 표시",
     },
     venue: {
+      nativeName: "원어 명칭: {name}",
       hostedShowsCount: "총 {count}회 공연 개최",
       frequentTracks: "🏆 이 공연장 단골 연주곡:",
       debutShow: "첫 무대 / 첫 공연",

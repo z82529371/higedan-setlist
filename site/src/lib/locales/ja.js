@@ -203,6 +203,7 @@ export const dictJa = {
       onlySpecialVersions: "✨ 特殊演出バージョンのみ表示",
     },
     venue: {
+      nativeName: "原表記：{name}",
       hostedShowsCount: "通算 {count} 公演を開催",
       frequentTracks: "🏆 この会場の定番曲：",
       debutShow: "初登場 / 初回公演",

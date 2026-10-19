@@ -405,7 +405,7 @@ describe("18. Official Venue Localization & Cross-Lingual Presentation (ADR-0110
         )
       );
       assert.ok(htmlYokohamaZh.includes("橫濱Arena"), "VenueSlip in zh-TW must render '橫濱Arena'");
-      assert.ok(htmlYokohamaZh.includes("日文原名：横浜アリーナ"), "VenueSlip in zh-TW must display '日文原名：横浜アリーナ'");
+      assert.ok(htmlYokohamaZh.includes("原名：横浜アリーナ"), "VenueSlip in zh-TW must display '原名：横浜アリーナ'");
 
       // When localized name equals native name (e.g. 台北小巨蛋 in zh-TW), no redundant subtitle
       const htmlTaipeiZh = renderToStaticMarkup(

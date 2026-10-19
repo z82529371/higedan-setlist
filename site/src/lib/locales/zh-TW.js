@@ -203,6 +203,7 @@ export const dictZhTw = {
       onlySpecialVersions: "✨ 僅顯示特殊演出版本",
     },
     venue: {
+      nativeName: "原名：{name}",
       hostedShowsCount: "共舉辦過 {count} 場演出",
       frequentTracks: "🏆 本場地常唱曲目：",
       debutShow: "首次登台 / 首演場次",
