@@ -122,11 +122,21 @@ components:
 
 ## Typography
 
-**Display Font:** "M PLUS Rounded 1c", "Zen Kaku Gothic New", "Noto Sans TC", sans-serif
-**Body Font:** "Noto Sans TC", "Zen Kaku Gothic New", system-ui, sans-serif
-**Label/Mono Font:** "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace
+**Universal Label/Mono Font (All Locales):** "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace
 
-**Character:** 標題採用圓黑體展現 Official 髭男 dism 流行爵士的親和與現代感；正文採用極清晰的思源黑體確保繁體中文高密度排版；序號與統計數字則堅守等寬字型，帶來專業演出工程清單的秩序感。
+**Locale-Isolated Font Stacks (ADR-0112):**
+- **Japanese (`ja`):**
+  - **Display:** "M PLUS Rounded 1c", "Zen Kaku Gothic New", sans-serif
+  - **Body:** "Zen Kaku Gothic New", "Hiragino Sans", "Yu Gothic", sans-serif
+- **Traditional Chinese (`zh-TW`):**
+  - **Display:** "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif
+  - **Body:** "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", system-ui, sans-serif
+- **Korean (`ko`):**
+  - **Display & Body:** "Pretendard", "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif
+- **English (`en`):**
+  - **Display & Body:** "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif
+
+**Character:** 標題在日語採用圓黑體展現 Official 髭男 dism 流行爵士的親和與現場周邊質感；繁體中文與韓文採用極清晰的思源家族與現代無襯線體，杜絕 CJK 異體字交叉污染；英語介面採用溫潤幾何質感的 Plus Jakarta Sans；序號與統計數字則跨語言堅守等寬字型（`IBM Plex Mono`），帶來專業演出工程清單的秩序感。
 
 ### Hierarchy
 - **Display** (800, clamp(1.5rem, 3.5vw, 2.25rem), line-height 1.2): 頁面大標題與巡演全名，沉穩厚實。

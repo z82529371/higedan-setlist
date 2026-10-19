@@ -151,4 +151,39 @@ describe("9. Design Token Invariants & Dedicated URL Routes Seam (DESIGN.md, ADR
       `Found unvetted arbitrary hex classes in UI components. Use semantic design tokens from DESIGN.md instead:\n${violations.join("\n")}`
     );
   });
+
+  it("verifies multi-lingual typography stacks and The Cue Monospace Rule (ADR-0112)", () => {
+    const stylePath = path.resolve(import.meta.dirname, "../../src/style.css");
+    const indexPath = path.resolve(import.meta.dirname, "../../index.html");
+    const styleContent = fs.readFileSync(stylePath, "utf8");
+    const indexContent = fs.readFileSync(indexPath, "utf8");
+
+    // The Cue Monospace Rule invariant
+    assert.ok(
+      styleContent.includes('--font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace'),
+      "style.css must enforce universal IBM Plex Mono invariant"
+    );
+
+    // Locale-specific isolated font stacks
+    const requiredLangs = [":lang(ja)", ":lang(zh-TW)", ":lang(ko)", ":lang(en)"];
+    for (const lang of requiredLangs) {
+      assert.ok(
+        styleContent.includes(lang),
+        `style.css must define dedicated font stack for ${lang}`
+      );
+    }
+
+    assert.ok(styleContent.includes('"Zen Kaku Gothic New"'), "style.css must include Zen Kaku Gothic New");
+    assert.ok(styleContent.includes('"Noto Sans TC"'), "style.css must include Noto Sans TC");
+    assert.ok(styleContent.includes('"Noto Sans KR"'), "style.css must include Noto Sans KR");
+    assert.ok(styleContent.includes('"Plus Jakarta Sans"'), "style.css must include Plus Jakarta Sans");
+
+    // Google Fonts link in index.html must load all required font families
+    assert.ok(indexContent.includes("family=IBM+Plex+Mono"), "index.html must load IBM Plex Mono");
+    assert.ok(indexContent.includes("family=M+PLUS+Rounded+1c"), "index.html must load M PLUS Rounded 1c");
+    assert.ok(indexContent.includes("family=Noto+Sans+KR"), "index.html must load Noto Sans KR");
+    assert.ok(indexContent.includes("family=Noto+Sans+TC"), "index.html must load Noto Sans TC");
+    assert.ok(indexContent.includes("family=Plus+Jakarta+Sans"), "index.html must load Plus Jakarta Sans");
+    assert.ok(indexContent.includes("family=Zen+Kaku+Gothic+New"), "index.html must load Zen Kaku Gothic New");
+  });
 });

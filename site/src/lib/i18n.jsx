@@ -132,6 +132,13 @@ export function I18nProvider({ children, initialLocale }) {
     return () => window.removeEventListener("hashchange", onHashChange);
   }, [locale]);
 
+  // Synchronize <html> lang attribute for CSS :lang() font isolation (ADR-0112)
+  useEffect(() => {
+    if (typeof document !== "undefined" && document.documentElement) {
+      document.documentElement.lang = locale;
+    }
+  }, [locale]);
+
   const dict = useMemo(() => DICTIONARIES[locale] || DICTIONARIES[DEFAULT_LOCALE], [locale]);
 
   const t = useCallback(

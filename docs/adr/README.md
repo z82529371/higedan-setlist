@@ -116,4 +116,6 @@
 | [ADR-0108: 行政地名多語在地化與場館一手真實邊界 (Administrative Geography Localization & Venue Integrity Boundary)](0108-administrative-geography-localization-and-venue-integrity.md) | 已採納 (Accepted) | 確立城市與都道府縣四語在地化、全域搜尋跨語檢索，守護場館建築實體一手真理不可變邊界 |
 | [ADR-0109: 測試架構抽離、領域模組化與無頭 SSR 單例最佳化 (Modular Test Architecture and Headless SSR Singleton)](0109-modular-test-architecture-and-headless-ssr-singleton.md) | 已採納 (Accepted) | 將 4000 行巨石測試解構為 pipeline、invariants、ui 三層領域模組與 Vite 惰性單例，提供細粒度指令與透明轉發門面 |
 | [ADR-0110: 官方場館正名在地化與多語雙向呈現架構 (Official Venue Localization & Cross-Lingual Presentation)](0110-official-venue-localization-and-cross-lingual-presentation.md) | 已採納 (Accepted) | 確立場館官方正名在地化、日本新字體歸位、安全回退原生名、URL 路由解耦與全域搜尋跨語雙向檢索 |
+| [ADR-0111: 場館實體主檔、原生名回退鏈與跨語系路由寬容解析架構 (Venue Master Profiles, Native Fallback Chain & Deep Link Resolution)](0111-venue-master-profiles-native-fallback-and-deep-link-resolution.md) | 已採納 (Accepted) | 建立專屬場館領域主檔 venue-profiles.json、一手在地原生名回退鏈與 URL 路由跨語系寬容解析 |
+| [ADR-0112: 多語言字體架構、語言專屬字體棧與 CJK 異體字隔離 (Multi-Lingual Typography and Locale-Isolated Font Stacks)](0112-multi-lingual-typography-and-locale-isolated-font-stacks.md) | 已採納 (Accepted) | 建立動態 html lang 同步、CSS :lang() 四語專屬字體棧、擴充 Noto Sans KR 與 Plus Jakarta Sans，杜絕 CJK 異體字污染 |
 
