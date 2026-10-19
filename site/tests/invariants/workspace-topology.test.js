@@ -107,4 +107,32 @@ describe("10. Workspace Topology & Runtime Version Invariants (ADR-0103)", () =>
       }
     }
   });
+it("guarantees repository documentation is free of inaccurate dome tour claims (五大巨蛋 / 巨蛋巡演)", () => {
+    const docFiles = ["README.md", "PRODUCT.md", "CONTEXT.md"].map((f) =>
+      path.join(repoRoot, f)
+    );
+
+    for (const filePath of docFiles) {
+      if (fs.existsSync(filePath)) {
+        const docContent = fs.readFileSync(filePath, "utf8");
+        const lines = docContent.split(/\r?\n/);
+        for (let i = 0; i < lines.length; i++) {
+          const line = lines[i];
+          if (
+            line.includes("Avoid") || line.includes("虛構") ||
+            line.includes("未曾舉辦") ||
+            line.includes("尚未舉辦") ||
+            line.includes("禁止")
+          ) {
+            continue;
+          }
+          const match = /(?:五大巨蛋|巨蛋巡演)/.exec(line);
+          assert.ok(
+            !match,
+            `File ${path.basename(filePath)}:${i + 1} contains inaccurate dome tour claim: "${line.trim()}". Official HIGEDAN DISM has never performed a dome tour.`
+          );
+        }
+      }
+    }
+  });
 });
