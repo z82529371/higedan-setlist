@@ -1,4 +1,5 @@
 import { useI18n } from "../../lib/i18n.jsx";
+import { useTicketBook } from "../../lib/ticket-book.js";
 import LanguageSwitcher from "../LanguageSwitcher.jsx";
 
 export function MobileFloatingControls({
@@ -6,8 +7,12 @@ export function MobileFloatingControls({
   onOpenSearch,
   onOpenDrawer,
   onReturnHome,
+  onSelectTickets,
+  storage,
 }) {
   const { t } = useI18n();
+  const { count: ticketCount } = useTicketBook({ storage });
+
   return (
     <>
       {/* Mobile Floating Action Buttons (Vertical Stack: Top Language FAB + Middle Round Search FAB + Bottom Filter Pill FAB) */}
@@ -41,27 +46,51 @@ export function MobileFloatingControls({
         </button>
       </div>
 
-      {/* Mobile Floating Action Cluster (Left-aligned: Home + Scroll to Top) */}
-      <div className="fixed bottom-5 left-4 z-30 sm:hidden flex items-center gap-2 select-none">
-        <button
-          type="button"
-          onClick={onReturnHome}
-          className="inline-flex items-center gap-1 px-3 h-10 rounded-full bg-paper/95 text-ink font-bold shadow-md border-[1.5px] border-ink text-[12px] cursor-pointer hover:bg-tape-tint active:scale-95 transition-all backdrop-blur-xs"
-          aria-label={t("mobile.backHomeAria", "回到首頁門面")}
-          title={t("mobile.backHomeTitle", "回到首頁門面")}
-        >
-          <span aria-hidden="true">🏠</span>
-          <span>{t("mobile.home", "首頁")}</span>
-        </button>
-        <button
-          type="button"
-          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-          className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-paper/95 text-ink font-bold shadow-md border border-ink text-[14px] cursor-pointer hover:bg-tape-tint active:scale-95 transition-all backdrop-blur-xs"
-          aria-label={t("mobile.backTopAria", "回到頁首")}
-          title={t("mobile.backTopTitle", "回到頁首")}
-        >
-          ↑
-        </button>
+      {/* Mobile Floating Action Cluster (Left-aligned: Ticket Book FAB vertically above Home + Scroll to Top) */}
+      <div className="fixed bottom-5 left-4 z-30 sm:hidden flex flex-col items-start gap-2.5 select-none">
+        {/* Ticket Book Floating Action Button (placed directly above Home button, round FAB matching Search FAB style) */}
+        {onSelectTickets && (
+          <button
+            type="button"
+            data-testid="mobile-ticket-book-fab"
+            onClick={onSelectTickets}
+            className="relative flex h-10 w-10 items-center justify-center rounded-full border-[1.5px] border-ink bg-paper/95 text-ink shadow-md cursor-pointer hover:bg-tape-tint active:scale-95 transition-all text-base backdrop-blur-xs"
+            aria-label={t("ticketBook.title", "我的巡演票夾")}
+            title={t("ticketBook.title", "我的巡演票夾")}
+          >
+            <span aria-hidden="true">🎟️</span>
+            {ticketCount > 0 && (
+              <span
+                data-testid="mobile-ticket-badge-count"
+                className="absolute -top-1.5 -right-1.5 inline-flex items-center justify-center rounded-full bg-tape text-ink font-mono font-bold text-[10px] min-w-[18px] h-[18px] px-1 border border-ink shadow-2xs tabular-nums"
+              >
+                {ticketCount}
+              </span>
+            )}
+          </button>
+        )}
+
+        <div className="flex items-center gap-2">
+          <button
+            type="button"
+            onClick={onReturnHome}
+            className="inline-flex items-center gap-1 px-3 h-10 rounded-full bg-paper/95 text-ink font-bold shadow-md border-[1.5px] border-ink text-[12px] cursor-pointer hover:bg-tape-tint active:scale-95 transition-all backdrop-blur-xs"
+            aria-label={t("mobile.backHomeAria", "回到首頁門面")}
+            title={t("mobile.backHomeTitle", "回到首頁門面")}
+          >
+            <span aria-hidden="true">🏠</span>
+            <span>{t("mobile.home", "首頁")}</span>
+          </button>
+          <button
+            type="button"
+            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+            className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-paper/95 text-ink font-bold shadow-md border border-ink text-[14px] cursor-pointer hover:bg-tape-tint active:scale-95 transition-all backdrop-blur-xs"
+            aria-label={t("mobile.backTopAria", "回到頁首")}
+            title={t("mobile.backTopTitle", "回到頁首")}
+          >
+            ↑
+          </button>
+        </div>
       </div>
     </>
   );

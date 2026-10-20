@@ -1,6 +1,5 @@
 import { queryTabClass } from "../../lib/constants.js";
 import { useI18n } from "../../lib/i18n.jsx";
-import { useTicketBook } from "../../lib/ticket-book.js";
 import LanguageSwitcher from "../LanguageSwitcher.jsx";
 
 export function ArchiveHeader({
@@ -12,11 +11,8 @@ export function ArchiveHeader({
   setTab,
   setQ,
   setIsFilterDrawerOpen,
-  onSelectTickets,
-  storage,
 }) {
   const { t } = useI18n();
-  const { count: ticketCount } = useTicketBook({ storage });
 
   return (
     <>
@@ -26,23 +22,6 @@ export function ArchiveHeader({
             {t("header.livePerformanceArchive")}
           </p>
           <div className="flex items-center gap-2 shrink-0">
-            <button
-              type="button"
-              data-testid="header-ticket-book-btn"
-              onClick={onSelectTickets}
-              className="inline-flex items-center gap-1.5 rounded-[4px] border border-ink/30 bg-card px-2.5 py-1 text-[11px] sm:text-[12px] font-bold text-ink shadow-2xs hover:bg-tape-tint transition-colors cursor-pointer touch-stamp"
-              title={t("ticketBook.title", "我的巡演票夾")}
-              aria-label={t("ticketBook.title", "我的巡演票夾")}
-            >
-              <span aria-hidden="true">🎟️</span>
-              <span className="hidden xs:inline">{t("nav.ticketBook", "票夾")}</span>
-              <span
-                data-testid="ticket-badge-count"
-                className="inline-flex items-center justify-center rounded-full bg-tape text-ink font-mono font-bold text-[10px] min-w-[18px] h-[18px] px-1 border border-ink/30 tabular-nums shadow-2xs"
-              >
-                {ticketCount}
-              </span>
-            </button>
             <LanguageSwitcher className="hidden sm:inline-block shrink-0" />
           </div>
         </div>

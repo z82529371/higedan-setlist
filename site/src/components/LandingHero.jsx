@@ -2,7 +2,6 @@ import { useMemo } from "react";
 import SearchBox from "./SearchBox.jsx";
 import LanguageSwitcher from "./LanguageSwitcher.jsx";
 import { useI18n } from "../lib/i18n.jsx";
-import { useTicketBook } from "../lib/ticket-book.js";
 
 export default function LandingHero({
   onEnterArchive,
@@ -19,10 +18,8 @@ export default function LandingHero({
   allUnits,
   q,
   setQ,
-  storage,
 }) {
   const { t } = useI18n();
-  const { count: ticketCount } = useTicketBook({ storage });
 
   // Find indicators for hot prompts
   const rejoiceUnit = useMemo(() => {
@@ -59,25 +56,8 @@ export default function LandingHero({
 
   return (
     <div className="mx-auto max-w-[960px] px-4 sm:px-6 py-6 sm:py-12 flex flex-col items-center text-center animate-fade-in relative">
-      {/* Top Utility Bar (Ticket Book & Language Switcher) */}
+      {/* Top Utility Bar (Language Switcher) */}
       <div className="w-full flex justify-end items-center gap-2 mb-3 sm:mb-5">
-        <button
-          type="button"
-          data-testid="landing-ticket-book-btn"
-          onClick={onSelectTickets}
-          className="inline-flex items-center gap-1.5 rounded-[4px] border border-ink/30 bg-card px-2.5 py-1 text-[11px] sm:text-[12px] font-bold text-ink shadow-2xs hover:bg-tape-tint transition-colors cursor-pointer touch-stamp"
-          title={t("ticketBook.title", "我的巡演票夾")}
-          aria-label={t("ticketBook.title", "我的巡演票夾")}
-        >
-          <span aria-hidden="true">🛂</span>
-          <span className="hidden xs:inline">{t("nav.ticketBook", "票夾")}</span>
-          <span
-            data-testid="landing-ticket-badge-count"
-            className="inline-flex items-center justify-center rounded-full bg-tape text-ink font-mono font-bold text-[10px] min-w-[18px] h-[18px] px-1 border border-ink/30 tabular-nums shadow-2xs"
-          >
-            {ticketCount}
-          </span>
-        </button>
         <LanguageSwitcher />
       </div>
 
@@ -215,10 +195,10 @@ export default function LandingHero({
         </div>
       </section>
 
-      {/* 3 Feature Spotlight Cards */}
+      {/* 4 Feature Spotlight Cards */}
       <section
-        className="grid grid-cols-1 md:grid-cols-3 gap-3.5 sm:gap-5 mt-10 sm:mt-12 w-full text-left"
-        aria-label={t("landing.features.sectionAria", "三大核心特色")}
+        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-4 mt-10 sm:mt-12 w-full text-left"
+        aria-label={t("landing.features.sectionAria", "四大核心特色")}
       >
         {/* Card 1: Bi-directional Archive */}
         <button
@@ -280,7 +260,43 @@ export default function LandingHero({
           </div>
         </button>
 
-        {/* Card 3: Complete Chronology & Provenance */}
+        {/* Card 3: Personal Concert Ticket Book */}
+        <button
+          type="button"
+          data-testid="landing-feature-ticket-book"
+          onClick={() => {
+            if (onSelectTickets) onSelectTickets();
+          }}
+          className="group flex flex-col justify-between rounded-xl border-[1.5px] border-ink/25 bg-card p-5 text-left transition-all motion-reduce:transition-none hover:border-ink hover:shadow-md cursor-pointer focus-visible:ring-2 focus-visible:ring-band focus-visible:outline-none"
+        >
+          <div>
+            <div className="flex items-center justify-between mb-3">
+              <span className="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-paper border border-ink/20 text-base shadow-2xs">
+                🗂️
+              </span>
+              <span className="font-mono text-[11px] font-bold text-muted uppercase tracking-wider group-hover:text-band-ink">
+                TICKET BOOK
+              </span>
+            </div>
+            <h3 className="m-0 font-display text-[16px] sm:text-[17px] font-bold text-ink">
+              {t("landing.features.ticketBookTitle", "個人巡演票夾")}
+            </h3>
+            <p className="mt-2 mb-0 text-[13px] text-muted leading-relaxed">
+              {t(
+                "landing.features.ticketBookDesc",
+                "打卡記錄每場參戰軌跡，自動統計總場次、現場神曲 Top 3 與足跡城市，並可客製化匯出高清紀念票卡。"
+              )}
+            </p>
+          </div>
+          <div className="mt-4 pt-3 border-t border-line-soft flex items-center justify-between text-[12px] font-bold text-ink group-hover:text-band-ink">
+            <span>{t("landing.features.ticketBookAction", "開啟我的巡演票夾")}</span>
+            <span className="transition-transform group-hover:translate-x-1" aria-hidden="true">
+              →
+            </span>
+          </div>
+        </button>
+
+        {/* Card 4: Complete Chronology & Provenance */}
         <button
           type="button"
           onClick={() => onSelectTab("venue")}

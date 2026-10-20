@@ -1,5 +1,6 @@
 import { trackKey } from "../../lib/track.js";
 import { useI18n } from "../../lib/i18n.jsx";
+import { useTicketBook } from "../../lib/ticket-book.js";
 
 export function ArchiveStatusBar({
   tab,
@@ -12,8 +13,10 @@ export function ArchiveStatusBar({
   slipRef,
   handleReturnHome,
   handleSelectTickets,
+  storage,
 }) {
   const { t } = useI18n();
+  const { count: ticketCount } = useTicketBook({ storage });
   return (
     <div
       className="sticky top-0 z-40 w-full bg-band border-b border-ink/20 shadow-xs select-none"
@@ -95,16 +98,25 @@ export function ArchiveStatusBar({
           {handleSelectTickets && (
             <button
               type="button"
+              data-testid="status-bar-ticket-book-btn"
               onClick={(e) => {
                 e.stopPropagation();
                 handleSelectTickets();
               }}
-              className="hidden sm:inline-flex items-center gap-1 px-2 py-0.5 rounded-[4px] bg-band-ink/10 hover:bg-band-ink/20 active:scale-95 text-band-ink font-bold border border-band-ink/30 transition-all cursor-pointer text-[10px] sm:text-[11px] shrink-0 shadow-2xs"
+              className="hidden sm:inline-flex items-center gap-1.5 px-2 py-0.5 rounded-[4px] bg-band-ink/10 hover:bg-band-ink/20 active:scale-95 text-band-ink font-bold border border-band-ink/30 transition-all cursor-pointer text-[10px] sm:text-[11px] shrink-0 shadow-2xs"
               title={t("ticketBook.title", "我的巡演票夾")}
               aria-label={t("ticketBook.title", "我的巡演票夾")}
             >
               <span aria-hidden="true">🎟️</span>
               <span>{t("nav.ticketBook", "票夾")}</span>
+              {ticketCount > 0 && (
+                <span
+                  data-testid="status-bar-ticket-badge-count"
+                  className="inline-flex items-center justify-center rounded-full bg-band-ink text-band font-mono font-bold text-[9px] min-w-[15px] h-[15px] px-1 border border-band-ink/30 tabular-nums shadow-2xs"
+                >
+                  {ticketCount}
+                </span>
+              )}
             </button>
           )}
 

@@ -108,9 +108,9 @@ export function TicketBookPage({
   };
 
   return (
-    <div className="mx-auto max-w-[960px] px-4 sm:px-6 py-4 sm:py-8">
-      {/* Top Navigation & Language Utility Bar */}
-      <div className="mb-4 sm:mb-6 flex items-center justify-between gap-3">
+    <div className="mx-auto max-w-[960px] px-4 sm:px-6 pt-4 pb-24 sm:py-8">
+      {/* Top Navigation & Language Utility Bar (Desktop only, mobile uses floating docks) */}
+      <div className="mb-4 sm:mb-6 hidden sm:flex items-center justify-between gap-3">
         <div className="flex items-center gap-2">
           {onReturnArchive && (
             <button
@@ -145,7 +145,7 @@ export function TicketBookPage({
         {/* Ticket Book Header Title Block */}
         <header className="flex flex-col items-center text-center pb-4">
           <div className="mb-2.5 inline-flex items-center justify-center w-12 h-12 rounded-[4px] bg-band border-[1.5px] border-ink shadow-2xs">
-            <span className="text-2xl" aria-hidden="true">🛂</span>
+            <span className="text-2xl" aria-hidden="true">🎟️</span>
           </div>
 
           <p className="m-0 font-mono text-[11px] sm:text-[12px] tracking-[0.2em] text-muted font-bold uppercase">
@@ -153,7 +153,7 @@ export function TicketBookPage({
           </p>
 
           <h1 className="m-0 mt-1.5 font-display text-[clamp(20px,4.5vw,36px)] font-black leading-tight tracking-tight text-ink">
-            Official髭男dism <span className="font-bold text-band-ink">{t("ticketBook.title", "我的巡演護照")}</span>
+            Official髭男dism <span className="font-bold text-band-ink">{t("ticketBook.title", "我的巡演票夾")}</span>
           </h1>
 
           <p className="mt-2 mb-0 text-[12px] sm:text-[14px] text-muted max-w-[560px] leading-relaxed">
@@ -196,7 +196,7 @@ export function TicketBookPage({
               {t("ticketBook.emptyTitle", "尚未登錄任何參戰紀錄")}
             </h2>
             <p className="mt-2.5 mb-5 text-[13px] sm:text-[14px] text-muted max-w-[480px] leading-relaxed">
-              {t("ticketBook.emptyDesc", "在任何場次的演出票根（ShowSlip）點擊「我參加過」，即可將現場回憶登錄至巡演護照中！")}
+              {t("ticketBook.emptyDesc", "在任何場次的演出票根（ShowSlip）點擊「我參加過」，即可將現場回憶登錄至巡演票夾中！")}
             </p>
             {(onReturnArchive || onReturnHome) && (
               <button
@@ -401,7 +401,7 @@ export function TicketBookPage({
         {/* Vintage Barcode Footer */}
         <TicketBarcodeFooter
           serial="TICKET BOOK // ATTENDANCE ARCHIVE"
-          label={t("ticketBook.title", "我的巡演護照")}
+          label={t("ticketBook.title", "我的巡演票夾")}
         />
       </article>
 
@@ -411,6 +411,53 @@ export function TicketBookPage({
         onClose={() => setIsSummaryModalOpen(false)}
         milestones={milestones}
       />
+
+      {/* Mobile Floating Action Controls (sm:hidden) */}
+      <div className="fixed bottom-5 right-4 z-40 sm:hidden flex flex-col items-end gap-2.5 select-none">
+        <LanguageSwitcher fab menuPosition="up" />
+      </div>
+
+      <div className="fixed bottom-5 left-4 z-30 sm:hidden flex flex-col items-start gap-2.5 select-none">
+        {onReturnArchive && (
+          <button
+            type="button"
+            data-testid="mobile-ticket-back-archive-fab"
+            onClick={onReturnArchive}
+            className="inline-flex items-center gap-1.5 px-3 h-10 rounded-full bg-paper/95 text-ink font-bold shadow-md border-[1.5px] border-ink text-[12px] cursor-pointer hover:bg-tape-tint active:scale-95 transition-all backdrop-blur-xs"
+            title={t("ticketBook.backToArchive", "返回檔案庫")}
+            aria-label={t("ticketBook.backToArchive", "返回檔案庫")}
+          >
+            <span aria-hidden="true">←</span>
+            <span>{t("ticketBook.backToArchive", "返回檔案庫")}</span>
+          </button>
+        )}
+
+        <div className="flex items-center gap-2">
+          {onReturnHome && (
+            <button
+              type="button"
+              data-testid="mobile-ticket-back-home-fab"
+              onClick={onReturnHome}
+              className="inline-flex items-center gap-1 px-3 h-10 rounded-full bg-paper/95 text-ink font-bold shadow-md border-[1.5px] border-ink text-[12px] cursor-pointer hover:bg-tape-tint active:scale-95 transition-all backdrop-blur-xs"
+              aria-label={t("mobile.backHomeAria", "回到首頁門面")}
+              title={t("mobile.backHomeTitle", "回到首頁門面")}
+            >
+              <span aria-hidden="true">🏠</span>
+              <span>{t("mobile.home", "首頁")}</span>
+            </button>
+          )}
+          <button
+            type="button"
+            data-testid="mobile-ticket-back-top-fab"
+            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+            className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-paper/95 text-ink font-bold shadow-md border border-ink text-[14px] cursor-pointer hover:bg-tape-tint active:scale-95 transition-all backdrop-blur-xs"
+            aria-label={t("mobile.backTopAria", "回到頁首")}
+            title={t("mobile.backTopTitle", "回到頁首")}
+          >
+            ↑
+          </button>
+        </div>
+      </div>
     </div>
   );
 }

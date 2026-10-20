@@ -131,6 +131,9 @@ describe("13. i18n Foundation, Hash Route Query Parameter Seam, and Header Switc
         assert.ok(dict.landing.features?.ticketStubTitle, `landing.features.ticketStubTitle must exist in ${loc}`);
         assert.ok(dict.landing.features?.ticketStubDesc, `landing.features.ticketStubDesc must exist in ${loc}`);
         assert.ok(dict.landing.features?.ticketStubAction, `landing.features.ticketStubAction must exist in ${loc}`);
+        assert.ok(dict.landing.features?.ticketBookTitle, `landing.features.ticketBookTitle must exist in ${loc}`);
+        assert.ok(dict.landing.features?.ticketBookDesc, `landing.features.ticketBookDesc must exist in ${loc}`);
+        assert.ok(dict.landing.features?.ticketBookAction, `landing.features.ticketBookAction must exist in ${loc}`);
         assert.ok(dict.landing.features?.provenanceTitle, `landing.features.provenanceTitle must exist in ${loc}`);
         assert.ok(dict.landing.features?.provenanceDesc, `landing.features.provenanceDesc must exist in ${loc}`);
         assert.ok(dict.landing.features?.provenanceAction, `landing.features.provenanceAction must exist in ${loc}`);
