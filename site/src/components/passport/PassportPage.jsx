@@ -4,6 +4,9 @@ import { usePassport } from "../../lib/passport.js";
 import { showDate, formatShowTime, formatShowVenueCity, shortUnitTitle } from "../../lib/domain.js";
 import { routeHash } from "../../lib/routes.js";
 import { TicketPerforationDivider, TicketBarcodeFooter } from "../slips/TicketCommon.jsx";
+import { computePassportMilestones } from "../../lib/passport-milestones.js";
+import { PassportMilestoneDashboard } from "./PassportMilestoneDashboard.jsx";
+import { MilestoneCardModal } from "./MilestoneCardModal.jsx";
 import LanguageSwitcher from "../LanguageSwitcher.jsx";
 import { SLIP_ARTICLE, SLIP_TAPE } from "../../lib/constants.js";
 
@@ -11,6 +14,7 @@ export function PassportPage({
   unitData,
   showById,
   unitIdByShowId,
+  allUsedSongs,
   storage,
   onSelectShow,
   onReturnArchive,
@@ -23,6 +27,17 @@ export function PassportPage({
 
   const [selectedYear, setSelectedYear] = useState(initialYear);
   const [searchKeyword, setSearchKeyword] = useState(initialKeyword);
+  const [isSummaryModalOpen, setIsSummaryModalOpen] = useState(false);
+
+  const milestones = useMemo(() => {
+    return computePassportMilestones({
+      attendedShows,
+      unitData,
+      showById,
+      unitIdByShowId,
+      allUsedSongs,
+    });
+  }, [attendedShows, unitData, showById, unitIdByShowId, allUsedSongs]);
 
   // Correlate attended shows with static catalog data (show.date takes precedence over attendedAt)
   const enrichedShows = useMemo(() => {
@@ -160,11 +175,19 @@ export function PassportPage({
         {/* Perforation Divider */}
         <TicketPerforationDivider />
 
+        {/* Dynamic Career Milestones Dashboard (Issue #37) */}
+        <div className="mt-4 sm:mt-6">
+          <PassportMilestoneDashboard
+            milestones={milestones}
+            onOpenSummaryCard={() => setIsSummaryModalOpen(true)}
+          />
+        </div>
+
         {/* Case 1: Empty State (0 shows attended) */}
         {attendedShows.length === 0 ? (
           <div
             data-testid="passport-empty-state"
-            className="my-8 sm:my-12 flex flex-col items-center text-center p-6 sm:p-10 rounded-[6px] border-[1.5px] border-dashed border-ink/30 bg-paper/60"
+            className="my-6 sm:my-8 flex flex-col items-center text-center p-6 sm:p-10 rounded-[6px] border-[1.5px] border-dashed border-ink/30 bg-paper/60"
           >
             <div className="w-14 h-14 rounded-full bg-tape/40 border border-ink/20 flex items-center justify-center text-3xl mb-3 shadow-2xs">
               <span aria-hidden="true">🎟️</span>
@@ -189,7 +212,7 @@ export function PassportPage({
           </div>
         ) : (
           /* Case 2: Filter Toolbar & Attended Shows Timeline */
-          <div className="mt-4 sm:mt-6 space-y-5">
+          <div className="space-y-5">
             {/* Filter & Live Search Toolbar */}
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2.5 bg-paper/60 p-2.5 sm:p-3 rounded-[6px] border border-line-soft">
               {/* Year Selector */}
@@ -381,6 +404,13 @@ export function PassportPage({
           label={t("passport.title", "我的巡演護照")}
         />
       </article>
+
+      {/* Career Milestones Summary Card Modal (Issue #37) */}
+      <MilestoneCardModal
+        isOpen={isSummaryModalOpen}
+        onClose={() => setIsSummaryModalOpen(false)}
+        milestones={milestones}
+      />
     </div>
   );
 }

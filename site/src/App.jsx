@@ -106,6 +106,7 @@ export function AppContent({ probeRoute } = {}) {
           unitData={unitData}
           showById={showById}
           unitIdByShowId={unitIdByShowId}
+          allUsedSongs={allUsedSongs}
           onSelectShow={handleSelectShow}
           onReturnArchive={handleReturnArchive}
           onReturnHome={handleReturnHome}
