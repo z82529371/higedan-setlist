@@ -4,10 +4,10 @@
 
 ---
 
-## 決策總覽清單（共 96 篇）
+## 決策總覽清單（共 97 篇）
 
 > [!NOTE]
-> **編號跳號說明**：本目錄編號自 ADR-0001 起至 ADR-0101 止。其中 ADR-0063、ADR-0064、ADR-0065、ADR-0068、ADR-0069 共 5 篇為早期介面排版草案，後續已被 ADR-0070 單欄聚焦架構完整吸收與替代，故無獨立保留歷史檔案；實體決策文件共計 96 篇。
+> **編號跳號說明**：本目錄編號自 ADR-0001 起至 ADR-0113 止。其中 ADR-0063、ADR-0064、ADR-0065、ADR-0068、ADR-0069 共 5 篇為早期介面排版草案，後續已被 ADR-0070 單欄聚焦架構完整吸收與替代，故無獨立保留歷史檔案；實體決策文件共計 97 篇。
 
 | 決策標題 | 狀態 | 日期 |
 | :--- | :---: | :---: |
@@ -118,4 +118,5 @@
 | [ADR-0110: 官方場館正名在地化與多語雙向呈現架構 (Official Venue Localization & Cross-Lingual Presentation)](0110-official-venue-localization-and-cross-lingual-presentation.md) | 已採納 (Accepted) | 確立場館官方正名在地化、日本新字體歸位、安全回退原生名、URL 路由解耦與全域搜尋跨語雙向檢索 |
 | [ADR-0111: 場館實體主檔、原生名回退鏈與跨語系路由寬容解析架構 (Venue Master Profiles, Native Fallback Chain & Deep Link Resolution)](0111-venue-master-profiles-native-fallback-and-deep-link-resolution.md) | 已採納 (Accepted) | 建立專屬場館領域主檔 venue-profiles.json、一手在地原生名回退鏈與 URL 路由跨語系寬容解析 |
 | [ADR-0112: 多語言字體架構、語言專屬字體棧與 CJK 異體字隔離 (Multi-Lingual Typography and Locale-Isolated Font Stacks)](0112-multi-lingual-typography-and-locale-isolated-font-stacks.md) | 已採納 (Accepted) | 建立動態 html lang 同步、CSS :lang() 四語專屬字體棧、擴充 Noto Sans KR 與 Plus Jakarta Sans，杜絕 CJK 異體字污染 |
+| [ADR-0113: 個人巡演護照、打卡持久化、動態生涯指標與自製小卡領域架構 (Personal Concert Passport, Attendance Persistence, Dynamic Milestones & Commemorative Card Architecture)](0113-personal-concert-passport-and-commemorative-card-architecture.md) | 已採納 (Accepted) | 建立純前端 LocalStorage 持久化、專屬 #/passport 路由、動態生涯里程碑計算與雙模態小卡透明 PNG 匯出管線 |
 
