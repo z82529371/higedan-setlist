@@ -68,6 +68,9 @@ export function MilestoneCardModal({ isOpen, onClose, milestones, storage: propS
     commitHolder(inputHolderName);
   };
 
+  const isDark = typeof document !== "undefined" && document.documentElement?.getAttribute("data-theme") === "dark";
+  const cardBgColor = isDark ? "#111319" : "#f8f7f4";
+
   // Auto-generate PNG preview when modal opens or holder changes for instant right-click/long-press save
   useEffect(() => {
     if (!isOpen || !milestones || imageUrl) return;
@@ -81,6 +84,7 @@ export function MilestoneCardModal({ isOpen, onClose, milestones, storage: propS
           pixelRatio: 2,
           borderRadius: "8px",
           topPadding: 16,
+          cardBackground: cardBgColor,
         });
         if (isMounted && url) {
           setImageUrl(url);
@@ -95,7 +99,7 @@ export function MilestoneCardModal({ isOpen, onClose, milestones, storage: propS
       isMounted = false;
       clearTimeout(timer);
     };
-  }, [isOpen, milestones, locale, imageUrl, appliedHolderName]);
+  }, [isOpen, milestones, locale, imageUrl, appliedHolderName, cardBgColor]);
 
   if (!isOpen || !milestones) return null;
 
@@ -161,7 +165,7 @@ export function MilestoneCardModal({ isOpen, onClose, milestones, storage: propS
             ref={cardRef}
             data-testid="milestone-summary-card"
             className="relative w-[540px] max-w-full rounded-[8px] border-[2px] border-ink bg-card p-5 sm:p-6 shadow-[4px_4px_0_rgba(0,0,0,0.2)] text-ink select-none"
-            style={{ width: "540px" }}
+            style={{ width: "540px", backgroundColor: cardBgColor }}
           >
           {/* Top Washi Tape Pin */}
           <div className={SLIP_TAPE} aria-hidden="true" />

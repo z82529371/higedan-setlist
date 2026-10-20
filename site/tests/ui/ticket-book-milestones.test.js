@@ -519,6 +519,10 @@ describe("25. TicketBook Dynamic Milestones Calculation & Summary Card (#37)", (
       assert.ok(html.includes('data-testid="milestone-card-modal"'), "Must render modal container");
       assert.ok(html.includes('data-testid="milestone-summary-card"'), "Must render summary card node");
       assert.ok(html.includes("540px"), "Summary card must specify 540px standard width (ADR-0100)");
+      assert.ok(
+        html.includes("#f8f7f4") || html.includes("rgb(248, 247, 244)"),
+        "Milestone card must have solid cardstock background #f8f7f4 to prevent transparent export"
+      );
 
       // Verify holder input in drawer and badge on card
       assert.ok(html.includes('data-testid="milestone-holder-input"'), "Must render milestone holder input");
