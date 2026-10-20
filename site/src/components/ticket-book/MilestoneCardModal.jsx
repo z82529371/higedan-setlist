@@ -71,7 +71,12 @@ export function MilestoneCardModal({ isOpen, onClose, milestones, storage: propS
   const isDark = typeof document !== "undefined" && document.documentElement?.getAttribute("data-theme") === "dark";
   const cardBgColor = isDark ? "#111319" : "#f8f7f4";
 
-  // Auto-generate PNG preview when modal opens or holder changes for instant right-click/long-press save
+  // Invalidate cached PNG whenever modal opens or customization changes
+  useEffect(() => {
+    setImageUrl("");
+  }, [isOpen, appliedHolderName, cardBgColor, locale]);
+
+  // Auto-generate PNG preview when modal is open and image is not ready
   useEffect(() => {
     if (!isOpen || !milestones || imageUrl) return;
     let isMounted = true;
@@ -160,7 +165,7 @@ export function MilestoneCardModal({ isOpen, onClose, milestones, storage: propS
         </div>
 
         {/* 540px Ticket Card Export Node (ADR-0100 & DESIGN.md: radius <= 8px, AAA contrast) */}
-        <div className="relative shrink-0 w-[540px] max-w-full">
+        <div className="relative shrink-0 w-[540px] max-w-full pt-4">
           <div
             ref={cardRef}
             data-testid="milestone-summary-card"
@@ -375,8 +380,19 @@ export function MilestoneCardModal({ isOpen, onClose, milestones, storage: propS
         )}
       </div>
 
-      {/* Save Hint Notice */}
-      <div className="w-full mt-4 flex items-center justify-center">
+      {/* Save Hint Notice and One-Click Download */}
+      <div className="w-full mt-4 flex flex-col sm:flex-row items-center justify-center gap-2.5">
+        {imageUrl && (
+          <a
+            href={imageUrl}
+            download="higedan-milestone-summary.png"
+            data-testid="milestone-download-btn"
+            className="flex items-center gap-1.5 px-4 py-1.5 rounded-lg font-mono text-xs font-bold bg-band text-band-ink shadow hover:opacity-90 active:scale-95 transition-all cursor-pointer"
+          >
+            <span aria-hidden="true">⬇️</span>
+            <span>{t("memorial.downloadPng", "下載透明圓角 PNG")}</span>
+          </a>
+        )}
         <div className="flex items-center gap-2 text-xs text-card bg-ink/75 border border-card/30 px-3 py-1.5 rounded-lg font-mono">
           <span aria-hidden="true">{isExporting ? "⏳" : "💡"}</span>
           <span className="font-bold">

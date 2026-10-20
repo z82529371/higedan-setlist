@@ -46,7 +46,7 @@ export async function exportElementToPng(sourceNode, options = {}) {
     }
   });
 
-  // 3. 建立完全隔離的離屏宿主容器
+  // 3. 建立完全隔離的離屏宿主容器（置於螢幕極遠處以隱藏，不可設 opacity: 0 以免外洩至渲染樹）
   const host = document.createElement("div");
   host.style.position = "fixed";
   host.style.left = "-99999px";
@@ -55,11 +55,8 @@ export async function exportElementToPng(sourceNode, options = {}) {
   host.style.minWidth = `${width}px`;
   host.style.maxWidth = `${width}px`;
   host.style.margin = "0";
-  host.style.padding = topPadding > 0 ? `${topPadding}px 0 0 0` : "0";
   host.style.zIndex = "-9999";
-  host.style.opacity = "0";
   host.style.pointerEvents = "none";
-  host.style.backgroundColor = "transparent";
   host.style.boxSizing = "border-box";
 
   // 4. 標準化克隆節點樣式（鎖定寬度、消除生硬截斷的外陰影、強制圓角與內部裁切）
@@ -72,27 +69,46 @@ export async function exportElementToPng(sourceNode, options = {}) {
   clone.style.boxSizing = "border-box";
   if (borderRadius) {
     clone.style.borderRadius = borderRadius;
-    clone.style.overflow = "hidden";
+    // 當有 topPadding 時（如上方突出之和紙膠帶），不可在卡片本體加 overflow: hidden，避免上方膠帶被硬切
+    if (!topPadding) {
+      clone.style.overflow = "hidden";
+    }
   }
   if (cardBackground) {
     clone.style.backgroundColor = cardBackground;
   }
 
-  host.appendChild(clone);
+  // 5. 若有 topPadding，建立乾淨的相對定位包裝層（供保留上方裝飾留白），絕不直接快照帶有 -99999px 的離屏宿主
+  let targetElement;
+  if (topPadding > 0) {
+    const wrapper = document.createElement("div");
+    wrapper.style.position = "relative";
+    wrapper.style.left = "0";
+    wrapper.style.top = "0";
+    wrapper.style.width = `${width}px`;
+    wrapper.style.minWidth = `${width}px`;
+    wrapper.style.maxWidth = `${width}px`;
+    wrapper.style.margin = "0";
+    wrapper.style.padding = `${topPadding}px 0 0 0`;
+    wrapper.style.boxSizing = "border-box";
+    wrapper.style.backgroundColor = "transparent";
+    wrapper.appendChild(clone);
+    host.appendChild(wrapper);
+    targetElement = wrapper;
+  } else {
+    host.appendChild(clone);
+    targetElement = clone;
+  }
+
   document.body.appendChild(host);
 
   try {
-    // 5. 等待瀏覽器完成離屏排版計算
+    // 6. 等待瀏覽器完成離屏排版計算
     await new Promise((resolve) => requestAnimationFrame(resolve));
 
-    const targetElement = topPadding > 0 ? host : clone;
-    const computedHeight = Math.ceil(
-      topPadding > 0
-        ? host.getBoundingClientRect().height
-        : clone.getBoundingClientRect().height
-    );
+    const computedHeight = Math.ceil(targetElement.getBoundingClientRect().height);
 
-    // 6. 呼叫 toPng，絕不填入不透明 backgroundColor，完整保留透明圓角
+    // 7. 呼叫 toPng，強制重設位置與可視度，絕不填入不透明 backgroundColor，完整保留透明圓角
     const dataUrl = await toPng(targetElement, {
       pixelRatio,
       skipFonts: true,
@@ -103,6 +119,10 @@ export async function exportElementToPng(sourceNode, options = {}) {
       canvasWidth: width * pixelRatio,
       canvasHeight: computedHeight * pixelRatio,
       style: {
+        position: "relative",
+        left: "0",
+        top: "0",
+        opacity: "1",
         transform: "none",
         margin: "0",
         boxShadow: "none",
