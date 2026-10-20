@@ -6,6 +6,7 @@
     "sync": "node scripts/sync-data.mjs",
     "lint": "oxlint src -c .oxlintrc.json",
     "check:i18n": "node scripts/check-i18n.mjs --self-test && node scripts/check-i18n.mjs",
+    "check-i18n": "pnpm check:i18n",
     "test": "pnpm sync && node scripts/check-i18n.mjs && node scripts/smoke-test.mjs",
     "test:pipeline": "node --test \"tests/pipeline/**/*.test.js\"",
     "test:invariants": "node --test \"tests/invariants/**/*.test.js\"",

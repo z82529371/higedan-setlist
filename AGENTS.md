@@ -8,7 +8,7 @@ Repository conventions and navigation pointers for AI agents working in this cod
 - **Product Architecture**: Consult [`PRODUCT.md`](./PRODUCT.md) for spotlight landing mode, archive dual-mode toggle, and search ergonomics.
 - **Visual Design**: Consult [`DESIGN.md`](./DESIGN.md) for ticket aesthetic tokens, perforation dividers, barcode footers, and contrast rules (small badge text <14px must strictly use high-contrast ink tokens with >= 7:1 AAA contrast; arbitrary unvetted hex colors like text-[#...] are prohibited).
 - **URL Routing & Deep Links**: Consult [`site/src/lib/routes.js`](./site/src/lib/routes.js) and [`ADR-0101`](./docs/adr/0101-url-hash-deep-linking-and-route-state-machine.md) for bidirectional hash schemes (`#/song`, `#/show`, `#/venue`, `#/tour`).
-- **Architectural Decision Records**: Consult [`docs/adr/`](./docs/adr/) for all historical architectural records (0001–0112).
+- **Architectural Decision Records**: Consult [`docs/adr/`](./docs/adr/) for all historical architectural records (0001–0113).
 - **Typography & Multi-Lingual Font Architecture**: Consult [`DESIGN.md`](./DESIGN.md#typography), [`ADR-0112`](./docs/adr/0112-multi-lingual-typography-and-locale-isolated-font-stacks.md), and [`site/src/style.css`](./site/src/style.css) for `:lang()` font stacks (`ja`, `zh-TW`, `ko`, `en`), Google Fonts CDN specifications, dynamic `<html lang="...">` sync, and The Cue Monospace Rule.
 - **Test Harness & Modular Suites**: Consult [`site/tests/`](./site/tests/) and [`ADR-0109`](./docs/adr/0109-modular-test-architecture-and-headless-ssr-singleton.md) for 3-tier modular test suites (`pipeline/`, `invariants/`, `ui/`) and headless Vite SSR singleton harness (`site/tests/helpers/vite-server.js`).
 - **CI/CD & Deployment Target**: Consult [`.github/workflows/ci.yml`](./.github/workflows/ci.yml) and [`.nvmrc`](./.nvmrc) for runtime version alignment (Cloudflare Pages builds depend on `.nvmrc` and `engines.node >= 22.13.0` for pnpm 11 compatibility).
@@ -31,12 +31,15 @@ Multiple autonomous agents frequently operate concurrently in this repository:
 9. **Solo Developer Workflow**: This is a solo developer repository. Commit or merge integration branches directly into `master` and push to origin; never open GitHub Pull Requests or Draft PRs unless explicitly instructed by the user.
 10. **Synchronous Tool Timeout & Anti-Polling Discipline**: For all terminal commands expected to finish quickly (including git operations `git commit`, `git push`, `git add`, `pnpm check`, `pnpm test`, `pnpm build`, `pnpm test:ui`), always set `WaitMsBeforeAsync` to `10000ms` (maximum) to complete synchronously and minimize background task roundtrips. When any command does enter the background, strictly adhere to reactive wakeup: NEVER poll or loop on `manage_task status`; stop calling tools immediately and await the system notification.
 11. **Tool Schema & Environment Parameter Discipline**: Adhere strictly to the declared schema of the current environment. For `run_command`, only supply `CommandLine`, `IsDaemon`, `WaitMsBeforeAsync`, and `toolSummary`; never inject unsupported foreign parameters like `Cwd` or `toolAction`. Use native tools (`read_file`, `write_file`, `edit_file`) rather than foreign agent tool names.
+12. **Consumer-Friendly Terminology & Product Reality Check**: When designing or implementing user-facing features, never expose engineer-facing jargon (e.g. `JSON`, `Schema`, `Payload`, `Database`, `Envelope`) in UI copy or action labels. For issues introducing heavy developer mechanics into consumer flows, always verify user-facing terminology and product necessity first with the human, prioritizing simple, warm, non-intimidating fan experiences (e.g. 「備份紀錄」/「轉移紀錄」 instead of 「JSON 備份還原」).
+13. **Line Ending & File Edit Hygiene**: In `edit_file`, prefer single-line exact anchors to avoid Windows CRLF mismatch failures, and ensure text files adhere to `.gitattributes` (`* text=auto eol=lf`).
 
 ## Verification Commands
 
 ### Inner Loop (Sub-Second Rapid Iteration)
 - `pnpm sync`: Compiles and syncs `data/*.json` and `data/{tours,events}` into `site/src/data/` and updates audit reports. Run whenever data files are updated.
 - `pnpm lint`: Runs `oxlint` static linting in ~20ms (`oxlint src -c .oxlintrc.json`). Run immediately after editing any component to catch undeclared variables (`no-undef`) or unused variables (`no-unused-vars`) before heavier SSR test execution.
+- `pnpm check:i18n`: Runs bare-CJK regression guard and self-tests across UI components (`site/scripts/check-i18n.mjs`).
 - `pnpm test:pipeline`: Runs pure data pipeline & consensus algorithm tests in <50ms (`site/tests/pipeline/`).
 - `pnpm test:invariants`: Runs repository structure, design tokens, cross-platform quoting, and AST invariant tests in ~120ms (`site/tests/invariants/`).
 
