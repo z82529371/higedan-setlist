@@ -305,7 +305,7 @@ export function TicketBookPage({
                       data-testid={`timeline-item-${showKey}`}
                       className="group relative rounded-[4px] border-[1.5px] border-ink bg-card p-3.5 sm:p-4 shadow-[2.5px_2.5px_0_rgba(0,0,0,0.08)] hover:shadow-[3px_3px_0_rgba(0,0,0,0.15)] transition-shadow"
                     >
-                      <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2 border-b border-line-soft pb-2.5">
+                      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-line-soft pb-2.5">
                         {/* Date & Tour Type Header */}
                         <div className="flex flex-wrap items-center gap-2">
                           <span className="font-mono text-[12px] sm:text-[13px] font-black text-ink tracking-tight tabular-nums bg-paper px-2 py-0.5 rounded border border-ink/20">
@@ -323,23 +323,39 @@ export function TicketBookPage({
                           )}
                         </div>
 
-                        {/* Quick Jump Action (Mobile/Desktop) */}
-                        <a
-                          href={routeHash.show(showKey, { lang: locale })}
-                          data-testid={`view-ticket-btn-${showKey}`}
-                          onClick={(e) => {
-                            if (onSelectShow) {
-                              e.preventDefault();
-                              onSelectShow(showKey);
-                            }
-                          }}
-                          className="inline-flex items-center gap-1 font-mono text-[11px] font-bold text-ink hover:text-band-ink underline underline-offset-2 cursor-pointer self-start sm:self-auto touch-stamp"
-                          title={t("ticketBook.viewShowSlip", "查看票根")}
-                        >
-                          <span aria-hidden="true">🎫</span>
-                          <span>{t("ticketBook.viewShowSlip", "查看票根")}</span>
-                          <span aria-hidden="true">→</span>
-                        </a>
+                        {/* Card Top Actions: View Slip & Remove Check-in */}
+                        <div className="flex items-center gap-2 shrink-0 self-start sm:self-auto">
+                          <a
+                            href={routeHash.show(showKey, { lang: locale })}
+                            data-testid={`view-ticket-btn-${showKey}`}
+                            onClick={(e) => {
+                              if (onSelectShow) {
+                                e.preventDefault();
+                                onSelectShow(showKey);
+                              }
+                            }}
+                            className="inline-flex items-center gap-1 font-mono text-[11px] font-bold text-ink hover:text-band-ink underline underline-offset-2 cursor-pointer touch-stamp"
+                            title={t("ticketBook.viewShowSlip", "查看票根")}
+                          >
+                            <span aria-hidden="true">🎫</span>
+                            <span>{t("ticketBook.viewShowSlip", "查看票根")}</span>
+                            <span aria-hidden="true">→</span>
+                          </a>
+
+                          <span className="text-line-soft select-none" aria-hidden="true">|</span>
+
+                          <button
+                            type="button"
+                            data-testid={`remove-btn-${showKey}`}
+                            onClick={() => remove(showKey)}
+                            className="inline-flex items-center gap-1 rounded bg-paper/60 hover:bg-request/10 px-2 py-0.5 font-mono text-[10px] sm:text-[11px] font-bold text-muted hover:text-request border border-line-soft hover:border-request/30 transition-colors cursor-pointer"
+                            title={t("ticketBook.removeAttended", "移出票夾")}
+                            aria-label={t("ticketBook.removeAttended", "移出票夾")}
+                          >
+                            <span aria-hidden="true">🗑️</span>
+                            <span>{t("ticketBook.removeAttended", "移出票夾")}</span>
+                          </button>
+                        </div>
                       </div>
 
                       {/* Tour & Show Title */}
@@ -374,21 +390,6 @@ export function TicketBookPage({
                             {item.entry.notes}
                           </div>
                         )}
-                      </div>
-
-                      {/* Card Bottom Row: Remove check-in button */}
-                      <div className="mt-3 pt-2.5 border-t border-line-soft flex items-center justify-end">
-                        <button
-                          type="button"
-                          data-testid={`remove-btn-${showKey}`}
-                          onClick={() => remove(showKey)}
-                          className="inline-flex items-center gap-1 rounded bg-paper hover:bg-request/10 px-2.5 py-1 font-mono text-[10px] sm:text-[11px] font-bold text-muted hover:text-request border border-line-soft hover:border-request/30 transition-colors cursor-pointer"
-                          title={t("ticketBook.removeAttended", "移除打卡")}
-                          aria-label={t("ticketBook.removeAttended", "移除打卡")}
-                        >
-                          <span aria-hidden="true">🗑️</span>
-                          <span>{t("ticketBook.removeAttended", "移除打卡")}</span>
-                        </button>
                       </div>
                     </div>
                   );

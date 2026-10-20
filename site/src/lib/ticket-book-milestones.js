@@ -1,4 +1,5 @@
 import songsData from "../data/songs.json";
+import { songUnreleased } from "./domain.js";
 
 /**
  * ticket-book-milestones.js — Dynamic Concert Ticket Book Milestones & Repertoire Engine
@@ -8,9 +9,10 @@ import songsData from "../data/songs.json";
  * 2. 跨越巡演數 (totalTours)
  * 3. 踩點場館數 (totalVenues)
  * 4. 足跡城市數 (totalCities)
- * 5. 現場歌曲解鎖覆蓋率 (unlockedSongCount, totalCatalogSongs, coveragePercentage)
+ * 5. 現場歌曲解鎖覆蓋率 (unlockedSongCount, totalCatalogSongs, coveragePercentage) - 排除未發行曲目
  * 6. 個人現場神曲排行榜 Top 3 (topSongs: rank, songId, title, count)
  * 7. 最初與最近參戰紀錄 (earliestShow, latestShow)
+ * 8. 參戰足跡全紀錄 (attendedShowsList)
  */
 
 export function computeTicketBookMilestones({
@@ -23,7 +25,18 @@ export function computeTicketBookMilestones({
 } = {}) {
   const totalShows = Array.isArray(attendedShows) ? attendedShows.length : 0;
   const catalog = allUsedSongs || songsCatalog || songsData.songs || [];
-  const totalCatalogSongs = catalog.length;
+
+  // Build a set of unreleased song IDs to exclude from coverage metrics
+  const unreleasedIdSet = new Set(songUnreleased);
+  for (const s of catalog) {
+    if (s && s.unreleased && s.id) {
+      unreleasedIdSet.add(s.id);
+    }
+  }
+
+  // Released songs catalog (denominator for coverage percentage)
+  const releasedCatalog = catalog.filter((s) => s && !unreleasedIdSet.has(s.id) && !s.unreleased);
+  const totalCatalogSongs = releasedCatalog.length;
 
   if (totalShows === 0) {
     return {
@@ -37,6 +50,7 @@ export function computeTicketBookMilestones({
       topSongs: [],
       earliestShow: null,
       latestShow: null,
+      attendedShowsList: [],
     };
   }
 
@@ -94,8 +108,11 @@ export function computeTicketBookMilestones({
     if (items && Array.isArray(items)) {
       for (const item of items) {
         if (item && item.songId) {
-          unlockedSongIds.add(item.songId);
           songPlayCounts[item.songId] = (songPlayCounts[item.songId] || 0) + 1;
+          // Only add to unlocked set if not an unreleased track
+          if (!unreleasedIdSet.has(item.songId)) {
+            unlockedSongIds.add(item.songId);
+          }
         }
       }
     }
@@ -151,5 +168,6 @@ export function computeTicketBookMilestones({
     topSongs,
     earliestShow,
     latestShow,
+    attendedShowsList: validShows,
   };
 }

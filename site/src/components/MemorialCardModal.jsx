@@ -5,7 +5,7 @@ import { localizeVenue } from "../lib/locales/venues.js";
 import { getKindArray, kindTabs } from "../lib/kind.js";
 import { useI18n, DICTIONARIES, DEFAULT_LOCALE, resolveTranslation } from "../lib/i18n.jsx";
 import { getStampById } from "../lib/stamps.js";
-import { getAttendedShow, recordAttendance, getSafeStorage } from "../lib/ticket-book.js";
+import { getAttendedShow, recordAttendance, getSafeStorage, getTicketBookHolderName, setTicketBookHolderName } from "../lib/ticket-book.js";
 
 // Session-level memory for theme choice across shows
 let sessionMemorialTheme = "vintage";
@@ -110,7 +110,10 @@ export function MemorialCardModal({
   const initialAttended = show ? getAttendedShow(showKey, storage) : null;
   const initialResolvedSeat = initialSeat !== undefined ? initialSeat : initialAttended?.seat || "";
   const initialResolvedNotes = initialNotes !== undefined ? initialNotes : initialAttended?.notes || "";
+  const initialHolder = getTicketBookHolderName(storage);
 
+  const [inputHolderName, setInputHolderName] = useState(initialHolder);
+  const [appliedHolderName, setAppliedHolderName] = useState(initialHolder);
   const [inputSeat, setInputSeat] = useState(initialResolvedSeat);
   const [appliedSeat, setAppliedSeat] = useState(initialResolvedSeat);
   const [inputNotes, setInputNotes] = useState(initialResolvedNotes);
@@ -133,6 +136,10 @@ export function MemorialCardModal({
   // Sync state if modal opens or showKey changes
   useEffect(() => {
     if (!isOpen || !show) return;
+    const currentHolder = getTicketBookHolderName(storage);
+    setInputHolderName(currentHolder);
+    setAppliedHolderName(currentHolder);
+
     const currentEntry = getAttendedShow(showKey, storage);
     if (currentEntry) {
       const s = initialSeat !== undefined ? initialSeat : currentEntry.seat || "";
@@ -159,7 +166,8 @@ export function MemorialCardModal({
     nextSeat = inputSeat,
     nextNotes = inputNotes,
     nextIncSeat = includeSeat,
-    nextIncNotes = includeNotes
+    nextIncNotes = includeNotes,
+    nextHolder = inputHolderName
   ) => {
     if (debounceTimerRef.current) {
       clearTimeout(debounceTimerRef.current);
@@ -167,6 +175,7 @@ export function MemorialCardModal({
     }
     setAppliedSeat(nextSeat);
     setAppliedNotes(nextNotes);
+    setAppliedHolderName(nextHolder);
 
     recordAttendance(
       showKey,
@@ -180,6 +189,16 @@ export function MemorialCardModal({
       },
       storage
     );
+    setTicketBookHolderName(nextHolder, storage);
+  };
+
+  const handleHolderNameChange = (val) => {
+    const trimmed = val.slice(0, 40);
+    setInputHolderName(trimmed);
+    if (debounceTimerRef.current) clearTimeout(debounceTimerRef.current);
+    debounceTimerRef.current = setTimeout(() => {
+      commitCustomization(inputSeat, inputNotes, includeSeat, includeNotes, trimmed);
+    }, 600);
   };
 
   const handleSeatChange = (val) => {
@@ -187,7 +206,7 @@ export function MemorialCardModal({
     setInputSeat(trimmed);
     if (debounceTimerRef.current) clearTimeout(debounceTimerRef.current);
     debounceTimerRef.current = setTimeout(() => {
-      commitCustomization(trimmed, inputNotes, includeSeat, includeNotes);
+      commitCustomization(trimmed, inputNotes, includeSeat, includeNotes, inputHolderName);
     }, 600);
   };
 
@@ -196,22 +215,22 @@ export function MemorialCardModal({
     setInputNotes(trimmed);
     if (debounceTimerRef.current) clearTimeout(debounceTimerRef.current);
     debounceTimerRef.current = setTimeout(() => {
-      commitCustomization(inputSeat, trimmed, includeSeat, includeNotes);
+      commitCustomization(inputSeat, trimmed, includeSeat, includeNotes, inputHolderName);
     }, 600);
   };
 
   const handleInputBlur = () => {
-    commitCustomization(inputSeat, inputNotes, includeSeat, includeNotes);
+    commitCustomization(inputSeat, inputNotes, includeSeat, includeNotes, inputHolderName);
   };
 
   const handleIncludeSeatChange = (val) => {
     setIncludeSeat(val);
-    commitCustomization(inputSeat, inputNotes, val, includeNotes);
+    commitCustomization(inputSeat, inputNotes, val, includeNotes, inputHolderName);
   };
 
   const handleIncludeNotesChange = (val) => {
     setIncludeNotes(val);
-    commitCustomization(inputSeat, inputNotes, includeSeat, val);
+    commitCustomization(inputSeat, inputNotes, includeSeat, val, inputHolderName);
   };
 
   const handleThemeChange = (newTheme) => {
@@ -225,7 +244,7 @@ export function MemorialCardModal({
 
   const cardBgColor = isVintage ? "#fcfaf2" : isWhite ? "#ffffff" : "#111319";
 
-  const customKey = `${includeSeat ? appliedSeat : ""}_${includeNotes ? appliedNotes : ""}_${stampId}`;
+  const customKey = `${appliedHolderName}_${includeSeat ? appliedSeat : ""}_${includeNotes ? appliedNotes : ""}_${stampId}`;
   const currentImageKey = getMemorialImageKey(showKey, theme, locale, customKey);
   const currentImageUrl = imageUrls[currentImageKey];
 
@@ -463,6 +482,26 @@ export function MemorialCardModal({
           {showCustomizer && (
             <div className="space-y-2 pt-2 border-t border-[#2d3446]/60 mt-2">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                {/* Fan Name / ID Input */}
+                <div>
+                  <div className="flex items-center justify-between pb-1">
+                    <label htmlFor="memorial-holder-input" className="font-mono text-[#9ca3af] font-bold">
+                      👤 {t("memorial.holderLabel", "歌迷暱稱・ID")}
+                    </label>
+                  </div>
+                  <input
+                    id="memorial-holder-input"
+                    type="text"
+                    data-testid="memorial-holder-input"
+                    maxLength={40}
+                    value={inputHolderName}
+                    onChange={(e) => handleHolderNameChange(e.target.value)}
+                    onBlur={handleInputBlur}
+                    placeholder={t("memorial.holderPlaceholder", "例如：@higedan_fan 或 小明")}
+                    className="w-full bg-[#1c202d] text-[#f3f4f6] border border-[#374151] rounded px-2.5 py-1 text-xs placeholder:text-[#6b7280] focus:border-[#d49a00] focus:outline-none font-mono"
+                  />
+                </div>
+
                 {/* Seat Input & Privacy Toggle */}
                 <div>
                   <div className="flex items-center justify-between pb-1">
@@ -492,36 +531,36 @@ export function MemorialCardModal({
                     className="w-full bg-[#1c202d] text-[#f3f4f6] border border-[#374151] rounded px-2.5 py-1 text-xs placeholder:text-[#6b7280] focus:border-[#d49a00] focus:outline-none font-mono"
                   />
                 </div>
+              </div>
 
-                {/* Notes Input & Privacy Toggle */}
-                <div>
-                  <div className="flex items-center justify-between pb-1">
-                    <label htmlFor="memorial-notes-input" className="font-mono text-[#9ca3af] font-bold">
-                      💬 {t("memorial.notesLabel", "觀演隨筆・心得")}
-                    </label>
-                    <label className="flex items-center gap-1 font-mono text-[10px] text-[#cbd5e1] cursor-pointer select-none">
-                      <input
-                        type="checkbox"
-                        data-testid="memorial-include-notes-toggle"
-                        checked={includeNotes}
-                        onChange={(e) => handleIncludeNotesChange(e.target.checked)}
-                        className="rounded accent-[#d49a00] cursor-pointer"
-                      />
-                      <span>{t("memorial.includeNotes", "在小卡上印出隨筆心得")}</span>
-                    </label>
-                  </div>
-                  <textarea
-                    id="memorial-notes-input"
-                    data-testid="memorial-notes-input"
-                    maxLength={300}
-                    rows={2}
-                    value={inputNotes}
-                    onChange={(e) => handleNotesChange(e.target.value)}
-                    onBlur={handleInputBlur}
-                    placeholder={t("memorial.notesPlaceholder", "寫下本場演出的難忘回憶（最多 300 字）...")}
-                    className="w-full bg-[#1c202d] text-[#f3f4f6] border border-[#374151] rounded px-2.5 py-1 text-xs placeholder:text-[#6b7280] focus:border-[#d49a00] focus:outline-none"
-                  />
+              {/* Notes Input & Privacy Toggle */}
+              <div>
+                <div className="flex items-center justify-between pb-1">
+                  <label htmlFor="memorial-notes-input" className="font-mono text-[#9ca3af] font-bold">
+                    💬 {t("memorial.notesLabel", "觀演隨筆・心得")}
+                  </label>
+                  <label className="flex items-center gap-1 font-mono text-[10px] text-[#cbd5e1] cursor-pointer select-none">
+                    <input
+                      type="checkbox"
+                      data-testid="memorial-include-notes-toggle"
+                      checked={includeNotes}
+                      onChange={(e) => handleIncludeNotesChange(e.target.checked)}
+                      className="rounded accent-[#d49a00] cursor-pointer"
+                    />
+                    <span>{t("memorial.includeNotes", "在小卡上印出隨筆心得")}</span>
+                  </label>
                 </div>
+                <textarea
+                  id="memorial-notes-input"
+                  data-testid="memorial-notes-input"
+                  maxLength={300}
+                  rows={2}
+                  value={inputNotes}
+                  onChange={(e) => handleNotesChange(e.target.value)}
+                  onBlur={handleInputBlur}
+                  placeholder={t("memorial.notesPlaceholder", "寫下本場演出的難忘回憶（最多 300 字）...")}
+                  className="w-full bg-[#1c202d] text-[#f3f4f6] border border-[#374151] rounded px-2.5 py-1 text-xs placeholder:text-[#6b7280] focus:border-[#d49a00] focus:outline-none"
+                />
               </div>
             </div>
           )}
@@ -636,20 +675,40 @@ export function MemorialCardModal({
                     📅 {dateFormatted}
                   </div>
 
-                  {/* Seat Badge (Privacy controlled, >=7:1 AAA contrast) */}
-                  {appliedSeat && includeSeat && (
-                    <div
-                      data-testid="ticket-seat-badge"
-                      className={`inline-flex items-center gap-1.5 px-2 py-0.5 rounded-[3px] font-mono text-[11px] font-bold border mt-1 ${
-                        isVintage
-                          ? "bg-[#f5ebd2] text-[#78350f] border-[#d6cebf]"
-                          : isWhite
-                          ? "bg-[#f3f4f6] text-[#111827] border-[#d1d5db]"
-                          : "bg-[#1c202d] text-[#fbbf24] border-[#374151]"
-                      }`}
-                    >
-                      <span className="font-bold text-[10px]">💺 SEAT:</span>
-                      <span className="font-black">{appliedSeat}</span>
+                  {/* Holder Name & Seat Badges (Privacy controlled, >=7:1 AAA contrast) */}
+                  {(appliedHolderName || (appliedSeat && includeSeat)) && (
+                    <div className="flex flex-wrap items-center gap-1.5 pt-1">
+                      {appliedHolderName && (
+                        <div
+                          data-testid="ticket-holder-badge"
+                          className={`inline-flex items-center gap-1.5 px-2 py-0.5 rounded-[3px] font-mono text-[11px] font-bold border ${
+                            isVintage
+                              ? "bg-[#f5ebd2] text-[#78350f] border-[#d6cebf]"
+                              : isWhite
+                              ? "bg-[#f3f4f6] text-[#111827] border-[#d1d5db]"
+                              : "bg-[#1c202d] text-[#fbbf24] border-[#374151]"
+                          }`}
+                        >
+                          <span className="font-bold text-[10px]">👤 HOLDER:</span>
+                          <span className="font-black">{appliedHolderName}</span>
+                        </div>
+                      )}
+
+                      {appliedSeat && includeSeat && (
+                        <div
+                          data-testid="ticket-seat-badge"
+                          className={`inline-flex items-center gap-1.5 px-2 py-0.5 rounded-[3px] font-mono text-[11px] font-bold border ${
+                            isVintage
+                              ? "bg-[#f5ebd2] text-[#78350f] border-[#d6cebf]"
+                              : isWhite
+                              ? "bg-[#f3f4f6] text-[#111827] border-[#d1d5db]"
+                              : "bg-[#1c202d] text-[#fbbf24] border-[#374151]"
+                          }`}
+                        >
+                          <span className="font-bold text-[10px]">💺 SEAT:</span>
+                          <span className="font-black">{appliedSeat}</span>
+                        </div>
+                      )}
                     </div>
                   )}
                 </div>

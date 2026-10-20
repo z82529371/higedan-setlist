@@ -285,9 +285,10 @@ describe("23. Tour TicketBook Dedicated Page (#/tickets) & Timeline Management (
       assert.ok(htmlZh.includes("Arena A 12"));
       assert.ok(htmlZh.includes("Amazing performance in Korea!"));
 
-      // Verify action buttons: Jump to Ticket and Remove Check-in
+      // Verify action buttons: Jump to Ticket and Remove Check-in co-located in top header
       assert.ok(htmlZh.includes(`data-testid="view-ticket-btn-${mockShow1.id}"`));
       assert.ok(htmlZh.includes(`data-testid="remove-btn-${mockShow1.id}"`));
+      assert.ok(!htmlZh.includes("mt-3 pt-2.5 border-t border-line-soft flex items-center justify-end"), "Redundant bottom action row must be removed");
 
       // Check reverse chronological order: mockShow2 (2024-12-15) must appear before mockShow1 (2024-11-30), which is before mockShow3 (2023-02-16)
       const idx2 = htmlZh.indexOf(`data-testid="timeline-item-${mockShow2.id}"`);

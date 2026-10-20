@@ -261,6 +261,29 @@ describe("22. ShowSlip Attendance Check-in & Resilient LocalStorage Persistence 
         globalThis.window.dispatchEvent = originalDispatch;
       }
     });
+
+    it("gets, sets, and persists global fan holderName across ticket-book sessions", async () => {
+      const {
+        loadTicketBook,
+        getTicketBookHolderName,
+        setTicketBookHolderName,
+        MemoryStorageAdapter,
+      } = await loadModule("/src/lib/ticket-book.js");
+
+      const storage = new MemoryStorageAdapter();
+
+      // Empty holderName by default
+      assert.strictEqual(getTicketBookHolderName(storage), "");
+
+      // Sets and returns trimmed holder name
+      const saved = setTicketBookHolderName("  @higedan_fan_01  ", storage);
+      assert.strictEqual(saved, "@higedan_fan_01");
+      assert.strictEqual(getTicketBookHolderName(storage), "@higedan_fan_01");
+
+      // Validates persistence in underlying payload
+      const payload = loadTicketBook(storage);
+      assert.strictEqual(payload.holderName, "@higedan_fan_01");
+    });
   });
 
   describe("Subtest 3: Headless React SSR Presentation & ShowSlip Integration", () => {

@@ -525,10 +525,11 @@ describe("16. Localized Commemorative Ticket Image Export (Issue #19)", () => {
 
     it("renders custom seat, notes, stamp, and privacy controls in MemorialCardModal (Issue #36)", async () => {
       const { MemorialCardModal } = await loadModule("/src/components/MemorialCardModal.jsx");
-      const { MemoryStorageAdapter, recordAttendance } = await loadModule("/src/lib/ticket-book.js");
+      const { MemoryStorageAdapter, recordAttendance, setTicketBookHolderName } = await loadModule("/src/lib/ticket-book.js");
       const { I18nProvider } = await loadModule("/src/lib/i18n.jsx");
 
       const storage = new MemoryStorageAdapter();
+      setTicketBookHolderName("HigedanFan99", storage);
       const mockShow = {
         id: "show-k-arena",
         date: "2024-11-12",
@@ -575,6 +576,7 @@ describe("16. Localized Commemorative Ticket Image Export (Issue #19)", () => {
       );
 
       // Verify custom inputs exist in drawer
+      assert.ok(htmlCustom.includes('data-testid="memorial-holder-input"'), "Holder input must be rendered in drawer");
       assert.ok(htmlCustom.includes('data-testid="memorial-seat-input"'), "Seat input must be rendered");
       assert.ok(htmlCustom.includes('data-testid="memorial-notes-input"'), "Notes input must be rendered");
       assert.ok(!htmlCustom.includes('data-testid="memorial-stamp-picker"'), "Stamp picker should not be rendered (single default stamp)");
@@ -583,6 +585,8 @@ describe("16. Localized Commemorative Ticket Image Export (Issue #19)", () => {
       assert.ok(!htmlCustom.includes('data-testid="memorial-download-btn"'), "Download PNG button should not be rendered (native save)");
 
       // Verify ticket elements rendered on card
+      assert.ok(htmlCustom.includes('data-testid="ticket-holder-badge"'), "Holder badge must be rendered on ticket");
+      assert.ok(htmlCustom.includes("HigedanFan99"), "Holder name must be rendered in ticket");
       assert.ok(htmlCustom.includes('data-testid="ticket-seat-badge"'), "Seat badge must be rendered on ticket");
       assert.ok(htmlCustom.includes("Arena A Block Row 12 Seat 34"), "Seat value must be rendered in ticket");
       assert.ok(htmlCustom.includes('data-testid="ticket-notes-memo"'), "Notes memo must be rendered on ticket");
@@ -645,6 +649,7 @@ describe("16. Localized Commemorative Ticket Image Export (Issue #19)", () => {
       // Card must NOT contain seat badge or notes memo
       assert.ok(!htmlPrivacy.includes('data-testid="ticket-seat-badge"'), "Seat badge must be omitted when includeSeat is false");
       assert.ok(!htmlPrivacy.includes('data-testid="ticket-notes-memo"'), "Notes memo must be omitted when includeNotes is false");
+      assert.ok(!htmlPrivacy.includes('data-testid="ticket-holder-badge"'), "Holder badge must be omitted when holderName is empty");
 
       // But drawer controls still retain the values for editing
       assert.ok(htmlPrivacy.includes('value="Confidential VIP Seat 1"'), "Drawer seat input retains value");

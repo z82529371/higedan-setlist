@@ -29,6 +29,7 @@ export function createEmptyTicketBook() {
     version: TICKET_BOOK_SCHEMA_VERSION,
     updatedAt: new Date().toISOString(),
     attendedShows: {},
+    holderName: "",
   };
 }
 
@@ -74,10 +75,32 @@ export function loadTicketBook(storage = getSafeStorage()) {
       }
     }
 
+    if (typeof parsed.holderName !== "string") {
+      parsed.holderName = "";
+    }
+
     return parsed;
   } catch {
     return createEmptyTicketBook();
   }
+}
+
+/**
+ * Returns the global ticket holder name / ID from storage.
+ */
+export function getTicketBookHolderName(storage = getSafeStorage()) {
+  const payload = loadTicketBook(storage);
+  return payload.holderName || "";
+}
+
+/**
+ * Updates the global ticket holder name / ID in storage and notifies components.
+ */
+export function setTicketBookHolderName(name, storage = getSafeStorage()) {
+  const payload = loadTicketBook(storage);
+  payload.holderName = String(name || "").trim().slice(0, 40);
+  saveTicketBook(payload, storage);
+  return payload.holderName;
 }
 
 /**

@@ -213,6 +213,71 @@ describe("25. TicketBook Dynamic Milestones Calculation & Summary Card (#37)", (
       assert.equal(stats.earliestShow?.showKey, "unknown-orphan-1");
       assert.equal(stats.latestShow?.showKey, "unknown-orphan-1");
     });
+
+    it("excludes unreleased songs from coverage denominator and numerator while preserving top songs qualification", async () => {
+      const { computeTicketBookMilestones } = await loadModule("/src/lib/ticket-book-milestones.js");
+
+      // Catalog with 4 released songs and 2 unreleased songs
+      const catalog = [
+        { id: "pretender", title: "Pretender" },
+        { id: "shukumei", title: "宿命" },
+        { id: "subtitle", title: "Subtitle" },
+        { id: "mixed-nuts", title: "ミックスナッツ" },
+        { id: "fuusen", title: "風船", unreleased: true },
+        { id: "akegata-no-getaway", title: "明け方のゲッタウェイ", unreleased: true },
+      ];
+
+      const testShowById = new Map([
+        [
+          "special-show",
+          {
+            id: "special-show",
+            date: "2024-05-01",
+            venue: "Club Live",
+            city: "東京",
+            setlist: [
+              { songId: "pretender" },
+              { songId: "fuusen" }, // unreleased
+              { songId: "akegata-no-getaway" }, // unreleased
+            ],
+          },
+        ],
+      ]);
+
+      const testUnitData = new Map([
+        [
+          "special-event",
+          {
+            unit: { id: "special-event", title: "FC Special Live", isTour: false },
+            isTour: false,
+          },
+        ],
+      ]);
+
+      const stats = computeTicketBookMilestones({
+        attendedShows: [{ showKey: "special-show", attendedAt: "2024-05-01" }],
+        unitData: testUnitData,
+        showById: testShowById,
+        unitIdByShowId: new Map([["special-show", "special-event"]]),
+        allUsedSongs: catalog,
+      });
+
+      // 1. Total catalog songs (denominator) excludes the 2 unreleased songs (4 instead of 6)
+      assert.equal(stats.totalCatalogSongs, 4, "Denominator must only count released songs");
+
+      // 2. Unlocked songs (numerator) only counts 'pretender' (1 instead of 3)
+      assert.equal(stats.unlockedSongCount, 1, "Numerator must only count released songs");
+      assert.equal(stats.coveragePercentage, 25, "Coverage is 1/4 = 25%");
+
+      // 3. Top songs retains unreleased songs based on actual live counts
+      const topSongIds = stats.topSongs.map((s) => s.songId);
+      assert.ok(topSongIds.includes("fuusen"), "Unreleased song 'fuusen' must be eligible for topSongs");
+      assert.ok(topSongIds.includes("akegata-no-getaway"), "Unreleased song 'akegata-no-getaway' must be eligible for topSongs");
+
+      // 4. attendedShowsList includes the show
+      assert.equal(stats.attendedShowsList.length, 1);
+      assert.equal(stats.attendedShowsList[0].showKey, "special-show");
+    });
   });
 
   describe("Seam 2: TicketBook Milestone Dashboard Presentation (TicketBookPage.jsx)", () => {
@@ -403,12 +468,39 @@ describe("25. TicketBook Dynamic Milestones Calculation & Summary Card (#37)", (
         venue: "舞洲體育園區",
         city: "大阪",
       },
+      attendedShowsList: [
+        {
+          showKey: "show-1",
+          date: "2024-11-30",
+          title: "Asia Tour 2024",
+          venue: "KINTEX Hall 5",
+          city: "高陽",
+        },
+        {
+          showKey: "show-2",
+          date: "2024-12-15",
+          title: "Asia Tour 2024",
+          venue: "台北小巨蛋",
+          city: "台北",
+        },
+        {
+          showKey: "show-3",
+          date: "2025-08-16",
+          title: "Summer Sonic 2025",
+          venue: "舞洲體育園區",
+          city: "大阪",
+        },
+      ],
     };
 
     it("renders 540px milestone summary card modal with full milestone stats and download button", async () => {
       const { React, renderToStaticMarkup } = await (await import("../helpers/vite-server.js")).getReactAndRenderer();
       const { I18nProvider } = await loadModule("/src/lib/i18n.jsx");
       const { MilestoneCardModal } = await loadModule("/src/components/ticket-book/MilestoneCardModal.jsx");
+      const { MemoryStorageAdapter, setTicketBookHolderName } = await loadModule("/src/lib/ticket-book.js");
+
+      const storage = new MemoryStorageAdapter();
+      setTicketBookHolderName("HigedanFan99", storage);
 
       const html = renderToStaticMarkup(
         React.createElement(
@@ -418,6 +510,7 @@ describe("25. TicketBook Dynamic Milestones Calculation & Summary Card (#37)", (
             isOpen: true,
             onClose: () => {},
             milestones: mockMilestones,
+            storage,
           })
         )
       );
@@ -426,6 +519,11 @@ describe("25. TicketBook Dynamic Milestones Calculation & Summary Card (#37)", (
       assert.ok(html.includes('data-testid="milestone-card-modal"'), "Must render modal container");
       assert.ok(html.includes('data-testid="milestone-summary-card"'), "Must render summary card node");
       assert.ok(html.includes("540px"), "Summary card must specify 540px standard width (ADR-0100)");
+
+      // Verify holder input in drawer and badge on card
+      assert.ok(html.includes('data-testid="milestone-holder-input"'), "Must render milestone holder input");
+      assert.ok(html.includes('data-testid="milestone-holder-badge"'), "Must render holder badge when name is set");
+      assert.ok(html.includes("HigedanFan99"), "Must display holder name in badge");
 
       // Verify milestone stats in card
       assert.ok(html.includes('data-testid="milestone-card-total-shows"'));
@@ -439,17 +537,18 @@ describe("25. TicketBook Dynamic Milestones Calculation & Summary Card (#37)", (
       assert.ok(html.includes("3 城市"));
       assert.ok(html.includes("50%"));
 
-      // Verify Top 3 songs
-      assert.ok(html.includes('data-testid="milestone-card-top-songs"'));
-      assert.ok(html.includes("Pretender"));
-      assert.ok(html.includes("宿命"));
-      assert.ok(html.includes("Subtitle"));
+      // Verify Top 3 songs is omitted from milestone card to keep layout clean for footprint list
+      assert.ok(!html.includes('data-testid="milestone-card-top-songs"'), "Top songs should be omitted from card for focused footprint sharing");
 
       // Verify First and Latest show history
       assert.ok(html.includes('data-testid="milestone-card-first-show"'));
       assert.ok(html.includes('data-testid="milestone-card-latest-show"'));
       assert.ok(html.includes("2024-11-30"));
       assert.ok(html.includes("2025-08-16"));
+
+      // Verify Attended Chronicle Footprint list
+      assert.ok(html.includes('data-testid="milestone-card-attended-list"'), "Chronicle attended list must be rendered");
+      assert.ok(html.includes("參戰足跡全紀錄"), "zh-TW attendedListTitle must be rendered");
 
       // Verify native save hint notice
       assert.ok(html.includes("長按小卡") || html.includes("另存圖片"), "Native save hint notice must be present");
@@ -476,6 +575,22 @@ describe("25. TicketBook Dynamic Milestones Calculation & Summary Card (#37)", (
         )
       );
       assert.equal(closedHtml, "");
+
+      // Verify holder badge is omitted when holder name is empty
+      const emptyHolderStorage = new MemoryStorageAdapter();
+      const emptyHolderHtml = renderToStaticMarkup(
+        React.createElement(
+          I18nProvider,
+          { initialLocale: "zh-TW" },
+          React.createElement(MilestoneCardModal, {
+            isOpen: true,
+            onClose: () => {},
+            milestones: mockMilestones,
+            storage: emptyHolderStorage,
+          })
+        )
+      );
+      assert.ok(!emptyHolderHtml.includes('data-testid="milestone-holder-badge"'), "Holder badge omitted when holder name is empty");
     });
   });
 });

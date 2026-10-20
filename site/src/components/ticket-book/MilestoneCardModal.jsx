@@ -4,12 +4,20 @@ import { showDate, formatShowVenueCity } from "../../lib/domain.js";
 import { exportElementToPng } from "../../lib/image-export.js";
 import { TicketPerforationDivider, TicketBarcodeFooter } from "../slips/TicketCommon.jsx";
 import { SLIP_TAPE } from "../../lib/constants.js";
+import { getSafeStorage, getTicketBookHolderName, setTicketBookHolderName } from "../../lib/ticket-book.js";
 
-export function MilestoneCardModal({ isOpen, onClose, milestones }) {
+export function MilestoneCardModal({ isOpen, onClose, milestones, storage: propStorage }) {
   const { t, locale } = useI18n();
   const cardRef = useRef(null);
+  const debounceTimerRef = useRef(null);
+  const storage = propStorage || getSafeStorage();
+
   const [isExporting, setIsExporting] = useState(false);
   const [imageUrl, setImageUrl] = useState("");
+
+  const initialHolder = getTicketBookHolderName(storage);
+  const [inputHolderName, setInputHolderName] = useState(initialHolder);
+  const [appliedHolderName, setAppliedHolderName] = useState(initialHolder);
 
   useEffect(() => {
     if (!isOpen) return;
@@ -20,7 +28,47 @@ export function MilestoneCardModal({ isOpen, onClose, milestones }) {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [isOpen, onClose]);
 
-  // Auto-generate PNG preview when modal opens for instant right-click/long-press save
+  // Sync holder name whenever modal opens
+  useEffect(() => {
+    if (!isOpen) return;
+    const h = getTicketBookHolderName(storage);
+    setInputHolderName(h);
+    setAppliedHolderName(h);
+  }, [isOpen, storage]);
+
+  // Cleanup debounce timer on unmount
+  useEffect(() => {
+    return () => {
+      if (debounceTimerRef.current) {
+        clearTimeout(debounceTimerRef.current);
+      }
+    };
+  }, []);
+
+  const commitHolder = (nextHolder) => {
+    if (debounceTimerRef.current) {
+      clearTimeout(debounceTimerRef.current);
+      debounceTimerRef.current = null;
+    }
+    setAppliedHolderName(nextHolder);
+    setTicketBookHolderName(nextHolder, storage);
+    setImageUrl(""); // Invalidate cached image to re-render canvas
+  };
+
+  const handleHolderChange = (val) => {
+    const trimmed = val.slice(0, 40);
+    setInputHolderName(trimmed);
+    if (debounceTimerRef.current) clearTimeout(debounceTimerRef.current);
+    debounceTimerRef.current = setTimeout(() => {
+      commitHolder(trimmed);
+    }, 600);
+  };
+
+  const handleInputBlur = () => {
+    commitHolder(inputHolderName);
+  };
+
+  // Auto-generate PNG preview when modal opens or holder changes for instant right-click/long-press save
   useEffect(() => {
     if (!isOpen || !milestones || imageUrl) return;
     let isMounted = true;
@@ -47,13 +95,13 @@ export function MilestoneCardModal({ isOpen, onClose, milestones }) {
       isMounted = false;
       clearTimeout(timer);
     };
-  }, [isOpen, milestones, locale, imageUrl]);
+  }, [isOpen, milestones, locale, imageUrl, appliedHolderName]);
 
   if (!isOpen || !milestones) return null;
 
-  const topSongs = milestones.topSongs || [];
   const earliest = milestones.earliestShow;
   const latest = milestones.latestShow;
+  const attendedList = milestones.attendedShowsList || [];
 
   return (
     <div
@@ -85,6 +133,28 @@ export function MilestoneCardModal({ isOpen, onClose, milestones }) {
           </button>
         </div>
 
+        {/* Customizer Drawer / Holder Input */}
+        <div className="w-full bg-ink/80 border border-card/30 rounded-[8px] p-2.5 mb-3 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2 shadow-lg">
+          <label
+            htmlFor="milestone-holder-input"
+            className="font-mono text-xs font-bold text-card flex items-center gap-1.5 shrink-0"
+          >
+            <span aria-hidden="true">👤</span>
+            <span>{t("ticketBook.holderLabel", "歌迷暱稱・ID")}</span>
+          </label>
+          <input
+            id="milestone-holder-input"
+            type="text"
+            data-testid="milestone-holder-input"
+            maxLength={40}
+            value={inputHolderName}
+            onChange={(e) => handleHolderChange(e.target.value)}
+            onBlur={handleInputBlur}
+            placeholder={t("ticketBook.holderPlaceholder", "例如：@higedan_fan 或 小明")}
+            className="w-full sm:max-w-[280px] bg-card text-ink border border-card/40 rounded px-2.5 py-1 text-xs placeholder:text-ink/50 focus:border-band focus:outline-none font-mono"
+          />
+        </div>
+
         {/* 540px Ticket Card Export Node (ADR-0100 & DESIGN.md: radius <= 8px, AAA contrast) */}
         <div className="relative shrink-0 w-[540px] max-w-full">
           <div
@@ -107,6 +177,17 @@ export function MilestoneCardModal({ isOpen, onClose, milestones }) {
             <p className="m-0 mt-0.5 font-display text-[15px] font-bold text-band-ink">
               {t("ticketBook.summaryCardTitle", "Official髭男dism 生涯參戰總結")}
             </p>
+
+            {/* Holder Name Badge (Privacy-friendly: only shown when non-empty) */}
+            {appliedHolderName && (
+              <div
+                data-testid="milestone-holder-badge"
+                className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-[3px] font-mono text-[11px] font-bold border border-ink/30 bg-paper/60 text-ink mt-2"
+              >
+                <span className="font-bold text-[10px]">👤 HOLDER:</span>
+                <span className="font-black">{appliedHolderName}</span>
+              </div>
+            )}
           </div>
 
           <TicketPerforationDivider />
@@ -178,40 +259,6 @@ export function MilestoneCardModal({ isOpen, onClose, milestones }) {
             </div>
           </div>
 
-          {/* Top 3 Live Songs */}
-          <div
-            data-testid="milestone-card-top-songs"
-            className="rounded-[4px] border border-ink/30 bg-paper/30 p-3 mb-3.5"
-          >
-            <div className="font-mono text-[11px] font-bold text-ink uppercase mb-2 flex items-center gap-1.5 border-b border-ink/20 pb-1">
-              <span>🔥</span>
-              <span>{t("ticketBook.topSongs", "現場神曲 Top 3")}</span>
-            </div>
-            {topSongs.length === 0 ? (
-              <p className="m-0 text-center py-1 font-mono text-[11px] text-ink">--</p>
-            ) : (
-              <div className="space-y-1.5">
-                {topSongs.map((song, idx) => {
-                  const medal = idx === 0 ? "🥇" : idx === 1 ? "🥈" : "🥉";
-                  return (
-                    <div
-                      key={song.songId}
-                      className="flex items-center justify-between gap-2 text-[12px] bg-card p-1.5 rounded border border-ink/20"
-                    >
-                      <div className="flex items-center gap-1.5 min-w-0">
-                        <span className="font-mono text-[11px] font-bold">{medal}</span>
-                        <span className="font-bold text-ink truncate">{song.title}</span>
-                      </div>
-                      <span className="shrink-0 font-mono text-[11px] font-bold text-ink">
-                        {t("ticketBook.timesUnit", "{count} 次", { count: song.count })}
-                      </span>
-                    </div>
-                  );
-                })}
-              </div>
-            )}
-          </div>
-
           {/* Timeline First & Latest */}
           <div className="grid grid-cols-2 gap-2.5 mb-3.5">
             <div
@@ -250,6 +297,55 @@ export function MilestoneCardModal({ isOpen, onClose, milestones }) {
               )}
             </div>
           </div>
+
+          {/* Attended Shows Chronicle Footprint */}
+          {attendedList.length > 0 && (
+            <div
+              data-testid="milestone-card-attended-list"
+              className="rounded-[4px] border border-ink/30 bg-paper/30 p-3 mb-3.5"
+            >
+              <div className="font-mono text-[11px] font-bold text-ink uppercase mb-2 flex items-center justify-between border-b border-ink/20 pb-1">
+                <span className="flex items-center gap-1.5">
+                  <span aria-hidden="true">🎪</span>
+                  <span>{t("ticketBook.attendedListTitle", "參戰足跡全紀錄")}</span>
+                </span>
+                <span className="text-[10px] tabular-nums font-bold text-ink/80">
+                  {t("ticketBook.showsUnit", "{count} 場", { count: attendedList.length })}
+                </span>
+              </div>
+              <div className="space-y-1.5">
+                {attendedList.map((entry, idx) => {
+                  const num = String(idx + 1).padStart(2, "0");
+                  const dateStr = entry.show ? showDate(entry.show, locale) : entry.date;
+                  const venueStr = entry.show ? formatShowVenueCity(entry.show, t, locale) : entry.venue || entry.city;
+                  return (
+                    <div
+                      key={entry.showKey || idx}
+                      className="p-2 rounded border border-ink/20 bg-card space-y-0.5 text-[11px]"
+                    >
+                      {/* Line 1: Date and Location */}
+                      <div className="flex items-center justify-between text-[11px] font-mono leading-tight">
+                        <div className="flex items-center gap-1.5 font-extrabold text-ink tabular-nums">
+                          <span className="text-[10px] text-band-ink font-bold">#{num}</span>
+                          <span>{dateStr}</span>
+                        </div>
+                        {venueStr && (
+                          <span className="text-[10px] font-medium text-ink/80 truncate max-w-[60%]">
+                            📍 {venueStr}
+                          </span>
+                        )}
+                      </div>
+
+                      {/* Line 2: Tour / Show Title */}
+                      <div className="font-bold text-ink text-[12px] truncate leading-tight">
+                        {entry.title || "--"}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          )}
 
           <TicketPerforationDivider />
 
