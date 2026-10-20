@@ -108,8 +108,13 @@ export function MemorialCardModal({
   const showKey = show?.id || "show";
 
   const initialAttended = show ? getAttendedShow(showKey, storage) : null;
-  const [seat, setSeat] = useState(() => (initialSeat !== undefined ? initialSeat : initialAttended?.seat || ""));
-  const [notes, setNotes] = useState(() => (initialNotes !== undefined ? initialNotes : initialAttended?.notes || ""));
+  const initialResolvedSeat = initialSeat !== undefined ? initialSeat : initialAttended?.seat || "";
+  const initialResolvedNotes = initialNotes !== undefined ? initialNotes : initialAttended?.notes || "";
+
+  const [inputSeat, setInputSeat] = useState(initialResolvedSeat);
+  const [appliedSeat, setAppliedSeat] = useState(initialResolvedSeat);
+  const [inputNotes, setInputNotes] = useState(initialResolvedNotes);
+  const [appliedNotes, setAppliedNotes] = useState(initialResolvedNotes);
   const stampId = "default";
   const [includeSeat, setIncludeSeat] = useState(() =>
     initialAttended?.includeSeat !== undefined ? Boolean(initialAttended.includeSeat) : true
@@ -123,34 +128,55 @@ export function MemorialCardModal({
   const [imageUrls, setImageUrls] = useState({}); // { [`${showId}-${theme}-${locale}`]: dataUrl }
   const [isGenerating, setIsGenerating] = useState(false);
   const cardRef = useRef(null);
+  const debounceTimerRef = useRef(null);
 
   // Sync state if modal opens or showKey changes
   useEffect(() => {
     if (!isOpen || !show) return;
     const currentEntry = getAttendedShow(showKey, storage);
     if (currentEntry) {
-      if (initialSeat === undefined) setSeat(currentEntry.seat || "");
-      if (initialNotes === undefined) setNotes(currentEntry.notes || "");
+      const s = initialSeat !== undefined ? initialSeat : currentEntry.seat || "";
+      const n = initialNotes !== undefined ? initialNotes : currentEntry.notes || "";
+      setInputSeat(s);
+      setAppliedSeat(s);
+      setInputNotes(n);
+      setAppliedNotes(n);
       setIncludeSeat(currentEntry.includeSeat !== undefined ? Boolean(currentEntry.includeSeat) : true);
       setIncludeNotes(currentEntry.includeNotes !== undefined ? Boolean(currentEntry.includeNotes) : true);
     }
   }, [isOpen, showKey, storage, initialSeat, initialNotes]);
 
-  const persistCustomization = (updates = {}) => {
-    const newSeat = updates.seat !== undefined ? updates.seat : seat;
-    const newNotes = updates.notes !== undefined ? updates.notes : notes;
-    const newIncSeat = updates.includeSeat !== undefined ? updates.includeSeat : includeSeat;
-    const newIncNotes = updates.includeNotes !== undefined ? updates.includeNotes : includeNotes;
+  // Clean up timer on unmount
+  useEffect(() => {
+    return () => {
+      if (debounceTimerRef.current) {
+        clearTimeout(debounceTimerRef.current);
+      }
+    };
+  }, []);
+
+  const commitCustomization = (
+    nextSeat = inputSeat,
+    nextNotes = inputNotes,
+    nextIncSeat = includeSeat,
+    nextIncNotes = includeNotes
+  ) => {
+    if (debounceTimerRef.current) {
+      clearTimeout(debounceTimerRef.current);
+      debounceTimerRef.current = null;
+    }
+    setAppliedSeat(nextSeat);
+    setAppliedNotes(nextNotes);
 
     recordAttendance(
       showKey,
       {
         date: show?.date,
-        seat: newSeat,
-        notes: newNotes,
+        seat: nextSeat,
+        notes: nextNotes,
         stampId: "default",
-        includeSeat: newIncSeat,
-        includeNotes: newIncNotes,
+        includeSeat: nextIncSeat,
+        includeNotes: nextIncNotes,
       },
       storage
     );
@@ -158,24 +184,34 @@ export function MemorialCardModal({
 
   const handleSeatChange = (val) => {
     const trimmed = val.slice(0, 50);
-    setSeat(trimmed);
-    persistCustomization({ seat: trimmed });
+    setInputSeat(trimmed);
+    if (debounceTimerRef.current) clearTimeout(debounceTimerRef.current);
+    debounceTimerRef.current = setTimeout(() => {
+      commitCustomization(trimmed, inputNotes, includeSeat, includeNotes);
+    }, 600);
   };
 
   const handleNotesChange = (val) => {
     const trimmed = val.slice(0, 300);
-    setNotes(trimmed);
-    persistCustomization({ notes: trimmed });
+    setInputNotes(trimmed);
+    if (debounceTimerRef.current) clearTimeout(debounceTimerRef.current);
+    debounceTimerRef.current = setTimeout(() => {
+      commitCustomization(inputSeat, trimmed, includeSeat, includeNotes);
+    }, 600);
+  };
+
+  const handleInputBlur = () => {
+    commitCustomization(inputSeat, inputNotes, includeSeat, includeNotes);
   };
 
   const handleIncludeSeatChange = (val) => {
     setIncludeSeat(val);
-    persistCustomization({ includeSeat: val });
+    commitCustomization(inputSeat, inputNotes, val, includeNotes);
   };
 
   const handleIncludeNotesChange = (val) => {
     setIncludeNotes(val);
-    persistCustomization({ includeNotes: val });
+    commitCustomization(inputSeat, inputNotes, includeSeat, val);
   };
 
   const handleThemeChange = (newTheme) => {
@@ -189,7 +225,7 @@ export function MemorialCardModal({
 
   const cardBgColor = isVintage ? "#fcfaf2" : isWhite ? "#ffffff" : "#111319";
 
-  const customKey = `${includeSeat ? seat : ""}_${includeNotes ? notes : ""}_${stampId}`;
+  const customKey = `${includeSeat ? appliedSeat : ""}_${includeNotes ? appliedNotes : ""}_${stampId}`;
   const currentImageKey = getMemorialImageKey(showKey, theme, locale, customKey);
   const currentImageUrl = imageUrls[currentImageKey];
 
@@ -449,8 +485,9 @@ export function MemorialCardModal({
                     type="text"
                     data-testid="memorial-seat-input"
                     maxLength={50}
-                    value={seat}
+                    value={inputSeat}
                     onChange={(e) => handleSeatChange(e.target.value)}
+                    onBlur={handleInputBlur}
                     placeholder={t("memorial.seatPlaceholder", "例如：搖滾 A 區 12 排 34 號")}
                     className="w-full bg-[#1c202d] text-[#f3f4f6] border border-[#374151] rounded px-2.5 py-1 text-xs placeholder:text-[#6b7280] focus:border-[#d49a00] focus:outline-none font-mono"
                   />
@@ -478,8 +515,9 @@ export function MemorialCardModal({
                     data-testid="memorial-notes-input"
                     maxLength={300}
                     rows={2}
-                    value={notes}
+                    value={inputNotes}
                     onChange={(e) => handleNotesChange(e.target.value)}
+                    onBlur={handleInputBlur}
                     placeholder={t("memorial.notesPlaceholder", "寫下本場演出的難忘回憶（最多 300 字）...")}
                     className="w-full bg-[#1c202d] text-[#f3f4f6] border border-[#374151] rounded px-2.5 py-1 text-xs placeholder:text-[#6b7280] focus:border-[#d49a00] focus:outline-none"
                   />
@@ -599,7 +637,7 @@ export function MemorialCardModal({
                   </div>
 
                   {/* Seat Badge (Privacy controlled, >=7:1 AAA contrast) */}
-                  {seat && includeSeat && (
+                  {appliedSeat && includeSeat && (
                     <div
                       data-testid="ticket-seat-badge"
                       className={`inline-flex items-center gap-1.5 px-2 py-0.5 rounded-[3px] font-mono text-[11px] font-bold border mt-1 ${
@@ -611,7 +649,7 @@ export function MemorialCardModal({
                       }`}
                     >
                       <span className="font-bold text-[10px]">💺 SEAT:</span>
-                      <span className="font-black">{seat}</span>
+                      <span className="font-black">{appliedSeat}</span>
                     </div>
                   )}
                 </div>
@@ -622,7 +660,7 @@ export function MemorialCardModal({
                 </div>
 
                 {/* Notes Memo Block (Privacy controlled, >=7:1 AAA contrast, radius <8px) */}
-                {notes && includeNotes && (
+                {appliedNotes && includeNotes && (
                   <div
                     data-testid="ticket-notes-memo"
                     className={`rounded-[4px] p-2.5 text-[11px] leading-relaxed border border-dashed ${
@@ -633,10 +671,10 @@ export function MemorialCardModal({
                         : "bg-[#161922] text-[#f4f4f5] border-[#2e3444]"
                     }`}
                   >
-                    <div className="flex items-center justify-between font-mono text-[9px] font-extrabold uppercase tracking-wider pb-1 border-b border-current/20 mb-1">
+                    <div className="flex items-center justify-between font-mono text-[9px] font-extrabold uppercase tracking-wider pb-1 border-current/20 mb-1">
                       <span>◆ FAN MEMO // {t("memorial.notesLabel", "觀演隨筆")}</span>
                     </div>
-                    <p className="whitespace-pre-wrap break-words italic m-0 font-medium">"{notes}"</p>
+                    <p className="whitespace-pre-wrap break-words italic m-0 font-medium">"{appliedNotes}"</p>
                   </div>
                 )}
 
