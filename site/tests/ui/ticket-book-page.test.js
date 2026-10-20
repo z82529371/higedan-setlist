@@ -73,8 +73,8 @@ describe("23. Tour TicketBook Dedicated Page (#/tickets) & Timeline Management (
   };
 
   const mockUnitData = new Map([
-    ["asia-tour-2024", { unit: mockTourUnit1, full: new Map(), isTour: true }],
-    ["shocking-nuts-2023", { unit: mockTourUnit2, full: new Map(), isTour: true }],
+    ["asia-tour-2024", { unit: mockTourUnit1, shows: [mockShow1, mockShow2], full: new Map(), isTour: true }],
+    ["shocking-nuts-2023", { unit: mockTourUnit2, shows: [mockShow3], full: new Map(), isTour: true }],
   ]);
 
   const mockShowById = new Map([
@@ -385,18 +385,104 @@ describe("23. Tour TicketBook Dedicated Page (#/tickets) & Timeline Management (
     });
   });
 
-  describe("Subtest 6: Global Header & Mobile Drawer TicketBook Entrances with Dynamic Badge", () => {
-    it("renders TicketBook entrance with attended count badge in ArchiveHeader, FilterDrawer, and LandingHero", async () => {
+  describe("Subtest 6: Global Header, Mobile Floating Controls & Status Bar TicketBook Entrances with Dynamic Badge", () => {
+    it("renders TicketBook entrance with attended count badge only when count > 0, and hides it from LandingHero", async () => {
       const { I18nProvider } = await loadModule("/src/lib/i18n.jsx");
       const { ArchiveHeader } = await loadModule("/src/components/layout/ArchiveHeader.jsx");
       const { FilterDrawer } = await loadModule("/src/components/layout/FilterDrawer.jsx");
+      const { ArchiveStatusBar } = await loadModule("/src/components/layout/ArchiveStatusBar.jsx");
+      const { MobileFloatingControls } = await loadModule("/src/components/layout/MobileFloatingControls.jsx");
+      const LandingHero = (await loadModule("/src/components/LandingHero.jsx")).default;
+      const { TicketBookPage } = await loadModule("/src/components/ticket-book/TicketBookPage.jsx");
       const { recordAttendance, getSafeStorage } = await loadModule("/src/lib/ticket-book.js");
 
       const storage = getSafeStorage();
       storage.clear();
+
+      // Zero-count checks (when count === 0, badges must NOT render)
+      const zeroHeader = renderToStaticMarkup(
+        React.createElement(
+          I18nProvider,
+          { initialLocale: "zh-TW" },
+          React.createElement(ArchiveHeader, {
+            totalAllShows: 100,
+            allUsedSongs: [],
+            allVenues: [],
+            categoriesCount: 8,
+            tab: "show",
+            setTab: () => {},
+            setQ: () => {},
+            setIsFilterDrawerOpen: () => {},
+            storage,
+          })
+        )
+      );
+      assert.ok(!zeroHeader.includes('data-testid="header-ticket-book-btn"'), "ArchiveHeader must NOT render ticket button beside LanguageSwitcher");
+
+      const zeroStatusBar = renderToStaticMarkup(
+        React.createElement(
+          I18nProvider,
+          { initialLocale: "zh-TW" },
+          React.createElement(ArchiveStatusBar, {
+            tab: "show",
+            handleSelectTickets: () => {},
+            handleReturnHome: () => {},
+            slipRef: { current: null },
+            storage,
+          })
+        )
+      );
+      assert.ok(zeroStatusBar.includes('data-testid="status-bar-ticket-book-btn"'), "ArchiveStatusBar renders ticket button");
+      assert.ok(!zeroStatusBar.includes('data-testid="status-bar-ticket-badge-count"'), "ArchiveStatusBar must NOT render badge when count is 0");
+
+      const zeroMobileFab = renderToStaticMarkup(
+        React.createElement(
+          I18nProvider,
+          { initialLocale: "zh-TW" },
+          React.createElement(MobileFloatingControls, {
+            tab: "show",
+            onOpenSearch: () => {},
+            onOpenDrawer: () => {},
+            onReturnHome: () => {},
+            onSelectTickets: () => {},
+            storage,
+          })
+        )
+      );
+      assert.ok(zeroMobileFab.includes('data-testid="mobile-ticket-book-fab"'), "MobileFloatingControls renders mobile-ticket-book-fab");
+      assert.ok(!zeroMobileFab.includes('data-testid="mobile-ticket-badge-count"'), "MobileFloatingControls must NOT render badge when count is 0");
+
+      // Verify LandingHero does NOT render ticket book button
+      const heroHtml = renderToStaticMarkup(
+        React.createElement(
+          I18nProvider,
+          { initialLocale: "zh-TW" },
+          React.createElement(LandingHero, {
+            onEnterArchive: () => {},
+            onSelectSong: () => {},
+            onSelectUnit: () => {},
+            onSelectVenue: () => {},
+            onSelectShow: () => {},
+            onOpenCalendar: () => {},
+            onSelectTab: () => {},
+            totalAllShows: 100,
+            allUsedSongs: [],
+            allVenues: [],
+            allUnits: [],
+            q: "",
+            setQ: () => {},
+          })
+        )
+      );
+      assert.ok(!heroHtml.includes('data-testid="landing-ticket-book-btn"'), "LandingHero must NOT render ticket book button");
+      assert.ok(heroHtml.includes('data-testid="landing-feature-ticket-book"'), "LandingHero must render feature card for ticket book");
+      assert.ok(heroHtml.includes("個人巡演票夾"), "LandingHero feature card must show ticket book title");
+      assert.ok(heroHtml.includes("開啟我的巡演票夾"), "LandingHero feature card must show ticket book CTA");
+
+      // Now add 1 attendance record
       recordAttendance(mockShow1.id, { date: mockShow1.date }, storage);
 
-      // 1. ArchiveHeader
+      // 1. ArchiveHeader (count > 0 renders badge)
       const htmlHeader = renderToStaticMarkup(
         React.createElement(
           I18nProvider,
@@ -414,11 +500,43 @@ describe("23. Tour TicketBook Dedicated Page (#/tickets) & Timeline Management (
           })
         )
       );
-      assert.ok(htmlHeader.includes('data-testid="header-ticket-book-btn"'), "ArchiveHeader must render ticket-book button");
-      assert.ok(htmlHeader.includes('data-testid="ticket-badge-count"'), "ArchiveHeader must render badge count");
-      assert.ok(htmlHeader.includes(">1<"), "Badge count must display 1");
+      assert.ok(!htmlHeader.includes('data-testid="header-ticket-book-btn"'), "ArchiveHeader must NOT render ticket button beside LanguageSwitcher");
 
-      // 2. FilterDrawer
+      // 2. ArchiveStatusBar (count > 0 renders badge next to home)
+      const htmlStatusBar = renderToStaticMarkup(
+        React.createElement(
+          I18nProvider,
+          { initialLocale: "zh-TW" },
+          React.createElement(ArchiveStatusBar, {
+            tab: "show",
+            handleSelectTickets: () => {},
+            handleReturnHome: () => {},
+            slipRef: { current: null },
+            storage,
+          })
+        )
+      );
+      assert.ok(htmlStatusBar.includes('data-testid="status-bar-ticket-badge-count"'), "ArchiveStatusBar must render badge count when count > 0");
+
+      // 3. MobileFloatingControls (count > 0 renders badge)
+      const htmlMobileFab = renderToStaticMarkup(
+        React.createElement(
+          I18nProvider,
+          { initialLocale: "zh-TW" },
+          React.createElement(MobileFloatingControls, {
+            tab: "show",
+            onOpenSearch: () => {},
+            onOpenDrawer: () => {},
+            onReturnHome: () => {},
+            onSelectTickets: () => {},
+            storage,
+          })
+        )
+      );
+      assert.ok(htmlMobileFab.includes('data-testid="mobile-ticket-badge-count"'), "MobileFloatingControls must render mobile-ticket-badge-count when count > 0");
+      assert.ok(htmlMobileFab.includes(">1<"), "Mobile badge count must display 1");
+
+      // 4. FilterDrawer
       const htmlDrawer = renderToStaticMarkup(
         React.createElement(
           I18nProvider,
@@ -439,6 +557,131 @@ describe("23. Tour TicketBook Dedicated Page (#/tickets) & Timeline Management (
       assert.ok(htmlDrawer.includes('data-testid="drawer-ticket-book-btn"'), "FilterDrawer must render ticket-book button");
       assert.ok(htmlDrawer.includes('data-testid="drawer-ticket-badge-count"'), "FilterDrawer must render drawer badge count");
       assert.ok(htmlDrawer.includes(">1<"), "Drawer badge count must display 1");
+
+      // 5. TicketBookPage emoji audit & mobile floating docks
+      const htmlPage = renderToStaticMarkup(
+        React.createElement(
+          I18nProvider,
+          { initialLocale: "zh-TW" },
+          React.createElement(TicketBookPage, {
+            unitData: new Map(),
+            showById: new Map(),
+            unitIdByShowId: new Map(),
+            allUsedSongs: [],
+            onReturnArchive: () => {},
+            onReturnHome: () => {},
+            storage,
+          })
+        )
+      );
+      assert.ok(htmlPage.includes("🎟️"), "TicketBookPage must use 🎟️ emoji");
+      assert.ok(!htmlPage.includes("🛂"), "TicketBookPage must NOT contain legacy 🛂 emoji");
+      assert.ok(!htmlPage.includes("護照"), "TicketBookPage must NOT contain legacy 護照 keyword");
+      assert.ok(htmlPage.includes('data-testid="mobile-ticket-back-archive-fab"'), "TicketBookPage must render mobile back-archive FAB");
+      assert.ok(htmlPage.includes('data-testid="mobile-ticket-back-home-fab"'), "TicketBookPage must render mobile back-home FAB");
+      assert.ok(htmlPage.includes('data-testid="mobile-ticket-back-top-fab"'), "TicketBookPage must render mobile back-top FAB");
+      assert.ok(htmlPage.includes("hidden sm:flex"), "TicketBookPage top utility bar must be hidden on mobile");
+
+      storage.clear();
+    });
+  });
+
+  describe("Subtest 7: Quick Check-in in TourSlip Itinerary and ShowNavigator Attended Badges", () => {
+    it("renders quick attend button in TourSlip and dynamic attended badge in ShowNavigator without opening details", async () => {
+      const { I18nProvider } = await loadModule("/src/lib/i18n.jsx");
+      const { TourSlip } = await loadModule("/src/components/slips/TourSlip.jsx");
+      const { ShowNavigator } = await loadModule("/src/components/navigators/ShowNavigator.jsx");
+      const { recordAttendance, getSafeStorage } = await loadModule("/src/lib/ticket-book.js");
+
+      const storage = getSafeStorage();
+      storage.clear();
+
+      const mockTourData = {
+        unit: mockTourUnit1,
+        shows: [mockShow1, mockShow2],
+        full: new Map([
+          [mockShow1.id, [{ songId: "pretender", title: "Pretender" }]],
+          [mockShow2.id, [{ songId: "pretender", title: "Pretender" }]],
+        ]),
+        isTour: true,
+      };
+
+      // 1. TourSlip before attendance: shows must have un-attended quick check-in buttons
+      const htmlTourUnattended = renderToStaticMarkup(
+        React.createElement(
+          I18nProvider,
+          { initialLocale: "zh-TW" },
+          React.createElement(TourSlip, {
+            tourUnitData: mockTourUnit1,
+            ud: mockTourData,
+            storage,
+          })
+        )
+      );
+      assert.ok(htmlTourUnattended.includes(`data-testid="tour-stop-attend-btn-${mockShow1.id}"`), "TourSlip must render quick attend button for show 1");
+      assert.ok(htmlTourUnattended.includes(`data-testid="tour-stop-attend-btn-${mockShow2.id}"`), "TourSlip must render quick attend button for show 2");
+      assert.ok(htmlTourUnattended.includes("收進票夾"), "Quick attend button shows '收進票夾' when un-attended");
+
+      // 2. ShowNavigator before attendance: no attended checkmark badges
+      const htmlNavUnattended = renderToStaticMarkup(
+        React.createElement(
+          I18nProvider,
+          { initialLocale: "zh-TW" },
+          React.createElement(ShowNavigator, {
+            unitData: mockUnitData,
+            current: mockTourData,
+            selUnitId: "asia-tour-2024",
+            selCategory: "巡演專場",
+            unitsByCategory: { "巡演專場": [mockTourUnit1] },
+            categoryStats: { "巡演專場": { units: 1, shows: 2 } },
+            availableYears: ["2024"],
+            filteredUnits: [mockTourUnit1],
+            pagedUnits: [mockTourUnit1],
+            storage,
+          })
+        )
+      );
+      assert.ok(!htmlNavUnattended.includes(`data-testid="show-nav-attended-badge-${mockShow1.id}"`), "ShowNavigator must NOT have badge for show 1 before check-in");
+
+      // Now record attendance for show 1 only
+      recordAttendance(mockShow1.id, { date: mockShow1.date }, storage);
+
+      // 3. TourSlip after check-in: show 1 has attended checkmark; show 2 remains un-attended
+      const htmlTourAttended = renderToStaticMarkup(
+        React.createElement(
+          I18nProvider,
+          { initialLocale: "zh-TW" },
+          React.createElement(TourSlip, {
+            tourUnitData: mockTourUnit1,
+            ud: mockTourData,
+            storage,
+          })
+        )
+      );
+      assert.ok(htmlTourAttended.includes("已收進票夾"), "Quick attend button shows '已收進票夾' after check-in");
+      assert.ok(htmlTourAttended.includes("bg-tape"), "Quick attend button uses bg-tape when attended");
+
+      // 4. ShowNavigator after check-in: show 1 has checkmark badge; show 2 does not
+      const htmlNavAttended = renderToStaticMarkup(
+        React.createElement(
+          I18nProvider,
+          { initialLocale: "zh-TW" },
+          React.createElement(ShowNavigator, {
+            unitData: mockUnitData,
+            current: mockTourData,
+            selUnitId: "asia-tour-2024",
+            selCategory: "巡演專場",
+            unitsByCategory: { "巡演專場": [mockTourUnit1] },
+            categoryStats: { "巡演專場": { units: 1, shows: 2 } },
+            availableYears: ["2024"],
+            filteredUnits: [mockTourUnit1],
+            pagedUnits: [mockTourUnit1],
+            storage,
+          })
+        )
+      );
+      assert.ok(htmlNavAttended.includes(`data-testid="show-nav-attended-badge-${mockShow1.id}"`), "ShowNavigator must render attended badge for show 1");
+      assert.ok(!htmlNavAttended.includes(`data-testid="show-nav-attended-badge-${mockShow2.id}"`), "ShowNavigator must NOT render attended badge for un-attended show 2");
 
       storage.clear();
     });

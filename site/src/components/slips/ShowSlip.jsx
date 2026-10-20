@@ -405,7 +405,7 @@ export function ShowSlip({
                 title={
                   attended
                     ? t("ticketBook.attendedTitle", "已記錄參加，點擊可取消打卡")
-                    : t("ticketBook.checkinTitle", "記錄我參加過這場演出（登錄至巡演護照）")
+                    : t("ticketBook.checkinTitle", "記錄我參加過這場演出（登錄至巡演票夾）")
                 }
               >
                 <span aria-hidden="true">{attended ? "✓" : "🎟️"}</span>

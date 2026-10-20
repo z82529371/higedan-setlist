@@ -18,6 +18,7 @@ import {
   TicketBarcodeFooter,
 } from "./TicketCommon.jsx";
 import { useI18n } from "../../lib/i18n.jsx";
+import { useTicketBook, toggleAttendance } from "../../lib/ticket-book.js";
 
 function formatShowBadgeLabel(show, t) {
   if (!show) return "";
@@ -35,8 +36,11 @@ export function TourSlip({
   onSelectSong,
   onSelectShow,
   initialItineraryExpanded = false,
+  storage,
 }) {
   const { t, locale, localizeVenue } = useI18n();
+  const { payload: ticketPayload } = useTicketBook({ storage });
+  const attendedMap = ticketPayload?.attendedShows || {};
   const targetData = tourUnitData || ud || tourData;
 
   const statsResult = useMemo(() => {
@@ -601,7 +605,37 @@ export function TourSlip({
                           [{t("cities." + stop.city, stop.city)}]
                         </span>
                       )}
-                      <div className="ml-auto shrink-0 flex items-center">
+                      <div className="ml-auto shrink-0 flex items-center gap-1 sm:gap-1.5">
+                        <button
+                          type="button"
+                          data-testid={`tour-stop-attend-btn-${stop.id}`}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            toggleAttendance(stop.id, { date: stop.date }, storage);
+                          }}
+                          className={`inline-flex items-center gap-1 rounded-[3px] px-1.5 sm:px-2 py-0.5 sm:py-1 text-[11px] sm:text-xs font-mono font-bold transition-all cursor-pointer touch-stamp select-none border active:scale-95 ${
+                            attendedMap[stop.id]
+                              ? "bg-tape text-ink border-ink shadow-2xs hover:brightness-95"
+                              : "bg-paper text-ink border-line-soft hover:bg-tape-tint/50 hover:border-ink/60"
+                          }`}
+                          title={
+                            attendedMap[stop.id]
+                              ? t("ticketBook.attendedTitle", "已記錄參加，點擊可取消打卡")
+                              : t("ticketBook.checkinTitle", "記錄我參加過這場演出（登錄至巡演票夾）")
+                          }
+                          aria-label={
+                            attendedMap[stop.id]
+                              ? t("ticketBook.attendedTitle", "已記錄參加，點擊可取消打卡")
+                              : t("ticketBook.checkinTitle", "記錄我參加過這場演出（登錄至巡演票夾）")
+                          }
+                        >
+                          <span aria-hidden="true">{attendedMap[stop.id] ? "✓" : "🎟️"}</span>
+                          <span className="hidden sm:inline">
+                            {attendedMap[stop.id]
+                              ? t("ticketBook.attended", "已參加")
+                              : t("ticketBook.markAttended", "我參加過")}
+                          </span>
+                        </button>
                         <a
                           href={routeHash.show(stop.id, locale)}
                           onClick={(e) => {

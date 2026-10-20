@@ -26,6 +26,7 @@ export function ArchiveLayout({
   allVenues,
   allUnits,
   showById,
+  storage,
 }) {
   const { t } = useI18n();
   const {
@@ -131,6 +132,7 @@ export function ArchiveLayout({
       handleSelectUnit={handleSelectUnit}
       handleSelectShow={handleSelectShow}
       handleSelectTourMode={handleSelectTourMode}
+      storage={storage}
     />
   );
 
@@ -189,6 +191,7 @@ export function ArchiveLayout({
         slipRef={slipRef}
         handleReturnHome={handleReturnHome}
         handleSelectTickets={handleSelectTickets}
+        storage={storage}
       />
 
       {/* Main Page Container (Centered 960px) */}
@@ -203,7 +206,6 @@ export function ArchiveLayout({
           setTab={setTab}
           setQ={setQ}
           setIsFilterDrawerOpen={setIsFilterDrawerOpen}
-          onSelectTickets={handleSelectTickets}
         />
 
         {/* Global SearchBox (Desktop: 常駐展示；Mobile: 改由底部雙鍵 Dock Spotlight 喚起) */}
@@ -345,6 +347,7 @@ export function ArchiveLayout({
                     ud={current}
                     onSelectSong={handleSelectSong}
                     onSelectShow={handleSelectShow}
+                    storage={storage}
                   />
                 ) : (
                   <ShowSlip
@@ -353,6 +356,7 @@ export function ArchiveLayout({
                     onSelectSong={handleSelectSong}
                     onSelectShow={handleSelectShow}
                     onSelectVenue={handleSelectVenue}
+                    storage={storage}
                   />
                 )}
               </section>
@@ -527,6 +531,8 @@ export function ArchiveLayout({
         }}
         onOpenDrawer={openFilterDrawer}
         onReturnHome={handleReturnHome}
+        onSelectTickets={handleSelectTickets}
+        storage={storage}
       />
 
       {/* Mobile Search Spotlight Modal */}

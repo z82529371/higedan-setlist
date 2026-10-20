@@ -2,6 +2,7 @@ import { PaginationPills, PAGE_SIZE } from "./PaginationPills.jsx";
 import { PERFORMANCE_CATEGORIES } from "../../lib/constants.js";
 import { unitEarliest, shortUnitTitle, defaultShowId, formatShowPlace } from "../../lib/domain.js";
 import { useI18n } from "../../lib/i18n.jsx";
+import { useTicketBook } from "../../lib/ticket-book.js";
 
 export function ShowNavigator({
   isDrawer = false,
@@ -13,9 +14,9 @@ export function ShowNavigator({
   setSelYear,
   selUnitId,
   selShow,
-  unitPage,
+  unitPage = 0,
   setUnitPage,
-  showPage,
+  showPage = 0,
   setShowPage,
   unitsByCategory,
   categoryStats,
@@ -29,14 +30,17 @@ export function ShowNavigator({
   handleSelectUnit,
   handleSelectShow,
   handleSelectTourMode,
+  storage,
 }) {
     const { t } = useI18n();
+    const { payload: ticketPayload } = useTicketBook({ storage });
+    const attendedMap = ticketPayload?.attendedShows || {};
     const curCategory = isDrawer && draftState ? draftState.category : selCategory;
     const curYear = isDrawer && draftState ? draftState.year : selYear;
     const curUnitId = isDrawer && draftState ? draftState.unitId : selUnitId;
     const curShowId = isDrawer && draftState ? draftState.showId : selShow;
-    const curUnitPage = isDrawer && draftState ? draftState.unitPage : unitPage;
-    const curShowPage = isDrawer && draftState ? draftState.showPage : showPage;
+    const curUnitPage = (isDrawer && draftState ? draftState.unitPage : unitPage) || 0;
+    const curShowPage = (isDrawer && draftState ? draftState.showPage : showPage) || 0;
 
     const curUnits = unitsByCategory[curCategory] || [];
     const curYearStats = new Map();
@@ -358,6 +362,15 @@ export function ShowNavigator({
                     <span className="font-mono text-[10px] opacity-75 tabular-nums">
                       {songCnt > 0 ? `${songCnt}${t("navigators.songsUnit", "首")}` : t("navigators.noSetlist", "無歌單")}
                     </span>
+                    {attendedMap[s.id] && (
+                      <span
+                        data-testid={`show-nav-attended-badge-${s.id}`}
+                        className="inline-flex items-center justify-center rounded-full bg-tape text-ink font-bold text-[9px] w-3.5 h-3.5 border border-ink/40 tabular-nums shadow-2xs shrink-0 select-none"
+                        title={t("ticketBook.attended", "已參加")}
+                      >
+                        ✓
+                      </span>
+                    )}
                   </button>
                 );
               })}
