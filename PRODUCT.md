@@ -26,7 +26,7 @@ web
 
 - 桌面端與行動端瀏覽器（Web App），主要於觀賞演唱會前後、通勤聽歌、討論歌單或巡演回顧時查閱。
 - 資料層由 `data/tours/`、`data/events/` 與 `data/songs/` 結構化 JSON 驅動，經同步腳本（`sync-data.mjs`）構建為靜態/輕量前端資料包。
-- 互動核心採用雙模架構（Dual-Mode Architecture）：進站為極致留白之「純淨聚光燈首頁門面（Spotlight Landing Page）」，提供大型聚焦搜尋框、熱門探索標籤與三大特色亮點卡；進入「檔案庫檢索模式（Archive Mode）」後切換為緊湊 AppBar、單欄聚焦流視圖、四層膠囊導航（類型 → 年份 → 活動 → 場次）與自適應兩層分段分頁機制（`CHUNK_SIZE = 50`, `PAGE_SIZE = 10`）。
+- 互動核心採用雙模架構（Dual-Mode Architecture）：進站為極致留白之「純淨聚光燈首頁門面（Spotlight Landing Page）」，提供大型聚焦搜尋框、熱門探索標籤與四大核心特色亮點卡（雙向檢索、單場票根、一手考證、個人巡演票夾）；進入「檔案庫檢索模式（Archive Mode）」後切換為緊湊 AppBar、單欄聚焦流視圖、四層膠囊導航（類型 → 年份 → 活動 → 場次）與自適應兩層分段分頁機制（`CHUNK_SIZE = 50`, `PAGE_SIZE = 10`）。
 
 ## Capabilities and Constraints
 
@@ -35,6 +35,7 @@ web
 - **單欄聚焦流約束**：全站維持 `max-w-[960px] mx-auto` 單一垂直滾動軸，杜絕雙滾動條拉扯與雜亂視窗切換。
 - **嚴謹命名規範**：場館名稱約定中文為主、品牌劇場保留原文；演出標題保持純淨官方名，不追加城市後綴。
 - **Hash 路由穿透**：全域搜尋與分類切換與 URL Hash 雙向同步，支援深層連結直達特定歌曲或場次，外部深層連結自動直達檢索票券而不受首頁阻擋。
+- **個人巡演票夾與隱私參戰記錄（ADR-0114, ADR-0115）**：提供專屬票夾頁面（`#/tickets`）與本地離線參戰足跡追蹤（`hg_ticket_book_v1`）。歌迷可於巡演日程（`TourSlip`）就地一鍵收納場次，或於單場票根（`ShowSlip`）進行深度打卡（自訂座位、備忘筆記、實體印章），並即時連動 `ShowNavigator` 場次按鈕與狀態列動態數字徽章，零個人資料上傳。
 - **資料保護約束**：同步腳本嚴格保護使用者自訂 `shortTitle`，不允許無序覆寫。
 
 ## Component & Domain Terminology Mapping
@@ -51,6 +52,9 @@ web
 | **行動版篩選抽屜**（Filter Drawer） | 手機版底層彈出之階層篩選面板與麵包屑指示 | `site/src/components/layout/FilterDrawer.jsx` |
 | **全域搜尋彈窗**（Search Modal） | 四語系無阻力跨語檢索歌曲、場館、巡演與日期 | `site/src/components/SearchBox.jsx` |
 | **紀念卡片彈窗**（Memorial Card Modal） | 專場紀念票根點陣/懷舊視覺卡片渲染與 PNG 匯出 | `site/src/components/MemorialCardModal.jsx` |
+| **個人巡演票夾**（Ticket Book Page） | 歌迷個人參戰編年史時間軸、里程碑統計、自訂筆記印章與紀念票卡匯出 | `site/src/components/ticket-book/TicketBookPage.jsx` |
+| **巡演日程就地收進票夾**（Tour Slip Quick Check-in） | 於巡演總覽日程中免開票根快速標記「收進票夾 / 取消」 | `site/src/components/slips/TourSlip.jsx` |
+| **行動端懸浮控制項**（Mobile Floating Controls） | 手機版單手友善之雙側懸浮按鈕（首頁/置頂、票夾動態圓點、語言切換球） | `site/src/components/layout/MobileFloatingControls.jsx` |
 
 ## Brand Commitments
 
