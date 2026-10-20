@@ -76,6 +76,60 @@ try {
     }
   }
 
+
+  // Guardrail: Banned / Deprecated Domain Terms Guard (e.g. passport, #/passport)
+  const bannedPatterns = [
+    { regex: /\bpassport\b/i, label: "passport (deprecated in ADR-0114, use ticket-book / Ticket Book)" },
+    { regex: /#\/passport\b/i, label: "#/passport (deprecated in ADR-0114, use #/tickets)" },
+  ];
+
+  // Files exempted from banned terms check (ADR-0113 historical record and the guard script itself)
+  const isBannedExempt = (file) =>
+    file === "docs/adr/0113-personal-concert-passport-and-commemorative-card-architecture.md" ||
+    file === "docs/adr/0114-concert-ticket-book-domain-refactoring-and-passport-deprecation.md" ||
+    file === "site/scripts/check-staged.mjs";
+
+  const codeFilesStaged = staged.filter((file) =>
+    (file.startsWith("site/src/") || file.startsWith("site/tests/")) && !isBannedExempt(file)
+  );
+
+  const termViolations = [];
+  for (const file of codeFilesStaged) {
+    try {
+      const content = execSync(`git show :"${file}"`, { encoding: "utf8" });
+      const lines = content.split(/\r?\n/);
+      lines.forEach((line, idx) => {
+        // Skip migration legacy key read in ticket-book.js
+        if (file === "site/src/lib/ticket-book.js" && line.includes("LEGACY_PASSPORT_STORAGE_KEY")) return;
+        if (file === "site/src/lib/ticket-book.js" && line.includes("hg_passport_v1")) return;
+
+        for (const { regex, label } of bannedPatterns) {
+          if (regex.test(line)) {
+            termViolations.push({
+              file,
+              lineNum: idx + 1,
+              line: line.trim(),
+              label,
+            });
+          }
+        }
+      });
+    } catch {
+      // Ignore if file show fails
+    }
+  }
+
+  if (termViolations.length > 0) {
+    console.error("\n❌ [Banned / Deprecated Domain Terms Violation]");
+    console.error("The following staged files contain deprecated terms (superseded by ADR-0114):");
+    for (const v of termViolations) {
+      console.error(`  - ${v.file}:${v.lineNum} -> ${v.label}`);
+      console.error(`    "${v.line}"`);
+    }
+    console.error("\nPlease replace all deprecated terminology before committing.");
+    process.exit(1);
+  }
+
   console.log(`✓ Staged files hygiene check passed (${staged.length} file${staged.length === 1 ? "" : "s"} staged):`);
   for (const file of staged) {
     console.log(`  • ${file}`);
