@@ -1,9 +1,9 @@
 import songsData from "../data/songs.json";
 
 /**
- * passport-milestones.js — Dynamic Concert Passport Milestones & Repertoire Engine
+ * ticket-book-milestones.js — Dynamic Concert Ticket Book Milestones & Repertoire Engine
  *
- * Implements statistical metrics calculation for the concert passport (Issue #37):
+ * Implements statistical metrics calculation for the concert ticket book (Issue #37, ADR-0114):
  * 1. 總場次 (totalShows)
  * 2. 跨越巡演數 (totalTours)
  * 3. 踩點場館數 (totalVenues)
@@ -13,7 +13,7 @@ import songsData from "../data/songs.json";
  * 7. 最初與最近參戰紀錄 (earliestShow, latestShow)
  */
 
-export function computePassportMilestones({
+export function computeTicketBookMilestones({
   attendedShows = [],
   unitData = null,
   showById = null,
@@ -101,33 +101,42 @@ export function computePassportMilestones({
     }
   }
 
-  // 6. Song catalog & coverage computation
+  // Calculate coverage
   const unlockedSongCount = unlockedSongIds.size;
   const coveragePercentage =
-    totalCatalogSongs > 0 ? Math.round((unlockedSongCount / totalCatalogSongs) * 1000) / 10 : 0;
+    totalCatalogSongs > 0
+      ? Math.round((unlockedSongCount / totalCatalogSongs) * 1000) / 10
+      : 0;
 
-  // Build title lookup
+  // Build catalog song title lookup
   const songTitleMap = new Map();
-  if (Array.isArray(catalog)) {
-    for (const s of catalog) {
-      if (s?.id && s?.title) {
-        songTitleMap.set(s.id, s.title);
-      }
+  for (const s of catalog) {
+    if (s?.id) {
+      songTitleMap.set(s.id, s.title || s.name || s.id);
     }
   }
 
-  // 7. Top 3 Live Songs
-  const topSongs = Object.entries(songPlayCounts)
-    .map(([songId, count]) => {
-      const title = songTitleMap.get(songId) || songId;
-      return { songId, count, title };
-    })
-    .sort((a, b) => b.count - a.count || a.title.localeCompare(b.title))
-    .slice(0, 3)
-    .map((item, idx) => ({ ...item, rank: idx + 1 }));
+  // Calculate top songs
+  const sortedSongIds = Object.keys(songPlayCounts).sort((a, b) => {
+    const diff = songPlayCounts[b] - songPlayCounts[a];
+    if (diff !== 0) return diff;
+    return a.localeCompare(b);
+  });
 
-  // 8. Earliest & Latest Shows
-  validShows.sort((a, b) => (a.date < b.date ? -1 : a.date > b.date ? 1 : 0));
+  const topSongs = sortedSongIds.slice(0, 3).map((songId, index) => ({
+    rank: index + 1,
+    songId,
+    title: songTitleMap.get(songId) || songId,
+    count: songPlayCounts[songId],
+  }));
+
+  // Sort chronological for earliest/latest
+  validShows.sort((a, b) => {
+    const c = a.date.localeCompare(b.date);
+    if (c !== 0) return c;
+    return a.showKey.localeCompare(b.showKey);
+  });
+
   const earliestShow = validShows.length > 0 ? validShows[0] : null;
   const latestShow = validShows.length > 0 ? validShows[validShows.length - 1] : null;
 

@@ -1,5 +1,5 @@
 /**
- * stamps.js — Commemorative Stamp Registry for Concert Passport & Memorial Cards
+ * stamps.js — Commemorative Stamp Registry for Concert Ticket Book & Memorial Cards
  *
  * Defines the available commemorative stamp designs for concert cards (Issue #36).
  */

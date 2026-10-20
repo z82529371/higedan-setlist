@@ -1,7 +1,7 @@
 import { useI18n } from "../../lib/i18n.jsx";
 import { showDate, formatShowVenueCity } from "../../lib/domain.js";
 
-export function PassportMilestoneDashboard({ milestones, onOpenSummaryCard }) {
+export function TicketBookMilestoneDashboard({ milestones, onOpenSummaryCard }) {
   const { t, locale } = useI18n();
 
   if (!milestones) return null;
@@ -12,7 +12,7 @@ export function PassportMilestoneDashboard({ milestones, onOpenSummaryCard }) {
 
   return (
     <div
-      data-testid="passport-milestones-dashboard"
+      data-testid="ticket-book-milestones-dashboard"
       className="mb-6 rounded-[6px] border-[1.5px] border-ink bg-card p-4 sm:p-5 shadow-[2.5px_2.5px_0_rgba(0,0,0,0.08)]"
     >
       {/* Header bar: Title & Export CTA */}
@@ -23,7 +23,7 @@ export function PassportMilestoneDashboard({ milestones, onOpenSummaryCard }) {
           </span>
           <div>
             <h2 className="m-0 font-display text-[15px] sm:text-[16px] font-bold text-ink leading-tight">
-              {t("passport.milestonesTitle", "生涯里程碑")}
+              {t("ticketBook.milestonesTitle", "生涯里程碑")}
             </h2>
             <p className="m-0 mt-0.5 font-mono text-[10px] sm:text-[11px] font-bold text-ink uppercase tracking-wider">
               CAREER MILESTONES & REPERTOIRE
@@ -37,10 +37,10 @@ export function PassportMilestoneDashboard({ milestones, onOpenSummaryCard }) {
             data-testid="generate-summary-card-btn"
             onClick={onOpenSummaryCard}
             className="inline-flex items-center justify-center gap-1.5 rounded-[4px] bg-band text-band-ink font-bold text-[11px] sm:text-[12px] px-3.5 py-1.5 border-[1.5px] border-ink shadow-2xs hover:brightness-105 transition-all cursor-pointer touch-stamp self-start sm:self-auto"
-            title={t("passport.generateCard", "產生生涯總結小卡")}
+            title={t("ticketBook.generateCard", "產生生涯總結小卡")}
           >
             <span aria-hidden="true">🎫</span>
-            <span>{t("passport.generateCard", "產生生涯總結小卡")}</span>
+            <span>{t("ticketBook.generateCard", "產生生涯總結小卡")}</span>
             <span aria-hidden="true">✨</span>
           </button>
         )}
@@ -54,13 +54,13 @@ export function PassportMilestoneDashboard({ milestones, onOpenSummaryCard }) {
           className="rounded-[4px] border border-ink/20 bg-paper/60 p-2.5 sm:p-3 text-center flex flex-col justify-between"
         >
           <div className="font-mono text-[10px] sm:text-[11px] font-bold text-ink uppercase">
-            {t("passport.totalShows", "總場次")}
+            {t("ticketBook.totalShows", "總場次")}
           </div>
           <div className="my-1 font-mono text-[18px] sm:text-[22px] font-black text-ink leading-none">
             {milestones.totalShows}
           </div>
           <div className="font-mono text-[10px] text-ink font-bold">
-            {t("passport.showsUnit", "{count} 場", { count: milestones.totalShows })}
+            {t("ticketBook.showsUnit", "{count} 場", { count: milestones.totalShows })}
           </div>
         </div>
 
@@ -70,13 +70,13 @@ export function PassportMilestoneDashboard({ milestones, onOpenSummaryCard }) {
           className="rounded-[4px] border border-ink/20 bg-paper/60 p-2.5 sm:p-3 text-center flex flex-col justify-between"
         >
           <div className="font-mono text-[10px] sm:text-[11px] font-bold text-ink uppercase">
-            {t("passport.totalTours", "巡演數")}
+            {t("ticketBook.totalTours", "巡演數")}
           </div>
           <div className="my-1 font-mono text-[18px] sm:text-[22px] font-black text-ink leading-none">
             {milestones.totalTours}
           </div>
           <div className="font-mono text-[10px] text-ink font-bold">
-            {t("passport.toursUnit", "{count} 巡演", { count: milestones.totalTours })}
+            {t("ticketBook.toursUnit", "{count} 巡演", { count: milestones.totalTours })}
           </div>
         </div>
 
@@ -86,13 +86,13 @@ export function PassportMilestoneDashboard({ milestones, onOpenSummaryCard }) {
           className="rounded-[4px] border border-ink/20 bg-paper/60 p-2.5 sm:p-3 text-center flex flex-col justify-between"
         >
           <div className="font-mono text-[10px] sm:text-[11px] font-bold text-ink uppercase">
-            {t("passport.totalCities", "足跡城市")}
+            {t("ticketBook.totalCities", "足跡城市")}
           </div>
           <div className="my-1 font-mono text-[18px] sm:text-[22px] font-black text-ink leading-none">
             {milestones.totalCities}
           </div>
           <div className="font-mono text-[10px] text-ink font-bold">
-            {t("passport.citiesUnit", "{count} 城市", { count: milestones.totalCities })}
+            {t("ticketBook.citiesUnit", "{count} 城市", { count: milestones.totalCities })}
           </div>
         </div>
 
@@ -102,7 +102,7 @@ export function PassportMilestoneDashboard({ milestones, onOpenSummaryCard }) {
           className="rounded-[4px] border border-ink/20 bg-paper/60 p-2.5 sm:p-3 text-center flex flex-col justify-between"
         >
           <div className="font-mono text-[10px] sm:text-[11px] font-bold text-ink uppercase">
-            {t("passport.coverage", "歌曲解鎖率")}
+            {t("ticketBook.coverage", "歌曲解鎖率")}
           </div>
           <div className="my-1 font-mono text-[18px] sm:text-[22px] font-black text-ink leading-none">
             {milestones.coveragePercentage}%
@@ -120,7 +120,7 @@ export function PassportMilestoneDashboard({ milestones, onOpenSummaryCard }) {
           <div className="flex items-center justify-between mb-2 pb-1.5 border-b border-line-soft/60">
             <span className="font-mono text-[11px] font-bold text-ink uppercase flex items-center gap-1">
               <span>🔥</span>
-              <span>{t("passport.topSongs", "現場神曲 Top 3")}</span>
+              <span>{t("ticketBook.topSongs", "現場神曲 Top 3")}</span>
             </span>
           </div>
 
@@ -143,7 +143,7 @@ export function PassportMilestoneDashboard({ milestones, onOpenSummaryCard }) {
                       <span className="font-bold text-ink truncate">{song.title}</span>
                     </div>
                     <span className="shrink-0 font-mono text-[11px] font-bold text-ink">
-                      {t("passport.timesUnit", "{count} 次", { count: song.count })}
+                      {t("ticketBook.timesUnit", "{count} 次", { count: song.count })}
                     </span>
                   </div>
                 );
@@ -168,7 +168,7 @@ export function PassportMilestoneDashboard({ milestones, onOpenSummaryCard }) {
               className="bg-card p-2 rounded border border-ink/15 text-[11px]"
             >
               <div className="flex items-center justify-between text-ink font-mono font-bold mb-0.5">
-                <span>{t("passport.firstShow", "最初參戰")}</span>
+                <span>{t("ticketBook.firstShow", "最初參戰")}</span>
                 <span>{earliest?.date ? (earliest.show ? showDate(earliest.show, locale) : earliest.date) : "--"}</span>
               </div>
               <div className="font-bold text-ink truncate text-[12px]">
@@ -187,7 +187,7 @@ export function PassportMilestoneDashboard({ milestones, onOpenSummaryCard }) {
               className="bg-card p-2 rounded border border-ink/15 text-[11px]"
             >
               <div className="flex items-center justify-between text-ink font-mono font-bold mb-0.5">
-                <span>{t("passport.latestShow", "最近參戰")}</span>
+                <span>{t("ticketBook.latestShow", "最近參戰")}</span>
                 <span>{latest?.date ? (latest.show ? showDate(latest.show, locale) : latest.date) : "--"}</span>
               </div>
               <div className="font-bold text-ink truncate text-[12px]">

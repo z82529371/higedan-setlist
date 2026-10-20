@@ -19,7 +19,7 @@ if (!globalThis.document) {
   };
 }
 
-describe("23. Tour Passport Dedicated Page (#/passport) & Timeline Management (#35)", () => {
+describe("23. Tour TicketBook Dedicated Page (#/tickets) & Timeline Management (#35)", () => {
   const mockShow1 = {
     id: "1720174",
     date: "2024-11-30",
@@ -89,46 +89,46 @@ describe("23. Tour Passport Dedicated Page (#/passport) & Timeline Management (#
     [mockShow3.id, "shocking-nuts-2023"],
   ]);
 
-  describe("Subtest 1: URL Hash Route State Machine (#/passport) & Navigation Invariants", () => {
-    it("parses and generates #/passport route hashes bidirectionally with language support", async () => {
+  describe("Subtest 1: URL Hash Route State Machine (#/tickets) & Navigation Invariants", () => {
+    it("parses and generates #/tickets route hashes bidirectionally with language support", async () => {
       const { parseRoute, buildRouteHash, routeHash } = await loadModule("/src/lib/routes.js");
 
       // 1. Parsing variations
-      assert.deepStrictEqual(parseRoute("#/passport"), { kind: "passport", value: null });
-      assert.deepStrictEqual(parseRoute("/#/passport"), { kind: "passport", value: null });
-      assert.deepStrictEqual(parseRoute("#/passport/"), { kind: "passport", value: null });
-      assert.deepStrictEqual(parseRoute("/passport"), { kind: "passport", value: null });
+      assert.deepStrictEqual(parseRoute("#/tickets"), { kind: "tickets", value: null });
+      assert.deepStrictEqual(parseRoute("/#/tickets"), { kind: "tickets", value: null });
+      assert.deepStrictEqual(parseRoute("#/tickets/"), { kind: "tickets", value: null });
+      assert.deepStrictEqual(parseRoute("/tickets"), { kind: "tickets", value: null });
 
       // Language parameter preservation
-      assert.deepStrictEqual(parseRoute("#/passport?lang=ja"), {
-        kind: "passport",
+      assert.deepStrictEqual(parseRoute("#/tickets?lang=ja"), {
+        kind: "tickets",
         value: null,
         lang: "ja",
       });
-      assert.deepStrictEqual(parseRoute("#/passport?lang=en"), {
-        kind: "passport",
+      assert.deepStrictEqual(parseRoute("#/tickets?lang=en"), {
+        kind: "tickets",
         value: null,
         lang: "en",
       });
 
       // 2. Hash generation
-      assert.strictEqual(buildRouteHash("passport"), "#/passport");
-      assert.strictEqual(buildRouteHash("passport", null, { lang: "ja" }), "#/passport?lang=ja");
-      assert.strictEqual(buildRouteHash("passport", null, { lang: "zh-TW" }), "#/passport"); // zh-TW is default
+      assert.strictEqual(buildRouteHash("tickets"), "#/tickets");
+      assert.strictEqual(buildRouteHash("tickets", null, { lang: "ja" }), "#/tickets?lang=ja");
+      assert.strictEqual(buildRouteHash("tickets", null, { lang: "zh-TW" }), "#/tickets"); // zh-TW is default
 
       // 3. routeHash helper
-      assert.strictEqual(typeof routeHash.passport, "function");
-      assert.strictEqual(routeHash.passport(), "#/passport");
-      assert.strictEqual(routeHash.passport({ lang: "ko" }), "#/passport?lang=ko");
+      assert.strictEqual(typeof routeHash.tickets, "function");
+      assert.strictEqual(routeHash.tickets(), "#/tickets");
+      assert.strictEqual(routeHash.tickets({ lang: "ko" }), "#/tickets?lang=ko");
     });
 
-    it("penetrates direct deep link for passport (#/passport) setting viewMode to 'passport'", async () => {
+    it("penetrates direct deep link for ticket-book (#/tickets) setting viewMode to 'tickets'", async () => {
       const { useArchiveRoute } = await loadModule("/src/hooks/useArchiveRoute.js");
       const { useArchiveFilter } = await loadModule("/src/hooks/useArchiveFilter.js");
       const { allUnits, buildIndex } = await loadModule("/src/lib/domain.js");
       const index = buildIndex();
 
-      globalThis.window.location.hash = "#/passport";
+      globalThis.window.location.hash = "#/tickets";
       let capturedRoute = null;
 
       function TestHookRunner() {
@@ -156,19 +156,19 @@ describe("23. Tour Passport Dedicated Page (#/passport) & Timeline Management (#
 
       renderToStaticMarkup(React.createElement(TestHookRunner));
       assert.ok(capturedRoute);
-      assert.strictEqual(capturedRoute.viewMode, "passport", "viewMode must be 'passport' on #/passport deep link");
-      assert.strictEqual(typeof capturedRoute.handleSelectPassport, "function");
+      assert.strictEqual(capturedRoute.viewMode, "tickets", "viewMode must be 'tickets' on #/tickets deep link");
+      assert.strictEqual(typeof capturedRoute.handleSelectTickets, "function");
       assert.strictEqual(typeof capturedRoute.handleReturnArchive, "function");
     });
   });
 
-  describe("Subtest 2: Passport Domain Hook (usePassport)", () => {
-    it("provides reactive passport state, attended count, attendedShows array, and atomic remove", async () => {
+  describe("Subtest 2: TicketBook Domain Hook (useTicketBook)", () => {
+    it("provides reactive ticket-book state, attended count, attendedShows array, and atomic remove", async () => {
       const {
-        usePassport,
+        useTicketBook,
         recordAttendance,
         getSafeStorage,
-      } = await loadModule("/src/lib/passport.js");
+      } = await loadModule("/src/lib/ticket-book.js");
 
       const storage = getSafeStorage();
       storage.clear();
@@ -178,7 +178,7 @@ describe("23. Tour Passport Dedicated Page (#/passport) & Timeline Management (#
 
       let hookResult = null;
       function TestHook() {
-        hookResult = usePassport({ storage });
+        hookResult = useTicketBook({ storage });
         return null;
       }
 
@@ -190,7 +190,7 @@ describe("23. Tour Passport Dedicated Page (#/passport) & Timeline Management (#
 
       // Test remove
       hookResult.remove("1720174");
-      const checkPayload = JSON.parse(storage.getItem("hg_passport_v1"));
+      const checkPayload = JSON.parse(storage.getItem("hg_ticket_book_v1"));
       assert.strictEqual(Boolean(checkPayload.attendedShows["1720174"]), false);
       assert.strictEqual(Boolean(checkPayload.attendedShows["1720175"]), true);
 
@@ -198,11 +198,11 @@ describe("23. Tour Passport Dedicated Page (#/passport) & Timeline Management (#
     });
   });
 
-  describe("Subtest 3: Passport Empty State & Exploration Flow", () => {
+  describe("Subtest 3: TicketBook Empty State & Exploration Flow", () => {
     it("renders ticket-aesthetic Empty State with exploration CTA when 0 shows are attended", async () => {
       const { I18nProvider } = await loadModule("/src/lib/i18n.jsx");
-      const { PassportPage } = await loadModule("/src/components/passport/PassportPage.jsx");
-      const { getSafeStorage } = await loadModule("/src/lib/passport.js");
+      const { TicketBookPage } = await loadModule("/src/components/ticket-book/TicketBookPage.jsx");
+      const { getSafeStorage } = await loadModule("/src/lib/ticket-book.js");
 
       const storage = getSafeStorage();
       storage.clear();
@@ -213,7 +213,7 @@ describe("23. Tour Passport Dedicated Page (#/passport) & Timeline Management (#
         React.createElement(
           I18nProvider,
           { initialLocale: "zh-TW" },
-          React.createElement(PassportPage, {
+          React.createElement(TicketBookPage, {
             unitData: mockUnitData,
             showById: mockShowById,
             unitIdByShowId: mockUnitIdByShowId,
@@ -225,18 +225,18 @@ describe("23. Tour Passport Dedicated Page (#/passport) & Timeline Management (#
         )
       );
 
-      assert.ok(htmlZh.includes('data-testid="passport-empty-state"'), "Must render passport-empty-state");
-      assert.ok(htmlZh.includes("尚未登錄任何參戰紀錄"), "Must display empty title");
+      assert.ok(htmlZh.includes('data-testid="ticket-book-empty-state"'), "Must render ticket-book-empty-state");
+      assert.ok(htmlZh.includes("尚未收藏任何參戰票根"), "Must display empty title");
       assert.ok(htmlZh.includes("開始探索演出場次"), "Must display explore CTA button");
-      assert.ok(htmlZh.includes('data-testid="passport-explore-cta"'), "Must render passport-explore-cta button");
+      assert.ok(htmlZh.includes('data-testid="ticket-book-explore-cta"'), "Must render ticket-book-explore-cta button");
     });
   });
 
   describe("Subtest 4: Timeline List Presentation, Badges & Show Details", () => {
     it("renders attended shows timeline in reverse chronological order with tickets, venues, and actions", async () => {
       const { I18nProvider } = await loadModule("/src/lib/i18n.jsx");
-      const { PassportPage } = await loadModule("/src/components/passport/PassportPage.jsx");
-      const { recordAttendance, getSafeStorage } = await loadModule("/src/lib/passport.js");
+      const { TicketBookPage } = await loadModule("/src/components/ticket-book/TicketBookPage.jsx");
+      const { recordAttendance, getSafeStorage } = await loadModule("/src/lib/ticket-book.js");
 
       const storage = getSafeStorage();
       storage.clear();
@@ -258,7 +258,7 @@ describe("23. Tour Passport Dedicated Page (#/passport) & Timeline Management (#
         React.createElement(
           I18nProvider,
           { initialLocale: "zh-TW" },
-          React.createElement(PassportPage, {
+          React.createElement(TicketBookPage, {
             unitData: mockUnitData,
             showById: mockShowById,
             unitIdByShowId: mockUnitIdByShowId,
@@ -268,7 +268,7 @@ describe("23. Tour Passport Dedicated Page (#/passport) & Timeline Management (#
       );
 
       // Verify header summary badge
-      assert.ok(htmlZh.includes('data-testid="passport-total-badge"'), "Must render passport-total-badge");
+      assert.ok(htmlZh.includes('data-testid="ticket-book-total-badge"'), "Must render ticket-book-total-badge");
       assert.ok(htmlZh.includes("累計參戰 3 場"), "Must display total count of 3 shows");
 
       // Verify timeline items rendered
@@ -302,8 +302,8 @@ describe("23. Tour Passport Dedicated Page (#/passport) & Timeline Management (#
   describe("Subtest 5: Year & Tour Keyword Filtering", () => {
     it("filters timeline by year and tour/venue keywords", async () => {
       const { I18nProvider } = await loadModule("/src/lib/i18n.jsx");
-      const { PassportPage } = await loadModule("/src/components/passport/PassportPage.jsx");
-      const { recordAttendance, getSafeStorage } = await loadModule("/src/lib/passport.js");
+      const { TicketBookPage } = await loadModule("/src/components/ticket-book/TicketBookPage.jsx");
+      const { recordAttendance, getSafeStorage } = await loadModule("/src/lib/ticket-book.js");
 
       const storage = getSafeStorage();
       storage.clear();
@@ -317,7 +317,7 @@ describe("23. Tour Passport Dedicated Page (#/passport) & Timeline Management (#
         React.createElement(
           I18nProvider,
           { initialLocale: "zh-TW" },
-          React.createElement(PassportPage, {
+          React.createElement(TicketBookPage, {
             unitData: mockUnitData,
             showById: mockShowById,
             unitIdByShowId: mockUnitIdByShowId,
@@ -325,15 +325,15 @@ describe("23. Tour Passport Dedicated Page (#/passport) & Timeline Management (#
           })
         )
       );
-      assert.ok(htmlInitial.includes('data-testid="passport-year-filter"'));
-      assert.ok(htmlInitial.includes('data-testid="passport-search-input"'));
+      assert.ok(htmlInitial.includes('data-testid="ticket-book-year-filter"'));
+      assert.ok(htmlInitial.includes('data-testid="ticket-book-search-input"'));
 
       // 2. Filter by Year 2023 only
       const html2023 = renderToStaticMarkup(
         React.createElement(
           I18nProvider,
           { initialLocale: "zh-TW" },
-          React.createElement(PassportPage, {
+          React.createElement(TicketBookPage, {
             unitData: mockUnitData,
             showById: mockShowById,
             unitIdByShowId: mockUnitIdByShowId,
@@ -351,7 +351,7 @@ describe("23. Tour Passport Dedicated Page (#/passport) & Timeline Management (#
         React.createElement(
           I18nProvider,
           { initialLocale: "zh-TW" },
-          React.createElement(PassportPage, {
+          React.createElement(TicketBookPage, {
             unitData: mockUnitData,
             showById: mockShowById,
             unitIdByShowId: mockUnitIdByShowId,
@@ -369,7 +369,7 @@ describe("23. Tour Passport Dedicated Page (#/passport) & Timeline Management (#
         React.createElement(
           I18nProvider,
           { initialLocale: "zh-TW" },
-          React.createElement(PassportPage, {
+          React.createElement(TicketBookPage, {
             unitData: mockUnitData,
             showById: mockShowById,
             unitIdByShowId: mockUnitIdByShowId,
@@ -378,19 +378,19 @@ describe("23. Tour Passport Dedicated Page (#/passport) & Timeline Management (#
           })
         )
       );
-      assert.ok(htmlNoMatch.includes('data-testid="passport-no-match"'));
+      assert.ok(htmlNoMatch.includes('data-testid="ticket-book-no-match"'));
       assert.ok(htmlNoMatch.includes("無符合條件的參戰場次"));
 
       storage.clear();
     });
   });
 
-  describe("Subtest 6: Global Header & Mobile Drawer Passport Entrances with Dynamic Badge", () => {
-    it("renders Passport entrance with attended count badge in ArchiveHeader, FilterDrawer, and LandingHero", async () => {
+  describe("Subtest 6: Global Header & Mobile Drawer TicketBook Entrances with Dynamic Badge", () => {
+    it("renders TicketBook entrance with attended count badge in ArchiveHeader, FilterDrawer, and LandingHero", async () => {
       const { I18nProvider } = await loadModule("/src/lib/i18n.jsx");
       const { ArchiveHeader } = await loadModule("/src/components/layout/ArchiveHeader.jsx");
       const { FilterDrawer } = await loadModule("/src/components/layout/FilterDrawer.jsx");
-      const { recordAttendance, getSafeStorage } = await loadModule("/src/lib/passport.js");
+      const { recordAttendance, getSafeStorage } = await loadModule("/src/lib/ticket-book.js");
 
       const storage = getSafeStorage();
       storage.clear();
@@ -414,8 +414,8 @@ describe("23. Tour Passport Dedicated Page (#/passport) & Timeline Management (#
           })
         )
       );
-      assert.ok(htmlHeader.includes('data-testid="header-passport-btn"'), "ArchiveHeader must render passport button");
-      assert.ok(htmlHeader.includes('data-testid="passport-badge-count"'), "ArchiveHeader must render badge count");
+      assert.ok(htmlHeader.includes('data-testid="header-ticket-book-btn"'), "ArchiveHeader must render ticket-book button");
+      assert.ok(htmlHeader.includes('data-testid="ticket-badge-count"'), "ArchiveHeader must render badge count");
       assert.ok(htmlHeader.includes(">1<"), "Badge count must display 1");
 
       // 2. FilterDrawer
@@ -436,8 +436,8 @@ describe("23. Tour Passport Dedicated Page (#/passport) & Timeline Management (#
           })
         )
       );
-      assert.ok(htmlDrawer.includes('data-testid="drawer-passport-btn"'), "FilterDrawer must render passport button");
-      assert.ok(htmlDrawer.includes('data-testid="drawer-passport-badge-count"'), "FilterDrawer must render drawer badge count");
+      assert.ok(htmlDrawer.includes('data-testid="drawer-ticket-book-btn"'), "FilterDrawer must render ticket-book button");
+      assert.ok(htmlDrawer.includes('data-testid="drawer-ticket-badge-count"'), "FilterDrawer must render drawer badge count");
       assert.ok(htmlDrawer.includes(">1<"), "Drawer badge count must display 1");
 
       storage.clear();

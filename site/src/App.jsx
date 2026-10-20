@@ -1,7 +1,7 @@
 import { Fragment, useMemo } from "react";
 import { allUnits, buildIndex } from "./lib/domain.js";
 import { ArchiveLayout } from "./components/layout/index.js";
-import { PassportPage } from "./components/passport/PassportPage.jsx";
+import { TicketBookPage } from "./components/ticket-book/TicketBookPage.jsx";
 import { useArchiveFilter, useArchiveRoute } from "./hooks/index.js";
 import { I18nProvider } from "./lib/i18n.jsx";
 import LandingHero from "./components/LandingHero.jsx";
@@ -60,7 +60,7 @@ export function AppContent({ probeRoute } = {}) {
     handleSelectSong,
     handleSelectVenue,
     handleSelectUnit,
-    handleSelectPassport,
+    handleSelectTickets,
     handleReturnArchive,
     handleReturnHome,
   } = routeState;
@@ -87,7 +87,7 @@ export function AppContent({ probeRoute } = {}) {
             handleSelectShow(shId);
           }}
           onOpenCalendar={() => setIsCalendarOpen(true)}
-          onSelectPassport={handleSelectPassport}
+          onSelectTickets={handleSelectTickets}
           onSelectTab={(newTab, options) => {
             setViewMode("archive");
             setTab(newTab);
@@ -101,8 +101,8 @@ export function AppContent({ probeRoute } = {}) {
           q={q}
           setQ={setQ}
         />
-      ) : viewMode === "passport" ? (
-        <PassportPage
+      ) : viewMode === "tickets" ? (
+        <TicketBookPage
           unitData={unitData}
           showById={showById}
           unitIdByShowId={unitIdByShowId}

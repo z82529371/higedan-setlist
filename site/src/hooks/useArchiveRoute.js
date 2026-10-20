@@ -75,7 +75,7 @@ export function useArchiveRoute({
     const r =
       parseRoute(window.location.hash) || parseRoute(window.location.pathname);
     if (!r) return fallback;
-    if (r.kind === "passport") return fallback;
+    if (r.kind === "tickets") return fallback;
     if (r.kind === "song" && allUsedSongs.some((s) => s.id === r.value))
       return { ...fallback, tab: "song", selSong: r.value };
     if (r.kind === "show" && unitIdByShowId.has(r.value))
@@ -121,7 +121,7 @@ export function useArchiveRoute({
     const r =
       parseRoute(rawHash) || parseRoute(window.location.pathname);
     if (!r) return "landing";
-    if (r.kind === "passport") return "passport";
+    if (r.kind === "tickets") return "tickets";
     if (r.kind === "song" && allUsedSongs.some((s) => s.id === r.value)) return "archive";
     if (r.kind === "show" && unitIdByShowId.has(r.value)) return "archive";
     if (r.kind === "venue" && resolveVenueKey(r.value, allVenues)) return "archive";
@@ -201,8 +201,8 @@ export function useArchiveRoute({
   // Hash is the single funnel: selections write hash, hashchange applies state.
   const applyRoute = (r) => {
     if (!r) return;
-    if (r.kind === "passport") {
-      setViewMode("passport");
+    if (r.kind === "tickets") {
+      setViewMode("tickets");
       setIsFilterDrawerOpen(false);
       return;
     }
@@ -303,8 +303,8 @@ export function useArchiveRoute({
         setViewMode("archive");
         return;
       }
-      if (rawHash.startsWith("#/passport") || r?.kind === "passport") {
-        setViewMode("passport");
+      if (rawHash.startsWith("#/tickets") || r?.kind === "tickets") {
+        setViewMode("tickets");
         setIsFilterDrawerOpen(false);
         return;
       }
@@ -515,11 +515,11 @@ export function useArchiveRoute({
     window.scrollTo({ top: 0, behavior: "instant" });
   };
 
-  const handleSelectPassport = () => {
+  const handleSelectTickets = () => {
     setQ("");
     setIsFilterDrawerOpen(false);
     setIsMobileSearchOpen(false);
-    go(routeHash.passport());
+    go(routeHash.tickets());
   };
 
   const handleReturnArchive = () => {
@@ -637,7 +637,7 @@ export function useArchiveRoute({
     handleSelectShowMode,
     handleToggleSubMode,
     handleReturnHome,
-    handleSelectPassport,
+    handleSelectTickets,
     handleReturnArchive,
     appendLang,
     visualViewportStyle,

@@ -38,7 +38,7 @@ export function MilestoneCardModal({ isOpen, onClose, milestones }) {
 
       if (dataUrl) {
         const link = document.createElement("a");
-        link.download = `higedan-passport-milestones-${new Date().toISOString().slice(0, 10)}.png`;
+        link.download = `higedan-ticket-book-milestones-${new Date().toISOString().slice(0, 10)}.png`;
         link.href = dataUrl;
         link.click();
       }
@@ -65,7 +65,7 @@ export function MilestoneCardModal({ isOpen, onClose, milestones }) {
               🎫
             </span>
             <span className="font-mono text-[12px] font-bold uppercase tracking-wider text-card">
-              {t("passport.milestonesTitle", "生涯里程碑")} // 540PX
+              {t("ticketBook.milestonesTitle", "生涯里程碑")} // 540PX
             </span>
           </div>
           <button
@@ -92,13 +92,13 @@ export function MilestoneCardModal({ isOpen, onClose, milestones }) {
           {/* Card Header */}
           <div className="text-center pt-2 pb-3">
             <p className="m-0 font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-ink">
-              {t("passport.summaryCardSubtitle", "CONCERT PASSPORT // CAREER MILESTONES")}
+              {t("ticketBook.summaryCardSubtitle", "CONCERT TICKET BOOK // CAREER MILESTONES")}
             </p>
             <h2 className="m-0 mt-1 font-display text-[22px] sm:text-[24px] font-black text-ink leading-tight">
               Official髭男dism
             </h2>
             <p className="m-0 mt-0.5 font-display text-[15px] font-bold text-band-ink">
-              {t("passport.summaryCardTitle", "Official髭男dism 生涯參戰總結")}
+              {t("ticketBook.summaryCardTitle", "Official髭男dism 生涯參戰總結")}
             </p>
           </div>
 
@@ -112,13 +112,13 @@ export function MilestoneCardModal({ isOpen, onClose, milestones }) {
               className="rounded-[4px] border border-ink/30 bg-paper/60 p-2 text-center"
             >
               <div className="font-mono text-[10px] font-bold text-ink uppercase">
-                {t("passport.totalShows", "總場次")}
+                {t("ticketBook.totalShows", "總場次")}
               </div>
               <div className="my-0.5 font-mono text-[20px] font-black text-ink leading-tight">
                 {milestones.totalShows}
               </div>
               <div className="font-mono text-[10px] text-ink font-bold">
-                {t("passport.showsUnit", "{count} 場", { count: milestones.totalShows })}
+                {t("ticketBook.showsUnit", "{count} 場", { count: milestones.totalShows })}
               </div>
             </div>
 
@@ -128,13 +128,13 @@ export function MilestoneCardModal({ isOpen, onClose, milestones }) {
               className="rounded-[4px] border border-ink/30 bg-paper/60 p-2 text-center"
             >
               <div className="font-mono text-[10px] font-bold text-ink uppercase">
-                {t("passport.totalTours", "巡演數")}
+                {t("ticketBook.totalTours", "巡演數")}
               </div>
               <div className="my-0.5 font-mono text-[20px] font-black text-ink leading-tight">
                 {milestones.totalTours}
               </div>
               <div className="font-mono text-[10px] text-ink font-bold">
-                {t("passport.toursUnit", "{count} 巡演", { count: milestones.totalTours })}
+                {t("ticketBook.toursUnit", "{count} 巡演", { count: milestones.totalTours })}
               </div>
             </div>
 
@@ -144,13 +144,13 @@ export function MilestoneCardModal({ isOpen, onClose, milestones }) {
               className="rounded-[4px] border border-ink/30 bg-paper/60 p-2 text-center"
             >
               <div className="font-mono text-[10px] font-bold text-ink uppercase">
-                {t("passport.totalCities", "足跡城市")}
+                {t("ticketBook.totalCities", "足跡城市")}
               </div>
               <div className="my-0.5 font-mono text-[20px] font-black text-ink leading-tight">
                 {milestones.totalCities}
               </div>
               <div className="font-mono text-[10px] text-ink font-bold">
-                {t("passport.citiesUnit", "{count} 城市", { count: milestones.totalCities })}
+                {t("ticketBook.citiesUnit", "{count} 城市", { count: milestones.totalCities })}
               </div>
             </div>
 
@@ -160,7 +160,7 @@ export function MilestoneCardModal({ isOpen, onClose, milestones }) {
               className="rounded-[4px] border border-ink/30 bg-paper/60 p-2 text-center"
             >
               <div className="font-mono text-[10px] font-bold text-ink uppercase">
-                {t("passport.coverage", "歌曲解鎖率")}
+                {t("ticketBook.coverage", "歌曲解鎖率")}
               </div>
               <div className="my-0.5 font-mono text-[20px] font-black text-ink leading-tight">
                 {milestones.coveragePercentage}%
@@ -178,7 +178,7 @@ export function MilestoneCardModal({ isOpen, onClose, milestones }) {
           >
             <div className="font-mono text-[11px] font-bold text-ink uppercase mb-2 flex items-center gap-1.5 border-b border-ink/20 pb-1">
               <span>🔥</span>
-              <span>{t("passport.topSongs", "現場神曲 Top 3")}</span>
+              <span>{t("ticketBook.topSongs", "現場神曲 Top 3")}</span>
             </div>
             {topSongs.length === 0 ? (
               <p className="m-0 text-center py-1 font-mono text-[11px] text-ink">--</p>
@@ -196,7 +196,7 @@ export function MilestoneCardModal({ isOpen, onClose, milestones }) {
                         <span className="font-bold text-ink truncate">{song.title}</span>
                       </div>
                       <span className="shrink-0 font-mono text-[11px] font-bold text-ink">
-                        {t("passport.timesUnit", "{count} 次", { count: song.count })}
+                        {t("ticketBook.timesUnit", "{count} 次", { count: song.count })}
                       </span>
                     </div>
                   );
@@ -212,7 +212,7 @@ export function MilestoneCardModal({ isOpen, onClose, milestones }) {
               className="rounded-[4px] border border-ink/20 bg-paper/40 p-2.5 text-[11px]"
             >
               <div className="flex items-center justify-between text-ink font-mono font-bold mb-0.5">
-                <span>{t("passport.firstShow", "最初參戰")}</span>
+                <span>{t("ticketBook.firstShow", "最初參戰")}</span>
                 <span>{earliest?.date ? (earliest.show ? showDate(earliest.show, locale) : earliest.date) : "--"}</span>
               </div>
               <div className="font-bold text-ink truncate text-[12px]">
@@ -230,7 +230,7 @@ export function MilestoneCardModal({ isOpen, onClose, milestones }) {
               className="rounded-[4px] border border-ink/20 bg-paper/40 p-2.5 text-[11px]"
             >
               <div className="flex items-center justify-between text-ink font-mono font-bold mb-0.5">
-                <span>{t("passport.latestShow", "最近參戰")}</span>
+                <span>{t("ticketBook.latestShow", "最近參戰")}</span>
                 <span>{latest?.date ? (latest.show ? showDate(latest.show, locale) : latest.date) : "--"}</span>
               </div>
               <div className="font-bold text-ink truncate text-[12px]">
@@ -248,8 +248,8 @@ export function MilestoneCardModal({ isOpen, onClose, milestones }) {
 
           {/* Vintage Barcode Footer */}
           <TicketBarcodeFooter
-            serial="PASSPORT // CAREER MILESTONES // 540PX"
-            label={t("passport.summaryCardTitle", "Official髭男dism 生涯參戰總結")}
+            serial="TICKET BOOK // CAREER MILESTONES // 540PX"
+            label={t("ticketBook.summaryCardTitle", "Official髭男dism 生涯參戰總結")}
           />
         </div>
 

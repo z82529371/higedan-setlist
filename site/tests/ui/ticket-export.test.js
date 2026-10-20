@@ -525,7 +525,7 @@ describe("16. Localized Commemorative Ticket Image Export (Issue #19)", () => {
 
     it("renders custom seat, notes, stamp, and privacy controls in MemorialCardModal (Issue #36)", async () => {
       const { MemorialCardModal } = await loadModule("/src/components/MemorialCardModal.jsx");
-      const { MemoryStorageAdapter, recordAttendance } = await loadModule("/src/lib/passport.js");
+      const { MemoryStorageAdapter, recordAttendance } = await loadModule("/src/lib/ticket-book.js");
       const { I18nProvider } = await loadModule("/src/lib/i18n.jsx");
 
       const storage = new MemoryStorageAdapter();
@@ -593,7 +593,7 @@ describe("16. Localized Commemorative Ticket Image Export (Issue #19)", () => {
 
     it("respects privacy controls by omitting seat or notes when toggled off (Issue #36)", async () => {
       const { MemorialCardModal } = await loadModule("/src/components/MemorialCardModal.jsx");
-      const { MemoryStorageAdapter, recordAttendance } = await loadModule("/src/lib/passport.js");
+      const { MemoryStorageAdapter, recordAttendance } = await loadModule("/src/lib/ticket-book.js");
       const { I18nProvider } = await loadModule("/src/lib/i18n.jsx");
 
       const storage = new MemoryStorageAdapter();
@@ -655,7 +655,7 @@ describe("16. Localized Commemorative Ticket Image Export (Issue #19)", () => {
 
     it("renders attendance quick-bar and inline editor on ShowSlip when attended (Issue #36)", async () => {
       const { ShowSlip } = await loadModule("/src/components/slips/ShowSlip.jsx");
-      const { MemoryStorageAdapter, recordAttendance } = await loadModule("/src/lib/passport.js");
+      const { MemoryStorageAdapter, recordAttendance } = await loadModule("/src/lib/ticket-book.js");
       const { I18nProvider } = await loadModule("/src/lib/i18n.jsx");
 
       const storage = new MemoryStorageAdapter();

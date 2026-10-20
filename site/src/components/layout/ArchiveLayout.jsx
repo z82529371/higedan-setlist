@@ -58,7 +58,7 @@ export function ArchiveLayout({
     handleSelectUnit,
     handleSelectTourMode,
     handleReturnHome,
-    handleSelectPassport,
+    handleSelectTickets,
     visualViewportStyle,
   } = routeState;
 
@@ -188,7 +188,7 @@ export function ArchiveLayout({
         trackShows={trackShows}
         slipRef={slipRef}
         handleReturnHome={handleReturnHome}
-        handleSelectPassport={handleSelectPassport}
+        handleSelectTickets={handleSelectTickets}
       />
 
       {/* Main Page Container (Centered 960px) */}
@@ -203,7 +203,7 @@ export function ArchiveLayout({
           setTab={setTab}
           setQ={setQ}
           setIsFilterDrawerOpen={setIsFilterDrawerOpen}
-          onSelectPassport={handleSelectPassport}
+          onSelectTickets={handleSelectTickets}
         />
 
         {/* Global SearchBox (Desktop: 常駐展示；Mobile: 改由底部雙鍵 Dock Spotlight 喚起) */}
@@ -515,7 +515,7 @@ export function ArchiveLayout({
         renderShowNavigator={renderShowNavigator}
         renderSongNavigator={renderSongNavigator}
         renderVenueNavigator={renderVenueNavigator}
-        onSelectPassport={handleSelectPassport}
+        onSelectTickets={handleSelectTickets}
       />
 
       {/* Mobile Floating Action Buttons & Docks */}

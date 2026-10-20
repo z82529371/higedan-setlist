@@ -113,33 +113,33 @@ describe("22. ShowSlip Attendance Check-in & Resilient LocalStorage Persistence 
     });
   });
 
-  describe("Subtest 2: Passport Storage Payload & Attendance Logic (passport.js)", () => {
+  describe("Subtest 2: TicketBook Storage Payload & Attendance Logic (ticket-book.js)", () => {
     it("initializes version 1 payload with attendedShows map when empty or corrupt", async () => {
-      const { loadPassport, createEmptyPassport, MemoryStorageAdapter, PASSPORT_STORAGE_KEY } =
-        await loadModule("/src/lib/passport.js");
+      const { loadTicketBook, createEmptyTicketBook, MemoryStorageAdapter, TICKET_BOOK_STORAGE_KEY } =
+        await loadModule("/src/lib/ticket-book.js");
 
       const storage = new MemoryStorageAdapter();
 
       // Empty storage
-      const p1 = loadPassport(storage);
+      const p1 = loadTicketBook(storage);
       assert.strictEqual(p1.version, 1);
       assert.deepStrictEqual(p1.attendedShows, {});
       assert.ok(p1.updatedAt);
 
       // Corrupted storage (not valid JSON)
-      storage.setItem(PASSPORT_STORAGE_KEY, "invalid-json{{{");
-      const p2 = loadPassport(storage);
+      storage.setItem(TICKET_BOOK_STORAGE_KEY, "invalid-json{{{");
+      const p2 = loadTicketBook(storage);
       assert.strictEqual(p2.version, 1);
       assert.deepStrictEqual(p2.attendedShows, {});
 
       // Corrupted schema (wrong version)
-      storage.setItem(PASSPORT_STORAGE_KEY, JSON.stringify({ version: 999 }));
-      const p3 = loadPassport(storage);
+      storage.setItem(TICKET_BOOK_STORAGE_KEY, JSON.stringify({ version: 999 }));
+      const p3 = loadTicketBook(storage);
       assert.strictEqual(p3.version, 1);
       assert.deepStrictEqual(p3.attendedShows, {});
     });
 
-    it("atomically records, checks, and removes attendance conforming to PassportShowEntry schema", async () => {
+    it("atomically records, checks, and removes attendance conforming to TicketBookShowEntry schema", async () => {
       const {
         recordAttendance,
         removeAttendance,
@@ -147,9 +147,9 @@ describe("22. ShowSlip Attendance Check-in & Resilient LocalStorage Persistence 
         isAttended,
         getAttendedShow,
         getAllAttendedShows,
-        loadPassport,
+        loadTicketBook,
         MemoryStorageAdapter,
-      } = await loadModule("/src/lib/passport.js");
+      } = await loadModule("/src/lib/ticket-book.js");
 
       const storage = new MemoryStorageAdapter();
       const showId = "1720174";
@@ -233,9 +233,9 @@ describe("22. ShowSlip Attendance Check-in & Resilient LocalStorage Persistence 
       assert.strictEqual(isAttended(showId, storage), false);
     });
 
-    it("dispatches hg:passport-updated event when saving passport data", async () => {
-      const { savePassport, createEmptyPassport, MemoryStorageAdapter, PASSPORT_EVENT_UPDATED } =
-        await loadModule("/src/lib/passport.js");
+    it("dispatches hg:ticket-book-updated event when saving ticket-book data", async () => {
+      const { saveTicketBook, createEmptyTicketBook, MemoryStorageAdapter, TICKET_BOOK_EVENT_UPDATED } =
+        await loadModule("/src/lib/ticket-book.js");
 
       const storage = new MemoryStorageAdapter();
       let eventDispatched = false;
@@ -243,7 +243,7 @@ describe("22. ShowSlip Attendance Check-in & Resilient LocalStorage Persistence 
 
       const originalDispatch = globalThis.window.dispatchEvent;
       globalThis.window.dispatchEvent = (evt) => {
-        if (evt.type === PASSPORT_EVENT_UPDATED) {
+        if (evt.type === TICKET_BOOK_EVENT_UPDATED) {
           eventDispatched = true;
           eventPayload = evt.detail.payload;
         }
@@ -251,9 +251,9 @@ describe("22. ShowSlip Attendance Check-in & Resilient LocalStorage Persistence 
       };
 
       try {
-        const payload = createEmptyPassport();
+        const payload = createEmptyTicketBook();
         payload.attendedShows["test-show"] = { showKey: "test-show", attendedAt: "2024-11-12" };
-        savePassport(payload, storage);
+        saveTicketBook(payload, storage);
 
         assert.strictEqual(eventDispatched, true);
         assert.ok(eventPayload?.attendedShows["test-show"]);
@@ -288,10 +288,10 @@ describe("22. ShowSlip Attendance Check-in & Resilient LocalStorage Persistence 
       isTour: true,
     };
 
-    it("renders ShowSlip with passport check-in button in un-attended state by default", async () => {
+    it("renders ShowSlip with ticket-book check-in button in un-attended state by default", async () => {
       const { I18nProvider } = await loadModule("/src/lib/i18n.jsx");
       const { ShowSlip } = await loadModule("/src/components/slips/ShowSlip.jsx");
-      const { MemoryStorageAdapter, getSafeStorage } = await loadModule("/src/lib/passport.js");
+      const { MemoryStorageAdapter, getSafeStorage } = await loadModule("/src/lib/ticket-book.js");
 
       // Ensure storage is clean
       const storage = getSafeStorage();
@@ -308,7 +308,7 @@ describe("22. ShowSlip Attendance Check-in & Resilient LocalStorage Persistence 
         )
       );
 
-      assert.ok(htmlZh.includes('data-testid="passport-toggle-btn"'), "Must render passport-toggle-btn");
+      assert.ok(htmlZh.includes('data-testid="ticket-book-toggle-btn"'), "Must render ticket-book-toggle-btn");
       assert.ok(htmlZh.includes('data-attended="false"'), "Must have data-attended='false'");
       assert.ok(htmlZh.includes('aria-pressed="false"'), "Must have aria-pressed='false'");
       assert.ok(htmlZh.includes("我參加過"), "zh-TW must display '我參加過'");
@@ -318,7 +318,7 @@ describe("22. ShowSlip Attendance Check-in & Resilient LocalStorage Persistence 
     it("renders ShowSlip in attended state when show attendance is pre-recorded in storage", async () => {
       const { I18nProvider } = await loadModule("/src/lib/i18n.jsx");
       const { ShowSlip } = await loadModule("/src/components/slips/ShowSlip.jsx");
-      const { recordAttendance, getSafeStorage } = await loadModule("/src/lib/passport.js");
+      const { recordAttendance, getSafeStorage } = await loadModule("/src/lib/ticket-book.js");
 
       const storage = getSafeStorage();
       recordAttendance(mockShow.id, { date: mockShow.date }, storage);
@@ -334,10 +334,10 @@ describe("22. ShowSlip Attendance Check-in & Resilient LocalStorage Persistence 
         )
       );
 
-      assert.ok(htmlZh.includes('data-testid="passport-toggle-btn"'), "Must render passport-toggle-btn");
+      assert.ok(htmlZh.includes('data-testid="ticket-book-toggle-btn"'), "Must render ticket-book-toggle-btn");
       assert.ok(htmlZh.includes('data-attended="true"'), "Must have data-attended='true'");
       assert.ok(htmlZh.includes('aria-pressed="true"'), "Must have aria-pressed='true'");
-      assert.ok(htmlZh.includes("已參加"), "zh-TW must display '已參加'");
+      assert.ok(htmlZh.includes("已收進票夾"), "zh-TW must display '已收進票夾'");
       assert.ok(htmlZh.includes("bg-tape"), "Must use bg-tape design token for active ticket attendance");
 
       // Clean up
@@ -347,7 +347,7 @@ describe("22. ShowSlip Attendance Check-in & Resilient LocalStorage Persistence 
     it("renders ShowSlip attendance toggle button accurately across all 4 locales (ja, en, ko, zh-TW)", async () => {
       const { I18nProvider } = await loadModule("/src/lib/i18n.jsx");
       const { ShowSlip } = await loadModule("/src/components/slips/ShowSlip.jsx");
-      const { recordAttendance, getSafeStorage } = await loadModule("/src/lib/passport.js");
+      const { recordAttendance, getSafeStorage } = await loadModule("/src/lib/ticket-book.js");
 
       const storage = getSafeStorage();
 
@@ -363,7 +363,7 @@ describe("22. ShowSlip Attendance Check-in & Resilient LocalStorage Persistence 
           })
         )
       );
-      assert.ok(htmlJaUnattended.includes("参加した！"), "ja must display '参加した！' when unattended");
+      assert.ok(htmlJaUnattended.includes("チケットブックに追加"), "ja must display 'チケットブックに追加' when unattended");
 
       recordAttendance(mockShow.id, { date: mockShow.date }, storage);
       const htmlJaAttended = renderToStaticMarkup(
@@ -376,7 +376,7 @@ describe("22. ShowSlip Attendance Check-in & Resilient LocalStorage Persistence 
           })
         )
       );
-      assert.ok(htmlJaAttended.includes("参加済み"), "ja must display '参加済み' when attended");
+      assert.ok(htmlJaAttended.includes("チケットブック追加済み"), "ja must display 'チケットブック追加済み' when attended");
 
       // 2. English (en) - Unattended then Attended
       storage.clear();
@@ -390,7 +390,7 @@ describe("22. ShowSlip Attendance Check-in & Resilient LocalStorage Persistence 
           })
         )
       );
-      assert.ok(htmlEnUnattended.includes("I Was There"), "en must display 'I Was There' when unattended");
+      assert.ok(htmlEnUnattended.includes("Add to Ticket Book"), "en must display 'Add to Ticket Book' when unattended");
 
       recordAttendance(mockShow.id, { date: mockShow.date }, storage);
       const htmlEnAttended = renderToStaticMarkup(
@@ -403,7 +403,7 @@ describe("22. ShowSlip Attendance Check-in & Resilient LocalStorage Persistence 
           })
         )
       );
-      assert.ok(htmlEnAttended.includes("Attended"), "en must display 'Attended' when attended");
+      assert.ok(htmlEnAttended.includes("In Ticket Book"), "en must display 'In Ticket Book' when attended");
 
       // 3. Korean (ko) - Unattended then Attended
       storage.clear();
@@ -417,7 +417,7 @@ describe("22. ShowSlip Attendance Check-in & Resilient LocalStorage Persistence 
           })
         )
       );
-      assert.ok(htmlKoUnattended.includes("나도 갔어요"), "ko must display '나도 갔어요' when unattended");
+      assert.ok(htmlKoUnattended.includes("티켓북에 담기"), "ko must display '티켓북에 담기' when unattended");
 
       recordAttendance(mockShow.id, { date: mockShow.date }, storage);
       const htmlKoAttended = renderToStaticMarkup(
@@ -430,7 +430,7 @@ describe("22. ShowSlip Attendance Check-in & Resilient LocalStorage Persistence 
           })
         )
       );
-      assert.ok(htmlKoAttended.includes("참석 완료"), "ko must display '참석 완료' when attended");
+      assert.ok(htmlKoAttended.includes("티켓북 보관중"), "ko must display '티켓북 보관중' when attended");
 
       // Clean up
       storage.clear();
@@ -439,7 +439,7 @@ describe("22. ShowSlip Attendance Check-in & Resilient LocalStorage Persistence 
     it("verifies interactive click toggle lifecycle and persistence across page transitions", async () => {
       const { I18nProvider } = await loadModule("/src/lib/i18n.jsx");
       const { ShowSlip } = await loadModule("/src/components/slips/ShowSlip.jsx");
-      const { toggleAttendance, isAttended, getSafeStorage } = await loadModule("/src/lib/passport.js");
+      const { toggleAttendance, isAttended, getSafeStorage } = await loadModule("/src/lib/ticket-book.js");
 
       const storage = getSafeStorage();
       storage.clear();
@@ -469,7 +469,7 @@ describe("22. ShowSlip Attendance Check-in & Resilient LocalStorage Persistence 
         )
       );
       assert.ok(html.includes('data-attended="true"'));
-      assert.ok(html.includes("已參加"));
+      assert.ok(html.includes("已收進票夾"));
 
       // Action: User clicks toggle button again to cancel
       const toggleRes2 = toggleAttendance(mockShow.id, {}, storage);

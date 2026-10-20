@@ -2,8 +2,8 @@ import { describe, it } from "node:test";
 import assert from "node:assert/strict";
 import { loadModule } from "../helpers/vite-server.js";
 
-describe("25. Passport Dynamic Milestones Calculation & Summary Card (#37)", () => {
-  describe("Seam 1: Domain Milestone Calculation Engine (passport-milestones.js)", () => {
+describe("25. TicketBook Dynamic Milestones Calculation & Summary Card (#37)", () => {
+  describe("Seam 1: Domain Milestone Calculation Engine (ticket-book-milestones.js)", () => {
     const mockShow1 = {
       id: "show-1",
       date: "2024-11-30",
@@ -111,9 +111,9 @@ describe("25. Passport Dynamic Milestones Calculation & Summary Card (#37)", () 
     ];
 
     it("returns zero milestones for empty attendance records", async () => {
-      const { computePassportMilestones } = await loadModule("/src/lib/passport-milestones.js");
+      const { computeTicketBookMilestones } = await loadModule("/src/lib/ticket-book-milestones.js");
 
-      const stats = computePassportMilestones({
+      const stats = computeTicketBookMilestones({
         attendedShows: [],
         unitData: mockUnitData,
         showById: mockShowById,
@@ -134,7 +134,7 @@ describe("25. Passport Dynamic Milestones Calculation & Summary Card (#37)", () 
     });
 
     it("correctly aggregates milestones, coverage, top 3 songs, and earliest/latest shows", async () => {
-      const { computePassportMilestones } = await loadModule("/src/lib/passport-milestones.js");
+      const { computeTicketBookMilestones } = await loadModule("/src/lib/ticket-book-milestones.js");
 
       const attendedShows = [
         { showKey: "show-1", attendedAt: "2024-11-30" },
@@ -142,7 +142,7 @@ describe("25. Passport Dynamic Milestones Calculation & Summary Card (#37)", () 
         { showKey: "show-3", attendedAt: "2025-08-16" },
       ];
 
-      const stats = computePassportMilestones({
+      const stats = computeTicketBookMilestones({
         attendedShows,
         unitData: mockUnitData,
         showById: mockShowById,
@@ -189,7 +189,7 @@ describe("25. Passport Dynamic Milestones Calculation & Summary Card (#37)", () 
     });
 
     it("gracefully handles orphaned shows, null fields, and non-song items", async () => {
-      const { computePassportMilestones } = await loadModule("/src/lib/passport-milestones.js");
+      const { computeTicketBookMilestones } = await loadModule("/src/lib/ticket-book-milestones.js");
 
       const attendedShows = [
         { showKey: "unknown-orphan-1", attendedAt: "2022-01-01" },
@@ -197,7 +197,7 @@ describe("25. Passport Dynamic Milestones Calculation & Summary Card (#37)", () 
         { showKey: "" },
       ];
 
-      const stats = computePassportMilestones({
+      const stats = computeTicketBookMilestones({
         attendedShows,
         unitData: mockUnitData,
         showById: mockShowById,
@@ -215,12 +215,12 @@ describe("25. Passport Dynamic Milestones Calculation & Summary Card (#37)", () 
     });
   });
 
-  describe("Seam 2: Passport Milestone Dashboard Presentation (PassportPage.jsx)", () => {
+  describe("Seam 2: TicketBook Milestone Dashboard Presentation (TicketBookPage.jsx)", () => {
     it("renders milestone dashboard with counters, top songs, first/latest shows, and generate card CTA", async () => {
       const { React, renderToStaticMarkup } = await (await import("../helpers/vite-server.js")).getReactAndRenderer();
       const { I18nProvider } = await loadModule("/src/lib/i18n.jsx");
-      const { PassportPage } = await loadModule("/src/components/passport/PassportPage.jsx");
-      const { recordAttendance, getSafeStorage } = await loadModule("/src/lib/passport.js");
+      const { TicketBookPage } = await loadModule("/src/components/ticket-book/TicketBookPage.jsx");
+      const { recordAttendance, getSafeStorage } = await loadModule("/src/lib/ticket-book.js");
 
       const storage = getSafeStorage();
       storage.clear();
@@ -293,7 +293,7 @@ describe("25. Passport Dynamic Milestones Calculation & Summary Card (#37)", () 
         React.createElement(
           I18nProvider,
           { initialLocale: "zh-TW" },
-          React.createElement(PassportPage, {
+          React.createElement(TicketBookPage, {
             unitData: mockUnitData,
             showById: mockShowById,
             unitIdByShowId: mockUnitIdByShowId,
@@ -304,7 +304,7 @@ describe("25. Passport Dynamic Milestones Calculation & Summary Card (#37)", () 
       );
 
       // Verify dashboard presence
-      assert.ok(htmlZh.includes('data-testid="passport-milestones-dashboard"'), "Must render passport-milestones-dashboard");
+      assert.ok(htmlZh.includes('data-testid="ticket-book-milestones-dashboard"'), "Must render ticket-book-milestones-dashboard");
       assert.ok(htmlZh.includes('data-testid="milestone-total-shows"'), "Must render milestone-total-shows");
       assert.ok(htmlZh.includes('data-testid="milestone-total-tours"'), "Must render milestone-total-tours");
       assert.ok(htmlZh.includes('data-testid="milestone-total-cities"'), "Must render milestone-total-cities");
@@ -326,7 +326,7 @@ describe("25. Passport Dynamic Milestones Calculation & Summary Card (#37)", () 
         React.createElement(
           I18nProvider,
           { initialLocale: "ja" },
-          React.createElement(PassportPage, {
+          React.createElement(TicketBookPage, {
             unitData: mockUnitData,
             showById: mockShowById,
             unitIdByShowId: mockUnitIdByShowId,
@@ -335,17 +335,17 @@ describe("25. Passport Dynamic Milestones Calculation & Summary Card (#37)", () 
           })
         )
       );
-      assert.ok(htmlJa.includes('data-testid="passport-milestones-dashboard"'));
+      assert.ok(htmlJa.includes('data-testid="ticket-book-milestones-dashboard"'));
 
       storage.clear();
     });
   });
 
-    it("renders milestone dashboard with zero stats even when no shows are attended (passport home entry)", async () => {
+    it("renders milestone dashboard with zero stats even when no shows are attended (ticket-book home entry)", async () => {
       const { React, renderToStaticMarkup } = await (await import("../helpers/vite-server.js")).getReactAndRenderer();
       const { I18nProvider } = await loadModule("/src/lib/i18n.jsx");
-      const { PassportPage } = await loadModule("/src/components/passport/PassportPage.jsx");
-      const { getSafeStorage } = await loadModule("/src/lib/passport.js");
+      const { TicketBookPage } = await loadModule("/src/components/ticket-book/TicketBookPage.jsx");
+      const { getSafeStorage } = await loadModule("/src/lib/ticket-book.js");
 
       const storage = getSafeStorage();
       storage.clear();
@@ -354,7 +354,7 @@ describe("25. Passport Dynamic Milestones Calculation & Summary Card (#37)", () 
         React.createElement(
           I18nProvider,
           { initialLocale: "zh-TW" },
-          React.createElement(PassportPage, {
+          React.createElement(TicketBookPage, {
             unitData: new Map(),
             showById: new Map(),
             unitIdByShowId: new Map(),
@@ -363,15 +363,15 @@ describe("25. Passport Dynamic Milestones Calculation & Summary Card (#37)", () 
         )
       );
 
-      // Milestone dashboard is visible on passport home even with 0 check-ins
-      assert.ok(htmlEmpty.includes('data-testid="passport-milestones-dashboard"'));
+      // Milestone dashboard is visible on ticket-book home even with 0 check-ins
+      assert.ok(htmlEmpty.includes('data-testid="ticket-book-milestones-dashboard"'));
       assert.ok(htmlEmpty.includes('data-testid="milestone-total-shows"'));
       assert.ok(htmlEmpty.includes("0 場"));
       assert.ok(htmlEmpty.includes("0 巡演"));
       assert.ok(htmlEmpty.includes("0 城市"));
       assert.ok(htmlEmpty.includes("0%"));
       // Empty state prompt is also visible
-      assert.ok(htmlEmpty.includes('data-testid="passport-empty-state"'));
+      assert.ok(htmlEmpty.includes('data-testid="ticket-book-empty-state"'));
 
       storage.clear();
     });
@@ -408,7 +408,7 @@ describe("25. Passport Dynamic Milestones Calculation & Summary Card (#37)", () 
     it("renders 540px milestone summary card modal with full milestone stats and download button", async () => {
       const { React, renderToStaticMarkup } = await (await import("../helpers/vite-server.js")).getReactAndRenderer();
       const { I18nProvider } = await loadModule("/src/lib/i18n.jsx");
-      const { MilestoneCardModal } = await loadModule("/src/components/passport/MilestoneCardModal.jsx");
+      const { MilestoneCardModal } = await loadModule("/src/components/ticket-book/MilestoneCardModal.jsx");
 
       const html = renderToStaticMarkup(
         React.createElement(

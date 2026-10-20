@@ -1,13 +1,14 @@
 /**
- * passport.js — Concert Passport & Attendance Tracking Domain Service
+ * ticket-book.js — Concert Ticket Book & Attendance Tracking Domain Service
  *
  * Implements the single source of truth for concert attendance records stored in
- * localStorage under the versioned key `hg_passport_v1` (Issue #33 / #34).
+ * localStorage under the versioned key `hg_ticket_book_v1` (Issue #33 / #34, ADR-0114).
  *
  * Invariants:
  * 1. Safe in SSR / headless Node.js environments via getSafeStorage fallback.
- * 2. Atomic state writes and cross-component reactive notification via `hg:passport-updated`.
- * 3. Conforms to PassportStoragePayload (v1) and PassportShowEntry specifications.
+ * 2. Atomic state writes and cross-component reactive notification via `hg:ticket-book-updated`.
+ * 3. Conforms to TicketBookStoragePayload (v1) and TicketBookShowEntry specifications.
+ * 4. Transparently migrates any legacy `hg_passport_v1` data upon read.
  */
 
 import { useState, useEffect, useCallback, useMemo } from "react";
@@ -15,58 +16,80 @@ import { getSafeStorage, MemoryStorageAdapter, SafeStorage } from "./storage.js"
 
 export { getSafeStorage, MemoryStorageAdapter, SafeStorage };
 
-export const PASSPORT_STORAGE_KEY = "hg_passport_v1";
-export const PASSPORT_SCHEMA_VERSION = 1;
-export const PASSPORT_EVENT_UPDATED = "hg:passport-updated";
+export const TICKET_BOOK_STORAGE_KEY = "hg_ticket_book_v1";
+export const LEGACY_PASSPORT_STORAGE_KEY = "hg_passport_v1";
+export const TICKET_BOOK_SCHEMA_VERSION = 1;
+export const TICKET_BOOK_EVENT_UPDATED = "hg:ticket-book-updated";
 
 /**
- * Creates a clean, empty passport payload conforming to v1 schema.
+ * Creates a clean, empty ticket book payload conforming to v1 schema.
  */
-export function createEmptyPassport() {
+export function createEmptyTicketBook() {
   return {
-    version: PASSPORT_SCHEMA_VERSION,
+    version: TICKET_BOOK_SCHEMA_VERSION,
     updatedAt: new Date().toISOString(),
     attendedShows: {},
   };
 }
 
 /**
- * Reads and parses the passport payload from safe storage.
+ * Reads and parses the ticket book payload from safe storage.
  * Gracefully self-heals corrupted or empty payloads.
+ * Automatically migrates legacy hg_passport_v1 payload if found.
  */
-export function loadPassport(storage = getSafeStorage()) {
+export function loadTicketBook(storage = getSafeStorage()) {
   try {
-    const raw = storage.getItem(PASSPORT_STORAGE_KEY);
-    if (!raw) return createEmptyPassport();
+    let raw = storage.getItem(TICKET_BOOK_STORAGE_KEY);
+    let isMigrated = false;
+
+    // Check legacy migration
+    if (!raw) {
+      const legacyRaw = storage.getItem(LEGACY_PASSPORT_STORAGE_KEY);
+      if (legacyRaw) {
+        raw = legacyRaw;
+        isMigrated = true;
+      }
+    }
+
+    if (!raw) return createEmptyTicketBook();
 
     const parsed = JSON.parse(raw);
     if (
       !parsed ||
       typeof parsed !== "object" ||
-      parsed.version !== PASSPORT_SCHEMA_VERSION ||
+      parsed.version !== TICKET_BOOK_SCHEMA_VERSION ||
       !parsed.attendedShows ||
       typeof parsed.attendedShows !== "object" ||
       Array.isArray(parsed.attendedShows)
     ) {
-      return createEmptyPassport();
+      return createEmptyTicketBook();
+    }
+
+    if (isMigrated) {
+      try {
+        storage.setItem(TICKET_BOOK_STORAGE_KEY, JSON.stringify(parsed));
+        storage.removeItem(LEGACY_PASSPORT_STORAGE_KEY);
+      } catch {
+        // SafeStorage fallback
+      }
     }
 
     return parsed;
   } catch {
-    return createEmptyPassport();
+    return createEmptyTicketBook();
   }
 }
 
 /**
- * Atomically writes the passport payload to safe storage and dispatches
+ * Atomically writes the ticket book payload to safe storage and dispatches
  * an event so all mounted components react immediately.
  */
-export function savePassport(payload, storage = getSafeStorage()) {
+export function saveTicketBook(payload, storage = getSafeStorage()) {
   if (!payload || typeof payload !== "object") return;
   payload.updatedAt = new Date().toISOString();
 
   try {
-    storage.setItem(PASSPORT_STORAGE_KEY, JSON.stringify(payload));
+    storage.setItem(TICKET_BOOK_STORAGE_KEY, JSON.stringify(payload));
   } catch {
     // Handled by SafeStorage fallback
   }
@@ -74,7 +97,7 @@ export function savePassport(payload, storage = getSafeStorage()) {
   if (typeof window !== "undefined" && typeof window.dispatchEvent === "function") {
     try {
       window.dispatchEvent(
-        new CustomEvent(PASSPORT_EVENT_UPDATED, {
+        new CustomEvent(TICKET_BOOK_EVENT_UPDATED, {
           detail: { payload },
         })
       );
@@ -89,7 +112,7 @@ export function savePassport(payload, storage = getSafeStorage()) {
  */
 export function isAttended(showKey, storage = getSafeStorage()) {
   if (!showKey) return false;
-  const payload = loadPassport(storage);
+  const payload = loadTicketBook(storage);
   return Boolean(payload.attendedShows?.[String(showKey)]);
 }
 
@@ -98,7 +121,7 @@ export function isAttended(showKey, storage = getSafeStorage()) {
  */
 export function getAttendedShow(showKey, storage = getSafeStorage()) {
   if (!showKey) return null;
-  const payload = loadPassport(storage);
+  const payload = loadTicketBook(storage);
   return payload.attendedShows?.[String(showKey)] || null;
 }
 
@@ -106,7 +129,7 @@ export function getAttendedShow(showKey, storage = getSafeStorage()) {
  * Returns all attended show entries as a flat array.
  */
 export function getAllAttendedShows(storage = getSafeStorage()) {
-  const payload = loadPassport(storage);
+  const payload = loadTicketBook(storage);
   return Object.values(payload.attendedShows || {});
 }
 
@@ -115,10 +138,10 @@ export function getAllAttendedShows(storage = getSafeStorage()) {
  */
 export function recordAttendance(showKey, showMeta = {}, storage = getSafeStorage()) {
   if (!showKey) {
-    return { attended: false, entry: null, payload: loadPassport(storage) };
+    return { attended: false, entry: null, payload: loadTicketBook(storage) };
   }
 
-  const payload = loadPassport(storage);
+  const payload = loadTicketBook(storage);
   const key = String(showKey);
   const existing = payload.attendedShows[key] || {};
   const nowIso = new Date().toISOString();
@@ -153,7 +176,7 @@ export function recordAttendance(showKey, showMeta = {}, storage = getSafeStorag
   };
 
   payload.attendedShows[key] = entry;
-  savePassport(payload, storage);
+  saveTicketBook(payload, storage);
 
   return { attended: true, entry, payload };
 }
@@ -163,14 +186,14 @@ export function recordAttendance(showKey, showMeta = {}, storage = getSafeStorag
  */
 export function removeAttendance(showKey, storage = getSafeStorage()) {
   if (!showKey) {
-    return { attended: false, payload: loadPassport(storage) };
+    return { attended: false, payload: loadTicketBook(storage) };
   }
 
-  const payload = loadPassport(storage);
+  const payload = loadTicketBook(storage);
   const key = String(showKey);
   if (payload.attendedShows[key]) {
     delete payload.attendedShows[key];
-    savePassport(payload, storage);
+    saveTicketBook(payload, storage);
   }
 
   return { attended: false, payload };
@@ -181,7 +204,7 @@ export function removeAttendance(showKey, storage = getSafeStorage()) {
  */
 export function toggleAttendance(showKey, showMeta = {}, storage = getSafeStorage()) {
   if (!showKey) {
-    return { attended: false, entry: null, payload: loadPassport(storage) };
+    return { attended: false, entry: null, payload: loadTicketBook(storage) };
   }
 
   if (isAttended(showKey, storage)) {
@@ -196,7 +219,7 @@ export function toggleAttendance(showKey, showMeta = {}, storage = getSafeStorag
  * React hook for checking and toggling attendance for a single show.
  * Supports reactive synchronization across multiple components.
  */
-export function usePassportAttendance(showKey, showMeta = null, options = {}) {
+export function useTicketBookAttendance(showKey, showMeta = null, options = {}) {
   const storage = options.storage || getSafeStorage(options.env);
   const [prevKey, setPrevKey] = useState(showKey);
   const [entry, setEntry] = useState(() => (showKey ? getAttendedShow(showKey, storage) : null));
@@ -220,10 +243,10 @@ export function usePassportAttendance(showKey, showMeta = null, options = {}) {
     syncState();
 
     if (typeof window !== "undefined" && typeof window.addEventListener === "function") {
-      window.addEventListener(PASSPORT_EVENT_UPDATED, syncState);
+      window.addEventListener(TICKET_BOOK_EVENT_UPDATED, syncState);
       window.addEventListener("storage", syncState);
       return () => {
-        window.removeEventListener(PASSPORT_EVENT_UPDATED, syncState);
+        window.removeEventListener(TICKET_BOOK_EVENT_UPDATED, syncState);
         window.removeEventListener("storage", syncState);
       };
     }
@@ -263,25 +286,25 @@ export function usePassportAttendance(showKey, showMeta = null, options = {}) {
 }
 
 /**
- * React hook providing the entire passport state, total attended count,
+ * React hook providing the entire ticket book state, total attended count,
  * attended shows array, and atomic removal with cross-component reactivity.
  */
-export function usePassport(options = {}) {
+export function useTicketBook(options = {}) {
   const storage = options.storage || getSafeStorage(options.env);
-  const [payload, setPayload] = useState(() => loadPassport(storage));
+  const [payload, setPayload] = useState(() => loadTicketBook(storage));
 
   useEffect(() => {
     const syncState = () => {
-      setPayload(loadPassport(storage));
+      setPayload(loadTicketBook(storage));
     };
 
     syncState();
 
     if (typeof window !== "undefined" && typeof window.addEventListener === "function") {
-      window.addEventListener(PASSPORT_EVENT_UPDATED, syncState);
+      window.addEventListener(TICKET_BOOK_EVENT_UPDATED, syncState);
       window.addEventListener("storage", syncState);
       return () => {
-        window.removeEventListener(PASSPORT_EVENT_UPDATED, syncState);
+        window.removeEventListener(TICKET_BOOK_EVENT_UPDATED, syncState);
         window.removeEventListener("storage", syncState);
       };
     }

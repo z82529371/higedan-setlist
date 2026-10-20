@@ -9,7 +9,7 @@ import { getSourceLabel, TicketPerforationDivider, TicketBarcodeFooter } from ".
 import { ShowSlipPanels } from "./ShowSlipPanels.jsx";
 import { ShowMetadataBox } from "./ShowMetadataBox.jsx";
 import { useI18n } from "../../lib/i18n.jsx";
-import { usePassportAttendance } from "../../lib/passport.js";
+import { useTicketBookAttendance } from "../../lib/ticket-book.js";
 import { COMMEMORATIVE_STAMPS, getStampById } from "../../lib/stamps.js";
 
 export function ShowSlip({
@@ -26,7 +26,7 @@ export function ShowSlip({
   if (!s) return null;
 
   const [showLegend, setShowLegend] = useState(false);
-  const { attended, entry, toggle: toggleAttendance, checkIn } = usePassportAttendance(showId, s, { storage });
+  const { attended, entry, toggle: toggleAttendance, checkIn } = useTicketBookAttendance(showId, s, { storage });
   const [showAttendanceEditor, setShowAttendanceEditor] = useState(false);
   const [showAnalysis, setShowAnalysis] = useState(false);
   const [showDiff, setShowDiff] = useState(false);
@@ -393,7 +393,7 @@ export function ShowSlip({
             <div className="flex flex-wrap items-center gap-2">
               <button
                 type="button"
-                data-testid="passport-toggle-btn"
+                data-testid="ticket-book-toggle-btn"
                 data-attended={attended ? "true" : "false"}
                 aria-pressed={attended}
                 onClick={toggleAttendance}
@@ -404,15 +404,15 @@ export function ShowSlip({
                 }`}
                 title={
                   attended
-                    ? t("passport.attendedTitle", "已記錄參加，點擊可取消打卡")
-                    : t("passport.checkinTitle", "記錄我參加過這場演出（登錄至巡演護照）")
+                    ? t("ticketBook.attendedTitle", "已記錄參加，點擊可取消打卡")
+                    : t("ticketBook.checkinTitle", "記錄我參加過這場演出（登錄至巡演護照）")
                 }
               >
                 <span aria-hidden="true">{attended ? "✓" : "🎟️"}</span>
                 <span>
                   {attended
-                    ? t("passport.attended", "已參加")
-                    : t("passport.markAttended", "我參加過")}
+                    ? t("ticketBook.attended", "已參加")
+                    : t("ticketBook.markAttended", "我參加過")}
                 </span>
               </button>
 
@@ -452,7 +452,7 @@ export function ShowSlip({
             </button>
           </div>
 
-          {/* Attended Passport Info & Customization Quick Bar */}
+          {/* Attended Ticket Book Info & Customization Quick Bar */}
           {attended && (
             <div
               data-testid="showslip-attendance-box"
@@ -461,7 +461,7 @@ export function ShowSlip({
               <div className="flex flex-wrap items-center justify-between gap-2">
                 <div className="flex flex-wrap items-center gap-1.5">
                   <span className="font-mono text-[10px] font-bold text-band-ink bg-band px-1.5 py-0.5 rounded-[2px] border border-ink/30">
-                    🎟️ {t("passport.attended", "已參加")}
+                    🎟️ {t("ticketBook.attended", "已參加")}
                   </span>
                   {entry?.seat && (
                     <span

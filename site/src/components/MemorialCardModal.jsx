@@ -5,7 +5,7 @@ import { localizeVenue } from "../lib/locales/venues.js";
 import { getKindArray, kindTabs } from "../lib/kind.js";
 import { useI18n, DICTIONARIES, DEFAULT_LOCALE, resolveTranslation } from "../lib/i18n.jsx";
 import { COMMEMORATIVE_STAMPS, getStampById } from "../lib/stamps.js";
-import { getAttendedShow, recordAttendance, getSafeStorage } from "../lib/passport.js";
+import { getAttendedShow, recordAttendance, getSafeStorage } from "../lib/ticket-book.js";
 
 // Session-level memory for theme choice across shows
 let sessionMemorialTheme = "vintage";

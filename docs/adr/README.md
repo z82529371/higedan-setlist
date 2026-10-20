@@ -118,5 +118,7 @@
 | [ADR-0110: 官方場館正名在地化與多語雙向呈現架構 (Official Venue Localization & Cross-Lingual Presentation)](0110-official-venue-localization-and-cross-lingual-presentation.md) | 已採納 (Accepted) | 確立場館官方正名在地化、日本新字體歸位、安全回退原生名、URL 路由解耦與全域搜尋跨語雙向檢索 |
 | [ADR-0111: 場館實體主檔、原生名回退鏈與跨語系路由寬容解析架構 (Venue Master Profiles, Native Fallback Chain & Deep Link Resolution)](0111-venue-master-profiles-native-fallback-and-deep-link-resolution.md) | 已採納 (Accepted) | 建立專屬場館領域主檔 venue-profiles.json、一手在地原生名回退鏈與 URL 路由跨語系寬容解析 |
 | [ADR-0112: 多語言字體架構、語言專屬字體棧與 CJK 異體字隔離 (Multi-Lingual Typography and Locale-Isolated Font Stacks)](0112-multi-lingual-typography-and-locale-isolated-font-stacks.md) | 已採納 (Accepted) | 建立動態 html lang 同步、CSS :lang() 四語專屬字體棧、擴充 Noto Sans KR 與 Plus Jakarta Sans，杜絕 CJK 異體字污染 |
-| [ADR-0113: 個人巡演護照、打卡持久化、動態生涯指標與自製小卡領域架構 (Personal Concert Passport, Attendance Persistence, Dynamic Milestones & Commemorative Card Architecture)](0113-personal-concert-passport-and-commemorative-card-architecture.md) | 已採納 (Accepted) | 建立純前端 LocalStorage 持久化、專屬 #/passport 路由、動態生涯里程碑計算與雙模態小卡透明 PNG 匯出管線 |
+| [ADR-0113: 個人巡演護照、打卡持久化、動態生涯指標與自製小卡領域架構 (Personal Concert Passport, Attendance Persistence, Dynamic Milestones & Commemorative Card Architecture)](0113-personal-concert-passport-and-commemorative-card-architecture.md) | 已被取代 (Superseded by ADR-0114) | 建立純前端 LocalStorage 持久化、專屬 #/passport 路由、動態生涯里程碑計算與雙模態小卡透明 PNG 匯出管線 |
+| [ADR-0114: 巡演票夾領域重構、意象升級與 Passport 概念廢棄架構 (Concert Ticket Book Domain Refactoring, Metaphor Upgrade & Passport Deprecation Architecture)](0114-concert-ticket-book-domain-refactoring-and-passport-deprecation.md) | 已採納 (Accepted) | 徹底廢棄護照出國意象與 #/passport 路由，升級為現場票券收納本（巡演票夾 Ticket Book）、#/tickets 一級路由與自動升級遷移管線 |
+
 
