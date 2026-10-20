@@ -10,7 +10,6 @@ import { ShowSlipPanels } from "./ShowSlipPanels.jsx";
 import { ShowMetadataBox } from "./ShowMetadataBox.jsx";
 import { useI18n } from "../../lib/i18n.jsx";
 import { useTicketBookAttendance } from "../../lib/ticket-book.js";
-import { COMMEMORATIVE_STAMPS, getStampById } from "../../lib/stamps.js";
 
 export function ShowSlip({
   ud,
@@ -26,8 +25,7 @@ export function ShowSlip({
   if (!s) return null;
 
   const [showLegend, setShowLegend] = useState(false);
-  const { attended, entry, toggle: toggleAttendance, checkIn } = useTicketBookAttendance(showId, s, { storage });
-  const [showAttendanceEditor, setShowAttendanceEditor] = useState(false);
+  const { attended, toggle: toggleAttendance } = useTicketBookAttendance(showId, s, { storage });
   const [showAnalysis, setShowAnalysis] = useState(false);
   const [showDiff, setShowDiff] = useState(false);
   const [showCompare, setShowCompare] = useState(false);
@@ -424,7 +422,7 @@ export function ShowSlip({
                 title={t("showExtra.previewMemorialTitle", "預覽並自訂儲存本場巡演歌單紀念小卡")}
               >
                 <span aria-hidden="true">📸</span>
-                <span>{t(attended ? "slips.customMemorialCard" : "slips.generateMemorialCard", "產生紀念小卡")}</span>
+                <span>{t("slips.generateMemorialCard", "產生紀念小卡")}</span>
               </button>
 
               <button
@@ -451,126 +449,6 @@ export function ShowSlip({
               <span>{showMoreTools ? t("slips.panels.collapseTools", "收合工具 ▴") : t("slips.panels.moreTools", "🛠️ 更多工具 ▾")}</span>
             </button>
           </div>
-
-          {/* Attended Ticket Book Info & Customization Quick Bar */}
-          {attended && (
-            <div
-              data-testid="showslip-attendance-box"
-              className="mt-1 rounded-[4px] border border-ink/20 bg-paper/60 p-2 sm:p-2.5 text-ink space-y-2"
-            >
-              <div className="flex flex-wrap items-center justify-between gap-2">
-                <div className="flex flex-wrap items-center gap-1.5">
-                  <span className="font-mono text-[10px] font-bold text-band-ink bg-band px-1.5 py-0.5 rounded-[2px] border border-ink/30">
-                    🎟️ {t("ticketBook.attended", "已參加")}
-                  </span>
-                  {entry?.seat && (
-                    <span
-                      data-testid="showslip-seat-display"
-                      className="font-mono text-[10px] font-bold text-ink bg-card px-1.5 py-0.5 rounded-[2px] border border-line-soft"
-                    >
-                      💺 {entry.seat}
-                    </span>
-                  )}
-                  {entry?.stampId && (
-                    <span
-                      data-testid="showslip-stamp-display"
-                      className="font-mono text-[10px] font-bold text-ink bg-card px-1.5 py-0.5 rounded-[2px] border border-line-soft"
-                    >
-                      💮 {t(getStampById(entry.stampId).nameKey, entry.stampId)}
-                    </span>
-                  )}
-                </div>
-
-                <div className="flex items-center gap-2">
-                  <button
-                    type="button"
-                    data-testid="showslip-edit-attendance-btn"
-                    onClick={() => setShowAttendanceEditor((v) => !v)}
-                    className="font-mono text-[10px] sm:text-[11px] font-bold text-muted hover:text-ink px-2 py-0.5 rounded border border-line-soft hover:border-ink/40 bg-card cursor-pointer transition-colors"
-                  >
-                    {showAttendanceEditor ? t("slips.common.collapse", "收合") : t("slips.editAttendance", "編輯打卡與小卡")}
-                  </button>
-
-                  <button
-                    type="button"
-                    data-testid="custom-memorial-card-btn"
-                    onClick={() => setShowMemorialModal(true)}
-                    className="inline-flex items-center gap-1 font-mono text-[10px] sm:text-[11px] font-bold text-band-ink bg-band px-2 py-0.5 rounded-[3px] border border-ink/30 hover:brightness-105 active:scale-[0.98] cursor-pointer transition-all touch-stamp"
-                  >
-                    <span aria-hidden="true">📸</span>
-                    <span>{t("slips.customMemorialCard", "自製紀念小卡")} →</span>
-                  </button>
-                </div>
-              </div>
-
-              {entry?.notes && !showAttendanceEditor && (
-                <p
-                  data-testid="showslip-notes-display"
-                  className="text-[11px] text-ink italic leading-relaxed m-0 border-l-2 border-band pl-2"
-                >
-                  "{entry.notes}"
-                </p>
-              )}
-
-              {/* Expandable Inline Editor */}
-              {showAttendanceEditor && (
-                <div className="pt-2 border-t border-line-soft space-y-2">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                    <div>
-                      <label htmlFor="showslip-seat-input" className="block text-[10px] font-mono font-bold text-muted mb-0.5">
-                        💺 {t("memorial.seatLabel", "座位席次")}
-                      </label>
-                      <input
-                        id="showslip-seat-input"
-                        type="text"
-                        data-testid="showslip-seat-input"
-                        maxLength={50}
-                        value={entry?.seat || ""}
-                        onChange={(e) => checkIn({ seat: e.target.value })}
-                        placeholder={t("memorial.seatPlaceholder", "例如：搖滾 A 區 12 排 34 號")}
-                        className="w-full rounded-[3px] border border-line-soft bg-card px-2 py-1 text-xs text-ink placeholder:text-muted/60 focus:border-ink focus:outline-none"
-                      />
-                    </div>
-
-                    <div>
-                      <label htmlFor="showslip-stamp-select" className="block text-[10px] font-mono font-bold text-muted mb-0.5">
-                        💮 {t("memorial.stampLabel", "紀念印章款式")}
-                      </label>
-                      <select
-                        id="showslip-stamp-select"
-                        data-testid="showslip-stamp-select"
-                        value={entry?.stampId || "default"}
-                        onChange={(e) => checkIn({ stampId: e.target.value })}
-                        className="w-full rounded-[3px] border border-line-soft bg-card px-2 py-1 text-xs text-ink focus:border-ink focus:outline-none"
-                      >
-                        {COMMEMORATIVE_STAMPS.map((stamp) => (
-                          <option key={stamp.id} value={stamp.id}>
-                            {t(stamp.nameKey, stamp.id)}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-                  </div>
-
-                  <div>
-                    <label htmlFor="showslip-notes-input" className="block text-[10px] font-mono font-bold text-muted mb-0.5">
-                      💬 {t("memorial.notesLabel", "觀演隨筆・心得")}
-                    </label>
-                    <textarea
-                      id="showslip-notes-input"
-                      data-testid="showslip-notes-input"
-                      maxLength={300}
-                      rows={2}
-                      value={entry?.notes || ""}
-                      onChange={(e) => checkIn({ notes: e.target.value })}
-                      placeholder={t("memorial.notesPlaceholder", "寫下本場演出的難忘回憶（最多 300 字）...")}
-                      className="w-full rounded-[3px] border border-line-soft bg-card px-2 py-1 text-xs text-ink placeholder:text-muted/60 focus:border-ink focus:outline-none"
-                    />
-                  </div>
-                </div>
-              )}
-            </div>
-          )}
 
           {/* Row 2: Secondary Analysis & Comparison Reel (Collapsible) */}
           {showMoreTools && (

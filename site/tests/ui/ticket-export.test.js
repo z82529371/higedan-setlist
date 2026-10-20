@@ -569,6 +569,7 @@ describe("16. Localized Commemorative Ticket Image Export (Issue #19)", () => {
             main: [{ cue: "M1", item: { songId: "pretender" } }],
             enc: [],
             storage,
+            initialCustomizerOpen: true,
           })
         )
       );
@@ -576,10 +577,10 @@ describe("16. Localized Commemorative Ticket Image Export (Issue #19)", () => {
       // Verify custom inputs exist in drawer
       assert.ok(htmlCustom.includes('data-testid="memorial-seat-input"'), "Seat input must be rendered");
       assert.ok(htmlCustom.includes('data-testid="memorial-notes-input"'), "Notes input must be rendered");
-      assert.ok(htmlCustom.includes('data-testid="memorial-stamp-picker"'), "Stamp picker must be rendered");
+      assert.ok(!htmlCustom.includes('data-testid="memorial-stamp-picker"'), "Stamp picker should not be rendered (single default stamp)");
       assert.ok(htmlCustom.includes('data-testid="memorial-include-seat-toggle"'), "Include seat toggle must be rendered");
       assert.ok(htmlCustom.includes('data-testid="memorial-include-notes-toggle"'), "Include notes toggle must be rendered");
-      assert.ok(htmlCustom.includes('data-testid="memorial-download-btn"'), "Download PNG button must be rendered");
+      assert.ok(!htmlCustom.includes('data-testid="memorial-download-btn"'), "Download PNG button should not be rendered (native save)");
 
       // Verify ticket elements rendered on card
       assert.ok(htmlCustom.includes('data-testid="ticket-seat-badge"'), "Seat badge must be rendered on ticket");
@@ -587,8 +588,8 @@ describe("16. Localized Commemorative Ticket Image Export (Issue #19)", () => {
       assert.ok(htmlCustom.includes('data-testid="ticket-notes-memo"'), "Notes memo must be rendered on ticket");
       assert.ok(htmlCustom.includes("Incredible live rendition of Subtitle and Pretender!"), "Notes content must be rendered");
       assert.ok(htmlCustom.includes('data-testid="ticket-stamp"'), "Custom stamp must be rendered");
-      assert.ok(htmlCustom.includes('data-stamp-id="stamp-rejoice"'), "Stamp id must match selected stamp");
-      assert.ok(htmlCustom.includes("歓喜"), "Rejoice stamp text must be rendered");
+      assert.ok(htmlCustom.includes('data-stamp-id="default"'), "Stamp id must match default stamp");
+      assert.ok(htmlCustom.includes("現場") || htmlCustom.includes("LIVE"), "Default stamp text must be rendered");
     });
 
     it("respects privacy controls by omitting seat or notes when toggled off (Issue #36)", async () => {
@@ -636,6 +637,7 @@ describe("16. Localized Commemorative Ticket Image Export (Issue #19)", () => {
             main: [{ cue: "M1", item: { songId: "pretender" } }],
             enc: [],
             storage,
+            initialCustomizerOpen: true,
           })
         )
       );
@@ -648,12 +650,12 @@ describe("16. Localized Commemorative Ticket Image Export (Issue #19)", () => {
       assert.ok(htmlPrivacy.includes('value="Confidential VIP Seat 1"'), "Drawer seat input retains value");
       assert.ok(htmlPrivacy.includes("Private personal memo"), "Drawer notes textarea retains value");
 
-      // Stamp is still rendered
+      // Stamp is still rendered with default id
       assert.ok(htmlPrivacy.includes('data-testid="ticket-stamp"'), "Stamp is rendered");
-      assert.ok(htmlPrivacy.includes('data-stamp-id="stamp-attended"'), "Stamp id matches attended proof");
+      assert.ok(htmlPrivacy.includes('data-stamp-id="default"'), "Stamp id matches default canonical stamp");
     });
 
-    it("renders attendance quick-bar and inline editor on ShowSlip when attended (Issue #36)", async () => {
+    it("renders clean one-click attendance on ShowSlip without inline sub-panel when attended", async () => {
       const { ShowSlip } = await loadModule("/src/components/slips/ShowSlip.jsx");
       const { MemoryStorageAdapter, recordAttendance } = await loadModule("/src/lib/ticket-book.js");
       const { I18nProvider } = await loadModule("/src/lib/i18n.jsx");
@@ -678,7 +680,7 @@ describe("16. Localized Commemorative Ticket Image Export (Issue #19)", () => {
         isTour: true,
       };
 
-      // 1. When not attended: no attendance box
+      // 1. When not attended: no attendance box, button shows unattended
       const htmlUnattended = renderToStaticMarkup(
         React.createElement(
           I18nProvider,
@@ -691,16 +693,18 @@ describe("16. Localized Commemorative Ticket Image Export (Issue #19)", () => {
         )
       );
       assert.ok(!htmlUnattended.includes('data-testid="showslip-attendance-box"'), "Attendance box should not render when unattended");
+      assert.ok(htmlUnattended.includes('data-testid="ticket-book-toggle-btn"'), "Ticket book toggle button exists");
+      assert.ok(htmlUnattended.includes('data-attended="false"'), "Button state indicates unattended");
       assert.ok(htmlUnattended.includes('data-testid="generate-memorial-card-btn"'), "Generate memorial card button exists");
 
-      // 2. When attended: attendance box and custom card button rendered
+      // 2. When attended: clean button state toggle, no pop-up / inline sub-panel
       recordAttendance(
         showId,
         {
           date: "2024-11-20",
           seat: "Arena 1F Row 3",
           notes: "Unbelievable encore performance!",
-          stampId: "stamp-special",
+          stampId: "default",
         },
         storage
       );
@@ -716,12 +720,10 @@ describe("16. Localized Commemorative Ticket Image Export (Issue #19)", () => {
           })
         )
       );
-      assert.ok(htmlAttended.includes('data-testid="showslip-attendance-box"'), "Attendance box must render when attended");
-      assert.ok(htmlAttended.includes('data-testid="showslip-seat-display"'), "Seat display badge must render");
-      assert.ok(htmlAttended.includes("Arena 1F Row 3"), "Seat text must render");
-      assert.ok(htmlAttended.includes('data-testid="showslip-notes-display"'), "Notes display must render");
-      assert.ok(htmlAttended.includes("Unbelievable encore performance!"), "Notes content must render");
-      assert.ok(htmlAttended.includes('data-testid="custom-memorial-card-btn"'), "Custom memorial card button must render");
+      assert.ok(!htmlAttended.includes('data-testid="showslip-attendance-box"'), "Attendance box must NOT render when attended (one-click)");
+      assert.ok(htmlAttended.includes('data-testid="ticket-book-toggle-btn"'), "Ticket book toggle button exists");
+      assert.ok(htmlAttended.includes('data-attended="true"'), "Button state indicates attended");
+      assert.ok(htmlAttended.includes('data-testid="generate-memorial-card-btn"'), "Memorial card button remains available");
     });
   });
 

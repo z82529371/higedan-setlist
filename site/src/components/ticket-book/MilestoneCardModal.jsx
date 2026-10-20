@@ -9,6 +9,7 @@ export function MilestoneCardModal({ isOpen, onClose, milestones }) {
   const { t, locale } = useI18n();
   const cardRef = useRef(null);
   const [isExporting, setIsExporting] = useState(false);
+  const [imageUrl, setImageUrl] = useState("");
 
   useEffect(() => {
     if (!isOpen) return;
@@ -19,35 +20,40 @@ export function MilestoneCardModal({ isOpen, onClose, milestones }) {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [isOpen, onClose]);
 
+  // Auto-generate PNG preview when modal opens for instant right-click/long-press save
+  useEffect(() => {
+    if (!isOpen || !milestones || imageUrl) return;
+    let isMounted = true;
+    setIsExporting(true);
+    const timer = setTimeout(async () => {
+      try {
+        if (!cardRef.current) return;
+        const url = await exportElementToPng(cardRef.current, {
+          width: 540,
+          pixelRatio: 2,
+          borderRadius: "8px",
+          topPadding: 16,
+        });
+        if (isMounted && url) {
+          setImageUrl(url);
+        }
+      } catch (err) {
+        console.error("Export milestone card failed:", err);
+      } finally {
+        if (isMounted) setIsExporting(false);
+      }
+    }, 150);
+    return () => {
+      isMounted = false;
+      clearTimeout(timer);
+    };
+  }, [isOpen, milestones, locale, imageUrl]);
+
   if (!isOpen || !milestones) return null;
 
   const topSongs = milestones.topSongs || [];
   const earliest = milestones.earliestShow;
   const latest = milestones.latestShow;
-
-  const handleDownload = async () => {
-    if (!cardRef.current || isExporting) return;
-    setIsExporting(true);
-    try {
-      const dataUrl = await exportElementToPng(cardRef.current, {
-        width: 540,
-        pixelRatio: 2,
-        borderRadius: "8px",
-        topPadding: 16,
-      });
-
-      if (dataUrl) {
-        const link = document.createElement("a");
-        link.download = `higedan-ticket-book-milestones-${new Date().toISOString().slice(0, 10)}.png`;
-        link.href = dataUrl;
-        link.click();
-      }
-    } catch (err) {
-      console.error("Export failed:", err);
-    } finally {
-      setIsExporting(false);
-    }
-  };
 
   return (
     <div
@@ -80,12 +86,13 @@ export function MilestoneCardModal({ isOpen, onClose, milestones }) {
         </div>
 
         {/* 540px Ticket Card Export Node (ADR-0100 & DESIGN.md: radius <= 8px, AAA contrast) */}
-        <div
-          ref={cardRef}
-          data-testid="milestone-summary-card"
-          className="relative w-[540px] max-w-full rounded-[8px] border-[2px] border-ink bg-card p-5 sm:p-6 shadow-[4px_4px_0_rgba(0,0,0,0.2)] text-ink select-none"
-          style={{ width: "540px" }}
-        >
+        <div className="relative shrink-0 w-[540px] max-w-full">
+          <div
+            ref={cardRef}
+            data-testid="milestone-summary-card"
+            className="relative w-[540px] max-w-full rounded-[8px] border-[2px] border-ink bg-card p-5 sm:p-6 shadow-[4px_4px_0_rgba(0,0,0,0.2)] text-ink select-none"
+            style={{ width: "540px" }}
+          >
           {/* Top Washi Tape Pin */}
           <div className={SLIP_TAPE} aria-hidden="true" />
 
@@ -253,20 +260,33 @@ export function MilestoneCardModal({ isOpen, onClose, milestones }) {
           />
         </div>
 
-        {/* Action Button: Download PNG */}
-        <div className="w-full mt-4 flex items-center justify-center gap-3">
-          <button
-            type="button"
-            data-testid="download-summary-card-btn"
-            onClick={handleDownload}
-            disabled={isExporting}
-            className="inline-flex items-center gap-2 px-6 py-2.5 rounded-[4px] bg-band text-band-ink font-bold text-[13px] sm:text-[14px] border-[1.5px] border-ink shadow-xs hover:brightness-105 transition-all cursor-pointer touch-stamp disabled:opacity-50"
-          >
-            <span aria-hidden="true">💾</span>
-            <span>{isExporting ? t("memorial.exporting", "匯出中...") : t("memorial.downloadPng", "下載透明圓角 PNG")}</span>
-          </button>
+        {/* Seamless Real <img> overlay for native right-click / long-press saving */}
+        {imageUrl && (
+          <img
+            src={imageUrl}
+            alt={t("ticketBook.summaryCardTitle", "Official髭男dism 生涯參戰總結")}
+            className="absolute inset-0 w-full h-full rounded-[8px] block object-top cursor-default z-10"
+            style={{
+              WebkitTouchCallout: "default",
+              userSelect: "auto",
+              pointerEvents: "auto",
+            }}
+          />
+        )}
+      </div>
+
+      {/* Save Hint Notice */}
+      <div className="w-full mt-4 flex items-center justify-center">
+        <div className="flex items-center gap-2 text-xs text-card bg-ink/75 border border-card/30 px-3 py-1.5 rounded-lg font-mono">
+          <span aria-hidden="true">{isExporting ? "⏳" : "💡"}</span>
+          <span className="font-bold">
+            {isExporting
+              ? t("memorial.generating", "高清紀念卡生成中...")
+              : t("memorial.saveHint", "手機長按小卡存入相簿 · 電腦點右鍵另存圖片")}
+          </span>
         </div>
       </div>
     </div>
-  );
+  </div>
+);
 }

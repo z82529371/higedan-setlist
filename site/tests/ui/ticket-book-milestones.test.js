@@ -451,8 +451,8 @@ describe("25. TicketBook Dynamic Milestones Calculation & Summary Card (#37)", (
       assert.ok(html.includes("2024-11-30"));
       assert.ok(html.includes("2025-08-16"));
 
-      // Verify download button
-      assert.ok(html.includes('data-testid="download-summary-card-btn"'));
+      // Verify native save hint notice
+      assert.ok(html.includes("長按小卡") || html.includes("另存圖片"), "Native save hint notice must be present");
 
 
       // Verify ADR-0100 & DESIGN.md card radius rule (radius <= 8px on slips, no rounded-[12px])
