@@ -96,6 +96,11 @@ function checkLines(relPath, text) {
       indexDepth += (line.match(/\{/g) || []).length - (line.match(/\}/g) || []).length;
       return;
     }
+    // Hardcoded English accessibility labels must go through t(...)
+    if (/\b(aria-label|title)\s*=\s*["'](?:Close|Search|Back|Submit|Cancel|Open|Previous|Next|Filter)["']/i.test(line)) {
+      violations.push({ line: i + 1, text: raw.trim().slice(0, 120) });
+      return;
+    }
     if (!CJK.test(line)) return;
     if (/^\s*console\.(error|warn|log|info|debug)\b/.test(line)) return; // dev logs
     if (hasLocaleNear(i)) return; // locale-ternary copy branch
@@ -216,6 +221,8 @@ function selfTest() {
     [`<span>藤原聡 · 小笹大輔 · 楢﨑誠 · 松浦匡希</span>`, false],
     [`      locale === "ja"\n        ? \`第 \${n} 公演\`\n        : \`第 \${n} 場\`,`, false],
     [`return title || "演出場次";`, true],
+    [`<button aria-label="Close">✕</button>`, true],
+    [`<button aria-label={t("common.close", "關閉")}>✕</button>`, false],
   ];
   let failed = 0;
   cases.forEach(([src, expectViolation], idx) => {
