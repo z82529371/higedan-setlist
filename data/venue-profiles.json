@@ -1352,6 +1352,19 @@
       }
     },
     {
+      "id": "fuchu-flight",
+      "canonical": "府中Flight",
+      "native": "府中Flight",
+      "region": "關東",
+      "prefecture": "東京都",
+      "city": "東京",
+      "names": {
+        "zh-TW": "府中Flight",
+        "ja": "府中Flight",
+        "en": "Fuchu Flight"
+      }
+    },
+    {
       "id": "拓殖大學-文京校區-後藤新平・新渡戶稻造紀念講堂",
       "canonical": "拓殖大學 文京校區 後藤新平・新渡戶稻造紀念講堂",
       "native": "拓殖大学 文京キャンパス 後藤新平・新渡戸稲造記念講堂",

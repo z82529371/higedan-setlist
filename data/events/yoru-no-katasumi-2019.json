@@ -1,0 +1,88 @@
+{
+  "id": "yoru-no-katasumi-2019",
+  "title": "佐藤赳(kobore) × Flight presents \"夜の片隅\"",
+  "shortTitle": "夜の片隅",
+  "type": "聯合專場",
+  "shows": [
+    {
+      "id": "yoru-no-katasumi-2019-0213",
+      "date": "2019-02-13",
+      "weekday": "水",
+      "opensAt": "18:30",
+      "startsAt": "19:00",
+      "city": "東京",
+      "venue": "府中Flight",
+      "region": "關東",
+      "prefecture": "東京都",
+      "title": "佐藤赳(kobore) × Flight presents \"夜の片隅\"",
+      "locked": true,
+      "sourceUrls": [
+        "https://higedan.com/news/3/?page=48",
+        "http://blog.livedoor.jp/tamami26/archives/52521220.html"
+      ],
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "title": "3月9日 [レミオロメン]",
+          "note": "Jose (TOTALFAT) × 藤原聡 コラボセッション (Joseステージ)"
+        },
+        {
+          "order": 2,
+          "encore": false,
+          "songId": "115man-kiro-no-film",
+          "note": "弾き語り",
+          "kind": [
+            "satoshi-solo"
+          ]
+        },
+        {
+          "order": 3,
+          "encore": false,
+          "title": "ママのピアノ [風味堂]",
+          "note": "風味堂 カバー（弾き語り）",
+          "kind": [
+            "satoshi-solo"
+          ]
+        },
+        {
+          "order": 4,
+          "encore": false,
+          "songId": "coffee-to-syrup",
+          "note": "弾き語り",
+          "kind": [
+            "satoshi-solo"
+          ]
+        },
+        {
+          "order": 5,
+          "encore": false,
+          "songId": "zero-no-mama-de-iraterara",
+          "note": "弾き語り",
+          "kind": [
+            "satoshi-solo"
+          ]
+        },
+        {
+          "order": 6,
+          "encore": false,
+          "songId": "pretender",
+          "note": "新曲（世界初披露・弾き語り）",
+          "kind": [
+            "premiere",
+            "satoshi-solo"
+          ]
+        },
+        {
+          "order": 7,
+          "encore": false,
+          "songId": "stand-by-you",
+          "note": "弾き語り",
+          "kind": [
+            "satoshi-solo"
+          ]
+        }
+      ]
+    }
+  ]
+}
