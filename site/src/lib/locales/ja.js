@@ -528,6 +528,7 @@ export const dictJa = {
     exportMemorialCard: "記念チケットを保存",
     exportMemorialCardTitle: "この公演の記念チケットをプレビューして保存",
     viewChecklist: "楽曲図鑑を開く",
+    viewChecklistCta: "図鑑を見る ↗",
     checklistTitle: "ライブ楽曲チェックリスト",
     checklistSubtitle: "LIVE SONG CHECKLIST // REPERTOIRE ARCHIVE",
     checklistProgress: "全 {total} 曲中 {unlocked} 曲解禁（{percentage}%）",

@@ -528,6 +528,7 @@ export const dictZhTw = {
     exportMemorialCard: "儲存紀念票根",
     exportMemorialCardTitle: "預覽並儲存本場次的紀念票根",
     viewChecklist: "查看現場曲庫解鎖成就圖鑑",
+    viewChecklistCta: "查看圖鑑 ↗",
     checklistTitle: "現場曲庫解鎖成就圖鑑",
     checklistSubtitle: "LIVE SONG CHECKLIST // REPERTOIRE ARCHIVE",
     checklistProgress: "共已解鎖 {unlocked} / {total} 首（{percentage}%）",

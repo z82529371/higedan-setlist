@@ -1,6 +1,25 @@
 import { useI18n } from "../../lib/i18n.jsx";
 import { showDate, formatShowVenueCity, shortUnitTitle } from "../../lib/domain.js";
 
+function MilestoneProgressBar({ percentage }) {
+  const safePercentage = Math.min(100, Math.max(0, percentage || 0));
+  return (
+    <div
+      data-testid="milestone-coverage-bar"
+      className="w-full h-1.5 bg-paper-dark/30 rounded-full overflow-hidden my-1"
+      role="progressbar"
+      aria-valuenow={percentage}
+      aria-valuemin="0"
+      aria-valuemax="100"
+    >
+      <div
+        className="h-full bg-accent rounded-full transition-all duration-300"
+        style={{ width: `${safePercentage}%` }}
+      />
+    </div>
+  );
+}
+
 export function TicketBookMilestoneDashboard({ milestones, onOpenSummaryCard, onOpenSongChecklist }) {
   const { t, locale } = useI18n();
 
@@ -107,16 +126,20 @@ export function TicketBookMilestoneDashboard({ milestones, onOpenSummaryCard, on
           >
             <div className="font-mono text-[10px] sm:text-[11px] font-bold text-ink uppercase flex items-center justify-center gap-1">
               <span>{t("ticketBook.coverage", "歌曲解鎖率")}</span>
-              <span className="opacity-0 group-hover:opacity-100 transition-opacity" aria-hidden="true">
-                📖
-              </span>
             </div>
             <div className="my-1 font-mono text-[18px] sm:text-[22px] font-black text-ink leading-none text-center">
               {milestones.coveragePercentage}%
             </div>
+            <MilestoneProgressBar percentage={milestones.coveragePercentage} />
             <div className="font-mono text-[10px] text-ink font-bold flex items-center justify-center gap-1">
               <span>{milestones.unlockedSongCount} / {milestones.totalCatalogSongs}</span>
-              <span className="text-[9px] text-muted group-hover:text-ink">→</span>
+            </div>
+            <div
+              data-testid="milestone-coverage-cta"
+              className="mt-2 inline-flex items-center justify-center gap-1 px-1.5 py-0.5 rounded-[3px] bg-ink/5 group-hover:bg-ink group-hover:text-paper font-mono text-[9px] sm:text-[10px] font-bold text-ink transition-colors border border-ink/20 group-hover:border-ink"
+            >
+              <span aria-hidden="true">📖</span>
+              <span>{t("ticketBook.viewChecklistCta", "查看圖鑑 ↗")}</span>
             </div>
           </button>
         ) : (
@@ -130,6 +153,7 @@ export function TicketBookMilestoneDashboard({ milestones, onOpenSummaryCard, on
             <div className="my-1 font-mono text-[18px] sm:text-[22px] font-black text-ink leading-none">
               {milestones.coveragePercentage}%
             </div>
+            <MilestoneProgressBar percentage={milestones.coveragePercentage} />
             <div className="font-mono text-[10px] text-ink font-bold">
               {milestones.unlockedSongCount} / {milestones.totalCatalogSongs}
             </div>

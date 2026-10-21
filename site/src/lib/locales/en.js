@@ -528,6 +528,7 @@ export const dictEn = {
     exportMemorialCard: "Save Memorial Ticket",
     exportMemorialCardTitle: "Preview and save commemorative ticket for this show",
     viewChecklist: "Open Live Song Checklist",
+    viewChecklistCta: "View Checklist ↗",
     checklistTitle: "Live Song Checklist",
     checklistSubtitle: "LIVE SONG CHECKLIST // REPERTOIRE ARCHIVE",
     checklistProgress: "Unlocked {unlocked} / {total} songs ({percentage}%)",

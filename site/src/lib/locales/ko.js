@@ -528,6 +528,7 @@ export const dictKo = {
     exportMemorialCard: "기념 티켓 저장",
     exportMemorialCardTitle: "이 공연의 기념 티켓 미리보기 및 저장",
     viewChecklist: "곡 체크리스트 열기",
+    viewChecklistCta: "도감 보기 ↗",
     checklistTitle: "라이브 곡 체크리스트",
     checklistSubtitle: "LIVE SONG CHECKLIST // REPERTOIRE ARCHIVE",
     checklistProgress: "총 {total}곡 중 {unlocked}곡 해금 ({percentage}%)",

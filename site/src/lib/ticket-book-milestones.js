@@ -17,6 +17,8 @@ import { ALBUM_ORDER } from "./constants.js";
  * 9. 現場曲庫解鎖成就圖鑑專輯分組 (albumGroups / songChecklist)
  */
 
+const EXCLUDED_CHECKLIST_BUCKETS = new Set(["未發行曲目", "合作單曲"]);
+
 function createAlbumGroup(album, songs) {
   const totalSongs = songs.length;
   const unlockedCount = songs.filter((s) => s.unlocked).length;
@@ -37,7 +39,7 @@ export function buildAlbumGroups(releasedCatalog, songPlayCounts = {}) {
   for (const s of releasedCatalog) {
     if (!s || !s.id) continue;
     const album = getSongAlbum(s);
-    if (album === "未發行曲目") continue;
+    if (EXCLUDED_CHECKLIST_BUCKETS.has(album)) continue;
     if (!songsByAlbum.has(album)) {
       songsByAlbum.set(album, []);
     }
@@ -55,7 +57,7 @@ export function buildAlbumGroups(releasedCatalog, songPlayCounts = {}) {
   const processedAlbums = new Set();
 
   for (const alb of ALBUM_ORDER) {
-    if (alb === "未發行曲目") continue;
+    if (EXCLUDED_CHECKLIST_BUCKETS.has(alb)) continue;
     if (songsByAlbum.has(alb)) {
       groups.push(createAlbumGroup(alb, songsByAlbum.get(alb)));
       processedAlbums.add(alb);
@@ -63,7 +65,7 @@ export function buildAlbumGroups(releasedCatalog, songPlayCounts = {}) {
   }
 
   for (const [alb, songs] of songsByAlbum.entries()) {
-    if (!processedAlbums.has(alb) && alb !== "未發行曲目") {
+    if (!processedAlbums.has(alb) && !EXCLUDED_CHECKLIST_BUCKETS.has(alb)) {
       groups.push(createAlbumGroup(alb, songs));
     }
   }
@@ -91,8 +93,15 @@ export function computeTicketBookMilestones({
   }
 
   // Released songs catalog (denominator for coverage percentage)
-  const releasedCatalog = catalog.filter((s) => s && !unreleasedIdSet.has(s.id) && !s.unreleased);
+  // Excludes unreleased songs and collaboration singles from coverage metrics and checklist drawer
+  const releasedCatalog = catalog.filter((s) => {
+    if (!s || !s.id) return false;
+    if (unreleasedIdSet.has(s.id) || s.unreleased) return false;
+    if (getSongAlbum(s) === "合作單曲") return false;
+    return true;
+  });
   const totalCatalogSongs = releasedCatalog.length;
+  const releasedSongIdSet = new Set(releasedCatalog.map((s) => s.id));
 
   if (totalShows === 0) {
     const albumGroups = buildAlbumGroups(releasedCatalog, {});
@@ -169,8 +178,8 @@ export function computeTicketBookMilestones({
       for (const item of items) {
         if (item && item.songId) {
           songPlayCounts[item.songId] = (songPlayCounts[item.songId] || 0) + 1;
-          // Only add to unlocked set if not an unreleased track
-          if (!unreleasedIdSet.has(item.songId)) {
+          // Only add to unlocked set if part of released catalog (excludes unreleased and collaboration tracks)
+          if (releasedSongIdSet.has(item.songId)) {
             unlockedSongIds.add(item.songId);
           }
         }

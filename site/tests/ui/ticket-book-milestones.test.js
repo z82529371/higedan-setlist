@@ -281,6 +281,71 @@ describe("25. TicketBook Dynamic Milestones Calculation & Summary Card (#37)", (
       assert.equal(stats.attendedShowsList[0].showKey, "special-show");
     });
 
+    it("excludes collaboration singles from coverage denominator and numerator and checklist album groups while preserving top songs qualification", async () => {
+      const { computeTicketBookMilestones } = await loadModule("/src/lib/ticket-book-milestones.js");
+
+      // Catalog with 2 released songs, 2 collaboration singles, and 1 unreleased song
+      const catalog = [
+        { id: "pretender", title: "Pretender" },
+        { id: "subtitle", title: "Subtitle" },
+        { id: "koi-no-saichu", title: "恋の最chu!" }, // collaboration single
+        { id: "bukiyou-na-futari-de", title: "不器用な二人で" }, // collaboration single
+        { id: "fuusen", title: "風船", unreleased: true }, // unreleased
+      ];
+
+      const testShowById = new Map([
+        [
+          "collab-show",
+          {
+            id: "collab-show",
+            date: "2016-08-01",
+            venue: "Live House",
+            city: "東京",
+            setlist: [
+              { songId: "pretender" },
+              { songId: "koi-no-saichu" }, // collaboration single
+              { songId: "fuusen" }, // unreleased
+            ],
+          },
+        ],
+      ]);
+
+      const testUnitData = new Map([
+        [
+          "collab-event",
+          {
+            unit: { id: "collab-event", title: "Special Joint Event", isTour: false },
+            isTour: false,
+          },
+        ],
+      ]);
+
+      const stats = computeTicketBookMilestones({
+        attendedShows: [{ showKey: "collab-show", attendedAt: "2016-08-01" }],
+        unitData: testUnitData,
+        showById: testShowById,
+        unitIdByShowId: new Map([["collab-show", "collab-event"]]),
+        allUsedSongs: catalog,
+      });
+
+      // 1. Total catalog songs (denominator) excludes both unreleased and collaboration songs (2 instead of 5)
+      assert.equal(stats.totalCatalogSongs, 2, "Denominator must exclude collaboration singles and unreleased songs");
+
+      // 2. Unlocked songs (numerator) only counts 'pretender' (1 instead of 3)
+      assert.equal(stats.unlockedSongCount, 1, "Numerator must exclude collaboration singles");
+      assert.equal(stats.coveragePercentage, 50, "Coverage is 1/2 = 50%");
+
+      // 3. Checklist album groups must NOT contain '合作單曲'
+      const albumNames = stats.albumGroups.map((g) => g.album);
+      assert.ok(!albumNames.includes("合作單曲"), "Album groups must not include '合作單曲'");
+      assert.ok(!albumNames.includes("未發行曲目"), "Album groups must not include '未發行曲目'");
+
+      // 4. Top songs retains collaboration and unreleased songs based on actual live counts
+      const topSongIds = stats.topSongs.map((s) => s.songId);
+      assert.ok(topSongIds.includes("koi-no-saichu"), "Collaboration song 'koi-no-saichu' must remain in topSongs if played");
+      assert.ok(topSongIds.includes("fuusen"), "Unreleased song 'fuusen' must remain in topSongs if played");
+    });
+
     it("computes albumGroups with songs, counts, and completion percentages excluding unreleased tracks", async () => {
       const { computeTicketBookMilestones } = await loadModule("/src/lib/ticket-book-milestones.js");
 
@@ -432,6 +497,9 @@ describe("25. TicketBook Dynamic Milestones Calculation & Summary Card (#37)", (
       assert.ok(htmlZh.includes('data-testid="milestone-total-tours"'), "Must render milestone-total-tours");
       assert.ok(htmlZh.includes('data-testid="milestone-total-cities"'), "Must render milestone-total-cities");
       assert.ok(htmlZh.includes('data-testid="milestone-coverage"'), "Must render milestone-coverage");
+      assert.ok(htmlZh.includes('data-testid="milestone-coverage-bar"'), "Must render milestone-coverage-bar progress bar");
+      assert.ok(htmlZh.includes('data-testid="milestone-coverage-cta"'), "Must render milestone-coverage-cta button badge");
+      assert.ok(htmlZh.includes("查看圖鑑 ↗"), "Must render zh-TW CTA text");
 
       // Verify Top 3 Songs block
       assert.ok(htmlZh.includes('data-testid="milestone-top-songs"'), "Must render milestone-top-songs block");
@@ -459,6 +527,7 @@ describe("25. TicketBook Dynamic Milestones Calculation & Summary Card (#37)", (
         )
       );
       assert.ok(htmlJa.includes('data-testid="ticket-book-milestones-dashboard"'));
+      assert.ok(htmlJa.includes("図鑑を見る ↗"), "Must render ja CTA text");
 
       storage.clear();
     });
