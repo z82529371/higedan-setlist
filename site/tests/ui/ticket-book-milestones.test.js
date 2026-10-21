@@ -182,10 +182,12 @@ describe("25. TicketBook Dynamic Milestones Calculation & Summary Card (#37)", (
       assert.ok(stats.earliestShow);
       assert.equal(stats.earliestShow.showKey, "show-1");
       assert.equal(stats.earliestShow.date, "2024-11-30");
+      assert.equal(stats.earliestShow.shortTitle, "Rejoice Asia Tour");
 
       assert.ok(stats.latestShow);
       assert.equal(stats.latestShow.showKey, "show-3");
       assert.equal(stats.latestShow.date, "2025-08-16");
+      assert.equal(stats.latestShow.shortTitle, "Summer Sonic 2025");
     });
 
     it("gracefully handles orphaned shows, null fields, and non-song items", async () => {
@@ -457,7 +459,8 @@ describe("25. TicketBook Dynamic Milestones Calculation & Summary Card (#37)", (
       earliestShow: {
         showKey: "show-1",
         date: "2024-11-30",
-        title: "Asia Tour 2024",
+        title: "Official髭男dism Asia Tour 2024 - Rejoice",
+        shortTitle: "Asia Tour 2024",
         venue: "KINTEX Hall 5",
         city: "高陽",
       },
@@ -549,6 +552,11 @@ describe("25. TicketBook Dynamic Milestones Calculation & Summary Card (#37)", (
       assert.ok(html.includes('data-testid="milestone-card-latest-show"'));
       assert.ok(html.includes("2024-11-30"));
       assert.ok(html.includes("2025-08-16"));
+
+      // Verify Atomic Show Date Invariant (whitespace-nowrap shrink-0)
+      assert.ok(html.includes("whitespace-nowrap shrink-0"), "Milestone card dates must have whitespace-nowrap shrink-0 to prevent bracket wrap");
+      assert.ok(html.includes("Asia Tour 2024"), "Must render shortTitle for concise tour titles in 540px milestone card");
+      assert.ok(!html.includes("Official髭男dism Asia Tour 2024 - Rejoice"), "Must omit redundant full title prefix when shortTitle is present");
 
       // Verify Attended Chronicle Footprint list
       assert.ok(html.includes('data-testid="milestone-card-attended-list"'), "Chronicle attended list must be rendered");

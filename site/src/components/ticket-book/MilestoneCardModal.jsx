@@ -1,6 +1,6 @@
 import { useRef, useState, useEffect } from "react";
 import { useI18n } from "../../lib/i18n.jsx";
-import { showDate, formatShowVenueCity } from "../../lib/domain.js";
+import { showDate, formatShowVenueCity, shortUnitTitle } from "../../lib/domain.js";
 import { exportElementToPng } from "../../lib/image-export.js";
 import { TicketPerforationDivider, TicketBarcodeFooter } from "../slips/TicketCommon.jsx";
 import { SLIP_TAPE } from "../../lib/constants.js";
@@ -274,12 +274,12 @@ export function MilestoneCardModal({ isOpen, onClose, milestones, storage: propS
               data-testid="milestone-card-first-show"
               className="rounded-[4px] border border-ink/20 bg-paper/40 p-2.5 text-[11px]"
             >
-              <div className="flex items-center justify-between text-ink font-mono font-bold mb-0.5">
-                <span>{t("ticketBook.firstShow", "最初參戰")}</span>
-                <span>{earliest?.date ? (earliest.show ? showDate(earliest.show, locale) : earliest.date) : "--"}</span>
+              <div className="flex items-center justify-between text-ink font-mono font-bold mb-0.5 gap-1">
+                <span className="shrink-0">{t("ticketBook.firstShow", "最初參戰")}</span>
+                <span className="whitespace-nowrap shrink-0">{earliest?.date ? (earliest.show ? showDate(earliest.show, locale) : earliest.date) : "--"}</span>
               </div>
               <div className="font-bold text-ink truncate text-[12px]">
-                {earliest?.title || "--"}
+                {earliest?.shortTitle || (earliest?.unit ? shortUnitTitle(earliest.unit) : earliest?.title) || "--"}
               </div>
               {earliest && (
                 <div className="text-ink text-[11px] truncate mt-0.5 font-medium">
@@ -292,12 +292,12 @@ export function MilestoneCardModal({ isOpen, onClose, milestones, storage: propS
               data-testid="milestone-card-latest-show"
               className="rounded-[4px] border border-ink/20 bg-paper/40 p-2.5 text-[11px]"
             >
-              <div className="flex items-center justify-between text-ink font-mono font-bold mb-0.5">
-                <span>{t("ticketBook.latestShow", "最近參戰")}</span>
-                <span>{latest?.date ? (latest.show ? showDate(latest.show, locale) : latest.date) : "--"}</span>
+              <div className="flex items-center justify-between text-ink font-mono font-bold mb-0.5 gap-1">
+                <span className="shrink-0">{t("ticketBook.latestShow", "最近參戰")}</span>
+                <span className="whitespace-nowrap shrink-0">{latest?.date ? (latest.show ? showDate(latest.show, locale) : latest.date) : "--"}</span>
               </div>
               <div className="font-bold text-ink truncate text-[12px]">
-                {latest?.title || "--"}
+                {latest?.shortTitle || (latest?.unit ? shortUnitTitle(latest.unit) : latest?.title) || "--"}
               </div>
               {latest && (
                 <div className="text-ink text-[11px] truncate mt-0.5 font-medium">
@@ -333,13 +333,13 @@ export function MilestoneCardModal({ isOpen, onClose, milestones, storage: propS
                       className="p-2 rounded border border-ink/20 bg-card space-y-0.5 text-[11px]"
                     >
                       {/* Line 1: Date and Location */}
-                      <div className="flex items-center justify-between text-[11px] font-mono leading-tight">
-                        <div className="flex items-center gap-1.5 font-extrabold text-ink tabular-nums">
+                      <div className="flex items-center justify-between text-[11px] font-mono leading-tight gap-2">
+                        <div className="flex items-center gap-1.5 font-extrabold text-ink tabular-nums whitespace-nowrap shrink-0">
                           <span className="text-[10px] text-band-ink font-bold">#{num}</span>
-                          <span>{dateStr}</span>
+                          <span className="whitespace-nowrap">{dateStr}</span>
                         </div>
                         {venueStr && (
-                          <span className="text-[10px] font-medium text-ink/80 truncate max-w-[60%]">
+                          <span className="text-[10px] font-medium text-ink/80 truncate min-w-0 max-w-[55%] text-right">
                             📍 {venueStr}
                           </span>
                         )}
@@ -347,7 +347,7 @@ export function MilestoneCardModal({ isOpen, onClose, milestones, storage: propS
 
                       {/* Line 2: Tour / Show Title */}
                       <div className="font-bold text-ink text-[12px] truncate leading-tight">
-                        {entry.title || "--"}
+                        {entry.shortTitle || (entry.unit ? shortUnitTitle(entry.unit) : entry.title) || "--"}
                       </div>
                     </div>
                   );

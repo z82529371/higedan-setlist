@@ -122,6 +122,8 @@
 | [ADR-0114: 巡演票夾領域重構、意象升級與 Passport 概念廢棄架構 (Concert Ticket Book Domain Refactoring, Metaphor Upgrade & Passport Deprecation Architecture)](0114-concert-ticket-book-domain-refactoring-and-passport-deprecation.md) | 已採納 (Accepted) | 徹底廢棄護照出國意象與 #/passport 路由，升級為現場票券收納本（巡演票夾 Ticket Book）、#/tickets 一級路由與自動升級遷移管線 |
 | [ADR-0115: 巡演日程就地收錄、首頁四大核心特色與全域票夾動態接觸點架構 (Tour Stop In-Place Check-in, Landing Feature Quartet & Ticket Book Dynamic Touchpoints Architecture)](0115-tour-stop-in-place-check-in-and-landing-quartet-architecture.md) | 已採納 (Accepted) | 確立首頁純淨聚光燈與票夾發現性權衡、四大特色亮點卡、巡演日程就地收進票夾與全域動態徽章接觸點 |
 | [ADR-0116: 票夾歌迷身分識別、歌曲解鎖率未發表曲邊界與生涯小卡編年史重構 (Ticket Book Holder Identity, Unreleased Song Coverage Boundary & Career Milestone Chronicle Architecture)](0116-ticket-book-holder-identity-and-milestone-chronicle-architecture.md) | 已採納 (Accepted) | 擴充 holderName 全域身分與雙卡同步、歌曲解鎖率嚴格排除未發表曲、生涯小卡重構為雙行足跡編年史與時間軸空間緊緻化 |
+| [ADR-0117: 原子演出日期防折行不變量與生涯里程碑小卡巡演標題精簡架構 (Atomic Show Date Invariant & Milestone Card Short Title Presentation Architecture)](0117-atomic-show-date-invariant-and-milestone-card-short-title-presentation.md) | 已採納 (Accepted) | 確立演出日期 whitespace-nowrap shrink-0 原子防擠下不變量，並將生涯小卡巡演名稱全面改採 shortTitle 精簡呈現 |
+
 
 
 

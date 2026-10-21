@@ -671,7 +671,7 @@ export function MemorialCardModal({
                       </>
                     )}
                   </div>
-                  <div className="font-mono text-xs font-bold text-[#d19f00] pt-0.5">
+                  <div className="font-mono text-xs font-bold text-[#d19f00] pt-0.5 whitespace-nowrap">
                     📅 {dateFormatted}
                   </div>
 

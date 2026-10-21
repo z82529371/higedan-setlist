@@ -95,6 +95,7 @@ describe("16. Localized Commemorative Ticket Image Export (Issue #19)", () => {
       assert.ok(htmlJa.includes("リクエスト"), "Must render 'リクエスト' arrangement badge in ja");
       assert.ok(htmlJa.includes("17:00 開場 / 18:00 開演"), "Must render Japanese door/start time in ja");
       assert.ok(htmlJa.includes("2024-11-12（火）"), "Must render Japanese date in ja");
+      assert.ok(htmlJa.includes("whitespace-nowrap"), "Must include whitespace-nowrap on date element to prevent bracket wrapping");
       assert.ok(htmlJa.includes("記念チケットプレビュー"), "Must render localized modal title in ja");
       assert.ok(htmlJa.includes("クラフト紙"), "Must render localized theme button 'クラフト紙' in ja");
       assert.ok(htmlJa.includes("ホワイトカード"), "Must render localized theme button 'ホワイトカード' in ja");

@@ -1,5 +1,5 @@
 import songsData from "../data/songs.json";
-import { songUnreleased } from "./domain.js";
+import { songUnreleased, shortUnitTitle } from "./domain.js";
 
 /**
  * ticket-book-milestones.js — Dynamic Concert Ticket Book Milestones & Repertoire Engine
@@ -98,6 +98,7 @@ export function computeTicketBookMilestones({
         venue: venueName || "",
         city: city || "",
         title: unit?.title || show?.title || key,
+        shortTitle: unit ? shortUnitTitle(unit) : show?.title || key,
       });
     }
 

@@ -1,5 +1,5 @@
 import { useI18n } from "../../lib/i18n.jsx";
-import { showDate, formatShowVenueCity } from "../../lib/domain.js";
+import { showDate, formatShowVenueCity, shortUnitTitle } from "../../lib/domain.js";
 
 export function TicketBookMilestoneDashboard({ milestones, onOpenSummaryCard }) {
   const { t, locale } = useI18n();
@@ -167,12 +167,12 @@ export function TicketBookMilestoneDashboard({ milestones, onOpenSummaryCard }) 
               data-testid="milestone-first-show"
               className="bg-card p-2 rounded border border-ink/15 text-[11px]"
             >
-              <div className="flex items-center justify-between text-ink font-mono font-bold mb-0.5">
-                <span>{t("ticketBook.firstShow", "最初參戰")}</span>
-                <span>{earliest?.date ? (earliest.show ? showDate(earliest.show, locale) : earliest.date) : "--"}</span>
+              <div className="flex items-center justify-between text-ink font-mono font-bold mb-0.5 gap-1">
+                <span className="shrink-0">{t("ticketBook.firstShow", "最初參戰")}</span>
+                <span className="whitespace-nowrap shrink-0">{earliest?.date ? (earliest.show ? showDate(earliest.show, locale) : earliest.date) : "--"}</span>
               </div>
               <div className="font-bold text-ink truncate text-[12px]">
-                {earliest?.title || "--"}
+                {earliest?.shortTitle || (earliest?.unit ? shortUnitTitle(earliest.unit) : earliest?.title) || "--"}
               </div>
               {earliest && (
                 <div className="text-ink text-[11px] truncate font-medium">
@@ -186,12 +186,12 @@ export function TicketBookMilestoneDashboard({ milestones, onOpenSummaryCard }) 
               data-testid="milestone-latest-show"
               className="bg-card p-2 rounded border border-ink/15 text-[11px]"
             >
-              <div className="flex items-center justify-between text-ink font-mono font-bold mb-0.5">
-                <span>{t("ticketBook.latestShow", "最近參戰")}</span>
-                <span>{latest?.date ? (latest.show ? showDate(latest.show, locale) : latest.date) : "--"}</span>
+              <div className="flex items-center justify-between text-ink font-mono font-bold mb-0.5 gap-1">
+                <span className="shrink-0">{t("ticketBook.latestShow", "最近參戰")}</span>
+                <span className="whitespace-nowrap shrink-0">{latest?.date ? (latest.show ? showDate(latest.show, locale) : latest.date) : "--"}</span>
               </div>
               <div className="font-bold text-ink truncate text-[12px]">
-                {latest?.title || "--"}
+                {latest?.shortTitle || (latest?.unit ? shortUnitTitle(latest.unit) : latest?.title) || "--"}
               </div>
               {latest && (
                 <div className="text-ink text-[11px] truncate font-medium">
