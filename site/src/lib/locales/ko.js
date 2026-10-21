@@ -177,6 +177,14 @@ export const dictKo = {
     copied: "✓ 복사됨",
     setlistInfoUnknown: "셋리스트 미확인",
     noPublicSetlist: "이 공연의 공개된 셋리스트 기록이 아직 없습니다",
+    quest: {
+      calloutTitle: "🔍 셋리스트 정보 제보 안내",
+      calloutDesc: "본 공연은 현재 공개된 셋리스트 기록이 없습니다. Official히게단dism의 초기 활동 기록을 함께 복원해 주세요! 당시 현장에 참여하셨거나 종이 셋리스트, 티켓 부표, 전단지(플라이어), 후기 사진을 소장하고 계신다면 제보를 부탁드립니다!",
+      submitBtn: "본 공연 셋리스트 제보하기",
+      submitTitle: "메일 앱을 열어 본 공연의 정보 제보 템플릿을 작성합니다",
+      reportTime: "공연 시간 제보하기",
+      reportTimeTitle: "본 공연의 입장 및 시작 시간 정보 제보하기",
+    },
     tour: {
       prefecturesCities: "{prefecturesCount}개 도도부현 · {citiesCount}개 도시",
       trackStatsTitle: "등장 곡 통계:",

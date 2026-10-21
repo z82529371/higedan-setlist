@@ -177,6 +177,14 @@ export const dictZhTw = {
     copied: "✓ 已複製",
     setlistInfoUnknown: "歌單情報未明",
     noPublicSetlist: "本場演出目前尚無公開曲目紀錄",
+    quest: {
+      calloutTitle: "🔍 歌單情報協尋中",
+      calloutDesc: "本場演出目前尚無公開曲目紀錄。Official 髭男 dism 早期現場足跡需要大家共同拼湊！如果您曾親臨現場，或持有當年的實體紙本歌單、門票票根、宣傳單（Flyer）或現場推文照片，歡迎協助補齊歷史拼圖！",
+      submitBtn: "提供本場曲目情報",
+      submitTitle: "開啟郵件軟體，預填本場演出情報回報範本",
+      reportTime: "提供開演時間",
+      reportTimeTitle: "提供本場演出的開場與開演時間情報",
+    },
     tour: {
       prefecturesCities: "{prefecturesCount} 都道府縣 · {citiesCount} 城市",
       trackStatsTitle: "登場曲目統計：",

@@ -8,6 +8,7 @@ import { assignCues } from "../../lib/resolve.js";
 import { getSourceLabel, TicketPerforationDivider, TicketBarcodeFooter } from "./TicketCommon.jsx";
 import { ShowSlipPanels } from "./ShowSlipPanels.jsx";
 import { ShowMetadataBox } from "./ShowMetadataBox.jsx";
+import { SetlistQuestCard } from "./SetlistQuestCard.jsx";
 import { useI18n } from "../../lib/i18n.jsx";
 import { useTicketBookAttendance } from "../../lib/ticket-book.js";
 
@@ -373,6 +374,7 @@ export function ShowSlip({
         {/* Level 3: Specific Show Details Ticket Stub Box (Clean & Focused) */}
         <ShowMetadataBox
           s={s}
+          unitTitle={ud.unit.title}
           songCount={songCount}
           mainCount={mainCount}
           encCount={encCount}
@@ -550,12 +552,7 @@ export function ShowSlip({
     <TicketPerforationDivider />
 
       {items.length === 0 ? (
-        <div className="my-8 rounded-[3px] border border-dashed border-line bg-paper px-6 py-8 text-center">
-          <p className="m-0 text-[16px] font-bold text-ink">🔍 {t("slips.setlistInfoUnknown", "歌單情報未明")}</p>
-          <p className="m-0 mt-2 text-[13px] text-muted">
-            {t("slips.noPublicSetlist", "本場演出目前尚無公開曲目紀錄")}
-          </p>
-        </div>
+        <SetlistQuestCard show={s} unitTitle={ud.unit.title} />
       ) : (
         <div className="space-y-4">
           <div>

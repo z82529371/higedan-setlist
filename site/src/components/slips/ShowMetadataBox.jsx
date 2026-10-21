@@ -1,6 +1,7 @@
 import { showDate, formatShowTime, formatShowSongBreakdown, formatShowPlace } from "../../lib/domain.js";
 import { routeHash } from "../../lib/track.js";
 import { useI18n } from "../../lib/i18n.jsx";
+import { buildTimeMailto } from "../../lib/feedback.js";
 
 export function ShowMetadataBox({
   s,
@@ -13,8 +14,12 @@ export function ShowMetadataBox({
   prevShow,
   nextShow,
   onSelectShow,
+  unitTitle = "",
 }) {
   const { locale, t, localizeVenue } = useI18n();
+  const timeFormatted = formatShowTime(s, locale);
+  const isTimeMissing = !timeFormatted && songCount > 0;
+  const timeMailto = isTimeMissing ? buildTimeMailto({ show: s, unitTitle, locale }) : "";
 
   return (
     <div className="border-y border-line-soft py-3 my-2">
@@ -24,12 +29,23 @@ export function ShowMetadataBox({
           <span className="text-[13px] text-muted" aria-hidden="true">📅</span>
           {showDate(s, locale)}
         </div>
-        {formatShowTime(s, locale) && (
+        {timeFormatted ? (
           <span className="text-[12px] font-medium text-muted">
             <span aria-hidden="true">⏰ </span>
-            {formatShowTime(s, locale)}
+            {timeFormatted}
           </span>
-        )}
+        ) : isTimeMissing ? (
+          <a
+            href={timeMailto}
+            data-testid="report-time-btn"
+            title={t("slips.quest.reportTimeTitle", "提供本場演出的開場與開演時間情報")}
+            className="inline-flex items-center gap-1 rounded border border-dashed border-ink/40 bg-card text-ink px-2 py-0.5 font-mono text-[11px] font-bold hover:bg-tape-tint hover:border-ink transition-colors cursor-pointer no-underline touch-stamp"
+          >
+            <span aria-hidden="true">⏰ </span>
+            <span>{t("slips.quest.reportTime", "提供開演時間")}</span>
+            <span aria-hidden="true">→</span>
+          </a>
+        ) : null}
       </div>
 
       {/* Venue & Metadata Box */}

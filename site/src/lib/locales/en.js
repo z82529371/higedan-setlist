@@ -177,6 +177,14 @@ export const dictEn = {
     copied: "✓ Copied",
     setlistInfoUnknown: "Setlist Unconfirmed",
     noPublicSetlist: "No public setlist record currently available for this show",
+    quest: {
+      calloutTitle: "🔍 Seeking Setlist Information",
+      calloutDesc: "No public setlist is currently recorded for this show. Early Official HIGE DANDISM live history relies on community contributions! If you attended this show or have a physical setlist, ticket stub, flyer, or tweets, please help us complete the archive!",
+      submitBtn: "Submit Setlist Information",
+      submitTitle: "Open email client with a pre-filled show information template",
+      reportTime: "Report Show Time",
+      reportTimeTitle: "Provide doors open and start times for this show",
+    },
     tour: {
       prefecturesCities: "{prefecturesCount} Prefectures · {citiesCount} Cities",
       trackStatsTitle: "Track Statistics:",

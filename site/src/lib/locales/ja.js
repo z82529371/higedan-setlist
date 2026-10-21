@@ -177,6 +177,14 @@ export const dictJa = {
     copied: "✓ コピー完了",
     setlistInfoUnknown: "セットリスト未確認",
     noPublicSetlist: "この公演の公開セットリスト記録は現在ありません",
+    quest: {
+      calloutTitle: "🔍 セットリスト情報募集中",
+      calloutDesc: "本公演は現在公開されているセットリスト情報がありません。Official髭男dismの初期の歩みを残すため、当時の紙のセトリ、チケット半券、フライヤー、ライブレポ写真などをお持ちの方の情報提供をお待ちしております！",
+      submitBtn: "セットリスト情報を提供する",
+      submitTitle: "メールアプリを起動し、本公演の情報提供テンプレートを作成します",
+      reportTime: "開演時間を提供する",
+      reportTimeTitle: "本公演の開場・開演時間情報を提供する",
+    },
     tour: {
       prefecturesCities: "{prefecturesCount} 都道府県 · {citiesCount} 都市",
       trackStatsTitle: "演奏曲目統計：",
