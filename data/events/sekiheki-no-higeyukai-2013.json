@@ -7,13 +7,16 @@
     {
       "id": "1916961",
       "date": "2013-12-15",
+      "weekday": "日",
       "city": "松江",
       "venue": "松江AZTiC canova",
       "region": "中國",
       "prefecture": "島根縣",
       "title": "赤壁の髭湯会",
+      "startsAt": "18:00",
       "sourceUrls": [
-        "https://www.livefans.jp/events/1916961"
+        "https://www.livefans.jp/events/1916961",
+        "https://x.com/officialhige/status/411893784348069888"
       ],
       "setlist": []
     }

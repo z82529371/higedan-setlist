@@ -7,14 +7,16 @@
     {
       "id": "fukuyama-music-factory-2014-0329-show",
       "date": "2014-03-29",
-      "weekday": "六",
+      "weekday": "土",
       "city": "福山",
       "venue": "福山MUSIC FACTORY",
       "region": "中國",
       "prefecture": "廣島縣",
       "title": "福山MUSICFACTORY LIVE",
+      "startsAt": "16:00",
       "sourceUrls": [
-        "https://x.com/officialhige/status/446243143747248128"
+        "https://x.com/officialhige/status/446243143747248128",
+        "https://x.com/officialhige/status/449444233288499203"
       ],
       "setlist": []
     }
