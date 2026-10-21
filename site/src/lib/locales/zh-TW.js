@@ -196,6 +196,8 @@ export const dictZhTw = {
       successDesc: "感謝您協助拼湊 Official 髭男 dism 歷史現場拼圖！我們將儘速查驗並更新檔案庫。",
       fallbackPrompt: "若送出失敗，亦可一鍵複製內容手動寄信至",
       officialContact: "官方勘誤信箱：",
+      openGmail: "在網頁版 Gmail 寄出",
+      nativeMail: "使用本機郵件軟體",
       copyFallbackBtn: "📋 複製內容與信箱",
       copied: "✓ 已複製到剪貼簿",
       invalidUrl: "請填寫以 http:// 或 https:// 開頭的有效網址",

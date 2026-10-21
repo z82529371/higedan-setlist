@@ -196,6 +196,8 @@ export const dictJa = {
       successDesc: "Official髭男dismの歴史アーカイブへのご協力ありがとうございます！確認の上反映いたします。",
       fallbackPrompt: "送信に失敗した場合は、内容をコピーしてメールでお送りいただけます：",
       officialContact: "公式情報提供・お問い合わせ窓口：",
+      openGmail: "Web版 Gmail で送信",
+      nativeMail: "端末のメールアプリを使用",
       copyFallbackBtn: "📋 内容とメールアドレスをコピー",
       copied: "✓ クリップボードにコピーしました",
       invalidUrl: "http:// または https:// で始まる有効なURLを入力してください",

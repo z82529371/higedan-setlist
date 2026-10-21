@@ -196,6 +196,8 @@ export const dictKo = {
       successDesc: "Official히게단dism 라이브 아카이브 완성에 기여해 주셔서 감사합니다! 검토 후 신속히 반영하겠습니다.",
       fallbackPrompt: "전송에 실패한 경우 내용을 복사하여 이메일로 보내실 수 있습니다:",
       officialContact: "공식 제보/문의 이메일: ",
+      openGmail: "웹 버전 Gmail로 전송",
+      nativeMail: "기기 기본 메일 앱 사용",
       copyFallbackBtn: "📋 내용 및 이메일 복사",
       copied: "✓ 클립보드에 복사되었습니다",
       invalidUrl: "http:// 또는 https://로 시작하는 유효한 URL을 입력해 주세요",

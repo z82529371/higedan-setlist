@@ -196,6 +196,8 @@ export const dictEn = {
       successDesc: "Thank you for helping complete the Official HIGE DANDISM live archive! We will verify and update soon.",
       fallbackPrompt: "If submission fails, you can also copy details and email to",
       officialContact: "Official Feedback Email: ",
+      openGmail: "Compose in Web Gmail",
+      nativeMail: "Use Local Mail App",
       copyFallbackBtn: "📋 Copy Details & Email",
       copied: "✓ Copied to clipboard",
       invalidUrl: "Please enter a valid URL starting with http:// or https://",

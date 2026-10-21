@@ -2,7 +2,7 @@ import { describe, it } from "node:test";
 import assert from "node:assert/strict";
 import { loadModule } from "../helpers/vite-server.js";
 
-describe("27. Crowdsourced Lead Drop Protocol (Seam 1: Payload & Validation)", () => {
+describe("27. Crowdsourced Lead Drop Protocol (Seam 1: Pure Frontend Lead Builders)", () => {
   it("validates evidence URL strictly rejecting non-HTTP/HTTPS and malformed strings", async () => {
     const { validateEvidenceUrl } = await loadModule("src/lib/feedback.js");
 
@@ -23,8 +23,8 @@ describe("27. Crowdsourced Lead Drop Protocol (Seam 1: Payload & Validation)", (
     assert.strictEqual(validateEvidenceUrl("javascript:alert(1)"), false, "Must reject javascript pseudo-protocol");
   });
 
-  it("builds structured submission payload for Web3Forms", async () => {
-    const { buildLeadSubmissionPayload } = await loadModule("src/lib/feedback.js");
+  it("builds Web Gmail compose URL directly targeting hgdnlive@gmail.com without any backend", async () => {
+    const { buildGmailWebComposeUrl, ARCHIVE_FEEDBACK_EMAIL } = await loadModule("src/lib/feedback.js");
 
     const mockShow = {
       id: "2012-07-07-matsue-aztic-canova",
@@ -33,8 +33,7 @@ describe("27. Crowdsourced Lead Drop Protocol (Seam 1: Payload & Validation)", (
     };
     const unitTitle = "第7回 松江だんだん祭り";
 
-    // Setlist lead payload
-    const payload = buildLeadSubmissionPayload({
+    const gmailUrl = buildGmailWebComposeUrl({
       show: mockShow,
       unitTitle,
       evidenceUrl: "https://x.com/fan/status/12345",
@@ -43,38 +42,16 @@ describe("27. Crowdsourced Lead Drop Protocol (Seam 1: Payload & Validation)", (
       locale: "zh-TW",
     });
 
-    assert.strictEqual(payload.show_id, "2012-07-07-matsue-aztic-canova");
-    assert.strictEqual(payload.show_date, "2012-07-07");
-    assert.strictEqual(payload.show_title, "第7回 松江だんだん祭り");
-    assert.strictEqual(payload.show_venue, "松江 AZTiC canova");
-    assert.strictEqual(payload.quest_type, "setlist");
-    assert.strictEqual(payload.evidence_url, "https://x.com/fan/status/12345");
-    assert.strictEqual(payload.notes, "推文第 2 張照片有紙本歌單");
-    assert.strictEqual(
-      payload.subject,
-      "[Official髭男dism 現場情報線索] 2012-07-07 第7回 松江だんだん祭り @ 松江 AZTiC canova"
-    );
-    assert.ok(payload.message.includes("https://x.com/fan/status/12345"));
-    assert.ok(payload.message.includes("2012-07-07-matsue-aztic-canova"));
-    assert.strictEqual(payload.from_name, "HIGEDAN Live Archive Lead Drop");
-
-    // Time lead payload
-    const timePayload = buildLeadSubmissionPayload({
-      show: mockShow,
-      unitTitle,
-      evidenceUrl: "https://livefans.jp/events/123",
-      questType: "time",
-      locale: "zh-TW",
-    });
-    assert.strictEqual(
-      timePayload.subject,
-      "[Official髭男dism 開演時間線索] 2012-07-07 第7回 松江だんだん祭り @ 松江 AZTiC canova"
-    );
-    assert.strictEqual(timePayload.quest_type, "time");
+    assert.ok(gmailUrl.startsWith("https://mail.google.com/mail/?view=cm&fs=1"), "Must open Gmail web compose");
+    assert.ok(gmailUrl.includes(`to=${encodeURIComponent(ARCHIVE_FEEDBACK_EMAIL)}`));
+    assert.ok(gmailUrl.includes("su="));
+    assert.ok(gmailUrl.includes("body="));
+    assert.ok(gmailUrl.includes(encodeURIComponent("https://x.com/fan/status/12345")));
+    assert.ok(gmailUrl.includes(encodeURIComponent("2012-07-07-matsue-aztic-canova")));
   });
 
-  it("builds clean fallback text for one-click clipboard copying", async () => {
-    const { buildLeadFallbackText, ARCHIVE_FEEDBACK_EMAIL } = await loadModule("src/lib/feedback.js");
+  it("builds clean native mailto URL and fallback clipboard text across locales", async () => {
+    const { buildLeadMailtoUrl, buildLeadFallbackText, ARCHIVE_FEEDBACK_EMAIL } = await loadModule("src/lib/feedback.js");
 
     const mockShow = {
       id: "2012-07-07-matsue-aztic-canova",
@@ -83,7 +60,8 @@ describe("27. Crowdsourced Lead Drop Protocol (Seam 1: Payload & Validation)", (
     };
     const unitTitle = "第7回 松江だんだん祭り";
 
-    const fallbackText = buildLeadFallbackText({
+    // 1. Mailto URL
+    const mailtoUrl = buildLeadMailtoUrl({
       show: mockShow,
       unitTitle,
       evidenceUrl: "https://x.com/fan/status/12345",
@@ -91,10 +69,31 @@ describe("27. Crowdsourced Lead Drop Protocol (Seam 1: Payload & Validation)", (
       questType: "setlist",
       locale: "zh-TW",
     });
+    assert.ok(mailtoUrl.startsWith(`mailto:${ARCHIVE_FEEDBACK_EMAIL}?`));
+    assert.ok(mailtoUrl.includes("%0D%0A"), "Must use RFC 6068 CRLF line breaks");
 
-    assert.ok(fallbackText.includes(ARCHIVE_FEEDBACK_EMAIL));
-    assert.ok(fallbackText.includes("2012-07-07-matsue-aztic-canova"));
-    assert.ok(fallbackText.includes("https://x.com/fan/status/12345"));
-    assert.ok(fallbackText.includes("第 2 張照片有紙本"));
+    // 2. Fallback Clipboard Text
+    const fallbackZh = buildLeadFallbackText({
+      show: mockShow,
+      unitTitle,
+      evidenceUrl: "https://x.com/fan/status/12345",
+      notes: "第 2 張照片有紙本",
+      questType: "setlist",
+      locale: "zh-TW",
+    });
+    assert.ok(fallbackZh.includes(ARCHIVE_FEEDBACK_EMAIL));
+    assert.ok(fallbackZh.includes("2012-07-07-matsue-aztic-canova"));
+    assert.ok(fallbackZh.includes("https://x.com/fan/status/12345"));
+    assert.ok(fallbackZh.includes("收件者:"));
+
+    const fallbackJa = buildLeadFallbackText({
+      show: mockShow,
+      unitTitle,
+      evidenceUrl: "https://x.com/fan/status/12345",
+      questType: "time",
+      locale: "ja",
+    });
+    assert.ok(fallbackJa.includes("宛先:"));
+    assert.ok(fallbackJa.includes("件名:"));
   });
 });

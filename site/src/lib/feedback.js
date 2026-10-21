@@ -258,12 +258,6 @@ export function buildTimeMailto({ show, unitTitle, locale = "zh-TW" }) {
   return `mailto:${ARCHIVE_FEEDBACK_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 }
 
-export const WEB3FORMS_ENDPOINT = "https://api.web3forms.com/submit";
-export const DEFAULT_WEB3FORMS_KEY =
-  typeof import.meta !== "undefined" && import.meta.env?.VITE_WEB3FORMS_KEY
-    ? import.meta.env.VITE_WEB3FORMS_KEY
-    : "";
-
 /**
  * Validates whether an evidence input is a syntactically valid HTTP or HTTPS URL.
  */
@@ -289,23 +283,22 @@ export function buildLeadSubject({ show, unitTitle, questType = "setlist" }) {
 }
 
 /**
- * Builds the structured payload for Web3Forms serverless submission.
+ * Builds the structured plain body text for lead reports across RFC 6068 CRLF standards.
  */
-export function buildLeadSubmissionPayload({
+export function buildLeadBody({
   show,
   unitTitle,
   evidenceUrl,
   notes = "",
   questType = "setlist",
   locale = "zh-TW",
-  accessKey = DEFAULT_WEB3FORMS_KEY,
+  newline = "\r\n",
 }) {
   const { date, title, venue, showId } = getShowDescriptor({ show, unitTitle });
-  const subject = buildLeadSubject({ show, unitTitle, questType });
   const cleanUrl = typeof evidenceUrl === "string" ? evidenceUrl.trim() : "";
   const cleanNotes = typeof notes === "string" ? notes.trim() : "";
 
-  const lines = [
+  return [
     `【Official 髭男 dism 現場情報線索回報】`,
     `・場次 ID: ${showId}`,
     `・演出日期: ${date}`,
@@ -316,22 +309,39 @@ export function buildLeadSubmissionPayload({
     `・備註/稱呼: ${cleanNotes || "(無)"}`,
     `・回報語系: ${locale}`,
     `・提交時間: ${new Date().toISOString()}`,
-  ];
+  ].join(newline);
+}
 
-  return {
-    access_key: accessKey,
-    subject,
-    from_name: "HIGEDAN Live Archive Lead Drop",
-    show_id: showId,
-    show_date: date,
-    show_title: title,
-    show_venue: venue,
-    quest_type: questType,
-    evidence_url: cleanUrl,
-    notes: cleanNotes,
-    locale,
-    message: lines.join("\n"),
-  };
+/**
+ * Builds direct Web Gmail compose link (opens in new tab, 100% web-based, zero backend).
+ */
+export function buildGmailWebComposeUrl({
+  show,
+  unitTitle,
+  evidenceUrl,
+  notes = "",
+  questType = "setlist",
+  locale = "zh-TW",
+}) {
+  const subject = buildLeadSubject({ show, unitTitle, questType });
+  const body = buildLeadBody({ show, unitTitle, evidenceUrl, notes, questType, locale });
+  return `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(ARCHIVE_FEEDBACK_EMAIL)}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+}
+
+/**
+ * Builds native mailto URL for desktop mail clients.
+ */
+export function buildLeadMailtoUrl({
+  show,
+  unitTitle,
+  evidenceUrl,
+  notes = "",
+  questType = "setlist",
+  locale = "zh-TW",
+}) {
+  const subject = buildLeadSubject({ show, unitTitle, questType });
+  const body = buildLeadBody({ show, unitTitle, evidenceUrl, notes, questType, locale });
+  return `mailto:${ARCHIVE_FEEDBACK_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 }
 
 const FALLBACK_LABELS = {
@@ -342,7 +352,7 @@ const FALLBACK_LABELS = {
 };
 
 /**
- * Builds fallback human-readable plain text for clipboard copying if background API submission fails.
+ * Builds fallback human-readable plain text for clipboard copying across locales.
  */
 export function buildLeadFallbackText({
   show,
@@ -352,13 +362,14 @@ export function buildLeadFallbackText({
   questType = "setlist",
   locale = "zh-TW",
 }) {
-  const payload = buildLeadSubmissionPayload({ show, unitTitle, evidenceUrl, notes, questType, locale });
+  const subject = buildLeadSubject({ show, unitTitle, questType });
+  const body = buildLeadBody({ show, unitTitle, evidenceUrl, notes, questType, locale, newline: "\n" });
   const labels = FALLBACK_LABELS[locale] || FALLBACK_LABELS["zh-TW"];
   return [
     `${labels.to}: ${ARCHIVE_FEEDBACK_EMAIL}`,
-    `${labels.subject}: ${payload.subject}`,
+    `${labels.subject}: ${subject}`,
     ``,
-    payload.message,
+    body,
   ].join("\n");
 }
 
