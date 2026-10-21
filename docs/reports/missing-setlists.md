@@ -1,6 +1,6 @@
 # Official髭男dism 未收錄歌單場次清單 (Missing Setlists Report)
 
-> 本清單收錄全檔案庫中 **未收錄歌單（曲目完全空白或僅具佔位符）** 之歷史場次，共計 **113** 場。
+> 本清單收錄全檔案庫中 **未收錄歌單（曲目完全空白或僅具佔位符）** 之歷史場次，共計 **112** 場。
 
 ### 統計與年份分佈
 
@@ -11,12 +11,12 @@
 | 2014 | **12 場** | 地下獨立樂團早期拼盤、LIVEHOUSE、學園祭 |
 | 2015 | **31 場** | Free Live Tour、店鋪發片活動、小型拼盤 |
 | 2016 | **30 場** | Free Live Tour、店鋪發片活動、小型拼盤 |
-| 2017 | **14 場** | 迷你專輯發售 Free Live、電台公開錄音、音樂祭 |
+| 2017 | **13 場** | 迷你專輯發售 Free Live、電台公開錄音、音樂祭 |
 | 2018 | **11 場** | 迷你專輯發售 Free Live、電台公開錄音、音樂祭 |
 
 ---
 
-### 完整清單明細 (共 113 場)
+### 完整清單明細 (共 112 場)
 
 | # | 日期 | 演出型態 | 巡演 / 活動名稱 | 場館 (城市) | 資料來源檔案 | 當前狀態 |
 |---|---|---|---|---|---|---|
@@ -24,7 +24,7 @@
 | 2 | 2012-09-16 | 特別專場 | Official髭男dism 2012.09.16 | 松江B1 (松江) | [unofficial-2012-0916.json](file:///C:/Users/User/%E9%AB%AD%E7%94%B7%20%E6%BC%94%E5%94%B1%E6%9C%83/data/events/unofficial-2012-0916.json) | 完全空白 |
 | 3 | 2012-10-11 | 特別專場 | Official髭男dism 2012.10.11 | 米子AZTiC laughs (米子) | [unofficial-2012-1011.json](file:///C:/Users/User/%E9%AB%AD%E7%94%B7%20%E6%BC%94%E5%94%B1%E6%9C%83/data/events/unofficial-2012-1011.json) | 完全空白 |
 | 4 | 2012-10-13 | 特別專場 | Official髭男dism 2012.10.13 | 松江AZTiC canova (松江) | [unofficial-2012-1013.json](file:///C:/Users/User/%E9%AB%AD%E7%94%B7%20%E6%BC%94%E5%94%B1%E6%9C%83/data/events/unofficial-2012-1013.json) | 完全空白 |
-| 5 | 2012-11-03 | 特別專場 | Official髭男dism 2012.11.03 | 米子市公會堂前廣場 野外特設舞台 (米子) | [unofficial-2012-1103.json](file:///C:/Users/User/%E9%AB%AD%E7%94%B7%20%E6%BC%94%E5%94%B1%E6%9C%83/data/events/unofficial-2012-1103.json) | 完全空白 |
+| 5 | 2012-11-03 | 音樂祭 | 第二次 米子映画事変 | 米子市公會堂前廣場 野外特設舞台 (米子) | [yonago-eiga-jihen-2012.json](file:///C:/Users/User/%E9%AB%AD%E7%94%B7%20%E6%BC%94%E5%94%B1%E6%9C%83/data/events/yonago-eiga-jihen-2012.json) | 完全空白 |
 | 6 | 2012-11-10 | 特別專場 | Official髭男dism 2012.11.10 | 松江AZTiC canova (松江) | [unofficial-2012-1110.json](file:///C:/Users/User/%E9%AB%AD%E7%94%B7%20%E6%BC%94%E5%94%B1%E6%9C%83/data/events/unofficial-2012-1110.json) | 完全空白 |
 | 7 | 2013-01-19 | 特別專場 | Official髭男dism 2013.01.19 | 米子AZTiC laughs (米子) | [unofficial-2013-0119.json](file:///C:/Users/User/%E9%AB%AD%E7%94%B7%20%E6%BC%94%E5%94%B1%E6%9C%83/data/events/unofficial-2013-0119.json) | 完全空白 |
 | 8 | 2013-02-28 | 特別專場 | Official髭男dism 2013.02.28 | 松江B1 (松江) | [unofficial-2013-0228.json](file:///C:/Users/User/%E9%AB%AD%E7%94%B7%20%E6%BC%94%E5%94%B1%E6%9C%83/data/events/unofficial-2013-0228.json) | 完全空白 |
@@ -118,18 +118,17 @@
 | 96 | 2017-09-23 | 音樂祭 | MUSIC CITY TENJIN 2017 | 岩田屋本館前 STAGE (福岡) | [music-city-tenjin-2017.json](file:///C:/Users/User/%E9%AB%AD%E7%94%B7%20%E6%BC%94%E5%94%B1%E6%9C%83/data/events/music-city-tenjin-2017.json) | 完全空白 |
 | 97 | 2017-10-14 | 店家活動 | インストア アコースティックミニライブ&サイン会 | TOWER RECORDS 橫濱VIVRE店 店內活動空間 (橫濱) | [report-release-acoustic-mini-live-2017.json](file:///C:/Users/User/%E9%AB%AD%E7%94%B7%20%E6%BC%94%E5%94%B1%E6%9C%83/data/tours/report-release-acoustic-mini-live-2017.json) | 完全空白 |
 | 98 | 2017-10-22 | 店家活動 | インストア アコースティックミニライブ&サイン会 | 三井OUTLET PARK 札幌北廣島 (北廣島) | [report-release-acoustic-mini-live-2017.json](file:///C:/Users/User/%E9%AB%AD%E7%94%B7%20%E6%BC%94%E5%94%B1%E6%9C%83/data/tours/report-release-acoustic-mini-live-2017.json) | 完全空白 |
-| 99 | 2017-11-04 | 音樂祭 | くるめ街かど音楽祭2017 | 久留米市 兩替町公園 特設舞台 (久留米) | [kurume-machikado-ongakusai-2017.json](file:///C:/Users/User/%E9%AB%AD%E7%94%B7%20%E6%BC%94%E5%94%B1%E6%9C%83/data/events/kurume-machikado-ongakusai-2017.json) | 完全空白 |
-| 100 | 2017-11-18 | 店家活動 | インストア アコースティックミニライブ&サイン会 | Airport Walk名古屋 3F活動舞台 (豐山) | [report-release-acoustic-mini-live-2017.json](file:///C:/Users/User/%E9%AB%AD%E7%94%B7%20%E6%BC%94%E5%94%B1%E6%9C%83/data/tours/report-release-acoustic-mini-live-2017.json) | 完全空白 |
-| 101 | 2017-11-25 | 聯合專場 | ウソツキpresents ウソツカナイミュージックツアー2017 | CRAZYMAMA 2nd Room (岡山) | [usotsuki-presents-2017.json](file:///C:/Users/User/%E9%AB%AD%E7%94%B7%20%E6%BC%94%E5%94%B1%E6%9C%83/data/events/usotsuki-presents-2017.json) | 完全空白 |
-| 102 | 2017-11-27 | 聯合專場 | SKY-HI Round A Ground 2017 | 高松festhalle (高松) | [sky-hi-round-a-ground-2017.json](file:///C:/Users/User/%E9%AB%AD%E7%94%B7%20%E6%BC%94%E5%94%B1%E6%9C%83/data/events/sky-hi-round-a-ground-2017.json) | 完全空白 |
-| 103 | 2018-03-03 | 店家活動 | インストア アコースティックミニライブ&サイン会 第2部 | 啦啦寶都甲子園 1F Park Walk Court (西宮) | [escapade-release-acoustic-mini-live-2018.json](file:///C:/Users/User/%E9%AB%AD%E7%94%B7%20%E6%BC%94%E5%94%B1%E6%9C%83/data/tours/escapade-release-acoustic-mini-live-2018.json) | 完全空白 |
-| 104 | 2018-03-04 | 店家活動 | インストア アコースティックミニライブ&サイン会 第2部 | 永旺夢樂城橿原 Sunshine Court (橿原) | [escapade-release-acoustic-mini-live-2018.json](file:///C:/Users/User/%E9%AB%AD%E7%94%B7%20%E6%BC%94%E5%94%B1%E6%9C%83/data/tours/escapade-release-acoustic-mini-live-2018.json) | 完全空白 |
-| 105 | 2018-03-10 | 店家活動 | インストア アコースティックミニライブ&サイン会 | 永旺夢樂城日吉津 鬱金香廣場 (日吉津) | [escapade-release-acoustic-mini-live-2018.json](file:///C:/Users/User/%E9%AB%AD%E7%94%B7%20%E6%BC%94%E5%94%B1%E6%9C%83/data/tours/escapade-release-acoustic-mini-live-2018.json) | 完全空白 |
-| 106 | 2018-03-11 | 音樂祭 | HIROSHIMA MUSIC STADIUM -ハルバン-'18 | 廣島 Alice Garden (廣島) | [hiroshima-music-stadium-18-2018.json](file:///C:/Users/User/%E9%AB%AD%E7%94%B7%20%E6%BC%94%E5%94%B1%E6%9C%83/data/events/hiroshima-music-stadium-18-2018.json) | 完全空白 |
-| 107 | 2018-03-17 | 店家活動 | インストア アコースティックミニライブ&サイン会 | 永旺夢樂城堺北花田 1F Center Court (堺) | [escapade-release-acoustic-mini-live-2018.json](file:///C:/Users/User/%E9%AB%AD%E7%94%B7%20%E6%BC%94%E5%94%B1%E6%9C%83/data/tours/escapade-release-acoustic-mini-live-2018.json) | 完全空白 |
-| 108 | 2018-03-18 | 音樂祭 | SANUKI ROCK COLOSSEUM～BUSTA CUP 9th round～ | 高松 Olive Hall (高松) | [sanuki-rock-colosseum-busta-cup-9th-round-2018.json](file:///C:/Users/User/%E9%AB%AD%E7%94%B7%20%E6%BC%94%E5%94%B1%E6%9C%83/data/events/sanuki-rock-colosseum-busta-cup-9th-round-2018.json) | 完全空白 |
-| 109 | 2018-03-24 | 音樂祭 | FUKUOKA STREET PARTY | きらめき通り 特設舞台 (福岡) | [fukuoka-street-party-2018.json](file:///C:/Users/User/%E9%AB%AD%E7%94%B7%20%E6%BC%94%E5%94%B1%E6%9C%83/data/events/fukuoka-street-party-2018.json) | 完全空白 |
-| 110 | 2018-04-07 | 店家活動 | インストア アコースティックミニライブ&サイン会 | 高崎OPA 2F活動空間 (高崎) | [escapade-release-acoustic-mini-live-2018.json](file:///C:/Users/User/%E9%AB%AD%E7%94%B7%20%E6%BC%94%E5%94%B1%E6%9C%83/data/tours/escapade-release-acoustic-mini-live-2018.json) | 完全空白 |
-| 111 | 2018-04-14 | 店家活動 | インストア アコースティックミニライブ&サイン会 第1部 | 永旺LakeTown mori 1F 木之廣場 (越谷) | [escapade-release-acoustic-mini-live-2018.json](file:///C:/Users/User/%E9%AB%AD%E7%94%B7%20%E6%BC%94%E5%94%B1%E6%9C%83/data/tours/escapade-release-acoustic-mini-live-2018.json) | 完全空白 |
-| 112 | 2018-07-15 | 音樂祭 | JOIN ALIVE 2018 | 岩見澤公園 NEW WALTZ (岩見澤) | [join-alive-2018.json](file:///C:/Users/User/%E9%AB%AD%E7%94%B7%20%E6%BC%94%E5%94%B1%E6%9C%83/data/events/join-alive-2018.json) | 完全空白 |
-| 113 | 2018-10-07 | 學園祭 | 工学院大学 八王子祭 | 工學院大學八王子校區體育館 (東京) | [kogakuin-hachiojisai-2018.json](file:///C:/Users/User/%E9%AB%AD%E7%94%B7%20%E6%BC%94%E5%94%B1%E6%9C%83/data/events/kogakuin-hachiojisai-2018.json) | 完全空白 |
+| 99 | 2017-11-18 | 店家活動 | インストア アコースティックミニライブ&サイン会 | Airport Walk名古屋 3F活動舞台 (豐山) | [report-release-acoustic-mini-live-2017.json](file:///C:/Users/User/%E9%AB%AD%E7%94%B7%20%E6%BC%94%E5%94%B1%E6%9C%83/data/tours/report-release-acoustic-mini-live-2017.json) | 完全空白 |
+| 100 | 2017-11-25 | 聯合專場 | ウソツキpresents ウソツカナイミュージックツアー2017 | CRAZYMAMA 2nd Room (岡山) | [usotsuki-presents-2017.json](file:///C:/Users/User/%E9%AB%AD%E7%94%B7%20%E6%BC%94%E5%94%B1%E6%9C%83/data/events/usotsuki-presents-2017.json) | 完全空白 |
+| 101 | 2017-11-27 | 聯合專場 | SKY-HI Round A Ground 2017 | 高松festhalle (高松) | [sky-hi-round-a-ground-2017.json](file:///C:/Users/User/%E9%AB%AD%E7%94%B7%20%E6%BC%94%E5%94%B1%E6%9C%83/data/events/sky-hi-round-a-ground-2017.json) | 完全空白 |
+| 102 | 2018-03-03 | 店家活動 | インストア アコースティックミニライブ&サイン会 第2部 | 啦啦寶都甲子園 1F Park Walk Court (西宮) | [escapade-release-acoustic-mini-live-2018.json](file:///C:/Users/User/%E9%AB%AD%E7%94%B7%20%E6%BC%94%E5%94%B1%E6%9C%83/data/tours/escapade-release-acoustic-mini-live-2018.json) | 完全空白 |
+| 103 | 2018-03-04 | 店家活動 | インストア アコースティックミニライブ&サイン会 第2部 | 永旺夢樂城橿原 Sunshine Court (橿原) | [escapade-release-acoustic-mini-live-2018.json](file:///C:/Users/User/%E9%AB%AD%E7%94%B7%20%E6%BC%94%E5%94%B1%E6%9C%83/data/tours/escapade-release-acoustic-mini-live-2018.json) | 完全空白 |
+| 104 | 2018-03-10 | 店家活動 | インストア アコースティックミニライブ&サイン会 | 永旺夢樂城日吉津 鬱金香廣場 (日吉津) | [escapade-release-acoustic-mini-live-2018.json](file:///C:/Users/User/%E9%AB%AD%E7%94%B7%20%E6%BC%94%E5%94%B1%E6%9C%83/data/tours/escapade-release-acoustic-mini-live-2018.json) | 完全空白 |
+| 105 | 2018-03-11 | 音樂祭 | HIROSHIMA MUSIC STADIUM -ハルバン-'18 | 廣島 Alice Garden (廣島) | [hiroshima-music-stadium-18-2018.json](file:///C:/Users/User/%E9%AB%AD%E7%94%B7%20%E6%BC%94%E5%94%B1%E6%9C%83/data/events/hiroshima-music-stadium-18-2018.json) | 完全空白 |
+| 106 | 2018-03-17 | 店家活動 | インストア アコースティックミニライブ&サイン会 | 永旺夢樂城堺北花田 1F Center Court (堺) | [escapade-release-acoustic-mini-live-2018.json](file:///C:/Users/User/%E9%AB%AD%E7%94%B7%20%E6%BC%94%E5%94%B1%E6%9C%83/data/tours/escapade-release-acoustic-mini-live-2018.json) | 完全空白 |
+| 107 | 2018-03-18 | 音樂祭 | SANUKI ROCK COLOSSEUM～BUSTA CUP 9th round～ | 高松 Olive Hall (高松) | [sanuki-rock-colosseum-busta-cup-9th-round-2018.json](file:///C:/Users/User/%E9%AB%AD%E7%94%B7%20%E6%BC%94%E5%94%B1%E6%9C%83/data/events/sanuki-rock-colosseum-busta-cup-9th-round-2018.json) | 完全空白 |
+| 108 | 2018-03-24 | 音樂祭 | FUKUOKA STREET PARTY | きらめき通り 特設舞台 (福岡) | [fukuoka-street-party-2018.json](file:///C:/Users/User/%E9%AB%AD%E7%94%B7%20%E6%BC%94%E5%94%B1%E6%9C%83/data/events/fukuoka-street-party-2018.json) | 完全空白 |
+| 109 | 2018-04-07 | 店家活動 | インストア アコースティックミニライブ&サイン会 | 高崎OPA 2F活動空間 (高崎) | [escapade-release-acoustic-mini-live-2018.json](file:///C:/Users/User/%E9%AB%AD%E7%94%B7%20%E6%BC%94%E5%94%B1%E6%9C%83/data/tours/escapade-release-acoustic-mini-live-2018.json) | 完全空白 |
+| 110 | 2018-04-14 | 店家活動 | インストア アコースティックミニライブ&サイン会 第1部 | 永旺LakeTown mori 1F 木之廣場 (越谷) | [escapade-release-acoustic-mini-live-2018.json](file:///C:/Users/User/%E9%AB%AD%E7%94%B7%20%E6%BC%94%E5%94%B1%E6%9C%83/data/tours/escapade-release-acoustic-mini-live-2018.json) | 完全空白 |
+| 111 | 2018-07-15 | 音樂祭 | JOIN ALIVE 2018 | 岩見澤公園 NEW WALTZ (岩見澤) | [join-alive-2018.json](file:///C:/Users/User/%E9%AB%AD%E7%94%B7%20%E6%BC%94%E5%94%B1%E6%9C%83/data/events/join-alive-2018.json) | 完全空白 |
+| 112 | 2018-10-07 | 學園祭 | 工学院大学 八王子祭 | 工學院大學八王子校區體育館 (東京) | [kogakuin-hachiojisai-2018.json](file:///C:/Users/User/%E9%AB%AD%E7%94%B7%20%E6%BC%94%E5%94%B1%E6%9C%83/data/events/kogakuin-hachiojisai-2018.json) | 完全空白 |

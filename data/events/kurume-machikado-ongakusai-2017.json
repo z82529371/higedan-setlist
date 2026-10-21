@@ -15,9 +15,17 @@
       "startsAt": "15:15",
       "sourceUrls": [
         "http://kurume-machi.info/",
-        "https://ja.wikipedia.org/wiki/Official%E9%AB%AD%E7%94%B7dism"
+        "https://ja.wikipedia.org/wiki/Official%E9%AB%AD%E7%94%B7dism",
+        "https://www.youtube.com/watch?v=bJXIYp2f0pc"
       ],
-      "setlist": []
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "songId": "lady",
+          "note": "一部曲目（現場映像確認）"
+        }
+      ]
     }
   ]
 }
