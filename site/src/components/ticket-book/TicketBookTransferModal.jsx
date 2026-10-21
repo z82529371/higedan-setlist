@@ -155,22 +155,10 @@ export function TicketBookTransferModal({
     }
   };
 
-  // Action: Confirm Merge
-  const handleConfirmMerge = () => {
+  // Action: Confirm Import (Merge or Overwrite)
+  const handleConfirm = (mode) => {
     if (!previewResult || !previewResult.parsedPayload) return;
-    const res = importTicketBookBackup(previewResult.parsedPayload, { mode: "merge" }, storage);
-    if (res.success) {
-      setSuccessMessage(t("ticketBook.transferSuccessNotice", "參戰紀錄已成功同步更新！"));
-      setTimeout(() => {
-        onClose();
-      }, 1200);
-    }
-  };
-
-  // Action: Confirm Overwrite
-  const handleConfirmOverwrite = () => {
-    if (!previewResult || !previewResult.parsedPayload) return;
-    const res = importTicketBookBackup(previewResult.parsedPayload, { mode: "overwrite" }, storage);
+    const res = importTicketBookBackup(previewResult.parsedPayload, { mode }, storage);
     if (res.success) {
       setSuccessMessage(t("ticketBook.transferSuccessNotice", "參戰紀錄已成功同步更新！"));
       setTimeout(() => {
@@ -194,7 +182,7 @@ export function TicketBookTransferModal({
           type="button"
           onClick={onClose}
           className="absolute top-4 right-4 p-1 rounded hover:bg-tape-tint text-muted hover:text-ink transition-colors cursor-pointer"
-          aria-label="Close"
+          aria-label={t("common.close", "關閉")}
         >
           <span className="text-xl leading-none">✕</span>
         </button>
@@ -270,7 +258,7 @@ export function TicketBookTransferModal({
               <button
                 type="button"
                 data-testid="transfer-confirm-merge"
-                onClick={handleConfirmMerge}
+                onClick={() => handleConfirm("merge")}
                 className="w-full inline-flex items-center justify-center gap-1.5 rounded-[4px] border-[1.5px] border-ink bg-band px-4 py-2.5 font-mono text-[12px] font-extrabold text-ink shadow-2xs hover:brightness-105 transition-all cursor-pointer"
               >
                 <span>✓ {t("ticketBook.mergeAction", "保留現有並合併")}</span>
@@ -278,7 +266,7 @@ export function TicketBookTransferModal({
               <button
                 type="button"
                 data-testid="transfer-confirm-overwrite"
-                onClick={handleConfirmOverwrite}
+                onClick={() => handleConfirm("overwrite")}
                 className="w-full inline-flex items-center justify-center gap-1.5 rounded-[4px] border border-ink/40 bg-card px-4 py-2 font-mono text-[11px] font-bold text-muted hover:text-ink hover:bg-tape-tint transition-all cursor-pointer"
               >
                 <span>⚠ {t("ticketBook.overwriteAction", "完全覆蓋為此備份")}</span>
@@ -330,17 +318,18 @@ export function TicketBookTransferModal({
               </div>
             </section>
 
-            {/* Track 2: Quick Transfer Code */}
-            <section className="rounded-[4px] border border-ink/20 bg-paper/60 p-3.5 space-y-2.5">
-              <div>
-                <h3 className="m-0 font-display text-[13px] font-extrabold text-ink flex items-center gap-1.5">
+            {/* Track 2: Quick Transfer Code (Collapsible) */}
+            <details open className="group rounded-[4px] border border-ink/20 bg-paper/60 p-3.5 space-y-2.5">
+              <summary className="cursor-pointer select-none font-display text-[13px] font-extrabold text-ink flex items-center justify-between list-none">
+                <div className="flex items-center gap-1.5">
                   <span aria-hidden="true">📲</span>
                   <span>{t("ticketBook.codeTrackTitle", "快速跨機轉移碼")}</span>
-                </h3>
-                <p className="mt-1 mb-0 text-[11px] text-muted">
-                  {t("ticketBook.codeTrackDesc", "在手機間可直接複製這串轉移代碼，貼到新手機完成同步。")}
-                </p>
-              </div>
+                </div>
+                <span className="text-[12px] text-muted group-open:rotate-180 transition-transform">▼</span>
+              </summary>
+              <p className="mt-1 mb-0 text-[11px] text-muted">
+                {t("ticketBook.codeTrackDesc", "在手機間可直接複製這串轉移代碼，貼到新手機完成同步。")}
+              </p>
 
               <div className="pt-1 flex flex-col gap-2">
                 <button
@@ -376,7 +365,7 @@ export function TicketBookTransferModal({
                   </button>
                 </div>
               </div>
-            </section>
+            </details>
           </div>
         )}
       </div>

@@ -494,7 +494,7 @@ export const dictZhTw = {
     citiesUnit: "{count} 城市",
     transferModalTitle: "票夾備份與跨裝置轉移",
     transferModalSubtitle: "在更換手機、多裝置同步或長期保存時，安全備份與轉移您的參戰紀錄",
-    backupTrigger: "備份與轉移",
+    backupTrigger: "備份與轉移紀錄",
     backupTriggerTitle: "備份或跨裝置轉移您的票夾紀錄",
     fileTrackTitle: "檔案備份與還原",
     fileTrackDesc: "將票夾記錄匯出為本機檔案保存，或選取先前的備份檔案還原。",

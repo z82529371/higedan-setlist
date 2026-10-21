@@ -494,7 +494,7 @@ export const dictEn = {
     citiesUnit: "{count} cities",
     transferModalTitle: "Ticket Book Backup & Device Transfer",
     transferModalSubtitle: "Safely backup and transfer your attendance records when switching phones or saving archives",
-    backupTrigger: "Backup & Transfer",
+    backupTrigger: "Backup & Transfer Records",
     backupTriggerTitle: "Backup or transfer your concert attendance records",
     fileTrackTitle: "File Backup & Restore",
     fileTrackDesc: "Download your records as a backup file, or restore from a previously saved file.",

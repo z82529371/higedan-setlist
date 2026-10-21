@@ -540,9 +540,16 @@ export function parseAndValidateTicketBookBackup(input, currentPayload = null, k
   const updatedShows = [];
 
   for (const k of Object.keys(cleanAttended)) {
-    if (currentAttended[k]) {
-      updatedShowsCount++;
-      updatedShows.push(k);
+    const existing = currentAttended[k];
+    if (existing) {
+      const isChanged =
+        (existing.seat || "") !== (cleanAttended[k].seat || "") ||
+        (existing.notes || "") !== (cleanAttended[k].notes || "") ||
+        (existing.stampId || "default") !== (cleanAttended[k].stampId || "default");
+      if (isChanged) {
+        updatedShowsCount++;
+        updatedShows.push(k);
+      }
     } else {
       newShowsCount++;
       newShows.push(k);
@@ -590,11 +597,12 @@ export function importTicketBookBackup(parsedPayload, options = {}, storage = ge
         payload.attendedShows[key] = { ...incomingEntry };
       } else {
         payload.attendedShows[key] = {
-          ...existing,
           ...incomingEntry,
-          seat: incomingEntry.seat || existing.seat,
-          notes: incomingEntry.notes || existing.notes,
-          stampId: incomingEntry.stampId || existing.stampId,
+          ...existing,
+          seat: existing.seat || incomingEntry.seat,
+          notes: existing.notes || incomingEntry.notes,
+          stampId: existing.stampId || incomingEntry.stampId,
+          favorite: existing.favorite !== undefined ? existing.favorite : incomingEntry.favorite,
           updatedAt: new Date().toISOString(),
         };
       }

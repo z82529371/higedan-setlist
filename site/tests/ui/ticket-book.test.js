@@ -683,6 +683,7 @@ describe("22. ShowSlip Attendance Check-in & Resilient LocalStorage Persistence 
       const afterMerge = loadTicketBook(storage);
       assert.strictEqual(Object.keys(afterMerge.attendedShows).length, 3);
       assert.strictEqual(afterMerge.attendedShows["show-A"].notes, "Original Note");
+      assert.strictEqual(afterMerge.attendedShows["show-B"].seat, "Seat B");
       assert.strictEqual(afterMerge.attendedShows["show-B"].notes, "Added Note");
       assert.strictEqual(afterMerge.attendedShows["show-C"].seat, "Seat C");
 

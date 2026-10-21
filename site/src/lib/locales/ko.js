@@ -494,7 +494,7 @@ export const dictKo = {
     citiesUnit: "{count} 개 도시",
     transferModalTitle: "티켓북 백업 및 기기 이전",
     transferModalSubtitle: "기기 변경이나 백업 보관 시 소중한 콘서트 참전 기록을 안전하게 이전하세요",
-    backupTrigger: "백업 및 이전",
+    backupTrigger: "백업 및 이전 기록",
     backupTriggerTitle: "참전 기록 백업 또는 다른 기기로 이전",
     fileTrackTitle: "파일 백업 및 복원",
     fileTrackDesc: "티켓북을 파일로 저장하거나 이전에 저장한 백업 파일을 불러옵니다.",

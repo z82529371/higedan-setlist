@@ -715,7 +715,7 @@ describe("23. Tour TicketBook Dedicated Page (#/tickets) & Timeline Management (
         "Must render ticket-book-backup-trigger button in desktop top bar"
       );
       assert.ok(
-        htmlZh.includes("備份與轉移"),
+        htmlZh.includes("備份與轉移紀錄"),
         "Must display consumer-friendly title on transfer button"
       );
     });

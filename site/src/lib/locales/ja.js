@@ -494,7 +494,7 @@ export const dictJa = {
     citiesUnit: "{count} 都市",
     transferModalTitle: "チケットブックのバックアップと移行",
     transferModalSubtitle: "機種変更や複数端末での同期、長期保存の際に、大切な参戦記録を安全に移行できます",
-    backupTrigger: "バックアップと移行",
+    backupTrigger: "バックアップと移行記録",
     backupTriggerTitle: "参戦記録をバックアップまたは他端末へ移行",
     fileTrackTitle: "ファイルで保存・復元",
     fileTrackDesc: "チケットブックをファイルとして保存するか、過去のバックアップファイルを読み込みます。",
