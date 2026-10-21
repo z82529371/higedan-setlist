@@ -517,6 +517,8 @@ export const dictKo = {
     invalidFileError: "파일 형식이 올바르지 않거나 손상되었습니다. 올바른 백업 파일을 선택해 주세요",
     invalidCodeError: "이전 코드가 유효하지 않거나 불완전합니다. 다시 복사하여 시도해 주세요",
     transferSuccessNotice: "참전 기록이 성공적으로 동기화되었습니다!",
+    exportMemorialCard: "기념 티켓 저장",
+    exportMemorialCardTitle: "이 공연의 기념 티켓 미리보기 및 저장",
   },
   landing: {
     instantSearchAria: "실시간 검색",

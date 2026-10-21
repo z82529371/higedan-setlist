@@ -517,6 +517,8 @@ export const dictZhTw = {
     invalidFileError: "檔案格式不正確或已毀損，請確認選取正確的票夾備份檔",
     invalidCodeError: "轉移代碼無效或格式不完整，請重新複製後貼上",
     transferSuccessNotice: "參戰紀錄已成功同步更新！",
+    exportMemorialCard: "儲存紀念票根",
+    exportMemorialCardTitle: "預覽並儲存本場次的紀念票根",
   },
   landing: {
     instantSearchAria: "即時檢索",

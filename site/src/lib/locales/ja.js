@@ -517,6 +517,8 @@ export const dictJa = {
     invalidFileError: "ファイルの形式が正しくないか破損しています。正しいバックアップファイルを選択してください",
     invalidCodeError: "移行コードが無効か不完全です。もう一度コピーしてお試しください",
     transferSuccessNotice: "参戦記録の更新が完了しました！",
+    exportMemorialCard: "記念チケットを保存",
+    exportMemorialCardTitle: "この公演の記念チケットをプレビューして保存",
   },
   landing: {
     instantSearchAria: "リアルタイム検索",

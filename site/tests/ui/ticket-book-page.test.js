@@ -285,9 +285,11 @@ describe("23. Tour TicketBook Dedicated Page (#/tickets) & Timeline Management (
       assert.ok(htmlZh.includes("Arena A 12"));
       assert.ok(htmlZh.includes("Amazing performance in Korea!"));
 
-      // Verify action buttons: Jump to Ticket and Remove Check-in co-located in top header
+      // Verify action buttons: Jump to Ticket and Remove Check-in co-located in top header, plus in-place memorial export in bottom action row (Issue #43)
       assert.ok(htmlZh.includes(`data-testid="view-ticket-btn-${mockShow1.id}"`));
       assert.ok(htmlZh.includes(`data-testid="remove-btn-${mockShow1.id}"`));
+      assert.ok(htmlZh.includes(`data-testid="export-memorial-btn-${mockShow1.id}"`));
+      assert.ok(htmlZh.includes("儲存紀念票根"));
       assert.ok(!htmlZh.includes("mt-3 pt-2.5 border-t border-line-soft flex items-center justify-end"), "Redundant bottom action row must be removed");
 
       // Check reverse chronological order: mockShow2 (2024-12-15) must appear before mockShow1 (2024-11-30), which is before mockShow3 (2023-02-16)
@@ -688,7 +690,7 @@ describe("23. Tour TicketBook Dedicated Page (#/tickets) & Timeline Management (
     });
   });
 
-  describe("Subtest 7: Ticket Book Dual-Track Backup & Transfer UI (#38 / #42)", () => {
+  describe("Subtest 8: Ticket Book Dual-Track Backup & Transfer UI (#38 / #42)", () => {
     it("renders backup and transfer trigger button in TicketBookPage header and mobile docks", async () => {
       const { I18nProvider } = await loadModule("/src/lib/i18n.jsx");
       const { TicketBookPage } = await loadModule("/src/components/ticket-book/TicketBookPage.jsx");
@@ -813,6 +815,133 @@ describe("23. Tour TicketBook Dedicated Page (#/tickets) & Timeline Management (
       assert.ok(html.includes('data-testid="transfer-confirm-overwrite"'));
       assert.ok(html.includes("2"));
       assert.ok(html.includes("1"));
+    });
+  });
+
+  describe("Subtest 9: In-place Memorial Card Modal Export Flow (#43)", () => {
+    it("renders export button on each timeline card and opens MemorialCardModal seamlessly in-place", async () => {
+      const { I18nProvider } = await loadModule("/src/lib/i18n.jsx");
+      const { TicketBookPage } = await loadModule("/src/components/ticket-book/TicketBookPage.jsx");
+      const { recordAttendance, getSafeStorage } = await loadModule("/src/lib/ticket-book.js");
+
+      const storage = getSafeStorage();
+      storage.clear();
+
+      // Pre-record attendance with seat, notes, and stamp preference
+      recordAttendance(
+        mockShow1.id,
+        {
+          date: mockShow1.date,
+          seat: "Arena A 12",
+          notes: "Unforgettable night at KINTEX!",
+          stampId: "default",
+          includeSeat: true,
+          includeNotes: true,
+        },
+        storage
+      );
+
+      // 1. Initial render without open modal (initialMemorialShowId: null)
+      const htmlClosed = renderToStaticMarkup(
+        React.createElement(
+          I18nProvider,
+          { initialLocale: "zh-TW" },
+          React.createElement(TicketBookPage, {
+            unitData: mockUnitData,
+            showById: mockShowById,
+            unitIdByShowId: mockUnitIdByShowId,
+            storage,
+            initialMemorialShowId: null,
+          })
+        )
+      );
+
+      // Verify the in-place export button is rendered on the timeline card
+      assert.ok(
+        htmlClosed.includes(`data-testid="export-memorial-btn-${mockShow1.id}"`),
+        "Timeline card must render export-memorial-btn"
+      );
+      assert.ok(htmlClosed.includes("🎨"), "Button must contain palette icon");
+      assert.ok(htmlClosed.includes("儲存紀念票根"), "Button must display localized label");
+      // Memorial card modal must NOT be rendered when closed
+      assert.ok(
+        !htmlClosed.includes('data-testid="memorial-card-modal"'),
+        "Memorial card modal must not be rendered when initialMemorialShowId is null"
+      );
+
+      // 2. Open modal in-place for mockShow1 (initialMemorialShowId: mockShow1.id)
+      const htmlOpen = renderToStaticMarkup(
+        React.createElement(
+          I18nProvider,
+          { initialLocale: "zh-TW" },
+          React.createElement(TicketBookPage, {
+            unitData: mockUnitData,
+            showById: mockShowById,
+            unitIdByShowId: mockUnitIdByShowId,
+            storage,
+            initialMemorialShowId: mockShow1.id,
+            initialMemorialImageUrl: "data:image/png;base64,mockPngData",
+          })
+        )
+      );
+
+      // Verify MemorialCardModal is rendered right inside TicketBookPage without route redirection
+      assert.ok(
+        htmlOpen.includes('data-testid="memorial-card-modal"'),
+        "Memorial card modal must be mounted inside TicketBookPage"
+      );
+      assert.ok(htmlOpen.includes("KINTEX Hall 5"), "Modal preview must reflect show venue");
+      assert.ok(htmlOpen.includes("2024-11-30"), "Modal preview must reflect show date");
+      assert.ok(htmlOpen.includes("Arena A 12"), "Modal preview must reflect custom seat");
+      assert.ok(htmlOpen.includes("Unforgettable night at KINTEX!"), "Modal preview must reflect custom notes");
+      assert.ok(
+        htmlOpen.includes('data-testid="ticket-stamp"'),
+        "Modal preview must reflect commemorative stamp"
+      );
+      assert.ok(
+        htmlOpen.includes('data-testid="memorial-download-btn"'),
+        "Modal must provide PNG export trigger button"
+      );
+      assert.ok(
+        htmlOpen.includes("higedan-memorial-1720174"),
+        "Download button must provide show-specific filename"
+      );
+
+      // 3. Multi-lingual consistency across all 4 locales (zh-TW, ja, en, ko)
+      const localeSpecs = [
+        { loc: "zh-TW", label: "儲存紀念票根", title: "預覽並儲存本場次的紀念票根" },
+        { loc: "ja", label: "記念チケットを保存", title: "この公演の記念チケットをプレビューして保存" },
+        { loc: "en", label: "Save Memorial Ticket", title: "Preview and save commemorative ticket for this show" },
+        { loc: "ko", label: "기념 티켓 저장", title: "이 공연의 기념 티켓 미리보기 및 저장" },
+      ];
+
+      for (const { loc, label, title } of localeSpecs) {
+        const locHtml = renderToStaticMarkup(
+          React.createElement(
+            I18nProvider,
+            { initialLocale: loc },
+            React.createElement(TicketBookPage, {
+              unitData: mockUnitData,
+              showById: mockShowById,
+              unitIdByShowId: mockUnitIdByShowId,
+              storage,
+              initialMemorialShowId: mockShow1.id,
+            })
+          )
+        );
+        assert.ok(
+          locHtml.includes(`data-testid="export-memorial-btn-${mockShow1.id}"`),
+          `Must render export button in ${loc}`
+        );
+        assert.ok(locHtml.includes(label), `Must render localized button label in ${loc}`);
+        assert.ok(locHtml.includes(title), `Must render localized button title attribute in ${loc}`);
+        assert.ok(
+          locHtml.includes('data-testid="memorial-card-modal"'),
+          `Must render MemorialCardModal in ${loc}`
+        );
+      }
+
+      storage.clear();
     });
   });
 });

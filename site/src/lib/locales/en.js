@@ -517,6 +517,8 @@ export const dictEn = {
     invalidFileError: "The file is invalid or corrupted. Please select a valid backup file",
     invalidCodeError: "The transfer code is invalid or incomplete. Please copy and try again",
     transferSuccessNotice: "Attendance records updated successfully!",
+    exportMemorialCard: "Save Memorial Ticket",
+    exportMemorialCardTitle: "Preview and save commemorative ticket for this show",
   },
   landing: {
     instantSearchAria: "Instant Search",

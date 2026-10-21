@@ -97,6 +97,7 @@ export function MemorialCardModal({
   initialNotes,
   _initialStampId,
   initialCustomizerOpen = false,
+  initialImageUrl = null,
 }) {
   const { locale: ctxLocale } = useI18n();
   const locale = propLocale || ctxLocale || DEFAULT_LOCALE;
@@ -246,7 +247,7 @@ export function MemorialCardModal({
 
   const customKey = `${appliedHolderName}_${includeSeat ? appliedSeat : ""}_${includeNotes ? appliedNotes : ""}_${stampId}`;
   const currentImageKey = getMemorialImageKey(showKey, theme, locale, customKey);
-  const currentImageUrl = imageUrls[currentImageKey];
+  const currentImageUrl = imageUrls[currentImageKey] || initialImageUrl;
 
   useEffect(() => {
     if (!isOpen || !show || currentImageUrl) return;
@@ -386,6 +387,7 @@ export function MemorialCardModal({
 
   return (
     <div
+      data-testid="memorial-card-modal"
       className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/80 backdrop-blur-sm overflow-y-auto"
       onClick={onClose}
       role="dialog"
@@ -817,7 +819,18 @@ export function MemorialCardModal({
         </div>
 
         {/* Modal Bottom Action Controls */}
-        <div className="p-3 sm:p-4 bg-[#171922] border-t border-[#2d3446] flex items-center justify-center">
+        <div className="p-3 sm:p-4 bg-[#171922] border-t border-[#2d3446] flex flex-col sm:flex-row items-center justify-center gap-2.5">
+          {currentImageUrl && (
+            <a
+              href={currentImageUrl}
+              download={`higedan-memorial-${showKey}-${theme}.png`}
+              data-testid="memorial-download-btn"
+              className="flex items-center gap-1.5 px-4 py-1.5 rounded-lg font-mono text-xs font-bold bg-[#d49a00] text-[#111319] shadow hover:opacity-90 active:scale-95 transition-all cursor-pointer"
+            >
+              <span aria-hidden="true">⬇️</span>
+              <span>{t("memorial.downloadPng", "下載透明圓角 PNG")}</span>
+            </a>
+          )}
           <div className="flex items-center gap-2 text-xs text-[#d49a00] bg-[#d49a00]/10 border border-[#d49a00]/30 px-3 py-1.5 rounded-lg font-mono">
             <span aria-hidden="true">{isGenerating ? "⏳" : "💡"}</span>
             <span className="font-bold">

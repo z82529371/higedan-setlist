@@ -8,6 +8,8 @@ import { computeTicketBookMilestones } from "../../lib/ticket-book-milestones.js
 import { TicketBookMilestoneDashboard } from "./TicketBookMilestoneDashboard.jsx";
 import { MilestoneCardModal } from "./MilestoneCardModal.jsx";
 import { TicketBookTransferModal } from "./TicketBookTransferModal.jsx";
+import { MemorialCardModal } from "../MemorialCardModal.jsx";
+import { assignCues } from "../../lib/resolve.js";
 import LanguageSwitcher from "../LanguageSwitcher.jsx";
 import { SLIP_ARTICLE, SLIP_TAPE } from "../../lib/constants.js";
 
@@ -22,6 +24,8 @@ export function TicketBookPage({
   onReturnHome,
   initialYear = "all",
   initialKeyword = "",
+  initialMemorialShowId = null,
+  initialMemorialImageUrl = null,
 }) {
   const { t, locale } = useI18n();
   const { count, attendedShows, remove } = useTicketBook({ storage });
@@ -30,6 +34,7 @@ export function TicketBookPage({
   const [searchKeyword, setSearchKeyword] = useState(initialKeyword);
   const [isSummaryModalOpen, setIsSummaryModalOpen] = useState(false);
   const [isTransferModalOpen, setIsTransferModalOpen] = useState(false);
+  const [memorialShowId, setMemorialShowId] = useState(initialMemorialShowId);
 
   const milestones = useMemo(() => {
     return computeTicketBookMilestones({
@@ -108,6 +113,52 @@ export function TicketBookPage({
     setSelectedYear("all");
     setSearchKeyword("");
   };
+
+  // Memoized show setlist & metadata for in-place MemorialCardModal export (Issue #43)
+  const activeMemorialData = useMemo(() => {
+    if (!memorialShowId) return null;
+    const item = enrichedShows.find((s) => s.entry.showKey === memorialShowId);
+    const rawShow = showById?.get ? showById.get(memorialShowId) : showById?.[memorialShowId];
+    const show =
+      rawShow ||
+      item?.show ||
+      (item
+        ? {
+            id: item.entry.showKey,
+            date: item.date,
+            title: item.title,
+            venue: item.venue,
+            city: item.city,
+            prefecture: item.prefecture,
+          }
+        : null);
+
+    const unitId =
+      (unitIdByShowId?.get ? unitIdByShowId.get(memorialShowId) : unitIdByShowId?.[memorialShowId]) ||
+      null;
+    const ud = unitId && unitData?.get ? unitData.get(unitId) : unitId ? unitData?.[unitId] : null;
+    const unit = ud?.unit || item?.unit || null;
+
+    const items = ud?.full?.get ? (ud.full.get(memorialShowId) || []) : (ud?.full?.[memorialShowId] || []);
+    const rawMain = [];
+    const rawEnc = [];
+    for (const i of items) (i.encore ? rawEnc : rawMain).push(i);
+    const main = assignCues(rawMain, "M");
+    const enc = assignCues(rawEnc, "EN");
+
+    const showList = unit?.shows || [];
+    const showIndex = showList.findIndex((x) => x.id === memorialShowId);
+    const totalShows = showList.length || 1;
+
+    return {
+      show,
+      unit,
+      main,
+      enc,
+      showIndex: showIndex >= 0 ? showIndex : 0,
+      totalShows,
+    };
+  }, [memorialShowId, enrichedShows, showById, unitIdByShowId, unitData]);
 
   return (
     <div className="mx-auto max-w-[960px] px-4 sm:px-6 pt-4 pb-24 sm:py-8">
@@ -402,6 +453,20 @@ export function TicketBookPage({
                             {item.entry.notes}
                           </div>
                         )}
+
+                        {/* Card Bottom Actions: In-place Memorial Card Export (Issue #43) */}
+                        <div className="mt-3 pt-2.5 border-t border-line-soft/60 flex items-center justify-between gap-2">
+                          <button
+                            type="button"
+                            data-testid={`export-memorial-btn-${showKey}`}
+                            onClick={() => setMemorialShowId(showKey)}
+                            className="inline-flex items-center gap-1.5 rounded-[4px] border border-ink/30 bg-card px-2.5 py-1 font-mono text-[11px] font-bold text-ink shadow-2xs hover:bg-tape-tint active:scale-[0.98] transition-all cursor-pointer touch-stamp"
+                            title={t("ticketBook.exportMemorialCardTitle", "預覽並儲存本場次的紀念票根")}
+                          >
+                            <span aria-hidden="true">🎨</span>
+                            <span>{t("ticketBook.exportMemorialCard", "儲存紀念票根")}</span>
+                          </button>
+                        </div>
                       </div>
                     </div>
                   );
@@ -432,6 +497,22 @@ export function TicketBookPage({
         storage={storage}
         knownShowKeys={showById instanceof Map ? Array.from(showById.keys()) : Object.keys(showById || {})}
       />
+
+      {/* Commemorative Setlist Card Preview Modal (In-place export, Issue #43) */}
+      {memorialShowId && activeMemorialData?.show && (
+        <MemorialCardModal
+          isOpen={Boolean(memorialShowId)}
+          onClose={() => setMemorialShowId(null)}
+          show={activeMemorialData.show}
+          unit={activeMemorialData.unit}
+          main={activeMemorialData.main}
+          enc={activeMemorialData.enc}
+          showIndex={activeMemorialData.showIndex}
+          totalShows={activeMemorialData.totalShows}
+          storage={storage}
+          initialImageUrl={initialMemorialImageUrl}
+        />
+      )}
 
       {/* Mobile Floating Action Controls (sm:hidden) */}
       <div className="fixed bottom-5 right-4 z-40 sm:hidden flex flex-col items-end gap-2.5 select-none">
