@@ -354,6 +354,15 @@ export default function LandingHero({
             "Official 髭男 dism 歌迷非官方非營利演出歷史檔案庫 · 資料源自官方公告、演出現場一手記錄與 LiveFans 查證"
           )}
         </p>
+        <p className="mt-2 text-[11px] sm:text-[12px] text-muted font-sans">
+          <span>{t("footer.contactLabel", "資料勘誤與反饋：")}</span>
+          <a
+            href={`mailto:hgdnlive@gmail.com?subject=${encodeURIComponent(t("footer.contactSubject", "[Official HIGEDAN Archive] 資料勘誤與意見反饋"))}`}
+            className="text-ink underline hover:text-band-ink transition-colors"
+          >
+            hgdnlive@gmail.com
+          </a>
+        </p>
       </footer>
     </div>
   );

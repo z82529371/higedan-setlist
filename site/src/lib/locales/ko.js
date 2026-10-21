@@ -520,6 +520,10 @@ export const dictKo = {
     primaryCtaSubtitle: "공연·곡·공연장 전방위 전환 및 듀얼 스마트 내비게이션 지원",
     footerDisclaimer: "Official 히게단 dism 팬 비공식·비영리 라이브 공연 아카이브 · 공식 발표, 현장 기록 및 LiveFans 검증 데이터 기반",
   },
+  footer: {
+    contactLabel: "제보 및 문의: ",
+    contactSubject: "[Official HIGEDAN Archive] 제보 및 문의",
+  },
 };
 
 

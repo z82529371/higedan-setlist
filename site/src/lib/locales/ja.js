@@ -520,6 +520,10 @@ export const dictJa = {
     primaryCtaSubtitle: "公演・楽曲・会場のシームレスな切り替えとスマートナビゲーション",
     footerDisclaimer: "Official髭男dism ファンによる非公式・非営利のライブ履歴アーカイブ · 公式発表、現場記録、LiveFansの検証に基づく",
   },
+  footer: {
+    contactLabel: "情報提供・お問い合わせ：",
+    contactSubject: "[Official HIGEDAN Archive] 情報提供・お問い合わせ",
+  },
 };
 
 

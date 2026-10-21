@@ -889,6 +889,8 @@ let renderToStaticMarkup;
       assert.ok(tourLayoutHtml.includes("CONSENSUS TEMPLATE // 巡演定番歌單"));
       assert.ok(tourLayoutHtml.includes("巡演總覽"));
       assert.ok(tourLayoutHtml.includes("查看票根"));
+      assert.ok(tourLayoutHtml.includes("hgdnlive@gmail.com"));
+      assert.ok(tourLayoutHtml.includes("mailto:hgdnlive@gmail.com"));
 
       // Render 2: showSubMode === "show" -> renders ShowSlip
       const showLayoutHtml = renderToStaticMarkup(

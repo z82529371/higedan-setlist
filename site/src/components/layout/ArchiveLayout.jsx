@@ -506,6 +506,15 @@ export function ArchiveLayout({
           <span>{footTpl}</span>
           <span>{current?.isTour ? t("layout.diffNote", "各場差異以 insert / skip 記錄") : ""}</span>
           <span>{t("layout.verifyNote", "演出順序、安可標記逐場核對 {sources}", { sources: sourceSummary })}</span>
+          <span>
+            {t("footer.contactLabel", "資料勘誤與反饋：")}
+            <a
+              href={`mailto:hgdnlive@gmail.com?subject=${encodeURIComponent(t("footer.contactSubject", "[Official HIGEDAN Archive] 資料勘誤與意見反饋"))}`}
+              className="text-ink underline hover:text-band-ink transition-colors"
+            >
+              hgdnlive@gmail.com
+            </a>
+          </span>
         </footer>
       </div>
 

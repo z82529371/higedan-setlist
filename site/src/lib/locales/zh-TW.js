@@ -520,6 +520,10 @@ export const dictZhTw = {
     primaryCtaSubtitle: "支援場次、歌曲與場館全方位切換與雙層智能導航",
     footerDisclaimer: "Official 髭男 dism 歌迷非官方非營利演出歷史檔案庫 · 資料源自官方公告、演出現場一手記錄與 LiveFans 查證",
   },
+  footer: {
+    contactLabel: "資料勘誤與反饋：",
+    contactSubject: "[Official HIGEDAN Archive] 資料勘誤與意見反饋",
+  },
 };
 
 

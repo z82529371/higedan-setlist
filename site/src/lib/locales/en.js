@@ -520,6 +520,10 @@ export const dictEn = {
     primaryCtaSubtitle: "Seamless switching across shows, songs, and venues with dual-level smart navigation",
     footerDisclaimer: "Unofficial non-profit Official HIGEDAN Dism live performance archive · Sourced from official announcements, on-site records, and LiveFans",
   },
+  footer: {
+    contactLabel: "Feedback & Errata: ",
+    contactSubject: "[Official HIGEDAN Archive] Feedback & Errata",
+  },
 };
 
 
