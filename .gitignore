@@ -8,3 +8,5 @@ scratch/
 .scratch/
 check_*.mjs
 compare_*.mjs
+.env*
+.env.local
