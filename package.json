@@ -14,6 +14,7 @@
     "test:invariants": "pnpm --filter ./site test:invariants",
     "test:ui": "pnpm --filter ./site test:ui",
     "check": "pnpm --filter ./site check",
+    "check:fast": "pnpm --filter ./site check:fast",
     "check:i18n": "pnpm --filter ./site check:i18n",
     "check-i18n": "pnpm --filter ./site check:i18n",
     "audit:reports": "pnpm --filter ./site audit:reports",

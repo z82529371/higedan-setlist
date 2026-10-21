@@ -39,22 +39,34 @@ describe("5. Frontend Modularization Invariants (ADR-0101)", () => {
     }
   });
 
-  it("ensures slip components adhere to DESIGN.md card radius (< 8px) rules", () => {
-    const slipsDir = path.resolve(
-      import.meta.dirname,
-      "../../src/components/slips"
-    );
-    const files = fs.readdirSync(slipsDir).filter((f) => f.endsWith(".jsx"));
-    const bannedRadiusRegex = /\brounded-(?:xl|2xl|3xl)\b/g;
+  it("ensures slip and ticket-book components adhere to DESIGN.md card radius (<= 8px) rules", () => {
+    const componentDirs = [
+      path.resolve(import.meta.dirname, "../../src/components/slips"),
+      path.resolve(import.meta.dirname, "../../src/components/ticket-book"),
+    ];
+    const bannedNamedRadiusRegex = /\brounded(?:-[tblr])?-(?:xl|2xl|3xl)\b/g;
+    const arbitraryRadiusRegex = /\brounded(?:-[tblr])?-\[(\d+)px\]/g;
 
-    for (const file of files) {
-      const content = fs.readFileSync(path.join(slipsDir, file), "utf-8");
-      const matches = content.match(bannedRadiusRegex);
-      assert.equal(
-        matches,
-        null,
-        `File ${file} contains banned large radius (> 8px) classes: ${matches?.join(", ")}`
-      );
+    for (const dir of componentDirs) {
+      const files = fs.readdirSync(dir).filter((f) => f.endsWith(".jsx"));
+      for (const file of files) {
+        const fileContent = fs.readFileSync(path.join(dir, file), "utf-8");
+        const namedMatches = fileContent.match(bannedNamedRadiusRegex);
+        assert.equal(
+          namedMatches,
+          null,
+          `File ${file} contains banned large radius (> 8px) classes: ${namedMatches?.join(", ")}`
+        );
+
+        let m;
+        while ((m = arbitraryRadiusRegex.exec(fileContent)) !== null) {
+          const px = parseInt(m[1], 10);
+          assert.ok(
+            px <= 8,
+            `File ${file} contains banned arbitrary large radius (${m[0]} > 8px, DESIGN.md invariant)`
+          );
+        }
+      }
     }
   });
 

@@ -326,4 +326,29 @@ describe("9. Design Token Invariants & Dedicated URL Routes Seam (DESIGN.md, ADR
       `Slip components must adhere to Zero Shift tactile ticket rules without active:scale-*: ${violations.join(", ")}`
     );
   });
+
+  it("enforces High-Contrast Ink Rule: small badge and stamp text (<14px) must not use low-contrast text-muted (DESIGN.md)", () => {
+    const dirs = [
+      path.resolve(import.meta.dirname, "../../src/components/slips"),
+      path.resolve(import.meta.dirname, "../../src/components/ticket-book"),
+    ];
+    const violations = [];
+    const smallBadgeMutedRegex = /className={?["'`][^"'`>]*?(?:badge|stamp)[^"'`>]*?text-(?:[10px]|[11px])[^"'`>]*?text-muted/gi;
+
+    for (const d of dirs) {
+      for (const f of fs.readdirSync(d)) {
+        if (!f.endsWith(".jsx")) continue;
+        const fileContent = fs.readFileSync(path.join(d, f), "utf8");
+        if (smallBadgeMutedRegex.test(fileContent)) {
+          violations.push(f);
+        }
+      }
+    }
+
+    assert.deepEqual(
+      violations,
+      [],
+      `Small badge/stamp text (<14px) must strictly use high-contrast ink tokens (>= 7:1 AAA contrast, DESIGN.md), found text-muted in: ${violations.join(", ")}`
+    );
+  });
 });

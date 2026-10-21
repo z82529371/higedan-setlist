@@ -16,6 +16,7 @@ Repository conventions and navigation pointers for AI agents working in this cod
 - **i18n & Context Providers Boundary**: Consult [`CONTEXT.md`](./CONTEXT.md#react-hooks-領域狀態與極端路由安全回退hooks-domain-state--hash-fallback-invariantsadr-0101), [`site/src/App.jsx`](./site/src/App.jsx), [`ADR-0107`](./docs/adr/0107-multi-language-localization-and-taxonomy-boundary.md), and [`ADR-0108`](./docs/adr/0108-administrative-geography-localization-and-venue-integrity.md) for the `<I18nProvider>` root wrapper requirement (`AppContent` pattern), the responsive switcher dichotomy, and administrative geography localization boundaries.
 - **Venue & Geography Presentation Boundaries**: Consult [`ADR-0108`](./docs/adr/0108-administrative-geography-localization-and-venue-integrity.md), [`ADR-0110`](./docs/adr/0110-official-venue-localization-and-cross-lingual-presentation.md), and [`ADR-0111`](./docs/adr/0111-venue-master-profiles-native-fallback-and-deep-link-resolution.md) for venue master profiles (`data/venue-profiles.json` as SSOT vs `data/venues.json` as crawler aliases), official venue localization dictionaries (`site/src/lib/locales/venues.js`), native name fallbacks, cross-lingual route resolution (`resolveVenueCanonical`), and the presentation touchpoints (`VenueNavigator`, `ShowMetadataBox`, `TourSlip`, `VenueSlip`, `SongSlip`, `SongMilestonesDrawer`, `MemorialCardModal`, `SearchBox`).
 - **Ticket Book & Attendance Tracking (ADR-0114, ADR-0115, ADR-0116, ADR-0118)**: Consult [`ADR-0114`](./docs/adr/0114-concert-ticket-book-domain-refactoring-and-passport-deprecation.md), [`ADR-0115`](./docs/adr/0115-tour-stop-in-place-check-in-and-landing-quartet-architecture.md), [`ADR-0116`](./docs/adr/0116-ticket-book-holder-identity-and-milestone-chronicle-architecture.md), [`ADR-0118`](./docs/adr/0118-ticket-book-dual-track-backup-and-defensive-transfer-architecture.md), [`site/src/lib/ticket-book.js`](./site/src/lib/ticket-book.js), and [`site/src/components/ticket-book/`](./site/src/components/ticket-book/) for the personal concert ticket book domain model, `hg_ticket_book_v1` storage schema, in-place check-in interaction, landing feature quartet, dynamic milestones, and commemorative card export. The term "passport" is strictly deprecated in favour of "ticket-book / 巡演票夾 / チケットブック / 티켓북".
+- **Discography & Album Affinity**: Consult [`site/src/lib/constants.js`](./site/src/lib/constants.js) (`ALBUM_MAP`, `ALBUM_ORDER`), [`site/src/lib/domain.js`](./site/src/lib/domain.js) (`getSongAlbum`), and [`site/src/lib/ticket-book-milestones.js`](./site/src/lib/ticket-book-milestones.js) (`buildAlbumGroups`) for canonical album era bucketing and repertoire checklist grouping.
 - **Issue Tracking**: Consult GitHub Issues via `gh issue view <number>` or `gh issue list` for feature specs and task acceptance criteria.
 
 ## Multi-Agent Workspace Hygiene
@@ -39,6 +40,7 @@ Multiple autonomous agents frequently operate concurrently in this repository:
 ## Verification Commands
 
 ### Inner Loop (Sub-Second Rapid Iteration)
+- `pnpm check:fast`: Runs combined static linting and CJK checks in ~50ms (`oxlint` + `check-i18n`). Use for rapid sub-second verification before heavier test execution.
 - `pnpm sync`: Compiles and syncs `data/*.json` and `data/{tours,events}` into `site/src/data/` and updates audit reports. Run whenever data files are updated.
 - `pnpm lint`: Runs `oxlint` static linting in ~20ms (`oxlint src -c .oxlintrc.json`). Run immediately after editing any component to catch undeclared variables (`no-undef`) or unused variables (`no-unused-vars`) before heavier SSR test execution.
 - `pnpm check:i18n`: Runs bare-CJK regression guard and self-tests across UI components (`site/scripts/check-i18n.mjs`).
@@ -47,8 +49,8 @@ Multiple autonomous agents frequently operate concurrently in this repository:
 
 ### Outer Loop (Integration & Pre-Commit Verification)
 - `pnpm test:ui`: Runs headless React SSR, route state machine, and localization tests (`site/tests/ui/`).
-- `pnpm check`: Master verification gate running `oxlint`, `check-i18n`, and all 24 test suites (116 invariant assertions). Run before every commit.
-- `pnpm test`: Runs data sync, `check-i18n`, and all 24 test suites (116 invariant assertions).
+- `pnpm check`: Master verification gate running `oxlint`, `check-i18n`, and all test suites (26 suites, 175 assertions). Run before every commit.
+- `pnpm test`: Runs data sync, `check-i18n`, and all test suites (26 suites, 175 assertions).
 - `pnpm build`: Production build via Vite compiler (`site/dist/`).
 
 ## Agent skills

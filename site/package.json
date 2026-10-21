@@ -12,6 +12,7 @@
     "test:invariants": "node --test \"tests/invariants/**/*.test.js\"",
     "test:ui": "node --test \"tests/ui/**/*.test.js\"",
     "check": "pnpm lint && pnpm test",
+    "check:fast": "oxlint src -c .oxlintrc.json && node scripts/check-i18n.mjs",
     "audit:reports": "node scripts/generate-audit-reports.mjs",
     "eval": "node scripts/eval.mjs",
     "generate:icons": "node scripts/generate-icons.mjs",

@@ -393,7 +393,7 @@ export function MilestoneCardModal({ isOpen, onClose, milestones, storage: propS
             <span>{t("memorial.downloadPng", "下載透明圓角 PNG")}</span>
           </a>
         )}
-        <div className="flex items-center gap-2 text-xs text-card bg-ink/75 border border-card/30 px-3 py-1.5 rounded-lg font-mono">
+        <div className="flex items-center gap-2 text-xs text-card bg-ink/75 border border-card/30 px-3 py-1.5 rounded-[6px] font-mono">
           <span aria-hidden="true">{isExporting ? "⏳" : "💡"}</span>
           <span className="font-bold">
             {isExporting
