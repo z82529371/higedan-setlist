@@ -31,6 +31,9 @@ function pwaPrecachePlugin() {
 }
 
 export default defineConfig({
+  server: {
+    host: true,
+  },
   plugins: [react(), tailwindcss(), pwaPrecachePlugin()],
   esbuild: {
     jsx: "automatic",

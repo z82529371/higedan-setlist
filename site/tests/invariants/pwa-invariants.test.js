@@ -2,7 +2,7 @@ import { describe, it } from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
 import path from "node:path";
-import { registerServiceWorker } from "../../src/lib/pwa.js";
+import { registerServiceWorker, unregisterServiceWorkers } from "../../src/lib/pwa.js";
 
 const siteRoot = path.resolve(import.meta.dirname, "../..");
 const publicDir = path.resolve(siteRoot, "public");
@@ -75,7 +75,7 @@ describe("20. PWA Offline Support & Web App Manifest Invariants (ADR-0119)", () 
   });
 
   describe("HTML Link & Meta Invariants", () => {
-    it("links manifest.webmanifest and sets theme-color and apple standalone meta tags in index.html", () => {
+    it("links manifest.webmanifest and sets theme-color, standard and apple standalone meta tags in index.html", () => {
       const html = fs.readFileSync(indexHtmlPath, "utf-8");
       assert.match(
         html,
@@ -86,6 +86,11 @@ describe("20. PWA Offline Support & Web App Manifest Invariants (ADR-0119)", () 
         html,
         /<meta\s+[^>]*name=["']theme-color["'][^>]*content=["']#d19f00["']/i,
         "index.html must define theme-color as #d19f00"
+      );
+      assert.match(
+        html,
+        /<meta\s+[^>]*name=["']mobile-web-app-capable["'][^>]*content=["']yes["']/i,
+        "index.html must set mobile-web-app-capable to yes"
       );
       assert.match(
         html,
@@ -143,6 +148,46 @@ describe("20. PWA Offline Support & Web App Manifest Invariants (ADR-0119)", () 
       // Call registerServiceWorker with mock client environment
       registerServiceWorker({ window: mockWindow, navigator: mockNavigator });
       assert.equal(registeredUrl, "/sw.js", "registerServiceWorker must register /sw.js");
+    });
+
+    it("guarantees unregisterServiceWorkers runs safely in Node.js SSR without navigator defined", async () => {
+      await assert.doesNotReject(async () => {
+        await unregisterServiceWorkers();
+      }, "unregisterServiceWorkers must not throw in SSR / headless Node environment");
+    });
+
+    it("unregisters active service workers and cleans caches when navigator.serviceWorker is available", async () => {
+      let unregistered = false;
+      const mockRegistrations = [
+        {
+          unregister: async () => {
+            unregistered = true;
+            return true;
+          },
+        },
+      ];
+      let cacheDeleted = false;
+      const mockCaches = {
+        keys: async () => ["higedan-setlist-v1", "other-cache"],
+        delete: async (name) => {
+          if (name.startsWith("higedan-setlist")) {
+            cacheDeleted = true;
+          }
+          return true;
+        },
+      };
+      const mockNavigator = {
+        serviceWorker: {
+          getRegistrations: async () => mockRegistrations,
+        },
+      };
+      const mockWindow = {
+        caches: mockCaches,
+      };
+
+      await unregisterServiceWorkers({ window: mockWindow, navigator: mockNavigator });
+      assert.equal(unregistered, true, "unregisterServiceWorkers must unregister all active service workers");
+      assert.equal(cacheDeleted, true, "unregisterServiceWorkers must prune dev caches");
     });
 
     it("verifies built sw.js in dist precaches compiled JS and CSS chunks when dist exists", () => {

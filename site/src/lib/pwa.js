@@ -5,9 +5,16 @@
  * supported client browser environments.
  */
 
-export function registerServiceWorker(env = {}) {
+const CACHE_NAME_PREFIX = "higedan-setlist";
+
+function resolveClientEnv(env = {}) {
   const win = env.window || (typeof window !== "undefined" ? window : null);
   const nav = env.navigator || (typeof navigator !== "undefined" ? navigator : null);
+  return { win, nav };
+}
+
+export function registerServiceWorker(env = {}) {
+  const { win, nav } = resolveClientEnv(env);
 
   if (!win || !nav || !("serviceWorker" in nav) || typeof nav.serviceWorker.register !== "function") {
     return;
@@ -25,5 +32,33 @@ export function registerServiceWorker(env = {}) {
     win.addEventListener("load", register);
   } else {
     register();
+  }
+}
+
+export async function unregisterServiceWorkers(env = {}) {
+  const { win, nav } = resolveClientEnv(env);
+
+  if (!win || !nav || !("serviceWorker" in nav) || typeof nav.serviceWorker.getRegistrations !== "function") {
+    return;
+  }
+
+  try {
+    const registrations = await nav.serviceWorker.getRegistrations();
+    if (Array.isArray(registrations)) {
+      await Promise.all(registrations.map((reg) => reg?.unregister?.()));
+    }
+
+    if (win.caches && typeof win.caches.keys === "function") {
+      const keys = await win.caches.keys();
+      if (Array.isArray(keys)) {
+        await Promise.all(
+          keys
+            .filter((cacheName) => typeof cacheName === "string" && cacheName.startsWith(CACHE_NAME_PREFIX))
+            .map((cacheName) => win.caches.delete(cacheName))
+        );
+      }
+    }
+  } catch (err) {
+    console.warn("ServiceWorker unregistration failed:", err);
   }
 }
