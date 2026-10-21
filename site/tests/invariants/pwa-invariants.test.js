@@ -107,6 +107,11 @@ describe("20. PWA Offline Support & Web App Manifest Invariants (ADR-0119)", () 
       assert.match(swCode, /caches\.match/, "sw.js must use caches.match for Cache-First");
       assert.match(swCode, /caches\.delete/, "sw.js must prune outdated caches on activate");
       assert.match(swCode, /skipWaiting\(\)/, "sw.js must call skipWaiting on install");
+      assert.doesNotMatch(
+        swCode,
+        /caches\.match\([^)]+\)\s*\|\|/,
+        "sw.js must not synchronously evaluate Promise-returning caches.match() with boolean OR"
+      );
     });
 
     it("guarantees registerServiceWorker runs safely in Node.js SSR without navigator defined", () => {

@@ -18,6 +18,7 @@
     "check-i18n": "pnpm --filter ./site check:i18n",
     "audit:reports": "pnpm --filter ./site audit:reports",
     "eval": "pnpm --filter ./site eval",
+    "generate:icons": "pnpm --filter ./site generate:icons",
     "check:staged": "node site/scripts/check-staged.mjs",
     "dev": "pnpm --filter ./site dev",
     "build": "pnpm --filter ./site build",
