@@ -513,4 +513,186 @@ describe("22. ShowSlip Attendance Check-in & Resilient LocalStorage Persistence 
       storage.clear();
     });
   });
+
+  describe("Subtest 6: Ticket Book Backup Export, 6-Tier Defense Parser & Transfer Code (#38 / #42)", () => {
+    it("exports standardized backup envelope with timestamped filename and conforms to schema", async () => {
+      const {
+        createEmptyTicketBook,
+        recordAttendance,
+        exportTicketBookBackup,
+        getSafeStorage,
+        MemoryStorageAdapter,
+      } = await loadModule("/src/lib/ticket-book.js");
+
+      const storage = getSafeStorage({ storage: new MemoryStorageAdapter() });
+      recordAttendance("rejoice-2024-0921", { seat: "アリーナ A2列 14番", notes: "首場震撼！" }, storage);
+
+      const backup = exportTicketBookBackup(storage);
+      assert.strictEqual(backup.schema, "hg_ticket_book_backup_v1");
+      assert.strictEqual(backup.version, 1);
+      assert.strictEqual(backup.app, "official-higedan-dism-setlist-archive");
+      assert.ok(backup.exportedAt, "must have exportedAt ISO timestamp");
+      assert.ok(backup.attendedShows["rejoice-2024-0921"], "must include attended shows");
+      assert.ok(backup.filename.startsWith("higedan-ticket-book-backup-"), "filename must follow standardized naming");
+      assert.ok(backup.filename.endsWith(".json"));
+    });
+
+    it("encodes and decodes URL-safe transfer code", async () => {
+      const {
+        encodeTicketBookTransferCode,
+        decodeTicketBookTransferCode,
+      } = await loadModule("/src/lib/ticket-book.js");
+
+      const payload = {
+        version: 1,
+        holderName: "ヒゲダンファン",
+        attendedShows: {
+          "show-001": { showKey: "show-001", seat: "2階 3列 5番", notes: "最高でした！" }
+        }
+      };
+
+      const code = encodeTicketBookTransferCode(payload);
+      assert.strictEqual(typeof code, "string");
+      assert.ok(code.length > 0);
+
+      const decoded = decodeTicketBookTransferCode(code);
+      assert.deepStrictEqual(decoded, payload);
+
+      // Malformed / invalid code returns null
+      assert.strictEqual(decodeTicketBookTransferCode("invalid-not-base64!@#$"), null);
+      assert.strictEqual(decodeTicketBookTransferCode(""), null);
+    });
+
+    it("applies 6-tier defensive validation against attacks and corrupted inputs", async () => {
+      const {
+        parseAndValidateTicketBookBackup,
+      } = await loadModule("/src/lib/ticket-book.js");
+
+      // Tier 1: Rejects non-object and non-JSON
+      assert.strictEqual(parseAndValidateTicketBookBackup("not-json").valid, false);
+      assert.strictEqual(parseAndValidateTicketBookBackup(null).valid, false);
+      assert.strictEqual(parseAndValidateTicketBookBackup([]).valid, false);
+
+      // Tier 2: Prototype pollution defense
+      const maliciousJson = '{"__proto__":{"polluted":true},"attendedShows":{}}';
+      const protoRes = parseAndValidateTicketBookBackup(maliciousJson);
+      assert.strictEqual(protoRes.valid, false);
+      assert.strictEqual(protoRes.error, "INVALID_STRUCTURE");
+
+      // Tier 3: Strips control characters and normalizes Unicode NFC
+      // e.g. \u0000 NULL, \u0007 BELL, decomposed Hangul/Kana
+      const rawWithControl = {
+        version: 1,
+        attendedShows: {
+          "show-clean": {
+            showKey: "show-clean",
+            seat: "Stand\u0000\u0007 1-A",
+            notes: "Great\u001b[31m show!\nEncore was amazing."
+          }
+        }
+      };
+      const cleanRes = parseAndValidateTicketBookBackup(rawWithControl, {}, ["show-clean"]);
+      assert.strictEqual(cleanRes.valid, true);
+      assert.strictEqual(cleanRes.parsedPayload.attendedShows["show-clean"].seat, "Stand 1-A");
+      assert.strictEqual(
+        cleanRes.parsedPayload.attendedShows["show-clean"].notes,
+        "Great[31m show!\nEncore was amazing."
+      );
+
+      // Tier 4 & 5: Seat <= 50 and Notes <= 300 truncation
+      const longInput = {
+        version: 1,
+        attendedShows: {
+          "show-long": {
+            showKey: "show-long",
+            seat: "A".repeat(80),
+            notes: "B".repeat(400)
+          }
+        }
+      };
+      const boundRes = parseAndValidateTicketBookBackup(longInput, {}, ["show-long"]);
+      assert.strictEqual(boundRes.valid, true);
+      assert.strictEqual(boundRes.parsedPayload.attendedShows["show-long"].seat.length, 50);
+      assert.strictEqual(boundRes.parsedPayload.attendedShows["show-long"].notes.length, 300);
+
+      // Tier 6: Orphan show preservation
+      const orphanInput = {
+        version: 1,
+        attendedShows: {
+          "secret-underground-2011": {
+            showKey: "secret-underground-2011",
+            notes: "Very rare unrecorded live"
+          }
+        }
+      };
+      // "secret-underground-2011" is not in knownShowKeys: ["show-clean", "show-long"]
+      const orphanRes = parseAndValidateTicketBookBackup(orphanInput, {}, ["show-clean", "show-long"]);
+      assert.strictEqual(orphanRes.valid, true);
+      assert.strictEqual(orphanRes.parsedPayload.attendedShows["secret-underground-2011"].isOrphaned, true);
+
+      // Diff calculation preview
+      const currentPayload = {
+        version: 1,
+        attendedShows: {
+          "show-existing": { showKey: "show-existing", seat: "Old seat" }
+        }
+      };
+      const incoming = {
+        version: 1,
+        attendedShows: {
+          "show-existing": { showKey: "show-existing", seat: "Updated seat" },
+          "show-new": { showKey: "show-new", seat: "New seat" }
+        }
+      };
+      const diffRes = parseAndValidateTicketBookBackup(incoming, currentPayload, ["show-existing", "show-new"]);
+      assert.strictEqual(diffRes.valid, true);
+      assert.strictEqual(diffRes.diff.newShowsCount, 1);
+      assert.strictEqual(diffRes.diff.updatedShowsCount, 1);
+      assert.strictEqual(diffRes.diff.totalIncomingShows, 2);
+    });
+
+    it("imports ticket book in merge or overwrite mode with atomic storage update", async () => {
+      const {
+        getSafeStorage,
+        MemoryStorageAdapter,
+        loadTicketBook,
+        importTicketBookBackup,
+      } = await loadModule("/src/lib/ticket-book.js");
+
+      const storage = getSafeStorage({ storage: new MemoryStorageAdapter() });
+      storage.setItem("hg_ticket_book_v1", JSON.stringify({
+        version: 1,
+        holderName: "Original Holder",
+        attendedShows: {
+          "show-A": { showKey: "show-A", seat: "Seat A", notes: "Original Note" },
+          "show-B": { showKey: "show-B", seat: "Seat B" }
+        }
+      }));
+
+      const incoming = {
+        holderName: "New Holder",
+        attendedShows: {
+          "show-B": { showKey: "show-B", seat: "Updated Seat B", notes: "Added Note" },
+          "show-C": { showKey: "show-C", seat: "Seat C" }
+        }
+      };
+
+      // Merge Mode
+      const mergeResult = importTicketBookBackup(incoming, { mode: "merge" }, storage);
+      assert.strictEqual(mergeResult.success, true);
+      const afterMerge = loadTicketBook(storage);
+      assert.strictEqual(Object.keys(afterMerge.attendedShows).length, 3);
+      assert.strictEqual(afterMerge.attendedShows["show-A"].notes, "Original Note");
+      assert.strictEqual(afterMerge.attendedShows["show-B"].notes, "Added Note");
+      assert.strictEqual(afterMerge.attendedShows["show-C"].seat, "Seat C");
+
+      // Overwrite Mode
+      const overwriteResult = importTicketBookBackup(incoming, { mode: "overwrite" }, storage);
+      assert.strictEqual(overwriteResult.success, true);
+      const afterOverwrite = loadTicketBook(storage);
+      assert.strictEqual(Object.keys(afterOverwrite.attendedShows).length, 2);
+      assert.strictEqual(afterOverwrite.attendedShows["show-A"], undefined);
+      assert.strictEqual(afterOverwrite.attendedShows["show-C"].seat, "Seat C");
+    });
+  });
 });

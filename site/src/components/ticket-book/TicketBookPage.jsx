@@ -7,6 +7,7 @@ import { TicketPerforationDivider, TicketBarcodeFooter } from "../slips/TicketCo
 import { computeTicketBookMilestones } from "../../lib/ticket-book-milestones.js";
 import { TicketBookMilestoneDashboard } from "./TicketBookMilestoneDashboard.jsx";
 import { MilestoneCardModal } from "./MilestoneCardModal.jsx";
+import { TicketBookTransferModal } from "./TicketBookTransferModal.jsx";
 import LanguageSwitcher from "../LanguageSwitcher.jsx";
 import { SLIP_ARTICLE, SLIP_TAPE } from "../../lib/constants.js";
 
@@ -28,6 +29,7 @@ export function TicketBookPage({
   const [selectedYear, setSelectedYear] = useState(initialYear);
   const [searchKeyword, setSearchKeyword] = useState(initialKeyword);
   const [isSummaryModalOpen, setIsSummaryModalOpen] = useState(false);
+  const [isTransferModalOpen, setIsTransferModalOpen] = useState(false);
 
   const milestones = useMemo(() => {
     return computeTicketBookMilestones({
@@ -133,6 +135,16 @@ export function TicketBookPage({
               <span aria-hidden="true">🏠</span>
             </button>
           )}
+          <button
+            type="button"
+            data-testid="ticket-book-backup-trigger"
+            onClick={() => setIsTransferModalOpen(true)}
+            className="inline-flex items-center gap-1.5 rounded-[4px] border border-ink/30 bg-card px-2.5 py-1.5 font-mono text-[11px] sm:text-[12px] font-bold text-ink shadow-2xs hover:bg-tape-tint transition-colors cursor-pointer"
+            title={t("ticketBook.backupTriggerTitle", "備份或跨裝置轉移您的票夾紀錄")}
+          >
+            <span aria-hidden="true">🔄</span>
+            <span>{t("ticketBook.backupTrigger", "備份與轉移")}</span>
+          </button>
         </div>
         <LanguageSwitcher />
       </div>
@@ -413,8 +425,26 @@ export function TicketBookPage({
         milestones={milestones}
       />
 
+      {/* Backup and Cross-Device Transfer Modal (Issue #38 / #42) */}
+      <TicketBookTransferModal
+        isOpen={isTransferModalOpen}
+        onClose={() => setIsTransferModalOpen(false)}
+        storage={storage}
+        knownShowKeys={showById instanceof Map ? Array.from(showById.keys()) : Object.keys(showById || {})}
+      />
+
       {/* Mobile Floating Action Controls (sm:hidden) */}
       <div className="fixed bottom-5 right-4 z-40 sm:hidden flex flex-col items-end gap-2.5 select-none">
+        <button
+          type="button"
+          data-testid="mobile-ticket-backup-fab"
+          onClick={() => setIsTransferModalOpen(true)}
+          className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-paper/95 text-ink font-bold shadow-md border-[1.5px] border-ink text-[14px] cursor-pointer hover:bg-tape-tint active:scale-95 transition-all backdrop-blur-xs"
+          title={t("ticketBook.backupTriggerTitle", "備份或跨裝置轉移您的票夾紀錄")}
+          aria-label={t("ticketBook.backupTrigger", "備份與轉移")}
+        >
+          🔄
+        </button>
         <LanguageSwitcher fab menuPosition="up" />
       </div>
 

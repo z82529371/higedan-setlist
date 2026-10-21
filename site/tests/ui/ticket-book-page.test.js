@@ -687,4 +687,132 @@ describe("23. Tour TicketBook Dedicated Page (#/tickets) & Timeline Management (
       storage.clear();
     });
   });
+
+  describe("Subtest 7: Ticket Book Dual-Track Backup & Transfer UI (#38 / #42)", () => {
+    it("renders backup and transfer trigger button in TicketBookPage header and mobile docks", async () => {
+      const { I18nProvider } = await loadModule("/src/lib/i18n.jsx");
+      const { TicketBookPage } = await loadModule("/src/components/ticket-book/TicketBookPage.jsx");
+      const { getSafeStorage } = await loadModule("/src/lib/ticket-book.js");
+
+      const storage = getSafeStorage();
+      storage.clear();
+
+      const htmlZh = renderToStaticMarkup(
+        React.createElement(
+          I18nProvider,
+          { initialLocale: "zh-TW" },
+          React.createElement(TicketBookPage, {
+            unitData: mockUnitData,
+            showById: mockShowById,
+            unitIdByShowId: mockUnitIdByShowId,
+            storage,
+          })
+        )
+      );
+
+      assert.ok(
+        htmlZh.includes('data-testid="ticket-book-backup-trigger"'),
+        "Must render ticket-book-backup-trigger button in desktop top bar"
+      );
+      assert.ok(
+        htmlZh.includes("備份與轉移"),
+        "Must display consumer-friendly title on transfer button"
+      );
+    });
+
+    it("renders TicketBookTransferModal with dual-track controls and strictly zero developer jargon", async () => {
+      const { I18nProvider } = await loadModule("/src/lib/i18n.jsx");
+      const { TicketBookTransferModal } = await loadModule(
+        "/src/components/ticket-book/TicketBookTransferModal.jsx"
+      );
+      const { getSafeStorage, recordAttendance } = await loadModule("/src/lib/ticket-book.js");
+
+      const storage = getSafeStorage();
+      storage.clear();
+      recordAttendance(mockShow1.id, { seat: "Arena A" }, storage);
+
+      const html = renderToStaticMarkup(
+        React.createElement(
+          I18nProvider,
+          { initialLocale: "zh-TW" },
+          React.createElement(TicketBookTransferModal, {
+            isOpen: true,
+            onClose: () => {},
+            storage,
+            knownShowKeys: [mockShow1.id, mockShow2.id],
+          })
+        )
+      );
+
+      // Verify modal elements
+      assert.ok(html.includes('data-testid="ticket-book-transfer-modal"'));
+      assert.ok(html.includes('data-testid="transfer-download-backup"'));
+      assert.ok(html.includes('data-testid="transfer-file-input"'));
+      assert.ok(html.includes('data-testid="transfer-copy-code"'));
+      assert.ok(html.includes('data-testid="transfer-code-input"'));
+
+      // Consumer-friendly verification: Prohibit developer jargon
+      assert.ok(!html.includes("JSON"), "Must NOT contain developer jargon 'JSON'");
+      assert.ok(!html.includes("Payload"), "Must NOT contain developer jargon 'Payload'");
+      assert.ok(!html.includes("LocalStorage"), "Must NOT contain developer jargon 'LocalStorage'");
+      assert.ok(!html.includes("Database"), "Must NOT contain developer jargon 'Database'");
+      assert.ok(!html.includes("Schema"), "Must NOT contain developer jargon 'Schema'");
+
+      // Verify multi-lingual rendering across all 4 locales
+      const locales = ["ja", "en", "ko", "zh-TW"];
+      for (const loc of locales) {
+        const locHtml = renderToStaticMarkup(
+          React.createElement(
+            I18nProvider,
+            { initialLocale: loc },
+            React.createElement(TicketBookTransferModal, {
+              isOpen: true,
+              onClose: () => {},
+              storage,
+              knownShowKeys: [mockShow1.id, mockShow2.id],
+            })
+          )
+        );
+        assert.ok(locHtml.includes('data-testid="ticket-book-transfer-modal"'));
+      }
+    });
+
+    it("renders diff preview with merge and overwrite actions when valid incoming backup is provided", async () => {
+      const { I18nProvider } = await loadModule("/src/lib/i18n.jsx");
+      const { TicketBookTransferModal } = await loadModule(
+        "/src/components/ticket-book/TicketBookTransferModal.jsx"
+      );
+      const { getSafeStorage, recordAttendance } = await loadModule("/src/lib/ticket-book.js");
+
+      const storage = getSafeStorage();
+      storage.clear();
+      recordAttendance(mockShow1.id, { seat: "Arena A" }, storage);
+
+      const previewDiff = {
+        newShowsCount: 2,
+        updatedShowsCount: 1,
+        totalIncomingShows: 3,
+      };
+
+      const html = renderToStaticMarkup(
+        React.createElement(
+          I18nProvider,
+          { initialLocale: "zh-TW" },
+          React.createElement(TicketBookTransferModal, {
+            isOpen: true,
+            onClose: () => {},
+            storage,
+            knownShowKeys: [mockShow1.id, mockShow2.id],
+            initialDiff: previewDiff,
+          })
+        )
+      );
+
+      assert.ok(html.includes('data-testid="transfer-diff-preview"'));
+      assert.ok(html.includes('data-testid="transfer-confirm-merge"'));
+      assert.ok(html.includes('data-testid="transfer-confirm-overwrite"'));
+      assert.ok(html.includes("2"));
+      assert.ok(html.includes("1"));
+    });
+  });
 });
