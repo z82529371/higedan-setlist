@@ -825,7 +825,7 @@ export function MemorialCardModal({
               href={currentImageUrl}
               download={`higedan-memorial-${showKey}-${theme}.png`}
               data-testid="memorial-download-btn"
-              className="flex items-center gap-1.5 px-4 py-1.5 rounded-lg font-mono text-xs font-bold bg-[#d49a00] text-[#111319] shadow hover:opacity-90 active:scale-95 transition-all cursor-pointer"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-[4px] font-mono text-xs font-bold bg-band text-band-ink border border-ink/40 shadow-2xs hover:brightness-105 transition-colors cursor-pointer"
             >
               <span aria-hidden="true">⬇️</span>
               <span>{t("memorial.downloadPng", "下載透明圓角 PNG")}</span>

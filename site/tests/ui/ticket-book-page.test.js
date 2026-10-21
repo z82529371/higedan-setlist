@@ -827,14 +827,14 @@ describe("23. Tour TicketBook Dedicated Page (#/tickets) & Timeline Management (
       const storage = getSafeStorage();
       storage.clear();
 
-      // Pre-record attendance with seat, notes, and stamp preference
+      // Pre-record attendance with seat, notes, and custom stamp preference
       recordAttendance(
         mockShow1.id,
         {
           date: mockShow1.date,
           seat: "Arena A 12",
           notes: "Unforgettable night at KINTEX!",
-          stampId: "default",
+          stampId: "stamp-rejoice",
           includeSeat: true,
           includeNotes: true,
         },
@@ -897,6 +897,14 @@ describe("23. Tour TicketBook Dedicated Page (#/tickets) & Timeline Management (
       assert.ok(
         htmlOpen.includes('data-testid="ticket-stamp"'),
         "Modal preview must reflect commemorative stamp"
+      );
+      assert.ok(
+        htmlOpen.includes('data-stamp-id="default"'),
+        "Modal preview must reflect canonical default stamp id"
+      );
+      assert.ok(
+        htmlOpen.includes("現場") || htmlOpen.includes("LIVE"),
+        "Modal preview must reflect authentic live stamp text"
       );
       assert.ok(
         htmlOpen.includes('data-testid="memorial-download-btn"'),

@@ -460,7 +460,7 @@ export function TicketBookPage({
                             type="button"
                             data-testid={`export-memorial-btn-${showKey}`}
                             onClick={() => setMemorialShowId(showKey)}
-                            className="inline-flex items-center gap-1.5 rounded-[4px] border border-ink/30 bg-card px-2.5 py-1 font-mono text-[11px] font-bold text-ink shadow-2xs hover:bg-tape-tint active:scale-[0.98] transition-all cursor-pointer touch-stamp"
+                            className="inline-flex items-center gap-1.5 rounded-[4px] border border-ink/30 bg-card px-2.5 py-1 font-mono text-[11px] font-bold text-ink shadow-2xs hover:bg-tape-tint transition-colors cursor-pointer touch-stamp"
                             title={t("ticketBook.exportMemorialCardTitle", "預覽並儲存本場次的紀念票根")}
                           >
                             <span aria-hidden="true">🎨</span>
