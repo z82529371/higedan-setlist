@@ -5,6 +5,7 @@ Repository conventions and navigation pointers for AI agents working in this cod
 ## Navigation Pointers
 
 - **Domain Glossary**: Consult [`GLOSSARY.md`](./GLOSSARY.md) for authoritative, implementation-free definitions of core live concert terminology (Tour, Event, Show, Setlist, 8 Categories, Ticket Book, Dual-Time Model).
+- **Coding Standards**: Consult [`CODING_STANDARDS.md`](./CODING_STANDARDS.md) for pure frontend static discipline, consumer-friendly copy, design token invariants, and multi-lingual parity rules.
 - **Domain Model & Data Invariants**: Consult [`CONTEXT.md`](./CONTEXT.md) for domain terminology, tour vs event boundaries, 8 performance categories, monotonicity rules, and placeholder track specs (`ADR-0098`).
 - **Product Architecture**: Consult [`PRODUCT.md`](./PRODUCT.md) for spotlight landing mode, archive dual-mode toggle, and search ergonomics.
 - **Visual Design**: Consult [`DESIGN.md`](./DESIGN.md) for ticket aesthetic tokens, perforation dividers, barcode footers, and contrast rules (small badge text <14px must strictly use high-contrast ink tokens with >= 7:1 AAA contrast; arbitrary unvetted hex colors like text-[#...] are prohibited).
@@ -36,6 +37,7 @@ Multiple autonomous agents frequently operate concurrently in this repository:
 11. **Tool Schema & Environment Parameter Discipline**: Adhere strictly to the declared schema of the current environment. For `run_command`, only supply `CommandLine`, `IsDaemon`, `WaitMsBeforeAsync`, and `toolSummary`; never inject unsupported foreign parameters like `Cwd` or `toolAction`. Use native tools (`read_file`, `write_file`, `edit_file`) rather than foreign agent tool names.
 12. **Consumer-Friendly Terminology & Product Reality Check**: When designing or implementing user-facing features, never expose engineer-facing jargon (e.g. `JSON`, `Schema`, `Payload`, `Database`, `Envelope`) in UI copy or action labels. For issues introducing heavy developer mechanics into consumer flows, always verify user-facing terminology and product necessity first with the human, prioritizing simple, warm, non-intimidating fan experiences (e.g. 「備份紀錄」/「轉移紀錄」 instead of 「JSON 備份還原」).
 13. **Line Ending & File Edit Hygiene**: In `edit_file`, prefer single-line exact anchors to avoid Windows CRLF mismatch failures, and ensure text files adhere to `.gitattributes` (`* text=auto eol=lf`).
+14. **Zero-Backend & Browser-Native First Principle (ADR-0123)**: This repository is strictly a 100% static client-side SPA hosted on Cloudflare Pages (zero runtime backend, zero serverless DBs, zero third-party form webhooks, zero API keys to maintain). When addressing client capabilities or system-level limitations (such as desktop mailto unresponsiveness), strictly prioritize browser-native primitives (Web Compose links like `mail.google.com`, Clipboard API, Web Share API, deep links) instead of introducing external backend or SaaS services.
 
 ## Verification Commands
 

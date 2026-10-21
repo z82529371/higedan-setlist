@@ -4,14 +4,17 @@ How the engineering skills should consume this repo's domain documentation when 
 
 ## This repo's domain docs
 
-This repo has no `GLOSSARY.md`; its ubiquitous language lives in:
+This repo's ubiquitous language and standards live in:
+
+- **`GLOSSARY.md`** at the repo root — authoritative definitions of core concert domain terms.
 
 - **`CONTEXT.md`** at the repo root — the glossary equivalent: tour vs event vs show boundaries, 8 performance categories, `opensAt`/`startsAt` time model, data invariants, and `Avoid` lists. Read the sections relevant to your topic before exploring.
 - **`PRODUCT.md`** — product architecture (spotlight landing, archive modes, search ergonomics).
 - **`DESIGN.md`** — visual tokens and contrast rules.
-- **`docs/adr/`** — 100+ ADRs (`0001`–`0107`), single location, no per-package ADRs.
+- **`CODING_STANDARDS.md`** — static SPA purity (ADR-0123), consumer-friendly copy, token discipline, and i18n parity.
+- **`docs/adr/`** — 100+ ADRs (`0001`–`0123`), single location, no per-package ADRs.
 
-When this file says `GLOSSARY.md`, read `CONTEXT.md` instead.
+
 
 ## Before exploring, read these
 
