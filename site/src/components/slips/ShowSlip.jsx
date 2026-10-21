@@ -397,7 +397,7 @@ export function ShowSlip({
                 data-attended={attended ? "true" : "false"}
                 aria-pressed={attended}
                 onClick={toggleAttendance}
-                className={`inline-flex items-center justify-center gap-1.5 rounded px-3 py-1.5 text-[11px] font-bold transition-all cursor-pointer select-none border active:scale-[0.98] ${
+                className={`inline-flex items-center justify-center gap-1.5 rounded px-3 py-1.5 text-[11px] font-bold transition-colors cursor-pointer select-none border touch-stamp ${
                   attended
                     ? "bg-tape text-ink border-ink font-extrabold shadow-xs hover:brightness-95"
                     : "bg-paper text-ink border-line-soft hover:bg-tape-tint/50 hover:border-ink/60"
@@ -420,7 +420,7 @@ export function ShowSlip({
                 type="button"
                 data-testid="generate-memorial-card-btn"
                 onClick={() => setShowMemorialModal(true)}
-                className="inline-flex items-center justify-center gap-1.5 rounded bg-band px-3 py-1.5 text-[11px] font-mono font-bold text-band-ink border border-ink/40 shadow-xs hover:brightness-105 active:scale-[0.98] transition-all cursor-pointer select-none"
+                className="inline-flex items-center justify-center gap-1.5 rounded bg-band px-3 py-1.5 text-[11px] font-mono font-bold text-band-ink border border-ink/40 shadow-xs hover:brightness-105 transition-colors cursor-pointer select-none touch-stamp"
                 title={t("showExtra.previewMemorialTitle", "預覽並自訂儲存本場巡演歌單紀念小卡")}
               >
                 <span aria-hidden="true">📸</span>
@@ -430,7 +430,7 @@ export function ShowSlip({
               <button
                 type="button"
                 onClick={handleCopySetlist}
-                className={`inline-flex items-center justify-center gap-1.5 rounded px-3 py-1.5 text-[11px] font-mono font-bold transition-all cursor-pointer select-none border active:scale-[0.98] ${
+                className={`inline-flex items-center justify-center gap-1.5 rounded px-3 py-1.5 text-[11px] font-mono font-bold transition-colors cursor-pointer select-none border touch-stamp ${
                   copied
                     ? "bg-band text-band-ink border-band shadow-xs"
                     : "bg-paper text-ink border-line-soft hover:bg-tape-tint/50 hover:border-ink/60"

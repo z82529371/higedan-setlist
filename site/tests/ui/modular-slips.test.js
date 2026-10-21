@@ -93,6 +93,10 @@ describe("23. Modular Slips & Crowdsourced Setlist Quest (#45, #40)", () => {
         "[Official髭男dism 現場情報] 2012-07-07 第7回 松江だんだん祭り @ 松江 AZTiC canova"
       );
       assert.ok(parsedUrl.searchParams.get("body").includes("2012-07-07-matsue-aztic-canova"));
+      assert.ok(
+        mailtoUrl.includes("%0D%0A"),
+        "Mailto URL body must use RFC 6068 CRLF line breaks (%0D%0A) for cross-client reliability"
+      );
 
       // 4. Missing Time Subject & Mailto
       const timeSubjectZh = buildTimeSubject({ show: mockShow, unitTitle, locale: "zh-TW" });
@@ -108,6 +112,10 @@ describe("23. Modular Slips & Crowdsourced Setlist Quest (#45, #40)", () => {
         "[Official髭男dism 開演時間情報] 2012-07-07 第7回 松江だんだん祭り @ 松江 AZTiC canova"
       );
       assert.ok(parsedTimeUrl.searchParams.get("body").includes("Doors"));
+      assert.ok(
+        timeMailto.includes("%0D%0A"),
+        "Time Mailto URL body must use RFC 6068 CRLF line breaks (%0D%0A) for cross-client reliability"
+      );
     });
   });
 

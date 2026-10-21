@@ -307,4 +307,23 @@ describe("9. Design Token Invariants & Dedicated URL Routes Seam (DESIGN.md, ADR
       `Touch Affordance Zero Shift Rule violated: touch-stamp provides flat ink feedback and must never be paired with active:scale-*:\n${violations.join("\n")}`
     );
   });
+
+  it("enforces Touch Affordance Zero Shift Rule on slip stubs: src/components/slips must never use active:scale-* (ADR-0104)", () => {
+    const slipsDir = path.resolve(import.meta.dirname, "../../src/components/slips");
+    const files = fs.readdirSync(slipsDir).filter((f) => f.endsWith(".jsx"));
+    const violations = [];
+
+    for (const f of files) {
+      const content = fs.readFileSync(path.join(slipsDir, f), "utf8");
+      if (/active:scale-[^\s"'`]+/.test(content)) {
+        violations.push(f);
+      }
+    }
+
+    assert.deepEqual(
+      violations,
+      [],
+      `Slip components must adhere to Zero Shift tactile ticket rules without active:scale-*: ${violations.join(", ")}`
+    );
+  });
 });
