@@ -3,6 +3,8 @@ export { TourSlip } from "./TourSlip.jsx";
 export { SongSlip } from "./SongSlip.jsx";
 export { VenueSlip } from "./VenueSlip.jsx";
 export { ShowMetadataBox } from "./ShowMetadataBox.jsx";
+export { SetlistQuestCard } from "./SetlistQuestCard.jsx";
+export { LeadDropModal } from "./LeadDropModal.jsx";
 export { SongMilestonesDrawer } from "./SongMilestonesDrawer.jsx";
 export { VenueMilestonesDrawer } from "./VenueMilestonesDrawer.jsx";
 export {

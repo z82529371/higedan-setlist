@@ -1,7 +1,8 @@
+import { useState } from "react";
 import { showDate, formatShowTime, formatShowSongBreakdown, formatShowPlace } from "../../lib/domain.js";
 import { routeHash } from "../../lib/track.js";
 import { useI18n } from "../../lib/i18n.jsx";
-import { buildTimeMailto } from "../../lib/feedback.js";
+import { LeadDropModal } from "./LeadDropModal.jsx";
 
 export function ShowMetadataBox({
   s,
@@ -15,11 +16,20 @@ export function ShowMetadataBox({
   nextShow,
   onSelectShow,
   unitTitle = "",
+  onOpenLeadModal,
 }) {
   const { locale, t, localizeVenue } = useI18n();
+  const [internalTimeModalOpen, setInternalTimeModalOpen] = useState(false);
   const timeFormatted = formatShowTime(s, locale);
   const isTimeMissing = !timeFormatted && songCount > 0;
-  const timeMailto = isTimeMissing ? buildTimeMailto({ show: s, unitTitle, locale }) : "";
+
+  const handleOpenTimeModal = () => {
+    if (onOpenLeadModal) {
+      onOpenLeadModal("time");
+    } else {
+      setInternalTimeModalOpen(true);
+    }
+  };
 
   return (
     <div className="border-y border-line-soft py-3 my-2">
@@ -35,16 +45,17 @@ export function ShowMetadataBox({
             {timeFormatted}
           </span>
         ) : isTimeMissing ? (
-          <a
-            href={timeMailto}
+          <button
+            type="button"
+            onClick={handleOpenTimeModal}
             data-testid="report-time-btn"
-            title={t("slips.quest.reportTimeTitle", "提供本場演出的開場與開演時間情報")}
-            className="inline-flex items-center gap-1 rounded border border-dashed border-ink/40 bg-card text-ink px-2 py-0.5 font-mono text-[11px] font-bold hover:bg-tape-tint hover:border-ink transition-colors cursor-pointer no-underline touch-stamp"
+            title={t("slips.quest.reportTimeTitle", "開啟情報投遞視窗，提供本場演出的開場與開演時間線索")}
+            className="inline-flex items-center gap-1 rounded border border-dashed border-ink/40 bg-card text-ink px-2 py-0.5 font-mono text-[11px] font-bold hover:bg-tape-tint hover:border-ink transition-colors cursor-pointer touch-stamp"
           >
             <span aria-hidden="true">⏰ </span>
             <span>{t("slips.quest.reportTime", "提供開演時間")}</span>
             <span aria-hidden="true">→</span>
-          </a>
+          </button>
         ) : null}
       </div>
 
@@ -202,6 +213,17 @@ export function ShowMetadataBox({
             <span className="text-muted/40 cursor-not-allowed min-h-[38px] px-2 py-1 sm:min-h-0 sm:p-0 flex items-center">{t("slips.tourFinale", "千秋樂")} →</span>
           )}
         </div>
+      )}
+
+      {/* Standalone fallback modal support when rendered outside ShowSlip */}
+      {!onOpenLeadModal && (
+        <LeadDropModal
+          isOpen={internalTimeModalOpen}
+          onClose={() => setInternalTimeModalOpen(false)}
+          show={s}
+          unitTitle={unitTitle}
+          questType="time"
+        />
       )}
     </div>
   );

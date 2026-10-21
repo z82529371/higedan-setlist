@@ -257,3 +257,108 @@ export function buildTimeMailto({ show, unitTitle, locale = "zh-TW" }) {
   const body = buildTimeBody({ show, unitTitle, locale });
   return `mailto:${ARCHIVE_FEEDBACK_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 }
+
+export const WEB3FORMS_ENDPOINT = "https://api.web3forms.com/submit";
+export const DEFAULT_WEB3FORMS_KEY =
+  typeof import.meta !== "undefined" && import.meta.env?.VITE_WEB3FORMS_KEY
+    ? import.meta.env.VITE_WEB3FORMS_KEY
+    : "";
+
+/**
+ * Validates whether an evidence input is a syntactically valid HTTP or HTTPS URL.
+ */
+export function validateEvidenceUrl(url) {
+  if (typeof url !== "string") return false;
+  const trimmed = url.trim();
+  if (!trimmed) return false;
+  try {
+    const parsed = new URL(trimmed);
+    return parsed.protocol === "http:" || parsed.protocol === "https:";
+  } catch {
+    return false;
+  }
+}
+
+/**
+ * Builds the subject line for crowdsourced lead drop submissions.
+ */
+export function buildLeadSubject({ show, unitTitle, questType = "setlist" }) {
+  const { date, title, venuePart } = getShowDescriptor({ show, unitTitle });
+  const prefix = questType === "time" ? "[Official髭男dism 開演時間線索]" : "[Official髭男dism 現場情報線索]";
+  return `${prefix} ${date} ${title}${venuePart}`.trim();
+}
+
+/**
+ * Builds the structured payload for Web3Forms serverless submission.
+ */
+export function buildLeadSubmissionPayload({
+  show,
+  unitTitle,
+  evidenceUrl,
+  notes = "",
+  questType = "setlist",
+  locale = "zh-TW",
+  accessKey = DEFAULT_WEB3FORMS_KEY,
+}) {
+  const { date, title, venue, showId } = getShowDescriptor({ show, unitTitle });
+  const subject = buildLeadSubject({ show, unitTitle, questType });
+  const cleanUrl = typeof evidenceUrl === "string" ? evidenceUrl.trim() : "";
+  const cleanNotes = typeof notes === "string" ? notes.trim() : "";
+
+  const lines = [
+    `【Official 髭男 dism 現場情報線索回報】`,
+    `・場次 ID: ${showId}`,
+    `・演出日期: ${date}`,
+    `・活動名稱: ${title}`,
+    `・演出場館: ${venue}`,
+    `・情報類型: ${questType === "time" ? "開演時間" : "曲目情報"}`,
+    `・佐證連結: ${cleanUrl}`,
+    `・備註/稱呼: ${cleanNotes || "(無)"}`,
+    `・回報語系: ${locale}`,
+    `・提交時間: ${new Date().toISOString()}`,
+  ];
+
+  return {
+    access_key: accessKey,
+    subject,
+    from_name: "HIGEDAN Live Archive Lead Drop",
+    show_id: showId,
+    show_date: date,
+    show_title: title,
+    show_venue: venue,
+    quest_type: questType,
+    evidence_url: cleanUrl,
+    notes: cleanNotes,
+    locale,
+    message: lines.join("\n"),
+  };
+}
+
+const FALLBACK_LABELS = {
+  "zh-TW": { to: "收件者", subject: "主旨" },
+  ja: { to: "宛先", subject: "件名" },
+  en: { to: "To", subject: "Subject" },
+  ko: { to: "받는 사람", subject: "제목" },
+};
+
+/**
+ * Builds fallback human-readable plain text for clipboard copying if background API submission fails.
+ */
+export function buildLeadFallbackText({
+  show,
+  unitTitle,
+  evidenceUrl,
+  notes = "",
+  questType = "setlist",
+  locale = "zh-TW",
+}) {
+  const payload = buildLeadSubmissionPayload({ show, unitTitle, evidenceUrl, notes, questType, locale });
+  const labels = FALLBACK_LABELS[locale] || FALLBACK_LABELS["zh-TW"];
+  return [
+    `${labels.to}: ${ARCHIVE_FEEDBACK_EMAIL}`,
+    `${labels.subject}: ${payload.subject}`,
+    ``,
+    payload.message,
+  ].join("\n");
+}
+

@@ -187,7 +187,7 @@ describe("23. Modular Slips & Crowdsourced Setlist Quest (#45, #40)", () => {
       assert.ok(htmlZh.includes('data-testid="quest-mailto-btn"'), "zh-TW must render quest-mailto-btn");
       assert.ok(htmlZh.includes("歌單情報協尋中"), "zh-TW must render quest headline");
       assert.ok(htmlZh.includes("提供本場曲目情報"), "zh-TW must render submit button label");
-      assert.ok(htmlZh.includes("mailto:hgdnlive@gmail.com"), "zh-TW must contain mailto link");
+      assert.ok(htmlZh.includes('type="button"'), "zh-TW must render modal trigger button instead of broken mailto link");
 
       // 2. ja
       const htmlJa = renderToStaticMarkup(
@@ -309,7 +309,7 @@ describe("23. Modular Slips & Crowdsourced Setlist Quest (#45, #40)", () => {
         "Show with songs but missing time must render report-time-btn"
       );
       assert.ok(htmlZh.includes("提供開演時間"), "Must display localized report time copy in zh-TW");
-      assert.ok(htmlZh.includes("mailto:hgdnlive@gmail.com"), "Must link to official feedback email");
+      assert.ok(htmlZh.includes('type="button"'), "Must render modal trigger button instead of broken mailto link");
     });
 
     it("does NOT render missing time report link when show already has opening/start times", async () => {

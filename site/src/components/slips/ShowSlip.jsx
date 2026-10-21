@@ -9,6 +9,7 @@ import { getSourceLabel, TicketPerforationDivider, TicketBarcodeFooter } from ".
 import { ShowSlipPanels } from "./ShowSlipPanels.jsx";
 import { ShowMetadataBox } from "./ShowMetadataBox.jsx";
 import { SetlistQuestCard } from "./SetlistQuestCard.jsx";
+import { LeadDropModal } from "./LeadDropModal.jsx";
 import { useI18n } from "../../lib/i18n.jsx";
 import { useTicketBookAttendance } from "../../lib/ticket-book.js";
 
@@ -33,6 +34,7 @@ export function ShowSlip({
   const [compareShowId, setCompareShowId] = useState("");
   const [copied, setCopied] = useState(false);
   const [showMemorialModal, setShowMemorialModal] = useState(false);
+  const [leadQuestModal, setLeadQuestModal] = useState(null);
   const [showMoreTools, setShowMoreTools] = useState(false);
   const slipRef = useRef(null);
 
@@ -384,6 +386,7 @@ export function ShowSlip({
           prevShow={prevShow}
           nextShow={nextShow}
           onSelectShow={onSelectShow}
+          onOpenLeadModal={(type) => setLeadQuestModal({ questType: type || "time" })}
         />
 
         {/* Level 4: Action Toolbar (Two-Tier Clean Split: Primary Actions & Sources + Analysis Reel) */}
@@ -552,7 +555,11 @@ export function ShowSlip({
     <TicketPerforationDivider />
 
       {items.length === 0 ? (
-        <SetlistQuestCard show={s} unitTitle={ud.unit.title} />
+        <SetlistQuestCard
+          show={s}
+          unitTitle={ud.unit.title}
+          onOpenLeadModal={(type) => setLeadQuestModal({ questType: type || "setlist" })}
+        />
       ) : (
         <div className="space-y-4">
           <div>
@@ -630,6 +637,17 @@ export function ShowSlip({
         totalShows={showList.length}
         storage={storage}
       />
+
+      {/* Crowdsourced Lead Drop Modal */}
+      {leadQuestModal && (
+        <LeadDropModal
+          isOpen={true}
+          onClose={() => setLeadQuestModal(null)}
+          show={s}
+          unitTitle={ud.unit.title}
+          questType={leadQuestModal.questType}
+        />
+      )}
     </article>
   );
 }

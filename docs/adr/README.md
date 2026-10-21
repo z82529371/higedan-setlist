@@ -4,10 +4,10 @@
 
 ---
 
-## 決策總覽清單（共 97 篇）
+## 決策總覽清單（共 98 篇）
 
 > [!NOTE]
-> **編號跳號說明**：本目錄編號自 ADR-0001 起至 ADR-0113 止。其中 ADR-0063、ADR-0064、ADR-0065、ADR-0068、ADR-0069 共 5 篇為早期介面排版草案，後續已被 ADR-0070 單欄聚焦架構完整吸收與替代，故無獨立保留歷史檔案；實體決策文件共計 97 篇。
+> **編號跳號說明**：本目錄編號自 ADR-0001 起至 ADR-0122 止。其中 ADR-0063、ADR-0064、ADR-0065、ADR-0068、ADR-0069 共 5 篇為早期介面排版草案，後續已被 ADR-0070 單欄聚焦架構完整吸收與替代，故無獨立保留歷史檔案；實體決策文件共計 98 篇。
 
 | 決策標題 | 狀態 | 日期 |
 | :--- | :---: | :---: |
@@ -126,4 +126,5 @@
 | [ADR-0118: 個人巡演票夾雙軌備份、跨裝置轉移與防禦性檢核架構 (Ticket Book Dual-Track Backup, Cross-Device Transfer & Defensive Ingestion Architecture)](0118-ticket-book-dual-track-backup-and-defensive-transfer-architecture.md) | 已採納 (Accepted) | 實作票夾模式 C 雙軌備份與轉移、6 道防禦檢核、本地優先不可篡改原則、孤兒場次寬容保留、變更預覽狀態機與完全去工程黑話介面 |
 | [ADR-0119: PWA 現場離線瀏覽支援、Web App Manifest 與 Cache-First 快取架構 (Progressive Web App Offline Support, Web App Manifest & Cache-First Service Worker Architecture)](0119-pwa-offline-support-and-web-app-manifest.md) | 已採納 (Accepted) | 配置合規 manifest.webmanifest 與雙規圖示、輕量 Cache-First Service Worker 離線快取、Vite bundle 注入與 SSR 安全隔離 |
 | [ADR-0120: 票夾參戰時間軸就地匯出紀念票根與彈窗狀態解耦架構 (In-Place Memorial Ticket Export & Timeline Interaction Architecture)](0120-in-place-memorial-ticket-export-and-timeline-interaction-architecture.md) | 已採納 (Accepted) | 實作時間軸卡片就地匯出入口、無跳轉彈窗狀態組裝、自動繼承座席心得與印章、一鍵 PNG 下載與四語系在地化 |
-| [ADR-0121: 未收錄歌單與缺失時間之樂迷情報協尋與預填回報架構 (Crowdsourced Setlist Quest & Prefilled Mailto Architecture)](0121-crowdsourced-setlist-quest-and-prefilled-mailto-architecture.md) | 已採納 (Accepted) | 將 113 場空歌單升級為點陣票根風格樂迷情報協尋卡、一鍵預填 mailto 協定、缺失開演時間就地提示與四語系完整在地化支援 |
+| [ADR-0121: 未收錄歌單與缺失時間之樂迷情報協尋與預填回報架構 (Crowdsourced Setlist Quest & Prefilled Mailto Architecture)](0121-crowdsourced-setlist-quest-and-prefilled-mailto-architecture.md) | 部分已被替代 (Partially Superseded) | 將 113 場空歌單升級為點陣票根風格樂迷情報協尋卡；純 mailto 協定已被 ADR-0122 替代 |
+| [ADR-0122: 站內情報線索投遞彈窗、佐證連結驗證與無伺服器轉發架構 (In-App Lead Drop Modal, Evidence Verification & Serverless Forwarding Architecture)](0122-in-app-lead-drop-modal-and-crowdsourced-evidence-architecture.md) | 已採納 (Accepted) | 實作站內線索投遞彈窗、佐證連結必填、Web3Forms 背景轉發、剪貼簿防禦備援與四語系在地化 |
