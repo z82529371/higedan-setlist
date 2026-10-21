@@ -74,6 +74,31 @@ try {
     } catch {
       // Ignore if git show fails
     }
+
+    // Guardrail: ADR Number Collision Check (ADR-0120 retro)
+    try {
+      const existingAdrs = execSync("git ls-files docs/adr/0*.md", { encoding: "utf8" })
+        .split(/\r?\n/)
+        .map((s) => s.trim().replace(/\\/g, "/"))
+        .filter(Boolean);
+
+      for (const adr of stagedAdrs) {
+        const match = adr.match(/^docs\/adr\/(\d{4})-(.+)\.md$/);
+        if (!match) continue;
+        const [, num] = match;
+        const collisions = existingAdrs.filter(
+          (existing) => existing !== adr && existing.startsWith(`docs/adr/${num}-`)
+        );
+        if (collisions.length > 0) {
+          console.error("\n❌ [ADR Number Collision Guardrail Violation]");
+          console.error(`Staged ADR '${adr}' collides with existing ADR '${collisions[0]}'.`);
+          console.error("Please increment the 4-digit ADR prefix to prevent index collisions.");
+          process.exit(1);
+        }
+      }
+    } catch {
+      // Ignore if git ls-files fails
+    }
   }
 
 

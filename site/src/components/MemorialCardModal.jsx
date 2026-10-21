@@ -119,6 +119,7 @@ export function MemorialCardModal({
   const [appliedSeat, setAppliedSeat] = useState(initialResolvedSeat);
   const [inputNotes, setInputNotes] = useState(initialResolvedNotes);
   const [appliedNotes, setAppliedNotes] = useState(initialResolvedNotes);
+  // 依據 ADR-0113 與 ADR-0116，單場紀念票券忠實模擬官方現場實體印章，固定使用經典「現場 / LIVE」官方專屬朱印（default）
   const stampId = "default";
   const [includeSeat, setIncludeSeat] = useState(() =>
     initialAttended?.includeSeat !== undefined ? Boolean(initialAttended.includeSeat) : true

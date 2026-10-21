@@ -387,7 +387,7 @@ export function MilestoneCardModal({ isOpen, onClose, milestones, storage: propS
             href={imageUrl}
             download="higedan-milestone-summary.png"
             data-testid="milestone-download-btn"
-            className="flex items-center gap-1.5 px-4 py-1.5 rounded-lg font-mono text-xs font-bold bg-band text-band-ink shadow hover:opacity-90 active:scale-95 transition-all cursor-pointer"
+            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-[4px] font-mono text-xs font-bold bg-band text-band-ink border border-ink/40 shadow-2xs hover:brightness-105 transition-colors cursor-pointer"
           >
             <span aria-hidden="true">⬇️</span>
             <span>{t("memorial.downloadPng", "下載透明圓角 PNG")}</span>

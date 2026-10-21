@@ -225,4 +225,86 @@ describe("9. Design Token Invariants & Dedicated URL Routes Seam (DESIGN.md, ADR
       "ticket-seat-badge must use AAA high-contrast ink tokens (>=7:1 contrast)"
     );
   });
+
+  it("enforces Touch Affordance Zero Shift Rule: elements with touch-stamp must not use active:scale-* (DESIGN.md, ADR-0102)", () => {
+    const componentsDir = path.resolve(import.meta.dirname, "../../src/components");
+
+    function findJsxFiles(dir) {
+      let results = [];
+      for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+        const fullPath = path.join(dir, entry.name);
+        if (entry.isDirectory()) {
+          results = results.concat(findJsxFiles(fullPath));
+        } else if (entry.name.endsWith(".jsx")) {
+          results.push(fullPath);
+        }
+      }
+      return results;
+    }
+
+    function extractClassNames(content) {
+      const classNames = [];
+      const regex = /className\s*=\s*/g;
+      let match;
+      while ((match = regex.exec(content)) !== null) {
+        const startIndex = regex.lastIndex;
+        const firstChar = content[startIndex];
+        if (firstChar === '"' || firstChar === "'") {
+          const endQuote = content.indexOf(firstChar, startIndex + 1);
+          if (endQuote !== -1) {
+            classNames.push(content.slice(startIndex, endQuote + 1));
+          }
+        } else if (firstChar === "{") {
+          let depth = 0;
+          let inString = null;
+          let i = startIndex;
+          for (; i < content.length; i++) {
+            const ch = content[i];
+            if (inString) {
+              if (ch === "\\") {
+                i++;
+              } else if (ch === inString) {
+                inString = null;
+              }
+            } else {
+              if (ch === '"' || ch === "'" || ch === "`") {
+                inString = ch;
+              } else if (ch === "{") {
+                depth++;
+              } else if (ch === "}") {
+                depth--;
+                if (depth === 0) {
+                  classNames.push(content.slice(startIndex, i + 1));
+                  break;
+                }
+              }
+            }
+          }
+        }
+      }
+      return classNames;
+    }
+
+    const files = findJsxFiles(componentsDir);
+    const violations = [];
+
+    for (const file of files) {
+      const content = fs.readFileSync(file, "utf8");
+      if (!content.includes("touch-stamp")) continue;
+
+      const classNames = extractClassNames(content);
+      for (const cls of classNames) {
+        if (cls.includes("touch-stamp") && /active:scale-[^\s"'`]+/.test(cls)) {
+          const relPath = path.relative(componentsDir, file).replace(/\\/g, "/");
+          violations.push(`${relPath}: ${cls.slice(0, 80)}...`);
+        }
+      }
+    }
+
+    assert.deepEqual(
+      violations,
+      [],
+      `Touch Affordance Zero Shift Rule violated: touch-stamp provides flat ink feedback and must never be paired with active:scale-*:\n${violations.join("\n")}`
+    );
+  });
 });

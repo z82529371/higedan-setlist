@@ -49,7 +49,7 @@ export function LanguageSwitcher({ className = "", menuPosition = "down", fab = 
         onClick={() => setIsOpen((v) => !v)}
         className={
           fab
-            ? "flex h-11 w-11 items-center justify-center rounded-full border-[2px] border-ink bg-paper text-ink shadow-[2.5px_2.5px_0_#000] cursor-pointer hover:bg-tape-tint active:scale-95 transition-all text-base touch-stamp focus-visible:outline-2 focus-visible:outline-band-ink"
+            ? "flex h-11 w-11 items-center justify-center rounded-full border-[2px] border-ink bg-paper text-ink shadow-[2.5px_2.5px_0_#000] cursor-pointer hover:bg-tape-tint transition-colors text-base touch-stamp focus-visible:outline-2 focus-visible:outline-band-ink"
             : "inline-flex items-center gap-1.5 px-2.5 py-1 min-h-[36px] sm:min-h-[38px] rounded-[4px] border-[1.5px] border-ink/30 bg-card text-ink hover:border-ink hover:bg-tape-tint/50 text-xs font-bold shadow-2xs transition-colors cursor-pointer touch-stamp focus-visible:outline-2 focus-visible:outline-band-ink"
         }
         aria-haspopup="true"
