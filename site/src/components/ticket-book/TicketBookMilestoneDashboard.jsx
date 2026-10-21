@@ -1,7 +1,7 @@
 import { useI18n } from "../../lib/i18n.jsx";
 import { showDate, formatShowVenueCity, shortUnitTitle } from "../../lib/domain.js";
 
-export function TicketBookMilestoneDashboard({ milestones, onOpenSummaryCard }) {
+export function TicketBookMilestoneDashboard({ milestones, onOpenSummaryCard, onOpenSongChecklist }) {
   const { t, locale } = useI18n();
 
   if (!milestones) return null;
@@ -97,20 +97,44 @@ export function TicketBookMilestoneDashboard({ milestones, onOpenSummaryCard }) 
         </div>
 
         {/* Song Repertoire Coverage */}
-        <div
-          data-testid="milestone-coverage"
-          className="rounded-[4px] border border-ink/20 bg-paper/60 p-2.5 sm:p-3 text-center flex flex-col justify-between"
-        >
-          <div className="font-mono text-[10px] sm:text-[11px] font-bold text-ink uppercase">
-            {t("ticketBook.coverage", "歌曲解鎖率")}
+        {onOpenSongChecklist ? (
+          <button
+            type="button"
+            data-testid="milestone-coverage"
+            onClick={onOpenSongChecklist}
+            className="rounded-[4px] border border-ink/20 bg-paper/60 p-2.5 sm:p-3 text-center flex flex-col justify-between hover:border-ink hover:bg-tape-tint/50 cursor-pointer transition-all touch-stamp group text-left sm:text-center"
+            title={t("ticketBook.viewChecklist", "查看現場曲庫解鎖成就圖鑑")}
+          >
+            <div className="font-mono text-[10px] sm:text-[11px] font-bold text-ink uppercase flex items-center justify-center gap-1">
+              <span>{t("ticketBook.coverage", "歌曲解鎖率")}</span>
+              <span className="opacity-0 group-hover:opacity-100 transition-opacity" aria-hidden="true">
+                📖
+              </span>
+            </div>
+            <div className="my-1 font-mono text-[18px] sm:text-[22px] font-black text-ink leading-none text-center">
+              {milestones.coveragePercentage}%
+            </div>
+            <div className="font-mono text-[10px] text-ink font-bold flex items-center justify-center gap-1">
+              <span>{milestones.unlockedSongCount} / {milestones.totalCatalogSongs}</span>
+              <span className="text-[9px] text-muted group-hover:text-ink">→</span>
+            </div>
+          </button>
+        ) : (
+          <div
+            data-testid="milestone-coverage"
+            className="rounded-[4px] border border-ink/20 bg-paper/60 p-2.5 sm:p-3 text-center flex flex-col justify-between"
+          >
+            <div className="font-mono text-[10px] sm:text-[11px] font-bold text-ink uppercase">
+              {t("ticketBook.coverage", "歌曲解鎖率")}
+            </div>
+            <div className="my-1 font-mono text-[18px] sm:text-[22px] font-black text-ink leading-none">
+              {milestones.coveragePercentage}%
+            </div>
+            <div className="font-mono text-[10px] text-ink font-bold">
+              {milestones.unlockedSongCount} / {milestones.totalCatalogSongs}
+            </div>
           </div>
-          <div className="my-1 font-mono text-[18px] sm:text-[22px] font-black text-ink leading-none">
-            {milestones.coveragePercentage}%
-          </div>
-          <div className="font-mono text-[10px] text-ink font-bold">
-            {milestones.unlockedSongCount} / {milestones.totalCatalogSongs}
-          </div>
-        </div>
+        )}
       </div>
 
       {/* Secondary Details: Top 3 Songs & History Milestones */}

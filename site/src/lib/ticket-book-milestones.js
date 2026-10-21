@@ -1,10 +1,11 @@
 import songsData from "../data/songs.json";
-import { songUnreleased, shortUnitTitle } from "./domain.js";
+import { songUnreleased, shortUnitTitle, getSongAlbum } from "./domain.js";
+import { ALBUM_ORDER } from "./constants.js";
 
 /**
  * ticket-book-milestones.js — Dynamic Concert Ticket Book Milestones & Repertoire Engine
  *
- * Implements statistical metrics calculation for the concert ticket book (Issue #37, ADR-0114):
+ * Implements statistical metrics calculation for the concert ticket book (Issue #37, #46, ADR-0114, ADR-0116):
  * 1. 總場次 (totalShows)
  * 2. 跨越巡演數 (totalTours)
  * 3. 踩點場館數 (totalVenues)
@@ -13,7 +14,62 @@ import { songUnreleased, shortUnitTitle } from "./domain.js";
  * 6. 個人現場神曲排行榜 Top 3 (topSongs: rank, songId, title, count)
  * 7. 最初與最近參戰紀錄 (earliestShow, latestShow)
  * 8. 參戰足跡全紀錄 (attendedShowsList)
+ * 9. 現場曲庫解鎖成就圖鑑專輯分組 (albumGroups / songChecklist)
  */
+
+function createAlbumGroup(album, songs) {
+  const totalSongs = songs.length;
+  const unlockedCount = songs.filter((s) => s.unlocked).length;
+  const completionPercentage =
+    totalSongs > 0 ? Math.round((unlockedCount / totalSongs) * 1000) / 10 : 0;
+
+  return {
+    album,
+    songs,
+    totalSongs,
+    unlockedCount,
+    completionPercentage,
+  };
+}
+
+export function buildAlbumGroups(releasedCatalog, songPlayCounts = {}) {
+  const songsByAlbum = new Map();
+  for (const s of releasedCatalog) {
+    if (!s || !s.id) continue;
+    const album = getSongAlbum(s);
+    if (album === "未發行曲目") continue;
+    if (!songsByAlbum.has(album)) {
+      songsByAlbum.set(album, []);
+    }
+    const count = songPlayCounts[s.id] || 0;
+    songsByAlbum.get(album).push({
+      id: s.id,
+      title: s.title || s.name || s.id,
+      album,
+      unlocked: count > 0,
+      count,
+    });
+  }
+
+  const groups = [];
+  const processedAlbums = new Set();
+
+  for (const alb of ALBUM_ORDER) {
+    if (alb === "未發行曲目") continue;
+    if (songsByAlbum.has(alb)) {
+      groups.push(createAlbumGroup(alb, songsByAlbum.get(alb)));
+      processedAlbums.add(alb);
+    }
+  }
+
+  for (const [alb, songs] of songsByAlbum.entries()) {
+    if (!processedAlbums.has(alb) && alb !== "未發行曲目") {
+      groups.push(createAlbumGroup(alb, songs));
+    }
+  }
+
+  return groups;
+}
 
 export function computeTicketBookMilestones({
   attendedShows = [],
@@ -39,6 +95,7 @@ export function computeTicketBookMilestones({
   const totalCatalogSongs = releasedCatalog.length;
 
   if (totalShows === 0) {
+    const albumGroups = buildAlbumGroups(releasedCatalog, {});
     return {
       totalShows: 0,
       totalTours: 0,
@@ -51,6 +108,8 @@ export function computeTicketBookMilestones({
       earliestShow: null,
       latestShow: null,
       attendedShowsList: [],
+      albumGroups,
+      songChecklist: albumGroups,
     };
   }
 
@@ -158,6 +217,8 @@ export function computeTicketBookMilestones({
   const earliestShow = validShows.length > 0 ? validShows[0] : null;
   const latestShow = validShows.length > 0 ? validShows[validShows.length - 1] : null;
 
+  const albumGroups = buildAlbumGroups(releasedCatalog, songPlayCounts);
+
   return {
     totalShows,
     totalTours: tourIds.size,
@@ -170,5 +231,7 @@ export function computeTicketBookMilestones({
     earliestShow,
     latestShow,
     attendedShowsList: validShows,
+    albumGroups,
+    songChecklist: albumGroups,
   };
 }

@@ -280,6 +280,62 @@ describe("25. TicketBook Dynamic Milestones Calculation & Summary Card (#37)", (
       assert.equal(stats.attendedShowsList.length, 1);
       assert.equal(stats.attendedShowsList[0].showKey, "special-show");
     });
+
+    it("computes albumGroups with songs, counts, and completion percentages excluding unreleased tracks", async () => {
+      const { computeTicketBookMilestones } = await loadModule("/src/lib/ticket-book-milestones.js");
+
+      const attendedShows = [
+        { showKey: "show-1", attendedAt: "2024-11-30" },
+        { showKey: "show-2", attendedAt: "2024-12-15" },
+        { showKey: "show-3", attendedAt: "2025-08-16" },
+      ];
+
+      const stats = computeTicketBookMilestones({
+        attendedShows,
+        unitData: mockUnitData,
+        showById: mockShowById,
+        unitIdByShowId: mockUnitIdByShowId,
+        allUsedSongs: mockAllUsedSongs,
+      });
+
+      assert.ok(Array.isArray(stats.albumGroups), "stats.albumGroups must be an array");
+      assert.ok(stats.albumGroups.length > 0, "albumGroups should not be empty");
+
+      // Rejoice (2024): 3 songs (subtitle, mixed-nuts, white-noise), 2 unlocked -> 66.7%
+      const rejoice = stats.albumGroups.find((g) => g.album === "Rejoice (2024)");
+      assert.ok(rejoice, "Rejoice group must exist");
+      assert.equal(rejoice.totalSongs, 3);
+      assert.equal(rejoice.unlockedCount, 2);
+      assert.equal(rejoice.completionPercentage, 66.7);
+
+      const subtitleSong = rejoice.songs.find((s) => s.id === "subtitle");
+      assert.ok(subtitleSong);
+      assert.equal(subtitleSong.unlocked, true);
+      assert.equal(subtitleSong.count, 1);
+
+      const whiteNoiseSong = rejoice.songs.find((s) => s.id === "white-noise");
+      assert.ok(whiteNoiseSong);
+      assert.equal(whiteNoiseSong.unlocked, false);
+      assert.equal(whiteNoiseSong.count, 0);
+
+      // Traveler (2019): 2 songs (pretender, shukumei), 2 unlocked -> 100%
+      const traveler = stats.albumGroups.find((g) => g.album === "Traveler (2019)");
+      assert.ok(traveler, "Traveler group must exist");
+      assert.equal(traveler.totalSongs, 2);
+      assert.equal(traveler.unlockedCount, 2);
+      assert.equal(traveler.completionPercentage, 100);
+
+      // Editorial (2021): 2 songs (cry-baby, i-love), 0 unlocked -> 0%
+      const editorial = stats.albumGroups.find((g) => g.album === "Editorial (2021)");
+      assert.ok(editorial, "Editorial group must exist");
+      assert.equal(editorial.totalSongs, 2);
+      assert.equal(editorial.unlockedCount, 0);
+      assert.equal(editorial.completionPercentage, 0);
+
+      // Verify unreleased album or unreleased songs are NOT in albumGroups
+      const unreleasedGroup = stats.albumGroups.find((g) => g.album === "未發行曲目");
+      assert.equal(unreleasedGroup, undefined, "Unreleased group must never be present in albumGroups");
+    });
   });
 
   describe("Seam 2: TicketBook Milestone Dashboard Presentation (TicketBookPage.jsx)", () => {
@@ -403,6 +459,107 @@ describe("25. TicketBook Dynamic Milestones Calculation & Summary Card (#37)", (
         )
       );
       assert.ok(htmlJa.includes('data-testid="ticket-book-milestones-dashboard"'));
+
+      storage.clear();
+    });
+
+    it("renders milestone coverage as interactive checklist trigger and filters timeline by song when selected", async () => {
+      const { React, renderToStaticMarkup } = await (await import("../helpers/vite-server.js")).getReactAndRenderer();
+      const { I18nProvider } = await loadModule("/src/lib/i18n.jsx");
+      const { TicketBookPage } = await loadModule("/src/components/ticket-book/TicketBookPage.jsx");
+      const { recordAttendance, getSafeStorage } = await loadModule("/src/lib/ticket-book.js");
+
+      const storage = getSafeStorage();
+      storage.clear();
+
+      const mockShow1 = {
+        id: "show-1",
+        date: "2024-11-30",
+        city: "高陽",
+        venue: "KINTEX Hall 5",
+        title: "Asia Tour 2024",
+      };
+      const mockShow2 = {
+        id: "show-2",
+        date: "2024-12-15",
+        city: "台北",
+        venue: "台北小巨蛋",
+        title: "Asia Tour 2024",
+      };
+      const mockUnitTour = {
+        id: "asia-tour-2024",
+        title: "Asia Tour 2024",
+        shortTitle: "Rejoice",
+        type: "巡演專場",
+        shows: [mockShow1, mockShow2],
+      };
+      const mockUnitData = new Map([
+        [
+          "asia-tour-2024",
+          {
+            unit: mockUnitTour,
+            isTour: true,
+            full: new Map([
+              [
+                "show-1",
+                [
+                  { order: 1, songId: "pretender" },
+                  { order: 2, songId: "shukumei" },
+                ],
+              ],
+              [
+                "show-2",
+                [
+                  { order: 1, songId: "pretender" },
+                  { order: 2, songId: "subtitle" },
+                ],
+              ],
+            ]),
+          },
+        ],
+      ]);
+      const mockShowById = new Map([
+        ["show-1", mockShow1],
+        ["show-2", mockShow2],
+      ]);
+      const mockUnitIdByShowId = new Map([
+        ["show-1", "asia-tour-2024"],
+        ["show-2", "asia-tour-2024"],
+      ]);
+      const mockAllUsedSongs = [
+        { id: "pretender", title: "Pretender" },
+        { id: "shukumei", title: "宿命" },
+        { id: "subtitle", title: "Subtitle" },
+        { id: "mixed-nuts", title: "ミックスナッツ" },
+      ];
+
+      recordAttendance("show-1", { date: "2024-11-30" }, storage);
+      recordAttendance("show-2", { date: "2024-12-15" }, storage);
+
+      // Render with initialFilterSongId="shukumei" (only show-1 played shukumei)
+      const htmlFiltered = renderToStaticMarkup(
+        React.createElement(
+          I18nProvider,
+          { initialLocale: "zh-TW" },
+          React.createElement(TicketBookPage, {
+            unitData: mockUnitData,
+            showById: mockShowById,
+            unitIdByShowId: mockUnitIdByShowId,
+            allUsedSongs: mockAllUsedSongs,
+            initialFilterSongId: "shukumei",
+            storage,
+          })
+        )
+      );
+
+      // Verify active song filter badge is displayed
+      assert.ok(htmlFiltered.includes('data-testid="ticket-book-active-song-filter"'), "Must render active song filter chip");
+      assert.ok(htmlFiltered.includes("宿命"), "Must display filtered song title");
+      assert.ok(htmlFiltered.includes('data-testid="clear-song-filter-btn"'), "Must render clear song filter button");
+
+      // Verify timeline filtering: show-1 is included, show-2 is filtered out
+      assert.ok(htmlFiltered.includes('data-testid="timeline-item-show-1"'), "show-1 played shukumei and must be present");
+      assert.ok(!htmlFiltered.includes('data-testid="timeline-item-show-2"'), "show-2 did not play shukumei and must be filtered out");
 
       storage.clear();
     });
@@ -603,6 +760,168 @@ describe("25. TicketBook Dynamic Milestones Calculation & Summary Card (#37)", (
         )
       );
       assert.ok(!emptyHolderHtml.includes('data-testid="milestone-holder-badge"'), "Holder badge omitted when holder name is empty");
+    });
+  });
+
+  describe("Seam 4: Live Song Checklist Component & Interactions (LiveSongChecklistDrawer.jsx)", () => {
+    it("renders live song checklist drawer with album grouping, completion progress, and stamp badges", async () => {
+      const { React, renderToStaticMarkup } = await (await import("../helpers/vite-server.js")).getReactAndRenderer();
+      const { I18nProvider } = await loadModule("/src/lib/i18n.jsx");
+      const { LiveSongChecklistDrawer } = await loadModule("/src/components/ticket-book/LiveSongChecklistDrawer.jsx");
+
+      const mockMilestones = {
+        unlockedSongCount: 5,
+        totalCatalogSongs: 10,
+        coveragePercentage: 50,
+        albumGroups: [
+          {
+            album: "Rejoice (2024)",
+            totalSongs: 3,
+            unlockedCount: 2,
+            completionPercentage: 66.7,
+            songs: [
+              { id: "subtitle", title: "Subtitle", album: "Rejoice (2024)", unlocked: true, count: 1 },
+              { id: "mixed-nuts", title: "ミックスナッツ", album: "Rejoice (2024)", unlocked: true, count: 1 },
+              { id: "white-noise", title: "ホワイトノイズ", album: "Rejoice (2024)", unlocked: false, count: 0 },
+            ],
+          },
+          {
+            album: "Traveler (2019)",
+            totalSongs: 2,
+            unlockedCount: 2,
+            completionPercentage: 100,
+            songs: [
+              { id: "pretender", title: "Pretender", album: "Traveler (2019)", unlocked: true, count: 3 },
+              { id: "shukumei", title: "宿命", album: "Traveler (2019)", unlocked: true, count: 2 },
+            ],
+          },
+        ],
+      };
+
+      // 1. Closed state returns null
+      const closedHtml = renderToStaticMarkup(
+        React.createElement(
+          I18nProvider,
+          { initialLocale: "zh-TW" },
+          React.createElement(LiveSongChecklistDrawer, {
+            isOpen: false,
+            onClose: () => {},
+            milestones: mockMilestones,
+          })
+        )
+      );
+      assert.equal(closedHtml, "");
+
+      // 2. Open state (Default / All filter)
+      const openHtml = renderToStaticMarkup(
+        React.createElement(
+          I18nProvider,
+          { initialLocale: "zh-TW" },
+          React.createElement(LiveSongChecklistDrawer, {
+            isOpen: true,
+            onClose: () => {},
+            milestones: mockMilestones,
+          })
+        )
+      );
+
+      // Verify drawer container and header
+      assert.ok(openHtml.includes('data-testid="live-song-checklist-drawer"'), "Must render drawer container");
+      assert.ok(openHtml.includes('data-testid="song-checklist-close-btn"'), "Must render close button");
+      assert.ok(openHtml.includes("現場曲庫解鎖成就圖鑑"), "Must render zh-TW checklist title");
+      assert.ok(openHtml.includes("共已解鎖 5 / 10 首"), "Must render overall unlocked progress");
+
+      // Verify filter tabs
+      assert.ok(openHtml.includes('data-testid="checklist-filter-all"'), "Must render All filter tab");
+      assert.ok(openHtml.includes('data-testid="checklist-filter-unlocked"'), "Must render Unlocked filter tab");
+      assert.ok(openHtml.includes('data-testid="checklist-filter-locked"'), "Must render Locked filter tab");
+
+      // Verify album groups and completion
+      assert.ok(openHtml.includes("Rejoice (2024)"));
+      assert.ok(openHtml.includes("2 / 3"));
+      assert.ok(openHtml.includes("Traveler (2019)"));
+      assert.ok(openHtml.includes("COMPLETE") || openHtml.includes("100%"), "100% complete album must show complete badge");
+
+      // Verify unlocked song stamp badge & button
+      assert.ok(openHtml.includes('data-testid="checklist-song-pretender"'));
+      assert.ok(openHtml.includes("已解鎖"), "Unlocked song must display unlocked badge");
+      assert.ok(openHtml.includes("3 次"), "Pretender count must be 3 次");
+
+      // Verify locked song stamp badge & deep link
+      assert.ok(openHtml.includes('data-testid="checklist-song-white-noise"'));
+      assert.ok(openHtml.includes("尚未在現場解鎖"), "Locked song must display not yet heard badge");
+      assert.ok(openHtml.includes("#/song/white-noise"), "Locked song must link to #/song/:id");
+
+      // Verify DESIGN.md tokens & contrast invariants
+      assert.ok(!openHtml.includes("text-[#"), "Must not use arbitrary hex colors");
+      assert.ok(openHtml.includes("text-ink"), "Must use high-contrast ink tokens");
+      assert.ok(openHtml.includes("rounded-t-[8px]"), "Drawer must follow DESIGN.md card radius <= 8px");
+      assert.ok(!openHtml.includes("rounded-t-[14px]"), "Drawer must not use rounded-t-[14px]");
+
+      // 3. Filtered state: only unlocked
+      const unlockedHtml = renderToStaticMarkup(
+        React.createElement(
+          I18nProvider,
+          { initialLocale: "zh-TW" },
+          React.createElement(LiveSongChecklistDrawer, {
+            isOpen: true,
+            initialFilter: "unlocked",
+            onClose: () => {},
+            milestones: mockMilestones,
+          })
+        )
+      );
+      assert.ok(unlockedHtml.includes('data-testid="checklist-song-pretender"'));
+      assert.ok(!unlockedHtml.includes('data-testid="checklist-song-white-noise"'), "Locked songs must be hidden in unlocked filter");
+
+      // 4. Filtered state: only locked
+      const lockedHtml = renderToStaticMarkup(
+        React.createElement(
+          I18nProvider,
+          { initialLocale: "zh-TW" },
+          React.createElement(LiveSongChecklistDrawer, {
+            isOpen: true,
+            initialFilter: "locked",
+            onClose: () => {},
+            milestones: mockMilestones,
+          })
+        )
+      );
+      assert.ok(lockedHtml.includes('data-testid="checklist-song-white-noise"'));
+      assert.ok(!lockedHtml.includes('data-testid="checklist-song-pretender"'), "Unlocked songs must be hidden in locked filter");
+
+      // 5. Empty filter state displays polite empty notice
+      const allLockedMilestones = {
+        unlockedSongCount: 0,
+        totalCatalogSongs: 2,
+        coveragePercentage: 0,
+        albumGroups: [
+          {
+            album: "Rejoice (2024)",
+            totalSongs: 2,
+            unlockedCount: 0,
+            completionPercentage: 0,
+            songs: [
+              { id: "subtitle", title: "Subtitle", album: "Rejoice (2024)", unlocked: false, count: 0 },
+              { id: "mixed-nuts", title: "ミックスナッツ", album: "Rejoice (2024)", unlocked: false, count: 0 },
+            ],
+          },
+        ],
+      };
+      const emptyHtml = renderToStaticMarkup(
+        React.createElement(
+          I18nProvider,
+          { initialLocale: "zh-TW" },
+          React.createElement(LiveSongChecklistDrawer, {
+            isOpen: true,
+            initialFilter: "unlocked",
+            onClose: () => {},
+            milestones: allLockedMilestones,
+          })
+        )
+      );
+      assert.ok(emptyHtml.includes('data-testid="checklist-empty-state"'), "Must render checklist-empty-state when 0 songs match filter");
+      assert.ok(emptyHtml.includes("目前篩選條件下無符合的曲目"), "Must render empty notice text");
     });
   });
 });

@@ -8,6 +8,7 @@ import { computeTicketBookMilestones } from "../../lib/ticket-book-milestones.js
 import { TicketBookMilestoneDashboard } from "./TicketBookMilestoneDashboard.jsx";
 import { MilestoneCardModal } from "./MilestoneCardModal.jsx";
 import { TicketBookTransferModal } from "./TicketBookTransferModal.jsx";
+import { LiveSongChecklistDrawer } from "./LiveSongChecklistDrawer.jsx";
 import { MemorialCardModal } from "../MemorialCardModal.jsx";
 import { assignCues } from "../../lib/resolve.js";
 import LanguageSwitcher from "../LanguageSwitcher.jsx";
@@ -24,6 +25,7 @@ export function TicketBookPage({
   onReturnHome,
   initialYear = "all",
   initialKeyword = "",
+  initialFilterSongId = null,
   initialMemorialShowId = null,
   initialMemorialImageUrl = null,
 }) {
@@ -32,8 +34,10 @@ export function TicketBookPage({
 
   const [selectedYear, setSelectedYear] = useState(initialYear);
   const [searchKeyword, setSearchKeyword] = useState(initialKeyword);
+  const [selectedSongId, setSelectedSongId] = useState(initialFilterSongId);
   const [isSummaryModalOpen, setIsSummaryModalOpen] = useState(false);
   const [isTransferModalOpen, setIsTransferModalOpen] = useState(false);
+  const [isSongChecklistOpen, setIsSongChecklistOpen] = useState(false);
   const [memorialShowId, setMemorialShowId] = useState(initialMemorialShowId);
 
   const milestones = useMemo(() => {
@@ -50,9 +54,11 @@ export function TicketBookPage({
   const enrichedShows = useMemo(() => {
     return (attendedShows || [])
       .map((entry) => {
-        const show = showById?.get(entry.showKey) || null;
-        const unitId = unitIdByShowId?.get(entry.showKey) || null;
-        const unit = unitId && unitData ? unitData.get(unitId)?.unit : null;
+        const show = showById?.get ? showById.get(entry.showKey) : showById?.[entry.showKey] || null;
+        const unitId = (unitIdByShowId?.get ? unitIdByShowId.get(entry.showKey) : unitIdByShowId?.[entry.showKey]) || null;
+        const ud = unitId && unitData?.get ? unitData.get(unitId) : unitId ? unitData?.[unitId] : null;
+        const unit = ud?.unit || null;
+        const setlist = ud?.full?.get ? ud.full.get(entry.showKey) || [] : ud?.full?.[entry.showKey] || show?.setlist || [];
 
         const effectiveDate = show?.date || entry.attendedAt || "9999-99-99";
         const yearMatch = effectiveDate.match(/^(\d{4})/);
@@ -62,6 +68,7 @@ export function TicketBookPage({
           entry,
           show,
           unit,
+          setlist,
           date: effectiveDate,
           year: effectiveYear,
           title: unit?.title || show?.title || entry.showKey,
@@ -84,11 +91,23 @@ export function TicketBookPage({
     return Array.from(years).sort().reverse();
   }, [enrichedShows]);
 
-  // Apply Year and Keyword filters (including localized venue and city names)
+  // Selected song title lookup for active filter indicator
+  const selectedSongTitle = useMemo(() => {
+    if (!selectedSongId) return null;
+    const song = (allUsedSongs || []).find((s) => s.id === selectedSongId);
+    return song?.title || song?.name || selectedSongId;
+  }, [selectedSongId, allUsedSongs]);
+
+  // Apply Year, Song, and Keyword filters (including localized venue and city names)
   const filteredShows = useMemo(() => {
     let list = enrichedShows;
     if (selectedYear !== "all") {
       list = list.filter((item) => item.year === selectedYear);
+    }
+    if (selectedSongId) {
+      list = list.filter((item) =>
+        Array.isArray(item.setlist) && item.setlist.some((it) => it && it.songId === selectedSongId)
+      );
     }
     const q = searchKeyword.trim().toLowerCase();
     if (q) {
@@ -107,11 +126,12 @@ export function TicketBookPage({
       });
     }
     return list;
-  }, [enrichedShows, selectedYear, searchKeyword, t, locale]);
+  }, [enrichedShows, selectedYear, selectedSongId, searchKeyword, t, locale]);
 
   const handleResetFilters = () => {
     setSelectedYear("all");
     setSearchKeyword("");
+    setSelectedSongId(null);
   };
 
   // Memoized show setlist & metadata for in-place MemorialCardModal export (Issue #43)
@@ -238,11 +258,12 @@ export function TicketBookPage({
         {/* Perforation Divider */}
         <TicketPerforationDivider />
 
-        {/* Dynamic Career Milestones Dashboard (Issue #37) */}
+        {/* Dynamic Career Milestones Dashboard (Issue #37, #46) */}
         <div className="mt-4 sm:mt-6">
           <TicketBookMilestoneDashboard
             milestones={milestones}
             onOpenSummaryCard={() => setIsSummaryModalOpen(true)}
+            onOpenSongChecklist={() => setIsSongChecklistOpen(true)}
           />
         </div>
 
@@ -278,25 +299,50 @@ export function TicketBookPage({
           <div className="space-y-5">
             {/* Filter & Live Search Toolbar */}
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2.5 bg-paper/60 p-2.5 sm:p-3 rounded-[6px] border border-line-soft">
-              {/* Year Selector */}
-              <div className="flex items-center gap-2">
-                <label htmlFor="ticket-book-year-select" className="shrink-0 font-mono text-[11px] font-bold text-muted uppercase">
-                  📅
-                </label>
-                <select
-                  id="ticket-book-year-select"
-                  data-testid="ticket-book-year-filter"
-                  value={selectedYear}
-                  onChange={(e) => setSelectedYear(e.target.value)}
-                  className="rounded border border-ink/30 bg-card px-2.5 py-1.5 font-mono text-[12px] font-bold text-ink shadow-2xs cursor-pointer focus:outline-none focus:ring-1 focus:ring-band"
-                >
-                  <option value="all">{t("ticketBook.filterAllYears", "全部年份")}</option>
-                  {availableYears.map((yr) => (
-                    <option key={yr} value={yr}>
-                      {yr}
-                    </option>
-                  ))}
-                </select>
+              {/* Year Selector & Song Filter Badge */}
+              <div className="flex flex-wrap items-center gap-2">
+                <div className="flex items-center gap-2">
+                  <label htmlFor="ticket-book-year-select" className="shrink-0 font-mono text-[11px] font-bold text-muted uppercase">
+                    📅
+                  </label>
+                  <select
+                    id="ticket-book-year-select"
+                    data-testid="ticket-book-year-filter"
+                    value={selectedYear}
+                    onChange={(e) => setSelectedYear(e.target.value)}
+                    className="rounded border border-ink/30 bg-card px-2.5 py-1.5 font-mono text-[12px] font-bold text-ink shadow-2xs cursor-pointer focus:outline-none focus:ring-1 focus:ring-band"
+                  >
+                    <option value="all">{t("ticketBook.filterAllYears", "全部年份")}</option>
+                    {availableYears.map((yr) => (
+                      <option key={yr} value={yr}>
+                        {yr}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                {selectedSongId && (
+                  <div
+                    data-testid="ticket-book-active-song-filter"
+                    className="inline-flex items-center gap-1.5 rounded-[4px] border border-ink/40 bg-tape px-2.5 py-1 text-[11px] sm:text-[12px] font-bold text-ink shadow-2xs"
+                  >
+                    <span aria-hidden="true">🎵</span>
+                    <span>
+                      {t("ticketBook.filterSongPrefix", "篩選曲目：")}
+                      {selectedSongTitle}
+                    </span>
+                    <button
+                      type="button"
+                      data-testid="clear-song-filter-btn"
+                      onClick={() => setSelectedSongId(null)}
+                      className="ml-1 text-muted hover:text-ink font-bold cursor-pointer"
+                      title={t("ticketBook.clearSongFilter", "清除曲目篩選")}
+                      aria-label={t("ticketBook.clearSongFilter", "清除曲目篩選")}
+                    >
+                      ✕
+                    </button>
+                  </div>
+                )}
               </div>
 
               {/* Keyword Search Input */}
@@ -488,6 +534,18 @@ export function TicketBookPage({
         isOpen={isSummaryModalOpen}
         onClose={() => setIsSummaryModalOpen(false)}
         milestones={milestones}
+      />
+
+      {/* Live Song Checklist Drawer (Issue #46) */}
+      <LiveSongChecklistDrawer
+        isOpen={isSongChecklistOpen}
+        onClose={() => setIsSongChecklistOpen(false)}
+        milestones={milestones}
+        currentFilterSongId={selectedSongId}
+        onFilterBySong={(songId) => {
+          setSelectedSongId(songId);
+          setIsSongChecklistOpen(false);
+        }}
       />
 
       {/* Backup and Cross-Device Transfer Modal (Issue #38 / #42) */}
