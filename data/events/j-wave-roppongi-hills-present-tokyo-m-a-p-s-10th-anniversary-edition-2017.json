@@ -13,10 +13,68 @@
       "prefecture": "東京都",
       "title": "J-WAVE & Roppongi Hills present TOKYO M.A.P.S 10th ANNIVERSARY EDITION",
       "sourceUrls": [
+        "https://x.com/beiketa/status/861100630038896640",
         "https://higedan.com/news/3/?page=62",
         "https://www.livefans.jp/events/789091"
       ],
-      "setlist": [],
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "type": "interlude",
+          "note": "リハ：愛なんだが…"
+        },
+        {
+          "order": 2,
+          "encore": false,
+          "type": "interlude",
+          "note": "リハ：日曜日のラブレター"
+        },
+        {
+          "order": 3,
+          "encore": false,
+          "type": "interlude",
+          "note": "リハ：夕暮れ沿い"
+        },
+        {
+          "order": 4,
+          "encore": false,
+          "type": "interlude",
+          "note": "SE: What's Going On?"
+        },
+        {
+          "order": 5,
+          "encore": false,
+          "songId": "inu-ka-cat-ka-de-shinumade-kenka-shiyou"
+        },
+        {
+          "order": 6,
+          "encore": false,
+          "songId": "itan-na-star"
+        },
+        {
+          "order": 7,
+          "encore": false,
+          "songId": "yugure-zoi",
+          "note": "Acoustic ver."
+        },
+        {
+          "order": 8,
+          "encore": false,
+          "songId": "zero-no-mama-de-iraterara",
+          "note": "Band ver."
+        },
+        {
+          "order": 9,
+          "encore": false,
+          "songId": "coffee-to-syrup"
+        },
+        {
+          "order": 10,
+          "encore": false,
+          "songId": "sweet-tweet"
+        }
+      ],
       "weekday": "日",
       "startsAt": "14:15"
     }

@@ -1,42 +1,60 @@
 {
   "id": "countdown-japan-17-18",
   "title": "COUNTDOWN JAPAN 17/18",
+  "shortTitle": "COUNTDOWN JAPAN 17/18",
   "type": "音樂祭",
   "shows": [
     {
       "id": "880116",
       "date": "2017-12-31",
+      "weekday": "日",
+      "opensAt": "13:30",
+      "startsAt": "27:15",
       "city": "千葉",
       "venue": "幕張展覽館 MOON STAGE",
       "region": "關東",
       "prefecture": "千葉縣",
       "title": "COUNTDOWN JAPAN 17/18",
       "sourceUrls": [
+        "https://x.com/beiketa/status/947539071257079808",
+        "https://rockinon.com/quick/cdj1718/detail/171545",
         "https://www.livefans.jp/events/880116"
       ],
       "setlist": [
         {
           "order": 1,
           "encore": false,
-          "songId": "lady"
+          "type": "interlude",
+          "note": "リハ：日曜日のラブレター"
         },
         {
           "order": 2,
           "encore": false,
-          "songId": "tell-me-baby"
+          "type": "interlude",
+          "note": "リハ：恋の前ならえ"
         },
         {
           "order": 3,
           "encore": false,
-          "songId": "coffee-to-syrup"
+          "songId": "lady"
         },
         {
           "order": 4,
           "encore": false,
-          "songId": "itan-na-star"
+          "songId": "tell-me-baby"
         },
         {
           "order": 5,
+          "encore": false,
+          "songId": "coffee-to-syrup"
+        },
+        {
+          "order": 6,
+          "encore": false,
+          "songId": "itan-na-star"
+        },
+        {
+          "order": 7,
           "encore": false,
           "songId": "inu-ka-cat-ka-de-shinumade-kenka-shiyou"
         }

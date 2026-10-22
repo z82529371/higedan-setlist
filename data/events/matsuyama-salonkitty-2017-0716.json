@@ -1,16 +1,20 @@
 {
-  "id": "unofficial-2017-0716",
-  "title": "Official髭男dism 2017.07.16",
+  "id": "matsuyama-salonkitty-2017-0716",
+  "title": "松山SALONKITTY 対バンライブ",
+  "shortTitle": "松山SALONKITTY",
   "type": "聯合專場",
   "shows": [
     {
       "id": "827589",
       "date": "2017-07-16",
+      "weekday": "日",
       "city": "松山",
       "venue": "松山SALONKITTY",
       "region": "四國",
       "prefecture": "愛媛縣",
-      "title": "Official髭男dism 2017.07.16",
+      "title": "松山SALONKITTY 対バンライブ",
+      "opensAt": "16:30",
+      "startsAt": "17:00",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=61",
         "https://www.livefans.jp/events/827589"

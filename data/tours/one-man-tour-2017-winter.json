@@ -16,7 +16,8 @@
         "https://higedan.com/news/3/?page=57",
         "https://www.livefans.jp/events/828049",
         "https://ameblo.jp/tenyo-ru/entry-12330531209.html",
-        "https://higedan-setlist.net/live/2017-11-03/"
+        "https://higedan-setlist.net/live/2017-11-03/",
+        "https://x.com/beiketa/status/939176341953396736"
       ],
       "opensAt": "17:00",
       "startsAt": "18:00",
@@ -53,11 +54,13 @@
       "title": "Official髭男dism one-man tour 2017 -winter-",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=57",
-        "https://www.livefans.jp/events/828050"
+        "https://www.livefans.jp/events/828050",
+        "https://x.com/beiketa/status/939176341953396736"
       ],
       "opensAt": "18:00",
       "diff": {},
-      "locked": true
+      "locked": true,
+      "weekday": "土"
     },
     {
       "id": "828051",
@@ -69,11 +72,13 @@
       "title": "Official髭男dism one-man tour 2017 -winter-",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=57",
-        "https://www.livefans.jp/events/828051"
+        "https://www.livefans.jp/events/828051",
+        "https://x.com/beiketa/status/939176341953396736"
       ],
       "opensAt": "17:30",
       "diff": {},
-      "locked": true
+      "locked": true,
+      "weekday": "日"
     },
     {
       "id": "828052",
@@ -85,11 +90,13 @@
       "title": "Official髭男dism one-man tour 2017 -winter-",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=57",
-        "https://www.livefans.jp/events/828052"
+        "https://www.livefans.jp/events/828052",
+        "https://x.com/beiketa/status/939176341953396736"
       ],
       "opensAt": "18:00",
       "diff": {},
-      "locked": true
+      "locked": true,
+      "weekday": "木祝"
     },
     {
       "id": "828053",
@@ -101,11 +108,13 @@
       "title": "Official髭男dism one-man tour 2017 -winter-",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=57",
-        "https://www.livefans.jp/events/828053"
+        "https://www.livefans.jp/events/828053",
+        "https://x.com/beiketa/status/939176341953396736"
       ],
       "opensAt": "17:30",
       "diff": {},
-      "locked": true
+      "locked": true,
+      "weekday": "日"
     },
     {
       "id": "828054",
@@ -117,11 +126,26 @@
       "title": "Official髭男dism one-man tour 2017 -winter-",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=57",
-        "https://www.livefans.jp/events/828054"
+        "https://www.livefans.jp/events/828054",
+        "https://x.com/beiketa/status/939176341953396736"
       ],
       "opensAt": "19:00",
-      "diff": {},
-      "locked": true
+      "diff": {
+        "skip": [
+          3
+        ],
+        "insert": [
+          {
+            "after": 1,
+            "item": {
+              "encore": false,
+              "songId": "hajimari-no-asa"
+            }
+          }
+        ]
+      },
+      "locked": true,
+      "weekday": "金"
     },
     {
       "id": "828055",
@@ -136,7 +160,8 @@
         "https://higedan.com/news/3/?page=57",
         "https://www.livefans.jp/events/828055",
         "https://ameblo.jp/tenyo-ru/entry-12336788556.html",
-        "https://higedan-setlist.net/live/2017-12-02/"
+        "https://higedan-setlist.net/live/2017-12-02/",
+        "https://x.com/beiketa/status/939176341953396736"
       ],
       "opensAt": "17:00",
       "startsAt": "18:00",
@@ -167,7 +192,8 @@
       "sourceUrls": [
         "https://higedan.com/news/3/?page=57",
         "https://www.livefans.jp/events/828056",
-        "https://higedan-setlist.net/live/2017-12-08/"
+        "https://higedan-setlist.net/live/2017-12-08/",
+        "https://x.com/beiketa/status/939176341953396736"
       ],
       "opensAt": "19:00",
       "diff": {
@@ -209,7 +235,8 @@
           }
         ]
       },
-      "locked": true
+      "locked": true,
+      "weekday": "金"
     }
   ],
   "templateSetlist": [
@@ -299,5 +326,5 @@
       "songId": "inu-ka-cat-ka-de-shinumade-kenka-shiyou"
     }
   ],
-  "templateBasis": "全體共識：整輪巡演固定演出 17 曲，包含小澤健二翻唱曲《ぼくらが旅に出る理由》於 M6"
+  "templateBasis": "全體共識：整輪巡演基本固定 17 首（含小澤健二翻唱曲《ぼくらが旅に出る理由》於 M6），松江首日加演《黄色い車》，神戶、名古屋、東京赤坂後半場次微調曲順（M2 始まりの朝 / M3 愛なんだが…），赤坂終場安可加碼《What's Going On?》至 18 曲；全 8 公演均經 Twitter @beiketa 現場一手考證核實"
 }

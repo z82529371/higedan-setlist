@@ -6,12 +6,16 @@
     {
       "id": "kirin-goodluck-live-2018-1020",
       "date": "2018-10-20",
+      "weekday": "土",
+      "startsAt": "16:00",
       "city": "線上直播",
       "venue": "線上直播",
       "region": "其他",
-      "title": "TOKYO FM KIRIN BEER \"GoodLuck\" LIVE 公開生放送",
+      "prefecture": "",
+      "title": "TOKYO FM KIRIN BEER \"GoodLuck\" LIVE 公開収録",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=49",
+        "https://x.com/beiketa/status/1053555810192678912",
         "https://ja.wikipedia.org/wiki/Official%E9%AB%AD%E7%94%B7dism"
       ],
       "setlist": [
@@ -60,8 +64,7 @@
           "encore": false,
           "songId": "stand-by-you"
         }
-      ],
-      "prefecture": ""
+      ]
     }
   ]
 }

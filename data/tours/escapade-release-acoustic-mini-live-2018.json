@@ -143,20 +143,92 @@
       "startsAt": "13:30"
     },
     {
-      "id": "escapade-acoustic-2018-0317",
+      "id": "escapade-acoustic-2018-0317-1",
       "date": "2018-03-17",
       "weekday": "土",
       "city": "堺",
       "venue": "永旺夢樂城堺北花田 1F Center Court",
       "region": "關西",
       "prefecture": "大阪府",
-      "title": "インストア アコースティックミニライブ&サイン会",
+      "title": "インストア アコースティックミニライブ&サイン会 第1部",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=55",
+        "https://x.com/beiketa/status/974876184495382530",
         "https://ja.wikipedia.org/wiki/Official%E9%AB%AD%E7%94%B7dism#インストアイベント"
       ],
-      "setlist": [],
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "type": "interlude",
+          "note": "リハ：日曜日のラブレター"
+        },
+        {
+          "order": 2,
+          "encore": false,
+          "songId": "ai-nandaga"
+        },
+        {
+          "order": 3,
+          "encore": false,
+          "songId": "itan-na-star"
+        },
+        {
+          "order": 4,
+          "encore": false,
+          "songId": "coffee-to-syrup"
+        },
+        {
+          "order": 5,
+          "encore": false,
+          "songId": "inu-ka-cat-ka-de-shinumade-kenka-shiyou"
+        }
+      ],
       "startsAt": "13:30"
+    },
+    {
+      "id": "escapade-acoustic-2018-0317-2",
+      "date": "2018-03-17",
+      "weekday": "土",
+      "city": "堺",
+      "venue": "永旺夢樂城堺北花田 1F Center Court",
+      "region": "關西",
+      "prefecture": "大阪府",
+      "title": "インストア アコースティックミニライブ&サイン会 第2部",
+      "sourceUrls": [
+        "https://higedan.com/news/3/?page=55",
+        "https://x.com/beiketa/status/974911406108688384",
+        "https://ja.wikipedia.org/wiki/Official%E9%AB%AD%E7%94%B7dism#インストアイベント"
+      ],
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "type": "interlude",
+          "note": "リハ：Tell Me Baby"
+        },
+        {
+          "order": 2,
+          "encore": false,
+          "songId": "yugure-zoi"
+        },
+        {
+          "order": 3,
+          "encore": false,
+          "songId": "itan-na-star"
+        },
+        {
+          "order": 4,
+          "encore": false,
+          "songId": "lady"
+        },
+        {
+          "order": 5,
+          "encore": false,
+          "songId": "inu-ka-cat-ka-de-shinumade-kenka-shiyou"
+        }
+      ],
+      "startsAt": "16:00"
     },
     {
       "id": "escapade-acoustic-2018-0325-1",
@@ -335,40 +407,26 @@
       ]
     },
     {
-      "id": "escapade-acoustic-2018-0407",
+      "id": "escapade-acoustic-2018-0407-1",
       "date": "2018-04-07",
       "weekday": "土",
       "city": "高崎",
       "venue": "高崎OPA 2F活動空間",
       "region": "關東",
       "prefecture": "群馬縣",
-      "title": "インストア アコースティックミニライブ&サイン会",
+      "title": "インストア アコースティックミニライブ&サイン会 第1部",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=54",
         "https://higedan.com/news/3/?page=55",
+        "https://x.com/beiketa/status/982484555134255104",
         "https://ja.wikipedia.org/wiki/Official%E9%AB%AD%E7%94%B7dism#インストアイベント"
-      ],
-      "setlist": [],
-      "startsAt": "13:30"
-    },
-    {
-      "id": "1477750",
-      "date": "2018-04-08",
-      "city": "小田原",
-      "venue": "小田原 Dynacity West 1F Canyon Stage",
-      "region": "關東",
-      "prefecture": "神奈川縣",
-      "title": "インストア アコースティックミニライブ&サイン会 (小田原)",
-      "sourceUrls": [
-        "https://higedan.com/news/3/?page=55",
-        "https://www.livefans.jp/events/1477750"
       ],
       "setlist": [
         {
           "order": 1,
           "encore": false,
           "type": "interlude",
-          "note": "リハ：前半・リハ Tell Me Baby"
+          "note": "リハ：Tell Me Baby"
         },
         {
           "order": 2,
@@ -389,37 +447,141 @@
           "order": 5,
           "encore": false,
           "songId": "inu-ka-cat-ka-de-shinumade-kenka-shiyou"
-        },
+        }
+      ],
+      "startsAt": "13:30"
+    },
+    {
+      "id": "escapade-acoustic-2018-0407-2",
+      "date": "2018-04-07",
+      "weekday": "土",
+      "city": "高崎",
+      "venue": "高崎OPA 2F活動空間",
+      "region": "關東",
+      "prefecture": "群馬縣",
+      "title": "インストア アコースティックミニライブ&サイン会 第2部",
+      "sourceUrls": [
+        "https://higedan.com/news/3/?page=54",
+        "https://higedan.com/news/3/?page=55",
+        "https://ja.wikipedia.org/wiki/Official%E9%AB%AD%E7%94%B7dism#インストアイベント"
+      ],
+      "setlist": [
         {
-          "order": 6,
+          "order": 1,
           "encore": false,
           "type": "interlude",
-          "note": "リハ：後半・リハ 115万キロのフィルム"
+          "note": "リハ：115万キロのフィルム"
         },
         {
-          "order": 7,
+          "order": 2,
           "encore": false,
           "songId": "yugure-zoi"
         },
         {
-          "order": 8,
+          "order": 3,
           "encore": false,
           "songId": "coffee-to-syrup"
         },
         {
-          "order": 9,
+          "order": 4,
           "encore": false,
           "songId": "lady"
         },
         {
-          "order": 10,
+          "order": 5,
           "encore": false,
           "songId": "inu-ka-cat-ka-de-shinumade-kenka-shiyou"
         }
       ],
-      "opensAt": "13:30",
+      "startsAt": "16:00"
+    },
+    {
+      "id": "1477750",
+      "date": "2018-04-08",
       "weekday": "日",
-      "startsAt": "13:30"
+      "startsAt": "13:30",
+      "city": "小田原",
+      "venue": "小田原 Dynacity West 1F Canyon Stage",
+      "region": "關東",
+      "prefecture": "神奈川縣",
+      "title": "インストア アコースティックミニライブ&サイン会 第1部",
+      "sourceUrls": [
+        "https://higedan.com/news/3/?page=55",
+        "https://www.livefans.jp/events/1477750",
+        "https://x.com/beiketa/status/982854947283730432"
+      ],
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "type": "interlude",
+          "note": "リハ：Tell Me Baby"
+        },
+        {
+          "order": 2,
+          "encore": false,
+          "songId": "ai-nandaga"
+        },
+        {
+          "order": 3,
+          "encore": false,
+          "songId": "itan-na-star"
+        },
+        {
+          "order": 4,
+          "encore": false,
+          "songId": "coffee-to-syrup"
+        },
+        {
+          "order": 5,
+          "encore": false,
+          "songId": "inu-ka-cat-ka-de-shinumade-kenka-shiyou"
+        }
+      ]
+    },
+    {
+      "id": "escapade-acoustic-2018-0408-2",
+      "date": "2018-04-08",
+      "weekday": "日",
+      "startsAt": "16:00",
+      "city": "小田原",
+      "venue": "小田原 Dynacity West 1F Canyon Stage",
+      "region": "關東",
+      "prefecture": "神奈川縣",
+      "title": "インストア アコースティックミニライブ&サイン会 第2部",
+      "sourceUrls": [
+        "https://higedan.com/news/3/?page=55",
+        "https://www.livefans.jp/events/1477750",
+        "https://x.com/beiketa/status/982881265312399361"
+      ],
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "type": "interlude",
+          "note": "リハ：115万キロのフィルム"
+        },
+        {
+          "order": 2,
+          "encore": false,
+          "songId": "yugure-zoi"
+        },
+        {
+          "order": 3,
+          "encore": false,
+          "songId": "coffee-to-syrup"
+        },
+        {
+          "order": 4,
+          "encore": false,
+          "songId": "lady"
+        },
+        {
+          "order": 5,
+          "encore": false,
+          "songId": "inu-ka-cat-ka-de-shinumade-kenka-shiyou"
+        }
+      ]
     },
     {
       "id": "escapade-acoustic-2018-0414-1",
@@ -434,9 +596,37 @@
       "sourceUrls": [
         "https://higedan.com/news/3/?page=55",
         "https://x.com/officialhige/status/984773481085657088",
+        "https://x.com/beiketa/status/985021659588395008",
         "https://ja.wikipedia.org/wiki/Official%E9%AB%AD%E7%94%B7dism#インストアイベント"
       ],
-      "setlist": []
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "type": "interlude",
+          "note": "リハ：Tell Me Baby"
+        },
+        {
+          "order": 2,
+          "encore": false,
+          "songId": "115man-kiro-no-film"
+        },
+        {
+          "order": 3,
+          "encore": false,
+          "songId": "itan-na-star"
+        },
+        {
+          "order": 4,
+          "encore": false,
+          "songId": "lady"
+        },
+        {
+          "order": 5,
+          "encore": false,
+          "songId": "inu-ka-cat-ka-de-shinumade-kenka-shiyou"
+        }
+      ]
     },
     {
       "id": "escapade-acoustic-2018-0414-2",
@@ -451,6 +641,7 @@
       "sourceUrls": [
         "https://higedan.com/news/3/?page=55",
         "https://x.com/officialhige/status/984773481085657088",
+        "https://x.com/beiketa/status/985051704713404416",
         "https://x.com/greenappleno7/status/985050750328889344",
         "https://ja.wikipedia.org/wiki/Official%E9%AB%AD%E7%94%B7dism#インストアイベント"
       ],

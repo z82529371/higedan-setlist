@@ -13,7 +13,8 @@
       "prefecture": "東京都",
       "title": "HIGEDAN acoustic one-man live 2018",
       "sourceUrls": [
-        "https://www.livefans.jp/events/890784"
+        "https://www.livefans.jp/events/890784",
+        "https://x.com/beiketa/status/959733666199908352"
       ],
       "setlist": [
         {
@@ -107,8 +108,9 @@
           "songId": "sweet-tweet"
         }
       ],
-      "opensAt": "17:00",
-      "locked": true
+      "opensAt": "16:15",
+      "locked": true,
+      "startsAt": "17:00"
     }
   ]
 }

@@ -6,13 +6,16 @@
     {
       "id": "bomber-e-m-night-2017-0618",
       "date": "2017-06-18",
+      "weekday": "日",
+      "startsAt": "17:30",
       "city": "名古屋",
       "venue": "名古屋電視台 B Studio (BOMBER-E 公開收錄)",
       "region": "中部",
       "prefecture": "愛知縣",
       "title": "メ～テレ BOMBER-E 「M.ナイト」公開収録LIVE",
       "sourceUrls": [
-        "https://higedan.com/news/3/?page=61"
+        "https://higedan.com/news/3/?page=61",
+        "https://x.com/beiketa/status/899234455360909312"
       ],
       "setlist": [
         {
@@ -24,10 +27,13 @@
           "order": 2,
           "encore": false,
           "songId": "inu-ka-cat-ka-de-shinumade-kenka-shiyou"
+        },
+        {
+          "order": 3,
+          "encore": false,
+          "songId": "equal"
         }
-      ],
-      "weekday": "日",
-      "startsAt": "17:30"
+      ]
     }
   ]
 }

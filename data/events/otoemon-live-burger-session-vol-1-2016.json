@@ -17,9 +17,36 @@
       "startsAt": "19:00",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=63",
+        "https://x.com/beiketa/status/810795299690016768",
         "https://ja.wikipedia.org/wiki/Official%E9%AB%AD%E7%94%B7dism"
       ],
-      "setlist": []
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "songId": "sweet-tweet"
+        },
+        {
+          "order": 2,
+          "encore": false,
+          "songId": "itan-na-star"
+        },
+        {
+          "order": 3,
+          "encore": false,
+          "songId": "yugure-zoi"
+        },
+        {
+          "order": 4,
+          "encore": false,
+          "songId": "coffee-to-syrup"
+        },
+        {
+          "order": 5,
+          "encore": false,
+          "songId": "whats-going-on"
+        }
+      ]
     }
   ]
 }

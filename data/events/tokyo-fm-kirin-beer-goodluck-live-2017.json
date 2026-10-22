@@ -6,13 +6,16 @@
     {
       "id": "kirin-goodluck-live-2017-0429",
       "date": "2017-04-29",
-      "prefecture": "",
-      "title": "TOKYO FM KIRIN BEER \"GoodLuck\" LIVE 公開生放送",
+      "weekday": "土",
+      "startsAt": "16:00",
       "city": "線上直播",
       "venue": "線上直播",
       "region": "其他",
+      "prefecture": "",
+      "title": "TOKYO FM KIRIN BEER \"GoodLuck\" LIVE 公開生放送",
       "sourceUrls": [
-        "https://higedan.com/news/3/?page=62"
+        "https://higedan.com/news/3/?page=62",
+        "https://x.com/beiketa/status/858276375811170305"
       ],
       "setlist": [
         {
@@ -43,7 +46,8 @@
         {
           "order": 6,
           "encore": false,
-          "songId": "yugure-zoi"
+          "songId": "yugure-zoi",
+          "note": "Acoustic"
         },
         {
           "order": 7,

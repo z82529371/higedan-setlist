@@ -3425,6 +3425,19 @@
       }
     },
     {
+      "id": "gu-divercity東京-plaza店",
+      "canonical": "GU DiverCity東京 Plaza店",
+      "native": "GU ダイバーシティ東京 プラザ店",
+      "region": "關東",
+      "prefecture": "東京都",
+      "city": "東京",
+      "names": {
+        "zh-TW": "GU DiverCity東京 Plaza店",
+        "ja": "GU ダイバーシティ東京 プラザ店",
+        "en": "GU DiverCity Tokyo Plaza"
+      }
+    },
+    {
       "id": "duo-music-exchange",
       "canonical": "duo MUSIC EXCHANGE",
       "native": "duo MUSIC EXCHANGE",

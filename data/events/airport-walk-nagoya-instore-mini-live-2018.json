@@ -1,0 +1,92 @@
+{
+  "id": "airport-walk-nagoya-instore-mini-live-2018",
+  "title": "インストア ミニライブ (エアポートウォーク名古屋)",
+  "shortTitle": "エアポートウォーク名古屋",
+  "type": "店家活動",
+  "shows": [
+    {
+      "id": "airport-walk-mini-live-2018-0217-1",
+      "date": "2018-02-17",
+      "weekday": "土",
+      "startsAt": "12:30",
+      "city": "豐山",
+      "venue": "Airport Walk名古屋 3F活動舞台",
+      "region": "中部",
+      "prefecture": "愛知縣",
+      "title": "インストア ミニライブ 12:30〜の回",
+      "sourceUrls": [
+        "https://x.com/beiketa/status/964716891309686784"
+      ],
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "type": "interlude",
+          "note": "リハ：日曜日のラブレター"
+        },
+        {
+          "order": 2,
+          "encore": false,
+          "songId": "ai-nandaga"
+        },
+        {
+          "order": 3,
+          "encore": false,
+          "songId": "tell-me-baby"
+        },
+        {
+          "order": 4,
+          "encore": false,
+          "songId": "itan-na-star"
+        },
+        {
+          "order": 5,
+          "encore": false,
+          "songId": "inu-ka-cat-ka-de-shinumade-kenka-shiyou"
+        }
+      ]
+    },
+    {
+      "id": "airport-walk-mini-live-2018-0217-2",
+      "date": "2018-02-17",
+      "weekday": "土",
+      "startsAt": "15:00",
+      "city": "豐山",
+      "venue": "Airport Walk名古屋 3F活動舞台",
+      "region": "中部",
+      "prefecture": "愛知縣",
+      "title": "インストア ミニライブ 15:00〜の回",
+      "sourceUrls": [
+        "https://x.com/beiketa/status/964750357120262147"
+      ],
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "type": "interlude",
+          "note": "リハ：LADY"
+        },
+        {
+          "order": 2,
+          "encore": false,
+          "songId": "itan-na-star"
+        },
+        {
+          "order": 3,
+          "encore": false,
+          "songId": "yugure-zoi"
+        },
+        {
+          "order": 4,
+          "encore": false,
+          "songId": "coffee-to-syrup"
+        },
+        {
+          "order": 5,
+          "encore": false,
+          "songId": "inu-ka-cat-ka-de-shinumade-kenka-shiyou"
+        }
+      ]
+    }
+  ]
+}

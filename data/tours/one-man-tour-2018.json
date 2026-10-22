@@ -27,7 +27,8 @@
             }
           }
         ]
-      }
+      },
+      "weekday": "水"
     },
     {
       "id": "889684",
@@ -43,7 +44,8 @@
         "https://www.livefans.jp/events/889684"
       ],
       "opensAt": "17:30",
-      "diff": {}
+      "diff": {},
+      "weekday": "木祝"
     },
     {
       "id": "889685",
@@ -59,7 +61,8 @@
         "https://www.livefans.jp/events/889685"
       ],
       "opensAt": "18:00",
-      "diff": {}
+      "diff": {},
+      "weekday": "土"
     },
     {
       "id": "889692",
@@ -75,7 +78,8 @@
         "https://www.livefans.jp/events/889692"
       ],
       "opensAt": "17:30",
-      "diff": {}
+      "diff": {},
+      "weekday": "日"
     },
     {
       "id": "889697",
@@ -142,7 +146,8 @@
           }
         ]
       },
-      "note": "higedan-setlist.net 記載正規安可為 2 首（What's Going On? / 異端なスター），現場一手推特考證本場安可加碼點歌合計 5 首"
+      "note": "higedan-setlist.net 記載正規安可為 2 首（What's Going On? / 異端なスター），現場一手推特考證本場安可加碼點歌合計 5 首",
+      "weekday": "金"
     },
     {
       "id": "889701",
@@ -168,7 +173,8 @@
             }
           }
         ]
-      }
+      },
+      "weekday": "土"
     },
     {
       "id": "889704",
@@ -226,7 +232,8 @@
             }
           }
         ]
-      }
+      },
+      "weekday": "土"
     },
     {
       "id": "889709",
@@ -259,7 +266,8 @@
             }
           }
         ]
-      }
+      },
+      "weekday": "土"
     },
     {
       "id": "889712",
@@ -325,7 +333,8 @@
             }
           }
         ]
-      }
+      },
+      "weekday": "土"
     },
     {
       "id": "889713",
@@ -366,7 +375,8 @@
             }
           }
         ]
-      }
+      },
+      "weekday": "日"
     },
     {
       "id": "945947",
@@ -382,7 +392,8 @@
         "https://www.livefans.jp/events/945947"
       ],
       "opensAt": "19:30",
-      "diff": {}
+      "diff": {},
+      "weekday": "火"
     },
     {
       "id": "889714",
@@ -398,7 +409,8 @@
         "https://www.livefans.jp/events/889714"
       ],
       "opensAt": "17:30",
-      "diff": {}
+      "diff": {},
+      "weekday": "日"
     },
     {
       "id": "889715",
@@ -439,7 +451,8 @@
             }
           }
         ]
-      }
+      },
+      "weekday": "金"
     },
     {
       "id": "889716",
@@ -483,7 +496,8 @@
             }
           }
         ]
-      }
+      },
+      "weekday": "木"
     }
   ],
   "templateSetlist": [
@@ -574,5 +588,6 @@
     }
   ],
   "templateBasis": "考證校準：基本固定模式 17 首（M1-M15 本篇 + 安可 What's Going On? / 異端なスター），各場安可點歌コーナー與巡迴追加曲以 diff 實體還原",
-  "shortTitle": "one-man tour 2018"
+  "shortTitle": "one-man tour 2018",
+  "type": "巡演專場"
 }

@@ -14,9 +14,31 @@
       "title": "ZIP-FM 23rd ANNIVERSARY ZIP AUTUMN SQUARE 2016",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=64",
-        "https://www.livefans.jp/events/710886"
+        "https://www.livefans.jp/events/710886",
+        "https://x.com/beiketa/status/782492677417766913"
       ],
-      "setlist": [],
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "songId": "sweet-tweet"
+        },
+        {
+          "order": 2,
+          "encore": false,
+          "songId": "itan-na-star"
+        },
+        {
+          "order": 3,
+          "encore": false,
+          "songId": "whats-going-on"
+        },
+        {
+          "order": 4,
+          "encore": false,
+          "songId": "nichiyoubi-no-love-letter"
+        }
+      ],
       "weekday": "日",
       "startsAt": "16:35"
     }

@@ -1,0 +1,50 @@
+{
+  "id": "cutting-edgu-special-live-2017",
+  "title": "Cutting edGU スペシャルライブ",
+  "shortTitle": "Cutting edGU",
+  "type": "店家活動",
+  "shows": [
+    {
+      "id": "cutting-edgu-2017-1120",
+      "date": "2017-11-20",
+      "weekday": "一",
+      "city": "東京",
+      "venue": "GU DiverCity東京 Plaza店",
+      "region": "關東",
+      "prefecture": "東京都",
+      "title": "Cutting edGU スペシャルライブ",
+      "startsAt": "18:00",
+      "sourceUrls": [
+        "https://x.com/beiketa/status/932582544918249472",
+        "https://prtimes.jp/main/html/rd/p/000000067.000009950.html"
+      ],
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "songId": "coffee-to-syrup"
+        },
+        {
+          "order": 2,
+          "encore": false,
+          "songId": "itan-na-star"
+        },
+        {
+          "order": 3,
+          "encore": false,
+          "songId": "yugure-zoi"
+        },
+        {
+          "order": 4,
+          "encore": false,
+          "songId": "lady"
+        },
+        {
+          "order": 5,
+          "encore": false,
+          "songId": "inu-ka-cat-ka-de-shinumade-kenka-shiyou"
+        }
+      ]
+    }
+  ]
+}

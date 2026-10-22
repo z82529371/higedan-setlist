@@ -16,6 +16,7 @@
       "sourceUrls": [
         "https://higedan.com/news/3/?page=52",
         "https://www.livefans.jp/events/994292",
+        "https://x.com/beiketa/status/1045886433813127169",
         "https://x.com/oga1207/status/1045884299407372288"
       ],
       "setlist": [
@@ -54,7 +55,7 @@
         {
           "order": 7,
           "encore": false,
-          "songId": "lady"
+          "songId": "no-doubt"
         },
         {
           "order": 8,

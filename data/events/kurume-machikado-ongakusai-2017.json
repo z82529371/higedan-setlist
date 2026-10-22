@@ -1,6 +1,7 @@
 {
   "id": "kurume-machikado-ongakusai-2017",
   "title": "くるめ街かど音楽祭2017",
+  "shortTitle": "くるめ街かど音楽祭2017",
   "type": "音樂祭",
   "shows": [
     {
@@ -14,6 +15,7 @@
       "title": "くるめ街かど音楽祭2017",
       "startsAt": "15:15",
       "sourceUrls": [
+        "https://x.com/beiketa/status/926705400669282305",
         "http://kurume-machi.info/",
         "https://ja.wikipedia.org/wiki/Official%E9%AB%AD%E7%94%B7dism",
         "https://www.youtube.com/watch?v=bJXIYp2f0pc"
@@ -22,8 +24,39 @@
         {
           "order": 1,
           "encore": false,
-          "songId": "lady",
-          "note": "一部曲目（現場映像確認）"
+          "type": "interlude",
+          "note": "リハ：愛なんだが…"
+        },
+        {
+          "order": 2,
+          "encore": false,
+          "type": "interlude",
+          "note": "リハ：SWEET TWEET"
+        },
+        {
+          "order": 3,
+          "encore": false,
+          "songId": "inu-ka-cat-ka-de-shinumade-kenka-shiyou"
+        },
+        {
+          "order": 4,
+          "encore": false,
+          "songId": "itan-na-star"
+        },
+        {
+          "order": 5,
+          "encore": false,
+          "songId": "lady"
+        },
+        {
+          "order": 6,
+          "encore": false,
+          "songId": "coffee-to-syrup"
+        },
+        {
+          "order": 7,
+          "encore": false,
+          "songId": "nichiyoubi-no-love-letter"
         }
       ]
     }

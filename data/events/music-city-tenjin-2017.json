@@ -1,6 +1,7 @@
 {
   "id": "music-city-tenjin-2017",
   "title": "MUSIC CITY TENJIN 2017",
+  "shortTitle": "MUSIC CITY TENJIN 2017",
   "type": "音樂祭",
   "shows": [
     {
@@ -12,10 +13,54 @@
       "prefecture": "福岡縣",
       "title": "MUSIC CITY TENJIN 2017",
       "sourceUrls": [
+        "https://x.com/beiketa/status/911451058597117952",
         "https://higedan.com/news/3/?page=59",
         "https://www.livefans.jp/events/853681"
       ],
-      "setlist": [],
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "type": "interlude",
+          "note": "リハ：日曜日のラブレター (1番)"
+        },
+        {
+          "order": 2,
+          "encore": false,
+          "type": "interlude",
+          "note": "リハ：愛なんだが… (2番)"
+        },
+        {
+          "order": 3,
+          "encore": false,
+          "songId": "coffee-to-syrup",
+          "note": "Acoustic"
+        },
+        {
+          "order": 4,
+          "encore": false,
+          "songId": "itan-na-star",
+          "note": "Acoustic"
+        },
+        {
+          "order": 5,
+          "encore": false,
+          "songId": "yugure-zoi",
+          "note": "Acoustic"
+        },
+        {
+          "order": 6,
+          "encore": false,
+          "songId": "lady",
+          "note": "Acoustic"
+        },
+        {
+          "order": 7,
+          "encore": false,
+          "songId": "inu-ka-cat-ka-de-shinumade-kenka-shiyou",
+          "note": "Acoustic"
+        }
+      ],
       "weekday": "土",
       "startsAt": "13:00"
     }

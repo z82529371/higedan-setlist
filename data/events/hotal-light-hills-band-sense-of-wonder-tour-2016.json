@@ -46,10 +46,42 @@
       "prefecture": "千葉縣",
       "title": "ホタルライトヒルズバンド ～センスオブワンダーTOUR 2016～",
       "sourceUrls": [
+        "https://x.com/beiketa/status/782162465018646528",
         "https://x.com/officialhige/status/754900590501572609",
         "https://www.livefans.jp/events/722063"
       ],
-      "setlist": []
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "songId": "nichiyoubi-no-love-letter"
+        },
+        {
+          "order": 2,
+          "encore": false,
+          "songId": "itan-na-star"
+        },
+        {
+          "order": 3,
+          "encore": false,
+          "songId": "zero-no-mama-de-iraterara"
+        },
+        {
+          "order": 4,
+          "encore": false,
+          "songId": "coffee-to-syrup"
+        },
+        {
+          "order": 5,
+          "encore": false,
+          "songId": "whats-going-on"
+        },
+        {
+          "order": 6,
+          "encore": false,
+          "songId": "clap-clap"
+        }
+      ]
     },
     {
       "id": "680845",
@@ -171,11 +203,48 @@
       "prefecture": "東京都",
       "title": "センスオブワンダーTOUR2016 ファイナルツーマンライブ",
       "sourceUrls": [
+        "https://x.com/beiketa/status/807922440466595840",
         "https://higedan.com/news/3/?page=63",
         "https://x.com/officialhige/status/754900590501572609",
         "https://ja.wikipedia.org/wiki/Official%E9%AB%AD%E7%94%B7dism"
       ],
-      "setlist": [],
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "songId": "koi-no-maenarae"
+        },
+        {
+          "order": 2,
+          "encore": false,
+          "songId": "itan-na-star"
+        },
+        {
+          "order": 3,
+          "encore": false,
+          "songId": "yugure-zoi"
+        },
+        {
+          "order": 4,
+          "encore": false,
+          "songId": "happy-birthday-to-you"
+        },
+        {
+          "order": 5,
+          "encore": false,
+          "songId": "zero-no-mama-de-iraterara"
+        },
+        {
+          "order": 6,
+          "encore": false,
+          "songId": "whats-going-on"
+        },
+        {
+          "order": 7,
+          "encore": false,
+          "songId": "sweet-tweet"
+        }
+      ],
       "opensAt": "18:00",
       "startsAt": "18:30"
     }
