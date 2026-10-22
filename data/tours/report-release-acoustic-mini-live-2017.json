@@ -5,20 +5,98 @@
   "type": "店家活動",
   "shows": [
     {
-      "id": "report-acoustic-2017-0723",
+      "id": "report-acoustic-2017-0723-1",
       "date": "2017-07-23",
       "weekday": "日",
       "city": "利府",
       "venue": "永旺夢樂城利府店 1F戶外特設會場",
       "region": "東北",
       "prefecture": "宮城縣",
-      "title": "インストア アコースティックミニライブ&サイン会",
+      "title": "インストア アコースティックミニライブ&サイン会 第1部",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=60",
+        "https://x.com/beiketa/status/888988604390719489",
         "https://ja.wikipedia.org/wiki/Official%E9%AB%AD%E7%94%B7dism#インストアイベント"
       ],
-      "setlist": [],
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "type": "interlude",
+          "note": "リハ：日曜日のラブレター"
+        },
+        {
+          "order": 2,
+          "encore": false,
+          "type": "interlude",
+          "note": "リハ：parade"
+        },
+        {
+          "order": 3,
+          "encore": false,
+          "songId": "itan-na-star"
+        },
+        {
+          "order": 4,
+          "encore": false,
+          "songId": "ai-nandaga"
+        },
+        {
+          "order": 5,
+          "encore": false,
+          "songId": "yugure-zoi"
+        },
+        {
+          "order": 6,
+          "encore": false,
+          "songId": "coffee-to-syrup"
+        }
+      ],
       "startsAt": "13:00"
+    },
+    {
+      "id": "report-acoustic-2017-0723-2",
+      "date": "2017-07-23",
+      "weekday": "日",
+      "city": "利府",
+      "venue": "永旺夢樂城利府店 1F戶外特設會場",
+      "region": "東北",
+      "prefecture": "宮城縣",
+      "title": "インストア アコースティックミニライブ&サイン会 第2部",
+      "sourceUrls": [
+        "https://higedan.com/news/3/?page=60",
+        "https://x.com/beiketa/status/889018396141993985",
+        "https://ja.wikipedia.org/wiki/Official%E9%AB%AD%E7%94%B7dism#インストアイベント"
+      ],
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "type": "interlude",
+          "note": "リハ：日曜日のラブレター"
+        },
+        {
+          "order": 2,
+          "encore": false,
+          "songId": "itan-na-star"
+        },
+        {
+          "order": 3,
+          "encore": false,
+          "songId": "ai-nandaga"
+        },
+        {
+          "order": 4,
+          "encore": false,
+          "songId": "yugure-zoi"
+        },
+        {
+          "order": 5,
+          "encore": false,
+          "songId": "coffee-to-syrup"
+        }
+      ],
+      "startsAt": "15:00"
     },
     {
       "id": "report-acoustic-2017-0820",
@@ -30,13 +108,159 @@
       "prefecture": "愛知縣",
       "title": "インストア アコースティックミニライブ&サイン会",
       "sourceUrls": [
+        "https://x.com/beiketa/status/899170645874843648",
         "https://ameblo.jp/tenyo-ru/entry-12305690727.html"
       ],
       "setlist": [
         {
           "order": 1,
           "encore": false,
+          "type": "interlude",
+          "note": "リハ：愛なんだが"
+        },
+        {
+          "order": 2,
+          "encore": false,
           "songId": "nichiyoubi-no-love-letter"
+        },
+        {
+          "order": 3,
+          "encore": false,
+          "songId": "itan-na-star"
+        },
+        {
+          "order": 4,
+          "encore": false,
+          "songId": "yugure-zoi"
+        },
+        {
+          "order": 5,
+          "encore": false,
+          "songId": "coffee-to-syrup"
+        },
+        {
+          "order": 6,
+          "encore": false,
+          "songId": "inu-ka-cat-ka-de-shinumade-kenka-shiyou"
+        }
+      ],
+      "startsAt": "15:00"
+    },
+    {
+      "id": "report-acoustic-2017-1014",
+      "date": "2017-10-14",
+      "weekday": "土",
+      "city": "橫濱",
+      "venue": "TOWER RECORDS 橫濱VIVRE店 店內活動空間",
+      "region": "關東",
+      "prefecture": "神奈川縣",
+      "title": "インストア アコースティックミニライブ&サイン会",
+      "sourceUrls": [
+        "https://higedan.com/news/3/?page=58",
+        "https://higedan.com/news/3/?page=60",
+        "https://x.com/beiketa/status/919059159298949120",
+        "https://ja.wikipedia.org/wiki/Official%E9%AB%AD%E7%94%B7dism#インストアイベント"
+      ],
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "type": "interlude",
+          "note": "リハ：日曜日のラブレター"
+        },
+        {
+          "order": 2,
+          "encore": false,
+          "type": "interlude",
+          "note": "リハ：異端なスター"
+        },
+        {
+          "order": 3,
+          "encore": false,
+          "songId": "coffee-to-syrup"
+        },
+        {
+          "order": 4,
+          "encore": false,
+          "songId": "yugure-zoi"
+        },
+        {
+          "order": 5,
+          "encore": false,
+          "songId": "lady"
+        },
+        {
+          "order": 6,
+          "encore": false,
+          "songId": "inu-ka-cat-ka-de-shinumade-kenka-shiyou"
+        }
+      ],
+      "startsAt": "12:00"
+    },
+    {
+      "id": "report-acoustic-2017-1022-1",
+      "date": "2017-10-22",
+      "weekday": "日",
+      "city": "北廣島",
+      "venue": "三井OUTLET PARK 札幌北廣島",
+      "region": "北海道",
+      "prefecture": "北海道",
+      "title": "インストア アコースティックミニライブ&サイン会 第1部",
+      "sourceUrls": [
+        "https://higedan.com/news/3/?page=60",
+        "https://x.com/beiketa/status/921956179894349825",
+        "https://ja.wikipedia.org/wiki/Official%E9%AB%AD%E7%94%B7dism#インストアイベント"
+      ],
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "type": "interlude",
+          "note": "リハ：日曜日のラブレター"
+        },
+        {
+          "order": 2,
+          "encore": false,
+          "songId": "coffee-to-syrup"
+        },
+        {
+          "order": 3,
+          "encore": false,
+          "songId": "yugure-zoi"
+        },
+        {
+          "order": 4,
+          "encore": false,
+          "songId": "lady"
+        },
+        {
+          "order": 5,
+          "encore": false,
+          "songId": "inu-ka-cat-ka-de-shinumade-kenka-shiyou"
+        }
+      ],
+      "startsAt": "13:00"
+    },
+    {
+      "id": "report-acoustic-2017-1022-2",
+      "date": "2017-10-22",
+      "weekday": "日",
+      "city": "北廣島",
+      "venue": "三井OUTLET PARK 札幌北廣島",
+      "region": "北海道",
+      "prefecture": "北海道",
+      "title": "インストア アコースティックミニライブ&サイン会 第2部",
+      "sourceUrls": [
+        "https://higedan.com/news/3/?page=60",
+        "https://x.com/beiketa/status/921985973411385347",
+        "https://ja.wikipedia.org/wiki/Official%E9%AB%AD%E7%94%B7dism#インストアイベント"
+      ],
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "type": "interlude",
+          "note": "リハ：愛なんだが"
         },
         {
           "order": 2,
@@ -51,47 +275,15 @@
         {
           "order": 4,
           "encore": false,
-          "songId": "coffee-to-syrup"
+          "songId": "lady"
         },
         {
           "order": 5,
           "encore": false,
           "songId": "inu-ka-cat-ka-de-shinumade-kenka-shiyou"
         }
-      ]
-    },
-    {
-      "id": "report-acoustic-2017-1014",
-      "date": "2017-10-14",
-      "weekday": "土",
-      "city": "橫濱",
-      "venue": "TOWER RECORDS 橫濱VIVRE店 店內活動空間",
-      "region": "關東",
-      "prefecture": "神奈川縣",
-      "title": "インストア アコースティックミニライブ&サイン会",
-      "sourceUrls": [
-        "https://higedan.com/news/3/?page=58",
-        "https://higedan.com/news/3/?page=60",
-        "https://ja.wikipedia.org/wiki/Official%E9%AB%AD%E7%94%B7dism#インストアイベント"
       ],
-      "setlist": [],
-      "startsAt": "12:00"
-    },
-    {
-      "id": "report-acoustic-2017-1022",
-      "date": "2017-10-22",
-      "weekday": "日",
-      "city": "北廣島",
-      "venue": "三井OUTLET PARK 札幌北廣島",
-      "region": "北海道",
-      "prefecture": "北海道",
-      "title": "インストア アコースティックミニライブ&サイン会",
-      "sourceUrls": [
-        "https://higedan.com/news/3/?page=60",
-        "https://ja.wikipedia.org/wiki/Official%E9%AB%AD%E7%94%B7dism#インストアイベント"
-      ],
-      "setlist": [],
-      "startsAt": "13:00"
+      "startsAt": "15:00"
     },
     {
       "id": "report-acoustic-2017-1118",
@@ -105,9 +297,37 @@
       "sourceUrls": [
         "https://higedan.com/news/3/?page=57",
         "https://higedan.com/news/3/?page=60",
+        "https://x.com/beiketa/status/931729786132557824",
         "https://ja.wikipedia.org/wiki/Official%E9%AB%AD%E7%94%B7dism#インストアイベント"
       ],
-      "setlist": [],
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "type": "interlude",
+          "note": "リハ：日曜日のラブレター"
+        },
+        {
+          "order": 2,
+          "encore": false,
+          "songId": "coffee-to-syrup"
+        },
+        {
+          "order": 3,
+          "encore": false,
+          "songId": "itan-na-star"
+        },
+        {
+          "order": 4,
+          "encore": false,
+          "songId": "yugure-zoi"
+        },
+        {
+          "order": 5,
+          "encore": false,
+          "songId": "inu-ka-cat-ka-de-shinumade-kenka-shiyou"
+        }
+      ],
       "startsAt": "12:00"
     }
   ]

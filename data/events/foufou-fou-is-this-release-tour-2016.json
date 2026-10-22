@@ -16,9 +16,36 @@
       "startsAt": "18:30",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=65",
+        "https://x.com/beiketa/status/786521153795858433",
         "https://ja.wikipedia.org/wiki/Official%E9%AB%AD%E7%94%B7dism"
       ],
-      "setlist": []
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "songId": "parade"
+        },
+        {
+          "order": 2,
+          "encore": false,
+          "songId": "itan-na-star"
+        },
+        {
+          "order": 3,
+          "encore": false,
+          "songId": "whats-going-on"
+        },
+        {
+          "order": 4,
+          "encore": false,
+          "songId": "sweet-tweet"
+        },
+        {
+          "order": 5,
+          "encore": false,
+          "songId": "clap-clap"
+        }
+      ]
     }
   ]
 }

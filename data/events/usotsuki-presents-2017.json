@@ -14,9 +14,46 @@
       "title": "ウソツキpresents ウソツカナイミュージックツアー2017",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=58",
-        "https://www.livefans.jp/events/856642"
+        "https://www.livefans.jp/events/856642",
+        "https://x.com/beiketa/status/934374733465784321"
       ],
-      "setlist": [],
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "songId": "inu-ka-cat-ka-de-shinumade-kenka-shiyou"
+        },
+        {
+          "order": 2,
+          "encore": false,
+          "songId": "itan-na-star"
+        },
+        {
+          "order": 3,
+          "encore": false,
+          "songId": "brothers"
+        },
+        {
+          "order": 4,
+          "encore": false,
+          "songId": "tell-me-baby"
+        },
+        {
+          "order": 5,
+          "encore": false,
+          "songId": "lady"
+        },
+        {
+          "order": 6,
+          "encore": false,
+          "songId": "coffee-to-syrup"
+        },
+        {
+          "order": 7,
+          "encore": false,
+          "songId": "sweet-tweet"
+        }
+      ],
       "weekday": "土",
       "opensAt": "17:30",
       "startsAt": "18:00"

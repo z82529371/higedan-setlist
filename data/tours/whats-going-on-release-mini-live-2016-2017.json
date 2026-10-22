@@ -53,6 +53,7 @@
       "title": "ミニライブ&特典会 in アリオ鳳 第1部",
       "sourceUrls": [
         "https://x.com/officialhige/status/807133834277851136",
+        "https://x.com/beiketa/status/817636751929806848",
         "https://higedan.com/news/3/?page=63",
         "https://ja.wikipedia.org/wiki/Official%E9%AB%AD%E7%94%B7dism#インストアイベント",
         "http://payforward0227.blog.fc2.com/blog-entry-72.html"
@@ -61,25 +62,37 @@
         {
           "order": 1,
           "encore": false,
-          "songId": "koi-no-maenarae"
+          "type": "interlude",
+          "note": "リハ：愛なんだが"
         },
         {
           "order": 2,
           "encore": false,
-          "songId": "itan-na-star"
+          "type": "interlude",
+          "note": "リハ：Happy Birthday To You"
         },
         {
           "order": 3,
           "encore": false,
-          "songId": "yugure-zoi"
+          "songId": "koi-no-maenarae"
         },
         {
           "order": 4,
           "encore": false,
+          "songId": "itan-na-star"
+        },
+        {
+          "order": 5,
+          "encore": false,
+          "songId": "yugure-zoi"
+        },
+        {
+          "order": 6,
+          "encore": false,
           "songId": "whats-going-on"
         }
       ],
-      "opensAt": "12:30"
+      "startsAt": "12:30"
     },
     {
       "id": "whats-going-on-2017-0107-2",
@@ -92,6 +105,7 @@
       "title": "ミニライブ&特典会 in アリオ鳳 第2部",
       "sourceUrls": [
         "https://x.com/officialhige/status/807133834277851136",
+        "https://x.com/beiketa/status/817637145447780352",
         "https://higedan.com/news/3/?page=63",
         "https://ja.wikipedia.org/wiki/Official%E9%AB%AD%E7%94%B7dism#インストアイベント",
         "http://payforward0227.blog.fc2.com/blog-entry-72.html"
@@ -100,25 +114,31 @@
         {
           "order": 1,
           "encore": false,
-          "songId": "nichiyoubi-no-love-letter"
+          "type": "interlude",
+          "note": "リハ：コーヒーとシロップ"
         },
         {
           "order": 2,
           "encore": false,
-          "songId": "itan-na-star"
+          "songId": "nichiyoubi-no-love-letter"
         },
         {
           "order": 3,
           "encore": false,
-          "songId": "yugure-zoi"
+          "songId": "itan-na-star"
         },
         {
           "order": 4,
           "encore": false,
+          "songId": "yugure-zoi"
+        },
+        {
+          "order": 5,
+          "encore": false,
           "songId": "kiiroi-kuruma"
         }
       ],
-      "opensAt": "15:30"
+      "startsAt": "15:30"
     },
     {
       "id": "whats-going-on-2017-0129",
@@ -131,9 +151,49 @@
       "title": "インストア ミニライブ&サイン会",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=63",
+        "https://x.com/beiketa/status/825580420683042817",
         "https://ja.wikipedia.org/wiki/Official%E9%AB%AD%E7%94%B7dism#インストアイベント"
       ],
-      "setlist": [],
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "type": "interlude",
+          "note": "リハ：恋の去り際"
+        },
+        {
+          "order": 2,
+          "encore": false,
+          "type": "interlude",
+          "note": "リハ：恋の前ならえ"
+        },
+        {
+          "order": 3,
+          "encore": false,
+          "type": "interlude",
+          "note": "リハ：異端なスター"
+        },
+        {
+          "order": 4,
+          "encore": false,
+          "songId": "coffee-to-syrup"
+        },
+        {
+          "order": 5,
+          "encore": false,
+          "songId": "itan-na-star"
+        },
+        {
+          "order": 6,
+          "encore": false,
+          "songId": "yugure-zoi"
+        },
+        {
+          "order": 7,
+          "encore": false,
+          "songId": "whats-going-on"
+        }
+      ],
       "startsAt": "13:00"
     }
   ]

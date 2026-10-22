@@ -13,29 +13,34 @@
       "title": "Official髭男dism one-man tour 2016",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=64",
-        "https://www.livefans.jp/events/711143"
+        "https://www.livefans.jp/events/711143",
+        "https://x.com/beiketa/status/802512603889008640"
       ],
       "opensAt": "18:00",
       "diff": {
         "skip": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
           8,
-          9,
           10,
           11,
-          12,
-          13,
-          14,
-          15,
-          16,
-          17,
-          18
+          14
+        ],
+        "insert": [
+          {
+            "after": 12,
+            "item": {
+              "order": 10,
+              "encore": false,
+              "songId": "nichiyoubi-no-love-letter"
+            }
+          },
+          {
+            "after": 17,
+            "item": {
+              "order": 18,
+              "encore": true,
+              "songId": "darin"
+            }
+          }
         ]
       },
       "locked": true
@@ -50,29 +55,40 @@
       "title": "Official髭男dism one-man tour 2016",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=64",
-        "https://www.livefans.jp/events/706768"
+        "https://www.livefans.jp/events/706768",
+        "https://x.com/beiketa/status/802512603889008640"
       ],
       "opensAt": "18:00",
       "diff": {
         "skip": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
           10,
-          11,
-          12,
-          13,
-          14,
-          15,
-          16,
-          17,
-          18
+          11
+        ],
+        "insert": [
+          {
+            "after": 9,
+            "item": {
+              "order": 10,
+              "encore": false,
+              "songId": "gomibako-kanojo",
+              "note": "リクエスト",
+              "kind": [
+                "request"
+              ]
+            }
+          },
+          {
+            "after": 9,
+            "item": {
+              "order": 11,
+              "encore": false,
+              "songId": "bukiyou-na-futari-de",
+              "note": "リクエスト（途中から替え歌）",
+              "kind": [
+                "request"
+              ]
+            }
+          }
         ]
       },
       "locked": true
@@ -89,7 +105,8 @@
         "https://higedan.com/news/3/?page=64",
         "https://www.livefans.jp/events/703936",
         "https://diskgarage.com/digaonline/liverepo/20655",
-        "https://higedan-setlist.net/live/2016-11-26/"
+        "https://higedan-setlist.net/live/2016-11-26/",
+        "https://x.com/beiketa/status/802512603889008640"
       ],
       "opensAt": "18:00",
       "diff": {},
@@ -199,5 +216,5 @@
       "songId": "kiiroi-kuruma"
     }
   ],
-  "templateBasis": "以東京代官山LOOP場（全巡演唯一完整記錄場次，來源：DI:GA ONLINE 現場報導與 higedan-setlist.net）為基準模板；名古屋與大阪無公開曲目紀錄保持無歌單存根"
+  "templateBasis": "以東京代官山LOOP場（來源：DI:GA ONLINE 現場報導、higedan-setlist.net、@beiketa 現場記錄）為基準模板；名古屋 ell. SIZE 與大阪阿倍野ROCKTOWN 場次依 @beiketa 現場手記記錄配置 diff 差異。"
 }

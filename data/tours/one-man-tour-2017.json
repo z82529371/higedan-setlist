@@ -16,9 +16,25 @@
       "sourceUrls": [
         "https://higedan.com/news/3/?page=62",
         "https://higedan.com/news/3/?page=61",
-        "https://www.livefans.jp/events/778081"
+        "https://www.livefans.jp/events/778081",
+        "https://x.com/beiketa/status/885843712034488320",
+        "https://x.com/beiketa/status/885843216859148288"
       ],
-      "diff": {},
+      "diff": {
+        "skip": [
+          11
+        ],
+        "insert": [
+          {
+            "after": 14,
+            "item": {
+              "order": 14,
+              "encore": false,
+              "songId": "ai-nandaga"
+            }
+          }
+        ]
+      },
       "locked": true
     },
     {
@@ -35,7 +51,8 @@
         "https://higedan.com/news/3/?page=62",
         "https://higedan.com/news/3/?page=61",
         "https://www.livefans.jp/events/778082",
-        "https://higedan-setlist.net/live/2017-06-16/"
+        "https://higedan-setlist.net/live/2017-06-16/",
+        "https://x.com/beiketa/status/885843216859148288"
       ],
       "diff": {},
       "locked": true
@@ -55,7 +72,8 @@
         "https://higedan.com/news/3/?page=61",
         "https://www.livefans.jp/events/778083",
         "https://ameblo.jp/tenyo-ru/entry-12288977861.html",
-        "https://higedan-setlist.net/live/2017-06-24/"
+        "https://higedan-setlist.net/live/2017-06-24/",
+        "https://x.com/beiketa/status/885843216859148288"
       ],
       "diff": {},
       "locked": true
@@ -73,7 +91,8 @@
       "sourceUrls": [
         "https://higedan.com/news/3/?page=62",
         "https://higedan.com/news/3/?page=61",
-        "https://www.livefans.jp/events/778084"
+        "https://www.livefans.jp/events/778084",
+        "https://x.com/beiketa/status/885843216859148288"
       ],
       "diff": {},
       "locked": true
@@ -91,7 +110,8 @@
       "sourceUrls": [
         "https://higedan.com/news/3/?page=62",
         "https://higedan.com/news/3/?page=61",
-        "https://www.livefans.jp/events/778085"
+        "https://www.livefans.jp/events/778085",
+        "https://x.com/beiketa/status/885843216859148288"
       ],
       "diff": {},
       "locked": true
@@ -126,13 +146,14 @@
     {
       "order": 6,
       "encore": false,
-      "songId": "kiiroi-kuruma"
+      "songId": "kiiroi-kuruma",
+      "note": "アコースティック"
     },
     {
       "order": 7,
       "encore": false,
       "songId": "natsu-moyou-no-neko",
-      "note": "当時未発売の新曲（2020年の『HELLO EP』に収録）"
+      "note": "アコースティック（当時未音源化）"
     },
     {
       "order": 8,
@@ -142,7 +163,8 @@
     {
       "order": 9,
       "encore": false,
-      "songId": "equal"
+      "songId": "equal",
+      "note": "1番は弾き語り"
     },
     {
       "order": 10,
@@ -185,5 +207,5 @@
       "songId": "rolling"
     }
   ],
-  "templateBasis": "全體共識：整輪巡演固定演出 17 曲，東京與愛知場曲目完全一致（含當時未發行曲《夏模様の猫》於 M7），橫濱、廣島、大阪曲目亦與模板一致"
+  "templateBasis": "全體共識：整輪巡演固定演出 17 曲。以澀谷、名古屋、廣島、大阪場次曲目為基準模板（含當時未發行曲《夏模様の猫》於 M7）；初日橫濱場依 @beiketa 現場記錄配置《愛なんだが…》調序至 M14 之 diff 差異。"
 }
