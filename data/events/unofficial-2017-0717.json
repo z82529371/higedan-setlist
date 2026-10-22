@@ -23,25 +23,31 @@
         {
           "order": 1,
           "encore": false,
-          "songId": "inu-ka-cat-ka-de-shinumade-kenka-shiyou"
+          "type": "interlude",
+          "note": "SE: What's Going On?"
         },
         {
           "order": 2,
           "encore": false,
-          "songId": "itan-na-star"
+          "songId": "inu-ka-cat-ka-de-shinumade-kenka-shiyou"
         },
         {
           "order": 3,
           "encore": false,
-          "songId": "hajimari-no-asa"
+          "songId": "itan-na-star"
         },
         {
           "order": 4,
           "encore": false,
-          "songId": "coffee-to-syrup"
+          "songId": "hajimari-no-asa"
         },
         {
           "order": 5,
+          "encore": false,
+          "songId": "coffee-to-syrup"
+        },
+        {
+          "order": 6,
           "encore": false,
           "songId": "sweet-tweet"
         }
