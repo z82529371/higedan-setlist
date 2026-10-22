@@ -7,6 +7,9 @@
     {
       "id": "1084697",
       "date": "2019-03-02",
+      "weekday": "土",
+      "opensAt": "16:30",
+      "startsAt": "17:30",
       "city": "東京",
       "venue": "新木場STUDIO COAST",
       "region": "關東",
@@ -93,6 +96,9 @@
     {
       "id": "1084703",
       "date": "2019-03-17",
+      "weekday": "日",
+      "opensAt": "16:30",
+      "startsAt": "17:30",
       "city": "大阪",
       "venue": "難波Hatch",
       "region": "關西",
@@ -100,7 +106,8 @@
       "title": "Official髭男dism two-man live 2019",
       "locked": true,
       "sourceUrls": [
-        "https://www.livefans.jp/events/1084703"
+        "https://www.livefans.jp/events/1084703",
+        "https://x.com/beiketa/status/1107242601780899840"
       ],
       "setlist": [
         {

@@ -124,14 +124,15 @@
       "sourceUrls": [
         "https://higedan.com/news/3/?page=49",
         "https://www.livefans.jp/events/949977",
-        "https://higedan-setlist.net/live/2018-11-07/"
+        "https://higedan-setlist.net/live/2018-11-07/",
+        "https://fusetter.com/tw/OSJK1#all"
       ],
       "date": "2018-11-07",
       "venue": "橫濱灣會館",
       "city": "橫濱",
       "region": "關東",
       "prefecture": "神奈川縣",
-      "opensAt": "19:00",
+      "opensAt": "18:00",
       "diff": {
         "skip": [
           16,
@@ -151,7 +152,15 @@
             }
           },
           {
-            "after": 16,
+            "after": 15,
+            "item": {
+              "encore": true,
+              "type": "interlude",
+              "note": "リクエスト：SWEET TWEET（のちにアンコール本編ラストで演奏）"
+            }
+          },
+          {
+            "after": 15,
             "item": {
               "encore": true,
               "songId": "trailer",
@@ -162,7 +171,7 @@
             }
           },
           {
-            "after": 17,
+            "after": 15,
             "item": {
               "encore": true,
               "songId": "clap-clap",
@@ -173,14 +182,18 @@
             }
           }
         ]
-      }
+      },
+      "weekday": "水",
+      "startsAt": "19:00",
+      "locked": true
     },
     {
       "id": "1001813",
       "title": "Official髭男dism one-man tour 18/19",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=49",
-        "https://www.livefans.jp/events/1001813"
+        "https://www.livefans.jp/events/1001813",
+        "https://fusetter.com/tw/0i98u#all"
       ],
       "date": "2018-11-09",
       "venue": "札幌cube garden",
@@ -199,7 +212,7 @@
             "after": 15,
             "item": {
               "encore": true,
-              "songId": "koi-no-maenarae",
+              "songId": "55",
               "note": "リクエストコーナー",
               "kind": [
                 "request"
@@ -207,21 +220,10 @@
             }
           },
           {
-            "after": 16,
+            "after": 15,
             "item": {
               "encore": true,
-              "songId": "trailer",
-              "note": "リクエストコーナー",
-              "kind": [
-                "request"
-              ]
-            }
-          },
-          {
-            "after": 17,
-            "item": {
-              "encore": true,
-              "songId": "clap-clap",
+              "songId": "coffee-to-syrup",
               "note": "リクエストコーナー",
               "kind": [
                 "request"
@@ -229,14 +231,16 @@
             }
           }
         ]
-      }
+      },
+      "locked": true
     },
     {
       "id": "949979",
       "title": "Official髭男dism one-man tour 18/19",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=49",
-        "https://www.livefans.jp/events/949979"
+        "https://www.livefans.jp/events/949979",
+        "https://fusetter.com/tw/wDHxF#all"
       ],
       "date": "2018-11-10",
       "venue": "札幌cube garden",
@@ -246,341 +250,9 @@
       "opensAt": "18:00",
       "diff": {
         "skip": [
-          16,
-          17,
-          18
-        ],
-        "insert": [
-          {
-            "after": 15,
-            "item": {
-              "encore": true,
-              "songId": "koi-no-maenarae",
-              "note": "リクエストコーナー",
-              "kind": [
-                "request"
-              ]
-            }
-          },
-          {
-            "after": 16,
-            "item": {
-              "encore": true,
-              "songId": "trailer",
-              "note": "リクエストコーナー",
-              "kind": [
-                "request"
-              ]
-            }
-          },
-          {
-            "after": 17,
-            "item": {
-              "encore": true,
-              "songId": "clap-clap",
-              "note": "リクエストコーナー",
-              "kind": [
-                "request"
-              ]
-            }
-          }
-        ]
-      }
-    },
-    {
-      "id": "949980",
-      "title": "Official髭男dism one-man tour 18/19",
-      "sourceUrls": [
-        "https://higedan.com/news/3/?page=49",
-        "https://www.livefans.jp/events/949980"
-      ],
-      "date": "2018-11-17",
-      "venue": "高松DIME",
-      "city": "高松",
-      "region": "四國",
-      "prefecture": "香川縣",
-      "opensAt": "18:00",
-      "diff": {
-        "skip": [
-          6,
-          7,
-          8,
-          10,
-          11,
-          14,
-          16,
-          17,
-          18
-        ],
-        "insert": [
-          {
-            "after": 5,
-            "item": {
-              "encore": false,
-              "songId": "115man-kiro-no-film"
-            }
-          },
-          {
-            "after": 5,
-            "item": {
-              "encore": false,
-              "songId": "bad-for-me"
-            }
-          },
-          {
-            "after": 5,
-            "item": {
-              "encore": false,
-              "songId": "no-doubt"
-            }
-          },
-          {
-            "after": 5,
-            "item": {
-              "encore": false,
-              "songId": "whats-going-on",
-              "note": "ロックver"
-            }
-          },
-          {
-            "after": 6,
-            "item": {
-              "encore": false,
-              "songId": "rolling"
-            }
-          },
-          {
-            "after": 12,
-            "item": {
-              "encore": false,
-              "songId": "inu-ka-cat-ka-de-shinumade-kenka-shiyou"
-            }
-          },
-          {
-            "after": 15,
-            "item": {
-              "encore": true,
-              "songId": "coffee-to-syrup",
-              "note": "リクエスト、サビのみ、キーボード弾き語り",
-              "kind": [
-                "satoshi-solo",
-                "request"
-              ]
-            }
-          },
-          {
-            "after": 15,
-            "item": {
-              "encore": true,
-              "songId": "koi-no-maenarae",
-              "note": "リクエスト、サビのみ、キーボード弾き語り",
-              "kind": [
-                "satoshi-solo",
-                "request"
-              ]
-            }
-          },
-          {
-            "after": 16,
-            "item": {
-              "encore": true,
-              "songId": "nichiyoubi-no-love-letter",
-              "note": "リクエスト、サビのみ、キーボード弾き語り",
-              "kind": [
-                "satoshi-solo",
-                "request"
-              ]
-            }
-          }
-        ]
-      }
-    },
-    {
-      "id": "949981",
-      "title": "Official髭男dism one-man tour 18/19",
-      "sourceUrls": [
-        "https://higedan.com/news/3/?page=49",
-        "https://www.livefans.jp/events/949981"
-      ],
-      "date": "2018-11-18",
-      "venue": "松山SALONKITTY",
-      "city": "松山",
-      "region": "四國",
-      "prefecture": "愛媛縣",
-      "opensAt": "17:30",
-      "diff": {
-        "skip": [
-          16,
-          17,
-          18
-        ],
-        "insert": [
-          {
-            "after": 15,
-            "item": {
-              "encore": true,
-              "songId": "koi-no-maenarae",
-              "note": "リクエストコーナー",
-              "kind": [
-                "request"
-              ]
-            }
-          },
-          {
-            "after": 16,
-            "item": {
-              "encore": true,
-              "songId": "trailer",
-              "note": "リクエストコーナー",
-              "kind": [
-                "request"
-              ]
-            }
-          },
-          {
-            "after": 17,
-            "item": {
-              "encore": true,
-              "songId": "clap-clap",
-              "note": "リクエストコーナー",
-              "kind": [
-                "request"
-              ]
-            }
-          }
-        ]
-      }
-    },
-    {
-      "id": "949982",
-      "title": "Official髭男dism one-man tour 18/19",
-      "sourceUrls": [
-        "https://higedan.com/news/3/?page=49",
-        "https://www.livefans.jp/events/949982"
-      ],
-      "date": "2018-11-22",
-      "venue": "松江AZTiC canova",
-      "city": "松江",
-      "region": "中國",
-      "prefecture": "島根縣",
-      "opensAt": "19:00",
-      "diff": {
-        "skip": [
-          16,
-          17,
-          18
-        ],
-        "insert": [
-          {
-            "after": 15,
-            "item": {
-              "encore": true,
-              "songId": "koi-no-maenarae",
-              "note": "リクエストコーナー",
-              "kind": [
-                "request"
-              ]
-            }
-          },
-          {
-            "after": 16,
-            "item": {
-              "encore": true,
-              "songId": "trailer",
-              "note": "リクエストコーナー",
-              "kind": [
-                "request"
-              ]
-            }
-          },
-          {
-            "after": 17,
-            "item": {
-              "encore": true,
-              "songId": "clap-clap",
-              "note": "リクエストコーナー",
-              "kind": [
-                "request"
-              ]
-            }
-          }
-        ]
-      }
-    },
-    {
-      "id": "949983",
-      "title": "Official髭男dism one-man tour 18/19",
-      "sourceUrls": [
-        "https://higedan.com/news/3/?page=49",
-        "https://www.livefans.jp/events/949983"
-      ],
-      "date": "2018-11-24",
-      "venue": "米子AZTiC laughs",
-      "city": "米子",
-      "region": "中國",
-      "prefecture": "鳥取縣",
-      "opensAt": "18:00",
-      "diff": {
-        "skip": [
-          16,
-          17,
-          18
-        ],
-        "insert": [
-          {
-            "after": 15,
-            "item": {
-              "encore": true,
-              "songId": "koi-no-maenarae",
-              "note": "リクエストコーナー",
-              "kind": [
-                "request"
-              ]
-            }
-          },
-          {
-            "after": 16,
-            "item": {
-              "encore": true,
-              "songId": "trailer",
-              "note": "リクエストコーナー",
-              "kind": [
-                "request"
-              ]
-            }
-          },
-          {
-            "after": 17,
-            "item": {
-              "encore": true,
-              "songId": "clap-clap",
-              "note": "リクエストコーナー",
-              "kind": [
-                "request"
-              ]
-            }
-          }
-        ]
-      }
-    },
-    {
-      "id": "949984",
-      "title": "Official髭男dism one-man tour 18/19",
-      "sourceUrls": [
-        "https://higedan.com/news/3/?page=49",
-        "https://www.livefans.jp/events/949984",
-        "https://higedan-setlist.net/live/2018-11-25/"
-      ],
-      "date": "2018-11-25",
-      "venue": "廣島CLUB QUATTRO",
-      "city": "廣島",
-      "region": "中國",
-      "prefecture": "廣島縣",
-      "opensAt": "17:30",
-      "diff": {
-        "skip": [
           4,
           5,
+          16,
           17,
           18
         ],
@@ -600,21 +272,26 @@
             }
           },
           {
-            "after": 16,
+            "after": 3,
             "item": {
-              "encore": true,
-              "songId": "furidasu-ame-gokigen-na-kimi",
-              "note": "リクエストコーナー（ツアー唯一）",
-              "kind": [
-                "request"
-              ]
+              "encore": false,
+              "type": "interlude",
+              "note": "LADY"
             }
           },
           {
-            "after": 16,
+            "after": 15,
             "item": {
               "encore": true,
-              "songId": "yugure-zoi",
+              "type": "interlude",
+              "note": "リクエスト：異端なスター（のちにアンコール本編で演奏）"
+            }
+          },
+          {
+            "after": 15,
+            "item": {
+              "encore": true,
+              "songId": "nichiyoubi-no-love-letter",
               "note": "リクエストコーナー",
               "kind": [
                 "request"
@@ -622,10 +299,21 @@
             }
           },
           {
-            "after": 16,
+            "after": 15,
             "item": {
               "encore": true,
-              "songId": "kiiroi-kuruma",
+              "songId": "shihatsu-ga-michibiku-kouhukuron",
+              "note": "リクエストコーナー",
+              "kind": [
+                "request"
+              ]
+            }
+          },
+          {
+            "after": 15,
+            "item": {
+              "encore": true,
+              "songId": "zero-no-mama-de-iraterara",
               "note": "リクエストコーナー",
               "kind": [
                 "request"
@@ -633,21 +321,23 @@
             }
           }
         ]
-      }
+      },
+      "locked": true
     },
     {
-      "id": "949985",
+      "id": "949980",
       "title": "Official髭男dism one-man tour 18/19",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=49",
-        "https://www.livefans.jp/events/949985"
+        "https://www.livefans.jp/events/949980",
+        "https://fusetter.com/tw/8pypd#all"
       ],
-      "date": "2018-11-28",
-      "venue": "HEAVEN'S ROCK 埼玉新都心 VJ-3",
-      "city": "埼玉",
-      "region": "關東",
-      "prefecture": "埼玉縣",
-      "opensAt": "19:00",
+      "date": "2018-11-17",
+      "venue": "高松DIME",
+      "city": "高松",
+      "region": "四國",
+      "prefecture": "香川縣",
+      "opensAt": "18:00",
       "diff": {
         "skip": [
           16,
@@ -655,6 +345,28 @@
           18
         ],
         "insert": [
+          {
+            "after": 15,
+            "item": {
+              "encore": true,
+              "songId": "coffee-to-syrup",
+              "note": "リクエストコーナー",
+              "kind": [
+                "request"
+              ]
+            }
+          },
+          {
+            "after": 15,
+            "item": {
+              "encore": true,
+              "songId": "ai-nandaga",
+              "note": "リクエストコーナー",
+              "kind": [
+                "request"
+              ]
+            }
+          },
           {
             "after": 15,
             "item": {
@@ -667,10 +379,62 @@
             }
           },
           {
-            "after": 16,
+            "after": 15,
             "item": {
               "encore": true,
-              "songId": "trailer",
+              "songId": "nichiyoubi-no-love-letter",
+              "note": "リクエストコーナー（何度でも何度でもver.）",
+              "kind": [
+                "request"
+              ]
+            }
+          }
+        ]
+      },
+      "locked": true
+    },
+    {
+      "id": "949981",
+      "title": "Official髭男dism one-man tour 18/19",
+      "sourceUrls": [
+        "https://higedan.com/news/3/?page=49",
+        "https://www.livefans.jp/events/949981",
+        "https://fusetter.com/tw/MTwD0#all"
+      ],
+      "date": "2018-11-18",
+      "venue": "松山SALONKITTY",
+      "city": "松山",
+      "region": "四國",
+      "prefecture": "愛媛縣",
+      "opensAt": "17:30",
+      "diff": {
+        "skip": [
+          4,
+          5,
+          16,
+          17,
+          18
+        ],
+        "insert": [
+          {
+            "after": 3,
+            "item": {
+              "encore": false,
+              "songId": "ai-nandaga"
+            }
+          },
+          {
+            "after": 3,
+            "item": {
+              "encore": false,
+              "songId": "coffee-to-syrup"
+            }
+          },
+          {
+            "after": 15,
+            "item": {
+              "encore": true,
+              "songId": "lady",
               "note": "リクエストコーナー",
               "kind": [
                 "request"
@@ -678,7 +442,29 @@
             }
           },
           {
-            "after": 17,
+            "after": 15,
+            "item": {
+              "encore": true,
+              "songId": "takaga-i-love-you",
+              "note": "リクエストコーナー",
+              "kind": [
+                "request"
+              ]
+            }
+          },
+          {
+            "after": 15,
+            "item": {
+              "encore": true,
+              "songId": "hajimari-no-asa",
+              "note": "リクエストコーナー",
+              "kind": [
+                "request"
+              ]
+            }
+          },
+          {
+            "after": 15,
             "item": {
               "encore": true,
               "songId": "clap-clap",
@@ -689,7 +475,385 @@
             }
           }
         ]
-      }
+      },
+      "locked": true
+    },
+    {
+      "id": "949982",
+      "title": "Official髭男dism one-man tour 18/19",
+      "sourceUrls": [
+        "https://higedan.com/news/3/?page=49",
+        "https://www.livefans.jp/events/949982",
+        "https://fusetter.com/tw/o2E5V#all"
+      ],
+      "date": "2018-11-22",
+      "venue": "松江AZTiC canova",
+      "city": "松江",
+      "region": "中國",
+      "prefecture": "島根縣",
+      "opensAt": "19:00",
+      "diff": {
+        "skip": [
+          4,
+          5,
+          16,
+          17,
+          18
+        ],
+        "insert": [
+          {
+            "after": 3,
+            "item": {
+              "encore": false,
+              "songId": "ai-nandaga"
+            }
+          },
+          {
+            "after": 3,
+            "item": {
+              "encore": false,
+              "songId": "coffee-to-syrup"
+            }
+          },
+          {
+            "after": 15,
+            "item": {
+              "encore": true,
+              "songId": "koi-no-maenarae",
+              "note": "リクエスト、サビのみ、キーボード弾き語り",
+              "kind": [
+                "satoshi-solo",
+                "request"
+              ]
+            }
+          },
+          {
+            "after": 15,
+            "item": {
+              "encore": true,
+              "type": "interlude",
+              "note": "リクエスト：SWEET TWEET（のちにアンコール本編ラストで演奏）"
+            }
+          },
+          {
+            "after": 15,
+            "item": {
+              "encore": true,
+              "songId": "darin",
+              "note": "リクエスト、サビのみ、キーボード弾き語り",
+              "kind": [
+                "satoshi-solo",
+                "request"
+              ]
+            }
+          },
+          {
+            "after": 15,
+            "item": {
+              "encore": true,
+              "songId": "nichiyoubi-no-love-letter",
+              "note": "リクエスト、サビのみ、キーボード弾き語り",
+              "kind": [
+                "satoshi-solo",
+                "request"
+              ]
+            }
+          },
+          {
+            "after": 15,
+            "item": {
+              "encore": true,
+              "songId": "yugure-zoi",
+              "note": "リクエスト、サビのみ、キーボード弾き語り (サックス準備のため後回し)",
+              "kind": [
+                "satoshi-solo",
+                "request"
+              ]
+            }
+          }
+        ]
+      },
+      "locked": true
+    },
+    {
+      "id": "949983",
+      "title": "Official髭男dism one-man tour 18/19",
+      "sourceUrls": [
+        "https://higedan.com/news/3/?page=49",
+        "https://www.livefans.jp/events/949983",
+        "https://fusetter.com/tw/O0hVD#all"
+      ],
+      "date": "2018-11-24",
+      "venue": "米子AZTiC laughs",
+      "city": "米子",
+      "region": "中國",
+      "prefecture": "鳥取縣",
+      "opensAt": "18:00",
+      "diff": {
+        "skip": [
+          4,
+          5,
+          16,
+          17,
+          18
+        ],
+        "insert": [
+          {
+            "after": 3,
+            "item": {
+              "encore": false,
+              "songId": "ai-nandaga"
+            }
+          },
+          {
+            "after": 3,
+            "item": {
+              "encore": false,
+              "songId": "coffee-to-syrup"
+            }
+          },
+          {
+            "after": 15,
+            "item": {
+              "encore": true,
+              "songId": "nichiyoubi-no-love-letter",
+              "note": "リクエストコーナー",
+              "kind": [
+                "request"
+              ]
+            }
+          },
+          {
+            "after": 15,
+            "item": {
+              "encore": true,
+              "type": "interlude",
+              "note": "リクエスト：異端なスター（のちにアンコール本編で演奏）"
+            }
+          },
+          {
+            "after": 15,
+            "item": {
+              "encore": true,
+              "songId": "hajimari-no-asa",
+              "note": "リクエストコーナー",
+              "kind": [
+                "request"
+              ]
+            }
+          },
+          {
+            "after": 15,
+            "item": {
+              "encore": true,
+              "songId": "mikanseinamamade",
+              "note": "リクエストコーナー",
+              "kind": [
+                "request"
+              ]
+            }
+          }
+        ]
+      },
+      "locked": true
+    },
+    {
+      "id": "949984",
+      "title": "Official髭男dism one-man tour 18/19",
+      "sourceUrls": [
+        "https://higedan.com/news/3/?page=49",
+        "https://www.livefans.jp/events/949984",
+        "https://higedan-setlist.net/live/2018-11-25/",
+        "https://fusetter.com/tw/LWWjM#all"
+      ],
+      "date": "2018-11-25",
+      "venue": "廣島CLUB QUATTRO",
+      "city": "廣島",
+      "region": "中國",
+      "prefecture": "廣島縣",
+      "opensAt": "17:30",
+      "diff": {
+        "skip": [
+          4,
+          5,
+          16,
+          17,
+          18
+        ],
+        "insert": [
+          {
+            "after": 3,
+            "item": {
+              "encore": false,
+              "songId": "ai-nandaga"
+            }
+          },
+          {
+            "after": 3,
+            "item": {
+              "encore": false,
+              "songId": "coffee-to-syrup"
+            }
+          },
+          {
+            "after": 15,
+            "item": {
+              "encore": true,
+              "type": "interlude",
+              "note": "リクエスト：異端なスター（のちにアンコール本編で演奏）"
+            }
+          },
+          {
+            "after": 15,
+            "item": {
+              "encore": true,
+              "songId": "happy-birthday-to-you",
+              "note": "リクエストコーナー（誕生日ソング）",
+              "kind": [
+                "request"
+              ]
+            }
+          },
+          {
+            "after": 15,
+            "item": {
+              "encore": true,
+              "type": "interlude",
+              "note": "リクエスト：SWEET TWEET（のちにアンコール本編ラストで演奏）"
+            }
+          },
+          {
+            "after": 15,
+            "item": {
+              "encore": true,
+              "songId": "koi-no-maenarae",
+              "note": "リクエストコーナー",
+              "kind": [
+                "request"
+              ]
+            }
+          },
+          {
+            "after": 15,
+            "item": {
+              "encore": true,
+              "songId": "furidasu-ame-gokigen-na-kimi",
+              "note": "リクエストコーナー（ツアー唯一）",
+              "kind": [
+                "request"
+              ]
+            }
+          },
+          {
+            "after": 15,
+            "item": {
+              "encore": true,
+              "songId": "yugure-zoi",
+              "note": "リクエストコーナー",
+              "kind": [
+                "request"
+              ]
+            }
+          },
+          {
+            "after": 15,
+            "item": {
+              "encore": true,
+              "songId": "kiiroi-kuruma",
+              "note": "リクエストコーナー",
+              "kind": [
+                "request"
+              ]
+            }
+          }
+        ]
+      },
+      "locked": true
+    },
+    {
+      "id": "949985",
+      "title": "Official髭男dism one-man tour 18/19",
+      "sourceUrls": [
+        "https://higedan.com/news/3/?page=49",
+        "https://www.livefans.jp/events/949985",
+        "https://fusetter.com/tw/jYqwv#all"
+      ],
+      "date": "2018-11-28",
+      "venue": "HEAVEN'S ROCK 埼玉新都心 VJ-3",
+      "city": "埼玉",
+      "region": "關東",
+      "prefecture": "埼玉縣",
+      "opensAt": "19:00",
+      "diff": {
+        "skip": [
+          4,
+          5,
+          16,
+          17,
+          18
+        ],
+        "insert": [
+          {
+            "after": 3,
+            "item": {
+              "encore": false,
+              "songId": "ai-nandaga"
+            }
+          },
+          {
+            "after": 3,
+            "item": {
+              "encore": false,
+              "songId": "coffee-to-syrup"
+            }
+          },
+          {
+            "after": 15,
+            "item": {
+              "encore": true,
+              "songId": "kiiroi-kuruma",
+              "note": "リクエストコーナー",
+              "kind": [
+                "request"
+              ]
+            }
+          },
+          {
+            "after": 15,
+            "item": {
+              "encore": true,
+              "songId": "55",
+              "note": "リクエストコーナー",
+              "kind": [
+                "request"
+              ]
+            }
+          },
+          {
+            "after": 15,
+            "item": {
+              "encore": true,
+              "songId": "hajimari-no-asa",
+              "note": "リクエストコーナー",
+              "kind": [
+                "request"
+              ]
+            }
+          },
+          {
+            "after": 15,
+            "item": {
+              "encore": true,
+              "songId": "koi-no-sarigiwa",
+              "note": "リクエストコーナー",
+              "kind": [
+                "request"
+              ]
+            }
+          }
+        ]
+      },
+      "locked": true
     },
     {
       "id": "949986",
@@ -697,7 +861,8 @@
       "sourceUrls": [
         "https://higedan.com/news/3/?page=49",
         "https://www.livefans.jp/events/949986",
-        "https://higedan-setlist.net/live/2018-12-01/"
+        "https://higedan-setlist.net/live/2018-12-01/",
+        "https://fusetter.com/tw/2Rjx9#all"
       ],
       "date": "2018-12-01",
       "venue": "仙台PIT",
@@ -710,7 +875,6 @@
         "skip": [
           4,
           5,
-          12,
           16,
           17,
           18
@@ -728,13 +892,6 @@
             "item": {
               "encore": false,
               "songId": "coffee-to-syrup"
-            }
-          },
-          {
-            "after": 11,
-            "item": {
-              "encore": false,
-              "songId": "akegata-no-getaway"
             }
           },
           {
@@ -771,14 +928,16 @@
             }
           }
         ]
-      }
+      },
+      "locked": true
     },
     {
       "id": "949987",
       "title": "Official髭男dism one-man tour 18/19",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=49",
-        "https://www.livefans.jp/events/949987"
+        "https://www.livefans.jp/events/949987",
+        "https://fusetter.com/tw/yILHm#all"
       ],
       "date": "2018-12-02",
       "venue": "郡山CLUB #9",
@@ -788,16 +947,40 @@
       "opensAt": "17:30",
       "diff": {
         "skip": [
+          4,
+          5,
           16,
           17,
           18
         ],
         "insert": [
           {
+            "after": 3,
+            "item": {
+              "encore": false,
+              "songId": "ai-nandaga"
+            }
+          },
+          {
+            "after": 3,
+            "item": {
+              "encore": false,
+              "songId": "coffee-to-syrup"
+            }
+          },
+          {
+            "after": 14,
+            "item": {
+              "encore": false,
+              "songId": "inu-ka-cat-ka-de-shinumade-kenka-shiyou",
+              "note": "おかわり"
+            }
+          },
+          {
             "after": 15,
             "item": {
               "encore": true,
-              "songId": "koi-no-maenarae",
+              "songId": "hajimari-no-asa",
               "note": "リクエストコーナー",
               "kind": [
                 "request"
@@ -805,21 +988,10 @@
             }
           },
           {
-            "after": 16,
+            "after": 15,
             "item": {
               "encore": true,
-              "songId": "trailer",
-              "note": "リクエストコーナー",
-              "kind": [
-                "request"
-              ]
-            }
-          },
-          {
-            "after": 17,
-            "item": {
-              "encore": true,
-              "songId": "clap-clap",
+              "songId": "knit-no-boushi",
               "note": "リクエストコーナー",
               "kind": [
                 "request"
@@ -827,14 +999,16 @@
             }
           }
         ]
-      }
+      },
+      "locked": true
     },
     {
       "id": "949988",
       "title": "Official髭男dism one-man tour 18/19",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=49",
-        "https://www.livefans.jp/events/949988"
+        "https://www.livefans.jp/events/949988",
+        "https://fusetter.com/tw/CbgZB#all"
       ],
       "date": "2018-12-09",
       "venue": "水戶LIGHT HOUSE",
@@ -844,16 +1018,32 @@
       "opensAt": "17:30",
       "diff": {
         "skip": [
+          4,
+          5,
           16,
           17,
           18
         ],
         "insert": [
           {
+            "after": 3,
+            "item": {
+              "encore": false,
+              "songId": "ai-nandaga"
+            }
+          },
+          {
+            "after": 3,
+            "item": {
+              "encore": false,
+              "songId": "coffee-to-syrup"
+            }
+          },
+          {
             "after": 15,
             "item": {
               "encore": true,
-              "songId": "koi-no-maenarae",
+              "songId": "kiiroi-kuruma",
               "note": "リクエストコーナー",
               "kind": [
                 "request"
@@ -861,10 +1051,10 @@
             }
           },
           {
-            "after": 16,
+            "after": 15,
             "item": {
               "encore": true,
-              "songId": "trailer",
+              "songId": "hajimari-no-asa",
               "note": "リクエストコーナー",
               "kind": [
                 "request"
@@ -872,10 +1062,21 @@
             }
           },
           {
-            "after": 17,
+            "after": 15,
             "item": {
               "encore": true,
-              "songId": "clap-clap",
+              "songId": "nichiyoubi-no-love-letter",
+              "note": "リクエストコーナー",
+              "kind": [
+                "request"
+              ]
+            }
+          },
+          {
+            "after": 15,
+            "item": {
+              "encore": true,
+              "songId": "driver",
               "note": "リクエストコーナー",
               "kind": [
                 "request"
@@ -883,14 +1084,16 @@
             }
           }
         ]
-      }
+      },
+      "locked": true
     },
     {
       "id": "949989",
       "title": "Official髭男dism one-man tour 18/19",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=49",
-        "https://www.livefans.jp/events/949989"
+        "https://www.livefans.jp/events/949989",
+        "https://fusetter.com/tw/gBwXk#all"
       ],
       "date": "2018-12-15",
       "venue": "新潟GOLDEN PIGS RED STAGE",
@@ -900,16 +1103,33 @@
       "opensAt": "18:00",
       "diff": {
         "skip": [
+          4,
+          5,
           16,
           17,
-          18
+          18,
+          19
         ],
         "insert": [
+          {
+            "after": 3,
+            "item": {
+              "encore": false,
+              "songId": "ai-nandaga"
+            }
+          },
+          {
+            "after": 3,
+            "item": {
+              "encore": false,
+              "songId": "coffee-to-syrup"
+            }
+          },
           {
             "after": 15,
             "item": {
               "encore": true,
-              "songId": "koi-no-maenarae",
+              "songId": "hajimari-no-asa",
               "note": "リクエストコーナー",
               "kind": [
                 "request"
@@ -917,21 +1137,10 @@
             }
           },
           {
-            "after": 16,
+            "after": 15,
             "item": {
               "encore": true,
-              "songId": "trailer",
-              "note": "リクエストコーナー",
-              "kind": [
-                "request"
-              ]
-            }
-          },
-          {
-            "after": 17,
-            "item": {
-              "encore": true,
-              "songId": "clap-clap",
+              "songId": "driver",
               "note": "リクエストコーナー",
               "kind": [
                 "request"
@@ -939,14 +1148,16 @@
             }
           }
         ]
-      }
+      },
+      "locked": true
     },
     {
       "id": "949990",
       "title": "Official髭男dism one-man tour 18/19",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=49",
-        "https://www.livefans.jp/events/949990"
+        "https://www.livefans.jp/events/949990",
+        "https://fusetter.com/tw/Dnf2k#all"
       ],
       "date": "2018-12-16",
       "venue": "長野CLUB JUNK BOX",
@@ -956,53 +1167,71 @@
       "opensAt": "17:30",
       "diff": {
         "skip": [
+          4,
+          5,
           16,
           17,
           18
         ],
         "insert": [
           {
+            "after": 3,
+            "item": {
+              "encore": false,
+              "songId": "ai-nandaga"
+            }
+          },
+          {
+            "after": 3,
+            "item": {
+              "encore": false,
+              "songId": "coffee-to-syrup"
+            }
+          },
+          {
             "after": 15,
             "item": {
               "encore": true,
-              "songId": "koi-no-maenarae",
-              "note": "リクエストコーナー",
+              "songId": "parade",
+              "note": "リクエスト（拳のきいたparade）",
               "kind": [
                 "request"
               ]
             }
           },
           {
-            "after": 16,
+            "after": 15,
             "item": {
               "encore": true,
-              "songId": "trailer",
-              "note": "リクエストコーナー",
+              "songId": "55",
+              "note": "リクエスト（松山千春さん風）",
               "kind": [
                 "request"
               ]
             }
           },
           {
-            "after": 17,
+            "after": 15,
             "item": {
               "encore": true,
-              "songId": "clap-clap",
-              "note": "リクエストコーナー",
+              "songId": "yuki-seku-asa-ga-kuru",
+              "note": "リクエスト（w/バンドのパソコン大輔）",
               "kind": [
                 "request"
               ]
             }
           }
         ]
-      }
+      },
+      "locked": true
     },
     {
       "id": "949991",
       "title": "Official髭男dism one-man tour 18/19",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=49",
-        "https://www.livefans.jp/events/949991"
+        "https://www.livefans.jp/events/949991",
+        "https://fusetter.com/tw/Z5EDr#all"
       ],
       "date": "2019-01-11",
       "venue": "NHK大阪會館",
@@ -1049,10 +1278,10 @@
             }
           },
           {
-            "after": 8,
+            "after": 7,
             "item": {
               "encore": false,
-              "songId": "sousisouai"
+              "songId": "zero-no-mama-de-iraterara"
             }
           },
           {
@@ -1105,14 +1334,16 @@
             }
           }
         ]
-      }
+      },
+      "locked": true
     },
     {
       "id": "949992",
       "title": "Official髭男dism one-man tour 18/19",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=49",
-        "https://www.livefans.jp/events/949992"
+        "https://www.livefans.jp/events/949992",
+        "https://fusetter.com/tw/JERCU#all"
       ],
       "date": "2019-01-12",
       "venue": "米子市文化會館 主廳",
@@ -1162,7 +1393,7 @@
             "after": 8,
             "item": {
               "encore": false,
-              "songId": "sousisouai"
+              "songId": "zero-no-mama-de-iraterara"
             }
           },
           {
@@ -1215,14 +1446,16 @@
             }
           }
         ]
-      }
+      },
+      "locked": true
     },
     {
       "id": "1014604",
       "title": "Official髭男dism one-man tour 18/19",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=49",
-        "https://www.livefans.jp/events/1014604"
+        "https://www.livefans.jp/events/1014604",
+        "https://fusetter.com/tw/3gaun#all"
       ],
       "date": "2019-01-16",
       "venue": "日本特殊陶業市民會館 Village Hall",
@@ -1272,7 +1505,7 @@
             "after": 8,
             "item": {
               "encore": false,
-              "songId": "sousisouai"
+              "songId": "zero-no-mama-de-iraterara"
             }
           },
           {
@@ -1325,14 +1558,16 @@
             }
           }
         ]
-      }
+      },
+      "locked": true
     },
     {
       "id": "949993",
       "title": "Official髭男dism one-man tour 18/19",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=49",
-        "https://www.livefans.jp/events/949993"
+        "https://www.livefans.jp/events/949993",
+        "https://fusetter.com/tw/3Bo6F#all"
       ],
       "date": "2019-01-18",
       "venue": "Live House 濱松窓枠",
@@ -1342,46 +1577,31 @@
       "opensAt": "19:00",
       "diff": {
         "skip": [
+          4,
+          5,
           16,
           17,
-          18
+          18,
+          19
         ],
         "insert": [
           {
-            "after": 15,
+            "after": 3,
             "item": {
-              "encore": true,
-              "songId": "koi-no-maenarae",
-              "note": "リクエストコーナー",
-              "kind": [
-                "request"
-              ]
+              "encore": false,
+              "songId": "ai-nandaga"
             }
           },
           {
-            "after": 16,
+            "after": 3,
             "item": {
-              "encore": true,
-              "songId": "trailer",
-              "note": "リクエストコーナー",
-              "kind": [
-                "request"
-              ]
-            }
-          },
-          {
-            "after": 17,
-            "item": {
-              "encore": true,
-              "songId": "clap-clap",
-              "note": "リクエストコーナー",
-              "kind": [
-                "request"
-              ]
+              "encore": false,
+              "songId": "coffee-to-syrup"
             }
           }
         ]
-      }
+      },
+      "locked": true
     },
     {
       "id": "949994",
@@ -1389,7 +1609,8 @@
       "sourceUrls": [
         "https://higedan.com/news/3/?page=49",
         "https://www.livefans.jp/events/949994",
-        "https://higedan-setlist.net/live/2019-01-19/"
+        "https://higedan-setlist.net/live/2019-01-19/",
+        "https://fusetter.com/tw/uAGzs#all"
       ],
       "date": "2019-01-19",
       "venue": "日本特殊陶業市民會館 Village Hall",
@@ -1492,7 +1713,8 @@
             }
           }
         ]
-      }
+      },
+      "locked": true
     },
     {
       "id": "949995",
@@ -1500,7 +1722,8 @@
       "sourceUrls": [
         "https://higedan.com/news/3/?page=49",
         "https://www.livefans.jp/events/949995",
-        "https://higedan-setlist.net/live/2019-01-24/"
+        "https://higedan-setlist.net/live/2019-01-24/",
+        "https://fusetter.com/tw/q967C#all"
       ],
       "date": "2019-01-24",
       "venue": "NHK會館",
@@ -1525,14 +1748,6 @@
           20
         ],
         "insert": [
-          {
-            "after": 0,
-            "item": {
-              "encore": false,
-              "type": "interlude",
-              "note": "SE:ESCAPADE"
-            }
-          },
           {
             "after": 0,
             "item": {
@@ -1611,14 +1826,16 @@
             }
           }
         ]
-      }
+      },
+      "locked": true
     },
     {
       "id": "949996",
       "title": "Official髭男dism one-man tour 18/19",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=49",
-        "https://www.livefans.jp/events/949996"
+        "https://www.livefans.jp/events/949996",
+        "https://fusetter.com/tw/hGG3M#all"
       ],
       "date": "2019-01-26",
       "venue": "福岡DRUM LOGOS",
@@ -1628,53 +1845,39 @@
       "opensAt": "18:00",
       "diff": {
         "skip": [
+          4,
+          5,
+          13,
           16,
           17,
           18
         ],
         "insert": [
           {
-            "after": 15,
+            "after": 3,
             "item": {
-              "encore": true,
-              "songId": "koi-no-maenarae",
-              "note": "リクエストコーナー",
-              "kind": [
-                "request"
-              ]
+              "encore": false,
+              "songId": "ai-nandaga"
             }
           },
           {
-            "after": 16,
+            "after": 3,
             "item": {
-              "encore": true,
-              "songId": "trailer",
-              "note": "リクエストコーナー",
-              "kind": [
-                "request"
-              ]
-            }
-          },
-          {
-            "after": 17,
-            "item": {
-              "encore": true,
-              "songId": "clap-clap",
-              "note": "リクエストコーナー",
-              "kind": [
-                "request"
-              ]
+              "encore": false,
+              "songId": "coffee-to-syrup"
             }
           }
         ]
-      }
+      },
+      "locked": true
     },
     {
       "id": "949997",
       "title": "Official髭男dism one-man tour 18/19",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=49",
-        "https://www.livefans.jp/events/949997"
+        "https://www.livefans.jp/events/949997",
+        "https://fusetter.com/tw/ENiue#all"
       ],
       "date": "2019-01-27",
       "venue": "鹿兒島SR HALL",
@@ -1684,16 +1887,49 @@
       "opensAt": "17:30",
       "diff": {
         "skip": [
+          4,
+          5,
+          13,
           16,
           17,
           18
         ],
         "insert": [
           {
+            "after": 3,
+            "item": {
+              "encore": false,
+              "songId": "ai-nandaga"
+            }
+          },
+          {
+            "after": 3,
+            "item": {
+              "encore": false,
+              "songId": "coffee-to-syrup"
+            }
+          },
+          {
             "after": 15,
             "item": {
               "encore": true,
-              "songId": "koi-no-maenarae",
+              "type": "interlude",
+              "note": "リクエスト：ESCAPADE（のちにアンコール本編で演奏）"
+            }
+          },
+          {
+            "after": 15,
+            "item": {
+              "encore": true,
+              "type": "interlude",
+              "note": "リクエスト：異端なスター（のちにアンコール本編で演奏）"
+            }
+          },
+          {
+            "after": 15,
+            "item": {
+              "encore": true,
+              "songId": "hajimari-no-asa",
               "note": "リクエストコーナー",
               "kind": [
                 "request"
@@ -1701,10 +1937,10 @@
             }
           },
           {
-            "after": 16,
+            "after": 15,
             "item": {
               "encore": true,
-              "songId": "trailer",
+              "songId": "lady",
               "note": "リクエストコーナー",
               "kind": [
                 "request"
@@ -1712,18 +1948,26 @@
             }
           },
           {
-            "after": 17,
+            "after": 15,
             "item": {
               "encore": true,
-              "songId": "clap-clap",
+              "songId": "koi-no-sarigiwa",
               "note": "リクエストコーナー",
               "kind": [
                 "request"
               ]
+            }
+          },
+          {
+            "after": 15,
+            "item": {
+              "encore": true,
+              "songId": "escapade"
             }
           }
         ]
-      }
+      },
+      "locked": true
     },
     {
       "id": "1014636",
@@ -1731,7 +1975,8 @@
       "sourceUrls": [
         "https://higedan.com/news/3/?page=49",
         "https://www.livefans.jp/events/1014636",
-        "https://higedan-setlist.net/live/2019-01-31/"
+        "https://higedan-setlist.net/live/2019-01-31/",
+        "https://fusetter.com/tw/6nMjc#all"
       ],
       "date": "2019-01-31",
       "venue": "NHK大阪會館",
@@ -1834,7 +2079,8 @@
             }
           }
         ]
-      }
+      },
+      "locked": true
     },
     {
       "id": "949998",
@@ -1842,14 +2088,17 @@
       "sourceUrls": [
         "https://higedan.com/news/3/?page=49",
         "https://www.livefans.jp/events/949998",
-        "https://higedan-setlist.net/live/2019-02-02/"
+        "https://higedan-setlist.net/live/2019-02-02/",
+        "https://x.com/beiketa/status/1091670804654247937"
       ],
       "date": "2019-02-02",
       "venue": "島根縣民會館 大會堂",
       "city": "松江",
       "region": "中國",
       "prefecture": "島根縣",
-      "opensAt": "18:00",
+      "opensAt": "17:00",
+      "startsAt": "18:00",
+      "weekday": "土",
       "diff": {
         "skip": [
           1,
@@ -1945,7 +2194,8 @@
             }
           }
         ]
-      }
+      },
+      "locked": true
     }
   ],
   "templateBasis": "手動校準：基於 17 場 Live House 巡演演出提取之共識曲目模板（含未發行曲《明け方のゲッタウェイ》於 M12）"

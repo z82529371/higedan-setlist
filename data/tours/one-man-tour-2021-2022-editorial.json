@@ -8,7 +8,8 @@
       "sourceUrls": [
         "https://higedan.com/news/3/?page=29",
         "https://www.livefans.jp/events/1310540",
-        "https://higedan-setlist.net/live/2021-09-04/"
+        "https://higedan-setlist.net/live/2021-09-04/",
+        "https://x.com/beiketa/status/1434108561412427780"
       ],
       "date": "2021-09-04",
       "opensAt": "17:00",
@@ -36,7 +37,8 @@
       "sourceUrls": [
         "https://higedan.com/news/3/?page=29",
         "https://www.livefans.jp/events/1310541",
-        "https://higedan-setlist.net/live/2021-09-05/"
+        "https://higedan-setlist.net/live/2021-09-05/",
+        "https://fusetter.com/tw/ksTMv1rz#all"
       ],
       "date": "2021-09-05",
       "opensAt": "17:00",
@@ -64,7 +66,8 @@
       "sourceUrls": [
         "https://higedan.com/news/3/?page=29",
         "https://www.livefans.jp/events/1310545",
-        "https://higedan-setlist.net/live/2021-10-02/"
+        "https://higedan-setlist.net/live/2021-10-02/",
+        "https://fusetter.com/tw/w27bPExc#all"
       ],
       "date": "2021-10-02",
       "opensAt": "17:00",
@@ -92,7 +95,8 @@
       "sourceUrls": [
         "https://higedan.com/news/3/?page=29",
         "https://www.livefans.jp/events/1310546",
-        "https://higedan-setlist.net/live/2021-10-03/"
+        "https://higedan-setlist.net/live/2021-10-03/",
+        "https://fusetter.com/tw/mXOQKXck#all"
       ],
       "date": "2021-10-03",
       "opensAt": "17:00",
@@ -110,6 +114,14 @@
             "item": {
               "encore": false,
               "songId": "parabola"
+            }
+          },
+          {
+            "after": 12,
+            "item": {
+              "encore": false,
+              "type": "interlude",
+              "note": "メンバー紹介"
             }
           }
         ]
@@ -360,7 +372,8 @@
       "sourceUrls": [
         "https://higedan.com/news/3/?page=29",
         "https://www.livefans.jp/events/1310555",
-        "https://higedan-setlist.net/live/2021-11-02/"
+        "https://higedan-setlist.net/live/2021-11-02/",
+        "https://fusetter.com/tw/L0ctDNmj#all"
       ],
       "date": "2021-11-02",
       "opensAt": "18:00",
@@ -388,7 +401,8 @@
       "sourceUrls": [
         "https://higedan.com/news/3/?page=29",
         "https://www.livefans.jp/events/1310556",
-        "https://higedan-setlist.net/live/2021-11-03/"
+        "https://higedan-setlist.net/live/2021-11-03/",
+        "https://fusetter.com/tw/lizjlpj9#all"
       ],
       "date": "2021-11-03",
       "opensAt": "17:00",
@@ -675,7 +689,8 @@
       "sourceUrls": [
         "https://higedan.com/news/3/?page=29",
         "https://www.livefans.jp/events/1310566",
-        "https://higedan-setlist.net/live/2021-12-19/"
+        "https://higedan-setlist.net/live/2021-12-19/",
+        "https://fusetter.com/tw/U1PPW21D#all"
       ],
       "date": "2021-12-19",
       "opensAt": "17:00",

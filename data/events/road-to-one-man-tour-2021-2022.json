@@ -12,7 +12,8 @@
       "prefecture": "神奈川縣",
       "title": "Official髭男dism Road to 「one - man tour 2021-2022 (仮)」",
       "sourceUrls": [
-        "https://www.livefans.jp/events/1310531"
+        "https://www.livefans.jp/events/1310531",
+        "https://fusetter.com/tw/pNHZarsx#all"
       ],
       "setlist": [
         {
@@ -63,12 +64,14 @@
         {
           "order": 10,
           "encore": false,
-          "songId": "yugure-zoi"
+          "songId": "yugure-zoi",
+          "note": "ジャズアレンジ"
         },
         {
           "order": 11,
           "encore": false,
-          "songId": "no-doubt"
+          "songId": "no-doubt",
+          "note": "レゲエアレンジ"
         },
         {
           "order": 12,
@@ -108,7 +111,8 @@
       "prefecture": "神奈川縣",
       "title": "Official髭男dism Road to 「one - man tour 2021-2022 (仮)」",
       "sourceUrls": [
-        "https://www.livefans.jp/events/1310532"
+        "https://www.livefans.jp/events/1310532",
+        "https://fusetter.com/tw/HZM83M36#all"
       ],
       "setlist": [
         {
@@ -159,12 +163,14 @@
         {
           "order": 10,
           "encore": false,
-          "songId": "yugure-zoi"
+          "songId": "yugure-zoi",
+          "note": "ジャズアレンジ"
         },
         {
           "order": 11,
           "encore": false,
-          "songId": "no-doubt"
+          "songId": "no-doubt",
+          "note": "レゲエアレンジ"
         },
         {
           "order": 12,
@@ -204,7 +210,8 @@
       "prefecture": "神奈川縣",
       "title": "Official髭男dism Road to 「one - man tour 2021-2022 (仮)」",
       "sourceUrls": [
-        "https://www.livefans.jp/events/1310533"
+        "https://www.livefans.jp/events/1310533",
+        "https://fusetter.com/tw/LJkLPn1C#all"
       ],
       "setlist": [
         {
@@ -255,12 +262,14 @@
         {
           "order": 10,
           "encore": false,
-          "songId": "yugure-zoi"
+          "songId": "yugure-zoi",
+          "note": "ジャズアレンジ"
         },
         {
           "order": 11,
           "encore": false,
-          "songId": "no-doubt"
+          "songId": "no-doubt",
+          "note": "レゲエアレンジ"
         },
         {
           "order": 12,
@@ -358,12 +367,14 @@
     {
       "order": 10,
       "encore": false,
-      "songId": "yugure-zoi"
+      "songId": "yugure-zoi",
+      "note": "ジャズアレンジ"
     },
     {
       "order": 11,
       "encore": false,
-      "songId": "no-doubt"
+      "songId": "no-doubt",
+      "note": "レゲエアレンジ"
     },
     {
       "order": 12,

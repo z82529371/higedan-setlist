@@ -10,10 +10,12 @@
       "sourceUrls": [
         "https://higedan.com/news/3/?page=44",
         "https://www.livefans.jp/events/1049544",
-        "https://higedan-setlist.net/live/2019-06-22/"
+        "https://higedan-setlist.net/live/2019-06-22/",
+        "https://fusetter.com/tw/d7SqF#all"
       ],
       "date": "2019-06-22",
-      "opensAt": "18:00",
+      "opensAt": "17:00",
+      "startsAt": "18:00",
       "venue": "SENDAI GIGS",
       "city": "仙台",
       "region": "東北",
@@ -69,10 +71,12 @@
       "sourceUrls": [
         "https://higedan.com/news/3/?page=44",
         "https://www.livefans.jp/events/1049545",
-        "https://higedan-setlist.net/live/2019-06-30/"
+        "https://higedan-setlist.net/live/2019-06-30/",
+        "https://fusetter.com/tw/PLDAV#all"
       ],
       "date": "2019-06-30",
-      "opensAt": "18:00",
+      "opensAt": "17:00",
+      "startsAt": "18:00",
       "venue": "Zepp Fukuoka",
       "city": "福岡",
       "region": "九州",
@@ -124,17 +128,20 @@
             }
           }
         ]
-      }
+      },
+      "locked": true
     },
     {
       "id": "1049550",
       "title": "official髭男dism one-man tour 2019",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=44",
-        "https://www.livefans.jp/events/1049550"
+        "https://www.livefans.jp/events/1049550",
+        "https://fusetter.com/tw/3H3LC#all"
       ],
       "date": "2019-07-05",
-      "opensAt": "19:00",
+      "opensAt": "18:00",
+      "startsAt": "19:00",
       "venue": "Zepp Sapporo",
       "city": "札幌",
       "region": "北海道",
@@ -176,7 +183,8 @@
             }
           }
         ]
-      }
+      },
+      "locked": true
     },
     {
       "id": "1078251",
@@ -184,10 +192,12 @@
       "sourceUrls": [
         "https://higedan.com/news/3/?page=44",
         "https://www.livefans.jp/events/1078251",
-        "https://higedan-setlist.net/live/2019-07-08/"
+        "https://higedan-setlist.net/live/2019-07-08/",
+        "https://fusetter.com/tw/5MHha#all"
       ],
       "date": "2019-07-08",
-      "opensAt": "19:00",
+      "opensAt": "18:00",
+      "startsAt": "19:00",
       "venue": "日本武道館",
       "city": "東京",
       "region": "關東",
@@ -257,17 +267,20 @@
             }
           }
         ]
-      }
+      },
+      "locked": true
     },
     {
       "id": "1049557",
       "title": "official髭男dism one-man tour 2019",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=44",
-        "https://www.livefans.jp/events/1049557"
+        "https://www.livefans.jp/events/1049557",
+        "https://fusetter.com/tw/bUDW7#all"
       ],
       "date": "2019-07-13",
-      "opensAt": "18:00",
+      "opensAt": "17:00",
+      "startsAt": "18:00",
       "venue": "Zepp Namba",
       "city": "大阪",
       "region": "關西",
@@ -277,7 +290,8 @@
           3,
           5,
           7,
-          10
+          10,
+          11
         ],
         "insert": [
           {
@@ -309,7 +323,8 @@
             }
           }
         ]
-      }
+      },
+      "locked": true
     },
     {
       "id": "1049558",
@@ -317,10 +332,12 @@
       "sourceUrls": [
         "https://higedan.com/news/3/?page=44",
         "https://www.livefans.jp/events/1049558",
-        "https://higedan-setlist.net/live/2019-07-14/"
+        "https://higedan-setlist.net/live/2019-07-14/",
+        "https://fusetter.com/tw/oXQ7a#all"
       ],
       "date": "2019-07-14",
-      "opensAt": "18:00",
+      "opensAt": "17:00",
+      "startsAt": "18:00",
       "venue": "Zepp Nagoya",
       "city": "名古屋",
       "region": "中部",
@@ -363,7 +380,8 @@
             }
           }
         ]
-      }
+      },
+      "locked": true
     },
     {
       "id": "1049559",
@@ -371,10 +389,12 @@
       "sourceUrls": [
         "https://higedan.com/news/3/?page=44",
         "https://www.livefans.jp/events/1049559",
-        "https://higedan-setlist.net/live/2019-07-21/"
+        "https://higedan-setlist.net/live/2019-07-21/",
+        "https://fusetter.com/tw/sv6lE#all"
       ],
       "date": "2019-07-21",
-      "opensAt": "18:00",
+      "opensAt": "17:00",
+      "startsAt": "18:00",
       "venue": "Zepp DiverCity",
       "city": "東京",
       "region": "關東",
@@ -418,7 +438,8 @@
           }
         ]
       },
-      "note": "LiveFans 將此場誤植為包含 LADY 的 19 首（實為複製 7/5 札幌報導），依現場共識考證校正為標準 18 首"
+      "note": "LiveFans 將此場誤植為包含 LADY 的 19 首（實為複製 7/5 札幌報導），依現場共識考證校正為標準 18 首",
+      "locked": true
     },
     {
       "id": "1049560",
@@ -426,14 +447,17 @@
       "sourceUrls": [
         "https://higedan.com/news/3/?page=44",
         "https://www.livefans.jp/events/1049560",
-        "https://higedan-setlist.net/live/2019-07-22/"
+        "https://higedan-setlist.net/live/2019-07-22/",
+        "https://x.com/beiketa/status/1153300064506302464"
       ],
       "date": "2019-07-22",
-      "opensAt": "19:00",
+      "opensAt": "18:00",
+      "startsAt": "19:00",
       "venue": "Zepp DiverCity",
       "city": "東京",
       "region": "關東",
       "prefecture": "東京都",
+      "locked": true,
       "diff": {
         "skip": [
           2,
@@ -465,14 +489,6 @@
             }
           },
           {
-            "after": 6,
-            "item": {
-              "encore": false,
-              "type": "interlude",
-              "note": "/aikoさんと愛子さま"
-            }
-          },
-          {
             "after": 8,
             "item": {
               "encore": false,
@@ -484,7 +500,7 @@
             "item": {
               "encore": false,
               "type": "interlude",
-              "note": "サボテンの花"
+              "note": "ツアー最後のMC（aikoと愛子さま / ちゃんまつ質問コーナー / ならちゃん「サボテンの花」）"
             }
           }
         ]
