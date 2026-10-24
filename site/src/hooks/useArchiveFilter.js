@@ -12,6 +12,8 @@ import {
   getUnitTypeLabel,
 } from "../lib/domain.js";
 import { trackKey } from "../lib/track.js";
+import { parseRoute } from "../lib/routes.js";
+import { resolveMapTarget } from "../lib/venue-map.js";
 import { PAGE_SIZE } from "../components/navigators/PaginationPills.jsx";
 
 export { PERFORMANCE_CATEGORIES };
@@ -49,8 +51,25 @@ export function useArchiveFilter({
     return sObj ? getSongAlbum(sObj) : ALBUM_ORDER[0];
   });
 
-  const [venueSortMode, setVenueSortMode] = useState("region"); // "region" | "count"
+  const [venueSortMode, setVenueSortMode] = useState(() => {
+    if (typeof window !== "undefined") {
+      const r = parseRoute(window.location?.hash) || parseRoute(window.location?.pathname);
+      if (r?.kind === "map") {
+        const resolved = resolveMapTarget(r.value);
+        if (resolved?.mode === "region") return "region";
+        if (resolved) return "map";
+      }
+    }
+    return "region";
+  }); // "map" | "region" | "count"
   const [selRegion, setSelRegion] = useState(() => {
+    if (typeof window !== "undefined") {
+      const r = parseRoute(window.location?.hash) || parseRoute(window.location?.pathname);
+      if (r?.kind === "map") {
+        const resolved = resolveMapTarget(r.value);
+        if (resolved?.mode === "region" && resolved.target) return resolved.target;
+      }
+    }
     const vObj = allVenues.find((v) => v.name === initialVenueName);
     return vObj ? getVenueRegion(vObj) : REGION_ORDER[0];
   });

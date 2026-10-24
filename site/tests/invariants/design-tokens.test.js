@@ -13,11 +13,18 @@ describe("9. Design Token Invariants & Dedicated URL Routes Seam (DESIGN.md, ADR
     assert.equal(routeHash.show("1672276"), "#/show/1672276");
     assert.equal(routeHash.venue("日本武道館"), "#/venue/%E6%97%A5%E6%9C%AC%E6%AD%A6%E9%81%93%E9%A4%A8");
     assert.equal(routeHash.tour("arena-tour-2024-rejoice"), "#/tour/arena-tour-2024-rejoice");
+    assert.equal(routeHash.map(), "#/map");
+    assert.equal(routeHash.map("journey"), "#/map/journey");
+    assert.equal(routeHash.map("島根縣"), "#/map/%E5%B3%B6%E6%A0%B9%E7%B8%A3");
 
     assert.deepEqual(parseRoute("#/song/pretender"), { kind: "song", value: "pretender" });
     assert.deepEqual(parseRoute("#/show/1672276"), { kind: "show", value: "1672276" });
     assert.deepEqual(parseRoute("#/venue/%E6%97%A5%E6%9C%AC%E6%AD%A6%E9%81%93%E9%A4%A8"), { kind: "venue", value: "日本武道館" });
     assert.deepEqual(parseRoute("#/tour/arena-tour-2024-rejoice"), { kind: "tour", value: "arena-tour-2024-rejoice" });
+    assert.deepEqual(parseRoute("#/map"), { kind: "map", value: null });
+    assert.deepEqual(parseRoute("#/map/journey"), { kind: "map", value: "journey" });
+    assert.deepEqual(parseRoute("#/map/%E5%B3%B6%E6%A0%B9%E7%B8%A3"), { kind: "map", value: "島根縣" });
+    assert.deepEqual(parseRoute("#/map/Shimane?lang=en"), { kind: "map", value: "Shimane", lang: "en" });
     assert.equal(parseRoute(""), null);
     assert.equal(parseRoute("#/unknown/123"), null);
   });

@@ -2,7 +2,7 @@ import songsData from "../data/songs.json";
 import { ALBUM_MAP } from "./constants.js";
 import { trackKeyOf, trackKey } from "./track.js";
 import { resolveShowItems, assignCues } from "./resolve.js";
-import { localizeVenue } from "./locales/venues.js";
+import { localizeVenue, venueProfilesByCanonical } from "./locales/venues.js";
 
 const tourUnits = Object.values(
   import.meta.glob("../data/tours/*.json", { eager: true, import: "default" })
@@ -314,11 +314,18 @@ export function buildIndex() {
   const venuesList = Array.from(venueShowsMap.keys())
     .map((venue) => {
       const firstShow = venueShowsMap.get(venue)[0]?.show;
+      const profile = venueProfilesByCanonical.get(venue);
       return {
         name: venue,
+        canonical: venue,
         city: firstShow?.city ?? "",
         region: firstShow?.region ?? "",
         prefecture: firstShow?.prefecture ?? "",
+        lat: profile?.lat ?? null,
+        lng: profile?.lng ?? null,
+        hubId: profile?.hubId ?? null,
+        address: profile?.address ?? null,
+        isVirtual: Boolean(profile?.isVirtual),
         shows: venueShowsMap.get(venue),
       };
     })

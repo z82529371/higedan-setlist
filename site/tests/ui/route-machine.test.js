@@ -118,11 +118,39 @@ describe("7. Custom Hooks & Route State Machine Invariants (ADR-0101)", () => {
     assert.equal(route.selVenue, targetVenue);
   });
 
+  it("penetrates direct deep links for interactive venue map (#/map, #/map/journey, #/map/:regionOrPref)", () => {
+    const { route: mapRoot, filter: filterRoot } = runProbe("#/map");
+    assert.equal(mapRoot.viewMode, "archive");
+    assert.equal(mapRoot.tab, "venue");
+    assert.equal(mapRoot.venueSubMode, "venues");
+    assert.equal(filterRoot.venueSortMode, "map");
+    assert.equal(mapRoot.selMapPrefecture, null);
+
+    const { route: mapJourney } = runProbe("#/map/journey");
+    assert.equal(mapJourney.viewMode, "archive");
+    assert.equal(mapJourney.tab, "venue");
+    assert.equal(mapJourney.venueSubMode, "journey");
+
+    const { route: mapPref, filter: filterPref } = runProbe(`#/map/${encodeURIComponent("島根縣")}`);
+    assert.equal(mapPref.viewMode, "archive");
+    assert.equal(mapPref.tab, "venue");
+    assert.equal(mapPref.venueSubMode, "venues");
+    assert.equal(filterPref.venueSortMode, "map");
+    assert.equal(mapPref.selMapPrefecture, "島根縣");
+
+    const { route: mapEnPref } = runProbe("#/map/Shimane");
+    assert.equal(mapEnPref.viewMode, "archive");
+    assert.equal(mapEnPref.tab, "venue");
+    assert.equal(mapEnPref.selMapPrefecture, "島根縣");
+  });
+
   it("safely falls back to default landing state on unknown or malformed hash", () => {
     const { route } = runProbe("#/unknown-target-404");
     assert.equal(route.viewMode, "landing");
     const { route: route2 } = runProbe("#/song/non-existent-song-id-xyz");
     assert.equal(route2.viewMode, "landing");
+    const { route: route3 } = runProbe("#/map/non-existent-prefecture-xyz");
+    assert.equal(route3.viewMode, "landing");
   });
 
   it("verifies mobile drawer draft state and confirmation label semantics", () => {

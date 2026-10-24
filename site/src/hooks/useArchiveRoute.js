@@ -11,6 +11,7 @@ import {
   formatShowPlace,
 } from "../lib/domain.js";
 import { parseRoute, routeHash } from "../lib/routes.js";
+import { resolveMapTarget } from "../lib/venue-map.js";
 import { useI18n, DEFAULT_LOCALE } from "../lib/i18n.jsx";
 import { resolveVenueCanonical } from "../lib/locales/venues.js";
 
@@ -67,6 +68,8 @@ export function useArchiveRoute({
     const fallback = {
       tab: "show",
       showSubMode: allUnits[0]?.templateSetlist ? "tour" : "show",
+      venueSubMode: "venues",
+      selMapPrefecture: null,
       selUnitId: allUnits[0]?.id ?? null,
       selSong: allUsedSongs[0]?.id ?? null,
       selVenue: allVenues[0]?.name ?? null,
@@ -76,6 +79,32 @@ export function useArchiveRoute({
       parseRoute(window.location.hash) || parseRoute(window.location.pathname);
     if (!r) return fallback;
     if (r.kind === "tickets") return fallback;
+    if (r.kind === "map") {
+      const resolvedMap = resolveMapTarget(r.value);
+      if (!resolvedMap) return fallback;
+      if (resolvedMap.mode === "journey") {
+        return {
+          ...fallback,
+          tab: "venue",
+          venueSubMode: "journey",
+          selMapPrefecture: null,
+        };
+      }
+      if (resolvedMap.mode === "prefecture") {
+        return {
+          ...fallback,
+          tab: "venue",
+          venueSubMode: "venues",
+          selMapPrefecture: resolvedMap.target,
+        };
+      }
+      return {
+        ...fallback,
+        tab: "venue",
+        venueSubMode: "venues",
+        selMapPrefecture: null,
+      };
+    }
     if (r.kind === "song" && allUsedSongs.some((s) => s.id === r.value))
       return { ...fallback, tab: "song", selSong: r.value };
     if (r.kind === "show" && unitIdByShowId.has(r.value))
@@ -122,6 +151,9 @@ export function useArchiveRoute({
       parseRoute(rawHash) || parseRoute(window.location.pathname);
     if (!r) return "landing";
     if (r.kind === "tickets") return "tickets";
+    if (r.kind === "map") {
+      return resolveMapTarget(r.value) ? "archive" : "landing";
+    }
     if (r.kind === "song" && allUsedSongs.some((s) => s.id === r.value)) return "archive";
     if (r.kind === "show" && unitIdByShowId.has(r.value)) return "archive";
     if (r.kind === "venue" && resolveVenueKey(r.value, allVenues)) return "archive";
@@ -136,6 +168,9 @@ export function useArchiveRoute({
   const [selUnitId, setSelUnitId] = useState(initial.selUnitId);
   const [tab, setTab] = useState(initial.tab);
   const [showSubMode, setShowSubMode] = useState(initial.showSubMode || "show");
+  const [venueSubMode, setVenueSubMode] = useState(initial.venueSubMode || "venues");
+  const [selMapPrefecture, setSelMapPrefecture] = useState(initial.selMapPrefecture ?? null);
+  const [selMapCity, setSelMapCity] = useState(null);
   const [selSong, setSelSong] = useState(initial.selSong);
   const [selVenue, setSelVenue] = useState(initial.selVenue);
   const [selShow, setSelShow] = useState(initial.selShow);
@@ -143,6 +178,11 @@ export function useArchiveRoute({
 
   // Desktop Collapsible Navigator state (persisted in localStorage)
   const [isDesktopNavOpen, setIsDesktopNavOpen] = useState(() => {
+    const r =
+      typeof window !== "undefined"
+        ? parseRoute(window.location?.hash) || parseRoute(window.location?.pathname)
+        : null;
+    if (r?.kind === "map" && resolveMapTarget(r.value)) return true;
     try {
       const saved = localStorage.getItem("hg_desktop_nav_open");
       if (saved !== null) return saved === "true";
@@ -272,6 +312,7 @@ export function useArchiveRoute({
       const resolvedVenue = resolveVenueKey(r.value, allVenues);
       if (resolvedVenue) {
         setTab("venue");
+        setVenueSubMode("venues");
         setSelVenue(resolvedVenue);
         setQ("");
         const venueObj = allVenues.find((v) => v.name === resolvedVenue);
@@ -284,6 +325,40 @@ export function useArchiveRoute({
             window.history.replaceState(null, "", canonicalHash);
           }
         }
+      }
+    } else if (r.kind === "map") {
+      const resolvedMap = resolveMapTarget(r.value);
+      if (!resolvedMap) {
+        setViewMode("landing");
+        window.location.hash = appendLang("#/");
+        return;
+      }
+      setTab("venue");
+      setIsDesktopNavOpen(true);
+      setQ("");
+      setSelMapCity(null);
+      if (resolvedMap.mode === "journey") {
+        setVenueSubMode("journey");
+        setSelMapPrefecture(null);
+      } else if (resolvedMap.mode === "prefecture") {
+        setVenueSubMode("venues");
+        setVenueSortMode("map");
+        setSelMapPrefecture(resolvedMap.target);
+        if (r.value !== resolvedMap.target && typeof window !== "undefined" && window.history?.replaceState) {
+          const canonicalHash = appendLang(routeHash.map(resolvedMap.target));
+          if (window.location.hash !== canonicalHash) {
+            window.history.replaceState(null, "", canonicalHash);
+          }
+        }
+      } else if (resolvedMap.mode === "region") {
+        setVenueSubMode("venues");
+        setVenueSortMode("region");
+        setSelRegion(resolvedMap.target);
+        setSelMapPrefecture(null);
+      } else {
+        setVenueSubMode("venues");
+        setVenueSortMode("map");
+        setSelMapPrefecture(null);
       }
     }
   };
@@ -328,6 +403,12 @@ export function useArchiveRoute({
           return;
         }
         if (r.kind === "venue" && !resolveVenueKey(r.value, allVenues)) {
+          setViewMode("landing");
+          window.location.hash = appendLang("#/");
+          window.scrollTo({ top: 0, behavior: "instant" });
+          return;
+        }
+        if (r.kind === "map" && !resolveMapTarget(r.value)) {
           setViewMode("landing");
           window.location.hash = appendLang("#/");
           window.scrollTo({ top: 0, behavior: "instant" });
@@ -449,7 +530,31 @@ export function useArchiveRoute({
     setQ("");
     setIsFilterDrawerOpen(false);
     setIsMobileSearchOpen(false);
+    setVenueSubMode("venues");
     go(routeHash.venue(venueName));
+  };
+
+  const handleSelectMap = (prefectureOrNull = null) => {
+    setQ("");
+    setIsFilterDrawerOpen(false);
+    setIsMobileSearchOpen(false);
+    setIsDesktopNavOpen(true);
+    setVenueSubMode("venues");
+    setVenueSortMode("map");
+    setSelMapPrefecture(prefectureOrNull);
+    setSelMapCity(null);
+    go(routeHash.map(prefectureOrNull));
+  };
+
+  const handleSelectMapJourney = () => {
+    setQ("");
+    setIsFilterDrawerOpen(false);
+    setIsMobileSearchOpen(false);
+    setIsDesktopNavOpen(true);
+    setVenueSubMode("journey");
+    setSelMapPrefecture(null);
+    setSelMapCity(null);
+    go(routeHash.map("journey"));
   };
 
   const handleSelectUnit = (uId, explicitShowId = null) => {
@@ -603,6 +708,12 @@ export function useArchiveRoute({
     setTab,
     showSubMode,
     setShowSubMode,
+    venueSubMode,
+    setVenueSubMode,
+    selMapPrefecture,
+    setSelMapPrefecture,
+    selMapCity,
+    setSelMapCity,
     selUnitId,
     setSelUnitId,
     selShow,
@@ -632,6 +743,8 @@ export function useArchiveRoute({
     handleSelectShow,
     handleSelectSong,
     handleSelectVenue,
+    handleSelectMap,
+    handleSelectMapJourney,
     handleSelectUnit,
     handleSelectTourMode,
     handleSelectShowMode,

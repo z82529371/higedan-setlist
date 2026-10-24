@@ -33,6 +33,12 @@ export function ArchiveLayout({
     tab,
     setTab,
     showSubMode,
+    venueSubMode,
+    setVenueSubMode,
+    selMapPrefecture,
+    setSelMapPrefecture,
+    selMapCity,
+    setSelMapCity,
     selUnitId,
     selShow,
     selSong,
@@ -56,6 +62,8 @@ export function ArchiveLayout({
     handleSelectShow,
     handleSelectSong,
     handleSelectVenue,
+    handleSelectMap,
+    handleSelectMapJourney,
     handleSelectUnit,
     handleSelectTourMode,
     handleReturnHome,
@@ -162,18 +170,29 @@ export function ArchiveLayout({
       isDrawer={isDrawer}
       draftState={draftState}
       setDraftState={setDraftState}
+      venueSubMode={venueSubMode}
+      setVenueSubMode={setVenueSubMode}
       venueSortMode={filterState.venueSortMode}
       setVenueSortMode={filterState.setVenueSortMode}
+      selMapPrefecture={selMapPrefecture}
+      setSelMapPrefecture={setSelMapPrefecture}
+      selMapCity={selMapCity}
+      setSelMapCity={setSelMapCity}
       selRegion={filterState.selRegion}
       setSelRegion={filterState.setSelRegion}
       selVenue={selVenue}
       venuePage={filterState.venuePage}
       setVenuePage={filterState.setVenuePage}
       allVenues={allVenues}
+      allUnits={allUnits}
+      globalVenueShows={globalVenueShows}
       venuesSortedByCount={filterState.venuesSortedByCount}
       filteredVenues={filterState.filteredVenues}
       pagedVenues={filterState.pagedVenues}
       handleSelectVenue={handleSelectVenue}
+      handleSelectShow={handleSelectShow}
+      handleSelectMap={handleSelectMap}
+      handleSelectMapJourney={handleSelectMapJourney}
     />
   );
 
@@ -435,9 +454,9 @@ export function ArchiveLayout({
           {/* ===================== TAB 3: VENUE ===================== */}
           {tab === "venue" && (
             <div className="flex flex-col gap-4">
-              {/* Desktop Navigator (Collapsible) */}
-              <div className="hidden sm:block">
-                {!isDesktopNavOpen ? (
+              {/* Navigator & Interactive Map / Career Journey (Always visible on mobile when in map/journey mode) */}
+              <div className={filterState.venueSortMode === "map" || venueSubMode === "journey" ? "block" : "hidden sm:block"}>
+                {!isDesktopNavOpen && filterState.venueSortMode !== "map" && venueSubMode !== "journey" ? (
                   <button
                     type="button"
                     onClick={toggleDesktopNav}
@@ -488,15 +507,17 @@ export function ArchiveLayout({
               </div>
 
               {/* Venue Slip Receipt */}
-              <section ref={slipRef} className="mt-2 sm:mt-4 scroll-mt-8 sm:scroll-mt-10">
-                <VenueSlip
-                  venueName={selVenue}
-                  globalVenueShows={globalVenueShows}
-                  unitData={unitData}
-                  onSelectShow={handleSelectShow}
-                  onSelectSong={handleSelectSong}
-                />
-              </section>
+              {venueSubMode !== "journey" && (
+                <section ref={slipRef} className="mt-2 sm:mt-4 scroll-mt-8 sm:scroll-mt-10">
+                  <VenueSlip
+                    venueName={selVenue}
+                    globalVenueShows={globalVenueShows}
+                    unitData={unitData}
+                    onSelectShow={handleSelectShow}
+                    onSelectSong={handleSelectSong}
+                  />
+                </section>
+              )}
             </div>
           )}
         </main>

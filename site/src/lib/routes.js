@@ -47,7 +47,7 @@ export function parseRoute(hash) {
   const langParam = params.get("lang");
   const lang = normalizeLocale(langParam);
 
-  const m = normalizedPath.match(/^\/(song|show|venue|tour)\/(.+)$/);
+  const m = normalizedPath.match(/^\/(song|show|venue|tour|map)\/(.+)$/);
   if (!m) {
     if (normalizedPath === "/archive") {
       const res = { kind: "archive", value: null };
@@ -56,6 +56,11 @@ export function parseRoute(hash) {
     }
     if (normalizedPath === "/tickets") {
       const res = { kind: "tickets", value: null };
+      if (lang) res.lang = lang;
+      return res;
+    }
+    if (normalizedPath === "/map") {
+      const res = { kind: "map", value: null };
       if (lang) res.lang = lang;
       return res;
     }
@@ -82,6 +87,12 @@ export function buildRouteHash(kind, value, options = {}) {
       ? `#/venue/${encodeURIComponent(value)}`
       : kind === "tour"
       ? `#/tour/${value}`
+      : kind === "map"
+      ? !value
+        ? `#/map`
+        : value === "journey"
+        ? `#/map/journey`
+        : `#/map/${encodeURIComponent(value)}`
       : kind === "tickets"
       ? `#/tickets`
       : kind === "archive"
@@ -99,6 +110,8 @@ export const routeHash = {
   show: (id, opts) => buildRouteHash("show", id, opts),
   venue: (name, opts) => buildRouteHash("venue", name, opts),
   tour: (id, opts) => buildRouteHash("tour", id, opts),
+  map: (target = null, opts) => buildRouteHash("map", target, opts),
+  mapJourney: (opts) => buildRouteHash("map", "journey", opts),
   tickets: (opts) => buildRouteHash("tickets", null, opts),
   archive: (opts) => buildRouteHash("archive", null, opts),
 };

@@ -14,6 +14,11 @@ import venueProfilesData from "../../data/venue-profiles.json";
 
 const profiles = venueProfilesData?.venues ?? [];
 
+export const venueProfiles = profiles;
+export const venueProfilesByCanonical = new Map(
+  profiles.map((v) => [v.canonical, v])
+);
+
 export const venueNative = Object.fromEntries(
   profiles.map((v) => [v.canonical, v.native])
 );

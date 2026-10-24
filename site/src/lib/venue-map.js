@@ -3,6 +3,8 @@
  * Clustering, Deterministic Spiderfy, and Tour Journey Route Sequence (ADR-0124).
  */
 
+import { geoZhTw, geoJa, geoEn, geoKo } from "./locales/geography.js";
+
 export const MAP_VIEWBOX = {
   width: 800,
   height: 560,
@@ -178,8 +180,102 @@ export const JAPAN_47_PREFECTURES = [
 ];
 
 export const OVERSEAS_COUNTRIES = ["韓國", "台灣", "新加坡", "泰國"];
+export const OVERSEAS_TARGET_KEY = "海外";
 
 export const SANIN_SANCTUARY_PREFECTURES = new Set(["島根縣", "鳥取縣"]);
+
+const PREF_ALIAS_LOOKUP = new Map();
+for (const pref of [...JAPAN_47_PREFECTURES, ...OVERSEAS_COUNTRIES]) {
+  PREF_ALIAS_LOOKUP.set(pref.toLowerCase(), pref);
+  const shortZh = pref.replace(/[都道府県縣]$/, "");
+  if (shortZh) PREF_ALIAS_LOOKUP.set(shortZh.toLowerCase(), pref);
+
+  for (const dict of [geoZhTw, geoJa, geoEn, geoKo]) {
+    const locName = dict?.prefectures?.[pref];
+    if (locName) {
+      PREF_ALIAS_LOOKUP.set(locName.toLowerCase(), pref);
+      const shortLoc = locName.replace(/[都道府県縣]$|(?:\s+prefecture|\s+metropolis)$/i, "").trim();
+      if (shortLoc) PREF_ALIAS_LOOKUP.set(shortLoc.toLowerCase(), pref);
+    }
+  }
+}
+
+const REGION_ALIAS_LOOKUP = new Map([
+  ["日本 - 關東", "日本 - 關東"],
+  ["關東", "日本 - 關東"],
+  ["関東", "日本 - 關東"],
+  ["kanto", "日本 - 關東"],
+  ["日本 - 關西", "日本 - 關西"],
+  ["關西", "日本 - 關西"],
+  ["関西", "日本 - 關西"],
+  ["kansai", "日本 - 關西"],
+  ["日本 - 東北 / 北海道", "日本 - 東北 / 北海道"],
+  ["東北", "日本 - 東北 / 北海道"],
+  ["tohoku", "日本 - 東北 / 北海道"],
+  ["日本 - 中部 / 九州 / 其他", "日本 - 中部 / 九州 / 其他"],
+  ["中部", "日本 - 中部 / 九州 / 其他"],
+  ["九州", "日本 - 中部 / 九州 / 其他"],
+  ["中國", "日本 - 中部 / 九州 / 其他"],
+  ["四國", "日本 - 中部 / 九州 / 其他"],
+  ["海外（台灣 / 韓國 / 東南亞）", "海外（台灣 / 韓國 / 東南亞）"],
+]);
+
+/**
+ * Resolves a route parameter from `#/map/:regionOrPref` into a canonical map target
+ * (`journey`, a canonical prefecture / overseas country, `"海外"`, or a canonical region).
+ * Returns `null` for unknown/malformed targets so the router safely falls back to `#/`.
+ *
+ * @param {string|null} rawTarget
+ * @returns {{ mode: "root" | "journey" | "prefecture" | "region", target: string | null } | null}
+ */
+export function resolveMapTarget(rawTarget) {
+  if (rawTarget === null || rawTarget === undefined || rawTarget === "") {
+    return { mode: "root", target: null };
+  }
+  if (typeof rawTarget !== "string") return null;
+  const clean = rawTarget.trim();
+  if (!clean) return { mode: "root", target: null };
+
+  const lower = clean.toLowerCase();
+  if (lower === "journey" || lower === "career") {
+    return { mode: "journey", target: "journey" };
+  }
+  if (clean === "海外" || lower === "overseas" || lower === "asia") {
+    return { mode: "prefecture", target: "海外" };
+  }
+  if (PREF_ALIAS_LOOKUP.has(lower)) {
+    return { mode: "prefecture", target: PREF_ALIAS_LOOKUP.get(lower) };
+  }
+  if (REGION_ALIAS_LOOKUP.has(lower) || REGION_ALIAS_LOOKUP.has(clean)) {
+    return {
+      mode: "region",
+      target: REGION_ALIAS_LOOKUP.get(clean) || REGION_ALIAS_LOOKUP.get(lower),
+    };
+  }
+  return null;
+}
+
+/**
+ * Formats a compact map badge label for a localized prefecture/country name
+ * without awkward mid-syllable truncation in English or Korean.
+ *
+ * @param {string} locPref
+ * @param {boolean} [isSanin=false]
+ * @returns {string}
+ */
+export function formatMapBadgeLabel(locPref = "", isSanin = false) {
+  const clean = String(locPref)
+    .replace(/[都道府県縣]$|(?:\s+prefecture|\s+metropolis)$/i, "")
+    .replace(/(?:특별시|광역시|특별자치도|도|현)$/, "")
+    .trim();
+  const isAscii = /^[ -~]+$/.test(clean);
+  const shortText = isAscii
+    ? clean.length <= 4
+      ? clean
+      : clean.slice(0, 3).toUpperCase()
+    : clean.slice(0, 3);
+  return isSanin ? `🌱${shortText}` : shortText;
+}
 
 function getShowsCountForVenue(venueName, venueObj, globalVenueShows) {
   if (globalVenueShows instanceof Map && globalVenueShows.has(venueName)) {

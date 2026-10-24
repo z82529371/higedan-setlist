@@ -334,4 +334,54 @@ describe("Venue Map Pure Domain Engine (ADR-0124)", () => {
       assert.strictEqual(seq.summary.flightCount, 5);
     });
   });
+
+  describe("5. japan-map-paths.js — Pre-Simplified 47 Prefectures + Dual Inset SVG Geometry & Spotlight ViewBox", () => {
+    it("provides 47 Japan prefectures and 4 Overseas Asia paths (< 15 KB) aligned with projected venue coordinates", async () => {
+      const mapPathsMod = await import("../../src/lib/japan-map-paths.js");
+      const {
+        PREFECTURE_PATHS,
+        PREFECTURE_MAP_BY_NAME,
+        getZoomViewBox,
+      } = mapPathsMod;
+
+      assert.ok(Array.isArray(PREFECTURE_PATHS), "PREFECTURE_PATHS must be an array");
+      assert.strictEqual(PREFECTURE_PATHS.length, 51, "Must include 47 Japan prefectures + 4 Overseas countries");
+
+      const rawPathFile = fs.readFileSync(
+        path.resolve(here, "../../src/lib/japan-map-paths.js"),
+        "utf8"
+      );
+      assert.ok(
+        Buffer.byteLength(rawPathFile, "utf8") < 15 * 1024,
+        "japan-map-paths.js must be under 15 KB"
+      );
+
+      for (const item of PREFECTURE_PATHS) {
+        assert.ok(item.prefecture, "Each entry must have prefecture name");
+        assert.ok(item.path && item.path.startsWith("M") && item.path.endsWith("Z"), `Invalid SVG path for ${item.prefecture}`);
+        assert.strictEqual(typeof item.cx, "number");
+        assert.strictEqual(typeof item.cy, "number");
+        assert.ok(item.viewBox && item.viewBox.split(" ").length === 4, `Invalid viewBox for ${item.prefecture}`);
+        assert.strictEqual(PREFECTURE_MAP_BY_NAME[item.prefecture], item);
+      }
+
+      assert.strictEqual(getZoomViewBox(null), "0 0 800 560");
+      const shimaneVb = getZoomViewBox("島根縣").split(" ").map(Number);
+      assert.strictEqual(shimaneVb.length, 4);
+      assert.ok(shimaneVb[2] < 800 && shimaneVb[3] < 560, "Spotlight zoom viewBox must zoom in closer than full 800x560");
+
+      // Verify all 347 physical venues project inside their prefecture's Spotlight Zoom viewBox
+      const { venueProfiles } = loadArchiveFixtures();
+      for (const v of venueProfiles) {
+        if (v.isVirtual) continue;
+        const pt = projectLatLngToSvg(v.lat, v.lng, v);
+        assert.ok(pt, `Projected point missing for ${v.canonical}`);
+        const [vx, vy, vw, vh] = getZoomViewBox(v.prefecture).split(" ").map(Number);
+        assert.ok(
+          pt.x >= vx && pt.x <= vx + vw && pt.y >= vy && pt.y <= vy + vh,
+          `Venue ${v.canonical} (${v.prefecture}) at (${pt.x}, ${pt.y}) must fall within prefecture zoom viewBox [${vx}, ${vy}, ${vw}, ${vh}]`
+        );
+      }
+    });
+  });
 });
