@@ -276,3 +276,8 @@ _Avoid_: 保留「全部」分類按鈕打破單據一致性、切換分類標�
 3. **無頭 SSR 測試探針防護網（Zero-Dependency In-Process SSR Test Harness，ADR-0109）**：模組化測試套件（`site/tests/ui/`）透過 `site/tests/helpers/vite-server.js` 之 Vite SSR 惰性單例在 Node.js 原生環境內掛載 Hooks，在毫秒級速度下完整驗證 Hash 穿透、八大分類統計與極端回退機制，完全不引入外部肥大之 JSDOM 或第三方測試庫。舊有 `smoke-test.mjs` 則作為透明轉發 Facade 維持 100% 向後相容。
 4. **國際化上下文邊界與按鈕響應不變式（I18n Context Boundary & Confirm Label Invariant）**：`I18nProvider` 必須置於 `App.jsx` 最外層包裹主應用 Hook（`AppContent`），使 `useArchiveRoute` 能無縫訂閱即時的 `I18nContext`。抽屜底部之動態確認標籤（`confirmButtonLabel`）與路由切換時之語系參數同步（`appendLang`）皆嚴格具備全語系響應能力（`zh-TW` 確認套用、`ja` 適用を確定、`en` Apply、`ko` 적용 확정），嚴禁將依賴 i18n 之 Hook 置於 Provider 之外導致語系退回寫死之預設繁中。
 _Avoid_: 非法 Hash 導致頁面崩潰或停留在無效空卡片、抽屜取消後未還原選項、引入肥大 JSDOM 拖慢本機與 CI 反饋速度、將依賴多語系的領域 Hook 掛載在 I18nProvider 外部導致行動抽屜操作按鈕漏翻。
+
+**互動式場地地圖、雙層座標聚合與巡演移動路線序列不變式（Interactive Venue Map & Tour Journey Sequence Invariants，ADR-0124）**:
+1. **雙層座標與同址多舞台真實性**：`data/venue-profiles.json` 中 347 處實體場館皆具備真實 WGS84 `lat`、`lng`（4 位小數）與 `hubId`（`"${prefecture}::${city}"`），2 處線上場館標記 `isVirtual: true` 且座標為 `null`。全國總覽以 47 都道府縣區塊＋左上亞洲海外插頁＋右下沖繩插頁為第一層聚合（Tier 1），局部放大展開場館地標（Tier 2）時，座標相同或 `< 200m` 之多廳／多舞台由前端自動以微幅放射展開（Spiderfy）呈現，嚴禁於 JSON 篡改偽造偏移經緯度。
+2. **巡演移動序列與三態交通工具判定契約**：`buildJourneySequence` 純函式直接連通各站真實 `lat/lng`，自動過濾 `isVirtual: true` 線上直播位移（如 `14-2021-editorial` 尾場線上配信改以「📡 線上配信」徽章獨立呈現），全生涯長征路線預設排除 `電視演出`（可切換開啟），並 100% 保留存根場次（Stub Shows）。相鄰場次轉場嚴格區分為 `stay`（同館連日演出）、`flight`（海外／沖繩／北海道跨海，或本州・四國・九州間大圓直線距離 `> 700 km`）與 `van`（其餘陸路與北海道道內轉場）。
+_Avoid_: 引入需 API Key 之外部商業圖磚服務違反零後端靜態純粹性、於全國視角直接撒點造成高密度城市重疊黑塊、將線上直播納入物理位移導致巡演終點偏離實體千秋樂。
