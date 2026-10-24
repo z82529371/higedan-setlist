@@ -113,14 +113,14 @@ let renderToStaticMarkup;
           assert.ok(track.ratio >= 0 && track.ratio <= 1);
           assert.equal(track.percentage, Math.round(track.ratio * 100));
 
-          if (track.count === stats.totalShows && stats.totalShows > 0) {
+          if (track.count === track.totalShows && track.totalShows > 0) {
             assert.equal(track.tier, "core");
             assert.equal(track.tierLabel, "核心全勤");
             assert.equal(track.tierBadgeLabel, "核心全勤 100%");
           } else if (track.ratio >= 0.7) {
             assert.equal(track.tier, "regular");
             assert.equal(track.tierLabel, "巡演定番");
-          } else if (track.ratio >= 0.3 && !(stats.totalShows <= 4 && track.count === 1)) {
+          } else if (track.ratio >= 0.3 && !(track.totalShows <= 4 && track.count === 1)) {
             assert.equal(track.tier, "rotating");
             assert.equal(track.tierLabel, "雙日輪替");
           } else {
@@ -1013,6 +1013,77 @@ let renderToStaticMarkup;
       );
       assert.ok(standaloneToggleHtml.includes("巡演總覽"));
       assert.ok(standaloneToggleHtml.includes("單場即時票根"));
+    });
+
+    it("excludes 0-song stub shows from tour track frequency denominator, itinerary standard flags, and defaultShowId", async () => {
+      const domainMod = await loadModule("./src/lib/domain.js");
+      const { defaultShowId } = domainMod;
+
+      const tourWithStubs = {
+        id: "stub-mixed-tour",
+        title: "ひげだん Free Live Tour 2015",
+        type: "店家活動",
+        isTour: true,
+        templateSetlist: [
+          { order: 1, songId: "koi-no-saichu" },
+          { order: 2, songId: "sweet-tweet" },
+        ],
+        shows: [
+          {
+            id: "show-confirmed-1",
+            date: "2015-05-03",
+            venue: "タワーレコード難波店",
+            city: "大阪",
+            diff: {},
+          },
+          {
+            id: "show-confirmed-2",
+            date: "2015-05-04",
+            venue: "タワーレコード京都店",
+            city: "京都",
+            diff: {},
+          },
+          {
+            id: "show-stub-3",
+            date: "2015-08-22",
+            venue: "永旺夢樂城日吉津",
+            city: "日吉津",
+            diff: { skip: [1, 2] },
+          },
+        ],
+      };
+
+      const stats = computeTourStatistics(tourWithStubs);
+      assert.equal(stats.totalShows, 3);
+      assert.equal(stats.confirmedShowsCount, 2);
+
+      for (const track of stats.consensusTracks) {
+        assert.equal(track.count, 2);
+        assert.equal(track.totalShows, 2);
+        assert.equal(track.percentage, 100);
+        assert.equal(track.tier, "core");
+      }
+
+      const stubStop = stats.itinerary.find((s) => s.id === "show-stub-3");
+      assert.ok(stubStop);
+      assert.equal(stubStop.totalSongs, 0);
+      assert.equal(stubStop.isStandard, false);
+
+      assert.equal(defaultShowId(tourWithStubs), "show-confirmed-2");
+    });
+
+    it("standalone toggle has dual-direction symbol", () => {
+      const standaloneToggleHtml = renderToStaticMarkup(
+        React.createElement(DualModeCapsuleToggle, {
+          isTour: true,
+          mode: "show",
+          unitId: "arena-tour-2024-rejoice",
+          showId: "1672276",
+          onToggleMode: () => {},
+          onSelectTour: () => {},
+          onSelectShow: () => {},
+        })
+      );
       assert.ok(standaloneToggleHtml.includes("⟷"));
     });
   });

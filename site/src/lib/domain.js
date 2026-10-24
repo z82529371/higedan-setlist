@@ -230,7 +230,7 @@ export function defaultShowId(unit) {
   );
   const withSongs = shows.filter(
     (s) =>
-      unit?.templateSetlist ||
+    resolveShowItems(unit, s).some((i) => i.songId || i.title) ||
       (s.setlist ?? []).some((i) => i.songId || i.title)
   );
   return (withSongs.length > 0 ? withSongs.at(-1) : shows.at(-1))?.id ?? null;
@@ -414,6 +414,7 @@ export function computeTourStatistics(tourUnitData) {
       tour: null,
       isTour: false,
       totalShows: 0,
+      confirmedShowsCount: 0,
       consensusTracks: [],
       templateTracks: [],
       coreTracks: [],
@@ -424,6 +425,7 @@ export function computeTourStatistics(tourUnitData) {
       itinerary: [],
       stats: {
         totalShows: 0,
+        confirmedShowsCount: 0,
         coreCount: 0,
         regularCount: 0,
         rotatingCount: 0,
@@ -463,6 +465,11 @@ export function computeTourStatistics(tourUnitData) {
   });
 
   const uniquePrefectures = new Set();
+  const confirmedShowsCount = resolvedShows.filter((rs) =>
+    rs.cuedItems.some((p) => p.cue !== null)
+  ).length;
+  const effectiveTotalShows =
+    confirmedShowsCount > 0 ? confirmedShowsCount : totalShows;
   const uniqueCities = new Set();
   const allUniqueSongKeys = new Set();
 
@@ -527,7 +534,7 @@ function isSoloItem(item) {
     const hasCueDrift = uniqueCues.length > 1;
 
     const count = appearances.length;
-    const freq = formatFrequencyStats(count, totalShows);
+    const freq = formatFrequencyStats(count, effectiveTotalShows);
 
     // 100% Monolithic Arrangement Rule:
     // Only if 100% of appearances in this tour carried the label do we badge it on the overview
@@ -555,7 +562,7 @@ function isSoloItem(item) {
       title,
       encore: !!item.encore,
       count,
-      totalShows,
+      totalShows: effectiveTotalShows,
       ratio: freq.ratio,
       percentage: freq.percentage,
       tier: freq.tier,
@@ -634,7 +641,7 @@ function isSoloItem(item) {
 
   const allNonTemplateTracks = Array.from(nonTemplateSongMap.values()).map((rec) => {
     const count = rec.appearances.length;
-    const freq = formatFrequencyStats(count, totalShows);
+    const freq = formatFrequencyStats(count, effectiveTotalShows);
 
     // 100% Monolithic Arrangement Rule:
     const badges = [];
@@ -664,7 +671,7 @@ function isSoloItem(item) {
       songId: rec.songId,
       title: rec.title,
       count,
-      totalShows,
+      totalShows: effectiveTotalShows,
       ratio: freq.ratio,
       percentage: freq.percentage,
       tier,
@@ -713,7 +720,7 @@ function isSoloItem(item) {
         const key = sid || stitle;
         const rec = nonTemplateSongMap.get(key);
         const count = rec?.appearances.length || 0;
-        const tier = getTourFrequencyTier(count, totalShows);
+        const tier = getTourFrequencyTier(count, effectiveTotalShows);
         if (tier === "rotating") {
           showRotatingInserts.push({ item: p, rec });
         } else {
@@ -737,9 +744,10 @@ function isSoloItem(item) {
       };
     });
 
+    const hasSongs = nonInterludeItems.length > 0;
     const hasRotatingInserts = showRotatingInserts.length > 0;
-    const isStandard = surpriseHighlights.length === 0 && !hasRotatingInserts;
-    const isRotating = surpriseHighlights.length === 0 && hasRotatingInserts;
+    const isStandard = hasSongs && surpriseHighlights.length === 0 && !hasRotatingInserts;
+    const isRotating = hasSongs && surpriseHighlights.length === 0 && hasRotatingInserts;
 
     return {
       id: s.id,
@@ -767,6 +775,7 @@ function isSoloItem(item) {
 
   const stats = {
     totalShows,
+    confirmedShowsCount,
     coreCount: coreTracks.length,
     regularCount: regularTracks.length,
     rotatingCount: rotatingTracks.length,
@@ -784,6 +793,7 @@ function isSoloItem(item) {
     tour: unit,
     isTour,
     totalShows,
+    confirmedShowsCount,
     consensusTracks,
     templateTracks: consensusTracks,
     coreTracks,

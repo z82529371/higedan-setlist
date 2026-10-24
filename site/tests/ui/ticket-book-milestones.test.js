@@ -346,6 +346,65 @@ describe("25. TicketBook Dynamic Milestones Calculation & Summary Card (#37)", (
       assert.ok(topSongIds.includes("fuusen"), "Unreleased song 'fuusen' must remain in topSongs if played");
     });
 
+    it("excludes virtual livestream venues and cities from totalVenues and totalCities while counting attendance and unlocked songs", async () => {
+      const { computeTicketBookMilestones } = await loadModule("/src/lib/ticket-book-milestones.js");
+
+      const catalog = [
+        { id: "pretender", title: "Pretender" },
+        { id: "subtitle", title: "Subtitle" },
+      ];
+
+      const testShowById = new Map([
+        [
+          "physical-show",
+          {
+            id: "physical-show",
+            date: "2024-12-15",
+            venue: "台北小巨蛋",
+            city: "台北",
+            setlist: [{ songId: "pretender" }],
+          },
+        ],
+        [
+          "livestream-show-1",
+          {
+            id: "livestream-show-1",
+            date: "2020-09-26",
+            venue: "線上直播",
+            city: "線上直播",
+            setlist: [{ songId: "subtitle" }],
+          },
+        ],
+        [
+          "livestream-show-2",
+          {
+            id: "livestream-show-2",
+            date: "2020-08-06",
+            venue: "線上直播 (YouTube / Twitter / LINE)",
+            city: "線上直播",
+            setlist: [{ songId: "pretender" }],
+          },
+        ],
+      ]);
+
+      const stats = computeTicketBookMilestones({
+        attendedShows: [
+          { showKey: "physical-show", attendedAt: "2024-12-15" },
+          { showKey: "livestream-show-1", attendedAt: "2020-09-26" },
+          { showKey: "livestream-show-2", attendedAt: "2020-08-06" },
+        ],
+        unitData: new Map(),
+        showById: testShowById,
+        unitIdByShowId: new Map(),
+        allUsedSongs: catalog,
+      });
+
+      assert.equal(stats.totalShows, 3);
+      assert.equal(stats.unlockedSongCount, 2);
+      assert.equal(stats.totalVenues, 1);
+      assert.equal(stats.totalCities, 1);
+    });
+
     it("computes albumGroups with songs, counts, and completion percentages excluding unreleased tracks", async () => {
       const { computeTicketBookMilestones } = await loadModule("/src/lib/ticket-book-milestones.js");
 

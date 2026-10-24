@@ -19,6 +19,10 @@ import { ALBUM_ORDER } from "./constants.js";
 
 const EXCLUDED_CHECKLIST_BUCKETS = new Set(["未發行曲目", "合作單曲"]);
 
+function isVirtualLivestreamPlace(value) {
+  return typeof value === "string" && value.startsWith("線上直播");
+}
+
 function createAlbumGroup(album, songs) {
   const totalSongs = songs.length;
   const unlockedCount = songs.filter((s) => s.unlocked).length;
@@ -97,7 +101,7 @@ export function computeTicketBookMilestones({
   const releasedCatalog = catalog.filter((s) => {
     if (!s || !s.id) return false;
     if (unreleasedIdSet.has(s.id) || s.unreleased) return false;
-    if (getSongAlbum(s) === "合作單曲") return false;
+    if (EXCLUDED_CHECKLIST_BUCKETS.has(getSongAlbum(s))) return false;
     return true;
   });
   const totalCatalogSongs = releasedCatalog.length;
@@ -145,13 +149,13 @@ export function computeTicketBookMilestones({
 
     // 2. Venue determination
     const venueName = show?.venue;
-    if (venueName && typeof venueName === "string") {
+    if (venueName && typeof venueName === "string" && !isVirtualLivestreamPlace(venueName)) {
       venueNames.add(venueName);
     }
 
     // 3. City determination
     const city = show?.city;
-    if (city && typeof city === "string") {
+    if (city && typeof city === "string" && !isVirtualLivestreamPlace(city)) {
       cities.add(city);
     }
 
