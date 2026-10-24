@@ -1,6 +1,6 @@
 # Coding Standards
 
-Engineering standards and judgement baselines for code review and implementation.
+Engineering standards, judgement baselines, and module test seams for code review and implementation.
 
 ## 1. Zero-Backend & Static Purity (ADR-0123)
 
@@ -8,10 +8,10 @@ Engineering standards and judgement baselines for code review and implementation
 - **Browser-Native Primitives**: When addressing client capabilities or system-level limitations (e.g. unconfigured desktop email clients), strictly choose browser-native web primitives (`mail.google.com` Web Compose, Clipboard API, Web Share API, deep URL hashes) over external SaaS services or backend proxies.
 - **Zero Secrets**: Never introduce `.env` secrets or client-side API keys. Public static assets and client-side data sync (`pnpm sync`) drive all application state.
 
-## 2. Fan Experience & Consumer-Friendly Copy (Rule 12)
+## 2. Fan Experience & Consumer-Friendly Copy
 
 - **No Developer Jargon**: Never expose engineer-facing mechanics in UI copy, modals, or user alerts.
-  - *Avoid*: `JSON 備份還原`, `Schema 驗證錯誤`, `Payload`, `Database`, `HTTP 500`.
+  - *Avoid*: `JSON 備份還原`, `Schema 驗證錯誤`, `Payload`, `Database`, `Envelope`, `HTTP 500`.
   - *Adopt*: `備份紀錄`, `轉移紀錄`, `檔案格式不符`, `請檢查網路連線`.
 - **Low-Friction Interactions**: Minimize steps required for fan participation. Forms must provide immediate copy-to-clipboard or direct compose fallbacks with instant visual feedback.
 
@@ -31,3 +31,17 @@ Engineering standards and judgement baselines for code review and implementation
   - English (`en.js`)
   - Korean (`ko.js`)
 - **No Bare CJK**: All JSX templates must use `t("...")` keys; bare CJK text outside locale files is forbidden and blocked by `pnpm check:i18n`.
+
+## 5. Core Domain Seams & Test Map (`/tdd` & `/implement`)
+
+When proposing and testing public seams during `/tdd` or `/implement`, target these canonical module boundaries and test suites:
+
+| Domain Module (`site/src/lib/`) | Public Seam / Export | Target Test Suite (`site/tests/`) |
+| :--- | :--- | :--- |
+| `domain.js` | `buildIndex`, `computeTourStatistics`, `defaultShowId`, `getSongAlbum` | `tests/ui/tour-statistics.test.js`, `tests/pipeline/canonical-titles.test.js` |
+| `resolve.js` | `resolve`, `assignCues`, `encoreStartOrderOf` | `tests/pipeline/resolve-monotonicity.test.js` |
+| `routes.js` | `parseRoute`, `routeHash` | `tests/invariants/design-tokens.test.js`, `tests/ui/route-machine.test.js` |
+| `ticket-book.js` | `loadTicketBook`, `toggleShowAttended`, `exportBackupFile`, `parseTransferCode` | `tests/ui/ticket-book.test.js` |
+| `ticket-book-milestones.js` | `computeTicketBookMilestones`, `buildAlbumGroups` | `tests/ui/ticket-book-milestones.test.js` |
+| `feedback.js` | `buildSetlistMailto`, `buildGmailWebComposeUrl`, `buildLeadFallbackText` | `tests/pipeline/feedback-lead.test.js`, `tests/ui/lead-drop-modal.test.js` |
+| `locales/venues.js` | `localizeVenue`, `getNativeVenue`, `resolveVenueCanonical`, `matchVenue` | `tests/ui/venue-localization.test.js`, `tests/invariants/venue-profiles.test.js` |

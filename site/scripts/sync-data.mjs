@@ -1,4 +1,4 @@
-import { cpSync, existsSync, mkdirSync, rmSync } from "node:fs";
+import { cpSync, existsSync, mkdirSync, readdirSync, rmSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { validateAndCleanTours } from "./validate-data.mjs";
@@ -12,7 +12,7 @@ const dest = resolve(here, "..", "src", "data");
 // Run validation and auto-cleaning prior to syncing data
 validateAndCleanTours();
 
-rmSync(dest, { recursive: true, force: true });
+// In-place sync without wiping dest directory to prevent concurrent Vite SSR race conditions
 mkdirSync(dest, { recursive: true });
 
 cpSync(resolve(src, "songs.json"), resolve(dest, "songs.json"));
@@ -24,10 +24,18 @@ if (existsSync(resolve(src, "venue-profiles.json"))) {
 }
 
 for (const sub of ["tours", "events"]) {
-  const dir = resolve(src, sub);
-  if (!existsSync(dir)) continue;
-  mkdirSync(resolve(dest, sub), { recursive: true });
-  cpSync(dir, resolve(dest, sub), { recursive: true });
+  const srcSub = resolve(src, sub);
+  if (!existsSync(srcSub)) continue;
+  const destSub = resolve(dest, sub);
+  mkdirSync(destSub, { recursive: true });
+
+  const srcFiles = new Set(readdirSync(srcSub));
+  for (const existing of readdirSync(destSub)) {
+    if (!srcFiles.has(existing)) {
+      rmSync(resolve(destSub, existing), { force: true });
+    }
+  }
+  cpSync(srcSub, destSub, { recursive: true });
   console.log("synced", sub);
 }
 

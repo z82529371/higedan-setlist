@@ -6,6 +6,7 @@
  * suites to avoid redundant boot costs.
  */
 
+import { cpSync, existsSync, mkdirSync, readdirSync, rmSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -15,12 +16,45 @@ let renderToStaticMarkupFn = null;
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const siteRoot = path.resolve(here, "../..");
+const repoDataRoot = path.resolve(siteRoot, "../data");
+const siteDataDest = path.resolve(siteRoot, "src/data");
+
+function ensureSiteDataSynced() {
+  if (!existsSync(repoDataRoot)) return;
+  mkdirSync(siteDataDest, { recursive: true });
+  for (const file of ["songs.json", "venue-profiles.json"]) {
+    const srcFile = path.resolve(repoDataRoot, file);
+    const dstFile = path.resolve(siteDataDest, file);
+    if (existsSync(srcFile) && !existsSync(dstFile)) {
+      cpSync(srcFile, dstFile);
+    }
+  }
+  for (const sub of ["tours", "events"]) {
+    const srcSub = path.resolve(repoDataRoot, sub);
+    const dstSub = path.resolve(siteDataDest, sub);
+    if (!existsSync(srcSub)) continue;
+    mkdirSync(dstSub, { recursive: true });
+    const srcFiles = new Set(readdirSync(srcSub));
+    const dstFiles = new Set(readdirSync(dstSub));
+    for (const existing of dstFiles) {
+      if (!srcFiles.has(existing)) {
+        rmSync(path.resolve(dstSub, existing), { force: true });
+      }
+    }
+    for (const f of srcFiles) {
+      if (!dstFiles.has(f)) {
+        cpSync(path.resolve(srcSub, f), path.resolve(dstSub, f));
+      }
+    }
+  }
+}
 
 /**
  * Returns the cached Vite dev server instance, creating it if not already running.
  */
 export async function getViteServer() {
   if (!serverInstance) {
+    ensureSiteDataSynced();
     const vite = await import("vite");
     serverInstance = await vite.createServer({
       root: siteRoot,
@@ -48,7 +82,16 @@ export async function getViteServer() {
  */
 export async function loadModule(specifier) {
   const server = await getViteServer();
-  return server.ssrLoadModule(specifier);
+  try {
+    return await server.ssrLoadModule(specifier);
+  } catch (err) {
+    if (err?.code === "ERR_LOAD_URL" && String(err?.message).includes("/src/data/")) {
+      ensureSiteDataSynced();
+      server.moduleGraph.invalidateAll();
+      return await server.ssrLoadModule(specifier);
+    }
+    throw err;
+  }
 }
 
 let consoleErrorHooked = false;

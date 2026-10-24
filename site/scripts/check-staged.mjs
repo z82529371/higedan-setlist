@@ -1,4 +1,5 @@
 import { execSync } from "node:child_process";
+import { existsSync, readFileSync, writeFileSync } from "node:fs";
 
 // Guardrail against staging concurrent agent files (data/events/ and docs/reports/)
 try {
@@ -41,6 +42,22 @@ try {
     console.error("\nRun: git reset -- <files> to unstage them before committing,");
     console.error("or specify STAGED_ALLOW_EVENTS=\"<file1>,<file2>\" if intentionally modifying them for this task.");
     process.exit(1);
+  }
+
+  // Guardrail: Normalize CRLF -> LF on staged text files in working tree (.gitattributes compliance)
+  const textExtRegex = /\.(?:js|jsx|mjs|md|json|css|html|yaml|yml)$/i;
+  for (const file of staged) {
+    if (textExtRegex.test(file) && existsSync(file)) {
+      try {
+        const raw = readFileSync(file, "utf8");
+        if (raw.includes("\r\n")) {
+          writeFileSync(file, raw.replace(/\r\n/g, "\n"), "utf8");
+          execSync(`git add -- "${file}"`);
+        }
+      } catch {
+        // Ignore if file cannot be normalized
+      }
+    }
   }
 
   // Guardrail: If any docs/adr/0*.md is staged, docs/adr/README.md must be staged and contain it
