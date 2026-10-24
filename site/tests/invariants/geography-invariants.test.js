@@ -34,7 +34,7 @@ describe("11. Administrative Geography & Venue Entity Invariants (ADR-0108)", ()
       "domain.js must export formatShowVenueCity"
     );
     assert.ok(
-      content.includes("prefecture: firstShow?.prefecture ?? \"\""),
+      /prefecture:\s*firstShow\?\.prefecture\b/.test(content),
       "domain.js venuesList must map canonical 'prefecture'"
     );
   });

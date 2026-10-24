@@ -21,6 +21,7 @@ Engineering standards, judgement baselines, and module test seams for code revie
   - Border radius: Strictly adhere to `rounded-[3px]` for tickets, badges, and modals.
   - Shadows: Strictly use zero-blur `shadow-xs` / `dark:shadow-none`.
   - Monospace cue: Numbers, dates, codes, and setlist counters use `font-mono` (The Cue Monospace Rule); subtitles and explanatory labels use proportional typography.
+  - Atomic Show Date Invariant: Whenever rendering a show date alongside a venue or city name, keep the date in a dedicated `font-mono whitespace-nowrap shrink-0` span and apply `truncate` only to the sibling venue/city span so dates never clip or wrap.
 - **Contrast**: Small text (<14px) and badge labels must meet AAA 7:1 contrast using semantic theme ink tokens (`text-ink`, `text-ink-muted`). Never introduce unvetted arbitrary hex colors (e.g. `text-[#...]`).
 
 ## 4. Multi-Lingual Parity (ADR-0107, ADR-0112)
@@ -53,4 +54,5 @@ When proposing and testing public seams during `/tdd` or `/implement`, target th
 | `ticket-book-milestones.js` | `computeTicketBookMilestones`, `buildAlbumGroups` | `tests/ui/ticket-book-milestones.test.js` |
 | `feedback.js` | `buildSetlistMailto`, `buildGmailWebComposeUrl`, `buildLeadFallbackText` | `tests/pipeline/feedback-lead.test.js`, `tests/ui/lead-drop-modal.test.js` |
 | `locales/venues.js` | `localizeVenue`, `getNativeVenue`, `resolveVenueCanonical`, `matchVenue` | `tests/ui/venue-localization.test.js`, `tests/invariants/venue-profiles.test.js` |
-| `venue-map.js` | `projectLatLngToSvg`, `buildPrefectureMapStats`, `computeSpiderfyOffsets`, `buildJourneySequence` | `tests/pipeline/venue-map.test.js`, `tests/invariants/venue-profiles.test.js` |
+| `venue-map.js` | `projectLatLngToSvg`, `buildPrefectureMapStats`, `computeSpiderfyOffsets`, `buildJourneySequence`, `resolveMapTarget`, `formatMapBadgeLabel` | `tests/pipeline/venue-map.test.js`, `tests/invariants/venue-profiles.test.js`, `tests/ui/venue-map-ui.test.js` |
+| `japan-map-paths.js` | `JAPAN_PREFECTURE_PATHS`, `OVERSEAS_INSET_COUNTRIES`, `getZoomViewBox` | `tests/pipeline/venue-map.test.js`, `tests/ui/venue-map-ui.test.js` |

@@ -25,6 +25,10 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { dictZhTw } from "../src/lib/locales/zh-TW.js";
+import { dictJa } from "../src/lib/locales/ja.js";
+import { dictEn } from "../src/lib/locales/en.js";
+import { dictKo } from "../src/lib/locales/ko.js";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const SCAN_TARGETS = ["src/components", "src/hooks", "src/App.jsx", "src/main.jsx"];
@@ -45,6 +49,7 @@ const CANONICAL = new Set([
   "EP / 單曲",
   "合作單曲",
   "未發行曲目",
+  "海外",
   "海外（台灣 / 韓國 / 東南亞）",
   "日本 - 關東",
   "日本 - 關西",
@@ -181,6 +186,39 @@ export function checkI18nContextBoundary(appSrc) {
   return violations;
 }
 
+function flattenKeys(obj, prefix = "") {
+  const keys = [];
+  for (const [k, v] of Object.entries(obj || {})) {
+    const next = prefix ? `${prefix}.${k}` : k;
+    if (v && typeof v === "object" && !Array.isArray(v)) {
+      keys.push(...flattenKeys(v, next));
+    } else {
+      keys.push(next);
+    }
+  }
+  return keys;
+}
+
+export function checkLocaleKeyParity(locales = { "zh-TW": dictZhTw, ja: dictJa, en: dictEn, ko: dictKo }) {
+  const violations = [];
+  const baseKeys = new Set(flattenKeys(locales["zh-TW"]));
+  for (const [code, dict] of Object.entries(locales)) {
+    if (code === "zh-TW") continue;
+    const keys = new Set(flattenKeys(dict));
+    for (const k of baseKeys) {
+      if (!keys.has(k)) {
+        violations.push(`locale '${code}' is missing key '${k}' (defined in zh-TW)`);
+      }
+    }
+    for (const k of keys) {
+      if (!baseKeys.has(k)) {
+        violations.push(`locale '${code}' has extra key '${k}' (not defined in zh-TW)`);
+      }
+    }
+  }
+  return violations;
+}
+
 function selfTest() {
   const cases = [
     // [source, expectViolation]
@@ -274,6 +312,11 @@ for (const file of files) {
       console.error(`${rel}: context boundary violation: ${bv}`);
     }
   }
+}
+const parityViolations = checkLocaleKeyParity();
+for (const pv of parityViolations) {
+  total++;
+  console.error(`src/lib/locales: key parity violation: ${pv}`);
 }
 if (total > 0) {
   console.error(
