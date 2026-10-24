@@ -172,6 +172,14 @@ try {
     process.exit(1);
   }
 
+  // Guardrail: Run venue-profiles invariant test whenever venue-profiles.json or geography.js is staged
+  const venueFilesStaged = staged.some(
+    (file) => file === "data/venue-profiles.json" || file === "site/src/lib/locales/geography.js"
+  );
+  if (venueFilesStaged) {
+    execSync("node --test site/tests/invariants/venue-profiles.test.js", { stdio: "inherit" });
+  }
+
   console.log(`✓ Staged files hygiene check passed (${staged.length} file${staged.length === 1 ? "" : "s"} staged):`);
   for (const file of staged) {
     console.log(`  • ${file}`);

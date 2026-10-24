@@ -132,8 +132,16 @@ describe("19. Venue Master Profiles & Invariant Gates (ADR-0111, ADR-0124)", () 
       assert.strictEqual(v.address, null, `Virtual venue ${v.canonical} must have address: null`);
     }
 
+    const byPrefecture = new Map();
     for (const p of physicalVenues) {
       assert.ok(typeof p.address === "string" && p.address.trim().length > 0, `Physical venue ${p.canonical} must have non-empty official address`);
+      if (p.country === "日本") {
+        const expectedPrefJa = geoJa.prefectures[p.prefecture];
+        assert.ok(
+          p.address.startsWith(expectedPrefJa),
+          `Japanese venue ${p.canonical} (${p.id}) address '${p.address}' must start with prefecture '${expectedPrefJa}'`
+        );
+      }
       assert.strictEqual(typeof p.lat, "number", `Physical venue ${p.canonical} must have numeric lat`);
       assert.strictEqual(typeof p.lng, "number", `Physical venue ${p.canonical} must have numeric lng`);
       assert.ok(p.lat >= 1.0 && p.lat <= 46.0, `Venue ${p.canonical} lat ${p.lat} out of valid range [1.0, 46.0]`);
@@ -142,6 +150,24 @@ describe("19. Venue Master Profiles & Invariant Gates (ADR-0111, ADR-0124)", () 
       assert.strictEqual(Number(p.lng.toFixed(4)), p.lng, `Venue ${p.canonical} lng ${p.lng} must have at most 4 decimal places`);
       assert.ok(p.prefecture && p.city, `Physical venue ${p.canonical} must have non-empty prefecture and city`);
       assert.strictEqual(p.hubId, `${p.prefecture}::${p.city}`, `Venue ${p.canonical} hubId must match prefecture::city`);
+
+      if (!byPrefecture.has(p.hubId)) byPrefecture.set(p.hubId, []);
+      byPrefecture.get(p.hubId).push(p);
+    }
+
+    // Ensure no venue within a city hub drifts > 0.45 deg (~45 km) from its city hub median
+    for (const [hubId, list] of byPrefecture.entries()) {
+      if (list.length < 2) continue;
+      const lats = list.map((x) => x.lat).sort((a, b) => a - b);
+      const lngs = list.map((x) => x.lng).sort((a, b) => a - b);
+      const medLat = lats[Math.floor(lats.length / 2)];
+      const medLng = lngs[Math.floor(lngs.length / 2)];
+      for (const v of list) {
+        assert.ok(
+          Math.abs(v.lat - medLat) <= 0.45 && Math.abs(v.lng - medLng) <= 0.45,
+          `Venue ${v.canonical} (${v.lat}, ${v.lng}) deviates excessively from hub ${hubId} median (${medLat}, ${medLng})`
+        );
+      }
     }
   });
 
