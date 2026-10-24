@@ -3,12 +3,13 @@ import assert from "node:assert/strict";
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { geoZhTw, geoJa, geoEn, geoKo } from "../../src/lib/locales/geography.js";
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(here, "..", "..", "..");
 const dataDir = path.resolve(root, "data");
 
-describe("19. Venue Master Profiles & Invariant Gates (ADR-0111)", () => {
+describe("19. Venue Master Profiles & Invariant Gates (ADR-0111, ADR-0124)", () => {
   const profilesPath = path.resolve(dataDir, "venue-profiles.json");
   assert.ok(fs.existsSync(profilesPath), "data/venue-profiles.json must exist");
 
@@ -115,6 +116,53 @@ describe("19. Venue Master Profiles & Invariant Gates (ADR-0111)", () => {
       0,
       `Venue profiles must not contain formatting defects or circuit leakage: ${JSON.stringify(violations, null, 2)}`
     );
+  });
+
+  it("ensures 347 physical venues have valid WGS84 lat/lng (4 decimals) and hubId, and 2 livestream venues have isVirtual=true (ADR-0124)", () => {
+    const virtualVenues = profiles.filter((p) => p.isVirtual === true);
+    const physicalVenues = profiles.filter((p) => !p.isVirtual);
+
+    assert.strictEqual(virtualVenues.length, 2, `Expected exactly 2 virtual venues, found ${virtualVenues.length}`);
+    assert.strictEqual(physicalVenues.length, 347, `Expected 347 physical venues, found ${physicalVenues.length}`);
+
+    for (const v of virtualVenues) {
+      assert.strictEqual(v.lat, null, `Virtual venue ${v.canonical} must have lat: null`);
+      assert.strictEqual(v.lng, null, `Virtual venue ${v.canonical} must have lng: null`);
+      assert.strictEqual(v.hubId, null, `Virtual venue ${v.canonical} must have hubId: null`);
+      assert.strictEqual(v.address, null, `Virtual venue ${v.canonical} must have address: null`);
+    }
+
+    for (const p of physicalVenues) {
+      assert.ok(typeof p.address === "string" && p.address.trim().length > 0, `Physical venue ${p.canonical} must have non-empty official address`);
+      assert.strictEqual(typeof p.lat, "number", `Physical venue ${p.canonical} must have numeric lat`);
+      assert.strictEqual(typeof p.lng, "number", `Physical venue ${p.canonical} must have numeric lng`);
+      assert.ok(p.lat >= 1.0 && p.lat <= 46.0, `Venue ${p.canonical} lat ${p.lat} out of valid range [1.0, 46.0]`);
+      assert.ok(p.lng >= 100.0 && p.lng <= 146.0, `Venue ${p.canonical} lng ${p.lng} out of valid range [100.0, 146.0]`);
+      assert.strictEqual(Number(p.lat.toFixed(4)), p.lat, `Venue ${p.canonical} lat ${p.lat} must have at most 4 decimal places`);
+      assert.strictEqual(Number(p.lng.toFixed(4)), p.lng, `Venue ${p.canonical} lng ${p.lng} must have at most 4 decimal places`);
+      assert.ok(p.prefecture && p.city, `Physical venue ${p.canonical} must have non-empty prefecture and city`);
+      assert.strictEqual(p.hubId, `${p.prefecture}::${p.city}`, `Venue ${p.canonical} hubId must match prefecture::city`);
+    }
+  });
+
+  it("ensures all physical venue cities and prefectures (including 越前) exist in 4-locale geography.js dictionaries", () => {
+    assert.strictEqual(geoZhTw.cities["越前"], "越前");
+    assert.strictEqual(geoJa.cities["越前"], "越前");
+    assert.strictEqual(geoEn.cities["越前"], "Echizen");
+    assert.strictEqual(geoKo.cities["越前"], "에치젠");
+
+    const physicalVenues = profiles.filter((p) => !p.isVirtual);
+    for (const p of physicalVenues) {
+      for (const [loc, dict] of [
+        ["zh-TW", geoZhTw],
+        ["ja", geoJa],
+        ["en", geoEn],
+        ["ko", geoKo],
+      ]) {
+        assert.ok(dict.prefectures[p.prefecture], `Prefecture '${p.prefecture}' (${p.canonical}) missing in ${loc}`);
+        assert.ok(dict.cities[p.city], `City '${p.city}' (${p.canonical}) missing in ${loc}`);
+      }
+    }
   });
 });
 

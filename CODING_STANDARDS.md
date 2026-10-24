@@ -45,3 +45,4 @@ When proposing and testing public seams during `/tdd` or `/implement`, target th
 | `ticket-book-milestones.js` | `computeTicketBookMilestones`, `buildAlbumGroups` | `tests/ui/ticket-book-milestones.test.js` |
 | `feedback.js` | `buildSetlistMailto`, `buildGmailWebComposeUrl`, `buildLeadFallbackText` | `tests/pipeline/feedback-lead.test.js`, `tests/ui/lead-drop-modal.test.js` |
 | `locales/venues.js` | `localizeVenue`, `getNativeVenue`, `resolveVenueCanonical`, `matchVenue` | `tests/ui/venue-localization.test.js`, `tests/invariants/venue-profiles.test.js` |
+| `venue-map.js` | `projectLatLngToSvg`, `buildPrefectureMapStats`, `computeSpiderfyOffsets`, `buildJourneySequence` | `tests/pipeline/venue-map.test.js`, `tests/invariants/venue-profiles.test.js` |
