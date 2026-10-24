@@ -14,9 +14,46 @@
       "title": "トアロード・アコースティック・フェスティバル 2016",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=68",
-        "https://www.livefans.jp/events/613663"
+        "https://www.livefans.jp/events/613663",
+        "https://x.com/yu0624na/status/1293193175314571265"
       ],
-      "setlist": [],
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "songId": "natsu-moyou-no-neko"
+        },
+        {
+          "order": 2,
+          "encore": false,
+          "songId": "nichiyoubi-no-love-letter"
+        },
+        {
+          "order": 3,
+          "encore": false,
+          "songId": "ai-nandaga"
+        },
+        {
+          "order": 4,
+          "encore": false,
+          "songId": "parade"
+        },
+        {
+          "order": 5,
+          "encore": false,
+          "songId": "koi-no-maenarae"
+        },
+        {
+          "order": 6,
+          "encore": false,
+          "songId": "itan-na-star"
+        },
+        {
+          "order": 7,
+          "encore": false,
+          "songId": "sweet-tweet"
+        }
+      ],
       "weekday": "日",
       "opensAt": "13:00",
       "startsAt": "13:30"

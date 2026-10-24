@@ -14,9 +14,15 @@
       "prefecture": "鳥取縣",
       "title": "秋のBSSまつり 2015",
       "sourceUrls": [
-        "https://ja.wikipedia.org/wiki/Official%E9%AB%AD%E7%94%B7dism#出演イベント"
+        "https://ja.wikipedia.org/wiki/Official%E9%AB%AD%E7%94%B7dism#出演イベント",
+        "https://x.com/yu0624na/status/647605846986260480"
       ],
-      "setlist": []
+      "setlist": [
+        { "order": 1, "encore": false, "songId": "yugure-zoi" },
+        { "order": 2, "encore": false, "songId": "itan-na-star" },
+        { "order": 3, "encore": false, "songId": "ai-nandaga" },
+        { "order": 4, "encore": false, "songId": "koi-no-maenarae" }
+      ]
     }
   ]
 }

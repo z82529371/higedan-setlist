@@ -15,26 +15,39 @@
       "startsAt": "12:30",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=67",
-        "https://www.livefans.jp/events/636682"
+        "https://www.livefans.jp/events/636682",
+        "https://x.com/uka_love_like/status/1918557333719777495"
       ],
       "setlist": [
         {
           "order": 1,
           "encore": false,
-          "songId": "ai-nandaga"
+          "type": "interlude",
+          "note": "リハ：parade"
         },
         {
           "order": 2,
           "encore": false,
-          "songId": "koi-no-maenarae"
+          "type": "interlude",
+          "note": "リハ：日曜日のラブレター"
         },
         {
           "order": 3,
           "encore": false,
-          "songId": "itan-na-star"
+          "songId": "ai-nandaga"
         },
         {
           "order": 4,
+          "encore": false,
+          "songId": "koi-no-maenarae"
+        },
+        {
+          "order": 5,
+          "encore": false,
+          "songId": "itan-na-star"
+        },
+        {
+          "order": 6,
           "encore": false,
           "songId": "sweet-tweet"
         }
