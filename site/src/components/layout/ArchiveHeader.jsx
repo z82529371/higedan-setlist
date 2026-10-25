@@ -50,9 +50,9 @@ export function ArchiveHeader({
         </div>
       </header>
 
-      {/* Top 3 Query Tabs */}
+      {/* Top 3 Query Tabs (Desktop only: on small screens, tab switching is centralized in the FilterDrawer) */}
       <div
-        className="mt-2.5 sm:mt-4 mb-3 grid w-full grid-cols-3 divide-x-[1.5px] divide-ink overflow-hidden rounded-[4px] border-[1.5px] border-ink bg-card shadow-sm"
+        className="hidden sm:grid mt-2.5 sm:mt-4 mb-3 w-full grid-cols-3 divide-x-[1.5px] divide-ink overflow-hidden rounded-[4px] border-[1.5px] border-ink bg-card shadow-sm"
         role="group"
         aria-label={t("nav.directionLabel")}
       >

@@ -13,6 +13,7 @@ export function ArchiveStatusBar({
   slipRef,
   handleReturnHome,
   handleSelectTickets,
+  handleSelectJourney,
   storage,
 }) {
   const { t } = useI18n();
@@ -117,6 +118,24 @@ export function ArchiveStatusBar({
                   {ticketCount}
                 </span>
               )}
+            </button>
+          )}
+
+          {/* Career Journey Action Button (Desktop) */}
+          {handleSelectJourney && (
+            <button
+              type="button"
+              data-testid="status-bar-journey-btn"
+              onClick={(e) => {
+                e.stopPropagation();
+                handleSelectJourney();
+              }}
+              className="hidden sm:inline-flex items-center gap-1.5 px-2 py-0.5 rounded-[4px] bg-band-ink/10 hover:bg-band-ink/20 active:scale-95 text-band-ink font-bold border border-band-ink/30 transition-all cursor-pointer text-[10px] sm:text-[11px] shrink-0 shadow-2xs"
+              title={t("nav.journeyTitle", "全生涯長征路線")}
+              aria-label={t("nav.journeyTitle", "全生涯長征路線")}
+            >
+              <span aria-hidden="true">🚐</span>
+              <span>{t("nav.journey", "巡演長征")}</span>
             </button>
           )}
 

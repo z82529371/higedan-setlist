@@ -68,6 +68,7 @@ export function ArchiveLayout({
     handleSelectTourMode,
     handleReturnHome,
     handleSelectTickets,
+    handleSelectJourney,
     visualViewportStyle,
   } = routeState;
 
@@ -210,6 +211,7 @@ export function ArchiveLayout({
         slipRef={slipRef}
         handleReturnHome={handleReturnHome}
         handleSelectTickets={handleSelectTickets}
+        handleSelectJourney={handleSelectJourney}
         storage={storage}
       />
 
@@ -244,7 +246,7 @@ export function ArchiveLayout({
         </div>
 
         {/* Mobile Current Context Summary Bar (Tap to open Filter Bottom Sheet) */}
-        <div className="sm:hidden mb-4">
+        <div className="sm:hidden mt-3 mb-4">
           <button
             type="button"
             onClick={openFilterDrawer}
@@ -454,9 +456,9 @@ export function ArchiveLayout({
           {/* ===================== TAB 3: VENUE ===================== */}
           {tab === "venue" && (
             <div className="flex flex-col gap-4">
-              {/* Navigator & Interactive Map / Career Journey (Always visible on mobile when in map/journey mode) */}
-              <div className={filterState.venueSortMode === "map" || venueSubMode === "journey" ? "block" : "hidden sm:block"}>
-                {!isDesktopNavOpen && filterState.venueSortMode !== "map" && venueSubMode !== "journey" ? (
+              {/* Desktop Venue Navigator (Collapsible, hidden on mobile) */}
+              <div className="hidden sm:block">
+                {!isDesktopNavOpen ? (
                   <button
                     type="button"
                     onClick={toggleDesktopNav}
@@ -507,17 +509,15 @@ export function ArchiveLayout({
               </div>
 
               {/* Venue Slip Receipt */}
-              {venueSubMode !== "journey" && (
-                <section ref={slipRef} className="mt-2 sm:mt-4 scroll-mt-8 sm:scroll-mt-10">
-                  <VenueSlip
-                    venueName={selVenue}
-                    globalVenueShows={globalVenueShows}
-                    unitData={unitData}
-                    onSelectShow={handleSelectShow}
-                    onSelectSong={handleSelectSong}
-                  />
-                </section>
-              )}
+              <section ref={slipRef} className="mt-2 sm:mt-4 scroll-mt-8 sm:scroll-mt-10">
+                <VenueSlip
+                  venueName={selVenue}
+                  globalVenueShows={globalVenueShows}
+                  unitData={unitData}
+                  onSelectShow={handleSelectShow}
+                  onSelectSong={handleSelectSong}
+                />
+              </section>
             </div>
           )}
         </main>
@@ -543,13 +543,16 @@ export function ArchiveLayout({
       <FilterDrawer
         isOpen={isFilterDrawerOpen}
         tab={tab}
+        draftTab={draftState?.tab || tab}
+        onSelectTab={(newTab) => {
+          setDraftState((prev) => (prev ? { ...prev, tab: newTab } : prev));
+        }}
         onClose={handleCancelDrawer}
         onCommit={handleCommitDrawer}
         confirmButtonLabel={confirmButtonLabel}
         renderShowNavigator={renderShowNavigator}
         renderSongNavigator={renderSongNavigator}
         renderVenueNavigator={renderVenueNavigator}
-        onSelectTickets={handleSelectTickets}
       />
 
       {/* Mobile Floating Action Buttons & Docks */}
@@ -562,6 +565,7 @@ export function ArchiveLayout({
         onOpenDrawer={openFilterDrawer}
         onReturnHome={handleReturnHome}
         onSelectTickets={handleSelectTickets}
+        onSelectJourney={handleSelectJourney}
         storage={storage}
       />
 

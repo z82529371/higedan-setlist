@@ -2,6 +2,7 @@ import { Fragment, useMemo } from "react";
 import { allUnits, buildIndex } from "./lib/domain.js";
 import { ArchiveLayout } from "./components/layout/index.js";
 import { TicketBookPage } from "./components/ticket-book/TicketBookPage.jsx";
+import { JourneyPage } from "./components/journey/index.js";
 import { useArchiveFilter, useArchiveRoute } from "./hooks/index.js";
 import { I18nProvider } from "./lib/i18n.jsx";
 import LandingHero from "./components/LandingHero.jsx";
@@ -61,6 +62,7 @@ export function AppContent({ probeRoute } = {}) {
     handleSelectVenue,
     handleSelectUnit,
     handleSelectTickets,
+    handleSelectJourney,
     handleReturnArchive,
     handleReturnHome,
   } = routeState;
@@ -88,6 +90,7 @@ export function AppContent({ probeRoute } = {}) {
           }}
           onOpenCalendar={() => setIsCalendarOpen(true)}
           onSelectTickets={handleSelectTickets}
+          onSelectJourney={handleSelectJourney}
           onSelectTab={(newTab, options) => {
             setViewMode("archive");
             setTab(newTab);
@@ -110,6 +113,16 @@ export function AppContent({ probeRoute } = {}) {
           onSelectShow={handleSelectShow}
           onReturnArchive={handleReturnArchive}
           onReturnHome={handleReturnHome}
+        />
+      ) : viewMode === "journey" ? (
+        <JourneyPage
+          allUnits={allUnits}
+          allVenues={allVenues}
+          globalVenueShows={globalVenueShows}
+          onSelectShow={handleSelectShow}
+          onReturnArchive={handleReturnArchive}
+          onReturnHome={handleReturnHome}
+          onSelectTickets={handleSelectTickets}
         />
       ) : (
         <ArchiveLayout

@@ -109,13 +109,12 @@ describe("7. Custom Hooks & Route State Machine Invariants (ADR-0101)", () => {
     assert.ok(filter.selCategory);
   });
 
-  it("penetrates direct deep link for venues (#/venue/:name) with regional grouping", () => {
-    const targetVenue = index.allVenues[0]?.name;
-    assert.ok(targetVenue);
-    const { route } = runProbe(`#/venue/${encodeURIComponent(targetVenue)}`);
+  it("penetrates direct deep link for venues (#/venue/:name) with automatic spotlight zoom to venue prefecture", () => {
+    const { route } = runProbe(`#/venue/${encodeURIComponent("日本武道館")}`);
     assert.equal(route.viewMode, "archive");
     assert.equal(route.tab, "venue");
-    assert.equal(route.selVenue, targetVenue);
+    assert.equal(route.selVenue, "日本武道館");
+    assert.equal(route.selMapPrefecture, "東京都");
   });
 
   it("penetrates direct deep links for interactive venue map (#/map, #/map/journey, #/map/:regionOrPref)", () => {
@@ -127,7 +126,7 @@ describe("7. Custom Hooks & Route State Machine Invariants (ADR-0101)", () => {
     assert.equal(mapRoot.selMapPrefecture, null);
 
     const { route: mapJourney } = runProbe("#/map/journey");
-    assert.equal(mapJourney.viewMode, "archive");
+    assert.equal(mapJourney.viewMode, "journey");
     assert.equal(mapJourney.tab, "venue");
     assert.equal(mapJourney.venueSubMode, "journey");
 

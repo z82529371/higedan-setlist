@@ -1,19 +1,15 @@
 import { useState, useMemo } from "react";
 import {
   ALBUM_ORDER,
-  REGION_ORDER,
   PERFORMANCE_CATEGORIES,
 } from "../lib/constants.js";
 import {
   allUnits,
   getSongAlbum,
-  getVenueRegion,
   unitEarliest,
   getUnitTypeLabel,
 } from "../lib/domain.js";
 import { trackKey } from "../lib/track.js";
-import { parseRoute } from "../lib/routes.js";
-import { resolveMapTarget } from "../lib/venue-map.js";
 import { PAGE_SIZE } from "../components/navigators/PaginationPills.jsx";
 
 export { PERFORMANCE_CATEGORIES };
@@ -27,7 +23,7 @@ export function useArchiveFilter({
   allVenues,
   initialUnitId,
   initialSongId,
-  initialVenueName,
+  _initialVenueName,
   currentUnit,
 }) {
   const initialUnit = unitData.get(initialUnitId)?.unit;
@@ -51,28 +47,8 @@ export function useArchiveFilter({
     return sObj ? getSongAlbum(sObj) : ALBUM_ORDER[0];
   });
 
-  const [venueSortMode, setVenueSortMode] = useState(() => {
-    if (typeof window !== "undefined") {
-      const r = parseRoute(window.location?.hash) || parseRoute(window.location?.pathname);
-      if (r?.kind === "map") {
-        const resolved = resolveMapTarget(r.value);
-        if (resolved?.mode === "region") return "region";
-        if (resolved) return "map";
-      }
-    }
-    return "region";
-  }); // "map" | "region" | "count"
-  const [selRegion, setSelRegion] = useState(() => {
-    if (typeof window !== "undefined") {
-      const r = parseRoute(window.location?.hash) || parseRoute(window.location?.pathname);
-      if (r?.kind === "map") {
-        const resolved = resolveMapTarget(r.value);
-        if (resolved?.mode === "region" && resolved.target) return resolved.target;
-      }
-    }
-    const vObj = allVenues.find((v) => v.name === initialVenueName);
-    return vObj ? getVenueRegion(vObj) : REGION_ORDER[0];
-  });
+  const [venueSortMode, setVenueSortMode] = useState("map"); // "map" | "count"
+  const [selRegion, setSelRegion] = useState("");
 
   // 10-item pagination states
   const [unitPage, setUnitPage] = useState(0);
@@ -183,11 +159,8 @@ export function useArchiveFilter({
   }, [allVenues, globalVenueShows]);
 
   const filteredVenues = useMemo(() => {
-    if (venueSortMode === "count") {
-      return venuesSortedByCount;
-    }
-    return allVenues.filter((v) => getVenueRegion(v) === selRegion);
-  }, [venueSortMode, selRegion, allVenues, venuesSortedByCount]);
+    return venuesSortedByCount;
+  }, [venuesSortedByCount]);
 
   const pagedUnits = useMemo(() => {
     const pageCount = Math.ceil(filteredUnits.length / PAGE_SIZE);

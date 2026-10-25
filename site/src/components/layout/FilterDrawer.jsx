@@ -1,21 +1,21 @@
 import { useI18n } from "../../lib/i18n.jsx";
-import { useTicketBook } from "../../lib/ticket-book.js";
 
 export function FilterDrawer({
   isOpen,
   tab,
+  draftTab,
+  onSelectTab,
   onClose,
   onCommit,
   confirmButtonLabel,
   renderShowNavigator,
   renderSongNavigator,
   renderVenueNavigator,
-  onSelectTickets,
-  storage,
 }) {
   const { t } = useI18n();
-  const { count: ticketCount } = useTicketBook({ storage });
   if (!isOpen) return null;
+
+  const currentTab = draftTab || tab;
 
   return (
     <div
@@ -36,59 +36,76 @@ export function FilterDrawer({
           <div className="h-1.5 w-12 rounded-full bg-line-soft" />
         </div>
 
-        {/* Sheet Header */}
-        <div className="flex items-center justify-between border-b border-line-soft px-4 py-2 bg-paper/50">
-          <div className="flex items-center gap-1.5 font-display text-[14px] font-black">
-            <span aria-hidden="true">
-              {tab === "show" ? "🏷️" : tab === "song" ? "🎵" : "🏛️"}
-            </span>
-            <span>
-              {tab === "show"
-                ? t("navigators.drawer.showFilterTitle", "篩選演出場次")
-                : tab === "song"
-                ? t("navigators.drawer.songFilterTitle", "挑選歌曲演出檔案")
-                : t("navigators.drawer.venueFilterTitle", "挑選場地歷史紀錄")}
-            </span>
+        {/* Sheet Header: Compact Segmented Tab Row + Close Button (ADR-0126) */}
+        <div className="flex items-center justify-between border-b border-line-soft px-3 py-2 bg-paper/50 gap-2">
+          {/* Segmented Tab Controls: [ 🎫 場次 | 🎵 歌曲 | 🏛️ 場地 ] */}
+          <div
+            className="grid flex-1 grid-cols-3 divide-x-[1.5px] divide-ink overflow-hidden rounded-[4px] border-[1.5px] border-ink bg-card shadow-2xs font-display text-[12px] font-black"
+            role="tablist"
+            aria-label={t("nav.directionLabel", "查詢維度切換")}
+          >
+            <button
+              type="button"
+              role="tab"
+              data-testid="drawer-tab-show"
+              aria-selected={currentTab === "show"}
+              onClick={() => onSelectTab?.("show")}
+              className={`flex items-center justify-center gap-1 py-1.5 px-1 cursor-pointer transition-colors ${
+                currentTab === "show"
+                  ? "bg-band text-band-ink font-black"
+                  : "bg-card text-muted hover:text-ink hover:bg-tape-tint/40"
+              }`}
+            >
+              <span aria-hidden="true">🎫</span>
+              <span>{t("nav.shows", "場次")}</span>
+            </button>
+            <button
+              type="button"
+              role="tab"
+              data-testid="drawer-tab-song"
+              aria-selected={currentTab === "song"}
+              onClick={() => onSelectTab?.("song")}
+              className={`flex items-center justify-center gap-1 py-1.5 px-1 cursor-pointer transition-colors border-l-[1.5px] border-ink ${
+                currentTab === "song"
+                  ? "bg-band text-band-ink font-black"
+                  : "bg-card text-muted hover:text-ink hover:bg-tape-tint/40"
+              }`}
+            >
+              <span aria-hidden="true">🎵</span>
+              <span>{t("nav.songs", "歌曲")}</span>
+            </button>
+            <button
+              type="button"
+              role="tab"
+              data-testid="drawer-tab-venue"
+              aria-selected={currentTab === "venue"}
+              onClick={() => onSelectTab?.("venue")}
+              className={`flex items-center justify-center gap-1 py-1.5 px-1 cursor-pointer transition-colors border-l-[1.5px] border-ink ${
+                currentTab === "venue"
+                  ? "bg-band text-band-ink font-black"
+                  : "bg-card text-muted hover:text-ink hover:bg-tape-tint/40"
+              }`}
+            >
+              <span aria-hidden="true">🏛️</span>
+              <span>{t("nav.venues", "場地")}</span>
+            </button>
           </div>
+
           <button
             type="button"
             onClick={onClose}
-            className="flex h-7 w-7 items-center justify-center rounded-full bg-paper border border-line-soft text-muted hover:text-ink hover:bg-tape-tint cursor-pointer font-bold"
+            className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-paper border border-line-soft text-muted hover:text-ink hover:bg-tape-tint cursor-pointer font-bold"
             aria-label={t("navigators.drawer.closeAria", "關閉抽屜")}
           >
             ✕
           </button>
         </div>
 
-        {/* Ticket Book Quick Entrance */}
-        <div className="px-4 py-2 border-b border-line-soft bg-paper/30">
-          <button
-            type="button"
-            data-testid="drawer-ticket-book-btn"
-            onClick={() => {
-              onClose();
-              if (onSelectTickets) onSelectTickets();
-            }}
-            className="w-full flex items-center justify-between rounded-[6px] border border-ink/30 bg-card px-3.5 py-2 font-display text-[13px] font-bold text-ink shadow-2xs hover:bg-tape-tint active:scale-[0.99] transition-all cursor-pointer"
-          >
-            <div className="flex items-center gap-2">
-              <span aria-hidden="true" className="text-base">🎟️</span>
-              <span>{t("ticketBook.title", "我的巡演票夾")}</span>
-            </div>
-            <span
-              data-testid="drawer-ticket-badge-count"
-              className="inline-flex items-center justify-center rounded-full bg-tape text-ink font-mono font-bold text-[11px] min-w-[20px] h-[20px] px-1.5 border border-ink/30 tabular-nums shadow-2xs"
-            >
-              {ticketCount}
-            </span>
-          </button>
-        </div>
-
         {/* Sheet Body (Scrollable) */}
         <div className="p-4 overflow-y-auto space-y-4 flex-1">
-          {tab === "show" && renderShowNavigator(true)}
-          {tab === "song" && renderSongNavigator(true)}
-          {tab === "venue" && renderVenueNavigator(true)}
+          {currentTab === "show" && renderShowNavigator(true)}
+          {currentTab === "song" && renderSongNavigator(true)}
+          {currentTab === "venue" && renderVenueNavigator(true)}
         </div>
 
         {/* Bottom Sticky Action Bar (Staged Commit: Cancel + Confirm Apply) */}

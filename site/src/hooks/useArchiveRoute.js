@@ -5,7 +5,6 @@ import {
   getUnitTypeLabel,
   unitEarliest,
   getSongAlbum,
-  getVenueRegion,
   songTitle,
   shortUnitTitle,
   formatShowPlace,
@@ -85,6 +84,7 @@ export function useArchiveRoute({
       if (resolvedMap.mode === "journey") {
         return {
           ...fallback,
+          viewMode: "journey",
           tab: "venue",
           venueSubMode: "journey",
           selMapPrefecture: null,
@@ -93,6 +93,7 @@ export function useArchiveRoute({
       if (resolvedMap.mode === "prefecture") {
         return {
           ...fallback,
+          viewMode: "archive",
           tab: "venue",
           venueSubMode: "venues",
           selMapPrefecture: resolvedMap.target,
@@ -100,6 +101,7 @@ export function useArchiveRoute({
       }
       return {
         ...fallback,
+        viewMode: "archive",
         tab: "venue",
         venueSubMode: "venues",
         selMapPrefecture: null,
@@ -116,7 +118,18 @@ export function useArchiveRoute({
         selShow: r.value,
       };
     const vKey = r.kind === "venue" ? resolveVenueKey(r.value, allVenues) : null;
-    if (vKey) return { ...fallback, tab: "venue", selVenue: vKey };
+    if (vKey) {
+      const venueObj = allVenues.find((v) => v.name === vKey);
+      const pref = venueObj ? (venueObj.prefecture || (venueObj.country && venueObj.country !== "日本" ? "海外" : null)) : null;
+      return {
+        ...fallback,
+        tab: "venue",
+        venueSubMode: "venues",
+        venueSortMode: "map",
+        selVenue: vKey,
+        selMapPrefecture: pref,
+      };
+    }
     if (r.kind === "tour") {
       const uEntry = unitData.get(r.value);
       if (uEntry) {
@@ -152,7 +165,9 @@ export function useArchiveRoute({
     if (!r) return "landing";
     if (r.kind === "tickets") return "tickets";
     if (r.kind === "map") {
-      return resolveMapTarget(r.value) ? "archive" : "landing";
+      const target = resolveMapTarget(r.value);
+      if (!target) return "landing";
+      return target.mode === "journey" ? "journey" : "archive";
     }
     if (r.kind === "song" && allUsedSongs.some((s) => s.id === r.value)) return "archive";
     if (r.kind === "show" && unitIdByShowId.has(r.value)) return "archive";
@@ -212,6 +227,7 @@ export function useArchiveRoute({
 
   const openFilterDrawer = () => {
     setDraftState({
+      tab: tab,
       category: selCategory,
       year: selYear,
       unitId: selUnitId,
@@ -313,11 +329,13 @@ export function useArchiveRoute({
       if (resolvedVenue) {
         setTab("venue");
         setVenueSubMode("venues");
+        setVenueSortMode("map");
         setSelVenue(resolvedVenue);
         setQ("");
         const venueObj = allVenues.find((v) => v.name === resolvedVenue);
         if (venueObj) {
-          setSelRegion(getVenueRegion(venueObj));
+          const pref = venueObj.prefecture || (venueObj.country && venueObj.country !== "日本" ? "海外" : null);
+          setSelMapPrefecture(pref);
         }
         if (r.value !== resolvedVenue && typeof window !== "undefined") {
           const canonicalHash = appendLang(routeHash.venue(resolvedVenue));
@@ -338,27 +356,38 @@ export function useArchiveRoute({
       setQ("");
       setSelMapCity(null);
       if (resolvedMap.mode === "journey") {
+        setViewMode("journey");
         setVenueSubMode("journey");
         setSelMapPrefecture(null);
+        setIsFilterDrawerOpen(false);
       } else if (resolvedMap.mode === "prefecture") {
+        setViewMode("archive");
         setVenueSubMode("venues");
         setVenueSortMode("map");
         setSelMapPrefecture(resolvedMap.target);
+        if (typeof window !== "undefined" && window.innerWidth < 640) {
+          setIsFilterDrawerOpen(true);
+        }
         if (r.value !== resolvedMap.target && typeof window !== "undefined" && window.history?.replaceState) {
           const canonicalHash = appendLang(routeHash.map(resolvedMap.target));
           if (window.location.hash !== canonicalHash) {
             window.history.replaceState(null, "", canonicalHash);
           }
         }
-      } else if (resolvedMap.mode === "region") {
-        setVenueSubMode("venues");
-        setVenueSortMode("region");
-        setSelRegion(resolvedMap.target);
-        setSelMapPrefecture(null);
       } else {
+        setViewMode("archive");
         setVenueSubMode("venues");
         setVenueSortMode("map");
         setSelMapPrefecture(null);
+        if (typeof window !== "undefined" && window.innerWidth < 640) {
+          setIsFilterDrawerOpen(true);
+        }
+        if (r.value && typeof window !== "undefined" && window.history?.replaceState) {
+          const canonicalHash = appendLang(routeHash.map(null));
+          if (window.location.hash !== canonicalHash) {
+            window.history.replaceState(null, "", canonicalHash);
+          }
+        }
       }
     }
   };
@@ -550,7 +579,7 @@ export function useArchiveRoute({
     setQ("");
     setIsFilterDrawerOpen(false);
     setIsMobileSearchOpen(false);
-    setIsDesktopNavOpen(true);
+    setViewMode("journey");
     setVenueSubMode("journey");
     setSelMapPrefecture(null);
     setSelMapCity(null);
@@ -638,7 +667,11 @@ export function useArchiveRoute({
       setIsFilterDrawerOpen(false);
       return;
     }
-    if (tab === "show") {
+    const targetTab = draftState.tab || tab;
+    if (targetTab !== tab) {
+      setTab(targetTab);
+    }
+    if (targetTab === "show") {
       setSelCategory(draftState.category);
       setSelYear(draftState.year);
       setSelUnitId(draftState.unitId);
@@ -653,12 +686,12 @@ export function useArchiveRoute({
         setShowSubMode("show");
         handleSelectShow(draftState.showId);
       }
-    } else if (tab === "song") {
+    } else if (targetTab === "song") {
       setSongSortMode(draftState.songSortMode);
       setSelAlbum(draftState.album);
       setSongPage(draftState.songPage);
       handleSelectSong(draftState.songId);
-    } else if (tab === "venue") {
+    } else if (targetTab === "venue") {
       setVenueSortMode(draftState.venueSortMode);
       setSelRegion(draftState.region);
       setVenuePage(draftState.venuePage);
@@ -673,7 +706,8 @@ export function useArchiveRoute({
 
   const confirmButtonLabel = useMemo(() => {
     if (!draftState) return t("confirm.apply", "確認套用");
-    if (tab === "show") {
+    const activeTab = draftState.tab || tab;
+    if (activeTab === "show") {
       const uEntry = unitData.get(draftState.unitId);
       const u = uEntry?.unit;
       const isTour = uEntry?.isTour;
@@ -687,14 +721,14 @@ export function useArchiveRoute({
       }
       return t("confirm.applyShowFallback", "確認套用場次");
     }
-    if (tab === "song") {
+    if (activeTab === "song") {
       const s = allUsedSongs.find((x) => x.id === draftState.songId);
       if (s) {
         return t("confirm.applySong", "確認套用：《{title}》", { title: songTitle[s.id] || s.title || s.id });
       }
       return t("confirm.applySongFallback", "確認套用歌曲");
     }
-    if (tab === "venue") {
+    if (activeTab === "venue") {
       return draftState.venueName ? t("confirm.applyVenue", "確認套用：{venue}", { venue: draftState.venueName }) : t("confirm.applyVenueFallback", "確認套用場地");
     }
     return t("confirm.apply", "確認套用");
@@ -751,6 +785,7 @@ export function useArchiveRoute({
     handleToggleSubMode,
     handleReturnHome,
     handleSelectTickets,
+    handleSelectJourney: handleSelectMapJourney,
     handleReturnArchive,
     appendLang,
     visualViewportStyle,
