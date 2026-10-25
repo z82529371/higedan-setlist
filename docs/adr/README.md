@@ -4,10 +4,10 @@
 
 ---
 
-## 決策總覽清單（共 99 篇）
+## 決策總覽清單（共 122 篇）
 
 > [!NOTE]
-> **編號跳號說明**：本目錄編號自 ADR-0001 起至 ADR-0123 止。其中 ADR-0063、ADR-0064、ADR-0065、ADR-0068、ADR-0069 共 5 篇為早期介面排版草案，後續已被 ADR-0070 單欄聚焦架構完整吸收與替代，故無獨立保留歷史檔案；實體決策文件共計 99 篇。
+> **編號跳號說明**：本目錄編號自 ADR-0001 起至 ADR-0127 止。其中 ADR-0063、ADR-0064、ADR-0065、ADR-0068、ADR-0069 共 5 篇為早期介面排版草案，後續已被 ADR-0070 單欄聚焦架構完整吸收與替代，故無獨立保留歷史檔案；實體決策文件共計 122 篇。
 
 | 決策標題 | 狀態 | 日期 |
 | :--- | :---: | :---: |
@@ -130,3 +130,6 @@
 | [ADR-0122: 站內情報線索投遞彈窗、佐證連結驗證與無伺服器轉發架構 (In-App Lead Drop Modal, Evidence Verification & Serverless Forwarding Architecture)](0122-in-app-lead-drop-modal-and-crowdsourced-evidence-architecture.md) | 已被替代 (Superseded by ADR-0123) | 實作站內線索投遞彈窗；Web3Forms 背景轉發已被 ADR-0123（純前端直連）替代 |
 | [ADR-0123: 拒絕過度工程化與現場情報純前端直連架構 (Over-engineering Refusal & Pure Frontend Direct Compose Architecture)](0123-overengineering-refusal-and-pure-frontend-direct-compose-architecture.md) | 已採納 (Accepted) | 拒絕過度工程化，移除 Web3Forms 與後端依賴，實作網頁版 Gmail 一鍵直達、剪貼簿複製與四語系在地化 |
 | [ADR-0124: 互動式場地地圖、雙層座標聚合與巡演移動路線序列基礎架構 (Interactive Venue Map, Two-Tier Coordinate Clustering & Tour Journey Route Architecture)](0124-interactive-venue-map-and-tour-journey-route-architecture.md) | 已採納 (Accepted) | 建立 347 處實體場館雙層座標與同址放射展開、日本 47 都道府縣＋沖繩／亞洲海外雙副聯插頁 SVG 底圖、五大介面適配與巡演移動三態（駐留／巡演車／飛機）純函式契約 |
+| [ADR-0125: 全生涯巡演足跡一級獨立頁面、懸浮 Emoji 按鈕與小尺寸場地地圖抽屜收納架構 (Career Tour Footprint Independent View, Floating Emoji Controls & Mobile Venue Map Drawer Confinement Architecture)](0125-career-journey-route-independent-view-and-mobile-drawer-confinement.md) | 已採納 (Accepted) | 將全生涯巡演足跡升格為一級獨立頁面（JourneyPage）、左下角垂直懸浮 Emoji 按鈕（🚐 與 🎟️）、淨空抽屜內部，並將小尺寸場地地圖全面收納於抽屜內部 |
+| [ADR-0126: 行動端直式三聯票券場地地圖與響應式投影幾何架構 (Responsive Triptych Portrait Venue Map & Projection Geometry Architecture)](0126-responsive-triptych-portrait-venue-map-architecture.md) | 已採納 (Accepted) | 實作行動端純自動響應切換直式三聯長條畫布（國外➔日本本土➔沖繩）、三聯打孔齒線分割、單一連貫 SVG 跨海航線繼承與自然頁面流動不變式 |
+| [ADR-0127: 小尺寸全生涯巡演足跡極大化地圖與行動端篩選抽屜架構 (Mobile Tour Journey Maximized Canvas & Filter Drawer Architecture)](0127-mobile-tour-journey-floating-console-and-cinema-architecture.md) | 已採納 (Accepted) | 確立小尺寸巡演足跡地圖極大化、底層標準懸浮按鈕、滑出式巡演篩選抽屜與沉浸影院全螢幕模式架構 |

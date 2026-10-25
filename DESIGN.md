@@ -260,5 +260,35 @@ components:
 ### 2. 生涯小卡精簡巡演標題準則 (Milestone Card Short Title Presentation)
 - **品牌冗餘消除**: 540px 生涯總結卡頂部已固定印刷大型樂團字標 `Official髭男dism`。下方「最初參戰」、「最近參戰」雙欄（每欄約 220px 寬度）及「參戰足跡全紀錄」清單中，巡演名稱一律優先採用 `shortUnitTitle(unit)`（如 `Rejoice`、`SHOCKING NUTS TOUR`），杜絕重疊的 `Official髭男dism` 前綴佔滿欄寬導致關鍵字被截斷。
 
+## Cartographic Ticket Map & Callout Presentation Rules (票券地圖海岸線、外海引出線與縮放比例規範)
+
+為確保互動式場地地圖（`VenueMapCanvas`）兼具專業地理製圖精確度與復古紙本票券工藝質感，嚴格遵循以下五項視覺與互動不變量：
+
+1. **高精細真實海岸線幾何（High-Resolution Coastline Geometry）**:
+   - 日本 47 都道府縣與亞洲海外副圖必須使用標準測繪級 TopoJSON／SVG 幾何（透過 `d3-geo` 投影生成真實半島、海灣與主要島嶼輪廓），嚴禁使用頂點數過少（`< 15` 點）導致都道府縣退化為矩形或梯形的粗糙多邊形。
+2. **海洋純度與左下角 HUD 票夾聯動原則（Ocean Purity & HUD Ticket Card Presentation）**:
+   - **禁止陸地與外海牽線雜亂**: 全國總覽層（Tier 1）嚴禁在都道府縣中心疊加貼膏藥文字框，亦不牽拉突兀的斜向延伸引出線（Callout Leader Lines）至外海，保持地圖輪廓極致清爽開闊。
+   - **兩階懸浮與票券 HUD 狀態機**: 都道府縣詳情（館數、場次、踏破狀態、山陰聖地標誌）統一由左下角固定票券資訊卡（`venue-hud-card`）靈動呈現；點選任意都道府縣即觸發聚光推進（Spotlight Zoom）深入該縣場館針點清單。
+3. **雙副聯插頁真實島嶼輪廓（Inset Coastlines Purity）**:
+   - 左上角「✈️ OVERSEAS ASIA」與右下角「🌺 OKINAWA」打孔齒線副圖完整露出台灣島、朝鮮半島、中南半島、新加坡及沖繩本島之真實輪廓；城市與場次資訊同樣由左下角票券 HUD 統一接管，不延伸多餘引線干擾島嶼視覺。
+4. **放大檢視恆定線寬與鄰縣淡化（Non-Scaling Stroke, Adaptive Pin Scale & Context Dimming）**:
+   - 點選單一都道府縣推進放大（Tier 2 Spotlight Zoom）時，所有縣界路徑必須套用 `vector-effect="non-scaling-stroke"`，且場館針點半徑、字級與 Spiderfy 放射展開半徑必須除以當前 `viewBox` 縮放倍率（Zoom Scale Factor），確保放大 6～10 倍時線條依然纖細、針點維持精緻尺寸而不暴脹。
+   - 放大狀態下，非選取之周邊鄰縣退居 `25%–30%` 不透明度作為地理方位背景，突顯目標都道府縣與縣內場館針點。
+5. **海面經緯網格與巡演路線時間序列動畫（Ocean Graticule & Sequential Journey Playback）**:
+   - 底圖海面鋪設低對比細緻經緯度格線（Graticule）與陸地微立體陰影（Offset Land Shadow），營造復古航海／鐵道票券地圖質感。
+   - 「🚐 巡演路線」嚴禁一次畫出全部轉場曲線；必須以時間順序「一段接一段」動畫播放：目前段以亮金線條描繪（`stroke-dashoffset`）並帶沿線移動的交通工具圖示（🚐／✈️），抵達與連日駐留時激發金色光暈脈衝波（Pulse Wave Resonator），同時浮出該站日期與場館小票根。
+   - **彗星拖尾三層階梯（Active Head ➔ Recent Tail ➔ Historic Footprint）**: 當前行駛段最亮；最近走過的 3~5 站（`completedLegs - 4 <= index < completedLegs`）為半透明「巡演拖尾」（`opacity 0.55`，線寬 `1.8`，站點 `opacity 0.75`）；更早的歷史路段沉澱為極細微光足跡（`opacity 0.18`，線寬 `1.0`，站點 `opacity 0.25`），既能一眼望見全生涯踏破網，又絕不干擾當前焦點。
+   - 播放列提供播放／暫停、可拖曳時間軸（顯示目前日期與場館）與 `1×／2×／4×` 倍速；進入頁面或變更年份／巡演篩選時，一律從起點自動以 `2×` 播放；使用者手動暫停或拖曳後不再自動恢復；播至最終站即停住並顯示「重播」，不循環。分頁切換至背景時自動暫停，返回頁面後保持暫停。播放行為不依賴 `prefers-reduced-motion`（此為使用者主動進入的地圖內容，播放列本身即提供暫停控制）。
+6. **純向量等角 3D 隨隊跟隨鏡頭與視角切換不變量（Pure Vector 3D Follow Cam & Perspective Invariants）**:
+   - **純向量渲染零點陣模糊（Zero-Blur Native Vector Purity）**: 嚴禁在主地圖 SVG 上套用會導致瀏覽器 GPU 二次點陣化貼圖模糊的 CSS 3D `rotateX` 或 `perspective`；完全回歸純 SVG 向量引擎，由瀏覽器向量管線以原生 sub-pixel 精度繪製所有海岸線、字體與轉場線，保證在 4K Retina 與各級螢幕上銳利如刀、絲毫不糊。
+   - **手工精雕立體 3D 紅色六人座休旅車（TourVan3D）**: 徹底告別 2D 圓圈貼紙 Emoji，以純向量幾何繪製真 3D 巡演車——具備熱血全紅純烤漆車身（無黑邊框干擾）、三排座深色座艙隱密車窗、銀色金屬後視鏡、四輪橡膠胎與銀色合金輪圈、車頂銀色金屬巡演樂器行李架（Silver Metallic Roof Rack with Touring Gear Box），以及車頭前方射出的兩道暖黃色大燈光束（Headlight Beams），並依路線切線角度動態平滑轉向。
+   - **手工精雕立體 3D 尊爵銀白巡演客機（TourAirplane3D）**: 跨海及超長途航線採用與巡演車同等細膩質感的真 3D 噴射客機——具備珍珠銀白金屬機身（無黑粗邊框）、冷銀後掠主翼與精雕雙渦輪噴射引擎（附帶後方柔和氣流噴射痕）、深色隱密駕駛艙與客艙車窗列（含玻璃折射光痕）、機首前探雙道暖黃航行大燈光束、翼尖標準航行燈（左紅右綠）與垂直尾翼，懸浮空中時投射柔和海面機影。特寫追焦時維持 0.72×，切換全國全景時自動放大至 1.4×，視野極致清晰。
+   - **預設全國全景視角與左下角無截斷票券卡（Default Overview & Fixed Bottom-Left Ticket HUD）**: 進入巡演路線模式時預設為「🗺️ 全國全景」（800×560 宏觀版圖，車輛自動放大至 1.35×/1.4× 清晰巡航），使用者可隨時切換「🎥 隨隊」特寫（280×196）；地圖畫布維持絕對正北朝上（North-Up），徹底避免方位旋轉造成的認知混亂。場次與場館資訊固定於左下角開闊海域（`bottom-2.5 left-2.5`，`data-testid="journey-hud-card"`）：行駛中動態顯示出發與前往下一站（`NEXT #X`），抵達或連日駐留時亮起金色到站徽章（`STOP #X`）；完整展示官方場館全稱、城市與日期，採自適應多行自然排版，徹底杜絕 `...` 粗暴截斷與文字溢出框框問題，點擊卡片可直接開啟該場次完整歌單。不遮擋本州、北海道與海外任何島嶼資訊。
+   - **極簡篩選與去干擾介面**: 巡演路線模式移除冗餘的頂端統計數字與長字串圖例，年份與專場巡演一律採用精簡下拉選單（`<select id="journey-year-select">` 與 `<select id="journey-tour-select">`），確保操作直覺且不搶奪視覺焦點。
+7. **場館地圖雙層懸浮 HUD 狀態機（Two-Tier Venue Map Hover HUD Machine）**:
+   - **全國全景層（Macro Tier）**: 左下角票券卡（`data-testid="venue-hud-card"`）預設常駐顯示日本全國巡迴踏破進度（43/47 都道府縣踏破率 91.5% · 海外 4 國）；滑鼠懸浮至任一都道府縣時，卡片即時切換為該縣市級資訊（館數、場次數、山陰發跡聖地徽章；已踏破縣市顯示手型游標並可點擊直接推進 Spotlight Zoom，未踏破縣市則提示尚無登錄演出且不觸發空放）。
+   - **局部放大層（Spotlight Zoom Micro Tier）**: 點進特定縣市後，左下角卡片靜止時顯示當前縣市總結；滑鼠懸浮至具體場館針點（或下方場館清單按鈕）時，左下角卡片即時切換為該個別場館卡片，且地圖針點與下方清單項呈現雙向鏡像高亮同步；點擊針點、卡片或列表項目直接載入該場館歷史公演歌單。
+
+
 
 

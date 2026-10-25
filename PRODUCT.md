@@ -44,7 +44,7 @@ web
 | :--- | :--- | :--- |
 | **場次篩選器**（Show Navigator） | 演出類型 → 年份 → 巡演專場 → 場次日期切換 | `site/src/components/navigators/ShowNavigator.jsx` |
 | **歌曲篩選器**（Song Navigator） | 專輯分類 / 登場次數排行 → 歌曲切換 | `site/src/components/navigators/SongNavigator.jsx` |
-| **場地篩選器**（Venue Navigator） | 日本地理分區 / 登場次數排行 → 場館切換 | `site/src/components/navigators/VenueNavigator.jsx` |
+| **場地篩選器**（Venue Navigator） | 互動場地地圖 / 登場次數排行 → 場館切換 | `site/src/components/navigators/VenueNavigator.jsx` |
 | **場次票根**（Show Slip） | 單場演出票根、本篇/安可曲目單、前場曲目 Diff | `site/src/components/slips/ShowSlip.jsx` + `ShowMetadataBox.jsx` |
 | **巡演總覽票券**（Tour Slip） | 巡演定番歌曲、輪換曲、驚喜曲目與巡演足跡日程 | `site/src/components/slips/TourSlip.jsx` |
 | **歌曲詳情票券**（Song Slip） | 歌曲出賽履歷、版本統計、首演/最新演出里程碑 | `site/src/components/slips/SongSlip.jsx` + `SongMilestonesDrawer.jsx` |
