@@ -358,4 +358,29 @@ describe("9. Design Token Invariants & Dedicated URL Routes Seam (DESIGN.md, ADR
       `Small badge/stamp text (<14px) must strictly use high-contrast ink tokens (>= 7:1 AAA contrast, DESIGN.md), found text-muted in: ${violations.join(", ")}`
     );
   });
+
+  it("enforces First-Class View Container Width Invariant: all top-level views must adhere to max-w-[960px] (DESIGN.md)", () => {
+    const views = [
+      { name: "LandingHero", path: path.resolve(import.meta.dirname, "../../src/components/LandingHero.jsx") },
+      { name: "ArchiveLayout", path: path.resolve(import.meta.dirname, "../../src/components/layout/ArchiveLayout.jsx") },
+      { name: "TicketBookPage", path: path.resolve(import.meta.dirname, "../../src/components/ticket-book/TicketBookPage.jsx") },
+      { name: "JourneyPage", path: path.resolve(import.meta.dirname, "../../src/components/journey/JourneyPage.jsx") },
+    ];
+
+    for (const view of views) {
+      const content = fs.readFileSync(view.path, "utf8");
+      assert.ok(
+        content.includes("max-w-[960px]"),
+        `${view.name} must define outer container with max-w-[960px] (DESIGN.md)`
+      );
+      assert.ok(
+        !content.includes("max-w-[1080px]"),
+        `${view.name} must not use unauthorized max-w-[1080px]`
+      );
+      assert.ok(
+        !content.includes("min-h-screen bg-paper"),
+        `${view.name} must not paint opaque bg-paper over global notebook-grid background (ADR-0091, ADR-0093)`
+      );
+    }
+  });
 });
