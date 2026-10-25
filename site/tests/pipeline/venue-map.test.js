@@ -3,6 +3,7 @@ import assert from "node:assert/strict";
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import zlib from "node:zlib";
 import {
   projectLatLngToSvg,
   buildPrefectureMapStats,
@@ -10,6 +11,18 @@ import {
   buildJourneySequence,
   haversineDistanceKm,
 } from "../../src/lib/venue-map.js";
+import {
+  PLAYBACK_SPEEDS,
+  DEFAULT_PLAYBACK_SPEED,
+  BASE_LEGS_PER_SECOND,
+  buildTransitPath,
+  pointOnTransit,
+  tangentAngleOnTransit,
+  computeHeadingUpRotation,
+  getPlaybackFrame,
+  advanceProgress,
+  computeFollowCamViewBox,
+} from "../../src/lib/journey-playback.js";
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(here, "..", "..", "..");
@@ -277,7 +290,7 @@ describe("Venue Map Pure Domain Engine (ADR-0124)", () => {
       assert.strictEqual(withTvJourney.transitions.length, 546);
     });
 
-    it("accurately classifies stay, van (<= 700 km & intra-Hokkaido), and flight (overseas, Okinawa, cross-strait Hokkaido, and > 700 km)", () => {
+    it("accurately classifies stay, van (interconnected Honshu/Shikoku/Kyushu road network & intra-Hokkaido), and flight (overseas, Okinawa, cross-strait Hokkaido)", () => {
       const { venueProfilesMap } = loadArchiveFixtures();
 
       // Verify Haversine distance calculation
@@ -293,9 +306,9 @@ describe("Venue Map Pure Domain Engine (ADR-0124)", () => {
         { id: "s2", date: "2024-01-02", venue: "松江AZTiC canova", city: "松江", prefecture: "島根縣", region: "中國" },
         // 2 -> 3: Matsue -> Osaka (~240 km overland) -> van
         { id: "s3", date: "2024-01-05", venue: "大阪城會館", city: "大阪", prefecture: "大阪府", region: "關西" },
-        // 3 -> 4: Osaka -> Fukuoka (~480 km <= 700 km across Kanmon Strait) -> van
+        // 3 -> 4: Osaka -> Fukuoka (across Kanmon Strait via expressway tunnel/bridge) -> van
         { id: "s4", date: "2024-01-08", venue: "福岡太陽宮殿會館", city: "福岡", prefecture: "福岡縣", region: "九州" },
-        // 4 -> 5: Fukuoka -> Tokyo (~880 km > 700 km long-haul) -> flight
+        // 4 -> 5: Fukuoka -> Tokyo (interconnected Honshu/Kyushu expressway network) -> van
         { id: "s5", date: "2024-01-12", venue: "日本武道館", city: "東京", prefecture: "東京都", region: "關東" },
         // 5 -> 6: Tokyo -> Sapporo (cross-strait to Hokkaido) -> flight
         { id: "s6", date: "2024-01-15", venue: "Zepp Sapporo", city: "札幌", prefecture: "北海道", region: "北海道" },
@@ -318,30 +331,135 @@ describe("Venue Map Pure Domain Engine (ADR-0124)", () => {
       const modes = seq.transitions.map((t) => t.transitMode);
       assert.deepStrictEqual(modes, [
         "stay",   // 1->2: Matsue -> Matsue (same venue)
-        "van",    // 2->3: Matsue -> Osaka (<= 700km)
-        "van",    // 3->4: Osaka -> Fukuoka (<= 700km)
-        "flight", // 4->5: Fukuoka -> Tokyo (> 700km)
-        "flight", // 5->6: Tokyo -> Sapporo (into Hokkaido)
-        "van",    // 6->7: Sapporo -> Obihiro (intra-Hokkaido)
-        "van",    // 7->8: Obihiro -> Asahikawa (intra-Hokkaido)
-        "flight", // 8->9: Asahikawa -> Nagoya (out of Hokkaido)
-        "flight", // 9->10: Nagoya -> Okinawa
+        "van",    // 2->3: Matsue -> Osaka (Honshu road)
+        "van",    // 3->4: Osaka -> Fukuoka (Honshu to Kyushu via Kanmon Tunnel/Bridge)
+        "van",    // 4->5: Fukuoka -> Tokyo (Kyushu to Honshu interconnected expressway)
+        "flight", // 5->6: Tokyo -> Sapporo (crossing Tsugaru Strait into Hokkaido)
+        "van",    // 6->7: Sapporo -> Obihiro (intra-Hokkaido road)
+        "van",    // 7->8: Obihiro -> Asahikawa (intra-Hokkaido road)
+        "flight", // 8->9: Asahikawa -> Nagoya (crossing Tsugaru Strait out of Hokkaido)
+        "flight", // 9->10: Nagoya -> Okinawa (island crossing)
         "flight", // 10->11: Okinawa -> Taipei (Overseas)
       ]);
 
       assert.strictEqual(seq.summary.stayCount, 1);
-      assert.strictEqual(seq.summary.vanCount, 4);
-      assert.strictEqual(seq.summary.flightCount, 5);
+      assert.strictEqual(seq.summary.vanCount, 5);
+      assert.strictEqual(seq.summary.flightCount, 4);
+    });
+
+    it("defaults journey playback to the 2× transport speed", () => {
+      assert.strictEqual(DEFAULT_PLAYBACK_SPEED, 2);
+      assert.ok(PLAYBACK_SPEEDS.includes(DEFAULT_PLAYBACK_SPEED), "Default speed must be offered in the transport");
+    });
+
+    it("builds quadratic transit curves and samples cursor positions along them via journey-playback.js", () => {
+      const a = { x: 100, y: 100 };
+      const b = { x: 300, y: 200 };
+      assert.strictEqual(buildTransitPath(a, a, "van"), "", "Zero-length legs produce no path");
+      const d = buildTransitPath(a, b, "flight");
+      assert.ok(d.startsWith("M100,100 Q") && d.endsWith("300,200"));
+
+      const p0 = pointOnTransit(a, b, "van", 0);
+      const p1 = pointOnTransit(a, b, "van", 1);
+      assert.deepStrictEqual([p0.x, p0.y], [100, 100]);
+      assert.deepStrictEqual([p1.x, p1.y], [300, 200]);
+      const mid = pointOnTransit(a, b, "van", 0.5);
+      assert.ok(mid.x > 100 && mid.x < 300 && mid.y > 100 && mid.y < 200 + 80);
+
+      // Tangent heading angle for vehicle steering in 2.5D third-person view
+      const angle0 = tangentAngleOnTransit(a, b, "van", 0);
+      const angle1 = tangentAngleOnTransit(a, b, "van", 1);
+      assert.strictEqual(typeof angle0, "number");
+      assert.strictEqual(typeof angle1, "number");
+      assert.ok(!Number.isNaN(angle0) && !Number.isNaN(angle1));
+      assert.strictEqual(tangentAngleOnTransit(a, a, "van", 0), 0);
+
+      // Heading-Up world rotation angles (rotates world so vehicle drives straight forward)
+      assert.strictEqual(computeHeadingUpRotation(0), -90); // East -> -90° (upwards)
+      assert.strictEqual(computeHeadingUpRotation(-90), 0); // North -> 0° (upwards)
+      assert.strictEqual(computeHeadingUpRotation(90), -180); // South -> -180° (upwards)
+    });
+
+    it("maps playback progress to sequential frames (completed legs, current leg, leg fraction) and clamps", () => {
+      const legs = [{ index: 0 }, { index: 1 }, { index: 2 }];
+
+      const start = getPlaybackFrame(legs, 0);
+      assert.strictEqual(start.completedLegs, 0);
+      assert.strictEqual(start.currentLeg, legs[0]);
+      assert.strictEqual(start.legT, 0);
+      assert.strictEqual(start.isComplete, false);
+
+      const mid = getPlaybackFrame(legs, 1.25);
+      assert.strictEqual(mid.completedLegs, 1);
+      assert.strictEqual(mid.currentLeg, legs[1]);
+      assert.strictEqual(mid.legT, 0.25);
+      assert.strictEqual(mid.arrivedStopIndex, 1);
+
+      const end = getPlaybackFrame(legs, 99);
+      assert.strictEqual(end.completedLegs, 3);
+      assert.strictEqual(end.currentLeg, null);
+      assert.strictEqual(end.legT, 1);
+      assert.strictEqual(end.isComplete, true);
+      assert.strictEqual(end.arrivedStopIndex, 3);
+
+      assert.strictEqual(getPlaybackFrame(legs, -5).progress, 0);
+      assert.strictEqual(getPlaybackFrame([], 3).isComplete, true);
+    });
+
+    it("advances progress by elapsed time scaled by speed and never exceeds the leg count", () => {
+      assert.deepStrictEqual(PLAYBACK_SPEEDS, [1, 2, 4]);
+      const one = advanceProgress(0, 1000, 1, 100);
+      assert.ok(Math.abs(one - BASE_LEGS_PER_SECOND) < 1e-9);
+      const fast = advanceProgress(0, 1000, 4, 100);
+      assert.ok(Math.abs(fast - BASE_LEGS_PER_SECOND * 4) < 1e-9);
+      assert.strictEqual(advanceProgress(99.9, 5000, 4, 100), 100);
+    });
+
+    it("computes follow cam viewBox smoothly tracking focus point across main islands, insets, and overview mode", () => {
+      // 1. Follow camera mode (default) centers a 280x196 window on focus point, clamped inside 800x560
+      const centerBox = computeFollowCamViewBox({ x: 400, y: 280, zone: "main" });
+      assert.strictEqual(centerBox, "260 182 280 196");
+
+      // Boundary clamping near top-left (e.g. x=50, y=50 in main island)
+      const topLeftBox = computeFollowCamViewBox({ x: 50, y: 50, zone: "main" });
+      assert.strictEqual(topLeftBox, "0 0 280 196");
+
+      // Boundary clamping near bottom-right (e.g. x=780, y=540)
+      const bottomRightBox = computeFollowCamViewBox({ x: 780, y: 540, zone: "main" });
+      assert.strictEqual(bottomRightBox, "520 364 280 196");
+
+      // 2. Overview camera mode always returns macro viewBox
+      assert.strictEqual(
+        computeFollowCamViewBox({ x: 300, y: 300, zone: "main" }, { cameraMode: "overview" }),
+        "0 0 800 560"
+      );
+
+      // 3. Completed journey returns macro viewBox when isComplete is true
+      assert.strictEqual(
+        computeFollowCamViewBox({ x: 300, y: 300, zone: "main" }, { isComplete: true }),
+        "0 0 800 560"
+      );
+
+      // 4. Overseas Asia Inset focus in follow mode
+      const overseasBox = computeFollowCamViewBox({ x: 80, y: 90, zone: "overseas" });
+      assert.strictEqual(overseasBox, "0 0 300 210");
+
+      // 5. Okinawa Inset focus in follow mode
+      const okinawaBox = computeFollowCamViewBox({ x: 700, y: 490, zone: "okinawa" });
+      assert.strictEqual(okinawaBox, "580 410 220 154");
     });
   });
 
-  describe("5. japan-map-paths.js — Pre-Simplified 47 Prefectures + Dual Inset SVG Geometry & Spotlight ViewBox", () => {
-    it("provides 47 Japan prefectures and 4 Overseas Asia paths (< 15 KB) aligned with projected venue coordinates", async () => {
+  describe("5. japan-map-paths.js — High-Resolution Coastline SVG Geometry, Callout Leader Anchors & Spotlight ViewBox", () => {
+    it("provides high-resolution 47 Japan prefectures + 4 Overseas Asia paths (< 15 KB gzip), callout anchors, graticules, and zoom scale factor", async () => {
       const mapPathsMod = await import("../../src/lib/japan-map-paths.js");
       const {
         PREFECTURE_PATHS,
         PREFECTURE_MAP_BY_NAME,
+        MAP_CALLOUT_ANCHORS,
+        MAP_GRATICULE_PATHS,
         getZoomViewBox,
+        getZoomScaleFactor,
       } = mapPathsMod;
 
       assert.ok(Array.isArray(PREFECTURE_PATHS), "PREFECTURE_PATHS must be an array");
@@ -351,19 +469,34 @@ describe("Venue Map Pure Domain Engine (ADR-0124)", () => {
         path.resolve(here, "../../src/lib/japan-map-paths.js"),
         "utf8"
       );
+      const gzipBytes = zlib.gzipSync(rawPathFile).length;
       assert.ok(
-        Buffer.byteLength(rawPathFile, "utf8") < 15 * 1024,
-        "japan-map-paths.js must be under 15 KB"
+        gzipBytes < 15 * 1024,
+        `japan-map-paths.js gzip size (${gzipBytes} B) must be under 15 KB (ADR-0124)`
       );
 
+      let totalVertices = 0;
       for (const item of PREFECTURE_PATHS) {
         assert.ok(item.prefecture, "Each entry must have prefecture name");
         assert.ok(item.path && item.path.startsWith("M") && item.path.endsWith("Z"), `Invalid SVG path for ${item.prefecture}`);
+        const vertexCount = (item.path.match(/[ML]/g) || []).length;
+        assert.ok(
+          vertexCount >= 10,
+          `Prefecture ${item.prefecture} must have high-resolution coastline geometry (>= 10 vertices, got ${vertexCount})`
+        );
+        totalVertices += vertexCount;
         assert.strictEqual(typeof item.cx, "number");
         assert.strictEqual(typeof item.cy, "number");
         assert.ok(item.viewBox && item.viewBox.split(" ").length === 4, `Invalid viewBox for ${item.prefecture}`);
         assert.strictEqual(PREFECTURE_MAP_BY_NAME[item.prefecture], item);
       }
+      assert.ok(totalVertices >= 900, `Total coastline vertices across 51 entries must be >= 900 (got ${totalVertices})`);
+
+      // Verify Callout Leader Line anchors & Graticule paths
+      assert.ok(Array.isArray(MAP_CALLOUT_ANCHORS) && MAP_CALLOUT_ANCHORS.length >= 7, "Must export MAP_CALLOUT_ANCHORS for ocean leader lines");
+      assert.ok(Array.isArray(MAP_GRATICULE_PATHS) && MAP_GRATICULE_PATHS.length >= 6, "Must export MAP_GRATICULE_PATHS for ocean grid");
+      assert.strictEqual(getZoomScaleFactor("0 0 800 560"), 1);
+      assert.ok(getZoomScaleFactor(getZoomViewBox("東京都")) > 3, "Zoom scale factor for Tokyo must be > 3x");
 
       assert.strictEqual(getZoomViewBox(null), "0 0 800 560");
       const shimaneVb = getZoomViewBox("島根縣").split(" ").map(Number);

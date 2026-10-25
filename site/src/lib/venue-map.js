@@ -11,6 +11,12 @@ export const MAP_VIEWBOX = {
   str: "0 0 800 560",
 };
 
+export const PORTRAIT_MAP_VIEWBOX = {
+  width: 540,
+  height: 930,
+  str: "0 0 540 930",
+};
+
 export const OVERSEAS_INSET_BOUNDS = {
   x: 16,
   y: 16,
@@ -24,6 +30,51 @@ export const OKINAWA_INSET_BOUNDS = {
   width: 174,
   height: 104,
 };
+
+export const PORTRAIT_OVERSEAS_INSET_BOUNDS = {
+  x: 20,
+  y: 20,
+  width: 500,
+  height: 205,
+};
+
+export const PORTRAIT_OKINAWA_INSET_BOUNDS = {
+  x: 150,
+  y: 848,
+  width: 240,
+  height: 68,
+};
+
+export const MAIN_PORTRAIT_OFFSET = { x: -212, y: 260 };
+export const OVERSEAS_PORTRAIT_OFFSET = { x: 137, y: 0 };
+export const OKINAWA_PORTRAIT_OFFSET = { x: -423, y: 390 };
+
+/**
+ * Maps an SVG coordinate point between landscape (800x560) and portrait (800x990)
+ * triptych layout spaces (ADR-0126).
+ *
+ * @param {{ x: number, y: number, zone?: "main" | "overseas" | "okinawa", anchorX?: number, anchorY?: number } | null} point
+ * @param {"landscape" | "portrait"} [layout]
+ * @returns {{ x: number, y: number, zone?: "main" | "overseas" | "okinawa", anchorX?: number, anchorY?: number } | null}
+ */
+export function projectPointToLayout(point, layout = "landscape") {
+  if (!point || layout !== "portrait") return point;
+  const zone = point.zone || "main";
+  const offset =
+    zone === "overseas"
+      ? OVERSEAS_PORTRAIT_OFFSET
+      : zone === "okinawa"
+      ? OKINAWA_PORTRAIT_OFFSET
+      : MAIN_PORTRAIT_OFFSET;
+
+  return {
+    ...point,
+    x: Number((point.x + offset.x).toFixed(2)),
+    y: Number((point.y + offset.y).toFixed(2)),
+    anchorX: point.anchorX != null ? Number((point.anchorX + offset.x).toFixed(2)) : point.anchorX,
+    anchorY: point.anchorY != null ? Number((point.anchorY + offset.y).toFixed(2)) : point.anchorY,
+  };
+}
 
 const COS_36_DEG = Math.cos((36 * Math.PI) / 180); // ~0.80901699
 
@@ -200,33 +251,13 @@ for (const pref of [...JAPAN_47_PREFECTURES, ...OVERSEAS_COUNTRIES]) {
   }
 }
 
-const REGION_ALIAS_LOOKUP = new Map([
-  ["日本 - 關東", "日本 - 關東"],
-  ["關東", "日本 - 關東"],
-  ["関東", "日本 - 關東"],
-  ["kanto", "日本 - 關東"],
-  ["日本 - 關西", "日本 - 關西"],
-  ["關西", "日本 - 關西"],
-  ["関西", "日本 - 關西"],
-  ["kansai", "日本 - 關西"],
-  ["日本 - 東北 / 北海道", "日本 - 東北 / 北海道"],
-  ["東北", "日本 - 東北 / 北海道"],
-  ["tohoku", "日本 - 東北 / 北海道"],
-  ["日本 - 中部 / 九州 / 其他", "日本 - 中部 / 九州 / 其他"],
-  ["中部", "日本 - 中部 / 九州 / 其他"],
-  ["九州", "日本 - 中部 / 九州 / 其他"],
-  ["中國", "日本 - 中部 / 九州 / 其他"],
-  ["四國", "日本 - 中部 / 九州 / 其他"],
-  ["海外（台灣 / 韓國 / 東南亞）", "海外（台灣 / 韓國 / 東南亞）"],
-]);
-
 /**
- * Resolves a route parameter from `#/map/:regionOrPref` into a canonical map target
- * (`journey`, a canonical prefecture / overseas country, `"海外"`, or a canonical region).
- * Returns `null` for unknown/malformed targets so the router safely falls back to `#/`.
+ * Resolves a route parameter from `#/map/:prefOrCountry` into a canonical map target
+ * (`journey`, a canonical prefecture / overseas country, or `"海外"`).
+ * Returns `null` for unknown/malformed targets so the router safely falls back to `#/map`.
  *
  * @param {string|null} rawTarget
- * @returns {{ mode: "root" | "journey" | "prefecture" | "region", target: string | null } | null}
+ * @returns {{ mode: "root" | "journey" | "prefecture", target: string | null } | null}
  */
 export function resolveMapTarget(rawTarget) {
   if (rawTarget === null || rawTarget === undefined || rawTarget === "") {
@@ -245,12 +276,6 @@ export function resolveMapTarget(rawTarget) {
   }
   if (PREF_ALIAS_LOOKUP.has(lower)) {
     return { mode: "prefecture", target: PREF_ALIAS_LOOKUP.get(lower) };
-  }
-  if (REGION_ALIAS_LOOKUP.has(lower) || REGION_ALIAS_LOOKUP.has(clean)) {
-    return {
-      mode: "region",
-      target: REGION_ALIAS_LOOKUP.get(clean) || REGION_ALIAS_LOOKUP.get(lower),
-    };
   }
   return null;
 }
@@ -620,7 +645,7 @@ function isStubShowRecord(show) {
   return false;
 }
 
-function classifyTransitMode(fromStop, toStop, distanceKm, flightThresholdKm) {
+function classifyTransitMode(fromStop, toStop) {
   // 1. Same venue consecutive days -> stay
   if (fromStop.venue && toStop.venue && fromStop.venue === toStop.venue) {
     return "stay";
@@ -650,12 +675,9 @@ function classifyTransitMode(fromStop, toStop, distanceKm, flightThresholdKm) {
     return "flight";
   }
 
-  // 2d. Long-haul inter-regional distance > 700 km -> flight
-  if (distanceKm > flightThresholdKm) {
-    return "flight";
-  }
-
-  // 3. All other overland transitions (Honshu/Shikoku/Kyushu <= 700 km and intra-Hokkaido) -> van
+  // 3. Domestic Japan interconnected highway road network (Honshu, Shikoku via Seto Bridges,
+  //    Kyushu via Kanmon Bridge/Tunnel, and intra-Hokkaido routes):
+  //    Bands and production crews drive their tour vans across mainland expressways regardless of distance.
   return "van";
 }
 
@@ -687,7 +709,6 @@ function classifyTransitMode(fromStop, toStop, distanceKm, flightThresholdKm) {
  */
 export function buildJourneySequence(shows = [], venueProfilesMap = null, options = {}) {
   const includeTvBroadcasts = options.includeTvBroadcasts === true;
-  const flightThresholdKm = options.flightDistanceThresholdKm ?? FLIGHT_DISTANCE_THRESHOLD_KM;
 
   const virtualShows = [];
   const physicalCandidates = [];
@@ -773,7 +794,7 @@ export function buildJourneySequence(shows = [], venueProfilesMap = null, option
         ? 0
         : haversineDistanceKm(from.lat, from.lng, to.lat, to.lng);
 
-    const transitMode = classifyTransitMode(from, to, rawDistanceKm, flightThresholdKm);
+    const transitMode = classifyTransitMode(from, to);
     const distanceKm = transitMode === "stay" ? 0 : rawDistanceKm;
 
     if (transitMode === "stay") stayCount += 1;
