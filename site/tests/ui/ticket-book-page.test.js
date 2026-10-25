@@ -479,7 +479,9 @@ describe("23. Tour TicketBook Dedicated Page (#/tickets) & Timeline Management (
       );
       assert.ok(!heroHtml.includes('data-testid="landing-ticket-book-btn"'), "LandingHero must NOT render ticket book button");
       assert.ok(heroHtml.includes('data-testid="landing-feature-ticket-book"'), "LandingHero must render feature card for ticket book");
+      assert.ok(heroHtml.includes('data-testid="landing-feature-journey"'), "LandingHero must render feature card for tour journey");
       assert.ok(heroHtml.includes("個人巡演票夾"), "LandingHero feature card must show ticket book title");
+      assert.ok(heroHtml.includes("全生涯巡演動態足跡"), "LandingHero feature card must show tour journey title");
       assert.ok(heroHtml.includes("開啟我的巡演票夾"), "LandingHero feature card must show ticket book CTA");
 
       // Now add 1 attendance record
@@ -539,7 +541,7 @@ describe("23. Tour TicketBook Dedicated Page (#/tickets) & Timeline Management (
       assert.ok(htmlMobileFab.includes('data-testid="mobile-ticket-badge-count"'), "MobileFloatingControls must render mobile-ticket-badge-count when count > 0");
       assert.ok(htmlMobileFab.includes(">1<"), "Mobile badge count must display 1");
 
-      // 4. FilterDrawer
+      // 4. FilterDrawer (ADR-0125: Pure filter drawer without extraneous buttons)
       const htmlDrawer = renderToStaticMarkup(
         React.createElement(
           I18nProvider,
@@ -553,13 +555,10 @@ describe("23. Tour TicketBook Dedicated Page (#/tickets) & Timeline Management (
             renderShowNavigator: () => null,
             renderSongNavigator: () => null,
             renderVenueNavigator: () => null,
-            storage,
           })
         )
       );
-      assert.ok(htmlDrawer.includes('data-testid="drawer-ticket-book-btn"'), "FilterDrawer must render ticket-book button");
-      assert.ok(htmlDrawer.includes('data-testid="drawer-ticket-badge-count"'), "FilterDrawer must render drawer badge count");
-      assert.ok(htmlDrawer.includes(">1<"), "Drawer badge count must display 1");
+      assert.ok(!htmlDrawer.includes('data-testid="drawer-ticket-book-btn"'), "FilterDrawer must be clean without ticket-book button (ADR-0125)");
 
       // 5. TicketBookPage emoji audit & mobile floating docks
       const htmlPage = renderToStaticMarkup(

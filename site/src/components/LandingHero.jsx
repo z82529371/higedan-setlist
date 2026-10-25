@@ -12,6 +12,7 @@ export default function LandingHero({
   onOpenCalendar,
   onSelectTab,
   onSelectTickets,
+  onSelectJourney,
   totalAllShows,
   allUsedSongs,
   allVenues,
@@ -296,32 +297,37 @@ export default function LandingHero({
           </div>
         </button>
 
-        {/* Card 4: Complete Chronology & Provenance */}
+        {/* Card 4: Tour Journey Navigator */}
         <button
           type="button"
-          onClick={() => onSelectTab("venue")}
+          data-testid="landing-feature-journey"
+          onClick={() => {
+            if (onSelectJourney) onSelectJourney();
+            else onSelectTab("venue");
+          }}
           className="group flex flex-col justify-between rounded-xl border-[1.5px] border-ink/25 bg-card p-5 text-left transition-all motion-reduce:transition-none hover:border-ink hover:shadow-md cursor-pointer focus-visible:ring-2 focus-visible:ring-band focus-visible:outline-none"
         >
           <div>
             <div className="flex items-center justify-between mb-3">
               <span className="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-paper border border-ink/20 text-base shadow-2xs">
-                🏛️
+                🚐
               </span>
               <span className="font-mono text-[11px] font-bold text-muted uppercase tracking-wider group-hover:text-band-ink">
-                PROVENANCE
+                TOUR JOURNEY
               </span>
             </div>
             <h3 className="m-0 font-display text-[16px] sm:text-[17px] font-bold text-ink">
-              {t("landing.features.provenanceTitle", "2012–2026 全域足跡")}
+              {t("landing.features.journeyTitle", "全生涯巡演動態足跡")}
             </h3>
             <p className="mt-2 mb-0 text-[13px] text-muted leading-relaxed">
-              {t("landing.features.provenanceDesc", "收錄 8 大演出型態、{venueCount} 處歷史場館與未發行地下原創曲，100% 一手官方資料嚴謹查證。", {
-                venueCount: allVenues.length,
-              })}
+              {t(
+                "landing.features.journeyDesc",
+                "523 場巡演全路線動態回顧，跟隨小巴與巡演航班自島根起步，重溫橫跨日本列島與海外各地的十餘年壯闊軌跡。"
+              )}
             </p>
           </div>
           <div className="mt-4 pt-3 border-t border-line-soft flex items-center justify-between text-[12px] font-bold text-ink group-hover:text-band-ink">
-            <span>{t("landing.features.provenanceAction", "探索歷史場館")}</span>
+            <span>{t("landing.features.journeyAction", "啟動巡演足跡")}</span>
             <span className="transition-transform group-hover:translate-x-1" aria-hidden="true">
               →
             </span>

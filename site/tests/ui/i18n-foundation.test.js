@@ -357,7 +357,7 @@ describe("13. i18n Foundation, Hash Route Query Parameter Seam, and Header Switc
       assert.ok(htmlJa.includes("台北アリーナ公演"), "ja must render 台北アリーナ公演");
       assert.ok(htmlJa.includes("演奏回数ランキング"), "ja must render 演奏回数ランキング");
       assert.ok(htmlJa.includes("実物チケット＆ステージRun-Sheet"), "ja must render ticket stub title");
-      assert.ok(htmlJa.includes("2012–2026 全軌跡"), "ja must render provenance title");
+      assert.ok(htmlJa.includes("全キャリア巡演動態足跡"), "ja must render journey title");
       assert.ok(htmlJa.includes("194"), "ja must interpolate dynamic venueCount");
       assert.ok(htmlJa.includes("アーカイブを探索する"), "ja must render primary CTA");
       assert.ok(htmlJa.includes("Official髭男dism ファンによる非公式・非営利のライブ履歴アーカイブ"), "ja must render localized footer");
@@ -374,7 +374,7 @@ describe("13. i18n Foundation, Hash Route Query Parameter Seam, and Header Switc
       assert.ok(htmlEn.includes("Taipei Arena Show"), "en must render Taipei Arena Show");
       assert.ok(htmlEn.includes("Top Performed Songs"), "en must render Top Performed Songs");
       assert.ok(htmlEn.includes("Authentic Ticket Stubs"), "en must render ticket stub title");
-      assert.ok(htmlEn.includes("2012–2026 Provenance"), "en must render provenance title");
+      assert.ok(htmlEn.includes("Career Tour Dynamic Route"), "en must render journey title");
       assert.ok(htmlEn.includes("Explore Full Archive"), "en must render primary CTA");
       assert.ok(htmlEn.includes("Unofficial non-profit Official HIGEDAN Dism"), "en must render localized footer");
       assert.ok(htmlEn.includes("Feedback &amp; Errata: "), "en must render localized contact label");
@@ -390,7 +390,7 @@ describe("13. i18n Foundation, Hash Route Query Parameter Seam, and Header Switc
       assert.ok(htmlKo.includes("타이베이 아레나 공연"), "ko must render 타이베이 아레나 공연");
       assert.ok(htmlKo.includes("곡 연주 랭킹"), "ko must render 곡 연주 랭킹");
       assert.ok(htmlKo.includes("실물 티켓") && htmlKo.includes("무대 전표"), "ko must render ticket stub title");
-      assert.ok(htmlKo.includes("2012–2026 전체 족적"), "ko must render provenance title");
+      assert.ok(htmlKo.includes("전체 커리어 투어 동적 발자취"), "ko must render journey title");
       assert.ok(htmlKo.includes("전체 아카이브 탐색하기"), "ko must render primary CTA");
       assert.ok(htmlKo.includes("Official 히게단 dism 팬 비공식"), "ko must render localized footer");
       assert.ok(htmlKo.includes("제보 및 문의: "), "ko must render localized contact label");
@@ -400,7 +400,7 @@ describe("13. i18n Foundation, Hash Route Query Parameter Seam, and Header Switc
       for (const html of [htmlJa, htmlEn, htmlKo]) {
         assert.ok(html.includes("BI-DIRECTIONAL"), "must preserve BI-DIRECTIONAL token");
         assert.ok(html.includes("TICKET STUB"), "must preserve TICKET STUB token");
-        assert.ok(html.includes("PROVENANCE"), "must preserve PROVENANCE token");
+        assert.ok(html.includes("TOUR JOURNEY"), "must preserve TOUR JOURNEY token");
         assert.ok(html.includes("Pretender"), "must preserve official song name Pretender");
       }
     });

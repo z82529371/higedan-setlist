@@ -206,7 +206,7 @@ describe("14. Localized Presentation & Domain Taxonomy (#17)", () => {
       assert.ok(showNavHtmlEn.includes("Tour"), "ShowNavigator must render localized category pill 'Tour' in en");
       assert.ok(showNavHtmlEn.includes("Festival"), "ShowNavigator must render localized category pill 'Festival' in en");
 
-      // 3. VenueNavigator in ja (依日本地理分區, 日本 - 関東)
+      // 3. VenueNavigator in ja (会場マップ, 公演数ランキング)
       const mockAllVenues = [
         { name: "日本武道館", region: "日本 - 關東", city: "東京", shows: [1, 2] },
         { name: "KINTEX", region: "海外", city: "首爾", shows: [1] },
@@ -217,8 +217,7 @@ describe("14. Localized Presentation & Domain Taxonomy (#17)", () => {
           { initialLocale: "ja" },
           React.createElement(VenueNavigator, {
             allVenues: mockAllVenues,
-            venueSortMode: "region",
-            selRegion: "日本 - 關東",
+            venueSortMode: "count",
             venuesSortedByCount: mockAllVenues,
             filteredVenues: mockAllVenues,
             pagedVenues: mockAllVenues,
@@ -226,8 +225,8 @@ describe("14. Localized Presentation & Domain Taxonomy (#17)", () => {
           })
         )
       );
-      assert.ok(venueNavHtmlJa.includes("日本 - 関東"), "VenueNavigator must render localized region '日本 - 関東' in ja");
-      assert.ok(venueNavHtmlJa.includes("海外（台湾 / 韓国 / 東南アジア）"), "VenueNavigator must render localized overseas region in ja");
+      assert.ok(venueNavHtmlJa.includes("会場マップ"), "VenueNavigator must render localized sort pill '会場マップ' in ja");
+      assert.ok(venueNavHtmlJa.includes("公演数ランキング"), "VenueNavigator must render localized sort pill '公演数ランキング' in ja");
 
       // 4. VenueNavigator in en
       const venueNavHtmlEn = renderToStaticMarkup(
@@ -236,8 +235,7 @@ describe("14. Localized Presentation & Domain Taxonomy (#17)", () => {
           { initialLocale: "en" },
           React.createElement(VenueNavigator, {
             allVenues: mockAllVenues,
-            venueSortMode: "region",
-            selRegion: "日本 - 關東",
+            venueSortMode: "count",
             venuesSortedByCount: mockAllVenues,
             filteredVenues: mockAllVenues,
             pagedVenues: mockAllVenues,
@@ -245,8 +243,8 @@ describe("14. Localized Presentation & Domain Taxonomy (#17)", () => {
           })
         )
       );
-      assert.ok(venueNavHtmlEn.includes("Japan - Kanto"), "VenueNavigator must render localized region 'Japan - Kanto' in en");
-      assert.ok(venueNavHtmlEn.includes("Overseas (Taiwan / Korea / SE Asia)"), "VenueNavigator must render localized overseas region in en");
+      assert.ok(venueNavHtmlEn.includes("Venue Map"), "VenueNavigator must render localized sort pill 'Venue Map' in en");
+      assert.ok(venueNavHtmlEn.includes("Show Ranking"), "VenueNavigator must render localized sort pill 'Show Ranking' in en");
     });
 
     it("renders ShowSlip and TourSlip with localized arrangement badges, headers, and preserved canonical titles", async () => {
