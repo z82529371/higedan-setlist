@@ -36,7 +36,8 @@ export function JourneyPlaybackControls({ playback, stops = [] }) {
       data-playing={isPlaying ? "true" : "false"}
       className="space-y-2 rounded-[3px] border border-ink/40 bg-paper px-3 py-2.5 shadow-xs dark:shadow-none"
     >
-      <div className="flex flex-wrap items-center gap-2">
+      {/* Row 1: Play/Pause button + Stop progress & Venue info */}
+      <div className="flex items-center gap-2.5 sm:gap-3">
         <button
           type="button"
           data-testid="journey-playback-toggle"
@@ -44,7 +45,7 @@ export function JourneyPlaybackControls({ playback, stops = [] }) {
           aria-pressed={isPlaying}
           disabled={locked}
           onClick={toggle}
-          className={`inline-flex items-center gap-1.5 rounded-[3px] border border-ink bg-band px-3 py-1.5 font-mono text-[12px] font-extrabold text-band-ink shadow-xs dark:shadow-none transition-colors ${
+          className={`shrink-0 inline-flex items-center gap-1.5 rounded-[3px] border border-ink bg-band px-3 py-1.5 font-mono text-[12px] font-extrabold text-band-ink shadow-xs dark:shadow-none transition-colors ${
             locked ? "cursor-not-allowed opacity-40" : "cursor-pointer hover:bg-card"
           }`}
         >
@@ -60,16 +61,19 @@ export function JourneyPlaybackControls({ playback, stops = [] }) {
             })}
           </div>
           {currentStop && (
-            <div className="flex min-w-0 flex-wrap items-center gap-1.5 text-[12px] font-extrabold text-ink">
+            <div className="flex min-w-0 flex-wrap items-center gap-1.5 text-[12px] font-extrabold text-ink leading-tight">
               <span className="font-mono whitespace-nowrap shrink-0 tabular-nums">{currentStop.date}</span>
-              <span aria-hidden="true" className="shrink-0">
+              <span aria-hidden="true" className="shrink-0 text-muted">
                 ·
               </span>
               <span className="truncate">{localizeVenue(currentStop.venue)}</span>
             </div>
           )}
         </div>
+      </div>
 
+      {/* Row 2: Speed buttons (1× 2× 4×) + Camera view toggle */}
+      <div className="flex flex-wrap items-center justify-between gap-2 pt-1 border-t border-dashed border-ink/20">
         <div role="group" aria-label={t("venueMap.playbackSpeedAria")} className="flex items-center gap-1">
           {PLAYBACK_SPEEDS.map((rate) => (
             <button
@@ -79,7 +83,7 @@ export function JourneyPlaybackControls({ playback, stops = [] }) {
               data-speed={rate}
               aria-pressed={speed === rate}
               onClick={() => setSpeed(rate)}
-              className={`rounded-[3px] border px-2 py-1 font-mono text-[11px] font-extrabold tabular-nums transition-colors cursor-pointer ${
+              className={`rounded-[3px] border px-2 py-0.5 font-mono text-[11px] font-extrabold tabular-nums transition-colors cursor-pointer ${
                 speed === rate
                   ? "border-ink bg-band text-band-ink shadow-2xs dark:shadow-none"
                   : "border-ink/40 bg-paper text-ink hover:bg-card"
@@ -98,7 +102,7 @@ export function JourneyPlaybackControls({ playback, stops = [] }) {
             aria-label={t("venueMap.playbackCameraAria")}
             aria-pressed={cameraMode === "follow"}
             onClick={toggleCameraMode}
-            className="rounded-[3px] border border-ink/40 bg-paper px-2.5 py-1 font-mono text-[11px] font-extrabold text-ink transition-colors hover:bg-card cursor-pointer shadow-2xs dark:shadow-none"
+            className="rounded-[3px] border border-ink/40 bg-paper px-2 py-0.5 font-mono text-[11px] font-extrabold text-ink transition-colors hover:bg-card cursor-pointer shadow-2xs dark:shadow-none"
           >
             {cameraMode === "follow"
               ? t("venueMap.playbackCameraFollow")

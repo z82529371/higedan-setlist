@@ -1,5 +1,7 @@
+import { useState } from "react";
 import { useI18n } from "../../lib/i18n.jsx";
 import { showDate, formatShowVenueCity, shortUnitTitle } from "../../lib/domain.js";
+import { TicketBookFootprintMap } from "./TicketBookFootprintMap.jsx";
 
 function MilestoneProgressBar({ percentage }) {
   const safePercentage = Math.min(100, Math.max(0, percentage || 0));
@@ -20,10 +22,20 @@ function MilestoneProgressBar({ percentage }) {
   );
 }
 
-export function TicketBookMilestoneDashboard({ milestones, onOpenSummaryCard, onOpenSongChecklist }) {
+export function TicketBookMilestoneDashboard({
+  milestones,
+  onOpenSummaryCard,
+  onOpenSongChecklist,
+  enrichedShows,
+  allVenues,
+  onSelectShow,
+}) {
   const { t, locale } = useI18n();
 
   if (!milestones) return null;
+
+  const [topSongsOpen, setTopSongsOpen] = useState(true);
+  const [timelineOpen, setTimelineOpen] = useState(true);
 
   const topSongs = milestones.topSongs || [];
   const earliest = milestones.earliestShow;
@@ -165,91 +177,120 @@ export function TicketBookMilestoneDashboard({ milestones, onOpenSummaryCard, on
       <div className="mt-3.5 grid grid-cols-1 sm:grid-cols-2 gap-3 pt-3 border-t border-line-soft">
         {/* Top 3 Live Songs */}
         <div data-testid="milestone-top-songs" className="rounded-[4px] border border-line-soft bg-paper/30 p-3">
-          <div className="flex items-center justify-between mb-2 pb-1.5 border-b border-line-soft/60">
+          <button
+            type="button"
+            data-testid="toggle-top-songs-btn"
+            onClick={() => setTopSongsOpen((prev) => !prev)}
+            aria-expanded={topSongsOpen}
+            className="w-full flex items-center justify-between mb-2 pb-1.5 border-b border-line-soft/60 cursor-pointer select-none text-left focus:outline-none"
+          >
             <span className="font-mono text-[11px] font-bold text-ink uppercase flex items-center gap-1">
               <span>🔥</span>
               <span>{t("ticketBook.topSongs", "現場神曲 Top 3")}</span>
             </span>
-          </div>
+            <span className="font-mono text-[11px] font-bold text-muted transition-transform select-none" aria-hidden="true">
+              {topSongsOpen ? "▼" : "▶"}
+            </span>
+          </button>
 
-          {topSongs.length === 0 ? (
-            <p className="m-0 text-center py-2 text-[11px] text-ink">--</p>
-          ) : (
-            <div className="space-y-1.5">
-              {topSongs.map((song, idx) => {
-                const medal = idx === 0 ? "🥇" : idx === 1 ? "🥈" : "🥉";
-                return (
-                  <div
-                    key={song.songId}
-                    data-testid={`milestone-top-song-${song.songId}`}
-                    className="flex items-center justify-between gap-2 text-[12px] bg-card p-1.5 rounded border border-ink/15"
-                  >
-                    <div className="flex items-center gap-1.5 min-w-0">
-                      <span className="font-mono text-[11px] font-bold" aria-hidden="true">
-                        {medal}
+          {topSongsOpen && (
+            topSongs.length === 0 ? (
+              <p className="m-0 text-center py-2 text-[11px] text-ink">--</p>
+            ) : (
+              <div className="space-y-1.5">
+                {topSongs.map((song, idx) => {
+                  const medal = idx === 0 ? "🥇" : idx === 1 ? "🥈" : "🥉";
+                  return (
+                    <div
+                      key={song.songId}
+                      data-testid={`milestone-top-song-${song.songId}`}
+                      className="flex items-center justify-between gap-2 text-[12px] bg-card p-1.5 rounded border border-ink/15"
+                    >
+                      <div className="flex items-center gap-1.5 min-w-0">
+                        <span className="font-mono text-[11px] font-bold" aria-hidden="true">
+                          {medal}
+                        </span>
+                        <span className="font-bold text-ink truncate">{song.title}</span>
+                      </div>
+                      <span className="shrink-0 font-mono text-[11px] font-bold text-ink">
+                        {t("ticketBook.timesUnit", "{count} 次", { count: song.count })}
                       </span>
-                      <span className="font-bold text-ink truncate">{song.title}</span>
                     </div>
-                    <span className="shrink-0 font-mono text-[11px] font-bold text-ink">
-                      {t("ticketBook.timesUnit", "{count} 次", { count: song.count })}
-                    </span>
-                  </div>
-                );
-              })}
-            </div>
+                  );
+                })}
+              </div>
+            )
           )}
         </div>
 
         {/* History: First & Latest Shows */}
         <div data-testid="milestone-shows-history" className="rounded-[4px] border border-line-soft bg-paper/30 p-3">
-          <div className="flex items-center justify-between mb-2 pb-1.5 border-b border-line-soft/60">
+          <button
+            type="button"
+            data-testid="toggle-timeline-btn"
+            onClick={() => setTimelineOpen((prev) => !prev)}
+            aria-expanded={timelineOpen}
+            className="w-full flex items-center justify-between mb-2 pb-1.5 border-b border-line-soft/60 cursor-pointer select-none text-left focus:outline-none"
+          >
             <span className="font-mono text-[11px] font-bold text-ink uppercase flex items-center gap-1">
               <span>📅</span>
               <span>TIMELINE HIGHLIGHTS</span>
             </span>
-          </div>
+            <span className="font-mono text-[11px] font-bold text-muted transition-transform select-none" aria-hidden="true">
+              {timelineOpen ? "▼" : "▶"}
+            </span>
+          </button>
 
-          <div className="space-y-2">
-            {/* First Show */}
-            <div
-              data-testid="milestone-first-show"
-              className="bg-card p-2 rounded border border-ink/15 text-[11px]"
-            >
-              <div className="flex items-center justify-between text-ink font-mono font-bold mb-0.5 gap-1">
-                <span className="shrink-0">{t("ticketBook.firstShow", "最初參戰")}</span>
-                <span className="whitespace-nowrap shrink-0">{earliest?.date ? (earliest.show ? showDate(earliest.show, locale) : earliest.date) : "--"}</span>
-              </div>
-              <div className="font-bold text-ink truncate text-[12px]">
-                {earliest?.shortTitle || (earliest?.unit ? shortUnitTitle(earliest.unit) : earliest?.title) || "--"}
-              </div>
-              {earliest && (
-                <div className="text-ink text-[11px] truncate font-medium">
-                  📍 {earliest.show ? formatShowVenueCity(earliest.show, t, locale) : earliest.venue || earliest.city}
+          {timelineOpen && (
+            <div className="space-y-2">
+              {/* First Show */}
+              <div
+                data-testid="milestone-first-show"
+                className="bg-card p-2 rounded border border-ink/15 text-[11px]"
+              >
+                <div className="flex items-center justify-between text-ink font-mono font-bold mb-0.5 gap-1">
+                  <span className="shrink-0">{t("ticketBook.firstShow", "最初參戰")}</span>
+                  <span className="whitespace-nowrap shrink-0">{earliest?.date ? (earliest.show ? showDate(earliest.show, locale) : earliest.date) : "--"}</span>
                 </div>
-              )}
-            </div>
+                <div className="font-bold text-ink truncate text-[12px]">
+                  {earliest?.shortTitle || (earliest?.unit ? shortUnitTitle(earliest.unit) : earliest?.title) || "--"}
+                </div>
+                {earliest && (
+                  <div className="text-ink text-[11px] truncate font-medium">
+                    📍 {earliest.show ? formatShowVenueCity(earliest.show, t, locale) : earliest.venue || earliest.city}
+                  </div>
+                )}
+              </div>
 
-            {/* Latest Show */}
-            <div
-              data-testid="milestone-latest-show"
-              className="bg-card p-2 rounded border border-ink/15 text-[11px]"
-            >
-              <div className="flex items-center justify-between text-ink font-mono font-bold mb-0.5 gap-1">
-                <span className="shrink-0">{t("ticketBook.latestShow", "最近參戰")}</span>
-                <span className="whitespace-nowrap shrink-0">{latest?.date ? (latest.show ? showDate(latest.show, locale) : latest.date) : "--"}</span>
-              </div>
-              <div className="font-bold text-ink truncate text-[12px]">
-                {latest?.shortTitle || (latest?.unit ? shortUnitTitle(latest.unit) : latest?.title) || "--"}
-              </div>
-              {latest && (
-                <div className="text-ink text-[11px] truncate font-medium">
-                  📍 {latest.show ? formatShowVenueCity(latest.show, t, locale) : latest.venue || latest.city}
+              {/* Latest Show */}
+              <div
+                data-testid="milestone-latest-show"
+                className="bg-card p-2 rounded border border-ink/15 text-[11px]"
+              >
+                <div className="flex items-center justify-between text-ink font-mono font-bold mb-0.5 gap-1">
+                  <span className="shrink-0">{t("ticketBook.latestShow", "最近參戰")}</span>
+                  <span className="whitespace-nowrap shrink-0">{latest?.date ? (latest.show ? showDate(latest.show, locale) : latest.date) : "--"}</span>
                 </div>
-              )}
+                <div className="font-bold text-ink truncate text-[12px]">
+                  {latest?.shortTitle || (latest?.unit ? shortUnitTitle(latest.unit) : latest?.title) || "--"}
+                </div>
+                {latest && (
+                  <div className="text-ink text-[11px] truncate font-medium">
+                    📍 {latest.show ? formatShowVenueCity(latest.show, t, locale) : latest.venue || latest.city}
+                  </div>
+                )}
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </div>
+
+      {/* Personal Concert Footprint & Prefecture Conquest Map (ADR-0124) */}
+      <TicketBookFootprintMap
+        attendedShows={enrichedShows || milestones?.attendedShowsList || []}
+        allVenues={allVenues}
+        onSelectShow={onSelectShow}
+      />
     </div>
   );
 }

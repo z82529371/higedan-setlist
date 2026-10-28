@@ -12,6 +12,7 @@ import {
   projectPointToLayout,
   buildPrefectureMapStats,
   computeSpiderfyOffsets,
+  lookupVenueProfile,
 } from "../lib/venue-map.js";
 import {
   PREFECTURE_PATHS,
@@ -182,6 +183,7 @@ export function VenueMapCanvas({
   onSelectVenue,
   journey = null,
   onSelectShow,
+  playbackOptions = null,
 }) {
   const { t, localizeVenue } = useI18n();
   const [hoveredVenue, setHoveredVenue] = useState(null);
@@ -357,9 +359,9 @@ export function VenueMapCanvas({
 
   const journeyStops = journey?.stops || EMPTY_LIST;
   const journeyTransitions = journey?.transitions || EMPTY_LIST;
-  const playback = useJourneyPlayback(journeyTransitions);
+  const playback = useJourneyPlayback(journeyTransitions, playbackOptions || undefined);
   const { frame } = playback;
-  const [finaleOverview, setFinaleOverview] = useState(false);
+  const [finaleOverview, setFinaleOverview] = useState(playbackOptions?.initialProgress === "end");
 
   useEffect(() => {
     if (!frame.isComplete) {
@@ -374,6 +376,19 @@ export function VenueMapCanvas({
   }, [frame.isComplete]);
 
   const arrivedStopIndex = Math.min(frame.arrivedStopIndex ?? frame.completedLegs, Math.max(0, journeyStops.length - 1));
+
+  const activeReachedPrefectures = useMemo(() => {
+    if (mode !== "journey" || !journeyStops.length) return null;
+    const reached = new Set();
+    const reachedStops = journeyStops.slice(0, arrivedStopIndex + 1);
+    for (const stop of reachedStops) {
+      const pref = stop.prefecture || lookupVenueProfile?.(stop.venue)?.prefecture;
+      if (pref) {
+        reached.add(pref);
+      }
+    }
+    return reached;
+  }, [mode, journeyStops, arrivedStopIndex]);
   const currentStop = journeyStops[arrivedStopIndex] || null;
   const currentStopPoint = currentStop?.svgPoint
     ? projectPointToLayout(currentStop.svgPoint, activeLayout)
@@ -655,39 +670,60 @@ export function VenueMapCanvas({
     [journeyTransitions, frame.completedLegs, activeLayout]
   );
 
-  const footprintStops = useMemo(
-    () =>
-      journeyStops.slice(0, frame.completedLegs).map((stop) => {
-        if (!stop.svgPoint) return null;
-        const stopPt = projectPointToLayout(stop.svgPoint, activeLayout);
-        const isRecentTail = stop.index >= frame.completedLegs - 4;
-        const tier = isRecentTail ? "tail" : "historic";
-        const opacity = isRecentTail ? "0.75" : "0.25";
-        return (
-          <circle
-            key={`arrived-${stop.showId}-${stop.index}`}
-            data-stop-state="footprint"
-            data-stop-tier={tier}
-            cx={stopPt.x}
-            cy={stopPt.y}
-            r={isRecentTail ? "3.2" : "2.2"}
-            fill="var(--color-card)"
-            stroke="var(--color-ink)"
-            strokeWidth={isRecentTail ? "1.0" : "0.7"}
-            opacity={opacity}
-            vectorEffect="non-scaling-stroke"
-          />
-        );
-      }),
-    [journeyStops, frame.completedLegs, activeLayout]
-  );
-
   const handleKeyActivate = (e, callback) => {
     if (e.key === "Enter" || e.key === " ") {
       e.preventDefault();
       callback();
     }
   };
+
+  const arrivedPastStops = useMemo(
+    () =>
+      journeyStops.slice(0, arrivedStopIndex).map((stop) => {
+        if (!stop.svgPoint) return null;
+        const pt = projectPointToLayout(stop.svgPoint, activeLayout);
+        const isStart = stop.isFirst;
+        const isFinal = stop.isFinal;
+        return (
+          <g
+            key={`arrived-stop-${stop.showId}-${stop.index}`}
+            data-testid="journey-stop-marker"
+            data-stop-id={stop.showId}
+            data-stop-number={stop.stopNumber}
+            data-stop-role={isStart ? "start" : isFinal ? "final" : "intermediate"}
+            data-stop-state="footprint"
+            transform={`translate(${pt.x}, ${pt.y})`}
+            role="button"
+            tabIndex={0}
+            aria-label={`${stop.date} ${localizeVenue(stop.venue)}`}
+            onClick={() => {
+              if (onSelectShow) onSelectShow(stop.showId);
+              if (isFullscreen) setIsFullscreen(false);
+            }}
+            onKeyDown={(e) =>
+              handleKeyActivate(e, () => {
+                if (onSelectShow) onSelectShow(stop.showId);
+                if (isFullscreen) setIsFullscreen(false);
+              })
+            }
+            className="cursor-pointer group/stop"
+          >
+            {/* Invisible touch target shield for comfortable tap accessibility */}
+            <circle r="12" fill="transparent" pointerEvents="all" />
+            {/* Subtle clean footprint dot without numbers — only current stop has the numbered circle */}
+            <circle
+              r="2.8"
+              fill={isStart ? "var(--color-tape)" : isFinal ? "var(--color-request)" : "var(--color-card)"}
+              stroke="var(--color-ink)"
+              strokeWidth="1.0"
+              vectorEffect="non-scaling-stroke"
+              className="group-hover/stop:r-[4.2] group-hover/stop:stroke-[1.8] transition-all"
+            />
+          </g>
+        );
+      }),
+    [journeyStops, arrivedStopIndex, activeLayout, onSelectShow, isFullscreen, localizeVenue]
+  );
 
   const renderMapSvg = (inModal = false) => (
     <svg
@@ -926,20 +962,31 @@ export function VenueMapCanvas({
               const isDimmed =
                 Boolean(selectedPrefecture) && !isSelected && mode === "venues";
 
+              const effectiveTier =
+                mode === "journey"
+                  ? activeReachedPrefectures && activeReachedPrefectures.has(geo.prefecture)
+                    ? stat.tier !== "unvisited"
+                      ? stat.tier
+                      : (geo.prefecture === "島根縣" || geo.prefecture === "鳥取縣"
+                        ? "sanctuary_or_hub"
+                        : "visited")
+                    : "unvisited"
+                  : stat.tier;
+
               const fillToken =
-                stat.tier === "unvisited"
+                effectiveTier === "unvisited"
                   ? "var(--color-paper)"
-                  : stat.tier === "sanctuary_or_hub"
+                  : effectiveTier === "sanctuary_or_hub"
                   ? "var(--color-band)"
                   : "var(--color-tape-soft)";
 
               const strokeToken =
-                stat.tier === "unvisited"
+                effectiveTier === "unvisited"
                   ? "var(--color-muted)"
                   : "var(--color-ink)";
 
               const ariaLabel =
-                stat.showCount > 0
+                effectiveTier !== "unvisited"
                   ? t("venueMap.prefAriaVisited", null, {
                       pref: locPref,
                       venues: stat.activeVenueCount || stat.venueCount,
@@ -949,29 +996,32 @@ export function VenueMapCanvas({
                       pref: locPref,
                     });
 
+              const isClickable =
+                effectiveTier !== "unvisited" && Boolean(onSelectPrefecture);
+
               return (
                 <g
                   key={geo.prefecture}
                   data-pref={geo.prefecture}
-                  data-tier={stat.tier}
-                  role="button"
-                  tabIndex={0}
+                  data-tier={effectiveTier}
+                  role={isClickable ? "button" : undefined}
+                  tabIndex={isClickable ? 0 : undefined}
                   aria-label={ariaLabel}
                   aria-pressed={isSelected}
                   transform={isPortrait ? getZoneTransform(geo.zone) : undefined}
                   onClick={() => {
-                    if (stat.tier !== "unvisited" && onSelectPrefecture) {
+                    if (isClickable) {
                       onSelectPrefecture(geo.prefecture);
                     }
                   }}
-                  onKeyDown={(e) =>
-                    handleKeyActivate(e, () => {
-                      if (stat.tier !== "unvisited" && onSelectPrefecture) {
+                  onKeyDown={(e) => {
+                    if (isClickable) {
+                      handleKeyActivate(e, () => {
                         onSelectPrefecture(geo.prefecture);
-                      }
-                    })
-                  }
-                  className={stat.tier === "unvisited" ? "cursor-default focus:outline-none" : "cursor-pointer focus:outline-none"}
+                      });
+                    }
+                  }}
+                  className={!isClickable ? "cursor-default focus:outline-none" : "cursor-pointer focus:outline-none"}
                   opacity={isDimmed ? 0.28 : 1}
                   data-dimmed={isDimmed ? "true" : undefined}
                   onMouseEnter={() => setHoveredPref(geo.prefecture)}
@@ -983,8 +1033,8 @@ export function VenueMapCanvas({
                     d={geo.path}
                     fill={fillToken}
                     stroke={strokeToken}
-                    strokeWidth={isSelected ? "2" : stat.tier === "unvisited" ? "0.9" : "1"}
-                    strokeDasharray={stat.tier === "unvisited" ? "3 2" : undefined}
+                    strokeWidth={isSelected ? "2" : effectiveTier === "unvisited" ? "0.9" : "1"}
+                    strokeDasharray={effectiveTier === "unvisited" ? "3 2" : undefined}
                     strokeLinejoin="round"
                     vectorEffect="non-scaling-stroke"
                   />
@@ -998,6 +1048,9 @@ export function VenueMapCanvas({
             {PREFECTURE_PATHS.filter((g) => g.zone !== "main").map((geo) => {
               const st = mapStats.byPrefecture[geo.prefecture];
               if (!st || st.showCount <= 0) return null;
+              if (mode === "journey" && (!activeReachedPrefectures || !activeReachedPrefectures.has(geo.prefecture))) {
+                return null;
+              }
               if (selectedPrefecture && selectedPrefecture !== geo.prefecture && selectedPrefecture !== OVERSEAS_TARGET_KEY) {
                 return null;
               }
@@ -1114,11 +1167,13 @@ export function VenueMapCanvas({
           {/* 5. Career / Tour Journey Route Layer — sequential playback (ADR-0124, DESIGN.md §5) */}
           {mode === "journey" && journey && (
             <g data-testid="journey-route-layer">
-              {/* 5a. Footprint: legs already travelled remain as low-opacity traces */}
+              {/* 5a. Footprint: legs already travelled remain behind the vehicle */}
               <g data-testid="journey-footprint-layer">{footprintLegs}</g>
-              <g data-testid="journey-footprint-stops">{footprintStops}</g>
 
-              {/* 5b. Current leg: drawn on demand, with a vehicle moving along it */}
+              {/* 5a2. Arrived past stops (discovered along the journey) */}
+              <g data-testid="journey-arrived-stops-layer">{arrivedPastStops}</g>
+
+              {/* 5b. Current leg: drawn dynamically behind moving vehicle */}
               {activeLeg && activeLeg.transitMode === "stay" && activeLegFrom && (
                 <g
                   data-leg-state="active-stay"
@@ -1180,11 +1235,13 @@ export function VenueMapCanvas({
                 </g>
               )}
 
-              {/* 5c. Arrival: stop marker plus a ticket stub with that stop's date & venue */}
-              {currentStopPoint && (
+              {/* 5c. Current arrived stop: stamp marker + golden pulse wave */}
+              {currentStopPoint && currentStop && (
                 <g
                   data-testid="journey-current-stop"
+                  data-stop-id={currentStop.showId}
                   data-stop-number={currentStop.stopNumber}
+                  data-stop-role={currentStop.isFirst ? "start" : currentStop.isFinal ? "final" : "intermediate"}
                   transform={`translate(${currentStopPoint.x}, ${currentStopPoint.y})`}
                   role="button"
                   tabIndex={0}
@@ -1211,24 +1268,26 @@ export function VenueMapCanvas({
                       pointerEvents="none"
                     />
                   )}
-                  <circle
-                    r="6.5"
-                    fill={currentStop.isFinal ? "var(--color-request)" : "var(--color-band)"}
-                    stroke="var(--color-ink)"
-                    strokeWidth="1.5"
-                    vectorEffect="non-scaling-stroke"
-                  />
-                  <text
-                    y="2.6"
-                    textAnchor="middle"
-                    fontFamily="var(--font-mono)"
-                    fontSize={String(currentStop.stopNumber).length > 2 ? 5.6 : 7}
-                    fontWeight="bold"
-                    fill={currentStop.isFinal ? "var(--color-card)" : "var(--color-band-ink)"}
-                    aria-hidden="true"
-                  >
-                    {currentStop.isFirst ? "S" : currentStop.isFinal ? "F" : currentStop.stopNumber}
-                  </text>
+                  <g data-testid="journey-stop-marker" data-stop-id={currentStop.showId} data-stop-state="current">
+                    <circle
+                      r="6.5"
+                      fill={currentStop.isFinal ? "var(--color-request)" : "var(--color-band)"}
+                      stroke="var(--color-ink)"
+                      strokeWidth="1.5"
+                      vectorEffect="non-scaling-stroke"
+                    />
+                    <text
+                      y="2.6"
+                      textAnchor="middle"
+                      fontFamily="var(--font-mono)"
+                      fontSize={String(currentStop.stopNumber).length > 2 ? 5.6 : 7}
+                      fontWeight="bold"
+                      fill={currentStop.isFinal ? "var(--color-card)" : "var(--color-band-ink)"}
+                      aria-hidden="true"
+                    >
+                      {currentStop.isFirst ? "S" : currentStop.isFinal ? "F" : currentStop.stopNumber}
+                    </text>
+                  </g>
                 </g>
               )}
             </g>
@@ -1462,7 +1521,7 @@ export function VenueMapCanvas({
         {mode === "journey" && hudStop && (
           <div
             data-testid="journey-hud-card"
-            className="md:hidden border-[1.5px] border-ink bg-card px-3 py-2 rounded-[3px] shadow-2xs flex items-center justify-between gap-2 select-none cursor-pointer active:bg-tape-tint/50"
+            className="md:hidden border-[1.5px] border-ink bg-card p-2.5 rounded-[3px] shadow-2xs flex flex-col gap-1.5 select-none cursor-pointer active:bg-tape-tint/50"
             role="button"
             tabIndex={0}
             onClick={() => onSelectShow && onSelectShow(hudStop.showId)}
@@ -1472,43 +1531,46 @@ export function VenueMapCanvas({
               venue: localizeVenue(hudStop.venue),
             })}
           >
-            <div className="flex items-center gap-2 min-w-0">
-              <span
-                className={`shrink-0 inline-flex items-center gap-1 px-1.5 py-0.5 rounded-[2px] font-mono text-[10px] font-bold uppercase tracking-wider ${
-                  isMoving
-                    ? "bg-solo text-solo-ink"
+            {/* Row 1: Status Badge + Date (left) and SETLIST ➔ button (right) */}
+            <div className="flex items-center justify-between gap-2">
+              <div className="flex items-center gap-2 min-w-0">
+                <span
+                  className={`shrink-0 inline-flex items-center gap-1 px-1.5 py-0.5 rounded-[2px] font-mono text-[10px] font-bold uppercase tracking-wider ${
+                    isMoving
+                      ? "bg-solo text-solo-ink"
+                      : hudStop.isFinal
+                      ? "bg-request text-request-ink"
+                      : "bg-band text-band-ink"
+                  }`}
+                >
+                  {isMoving && <span className="h-1.5 w-1.5 rounded-full bg-current animate-ping" />}
+                  {isMoving
+                    ? `${activeLeg?.transitMode === "flight" ? "✈️ " : "🚐 "}${t("venueMap.hudNextStop", null, { n: hudStop.stopNumber })}`
                     : hudStop.isFinal
-                    ? "bg-request text-request-ink"
-                    : "bg-band text-band-ink"
-                }`}
-              >
-                {isMoving && <span className="h-1.5 w-1.5 rounded-full bg-current animate-ping" />}
-                {isMoving
-                  ? `${activeLeg?.transitMode === "flight" ? "✈️ " : "🚐 "}${t("venueMap.hudNextStop", null, { n: hudStop.stopNumber })}`
-                  : hudStop.isFinal
-                  ? `🏁 ${t("venueMap.hudFinale")}`
-                  : hudStop.isFirst
-                  ? `🎸 ${t("venueMap.hudStart")}`
-                  : activeLeg?.transitMode === "stay"
-                  ? `🏕️ ${t("venueMap.hudStay")}`
-                  : `📍 ${t("venueMap.hudArrivedStop", null, { n: hudStop.stopNumber })}`}
-              </span>
-              <div className="min-w-0">
-                <div className="truncate font-bold text-[12px] leading-tight text-ink">
-                  {localizeVenue(hudStop.venue)}
-                </div>
-                <div className="truncate text-[10px] text-muted font-mono">
-                  {hudStop.city ? `${t(`cities.${hudStop.city}`, hudStop.city)} · ` : ""}
-                  {t(`prefectures.${hudStop.prefecture}`, hudStop.prefecture)}
-                </div>
+                    ? `🏁 ${t("venueMap.hudFinale")}`
+                    : hudStop.isFirst
+                    ? `🎸 ${t("venueMap.hudStart")}`
+                    : activeLeg?.transitMode === "stay"
+                    ? `🏕️ ${t("venueMap.hudStay")}`
+                    : `📍 ${t("venueMap.hudArrivedStop", null, { n: hudStop.stopNumber })}`}
+                </span>
+                <span className="font-mono text-[11px] font-extrabold text-muted">
+                  {hudStop.date}
+                </span>
               </div>
-            </div>
-            <div className="shrink-0 flex items-center gap-1.5">
-              <span className="font-mono text-[11px] font-extrabold text-muted">
-                {hudStop.date}
-              </span>
-              <span className="rounded-[2px] bg-band px-1.5 py-0.5 font-mono text-[10px] font-bold text-band-ink">
+              <span className="shrink-0 rounded-[2px] bg-band px-2 py-0.5 font-mono text-[10px] font-bold text-band-ink shadow-2xs">
                 SETLIST ➔
+              </span>
+            </div>
+
+            {/* Row 2: Venue Name + Prefecture & City (generous full-width line, no truncation) */}
+            <div className="flex flex-wrap items-baseline gap-x-2 gap-y-0.5 pt-1 border-t border-dashed border-ink/20 text-ink">
+              <span className="font-bold text-[13px] leading-snug break-words">
+                {localizeVenue(hudStop.venue)}
+              </span>
+              <span className="text-[11px] text-muted font-mono shrink-0">
+                {hudStop.city ? `${t(`cities.${hudStop.city}`, hudStop.city)} · ` : ""}
+                {t(`prefectures.${hudStop.prefecture}`, hudStop.prefecture)}
               </span>
             </div>
           </div>
@@ -1516,7 +1578,7 @@ export function VenueMapCanvas({
 
         {/* Journey Playback Transport: docked directly underneath the map card */}
         {mode === "journey" && journey && (
-          <div data-testid="journey-playback-dock" className="shrink-0">
+          <div data-testid="journey-playback-dock" className="shrink-0 -mt-1 md:mt-0">
             <JourneyPlaybackControls playback={playback} stops={journeyStops} />
           </div>
         )}

@@ -19,6 +19,7 @@ export function TicketBookPage({
   showById,
   unitIdByShowId,
   allUsedSongs,
+  allVenues,
   storage,
   onSelectShow,
   onReturnArchive,
@@ -258,12 +259,15 @@ export function TicketBookPage({
         {/* Perforation Divider */}
         <TicketPerforationDivider />
 
-        {/* Dynamic Career Milestones Dashboard (Issue #37, #46) */}
+        {/* Dynamic Career Milestones Dashboard (Issue #37, #46, #54) */}
         <div className="mt-4 sm:mt-6">
           <TicketBookMilestoneDashboard
             milestones={milestones}
             onOpenSummaryCard={() => setIsSummaryModalOpen(true)}
             onOpenSongChecklist={() => setIsSongChecklistOpen(true)}
+            enrichedShows={enrichedShows}
+            allVenues={allVenues}
+            onSelectShow={onSelectShow}
           />
         </div>
 

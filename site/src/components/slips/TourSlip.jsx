@@ -19,14 +19,14 @@ import {
 } from "./TicketCommon.jsx";
 import { useI18n } from "../../lib/i18n.jsx";
 import { useTicketBook, toggleAttendance } from "../../lib/ticket-book.js";
+import { TourJourneyMapPanel } from "./TourJourneyMapPanel.jsx";
 
 function formatShowBadgeLabel(show, t) {
   if (!show) return "";
   const dateStr = show.date ? show.date.slice(5).replace("-", "/") : "";
   const locCity = show.city ? (t ? t("cities." + show.city, show.city) : show.city) : "";
   const place = locCity || show.venue || "";
-  if (place && dateStr) return `${place} ${dateStr}`;
-  return place || dateStr || show.id || "";
+  return place && dateStr ? `${place} ${dateStr}` : place || dateStr || show.id || "";
 }
 
 export function TourSlip({
@@ -36,6 +36,7 @@ export function TourSlip({
   onSelectSong,
   onSelectShow,
   initialItineraryExpanded = false,
+  initialItineraryView = "list",
   storage,
 }) {
   const { t, locale, localizeVenue } = useI18n();
@@ -50,6 +51,8 @@ export function TourSlip({
   const [expandedTourId, setExpandedTourId] = useState(
     initialItineraryExpanded ? (statsResult?.tour?.id ?? null) : null
   );
+
+  const [itineraryView, setItineraryView] = useState(initialItineraryView);
 
   const [isEncoreCollapsed, setIsEncoreCollapsed] = useState(false);
   const [isRotatingCollapsed, setIsRotatingCollapsed] = useState(false);
@@ -80,11 +83,17 @@ export function TourSlip({
   const mainTracks = consensusTracks.filter((t) => !t.encore);
   const encTracks = consensusTracks.filter((t) => t.encore);
 
-  const formatSerial = () => {
-    const rawDate = (stats.dateStart || "").replace(/-/g, "");
-    const rawId = (tour.id || "TOUR").replace(/[^a-zA-Z0-9]/g, "").slice(0, 8).toUpperCase();
-    return `SN: TOUR-${rawDate || "2024"}-${rawId || "MASTER"}`;
-  };
+  const rawTourShows =
+    targetData?.shows ||
+    targetData?.unit?.shows ||
+    tourUnitData?.shows ||
+    ud?.shows ||
+    tourData?.shows ||
+    tour?.shows ||
+    [];
+
+  const formatSerial = () =>
+    `SN: TOUR-${(stats.dateStart || "").replace(/-/g, "") || "2024"}-${(tour.id || "TOUR").replace(/[^a-zA-Z0-9]/g, "").slice(0, 8).toUpperCase() || "MASTER"}`;
 
   const renderTrackTitleAndBadges = (track) => {
     const isClickable = !!(onSelectSong && track.songId);
@@ -553,21 +562,60 @@ export function TourSlip({
           id="tour-itinerary-section"
           className="rounded-[3px] p-3.5 sm:p-4 border border-line-soft bg-paper/50 space-y-3 mt-6"
         >
-          <div className="flex items-center justify-between font-mono text-xs font-bold uppercase tracking-wider text-muted pb-1.5 mb-1 border-b border-line-soft">
+          <div className="flex flex-wrap items-center justify-between gap-2 font-mono text-xs font-bold uppercase tracking-wider text-muted pb-1.5 mb-1 border-b border-line-soft">
             <span className="flex items-center gap-1.5 text-ink font-extrabold">
               <span className="text-band">◆</span> {t("slips.tourItinerary", "TOUR ITINERARY // 全國巡演日程足跡")}
             </span>
-            <span className="tabular-nums text-xs text-muted font-mono">
-              {itinerary.length} STOPS
-            </span>
+            <div className="flex items-center gap-2">
+              <div className="inline-flex rounded-[3px] border border-ink/30 p-0.5 bg-paper">
+                <button
+                  type="button"
+                  data-testid="tour-view-toggle-list"
+                  onClick={() => setItineraryView("list")}
+                  className={`px-2 py-0.5 rounded-[2px] font-mono text-[11px] font-bold cursor-pointer transition-colors ${
+                    itineraryView === "list"
+                      ? "bg-ink text-paper"
+                      : "text-muted hover:text-ink hover:bg-tape-tint/50"
+                  }`}
+                  aria-pressed={itineraryView === "list"}
+                >
+                  📋 {t("slips.tour.viewList", "時序日程表")}
+                </button>
+                <button
+                  type="button"
+                  data-testid="tour-view-toggle-map"
+                  onClick={() => setItineraryView("map")}
+                  className={`px-2 py-0.5 rounded-[2px] font-mono text-[11px] font-bold cursor-pointer transition-colors ${
+                    itineraryView === "map"
+                      ? "bg-ink text-paper"
+                      : "text-muted hover:text-ink hover:bg-tape-tint/50"
+                  }`}
+                  aria-pressed={itineraryView === "map"}
+                >
+                  🗺️ {t("slips.tour.viewMap", "巡演路線圖")}
+                </button>
+              </div>
+              <span className="tabular-nums text-xs text-muted font-mono">
+                {itinerary.length} STOPS
+              </span>
+            </div>
           </div>
 
-          <p className="text-[12px] text-muted m-0">
-            {t(
-              "slips.tour.itineraryDesc",
-              "按時序排列之巡迴站點、演出場館、所在城市與開演時刻（點擊直達該場單場票根）："
-            )}
-          </p>
+          {itineraryView === "map" ? (
+            <TourJourneyMapPanel
+              rawShows={rawTourShows}
+              onSelectShow={onSelectShow}
+              localizeVenue={localizeVenue}
+              t={t}
+            />
+          ) : (
+            <>
+              <p className="text-[12px] text-muted m-0">
+                {t(
+                  "slips.tour.itineraryDesc",
+                  "按時序排列之巡迴站點、演出場館、所在城市與開演時刻（點擊直達該場單場票根）："
+                )}
+              </p>
 
           <ol className="m-0 list-none p-0 divide-y divide-line-soft/50">
             {displayedItinerary.map((stop) => (
@@ -735,6 +783,8 @@ export function TourSlip({
                 </span>
               </button>
             </div>
+          )}
+            </>
           )}
         </div>
       )}

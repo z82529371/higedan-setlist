@@ -622,7 +622,7 @@ export function haversineDistanceKm(lat1, lng1, lat2, lng2) {
   return Number((EARTH_RADIUS_KM * c).toFixed(2));
 }
 
-function lookupVenueProfile(venueName, venueProfilesMap) {
+export function lookupVenueProfile(venueName, venueProfilesMap) {
   if (!venueName || !venueProfilesMap) return null;
   if (venueProfilesMap instanceof Map) return venueProfilesMap.get(venueName) ?? null;
   if (Array.isArray(venueProfilesMap)) {

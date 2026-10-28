@@ -21,19 +21,39 @@ const EMPTY_TRANSITIONS = [];
  * intentionally independent of `prefers-reduced-motion`: the route is opt-in map content
  * with its own pause control, so users can stop it whenever they want.
  */
-export function useJourneyPlayback(transitions = EMPTY_TRANSITIONS) {
+export function useJourneyPlayback(transitions = EMPTY_TRANSITIONS, options = {}) {
   const total = transitions.length;
-  const [progress, setProgress] = useState(0);
-  const [playing, setPlaying] = useState(true);
+  const initProgress =
+    options.initialProgress === "end"
+      ? total
+      : typeof options.initialProgress === "number"
+      ? options.initialProgress
+      : 0;
+  const initPlaying =
+    options.initialPlaying !== undefined ? options.initialPlaying : options.initialProgress === "end" ? false : true;
+
+  const [progress, setProgress] = useState(initProgress);
+  const [playing, setPlaying] = useState(initPlaying && total > 0);
   const [speed, setSpeed] = useState(DEFAULT_PLAYBACK_SPEED);
-  const [cameraMode, setCameraMode] = useState(DEFAULT_CAMERA_MODE);
+  const [cameraMode, setCameraMode] = useState(
+    options.initialProgress === "end" ? "overview" : (options.initialCameraMode || DEFAULT_CAMERA_MODE)
+  );
   const isPlaying = playing && total > 0;
 
-  // A new journey (year / tour filter, TV toggle) restarts at the origin and plays itself.
+  // A new journey restarts at origin unless initialProgress specified
   useEffect(() => {
-    setProgress(0);
-    setPlaying(transitions.length > 0);
-  }, [transitions]);
+    if (options.initialProgress === "end") {
+      setProgress(transitions.length);
+      setPlaying(false);
+      setCameraMode("overview");
+    } else if (typeof options.initialProgress === "number") {
+      setProgress(options.initialProgress);
+      setPlaying(options.initialPlaying ?? false);
+    } else {
+      setProgress(0);
+      setPlaying(transitions.length > 0);
+    }
+  }, [transitions, options.initialProgress, options.initialPlaying]);
 
   // A hidden tab freezes the clock; returning to the page stays paused until the user resumes.
   useEffect(() => {

@@ -348,22 +348,24 @@ export function VenueSlip({ venueName, globalVenueShows, unitData, onSelectShow,
           </div>
         </div>
 
-        {/* Level 2: Venue Title Headline */}
-        <h2 className="mt-2.5 mb-1 font-display text-[24px] sm:text-[27px] font-black leading-tight text-ink tracking-tight text-pretty">
-          {localizedTitle}{" "}
-          {(venueCity || venuePref) && (
-            <span className="inline-block text-[16px] sm:text-[17px] font-medium text-muted whitespace-nowrap">
-              （{venuePref ? `${t("prefectures." + venuePref, venuePref)} · ` : ""}{t("cities." + venueCity, venueCity)}）
-            </span>
-          )}
-        </h2>
+        {/* Level 2: Venue Primary Identity (Name, Prefecture, City, Native Subtitle) */}
+        <div className="mt-2.5 mb-1">
+          <h2 className="font-display text-[24px] sm:text-[27px] font-black leading-tight text-ink tracking-tight text-pretty m-0">
+            {localizedTitle}{" "}
+            {(venueCity || venuePref) && (
+              <span className="inline-block text-[16px] sm:text-[17px] font-medium text-muted whitespace-nowrap">
+                （{venuePref ? `${t("prefectures." + venuePref, venuePref)} · ` : ""}{t("cities." + venueCity, venueCity)}）
+              </span>
+            )}
+          </h2>
 
-        {/* Level 2b: Native Venue Subtitle (ADR-0111) */}
-        {showNativeSubtitle && (
-          <div className="mb-2 text-[13px] text-muted tracking-wide" data-testid="venue-native-subtitle">
-            {t("slips.venue.nativeName", "原名：{name}", { name: nativeName })}
-          </div>
-        )}
+          {/* Level 2b: Native Venue Subtitle (ADR-0111) */}
+          {showNativeSubtitle && (
+            <div className="mt-1 text-[13px] text-muted tracking-wide" data-testid="venue-native-subtitle">
+              {t("slips.venue.nativeName", "原名：{name}", { name: nativeName })}
+            </div>
+          )}
+        </div>
 
         {/* Level 3a: Venue Identity Summary Bar (Clean, single cohesive line) */}
         <div className="flex flex-wrap items-center gap-2 pt-2 border-t border-line-soft font-mono text-[12px] text-muted">
