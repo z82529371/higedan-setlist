@@ -4,7 +4,7 @@
 
 ---
 
-## 決策總覽清單（共 122 篇）
+## 決策總覽清單（共 124 篇）
 
 > [!NOTE]
 > **編號跳號說明**：本目錄編號自 ADR-0001 起至 ADR-0127 止。其中 ADR-0063、ADR-0064、ADR-0065、ADR-0068、ADR-0069 共 5 篇為早期介面排版草案，後續已被 ADR-0070 單欄聚焦架構完整吸收與替代，故無獨立保留歷史檔案；實體決策文件共計 122 篇。
@@ -134,3 +134,4 @@
 | [ADR-0126: 行動端直式三聯票券場地地圖與響應式投影幾何架構 (Responsive Triptych Portrait Venue Map & Projection Geometry Architecture)](0126-responsive-triptych-portrait-venue-map-architecture.md) | 已採納 (Accepted) | 實作行動端純自動響應切換直式三聯長條畫布（國外➔日本本土➔沖繩）、三聯打孔齒線分割、單一連貫 SVG 跨海航線繼承與自然頁面流動不變式 |
 | [ADR-0127: 小尺寸全生涯巡演足跡極大化地圖與行動端篩選抽屜架構 (Mobile Tour Journey Maximized Canvas & Filter Drawer Architecture)](0127-mobile-tour-journey-floating-console-and-cinema-architecture.md) | 已採納 (Accepted) | 確立小尺寸巡演足跡地圖極大化、底層標準懸浮按鈕、滑出式巡演篩選抽屜與沉浸影院全螢幕模式架構 |
 | [ADR-0128: 巡演票券路線圖與個人票夾參戰足跡整合及場館定位郵戳收斂架構 (TourSlip Route Map & Ticket Book Footprint Integration with Venue Mini Locator Stamp Omission Architecture)](0128-tour-slip-journey-and-ticket-book-footprint-integration-architecture.md) | 已採納 (Accepted) | 實作 TourSlip 列表/路線圖雙模式切換與線上場次隔離、TicketBook 個人 47 都道府縣制霸足跡與里程碑獨立折疊，並正式廢除 VenueSlip 冗餘微型定位郵戳地圖 |
+| [ADR-0129: 團員動物吉祥物動畫、代表曲目廢除與個人參戰足跡明信片圖卡架構 (Band Animal Avatars, Representative Song Omission & Ticket Book Footprint Postcard Export Architecture)](0129-band-animal-avatars-and-ticket-book-footprint-export-architecture.md) | 已採納 (Accepted) | 確立四位團員動物吉祥物（🐨🐱🦍🐻）與三態巡演狀態機、嚴守樂團巡演 vs 歌迷足跡登場邊界、果斷剔除「代表曲目」過度設計，並建立票夾獨立 540px 參戰足跡明信片 PNG 匯出架構 |
