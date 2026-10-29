@@ -3,6 +3,7 @@ import { useI18n } from "../../lib/i18n.jsx";
 import { buildPrefectureMapStats, buildJourneySequence } from "../../lib/venue-map.js";
 import { venueProfiles, venueProfilesByCanonical } from "../../lib/locales/venues.js";
 import { VenueMapCanvas } from "../VenueMapCanvas.jsx";
+import { FootprintCardModal } from "./FootprintCardModal.jsx";
 
 /**
  * Fan's Personal Concert Footprint & Prefecture Conquest Map (ADR-0124, Issue #54).
@@ -13,9 +14,11 @@ export function TicketBookFootprintMap({
   attendedShows = [],
   allVenues = null,
   onSelectShow,
+  storage,
 }) {
   const { t } = useI18n();
   const [isExpanded, setIsExpanded] = useState(true);
+  const [isFootprintModalOpen, setIsFootprintModalOpen] = useState(false);
 
   // 1. Filter out online livestreams; only physical live shows count towards cartographic footprint
   const physicalShows = useMemo(() => {
@@ -85,29 +88,41 @@ export function TicketBookFootprintMap({
       className="mt-4 rounded-[4px] border border-line-soft bg-paper/40 p-3 sm:p-4 space-y-3"
     >
       {/* Header bar: Title & Conquest Progress Badge + Collapse Toggle */}
-      <button
-        type="button"
-        data-testid="toggle-footprint-map-btn"
-        onClick={() => setIsExpanded((prev) => !prev)}
-        aria-expanded={isExpanded}
-        className="w-full flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-line-soft/80 pb-2.5 text-left cursor-pointer select-none focus:outline-none"
-      >
-        <div className="flex items-center gap-2">
+      <div className="w-full flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-line-soft/80 pb-2.5">
+        <button
+          type="button"
+          data-testid="toggle-footprint-map-btn"
+          onClick={() => setIsExpanded((prev) => !prev)}
+          aria-expanded={isExpanded}
+          className="flex items-center gap-2 text-left cursor-pointer select-none focus:outline-none flex-1 group"
+        >
           <span className="text-lg select-none" aria-hidden="true">
             🗺️
           </span>
           <div>
-            <h3 className="m-0 font-display text-[14px] sm:text-[15px] font-bold text-ink leading-tight">
+            <h3 className="m-0 font-display text-[14px] sm:text-[15px] font-bold text-ink leading-tight group-hover:text-band-ink transition-colors">
               {t("ticketBook.footprintTitle", "我的參戰足跡地圖")}
             </h3>
             <p className="m-0 mt-0.5 font-mono text-[10px] font-bold text-muted uppercase tracking-wider">
               PERSONAL TOUR FOOTPRINT & CONQUEST
             </p>
           </div>
-        </div>
+        </button>
 
-        {/* Progress Pill + Collapse Chevron */}
+        {/* Action Buttons & Progress Pill + Collapse Chevron */}
         <div className="flex flex-wrap items-center gap-2">
+          {physicalShows.length > 0 && (
+            <button
+              type="button"
+              data-testid="open-footprint-card-btn"
+              onClick={() => setIsFootprintModalOpen(true)}
+              className="inline-flex items-center gap-1.5 rounded-[4px] border border-ink/40 bg-band px-2.5 py-1 font-mono text-[11px] font-bold text-band-ink shadow-2xs hover:brightness-105 transition-colors cursor-pointer"
+            >
+              <span aria-hidden="true">📸</span>
+              <span>{t("ticketBook.saveFootprintCard", "儲存足跡卡")}</span>
+            </button>
+          )}
+
           <span
             data-testid="footprint-progress-badge"
             className="inline-flex items-center gap-1.5 rounded-[4px] border border-ink/30 bg-tape px-2.5 py-1 font-mono text-[11px] font-bold text-ink shadow-2xs"
@@ -122,11 +137,19 @@ export function TicketBookFootprintMap({
               </span>
             )}
           </span>
-          <span className="font-mono text-[11px] font-bold text-muted transition-transform select-none" aria-hidden="true">
+
+          <button
+            type="button"
+            data-testid="toggle-footprint-chevron-btn"
+            onClick={() => setIsExpanded((prev) => !prev)}
+            aria-expanded={isExpanded}
+            aria-label={isExpanded ? t("common.collapse", "收合") : t("common.expand", "展開")}
+            className="font-mono text-[11px] font-bold text-muted transition-transform select-none cursor-pointer p-0.5"
+          >
             {isExpanded ? "▼" : "▶"}
-          </span>
+          </button>
         </div>
-      </button>
+      </div>
 
       {isExpanded && (
         <>
@@ -217,6 +240,15 @@ export function TicketBookFootprintMap({
       )}
         </>
       )}
+
+      {/* 540px Tour Footprint Commemorative Postcard Modal (ADR-0129, Issue #56) */}
+      <FootprintCardModal
+        isOpen={isFootprintModalOpen}
+        onClose={() => setIsFootprintModalOpen(false)}
+        attendedShows={physicalShows}
+        allVenues={effectiveVenuesList}
+        storage={storage}
+      />
     </div>
   );
 }
