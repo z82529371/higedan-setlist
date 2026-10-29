@@ -4,10 +4,10 @@
 
 ---
 
-## 決策總覽清單（共 126 篇）
+## 決策總覽清單（共 127 篇）
 
 > [!NOTE]
-> **編號跳號說明**：本目錄編號自 ADR-0001 起至 ADR-0127 止。其中 ADR-0063、ADR-0064、ADR-0065、ADR-0068、ADR-0069 共 5 篇為早期介面排版草案，後續已被 ADR-0070 單欄聚焦架構完整吸收與替代，故無獨立保留歷史檔案；實體決策文件共計 122 篇。
+> **編號跳號說明**：本目錄編號自 ADR-0001 起至 ADR-0127 止。其中 ADR-0063、ADR-0064、ADR-0065、ADR-0068、ADR-0069 共 5 篇為早期介面排版草案，後續已被 ADR-0070 單欄聚焦架構完整吸收與替代，故無獨立保留歷史檔案；實體決策文件共計 123 篇。
 
 | 決策標題 | 狀態 | 日期 |
 | :--- | :---: | :---: |
@@ -139,3 +139,4 @@
 | [ADR-0131: 參戰足跡動態明信片短片錄製匯出與累計里程廢除架構 (Living Postcard Tour Footprint Video Recording & Distance Omission Architecture)](0131-living-postcard-tour-footprint-video-recording-and-distance-omission-architecture.md) | 已採納 (Accepted) | 確立廢除「累計遠征距離」、540px 動態明信片（The Living Postcard）短片錄製架構、1×/2×/4× 巡演倍速時長連動契約、一鍵演出錄製與影片+PNG雙軌匯出不變式 |
 | [ADR-0132: 向量畫布引擎、次秒級 1080p 視網膜巡演足跡動態短片合成架構 (Vector Canvas Engine & Sub-Second 1080p Retina Video Export Architecture)](0132-vector-canvas-engine-subsecond-retina-video-export.md) | 已被替代 (Superseded by ADR-0133) | 確立分層純向量畫布架構、次秒級離線高速轉檔、2× Retina 1080p 超高清規格、吉祥物動態與 1.5 秒落地章定格儀式感；短片功能後續由 ADR-0133 簡化回歸純 PNG 匯出 |
 | [ADR-0133: 參戰足跡紀念明信片純 PNG 離線匯出、全線踏破快照與「參戰紀念」正名架構 (Tour Footprint Postcard Pure PNG Export, Completed Souvenir Snapshot & Live Memorial Architecture)](0133-tour-footprint-postcard-pure-png-export-and-live-memorial-architecture.md) | 已採納 (Accepted) | 封存瀏覽器短片錄製，回歸 100% 穩定純 PNG 離線匯出、始終匯出全線踏破完成體快照、印章正式正名為「參戰紀念」並維持累計距離剔除 |
+| [ADR-0134: PWA 網路優先導航策略、建置雜湊快取版本化與邊緣標頭架構 (PWA Network-First Navigation, Dynamic Hash Cache Invalidation & Cloudflare Edge Headers Architecture)](0134-pwa-network-first-navigation-and-hash-cache-invalidation-architecture.md) | 已採納 (Accepted) | 實作 HTML 導航 Network-First 附加 1.8 秒超時自動降級、Vite 建置期注入動態雜湊版號、Cloudflare Pages _headers 邊緣標頭規範與用戶端平滑接管，徹底免除 Ctrl+R |

@@ -8,6 +8,7 @@ const siteRoot = path.resolve(import.meta.dirname, "../..");
 const publicDir = path.resolve(siteRoot, "public");
 const manifestPath = path.resolve(publicDir, "manifest.webmanifest");
 const swPath = path.resolve(publicDir, "sw.js");
+const headersPath = path.resolve(publicDir, "_headers");
 const indexHtmlPath = path.resolve(siteRoot, "index.html");
 
 describe("20. PWA Offline Support & Web App Manifest Invariants (ADR-0119)", () => {
@@ -98,10 +99,30 @@ describe("20. PWA Offline Support & Web App Manifest Invariants (ADR-0119)", () 
         "index.html must set apple-mobile-web-app-capable to yes"
       );
     });
+
+    it("declares Cloudflare Pages _headers for cache control and instant invalidation", () => {
+      assert.ok(fs.existsSync(headersPath), "site/public/_headers must exist");
+      const headers = fs.readFileSync(headersPath, "utf-8");
+      assert.match(
+        headers,
+        /\/index\.html[\s\S]*?Cache-Control:\s*public,\s*max-age=0,\s*must-revalidate/i,
+        "_headers must specify max-age=0, must-revalidate for /index.html"
+      );
+      assert.match(
+        headers,
+        /\/sw\.js[\s\S]*?Cache-Control:\s*public,\s*max-age=0,\s*must-revalidate/i,
+        "_headers must specify max-age=0, must-revalidate for /sw.js"
+      );
+      assert.match(
+        headers,
+        /\/assets\/\*[\s\S]*?Cache-Control:\s*public,\s*max-age=31536000,\s*immutable/i,
+        "_headers must specify immutable 1-year cache for /assets/*"
+      );
+    });
   });
 
   describe("Service Worker Architecture & SSR Safety", () => {
-    it("guarantees sw.js implements Cache-First, precache, and cache pruning", () => {
+    it("guarantees sw.js implements Network-First for navigation with timeout and Cache-First for assets (ADR-0134)", () => {
       assert.ok(fs.existsSync(swPath), "sw.js must exist in site/public");
       const swCode = fs.readFileSync(swPath, "utf-8");
 
@@ -109,9 +130,19 @@ describe("20. PWA Offline Support & Web App Manifest Invariants (ADR-0119)", () 
       assert.match(swCode, /addEventListener\(\s*["']install["']/, "sw.js must listen for install");
       assert.match(swCode, /addEventListener\(\s*["']activate["']/, "sw.js must listen for activate");
       assert.match(swCode, /addEventListener\(\s*["']fetch["']/, "sw.js must listen for fetch");
-      assert.match(swCode, /caches\.match/, "sw.js must use caches.match for Cache-First");
+      assert.match(swCode, /caches\.match/, "sw.js must use caches.match");
       assert.match(swCode, /caches\.delete/, "sw.js must prune outdated caches on activate");
       assert.match(swCode, /skipWaiting\(\)/, "sw.js must call skipWaiting on install");
+      assert.match(
+        swCode,
+        /["']navigate["']/,
+        "sw.js must check navigation mode for Network-First strategy"
+      );
+      assert.match(
+        swCode,
+        /(?:timeout|setTimeout)/i,
+        "sw.js must implement timeout fallback for weak networks in concert venues"
+      );
       assert.doesNotMatch(
         swCode,
         /caches\.match\([^)]+\)\s*\|\|/,
@@ -190,12 +221,22 @@ describe("20. PWA Offline Support & Web App Manifest Invariants (ADR-0119)", () 
       assert.equal(cacheDeleted, true, "unregisterServiceWorkers must prune dev caches");
     });
 
-    it("verifies built sw.js in dist precaches compiled JS and CSS chunks when dist exists", () => {
+    it("verifies built sw.js in dist precaches compiled JS and CSS chunks and injects dynamic CACHE_NAME when dist exists", () => {
       const distSwPath = path.resolve(siteRoot, "dist/sw.js");
       if (fs.existsSync(distSwPath)) {
         const distSw = fs.readFileSync(distSwPath, "utf-8");
         assert.match(distSw, /\/assets\/index-[^"']+\.js/, "dist/sw.js must precache compiled JS bundle");
         assert.match(distSw, /\/assets\/index-[^"']+\.css/, "dist/sw.js must precache compiled CSS bundle");
+        assert.match(
+          distSw,
+          /const CACHE_NAME = "higedan-setlist-[a-zA-Z0-9]+";/,
+          "dist/sw.js must inject dynamic CACHE_NAME with bundle hash"
+        );
+        assert.doesNotMatch(
+          distSw,
+          /\/\* __CACHE_NAME_INJECTION__ \*\//,
+          "dist/sw.js must replace the CACHE_NAME injection placeholder"
+        );
       }
     });
   });

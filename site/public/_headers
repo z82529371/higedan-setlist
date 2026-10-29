@@ -1,0 +1,15 @@
+# Cloudflare Pages HTTP Headers (ADR-0134)
+# HTML Shell: Revalidate with ETag to pick up fresh deployments instantly without hard refresh
+/index.html
+  Cache-Control: public, max-age=0, must-revalidate
+
+/
+  Cache-Control: public, max-age=0, must-revalidate
+
+# Service Worker: Check for byte changes on navigation, never store in browser disk cache
+/sw.js
+  Cache-Control: public, max-age=0, must-revalidate
+
+# Immutable Vite Assets: Hashed JS, CSS, and fonts can be cached forever
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable

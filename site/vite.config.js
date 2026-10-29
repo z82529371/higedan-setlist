@@ -17,12 +17,23 @@ function pwaPrecachePlugin() {
         )
         .map((file) => `/${file}`);
 
+      // Extract entry chunk hash for dynamic cache versioning (ADR-0134)
+      const mainJsChunk = Object.keys(bundle).find(
+        (file) => file.startsWith("assets/index-") && file.endsWith(".js")
+      );
+      const hashMatch = mainJsChunk ? mainJsChunk.match(/assets\/index-([a-zA-Z0-9_-]+)\.js/) : null;
+      const buildHash = hashMatch ? hashMatch[1] : Date.now().toString(36);
+
       const swDistPath = path.resolve(options.dir || "dist", "sw.js");
       if (fs.existsSync(swDistPath)) {
         let swContent = fs.readFileSync(swDistPath, "utf-8");
         swContent = swContent.replace(
           "/* __VITE_ASSETS_INJECTION__ */",
           assetPaths.map((p) => `  ${JSON.stringify(p)},`).join("\n")
+        );
+        swContent = swContent.replace(
+          /const CACHE_NAME = ["'][^"']+["'];\s*\/\* __CACHE_NAME_INJECTION__ \*\//,
+          `const CACHE_NAME = "higedan-setlist-${buildHash}";`
         );
         fs.writeFileSync(swDistPath, swContent, "utf-8");
       }

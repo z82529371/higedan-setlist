@@ -21,9 +21,16 @@ export function registerServiceWorker(env = {}) {
   }
 
   const register = () => {
-    nav.serviceWorker.register("/sw.js").catch((error) => {
-      console.warn("ServiceWorker registration failed:", error);
-    });
+    nav.serviceWorker
+      .register("/sw.js")
+      .then((registration) => {
+        if (typeof registration?.update === "function") {
+          registration.update().catch(() => {});
+        }
+      })
+      .catch((error) => {
+        console.warn("ServiceWorker registration failed:", error);
+      });
   };
 
   if (win.document && win.document.readyState === "complete") {
