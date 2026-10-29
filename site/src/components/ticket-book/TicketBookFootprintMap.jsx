@@ -49,7 +49,11 @@ export function TicketBookFootprintMap({
   // 2. Build chronological journey sequence for personal concert trajectory
   const fanJourney = useMemo(() => {
     if (physicalShows.length === 0) return null;
-    return buildJourneySequence(physicalShows, venueProfilesByCanonical, { includeTvBroadcasts: false });
+    const seq = buildJourneySequence(physicalShows, venueProfilesByCanonical, { includeTvBroadcasts: false });
+    if (seq) {
+      seq.isPersonal = true;
+    }
+    return seq;
   }, [physicalShows]);
 
   // 3. Build venue appearances map for lighting up visited prefectures
@@ -167,6 +171,7 @@ export function TicketBookFootprintMap({
             <VenueMapCanvas
               mode="journey"
               journey={fanJourney}
+              isPersonal={true}
               globalVenueShows={fanVenueShows}
               allVenues={effectiveVenuesList}
               onSelectShow={onSelectShow}
