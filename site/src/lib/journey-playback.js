@@ -28,8 +28,12 @@ function controlPoint(from, to, transitMode) {
   const dx = to.x - from.x;
   const dy = to.y - from.y;
   const dist = Math.hypot(dx, dy);
-  const arcFactor = transitMode === "flight" ? 0.24 : 0.12;
-  const offset = Math.min(85, Math.max(8, dist * arcFactor));
+  if (dist < 1e-4) return { x: from.x, y: from.y };
+
+  // For ultra-short hops (e.g. intra-city venues in Matsue/Shimane), scale offset down smoothly
+  // to avoid artificial circular loops and wild vehicle spinning.
+  const arcFactor = transitMode === "flight" ? 0.24 : (dist < 30 ? 0.04 : 0.12);
+  const offset = Math.min(85, dist * arcFactor);
   const nx = -dy / dist;
   const ny = dx / dist;
   return {
@@ -66,15 +70,22 @@ export function pointOnTransit(from, to, transitMode, t) {
 /**
  * Tangent heading angle (in degrees, -180..180) along the leg curve at fraction t.
  * Gives the steering angle for the 🚐 or ✈️ in third-person chase cam view.
+ * For ultra-short intra-city hops (< 15 units), uses direct steady heading to eliminate spinning.
  */
 export function tangentAngleOnTransit(from, to, transitMode, t) {
   if (!from || !to) return 0;
-  if (Math.hypot(to.x - from.x, to.y - from.y) < 1) return 0;
+  const dx = to.x - from.x;
+  const dy = to.y - from.y;
+  const dist = Math.hypot(dx, dy);
+  if (dist < 1) return 0;
+  if (dist < 15) {
+    return Number((Math.atan2(dy, dx) * (180 / Math.PI)).toFixed(1));
+  }
   const c = controlPoint(from, to, transitMode);
   const u = Math.min(1, Math.max(0, t));
-  const dx = 2 * (1 - u) * (c.x - from.x) + 2 * u * (to.x - c.x);
-  const dy = 2 * (1 - u) * (c.y - from.y) + 2 * u * (to.y - c.y);
-  return Number((Math.atan2(dy, dx) * (180 / Math.PI)).toFixed(1));
+  const tdx = 2 * (1 - u) * (c.x - from.x) + 2 * u * (to.x - c.x);
+  const tdy = 2 * (1 - u) * (c.y - from.y) + 2 * u * (to.y - c.y);
+  return Number((Math.atan2(tdy, tdx) * (180 / Math.PI)).toFixed(1));
 }
 
 /**

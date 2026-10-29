@@ -30,70 +30,69 @@ import { useJourneyPlayback } from "../lib/use-journey-playback.js";
 import { JourneyPlaybackControls } from "./JourneyPlaybackControls.jsx";
 import { venueProfiles } from "../lib/locales/venues.js";
 import { useI18n } from "../lib/i18n.jsx";
+import {
+  TourVanEmojiRiders,
+  TourAirplaneEmojiRiders,
+  PersonalFanRider,
+  PersonalAirplaneFanRider,
+  BandEnsembleHUD,
+} from "./map/BandAnimalAvatars.jsx";
 
 const EMPTY_LIST = [];
 
 /**
- * Handcrafted 3D Isometric Touring 6-Seater Red SUV with Silver Roof Rack (pure SVG vectors).
+ * Handcrafted 3D Isometric Touring Spacious Red Tour Van (pure SVG vectors).
  * Pure crimson red paint finish without black borders ("旁邊不用黑邊框 保持全紅").
+ * Features spacious open-top observation cabin deck where the 4 band members sit comfortably without crowding.
+ * When isPersonal is true (fan's concert footprint map), seats the solo fan wearing sunglasses (😎).
  */
-export function TourVan3D({ angle = 0, scale = 0.7 }) {
+export function TourVan3D({ angle = 0, scale = 0.7, isPersonal = false }) {
   return (
     <g transform={`rotate(${angle}) scale(${scale})`}>
       {/* 1. Soft Ground Contact Shadow */}
-      <ellipse cx="0" cy="2.5" rx="15" ry="7.5" fill="var(--color-ink)" opacity="0.25" />
+      <ellipse cx="0" cy="3.5" rx="22" ry="12" fill="var(--color-ink)" opacity="0.25" />
 
       {/* 2. Front Headlight Beams illuminating the road forward */}
-      <polygon points="12,-5.5 30,-12 30,-1.5 12,-3.5" fill="var(--color-band)" opacity="0.35" />
-      <polygon points="12,3.5 30,1.5 30,12 12,5.5" fill="var(--color-band)" opacity="0.35" />
-      <circle cx="12" cy="-4.5" r="1.3" fill="#fff" opacity="0.95" />
-      <circle cx="12" cy="4.5" r="1.3" fill="#fff" opacity="0.95" />
+      <polygon points="18,-7.5 40,-15 40,-2 18,-4.5" fill="var(--color-band)" opacity="0.35" />
+      <polygon points="18,4.5 40,2 40,15 18,7.5" fill="var(--color-band)" opacity="0.35" />
+      <circle cx="18" cy="-6" r="1.6" fill="#fff" opacity="0.95" />
+      <circle cx="18" cy="6" r="1.6" fill="#fff" opacity="0.95" />
 
       {/* 3. Four Rubber Tires with Silver Alloy Rims */}
-      <rect x="5.5" y="-8.8" width="5.5" height="2.5" rx="1.2" fill="#18181b" />
-      <circle cx="8.2" cy="-7.5" r="0.9" fill="#e2e8f0" stroke="#64748b" strokeWidth="0.4" />
-      <rect x="5.5" y="6.3" width="5.5" height="2.5" rx="1.2" fill="#18181b" />
-      <circle cx="8.2" cy="7.5" r="0.9" fill="#e2e8f0" stroke="#64748b" strokeWidth="0.4" />
-      <rect x="-10" y="-8.8" width="5.5" height="2.5" rx="1.2" fill="#18181b" />
-      <circle cx="-7.2" cy="-7.5" r="0.9" fill="#e2e8f0" stroke="#64748b" strokeWidth="0.4" />
-      <rect x="-10" y="6.3" width="5.5" height="2.5" rx="1.2" fill="#18181b" />
-      <circle cx="-7.2" cy="7.5" r="0.9" fill="#e2e8f0" stroke="#64748b" strokeWidth="0.4" />
+      <rect x="8" y="-12.5" width="7" height="3" rx="1.5" fill="#18181b" />
+      <circle cx="11.5" cy="-11" r="1.1" fill="#e2e8f0" stroke="#64748b" strokeWidth="0.5" />
+      <rect x="8" y="9.5" width="7" height="3" rx="1.5" fill="#18181b" />
+      <circle cx="11.5" cy="11" r="1.1" fill="#e2e8f0" stroke="#64748b" strokeWidth="0.5" />
+      <rect x="-15" y="-12.5" width="7" height="3" rx="1.5" fill="#18181b" />
+      <circle cx="-11.5" cy="-11" r="1.1" fill="#e2e8f0" stroke="#64748b" strokeWidth="0.5" />
+      <rect x="-15" y="9.5" width="7" height="3" rx="1.5" fill="#18181b" />
+      <circle cx="-11.5" cy="11" r="1.1" fill="#e2e8f0" stroke="#64748b" strokeWidth="0.5" />
 
-      {/* 4. Pure Crimson Red 6-Seater SUV Body (純粹熱血全紅烤漆，無黑邊框) */}
-      <rect x="-12.5" y="-6.8" width="25" height="13.6" rx="3.5" fill="#dc2626" />
+      {/* 4. Pure Crimson Red Spacious Tour Van Body (純粹熱血全紅烤漆，無黑邊框) */}
+      <rect x="-18" y="-10" width="36" height="20" rx="4.5" fill="#dc2626" />
       {/* Sleek roof ridge highlight in vibrant scarlet */}
-      <path d="M-11.5,-6 L11.5,-6 L11.5,-3.5 L-11.5,-3.5 Z" fill="#ef4444" opacity="0.85" />
-      <path d="M-11.5,3.5 L11.5,3.5 L11.5,6 L-11.5,6 Z" fill="#b91c1c" opacity="0.4" />
+      <path d="M-17,-9 L17,-9 L17,-5.5 L-17,-5.5 Z" fill="#ef4444" opacity="0.85" />
+      <path d="M-17,5.5 L17,5.5 L17,9 L-17,9 Z" fill="#b91c1c" opacity="0.4" />
 
       {/* 5. Silver Side Mirrors (純銀色後視鏡，無黑外框) */}
-      <rect x="5.5" y="-8" width="2" height="1.6" rx="0.6" fill="#e2e8f0" />
-      <rect x="5.5" y="6.4" width="2" height="1.6" rx="0.6" fill="#e2e8f0" />
+      <rect x="8" y="-12" width="2.8" height="2" rx="0.8" fill="#e2e8f0" />
+      <rect x="8" y="10" width="2.8" height="2" rx="0.8" fill="#e2e8f0" />
 
-      {/* 6. 6-Seater 3-Row Tinted Privacy Windows (三排座深色座艙車窗玻璃) */}
-      <path d="M4.5,-5.2 L9.2,-4.2 L9.2,4.2 L4.5,5.2 Z" fill="#0f172a" />
-      <line x1="5.5" y1="-3.2" x2="8.2" y2="1.5" stroke="#94a3b8" strokeWidth="0.7" opacity="0.7" />
-      <rect x="0.5" y="-5.6" width="3.5" height="1.6" rx="0.5" fill="#0f172a" />
-      <rect x="0.5" y="4" width="3.5" height="1.6" rx="0.5" fill="#0f172a" />
-      <rect x="-4.5" y="-5.6" width="4" height="1.6" rx="0.5" fill="#0f172a" />
-      <rect x="-4.5" y="4" width="4" height="1.6" rx="0.5" fill="#0f172a" />
-      <rect x="-9.5" y="-5.6" width="4" height="1.6" rx="0.5" fill="#0f172a" />
-      <rect x="-9.5" y="4" width="4" height="1.6" rx="0.5" fill="#0f172a" />
-      <rect x="-11.8" y="-3.8" width="1.6" height="7.6" rx="0.6" fill="#0f172a" />
+      {/* 6. Tinted Front Windshield & Windows */}
+      <path d="M7,-7.5 L14,-6 L14,6 L7,7.5 Z" fill="#0f172a" />
+      <line x1="8.5" y1="-5" x2="12.5" y2="2" stroke="#94a3b8" strokeWidth="0.8" opacity="0.7" />
 
-      {/* 7. Silver Metallic Roof Rack with Touring Gear (銀色金屬巡演樂器行李架) */}
-      <line x1="-8.5" y1="-4.6" x2="3.5" y2="-4.6" stroke="#f1f5f9" strokeWidth="1.2" strokeLinecap="round" />
-      <line x1="-8.5" y1="-4.6" x2="3.5" y2="-4.6" stroke="#94a3b8" strokeWidth="0.4" strokeLinecap="round" />
-      <line x1="-8.5" y1="4.6" x2="3.5" y2="4.6" stroke="#f1f5f9" strokeWidth="1.2" strokeLinecap="round" />
-      <line x1="-8.5" y1="4.6" x2="3.5" y2="4.6" stroke="#94a3b8" strokeWidth="0.4" strokeLinecap="round" />
-      <line x1="-7" y1="-4.6" x2="-7" y2="4.6" stroke="#e2e8f0" strokeWidth="1" />
-      <line x1="-2.5" y1="-4.6" x2="-2.5" y2="4.6" stroke="#e2e8f0" strokeWidth="1" />
-      <line x1="2" y1="-4.6" x2="2" y2="4.6" stroke="#e2e8f0" strokeWidth="1" />
-      <rect x="-6" y="-3" width="7.5" height="6" rx="1.5" fill="#e2e8f0" stroke="#64748b" strokeWidth="0.8" />
-      <line x1="-6" y1="0" x2="1.5" y2="0" stroke="#94a3b8" strokeWidth="0.6" />
+      {/* 7. Silver Metallic Open-Top Cabin Deck & Safety Rail (銀色金屬露天座艙護欄) */}
+      <rect x="-15.5" y="-8.5" width="22" height="17" rx="3.5" fill="#0f172a" opacity="0.6" />
+      <rect x="-16" y="-9" width="23" height="18" rx="4" fill="none" stroke="#e2e8f0" strokeWidth="1" strokeDasharray="3 2" />
+      <line x1="-15" y1="0" x2="6" y2="0" stroke="#94a3b8" strokeWidth="0.6" strokeDasharray="2 2" opacity="0.5" />
+
+      {/* 7b. Upper Deck Riders: Solo Sunglasses Fan (😎) for personal footprints, or 4 Band Emojis */}
+      {isPersonal ? <PersonalFanRider /> : <TourVanEmojiRiders />}
 
       {/* 8. Rear Tail Lights (紅寶石尾燈) */}
-      <rect x="-12.5" y="-5.5" width="1" height="2" rx="0.5" fill="#ef4444" />
-      <rect x="-12.5" y="3.5" width="1" height="2" rx="0.5" fill="#ef4444" />
+      <rect x="-18" y="-8" width="1.4" height="2.8" rx="0.6" fill="#ef4444" />
+      <rect x="-18" y="5.2" width="1.4" height="2.8" rx="0.6" fill="#ef4444" />
     </g>
   );
 }
@@ -101,70 +100,68 @@ export function TourVan3D({ angle = 0, scale = 0.7 }) {
 /**
  * Handcrafted 3D Aerodynamic Touring Jet in Platinum Silver Metallic (pure SVG vectors).
  * Styled in pure paint finish matching the touring van (zero black border, deep tinted windows, forward headlights).
+ * Features elongated fuselage accommodating the band emojis or solo fan emoji (😎).
  */
-export function TourAirplane3D({ angle = 0, scale = 0.72 }) {
+export function TourAirplane3D({ angle = 0, scale = 0.72, isPersonal = false }) {
   return (
     <g transform={`rotate(${angle}) scale(${scale})`}>
       {/* 1. Ground Shadow (gliding across islands and ocean below) */}
-      <g transform="translate(-1, 10) scale(0.9)" opacity="0.22" fill="var(--color-ink)">
-        <path d="M-14,0 L-4,-14 L3,-14 L0,-1 L11,-1 L15,0 L11,1 L0,1 L3,14 L-4,14 L-14,0 Z" />
+      <g transform="translate(-1, 12) scale(0.9)" opacity="0.22" fill="var(--color-ink)">
+        <path d="M-20,0 L-6,-20 L4,-20 L0,-1.5 16,-1.5 22,0 L16,1.5 L0,1.5 L4,20 L-6,20 L-20,0 Z" />
       </g>
 
       {/* 2. Elevated Aircraft Body */}
       <g transform="translate(0, -5)">
         {/* Forward Headlight Beams illuminating the flight path */}
-        <polygon points="12,-3 32,-9 32,-1 12,-1.5" fill="var(--color-band)" opacity="0.35" />
-        <polygon points="12,1.5 32,1 32,9 12,3" fill="var(--color-band)" opacity="0.35" />
-        <circle cx="12" cy="-2" r="1.1" fill="#fff" opacity="0.95" />
-        <circle cx="12" cy="2" r="1.1" fill="#fff" opacity="0.95" />
+        <polygon points="18,-4 42,-12 42,-1 18,-2" fill="var(--color-band)" opacity="0.35" />
+        <polygon points="18,2 42,1 42,12 18,4" fill="var(--color-band)" opacity="0.35" />
+        <circle cx="18" cy="-2.5" r="1.3" fill="#fff" opacity="0.95" />
+        <circle cx="18" cy="2.5" r="1.3" fill="#fff" opacity="0.95" />
 
         {/* Jet Exhaust Heat Contrails behind turbofans */}
-        <polygon points="-4,-7.2 -18,-9.5 -18,-5 -4,-7.2" fill="var(--color-band)" opacity="0.25" />
-        <polygon points="-4,7.2 -18,5 -18,9.5 -4,7.2" fill="var(--color-band)" opacity="0.25" />
+        <polygon points="-6,-10 -24,-13 -24,-7 -6,-10" fill="var(--color-band)" opacity="0.25" />
+        <polygon points="-6,10 -24,7 -24,13 -6,10" fill="var(--color-band)" opacity="0.25" />
 
         {/* Swept Main Wings in Platinum Silver Metallic (no black outline) */}
-        <polygon points="-4,-16 2.5,-16 2.5,-2 0,-1 0,1 2.5,2 2.5,16 -4,16 -2,2 -2,-2" fill="#e2e8f0" />
-        <polygon points="-1,-15 2,-15 2,-2 -1,-2" fill="#f8fafc" opacity="0.85" />
-        <polygon points="-1,2 2,2 2,15 -1,15" fill="#f8fafc" opacity="0.85" />
+        <polygon points="-6,-22 4,-22 4,-3 0,-1.5 0,1.5 4,3 4,22 -6,22 -3,3 -3,-3" fill="#e2e8f0" />
+        <polygon points="-2,-21 3.5,-21 3.5,-3 -2,-3" fill="#f8fafc" opacity="0.85" />
+        <polygon points="-2,3 3.5,3 3.5,21 -2,21" fill="#f8fafc" opacity="0.85" />
 
         {/* Wingtip Navigation Lights (Port Red / Starboard Green) */}
-        <circle cx="2" cy="-16" r="1.1" fill="var(--color-request)" />
-        <circle cx="2" cy="16" r="1.1" fill="#22c55e" />
+        <circle cx="3" cy="-22" r="1.3" fill="var(--color-request)" />
+        <circle cx="3" cy="22" r="1.3" fill="#22c55e" />
 
         {/* Twin Turbofan Jet Engines */}
-        <rect x="-4" y="-8.4" width="7" height="2.4" rx="1.2" fill="#64748b" />
-        <rect x="-4" y="6" width="7" height="2.4" rx="1.2" fill="#64748b" />
-        <rect x="-3.5" y="-8.1" width="5.5" height="1.8" rx="0.9" fill="#cbd5e1" />
-        <rect x="-3.5" y="6.3" width="5.5" height="1.8" rx="0.9" fill="#cbd5e1" />
-        <ellipse cx="2.6" cy="-7.2" rx="0.5" ry="0.9" fill="#0f172a" />
-        <ellipse cx="2.6" cy="7.2" rx="0.5" ry="0.9" fill="#0f172a" />
+        <rect x="-6" y="-11.2" width="9" height="3" rx="1.5" fill="#64748b" />
+        <rect x="-6" y="8.2" width="9" height="3" rx="1.5" fill="#64748b" />
+        <rect x="-5.5" y="-10.8" width="7" height="2.2" rx="1.1" fill="#cbd5e1" />
+        <rect x="-5.5" y="8.6" width="7" height="2.2" rx="1.1" fill="#cbd5e1" />
+        <ellipse cx="2.6" cy="-9.7" rx="0.6" ry="1.1" fill="#0f172a" />
+        <ellipse cx="2.6" cy="9.7" rx="0.6" ry="1.1" fill="#0f172a" />
 
-        {/* Aerodynamic Fuselage (Platinum Pearl White / Silver, no black border) */}
-        <path d="M-15,0 C-15,-2.8 -4,-3.2 11,-1.8 C14.5,-0.9 16.5,0 16.5,0 C16.5,0 14.5,0.9 11,1.8 C-4,3.2 -15,2.8 -15,0 Z" fill="#f8fafc" />
-        <path d="M-14,-0.5 C-14,-2.2 -3,-2.6 10,-1.4 C13,-0.6 15,0 15,0 C13,0.3 10,0.5 -14,-0.5 Z" fill="#ffffff" opacity="0.9" />
-        <path d="M-14,0.5 C-4,2.6 10,1.4 15,0 C14,0.7 10.5,1.6 -4,2.6 Z" fill="#cbd5e1" opacity="0.5" />
+        {/* Aerodynamic Elongated Fuselage (Platinum Pearl White / Silver, no black border) */}
+        <path d="M-22,0 C-22,-4.2 -6,-4.8 18,-2.6 C23,-1.2 26,0 26,0 C26,0 23,1.2 18,2.6 C-6,4.8 -22,4.2 -22,0 Z" fill="#f8fafc" />
+        <path d="M-21,-0.6 C-21,-3.2 -5,-3.8 17,-1.8 C21,-0.8 24,0 24,0 C21,0.5 17,0.8 -21,-0.6 Z" fill="#ffffff" opacity="0.9" />
+        <path d="M-21,0.6 C-5,3.8 17,1.8 24,0 C23,1 18,2.2 -5,3.8 Z" fill="#cbd5e1" opacity="0.5" />
 
         {/* Cockpit Canopy (Deep Tinted Window with Silver Glare Line) */}
-        <path d="M8,-1.2 L12.5,-0.8 L12.5,0.8 L8,1.2 Z" fill="#0f172a" />
-        <line x1="8.8" y1="-0.7" x2="11.8" y2="0.3" stroke="#94a3b8" strokeWidth="0.6" opacity="0.8" />
+        <path d="M17,-1.5 L23,-0.9 L23,0.9 L17,1.5 Z" fill="#0f172a" />
+        <line x1="18" y1="-0.9" x2="22" y2="0.4" stroke="#94a3b8" strokeWidth="0.7" opacity="0.8" />
 
-        {/* Passenger Cabin Privacy Windows (5 on each flank) */}
-        <circle cx="5" cy="-1.7" r="0.45" fill="#0f172a" />
-        <circle cx="2.5" cy="-1.9" r="0.45" fill="#0f172a" />
-        <circle cx="0" cy="-2" r="0.45" fill="#0f172a" />
-        <circle cx="-2.5" cy="-2" r="0.45" fill="#0f172a" />
-        <circle cx="-5" cy="-1.9" r="0.45" fill="#0f172a" />
-        <circle cx="5" cy="1.7" r="0.45" fill="#0f172a" />
-        <circle cx="2.5" cy="1.9" r="0.45" fill="#0f172a" />
-        <circle cx="0" cy="2" r="0.45" fill="#0f172a" />
-        <circle cx="-2.5" cy="2" r="0.45" fill="#0f172a" />
-        <circle cx="-5" cy="1.9" r="0.45" fill="#0f172a" />
+        {/* Passenger Cabin Privacy Windows */}
+        <circle cx="16" cy="-2.5" r="0.5" fill="#0f172a" />
+        <circle cx="16" cy="2.5" r="0.5" fill="#0f172a" />
+        <circle cx="-16" cy="-2.5" r="0.5" fill="#0f172a" />
+        <circle cx="-16" cy="2.5" r="0.5" fill="#0f172a" />
+
+        {/* Upper Deck Riders: Solo Sunglasses Fan (😎) for personal footprints, or 4 Band Emojis */}
+        {isPersonal ? <PersonalAirplaneFanRider /> : <TourAirplaneEmojiRiders />}
 
         {/* Horizontal Stabilizers & Tail Fin */}
-        <polygon points="-16,-6 -12,-6 -10,0 -12,6 -16,6 -13,0" fill="#e2e8f0" />
-        <polygon points="-15,0 -11,-0.5 -9.5,0 -11,0.5" fill="#cbd5e1" />
+        <polygon points="-24,-9 -18,-9 -15,0 -18,9 -24,9 -20,0" fill="#e2e8f0" />
+        <polygon points="-22,0 -16,-0.7 -14,0 -16,0.7" fill="#cbd5e1" />
         {/* Official Band Gold Tail Fin Accent */}
-        <rect x="-14" y="-0.4" width="3.2" height="0.8" fill="var(--color-band)" />
+        <rect x="-21" y="-0.5" width="4.5" height="1" fill="var(--color-band)" />
       </g>
     </g>
   );
@@ -184,6 +181,7 @@ export function VenueMapCanvas({
   journey = null,
   onSelectShow,
   playbackOptions = null,
+  isPersonal = false,
 }) {
   const { t, localizeVenue } = useI18n();
   const [hoveredVenue, setHoveredVenue] = useState(null);
@@ -362,6 +360,7 @@ export function VenueMapCanvas({
   const playback = useJourneyPlayback(journeyTransitions, playbackOptions || undefined);
   const { frame } = playback;
   const [finaleOverview, setFinaleOverview] = useState(playbackOptions?.initialProgress === "end");
+  const effectiveIsPersonal = Boolean(isPersonal || journey?.isPersonal);
 
   useEffect(() => {
     if (!frame.isComplete) {
@@ -1214,27 +1213,6 @@ export function VenueMapCanvas({
                 />
               )}
 
-              {activeLeg && vehiclePoint && frame.legT >= 0 && (
-                <g
-                  data-testid="journey-vehicle-marker"
-                  data-leg-mode={activeLeg.transitMode}
-                  transform={`translate(${vehiclePoint.x}, ${vehiclePoint.y})`}
-                  pointerEvents="none"
-                >
-                  {activeLeg.transitMode === "flight" ? (
-                    <TourAirplane3D
-                      angle={effectiveHeading}
-                      scale={playback.cameraMode === "overview" || finaleOverview ? 1.4 : 0.72}
-                    />
-                  ) : (
-                    <TourVan3D
-                      angle={effectiveHeading}
-                      scale={playback.cameraMode === "overview" || finaleOverview ? 1.35 : 0.7}
-                    />
-                  )}
-                </g>
-              )}
-
               {/* 5c. Current arrived stop: stamp marker + golden pulse wave */}
               {currentStopPoint && currentStop && (
                 <g
@@ -1288,6 +1266,30 @@ export function VenueMapCanvas({
                       {currentStop.isFirst ? "S" : currentStop.isFinal ? "F" : currentStop.stopNumber}
                     </text>
                   </g>
+                </g>
+              )}
+
+              {/* 5d. Journey Vehicle: Rendered ON TOP of stop pins so the vehicle & emojis are never obscured by number dots */}
+              {activeLeg && vehiclePoint && frame.legT >= 0 && (
+                <g
+                  data-testid="journey-vehicle-marker"
+                  data-leg-mode={activeLeg.transitMode}
+                  transform={`translate(${vehiclePoint.x}, ${vehiclePoint.y})`}
+                  pointerEvents="none"
+                >
+                  {activeLeg.transitMode === "flight" ? (
+                    <TourAirplane3D
+                      angle={effectiveHeading}
+                      scale={playback.cameraMode === "overview" || finaleOverview ? 1.4 : 0.72}
+                      isPersonal={effectiveIsPersonal}
+                    />
+                  ) : (
+                    <TourVan3D
+                      angle={effectiveHeading}
+                      scale={playback.cameraMode === "overview" || finaleOverview ? 1.35 : 0.7}
+                      isPersonal={effectiveIsPersonal}
+                    />
+                  )}
                 </g>
               )}
             </g>
@@ -1409,18 +1411,27 @@ export function VenueMapCanvas({
 
               {/* Bottom-Left Fixed Ticket HUD (Journey mode: desktop floating HUD; mobile docks below map frame) */}
               {mode === "journey" && hudStop && (
-                <div
-                  data-testid="journey-hud-card"
-                  className="hidden md:block absolute bottom-2.5 left-2.5 z-10 max-w-[280px] rounded-[3px] border-[1.5px] border-ink bg-card p-2 sm:p-2.5 shadow-sm select-none hover:border-band cursor-pointer focus:outline-none focus:ring-2 focus:ring-band transition-colors"
-                  role="button"
-                  tabIndex={0}
-                  onClick={() => onSelectShow && onSelectShow(hudStop.showId)}
-                  onKeyDown={(e) => handleKeyActivate(e, () => onSelectShow && onSelectShow(hudStop.showId))}
-                  aria-label={t("venueMap.hudViewShowAria", null, {
-                    date: hudStop.date,
-                    venue: localizeVenue(hudStop.venue),
-                  })}
-                >
+                <div className="hidden md:flex flex-col gap-1.5 absolute bottom-2.5 left-2.5 z-10 max-w-[280px]">
+                  {/* Touring State Machine: Band Animal Avatars Ensemble HUD (ADR-0129) */}
+                  {!effectiveIsPersonal && (
+                    <BandEnsembleHUD
+                      state={isMoving ? "moving" : activeLeg?.transitMode === "stay" ? "stay" : "arrived"}
+                      isFinal={Boolean(hudStop.isFinal && !isMoving)}
+                    />
+                  )}
+
+                  <div
+                    data-testid="journey-hud-card"
+                    className="w-full rounded-[3px] border-[1.5px] border-ink bg-card p-2 sm:p-2.5 shadow-sm select-none hover:border-band cursor-pointer focus:outline-none focus:ring-2 focus:ring-band transition-colors"
+                    role="button"
+                    tabIndex={0}
+                    onClick={() => onSelectShow && onSelectShow(hudStop.showId)}
+                    onKeyDown={(e) => handleKeyActivate(e, () => onSelectShow && onSelectShow(hudStop.showId))}
+                    aria-label={t("venueMap.hudViewShowAria", null, {
+                      date: hudStop.date,
+                      venue: localizeVenue(hudStop.venue),
+                    })}
+                  >
                   {/* Header: Dynamic Status Badge + Show Date */}
                   <div className="flex items-center justify-between gap-1 mb-1">
                     <span
@@ -1464,6 +1475,7 @@ export function VenueMapCanvas({
                     </span>
                   </div>
                 </div>
+              </div>
               )}
 
               {renderMapSvg(false)}
@@ -1519,18 +1531,25 @@ export function VenueMapCanvas({
 
         {/* Mobile Docked Journey HUD Ribbon (md:hidden, docked below map frame, 100% unobscured canvas) */}
         {mode === "journey" && hudStop && (
-          <div
-            data-testid="journey-hud-card"
-            className="md:hidden border-[1.5px] border-ink bg-card p-2.5 rounded-[3px] shadow-2xs flex flex-col gap-1.5 select-none cursor-pointer active:bg-tape-tint/50"
-            role="button"
-            tabIndex={0}
-            onClick={() => onSelectShow && onSelectShow(hudStop.showId)}
-            onKeyDown={(e) => handleKeyActivate(e, () => onSelectShow && onSelectShow(hudStop.showId))}
-            aria-label={t("venueMap.hudViewShowAria", null, {
-              date: hudStop.date,
-              venue: localizeVenue(hudStop.venue),
-            })}
-          >
+          <div className="md:hidden flex flex-col gap-1.5">
+            {!effectiveIsPersonal && (
+              <BandEnsembleHUD
+                state={isMoving ? "moving" : activeLeg?.transitMode === "stay" ? "stay" : "arrived"}
+                isFinal={Boolean(hudStop.isFinal && !isMoving)}
+              />
+            )}
+            <div
+              data-testid="journey-hud-card"
+              className="border-[1.5px] border-ink bg-card p-2.5 rounded-[3px] shadow-2xs flex flex-col gap-1.5 select-none cursor-pointer active:bg-tape-tint/50"
+              role="button"
+              tabIndex={0}
+              onClick={() => onSelectShow && onSelectShow(hudStop.showId)}
+              onKeyDown={(e) => handleKeyActivate(e, () => onSelectShow && onSelectShow(hudStop.showId))}
+              aria-label={t("venueMap.hudViewShowAria", null, {
+                date: hudStop.date,
+                venue: localizeVenue(hudStop.venue),
+              })}
+            >
             {/* Row 1: Status Badge + Date (left) and SETLIST ➔ button (right) */}
             <div className="flex items-center justify-between gap-2">
               <div className="flex items-center gap-2 min-w-0">
@@ -1574,6 +1593,7 @@ export function VenueMapCanvas({
               </span>
             </div>
           </div>
+        </div>
         )}
 
         {/* Journey Playback Transport: docked directly underneath the map card */}
