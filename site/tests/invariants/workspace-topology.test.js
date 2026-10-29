@@ -73,7 +73,7 @@ describe("10. Workspace Topology & Runtime Version Invariants (ADR-0103)", () =>
     );
   });
 
-  it("guarantees all ADR documents in docs/adr/ are indexed in docs/adr/README.md", () => {
+  it("guarantees all ADR documents in docs/adr/ are indexed in docs/adr/README.md and AGENTS.md cites the latest ADR range", () => {
     const adrDir = path.resolve(repoRoot, "docs", "adr");
     const readmePath = path.resolve(adrDir, "README.md");
 
@@ -90,6 +90,21 @@ describe("10. Workspace Topology & Runtime Version Invariants (ADR-0103)", () =>
       [],
       `The following ADR files are missing from docs/adr/README.md index:\n${missing.join("\n")}`
     );
+
+    // Assert AGENTS.md cites the latest ADR range (0001–XXXX)
+    const maxAdrNum = adrFiles.reduce((max, f) => {
+      const match = f.match(/^(\d{4})-/);
+      return match ? Math.max(max, parseInt(match[1], 10)) : max;
+    }, 0);
+    const expectedRange = `0001–${String(maxAdrNum).padStart(4, "0")}`;
+    const agentsPath = path.resolve(repoRoot, "AGENTS.md");
+    if (fs.existsSync(agentsPath)) {
+      const agentsContent = fs.readFileSync(agentsPath, "utf8");
+      assert.ok(
+        agentsContent.includes(expectedRange),
+        `AGENTS.md must cite the latest ADR range (${expectedRange}). Found mismatch in AGENTS.md.`
+      );
+    }
   });
 
   it("guarantees all node:test glob arguments in package.json use escaped double quotes for Windows cross-platform compatibility", () => {

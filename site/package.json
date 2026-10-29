@@ -11,6 +11,7 @@
     "test:pipeline": "node --test \"tests/pipeline/**/*.test.js\"",
     "test:invariants": "node --test \"tests/invariants/**/*.test.js\"",
     "test:ui": "node --test \"tests/ui/**/*.test.js\"",
+    "test:file": "node --test",
     "check": "pnpm lint && pnpm test",
     "check:fast": "oxlint src -c .oxlintrc.json && node scripts/check-i18n.mjs",
     "audit:reports": "node scripts/generate-audit-reports.mjs",
