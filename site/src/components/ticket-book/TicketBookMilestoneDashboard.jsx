@@ -29,6 +29,7 @@ export function TicketBookMilestoneDashboard({
   enrichedShows,
   allVenues,
   onSelectShow,
+  storage,
 }) {
   const { t, locale } = useI18n();
 
@@ -290,6 +291,7 @@ export function TicketBookMilestoneDashboard({
         attendedShows={enrichedShows || milestones?.attendedShowsList || []}
         allVenues={allVenues}
         onSelectShow={onSelectShow}
+        storage={storage}
       />
     </div>
   );

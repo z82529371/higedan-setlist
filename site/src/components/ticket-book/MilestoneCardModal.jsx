@@ -128,7 +128,7 @@ export function MilestoneCardModal({ isOpen, onClose, milestones, storage: propS
               🎫
             </span>
             <span className="font-mono text-[12px] font-bold uppercase tracking-wider text-card">
-              {t("ticketBook.milestonesTitle", "生涯里程碑")} // 540PX
+              {t("ticketBook.milestonesTitle", "生涯里程碑")}
             </span>
           </div>
           <button
@@ -360,7 +360,7 @@ export function MilestoneCardModal({ isOpen, onClose, milestones, storage: propS
 
           {/* Vintage Barcode Footer */}
           <TicketBarcodeFooter
-            serial="TICKET BOOK // CAREER MILESTONES // 540PX"
+            serial="TICKET BOOK // CAREER MILESTONES"
             label={t("ticketBook.summaryCardTitle", "Official髭男dism 生涯參戰總結")}
           />
         </div>

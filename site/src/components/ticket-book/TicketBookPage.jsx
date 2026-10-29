@@ -268,6 +268,7 @@ export function TicketBookPage({
             enrichedShows={enrichedShows}
             allVenues={allVenues}
             onSelectShow={onSelectShow}
+            storage={storage}
           />
         </div>
 

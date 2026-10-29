@@ -51,6 +51,11 @@ export function VenueMapCanvas({
   onSelectShow,
   playbackOptions = null,
   isPersonal = false,
+  hideControls = false,
+  hidePlayback = false,
+  hideHud = false,
+  compact = false,
+  controlledPlayback = null,
 }) {
   const { t, localizeVenue } = useI18n();
   const [hoveredVenue, setHoveredVenue] = useState(null);
@@ -226,7 +231,8 @@ export function VenueMapCanvas({
 
   const journeyStops = journey?.stops || EMPTY_LIST;
   const journeyTransitions = journey?.transitions || EMPTY_LIST;
-  const playback = useJourneyPlayback(journeyTransitions, playbackOptions || undefined);
+  const internalPlayback = useJourneyPlayback(journeyTransitions, playbackOptions || undefined);
+  const playback = controlledPlayback || internalPlayback;
   const { frame } = playback;
   const [finaleOverview, setFinaleOverview] = useState(playbackOptions?.initialProgress === "end");
   const effectiveIsPersonal = Boolean(isPersonal || journey?.isPersonal);
@@ -603,6 +609,8 @@ export function VenueMapCanvas({
                 className={`block w-full select-none transition-all duration-300 motion-reduce:transition-none ${
         inModal
           ? "h-full w-full object-contain"
+          : compact
+          ? "h-[360px] sm:h-[400px] w-full object-contain"
           : mode === "venues" && selectedPrefecture
           ? "h-[280px] sm:h-[300px] md:h-full md:max-h-[440px] object-contain"
           : mode === "journey"
@@ -1204,28 +1212,30 @@ export function VenueMapCanvas({
         <div className={mode === "venues" && selectedPrefecture ? "md:col-span-5 flex flex-col" : ""}>
           <div className="rounded-[3px] border-[1.5px] border-ink bg-paper shadow-xs overflow-hidden flex flex-col flex-1">
             <div className="relative flex items-center justify-center overflow-hidden flex-1">
-              <div className="absolute top-2.5 right-2.5 z-10 flex items-center gap-2">
-                {mode === "venues" && selectedPrefecture && (
+              {!hideControls && (
+                <div className="absolute top-2.5 right-2.5 z-10 flex items-center gap-2">
+                  {mode === "venues" && selectedPrefecture && (
+                    <button
+                      type="button"
+                      data-testid="map-reset-zoom-btn"
+                      onClick={() => onSelectPrefecture && onSelectPrefecture(null)}
+                      aria-label={t("venueMap.backToNationalAria")}
+                      className="rounded-[3px] border-[1.5px] border-ink bg-band px-2.5 py-1 font-mono text-[11px] font-extrabold text-band-ink shadow-xs hover:bg-card cursor-pointer transition-colors motion-reduce:transition-none"
+                    >
+                      {t("venueMap.backToNational")}
+                    </button>
+                  )}
                   <button
                     type="button"
-                    data-testid="map-reset-zoom-btn"
-                    onClick={() => onSelectPrefecture && onSelectPrefecture(null)}
-                    aria-label={t("venueMap.backToNationalAria")}
-                    className="rounded-[3px] border-[1.5px] border-ink bg-band px-2.5 py-1 font-mono text-[11px] font-extrabold text-band-ink shadow-xs hover:bg-card cursor-pointer transition-colors motion-reduce:transition-none"
+                    data-testid="map-fullscreen-btn"
+                    onClick={() => setIsFullscreen(true)}
+                    aria-label={t("venueMap.fullscreenAria")}
+                    className="rounded-[3px] border-[1.5px] border-ink bg-card px-2.5 py-1 font-mono text-[11px] font-extrabold text-ink shadow-xs hover:bg-band hover:text-band-ink cursor-pointer transition-colors motion-reduce:transition-none"
                   >
-                    {t("venueMap.backToNational")}
+                    {t("venueMap.fullscreen")}
                   </button>
-                )}
-                <button
-                  type="button"
-                  data-testid="map-fullscreen-btn"
-                  onClick={() => setIsFullscreen(true)}
-                  aria-label={t("venueMap.fullscreenAria")}
-                  className="rounded-[3px] border-[1.5px] border-ink bg-card px-2.5 py-1 font-mono text-[11px] font-extrabold text-ink shadow-xs hover:bg-band hover:text-band-ink cursor-pointer transition-colors motion-reduce:transition-none"
-                >
-                  {t("venueMap.fullscreen")}
-                </button>
-              </div>
+                </div>
+              )}
 
               {/* Desktop-only floating HUD card inside map (when not zoomed into a prefecture) */}
               {mode === "venues" && venueHudData && !selectedPrefecture && (
@@ -1340,7 +1350,7 @@ export function VenueMapCanvas({
         </div>
 
         {/* Docked Journey HUD Ribbon (Desktop & Mobile: docked below map frame, 100% unobscured canvas so Fukuoka/Kyushu is never covered) */}
-        {mode === "journey" && hudStop && (
+        {mode === "journey" && hudStop && !hideHud && (
           <div data-testid="journey-hud-dock">
             <div
               data-testid="journey-hud-card"
@@ -1444,7 +1454,7 @@ export function VenueMapCanvas({
         )}
 
         {/* Journey Playback Transport: docked directly underneath the map card */}
-        {mode === "journey" && journey && (
+        {mode === "journey" && journey && !hidePlayback && (
           <div data-testid="journey-playback-dock" className="shrink-0 -mt-1 md:mt-0">
             <JourneyPlaybackControls playback={playback} stops={journeyStops} />
           </div>
