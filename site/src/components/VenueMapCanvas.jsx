@@ -1278,73 +1278,14 @@ export function VenueMapCanvas({
                 </div>
               )}
 
-              {/* Bottom-Left Fixed Ticket HUD (Journey mode: desktop floating HUD; mobile docks below map frame) */}
-              {mode === "journey" && hudStop && (
+              {/* Bottom-Left Fixed Journey Emoji Ensemble HUD (ADR-0129: desktop only, omitted on mobile/small screens) */}
+              {mode === "journey" && hudStop && !effectiveIsPersonal && (
                 <div className="hidden md:flex flex-col gap-1.5 absolute bottom-2.5 left-2.5 z-10 max-w-[280px]">
-                  {/* Touring State Machine: Band Animal Avatars Ensemble HUD (ADR-0129) */}
-                  {!effectiveIsPersonal && (
-                    <BandEnsembleHUD
-                      state={isMoving ? "moving" : activeLeg?.transitMode === "stay" ? "stay" : "arrived"}
-                      isFinal={Boolean(hudStop.isFinal && !isMoving)}
-                    />
-                  )}
-
-                  <div
-                    data-testid="journey-hud-card"
-                    className="w-full rounded-[3px] border-[1.5px] border-ink bg-card p-2 sm:p-2.5 shadow-sm select-none hover:border-band cursor-pointer focus:outline-none focus:ring-2 focus:ring-band transition-colors"
-                    role="button"
-                    tabIndex={0}
-                    onClick={() => onSelectShow && onSelectShow(hudStop.showId)}
-                    onKeyDown={(e) => handleKeyActivate(e, () => onSelectShow && onSelectShow(hudStop.showId))}
-                    aria-label={t("venueMap.hudViewShowAria", null, {
-                      date: hudStop.date,
-                      venue: localizeVenue(hudStop.venue),
-                    })}
-                  >
-                  {/* Header: Dynamic Status Badge + Show Date */}
-                  <div className="flex items-center justify-between gap-1 mb-1">
-                    <span
-                      className={`inline-flex items-center gap-1 px-1.5 py-0.5 rounded-[2px] font-mono text-[10px] font-bold uppercase tracking-wider ${
-                        isMoving
-                          ? "bg-solo text-solo-ink"
-                          : hudStop.isFinal
-                          ? "bg-request text-request-ink"
-                          : "bg-band text-band-ink"
-                      }`}
-                    >
-                      {isMoving && <span className="h-1.5 w-1.5 rounded-full bg-current animate-ping" />}
-                      {isMoving
-                        ? `${activeLeg?.transitMode === "flight" ? "✈️ " : "🚐 "}${t("venueMap.hudNextStop", null, { n: hudStop.stopNumber })}`
-                        : hudStop.isFinal
-                        ? `🏁 ${t("venueMap.hudFinale")}`
-                        : hudStop.isFirst
-                        ? `🎸 ${t("venueMap.hudStart")}`
-                        : activeLeg?.transitMode === "stay"
-                        ? `🏕️ ${t("venueMap.hudStay")}`
-                        : `📍 ${t("venueMap.hudArrivedStop", null, { n: hudStop.stopNumber })}`}
-                    </span>
-                    <span className="font-mono text-[11px] font-extrabold text-muted">
-                      {hudStop.date}
-                    </span>
-                  </div>
-
-                  {/* Venue Name: Adaptive Full Text, No Truncation, Multi-line Natural Wrapping */}
-                  <div className="font-bold text-[12px] sm:text-[13px] leading-tight text-ink break-words my-1">
-                    {localizeVenue(hudStop.venue)}
-                  </div>
-
-                  {/* City & Prefecture + Click Setlist Link */}
-                  <div className="flex items-center justify-between gap-1 mt-1 text-[10px] sm:text-[11px] text-muted font-mono border-t border-dashed border-ink/20 pt-1">
-                    <span className="truncate">
-                      {hudStop.city ? `${t(`cities.${hudStop.city}`, hudStop.city)} · ` : ""}
-                      {t(`prefectures.${hudStop.prefecture}`, hudStop.prefecture)}
-                    </span>
-                    <span className="text-[10px] font-bold text-band-ink shrink-0">
-                      SETLIST ➔
-                    </span>
-                  </div>
+                  <BandEnsembleHUD
+                    state={isMoving ? "moving" : activeLeg?.transitMode === "stay" ? "stay" : "arrived"}
+                    isFinal={Boolean(hudStop.isFinal && !isMoving)}
+                  />
                 </div>
-              </div>
               )}
 
               {renderMapSvg(false)}
@@ -1398,18 +1339,12 @@ export function VenueMapCanvas({
           </div>
         </div>
 
-        {/* Mobile Docked Journey HUD Ribbon (md:hidden, docked below map frame, 100% unobscured canvas) */}
+        {/* Docked Journey HUD Ribbon (Desktop & Mobile: docked below map frame, 100% unobscured canvas so Fukuoka/Kyushu is never covered) */}
         {mode === "journey" && hudStop && (
-          <div className="md:hidden flex flex-col gap-1.5">
-            {!effectiveIsPersonal && (
-              <BandEnsembleHUD
-                state={isMoving ? "moving" : activeLeg?.transitMode === "stay" ? "stay" : "arrived"}
-                isFinal={Boolean(hudStop.isFinal && !isMoving)}
-              />
-            )}
+          <div data-testid="journey-hud-dock">
             <div
               data-testid="journey-hud-card"
-              className="border-[1.5px] border-ink bg-card p-2.5 rounded-[3px] shadow-2xs flex flex-col gap-1.5 select-none cursor-pointer active:bg-tape-tint/50"
+              className="border-[1.5px] border-ink bg-card p-2 sm:p-2.5 rounded-[3px] shadow-2xs select-none hover:border-band cursor-pointer focus:outline-none focus:ring-2 focus:ring-band transition-colors active:bg-tape-tint/50"
               role="button"
               tabIndex={0}
               onClick={() => onSelectShow && onSelectShow(hudStop.showId)}
@@ -1419,50 +1354,93 @@ export function VenueMapCanvas({
                 venue: localizeVenue(hudStop.venue),
               })}
             >
-            {/* Row 1: Status Badge + Date (left) and SETLIST ➔ button (right) */}
-            <div className="flex items-center justify-between gap-2">
-              <div className="flex items-center gap-2 min-w-0">
-                <span
-                  className={`shrink-0 inline-flex items-center gap-1 px-1.5 py-0.5 rounded-[2px] font-mono text-[10px] font-bold uppercase tracking-wider ${
-                    isMoving
-                      ? "bg-solo text-solo-ink"
+              {/* Desktop Flat Single-Row Layout (hidden md:flex) */}
+              <div className="hidden md:flex items-center justify-between gap-3">
+                <div className="flex items-center gap-2.5 min-w-0">
+                  <span
+                    className={`shrink-0 inline-flex items-center gap-1 px-1.5 py-0.5 rounded-[2px] font-mono text-[10px] font-bold uppercase tracking-wider ${
+                      isMoving
+                        ? "bg-solo text-solo-ink"
+                        : hudStop.isFinal
+                        ? "bg-request text-request-ink"
+                        : "bg-band text-band-ink"
+                    }`}
+                  >
+                    {isMoving && <span className="h-1.5 w-1.5 rounded-full bg-current animate-ping" />}
+                    {isMoving
+                      ? `${activeLeg?.transitMode === "flight" ? "✈️ " : "🚐 "}${t("venueMap.hudNextStop", null, { n: hudStop.stopNumber })}`
                       : hudStop.isFinal
-                      ? "bg-request text-request-ink"
-                      : "bg-band text-band-ink"
-                  }`}
-                >
-                  {isMoving && <span className="h-1.5 w-1.5 rounded-full bg-current animate-ping" />}
-                  {isMoving
-                    ? `${activeLeg?.transitMode === "flight" ? "✈️ " : "🚐 "}${t("venueMap.hudNextStop", null, { n: hudStop.stopNumber })}`
-                    : hudStop.isFinal
-                    ? `🏁 ${t("venueMap.hudFinale")}`
-                    : hudStop.isFirst
-                    ? `🎸 ${t("venueMap.hudStart")}`
-                    : activeLeg?.transitMode === "stay"
-                    ? `🏕️ ${t("venueMap.hudStay")}`
-                    : `📍 ${t("venueMap.hudArrivedStop", null, { n: hudStop.stopNumber })}`}
-                </span>
-                <span className="font-mono text-[11px] font-extrabold text-muted">
-                  {hudStop.date}
+                      ? `🏁 ${t("venueMap.hudFinale")}`
+                      : hudStop.isFirst
+                      ? `🎸 ${t("venueMap.hudStart")}`
+                      : activeLeg?.transitMode === "stay"
+                      ? `🏕️ ${t("venueMap.hudStay")}`
+                      : `📍 ${t("venueMap.hudArrivedStop", null, { n: hudStop.stopNumber })}`}
+                  </span>
+                  <span className="font-mono text-[11px] font-extrabold text-muted shrink-0 tabular-nums">
+                    {hudStop.date}
+                  </span>
+                  <span className="text-line-soft select-none" aria-hidden="true">|</span>
+                  <span className="font-bold text-[13px] text-ink leading-tight truncate">
+                    {localizeVenue(hudStop.venue)}
+                  </span>
+                  <span className="text-[11px] text-muted font-mono shrink-0">
+                    ({hudStop.city ? `${t(`cities.${hudStop.city}`, hudStop.city)} · ` : ""}
+                    {t(`prefectures.${hudStop.prefecture}`, hudStop.prefecture)})
+                  </span>
+                </div>
+                <span className="shrink-0 rounded-[2px] bg-band px-2.5 py-1 font-mono text-[10px] font-bold text-band-ink shadow-2xs hover:brightness-105 transition-all">
+                  SETLIST ➔
                 </span>
               </div>
-              <span className="shrink-0 rounded-[2px] bg-band px-2 py-0.5 font-mono text-[10px] font-bold text-band-ink shadow-2xs">
-                SETLIST ➔
-              </span>
-            </div>
 
-            {/* Row 2: Venue Name + Prefecture & City (generous full-width line, no truncation) */}
-            <div className="flex flex-wrap items-baseline gap-x-2 gap-y-0.5 pt-1 border-t border-dashed border-ink/20 text-ink">
-              <span className="font-bold text-[13px] leading-snug break-words">
-                {localizeVenue(hudStop.venue)}
-              </span>
-              <span className="text-[11px] text-muted font-mono shrink-0">
-                {hudStop.city ? `${t(`cities.${hudStop.city}`, hudStop.city)} · ` : ""}
-                {t(`prefectures.${hudStop.prefecture}`, hudStop.prefecture)}
-              </span>
+              {/* Mobile 2-Row Layout (md:hidden) */}
+              <div className="md:hidden flex flex-col gap-1.5">
+                {/* Row 1: Status Badge + Date (left) and SETLIST ➔ button (right) */}
+                <div className="flex items-center justify-between gap-2">
+                  <div className="flex items-center gap-2 min-w-0">
+                    <span
+                      className={`shrink-0 inline-flex items-center gap-1 px-1.5 py-0.5 rounded-[2px] font-mono text-[10px] font-bold uppercase tracking-wider ${
+                        isMoving
+                          ? "bg-solo text-solo-ink"
+                          : hudStop.isFinal
+                          ? "bg-request text-request-ink"
+                          : "bg-band text-band-ink"
+                      }`}
+                    >
+                      {isMoving && <span className="h-1.5 w-1.5 rounded-full bg-current animate-ping" />}
+                      {isMoving
+                        ? `${activeLeg?.transitMode === "flight" ? "✈️ " : "🚐 "}${t("venueMap.hudNextStop", null, { n: hudStop.stopNumber })}`
+                        : hudStop.isFinal
+                        ? `🏁 ${t("venueMap.hudFinale")}`
+                        : hudStop.isFirst
+                        ? `🎸 ${t("venueMap.hudStart")}`
+                        : activeLeg?.transitMode === "stay"
+                        ? `🏕️ ${t("venueMap.hudStay")}`
+                        : `📍 ${t("venueMap.hudArrivedStop", null, { n: hudStop.stopNumber })}`}
+                    </span>
+                    <span className="font-mono text-[11px] font-extrabold text-muted">
+                      {hudStop.date}
+                    </span>
+                  </div>
+                  <span className="shrink-0 rounded-[2px] bg-band px-2 py-0.5 font-mono text-[10px] font-bold text-band-ink shadow-2xs">
+                    SETLIST ➔
+                  </span>
+                </div>
+
+                {/* Row 2: Venue Name + Prefecture & City (generous full-width line, no truncation) */}
+                <div className="flex flex-wrap items-baseline gap-x-2 gap-y-0.5 pt-1 border-t border-dashed border-ink/20 text-ink">
+                  <span className="font-bold text-[13px] leading-snug break-words">
+                    {localizeVenue(hudStop.venue)}
+                  </span>
+                  <span className="text-[11px] text-muted font-mono shrink-0">
+                    {hudStop.city ? `${t(`cities.${hudStop.city}`, hudStop.city)} · ` : ""}
+                    {t(`prefectures.${hudStop.prefecture}`, hudStop.prefecture)}
+                  </span>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
         )}
 
         {/* Journey Playback Transport: docked directly underneath the map card */}
