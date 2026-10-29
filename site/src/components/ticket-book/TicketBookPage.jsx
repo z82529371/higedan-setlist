@@ -436,8 +436,21 @@ export function TicketBookPage({
                           )}
                         </div>
 
-                        {/* Card Top Actions: View Slip & Remove Check-in */}
-                        <div className="flex items-center gap-2 shrink-0 self-start sm:self-auto">
+                        {/* Card Top Actions: Export Memorial, View Slip & Remove Check-in */}
+                        <div className="flex flex-wrap items-center gap-2 shrink-0 self-start sm:self-auto">
+                          <button
+                            type="button"
+                            data-testid={`export-memorial-btn-${showKey}`}
+                            onClick={() => setMemorialShowId(showKey)}
+                            className="inline-flex items-center gap-1 rounded bg-paper/60 hover:bg-tape-tint px-2 py-0.5 font-mono text-[10px] sm:text-[11px] font-bold text-ink border border-line-soft hover:border-ink/40 transition-colors cursor-pointer touch-stamp"
+                            title={t("ticketBook.exportMemorialCardTitle", "預覽並儲存本場次的紀念票根")}
+                          >
+                            <span aria-hidden="true">🎨</span>
+                            <span>{t("ticketBook.exportMemorialCard", "儲存紀念票根")}</span>
+                          </button>
+
+                          <span className="text-line-soft select-none" aria-hidden="true">|</span>
+
                           <a
                             href={routeHash.show(showKey, { lang: locale })}
                             data-testid={`view-ticket-btn-${showKey}`}
@@ -503,20 +516,6 @@ export function TicketBookPage({
                             {item.entry.notes}
                           </div>
                         )}
-
-                        {/* Card Bottom Actions: In-place Memorial Card Export (Issue #43) */}
-                        <div className="mt-3 pt-2.5 border-t border-line-soft/60 flex items-center justify-between gap-2">
-                          <button
-                            type="button"
-                            data-testid={`export-memorial-btn-${showKey}`}
-                            onClick={() => setMemorialShowId(showKey)}
-                            className="inline-flex items-center gap-1.5 rounded-[4px] border border-ink/30 bg-card px-2.5 py-1 font-mono text-[11px] font-bold text-ink shadow-2xs hover:bg-tape-tint transition-colors cursor-pointer touch-stamp"
-                            title={t("ticketBook.exportMemorialCardTitle", "預覽並儲存本場次的紀念票根")}
-                          >
-                            <span aria-hidden="true">🎨</span>
-                            <span>{t("ticketBook.exportMemorialCard", "儲存紀念票根")}</span>
-                          </button>
-                        </div>
                       </div>
                     </div>
                   );

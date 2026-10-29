@@ -44,7 +44,7 @@ export function TicketBookMilestoneDashboard({
   return (
     <div
       data-testid="ticket-book-milestones-dashboard"
-      className="mb-6 rounded-[6px] border-[1.5px] border-ink bg-card p-4 sm:p-5 shadow-[2.5px_2.5px_0_rgba(0,0,0,0.08)]"
+      className="mb-6"
     >
       {/* Header bar: Title & Export CTA */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-line-soft pb-3.5">
