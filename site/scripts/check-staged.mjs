@@ -119,10 +119,13 @@ try {
   }
 
 
-  // Guardrail: Banned / Deprecated Domain Terms Guard (e.g. passport, #/passport)
+  // Guardrail: Banned / Deprecated Domain Terms Guard (e.g. passport, #/passport, 遠征踏破, 540PX)
   const bannedPatterns = [
     { regex: /\bpassport\b/i, label: "passport (deprecated in ADR-0114, use ticket-book / Ticket Book)" },
     { regex: /#\/passport\b/i, label: "#/passport (deprecated in ADR-0114, use #/tickets)" },
+    { regex: /\/\/\s*540PX\b/i, label: "// 540PX (internal layout dimension leaked into user-facing UI copy)", srcOnly: true },
+    { regex: /\b540PX\b/, label: "540PX (technical layout dimension in UI; clean user-facing copy per CODING_STANDARDS.md)", srcOnly: true },
+    { regex: /遠征踏破/, label: "遠征踏破 (awkward militaristic jargon; use authentic 參戰紀念 / LIVE MEMORIAL per GLOSSARY.md)", srcOnly: true },
   ];
 
   // Files exempted from banned terms check (ADR-0113 historical record and the guard script itself)
@@ -145,7 +148,8 @@ try {
         if (file === "site/src/lib/ticket-book.js" && line.includes("LEGACY_PASSPORT_STORAGE_KEY")) return;
         if (file === "site/src/lib/ticket-book.js" && line.includes("hg_passport_v1")) return;
 
-        for (const { regex, label } of bannedPatterns) {
+        for (const { regex, label, srcOnly } of bannedPatterns) {
+          if (srcOnly && !file.startsWith("site/src/")) continue;
           if (regex.test(line)) {
             termViolations.push({
               file,

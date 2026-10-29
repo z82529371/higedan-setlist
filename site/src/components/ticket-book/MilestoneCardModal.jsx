@@ -165,12 +165,12 @@ export function MilestoneCardModal({ isOpen, onClose, milestones, storage: propS
         </div>
 
         {/* 540px Ticket Card Export Node (ADR-0100 & DESIGN.md: radius <= 8px, AAA contrast) */}
-        <div className="relative shrink-0 w-[540px] max-w-full pt-4">
+        <div className="relative w-full max-w-[540px] pt-2 sm:pt-4">
           <div
             ref={cardRef}
             data-testid="milestone-summary-card"
-            className="relative w-[540px] max-w-full rounded-[8px] border-[2px] border-ink bg-card p-5 sm:p-6 shadow-[4px_4px_0_rgba(0,0,0,0.2)] text-ink select-none"
-            style={{ width: "540px", backgroundColor: cardBgColor }}
+            className="relative w-full max-w-[540px] rounded-[8px] border-[2px] border-ink bg-card p-4 sm:p-6 shadow-[4px_4px_0_rgba(0,0,0,0.2)] text-ink select-none"
+            style={{ backgroundColor: cardBgColor }}
           >
           {/* Top Washi Tape Pin */}
           <div className={SLIP_TAPE} aria-hidden="true" />

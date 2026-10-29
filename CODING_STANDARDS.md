@@ -10,9 +10,10 @@ Engineering standards, judgement baselines, and module test seams for code revie
 
 ## 2. Fan Experience & Consumer-Friendly Copy
 
-- **No Developer Jargon**: Never expose engineer-facing mechanics in UI copy, modals, or user alerts.
-  - *Avoid*: `JSON 備份還原`, `Schema 驗證錯誤`, `Payload`, `Database`, `Envelope`, `HTTP 500`.
-  - *Adopt*: `備份紀錄`, `轉移紀錄`, `檔案格式不符`, `請檢查網路連線`.
+- **No Developer or Technical Layout Jargon**: Never expose engineer-facing mechanics or internal layout specifications in UI copy, modals, or user alerts.
+  - *Avoid*: `JSON 備份還原`, `Schema 驗證錯誤`, `Payload`, `Database`, `Envelope`, `HTTP 500`, `// 540PX`, `540px`, `遠征踏破`.
+  - *Adopt*: `備份紀錄`, `轉移紀錄`, `檔案格式不符`, `請檢查網路連線`, clean titles without internal dimension suffixes, `參戰紀念` (`LIVE MEMORIAL`).
+- **Commemorative Card Export Modals Ergonomics**: Modals dedicated to saving commemorative cards (such as `MilestoneCardModal` or `FootprintCardModal`) must stay focused on souvenir preview and one-click export (`exportElementToPng`). Never clutter export modal toolbars with player transport widgets (playback speed selectors `[1×][2×][4×]`, timeline scrubbers, replay loops) — interactive playback belongs exclusively in primary exploration views (e.g. `TicketBookFootprintMap`).
 - **Low-Friction Interactions**: Minimize steps required for fan participation. Forms must provide immediate copy-to-clipboard or direct compose fallbacks with instant visual feedback.
 
 ## 3. Ticket Aesthetic & Token Discipline (DESIGN.md)
@@ -22,6 +23,7 @@ Engineering standards, judgement baselines, and module test seams for code revie
   - Shadows: Strictly use zero-blur `shadow-xs` / `dark:shadow-none`.
   - Monospace cue: Numbers, dates, codes, and setlist counters use `font-mono` (The Cue Monospace Rule); subtitles and explanatory labels use proportional typography.
   - Atomic Show Date Invariant: Whenever rendering a show date alongside a venue or city name, keep the date in a dedicated `font-mono whitespace-nowrap shrink-0` span and apply `truncate` only to the sibling venue/city span so dates never clip or wrap.
+  - 540px Postcard & Ticket Slip Mobile Fluidity: Components intended for standard 540px offline export must remain 100% fluid on mobile screens. Outer card containers must strictly use `w-full max-w-[540px]`, never fixed unconstrained `w-[540px]` or hardcoded inline `width: 540px`. Inner rows (such as postmark stamps and summary metrics) must remain resilient across narrow 360px~390px viewports without vertical displacement or awkward clipping.
 - **Contrast**: Small text (<14px) and badge labels must meet AAA 7:1 contrast using semantic theme ink tokens (`text-ink`, `text-ink-muted`). Never introduce unvetted arbitrary hex colors (e.g. `text-[#...]`).
 
 ## 4. Multi-Lingual Parity (ADR-0107, ADR-0112)

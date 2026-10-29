@@ -383,4 +383,66 @@ describe("9. Design Token Invariants & Dedicated URL Routes Seam (DESIGN.md, ADR
       );
     }
   });
+
+  it("enforces 540px Commemorative Card Modal Fluidity Invariant (CODING_STANDARDS.md)", () => {
+    const cardModals = [
+      { name: "MilestoneCardModal", path: path.resolve(import.meta.dirname, "../../src/components/ticket-book/MilestoneCardModal.jsx") },
+      { name: "FootprintCardModal", path: path.resolve(import.meta.dirname, "../../src/components/ticket-book/FootprintCardModal.jsx") },
+    ];
+
+    for (const modal of cardModals) {
+      const content = fs.readFileSync(modal.path, "utf8");
+      assert.ok(
+        content.includes("w-full max-w-[540px]"),
+        `${modal.name} must use fluid container 'w-full max-w-[540px]' for mobile responsiveness (CODING_STANDARDS.md)`
+      );
+      assert.ok(
+        !content.includes('style={{ width: "540px"'),
+        `${modal.name} must not use fixed inline width: 540px`
+      );
+      assert.ok(
+        !content.includes("shrink-0 w-[540px]"),
+        `${modal.name} must not use fixed non-fluid shrink-0 w-[540px]`
+      );
+    }
+  });
+
+  it("prohibits awkward militaristic jargon and leaked technical dimension suffixes (CODING_STANDARDS.md)", () => {
+    const srcDir = path.resolve(import.meta.dirname, "../../src");
+
+    function findCodeFiles(dir) {
+      let results = [];
+      const entries = fs.readdirSync(dir, { withFileTypes: true });
+      for (const entry of entries) {
+        const fullPath = path.join(dir, entry.name);
+        if (entry.isDirectory()) {
+          results = results.concat(findCodeFiles(fullPath));
+        } else if (/\.(?:jsx?|css)$/.test(entry.name)) {
+          results.push(fullPath);
+        }
+      }
+      return results;
+    }
+
+    const files = findCodeFiles(srcDir);
+    const violations = [];
+
+    for (const file of files) {
+      const content = fs.readFileSync(file, "utf8");
+      const relPath = path.relative(srcDir, file).replace(/\\/g, "/");
+
+      if (content.includes("遠征踏破")) {
+        violations.push(`${relPath}: contains awkward term '遠征踏破' (use '參戰紀念' / LIVE MEMORIAL)`);
+      }
+      if (/\b540PX\b/.test(content)) {
+        violations.push(`${relPath}: contains technical layout dimension '540PX'`);
+      }
+    }
+
+    assert.deepEqual(
+      violations,
+      [],
+      `Found forbidden terms or dimension leaks in site/src/:\n${violations.join("\n")}`
+    );
+  });
 });
