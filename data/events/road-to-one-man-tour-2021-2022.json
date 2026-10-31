@@ -402,5 +402,11 @@
       "songId": "universe"
     }
   ],
-  "templateBasis": "全自動提煉：基於 3 場演出提取 $\\ge 50\\%$ 多數共識歌單"
+  "templateBasis": "全自動提煉：基於 3 場演出提取 $\\ge 50\\%$ 多數共識歌單",
+  "media": {
+    "digest": {
+      "youtubeId": "1i9IfhFqxXM",
+      "title": "[BD/DVD Digest] Official髭男dism 「Road to \\\"one man tour 2021-2022\\\" from 2021.06.23 ぴあアリーナMM –」"
+    }
+  }
 }
