@@ -1534,5 +1534,11 @@
       "songId": "i-love"
     }
   ],
-  "templateBasis": "全自動提煉：基於 49 場演出提取 $\\ge 50\\%$ 多數共識歌單"
+  "templateBasis": "全自動提煉：基於 49 場演出提取 $\\ge 50\\%$ 多數共識歌單",
+  "media": {
+    "digest": {
+      "youtubeId": "6T8pCwKVQHY",
+      "title": "［BD/DVD Digest］Official髭男dism「one-man tour 2021-2022 -Editorial-」＠SAITAMA SUPER ARENA"
+    }
+  }
 }

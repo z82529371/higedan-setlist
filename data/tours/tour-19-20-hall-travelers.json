@@ -1211,5 +1211,11 @@
       "songId": "shukumei"
     }
   ],
-  "templateBasis": "全自動提煉：基於 29 場演出提取 $\\ge 50\\%$ 多數共識歌單"
+  "templateBasis": "全自動提煉：基於 29 場演出提取 $\\ge 50\\%$ 多數共識歌單",
+  "media": {
+    "digest": {
+      "youtubeId": "y3L0pjZZqKo",
+      "title": "Official髭男dism Tour 19/20 -Hall Travelers- (2020.2.10 パシフィコ横浜)［Digest］"
+    }
+  }
 }

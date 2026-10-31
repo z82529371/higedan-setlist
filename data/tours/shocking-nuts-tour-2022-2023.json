@@ -1320,5 +1320,11 @@
       "songId": "hakan"
     }
   ],
-  "templateBasis": "全自動提煉：基於 21 場演出提取 $\\ge 50\\%$ 多數共識歌單"
+  "templateBasis": "全自動提煉：基於 21 場演出提取 $\\ge 50\\%$ 多數共識歌單",
+  "media": {
+    "digest": {
+      "youtubeId": "q7oSGQ0ZHxY",
+      "title": "[BD/DVD Digest] Official髭男dism「SHOCKING NUTS TOUR selected from NIPPON BUDOKAN」"
+    }
+  }
 }

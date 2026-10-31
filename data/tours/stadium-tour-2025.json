@@ -406,5 +406,11 @@
       "songId": "stand-by-you"
     }
   ],
-  "templateBasis": "全自動提煉：基於 4 場演出提取 $\\ge 50\\%$ 多數共識歌單"
+  "templateBasis": "全自動提煉：基於 4 場演出提取 $\\ge 50\\%$ 多數共識歌單",
+  "media": {
+    "digest": {
+      "youtubeId": "0qT_3dvUdIc",
+      "title": "[BD/DVD Digest] Official髭男dism「LIVE at STADIUM 2025 (2025.06.01)」@日産スタジアム"
+    }
+  }
 }

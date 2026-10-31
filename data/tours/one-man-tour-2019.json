@@ -604,5 +604,11 @@
       "songId": "stand-by-you"
     }
   ],
-  "templateBasis": "全自動提煉：基於 8 場演出提取 $\\ge 50\\%$ 多數共識歌單"
+  "templateBasis": "全自動提煉：基於 8 場演出提取 $\\ge 50\\%$ 多數共識歌單",
+  "media": {
+    "digest": {
+      "youtubeId": "7wYi667iaFg",
+      "title": "Official髭男dism - one-man tour 2019＠日本武道館［Digest］"
+    }
+  }
 }

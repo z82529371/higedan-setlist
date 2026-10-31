@@ -928,8 +928,7 @@
             }
           }
         ]
-      },
-      "locked": true
+      }
     },
     {
       "id": "949987",
@@ -2198,5 +2197,11 @@
       "locked": true
     }
   ],
-  "templateBasis": "手動校準：基於 17 場 Live House 巡演演出提取之共識曲目模板（含未發行曲《明け方のゲッタウェイ》於 M12）"
+  "templateBasis": "手動校準：基於 17 場 Live House 巡演演出提取之共識曲目模板（含未發行曲《明け方のゲッタウェイ》於 M12）",
+  "media": {
+    "digest": {
+      "youtubeId": "ysOzjTknC14",
+      "title": "［DVD/Blu-ray Digest］Official髭男dism one-man tour 18/19 (1/24 NHK Hall)"
+    }
+  }
 }

@@ -596,5 +596,11 @@
       "songId": "tattoo"
     }
   ],
-  "templateBasis": "全自動提煉：基於 10 場演出提取 $\\ge 50\\%$ 多數共識歌單"
+  "templateBasis": "全自動提煉：基於 10 場演出提取 $\\ge 50\\%$ 多數共識歌單",
+  "media": {
+    "digest": {
+      "youtubeId": "ag68sq2NeLc",
+      "title": "［BD/DVD Digest］Official髭男dism Arena Tour 2024 - Rejoice -"
+    }
+  }
 }
