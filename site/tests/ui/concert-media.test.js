@@ -51,7 +51,9 @@ describe("33. Concert & Tour Media Digest Stage UI (ADR-0136)", () => {
     assert.match(html, /https:\/\/www\.youtube\.com\/embed\/y3L0pjZZqKo/, "embeds YouTube player with correct video ID");
     assert.match(html, /🎬 巡演精華/, "renders localized tour digest badge");
     assert.match(html, /Tour 19\/20 -Hall Travelers-/, "renders custom title in stage header");
-    assert.match(html, /YouTube ↗/, "provides direct YouTube watch link");
+    assert.match(html, /前往 YouTube/, "renders compact Watch on YouTube text");
+    assert.match(html, /YouTube.*↗/, "provides direct YouTube watch link");
+    assert.match(html, /truncate shrink/, "ensures stage title truncates gracefully on narrow screens");
   });
 
   it("renders TourSlip always-on digest stage when media.digest is present (Zero DOM Pollution when absent)", async () => {
@@ -143,5 +145,9 @@ describe("33. Concert & Tour Media Digest Stage UI (ADR-0136)", () => {
     assert.match(html, /data-testid="show-digest-btn"/, "renders show digest button for flagship show");
     assert.match(html, /🎬/, "renders single emoji");
     assert.match(html, /演出精華/, "renders clean localized show digest button text");
+    assert.match(html, /grid grid-cols-2/, "renders 2-column grid on mobile for primary actions");
+    assert.match(html, /紀念小卡/, "renders short memorial card text for mobile viewports");
+    assert.match(html, /產生紀念小卡/, "renders full memorial card text for desktop viewports");
+    assert.match(html, /w-full sm:w-auto/, "renders responsive full-width more tools button on mobile");
   });
 });

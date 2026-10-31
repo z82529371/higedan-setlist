@@ -328,12 +328,12 @@ export function SongSlip({ songId, trackShows, showById, unitData, onSelectShow,
 
         {/* Level 3b: Action Toolbar & Collapsible Tools */}
         <div className="mt-2.5 flex flex-col gap-2 border-t border-line-soft/80 pt-2 font-mono text-[11px] slip-ignore-export">
-          <div className="flex flex-wrap items-center justify-between gap-2">
-            <div className="flex flex-wrap items-center gap-1.5">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+            <div className="grid grid-cols-2 gap-2 sm:flex sm:flex-wrap sm:items-center sm:gap-1.5">
               <button
                 type="button"
                 onClick={handleCopyHistory}
-                className={`inline-flex items-center gap-1 rounded px-2.5 py-1 font-mono text-[11px] font-bold transition-all cursor-pointer select-none border ${
+                className={`inline-flex items-center justify-center gap-1 rounded px-2.5 py-1.5 sm:py-1 font-mono text-[11px] font-bold transition-all cursor-pointer select-none border ${
                   copied
                     ? "bg-band text-band-ink border-band shadow-xs"
                     : "bg-paper text-ink border-line-soft hover:bg-tape-tint/50 hover:border-ink/60"
@@ -352,7 +352,7 @@ export function SongSlip({ songId, trackShows, showById, unitData, onSelectShow,
                       el.scrollIntoView({ behavior: "smooth", block: "nearest" });
                     }
                   }}
-                  className="inline-flex items-center gap-1 rounded border border-ink/40 bg-tape/20 px-2.5 py-1 font-mono text-[11px] font-bold text-ink hover:bg-band hover:border-band hover:text-band-ink transition-colors cursor-pointer select-none"
+                  className="inline-flex items-center justify-center gap-1 rounded border border-ink/40 bg-tape/20 px-2.5 py-1.5 sm:py-1 font-mono text-[11px] font-bold text-ink hover:bg-band hover:border-band hover:text-band-ink transition-colors cursor-pointer select-none"
                   title={
                     media.hasLive
                       ? (media.live?.isExcerpt
@@ -372,7 +372,7 @@ export function SongSlip({ songId, trackShows, showById, unitData, onSelectShow,
                   href={youtubeUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1 rounded border border-line-soft bg-paper px-2 py-1 font-mono text-[11px] font-bold text-ink hover:bg-band hover:border-band transition-colors no-underline"
+                  className="inline-flex items-center justify-center gap-1 rounded border border-line-soft bg-paper px-2 py-1.5 sm:py-1 font-mono text-[11px] font-bold text-ink hover:bg-band hover:border-band transition-colors no-underline"
                   title={t("songExtra.youtubeTitle", "在 YouTube 搜尋現場 Live 影片")}
                 >
                   <span>▶ YouTube</span>
@@ -382,7 +382,7 @@ export function SongSlip({ songId, trackShows, showById, unitData, onSelectShow,
                 href={spotifyUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1 rounded border border-line-soft bg-paper px-2 py-1 font-mono text-[11px] font-bold text-ink hover:bg-band hover:border-band transition-colors no-underline"
+                className="col-span-2 sm:col-span-1 inline-flex items-center justify-center gap-1 rounded border border-line-soft bg-paper px-2 py-1.5 sm:py-1 font-mono text-[11px] font-bold text-ink hover:bg-band hover:border-band transition-colors no-underline"
                 title={t("songExtra.spotifyTitle", "在 Spotify 聆聽官方音源")}
               >
                 <span>🎧 Spotify</span>
@@ -392,7 +392,7 @@ export function SongSlip({ songId, trackShows, showById, unitData, onSelectShow,
             <button
               type="button"
               onClick={() => setShowMoreTools((v) => !v)}
-              className="inline-flex items-center justify-center gap-1 rounded bg-paper hover:bg-tape-tint/50 px-2.5 py-1 text-[11px] font-mono font-bold text-ink border border-line-soft hover:border-ink/60 transition-colors cursor-pointer select-none"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-1 rounded bg-paper hover:bg-tape-tint/50 px-2.5 py-1.5 sm:py-1 text-[11px] font-mono font-bold text-ink border border-line-soft hover:border-ink/60 transition-colors cursor-pointer select-none"
               aria-expanded={showMoreTools}
               title={t("songExtra.expandToolsTitle", "展開更多歷程（首演/最新出演里程碑、年度分佈與資料庫外鏈）")}
             >

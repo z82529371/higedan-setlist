@@ -409,24 +409,21 @@ export function ShowSlip({
           )}
 
           {/* Row 1: Primary Export Actions & Collapsible Tools Toggle */}
-          <div className="flex flex-wrap items-center justify-between gap-2">
-            <div className="flex flex-wrap items-center gap-2">
-              {hasDigest && (
-                <button
-                  type="button"
-                  data-testid="show-digest-btn"
-                  onClick={() => setShowDigestStage((v) => !v)}
-                  className={`inline-flex items-center justify-center gap-1.5 rounded px-3 py-1.5 text-[11px] font-mono font-bold transition-colors cursor-pointer select-none border touch-stamp ${
-                    showDigestStage
-                      ? "bg-band text-band-ink border-ink font-extrabold shadow-xs hover:brightness-105"
-                      : "bg-paper text-ink border-line-soft hover:bg-tape-tint/50 hover:border-ink/60"
-                  }`}
-                  title={t("showExtra.watchDigestTitle", "欣賞官方演出精華影片")}
-                >
-                  <span aria-hidden="true">🎬</span>
-                  <span>{t("showExtra.watchDigest", "演出精華")}</span>
-                </button>
-              )}
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+            {/* Primary Action Buttons: 2-column Grid on Mobile, Flex on Desktop */}
+            <div className="grid grid-cols-2 gap-2 sm:flex sm:flex-wrap sm:items-center">
+              <button
+                type="button"
+                data-testid="generate-memorial-card-btn"
+                onClick={() => setShowMemorialModal(true)}
+                className="inline-flex items-center justify-center gap-1.5 rounded bg-band px-3 py-1.5 text-[11px] font-mono font-bold text-band-ink border border-ink/40 shadow-xs hover:brightness-105 transition-colors cursor-pointer select-none touch-stamp"
+                title={t("showExtra.previewMemorialTitle", "預覽並自訂儲存本場巡演歌單紀念小卡")}
+              >
+                <span aria-hidden="true">📸</span>
+                <span className="hidden sm:inline">{t("slips.generateMemorialCard", "產生紀念小卡")}</span>
+                <span className="sm:hidden">{t("slips.memorialCardShort", "紀念小卡")}</span>
+              </button>
+
               <button
                 type="button"
                 data-testid="ticket-book-toggle-btn"
@@ -454,19 +451,10 @@ export function ShowSlip({
 
               <button
                 type="button"
-                data-testid="generate-memorial-card-btn"
-                onClick={() => setShowMemorialModal(true)}
-                className="inline-flex items-center justify-center gap-1.5 rounded bg-band px-3 py-1.5 text-[11px] font-mono font-bold text-band-ink border border-ink/40 shadow-xs hover:brightness-105 transition-colors cursor-pointer select-none touch-stamp"
-                title={t("showExtra.previewMemorialTitle", "預覽並自訂儲存本場巡演歌單紀念小卡")}
-              >
-                <span aria-hidden="true">📸</span>
-                <span>{t("slips.generateMemorialCard", "產生紀念小卡")}</span>
-              </button>
-
-              <button
-                type="button"
                 onClick={handleCopySetlist}
                 className={`inline-flex items-center justify-center gap-1.5 rounded px-3 py-1.5 text-[11px] font-mono font-bold transition-colors cursor-pointer select-none border touch-stamp ${
+                  hasDigest ? "" : "col-span-2 sm:col-span-1"
+                } ${
                   copied
                     ? "bg-band text-band-ink border-band shadow-xs"
                     : "bg-paper text-ink border-line-soft hover:bg-tape-tint/50 hover:border-ink/60"
@@ -475,12 +463,29 @@ export function ShowSlip({
               >
                 <span>{copied ? t("slips.copied", "✓ 已複製") : t("slips.copySetlist", "📋 複製歌單")}</span>
               </button>
+
+              {hasDigest && (
+                <button
+                  type="button"
+                  data-testid="show-digest-btn"
+                  onClick={() => setShowDigestStage((v) => !v)}
+                  className={`inline-flex items-center justify-center gap-1.5 rounded px-3 py-1.5 text-[11px] font-mono font-bold transition-colors cursor-pointer select-none border touch-stamp ${
+                    showDigestStage
+                      ? "bg-band text-band-ink border-ink font-extrabold shadow-xs hover:brightness-105"
+                      : "bg-paper text-ink border-line-soft hover:bg-tape-tint/50 hover:border-ink/60"
+                  }`}
+                  title={t("showExtra.watchDigestTitle", "欣賞官方演出精華影片")}
+                >
+                  <span aria-hidden="true">🎬</span>
+                  <span>{t("showExtra.watchDigest", "演出精華")}</span>
+                </button>
+              )}
             </div>
 
             <button
               type="button"
               onClick={() => setShowMoreTools((v) => !v)}
-              className="inline-flex items-center justify-center gap-1 rounded bg-paper hover:bg-tape-tint/50 px-2.5 py-1.5 text-[11px] font-mono font-bold text-ink border border-line-soft hover:border-ink/60 transition-colors cursor-pointer select-none"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-1 rounded bg-paper hover:bg-tape-tint/50 px-2.5 py-1.5 text-[11px] font-mono font-bold text-ink border border-line-soft hover:border-ink/60 transition-colors cursor-pointer select-none"
               aria-expanded={showMoreTools}
               title={t("showExtra.expandToolsTitle", "展開更多工具（雙場曲目比對、專輯分佈、圖例與資料來源）")}
             >
