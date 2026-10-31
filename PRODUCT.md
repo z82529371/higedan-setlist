@@ -45,8 +45,8 @@ web
 | **場次篩選器**（Show Navigator） | 演出類型 → 年份 → 巡演專場 → 場次日期切換 | `site/src/components/navigators/ShowNavigator.jsx` |
 | **歌曲篩選器**（Song Navigator） | 專輯分類 / 登場次數排行 → 歌曲切換 | `site/src/components/navigators/SongNavigator.jsx` |
 | **場地篩選器**（Venue Navigator） | 互動場地地圖 / 登場次數排行 → 場館切換 | `site/src/components/navigators/VenueNavigator.jsx` |
-| **場次票根**（Show Slip） | 單場演出票根、本篇/安可曲目單、前場曲目 Diff | `site/src/components/slips/ShowSlip.jsx` + `ShowMetadataBox.jsx` |
-| **巡演總覽票券**（Tour Slip） | 巡演定番歌曲、輪換曲、驚喜曲目與巡演足跡日程 | `site/src/components/slips/TourSlip.jsx` |
+| **場次票根**（Show Slip） | 單場演出票根、官方精華舞台（旗艦單場）、本篇/安可曲目單、前場曲目 Diff | `site/src/components/slips/ShowSlip.jsx` + `ShowMetadataBox.jsx` + `SongMediaStage.jsx` |
+| **巡演總覽票券**（Tour Slip） | 巡演定番歌曲、官方精華舞台（BD/DVD Digest）、輪換曲、驚喜曲目與巡演足跡日程 | `site/src/components/slips/TourSlip.jsx` + `SongMediaStage.jsx` |
 | **歌曲詳情票券**（Song Slip） | 歌曲出賽履歷、官方雙軌影音舞台（MV/Live/精華）、版本統計、首演/最新演出里程碑 | `site/src/components/slips/SongSlip.jsx` + `SongMediaStage.jsx` + `SongMilestonesDrawer.jsx` |
 | **場館詳情票券**（Venue Slip） | 場館歷史演出編年史、地理標籤與初次/最近登場 | `site/src/components/slips/VenueSlip.jsx` |
 | **行動版篩選抽屜**（Filter Drawer） | 手機版底層彈出之階層篩選面板與麵包屑指示 | `site/src/components/layout/FilterDrawer.jsx` |

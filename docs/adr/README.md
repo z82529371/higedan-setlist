@@ -4,10 +4,10 @@
 
 ---
 
-## 決策總覽清單（共 130 篇）
+## 決策總覽清單（共 131 篇）
 
 > [!NOTE]
-> **編號跳號說明**：本目錄編號自 ADR-0001 起至 ADR-0135 止。其中 ADR-0063、ADR-0064、ADR-0065、ADR-0068、ADR-0069 共 5 篇為早期介面排版草案，後續已被 ADR-0070 單欄聚焦架構完整吸收與替代，故無獨立保留歷史檔案；實體決策文件共計 130 篇。
+> **編號跳號說明**：本目錄編號自 ADR-0001 起至 ADR-0136 止。其中 ADR-0063、ADR-0064、ADR-0065、ADR-0068、ADR-0069 共 5 篇為早期介面排版草案，後續已被 ADR-0070 單欄聚焦架構完整吸收與替代，故無獨立保留歷史檔案；實體決策文件共計 131 篇。
 
 | 決策標題 | 狀態 | 日期 |
 | :--- | :---: | :---: |
@@ -141,3 +141,4 @@
 | [ADR-0133: 參戰足跡紀念明信片純 PNG 離線匯出、全線踏破快照與「參戰紀念」正名架構 (Tour Footprint Postcard Pure PNG Export, Completed Souvenir Snapshot & Live Memorial Architecture)](0133-tour-footprint-postcard-pure-png-export-and-live-memorial-architecture.md) | 已採納 (Accepted) | 封存瀏覽器短片錄製，回歸 100% 穩定純 PNG 離線匯出、始終匯出全線踏破完成體快照、印章正式正名為「參戰紀念」並維持累計距離剔除 |
 | [ADR-0134: PWA 網路優先導航策略、建置雜湊快取版本化與邊緣標頭架構 (PWA Network-First Navigation, Dynamic Hash Cache Invalidation & Cloudflare Edge Headers Architecture)](0134-pwa-network-first-navigation-and-hash-cache-invalidation-architecture.md) | 已採納 (Accepted) | 實作 HTML 導航 Network-First 附加 1.8 秒超時自動降級、Vite 建置期注入動態雜湊版號、Cloudflare Pages _headers 邊緣標頭規範與用戶端平滑接管，徹底免除 Ctrl+R |
 | [ADR-0135: 歌曲主檔官方影音收錄、現場雙軌聯動與沉浸式播放架構 (Song Master Media Embed, Live Twin-Track Linkage & Immersive Player Architecture)](0135-song-master-media-embed-and-live-twin-track-linkage-architecture.md) | 已採納 (Accepted) | 歌曲主檔擴充結構化 mv 與 live 影音欄位、支援 "MM:SS" 與秒數防呆時間戳、票根原生內嵌影音舞台（SongMediaStage）、雙軌切換、多版本選台器、現場精華區間自動暫停與 showId 場次直達 |
+| [ADR-0136: 巡演與單場官方影音精華收錄、全景票券舞台與漸進式展示架構 (Tour & Show Media Digest Embed, Concert Media Stage & Progressive Enhancement Architecture)](0136-tour-and-show-media-digest-and-concert-stage-architecture.md) | 已採納 (Accepted) | 巡演主檔與單場事件擴充 media.digest 影音欄位、漸進式增強（有 Digest 始展示、無 Digest 零 DOM 污染）、共用全景演出影音舞台（ConcertMediaStage）、工具列一鍵展開與全螢幕沉浸播放 |
