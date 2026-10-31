@@ -12,6 +12,8 @@ import { SetlistQuestCard } from "./SetlistQuestCard.jsx";
 import { LeadDropModal } from "./LeadDropModal.jsx";
 import { useI18n } from "../../lib/i18n.jsx";
 import { useTicketBookAttendance } from "../../lib/ticket-book.js";
+import { SongMediaStage } from "./SongMediaStage.jsx";
+import { extractConcertMedia } from "../../lib/song-media.js";
 
 export function ShowSlip({
   ud,
@@ -36,7 +38,13 @@ export function ShowSlip({
   const [showMemorialModal, setShowMemorialModal] = useState(false);
   const [leadQuestModal, setLeadQuestModal] = useState(null);
   const [showMoreTools, setShowMoreTools] = useState(false);
+  const [showDigestStage, setShowDigestStage] = useState(false);
   const slipRef = useRef(null);
+
+  const digestMedia = useMemo(() => {
+    return extractConcertMedia(s.media ? s : ud.unit);
+  }, [s, ud.unit]);
+  const hasDigest = !!digestMedia;
 
   const showList = ud.unit.shows || [];
   const currentIdx = showList.findIndex((x) => x.id === showId);
@@ -391,9 +399,34 @@ export function ShowSlip({
 
         {/* Level 4: Action Toolbar (Two-Tier Clean Split: Primary Actions & Sources + Analysis Reel) */}
         <div className="mt-2.5 flex flex-col gap-2 border-t border-line-soft/80 pt-2.5 slip-ignore-export">
+          {/* Concert Media Digest Stage */}
+          {hasDigest && showDigestStage && (
+            <SongMediaStage
+              mediaOverride={digestMedia}
+              titleOverride={s.title || ud.unit.title}
+              onClose={() => setShowDigestStage(false)}
+            />
+          )}
+
           {/* Row 1: Primary Export Actions & Collapsible Tools Toggle */}
           <div className="flex flex-wrap items-center justify-between gap-2">
             <div className="flex flex-wrap items-center gap-2">
+              {hasDigest && (
+                <button
+                  type="button"
+                  data-testid="show-digest-btn"
+                  onClick={() => setShowDigestStage((v) => !v)}
+                  className={`inline-flex items-center justify-center gap-1.5 rounded px-3 py-1.5 text-[11px] font-mono font-bold transition-colors cursor-pointer select-none border touch-stamp ${
+                    showDigestStage
+                      ? "bg-band text-band-ink border-ink font-extrabold shadow-xs hover:brightness-105"
+                      : "bg-paper text-ink border-line-soft hover:bg-tape-tint/50 hover:border-ink/60"
+                  }`}
+                  title={t("showExtra.watchDigestTitle", "欣賞官方演出精華影片")}
+                >
+                  <span aria-hidden="true">🎬</span>
+                  <span>{t("showExtra.watchDigest", "演出精華")}</span>
+                </button>
+              )}
               <button
                 type="button"
                 data-testid="ticket-book-toggle-btn"

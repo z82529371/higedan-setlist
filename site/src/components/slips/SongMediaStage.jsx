@@ -20,6 +20,8 @@ export function SongMediaStage({
   onSelectShow,
   initialTrack,
   mediaOverride,
+  titleOverride,
+  onClose,
 }) {
   const { t } = useI18n();
   const iframeRef = useRef(null);
@@ -169,7 +171,7 @@ export function SongMediaStage({
         <div className="flex flex-wrap items-center gap-1.5 min-w-0">
           <span className="inline-block h-2 w-2 rounded-full border border-ink bg-tape shrink-0" aria-hidden="true" />
           <span className="font-bold text-ink uppercase tracking-wider shrink-0">
-            {t("songExtra.mediaModalAria", "官方影音舞台")}
+            {titleOverride || t("songExtra.mediaModalAria", "官方影音舞台")}
           </span>
 
           {media.hasLive && media.hasMv ? (
@@ -217,9 +219,11 @@ export function SongMediaStage({
             </div>
           ) : media.hasLive ? (
             <span className="shrink-0 rounded bg-band/15 text-band-ink border border-band/30 px-2 py-0.5 text-[10px] font-bold ml-1">
-              {currentLive?.isExcerpt
-                ? t("songExtra.liveExcerptTab", "🎪 現場精華")
-                : t("songExtra.liveTab", "🎪 現場 Live")}
+              {currentLive?.isDigest
+                ? `🎬 ${t("tourExtra.watchDigest", "巡演精華")}`
+                : currentLive?.isExcerpt
+                  ? t("songExtra.liveExcerptTab", "🎪 現場精華")
+                  : t("songExtra.liveTab", "🎪 現場 Live")}
             </span>
           ) : media.hasMv ? (
             <span className="shrink-0 rounded bg-black/[0.04] dark:bg-white/[0.05] text-muted border border-line-soft px-2 py-0.5 text-[10px] font-bold ml-1">
@@ -228,9 +232,9 @@ export function SongMediaStage({
           ) : null}
         </div>
 
-        {/* Right: External YouTube Link */}
-        {watchUrl && (
-          <div className="flex items-center justify-end shrink-0 self-end sm:self-auto">
+        {/* Right: External YouTube Link & Optional Close */}
+        <div className="flex items-center justify-end gap-1.5 shrink-0 self-end sm:self-auto">
+          {watchUrl && (
             <a
               href={watchUrl}
               target="_blank"
@@ -241,8 +245,19 @@ export function SongMediaStage({
               <span className="hidden min-[420px]:inline">{t("songExtra.openInYouTube", "在 YouTube 開啟原始影片")}</span>
               <span className="min-[420px]:hidden">YouTube ↗</span>
             </a>
-          </div>
-        )}
+          )}
+          {onClose && (
+            <button
+              type="button"
+              onClick={onClose}
+              className="inline-flex items-center justify-center rounded border border-line-soft bg-paper hover:bg-black/[0.04] dark:hover:bg-white/[0.04] p-1 text-muted hover:text-ink transition-colors min-h-[30px] min-w-[30px] cursor-pointer"
+              title={t("songExtra.closePlayer", "關閉播放器")}
+              aria-label={t("songExtra.closePlayer", "關閉播放器")}
+            >
+              ✕
+            </button>
+          )}
+        </div>
       </div>
 
       {/* Multiple Live Performances Selector Sub-bar */}
