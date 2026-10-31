@@ -292,8 +292,8 @@ export function SongMediaModal({
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-1 rounded border border-line-soft bg-paper px-2 py-0.5 font-mono text-[11px] font-bold text-ink hover:bg-band hover:border-band hover:text-band-ink transition-colors no-underline"
               >
-                <span>↗</span>
-                <span>{t("songExtra.openInYouTube", "在 YouTube 開啟原始影片")}</span>
+                <span className="hidden min-[380px]:inline">{t("songExtra.openInYouTube", "前往 YouTube")} ↗</span>
+                <span className="min-[380px]:hidden">YouTube ↗</span>
               </a>
             )}
           </div>

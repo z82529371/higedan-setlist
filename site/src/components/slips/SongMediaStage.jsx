@@ -165,21 +165,24 @@ export function SongMediaStage({
       data-testid="song-media-stage"
       className="my-3 rounded-[3px] border border-line-soft bg-card overflow-hidden shadow-2xs select-none"
     >
-      {/* Stage Top Bar (Responsive for mobile & small screens) */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 px-3 py-2 bg-paper border-b border-line-soft font-mono text-[11px]">
+      {/* Stage Top Bar (Responsive for mobile & small screens: single-row layout) */}
+      <div className="flex items-center justify-between gap-2 px-3 py-1.5 bg-paper border-b border-line-soft font-mono text-[11px]">
         {/* Left: Stage Title & Dual Track Switcher */}
-        <div className="flex flex-wrap items-center gap-1.5 min-w-0">
+        <div className="flex items-center gap-1.5 min-w-0 flex-1 overflow-hidden">
           <span className="inline-block h-2 w-2 rounded-full border border-ink bg-tape shrink-0" aria-hidden="true" />
-          <span className="font-bold text-ink uppercase tracking-wider shrink-0">
+          <span
+            className="font-bold text-ink uppercase tracking-wider truncate shrink"
+            title={titleOverride || t("songExtra.mediaModalAria", "官方影音舞台")}
+          >
             {titleOverride || t("songExtra.mediaModalAria", "官方影音舞台")}
           </span>
 
           {media.hasLive && media.hasMv ? (
-            <div className="inline-flex items-center rounded bg-black/[0.04] dark:bg-white/[0.05] p-0.5 font-bold ml-1">
+            <div className="inline-flex items-center rounded bg-black/[0.04] dark:bg-white/[0.05] p-0.5 font-bold shrink-0 ml-1">
               <button
                 type="button"
                 onClick={() => handleTrackChange("live")}
-                className={`px-2.5 py-1 rounded transition-colors cursor-pointer min-h-[30px] flex items-center gap-1 ${
+                className={`px-2 py-0.5 rounded transition-colors cursor-pointer min-h-[26px] flex items-center gap-1 ${
                   activeTrack === "live"
                     ? "bg-band text-band-ink font-extrabold shadow-2xs"
                     : "text-muted hover:text-ink hover:bg-tape/30"
@@ -200,7 +203,7 @@ export function SongMediaStage({
               <button
                 type="button"
                 onClick={() => handleTrackChange("mv")}
-                className={`px-2.5 py-1 rounded transition-colors cursor-pointer min-h-[30px] flex items-center gap-1 ${
+                className={`px-2 py-0.5 rounded transition-colors cursor-pointer min-h-[26px] flex items-center gap-1 ${
                   activeTrack === "mv"
                     ? "bg-band text-band-ink font-extrabold shadow-2xs"
                     : "text-muted hover:text-ink hover:bg-tape/30"
@@ -233,24 +236,23 @@ export function SongMediaStage({
         </div>
 
         {/* Right: External YouTube Link & Optional Close */}
-        <div className="flex items-center justify-end gap-1.5 shrink-0 self-end sm:self-auto">
+        <div className="flex items-center justify-end gap-1.5 shrink-0">
           {watchUrl && (
             <a
               href={watchUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 rounded border border-line-soft bg-paper px-2 py-1 font-bold text-ink hover:bg-band hover:border-band hover:text-band-ink transition-colors no-underline min-h-[30px]"
+              className="inline-flex items-center gap-1 rounded border border-line-soft bg-paper px-2 py-1 font-bold text-ink hover:bg-band hover:border-band hover:text-band-ink transition-colors no-underline min-h-[28px]"
             >
-              <span>↗</span>
-              <span className="hidden min-[420px]:inline">{t("songExtra.openInYouTube", "在 YouTube 開啟原始影片")}</span>
-              <span className="min-[420px]:hidden">YouTube ↗</span>
+              <span className="hidden min-[380px]:inline">{t("songExtra.openInYouTube", "前往 YouTube")} ↗</span>
+              <span className="min-[380px]:hidden">YouTube ↗</span>
             </a>
           )}
           {onClose && (
             <button
               type="button"
               onClick={onClose}
-              className="inline-flex items-center justify-center rounded border border-line-soft bg-paper hover:bg-black/[0.04] dark:hover:bg-white/[0.04] p-1 text-muted hover:text-ink transition-colors min-h-[30px] min-w-[30px] cursor-pointer"
+              className="inline-flex items-center justify-center rounded border border-line-soft bg-paper hover:bg-black/[0.04] dark:hover:bg-white/[0.04] p-1 text-muted hover:text-ink transition-colors min-h-[28px] min-w-[28px] cursor-pointer"
               title={t("songExtra.closePlayer", "關閉播放器")}
               aria-label={t("songExtra.closePlayer", "關閉播放器")}
             >
