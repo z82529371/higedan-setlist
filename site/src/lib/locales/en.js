@@ -443,6 +443,10 @@ export const dictEn = {
     itineraryCollapse: "▲ Collapse itinerary (first 10 only)",
     itineraryExpand: "▼ Expand full itinerary ({total} shows · {rest} more)",
     ariaTourOverview: "Tour Overview",
+    watchDigest: "Tour Digest",
+    watchDigestTitle: "Watch official tour digest (BD/DVD Digest)",
+    officialDigest: "Official Tour Digest (BD/DVD Digest)",
+    collapseDigest: "Collapse Digest",
   },
   venueExtra: {
     sanctuaryDesc: "Birthplace and early live stronghold",
@@ -514,6 +518,10 @@ export const dictEn = {
     copyPlainTitle: "Copy plain setlist text",
     expandToolsTitle: "Expand tools (compare, album breakdown, legend, sources)",
     sourceOpenTitle: "Open primary source: {url}",
+    watchDigest: "Concert Digest",
+    watchDigestTitle: "Watch official concert digest",
+    officialDigest: "Official Concert Digest",
+    collapseDigest: "Collapse Digest",
   },
   ticketBook: {
     markAttended: "Add to Ticket Book",

@@ -264,6 +264,58 @@ export function resolveSongMedia(s) {
   };
 }
 
+/**
+ * Extracts and normalizes concert media (e.g. BD/DVD Digest) from a tour or event object.
+ * Returns null if no valid digest media is present.
+ */
+export function extractConcertMedia(target) {
+  if (!target) return null;
+  const rawMedia = target.media || target.unit?.media || target.tour?.media;
+  if (!rawMedia || !rawMedia.digest) return null;
+
+  const digest = rawMedia.digest;
+  const youtubeId = typeof digest === "string" ? digest : digest.youtubeId;
+  if (!youtubeId) return null;
+
+  const title =
+    typeof digest === "object" && digest.title
+      ? digest.title
+      : target.title || target.name || target.unit?.title || target.tour?.title || "";
+  const start = typeof digest === "object" ? parseTimestamp(digest.start) : 0;
+  const end = typeof digest === "object" ? parseTimestamp(digest.end) : 0;
+
+  return {
+    type: "digest",
+    hasMedia: true,
+    hasLive: true,
+    hasMultipleLives: false,
+    hasMv: false,
+    hasMultipleMvs: false,
+    defaultTrack: "live",
+    youtubeId,
+    title,
+    start,
+    end,
+    embedUrl: buildYouTubeEmbedUrl(youtubeId, start, true, end),
+    watchUrl: buildYouTubeWatchUrl(youtubeId, start),
+    live: {
+      youtubeId,
+      title,
+      start,
+      end,
+      isDigest: true,
+    },
+    digest: {
+      youtubeId,
+      title,
+      start,
+      end,
+      embedUrl: buildYouTubeEmbedUrl(youtubeId, start, true, end),
+      watchUrl: buildYouTubeWatchUrl(youtubeId, start),
+    },
+  };
+}
+
 const songMediaMap = new Map();
 for (const s of songsData.songs) {
   songMediaMap.set(s.id, resolveSongMedia(s));

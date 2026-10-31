@@ -443,6 +443,10 @@ export const dictJa = {
     itineraryCollapse: "▲ 日程を折りたたむ（最初の10公演のみ）",
     itineraryExpand: "▼ 全日程を展開（全 {total} 公演 · 残り {rest} 公演）",
     ariaTourOverview: "ツアー総覧",
+    watchDigest: "ツアーダイジェスト",
+    watchDigestTitle: "公式ツアーダイジェスト映像を視聴 (BD/DVD Digest)",
+    officialDigest: "公式ツアーダイジェスト (BD/DVD Digest)",
+    collapseDigest: "ダイジェストを閉じる",
   },
   venueExtra: {
     sanctuaryDesc: "結成の地・初期の重要拠点",
@@ -514,6 +518,10 @@ export const dictJa = {
     copyPlainTitle: "標準セットリストをコピー",
     expandToolsTitle: "ツール展開（比較・アルバム構成・凡例・出典）",
     sourceOpenTitle: "一次ソースを開く：{url}",
+    watchDigest: "ライブダイジェスト",
+    watchDigestTitle: "公式ライブダイジェスト映像を視聴",
+    officialDigest: "公式ライブダイジェスト",
+    collapseDigest: "ダイジェストを閉じる",
   },
   ticketBook: {
     markAttended: "チケットブックに追加",

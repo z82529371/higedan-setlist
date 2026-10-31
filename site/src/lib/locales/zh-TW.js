@@ -443,6 +443,10 @@ export const dictZhTw = {
     itineraryCollapse: "▲ 收合巡演日程（僅顯示前 10 場）",
     itineraryExpand: "▼ 展開全部日程（全 {total} 場 · 尚有 {rest} 場）",
     ariaTourOverview: "巡演總覽",
+    watchDigest: "巡演精華",
+    watchDigestTitle: "欣賞官方巡演精華影片 (BD/DVD Digest)",
+    officialDigest: "官方巡演精華 (BD/DVD Digest)",
+    collapseDigest: "收合精華舞台",
   },
   venueExtra: {
     sanctuaryDesc: "樂團成軍發跡地與早期重要現場據點",
@@ -514,6 +518,10 @@ export const dictZhTw = {
     copyPlainTitle: "複製標準歌單純文字",
     expandToolsTitle: "展開更多工具（雙場曲目比對、專輯分佈、圖例與資料來源）",
     sourceOpenTitle: "開啟一手來源：{url}",
+    watchDigest: "演出精華",
+    watchDigestTitle: "欣賞官方演出精華影片",
+    officialDigest: "官方演出精華",
+    collapseDigest: "收合精華舞台",
   },
   ticketBook: {
     markAttended: "收進票夾",

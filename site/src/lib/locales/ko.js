@@ -443,6 +443,10 @@ export const dictKo = {
     itineraryCollapse: "▲ 일정 접기 (앞 10개 공연만)",
     itineraryExpand: "▼ 전체 일정 펼치기 (전 {total}회 · 나머지 {rest}회)",
     ariaTourOverview: "투어 총람",
+    watchDigest: "투어 다이제스트",
+    watchDigestTitle: "공식 투어 다이제스트 영상 감상 (BD/DVD Digest)",
+    officialDigest: "공식 투어 다이제스트 (BD/DVD Digest)",
+    collapseDigest: "다이제스트 접기",
   },
   venueExtra: {
     sanctuaryDesc: "결성지·초기 중요 거점",
@@ -514,6 +518,10 @@ export const dictKo = {
     copyPlainTitle: "표준 셋리스트 복사",
     expandToolsTitle: "도구 펼치기 (비교·앨범 구성·범례·출처)",
     sourceOpenTitle: "1차 출처 열기: {url}",
+    watchDigest: "공연 다이제스트",
+    watchDigestTitle: "공식 공연 다이제스트 영상 감상",
+    officialDigest: "공식 공연 다이제스트",
+    collapseDigest: "다이제스트 접기",
   },
   ticketBook: {
     markAttended: "티켓북에 담기",

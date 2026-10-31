@@ -207,4 +207,64 @@ describe("32. Song Master Media & Twin-Track Linkage (Seam: song-media.js)", () 
     assert.strictEqual(nonMedia.hasMv, false);
     assert.strictEqual(nonMedia.defaultTrack, null);
   });
+
+  it("extracts and normalizes tour and event concert media digests (ADR-0136)", async () => {
+    const { extractConcertMedia } = await loadModule("src/lib/song-media.js");
+
+    // 1. Tour with digest object
+    const tourWithDigest = {
+      id: "tour-19-20-hall-travelers",
+      title: "Official髭男dism Tour 19/20 -Hall Travelers-",
+      media: {
+        digest: {
+          youtubeId: "y3L0pjZZqKo",
+          title: "Official髭男dism Tour 19/20 -Hall Travelers- (2020.2.10 パシフィコ横浜)［Digest］",
+        },
+      },
+    };
+    const tourRes = extractConcertMedia(tourWithDigest);
+    assert.notStrictEqual(tourRes, null);
+    assert.strictEqual(tourRes.youtubeId, "y3L0pjZZqKo");
+    assert.strictEqual(
+      tourRes.title,
+      "Official髭男dism Tour 19/20 -Hall Travelers- (2020.2.10 パシフィコ横浜)［Digest］"
+    );
+    assert.strictEqual(
+      tourRes.embedUrl,
+      "https://www.youtube.com/embed/y3L0pjZZqKo?autoplay=1&rel=0&enablejsapi=1"
+    );
+
+    // 2. Event unit wrapping
+    const eventWithUnit = {
+      unit: {
+        title: "ONLINE LIVE 2020 - Arena Travelers -",
+        media: {
+          digest: {
+            youtubeId: "8q4AkXgjdGg",
+          },
+        },
+      },
+    };
+    const eventRes = extractConcertMedia(eventWithUnit);
+    assert.notStrictEqual(eventRes, null);
+    assert.strictEqual(eventRes.youtubeId, "8q4AkXgjdGg");
+    assert.strictEqual(eventRes.title, "ONLINE LIVE 2020 - Arena Travelers -");
+
+    // 3. Tour with string digest
+    const simpleTour = {
+      title: "Simple Tour",
+      media: { digest: "LF-_THYGXe0" },
+    };
+    const simpleRes = extractConcertMedia(simpleTour);
+    assert.notStrictEqual(simpleRes, null);
+    assert.strictEqual(simpleRes.youtubeId, "LF-_THYGXe0");
+
+    // 4. Tour without media returns null (Zero DOM Pollution)
+    const tourWithoutMedia = {
+      id: "free-live-tour-2015",
+      title: "Free Live Tour 2015",
+    };
+    assert.strictEqual(extractConcertMedia(tourWithoutMedia), null);
+    assert.strictEqual(extractConcertMedia(null), null);
+  });
 });
