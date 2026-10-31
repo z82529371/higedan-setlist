@@ -7,6 +7,8 @@ import { buildSongHistoryText } from "../../lib/song-history-text.js";
 import { trackKey, routeHash } from "../../lib/track.js";
 import { CATEGORY_ORDER, songFilterPillClass, TicketPerforationDivider, TicketBarcodeFooter } from "./TicketCommon.jsx";
 import { SongMilestonesDrawer } from "./SongMilestonesDrawer.jsx";
+import { SongMediaStage } from "./SongMediaStage.jsx";
+import { getSongMedia } from "../../lib/song-media.js";
 
 export function SongSlip({ songId, trackShows, showById, unitData, onSelectShow, onSelectVenue }) {
   const { locale, t, localizeVenue } = useI18n();
@@ -14,6 +16,8 @@ export function SongSlip({ songId, trackShows, showById, unitData, onSelectShow,
   const [onlySpecial, setOnlySpecial] = useState(false);
   const [showYearBreakdown, setShowYearBreakdown] = useState(false);
   const [showMoreTools, setShowMoreTools] = useState(false);
+
+  const media = getSongMedia(songId);
 
   const appearances = useMemo(() => {
     return songId ? (trackShows.get(trackKey("song", songId)) ?? []) : [];
@@ -339,15 +343,41 @@ export function SongSlip({ songId, trackShows, showById, unitData, onSelectShow,
                 <span>{copied ? t("slips.copied", "✓ 已複製") : t("slips.copyHistory", "📋 複製歷程")}</span>
               </button>
 
-              <a
-                href={youtubeUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1 rounded border border-line-soft bg-paper px-2 py-1 font-mono text-[11px] font-bold text-ink hover:bg-band hover:border-band transition-colors no-underline"
-                title={t("songExtra.youtubeTitle", "在 YouTube 搜尋現場 Live 影片")}
-              >
-                <span>▶ YouTube</span>
-              </a>
+              {media.hasMedia ? (
+                <button
+                  type="button"
+                  onClick={() => {
+                    const el = document.getElementById("song-media-stage");
+                    if (el) {
+                      el.scrollIntoView({ behavior: "smooth", block: "nearest" });
+                    }
+                  }}
+                  className="inline-flex items-center gap-1 rounded border border-ink/40 bg-tape/20 px-2.5 py-1 font-mono text-[11px] font-bold text-ink hover:bg-band hover:border-band hover:text-band-ink transition-colors cursor-pointer select-none"
+                  title={
+                    media.hasLive
+                      ? (media.live?.isExcerpt
+                          ? t("songExtra.excerptNotice", "官方精華片段")
+                          : t("songExtra.watchLiveTitle", "欣賞官方現場演出影片"))
+                      : t("songExtra.watchMvTitle", "欣賞官方音樂錄影帶")
+                  }
+                >
+                  <span>
+                    {media.hasLive
+                      ? `🎬 ${media.live?.isExcerpt ? t("songExtra.watchLiveExcerpt", "現場精華") : t("songExtra.watchLive", "現場影片")}`
+                      : `▶ ${media.mv?.isExcerpt ? t("songExtra.watchMvExcerpt", "官方 MV（精華）") : t("songExtra.watchMv", "官方 MV")}`}
+                  </span>
+                </button>
+              ) : (
+                <a
+                  href={youtubeUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 rounded border border-line-soft bg-paper px-2 py-1 font-mono text-[11px] font-bold text-ink hover:bg-band hover:border-band transition-colors no-underline"
+                  title={t("songExtra.youtubeTitle", "在 YouTube 搜尋現場 Live 影片")}
+                >
+                  <span>▶ YouTube</span>
+                </a>
+              )}
               <a
                 href={spotifyUrl}
                 target="_blank"
@@ -389,6 +419,9 @@ export function SongSlip({ songId, trackShows, showById, unitData, onSelectShow,
       </div>
 
       <TicketPerforationDivider />
+
+      {/* Official Media Stage (ADR-0135, In-place Embed) */}
+      <SongMediaStage songId={songId} onSelectShow={onSelectShow} />
 
       {/* Category Tabs & Special Version Toggle */}
       <div className="my-2 space-y-2 border-b border-line-soft pb-2.5">

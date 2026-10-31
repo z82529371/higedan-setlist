@@ -229,7 +229,7 @@ describe("20. PWA Offline Support & Web App Manifest Invariants (ADR-0119)", () 
         assert.match(distSw, /\/assets\/index-[^"']+\.css/, "dist/sw.js must precache compiled CSS bundle");
         assert.match(
           distSw,
-          /const CACHE_NAME = "higedan-setlist-[a-zA-Z0-9]+";/,
+          /const CACHE_NAME = "higedan-setlist-[a-zA-Z0-9_-]+";/,
           "dist/sw.js must inject dynamic CACHE_NAME with bundle hash"
         );
         assert.doesNotMatch(

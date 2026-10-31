@@ -58,3 +58,4 @@ When proposing and testing public seams during `/tdd` or `/implement`, target th
 | `locales/venues.js` | `localizeVenue`, `getNativeVenue`, `resolveVenueCanonical`, `matchVenue` | `tests/ui/venue-localization.test.js`, `tests/invariants/venue-profiles.test.js` |
 | `venue-map.js` | `projectLatLngToSvg`, `buildPrefectureMapStats`, `computeSpiderfyOffsets`, `buildJourneySequence`, `resolveMapTarget`, `formatMapBadgeLabel` | `tests/pipeline/venue-map.test.js`, `tests/invariants/venue-profiles.test.js`, `tests/ui/venue-map-ui.test.js` |
 | `japan-map-paths.js` | `JAPAN_PREFECTURE_PATHS`, `OVERSEAS_INSET_COUNTRIES`, `getZoomViewBox` | `tests/pipeline/venue-map.test.js`, `tests/ui/venue-map-ui.test.js` |
+| `song-media.js` | `parseTimestamp`, `formatTimestamp`, `buildYouTubeEmbedUrl`, `buildYouTubeWatchUrl`, `extractSongMedia`, `resolveActiveMedia` | `tests/pipeline/song-media.test.js`, `tests/ui/song-media-modal.test.js` |

@@ -3,580 +3,2546 @@
     {
       "id": "same-blue",
       "title": "Same Blue",
-      "livefansId": "851689"
+      "livefansId": "851689",
+      "media": {
+        "mv": {
+          "youtubeId": "A7cp6OVa0Qc"
+        },
+        "live": [
+          {
+            "youtubeId": "DTNx62dezOw",
+            "title": "Arena Tour 2024 - Rejoice - @ K-Arena Yokohama (2024.11.13)",
+            "shortTitle": "2024 K-Arena",
+            "showId": "1672276"
+          },
+          {
+            "youtubeId": "0qT_3dvUdIc",
+            "title": "LIVE at STADIUM 2025 @ 日產體育場 (2025.06.01)",
+            "shortTitle": "2025 日產",
+            "showId": "1735839",
+            "start": "00:06",
+            "end": "00:19"
+          }
+        ]
+      }
     },
     {
       "id": "shukumei",
       "title": "宿命",
-      "livefansId": "606701"
+      "livefansId": "606701",
+      "media": {
+        "mv": [
+          {
+            "youtubeId": "-kgOFJG881I",
+            "title": "Official髭男dism - 宿命 [Official Video]",
+            "shortTitle": "官方 MV",
+            "subType": "mv"
+          },
+          {
+            "youtubeId": "YCOFzO_8BYs",
+            "title": "Official髭男dism - 宿命 (Brass Band ver.)［Official Video］",
+            "shortTitle": "Brass Band ver.",
+            "subType": "mv"
+          }
+        ],
+        "live": [
+          {
+            "youtubeId": "0qT_3dvUdIc",
+            "title": "LIVE at STADIUM 2025 @ 日產體育場 (2025.06.01)",
+            "shortTitle": "2025 日產",
+            "showId": "1735839",
+            "start": "03:19",
+            "end": "03:31"
+          },
+          {
+            "youtubeId": "ag68sq2NeLc",
+            "title": "Arena Tour 2024 - Rejoice - @ K-Arena Yokohama (2024.11.13)",
+            "shortTitle": "2024 K-Arena",
+            "showId": "1672276",
+            "start": "00:57",
+            "end": "01:25"
+          },
+          {
+            "youtubeId": "1i9IfhFqxXM",
+            "title": "Road to \"one man tour 2021-2022\" @ ぴあアリーナMM (2021.06.23)",
+            "shortTitle": "2021 ぴあMM",
+            "start": "04:00",
+            "end": "04:29"
+          },
+          {
+            "youtubeId": "7wYi667iaFg",
+            "title": "one-man tour 2019 @ 日本武道館 (2019.07.08)",
+            "shortTitle": "2019 武道館",
+            "showId": "1078251",
+            "start": "02:05",
+            "end": "02:37"
+          },
+          {
+            "youtubeId": "y3L0pjZZqKo",
+            "title": "Tour 19/20 - Hall Travelers - @ パシフィコ横浜 (2020.02.10)",
+            "shortTitle": "2020 パシフィコ横浜",
+            "showId": "1150110",
+            "start": "04:16",
+            "end": "05:13"
+          }
+        ]
+      }
     },
     {
       "id": "50pct",
       "title": "50%",
-      "livefansId": "886812"
+      "livefansId": "886812",
+      "media": {
+        "mv": {
+          "youtubeId": "Vv2n31gL85I"
+        },
+        "live": [
+          {
+            "youtubeId": "iSgswUq0Qcg",
+            "title": "LIVE at STADIUM 2025 @ 日產體育場 (2025.06.01)",
+            "shortTitle": "2025 日產",
+            "showId": "1735839"
+          },
+          {
+            "youtubeId": "0qT_3dvUdIc",
+            "title": "LIVE at STADIUM 2025 @ 日產體育場 (2025.06.01)",
+            "shortTitle": "2025 日產 (精華)",
+            "showId": "1735839",
+            "start": "04:17",
+            "end": "04:29"
+          }
+        ]
+      }
     },
     {
       "id": "sanitizer",
       "title": "Sanitizer",
-      "livefansId": "925371"
+      "livefansId": "925371",
+      "media": {
+        "mv": {
+          "youtubeId": "t-E9h7fJPX4"
+        },
+        "live": {
+          "youtubeId": "-HlybtZvqd4",
+          "title": "one-man tour FOUR-RE:ISM @ Zepp Nagoya (2026.01.22)",
+          "shortTitle": "2026 Zepp名古屋",
+          "showId": "four-re-ism-nagoya-0122",
+          "start": "00:33",
+          "end": "00:44"
+        }
+      }
     },
     {
       "id": "elder-flower",
       "title": "エルダーフラワー",
       "livefansId": "942242",
-      "alias": "Elderflower"
+      "alias": "Elderflower",
+      "media": {
+        "mv": {
+          "youtubeId": "upLTD7DFtng"
+        },
+        "live": null
+      }
     },
     {
       "id": "laughter",
       "title": "Laughter",
-      "livefansId": "651488"
+      "livefansId": "651488",
+      "media": {
+        "mv": {
+          "youtubeId": "kff_DXor7jc"
+        },
+        "live": [
+          {
+            "youtubeId": "0qT_3dvUdIc",
+            "title": "LIVE at STADIUM 2025 @ 日產體育場 (2025.06.01)",
+            "shortTitle": "2025 日產",
+            "showId": "1735839",
+            "start": "00:59",
+            "end": "01:10"
+          },
+          {
+            "youtubeId": "8q4AkXgjdGg",
+            "title": "ONLINE LIVE 2020 - Arena Travelers - (2020.09.26)",
+            "shortTitle": "2020 線上演唱",
+            "showId": "online-live-2020-arena-travelers",
+            "start": "02:29",
+            "end": "03:04"
+          },
+          {
+            "youtubeId": "VIEsmE4lHPo",
+            "title": "FC Tour Vol.2 - The Blooming Universe ONLINE - (2021.04.18)",
+            "shortTitle": "2021 FC 線上演唱",
+            "showId": "fc-tour-vol-2-the-blooming-universe-online-2021",
+            "start": "01:42",
+            "end": "02:16"
+          }
+        ]
+      }
     },
     {
       "id": "pretender",
       "title": "Pretender",
-      "livefansId": "601157"
+      "livefansId": "601157",
+      "media": {
+        "mv": [
+          {
+            "youtubeId": "TQ8WlA2GXbk",
+            "title": "Official髭男dism - Pretender [Official Video]",
+            "shortTitle": "官方 MV",
+            "subType": "mv"
+          },
+          {
+            "youtubeId": "0sDmhAItwbI",
+            "title": "Official髭男dism - Pretender (Acoustic ver.)［Official Video］",
+            "shortTitle": "Acoustic ver.",
+            "subType": "mv"
+          }
+        ],
+        "live": [
+          {
+            "youtubeId": "h8rZAMiRTTo",
+            "title": "LIVE at STADIUM 2025 @ 日產體育場 (2025.06.01)",
+            "shortTitle": "2025 日產",
+            "showId": "1735839"
+          },
+          {
+            "youtubeId": "0qT_3dvUdIc",
+            "title": "LIVE at STADIUM 2025 @ 日產體育場 (2025.06.01)",
+            "shortTitle": "2025 日產 (精華)",
+            "showId": "1735839",
+            "start": "01:21",
+            "end": "01:31"
+          },
+          {
+            "youtubeId": "q7oSGQ0ZHxY",
+            "title": "SHOCKING NUTS TOUR @ 日本武道館 (2023.02.16)",
+            "shortTitle": "2023 武道館",
+            "showId": "1499381",
+            "start": "00:19",
+            "end": "01:03"
+          },
+          {
+            "youtubeId": "1i9IfhFqxXM",
+            "title": "Road to \"one man tour 2021-2022\" @ ぴあアリーナMM (2021.06.23)",
+            "shortTitle": "2021 ぴあMM",
+            "start": "01:09",
+            "end": "01:50"
+          },
+          {
+            "youtubeId": "7wYi667iaFg",
+            "title": "one-man tour 2019 @ 日本武道館 (2019.07.08)",
+            "shortTitle": "2019 武道館",
+            "showId": "1078251",
+            "start": "01:39",
+            "end": "02:05"
+          }
+        ]
+      }
     },
     {
       "id": "fire-ground",
       "title": "FIRE GROUND",
-      "livefansId": "566396"
+      "livefansId": "566396",
+      "media": {
+        "mv": {
+          "youtubeId": "sem3UU-EQJs"
+        },
+        "live": [
+          {
+            "youtubeId": "B_MtNFbmycI",
+            "title": "one-man tour 18/19 @ NHK 會館 (2019.01.24)",
+            "shortTitle": "2019 NHK會館",
+            "showId": "949995"
+          },
+          {
+            "youtubeId": "ysOzjTknC14",
+            "title": "one-man tour 18/19 @ NHK 會館 (2019.01.24)",
+            "shortTitle": "2019 NHK會館 (精華)",
+            "showId": "949995",
+            "start": "01:50",
+            "end": "02:22"
+          },
+          {
+            "youtubeId": "0qT_3dvUdIc",
+            "title": "LIVE at STADIUM 2025 @ 日產體育場 (2025.06.01)",
+            "shortTitle": "2025 日產",
+            "showId": "1735839",
+            "start": "02:02",
+            "end": "02:18"
+          },
+          {
+            "youtubeId": "-HlybtZvqd4",
+            "title": "one-man tour FOUR-RE:ISM @ Zepp Nagoya (2026.01.22)",
+            "shortTitle": "2026 Zepp名古屋",
+            "showId": "four-re-ism-nagoya-0122",
+            "start": "01:11",
+            "end": "01:47"
+          },
+          {
+            "youtubeId": "1i9IfhFqxXM",
+            "title": "Road to \"one man tour 2021-2022\" @ ぴあアリーナMM (2021.06.23)",
+            "shortTitle": "2021 ぴあMM",
+            "start": "03:06",
+            "end": "03:35"
+          }
+        ]
+      }
     },
     {
       "id": "make-me-wonder",
       "title": "Make Me Wonder",
-      "livefansId": "925372"
+      "livefansId": "925372",
+      "media": {
+        "mv": {
+          "youtubeId": "LU7xD_yx43c"
+        },
+        "live": {
+          "youtubeId": "-HlybtZvqd4",
+          "title": "one-man tour FOUR-RE:ISM @ Zepp Nagoya (2026.01.22)",
+          "shortTitle": "2026 Zepp名古屋",
+          "showId": "four-re-ism-nagoya-0122",
+          "start": "00:58",
+          "end": "01:10"
+        }
+      }
     },
     {
       "id": "cry-baby",
       "title": "Cry Baby",
-      "livefansId": "680374"
+      "livefansId": "680374",
+      "media": {
+        "mv": {
+          "youtubeId": "O1bhZgkC4Gw"
+        },
+        "live": [
+          {
+            "youtubeId": "V8kXFEWNTYc",
+            "title": "Road to \"one man tour 2021-2022\" @ ぴあアリーナMM (2021.06.23)",
+            "shortTitle": "2021 ぴあMM"
+          },
+          {
+            "youtubeId": "0qT_3dvUdIc",
+            "title": "LIVE at STADIUM 2025 @ 日產體育場 (2025.06.01)",
+            "shortTitle": "2025 日產",
+            "showId": "1735839",
+            "start": "02:47",
+            "end": "03:05"
+          },
+          {
+            "youtubeId": "6T8pCwKVQHY",
+            "title": "one-man tour 2021-2022 -Editorial- @ さいたまスーパーアリーナ (2022.03.21)",
+            "shortTitle": "2022 さいたま",
+            "showId": "1353361",
+            "start": "02:42",
+            "end": "03:00"
+          },
+          {
+            "youtubeId": "1i9IfhFqxXM",
+            "title": "Road to \"one man tour 2021-2022\" @ ぴあアリーナMM (2021.06.23)",
+            "shortTitle": "2021 ぴあMM (精華)",
+            "start": "01:51",
+            "end": "02:38"
+          },
+          {
+            "youtubeId": "CfiY_yta4-k",
+            "title": "ONLINE FREE LIVE in Tokyo Opera City (2021.08.28)",
+            "shortTitle": "2021 Opera City",
+            "start": "00:45",
+            "end": "01:04"
+          }
+        ]
+      }
     },
     {
       "id": "takaga-i-love-you",
       "title": "たかがアイラブユー",
-      "livefansId": "547686"
+      "livefansId": "547686",
+      "media": {
+        "mv": null,
+        "live": [
+          {
+            "youtubeId": "K2mbJXjxMVQ",
+            "title": "one-man tour 2018 @ 中野サンプラザホール (2018.07.05)",
+            "shortTitle": "2018 中野サンプラザ",
+            "showId": "889716"
+          },
+          {
+            "youtubeId": "LF-_THYGXe0",
+            "title": "one-man tour 2018 @ 中野サンプラザホール (2018.07.05)",
+            "shortTitle": "2018 中野サンプラザ (精華)",
+            "showId": "889716",
+            "start": "00:37",
+            "end": "00:44"
+          }
+        ]
+      }
     },
     {
       "id": "i-love",
       "title": "I LOVE...",
-      "livefansId": "640431"
+      "livefansId": "640431",
+      "media": {
+        "mv": {
+          "youtubeId": "bt8wNQJaKAk"
+        },
+        "live": [
+          {
+            "youtubeId": "mKk6o3ZkubA",
+            "title": "Tour 19/20 - Hall Travelers - @ パシフィコ横浜 (2020.02.10)",
+            "shortTitle": "2020 パシフィコ横浜",
+            "showId": "1150110"
+          },
+          {
+            "youtubeId": "0qT_3dvUdIc",
+            "title": "LIVE at STADIUM 2025 @ 日產體育場 (2025.06.01)",
+            "shortTitle": "2025 日產",
+            "showId": "1735839",
+            "start": "04:29",
+            "end": "04:41"
+          },
+          {
+            "youtubeId": "6T8pCwKVQHY",
+            "title": "one-man tour 2021-2022 -Editorial- @ さいたまスーパーアリーナ (2022.03.21)",
+            "shortTitle": "2022 さいたま",
+            "showId": "1353361",
+            "start": "03:19",
+            "end": "04:30"
+          },
+          {
+            "youtubeId": "1i9IfhFqxXM",
+            "title": "Road to \"one man tour 2021-2022\" @ ぴあアリーナMM (2021.06.23)",
+            "shortTitle": "2021 ぴあMM",
+            "start": "00:12",
+            "end": "00:38"
+          },
+          {
+            "youtubeId": "y3L0pjZZqKo",
+            "title": "Tour 19/20 - Hall Travelers - @ パシフィコ横浜 (2020.02.10)",
+            "shortTitle": "2020 パシフィコ横浜 (精華)",
+            "showId": "1150110",
+            "start": "03:21",
+            "end": "03:49"
+          },
+          {
+            "youtubeId": "8q4AkXgjdGg",
+            "title": "ONLINE LIVE 2020 - Arena Travelers - (2020.09.26)",
+            "shortTitle": "2020 線上演唱",
+            "showId": "online-live-2020-arena-travelers",
+            "start": "04:02",
+            "end": "04:29"
+          },
+          {
+            "youtubeId": "VIEsmE4lHPo",
+            "title": "FC Tour Vol.2 - The Blooming Universe ONLINE - (2021.04.18)",
+            "shortTitle": "2021 FC 線上演唱",
+            "showId": "fc-tour-vol-2-the-blooming-universe-online-2021",
+            "start": "04:58",
+            "end": "05:19"
+          },
+          {
+            "youtubeId": "CfiY_yta4-k",
+            "title": "ONLINE FREE LIVE in Tokyo Opera City (2021.08.28)",
+            "shortTitle": "2021 Opera City",
+            "start": "00:00",
+            "end": "00:24"
+          }
+        ]
+      }
     },
     {
       "id": "tattoo",
       "title": "TATTOO",
-      "livefansId": "830422"
+      "livefansId": "830422",
+      "media": {
+        "mv": {
+          "youtubeId": "oLrp9uTa9gw"
+        },
+        "live": [
+          {
+            "youtubeId": "gwxSBuyIJEI",
+            "title": "LIVE at STADIUM 2025 @ 日產體育場 (2025.06.01)",
+            "shortTitle": "2025 日產",
+            "showId": "1735839"
+          },
+          {
+            "youtubeId": "0qT_3dvUdIc",
+            "title": "LIVE at STADIUM 2025 @ 日產體育場 (2025.06.01)",
+            "shortTitle": "2025 日產 (精華)",
+            "showId": "1735839",
+            "start": "03:31",
+            "end": "03:51"
+          },
+          {
+            "youtubeId": "ag68sq2NeLc",
+            "title": "Arena Tour 2024 - Rejoice - @ K-Arena Yokohama (2024.11.13)",
+            "shortTitle": "2024 K-Arena",
+            "showId": "1672276",
+            "start": "05:34",
+            "end": "06:17"
+          },
+          {
+            "youtubeId": "g--p8_sgGXE",
+            "title": "Official髭男dism Live at Radio",
+            "shortTitle": "Live at Radio",
+            "start": "00:10",
+            "end": "00:18"
+          }
+        ]
+      }
     },
     {
       "id": "subtitle",
       "title": "Subtitle",
-      "livefansId": "736671"
+      "livefansId": "736671",
+      "media": {
+        "mv": {
+          "youtubeId": "hN5MBlGv2Ac"
+        },
+        "live": [
+          {
+            "youtubeId": "0qT_3dvUdIc",
+            "title": "LIVE at STADIUM 2025 @ 日產體育場 (2025.06.01)",
+            "shortTitle": "2025 日產",
+            "showId": "1735839",
+            "start": "01:47",
+            "end": "02:02"
+          },
+          {
+            "youtubeId": "ag68sq2NeLc",
+            "title": "Arena Tour 2024 - Rejoice - @ K-Arena Yokohama (2024.11.13)",
+            "shortTitle": "2024 K-Arena",
+            "showId": "1672276",
+            "start": "02:48",
+            "end": "03:20"
+          },
+          {
+            "youtubeId": "q7oSGQ0ZHxY",
+            "title": "SHOCKING NUTS TOUR @ 日本武道館 (2023.02.16)",
+            "shortTitle": "2023 武道館",
+            "showId": "1499381",
+            "start": "02:08",
+            "end": "02:40"
+          }
+        ]
+      }
     },
     {
       "id": "mixed-nuts",
       "title": "ミックスナッツ",
       "livefansId": "712993",
-      "alias": "Mixed Nuts"
+      "alias": "Mixed Nuts",
+      "media": {
+        "mv": {
+          "youtubeId": "CbH2F0kXgTY"
+        },
+        "live": [
+          {
+            "youtubeId": "vl8MMQQA3YM",
+            "title": "SHOCKING NUTS TOUR @ 日本武道館 (2023.02.16)",
+            "shortTitle": "2023 武道館",
+            "showId": "1499381"
+          },
+          {
+            "youtubeId": "0qT_3dvUdIc",
+            "title": "LIVE at STADIUM 2025 @ 日產體育場 (2025.06.01)",
+            "shortTitle": "2025 日產",
+            "showId": "1735839",
+            "start": "00:30",
+            "end": "00:42"
+          },
+          {
+            "youtubeId": "q7oSGQ0ZHxY",
+            "title": "SHOCKING NUTS TOUR @ 日本武道館 (2023.02.16)",
+            "shortTitle": "2023 武道館 (精華)",
+            "showId": "1499381",
+            "start": "04:19",
+            "end": "05:20"
+          },
+          {
+            "youtubeId": "g--p8_sgGXE",
+            "title": "Official髭男dism Live at Radio",
+            "shortTitle": "Live at Radio",
+            "start": "00:32",
+            "end": "00:44"
+          }
+        ]
+      }
     },
     {
       "id": "white-noise",
       "title": "ホワイトノイズ",
       "livefansId": "754448",
-      "alias": "White Noise"
+      "alias": "White Noise",
+      "media": {
+        "mv": {
+          "youtubeId": "_ciQX22n9NE"
+        },
+        "live": [
+          {
+            "youtubeId": "6nfovEqNvx0",
+            "title": "SHOCKING NUTS TOUR @ 日本武道館 (2023.02.16)",
+            "shortTitle": "2023 武道館",
+            "showId": "1499381"
+          },
+          {
+            "youtubeId": "0qT_3dvUdIc",
+            "title": "LIVE at STADIUM 2025 @ 日產體育場 (2025.06.01)",
+            "shortTitle": "2025 日產",
+            "showId": "1735839",
+            "start": "03:06",
+            "end": "03:18"
+          },
+          {
+            "youtubeId": "ag68sq2NeLc",
+            "title": "Arena Tour 2024 - Rejoice - @ K-Arena Yokohama (2024.11.13)",
+            "shortTitle": "2024 K-Arena",
+            "showId": "1672276",
+            "start": "03:21",
+            "end": "03:51"
+          },
+          {
+            "youtubeId": "q7oSGQ0ZHxY",
+            "title": "SHOCKING NUTS TOUR @ 日本武道館 (2023.02.16)",
+            "shortTitle": "2023 武道館 (精華)",
+            "showId": "1499381",
+            "start": "03:46",
+            "end": "04:18"
+          }
+        ]
+      }
     },
     {
       "id": "rashisa",
       "title": "らしさ",
-      "livefansId": "906285"
+      "livefansId": "906285",
+      "media": {
+        "mv": [
+          {
+            "youtubeId": "keOnleW2eak",
+            "title": "Official髭男dism - らしさ [Official Video]",
+            "shortTitle": "官方 MV",
+            "subType": "mv"
+          },
+          {
+            "youtubeId": "CWZ0lTUs5Mk",
+            "title": "「らしさ」✕ 劇場アニメ「ひゃくえむ。」コラボレーション MV",
+            "shortTitle": "動畫版 MV",
+            "subType": "anime"
+          }
+        ],
+        "live": [
+          {
+            "youtubeId": "KZEUB9LQaUo",
+            "title": "SUMMER SONIC 2025 (TOKYO) @ ZOZO Marine Stadium (2025.08.16)",
+            "shortTitle": "2025 SUMMER SONIC",
+            "showId": "summer-sonic-2025"
+          },
+          {
+            "youtubeId": "-HlybtZvqd4",
+            "title": "one-man tour FOUR-RE:ISM @ Zepp Nagoya (2026.01.22)",
+            "shortTitle": "2026 Zepp名古屋",
+            "showId": "four-re-ism-nagoya-0122",
+            "start": "00:45",
+            "end": "00:57"
+          }
+        ]
+      }
     },
     {
       "id": "stardust",
       "title": "スターダスト",
       "livefansId": "941961",
-      "alias": "Stardust"
+      "alias": "Stardust",
+      "media": {
+        "mv": {
+          "youtubeId": "O4fFTWQzXVE"
+        },
+        "live": {
+          "youtubeId": "8_fvXRL9VEY",
+          "title": "OFFICIAL HIGE DANDISM one-man tour 2026 @ 大阪城會館 (2026.07.19)",
+          "shortTitle": "2026 大阪城會館",
+          "showId": "one-man-tour-2026-osaka-0719"
+        }
+      }
     },
     {
       "id": "stand-by-you",
       "title": "Stand By You",
-      "livefansId": "565164"
+      "livefansId": "565164",
+      "media": {
+        "mv": [
+          {
+            "youtubeId": "22mOCjkwQjM",
+            "title": "Official髭男dism - Stand By You [Official Video]",
+            "shortTitle": "官方 MV",
+            "subType": "mv"
+          },
+          {
+            "youtubeId": "1oYzKnVG1Vk",
+            "title": "Official髭男dism - Stand By You (Acoustic ver.)［Official Video］",
+            "shortTitle": "Acoustic ver.",
+            "subType": "mv"
+          }
+        ],
+        "live": [
+          {
+            "youtubeId": "uZtZ0Wvy3N8",
+            "title": "LIVE at STADIUM 2025 @ 日產體育場 (2025.06.01)",
+            "shortTitle": "2025 日產",
+            "showId": "1735839"
+          },
+          {
+            "youtubeId": "0qT_3dvUdIc",
+            "title": "LIVE at STADIUM 2025 @ 日產體育場 (2025.06.01)",
+            "shortTitle": "2025 日產 (精華)",
+            "showId": "1735839",
+            "start": "05:04",
+            "end": "05:30"
+          },
+          {
+            "youtubeId": "ag68sq2NeLc",
+            "title": "Arena Tour 2024 - Rejoice - @ K-Arena Yokohama (2024.11.13)",
+            "shortTitle": "2024 K-Arena",
+            "showId": "1672276",
+            "start": "01:26",
+            "end": "02:16"
+          },
+          {
+            "youtubeId": "1i9IfhFqxXM",
+            "title": "Road to \"one man tour 2021-2022\" @ ぴあアリーナMM (2021.06.23)",
+            "shortTitle": "2021 ぴあMM",
+            "start": "03:36",
+            "end": "04:00"
+          },
+          {
+            "youtubeId": "Vy9I6K01Yh4",
+            "title": "HIGEDAN acoustic one-man live 2018 -Autumn- @ ヒューリックホール東京 (2018.10.13)",
+            "shortTitle": "2018 Hulic Hall",
+            "start": "01:43",
+            "end": "01:56"
+          },
+          {
+            "youtubeId": "ysOzjTknC14",
+            "title": "one-man tour 18/19 @ NHK 會館 (2019.01.24)",
+            "shortTitle": "2019 NHK會館",
+            "showId": "949995",
+            "start": "02:22",
+            "end": "02:47"
+          },
+          {
+            "youtubeId": "7wYi667iaFg",
+            "title": "one-man tour 2019 @ 日本武道館 (2019.07.08)",
+            "shortTitle": "2019 武道館",
+            "showId": "1078251",
+            "start": "03:06",
+            "end": "03:42"
+          },
+          {
+            "youtubeId": "VIEsmE4lHPo",
+            "title": "FC Tour Vol.2 - The Blooming Universe ONLINE - (2021.04.18)",
+            "shortTitle": "2021 FC 線上演唱",
+            "showId": "fc-tour-vol-2-the-blooming-universe-online-2021",
+            "start": "05:20",
+            "end": "06:23"
+          }
+        ]
+      }
     },
     {
       "id": "115man-kiro-no-film",
       "title": "115万キロのフィルム",
-      "livefansId": "547687"
+      "livefansId": "547687",
+      "media": {
+        "mv": null,
+        "live": [
+          {
+            "youtubeId": "ljDRzQz3ULE",
+            "title": "acoustic one-man live 2018 -Autumn- @ 東京 Hulic Hall (2018.10.13)",
+            "shortTitle": "2018 Hulic Hall"
+          },
+          {
+            "youtubeId": "0qT_3dvUdIc",
+            "title": "LIVE at STADIUM 2025 @ 日產體育場 (2025.06.01)",
+            "shortTitle": "2025 日產",
+            "showId": "1735839",
+            "start": "01:11",
+            "end": "01:20"
+          },
+          {
+            "youtubeId": "LF-_THYGXe0",
+            "title": "one-man tour 2018 @ 中野サンプラザホール (2018.07.05)",
+            "shortTitle": "2018 中野サンプラザ",
+            "showId": "889716",
+            "start": "00:45",
+            "end": "00:54"
+          },
+          {
+            "youtubeId": "Vy9I6K01Yh4",
+            "title": "HIGEDAN acoustic one-man live 2018 -Autumn- @ ヒューリックホール東京 (2018.10.13)",
+            "shortTitle": "2018 Hulic Hall (精華)",
+            "start": "00:56",
+            "end": "01:06"
+          },
+          {
+            "youtubeId": "7wYi667iaFg",
+            "title": "one-man tour 2019 @ 日本武道館 (2019.07.08)",
+            "shortTitle": "2019 武道館",
+            "showId": "1078251",
+            "start": "00:09",
+            "end": "00:45"
+          }
+        ]
+      }
     },
     {
       "id": "nichijo",
       "title": "日常",
-      "livefansId": "830421"
+      "livefansId": "830421",
+      "media": {
+        "mv": {
+          "youtubeId": "LbtQM793jn8"
+        },
+        "live": [
+          {
+            "youtubeId": "ag68sq2NeLc",
+            "title": "Arena Tour 2024 - Rejoice - @ K-Arena Yokohama (2024.11.13)",
+            "shortTitle": "2024 K-Arena",
+            "showId": "1672276",
+            "start": "02:17",
+            "end": "02:47"
+          },
+          {
+            "youtubeId": "g--p8_sgGXE",
+            "title": "Official髭男dism Live at Radio",
+            "shortTitle": "Live at Radio",
+            "start": "00:00",
+            "end": "00:09"
+          }
+        ]
+      }
     },
     {
       "id": "yesterday",
       "title": "イエスタデイ",
       "livefansId": "620336",
-      "alias": "Yesterday"
+      "alias": "Yesterday",
+      "media": {
+        "mv": {
+          "youtubeId": "DuMqFknYHBs"
+        },
+        "live": [
+          {
+            "youtubeId": "0qT_3dvUdIc",
+            "title": "LIVE at STADIUM 2025 @ 日產體育場 (2025.06.01)",
+            "shortTitle": "2025 日產",
+            "showId": "1735839",
+            "start": "01:32",
+            "end": "01:47"
+          },
+          {
+            "youtubeId": "y3L0pjZZqKo",
+            "title": "Tour 19/20 - Hall Travelers - @ パシフィコ横浜 (2020.02.10)",
+            "shortTitle": "2020 パシフィコ横浜",
+            "showId": "1150110",
+            "start": "00:37",
+            "end": "01:10"
+          },
+          {
+            "youtubeId": "8q4AkXgjdGg",
+            "title": "ONLINE LIVE 2020 - Arena Travelers - (2020.09.26)",
+            "shortTitle": "2020 線上演唱",
+            "showId": "online-live-2020-arena-travelers",
+            "start": "01:57",
+            "end": "02:29"
+          }
+        ]
+      }
     },
     {
       "id": "editorial",
       "title": "Editorial",
-      "livefansId": "687568"
+      "livefansId": "687568",
+      "media": {
+        "mv": null,
+        "live": null
+      }
     },
     {
       "id": "amazing",
       "title": "Amazing",
-      "livefansId": "606699"
+      "livefansId": "606699",
+      "media": {
+        "mv": null,
+        "live": {
+          "youtubeId": "7wYi667iaFg",
+          "title": "one-man tour 2019 @ 日本武道館 (2019.07.08)",
+          "shortTitle": "2019 武道館",
+          "showId": "1078251",
+          "start": "02:37",
+          "end": "03:05"
+        }
+      }
     },
     {
       "id": "fuusen",
       "title": "風船",
       "livefansId": "736005",
-      "unreleased": true
+      "unreleased": true,
+      "media": {
+        "mv": null,
+        "live": null
+      }
     },
     {
       "id": "trailer",
       "title": "Trailer",
-      "livefansId": "569560"
+      "livefansId": "569560",
+      "media": {
+        "mv": null,
+        "live": null
+      }
     },
     {
       "id": "apoptosis",
       "title": "アポトーシス",
       "livefansId": "686673",
-      "alias": "Apoptosis"
+      "alias": "Apoptosis",
+      "media": {
+        "mv": {
+          "youtubeId": "PZX2npwj6jY"
+        },
+        "live": [
+          {
+            "youtubeId": "6T8pCwKVQHY",
+            "title": "one-man tour 2021-2022 -Editorial- @ さいたまスーパーアリーナ (2022.03.21)",
+            "shortTitle": "2022 さいたま",
+            "showId": "1353361",
+            "start": "03:01",
+            "end": "03:18"
+          },
+          {
+            "youtubeId": "IztTWOVdShY",
+            "title": "Piano ver. @ Bunkamura Studio (Short ver.)",
+            "shortTitle": "Bunkamura Studio"
+          },
+          {
+            "youtubeId": "CfiY_yta4-k",
+            "title": "ONLINE FREE LIVE in Tokyo Opera City (2021.08.28)",
+            "shortTitle": "2021 Opera City",
+            "start": "01:05",
+            "end": "01:36"
+          }
+        ]
+      }
     },
     {
       "id": "anarchy",
       "title": "Anarchy",
-      "livefansId": "702214"
+      "livefansId": "702214",
+      "media": {
+        "mv": {
+          "youtubeId": "H_2jH6XVYU0"
+        },
+        "live": {
+          "youtubeId": "-HlybtZvqd4",
+          "title": "one-man tour FOUR-RE:ISM @ Zepp Nagoya (2026.01.22)",
+          "shortTitle": "2026 Zepp名古屋",
+          "showId": "four-re-ism-nagoya-0122",
+          "start": "00:00",
+          "end": "00:32"
+        }
+      }
     },
     {
       "id": "anarchy-rejoice-ver",
       "title": "Anarchy (Rejoice ver.)",
-      "livefansId": "702214"
+      "livefansId": "702214",
+      "media": {
+        "mv": null,
+        "live": {
+          "youtubeId": "6T8pCwKVQHY",
+          "title": "one-man tour 2021-2022 -Editorial- @ さいたまスーパーアリーナ (2022.03.21)",
+          "shortTitle": "2022 さいたま",
+          "showId": "1353361",
+          "start": "01:30",
+          "end": "01:44"
+        }
+      }
     },
     {
       "id": "no-doubt",
       "title": "ノーダウト",
       "livefansId": "537222",
-      "alias": "No Doubt"
+      "alias": "No Doubt",
+      "media": {
+        "mv": {
+          "youtubeId": "EHw005ZqCXk"
+        },
+        "live": [
+          {
+            "youtubeId": "0qT_3dvUdIc",
+            "title": "LIVE at STADIUM 2025 @ 日產體育場 (2025.06.01)",
+            "shortTitle": "2025 日產",
+            "showId": "1735839",
+            "start": "02:29",
+            "end": "02:46"
+          },
+          {
+            "youtubeId": "ag68sq2NeLc",
+            "title": "Arena Tour 2024 - Rejoice - @ K-Arena Yokohama (2024.11.13)",
+            "shortTitle": "2024 K-Arena",
+            "showId": "1672276",
+            "start": "03:52",
+            "end": "04:14"
+          },
+          {
+            "youtubeId": "6T8pCwKVQHY",
+            "title": "one-man tour 2021-2022 -Editorial- @ さいたまスーパーアリーナ (2022.03.21)",
+            "shortTitle": "2022 さいたま",
+            "showId": "1353361",
+            "start": "02:19",
+            "end": "02:41"
+          },
+          {
+            "youtubeId": "LF-_THYGXe0",
+            "title": "one-man tour 2018 @ 中野サンプラザホール (2018.07.05)",
+            "shortTitle": "2018 中野サンプラザ",
+            "showId": "889716",
+            "start": "00:11",
+            "end": "00:26"
+          },
+          {
+            "youtubeId": "Vy9I6K01Yh4",
+            "title": "HIGEDAN acoustic one-man live 2018 -Autumn- @ ヒューリックホール東京 (2018.10.13)",
+            "shortTitle": "2018 Hulic Hall",
+            "start": "01:26",
+            "end": "01:32"
+          },
+          {
+            "youtubeId": "ysOzjTknC14",
+            "title": "one-man tour 18/19 @ NHK 會館 (2019.01.24)",
+            "shortTitle": "2019 NHK會館",
+            "showId": "949995",
+            "start": "00:13",
+            "end": "00:30"
+          },
+          {
+            "youtubeId": "VIEsmE4lHPo",
+            "title": "FC Tour Vol.2 - The Blooming Universe ONLINE - (2021.04.18)",
+            "shortTitle": "2021 FC 線上演唱",
+            "showId": "fc-tour-vol-2-the-blooming-universe-online-2021",
+            "start": "03:31",
+            "end": "03:55"
+          }
+        ]
+      }
     },
     {
       "id": "rolling",
       "title": "Rolling",
-      "livefansId": "509547"
+      "livefansId": "509547",
+      "media": {
+        "mv": {
+          "youtubeId": "R9s5IepTYFI",
+          "title": "Official髭男dism - Re: PLAYLIST",
+          "shortTitle": "精華 MV",
+          "start": "00:47",
+          "end": "01:54",
+          "subType": "crossfade"
+        },
+        "live": null
+      }
     },
     {
       "id": "driver",
       "title": "Driver",
-      "livefansId": "509546"
+      "livefansId": "509546",
+      "media": {
+        "mv": null,
+        "live": null
+      }
     },
     {
       "id": "parabola",
       "title": "パラボラ",
       "livefansId": "651487",
-      "alias": "Parabola"
+      "alias": "Parabola",
+      "media": {
+        "mv": {
+          "youtubeId": "pkoxFpmiCWo"
+        },
+        "live": [
+          {
+            "youtubeId": "0qT_3dvUdIc",
+            "title": "LIVE at STADIUM 2025 @ 日產體育場 (2025.06.01)",
+            "shortTitle": "2025 日產",
+            "showId": "1735839",
+            "start": "00:43",
+            "end": "00:58"
+          },
+          {
+            "youtubeId": "8q4AkXgjdGg",
+            "title": "ONLINE LIVE 2020 - Arena Travelers - (2020.09.26)",
+            "shortTitle": "2020 線上演唱",
+            "showId": "online-live-2020-arena-travelers",
+            "start": "00:30",
+            "end": "01:06"
+          }
+        ]
+      }
     },
     {
       "id": "ai-nandaga",
       "title": "愛なんだが…",
-      "livefansId": "368225"
+      "livefansId": "368225",
+      "media": {
+        "mv": [
+          {
+            "youtubeId": "i68HdrqOPcE",
+            "title": "Official髭男dism - 愛なんだが・・・ [Official Video]",
+            "shortTitle": "官方 MV",
+            "subType": "mv"
+          },
+          {
+            "youtubeId": "LyHqJwvZtGQ",
+            "title": "Official髭男dism - デビュー盤「ラブとピースは君の中」まとめMV",
+            "shortTitle": "精華 MV",
+            "start": "02:31",
+            "end": "02:54",
+            "subType": "crossfade"
+          }
+        ],
+        "live": null
+      }
     },
     {
       "id": "whats-going-on",
       "title": "What's Going On?",
-      "livefansId": "435720"
+      "livefansId": "435720",
+      "media": {
+        "mv": {
+          "youtubeId": "PB8dUVLPnuo"
+        },
+        "live": null
+      }
     },
     {
       "id": "zero-no-mama-de-iraterara",
       "title": "ゼロのままでいられたら",
-      "livefansId": "478125"
+      "livefansId": "478125",
+      "media": {
+        "mv": null,
+        "live": [
+          {
+            "youtubeId": "4X_l0bw_oEw",
+            "title": "THE DAILY MIRROR tour 2016 @ SHIBUYA TAKE OFF 7 (2016.07.23)",
+            "shortTitle": "2016 TAKE OFF 7",
+            "showId": "727414"
+          },
+          {
+            "youtubeId": "Vy9I6K01Yh4",
+            "title": "HIGEDAN acoustic one-man live 2018 -Autumn- @ ヒューリックホール東京 (2018.10.13)",
+            "shortTitle": "2018 Hulic Hall",
+            "start": "00:26",
+            "end": "00:36"
+          },
+          {
+            "youtubeId": "VIEsmE4lHPo",
+            "title": "FC Tour Vol.2 - The Blooming Universe ONLINE - (2021.04.18)",
+            "shortTitle": "2021 FC 線上演唱",
+            "showId": "fc-tour-vol-2-the-blooming-universe-online-2021",
+            "start": "02:17",
+            "end": "02:53"
+          }
+        ]
+      }
     },
     {
       "id": "b-side-blues",
       "title": "B-Side Blues",
-      "livefansId": "851688"
+      "livefansId": "851688",
+      "media": {
+        "mv": null,
+        "live": {
+          "youtubeId": "Wnpw4dYDH_Q",
+          "title": "special program “Time to Rejoice”",
+          "shortTitle": "Time to Rejoice"
+        }
+      }
     },
     {
       "id": "itan-na-star",
       "title": "異端なスター",
-      "livefansId": "329568"
+      "livefansId": "329568",
+      "media": {
+        "mv": null,
+        "live": [
+          {
+            "youtubeId": "02x7mh7io_8",
+            "title": "ONE-MAN TOUR 2017 @ 澀谷 CLUB QUATTRO (2017.06.16)",
+            "shortTitle": "2017 渋谷QUATTRO",
+            "showId": "778082",
+            "start": "03:39"
+          },
+          {
+            "youtubeId": "dEhZzEJrcUE",
+            "title": "YouTube Music Foundry スペシャルパフォーマンス",
+            "shortTitle": "YouTube Foundry"
+          },
+          {
+            "youtubeId": "0qT_3dvUdIc",
+            "title": "LIVE at STADIUM 2025 @ 日產體育場 (2025.06.01)",
+            "shortTitle": "2025 日產",
+            "showId": "1735839",
+            "start": "04:41",
+            "end": "04:50"
+          },
+          {
+            "youtubeId": "Vy9I6K01Yh4",
+            "title": "HIGEDAN acoustic one-man live 2018 -Autumn- @ ヒューリックホール東京 (2018.10.13)",
+            "shortTitle": "2018 Hulic Hall",
+            "start": "01:16",
+            "end": "01:25"
+          },
+          {
+            "youtubeId": "ysOzjTknC14",
+            "title": "one-man tour 18/19 @ NHK 會館 (2019.01.24)",
+            "shortTitle": "2019 NHK會館",
+            "showId": "949995",
+            "start": "02:47",
+            "end": "03:26"
+          },
+          {
+            "youtubeId": "7wYi667iaFg",
+            "title": "one-man tour 2019 @ 日本武道館 (2019.07.08)",
+            "shortTitle": "2019 武道館",
+            "showId": "1078251",
+            "start": "00:46",
+            "end": "00:55"
+          },
+          {
+            "youtubeId": "VIEsmE4lHPo",
+            "title": "FC Tour Vol.2 - The Blooming Universe ONLINE - (2021.04.18)",
+            "shortTitle": "2021 FC 線上演唱",
+            "showId": "fc-tour-vol-2-the-blooming-universe-online-2021",
+            "start": "00:47",
+            "end": "01:11"
+          }
+        ]
+      }
     },
     {
       "id": "sweet-tweet",
       "title": "SWEET TWEET",
-      "livefansId": "511535"
+      "livefansId": "511535",
+      "media": {
+        "mv": [
+          {
+            "youtubeId": "qrtKLNTB71c",
+            "title": "Official髭男dism - SWEET TWEET [Official Video]",
+            "shortTitle": "官方 MV",
+            "subType": "mv"
+          },
+          {
+            "youtubeId": "LyHqJwvZtGQ",
+            "title": "Official髭男dism - デビュー盤「ラブとピースは君の中」まとめMV",
+            "shortTitle": "精華 MV",
+            "start": "00:00",
+            "end": "00:44",
+            "subType": "crossfade"
+          }
+        ],
+        "live": null
+      }
     },
     {
       "id": "knit-no-boushi",
       "title": "ニットの帽子",
-      "livefansId": "649503"
+      "livefansId": "649503",
+      "media": {
+        "mv": null,
+        "live": {
+          "youtubeId": "Vy9I6K01Yh4",
+          "title": "HIGEDAN acoustic one-man live 2018 -Autumn- @ ヒューリックホール東京 (2018.10.13)",
+          "shortTitle": "2018 Hulic Hall",
+          "start": "00:49",
+          "end": "00:55"
+        }
+      }
     },
     {
       "id": "vintage",
       "title": "ビンテージ",
       "livefansId": "626357",
-      "alias": "Vintage"
+      "alias": "Vintage",
+      "media": {
+        "mv": {
+          "youtubeId": "cMLTX2FClxw"
+        },
+        "live": [
+          {
+            "youtubeId": "8q4AkXgjdGg",
+            "title": "ONLINE LIVE 2020 - Arena Travelers - (2020.09.26)",
+            "shortTitle": "2020 線上演唱",
+            "showId": "online-live-2020-arena-travelers",
+            "start": "01:07",
+            "end": "01:32"
+          },
+          {
+            "youtubeId": "y3L0pjZZqKo",
+            "title": "Tour 19/20 - Hall Travelers - @ パシフィコ横浜 (2020.02.10)",
+            "shortTitle": "2020 パシフィコ横浜",
+            "showId": "1150110",
+            "start": "01:27",
+            "end": "01:47"
+          }
+        ]
+      }
     },
     {
       "id": "tabi-wa-michizure",
       "title": "旅は道連れ",
-      "livefansId": "626360"
+      "livefansId": "626360",
+      "media": {
+        "mv": null,
+        "live": [
+          {
+            "youtubeId": "1i9IfhFqxXM",
+            "title": "Road to \"one man tour 2021-2022\" @ ぴあアリーナMM (2021.06.23)",
+            "shortTitle": "2021 ぴあMM",
+            "start": "02:39",
+            "end": "03:06"
+          },
+          {
+            "youtubeId": "y3L0pjZZqKo",
+            "title": "Tour 19/20 - Hall Travelers - @ パシフィコ横浜 (2020.02.10)",
+            "shortTitle": "2020 パシフィコ横浜",
+            "showId": "1150110",
+            "start": "02:07",
+            "end": "02:47"
+          },
+          {
+            "youtubeId": "8q4AkXgjdGg",
+            "title": "ONLINE LIVE 2020 - Arena Travelers - (2020.09.26)",
+            "shortTitle": "2020 線上演唱",
+            "showId": "online-live-2020-arena-travelers",
+            "start": "03:05",
+            "end": "03:37"
+          }
+        ]
+      }
     },
     {
       "id": "yugure-zoi",
       "title": "夕暮れ沿い",
-      "livefansId": "329557"
+      "livefansId": "329557",
+      "media": {
+        "mv": {
+          "youtubeId": "LyHqJwvZtGQ",
+          "title": "Official髭男dism - デビュー盤「ラブとピースは君の中」まとめMV",
+          "shortTitle": "精華 MV",
+          "start": "01:05",
+          "end": "01:28",
+          "subType": "crossfade"
+        },
+        "live": [
+          {
+            "youtubeId": "XZsSUSYBeLs",
+            "title": "YouTube Music Foundry スペシャルパフォーマンス",
+            "shortTitle": "YouTube Foundry"
+          },
+          {
+            "youtubeId": "8q4AkXgjdGg",
+            "title": "ONLINE LIVE 2020 - Arena Travelers - (2020.09.26)",
+            "shortTitle": "2020 線上演唱",
+            "showId": "online-live-2020-arena-travelers",
+            "start": "03:38",
+            "end": "04:01"
+          }
+        ]
+      }
     },
     {
       "id": "dakuten",
       "title": "濁点",
-      "livefansId": "851686"
+      "livefansId": "851686",
+      "media": {
+        "mv": null,
+        "live": null
+      }
     },
     {
       "id": "koi-no-sarigiwa",
       "title": "恋の去り際",
-      "livefansId": "547689"
+      "livefansId": "547689",
+      "media": {
+        "mv": {
+          "youtubeId": "R9s5IepTYFI",
+          "title": "Official髭男dism - Re: PLAYLIST",
+          "shortTitle": "精華 MV",
+          "start": "01:55",
+          "end": "02:28",
+          "subType": "crossfade"
+        },
+        "live": null
+      }
     },
     {
       "id": "sousisouai",
       "title": "相思相愛",
-      "livefansId": "547685"
+      "livefansId": "547685",
+      "media": {
+        "mv": null,
+        "live": null
+      }
     },
     {
       "id": "universe",
       "title": "Universe",
-      "livefansId": "669304"
+      "livefansId": "669304",
+      "media": {
+        "mv": {
+          "youtubeId": "6lnS-8FVod4"
+        },
+        "live": [
+          {
+            "youtubeId": "Rvwc5_PpLuY",
+            "title": "Road to \"one man tour 2021-2022\" @ ぴあアリーナMM (2021.06.23)",
+            "shortTitle": "2021 ぴあMM"
+          },
+          {
+            "youtubeId": "0qT_3dvUdIc",
+            "title": "LIVE at STADIUM 2025 @ 日產體育場 (2025.06.01)",
+            "shortTitle": "2025 日產",
+            "showId": "1735839",
+            "start": "00:20",
+            "end": "00:29"
+          },
+          {
+            "youtubeId": "6T8pCwKVQHY",
+            "title": "one-man tour 2021-2022 -Editorial- @ さいたまスーパーアリーナ (2022.03.21)",
+            "shortTitle": "2022 さいたま",
+            "showId": "1353361",
+            "start": "00:08",
+            "end": "00:18"
+          },
+          {
+            "youtubeId": "1i9IfhFqxXM",
+            "title": "Road to \"one man tour 2021-2022\" @ ぴあアリーナMM (2021.06.23)",
+            "shortTitle": "2021 ぴあMM (精華)",
+            "start": "04:30",
+            "end": "05:15"
+          },
+          {
+            "youtubeId": "VIEsmE4lHPo",
+            "title": "FC Tour Vol.2 - The Blooming Universe ONLINE - (2021.04.18)",
+            "shortTitle": "2021 FC 線上演唱",
+            "showId": "fc-tour-vol-2-the-blooming-universe-online-2021",
+            "start": "04:29",
+            "end": "04:57"
+          },
+          {
+            "youtubeId": "CfiY_yta4-k",
+            "title": "ONLINE FREE LIVE in Tokyo Opera City (2021.08.28)",
+            "shortTitle": "2021 Opera City",
+            "start": "00:25",
+            "end": "00:44"
+          }
+        ]
+      }
     },
     {
       "id": "sharon",
       "title": "Sharon",
-      "livefansId": "851683"
+      "livefansId": "851683",
+      "media": {
+        "mv": [
+          {
+            "youtubeId": "Ssj-NhrKOdg",
+            "title": "Official髭男dism - Sharon [Official Video]",
+            "shortTitle": "官方 MV",
+            "subType": "mv"
+          },
+          {
+            "youtubeId": "SGv71siTnRE",
+            "title": "Official髭男dism - Sharon [Short Film 微電影]",
+            "shortTitle": "微電影",
+            "subType": "film"
+          }
+        ],
+        "live": null
+      }
     },
     {
       "id": "lady",
       "title": "LADY",
-      "livefansId": "502827"
+      "livefansId": "502827",
+      "media": {
+        "mv": {
+          "youtubeId": "0nzgi6dz8VY"
+        },
+        "live": [
+          {
+            "youtubeId": "ysOzjTknC14",
+            "title": "one-man tour 18/19 @ NHK 會館 (2019.01.24)",
+            "shortTitle": "2019 NHK會館",
+            "showId": "949995",
+            "start": "00:58",
+            "end": "01:26"
+          },
+          {
+            "youtubeId": "7wYi667iaFg",
+            "title": "one-man tour 2019 @ 日本武道館 (2019.07.08)",
+            "shortTitle": "2019 武道館",
+            "showId": "1078251",
+            "start": "00:55",
+            "end": "01:14"
+          }
+        ]
+      }
     },
     {
       "id": "rowan",
       "title": "Rowan",
-      "livefansId": "626358"
+      "livefansId": "626358",
+      "media": {
+        "mv": null,
+        "live": {
+          "youtubeId": "8q4AkXgjdGg",
+          "title": "ONLINE LIVE 2020 - Arena Travelers - (2020.09.26)",
+          "shortTitle": "2020 線上演唱",
+          "showId": "online-live-2020-arena-travelers",
+          "start": "01:33",
+          "end": "01:56"
+        }
+      }
     },
     {
       "id": "shihatsu-ga-michibiku-kouhukuron",
       "title": "始発が導く幸福論",
-      "livefansId": "329564"
+      "livefansId": "329564",
+      "media": {
+        "mv": [
+          {
+            "youtubeId": "0M-6ImZ9FSk",
+            "title": "Official髭男dism - 始発が導く幸福論 [Official Video]",
+            "shortTitle": "官方 MV",
+            "subType": "mv"
+          },
+          {
+            "youtubeId": "LyHqJwvZtGQ",
+            "title": "Official髭男dism - デビュー盤「ラブとピースは君の中」まとめMV",
+            "shortTitle": "精華 MV",
+            "start": "02:00",
+            "end": "02:30",
+            "subType": "crossfade"
+          }
+        ],
+        "live": null
+      }
     },
     {
       "id": "coffee-to-syrup",
       "title": "コーヒーとシロップ",
-      "livefansId": "329566"
+      "livefansId": "329566",
+      "media": {
+        "mv": {
+          "youtubeId": "Vho5jBUfR28"
+        },
+        "live": {
+          "youtubeId": "H2IsdpZWXk4",
+          "title": "YouTube Music Night with J-WAVE SONAR MUSIC (2017.11.18)",
+          "shortTitle": "2017 YT Music Night"
+        }
+      }
     },
     {
       "id": "chessboard",
       "title": "Chessboard",
-      "livefansId": "791434"
+      "livefansId": "791434",
+      "media": {
+        "mv": {
+          "youtubeId": "qo55wGLXcOQ"
+        },
+        "live": [
+          {
+            "youtubeId": "kibPxYYsMQ0",
+            "title": "Arena Tour 2024 - Rejoice - @ K-Arena Yokohama (2024.11.13)",
+            "shortTitle": "2024 K-Arena",
+            "showId": "1672276"
+          },
+          {
+            "youtubeId": "0qT_3dvUdIc",
+            "title": "LIVE at STADIUM 2025 @ 日產體育場 (2025.06.01)",
+            "shortTitle": "2025 日產",
+            "showId": "1735839",
+            "start": "03:52",
+            "end": "04:16"
+          },
+          {
+            "youtubeId": "ag68sq2NeLc",
+            "title": "Arena Tour 2024 - Rejoice - @ K-Arena Yokohama (2024.11.13)",
+            "shortTitle": "2024 K-Arena (精華)",
+            "showId": "1672276",
+            "start": "04:45",
+            "end": "05:33"
+          },
+          {
+            "youtubeId": "g--p8_sgGXE",
+            "title": "Official髭男dism Live at Radio",
+            "shortTitle": "Live at Radio",
+            "start": "00:19",
+            "end": "00:31"
+          }
+        ]
+      }
     },
     {
       "id": "happy-birthday-to-you",
       "title": "Happy Birthday To You",
-      "livefansId": "648180"
+      "livefansId": "648180",
+      "media": {
+        "mv": null,
+        "live": null
+      }
     },
     {
       "id": "mikanseinamamade",
       "title": "未完成なままで",
-      "livefansId": "649505"
+      "livefansId": "649505",
+      "media": {
+        "mv": null,
+        "live": null
+      }
     },
     {
       "id": "shower",
       "title": "Shower",
-      "livefansId": "687563"
+      "livefansId": "687563",
+      "media": {
+        "mv": null,
+        "live": {
+          "youtubeId": "6T8pCwKVQHY",
+          "title": "one-man tour 2021-2022 -Editorial- @ さいたまスーパーアリーナ (2022.03.21)",
+          "shortTitle": "2022 さいたま",
+          "showId": "1353361",
+          "start": "00:19",
+          "end": "00:40"
+        }
+      }
     },
     {
       "id": "hakan",
       "title": "破顔",
-      "livefansId": "736008"
+      "livefansId": "736008",
+      "media": {
+        "mv": null,
+        "live": {
+          "youtubeId": "q7oSGQ0ZHxY",
+          "title": "SHOCKING NUTS TOUR @ 日本武道館 (2023.02.16)",
+          "shortTitle": "2023 武道館",
+          "showId": "1499381",
+          "start": "03:19",
+          "end": "03:45"
+        }
+      }
     },
     {
       "id": "nichiyoubi-no-love-letter",
       "title": "日曜日のラブレター",
-      "livefansId": "329570"
+      "livefansId": "329570",
+      "media": {
+        "mv": {
+          "youtubeId": "R9s5IepTYFI",
+          "title": "Official髭男dism - Re: PLAYLIST",
+          "shortTitle": "精華 MV",
+          "start": "00:10",
+          "end": "00:47",
+          "subType": "crossfade"
+        },
+        "live": {
+          "youtubeId": "Vy9I6K01Yh4",
+          "title": "HIGEDAN acoustic one-man live 2018 -Autumn- @ ヒューリックホール東京 (2018.10.13)",
+          "shortTitle": "2018 Hulic Hall",
+          "start": "00:06",
+          "end": "00:16"
+        }
+      }
     },
     {
       "id": "pending-machine",
       "title": "ペンディングマシーン",
       "livefansId": "687567",
-      "alias": "Pending Machine"
+      "alias": "Pending Machine",
+      "media": {
+        "mv": {
+          "youtubeId": "4BVd6TK8_EQ"
+        },
+        "live": {
+          "youtubeId": "6T8pCwKVQHY",
+          "title": "one-man tour 2021-2022 -Editorial- @ さいたまスーパーアリーナ (2022.03.21)",
+          "shortTitle": "2022 さいたま",
+          "showId": "1353361",
+          "start": "01:45",
+          "end": "02:02"
+        }
+      }
     },
     {
       "id": "get-back-to-jinsei",
       "title": "Get Back To 人生",
-      "livefansId": "851684"
+      "livefansId": "851684",
+      "media": {
+        "mv": null,
+        "live": {
+          "youtubeId": "ag68sq2NeLc",
+          "title": "Arena Tour 2024 - Rejoice - @ K-Arena Yokohama (2024.11.13)",
+          "shortTitle": "2024 K-Arena",
+          "showId": "1672276",
+          "start": "00:14",
+          "end": "00:56"
+        }
+      }
     },
     {
       "id": "brothers",
       "title": "ブラザーズ",
       "livefansId": "509545",
-      "alias": "Brothers"
+      "alias": "Brothers",
+      "media": {
+        "mv": {
+          "youtubeId": "1fO0mY5vLA8"
+        },
+        "live": [
+          {
+            "youtubeId": "xxIEeHLFo_s",
+            "title": "one-man tour 2019 @ 日本武道館 (2019.07.08)",
+            "shortTitle": "2019 武道館",
+            "showId": "1078251"
+          },
+          {
+            "youtubeId": "0qT_3dvUdIc",
+            "title": "LIVE at STADIUM 2025 @ 日產體育場 (2025.06.01)",
+            "shortTitle": "2025 日產",
+            "showId": "1735839",
+            "start": "02:18",
+            "end": "02:29"
+          },
+          {
+            "youtubeId": "6T8pCwKVQHY",
+            "title": "one-man tour 2021-2022 -Editorial- @ さいたまスーパーアリーナ (2022.03.21)",
+            "shortTitle": "2022 さいたま",
+            "showId": "1353361",
+            "start": "02:03",
+            "end": "02:18"
+          },
+          {
+            "youtubeId": "ysOzjTknC14",
+            "title": "one-man tour 18/19 @ NHK 會館 (2019.01.24)",
+            "shortTitle": "2019 NHK會館",
+            "showId": "949995",
+            "start": "01:27",
+            "end": "01:49"
+          },
+          {
+            "youtubeId": "VIEsmE4lHPo",
+            "title": "FC Tour Vol.2 - The Blooming Universe ONLINE - (2021.04.18)",
+            "shortTitle": "2021 FC 線上演唱",
+            "showId": "fc-tour-vol-2-the-blooming-universe-online-2021",
+            "start": "03:09",
+            "end": "03:30"
+          }
+        ]
+      }
     },
     {
       "id": "bad-for-me",
       "title": "バッドフォーミー",
       "livefansId": "551593",
-      "alias": "Bad for Me"
+      "alias": "Bad for Me",
+      "media": {
+        "mv": {
+          "youtubeId": "0mN5jaB9wq0",
+          "title": "バッドフォーミー［Official Lyric Video］",
+          "subType": "lyric"
+        },
+        "live": {
+          "youtubeId": "ysOzjTknC14",
+          "title": "one-man tour 18/19 @ NHK 會館 (2019.01.24)",
+          "shortTitle": "2019 NHK會館",
+          "showId": "949995",
+          "start": "00:31",
+          "end": "00:57"
+        }
+      }
     },
     {
       "id": "second-line",
       "title": "Second LINE",
-      "livefansId": "547684"
+      "livefansId": "547684",
+      "media": {
+        "mv": null,
+        "live": {
+          "youtubeId": "VIEsmE4lHPo",
+          "title": "FC Tour Vol.2 - The Blooming Universe ONLINE - (2021.04.18)",
+          "shortTitle": "2021 FC 線上演唱",
+          "showId": "fc-tour-vol-2-the-blooming-universe-online-2021",
+          "start": "00:13",
+          "end": "00:46"
+        }
+      }
     },
     {
       "id": "last-song",
       "title": "ラストソング",
       "livefansId": "626361",
-      "alias": "Last Song"
+      "alias": "Last Song",
+      "media": {
+        "mv": null,
+        "live": [
+          {
+            "youtubeId": "ajJKtzg--5g",
+            "title": "ラストソング［Studio Live Session］",
+            "shortTitle": "Studio Live"
+          },
+          {
+            "youtubeId": "8q4AkXgjdGg",
+            "title": "ONLINE LIVE 2020 - Arena Travelers - (2020.09.26)",
+            "shortTitle": "2020 線上演唱",
+            "showId": "online-live-2020-arena-travelers",
+            "start": "04:30",
+            "end": "04:52"
+          },
+          {
+            "youtubeId": "y3L0pjZZqKo",
+            "title": "Tour 19/20 - Hall Travelers - @ パシフィコ横浜 (2020.02.10)",
+            "shortTitle": "2020 パシフィコ横浜",
+            "showId": "1150110",
+            "start": "02:48",
+            "end": "03:20"
+          }
+        ]
+      }
     },
     {
       "id": "soulsoup",
       "title": "SOULSOUP",
-      "livefansId": "830423"
+      "livefansId": "830423",
+      "media": {
+        "mv": {
+          "youtubeId": "-H_k7iwrWVY"
+        },
+        "live": [
+          {
+            "youtubeId": "OGqaBTjS5yU",
+            "title": "Official髭男dism Live at Radio",
+            "shortTitle": "Live at Radio"
+          },
+          {
+            "youtubeId": "0qT_3dvUdIc",
+            "title": "LIVE at STADIUM 2025 @ 日產體育場 (2025.06.01)",
+            "shortTitle": "2025 日產",
+            "showId": "1735839",
+            "start": "04:51",
+            "end": "05:03"
+          },
+          {
+            "youtubeId": "g--p8_sgGXE",
+            "title": "Official髭男dism Live at Radio",
+            "shortTitle": "Live at Radio (精華)",
+            "start": "00:45",
+            "end": "01:00"
+          }
+        ]
+      }
     },
     {
       "id": "55",
       "title": "55",
-      "livefansId": "582048"
+      "livefansId": "582048",
+      "media": {
+        "mv": {
+          "youtubeId": "R9s5IepTYFI",
+          "title": "Official髭男dism - Re: PLAYLIST",
+          "shortTitle": "精華 MV",
+          "start": "02:54",
+          "end": "03:51",
+          "subType": "crossfade"
+        },
+        "live": [
+          {
+            "youtubeId": "Vy9I6K01Yh4",
+            "title": "HIGEDAN acoustic one-man live 2018 -Autumn- @ ヒューリックホール東京 (2018.10.13)",
+            "shortTitle": "2018 Hulic Hall",
+            "start": "00:16",
+            "end": "00:26"
+          },
+          {
+            "youtubeId": "7wYi667iaFg",
+            "title": "one-man tour 2019 @ 日本武道館 (2019.07.08)",
+            "shortTitle": "2019 武道館",
+            "showId": "1078251",
+            "start": "01:15",
+            "end": "01:38"
+          }
+        ]
+      }
     },
     {
       "id": "bedroom-talk",
       "title": "Bedroom Talk",
-      "livefansId": "687565"
+      "livefansId": "687565",
+      "media": {
+        "mv": {
+          "youtubeId": "l_HTf8JRTts",
+          "title": "Official髭男dism - Bedroom Talk［Official Lyric Video］",
+          "shortTitle": "歌詞版 MV",
+          "subType": "lyric"
+        },
+        "live": {
+          "youtubeId": "6T8pCwKVQHY",
+          "title": "one-man tour 2021-2022 -Editorial- @ さいたまスーパーアリーナ (2022.03.21)",
+          "shortTitle": "2022 さいたま",
+          "showId": "1353361",
+          "start": "00:51",
+          "end": "01:15"
+        }
+      }
     },
     {
       "id": "hello",
       "title": "HELLO",
-      "livefansId": "651486"
+      "livefansId": "651486",
+      "media": {
+        "mv": {
+          "youtubeId": "p1qM75a9FeE"
+        },
+        "live": [
+          {
+            "youtubeId": "1i9IfhFqxXM",
+            "title": "Road to \"one man tour 2021-2022\" @ ぴあアリーナMM (2021.06.23)",
+            "shortTitle": "2021 ぴあMM",
+            "start": "00:38",
+            "end": "01:07"
+          },
+          {
+            "youtubeId": "8q4AkXgjdGg",
+            "title": "ONLINE LIVE 2020 - Arena Travelers - (2020.09.26)",
+            "shortTitle": "2020 線上演唱",
+            "showId": "online-live-2020-arena-travelers",
+            "start": "00:00",
+            "end": "00:29"
+          }
+        ]
+      }
     },
     {
       "id": "uramitsuramikiwami",
       "title": "うらみつらみきわみ",
-      "livefansId": "851687"
+      "livefansId": "851687",
+      "media": {
+        "mv": null,
+        "live": {
+          "youtubeId": "ag68sq2NeLc",
+          "title": "Arena Tour 2024 - Rejoice - @ K-Arena Yokohama (2024.11.13)",
+          "shortTitle": "2024 K-Arena",
+          "showId": "1672276",
+          "start": "04:15",
+          "end": "04:44"
+        }
+      }
     },
     {
       "id": "inu-ka-cat-ka-de-shinumade-kenka-shiyou",
       "title": "犬かキャットかで死ぬまで喧嘩しよう!",
-      "livefansId": "474418"
+      "livefansId": "474418",
+      "media": {
+        "mv": {
+          "youtubeId": "IzyrINr2Xj4"
+        },
+        "live": [
+          {
+            "youtubeId": "02x7mh7io_8",
+            "title": "ONE-MAN TOUR 2017 @ 澀谷 CLUB QUATTRO (2017.06.16)",
+            "shortTitle": "2017 渋谷QUATTRO",
+            "showId": "778082",
+            "start": "00:00",
+            "end": "03:37"
+          },
+          {
+            "youtubeId": "LF-_THYGXe0",
+            "title": "one-man tour 2018 @ 中野サンプラザホール (2018.07.05)",
+            "shortTitle": "2018 中野サンプラザ",
+            "showId": "889716",
+            "start": "00:55",
+            "end": "01:05"
+          },
+          {
+            "youtubeId": "Vy9I6K01Yh4",
+            "title": "HIGEDAN acoustic one-man live 2018 -Autumn- @ ヒューリックホール東京 (2018.10.13)",
+            "shortTitle": "2018 Hulic Hall",
+            "start": "01:33",
+            "end": "01:43"
+          },
+          {
+            "youtubeId": "VIEsmE4lHPo",
+            "title": "FC Tour Vol.2 - The Blooming Universe ONLINE - (2021.04.18)",
+            "shortTitle": "2021 FC 線上演唱",
+            "showId": "fc-tour-vol-2-the-blooming-universe-online-2021",
+            "start": "02:54",
+            "end": "03:09"
+          }
+        ]
+      }
     },
     {
       "id": "finder",
       "title": "Finder",
-      "livefansId": "851682"
+      "livefansId": "851682",
+      "media": {
+        "mv": {
+          "youtubeId": "clwriIVEpI4"
+        },
+        "live": null
+      }
     },
     {
       "id": "catchball",
       "title": "キャッチボール",
       "livefansId": "851685",
-      "alias": "Catch Ball"
+      "alias": "Catch Ball",
+      "media": {
+        "mv": null,
+        "live": null
+      }
     },
     {
       "id": "choral-a",
       "title": "Choral A",
-      "livefansId": "736006"
+      "livefansId": "736006",
+      "media": {
+        "mv": {
+          "youtubeId": "I8fxhn_l08g"
+        },
+        "live": {
+          "youtubeId": "q7oSGQ0ZHxY",
+          "title": "SHOCKING NUTS TOUR @ 日本武道館 (2023.02.16)",
+          "shortTitle": "2023 武道館",
+          "showId": "1499381",
+          "start": "01:46",
+          "end": "02:07"
+        }
+      }
     },
     {
       "id": "filament",
       "title": "フィラメント",
       "livefansId": "687566",
-      "alias": "Filament"
+      "alias": "Filament",
+      "media": {
+        "mv": null,
+        "live": {
+          "youtubeId": "6T8pCwKVQHY",
+          "title": "one-man tour 2021-2022 -Editorial- @ さいたまスーパーアリーナ (2022.03.21)",
+          "shortTitle": "2022 さいたま",
+          "showId": "1353361",
+          "start": "01:16",
+          "end": "01:29"
+        }
+      }
     },
     {
       "id": "escapade",
       "title": "ESCAPADE",
-      "livefansId": "540831"
+      "livefansId": "540831",
+      "media": {
+        "mv": null,
+        "live": [
+          {
+            "youtubeId": "VIEsmE4lHPo",
+            "title": "FC Tour Vol.2 - The Blooming Universe ONLINE - (2021.04.18)",
+            "shortTitle": "2021 FC 線上演唱",
+            "showId": "fc-tour-vol-2-the-blooming-universe-online-2021",
+            "start": "01:12",
+            "end": "01:41"
+          },
+          {
+            "youtubeId": "LF-_THYGXe0",
+            "title": "one-man tour 2018 @ 中野サンプラザホール (2018.07.05)",
+            "shortTitle": "2018 中野サンプラザ",
+            "showId": "889716",
+            "start": "01:05",
+            "end": "01:16"
+          }
+        ]
+      }
     },
     {
       "id": "parade",
       "title": "parade",
-      "livefansId": "329569"
+      "livefansId": "329569",
+      "media": {
+        "mv": {
+          "youtubeId": "LyHqJwvZtGQ",
+          "title": "Official髭男dism - デビュー盤「ラブとピースは君の中」まとめMV",
+          "shortTitle": "精華 MV",
+          "start": "02:55",
+          "end": "03:14",
+          "subType": "crossfade"
+        },
+        "live": {
+          "youtubeId": "q7oSGQ0ZHxY",
+          "title": "SHOCKING NUTS TOUR @ 日本武道館 (2023.02.16)",
+          "shortTitle": "2023 武道館",
+          "showId": "1499381",
+          "start": "02:41",
+          "end": "03:18"
+        }
+      }
     },
     {
       "id": "clap-clap",
       "title": "Clap Clap",
-      "livefansId": "435721"
+      "livefansId": "435721",
+      "media": {
+        "mv": {
+          "youtubeId": "R9s5IepTYFI",
+          "title": "Official髭男dism - Re: PLAYLIST",
+          "shortTitle": "精華 MV",
+          "start": "02:29",
+          "end": "02:53",
+          "subType": "crossfade"
+        },
+        "live": null
+      }
     },
     {
       "id": "tell-me-baby",
       "title": "Tell Me Baby",
-      "livefansId": "502826"
+      "livefansId": "502826",
+      "media": {
+        "mv": {
+          "youtubeId": "3IDvi4buNdk"
+        },
+        "live": [
+          {
+            "youtubeId": "9jXH_my4cuA",
+            "title": "one-man tour 2017 -winter- @ MYNAVI BLITZ 赤坂 (2017.12.08)",
+            "shortTitle": "2017 赤坂BLITZ",
+            "showId": "828056"
+          },
+          {
+            "youtubeId": "q7oSGQ0ZHxY",
+            "title": "SHOCKING NUTS TOUR @ 日本武道館 (2023.02.16)",
+            "shortTitle": "2023 武道館",
+            "showId": "1499381",
+            "start": "01:04",
+            "end": "01:45"
+          },
+          {
+            "youtubeId": "LF-_THYGXe0",
+            "title": "one-man tour 2018 @ 中野サンプラザホール (2018.07.05)",
+            "shortTitle": "2018 中野サンプラザ",
+            "showId": "889716",
+            "start": "00:27",
+            "end": "00:36"
+          },
+          {
+            "youtubeId": "Vy9I6K01Yh4",
+            "title": "HIGEDAN acoustic one-man live 2018 -Autumn- @ ヒューリックホール東京 (2018.10.13)",
+            "shortTitle": "2018 Hulic Hall",
+            "start": "01:06",
+            "end": "01:15"
+          }
+        ]
+      }
     },
     {
       "id": "midori-no-amayoke",
       "title": "みどりの雨避け",
-      "livefansId": "687564"
+      "livefansId": "687564",
+      "media": {
+        "mv": null,
+        "live": {
+          "youtubeId": "6T8pCwKVQHY",
+          "title": "one-man tour 2021-2022 -Editorial- @ さいたまスーパーアリーナ (2022.03.21)",
+          "shortTitle": "2022 さいたま",
+          "showId": "1353361",
+          "start": "00:41",
+          "end": "00:50"
+        }
+      }
     },
     {
       "id": "lost-in-my-room",
       "title": "Lost In My Room",
-      "livefansId": "687569"
+      "livefansId": "687569",
+      "media": {
+        "mv": null,
+        "live": null
+      }
     },
     {
       "id": "koi-no-maenarae",
       "title": "恋の前ならえ",
-      "livefansId": "329573"
+      "livefansId": "329573",
+      "media": {
+        "mv": [
+          {
+            "youtubeId": "n0e0y01w92A",
+            "title": "Official髭男dism - 恋の前ならえ [Official Video]",
+            "shortTitle": "官方 MV",
+            "subType": "mv"
+          },
+          {
+            "youtubeId": "LyHqJwvZtGQ",
+            "title": "Official髭男dism - デビュー盤「ラブとピースは君の中」まとめMV (前段)",
+            "shortTitle": "精華 (前段)",
+            "start": "00:45",
+            "end": "01:04",
+            "subType": "crossfade"
+          },
+          {
+            "youtubeId": "LyHqJwvZtGQ",
+            "title": "Official髭男dism - デビュー盤「ラブとピースは君の中」まとめMV (後段)",
+            "shortTitle": "精華 (後段)",
+            "start": "03:35",
+            "end": "04:44",
+            "subType": "crossfade"
+          }
+        ],
+        "live": null
+      }
     },
     {
       "id": "yuki-seku-asa-ga-kuru",
       "title": "雪急く朝が来る",
-      "livefansId": "329559"
+      "livefansId": "329559",
+      "media": {
+        "mv": {
+          "youtubeId": "LyHqJwvZtGQ",
+          "title": "Official髭男dism - デビュー盤「ラブとピースは君の中」まとめMV",
+          "shortTitle": "精華 MV",
+          "start": "01:35",
+          "end": "01:59",
+          "subType": "crossfade"
+        },
+        "live": null
+      }
     },
     {
       "id": "darin",
       "title": "ダーリン。",
-      "livefansId": "329571"
+      "livefansId": "329571",
+      "media": {
+        "mv": {
+          "youtubeId": "LyHqJwvZtGQ",
+          "title": "Official髭男dism - デビュー盤「ラブとピースは君の中」まとめMV",
+          "shortTitle": "精華 MV",
+          "start": "03:15",
+          "end": "03:34",
+          "subType": "crossfade"
+        },
+        "live": null
+      }
     },
     {
       "id": "hajimari-no-asa",
       "title": "始まりの朝",
-      "livefansId": "474419"
+      "livefansId": "474419",
+      "media": {
+        "mv": null,
+        "live": null
+      }
     },
     {
       "id": "equal",
       "title": "イコール",
       "livefansId": "649508",
-      "alias": "Equal"
+      "alias": "Equal",
+      "media": {
+        "mv": null,
+        "live": null
+      }
     },
     {
       "id": "kiiroi-kuruma",
       "title": "黄色い車",
-      "livefansId": "649506"
+      "livefansId": "649506",
+      "media": {
+        "mv": {
+          "youtubeId": "vJ3EPe4lPCY",
+          "title": "Official髭男dism - 黄色い車（アニメ「秘密結社 鷹の爪 GT」ED ver.）",
+          "shortTitle": "動畫版 MV",
+          "subType": "anime"
+        },
+        "live": null
+      }
     },
     {
       "id": "saredo-hibi-wa",
-      "title": "されど日々は"
+      "title": "されど日々は",
+      "media": {
+        "mv": null,
+        "live": null
+      }
     },
     {
       "id": "kanousei",
       "title": "可能性",
-      "livefansId": "649502"
+      "livefansId": "649502",
+      "media": {
+        "mv": null,
+        "live": {
+          "youtubeId": "Vy9I6K01Yh4",
+          "title": "HIGEDAN acoustic one-man live 2018 -Autumn- @ ヒューリックホール東京 (2018.10.13)",
+          "shortTitle": "2018 Hulic Hall",
+          "start": "00:37",
+          "end": "00:49"
+        }
+      }
     },
     {
       "id": "hatsumeika",
       "title": "発明家",
-      "livefansId": "547688"
+      "livefansId": "547688",
+      "media": {
+        "mv": null,
+        "live": [
+          {
+            "youtubeId": "VIEsmE4lHPo",
+            "title": "FC Tour Vol.2 - The Blooming Universe ONLINE - (2021.04.18)",
+            "shortTitle": "2021 FC 線上演唱",
+            "showId": "fc-tour-vol-2-the-blooming-universe-online-2021",
+            "start": "03:55",
+            "end": "04:28"
+          },
+          {
+            "youtubeId": "LF-_THYGXe0",
+            "title": "one-man tour 2018 @ 中野サンプラザホール (2018.07.05)",
+            "shortTitle": "2018 中野サンプラザ",
+            "showId": "889716",
+            "start": "01:16",
+            "end": "01:38"
+          }
+        ]
+      }
     },
     {
       "id": "saigo-no-koi-wazurai",
       "title": "最後の恋煩い",
-      "livefansId": "626359"
+      "livefansId": "626359",
+      "media": {
+        "mv": null,
+        "live": [
+          {
+            "youtubeId": "3LYdaQ1N8RY",
+            "title": "最後の恋煩い［Studio Live Session］",
+            "shortTitle": "Studio Live"
+          },
+          {
+            "youtubeId": "y3L0pjZZqKo",
+            "title": "Tour 19/20 - Hall Travelers - @ パシフィコ横浜 (2020.02.10)",
+            "shortTitle": "2020 パシフィコ横浜",
+            "showId": "1150110",
+            "start": "01:11",
+            "end": "01:27"
+          }
+        ]
+      }
     },
     {
       "id": "052519",
-      "title": "052519"
+      "title": "052519",
+      "media": {
+        "mv": null,
+        "live": null
+      }
     },
     {
       "id": "travelers",
-      "title": "Travelers"
+      "title": "Travelers",
+      "media": {
+        "mv": null,
+        "live": null
+      }
     },
     {
       "id": "natsu-moyou-no-neko",
       "title": "夏模様の猫",
-      "livefansId": "649507"
+      "livefansId": "649507",
+      "media": {
+        "mv": null,
+        "live": null
+      }
     },
     {
       "id": "akegata-no-getaway",
       "title": "明け方のゲッタウェイ",
       "livefansId": "606720",
-      "unreleased": true
+      "unreleased": true,
+      "media": {
+        "mv": null,
+        "live": null
+      }
     },
     {
       "id": "furidasu-ame-gokigen-na-kimi",
       "title": "ふりだす雨、ゴキゲンな君",
       "livefansId": "329563",
-      "unreleased": true
+      "unreleased": true,
+      "media": {
+        "mv": null,
+        "live": null
+      }
     },
     {
       "id": "asa-ni-nareba",
       "title": "朝になれば",
       "livefansId": "329565",
-      "unreleased": true
+      "unreleased": true,
+      "media": {
+        "mv": null,
+        "live": null
+      }
     },
     {
       "id": "koi-no-saichu",
       "title": "恋の最chu!",
-      "livefansId": "936712"
+      "livefansId": "936712",
+      "media": {
+        "mv": null,
+        "live": null
+      }
     },
     {
       "id": "bukiyou-na-futari-de",
       "title": "不器用な二人で",
-      "livefansId": "329560"
+      "livefansId": "329560",
+      "media": {
+        "mv": null,
+        "live": null
+      }
     },
     {
       "id": "sakura-no-namida",
       "title": "桜の涙",
       "livefansId": "329562",
-      "unreleased": true
+      "unreleased": true,
+      "media": {
+        "mv": null,
+        "live": null
+      }
     },
     {
       "id": "triangle-wo-mawase",
       "title": "トライアングルを回せ",
       "livefansId": "329567",
-      "unreleased": true
+      "unreleased": true,
+      "media": {
+        "mv": null,
+        "live": null
+      }
     },
     {
       "id": "gomibako-kanojo",
       "title": "ごみ箱彼女",
       "livefansId": "329574",
-      "unreleased": true
+      "unreleased": true,
+      "media": {
+        "mv": null,
+        "live": null
+      }
     },
     {
       "id": "teddy-heart-drawing",
       "title": "テディの心情描写",
       "livefansId": "936250",
-      "unreleased": true
+      "unreleased": true,
+      "media": {
+        "mv": null,
+        "live": null
+      }
     },
     {
       "id": "dosei-to-spica",
       "title": "土星とスピカ",
       "livefansId": "936253",
-      "unreleased": true
+      "unreleased": true,
+      "media": {
+        "mv": null,
+        "live": null
+      }
     },
     {
       "id": "utaemoshinai-uta",
       "title": "歌えもしない歌",
       "livefansId": "936256",
-      "unreleased": true
+      "unreleased": true,
+      "media": {
+        "mv": null,
+        "live": null
+      }
     },
     {
       "id": "duffle-coat-no-amai-yume",
       "title": "ダッフルコートの甘い夢",
       "livefansId": "936252",
-      "unreleased": true
+      "unreleased": true,
+      "media": {
+        "mv": null,
+        "live": null
+      }
     },
     {
       "id": "kimi-to-sugoseru-natsu-nara",
       "title": "君と過ごせる夏なら",
       "livefansId": "936254",
-      "unreleased": true
+      "unreleased": true,
+      "media": {
+        "mv": null,
+        "live": null
+      }
     },
     {
       "id": "shuumatsu-yoi-no-funkism",
       "title": "週末、酔のfunkism",
       "livefansId": "936248",
-      "unreleased": true
+      "unreleased": true,
+      "media": {
+        "mv": null,
+        "live": null
+      }
     },
     {
       "id": "koharubiyori",
       "title": "小春日和",
       "livefansId": "936249",
-      "unreleased": true
+      "unreleased": true,
+      "media": {
+        "mv": null,
+        "live": null
+      }
     },
     {
       "id": "nee-darin",
       "title": "ねえ、ダーリン。",
       "livefansId": "936247",
-      "unreleased": true
+      "unreleased": true,
+      "media": {
+        "mv": null,
+        "live": null
+      }
     },
     {
       "id": "egao-no-matsu-basho",
       "title": "笑顔の待つ場所",
-      "unreleased": true
+      "unreleased": true,
+      "media": {
+        "mv": null,
+        "live": null
+      }
     }
   ]
 }
