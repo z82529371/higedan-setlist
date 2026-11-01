@@ -11,7 +11,8 @@ import { songTitle } from "../../lib/domain.js";
  * SongMediaStage
  * 歌曲票根專屬現場/官方影音內嵌舞台 (In-place Video Stage, ADR-0135)
  * - 原生票根內嵌：零彈窗、零遮罩、完全杜絕 Chromium/Windows Direct Composition 破圖
- * - 行動端排版最佳化：針對小螢幕（<420px 及 <640px）自適應折行與大點擊熱區（>=32px）
+ * - 行動端排版自適應：針對小螢幕（<420px 及 <640px）標題不截斷，雙軌與版本選台流暢折行
+ * - 可收合機制：支援摺疊收合（僅保留簡潔標題列）以釋放行動端垂直視野
  * - 自動調節 50% 音量：透過 postMessage 在開播時自動調節播放器音量至 50%
  * - 邊聽邊看雙重體驗：歌迷可在聆聽現場演出的同時向下滑動瀏覽歷年巡演開演紀錄
  */
@@ -22,10 +23,16 @@ export function SongMediaStage({
   mediaOverride,
   titleOverride,
   onClose,
+  collapsed: controlledCollapsed,
+  onToggleCollapse,
 }) {
   const { t } = useI18n();
   const iframeRef = useRef(null);
   const media = mediaOverride || getSongMedia(songId);
+
+  const [internalCollapsed, setInternalCollapsed] = useState(false);
+  const isCollapsed =
+    controlledCollapsed !== undefined ? controlledCollapsed : internalCollapsed;
 
   const [activeTrack, setActiveTrack] = useState(() => {
     return initialTrack || media.defaultTrack || "live";
@@ -41,6 +48,7 @@ export function SongMediaStage({
     setSelectedLiveIndex(0);
     setSelectedMvIndex(0);
     setUserSwitched(false);
+    setInternalCollapsed(false);
   }, [songId, initialTrack, media.defaultTrack]);
 
   // Safe volume dispatch (Sets volume to 50% via YouTube IFrame HTML5 PostMessage)
@@ -120,7 +128,7 @@ export function SongMediaStage({
 
   // Auto-regulate volume when activeTrack, selectedLiveIndex, selectedMvIndex, or embedUrl changes
   useEffect(() => {
-    if (!embedUrl) return;
+    if (!embedUrl || isCollapsed) return;
     const t1 = setTimeout(dispatchVolume, 400);
     const t2 = setTimeout(dispatchVolume, 1000);
     const t3 = setTimeout(dispatchVolume, 2000);
@@ -129,7 +137,7 @@ export function SongMediaStage({
       clearTimeout(t2);
       clearTimeout(t3);
     };
-  }, [embedUrl, activeTrack, selectedLiveIndex, selectedMvIndex]);
+  }, [embedUrl, activeTrack, selectedLiveIndex, selectedMvIndex, isCollapsed]);
 
   if (!media.hasMedia || !currentVideo) return null;
 
@@ -141,6 +149,15 @@ export function SongMediaStage({
     if (track !== activeTrack) {
       setUserSwitched(true);
       setActiveTrack(track);
+    }
+  };
+
+  const handleToggleCollapse = () => {
+    const next = !isCollapsed;
+    if (onToggleCollapse) {
+      onToggleCollapse(next);
+    } else {
+      setInternalCollapsed(next);
     }
   };
 
@@ -159,100 +176,67 @@ export function SongMediaStage({
     return t("songExtra.mvTab", "🎬 官方 MV");
   };
 
+  const stageTitle = titleOverride || t("songExtra.mediaModalAria", "官方影音舞台");
+
   return (
     <div
       id="song-media-stage"
       data-testid="song-media-stage"
-      className="my-3 rounded-[3px] border border-line-soft bg-card overflow-hidden shadow-2xs select-none"
+      className="my-2.5 sm:my-3 rounded-[3px] border border-line-soft bg-card overflow-hidden shadow-2xs select-none"
     >
-      {/* Stage Top Bar (Responsive for mobile & small screens: single-row layout) */}
-      <div className="flex items-center justify-between gap-2 px-3 py-1.5 bg-paper border-b border-line-soft font-mono text-[11px]">
-        {/* Left: Stage Title & Dual Track Switcher */}
-        <div className="flex items-center gap-1.5 min-w-0 flex-1 overflow-hidden">
+      {/* Stage Top Bar (Responsive multi-row wrapping on small screens; title never truncated) */}
+      <div
+        className={`flex flex-wrap items-center justify-between gap-y-1.5 gap-x-2 px-3 py-1.5 bg-paper font-mono text-[11px] ${
+          isCollapsed ? "" : "border-b border-line-soft"
+        }`}
+      >
+        {/* Left: Stage Title & Indicator Dot */}
+        <div className="flex items-center gap-1.5 min-w-0 flex-1">
           <span className="inline-block h-2 w-2 rounded-full border border-ink bg-tape shrink-0" aria-hidden="true" />
           <span
             className="font-bold text-ink uppercase tracking-wider truncate shrink"
-            title={titleOverride || t("songExtra.mediaModalAria", "官方影音舞台")}
+            title={stageTitle}
           >
-            {titleOverride || t("songExtra.mediaModalAria", "官方影音舞台")}
+            {stageTitle}
           </span>
-
-          {media.hasLive && media.hasMv ? (
-            <div className="inline-flex items-center rounded bg-black/[0.04] dark:bg-white/[0.05] p-0.5 font-bold shrink-0 ml-1">
-              <button
-                type="button"
-                onClick={() => handleTrackChange("live")}
-                className={`px-2 py-0.5 rounded transition-colors cursor-pointer min-h-[26px] flex items-center gap-1 ${
-                  activeTrack === "live"
-                    ? "bg-band text-band-ink font-extrabold shadow-2xs"
-                    : "text-muted hover:text-ink hover:bg-tape/30"
-                }`}
-                aria-pressed={activeTrack === "live"}
-              >
-                <span>
-                  {currentLive?.isExcerpt
-                    ? t("songExtra.liveExcerptTab", "🎪 現場精華")
-                    : t("songExtra.liveTab", "🎪 現場 Live")}
-                </span>
-                {currentLive?.isExcerpt && currentLive.durationSeconds > 0 && (
-                  <span className="font-mono text-[9px] opacity-80">
-                    ({currentLive.durationSeconds}s)
-                  </span>
-                )}
-              </button>
-              <button
-                type="button"
-                onClick={() => handleTrackChange("mv")}
-                className={`px-2 py-0.5 rounded transition-colors cursor-pointer min-h-[26px] flex items-center gap-1 ${
-                  activeTrack === "mv"
-                    ? "bg-band text-band-ink font-extrabold shadow-2xs"
-                    : "text-muted hover:text-ink hover:bg-tape/30"
-                }`}
-                aria-pressed={activeTrack === "mv"}
-              >
-                <span>
-                  {getMvTabLabel(currentMv)}
-                </span>
-                {currentMv?.isExcerpt && currentMv.durationSeconds > 0 && (
-                  <span className="font-mono text-[9px] opacity-80">
-                    ({currentMv.durationSeconds}s)
-                  </span>
-                )}
-              </button>
-            </div>
-          ) : media.hasLive ? (
-            <span className="shrink-0 rounded bg-band/15 text-band-ink border border-band/30 px-2 py-0.5 text-[10px] font-bold ml-1">
-              {currentLive?.isDigest
-                ? `🎬 ${t("tourExtra.watchDigest", "巡演精華")}`
-                : currentLive?.isExcerpt
-                  ? t("songExtra.liveExcerptTab", "🎪 現場精華")
-                  : t("songExtra.liveTab", "🎪 現場 Live")}
-            </span>
-          ) : media.hasMv ? (
-            <span className="shrink-0 rounded bg-black/[0.04] dark:bg-white/[0.05] text-muted border border-line-soft px-2 py-0.5 text-[10px] font-bold ml-1">
-              {getMvTabLabel(currentMv)}
-            </span>
-          ) : null}
         </div>
 
-        {/* Right: External YouTube Link & Optional Close */}
-        <div className="flex items-center justify-end gap-1.5 shrink-0">
+        {/* Right: External YouTube Link, Collapse/Expand Toggle & Optional Close */}
+        <div className="flex items-center gap-1.5 shrink-0 ml-auto order-2 sm:order-3">
           {watchUrl && (
             <a
               href={watchUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 rounded border border-line-soft bg-paper px-2 py-1 font-bold text-ink hover:bg-band hover:border-band hover:text-band-ink transition-colors no-underline min-h-[28px]"
+              className="inline-flex items-center gap-1 rounded border border-line-soft bg-paper px-2 py-0.5 font-bold text-ink hover:bg-band hover:border-band hover:text-band-ink transition-colors no-underline min-h-[26px]"
+              title={t("songExtra.openInYouTube", "前往 YouTube")}
             >
               <span className="hidden min-[380px]:inline">{t("songExtra.openInYouTube", "前往 YouTube")} ↗</span>
               <span className="min-[380px]:hidden">YouTube ↗</span>
             </a>
           )}
+          <button
+            type="button"
+            onClick={handleToggleCollapse}
+            aria-expanded={!isCollapsed}
+            className="inline-flex items-center gap-1 px-2 py-0.5 rounded border border-line-soft bg-paper hover:bg-tape-tint/50 text-ink font-bold transition-colors cursor-pointer shrink-0 select-none min-h-[26px]"
+            title={
+              isCollapsed
+                ? t("songExtra.expandStage", "展開 ▾")
+                : t("songExtra.collapseStage", "收合 ▴")
+            }
+          >
+            <span>
+              {isCollapsed
+                ? t("songExtra.expandStage", "展開 ▾")
+                : t("songExtra.collapseStage", "收合 ▴")}
+            </span>
+          </button>
           {onClose && (
             <button
               type="button"
               onClick={onClose}
-              className="inline-flex items-center justify-center rounded border border-line-soft bg-paper hover:bg-black/[0.04] dark:hover:bg-white/[0.04] p-1 text-muted hover:text-ink transition-colors min-h-[28px] min-w-[28px] cursor-pointer"
+              className="inline-flex items-center justify-center rounded border border-line-soft bg-paper hover:bg-black/[0.04] dark:hover:bg-white/[0.04] p-1 text-muted hover:text-ink transition-colors min-h-[26px] min-w-[26px] cursor-pointer"
               title={t("songExtra.closePlayer", "關閉播放器")}
               aria-label={t("songExtra.closePlayer", "關閉播放器")}
             >
@@ -260,152 +244,218 @@ export function SongMediaStage({
             </button>
           )}
         </div>
-      </div>
 
-      {/* Multiple Live Performances Selector Sub-bar */}
-      {isLive && media.hasMultipleLives && (
-        <div
-          data-testid="song-media-live-selector"
-          className="flex flex-wrap items-center gap-1.5 px-3 py-1.5 bg-paper/70 border-b border-line-soft font-mono text-[11px]"
-        >
-          <span className="text-muted text-[10px] font-bold uppercase tracking-wider shrink-0 mr-1">
-            {t("songExtra.liveVersions", "場次版本：")}
-          </span>
-          {media.lives.map((l, idx) => {
-            const isActive = idx === selectedLiveIndex;
-            return (
-              <button
-                key={l.youtubeId + idx}
-                type="button"
-                onClick={() => {
-                  if (idx !== selectedLiveIndex) {
-                    setUserSwitched(true);
-                    setSelectedLiveIndex(idx);
-                  }
-                }}
-                className={`inline-flex items-center gap-1 rounded px-2 py-0.5 text-[11px] font-bold transition-colors cursor-pointer min-h-[28px] ${
-                  isActive
-                    ? "bg-band text-band-ink shadow-2xs font-extrabold"
-                    : "bg-paper text-muted hover:text-ink hover:bg-tape/30 border border-line-soft/80"
-                }`}
-                aria-pressed={isActive}
-              >
-                <span>📍</span>
-                <span>{l.shortTitle || l.title}</span>
-                {l.isExcerpt && l.durationSeconds > 0 && (
-                  <span className="text-[9px] opacity-80">({l.durationSeconds}s)</span>
-                )}
-              </button>
-            );
-          })}
-        </div>
-      )}
-
-      {/* Multiple MV Versions Selector Sub-bar */}
-      {isMv && media.hasMultipleMvs && (
-        <div
-          data-testid="song-media-mv-selector"
-          className="flex flex-wrap items-center gap-1.5 px-3 py-1.5 bg-paper/70 border-b border-line-soft font-mono text-[11px]"
-        >
-          <span className="text-muted text-[10px] font-bold uppercase tracking-wider shrink-0 mr-1">
-            {t("songExtra.mvVersions", "MV 版本：")}
-          </span>
-          {media.mvs.map((m, idx) => {
-            const isActive = idx === selectedMvIndex;
-            const badgeIcon =
-              m.subType === "anime"
-                ? "🎨"
-                : m.subType === "film"
-                  ? "🎥"
-                  : m.subType === "lyric"
-                    ? "📝"
-                    : m.subType === "short"
-                      ? "🎬"
-                      : "🎬";
-            return (
-              <button
-                key={m.youtubeId + idx}
-                type="button"
-                onClick={() => {
-                  if (idx !== selectedMvIndex) {
-                    setUserSwitched(true);
-                    setSelectedMvIndex(idx);
-                  }
-                }}
-                className={`inline-flex items-center gap-1 rounded px-2 py-0.5 text-[11px] font-bold transition-colors cursor-pointer min-h-[28px] ${
-                  isActive
-                    ? "bg-band text-band-ink shadow-2xs font-extrabold"
-                    : "bg-paper text-muted hover:text-ink hover:bg-tape/30 border border-line-soft/80"
-                }`}
-                aria-pressed={isActive}
-              >
-                <span>{badgeIcon}</span>
-                <span>{m.shortTitle || m.title}</span>
-                {m.isExcerpt && m.durationSeconds > 0 && (
-                  <span className="text-[9px] opacity-80">({m.durationSeconds}s)</span>
-                )}
-              </button>
-            );
-          })}
-        </div>
-      )}
-
-      {/* 16:9 Video Embed Container */}
-      <div className="relative aspect-video w-full bg-black overflow-hidden">
-        {embedUrl ? (
-          <iframe
-            ref={iframeRef}
-            src={embedUrl}
-            onLoad={handleIframeLoad}
-            title={`${title} - ${isLive ? t("songExtra.liveVideo", "現場演出") : t("songExtra.musicVideo", "官方 MV")}`}
-            className="absolute inset-0 h-full w-full border-0 outline-none"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            referrerPolicy="no-referrer-when-downgrade"
-            allowFullScreen
-          />
-        ) : null}
-      </div>
-
-      {/* Stage Bottom Bar (Link to Show Slip or Video Information) */}
-      <div className="flex flex-wrap items-center justify-between gap-1.5 px-3 py-2 bg-paper font-mono text-[11px] border-t border-line-soft">
-        {isLive && currentLive?.showId ? (
-          <button
-            type="button"
-            onClick={handleShowClick}
-            className="w-full sm:w-auto inline-flex items-center justify-between sm:justify-start gap-1.5 rounded border border-line-soft bg-tape/30 px-2.5 py-1 text-[11px] font-bold text-ink hover:bg-band hover:text-band-ink transition-colors cursor-pointer text-left min-h-[32px]"
-            title={t("songExtra.viewShowSlipTitle", "前往查看此場次的完整曲目清單與開演資訊")}
-          >
-            <div className="flex items-center gap-1.5 min-w-0">
-              <span className="shrink-0">📍</span>
-              <span className="truncate">
-                {currentLive.title || t("songExtra.livePerformance", "現場演出紀錄")}
+        {/* Dual Track Switcher (Row 2 on mobile, inline on desktop; hidden when collapsed) */}
+        {!isCollapsed && (media.hasLive && media.hasMv ? (
+          <div className="w-full sm:w-auto order-3 sm:order-2 flex items-center rounded bg-black/[0.04] dark:bg-white/[0.05] p-0.5 font-bold">
+            <button
+              type="button"
+              onClick={() => handleTrackChange("live")}
+              className={`flex-1 sm:flex-initial px-2 py-0.5 rounded transition-colors cursor-pointer min-h-[26px] flex items-center justify-center gap-1 ${
+                activeTrack === "live"
+                  ? "bg-band text-band-ink font-extrabold shadow-2xs"
+                  : "text-muted hover:text-ink hover:bg-tape/30"
+              }`}
+              aria-pressed={activeTrack === "live"}
+            >
+              <span>
+                {currentLive?.isExcerpt
+                  ? t("songExtra.liveExcerptTab", "🎪 現場精華")
+                  : t("songExtra.liveTab", "🎪 現場 Live")}
               </span>
-              {currentLive.isExcerpt && currentLive.timeRangeText && (
-                <span className="shrink-0 rounded bg-band/20 text-band-ink px-1.5 py-0.5 text-[10px] font-bold">
-                  ⏱️ {currentLive.timeRangeText}
+              {currentLive?.isExcerpt && currentLive.durationSeconds > 0 && (
+                <span className="font-mono text-[9px] opacity-80">
+                  ({currentLive.durationSeconds}s)
                 </span>
               )}
-            </div>
-            <span className="shrink-0 font-extrabold underline underline-offset-2 ml-2">
-              {t("songExtra.viewShowSlip", "前往該場次票根 →")}
-            </span>
-          </button>
-        ) : (
-          <div className="flex items-center gap-1.5 py-1 min-w-0">
-            <span className="text-muted text-[11px] truncate">
-              {currentVideo?.title ||
-                (isLive
-                  ? t("songExtra.officialLiveVideo", "官方現場演出")
-                  : t("songExtra.officialMusicVideo", "官方音樂錄影帶"))}
-            </span>
-            {currentVideo?.isExcerpt && currentVideo.timeRangeText && (
-              <span className="shrink-0 rounded bg-tape/40 text-ink px-1.5 py-0.5 text-[10px] font-bold">
-                ⏱️ {currentVideo.timeRangeText}
+            </button>
+            <button
+              type="button"
+              onClick={() => handleTrackChange("mv")}
+              className={`flex-1 sm:flex-initial px-2 py-0.5 rounded transition-colors cursor-pointer min-h-[26px] flex items-center justify-center gap-1 ${
+                activeTrack === "mv"
+                  ? "bg-band text-band-ink font-extrabold shadow-2xs"
+                  : "text-muted hover:text-ink hover:bg-tape/30"
+              }`}
+              aria-pressed={activeTrack === "mv"}
+            >
+              <span>
+                {getMvTabLabel(currentMv)}
               </span>
+              {currentMv?.isExcerpt && currentMv.durationSeconds > 0 && (
+                <span className="font-mono text-[9px] opacity-80">
+                  ({currentMv.durationSeconds}s)
+                </span>
+              )}
+            </button>
+          </div>
+        ) : media.hasLive ? (
+          <div className="w-full sm:w-auto order-3 sm:order-2 flex items-center">
+            <span className="rounded bg-band/15 text-band-ink border border-band/30 px-2 py-0.5 text-[10px] font-bold">
+              {currentLive?.isDigest
+                ? `🎬 ${t("tourExtra.watchDigest", "巡演精華")}`
+                : currentLive?.isExcerpt
+                  ? t("songExtra.liveExcerptTab", "🎪 現場精華")
+                  : t("songExtra.liveTab", "🎪 現場 Live")}
+            </span>
+          </div>
+        ) : media.hasMv ? (
+          <div className="w-full sm:w-auto order-3 sm:order-2 flex items-center">
+            <span className="rounded bg-black/[0.04] dark:bg-white/[0.05] text-muted border border-line-soft px-2 py-0.5 text-[10px] font-bold">
+              {getMvTabLabel(currentMv)}
+            </span>
+          </div>
+        ) : null)}
+      </div>
+
+      {/* When collapsed, hide player body and sub-bars */}
+      {!isCollapsed && (
+        <>
+          {/* Multiple Live Performances Selector Sub-bar */}
+          {isLive && media.hasMultipleLives && (
+            <div
+              data-testid="song-media-live-selector"
+              className="flex flex-wrap items-center gap-1.5 px-3 py-1.5 bg-paper/70 border-b border-line-soft font-mono text-[11px]"
+            >
+              <span className="text-muted text-[10px] font-bold uppercase tracking-wider shrink-0 mr-1">
+                {t("songExtra.liveVersions", "場次版本：")}
+              </span>
+              {media.lives.map((l, idx) => {
+                const isActive = idx === selectedLiveIndex;
+                return (
+                  <button
+                    key={l.youtubeId + idx}
+                    type="button"
+                    onClick={() => {
+                      if (idx !== selectedLiveIndex) {
+                        setUserSwitched(true);
+                        setSelectedLiveIndex(idx);
+                      }
+                    }}
+                    className={`inline-flex items-center gap-1 rounded px-2 py-0.5 text-[11px] font-bold transition-colors cursor-pointer min-h-[28px] ${
+                      isActive
+                        ? "bg-band text-band-ink shadow-2xs font-extrabold"
+                        : "bg-paper text-muted hover:text-ink hover:bg-tape/30 border border-line-soft/80"
+                    }`}
+                    aria-pressed={isActive}
+                  >
+                    <span>📍 {l.shortTitle || l.title}</span>
+                    {l.isExcerpt && l.durationSeconds > 0 && (
+                      <span className="text-[9px] opacity-80">({l.durationSeconds}s)</span>
+                    )}
+                  </button>
+                );
+              })}
+            </div>
+          )}
+
+          {/* Multiple Official Music Videos Selector Sub-bar */}
+          {isMv && media.hasMultipleMvs && (
+            <div
+              data-testid="song-media-mv-selector"
+              className="flex flex-wrap items-center gap-1.5 px-3 py-1.5 bg-paper/70 border-b border-line-soft font-mono text-[11px]"
+            >
+              <span className="text-muted text-[10px] font-bold uppercase tracking-wider shrink-0 mr-1">
+                {t("songExtra.mvVersions", "MV 版本：")}
+              </span>
+              {media.mvs.map((m, idx) => {
+                const isActive = idx === selectedMvIndex;
+                const badgeIcon =
+                  m.subType === "anime"
+                    ? "🎨"
+                    : m.subType === "film"
+                      ? "🎥"
+                      : m.subType === "lyric"
+                        ? "📝"
+                        : m.subType === "short"
+                          ? "🎬"
+                          : "🎬";
+                return (
+                  <button
+                    key={m.youtubeId + idx}
+                    type="button"
+                    onClick={() => {
+                      if (idx !== selectedMvIndex) {
+                        setUserSwitched(true);
+                        setSelectedMvIndex(idx);
+                      }
+                    }}
+                    className={`inline-flex items-center gap-1 rounded px-2 py-0.5 text-[11px] font-bold transition-colors cursor-pointer min-h-[28px] ${
+                      isActive
+                        ? "bg-band text-band-ink shadow-2xs font-extrabold"
+                        : "bg-paper text-muted hover:text-ink hover:bg-tape/30 border border-line-soft/80"
+                    }`}
+                    aria-pressed={isActive}
+                  >
+                    <span>{badgeIcon}</span>
+                    <span>{m.shortTitle || m.title}</span>
+                    {m.isExcerpt && m.durationSeconds > 0 && (
+                      <span className="text-[9px] opacity-80">({m.durationSeconds}s)</span>
+                    )}
+                  </button>
+                );
+              })}
+            </div>
+          )}
+
+          {/* 16:9 Video Embed Container */}
+          <div className="relative aspect-video w-full bg-black overflow-hidden">
+            {embedUrl ? (
+              <iframe
+                ref={iframeRef}
+                src={embedUrl}
+                onLoad={handleIframeLoad}
+                title={`${title} - ${isLive ? t("songExtra.liveVideo", "現場演出") : t("songExtra.musicVideo", "官方 MV")}`}
+                className="absolute inset-0 h-full w-full border-0 outline-none"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerPolicy="no-referrer-when-downgrade"
+                allowFullScreen
+              />
+            ) : null}
+          </div>
+
+          {/* Stage Bottom Bar (Link to Show Slip or Video Information) */}
+          <div className="flex flex-wrap items-center justify-between gap-1.5 px-3 py-2 bg-paper font-mono text-[11px] border-t border-line-soft">
+            {isLive && currentLive?.showId ? (
+              <button
+                type="button"
+                onClick={handleShowClick}
+                className="w-full sm:w-auto inline-flex items-center justify-between sm:justify-start gap-1.5 rounded border border-line-soft bg-tape/30 px-2.5 py-1 text-[11px] font-bold text-ink hover:bg-band hover:text-band-ink transition-colors cursor-pointer text-left min-h-[32px]"
+                title={t("songExtra.viewShowSlipTitle", "前往查看此場次的完整曲目清單與開演資訊")}
+              >
+                <div className="flex items-center gap-1.5 min-w-0">
+                  <span className="shrink-0">📍</span>
+                  <span className="truncate">
+                    {currentLive.title || t("songExtra.livePerformance", "現場演出紀錄")}
+                  </span>
+                  {currentLive.isExcerpt && currentLive.timeRangeText && (
+                    <span className="shrink-0 rounded bg-band/20 text-band-ink px-1.5 py-0.5 text-[10px] font-bold">
+                      ⏱️ {currentLive.timeRangeText}
+                    </span>
+                  )}
+                </div>
+                <span className="shrink-0 font-extrabold underline underline-offset-2 ml-2">
+                  {t("songExtra.viewShowSlip", "前往該場次票根 →")}
+                </span>
+              </button>
+            ) : (
+              <div className="flex items-center gap-1.5 py-1 min-w-0">
+                <span className="text-muted text-[11px] truncate">
+                  {currentVideo?.title ||
+                    (isLive
+                      ? t("songExtra.officialLiveVideo", "官方現場演出")
+                      : t("songExtra.officialMusicVideo", "官方音樂錄影帶"))}
+                </span>
+                {currentVideo?.isExcerpt && currentVideo.timeRangeText && (
+                  <span className="shrink-0 rounded bg-tape/40 text-ink px-1.5 py-0.5 text-[10px] font-bold">
+                    ⏱️ {currentVideo.timeRangeText}
+                  </span>
+                )}
+              </div>
             )}
           </div>
-        )}
-      </div>
+        </>
+      )}
     </div>
   );
 }

@@ -272,7 +272,10 @@ describe("33. Song Media Stage & SongSlip In-Place Integration (UI SSR)", () => 
         })
       )
     );
-    assert.ok(htmlPretender.includes("🎬 現場影片"), "Populated song must render 🎬 現場影片 button");
+    assert.ok(
+      !htmlPretender.includes("🎬 現場影片") && !htmlPretender.includes("🎬 現場精華"),
+      "Populated song must omit redundant toolbar jump button in favor of in-place stage"
+    );
     assert.ok(htmlPretender.includes('data-testid="song-media-stage"'), "Populated song must render in-place stage");
     assert.ok(htmlPretender.includes("youtube.com/embed/"), "Must embed youtube player in-place");
 
@@ -292,5 +295,44 @@ describe("33. Song Media Stage & SongSlip In-Place Integration (UI SSR)", () => 
     assert.ok(htmlUnpopulated.includes("▶ YouTube"), "Unpopulated song must render ▶ YouTube search link");
     assert.ok(htmlUnpopulated.includes("youtube.com/results?search_query="), "Must contain search query url");
     assert.ok(!htmlUnpopulated.includes('data-testid="song-media-stage"'), "Unpopulated song must not render stage");
+  });
+
+  it("supports collapsible stage toggling (collapsing hides YouTube iframe to free mobile vertical height)", async () => {
+    const { SongMediaStage } = await loadModule("src/components/slips/SongMediaStage.jsx");
+    const { I18nProvider } = await loadModule("src/lib/i18n.jsx");
+
+    // Expanded stage (default)
+    const htmlExpanded = renderToStaticMarkup(
+      React.createElement(
+        I18nProvider,
+        { initialLocale: "zh-TW" },
+        React.createElement(SongMediaStage, {
+          songId: "pretender",
+          mediaOverride: mockPretenderMedia,
+          collapsed: false,
+        })
+      )
+    );
+    assert.ok(htmlExpanded.includes("收合 ▴"), "Expanded stage must show collapse toggle button");
+    assert.ok(htmlExpanded.includes("<iframe"), "Expanded stage must render embed iframe");
+    assert.ok(htmlExpanded.includes("🎪 現場 Live"), "Expanded stage must render track switcher");
+
+    // Collapsed stage
+    const htmlCollapsed = renderToStaticMarkup(
+      React.createElement(
+        I18nProvider,
+        { initialLocale: "zh-TW" },
+        React.createElement(SongMediaStage, {
+          songId: "pretender",
+          mediaOverride: mockPretenderMedia,
+          collapsed: true,
+        })
+      )
+    );
+    assert.ok(htmlCollapsed.includes("展開 ▾"), "Collapsed stage must show expand toggle button");
+    assert.ok(!htmlCollapsed.includes("<iframe"), "Collapsed stage must not render embed iframe");
+    assert.ok(!htmlCollapsed.includes("🎪 現場 Live"), "Collapsed stage must not render track switcher");
+    assert.ok(htmlCollapsed.includes("官方影音播放器"), "Collapsed stage must retain header title");
+    assert.ok(htmlCollapsed.includes("YouTube ↗"), "Collapsed stage must retain direct outbound link");
   });
 });
