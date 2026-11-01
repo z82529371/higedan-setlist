@@ -25,6 +25,8 @@ Engineering standards, judgement baselines, and module test seams for code revie
   - Atomic Show Date Invariant: Whenever rendering a show date alongside a venue or city name, keep the date in a dedicated `font-mono whitespace-nowrap shrink-0` span and apply `truncate` only to the sibling venue/city span so dates never clip or wrap.
   - 540px Postcard & Ticket Slip Mobile Fluidity: Components intended for standard 540px offline export must remain 100% fluid on mobile screens. Outer card containers must strictly use `w-full max-w-[540px]`, never fixed unconstrained `w-[540px]` or hardcoded inline `width: 540px`. Inner rows (such as postmark stamps and summary metrics) must remain resilient across narrow 360px~390px viewports without vertical displacement or awkward clipping.
 - **Contrast**: Small text (<14px) and badge labels must meet AAA 7:1 contrast using semantic theme ink tokens (`text-ink`, `text-ink-muted`). Never introduce unvetted arbitrary hex colors (e.g. `text-[#...]`).
+- **Mobile Drawer Confinement Rule (ADR-0140)**: When rendering list items inside `FilterDrawer` on mobile screens, list capacity must be strictly capped (venues locked to 10 items per page; 18 items 3×6 grid is reserved exclusively for desktop wide view). This prevents vertical mobile popups from causing over 900px of scrolling blowout.
+- **Leaderboard Podium & Bar Discipline (ADR-0139)**: Podium badges (#1 gold, #2 silver, #3 bronze) and horizontal percentage bars must strictly use semantic theme tokens (`bg-paper-light`, `text-ink`, `border-ink/20`) with >= 7:1 AAA contrast in small text. Unvetted raw hex values are forbidden.
 
 ## 4. Multi-Lingual Parity (ADR-0107, ADR-0112)
 
@@ -59,4 +61,6 @@ When proposing and testing public seams during `/tdd` or `/implement`, target th
 | `venue-map.js` | `projectLatLngToSvg`, `buildPrefectureMapStats`, `computeSpiderfyOffsets`, `buildJourneySequence`, `resolveMapTarget`, `formatMapBadgeLabel` | `tests/pipeline/venue-map.test.js`, `tests/invariants/venue-profiles.test.js`, `tests/ui/venue-map-ui.test.js` |
 | `japan-map-paths.js` | `JAPAN_PREFECTURE_PATHS`, `OVERSEAS_INSET_COUNTRIES`, `getZoomViewBox` | `tests/pipeline/venue-map.test.js`, `tests/ui/venue-map-ui.test.js` |
 | `song-media.js` | `parseTimestamp`, `formatTimestamp`, `buildYouTubeEmbedUrl`, `buildYouTubeWatchUrl`, `extractSongMedia`, `extractConcertMedia`, `resolveActiveMedia` | `tests/pipeline/song-media.test.js`, `tests/ui/song-media-modal.test.js` |
+| `spotify.js` | `validateSpotifyTrackId`, `buildSpotifyEmbedUrl` | `tests/pipeline/spotify.test.js` |
+| `ranking.js` | `computeRankings` | `tests/pipeline/ranking.test.js`, `tests/ui/ranking-page.test.js`, `tests/ui/ranking-route.test.js` |
 | `pwa.js` | `registerServiceWorker`, `unregisterServiceWorkers`, `subscribeUpdateAvailable`, `applyServiceWorkerUpdate` | `tests/invariants/pwa-invariants.test.js`, `tests/ui/update-notification-toast.test.js` |
