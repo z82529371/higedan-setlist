@@ -737,6 +737,13 @@ export const dictZhTw = {
     fullscreenAria: "開啟全螢幕互動地圖視窗",
     fullscreenCloseAria: "關閉全螢幕地圖視窗",
   },
+  pwa: {
+    updateAvailable: "巡演歌單與功能已有新版本",
+    updateNow: "立即更新",
+    updating: "更新中...",
+    dismiss: "稍後",
+    dismissAria: "關閉版本更新提醒",
+  },
 };
 
 

@@ -737,6 +737,13 @@ export const dictJa = {
     fullscreenAria: "全画面インタラクティブマップを開く",
     fullscreenCloseAria: "全画面マップを閉じる",
   },
+  pwa: {
+    updateAvailable: "ツアーセトリと新機能が更新されました",
+    updateNow: "今すぐ更新",
+    updating: "更新中...",
+    dismiss: "あとで",
+    dismissAria: "バージョン更新の通知を閉じる",
+  },
 };
 
 

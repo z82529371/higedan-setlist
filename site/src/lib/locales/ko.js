@@ -737,6 +737,13 @@ export const dictKo = {
     fullscreenAria: "전체 화면 상호작용 지도 열기",
     fullscreenCloseAria: "전체 화면 지도 닫기",
   },
+  pwa: {
+    updateAvailable: "투어 세트리스트와 새로운 기능이 업데이트되었습니다",
+    updateNow: "지금 업데이트",
+    updating: "업데이트 중...",
+    dismiss: "나중에",
+    dismissAria: "업데이트 알림 닫기",
+  },
 };
 
 

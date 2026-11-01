@@ -737,6 +737,13 @@ export const dictEn = {
     fullscreenAria: "Open interactive fullscreen venue map",
     fullscreenCloseAria: "Close fullscreen venue map",
   },
+  pwa: {
+    updateAvailable: "Tour setlists & features updated",
+    updateNow: "Update Now",
+    updating: "Updating...",
+    dismiss: "Later",
+    dismissAria: "Dismiss update notification",
+  },
 };
 
 
