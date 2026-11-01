@@ -3,6 +3,7 @@ import { allUnits, buildIndex } from "./lib/domain.js";
 import { ArchiveLayout } from "./components/layout/index.js";
 import { TicketBookPage } from "./components/ticket-book/TicketBookPage.jsx";
 import { JourneyPage } from "./components/journey/index.js";
+import { RankingPage } from "./components/ranking/RankingPage.jsx";
 import { useArchiveFilter, useArchiveRoute } from "./hooks/index.js";
 import { I18nProvider } from "./lib/i18n.jsx";
 import LandingHero from "./components/LandingHero.jsx";
@@ -63,6 +64,7 @@ export function AppContent({ probeRoute } = {}) {
     handleSelectVenue,
     handleSelectUnit,
     handleSelectTickets,
+    handleSelectRanking,
     handleSelectJourney,
     handleReturnArchive,
     handleReturnHome,
@@ -91,6 +93,7 @@ export function AppContent({ probeRoute } = {}) {
           }}
           onOpenCalendar={() => setIsCalendarOpen(true)}
           onSelectTickets={handleSelectTickets}
+          onSelectRanking={handleSelectRanking}
           onSelectJourney={handleSelectJourney}
           onSelectTab={(newTab, options) => {
             setViewMode("archive");
@@ -124,6 +127,25 @@ export function AppContent({ probeRoute } = {}) {
           onReturnArchive={handleReturnArchive}
           onReturnHome={handleReturnHome}
           onSelectTickets={handleSelectTickets}
+        />
+      ) : viewMode === "ranking" ? (
+        <RankingPage
+          allUsedSongs={allUsedSongs}
+          allVenues={allVenues}
+          trackShows={trackShows}
+          showById={showById}
+          onSelectSong={(sId) => {
+            setViewMode("archive");
+            handleSelectSong(sId);
+          }}
+          onSelectVenue={(vName) => {
+            setViewMode("archive");
+            handleSelectVenue(vName);
+          }}
+          onReturnArchive={handleReturnArchive}
+          onReturnHome={handleReturnHome}
+          onSelectTickets={handleSelectTickets}
+          onSelectJourney={handleSelectJourney}
         />
       ) : (
         <ArchiveLayout

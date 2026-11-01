@@ -64,6 +64,11 @@ export function parseRoute(hash) {
       if (lang) res.lang = lang;
       return res;
     }
+    if (normalizedPath === "/ranking") {
+      const res = { kind: "ranking", value: null };
+      if (lang) res.lang = lang;
+      return res;
+    }
     return null;
   }
 
@@ -95,6 +100,8 @@ export function buildRouteHash(kind, value, options = {}) {
         : `#/map/${encodeURIComponent(value)}`
       : kind === "tickets"
       ? `#/tickets`
+      : kind === "ranking"
+      ? `#/ranking`
       : kind === "archive"
       ? `#/archive`
       : "#/";
@@ -113,5 +120,6 @@ export const routeHash = {
   map: (target = null, opts) => buildRouteHash("map", target, opts),
   mapJourney: (opts) => buildRouteHash("map", "journey", opts),
   tickets: (opts) => buildRouteHash("tickets", null, opts),
+  ranking: (opts) => buildRouteHash("ranking", null, opts),
   archive: (opts) => buildRouteHash("archive", null, opts),
 };

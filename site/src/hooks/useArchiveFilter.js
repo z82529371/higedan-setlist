@@ -62,7 +62,7 @@ export function useArchiveFilter({
 
   // Units indexed by performance category
   const unitsByCategory = useMemo(() => {
-    const map = {};
+    const map = { ALL: allUnits };
     for (const cat of PERFORMANCE_CATEGORIES) {
       map[cat] = [];
     }
@@ -72,11 +72,16 @@ export function useArchiveFilter({
       map[t].push(u);
     }
     return map;
-  }, []);
+  }, [allUnits]);
 
   // Category counts and statistics
   const categoryStats = useMemo(() => {
-    const stats = {};
+    const stats = {
+      ALL: {
+        units: allUnits.length,
+        shows: totalAllShows,
+      },
+    };
     for (const cat of PERFORMANCE_CATEGORIES) {
       const list = unitsByCategory[cat] || [];
       stats[cat] = {
@@ -85,13 +90,13 @@ export function useArchiveFilter({
       };
     }
     return stats;
-  }, [unitsByCategory]);
+  }, [unitsByCategory, allUnits, totalAllShows]);
 
   // Available years and show counts for current category
   const yearStats = useMemo(() => {
     const map = new Map();
     for (const u of allUnits) {
-      if (getUnitTypeLabel(u) === selCategory) {
+      if (selCategory === "ALL" || getUnitTypeLabel(u) === selCategory) {
         const y = unitEarliest(u).split("-")[0];
         if (y && y !== "9999") {
           const prev = map.get(y) || { shows: 0, units: 0 };
@@ -102,7 +107,7 @@ export function useArchiveFilter({
       }
     }
     return map;
-  }, [selCategory]);
+  }, [selCategory, allUnits]);
 
   const availableYears = useMemo(() => {
     return Array.from(yearStats.keys()).sort((a, b) => b.localeCompare(a));
@@ -110,7 +115,7 @@ export function useArchiveFilter({
 
   const handleCategoryClick = (cat) => {
     setSelCategory(cat);
-    const catUnits = unitsByCategory[cat] || [];
+    const catUnits = cat === "ALL" ? allUnits : (unitsByCategory[cat] || []);
     const catYears = Array.from(
       new Set(
         catUnits
@@ -126,12 +131,12 @@ export function useArchiveFilter({
   };
 
   const filteredUnits = useMemo(() => {
-    const list = unitsByCategory[selCategory] || [];
+    const list = selCategory === "ALL" ? allUnits : (unitsByCategory[selCategory] || []);
     return list.filter((u) => {
       const y = unitEarliest(u).split("-")[0];
       return y === selYear;
     });
-  }, [unitsByCategory, selCategory, selYear]);
+  }, [unitsByCategory, selCategory, selYear, allUnits]);
 
   // Memoized sorted songs by performance count (High to Low)
   const songsSortedByCount = useMemo(() => {
@@ -143,11 +148,19 @@ export function useArchiveFilter({
   }, [allUsedSongs, trackShows]);
 
   const filteredSongs = useMemo(() => {
-    if (songSortMode === "count") {
-      return songsSortedByCount;
+    let list = allUsedSongs;
+    if (selAlbum) {
+      list = list.filter((s) => getSongAlbum(s) === selAlbum);
     }
-    return allUsedSongs.filter((s) => getSongAlbum(s) === selAlbum);
-  }, [songSortMode, selAlbum, allUsedSongs, songsSortedByCount]);
+    if (songSortMode === "count") {
+      return [...list].sort((a, b) => {
+        const cntA = trackShows.get(trackKey("song", a.id))?.length || 0;
+        const cntB = trackShows.get(trackKey("song", b.id))?.length || 0;
+        return cntB - cntA || String(a.title || a.id || "").localeCompare(String(b.title || b.id || ""));
+      });
+    }
+    return list;
+  }, [songSortMode, selAlbum, allUsedSongs, trackShows]);
 
   // Memoized sorted venues by show count (High to Low)
   const venuesSortedByCount = useMemo(() => {

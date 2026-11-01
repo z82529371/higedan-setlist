@@ -1,6 +1,7 @@
+import { useState, useMemo } from "react";
 import { PaginationPills, PAGE_SIZE } from "./PaginationPills.jsx";
 import { PERFORMANCE_CATEGORIES } from "../../lib/constants.js";
-import { unitEarliest, shortUnitTitle, defaultShowId, formatShowPlace } from "../../lib/domain.js";
+import { unitEarliest, shortUnitTitle, defaultShowId, formatShowPlace, getUnitTypeLabel } from "../../lib/domain.js";
 import { useI18n } from "../../lib/i18n.jsx";
 import { useTicketBook } from "../../lib/ticket-book.js";
 
@@ -30,11 +31,14 @@ export function ShowNavigator({
   handleSelectUnit,
   handleSelectShow,
   handleSelectTourMode,
+  allUnits = [],
   storage,
 }) {
     const { t } = useI18n();
     const { payload: ticketPayload } = useTicketBook({ storage });
     const attendedMap = ticketPayload?.attendedShows || {};
+    const [localQuery, setLocalQuery] = useState("");
+
     const curCategory = isDrawer && draftState ? draftState.category : selCategory;
     const curYear = isDrawer && draftState ? draftState.year : selYear;
     const curUnitId = isDrawer && draftState ? draftState.unitId : selUnitId;
@@ -42,17 +46,30 @@ export function ShowNavigator({
     const curUnitPage = (isDrawer && draftState ? draftState.unitPage : unitPage) || 0;
     const curShowPage = (isDrawer && draftState ? draftState.showPage : showPage) || 0;
 
-    const curUnits = unitsByCategory[curCategory] || [];
-    const curYearStats = new Map();
-    for (const u of curUnits) {
-      const y = unitEarliest(u).split("-")[0];
-      if (y && y !== "9999") {
-        const prev = curYearStats.get(y) || { shows: 0, units: 0 };
-        prev.shows += u.shows?.length || 0;
-        prev.units += 1;
-        curYearStats.set(y, prev);
+    const effectiveAllUnits = useMemo(() => {
+      if (allUnits && allUnits.length > 0) return allUnits;
+      return Object.values(unitsByCategory || {}).flat();
+    }, [allUnits, unitsByCategory]);
+
+    const curUnits = useMemo(() => {
+      if (curCategory === "ALL") return effectiveAllUnits;
+      return unitsByCategory[curCategory] || [];
+    }, [curCategory, effectiveAllUnits, unitsByCategory]);
+
+    const curYearStats = useMemo(() => {
+      const map = new Map();
+      for (const u of curUnits) {
+        const y = unitEarliest(u).split("-")[0];
+        if (y && y !== "9999") {
+          const prev = map.get(y) || { shows: 0, units: 0 };
+          prev.shows += u.shows?.length || 0;
+          prev.units += 1;
+          map.set(y, prev);
+        }
       }
-    }
+      return map;
+    }, [curUnits]);
+
     const dAvailableYears = isDrawer && draftState
       ? Array.from(curYearStats.keys()).sort((a, b) => b.localeCompare(a))
       : availableYears;
@@ -81,44 +98,161 @@ export function ShowNavigator({
       (safeShowPage + 1) * PAGE_SIZE
     );
 
+    // Instant omnibox search query matching
+    const query = localQuery.trim().toLowerCase();
+    const isSearching = query.length > 0;
+
+    const matchingUnits = useMemo(() => {
+      if (!isSearching) return [];
+      return effectiveAllUnits.filter((u) => {
+        const title = (u.title || "").toLowerCase();
+        const sub = (u.subtitle || "").toLowerCase();
+        const id = (u.id || "").toLowerCase();
+        if (title.includes(query) || sub.includes(query) || id.includes(query)) return true;
+
+        const y = unitEarliest(u).split("-")[0];
+        if (y.includes(query)) return true;
+
+        if (u.shows && u.shows.some((s) => {
+          const place = (s.place || "").toLowerCase();
+          const pref = (s.prefecture || "").toLowerCase();
+          const city = (s.city || "").toLowerCase();
+          return place.includes(query) || pref.includes(query) || city.includes(query);
+        })) {
+          return true;
+        }
+        return false;
+      });
+    }, [isSearching, query, effectiveAllUnits]);
+
     return (
       <div
         className={`relative rounded-[6px] border-[1.5px] border-ink bg-card p-4 sm:p-5 shadow-sm space-y-4 ${
           isDrawer ? "border-0 shadow-none p-0 sm:p-0" : ""
         }`}
       >
-        {/* Step 1: 演出分類 */}
-        <div>
-          <div className="flex items-center justify-between mb-2">
-            <span className="font-mono text-[11px] font-bold text-muted uppercase tracking-wider flex items-center gap-1.5">
-              <span aria-hidden="true">🏷️</span>
-              <span>{t("navigators.selectCategory", "1. 選擇演出類型")}</span>
-            </span>
-            <span className="font-mono text-[11px] text-muted tabular-nums">
-              {categoryStats[curCategory]?.shows || 0} {t("navigators.showsCountUnit", "場演出")}
-            </span>
+        {/* Step 0: 即時巡演 / 活動 / 場館智慧搜尋框 */}
+        <div className="relative">
+          <input
+            type="text"
+            data-testid="show-search-input"
+            value={localQuery}
+            onChange={(e) => setLocalQuery(e.target.value)}
+            placeholder={t("showNav.searchPlaceholder", "搜尋巡演、活動或場館，如 Rejoice, 武道館...")}
+            className="w-full text-xs px-3 py-1.5 rounded-[3px] border border-line-soft bg-paper text-ink placeholder:text-muted focus:border-ink focus:outline-none"
+          />
+          {localQuery && (
+            <button
+              type="button"
+              onClick={() => setLocalQuery("")}
+              className="absolute right-2.5 top-1/2 -translate-y-1/2 text-muted hover:text-ink text-xs font-bold cursor-pointer"
+              aria-label="clear"
+            >
+              ✕
+            </button>
+          )}
+        </div>
+
+        {isSearching ? (
+          /* 即時搜尋匹配結果卡片清單 */
+          <div className="space-y-2 pt-1 border-t border-line-soft">
+            <div className="flex items-center justify-between text-[11px] font-mono text-muted">
+              <span>
+                {t("showNav.matchingUnitsCount", null, { count: matchingUnits.length })}
+              </span>
+              <button
+                type="button"
+                onClick={() => setLocalQuery("")}
+                className="text-[11px] font-mono text-ink/70 hover:text-ink cursor-pointer underline"
+              >
+                {t("common.clear", "清除搜尋")}
+              </button>
+            </div>
+
+            {matchingUnits.length === 0 ? (
+              <div className="py-4 text-center text-xs text-muted font-mono">
+                {t("showNav.emptySearchResult", "查無符合條件的巡演或活動")}
+              </div>
+            ) : (
+              <div className="flex flex-wrap gap-1.5 sm:gap-2 max-h-[280px] overflow-y-auto pr-1">
+                {matchingUnits.map((u) => {
+                  const isCur = u.id === curUnitId;
+                  const yr = unitEarliest(u).split("-")[0];
+                  const type = getUnitTypeLabel(u);
+                  const showCnt = (u.shows || []).length;
+                  const uData = unitData?.get(u.id);
+                  const hasSongs = (uData?.songShows?.size ?? 0) > 0;
+
+                  return (
+                    <button
+                      key={u.id}
+                      type="button"
+                      onClick={() => {
+                        const targetShowId = defaultShowId(u);
+                        const isTour = !!u.templateSetlist;
+                        if (isDrawer && draftState) {
+                          setDraftState((prev) => ({
+                            ...prev,
+                            unitId: u.id,
+                            showId: targetShowId,
+                            showSubMode: isTour ? "tour" : "show",
+                            showPage: 0,
+                          }));
+                        } else {
+                          handleSelectUnit(u.id);
+                        }
+                      }}
+                      className={`rounded-full px-3.5 py-1.5 text-[12px] sm:text-[13px] font-semibold transition-colors motion-reduce:transition-none cursor-pointer inline-flex items-center gap-1.5 focus-visible:ring-2 focus-visible:ring-band focus-visible:outline-none ${
+                        isCur
+                          ? "bg-band text-band-ink font-bold shadow-xs border border-ink/40"
+                          : hasSongs
+                          ? "bg-paper text-ink border border-line-soft hover:bg-tape-tint/50 hover:border-ink/60"
+                          : "bg-paper/70 text-muted border border-dashed border-line hover:bg-tape-tint/40 hover:border-ink/60 hover:text-ink"
+                      }`}
+                    >
+                      <span className="truncate max-w-[260px] sm:max-w-none">
+                        {shortUnitTitle(u)}
+                      </span>
+                      <span className="font-mono text-[10px] opacity-75 tabular-nums">
+                        [{yr} · {t(`categories.${type}`, type)}] ({showCnt}{t("navigators.showsUnit", "場")})
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
+            )}
           </div>
-          <div className="flex flex-wrap gap-1.5 sm:gap-2">
-            {PERFORMANCE_CATEGORIES.map((cat) => {
-              const isCur = curCategory === cat;
-              const stat = categoryStats[cat] || { units: 0, shows: 0 };
-              return (
+        ) : (
+          <>
+            {/* Step 1: 演出分類 */}
+            <div>
+              <div className="flex items-center justify-between mb-2">
+                <span className="font-mono text-[11px] font-bold text-muted uppercase tracking-wider flex items-center gap-1.5">
+                  <span aria-hidden="true">🏷️</span>
+                  <span>{t("navigators.selectCategory", "1. 選擇演出類型")}</span>
+                </span>
+                <span className="font-mono text-[11px] text-muted tabular-nums">
+                  {categoryStats[curCategory]?.shows || 0} {t("navigators.showsCountUnit", "場演出")}
+                </span>
+              </div>
+              <div className="flex flex-wrap gap-1.5 sm:gap-2">
+                {/* 全部類型 (ALL) 首選膠囊 */}
                 <button
-                  key={cat}
                   type="button"
+                  data-testid="show-category-all"
                   onClick={() => {
                     if (isDrawer && draftState) {
-                      const units = unitsByCategory[cat] || [];
+                      const allU = effectiveAllUnits;
                       const years = Array.from(
-                        new Set(units.map((u) => unitEarliest(u).split("-")[0]))
+                        new Set(allU.map((u) => unitEarliest(u).split("-")[0]))
                       ).sort().reverse();
                       const nextYear = years.includes(draftState.year) ? draftState.year : (years[0] || "2024");
-                      const nextUnits = units.filter((u) => unitEarliest(u).split("-")[0] === nextYear);
-                      const nextUnit = nextUnits.find((u) => u.id === draftState.unitId) || nextUnits[0] || units[0];
+                      const nextUnits = allU.filter((u) => unitEarliest(u).split("-")[0] === nextYear);
+                      const nextUnit = nextUnits.find((u) => u.id === draftState.unitId) || nextUnits[0] || allU[0];
                       const nextShowId = nextUnit ? defaultShowId(nextUnit) : "";
                       setDraftState((prev) => ({
                         ...prev,
-                        category: cat,
+                        category: "ALL",
                         year: nextYear,
                         unitId: nextUnit?.id || "",
                         showId: nextShowId,
@@ -126,24 +260,66 @@ export function ShowNavigator({
                         showPage: 0,
                       }));
                     } else {
-                      handleCategoryClick(cat);
+                      handleCategoryClick("ALL");
                     }
                   }}
                   className={`rounded-full px-3.5 py-1.5 text-[12px] sm:text-[13px] font-semibold transition-colors motion-reduce:transition-none cursor-pointer inline-flex items-center gap-1.5 focus-visible:ring-2 focus-visible:ring-band focus-visible:outline-none ${
-                    isCur
+                    curCategory === "ALL"
                       ? "bg-band text-band-ink font-bold shadow-xs border border-ink/40"
                       : "bg-paper text-ink border border-line-soft hover:bg-tape-tint/50 hover:border-ink/60"
                   }`}
                 >
-                  <span>{t(`categories.${cat}`, cat)}</span>
+                  <span>{t("showNav.allCategories", "全部類型")}</span>
                   <span className="font-mono text-[11px] opacity-75 tabular-nums">
-                    ({stat.shows}{t("navigators.showsUnit", "場")})
+                    ({categoryStats["ALL"]?.shows || 0}{t("navigators.showsUnit", "場")})
                   </span>
                 </button>
-              );
-            })}
-          </div>
-        </div>
+
+                {PERFORMANCE_CATEGORIES.map((cat) => {
+                  const isCur = curCategory === cat;
+                  const stat = categoryStats[cat] || { units: 0, shows: 0 };
+                  return (
+                    <button
+                      key={cat}
+                      type="button"
+                      onClick={() => {
+                        if (isDrawer && draftState) {
+                          const units = unitsByCategory[cat] || [];
+                          const years = Array.from(
+                            new Set(units.map((u) => unitEarliest(u).split("-")[0]))
+                          ).sort().reverse();
+                          const nextYear = years.includes(draftState.year) ? draftState.year : (years[0] || "2024");
+                          const nextUnits = units.filter((u) => unitEarliest(u).split("-")[0] === nextYear);
+                          const nextUnit = nextUnits.find((u) => u.id === draftState.unitId) || nextUnits[0] || units[0];
+                          const nextShowId = nextUnit ? defaultShowId(nextUnit) : "";
+                          setDraftState((prev) => ({
+                            ...prev,
+                            category: cat,
+                            year: nextYear,
+                            unitId: nextUnit?.id || "",
+                            showId: nextShowId,
+                            unitPage: 0,
+                            showPage: 0,
+                          }));
+                        } else {
+                          handleCategoryClick(cat);
+                        }
+                      }}
+                      className={`rounded-full px-3.5 py-1.5 text-[12px] sm:text-[13px] font-semibold transition-colors motion-reduce:transition-none cursor-pointer inline-flex items-center gap-1.5 focus-visible:ring-2 focus-visible:ring-band focus-visible:outline-none ${
+                        isCur
+                          ? "bg-band text-band-ink font-bold shadow-xs border border-ink/40"
+                          : "bg-paper text-ink border border-line-soft hover:bg-tape-tint/50 hover:border-ink/60"
+                      }`}
+                    >
+                      <span>{t(`categories.${cat}`, cat)}</span>
+                      <span className="font-mono text-[11px] opacity-75 tabular-nums">
+                        ({stat.shows}{t("navigators.showsUnit", "場")})
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
 
         {/* Step 2: 演出年份 */}
         <div className="pt-2 border-t border-line-soft">
@@ -271,6 +447,8 @@ export function ShowNavigator({
             })}
           </div>
         </div>
+        </>
+        )}
 
         {/* Step 4: 切換場次日期 (十個十個顯示，單發 1 場直接隱藏) */}
         {dCurrentUnitData?.shows && dCurrentUnitData.shows.length > 1 && (

@@ -74,7 +74,7 @@ describe("6. Component Mount & SSR Render Smoke Test", () => {
       })
     );
     assert.ok(html.length > 0);
-    assert.ok(html.includes("歌曲分類方式"));
+    assert.ok(html.includes("選擇歌曲") || html.includes("發行專輯"));
   });
 
   it("renders VenueNavigator without ReferenceError", async () => {

@@ -26,7 +26,7 @@ export const songAlias = Object.fromEntries(
 
 export function getSongAlbum(song) {
   if (song.unreleased || songUnreleased.has(song.id)) return "未發行曲目";
-  return ALBUM_MAP[song.id] ?? "EP / 單曲";
+  return song.album || (ALBUM_MAP[song.id] ?? "EP / 單曲");
 }
 
 /**

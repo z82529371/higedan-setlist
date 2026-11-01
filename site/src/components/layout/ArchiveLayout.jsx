@@ -68,6 +68,7 @@ export function ArchiveLayout({
     handleSelectTourMode,
     handleReturnHome,
     handleSelectTickets,
+    handleSelectRanking,
     handleSelectJourney,
     visualViewportStyle,
   } = routeState;
@@ -141,6 +142,7 @@ export function ArchiveLayout({
       handleSelectUnit={handleSelectUnit}
       handleSelectShow={handleSelectShow}
       handleSelectTourMode={handleSelectTourMode}
+      allUnits={allUnits}
       storage={storage}
     />
   );
@@ -211,6 +213,7 @@ export function ArchiveLayout({
         slipRef={slipRef}
         handleReturnHome={handleReturnHome}
         handleSelectTickets={handleSelectTickets}
+        handleSelectRanking={handleSelectRanking}
         handleSelectJourney={handleSelectJourney}
         storage={storage}
       />
@@ -565,6 +568,7 @@ export function ArchiveLayout({
         onOpenDrawer={openFilterDrawer}
         onReturnHome={handleReturnHome}
         onSelectTickets={handleSelectTickets}
+        onSelectRanking={handleSelectRanking}
         onSelectJourney={handleSelectJourney}
         storage={storage}
       />

@@ -12,6 +12,7 @@ export default function LandingHero({
   onOpenCalendar,
   onSelectTab,
   onSelectTickets,
+  onSelectRanking,
   onSelectJourney,
   totalAllShows,
   allUsedSongs,
@@ -173,7 +174,11 @@ export default function LandingHero({
           <button
             type="button"
             onClick={() => {
-              onSelectTab("song", { sortMode: "count" });
+              if (onSelectRanking) {
+                onSelectRanking();
+              } else {
+                onSelectTab("song", { sortMode: "count" });
+              }
             }}
             className="rounded-[4px] border border-ink/25 bg-card hover:bg-band hover:text-band-ink px-2.5 py-1 font-medium transition-colors motion-reduce:transition-none cursor-pointer shadow-2xs flex items-center gap-1"
           >

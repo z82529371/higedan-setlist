@@ -13,6 +13,7 @@ export function ArchiveStatusBar({
   slipRef,
   handleReturnHome,
   handleSelectTickets,
+  handleSelectRanking,
   handleSelectJourney,
   storage,
 }) {
@@ -118,6 +119,24 @@ export function ArchiveStatusBar({
                   {ticketCount}
                 </span>
               )}
+            </button>
+          )}
+
+          {/* Leaderboard Action Button (Desktop) */}
+          {handleSelectRanking && (
+            <button
+              type="button"
+              data-testid="status-bar-ranking-btn"
+              onClick={(e) => {
+                e.stopPropagation();
+                handleSelectRanking();
+              }}
+              className="hidden sm:inline-flex items-center gap-1.5 px-2 py-0.5 rounded-[4px] bg-band-ink/10 hover:bg-band-ink/20 active:scale-95 text-band-ink font-bold border border-band-ink/30 transition-all cursor-pointer text-[10px] sm:text-[11px] shrink-0 shadow-2xs"
+              title={t("ranking.title", "演出排行")}
+              aria-label={t("ranking.title", "演出排行")}
+            >
+              <span aria-hidden="true">🏆</span>
+              <span>{t("nav.ranking", "排行")}</span>
             </button>
           )}
 

@@ -8,12 +8,15 @@ export function MobileFloatingControls({
   onOpenDrawer,
   onReturnHome,
   onSelectTickets,
+  onSelectRanking,
   onSelectJourney,
   onReturnArchive,
   storage,
 }) {
   const { t } = useI18n();
   const { count: ticketCount } = useTicketBook({ storage });
+
+  const isStandalonePage = tab === "journey" || tab === "ranking";
 
   return (
     <>
@@ -33,6 +36,8 @@ export function MobileFloatingControls({
             </button>
             <LanguageSwitcher fab menuPosition="up" />
           </>
+        ) : tab === "ranking" ? (
+          <LanguageSwitcher fab menuPosition="up" />
         ) : (
           <>
             {/* Language FAB (drop-up menu, round silhouette matching Search FAB) */}
@@ -68,12 +73,12 @@ export function MobileFloatingControls({
 
       {/* Mobile Floating Action Cluster (Left-aligned) */}
       <div className="fixed bottom-5 left-4 z-30 sm:hidden flex flex-col items-start gap-2.5 select-none">
-        {tab === "journey" ? (
+        {isStandalonePage ? (
           <>
             {onReturnArchive && (
               <button
                 type="button"
-                data-testid="mobile-archive-fab"
+                data-testid={tab === "ranking" ? "mobile-ranking-back-archive-fab" : "mobile-archive-fab"}
                 onClick={onReturnArchive}
                 className="inline-flex items-center gap-1.5 px-3 h-10 rounded-full bg-paper/95 text-ink font-bold shadow-md border-[1.5px] border-ink text-[12px] cursor-pointer hover:bg-tape-tint active:scale-95 transition-all backdrop-blur-xs"
                 title={t("ticketBook.backToArchive", "返回檔案庫")}
@@ -83,18 +88,30 @@ export function MobileFloatingControls({
                 <span>{t("ticketBook.backToArchive", "返回檔案庫")}</span>
               </button>
             )}
-            {onReturnHome && (
+            <div className="flex items-center gap-2">
+              {onReturnHome && (
+                <button
+                  type="button"
+                  data-testid={tab === "ranking" ? "mobile-ranking-back-home-fab" : undefined}
+                  onClick={onReturnHome}
+                  className="inline-flex items-center gap-1 px-3 h-10 rounded-full bg-paper/95 text-ink font-bold shadow-md border-[1.5px] border-ink text-[12px] cursor-pointer hover:bg-tape-tint active:scale-95 transition-all backdrop-blur-xs"
+                  aria-label={t("mobile.backHomeAria", "回到首頁門面")}
+                  title={t("mobile.backHomeTitle", "回到首頁門面")}
+                >
+                  <span aria-hidden="true">🏠</span>
+                  <span>{t("mobile.home", "首頁")}</span>
+                </button>
+              )}
               <button
                 type="button"
-                onClick={onReturnHome}
-                className="inline-flex items-center gap-1 px-3 h-10 rounded-full bg-paper/95 text-ink font-bold shadow-md border-[1.5px] border-ink text-[12px] cursor-pointer hover:bg-tape-tint active:scale-95 transition-all backdrop-blur-xs"
-                aria-label={t("mobile.backHomeAria", "回到首頁門面")}
-                title={t("mobile.backHomeTitle", "回到首頁門面")}
+                onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+                className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-paper/95 text-ink font-bold shadow-md border border-ink text-[14px] cursor-pointer hover:bg-tape-tint active:scale-95 transition-all backdrop-blur-xs"
+                aria-label={t("mobile.backTopAria", "回到頁首")}
+                title={t("mobile.backTopTitle", "回到頁首")}
               >
-                <span aria-hidden="true">🏠</span>
-                <span>{t("mobile.home", "首頁")}</span>
+                <span aria-hidden="true">▲</span>
               </button>
-            )}
+            </div>
           </>
         ) : (
           <>
@@ -109,6 +126,20 @@ export function MobileFloatingControls({
                 title={t("ticketBook.backToArchive", "返回檔案庫")}
               >
                 <span aria-hidden="true">🗄️</span>
+              </button>
+            )}
+
+            {/* Leaderboard Floating Action Button */}
+            {onSelectRanking && (
+              <button
+                type="button"
+                data-testid="mobile-ranking-fab"
+                onClick={onSelectRanking}
+                className="flex h-10 w-10 items-center justify-center rounded-full border-[1.5px] border-ink bg-paper/95 text-ink shadow-md cursor-pointer hover:bg-tape-tint active:scale-95 transition-all text-base backdrop-blur-xs"
+                aria-label={t("ranking.title", "演出排行")}
+                title={t("ranking.title", "演出排行")}
+              >
+                <span aria-hidden="true">🏆</span>
               </button>
             )}
 
