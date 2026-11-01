@@ -24,6 +24,23 @@
             "end": "00:19"
           }
         ]
+      },
+      "spotify": {
+        "trackId": "2cupzYHOSLmMqDHRVQfI9j",
+        "live": [
+          {
+            "trackId": "5q7reJyTr8YxJU9ClhTr6Z",
+            "title": "Arena Tour 2024 - Rejoice -",
+            "shortTitle": "Arena Tour 2024 - Rejoice -",
+            "showId": "1672276"
+          },
+          {
+            "trackId": "0uIMPTJt25ul93B0bPHZ1x",
+            "title": "LIVE at STADIUM 2025",
+            "shortTitle": "LIVE at STADIUM 2025",
+            "showId": "1735839"
+          }
+        ]
       }
     },
     {
@@ -86,6 +103,41 @@
             "end": "05:13"
           }
         ]
+      },
+      "spotify": {
+        "trackId": "2K74OeuU2y0RN746g9EizC",
+        "live": [
+          {
+            "trackId": "4HocKZYCL8aNX2zE3mfdyN",
+            "title": "one-man tour 2019",
+            "shortTitle": "one-man tour 2019",
+            "showId": "1078251"
+          },
+          {
+            "trackId": "4rM97wEtlenfH3Ymkq1x23",
+            "title": "ONLINE LIVE 2020 - Arena Travelers -",
+            "shortTitle": "ONLINE LIVE 2020 - Arena Travelers -",
+            "showId": "online-live-2020-arena-travelers"
+          },
+          {
+            "trackId": "5xJys5RTuB3J7gCxiveJgf",
+            "title": "one-man tour 2021-2022 -Editorial-",
+            "shortTitle": "one-man tour 2021-2022 -Editorial-",
+            "showId": "1353361"
+          },
+          {
+            "trackId": "1rjSnupd16KjDjsUp43dMB",
+            "title": "Arena Tour 2024 - Rejoice -",
+            "shortTitle": "Arena Tour 2024 - Rejoice -",
+            "showId": "1672276"
+          },
+          {
+            "trackId": "4NvQY83LibqK65AYExuuay",
+            "title": "LIVE at STADIUM 2025",
+            "shortTitle": "LIVE at STADIUM 2025",
+            "showId": "1735839"
+          }
+        ]
       }
     },
     {
@@ -112,6 +164,17 @@
             "end": "04:29"
           }
         ]
+      },
+      "spotify": {
+        "trackId": "46r7xisTxx58n3tVPS1LIz",
+        "live": [
+          {
+            "trackId": "0vRFVJAAOxUXZ1ffdz4Kmv",
+            "title": "LIVE at STADIUM 2025",
+            "shortTitle": "LIVE at STADIUM 2025",
+            "showId": "1735839"
+          }
+        ]
       }
     },
     {
@@ -130,6 +193,9 @@
           "start": "00:33",
           "end": "00:44"
         }
+      },
+      "spotify": {
+        "trackId": "4eCYeVfzGsS6jq8aX43yDr"
       }
     },
     {
@@ -142,6 +208,9 @@
           "youtubeId": "upLTD7DFtng"
         },
         "live": null
+      },
+      "spotify": {
+        "trackId": "2QYaW8UQEae0GuMJrE7aeE"
       }
     },
     {
@@ -176,6 +245,29 @@
             "showId": "fc-tour-vol-2-the-blooming-universe-online-2021",
             "start": "01:42",
             "end": "02:16"
+          }
+        ]
+      },
+      "spotify": {
+        "trackId": "75fYFVXHzzwfc5yzFWlIlZ",
+        "live": [
+          {
+            "trackId": "5qaFGAHXjNqudSNd0XqxnT",
+            "title": "ONLINE LIVE 2020 - Arena Travelers -",
+            "shortTitle": "ONLINE LIVE 2020 - Arena Travelers -",
+            "showId": "online-live-2020-arena-travelers"
+          },
+          {
+            "trackId": "10gpl1HBr82dv2WKl7lyB2",
+            "title": "one-man tour 2021-2022 -Editorial-",
+            "shortTitle": "one-man tour 2021-2022 -Editorial-",
+            "showId": "1353361"
+          },
+          {
+            "trackId": "48mIBdxslQ6rtGW6XkIOeZ",
+            "title": "LIVE at STADIUM 2025",
+            "shortTitle": "LIVE at STADIUM 2025",
+            "showId": "1735839"
           }
         ]
       }
@@ -238,6 +330,35 @@
             "end": "02:05"
           }
         ]
+      },
+      "spotify": {
+        "trackId": "49h5Aav6yn1o1ACGyovDdZ",
+        "live": [
+          {
+            "trackId": "0gVAOCKKL6AchhA7hYW3gf",
+            "title": "one-man tour 2019",
+            "shortTitle": "one-man tour 2019",
+            "showId": "1078251"
+          },
+          {
+            "trackId": "6XqMGU4ZG4wkfp1BwooAu1",
+            "title": "ONLINE LIVE 2020 - Arena Travelers -",
+            "shortTitle": "ONLINE LIVE 2020 - Arena Travelers -",
+            "showId": "online-live-2020-arena-travelers"
+          },
+          {
+            "trackId": "4NBqzd4qydIHhc6XVaKtE5",
+            "title": "one-man tour 2021-2022 -Editorial-",
+            "shortTitle": "one-man tour 2021-2022 -Editorial-",
+            "showId": "1353361"
+          },
+          {
+            "trackId": "0jzaKi1r7pOgp0lZphr8kc",
+            "title": "LIVE at STADIUM 2025",
+            "shortTitle": "LIVE at STADIUM 2025",
+            "showId": "1735839"
+          }
+        ]
       }
     },
     {
@@ -287,6 +408,35 @@
             "end": "03:35"
           }
         ]
+      },
+      "spotify": {
+        "trackId": "7MD6H2H0kgfYz9yqLCaEQt",
+        "live": [
+          {
+            "trackId": "7wyUdjiWNb2umjK0p457ew",
+            "title": "one-man tour 2019",
+            "shortTitle": "one-man tour 2019",
+            "showId": "1078251"
+          },
+          {
+            "trackId": "1nRL1zypBuKg5GjAFy0LlS",
+            "title": "ONLINE LIVE 2020 - Arena Travelers -",
+            "shortTitle": "ONLINE LIVE 2020 - Arena Travelers -",
+            "showId": "online-live-2020-arena-travelers"
+          },
+          {
+            "trackId": "4RU6eLu7uTWRxRuHsTcMpa",
+            "title": "one-man tour 2021-2022 -Editorial-",
+            "shortTitle": "one-man tour 2021-2022 -Editorial-",
+            "showId": "1353361"
+          },
+          {
+            "trackId": "23ybSkJMTrsZz1z6GM0eTB",
+            "title": "LIVE at STADIUM 2025",
+            "shortTitle": "LIVE at STADIUM 2025",
+            "showId": "1735839"
+          }
+        ]
       }
     },
     {
@@ -305,6 +455,9 @@
           "start": "00:58",
           "end": "01:10"
         }
+      },
+      "spotify": {
+        "trackId": "1sgW7loPL1qtWOPimvm7X5"
       }
     },
     {
@@ -352,6 +505,23 @@
             "end": "01:04"
           }
         ]
+      },
+      "spotify": {
+        "trackId": "6wDntdm888mDo458RaYjGl",
+        "live": [
+          {
+            "trackId": "2xRt064xzxFYda4n8yN0q0",
+            "title": "one-man tour 2021-2022 -Editorial-",
+            "shortTitle": "one-man tour 2021-2022 -Editorial-",
+            "showId": "1353361"
+          },
+          {
+            "trackId": "5D7KmwSGFsJwHUFbPEjJGw",
+            "title": "LIVE at STADIUM 2025",
+            "shortTitle": "LIVE at STADIUM 2025",
+            "showId": "1735839"
+          }
+        ]
       }
     },
     {
@@ -374,6 +544,17 @@
             "showId": "889716",
             "start": "00:37",
             "end": "00:44"
+          }
+        ]
+      },
+      "spotify": {
+        "trackId": "3bDZ1sygGNlFsFRauggHwU",
+        "live": [
+          {
+            "trackId": "53pkEMuCwBOWAXsQBLHb3C",
+            "title": "ONLINE LIVE 2020 - Arena Travelers -",
+            "shortTitle": "ONLINE LIVE 2020 - Arena Travelers -",
+            "showId": "online-live-2020-arena-travelers"
           }
         ]
       }
@@ -448,6 +629,29 @@
             "end": "00:24"
           }
         ]
+      },
+      "spotify": {
+        "trackId": "5wWLNNwMAehpj83FU4Lz0m",
+        "live": [
+          {
+            "trackId": "7r2rK7dQsC6eSADYBmn08G",
+            "title": "ONLINE LIVE 2020 - Arena Travelers -",
+            "shortTitle": "ONLINE LIVE 2020 - Arena Travelers -",
+            "showId": "online-live-2020-arena-travelers"
+          },
+          {
+            "trackId": "0DF7Xtn0MZbL2eJP24BX57",
+            "title": "one-man tour 2021-2022 -Editorial-",
+            "shortTitle": "one-man tour 2021-2022 -Editorial-",
+            "showId": "1353361"
+          },
+          {
+            "trackId": "7CYjMUJbTyYuOhJ19Bqv0L",
+            "title": "LIVE at STADIUM 2025",
+            "shortTitle": "LIVE at STADIUM 2025",
+            "showId": "1735839"
+          }
+        ]
       }
     },
     {
@@ -489,6 +693,23 @@
             "end": "00:18"
           }
         ]
+      },
+      "spotify": {
+        "trackId": "5A8awliuQRqJP37Eo2DSZI",
+        "live": [
+          {
+            "trackId": "0wwYzq8zyRqaKifZVO6ZZs",
+            "title": "Arena Tour 2024 - Rejoice -",
+            "shortTitle": "Arena Tour 2024 - Rejoice -",
+            "showId": "1672276"
+          },
+          {
+            "trackId": "0cPhKuIICSyZFPlnHD0UNn",
+            "title": "LIVE at STADIUM 2025",
+            "shortTitle": "LIVE at STADIUM 2025",
+            "showId": "1735839"
+          }
+        ]
       }
     },
     {
@@ -523,6 +744,23 @@
             "showId": "1499381",
             "start": "02:08",
             "end": "02:40"
+          }
+        ]
+      },
+      "spotify": {
+        "trackId": "2fVh6ttCTTEkoFuGCAyItt",
+        "live": [
+          {
+            "trackId": "50cqBTDo3gnFsFDDa76mx0",
+            "title": "Arena Tour 2024 - Rejoice -",
+            "shortTitle": "Arena Tour 2024 - Rejoice -",
+            "showId": "1672276"
+          },
+          {
+            "trackId": "0lSk58W6H5NrrjK05zHwti",
+            "title": "LIVE at STADIUM 2025",
+            "shortTitle": "LIVE at STADIUM 2025",
+            "showId": "1735839"
           }
         ]
       }
@@ -565,6 +803,23 @@
             "shortTitle": "Live at Radio",
             "start": "00:32",
             "end": "00:44"
+          }
+        ]
+      },
+      "spotify": {
+        "trackId": "2V7l0ns6AahvMd0dkYrm93",
+        "live": [
+          {
+            "trackId": "0aQuH7UctqDsZWCy7Rik4p",
+            "title": "Arena Tour 2024 - Rejoice -",
+            "shortTitle": "Arena Tour 2024 - Rejoice -",
+            "showId": "1672276"
+          },
+          {
+            "trackId": "7rmFbIRvEWPALwL9u8Q1Vw",
+            "title": "LIVE at STADIUM 2025",
+            "shortTitle": "LIVE at STADIUM 2025",
+            "showId": "1735839"
           }
         ]
       }
@@ -610,6 +865,23 @@
             "end": "04:18"
           }
         ]
+      },
+      "spotify": {
+        "trackId": "1qbe8qsy1uElYTwdThhRvB",
+        "live": [
+          {
+            "trackId": "5yk6LrCftljBNLeyLRR9WF",
+            "title": "Arena Tour 2024 - Rejoice -",
+            "shortTitle": "Arena Tour 2024 - Rejoice -",
+            "showId": "1672276"
+          },
+          {
+            "trackId": "2SDkOGProhd8oL2xOe4G9P",
+            "title": "LIVE at STADIUM 2025",
+            "shortTitle": "LIVE at STADIUM 2025",
+            "showId": "1735839"
+          }
+        ]
       }
     },
     {
@@ -647,6 +919,9 @@
             "end": "00:57"
           }
         ]
+      },
+      "spotify": {
+        "trackId": "1AtGObI2IJtDzQRvPBAPYP"
       }
     },
     {
@@ -664,6 +939,9 @@
           "shortTitle": "2026 大阪城會館",
           "showId": "one-man-tour-2026-osaka-0719"
         }
+      },
+      "spotify": {
+        "trackId": "60Lst9oTXDsAPXvHKUrxpk"
       }
     },
     {
@@ -747,6 +1025,41 @@
             "end": "06:23"
           }
         ]
+      },
+      "spotify": {
+        "trackId": "6SzML1m0wK3edW6RbH3oxT",
+        "live": [
+          {
+            "trackId": "2IPXMJTxAIMbiNokUwCSbY",
+            "title": "one-man tour 2019",
+            "shortTitle": "one-man tour 2019",
+            "showId": "1078251"
+          },
+          {
+            "trackId": "1fnMp1XRS3d08DMyBqqL9Z",
+            "title": "ONLINE LIVE 2020 - Arena Travelers -",
+            "shortTitle": "ONLINE LIVE 2020 - Arena Travelers -",
+            "showId": "online-live-2020-arena-travelers"
+          },
+          {
+            "trackId": "7kxVSpQiSyHtXS0hShLwd3",
+            "title": "one-man tour 2021-2022 -Editorial-",
+            "shortTitle": "one-man tour 2021-2022 -Editorial-",
+            "showId": "1353361"
+          },
+          {
+            "trackId": "1jbY1tzGV0xwz1SrCjuHLJ",
+            "title": "Arena Tour 2024 - Rejoice -",
+            "shortTitle": "Arena Tour 2024 - Rejoice -",
+            "showId": "1672276"
+          },
+          {
+            "trackId": "0WMIMQKs2OLMfZY7ylxTuZ",
+            "title": "LIVE at STADIUM 2025",
+            "shortTitle": "LIVE at STADIUM 2025",
+            "showId": "1735839"
+          }
+        ]
       }
     },
     {
@@ -793,6 +1106,41 @@
             "end": "00:45"
           }
         ]
+      },
+      "spotify": {
+        "trackId": "4mdOqt3AiUJbBXL02aa5iw",
+        "live": [
+          {
+            "trackId": "4u8ciAuHDX869sQDX79iHt",
+            "title": "one-man tour 2019",
+            "shortTitle": "one-man tour 2019",
+            "showId": "1078251"
+          },
+          {
+            "trackId": "61HOzw8W7Z2d2mWUBhMVjx",
+            "title": "ONLINE LIVE 2020 - Arena Travelers -",
+            "shortTitle": "ONLINE LIVE 2020 - Arena Travelers -",
+            "showId": "online-live-2020-arena-travelers"
+          },
+          {
+            "trackId": "58nSYUNvqM6OHaF4cd2VwG",
+            "title": "one-man tour 2021-2022 -Editorial-",
+            "shortTitle": "one-man tour 2021-2022 -Editorial-",
+            "showId": "1353361"
+          },
+          {
+            "trackId": "23Kn3m4Aeg5m0WoPkJ26hh",
+            "title": "Arena Tour 2024 - Rejoice -",
+            "shortTitle": "Arena Tour 2024 - Rejoice -",
+            "showId": "1672276"
+          },
+          {
+            "trackId": "2gIbBSXNQl1l43v3znbdXe",
+            "title": "LIVE at STADIUM 2025",
+            "shortTitle": "LIVE at STADIUM 2025",
+            "showId": "1735839"
+          }
+        ]
       }
     },
     {
@@ -818,6 +1166,17 @@
             "shortTitle": "Live at Radio",
             "start": "00:00",
             "end": "00:09"
+          }
+        ]
+      },
+      "spotify": {
+        "trackId": "7Hfli6u8P4wQz2NzyAjW8V",
+        "live": [
+          {
+            "trackId": "7duhFoDULoBmGrB2NEWM5i",
+            "title": "Arena Tour 2024 - Rejoice -",
+            "shortTitle": "Arena Tour 2024 - Rejoice -",
+            "showId": "1672276"
           }
         ]
       }
@@ -857,6 +1216,23 @@
             "end": "02:29"
           }
         ]
+      },
+      "spotify": {
+        "trackId": "43MGiVpukiSOnm7RdltAtZ",
+        "live": [
+          {
+            "trackId": "4344sKMyVI5AeL4Bw6QRyR",
+            "title": "ONLINE LIVE 2020 - Arena Travelers -",
+            "shortTitle": "ONLINE LIVE 2020 - Arena Travelers -",
+            "showId": "online-live-2020-arena-travelers"
+          },
+          {
+            "trackId": "0a3j95jNhT2UGAYOLBzqjl",
+            "title": "LIVE at STADIUM 2025",
+            "shortTitle": "LIVE at STADIUM 2025",
+            "showId": "1735839"
+          }
+        ]
       }
     },
     {
@@ -866,6 +1242,17 @@
       "media": {
         "mv": null,
         "live": null
+      },
+      "spotify": {
+        "trackId": "75zWFErLuubT7CE61UoaIP",
+        "live": [
+          {
+            "trackId": "2yrDtsHjm4s86ljxLbNPt9",
+            "title": "one-man tour 2021-2022 -Editorial-",
+            "shortTitle": "one-man tour 2021-2022 -Editorial-",
+            "showId": "1353361"
+          }
+        ]
       }
     },
     {
@@ -882,6 +1269,17 @@
           "start": "02:37",
           "end": "03:05"
         }
+      },
+      "spotify": {
+        "trackId": "5dLOBttnHKhYdQh6uLRpu0",
+        "live": [
+          {
+            "trackId": "7einwmKkOsfWIGJs1kynzp",
+            "title": "one-man tour 2019",
+            "shortTitle": "one-man tour 2019",
+            "showId": "1078251"
+          }
+        ]
       }
     },
     {
@@ -901,6 +1299,9 @@
       "media": {
         "mv": null,
         "live": null
+      },
+      "spotify": {
+        "trackId": "3bSVMSV35vwdTnH6amox6o"
       }
     },
     {
@@ -934,6 +1335,17 @@
             "end": "01:36"
           }
         ]
+      },
+      "spotify": {
+        "trackId": "222BlW44cS9nOM6C369IB2",
+        "live": [
+          {
+            "trackId": "5gKCvBKK7RvblNSnm2YXmN",
+            "title": "one-man tour 2021-2022 -Editorial-",
+            "shortTitle": "one-man tour 2021-2022 -Editorial-",
+            "showId": "1353361"
+          }
+        ]
       }
     },
     {
@@ -952,6 +1364,17 @@
           "start": "00:00",
           "end": "00:32"
         }
+      },
+      "spotify": {
+        "trackId": "1mZc8Z72pG7Bw04uH94F4a",
+        "live": [
+          {
+            "trackId": "2x4eEHrDi4pWYlHS7ftFCb",
+            "title": "one-man tour 2021-2022 -Editorial-",
+            "shortTitle": "one-man tour 2021-2022 -Editorial-",
+            "showId": "1353361"
+          }
+        ]
       }
     },
     {
@@ -968,6 +1391,17 @@
           "start": "01:30",
           "end": "01:44"
         }
+      },
+      "spotify": {
+        "trackId": "0XnFySareTTQ21xc8W2jDV",
+        "live": [
+          {
+            "trackId": "5X9TqZNwdOeei5hc50Tj7j",
+            "title": "Arena Tour 2024 - Rejoice -",
+            "shortTitle": "Arena Tour 2024 - Rejoice -",
+            "showId": "1672276"
+          }
+        ]
       }
     },
     {
@@ -1036,6 +1470,41 @@
             "end": "03:55"
           }
         ]
+      },
+      "spotify": {
+        "trackId": "2i4pY0jBULpLToPEzoelh9",
+        "live": [
+          {
+            "trackId": "2VhVKJBTaPj3Qre5tcI1BJ",
+            "title": "one-man tour 2019",
+            "shortTitle": "one-man tour 2019",
+            "showId": "1078251"
+          },
+          {
+            "trackId": "0iyQ62oS3BViV5bRox4FHb",
+            "title": "ONLINE LIVE 2020 - Arena Travelers -",
+            "shortTitle": "ONLINE LIVE 2020 - Arena Travelers -",
+            "showId": "online-live-2020-arena-travelers"
+          },
+          {
+            "trackId": "69dtXOUqhwWsz1MF8GjeV2",
+            "title": "one-man tour 2021-2022 -Editorial-",
+            "shortTitle": "one-man tour 2021-2022 -Editorial-",
+            "showId": "1353361"
+          },
+          {
+            "trackId": "2ZUhAUH84HQtWSwtN7O9sJ",
+            "title": "Arena Tour 2024 - Rejoice -",
+            "shortTitle": "Arena Tour 2024 - Rejoice -",
+            "showId": "1672276"
+          },
+          {
+            "trackId": "0gVBy5lQ4XqHOWRS12zqEM",
+            "title": "LIVE at STADIUM 2025",
+            "shortTitle": "LIVE at STADIUM 2025",
+            "showId": "1735839"
+          }
+        ]
       }
     },
     {
@@ -1052,6 +1521,17 @@
           "subType": "crossfade"
         },
         "live": null
+      },
+      "spotify": {
+        "trackId": "1AsLOHNlBlBVPrROZdfxu1",
+        "live": [
+          {
+            "trackId": "1CT4a7CfOv21IbOxifIGhJ",
+            "title": "one-man tour 2019",
+            "shortTitle": "one-man tour 2019",
+            "showId": "1078251"
+          }
+        ]
       }
     },
     {
@@ -1061,6 +1541,9 @@
       "media": {
         "mv": null,
         "live": null
+      },
+      "spotify": {
+        "trackId": "5SxHNFMS3cPPPmdM4NPtxW"
       }
     },
     {
@@ -1090,6 +1573,23 @@
             "end": "01:06"
           }
         ]
+      },
+      "spotify": {
+        "trackId": "55pezTty1DSrrc8wlOMZbA",
+        "live": [
+          {
+            "trackId": "3I1rfQ6e4l7Iy2GwKW2aVt",
+            "title": "ONLINE LIVE 2020 - Arena Travelers -",
+            "shortTitle": "ONLINE LIVE 2020 - Arena Travelers -",
+            "showId": "online-live-2020-arena-travelers"
+          },
+          {
+            "trackId": "56ozHzceuVezkzFzTLy9mX",
+            "title": "LIVE at STADIUM 2025",
+            "shortTitle": "LIVE at STADIUM 2025",
+            "showId": "1735839"
+          }
+        ]
       }
     },
     {
@@ -1114,6 +1614,9 @@
           }
         ],
         "live": null
+      },
+      "spotify": {
+        "trackId": "1bbOJBB8INUvYUT99PHiWH"
       }
     },
     {
@@ -1125,6 +1628,9 @@
           "youtubeId": "PB8dUVLPnuo"
         },
         "live": null
+      },
+      "spotify": {
+        "trackId": "1kNn89l983g8p9UZa3NaIR"
       }
     },
     {
@@ -1156,6 +1662,9 @@
             "end": "02:53"
           }
         ]
+      },
+      "spotify": {
+        "trackId": "0M8fLDERc37U2HoQGcXyOT"
       }
     },
     {
@@ -1169,6 +1678,17 @@
           "title": "special program “Time to Rejoice”",
           "shortTitle": "Time to Rejoice"
         }
+      },
+      "spotify": {
+        "trackId": "2Hkzq8mcttGm0jd86D2gKl",
+        "live": [
+          {
+            "trackId": "7k2ctyTkYhcyFw252PaoJz",
+            "title": "Arena Tour 2024 - Rejoice -",
+            "shortTitle": "Arena Tour 2024 - Rejoice -",
+            "showId": "1672276"
+          }
+        ]
       }
     },
     {
@@ -1230,6 +1750,35 @@
             "end": "01:11"
           }
         ]
+      },
+      "spotify": {
+        "trackId": "6vtHQ7FcAXSOKSOeaBm5bc",
+        "live": [
+          {
+            "trackId": "0hG8CRgb2UNylIImor0Vne",
+            "title": "one-man tour 2019",
+            "shortTitle": "one-man tour 2019",
+            "showId": "1078251"
+          },
+          {
+            "trackId": "4nD6lhV3APibsr90Pp2i7v",
+            "title": "ONLINE LIVE 2020 - Arena Travelers -",
+            "shortTitle": "ONLINE LIVE 2020 - Arena Travelers -",
+            "showId": "online-live-2020-arena-travelers"
+          },
+          {
+            "trackId": "01SequUX711EJdR6ExbJAw",
+            "title": "one-man tour 2021-2022 -Editorial-",
+            "shortTitle": "one-man tour 2021-2022 -Editorial-",
+            "showId": "1353361"
+          },
+          {
+            "trackId": "0OvnwcSijy1Kbc2e94XpYq",
+            "title": "LIVE at STADIUM 2025",
+            "shortTitle": "LIVE at STADIUM 2025",
+            "showId": "1735839"
+          }
+        ]
       }
     },
     {
@@ -1254,6 +1803,9 @@
           }
         ],
         "live": null
+      },
+      "spotify": {
+        "trackId": "7HiPTHw9UMvnTiZf6wElCP"
       }
     },
     {
@@ -1269,6 +1821,9 @@
           "start": "00:49",
           "end": "00:55"
         }
+      },
+      "spotify": {
+        "trackId": "33JtUjUhbfJlBbdCXH6v5I"
       }
     },
     {
@@ -1296,6 +1851,17 @@
             "showId": "1150110",
             "start": "01:27",
             "end": "01:47"
+          }
+        ]
+      },
+      "spotify": {
+        "trackId": "0VJjfALZ6SuIQumrTgF3tJ",
+        "live": [
+          {
+            "trackId": "3A9lLYtwmeyaQ1WWCFQyb4",
+            "title": "ONLINE LIVE 2020 - Arena Travelers -",
+            "shortTitle": "ONLINE LIVE 2020 - Arena Travelers -",
+            "showId": "online-live-2020-arena-travelers"
           }
         ]
       }
@@ -1331,6 +1897,17 @@
             "end": "03:37"
           }
         ]
+      },
+      "spotify": {
+        "trackId": "4VTJ2rVtl0eMf7PVJG4qD7",
+        "live": [
+          {
+            "trackId": "6i5Gkts4kH61xiQj2IGokg",
+            "title": "ONLINE LIVE 2020 - Arena Travelers -",
+            "shortTitle": "ONLINE LIVE 2020 - Arena Travelers -",
+            "showId": "online-live-2020-arena-travelers"
+          }
+        ]
       }
     },
     {
@@ -1361,6 +1938,17 @@
             "end": "04:01"
           }
         ]
+      },
+      "spotify": {
+        "trackId": "2RQldIxad7pqy0vAyCbPvT",
+        "live": [
+          {
+            "trackId": "68V0J4h60rsqfuwO3yuuxU",
+            "title": "ONLINE LIVE 2020 - Arena Travelers -",
+            "shortTitle": "ONLINE LIVE 2020 - Arena Travelers -",
+            "showId": "online-live-2020-arena-travelers"
+          }
+        ]
       }
     },
     {
@@ -1370,6 +1958,17 @@
       "media": {
         "mv": null,
         "live": null
+      },
+      "spotify": {
+        "trackId": "1SUjL2EuF4HG97W3syGyOZ",
+        "live": [
+          {
+            "trackId": "6fldY86rPyYBGVg2gTxXRo",
+            "title": "Arena Tour 2024 - Rejoice -",
+            "shortTitle": "Arena Tour 2024 - Rejoice -",
+            "showId": "1672276"
+          }
+        ]
       }
     },
     {
@@ -1386,6 +1985,9 @@
           "subType": "crossfade"
         },
         "live": null
+      },
+      "spotify": {
+        "trackId": "7Bi06c0oQouKr0AY52uqV3"
       }
     },
     {
@@ -1395,6 +1997,9 @@
       "media": {
         "mv": null,
         "live": null
+      },
+      "spotify": {
+        "trackId": "4EEu2wG5c7aOSVJaaDomv6"
       }
     },
     {
@@ -1450,6 +2055,23 @@
             "end": "00:44"
           }
         ]
+      },
+      "spotify": {
+        "trackId": "0RuLz62h4YPNXqdO20Fmf6",
+        "live": [
+          {
+            "trackId": "4epGXs60ah5eLxnBuacHGC",
+            "title": "one-man tour 2021-2022 -Editorial-",
+            "shortTitle": "one-man tour 2021-2022 -Editorial-",
+            "showId": "1353361"
+          },
+          {
+            "trackId": "1BgCFikxeXCrP3laR27Dla",
+            "title": "LIVE at STADIUM 2025",
+            "shortTitle": "LIVE at STADIUM 2025",
+            "showId": "1735839"
+          }
+        ]
       }
     },
     {
@@ -1472,6 +2094,17 @@
           }
         ],
         "live": null
+      },
+      "spotify": {
+        "trackId": "1pcZjgQhIwzi2xcJvGMvnI",
+        "live": [
+          {
+            "trackId": "3HDUzEftYRKwK7HiqWvprY",
+            "title": "Arena Tour 2024 - Rejoice -",
+            "shortTitle": "Arena Tour 2024 - Rejoice -",
+            "showId": "1672276"
+          }
+        ]
       }
     },
     {
@@ -1500,6 +2133,17 @@
             "end": "01:14"
           }
         ]
+      },
+      "spotify": {
+        "trackId": "6QYpqS7gJlNKYqaD8EUBrk",
+        "live": [
+          {
+            "trackId": "5yrR06nJR7mhyOVI3TkD95",
+            "title": "one-man tour 2019",
+            "shortTitle": "one-man tour 2019",
+            "showId": "1078251"
+          }
+        ]
       }
     },
     {
@@ -1516,6 +2160,17 @@
           "start": "01:33",
           "end": "01:56"
         }
+      },
+      "spotify": {
+        "trackId": "0bL0IdYyztMye83rw3rpqy",
+        "live": [
+          {
+            "trackId": "3U3DIHURqjFjNR9ubxsCoH",
+            "title": "ONLINE LIVE 2020 - Arena Travelers -",
+            "shortTitle": "ONLINE LIVE 2020 - Arena Travelers -",
+            "showId": "online-live-2020-arena-travelers"
+          }
+        ]
       }
     },
     {
@@ -1540,6 +2195,9 @@
           }
         ],
         "live": null
+      },
+      "spotify": {
+        "trackId": "3q5lemog0BGgJ2yOKe8DB7"
       }
     },
     {
@@ -1555,6 +2213,17 @@
           "title": "YouTube Music Night with J-WAVE SONAR MUSIC (2017.11.18)",
           "shortTitle": "2017 YT Music Night"
         }
+      },
+      "spotify": {
+        "trackId": "6l1P9avGqv8oHBjwxp2ABq",
+        "live": [
+          {
+            "trackId": "3z5QK6Hoi0m6RuyvCHsC1K",
+            "title": "one-man tour 2019",
+            "shortTitle": "one-man tour 2019",
+            "showId": "1078251"
+          }
+        ]
       }
     },
     {
@@ -1596,6 +2265,23 @@
             "end": "00:31"
           }
         ]
+      },
+      "spotify": {
+        "trackId": "2Bpmp4VAXE8Qmmmtuzy302",
+        "live": [
+          {
+            "trackId": "7zaaYSsk6IGSH54359XhQp",
+            "title": "Arena Tour 2024 - Rejoice -",
+            "shortTitle": "Arena Tour 2024 - Rejoice -",
+            "showId": "1672276"
+          },
+          {
+            "trackId": "5MK9jxSyf28YSBIUswG5XX",
+            "title": "LIVE at STADIUM 2025",
+            "shortTitle": "LIVE at STADIUM 2025",
+            "showId": "1735839"
+          }
+        ]
       }
     },
     {
@@ -1605,6 +2291,9 @@
       "media": {
         "mv": null,
         "live": null
+      },
+      "spotify": {
+        "trackId": "5xBemwxJ5mOJVghwC7XSbN"
       }
     },
     {
@@ -1614,6 +2303,9 @@
       "media": {
         "mv": null,
         "live": null
+      },
+      "spotify": {
+        "trackId": "2Yd8RQQvMdiDkg7jEXbKGu"
       }
     },
     {
@@ -1630,6 +2322,17 @@
           "start": "00:19",
           "end": "00:40"
         }
+      },
+      "spotify": {
+        "trackId": "5eQidKmns37kwHnCRuqeov",
+        "live": [
+          {
+            "trackId": "5mhC1TQ5hUc90cXBIE219A",
+            "title": "one-man tour 2021-2022 -Editorial-",
+            "shortTitle": "one-man tour 2021-2022 -Editorial-",
+            "showId": "1353361"
+          }
+        ]
       }
     },
     {
@@ -1646,6 +2349,9 @@
           "start": "03:19",
           "end": "03:45"
         }
+      },
+      "spotify": {
+        "trackId": "6gM8ZIIsCJXpzgWdZIrXuI"
       }
     },
     {
@@ -1668,6 +2374,9 @@
           "start": "00:06",
           "end": "00:16"
         }
+      },
+      "spotify": {
+        "trackId": "6edqrdpbmkiAFopurhsNmQ"
       }
     },
     {
@@ -1687,6 +2396,17 @@
           "start": "01:45",
           "end": "02:02"
         }
+      },
+      "spotify": {
+        "trackId": "5eLmQSX7LblbNzoGWXk5OB",
+        "live": [
+          {
+            "trackId": "7gUo1r0v3Hxl1Mr9PK1KIt",
+            "title": "one-man tour 2021-2022 -Editorial-",
+            "shortTitle": "one-man tour 2021-2022 -Editorial-",
+            "showId": "1353361"
+          }
+        ]
       }
     },
     {
@@ -1703,6 +2423,17 @@
           "start": "00:14",
           "end": "00:56"
         }
+      },
+      "spotify": {
+        "trackId": "74jUYqSHTvYjPjiESiJjU8",
+        "live": [
+          {
+            "trackId": "5y65af5YYNkFqfKPbHavRk",
+            "title": "Arena Tour 2024 - Rejoice -",
+            "shortTitle": "Arena Tour 2024 - Rejoice -",
+            "showId": "1672276"
+          }
+        ]
       }
     },
     {
@@ -1754,6 +2485,29 @@
             "end": "03:30"
           }
         ]
+      },
+      "spotify": {
+        "trackId": "4AhmSlOWBAQSMNWaQ6CrA4",
+        "live": [
+          {
+            "trackId": "1dRFwaZm5O3F82L3Un54Vm",
+            "title": "one-man tour 2019",
+            "shortTitle": "one-man tour 2019",
+            "showId": "1078251"
+          },
+          {
+            "trackId": "0AyuQBTgvbha7WQpQRAyKT",
+            "title": "one-man tour 2021-2022 -Editorial-",
+            "shortTitle": "one-man tour 2021-2022 -Editorial-",
+            "showId": "1353361"
+          },
+          {
+            "trackId": "4ROrlFMcdF0bak2BxsHHly",
+            "title": "LIVE at STADIUM 2025",
+            "shortTitle": "LIVE at STADIUM 2025",
+            "showId": "1735839"
+          }
+        ]
       }
     },
     {
@@ -1775,6 +2529,17 @@
           "start": "00:31",
           "end": "00:57"
         }
+      },
+      "spotify": {
+        "trackId": "3ponIUc0NRnVtK3TfOQxTv",
+        "live": [
+          {
+            "trackId": "0sfBK5Pu5n2IkmPFHj3q3B",
+            "title": "one-man tour 2019",
+            "shortTitle": "one-man tour 2019",
+            "showId": "1078251"
+          }
+        ]
       }
     },
     {
@@ -1791,6 +2556,9 @@
           "start": "00:13",
           "end": "00:46"
         }
+      },
+      "spotify": {
+        "trackId": "2MYQS2IcGtNBO7E0ExG2yD"
       }
     },
     {
@@ -1821,6 +2589,17 @@
             "showId": "1150110",
             "start": "02:48",
             "end": "03:20"
+          }
+        ]
+      },
+      "spotify": {
+        "trackId": "7z7QMipKk1LMlc8ZmOu871",
+        "live": [
+          {
+            "trackId": "3wSKMw6nFJ8XLWoQQUvbJ2",
+            "title": "ONLINE LIVE 2020 - Arena Travelers -",
+            "shortTitle": "ONLINE LIVE 2020 - Arena Travelers -",
+            "showId": "online-live-2020-arena-travelers"
           }
         ]
       }
@@ -1855,6 +2634,23 @@
             "end": "01:00"
           }
         ]
+      },
+      "spotify": {
+        "trackId": "4opy5i82STNOnjlUi5CgLU",
+        "live": [
+          {
+            "trackId": "4PpetrkPITOSFBaq9Lphdg",
+            "title": "Arena Tour 2024 - Rejoice -",
+            "shortTitle": "Arena Tour 2024 - Rejoice -",
+            "showId": "1672276"
+          },
+          {
+            "trackId": "3BZmrbchTv8dhiZXCiQXX7",
+            "title": "LIVE at STADIUM 2025",
+            "shortTitle": "LIVE at STADIUM 2025",
+            "showId": "1735839"
+          }
+        ]
       }
     },
     {
@@ -1887,6 +2683,17 @@
             "end": "01:38"
           }
         ]
+      },
+      "spotify": {
+        "trackId": "0GKXPZH3Fo93sl4XEBM3cw",
+        "live": [
+          {
+            "trackId": "6yTp8noLK3NwRTkINUbUi4",
+            "title": "one-man tour 2019",
+            "shortTitle": "one-man tour 2019",
+            "showId": "1078251"
+          }
+        ]
       }
     },
     {
@@ -1908,6 +2715,17 @@
           "start": "00:51",
           "end": "01:15"
         }
+      },
+      "spotify": {
+        "trackId": "1Ppu2rlgrZz0pfcRl20vpC",
+        "live": [
+          {
+            "trackId": "2TmW9yMAAFxnLEOws1EBpG",
+            "title": "one-man tour 2021-2022 -Editorial-",
+            "shortTitle": "one-man tour 2021-2022 -Editorial-",
+            "showId": "1353361"
+          }
+        ]
       }
     },
     {
@@ -1935,6 +2753,23 @@
             "end": "00:29"
           }
         ]
+      },
+      "spotify": {
+        "trackId": "2ErKrJGeDg1ff8BiaFNEJE",
+        "live": [
+          {
+            "trackId": "5YfiEdwI8ZtLMVZrhlgrei",
+            "title": "ONLINE LIVE 2020 - Arena Travelers -",
+            "shortTitle": "ONLINE LIVE 2020 - Arena Travelers -",
+            "showId": "online-live-2020-arena-travelers"
+          },
+          {
+            "trackId": "3KPfmsAnedSxXO0SeSFtdf",
+            "title": "one-man tour 2021-2022 -Editorial-",
+            "shortTitle": "one-man tour 2021-2022 -Editorial-",
+            "showId": "1353361"
+          }
+        ]
       }
     },
     {
@@ -1951,6 +2786,17 @@
           "start": "04:15",
           "end": "04:44"
         }
+      },
+      "spotify": {
+        "trackId": "4J2k2MbIIWp4FlJfdqt7xG",
+        "live": [
+          {
+            "trackId": "1Nw5qN0EVEfmhY3TNuBJGU",
+            "title": "Arena Tour 2024 - Rejoice -",
+            "shortTitle": "Arena Tour 2024 - Rejoice -",
+            "showId": "1672276"
+          }
+        ]
       }
     },
     {
@@ -1994,6 +2840,17 @@
             "end": "03:09"
           }
         ]
+      },
+      "spotify": {
+        "trackId": "4LjzrLpEG9VeKiZTngLfov",
+        "live": [
+          {
+            "trackId": "3803iC1LUcfdfTn9JJScHm",
+            "title": "one-man tour 2019",
+            "shortTitle": "one-man tour 2019",
+            "showId": "1078251"
+          }
+        ]
       }
     },
     {
@@ -2005,6 +2862,9 @@
           "youtubeId": "clwriIVEpI4"
         },
         "live": null
+      },
+      "spotify": {
+        "trackId": "4q6SAqXwIhkeXRU8JzHCqA"
       }
     },
     {
@@ -2015,6 +2875,17 @@
       "media": {
         "mv": null,
         "live": null
+      },
+      "spotify": {
+        "trackId": "5yQ5xnIASo6i0QD1bPVeu3",
+        "live": [
+          {
+            "trackId": "0nngzK9EfnZ0z3Aw1lcG9l",
+            "title": "Arena Tour 2024 - Rejoice -",
+            "shortTitle": "Arena Tour 2024 - Rejoice -",
+            "showId": "1672276"
+          }
+        ]
       }
     },
     {
@@ -2033,6 +2904,9 @@
           "start": "01:46",
           "end": "02:07"
         }
+      },
+      "spotify": {
+        "trackId": "2m7TKOSvZAfBCrZqPQBQbW"
       }
     },
     {
@@ -2050,6 +2924,17 @@
           "start": "01:16",
           "end": "01:29"
         }
+      },
+      "spotify": {
+        "trackId": "3KLU8Fa0jx8wIh91m4ItFK",
+        "live": [
+          {
+            "trackId": "4hvxD8DIvp15w1mxYmF5kR",
+            "title": "one-man tour 2021-2022 -Editorial-",
+            "shortTitle": "one-man tour 2021-2022 -Editorial-",
+            "showId": "1353361"
+          }
+        ]
       }
     },
     {
@@ -2076,6 +2961,9 @@
             "end": "01:16"
           }
         ]
+      },
+      "spotify": {
+        "trackId": "3mJr8wRMrRdjgUFfaZCQWp"
       }
     },
     {
@@ -2099,6 +2987,9 @@
           "start": "02:41",
           "end": "03:18"
         }
+      },
+      "spotify": {
+        "trackId": "7lKHXZc5AqI1COfzV788cF"
       }
     },
     {
@@ -2115,6 +3006,9 @@
           "subType": "crossfade"
         },
         "live": null
+      },
+      "spotify": {
+        "trackId": "6Yr6XHwUBTDxiC2NnoXGEw"
       }
     },
     {
@@ -2156,6 +3050,17 @@
             "end": "01:15"
           }
         ]
+      },
+      "spotify": {
+        "trackId": "3X4TWvjxlljOOHJgQc8cSi",
+        "live": [
+          {
+            "trackId": "3GYiSkfGSMAjHkBwwqfexV",
+            "title": "one-man tour 2019",
+            "shortTitle": "one-man tour 2019",
+            "showId": "1078251"
+          }
+        ]
       }
     },
     {
@@ -2172,6 +3077,17 @@
           "start": "00:41",
           "end": "00:50"
         }
+      },
+      "spotify": {
+        "trackId": "1l1qZpVZnkY5CKU1j0F68O",
+        "live": [
+          {
+            "trackId": "6JPHJ7NWIGQ7ak7yPJ3eoR",
+            "title": "one-man tour 2021-2022 -Editorial-",
+            "shortTitle": "one-man tour 2021-2022 -Editorial-",
+            "showId": "1353361"
+          }
+        ]
       }
     },
     {
@@ -2181,6 +3097,17 @@
       "media": {
         "mv": null,
         "live": null
+      },
+      "spotify": {
+        "trackId": "7FrnEJvjDRU3X4ybFNEfsy",
+        "live": [
+          {
+            "trackId": "4QjDGt12U4HAxf2ROpIeeV",
+            "title": "one-man tour 2021-2022 -Editorial-",
+            "shortTitle": "one-man tour 2021-2022 -Editorial-",
+            "showId": "1353361"
+          }
+        ]
       }
     },
     {
@@ -2213,6 +3140,9 @@
           }
         ],
         "live": null
+      },
+      "spotify": {
+        "trackId": "5Qgdm7CYbQoS32tqtIdHVd"
       }
     },
     {
@@ -2229,6 +3159,9 @@
           "subType": "crossfade"
         },
         "live": null
+      },
+      "spotify": {
+        "trackId": "5Ln8aDfdWmWHvCwGbul6qP"
       }
     },
     {
@@ -2245,6 +3178,9 @@
           "subType": "crossfade"
         },
         "live": null
+      },
+      "spotify": {
+        "trackId": "7kGja6wrpOL0CyvftQMLmG"
       }
     },
     {
@@ -2254,6 +3190,17 @@
       "media": {
         "mv": null,
         "live": null
+      },
+      "spotify": {
+        "trackId": "27ZIwGuQ4dapegDtkDF421",
+        "live": [
+          {
+            "trackId": "71YP4zjgGEh8fwYWREOq7P",
+            "title": "one-man tour 2019",
+            "shortTitle": "one-man tour 2019",
+            "showId": "1078251"
+          }
+        ]
       }
     },
     {
@@ -2264,6 +3211,9 @@
       "media": {
         "mv": null,
         "live": null
+      },
+      "spotify": {
+        "trackId": "11AbfhB0FNNs6yRClQMVfC"
       }
     },
     {
@@ -2278,6 +3228,9 @@
           "subType": "anime"
         },
         "live": null
+      },
+      "spotify": {
+        "trackId": "0G2MBXDNe5UKICTmGiEZbG"
       }
     },
     {
@@ -2286,6 +3239,9 @@
       "media": {
         "mv": null,
         "live": null
+      },
+      "spotify": {
+        "trackId": "4djsEWqlJZS7tVMII4Ec97"
       }
     },
     {
@@ -2301,6 +3257,9 @@
           "start": "00:37",
           "end": "00:49"
         }
+      },
+      "spotify": {
+        "trackId": "3I5JvMlEFuDJZpSjJDUBhN"
       }
     },
     {
@@ -2327,6 +3286,9 @@
             "end": "01:38"
           }
         ]
+      },
+      "spotify": {
+        "trackId": "4YUv74JAPluStaE32sUVBZ"
       }
     },
     {
@@ -2350,6 +3312,9 @@
             "end": "01:27"
           }
         ]
+      },
+      "spotify": {
+        "trackId": "27EnDbXKku4XGjPC7U8ptt"
       }
     },
     {
@@ -2358,6 +3323,9 @@
       "media": {
         "mv": null,
         "live": null
+      },
+      "spotify": {
+        "trackId": "70PPGbNYFGVBHg373kIFlC"
       }
     },
     {
@@ -2366,6 +3334,9 @@
       "media": {
         "mv": null,
         "live": null
+      },
+      "spotify": {
+        "trackId": "45AcsfxvxBu12EhzW4nnb4"
       }
     },
     {
@@ -2375,6 +3346,17 @@
       "media": {
         "mv": null,
         "live": null
+      },
+      "spotify": {
+        "trackId": "4O2DFidmTVlXxumJlkPa7q",
+        "live": [
+          {
+            "trackId": "3HeCT4GjY7lWxV9g0xrpR8",
+            "title": "ONLINE LIVE 2020 - Arena Travelers -",
+            "shortTitle": "ONLINE LIVE 2020 - Arena Travelers -",
+            "showId": "online-live-2020-arena-travelers"
+          }
+        ]
       }
     },
     {
@@ -2414,6 +3396,9 @@
       "media": {
         "mv": null,
         "live": null
+      },
+      "spotify": {
+        "trackId": "0CUzisNhvCTPHSjaBzGbOO"
       }
     },
     {
@@ -2423,6 +3408,9 @@
       "media": {
         "mv": null,
         "live": null
+      },
+      "spotify": {
+        "trackId": "1iB4swiILkIoxVvq5v4iZi"
       }
     },
     {

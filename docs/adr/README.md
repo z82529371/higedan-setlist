@@ -4,10 +4,10 @@
 
 ---
 
-## 決策總覽清單（共 132 篇）
+## 決策總覽清單（共 133 篇）
 
 > [!NOTE]
-> **編號跳號說明**：本目錄編號自 ADR-0001 起至 ADR-0137 止。其中 ADR-0063、ADR-0064、ADR-0065、ADR-0068、ADR-0069 共 5 篇為早期介面排版草案，後續已被 ADR-0070 單欄聚焦架構完整吸收與替代，故無獨立保留歷史檔案；實體決策文件共計 132 篇。
+> **編號跳號說明**：本目錄編號自 ADR-0001 起至 ADR-0138 止。其中 ADR-0063、ADR-0064、ADR-0065、ADR-0068、ADR-0069 共 5 篇為早期介面排版草案，後續已被 ADR-0070 單欄聚焦架構完整吸收與替代，故無獨立保留歷史檔案；實體決策文件共計 133 篇。
 
 | 決策標題 | 狀態 | 日期 |
 | :--- | :---: | :---: |
@@ -143,3 +143,4 @@
 | [ADR-0135: 歌曲主檔官方影音收錄、現場雙軌聯動與沉浸式播放架構 (Song Master Media Embed, Live Twin-Track Linkage & Immersive Player Architecture)](0135-song-master-media-embed-and-live-twin-track-linkage-architecture.md) | 已採納 (Accepted) | 歌曲主檔擴充結構化 mv 與 live 影音欄位、支援 "MM:SS" 與秒數防呆時間戳、票根原生內嵌影音舞台（SongMediaStage）、雙軌切換、多版本選台器、現場精華區間自動暫停與 showId 場次直達 |
 | [ADR-0136: 巡演與單場官方影音精華收錄、全景票券舞台與漸進式展示架構 (Tour & Show Media Digest Embed, Concert Media Stage & Progressive Enhancement Architecture)](0136-tour-and-show-media-digest-and-concert-stage-architecture.md) | 已採納 (Accepted) | 巡演主檔與單場事件擴充 media.digest 影音欄位、漸進式增強（有 Digest 始展示、無 Digest 零 DOM 污染）、共用全景演出影音舞台（ConcertMediaStage）、工具列一鍵展開與全螢幕沉浸播放 |
 | [ADR-0137: PWA 版本更新提示、背景待命接管與無干擾互動式刷新架構 (PWA Version Update Notification, Waiting Lifecycle & Non-Intrusive Interactive Reload Architecture)](0137-pwa-version-update-notification-and-interactive-reload-architecture.md) | 已採納 (Accepted) | 實作 Service Worker 待命接管生命週期、三軌被動檢查（視窗喚醒/路由跳轉 15 分鐘防抖 + 60 分鐘心跳）、非阻斷式票券風提示元件（UpdateNotificationToast）與 Session 防打擾機制 |
+| [ADR-0138: 歌曲主檔 Spotify 官方音源收錄、現場雙軌聯動與緊湊型播放舞台架構 (Song Master Spotify Audio Embed, Live Twin-Track Linkage & Compact Audio Stage Architecture)](0138-spotify-master-audio-stage-and-live-twin-track-architecture.md) | 已採納 (Accepted) | 歌曲主檔擴充結構化 spotify 欄位（94 首正式音源 100% 覆蓋、56 首收錄 99+ 筆跨年份現場）、22 碼 Base62 檢驗管線、票根原生內嵌緊湊型播放舞台（SpotifyAudioStage）、雙軌切換、多場次選台與 showId 場次直達 |
