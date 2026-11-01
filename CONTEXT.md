@@ -351,7 +351,7 @@ _Avoid_: 引入不穩定且缺乏硬體保證的瀏覽器影片錄製破壞離�
 
 **PWA 版本更新提示、背景待命接管與無干擾互動式刷新不變式（PWA Waiting Update Lifecycle & Interactive Reload Invariants，ADR-0137）**:
 1. **取消自動接管與待命生命週期（Waiting Worker Lifecycle）**：新版 Service Worker 完成預快取安裝後，不執行無條件 `skipWaiting()`，而是在背景保留於 `waiting` 狀態，杜絕背刺舊版前端正在執行的記憶體實例與中斷樂迷操作。
-2. **前景喚醒主動檢查與防抖節流（Visibility Focus Trigger with 15-Min Throttle）**：網頁載入時主動調用 `registration.update()`；當樂迷切換手機 App 或從背景分頁回到本站（`visibilitychange: visible`）且距上次檢查超過 15 分鐘（900,000ms）時自動檢查邊緣部署，既保證版本新鮮度又杜絕常駐計時器消耗現場電力與流量。
+2. **三軌被動更新檢查與防抖節流（Three-Track Passive Update Check with 15-Min Throttle）**：網頁載入時主動調用 `registration.update()`；當樂迷切換手機 App 回到本站（`visibilitychange`）、於站內切換歌單路由（`hashchange`）且距上次檢查超過 15 分鐘（900,000ms），以及每 60 分鐘前景心跳時，自動檢查邊緣部署，既保證版本新鮮度又杜絕常駐計時器消耗現場電力與流量。
 3. **非阻斷式票券風提示與 Session 禮貌防騷擾（Non-Intrusive Toast & Session Dismissal）**：偵測到新版就緒時，於螢幕底部浮現高對比票券風提示橫條（`UpdateNotificationToast`）。樂迷若選擇「稍後」，在當次工作階段（Session）中絕不重複彈出打擾。
 4. **互動式接管與 Hash 路由無縫保全（Interactive Reload & Hash Preservation）**：樂迷點擊「立即更新」後，按鈕轉為「更新中...」禁用態，通知 Waiting Worker 執行 `SKIP_WAITING`，並在 `controllerchange` 觸發時平滑重整，原生保全樂迷當前所處之 `#/tickets`、`#/tour/xxx` 等 Hash 路由狀態。
 _Avoid_: 無條件強制自動 `location.reload()` 造成樂迷打卡或查歌途中資料遺失、在演唱會微弱網路環境下頻繁短輪詢、彈出強制遮罩式 Modal 阻斷瀏覽體驗、在更新提示暴露生澀冰冷的 Git Commit 或建置工程黑話。

@@ -29,9 +29,12 @@ Accepted
      - 註冊成功後，監聽 `registration.onupdatefound`，當新 worker 的狀態轉為 `installed` 且當前已有控制器（`navigator.serviceWorker.controller`）時，發布更新就緒事件。
      - 若頁面載入時已存在 `registration.waiting`（例如先前已在背景下載好但尚未套用），立即識別並發布更新就緒事件。
      - 匯出 `subscribeUpdateAvailable(callback)` 與 `applyUpdate()` API，供 React 元件訂閱與操作。
-3. **視窗喚醒自動檢查（Visibility Focus Update Trigger with Throttle）**：
-   - 在 `site/src/lib/pwa.js` 中監聽 `document.addEventListener("visibilitychange", ...)`。
-   - 當文件狀態轉為 `visible` 且距離上次檢查時間超過 15 分鐘（900,000ms）時，自動調用 `registration.update()`，確保手機切回前景秒級捕捉新版，同時徹底杜絕輪詢耗電。
+3. **三軌被動更新檢查機制（Three-Track Passive Update Check Architecture）**：
+   - 針對 SPA 單頁應用站內切換無全頁導航請求之特點，在 `site/src/lib/pwa.js` 配置三軌被動檢查觸發點：
+     - **視窗喚醒軌（Visibility Focus）**：監聽 `document.addEventListener("visibilitychange", ...)`，文件轉為 `visible` 且距上次檢查 > 15 分鐘時調用 `registration.update()`。
+     - **站內路由跳轉軌（SPA Route Change）**：監聽 `window.addEventListener("hashchange", ...)`，當樂迷於站內切換歌曲、巡演或票夾且距上次檢查 > 15 分鐘時調用 `registration.update()`。
+     - **常開前景心跳軌（60-Minute Passive Heartbeat）**：針對電腦螢幕或常開平板前台不關閉分頁的情境，以 `setInterval` 每 60 分鐘主動檢查一次。
+   - 徹底消滅「分頁一直開著吃不到新版」之盲區，同時恪守零後端極致節能原則。
 4. **非阻斷式票券風提示元件（`UpdateNotificationToast`）**：
    - 在 `site/src/components/common/UpdateNotificationToast.jsx` 實作浮動提示元件，掛載於 `site/src/App.jsx` 根階層。
    - 採用票券深黑底金色細邊高對比質感，浮於螢幕底部中央。

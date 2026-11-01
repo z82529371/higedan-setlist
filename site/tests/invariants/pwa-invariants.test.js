@@ -210,6 +210,40 @@ describe("20. PWA Offline Support & Web App Manifest Invariants (ADR-0119)", () 
       unsubscribe();
     });
 
+    it("attaches hashchange and passive interval heartbeat update triggers (ADR-0137)", async () => {
+      let hashchangeRegistered = false;
+      let intervalRegistered = false;
+
+      const mockRegistration = {
+        scope: "/",
+        update: async () => {},
+      };
+
+      const mockNavigator = {
+        serviceWorker: {
+          register: () => Promise.resolve(mockRegistration),
+        },
+      };
+
+      const mockWindow = {
+        addEventListener: (event, handler) => {
+          if (event === "load") handler();
+          if (event === "hashchange") hashchangeRegistered = true;
+        },
+        setInterval: (handler, intervalMs) => {
+          if (intervalMs === 3600000) intervalRegistered = true;
+          return 123;
+        },
+        document: {
+          addEventListener: () => {},
+        },
+      };
+
+      await registerServiceWorker({ window: mockWindow, navigator: mockNavigator });
+      assert.equal(hashchangeRegistered, true, "Must attach hashchange listener for SPA navigation checks");
+      assert.equal(intervalRegistered, true, "Must attach 60-minute passive heartbeat interval for open tabs");
+    });
+
     it("applies service worker update by posting SKIP_WAITING and reloading upon controllerchange (ADR-0137)", () => {
       let postedMessage = null;
       let reloaded = false;

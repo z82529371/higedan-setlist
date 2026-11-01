@@ -7,11 +7,13 @@
 
 const CACHE_NAME_PREFIX = "higedan-setlist";
 export const VISIBILITY_CHECK_THROTTLE_MS = 15 * 60 * 1000; // 15 minutes
+export const PASSIVE_HEARTBEAT_INTERVAL_MS = 60 * 60 * 1000; // 60 minutes
 
 const updateListeners = new Set();
 let activeRegistration = null;
 let waitingWorkerInstance = null;
 let lastCheckTimestamp = 0;
+let heartbeatTimerId = null;
 
 function resolveClientEnv(env = {}) {
   const win = env.window || (typeof window !== "undefined" ? window : null);
@@ -113,6 +115,16 @@ export function registerServiceWorker(env = {}) {
           });
         }
 
+        const triggerThrottledCheck = () => {
+          const now = Date.now();
+          if (now - lastCheckTimestamp >= VISIBILITY_CHECK_THROTTLE_MS) {
+            lastCheckTimestamp = now;
+            if (typeof registration?.update === "function") {
+              registration.update().catch(() => {});
+            }
+          }
+        };
+
         // 3. Initial update check on page load
         if (typeof registration.update === "function") {
           registration.update().catch(() => {});
@@ -123,15 +135,26 @@ export function registerServiceWorker(env = {}) {
         if (win.document && typeof win.document.addEventListener === "function") {
           win.document.addEventListener("visibilitychange", () => {
             if (win.document.visibilityState === "visible") {
-              const now = Date.now();
-              if (now - lastCheckTimestamp >= VISIBILITY_CHECK_THROTTLE_MS) {
-                lastCheckTimestamp = now;
-                if (typeof registration.update === "function") {
-                  registration.update().catch(() => {});
-                }
-              }
+              triggerThrottledCheck();
             }
           });
+        }
+
+        // 5. SPA Route Change check: when user navigates between songs/shows/tours (hashchange)
+        if (typeof win.addEventListener === "function") {
+          win.addEventListener("hashchange", triggerThrottledCheck);
+        }
+
+        // 6. Passive foreground heartbeat: every 60 minutes for perpetually open tabs
+        if (typeof win.setInterval === "function") {
+          if (heartbeatTimerId && typeof win.clearInterval === "function") {
+            win.clearInterval(heartbeatTimerId);
+          }
+          heartbeatTimerId = win.setInterval(() => {
+            if (!win.document || win.document.visibilityState === "visible") {
+              triggerThrottledCheck();
+            }
+          }, PASSIVE_HEARTBEAT_INTERVAL_MS);
         }
 
         return registration;
@@ -162,6 +185,11 @@ export async function unregisterServiceWorkers(env = {}) {
   activeRegistration = null;
   waitingWorkerInstance = null;
   lastCheckTimestamp = 0;
+
+  if (heartbeatTimerId && win && typeof win.clearInterval === "function") {
+    win.clearInterval(heartbeatTimerId);
+    heartbeatTimerId = null;
+  }
 
   if (!win || !nav || !("serviceWorker" in nav) || typeof nav.serviceWorker.getRegistrations !== "function") {
     return;
