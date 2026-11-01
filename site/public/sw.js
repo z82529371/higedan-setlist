@@ -66,14 +66,20 @@ function fetchWithTimeout(request, timeoutMs) {
   });
 }
 
-// Install: precache app shell and assets
+// Install: precache app shell and assets (Waiting lifecycle, ADR-0137)
 self.addEventListener("install", (event) => {
   event.waitUntil(
     caches
       .open(CACHE_NAME)
       .then((cache) => cache.addAll(PRECACHE_ASSETS))
-      .then(() => self.skipWaiting())
   );
+});
+
+// Message: interactive skip waiting trigger from UI prompt (ADR-0137)
+self.addEventListener("message", (event) => {
+  if (event.data && event.data.type === "SKIP_WAITING") {
+    self.skipWaiting();
+  }
 });
 
 // Activate: clean up outdated cache versions and claim clients

@@ -2,7 +2,12 @@ import { describe, it } from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
 import path from "node:path";
-import { registerServiceWorker, unregisterServiceWorkers } from "../../src/lib/pwa.js";
+import {
+  registerServiceWorker,
+  unregisterServiceWorkers,
+  subscribeUpdateAvailable,
+  applyServiceWorkerUpdate,
+} from "../../src/lib/pwa.js";
 
 const siteRoot = path.resolve(import.meta.dirname, "../..");
 const publicDir = path.resolve(siteRoot, "public");
@@ -130,9 +135,16 @@ describe("20. PWA Offline Support & Web App Manifest Invariants (ADR-0119)", () 
       assert.match(swCode, /addEventListener\(\s*["']install["']/, "sw.js must listen for install");
       assert.match(swCode, /addEventListener\(\s*["']activate["']/, "sw.js must listen for activate");
       assert.match(swCode, /addEventListener\(\s*["']fetch["']/, "sw.js must listen for fetch");
+      assert.match(swCode, /addEventListener\(\s*["']message["']/, "sw.js must listen for message (ADR-0137)");
+      assert.match(swCode, /SKIP_WAITING/, "sw.js must handle SKIP_WAITING message (ADR-0137)");
       assert.match(swCode, /caches\.match/, "sw.js must use caches.match");
       assert.match(swCode, /caches\.delete/, "sw.js must prune outdated caches on activate");
-      assert.match(swCode, /skipWaiting\(\)/, "sw.js must call skipWaiting on install");
+      assert.match(swCode, /skipWaiting\(\)/, "sw.js must call skipWaiting upon request");
+      assert.doesNotMatch(
+        swCode,
+        /then\(\s*\(\)\s*=>\s*self\.skipWaiting\(\)\s*\)/,
+        "sw.js must not unconditionally skipWaiting in install, preserving waiting lifecycle (ADR-0137)"
+      );
       assert.match(
         swCode,
         /["']navigate["']/,
@@ -148,6 +160,100 @@ describe("20. PWA Offline Support & Web App Manifest Invariants (ADR-0119)", () 
         /caches\.match\([^)]+\)\s*\|\|/,
         "sw.js must not synchronously evaluate Promise-returning caches.match() with boolean OR"
       );
+    });
+
+    it("guarantees subscribeUpdateAvailable and applyServiceWorkerUpdate run safely in SSR", () => {
+      assert.doesNotThrow(() => {
+        const unsubscribe = subscribeUpdateAvailable(() => {});
+        if (typeof unsubscribe === "function") unsubscribe();
+      }, "subscribeUpdateAvailable must not throw in SSR");
+
+      assert.doesNotThrow(() => {
+        applyServiceWorkerUpdate();
+      }, "applyServiceWorkerUpdate must not throw in SSR");
+    });
+
+    it("notifies update subscribers when a waiting worker is detected (ADR-0137)", async () => {
+      let notified = false;
+      const unsubscribe = subscribeUpdateAvailable(() => {
+        notified = true;
+      });
+
+      const mockWaitingWorker = {
+        postMessage: () => {},
+      };
+
+      const mockRegistration = {
+        scope: "/",
+        waiting: mockWaitingWorker,
+        update: async () => {},
+      };
+
+      const mockNavigator = {
+        serviceWorker: {
+          controller: {},
+          register: () => Promise.resolve(mockRegistration),
+        },
+      };
+
+      const mockWindow = {
+        addEventListener: (event, handler) => {
+          if (event === "load") handler();
+        },
+        document: {
+          addEventListener: () => {},
+        },
+      };
+
+      await registerServiceWorker({ window: mockWindow, navigator: mockNavigator });
+      assert.equal(notified, true, "Must notify subscriber when waiting worker exists");
+      unsubscribe();
+    });
+
+    it("applies service worker update by posting SKIP_WAITING and reloading upon controllerchange (ADR-0137)", () => {
+      let postedMessage = null;
+      let reloaded = false;
+      let controllerChangeHandler = null;
+
+      const mockWaitingWorker = {
+        postMessage: (msg) => {
+          postedMessage = msg;
+        },
+      };
+
+      const mockRegistration = {
+        waiting: mockWaitingWorker,
+      };
+
+      const mockNavigator = {
+        serviceWorker: {
+          addEventListener: (event, handler) => {
+            if (event === "controllerchange") {
+              controllerChangeHandler = handler;
+            }
+          },
+        },
+      };
+
+      const mockWindow = {
+        location: {
+          reload: () => {
+            reloaded = true;
+          },
+        },
+      };
+
+      applyServiceWorkerUpdate({
+        window: mockWindow,
+        navigator: mockNavigator,
+        registration: mockRegistration,
+      });
+
+      assert.deepEqual(postedMessage, { type: "SKIP_WAITING" }, "Must post SKIP_WAITING to waiting worker");
+      assert.ok(typeof controllerChangeHandler === "function", "Must listen to controllerchange");
+
+      controllerChangeHandler();
+      assert.equal(reloaded, true, "Must reload window upon controllerchange");
     });
 
     it("guarantees registerServiceWorker runs safely in Node.js SSR without navigator defined", () => {
