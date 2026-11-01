@@ -7,6 +7,7 @@ import { useArchiveFilter, useArchiveRoute } from "./hooks/index.js";
 import { I18nProvider } from "./lib/i18n.jsx";
 import LandingHero from "./components/LandingHero.jsx";
 import CalendarModal from "./components/CalendarModal.jsx";
+import UpdateNotificationToast from "./components/common/UpdateNotificationToast.jsx";
 import "./style.css";
 
 export function AppContent({ probeRoute } = {}) {
@@ -145,6 +146,9 @@ export function AppContent({ probeRoute } = {}) {
         allUnits={allUnits}
         onSelectShow={handleSelectShow}
       />
+
+      {/* 🔔 PWA Interactive Version Update Notification Toast (ADR-0137) */}
+      <UpdateNotificationToast />
     </Fragment>
   );
 }
