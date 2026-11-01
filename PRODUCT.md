@@ -36,6 +36,7 @@ web
 - **嚴謹命名規範**：場館名稱約定中文為主、品牌劇場保留原文；演出標題保持純淨官方名，不追加城市後綴。
 - **Hash 路由穿透**：全域搜尋與分類切換與 URL Hash 雙向同步，支援深層連結直達特定歌曲或場次，外部深層連結自動直達檢索票券而不受首頁阻擋。
 - **個人巡演票夾與隱私參戰記錄（ADR-0114, ADR-0115）**：提供專屬票夾頁面（`#/tickets`）與本地離線參戰足跡追蹤（`hg_ticket_book_v1`）。歌迷可於巡演日程（`TourSlip`）就地一鍵收納場次，或於單場票根（`ShowSlip`）進行深度打卡（自訂座位、備忘筆記、實體印章），並即時連動 `ShowNavigator` 場次按鈕與狀態列動態數字徽章，零個人資料上傳。
+- **PWA 現場離線瀏覽與非阻斷式版本更新（ADR-0119, ADR-0134, ADR-0137）**：完整支援 Web App Manifest 獨立桌面與行動端安裝與 Cache-First 離線瞬開。雲端發布新版歌單或修復時，新 Service Worker 於背景待命預存；當新版就緒後，於視窗喚醒（15 分鐘防抖）或載入時觸發底部非阻斷式票券風提示條（`UpdateNotificationToast`），由樂迷自主點擊一鍵刷新套用，杜絕強制重載打斷操作。
 - **資料保護約束**：同步腳本嚴格保護使用者自訂 `shortTitle`，不允許無序覆寫。
 
 ## Component & Domain Terminology Mapping
@@ -54,6 +55,7 @@ web
 | **紀念卡片彈窗**（Memorial Card Modal） | 專場紀念票根點陣/懷舊視覺卡片渲染與 PNG 匯出 | `site/src/components/MemorialCardModal.jsx` |
 | **個人巡演票夾**（Ticket Book Page） | 歌迷個人參戰編年史時間軸、里程碑統計、自訂筆記印章與紀念票卡匯出 | `site/src/components/ticket-book/TicketBookPage.jsx` |
 | **巡演日程就地收進票夾**（Tour Slip Quick Check-in） | 於巡演總覽日程中免開票根快速標記「收進票夾 / 取消」 | `site/src/components/slips/TourSlip.jsx` |
+| **版本更新通知條**（Update Notification Toast） | PWA 新版本待命就緒時之底部非阻斷票券風提示橫條，提供立即更新與當次稍後操作 | `site/src/components/common/UpdateNotificationToast.jsx` |
 | **行動端懸浮控制項**（Mobile Floating Controls） | 手機版單手友善之雙側懸浮按鈕（首頁/置頂、票夾動態圓點、語言切換球） | `site/src/components/layout/MobileFloatingControls.jsx` |
 
 ## Brand Commitments
