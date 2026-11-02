@@ -14,6 +14,11 @@ import { useI18n } from "../../lib/i18n.jsx";
 import { useTicketBookAttendance } from "../../lib/ticket-book.js";
 import { SongMediaStage } from "./SongMediaStage.jsx";
 import { extractConcertMedia } from "../../lib/song-media.js";
+import liveReleasesData from "../../data/live-releases.json";
+import { buildLiveReleaseIndex } from "../../lib/live-releases.js";
+import { LiveReleaseSection } from "./LiveReleaseSection.jsx";
+
+const liveReleasesIndex = buildLiveReleaseIndex(liveReleasesData);
 
 export function ShowSlip({
   ud,
@@ -45,6 +50,7 @@ export function ShowSlip({
     return extractConcertMedia(s.media ? s : ud.unit);
   }, [s, ud.unit]);
   const hasDigest = !!digestMedia;
+  const showReleases = useMemo(() => liveReleasesIndex.getReleasesForShow(showId), [showId]);
 
   const showList = ud.unit.shows || [];
   const currentIdx = showList.findIndex((x) => x.id === showId);
@@ -372,9 +378,25 @@ export function ShowSlip({
             <span className="inline-block h-2 w-2 rounded-full border border-ink bg-tape" aria-hidden="true" />
             Official 髭男 dism
           </div>
-          <span className="inline-flex items-center rounded-[3px] border border-ink/30 bg-band/15 px-2 py-0.5 font-mono text-xs font-bold text-band-ink">
-            {t(`categories.${ud.unit.type}`, ud.unit.type)}
-          </span>
+          <div className="flex items-center gap-1.5">
+            {showReleases.length > 0 && (
+              <button
+                type="button"
+                onClick={() => {
+                  const el = document.getElementById("show-releases");
+                  if (el) el.scrollIntoView({ behavior: "smooth" });
+                }}
+                className="inline-flex items-center gap-1 rounded-[3px] border border-ink/20 bg-paper-light hover:bg-paper hover:border-ink/50 px-2 py-0.5 font-mono text-xs font-medium text-ink transition-colors cursor-pointer select-none touch-stamp"
+                title={t("view_releases_title", "檢視本場官方映像化與發行載體")}
+              >
+                <span aria-hidden="true">💿</span>
+                <span>{t("official_release_badge", "官方映像化")}</span>
+              </button>
+            )}
+            <span className="inline-flex items-center rounded-[3px] border border-ink/30 bg-band/15 px-2 py-0.5 font-mono text-xs font-bold text-band-ink">
+              {t(`categories.${ud.unit.type}`, ud.unit.type)}
+            </span>
+          </div>
         </div>
 
         {/* Level 2: Tour / Event Name Headline */}
@@ -626,6 +648,9 @@ export function ShowSlip({
           )}
         </div>
       )}
+
+      {/* Live Releases & Video Archive Mapping (ADR-0142) */}
+      <LiveReleaseSection releases={showReleases} showId={showId} />
 
       {/* Bottom Show Navigation Footer */}
       {showList.length > 1 && (

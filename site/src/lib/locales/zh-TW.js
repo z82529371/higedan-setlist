@@ -11,6 +11,8 @@ export const dictZhTw = {
     ranking: "排行",
     journey: "巡演足跡",
     journeyTitle: "全生涯巡演足跡",
+    releases: "作品",
+    releasesTitle: "官方現場影音發行",
     directionLabel: "查詢方向",
   },
   header: {
@@ -815,6 +817,15 @@ export const dictZhTw = {
     dismiss: "稍後",
     dismissAria: "關閉版本更新提醒",
   },
+  live_releases_title: "官方映像化與發行載體",
+  all_categories: "全部型態",
+  bonus_included_in: "收錄於",
+  view_all_releases: "瀏覽歷年現場影音發行",
+  live_discography_title: "現場影音發行",
+  live_discography_desc: "收錄 Official 髭男 dism 歷年官方發行之獨立現場影音（BD/DVD）、初回限定盤特典光碟與串流現場專輯。",
+  view_show_slip: "前往演出票根",
+  official_release_badge: "官方映像化",
+  view_releases_title: "檢視本場官方映像化與發行載體",
 };
 
 

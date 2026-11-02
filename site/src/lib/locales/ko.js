@@ -11,6 +11,8 @@ export const dictKo = {
     ranking: "랭킹",
     journey: "투어 발자취",
     journeyTitle: "전체 커리어 투어 발자취",
+    releases: "작품",
+    releasesTitle: "공식 영상화 및 발매 아카이브",
     directionLabel: "조회 기준",
   },
   header: {
@@ -815,6 +817,15 @@ export const dictKo = {
     dismiss: "나중에",
     dismissAria: "업데이트 알림 닫기",
   },
+  live_releases_title: "공식 영상화 및 발매 작품",
+  all_categories: "전체 형태",
+  bonus_included_in: "수록 작품",
+  view_all_releases: "역대 라이브 작품 아카이브 보기",
+  live_discography_title: "라이브 작품 아카이브",
+  live_discography_desc: "Official히게단dism이 발표한 단독 라이브 영상(BD/DVD), 초회한정반 특전 디스크 및 스트리밍 라이브 앨범을 총망라.",
+  view_show_slip: "공연 티켓 보기",
+  official_release_badge: "공식 영상화",
+  view_releases_title: "이 공연의 공식 영상화 및 발매 정보 보기",
 };
 
 

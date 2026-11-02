@@ -15,6 +15,7 @@ export function ArchiveStatusBar({
   handleSelectTickets,
   handleSelectRanking,
   handleSelectJourney,
+  handleSelectReleases,
   storage,
 }) {
   const { t } = useI18n();
@@ -34,7 +35,7 @@ export function ArchiveStatusBar({
       title={t("statusBar.backToTopTitle", "點擊滾動回單據頂部")}
       aria-label={t("statusBar.backToTopAria", "當前狀態導航列，點擊回單據頂部")}
     >
-      <div className="mx-auto max-w-[960px] px-4 sm:px-6 flex items-center justify-between gap-3 py-1 sm:py-2 font-mono text-[10px] sm:text-[12px] tracking-wider sm:tracking-[0.14em] text-band-ink whitespace-nowrap overflow-hidden cursor-pointer">
+      <div className="w-full px-4 sm:px-6 flex items-center justify-between gap-3 py-1 sm:py-2 font-mono text-[10px] sm:text-[12px] tracking-wider sm:tracking-[0.14em] text-band-ink whitespace-nowrap overflow-hidden cursor-pointer">
         {/* Left: Dynamic Context Title */}
         <div className="truncate min-w-0 font-bold">
           {tab === "show" && <span>{current?.unit.title ?? ""}</span>}
@@ -155,6 +156,24 @@ export function ArchiveStatusBar({
             >
               <span aria-hidden="true">🚐</span>
               <span>{t("nav.journey", "巡演長征")}</span>
+            </button>
+          )}
+
+          {/* Live Releases Action Button (Desktop) */}
+          {handleSelectReleases && (
+            <button
+              type="button"
+              data-testid="status-bar-releases-btn"
+              onClick={(e) => {
+                e.stopPropagation();
+                handleSelectReleases();
+              }}
+              className="hidden sm:inline-flex items-center gap-1.5 px-2 py-0.5 rounded-[4px] bg-band-ink/10 hover:bg-band-ink/20 active:scale-95 text-band-ink font-bold border border-band-ink/30 transition-all cursor-pointer text-[10px] sm:text-[11px] shrink-0 shadow-2xs"
+              title={t("nav.releasesTitle", "官方現場影音發行")}
+              aria-label={t("nav.releasesTitle", "官方現場影音發行")}
+            >
+              <span aria-hidden="true">💿</span>
+              <span>{t("nav.releases", "作品")}</span>
             </button>
           )}
 

@@ -11,6 +11,8 @@ export const dictEn = {
     ranking: "Leaderboard",
     journey: "Tour Journey",
     journeyTitle: "Career Tour Route",
+    releases: "Releases",
+    releasesTitle: "Official Live Releases Archive",
     directionLabel: "Query Direction",
   },
   header: {
@@ -815,6 +817,15 @@ export const dictEn = {
     dismiss: "Later",
     dismissAria: "Dismiss update notification",
   },
+  live_releases_title: "Official Live Releases",
+  all_categories: "All Formats",
+  bonus_included_in: "Included in",
+  view_all_releases: "Browse Live Release Archive",
+  live_discography_title: "Live Release Archive",
+  live_discography_desc: "Official髭男dism live video releases (Blu-ray/DVD), limited edition bonus discs, and digital live streaming albums.",
+  view_show_slip: "View Show Slip",
+  official_release_badge: "Official Release",
+  view_releases_title: "View official live release for this show",
 };
 
 

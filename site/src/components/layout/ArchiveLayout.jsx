@@ -70,6 +70,7 @@ export function ArchiveLayout({
     handleSelectTickets,
     handleSelectRanking,
     handleSelectJourney,
+    handleSelectReleases,
     visualViewportStyle,
   } = routeState;
 
@@ -215,6 +216,7 @@ export function ArchiveLayout({
         handleSelectTickets={handleSelectTickets}
         handleSelectRanking={handleSelectRanking}
         handleSelectJourney={handleSelectJourney}
+        handleSelectReleases={handleSelectReleases}
         storage={storage}
       />
 
@@ -570,6 +572,7 @@ export function ArchiveLayout({
         onSelectTickets={handleSelectTickets}
         onSelectRanking={handleSelectRanking}
         onSelectJourney={handleSelectJourney}
+        onSelectReleases={handleSelectReleases}
         storage={storage}
       />
 

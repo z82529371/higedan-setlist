@@ -10,13 +10,14 @@ export function MobileFloatingControls({
   onSelectTickets,
   onSelectRanking,
   onSelectJourney,
+  onSelectReleases,
   onReturnArchive,
   storage,
 }) {
   const { t } = useI18n();
   const { count: ticketCount } = useTicketBook({ storage });
 
-  const isStandalonePage = tab === "journey" || tab === "ranking";
+  const isStandalonePage = tab === "journey" || tab === "ranking" || tab === "releases";
 
   return (
     <>
@@ -36,7 +37,7 @@ export function MobileFloatingControls({
             </button>
             <LanguageSwitcher fab menuPosition="up" />
           </>
-        ) : tab === "ranking" ? (
+        ) : tab === "ranking" || tab === "releases" ? (
           <LanguageSwitcher fab menuPosition="up" />
         ) : (
           <>
@@ -154,6 +155,20 @@ export function MobileFloatingControls({
                 title={t("nav.journeyTitle", "全生涯巡演足跡")}
               >
                 <span aria-hidden="true">🚐</span>
+              </button>
+            )}
+
+            {/* Live Releases Floating Action Button */}
+            {onSelectReleases && (
+              <button
+                type="button"
+                data-testid="mobile-releases-fab"
+                onClick={onSelectReleases}
+                className="flex h-10 w-10 items-center justify-center rounded-full border-[1.5px] border-ink bg-paper/95 text-ink shadow-md cursor-pointer hover:bg-tape-tint active:scale-95 transition-all text-base backdrop-blur-xs"
+                aria-label={t("nav.releasesTitle", "官方現場影音發行")}
+                title={t("nav.releasesTitle", "官方現場影音發行")}
+              >
+                <span aria-hidden="true">💿</span>
               </button>
             )}
 

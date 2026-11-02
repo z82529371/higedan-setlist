@@ -11,6 +11,8 @@ export const dictJa = {
     ranking: "ランキング",
     journey: "巡演足跡",
     journeyTitle: "全キャリア巡演足跡",
+    releases: "作品",
+    releasesTitle: "公式映像化・リリースアーカイブ",
     directionLabel: "検索方向",
   },
   header: {
@@ -815,6 +817,15 @@ export const dictJa = {
     dismiss: "あとで",
     dismissAria: "バージョン更新の通知を閉じる",
   },
+  live_releases_title: "公式映像化・リリース作品",
+  all_categories: "全タイプ",
+  bonus_included_in: "収録作品",
+  view_all_releases: "歴代ライブ作品アーカイブを見る",
+  live_discography_title: "ライブ作品アーカイブ",
+  live_discography_desc: "Official髭男dismがこれまでリリースした単独ライブ映像（BD/DVD）、初回限定盤特典ディスク、および配信限定ライブ音源を網羅。",
+  view_show_slip: "公演チケットへ",
+  official_release_badge: "公式映像化",
+  view_releases_title: "本公演の公式映像化・リリース情報を見る",
 };
 
 

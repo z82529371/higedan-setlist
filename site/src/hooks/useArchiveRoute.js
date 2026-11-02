@@ -78,7 +78,7 @@ export function useArchiveRoute({
       parseRoute(window.location.hash) || parseRoute(window.location.pathname);
     if (!r) return fallback;
     if (r.kind === "tickets") return fallback;
-    if (r.kind === "ranking") return fallback;
+    if (r.kind === "ranking" || r.kind === "releases") return fallback;
     if (r.kind === "map") {
       const resolvedMap = resolveMapTarget(r.value);
       if (!resolvedMap) return fallback;
@@ -166,6 +166,7 @@ export function useArchiveRoute({
     if (!r) return "landing";
     if (r.kind === "tickets") return "tickets";
     if (r.kind === "ranking") return "ranking";
+    if (r.kind === "releases") return "releases";
     if (r.kind === "map") {
       const target = resolveMapTarget(r.value);
       if (!target) return "landing";
@@ -266,6 +267,11 @@ export function useArchiveRoute({
     }
     if (r.kind === "ranking") {
       setViewMode("ranking");
+      setIsFilterDrawerOpen(false);
+      return;
+    }
+    if (r.kind === "releases") {
+      setViewMode("releases");
       setIsFilterDrawerOpen(false);
       return;
     }
@@ -670,6 +676,13 @@ export function useArchiveRoute({
     go(routeHash.ranking());
   };
 
+  const handleSelectReleases = () => {
+    setQ("");
+    setIsFilterDrawerOpen(false);
+    setIsMobileSearchOpen(false);
+    go(routeHash.releases());
+  };
+
   const handleReturnArchive = () => {
     setViewMode("archive");
     setQ("");
@@ -800,6 +813,7 @@ export function useArchiveRoute({
     handleReturnHome,
     handleSelectTickets,
     handleSelectRanking,
+    handleSelectReleases,
     handleSelectJourney: handleSelectMapJourney,
     handleReturnArchive,
     appendLang,
