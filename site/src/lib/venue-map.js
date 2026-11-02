@@ -235,6 +235,77 @@ export const OVERSEAS_TARGET_KEY = "海外";
 
 export const SANIN_SANCTUARY_PREFECTURES = new Set(["島根縣", "鳥取縣"]);
 
+export const JAPAN_8_REGIONS = [
+  {
+    id: "kanto",
+    labelKey: "regions.kanto",
+    defaultLabel: "關東",
+    prefectures: ["東京都", "神奈川縣", "埼玉縣", "千葉縣", "茨城縣", "栃木縣", "群馬縣"],
+  },
+  {
+    id: "kinki",
+    labelKey: "regions.kinki",
+    defaultLabel: "近畿",
+    prefectures: ["大阪府", "兵庫縣", "京都府", "滋賀縣", "奈良縣", "和歌山縣", "三重縣"],
+  },
+  {
+    id: "chugoku",
+    labelKey: "regions.chugoku",
+    defaultLabel: "中國",
+    isSanin: true,
+    prefectures: ["島根縣", "鳥取縣", "廣島縣", "岡山縣", "山口縣"],
+  },
+  {
+    id: "chubu",
+    labelKey: "regions.chubu",
+    defaultLabel: "中部",
+    prefectures: ["愛知縣", "靜岡縣", "新潟縣", "石川縣", "長野縣", "岐阜縣", "富山縣", "福井縣", "山梨縣"],
+  },
+  {
+    id: "tohoku",
+    labelKey: "regions.tohoku",
+    defaultLabel: "東北",
+    prefectures: ["宮城縣", "福島縣", "青森縣", "秋田縣", "山形縣", "岩手縣"],
+  },
+  {
+    id: "kyushu",
+    labelKey: "regions.kyushu",
+    defaultLabel: "九州・沖繩",
+    prefectures: ["福岡縣", "熊本縣", "鹿兒島縣", "長崎縣", "大分縣", "佐賀縣", "沖繩縣", "宮崎縣"],
+  },
+  {
+    id: "shikoku",
+    labelKey: "regions.shikoku",
+    defaultLabel: "四國",
+    prefectures: ["香川縣", "愛媛縣", "高知縣", "德島縣"],
+  },
+  {
+    id: "hokkaido",
+    labelKey: "regions.hokkaido",
+    defaultLabel: "北海道",
+    prefectures: ["北海道"],
+  },
+  {
+    id: "overseas",
+    labelKey: "regions.overseas",
+    defaultLabel: "海外",
+    isOverseas: true,
+    prefectures: ["台灣", "韓國", "泰國", "新加坡"],
+  },
+];
+
+const PREFECTURE_TO_REGION_MAP = new Map();
+for (const reg of JAPAN_8_REGIONS) {
+  for (const pref of reg.prefectures) {
+    PREFECTURE_TO_REGION_MAP.set(pref, reg.id);
+  }
+}
+
+export function getRegionIdForPrefecture(pref) {
+  if (!pref) return null;
+  return PREFECTURE_TO_REGION_MAP.get(pref) || null;
+}
+
 const PREF_ALIAS_LOOKUP = new Map();
 for (const pref of [...JAPAN_47_PREFECTURES, ...OVERSEAS_COUNTRIES]) {
   PREF_ALIAS_LOOKUP.set(pref.toLowerCase(), pref);
