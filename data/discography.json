@@ -1,0 +1,858 @@
+{
+  "version": "1.0.0",
+  "lastUpdated": "2026-11-03",
+  "physicalSingles": [
+    {
+      "index": 1,
+      "title": "ノーダウト",
+      "releaseDate": "2018-04-11",
+      "label": "ポニーキャニオン",
+      "album": "エスカパレード",
+      "chartRankOricon": 51,
+      "editions": [
+        {
+          "name": "完全限定生産盤",
+          "format": "cd",
+          "catalogNumber": "PCCA-70529"
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "title": "Pretender",
+      "releaseDate": "2019-05-15",
+      "label": "ポニーキャニオン",
+      "album": "Traveler",
+      "chartRankOricon": 9,
+      "editions": [
+        {
+          "name": "初回限定盤",
+          "format": "cd_dvd",
+          "catalogNumber": "PCCA-04784",
+          "bonusContent": "HIGEDAN acoustic one-man live 2018 -Autumn- LIVE DVD"
+        },
+        {
+          "name": "通常盤",
+          "format": "cd",
+          "catalogNumber": "PCCA-04785"
+        }
+      ]
+    },
+    {
+      "index": 3,
+      "title": "宿命",
+      "releaseDate": "2019-07-31",
+      "label": "ポニーキャニオン",
+      "album": "Traveler",
+      "chartRankOricon": 15,
+      "editions": [
+        {
+          "name": "通常盤",
+          "format": "cd",
+          "catalogNumber": "PCCA-70544"
+        }
+      ]
+    },
+    {
+      "index": 4,
+      "title": "I LOVE...",
+      "releaseDate": "2020-02-12",
+      "label": "ポニーキャニオン",
+      "album": "Editorial",
+      "chartRankOricon": 5,
+      "editions": [
+        {
+          "name": "通常盤",
+          "format": "cd",
+          "catalogNumber": "PCCA-70549"
+        }
+      ]
+    },
+    {
+      "index": 5,
+      "title": "Universe",
+      "releaseDate": "2021-02-24",
+      "label": "IRORI Records",
+      "album": "Editorial",
+      "chartRankOricon": 3,
+      "editions": [
+        {
+          "name": "CD+Blu-ray盤",
+          "format": "cd_bluray",
+          "catalogNumber": "PCCA-06010",
+          "bonusContent": "Official髭男dism ONLINE LIVE 2020 - Arena Travelers -"
+        },
+        {
+          "name": "CD+DVD盤",
+          "format": "cd_dvd",
+          "catalogNumber": "PCCA-06011",
+          "bonusContent": "Official髭男dism ONLINE LIVE 2020 - Arena Travelers -"
+        },
+        {
+          "name": "通常盤",
+          "format": "cd",
+          "catalogNumber": "PCCA-70553"
+        }
+      ]
+    },
+    {
+      "index": 6,
+      "title": "Chessboard / 日常",
+      "releaseDate": "2023-09-13",
+      "label": "IRORI Records",
+      "album": "Rejoice",
+      "chartRankOricon": 6,
+      "editions": [
+        {
+          "name": "CD+Blu-ray盤",
+          "format": "cd_bluray",
+          "catalogNumber": "PCCA-06224",
+          "bonusContent": "Official髭男dism 『Editorial』発売記念 ONLINE FREE LIVE in Tokyo Opera City / 「日常」Recording Document"
+        },
+        {
+          "name": "CD+DVD盤",
+          "format": "cd_dvd",
+          "catalogNumber": "PCCA-06225",
+          "bonusContent": "Official髭男dism 『Editorial』発売記念 ONLINE FREE LIVE in Tokyo Opera City / 「日常」Recording Document"
+        },
+        {
+          "name": "通常盤",
+          "format": "cd",
+          "catalogNumber": "PCCA-70563"
+        }
+      ]
+    },
+    {
+      "index": 7,
+      "title": "スターダスト / エルダーフラワー",
+      "releaseDate": "2026-04-22",
+      "label": "IRORI Records",
+      "album": "未収録",
+      "chartRankOricon": 7,
+      "editions": [
+        {
+          "name": "CD+Blu-ray盤",
+          "format": "cd_bluray",
+          "catalogNumber": "PCCA-06477",
+          "bonusContent": "one-man tour FOUR-RE:ISM selected from Zepp Nagoya (2026.01.22) + Special Digest Movie"
+        },
+        {
+          "name": "CD+DVD盤",
+          "format": "cd_dvd",
+          "catalogNumber": "PCCA-06478",
+          "bonusContent": "one-man tour FOUR-RE:ISM selected from Zepp Nagoya (2026.01.22) + Special Digest Movie"
+        },
+        {
+          "name": "通常盤",
+          "format": "cd",
+          "catalogNumber": "PCCA-70586"
+        }
+      ]
+    }
+  ],
+  "digitalSingles": [
+    {
+      "index": 1,
+      "title": "Tell Me Baby / ブラザーズ",
+      "releaseDate": "2017-07-21",
+      "label": "ラストラム・ミュージックエンタテインメント",
+      "album": "エスカパレード",
+      "chartRank": {
+        "billboardHot100": null,
+        "oriconDl": "24位"
+      },
+      "certRIAJ": null
+    },
+    {
+      "index": 2,
+      "title": "バッドフォーミー",
+      "releaseDate": "2018-08-06",
+      "label": "ポニーキャニオン",
+      "album": "Traveler",
+      "chartRank": {
+        "billboardHot100": 93,
+        "billboardDl": 83,
+        "billboardSt": 23
+      },
+      "certRIAJ": {
+        "stream": "ゴールド"
+      }
+    },
+    {
+      "index": 3,
+      "title": "パラボラ",
+      "releaseDate": "2020-04-10",
+      "label": "ポニーキャニオン",
+      "album": "Editorial",
+      "chartRank": {
+        "billboardHot100": 6,
+        "billboardDl": 1,
+        "billboardSt": 5,
+        "oriconDs": 1,
+        "oriconSt": 5
+      },
+      "certRIAJ": {
+        "download": "ゴールド",
+        "stream": "ダブル・プラチナ"
+      }
+    },
+    {
+      "index": 4,
+      "title": "Laughter",
+      "releaseDate": "2020-07-10",
+      "label": "ポニーキャニオン",
+      "album": "Editorial",
+      "chartRank": {
+        "billboardHot100": 10,
+        "billboardDl": 4,
+        "billboardSt": 8,
+        "oriconDs": 3,
+        "oriconSt": 7
+      },
+      "certRIAJ": null
+    },
+    {
+      "index": 5,
+      "title": "Cry Baby",
+      "releaseDate": "2021-05-07",
+      "label": "IRORI Records",
+      "album": "Editorial",
+      "chartRank": {
+        "billboardHot100": 4,
+        "billboardDl": 2,
+        "billboardSt": 3,
+        "oriconDs": 2,
+        "oriconSt": 2
+      },
+      "certRIAJ": {
+        "stream": "ダイヤモンド"
+      }
+    },
+    {
+      "index": 6,
+      "title": "Anarchy",
+      "releaseDate": "2022-01-07",
+      "label": "IRORI Records",
+      "album": "Rejoice",
+      "chartRank": {
+        "billboardHot100": 12,
+        "billboardDl": 4,
+        "billboardSt": 31,
+        "oriconDs": 4
+      },
+      "certRIAJ": {
+        "stream": "ゴールド"
+      }
+    },
+    {
+      "index": 7,
+      "title": "ミックスナッツ",
+      "releaseDate": "2022-04-15",
+      "label": "IRORI Records",
+      "album": "Rejoice",
+      "chartRank": {
+        "billboardHot100": 1,
+        "billboardDl": 1,
+        "billboardSt": 1,
+        "oriconDs": 1,
+        "oriconSt": 1
+      },
+      "certRIAJ": {
+        "download": "プラチナ",
+        "stream": "ダイヤモンド"
+      }
+    },
+    {
+      "index": 8,
+      "title": "Subtitle",
+      "releaseDate": "2022-10-12",
+      "label": "IRORI Records",
+      "album": "Rejoice",
+      "chartRank": {
+        "billboardHot100": 1,
+        "billboardDl": 1,
+        "billboardSt": 1,
+        "oriconDs": 1,
+        "oriconSt": 1
+      },
+      "certRIAJ": {
+        "stream": "ダイヤモンド"
+      }
+    },
+    {
+      "index": 9,
+      "title": "ホワイトノイズ",
+      "releaseDate": "2023-01-11",
+      "label": "IRORI Records",
+      "album": "Rejoice",
+      "chartRank": {
+        "billboardHot100": 5,
+        "billboardDl": 1,
+        "billboardSt": 13,
+        "oriconDs": 1,
+        "oriconSt": 9
+      },
+      "certRIAJ": {
+        "download": "ゴールド",
+        "stream": "プラチナ"
+      }
+    },
+    {
+      "index": 10,
+      "title": "TATTOO",
+      "releaseDate": "2023-04-21",
+      "label": "IRORI Records",
+      "album": "Rejoice",
+      "chartRank": {
+        "billboardHot100": 6,
+        "billboardDl": 4,
+        "billboardSt": 4,
+        "oriconDs": 4,
+        "oriconSt": 3
+      },
+      "certRIAJ": {
+        "stream": "ダブル・プラチナ"
+      }
+    },
+    {
+      "index": 11,
+      "title": "Chessboard",
+      "releaseDate": "2023-08-09",
+      "label": "IRORI Records",
+      "album": "Rejoice",
+      "chartRank": {
+        "billboardHot100": 18,
+        "billboardDl": 2,
+        "billboardSt": 52,
+        "oriconDs": 2
+      },
+      "certRIAJ": {
+        "stream": "ゴールド"
+      }
+    },
+    {
+      "index": 12,
+      "title": "日常",
+      "releaseDate": "2023-09-13",
+      "label": "IRORI Records",
+      "album": "Rejoice",
+      "chartRank": {
+        "billboardHot100": 20,
+        "billboardDl": 4,
+        "billboardSt": 28,
+        "oriconDs": 5
+      },
+      "certRIAJ": null
+    },
+    {
+      "index": 13,
+      "title": "SOULSOUP",
+      "releaseDate": "2023-12-13",
+      "label": "IRORI Records",
+      "album": "Rejoice",
+      "chartRank": {
+        "billboardHot100": 12,
+        "billboardDl": 2,
+        "billboardSt": 24,
+        "oriconDs": 2,
+        "oriconSt": 23
+      },
+      "certRIAJ": null
+    },
+    {
+      "index": 14,
+      "title": "Same Blue",
+      "releaseDate": "2024-10-02",
+      "label": "IRORI Records",
+      "album": "未収録",
+      "chartRank": {
+        "billboardHot100": 5,
+        "billboardDl": 2,
+        "billboardSt": 4,
+        "oriconDs": 3,
+        "oriconSt": 4
+      },
+      "certRIAJ": {
+        "stream": "プラチナ"
+      }
+    },
+    {
+      "index": 15,
+      "title": "50%",
+      "releaseDate": "2024-12-13",
+      "label": "IRORI Records",
+      "album": "未収録",
+      "chartRank": {
+        "billboardHot100": 16,
+        "billboardDl": 1,
+        "billboardSt": 46,
+        "oriconDs": 1
+      },
+      "certRIAJ": null
+    },
+    {
+      "index": 16,
+      "title": "らしさ",
+      "releaseDate": "2025-08-06",
+      "label": "IRORI Records",
+      "album": "未収録",
+      "chartRank": {
+        "billboardHot100": 12,
+        "billboardDl": 3,
+        "billboardSt": 19,
+        "oriconDs": 1
+      },
+      "certRIAJ": {
+        "stream": "ゴールド"
+      }
+    },
+    {
+      "index": 17,
+      "title": "Sanitizer",
+      "releaseDate": "2025-12-01",
+      "label": "IRORI Records",
+      "album": "未収録",
+      "chartRank": {
+        "billboardHot100": 6,
+        "billboardDl": 4,
+        "billboardSt": 28
+      },
+      "certRIAJ": null
+    },
+    {
+      "index": 18,
+      "title": "Make Me Wonder",
+      "releaseDate": "2025-12-29",
+      "label": "IRORI Records",
+      "album": "未収録",
+      "chartRank": {
+        "billboardHot100": 18,
+        "billboardDl": 9,
+        "billboardSt": 62
+      },
+      "certRIAJ": null
+    },
+    {
+      "index": 19,
+      "title": "エルダーフラワー",
+      "releaseDate": "2026-03-30",
+      "label": "IRORI Records",
+      "album": "未収録",
+      "chartRank": {
+        "billboardHot100": 11,
+        "billboardDl": 1,
+        "billboardSt": 24,
+        "oriconDs": 2,
+        "oriconSt": 29
+      },
+      "certRIAJ": null
+    },
+    {
+      "index": 20,
+      "title": "スターダスト",
+      "releaseDate": "2026-04-13",
+      "label": "IRORI Records",
+      "album": "未収録",
+      "chartRank": {
+        "billboardHot100": 7,
+        "billboardDl": 2,
+        "billboardSt": 27,
+        "oriconDs": 1
+      },
+      "certRIAJ": null
+    }
+  ],
+  "eps": [
+    {
+      "index": 1,
+      "title": "What's Going On?",
+      "releaseDate": "2016-11-02",
+      "label": "ラストラム・ミュージックエンタテインメント",
+      "album": "未収録",
+      "chartRankOricon": 108,
+      "editions": [
+        {
+          "name": "通常盤 (CD+DVD)",
+          "format": "cd_dvd",
+          "catalogNumber": "LASCD-0075",
+          "bonusContent": "Live DVD From 「THE DAILY MIRROR tour 2016」東京公演"
+        },
+        {
+          "name": "初回限定「秘密結社 鷹の爪」盤",
+          "format": "cd_goods",
+          "catalogNumber": "LASCD-0074"
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "title": "Stand By You EP",
+      "releaseDate": "2018-10-17",
+      "label": "ポニーキャニオン",
+      "album": "Traveler",
+      "chartRankOricon": 17,
+      "editions": [
+        {
+          "name": "初回限定盤",
+          "format": "cd_dvd",
+          "catalogNumber": "PCCA-04716",
+          "bonusContent": "Official髭男dism one-man tour 2018 LIVE DVD (中野サンプラザ)"
+        },
+        {
+          "name": "通常盤",
+          "format": "cd",
+          "catalogNumber": "PCCA-04717"
+        }
+      ]
+    },
+    {
+      "index": 3,
+      "title": "HELLO EP",
+      "releaseDate": "2020-08-05",
+      "label": "IRORI Records",
+      "album": "Editorial",
+      "chartRankOricon": 2,
+      "editions": [
+        {
+          "name": "CD+DVD盤",
+          "format": "cd_dvd",
+          "catalogNumber": "PCCA-04960",
+          "bonusContent": "Official髭男dism Tour 19/20 -Hall Travelers- from 2020.02.10 パシフィコ横浜"
+        },
+        {
+          "name": "通常盤 (CD Only)",
+          "format": "cd",
+          "catalogNumber": "PCCA-04961"
+        }
+      ]
+    },
+    {
+      "index": 4,
+      "title": "ミックスナッツ EP",
+      "releaseDate": "2022-06-22",
+      "label": "IRORI Records",
+      "album": "Rejoice",
+      "chartRankOricon": 3,
+      "editions": [
+        {
+          "name": "CD+Blu-ray盤",
+          "format": "cd_bluray",
+          "catalogNumber": "PCCA-06136",
+          "bonusContent": "Official髭男dism Road to 「one-man tour 2021-2022」 - selected from 2021.06.23 ぴあアリーナMM -"
+        },
+        {
+          "name": "CD+DVD盤",
+          "format": "cd_dvd",
+          "catalogNumber": "PCCA-06137",
+          "bonusContent": "Official髭男dism Road to 「one-man tour 2021-2022」 - selected from 2021.06.23 ぴあアリーナMM -"
+        },
+        {
+          "name": "通常盤 (CD Only)",
+          "format": "cd",
+          "catalogNumber": "PCCA-06138"
+        }
+      ]
+    },
+    {
+      "index": "digital-1",
+      "title": "LADY",
+      "releaseDate": "2017-10-13",
+      "label": "ラストラム・ミュージックエンタテインメント",
+      "album": "エスカパレード",
+      "format": "digital",
+      "catalogNumber": "LACH-0006"
+    }
+  ],
+  "albums": {
+    "fullAlbums": [
+      {
+        "index": "indie-1",
+        "title": "エスカパレード",
+        "releaseDate": "2018-04-11",
+        "label": "ラストラム・ミュージックエンタテインメント",
+        "chartRankOricon": 15,
+        "editions": [
+          {
+            "name": "初回限定盤",
+            "format": "cd_dvd",
+            "catalogNumber": "LACD-0292",
+            "bonusContent": "Official髭男dism one-man tour 2017 -winter- LIVE DVD (赤坂BLITZ)"
+          },
+          {
+            "name": "通常盤",
+            "format": "cd",
+            "catalogNumber": "LACD-0293"
+          }
+        ]
+      },
+      {
+        "index": 1,
+        "title": "Traveler",
+        "releaseDate": "2019-10-09",
+        "label": "ポニーキャニオン",
+        "chartRankOricon": 1,
+        "editions": [
+          {
+            "name": "初回限定盤 (CD+Blu-ray)",
+            "format": "cd_bluray",
+            "catalogNumber": "PCCA-04820",
+            "bonusContent": "Official髭男dism one-man tour 18/19 from 2019.01.24 NHKホール"
+          },
+          {
+            "name": "初回限定盤 (CD+DVD)",
+            "format": "cd_dvd",
+            "catalogNumber": "PCCA-04821",
+            "bonusContent": "Official髭男dism one-man tour 18/19 from 2019.01.24 NHKホール"
+          },
+          {
+            "name": "通常盤",
+            "format": "cd",
+            "catalogNumber": "PCCA-04822"
+          }
+        ]
+      },
+      {
+        "index": 2,
+        "title": "Editorial",
+        "releaseDate": "2021-08-18",
+        "label": "IRORI Records",
+        "chartRankOricon": 1,
+        "editions": [
+          {
+            "name": "CD+Blu-ray盤",
+            "format": "cd_bluray",
+            "catalogNumber": "PCCA-06055",
+            "bonusContent": "Official髭男dism FC Tour Vol.2 - The Blooming Universe ONLINE -"
+          },
+          {
+            "name": "CD+DVD盤",
+            "format": "cd_dvd",
+            "catalogNumber": "PCCA-06056",
+            "bonusContent": "Official髭男dism FC Tour Vol.2 - The Blooming Universe ONLINE -"
+          },
+          {
+            "name": "通常盤 (CD Only)",
+            "format": "cd",
+            "catalogNumber": "PCCA-06057"
+          }
+        ]
+      },
+      {
+        "index": 3,
+        "title": "Rejoice",
+        "releaseDate": "2024-07-24",
+        "label": "IRORI Records",
+        "chartRankOricon": 1,
+        "editions": [
+          {
+            "name": "CD+Blu-ray盤",
+            "format": "cd_bluray",
+            "catalogNumber": "PCCA-06302",
+            "bonusContent": "OFFICIAL HIGE DANDISM SHOCKING NUTS TOUR selected from NIPPON BUDOKAN"
+          },
+          {
+            "name": "CD+DVD盤",
+            "format": "cd_dvd",
+            "catalogNumber": "PCCA-06303",
+            "bonusContent": "OFFICIAL HIGE DANDISM SHOCKING NUTS TOUR selected from NIPPON BUDOKAN"
+          },
+          {
+            "name": "通常盤 (CD Only)",
+            "format": "cd",
+            "catalogNumber": "PCCA-06304"
+          }
+        ]
+      }
+    ],
+    "miniAlbums": [
+      {
+        "index": 1,
+        "title": "ラブとピースは君の中",
+        "releaseDate": "2015-04-22",
+        "label": "ラストラム・ミュージックエンタテインメント",
+        "chartRankOricon": 160,
+        "editions": [
+          {
+            "name": "通常盤",
+            "format": "cd",
+            "catalogNumber": "LACD-0251"
+          }
+        ]
+      },
+      {
+        "index": 2,
+        "title": "MAN IN THE MIRROR",
+        "releaseDate": "2016-06-15",
+        "label": "ラストラム・ミュージックエンタテインメント",
+        "chartRankOricon": 136,
+        "editions": [
+          {
+            "name": "通常盤",
+            "format": "cd",
+            "catalogNumber": "LACD-0276"
+          }
+        ]
+      },
+      {
+        "index": 3,
+        "title": "レポート",
+        "releaseDate": "2017-04-19",
+        "label": "ラストラム・ミュージックエンタテインメント",
+        "chartRankOricon": 81,
+        "editions": [
+          {
+            "name": "初回限定盤 (CD+マフラータオル)",
+            "format": "cd_goods",
+            "catalogNumber": "LACD-0284"
+          },
+          {
+            "name": "通常盤",
+            "format": "cd",
+            "catalogNumber": "LACD-0285"
+          }
+        ]
+      }
+    ],
+    "digitalAlbums": [
+      {
+        "index": 1,
+        "title": "Traveler -Instrumentals-",
+        "releaseDate": "2020-06-26",
+        "label": "ポニーキャニオン",
+        "format": "digital",
+        "catalogNumber": "PCSP-03059",
+        "chartRankOricon": 16
+      },
+      {
+        "index": 2,
+        "title": "Editorial (Instrumental)",
+        "releaseDate": "2022-04-15",
+        "label": "IRORI Records",
+        "format": "digital",
+        "catalogNumber": "PCSP-04192",
+        "chartRankOricon": 44
+      },
+      {
+        "index": "live-1",
+        "title": "Official髭男dism ONLINE LIVE 2020 - Arena Travelers - (Live)",
+        "releaseDate": "2021-08-18",
+        "label": "IRORI Records",
+        "format": "digital",
+        "catalogNumber": "PCSP-03714",
+        "relatedSingle": "Universe",
+        "note": "單曲《Universe》（CD+Live盤: PCCA-06010 / PCCA-06011, 通常盤: PCCA-70553）附屬之無觀眾線上演唱會現場音源串流化發行",
+        "sourceCatalogNumbers": [
+          "PCCA-06010 (CD+BD)",
+          "PCCA-06011 (CD+DVD)",
+          "PCCA-70553 (通常盤CD)"
+        ]
+      }
+    ]
+  },
+  "liveReleases": [
+    {
+      "index": 1,
+      "title": "Official髭男dism LIVE COLLECTION 2016-2018",
+      "releaseDate": "2019-06-22",
+      "label": "ポニーキャニオン",
+      "chartRankOricon": "圏外",
+      "editions": [
+        {
+          "name": "DVD盤 (通販・会場限定)",
+          "format": "dvd",
+          "catalogNumber": "LADV-0011"
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "title": "Official髭男dism one-man tour 2019 @日本武道館",
+      "releaseDate": "2020-02-12",
+      "label": "ポニーキャニオン",
+      "chartRankOricon": 2,
+      "editions": [
+        {
+          "name": "2DVD盤",
+          "format": "2dvd",
+          "catalogNumber": "PCBP-53284"
+        },
+        {
+          "name": "Blu-ray盤",
+          "format": "bluray",
+          "catalogNumber": "PCXP-50739"
+        },
+        {
+          "name": "2CD (Live Audio)",
+          "format": "2cd",
+          "catalogNumber": "PCCA-04896"
+        }
+      ]
+    },
+    {
+      "index": 3,
+      "title": "Official髭男dism one-man tour 2021-2022 -Editorial- @SAITAMA SUPER ARENA",
+      "releaseDate": "2022-10-05",
+      "label": "IRORI Records",
+      "chartRankOricon": 1,
+      "editions": [
+        {
+          "name": "2DVD盤",
+          "format": "2dvd",
+          "catalogNumber": "PCBP-55590"
+        },
+        {
+          "name": "Blu-ray盤",
+          "format": "bluray",
+          "catalogNumber": "PCXP-50907"
+        },
+        {
+          "name": "CD / 配信 (Live Audio)",
+          "format": "cd_digital",
+          "catalogNumber": "PCSP-04533"
+        }
+      ]
+    },
+    {
+      "index": 4,
+      "title": "Official髭男dism Arena Tour 2024 - Rejoice -",
+      "releaseDate": "2025-12-10",
+      "label": "IRORI Records",
+      "chartRankOricon": "TBA",
+      "editions": [
+        {
+          "name": "2DVD盤",
+          "format": "2dvd",
+          "catalogNumber": "PCBP-55615"
+        },
+        {
+          "name": "Blu-ray盤",
+          "format": "bluray",
+          "catalogNumber": "PCXP-51237"
+        }
+      ]
+    },
+    {
+      "index": 5,
+      "title": "OFFICIAL HIGE DANDISM LIVE at STADIUM 2025",
+      "releaseDate": "2026-07-15",
+      "label": "IRORI Records",
+      "editions": [
+        {
+          "name": "Blu-ray盤",
+          "format": "bluray",
+          "catalogNumber": "PCXP-51277"
+        },
+        {
+          "name": "DVD盤",
+          "format": "dvd",
+          "catalogNumber": "PCBP-55621"
+        },
+        {
+          "name": "CD盤 (Live Audio)",
+          "format": "cd",
+          "catalogNumber": "PCCA-06532"
+        }
+      ]
+    }
+  ]
+}

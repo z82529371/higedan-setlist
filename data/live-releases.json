@@ -1,0 +1,449 @@
+{
+  "releases": [
+    {
+      "id": "whats-going-on-dvd-2016",
+      "title": "Live DVD From 「THE DAILY MIRROR tour 2016」 東京公演",
+      "shortTitle": "THE DAILY MIRROR tour 2016 澀谷",
+      "releaseDate": "2016-11-02",
+      "releaseType": "bonus_video",
+      "parentRelease": {
+        "title": "What's Going On? (通常盤 CD+DVD)",
+        "albumId": "whats-going-on",
+        "type": "ep"
+      },
+      "formats": [
+        "dvd"
+      ],
+      "catalogNumbers": [
+        "LASCD-0075"
+      ],
+      "recordings": [
+        {
+          "showId": "727414",
+          "coverage": "selected"
+        }
+      ]
+    },
+    {
+      "id": "escapade-blitz-2017",
+      "title": "Official髭男dism one-man tour 2017 -winter- LIVE DVD",
+      "shortTitle": "one-man tour 2017 -winter- 赤坂BLITZ",
+      "releaseDate": "2018-04-11",
+      "releaseType": "bonus_video",
+      "parentRelease": {
+        "title": "エスカパレード (初回限定盤 CD+DVD)",
+        "albumId": "escapade",
+        "type": "album"
+      },
+      "formats": [
+        "dvd"
+      ],
+      "catalogNumbers": [
+        "LACD-0292"
+      ],
+      "recordings": [
+        {
+          "showId": "828056",
+          "coverage": "selected"
+        }
+      ]
+    },
+    {
+      "id": "stand-by-you-nakano-2018",
+      "title": "Official髭男dism one-man tour 2018 LIVE DVD",
+      "shortTitle": "one-man tour 2018 中野サンプラザ",
+      "releaseDate": "2018-10-17",
+      "releaseType": "bonus_video",
+      "parentRelease": {
+        "title": "Stand By You EP (初回限定盤 CD+DVD)",
+        "albumId": "stand-by-you-ep",
+        "type": "ep"
+      },
+      "formats": [
+        "dvd"
+      ],
+      "catalogNumbers": [
+        "PCCA-04716"
+      ],
+      "recordings": [
+        {
+          "showId": "889716",
+          "coverage": "selected"
+        }
+      ]
+    },
+    {
+      "id": "pretender-acoustic-2018",
+      "title": "HIGEDAN acoustic one-man live 2018 -Autumn- LIVE DVD",
+      "shortTitle": "acoustic one-man live 2018 東京Hulic Hall",
+      "releaseDate": "2019-05-15",
+      "releaseType": "bonus_video",
+      "parentRelease": {
+        "title": "Pretender (初回限定盤 CD+DVD)",
+        "albumId": "pretender",
+        "type": "single"
+      },
+      "formats": [
+        "dvd"
+      ],
+      "catalogNumbers": [
+        "PCCA-04784"
+      ],
+      "recordings": [
+        {
+          "showId": "1008039",
+          "coverage": "selected"
+        }
+      ]
+    },
+    {
+      "id": "live-collection-2016-2018",
+      "title": "Official髭男dism LIVE COLLECTION 2016-2018",
+      "shortTitle": "LIVE COLLECTION 2016-2018 (限定盤)",
+      "releaseDate": "2019-06-22",
+      "releaseType": "standalone",
+      "formats": [
+        "dvd"
+      ],
+      "catalogNumbers": [
+        "LADV-0011"
+      ],
+      "recordings": [
+        {
+          "showId": "727414",
+          "coverage": "selected"
+        },
+        {
+          "showId": "778082",
+          "coverage": "selected"
+        },
+        {
+          "showId": "828056",
+          "coverage": "selected"
+        },
+        {
+          "showId": "889716",
+          "coverage": "selected"
+        }
+      ]
+    },
+    {
+      "id": "traveler-nhk-hall-2019",
+      "title": "Official髭男dism one-man tour 18/19 from 2019.01.24 NHKホール",
+      "shortTitle": "one-man tour 18/19 NHK Hall",
+      "releaseDate": "2019-10-09",
+      "releaseType": "bonus_video",
+      "parentRelease": {
+        "title": "Traveler (初回限定盤 CD+Blu-ray / CD+DVD)",
+        "albumId": "traveler",
+        "type": "album"
+      },
+      "formats": [
+        "bluray",
+        "dvd"
+      ],
+      "catalogNumbers": [
+        "PCCA-04820 (CD+BD)",
+        "PCCA-04821 (CD+DVD)"
+      ],
+      "recordings": [
+        {
+          "showId": "949995",
+          "coverage": "full"
+        }
+      ]
+    },
+    {
+      "id": "one-man-tour-budokan-2019",
+      "title": "Official髭男dism one-man tour 2019 @ 日本武道館",
+      "shortTitle": "one-man tour 2019 日本武道館",
+      "releaseDate": "2020-02-12",
+      "releaseType": "standalone",
+      "formats": [
+        "bluray",
+        "dvd",
+        "cd",
+        "streaming_audio"
+      ],
+      "catalogNumbers": [
+        "PCXP-50739",
+        "PCBP-53284",
+        "PCCA-04896"
+      ],
+      "recordings": [
+        {
+          "showId": "1078251",
+          "coverage": "full"
+        }
+      ],
+      "streaming": {
+        "spotifyAlbumId": "4RPF3qN6ZDGvjrxuSAi2jb"
+      }
+    },
+    {
+      "id": "hello-ep-pacifico-2020",
+      "title": "Official髭男dism Tour 19/20 -Hall Travelers- from 2020.02.10 パシフィコ横浜",
+      "shortTitle": "Hall Travelers 2020 橫濱國立大會堂",
+      "releaseDate": "2020-08-05",
+      "releaseType": "bonus_video",
+      "parentRelease": {
+        "title": "HELLO EP (CD+DVD盤)",
+        "albumId": "hello-ep",
+        "type": "ep"
+      },
+      "formats": [
+        "dvd"
+      ],
+      "catalogNumbers": [
+        "PCCA-04960"
+      ],
+      "recordings": [
+        {
+          "showId": "1150110",
+          "coverage": "selected"
+        }
+      ]
+    },
+    {
+      "id": "universe-online-live-2020",
+      "title": "Universe + Official髭男dism ONLINE LIVE 2020 – Arena Travelers –",
+      "shortTitle": "ONLINE LIVE 2020 - Arena Travelers -",
+      "releaseDate": "2021-02-24",
+      "releaseType": "bonus_video",
+      "parentRelease": {
+        "title": "Universe (CD+Live Blu-ray / CD+Live DVD盤)",
+        "albumId": "universe",
+        "type": "single",
+        "catalogNumbers": [
+          "PCCA-06010 (CD+BD)",
+          "PCCA-06011 (CD+DVD)",
+          "PCCA-70553 (通常盤CD)"
+        ]
+      },
+      "formats": [
+        "bluray",
+        "dvd",
+        "streaming_audio"
+      ],
+      "catalogNumbers": [
+        "PCCA-06010 (CD+BD)",
+        "PCCA-06011 (CD+DVD)",
+        "PCSP-03714 (Live配信)"
+      ],
+      "recordings": [
+        {
+          "showId": "1263675",
+          "coverage": "full"
+        }
+      ],
+      "streaming": {
+        "spotifyAlbumId": "6d5yPkJL9BmQ7KXr0xbiGy"
+      }
+    },
+    {
+      "id": "editorial-blooming-universe-2021",
+      "title": "Official髭男dism FC Tour Vol.2 - The Blooming Universe ONLINE -",
+      "shortTitle": "The Blooming Universe ONLINE 2021",
+      "releaseDate": "2021-08-18",
+      "releaseType": "bonus_video",
+      "parentRelease": {
+        "title": "Editorial (CD+Blu-ray / CD+DVD盤)",
+        "albumId": "editorial",
+        "type": "album"
+      },
+      "formats": [
+        "bluray",
+        "dvd"
+      ],
+      "catalogNumbers": [
+        "PCCA-06055 (CD+BD)",
+        "PCCA-06056 (CD+DVD)"
+      ],
+      "recordings": [
+        {
+          "showId": "1310638",
+          "coverage": "full"
+        }
+      ]
+    },
+    {
+      "id": "mixed-nuts-road-to-editorial-2021",
+      "title": "Official髭男dism Road to 『one - man tour 2021-2022』 - selected from 2021.06.23 ぴあアリーナMM -",
+      "shortTitle": "Road to Editorial 橫濱 Pia Arena MM",
+      "releaseDate": "2022-06-22",
+      "releaseType": "bonus_video",
+      "parentRelease": {
+        "title": "ミックスナッツ EP (CD+Blu-ray / CD+DVD盤)",
+        "albumId": "mixed-nuts-ep",
+        "type": "ep"
+      },
+      "formats": [
+        "bluray",
+        "dvd"
+      ],
+      "catalogNumbers": [
+        "PCCA-06136 (CD+BD)",
+        "PCCA-06137 (CD+DVD)"
+      ],
+      "recordings": [
+        {
+          "showId": "1310531",
+          "coverage": "selected"
+        }
+      ]
+    },
+    {
+      "id": "editorial-saitama-2022",
+      "title": "Official髭男dism one-man tour 2021-2022 -Editorial- @ SAITAMA SUPER ARENA",
+      "shortTitle": "Editorial 埼玉超級競技場",
+      "releaseDate": "2022-10-05",
+      "releaseType": "standalone",
+      "formats": [
+        "bluray",
+        "dvd",
+        "cd",
+        "streaming_audio"
+      ],
+      "catalogNumbers": [
+        "PCXP-50907",
+        "PCBP-55590",
+        "PCCA-06160"
+      ],
+      "recordings": [
+        {
+          "showId": "1353361",
+          "coverage": "full"
+        }
+      ],
+      "streaming": {
+        "spotifyAlbumId": "1ceSzYNgQgYAXhWdvGkkEy"
+      }
+    },
+    {
+      "id": "chessboard-tokyo-opera-city-2021",
+      "title": "Official髭男dism 『Editorial』発売記念 ONLINE FREE LIVE in Tokyo Opera City",
+      "shortTitle": "Editorial 発売記念 ONLINE FREE LIVE",
+      "releaseDate": "2023-09-13",
+      "releaseType": "bonus_video",
+      "parentRelease": {
+        "title": "Chessboard / 日常 (CD+Blu-ray / CD+DVD盤)",
+        "albumId": "chessboard-nichijo",
+        "type": "single"
+      },
+      "formats": [
+        "bluray",
+        "dvd"
+      ],
+      "catalogNumbers": [
+        "PCCA-06224 (CD+BD)",
+        "PCCA-06225 (CD+DVD)"
+      ],
+      "recordings": [
+        {
+          "showId": "1340143",
+          "coverage": "selected"
+        }
+      ]
+    },
+    {
+      "id": "shocking-nuts-budokan-2023",
+      "title": "OFFICIAL HIGEDAN DISM SHOCKING NUTS TOUR selected from NIPPON BUDOKAN",
+      "shortTitle": "SHOCKING NUTS 日本武道館",
+      "releaseDate": "2024-07-24",
+      "releaseType": "bonus_video",
+      "parentRelease": {
+        "title": "Rejoice (CD+Blu-ray / CD+DVD盤)",
+        "albumId": "rejoice",
+        "type": "album"
+      },
+      "formats": [
+        "bluray",
+        "dvd"
+      ],
+      "catalogNumbers": [
+        "PCCA-06302 (CD+BD)",
+        "PCCA-06303 (CD+DVD)"
+      ],
+      "recordings": [
+        {
+          "showId": "1499381",
+          "coverage": "selected"
+        }
+      ]
+    },
+    {
+      "id": "arena-tour-rejoice-2024",
+      "title": "Official髭男dism Arena Tour 2024 - Rejoice -",
+      "shortTitle": "Arena Tour 2024 - Rejoice - 橫濱K-Arena",
+      "releaseDate": "2025-12-10",
+      "releaseType": "standalone",
+      "formats": [
+        "bluray",
+        "dvd"
+      ],
+      "catalogNumbers": [
+        "PCXP-51237",
+        "PCBP-55615"
+      ],
+      "recordings": [
+        {
+          "showId": "1672276",
+          "coverage": "full"
+        }
+      ]
+    },
+    {
+      "id": "stardust-four-re-ism-2026",
+      "title": "Official髭男dism – one-man tour FOUR-RE:ISM selected from Zepp Nagoya (2026.01.22)",
+      "shortTitle": "FOUR-RE:ISM 名古屋 Zepp Nagoya",
+      "releaseDate": "2026-04-22",
+      "releaseType": "bonus_video",
+      "parentRelease": {
+        "title": "スターダスト / エルダーフラワー (CD+Blu-ray / CD+DVD盤)",
+        "albumId": "stardust-elderflower",
+        "type": "single"
+      },
+      "formats": [
+        "bluray",
+        "dvd"
+      ],
+      "catalogNumbers": [
+        "PCCA-06477 (CD+BD)",
+        "PCCA-06478 (CD+DVD)"
+      ],
+      "recordings": [
+        {
+          "showId": "four-re-ism-nagoya-0122",
+          "coverage": "selected"
+        }
+      ]
+    },
+    {
+      "id": "live-at-stadium-2025",
+      "title": "OFFICIAL HIGE DANDISM LIVE at STADIUM 2025",
+      "shortTitle": "LIVE at STADIUM 2025 日產體育場",
+      "releaseDate": "2026-07-15",
+      "releaseType": "standalone",
+      "formats": [
+        "bluray",
+        "dvd",
+        "cd",
+        "streaming_audio"
+      ],
+      "catalogNumbers": [
+        "PCXP-51277",
+        "PCBP-55621",
+        "PCCA-06532"
+      ],
+      "recordings": [
+        {
+          "showId": "1735839",
+          "coverage": "full"
+        }
+      ],
+      "streaming": {
+        "spotifyAlbumId": "5zYL6JPCUQjOuO0M9nUB0r"
+      }
+    }
+  ]
+}

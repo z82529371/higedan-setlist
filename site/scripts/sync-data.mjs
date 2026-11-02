@@ -23,6 +23,16 @@ if (existsSync(resolve(src, "venue-profiles.json"))) {
   console.log("synced venue-profiles.json");
 }
 
+if (existsSync(resolve(src, "live-releases.json"))) {
+  cpSync(resolve(src, "live-releases.json"), resolve(dest, "live-releases.json"));
+  console.log("synced live-releases.json");
+}
+
+if (existsSync(resolve(src, "discography.json"))) {
+  cpSync(resolve(src, "discography.json"), resolve(dest, "discography.json"));
+  console.log("synced discography.json");
+}
+
 for (const sub of ["tours", "events"]) {
   const srcSub = resolve(src, sub);
   if (!existsSync(srcSub)) continue;
