@@ -376,3 +376,10 @@ _Avoid_: 引入不穩定且缺乏硬體保證的瀏覽器影片錄製破壞離�
 3. **非阻斷式票券風提示與 Session 禮貌防騷擾（Non-Intrusive Toast & Session Dismissal）**：偵測到新版就緒時，於螢幕底部浮現高對比票券風提示橫條（`UpdateNotificationToast`）。樂迷若選擇「稍後」，在當次工作階段（Session）中絕不重複彈出打擾。
 4. **互動式接管與 Hash 路由無縫保全（Interactive Reload & Hash Preservation）**：樂迷點擊「立即更新」後，按鈕轉為「更新中...」禁用態，通知 Waiting Worker 執行 `SKIP_WAITING`，並在 `controllerchange` 觸發時平滑重整，原生保全樂迷當前所處之 `#/tickets`、`#/tour/xxx` 等 Hash 路由狀態。
 _Avoid_: 無條件強制自動 `location.reload()` 造成樂迷打卡或查歌途中資料遺失、在演唱會微弱網路環境下頻繁短輪詢、彈出強制遮罩式 Modal 阻斷瀏覽體驗、在更新提示暴露生澀冰冷的 Git Commit 或建置工程黑話。
+
+**互動式場地地圖分區都道府縣文字導覽與空間雙向連動不變式（Interactive Venue Map Regional Prefecture Text Navigator & Spatial Sync Invariants，ADR-0141）**:
+1. **八大地方與亞洲海外標準劃分與「全部」頁籤排除**：場地地圖全國總覽（`mode === "venues" && !selectedPrefecture`）正下方整合雙層分區文字導覽器（`RegionalPrefecturePicker`）。頂部 Tier 1 頁籤嚴格依日本標準地理劃分 8 大地方（北海道、東北、關東、中部、近畿、中國、四國、九州沖繩）＋ 亞洲海外；預設聚焦於高頻演出重鎮關東地方（`kanto`），嚴格排除冗餘的「全部」頁籤，防止全日本 43 縣一次傾瀉造成資訊過載與行動抽屜垂直暴增。
+2. **場次降序排序與未踏破 4 縣史實呈現**：各地方內已踏破都道府縣按累積場次降序（`showCount DESC`）排列，島根與鳥取保留發跡聖地 🌱 圖示；未踏破 4 縣（岩手、三重、和歌山、宮崎）保留於各自所屬分區末端，採用票券虛線邊框（`border-dashed`）＋ `text-muted` ＋ `[未踏破]` 標籤置底呈現，點擊停用並提供無障礙提示，忠實記錄 43/47 踏破進度。
+3. **雙向即時空間鏡像連動（Bi-directional Spatial Mirroring）**：文字膠囊 Hover 時 SVG 地圖對應縣即刻以官方金（`--color-band`）亮起，左下角 HUD 顯示統計；地圖 Hover 時文字膠囊即刻鏡像高亮；膠囊點擊直達 Spotlight Zoom 平滑變焦展開微觀場館清單。
+4. **行動端單行滾動與 Omnibox 智慧同步**：行動端與抽屜內地方頁籤採用 `flex-nowrap overflow-x-auto` 單行水平滑動條，高度鎖定 ~36px 嚴防垂直爆版；頂部 Omnibox 輸入縣名時自動切換至該分區並聚焦膠囊。
+_Avoid_: 設置冗餘全部頁籤導致手機抽屜垂直暴增、在未登錄場次之縣市偽造演出、將未踏破 4 縣自文字列表中粗暴刪除造成資料遺漏誤解、打破 Hover 雙向鏡像連動。
