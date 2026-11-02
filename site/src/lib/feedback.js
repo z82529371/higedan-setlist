@@ -3,6 +3,8 @@
  */
 
 export const ARCHIVE_FEEDBACK_EMAIL = "hgdnlive@gmail.com";
+export const ARCHIVE_AUTHOR_INSTAGRAM = "higedan_live";
+export const ARCHIVE_AUTHOR_INSTAGRAM_URL = "https://www.instagram.com/higedan_live/";
 
 function getShowDescriptor({ show, unitTitle }) {
   const date = show?.date || "";
@@ -367,6 +369,7 @@ export function buildLeadFallbackText({
   const labels = FALLBACK_LABELS[locale] || FALLBACK_LABELS["zh-TW"];
   return [
     `${labels.to}: ${ARCHIVE_FEEDBACK_EMAIL}`,
+    `Instagram: @${ARCHIVE_AUTHOR_INSTAGRAM} (${ARCHIVE_AUTHOR_INSTAGRAM_URL})`,
     `${labels.subject}: ${subject}`,
     ``,
     body,

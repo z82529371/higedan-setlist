@@ -15,6 +15,11 @@ import { MobileSearchModal } from "./MobileSearchModal.jsx";
 import { MobileFloatingControls } from "./MobileFloatingControls.jsx";
 import SearchBox from "../SearchBox.jsx";
 import { useI18n } from "../../lib/i18n.jsx";
+import {
+  ARCHIVE_FEEDBACK_EMAIL,
+  ARCHIVE_AUTHOR_INSTAGRAM,
+  ARCHIVE_AUTHOR_INSTAGRAM_URL,
+} from "../../lib/feedback.js";
 
 export function ArchiveLayout({
   filterState,
@@ -535,10 +540,21 @@ export function ArchiveLayout({
           <span>
             {t("footer.contactLabel", "資料勘誤與反饋：")}
             <a
-              href={`mailto:hgdnlive@gmail.com?subject=${encodeURIComponent(t("footer.contactSubject", "[Official HIGEDAN Archive] 資料勘誤與意見反饋"))}`}
+              href={`mailto:${ARCHIVE_FEEDBACK_EMAIL}?subject=${encodeURIComponent(t("footer.contactSubject", "[Official HIGEDAN Archive] 資料勘誤與意見反饋"))}`}
               className="text-ink underline hover:text-band-ink transition-colors"
             >
-              hgdnlive@gmail.com
+              {ARCHIVE_FEEDBACK_EMAIL}
+            </a>
+          </span>
+          <span>
+            {t("footer.authorLabel", "作者 IG：")}
+            <a
+              href={ARCHIVE_AUTHOR_INSTAGRAM_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-ink underline hover:text-band-ink transition-colors"
+            >
+              @{ARCHIVE_AUTHOR_INSTAGRAM}
             </a>
           </span>
         </footer>

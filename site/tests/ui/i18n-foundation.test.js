@@ -142,6 +142,8 @@ describe("13. i18n Foundation, Hash Route Query Parameter Seam, and Header Switc
         assert.ok(dict.landing.footerDisclaimer, `landing.footerDisclaimer must exist in ${loc}`);
         assert.ok(dict.footer?.contactLabel, `footer.contactLabel must exist in ${loc}`);
         assert.ok(dict.footer?.contactSubject, `footer.contactSubject must exist in ${loc}`);
+        assert.ok(dict.footer?.authorLabel, `footer.authorLabel must exist in ${loc}`);
+        assert.ok(dict.slips?.quest?.authorInstagram, `slips.quest.authorInstagram must exist in ${loc}`);
 
         // Check 8 categories
         const expectedCategories = [
@@ -362,6 +364,8 @@ describe("13. i18n Foundation, Hash Route Query Parameter Seam, and Header Switc
       assert.ok(htmlJa.includes("アーカイブを探索する"), "ja must render primary CTA");
       assert.ok(htmlJa.includes("Official髭男dism ファンによる非公式・非営利のライブ履歴アーカイブ"), "ja must render localized footer");
       assert.ok(htmlJa.includes("情報提供・お問い合わせ："), "ja must render localized contact label");
+      assert.ok(htmlJa.includes("作者 IG："), "ja must render author IG label");
+      assert.ok(htmlJa.includes("@higedan_live"), "ja must render author IG account");
       assert.ok(htmlJa.includes("mailto:hgdnlive@gmail.com"), "ja must render mailto link");
 
       // 2. English (en)
@@ -378,6 +382,8 @@ describe("13. i18n Foundation, Hash Route Query Parameter Seam, and Header Switc
       assert.ok(htmlEn.includes("Explore Full Archive"), "en must render primary CTA");
       assert.ok(htmlEn.includes("Unofficial non-profit Official HIGEDAN Dism"), "en must render localized footer");
       assert.ok(htmlEn.includes("Feedback &amp; Errata: "), "en must render localized contact label");
+      assert.ok(htmlEn.includes("Author IG: "), "en must render author IG label");
+      assert.ok(htmlEn.includes("@higedan_live"), "en must render author IG account");
       assert.ok(htmlEn.includes("mailto:hgdnlive@gmail.com"), "en must render mailto link");
 
       // 3. Korean (ko)
@@ -394,6 +400,8 @@ describe("13. i18n Foundation, Hash Route Query Parameter Seam, and Header Switc
       assert.ok(htmlKo.includes("전체 아카이브 탐색하기"), "ko must render primary CTA");
       assert.ok(htmlKo.includes("Official 히게단 dism 팬 비공식"), "ko must render localized footer");
       assert.ok(htmlKo.includes("제보 및 문의: "), "ko must render localized contact label");
+      assert.ok(htmlKo.includes("제작자 IG: "), "ko must render author IG label");
+      assert.ok(htmlKo.includes("@higedan_live"), "ko must render author IG account");
       assert.ok(htmlKo.includes("mailto:hgdnlive@gmail.com"), "ko must render mailto link");
 
       // 4. Preserved Design Tokens across all locales

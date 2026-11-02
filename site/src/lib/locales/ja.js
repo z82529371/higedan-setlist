@@ -214,6 +214,7 @@ export const dictJa = {
       successDesc: "Official髭男dismの歴史アーカイブへのご協力ありがとうございます！確認の上反映いたします。",
       fallbackPrompt: "送信に失敗した場合は、内容をコピーしてメールでお送りいただけます：",
       officialContact: "公式情報提供・お問い合わせ窓口：",
+      authorInstagram: "作者 IG：",
       openGmail: "Web版 Gmail で送信",
       nativeMail: "端末のメールアプリを使用",
       copyFallbackBtn: "📋 内容とメールアドレスをコピー",
@@ -731,6 +732,7 @@ export const dictJa = {
   footer: {
     contactLabel: "情報提供・お問い合わせ：",
     contactSubject: "[Official HIGEDAN Archive] 情報提供・お問い合わせ",
+    authorLabel: "作者 IG：",
   },
   venueMap: {
     regionAria: "Official髭男dism インタラクティブ会場＆ツアールートマップ",

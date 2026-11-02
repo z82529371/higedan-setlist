@@ -55,6 +55,8 @@ describe("28. In-App Lead Drop Modal (Seam 2 & 3: UI & Modal)", () => {
     assert.ok(htmlZh.includes("松江 AZTiC canova"), "Must display venue");
     assert.ok(htmlZh.includes("提供曲目情報線索"), "zh-TW must render modal header");
     assert.ok(htmlZh.includes("hgdnlive@gmail.com"), "Must mention official contact email for fallback");
+    assert.ok(htmlZh.includes("@higedan_live"), "Must render author IG handle in modal");
+    assert.ok(htmlZh.includes("https://www.instagram.com/higedan_live/"), "Must render author IG link");
 
     // 2. ja
     const htmlJa = renderToStaticMarkup(

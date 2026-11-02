@@ -214,6 +214,7 @@ export const dictEn = {
       successDesc: "Thank you for helping complete the Official HIGE DANDISM live archive! We will verify and update soon.",
       fallbackPrompt: "If submission fails, you can also copy details and email to",
       officialContact: "Official Feedback Email: ",
+      authorInstagram: "Author IG: ",
       openGmail: "Compose in Web Gmail",
       nativeMail: "Use Local Mail App",
       copyFallbackBtn: "📋 Copy Details & Email",
@@ -731,6 +732,7 @@ export const dictEn = {
   footer: {
     contactLabel: "Feedback & Errata: ",
     contactSubject: "[Official HIGEDAN Archive] Feedback & Errata",
+    authorLabel: "Author IG: ",
   },
   venueMap: {
     regionAria: "Official HIGEDAN Dism Interactive Venue & Tour Journey Map",

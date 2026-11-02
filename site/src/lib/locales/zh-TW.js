@@ -214,6 +214,7 @@ export const dictZhTw = {
       successDesc: "感謝您協助拼湊 Official 髭男 dism 歷史現場拼圖！我們將儘速查驗並更新檔案庫。",
       fallbackPrompt: "若送出失敗，亦可一鍵複製內容手動寄信至",
       officialContact: "官方勘誤信箱：",
+      authorInstagram: "作者 IG：",
       openGmail: "在網頁版 Gmail 寄出",
       nativeMail: "使用本機郵件軟體",
       copyFallbackBtn: "📋 複製內容與信箱",
@@ -731,6 +732,7 @@ export const dictZhTw = {
   footer: {
     contactLabel: "資料勘誤與反饋：",
     contactSubject: "[Official HIGEDAN Archive] 資料勘誤與意見反饋",
+    authorLabel: "作者 IG：",
   },
   venueMap: {
     regionAria: "Official髭男dism 互動場地與巡演足跡地圖",

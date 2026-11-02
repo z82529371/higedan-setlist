@@ -24,7 +24,16 @@ describe("27. Crowdsourced Lead Drop Protocol (Seam 1: Pure Frontend Lead Builde
   });
 
   it("builds Web Gmail compose URL directly targeting hgdnlive@gmail.com without any backend", async () => {
-    const { buildGmailWebComposeUrl, ARCHIVE_FEEDBACK_EMAIL } = await loadModule("src/lib/feedback.js");
+    const {
+      buildGmailWebComposeUrl,
+      ARCHIVE_FEEDBACK_EMAIL,
+      ARCHIVE_AUTHOR_INSTAGRAM,
+      ARCHIVE_AUTHOR_INSTAGRAM_URL,
+    } = await loadModule("src/lib/feedback.js");
+
+    assert.strictEqual(ARCHIVE_FEEDBACK_EMAIL, "hgdnlive@gmail.com");
+    assert.strictEqual(ARCHIVE_AUTHOR_INSTAGRAM, "higedan_live");
+    assert.strictEqual(ARCHIVE_AUTHOR_INSTAGRAM_URL, "https://www.instagram.com/higedan_live/");
 
     const mockShow = {
       id: "2012-07-07-matsue-aztic-canova",

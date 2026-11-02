@@ -891,6 +891,8 @@ let renderToStaticMarkup;
       assert.ok(tourLayoutHtml.includes("查看票根"));
       assert.ok(tourLayoutHtml.includes("hgdnlive@gmail.com"));
       assert.ok(tourLayoutHtml.includes("mailto:hgdnlive@gmail.com"));
+      assert.ok(tourLayoutHtml.includes("@higedan_live"));
+      assert.ok(tourLayoutHtml.includes("https://www.instagram.com/higedan_live/"));
 
       // Render 2: showSubMode === "show" -> renders ShowSlip
       const showLayoutHtml = renderToStaticMarkup(

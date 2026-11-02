@@ -214,6 +214,7 @@ export const dictKo = {
       successDesc: "Official히게단dism 라이브 아카이브 완성에 기여해 주셔서 감사합니다! 검토 후 신속히 반영하겠습니다.",
       fallbackPrompt: "전송에 실패한 경우 내용을 복사하여 이메일로 보내실 수 있습니다:",
       officialContact: "공식 제보/문의 이메일: ",
+      authorInstagram: "제작자 IG: ",
       openGmail: "웹 버전 Gmail로 전송",
       nativeMail: "기기 기본 메일 앱 사용",
       copyFallbackBtn: "📋 내용 및 이메일 복사",
@@ -731,6 +732,7 @@ export const dictKo = {
   footer: {
     contactLabel: "제보 및 문의: ",
     contactSubject: "[Official HIGEDAN Archive] 제보 및 문의",
+    authorLabel: "제작자 IG: ",
   },
   venueMap: {
     regionAria: "Official 히게단 dism 인터랙티브 공연장 및 투어 여정 지도",

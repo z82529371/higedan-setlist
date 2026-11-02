@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useI18n } from "../../lib/i18n.jsx";
 import {
   ARCHIVE_FEEDBACK_EMAIL,
+  ARCHIVE_AUTHOR_INSTAGRAM,
+  ARCHIVE_AUTHOR_INSTAGRAM_URL,
   validateEvidenceUrl,
   buildGmailWebComposeUrl,
   buildLeadMailtoUrl,
@@ -226,10 +228,23 @@ export function LeadDropModal({
           </div>
 
           {/* Desktop Mail Client & Direct Email Footnote */}
-          <div className="pt-2 border-t border-line-soft/60 flex flex-wrap items-center justify-between gap-1 text-[11px] font-mono text-muted">
-            <div>
-              <span>📮 {t("slips.quest.officialContact", "官方勘誤信箱：")} </span>
-              <strong className="text-ink">{ARCHIVE_FEEDBACK_EMAIL}</strong>
+          <div className="pt-2 border-t border-line-soft/60 flex flex-wrap items-center justify-between gap-y-1 gap-x-2 text-[11px] font-mono text-muted">
+            <div className="flex flex-wrap items-center gap-x-3 gap-y-0.5">
+              <div>
+                <span>📮 {t("slips.quest.officialContact", "官方勘誤信箱：")} </span>
+                <strong className="text-ink">{ARCHIVE_FEEDBACK_EMAIL}</strong>
+              </div>
+              <div>
+                <span>📸 {t("slips.quest.authorInstagram", "作者 IG：")} </span>
+                <a
+                  href={ARCHIVE_AUTHOR_INSTAGRAM_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-bold text-ink underline hover:text-band-ink transition-colors"
+                >
+                  @{ARCHIVE_AUTHOR_INSTAGRAM}
+                </a>
+              </div>
             </div>
             <a
               href={isValidUrl ? mailtoUrl : "#"}
