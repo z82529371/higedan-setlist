@@ -197,6 +197,7 @@ export function VenueNavigator({
             allVenues={allVenues}
             globalVenueShows={globalVenueShows}
             selectedPrefecture={selMapPrefecture}
+            detectedPrefecture={detectedPrefecture}
             onSelectPrefecture={handlePrefectureClick}
             selectedCity={selMapCity}
             onSelectCity={setSelMapCity}

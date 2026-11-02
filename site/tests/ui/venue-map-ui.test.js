@@ -456,4 +456,48 @@ describe("24. Interactive SVG Venue Map Canvas & Career Journey Navigator (#53, 
     assert.ok(htmlTokyo.includes("max-h-[360px]"), "Drilldown panel must have max-h-[360px] boundary on mobile");
     assert.ok(!htmlTokyo.includes("hidden md:flex"), "Drilldown panel must not be hidden on mobile");
   });
+
+  it("verifies ADR-0141 RegionalPrefecturePicker integration, 8 regions tabs, unvisited badges, and macro view dock", () => {
+    // 1. In Macro view (selectedPrefecture = null), RegionalPrefecturePicker is rendered
+    const htmlMacro = renderToStaticMarkup(
+      React.createElement(
+        I18nProvider,
+        { initialLocale: "zh-TW" },
+        React.createElement(VenueMapCanvas, {
+          allVenues: index.allVenues,
+          globalVenueShows: index.globalVenueShows,
+          selectedPrefecture: null,
+          onSelectPrefecture: () => {},
+        })
+      )
+    );
+
+    assert.ok(htmlMacro.includes('data-testid="regional-prefecture-picker"'), "Must render regional-prefecture-picker in macro overview");
+    assert.ok(htmlMacro.includes('data-testid="region-tabs-bar"'), "Must render region tabs bar");
+    assert.ok(!htmlMacro.includes('data-testid="region-tab-all"'), "Must not render 'all' region tab");
+    assert.ok(htmlMacro.includes('data-testid="region-tab-kanto"'), "Must render Kanto region tab");
+    assert.ok(htmlMacro.includes('data-testid="region-tab-kinki"'), "Must render Kinki region tab");
+    assert.ok(htmlMacro.includes('data-testid="region-tab-chugoku"'), "Must render Chugoku region tab");
+    assert.ok(htmlMacro.includes('data-testid="region-tab-overseas"'), "Must render Overseas region tab");
+    assert.ok(htmlMacro.includes('data-testid="pref-capsules-grid"'), "Must render prefecture capsules grid");
+    assert.ok(htmlMacro.includes('data-testid="pref-capsule-東京都"'), "Must render Tokyo capsule under default Kanto tab");
+    assert.ok(htmlMacro.includes('data-testid="pref-capsule-神奈川縣"'), "Must render Kanagawa capsule under default Kanto tab");
+
+    // 2. In Zoomed view (selectedPrefecture is set), RegionalPrefecturePicker is hidden while drilldown panel is shown
+    const htmlZoomed = renderToStaticMarkup(
+      React.createElement(
+        I18nProvider,
+        { initialLocale: "zh-TW" },
+        React.createElement(VenueMapCanvas, {
+          allVenues: index.allVenues,
+          globalVenueShows: index.globalVenueShows,
+          selectedPrefecture: "東京都",
+          onSelectPrefecture: () => {},
+        })
+      )
+    );
+
+    assert.ok(!htmlZoomed.includes('data-testid="regional-prefecture-picker"'), "Picker must be hidden when zoomed into a prefecture");
+    assert.ok(htmlZoomed.includes('data-testid="map-drilldown-panel"'), "Drilldown panel must be visible when zoomed");
+  });
 });

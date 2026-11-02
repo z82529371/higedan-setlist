@@ -13,6 +13,8 @@ import {
   buildPrefectureMapStats,
   computeSpiderfyOffsets,
   lookupVenueProfile,
+  JAPAN_8_REGIONS,
+  getRegionIdForPrefecture,
 } from "../lib/venue-map.js";
 import {
   PREFECTURE_PATHS,
@@ -32,6 +34,7 @@ import { venueProfiles } from "../lib/locales/venues.js";
 import { useI18n } from "../lib/i18n.jsx";
 import { BandEnsembleHUD } from "./map/BandAnimalAvatars.jsx";
 import { TourVan3D, TourAirplane3D } from "./map/TourVehicles.jsx";
+import { RegionalPrefecturePicker } from "./map/RegionalPrefecturePicker.jsx";
 export { TourVan3D, TourAirplane3D };
 
 const EMPTY_LIST = [];
@@ -56,15 +59,26 @@ export function VenueMapCanvas({
   hideHud = false,
   compact = false,
   controlledPlayback = null,
+  detectedPrefecture = null,
 }) {
   const { t, localizeVenue } = useI18n();
   const [hoveredVenue, setHoveredVenue] = useState(null);
   const [hoveredPref, setHoveredPref] = useState(null);
+  const [activeRegion, setActiveRegion] = useState("kanto");
   const [localCity, setLocalCity] = useState(null);
   const [isSmallScreen, setIsSmallScreen] = useState(false);
   const containerRef = useRef(null);
   const prevPrefRef = useRef(selectedPrefecture);
   const cardRefs = useRef(new Map());
+
+  useEffect(() => {
+    if (detectedPrefecture) {
+      const regId = getRegionIdForPrefecture(detectedPrefecture);
+      if (regId) {
+        setActiveRegion(regId);
+      }
+    }
+  }, [detectedPrefecture]);
 
   useEffect(() => {
     if (hoveredVenue && cardRefs.current.has(hoveredVenue)) {
@@ -228,6 +242,10 @@ export function VenueMapCanvas({
     () => buildPrefectureMapStats(effectiveVenues, globalVenueShows),
     [effectiveVenues, globalVenueShows]
   );
+
+  const activeRegionObj = useMemo(() => {
+    return JAPAN_8_REGIONS.find((r) => r.id === activeRegion) || JAPAN_8_REGIONS[0];
+  }, [activeRegion]);
 
   const journeyStops = journey?.stops || EMPTY_LIST;
   const journeyTransitions = journey?.transitions || EMPTY_LIST;
@@ -849,17 +867,41 @@ export function VenueMapCanvas({
                     : "unvisited"
                   : stat.tier;
 
+              const isHovered =
+                hoveredPref === geo.prefecture ||
+                (hoveredPref === OVERSEAS_TARGET_KEY && geo.zone === "overseas");
+              const isRegionHighlighted = Boolean(
+                activeRegionObj && activeRegionObj.prefectures.includes(geo.prefecture)
+              );
+
               const fillToken =
-                effectiveTier === "unvisited"
+                isHovered
+                  ? "var(--color-band)"
+                  : effectiveTier === "unvisited"
                   ? "var(--color-paper)"
+                  : isRegionHighlighted
+                  ? "var(--color-tape)"
                   : effectiveTier === "sanctuary_or_hub"
                   ? "var(--color-band)"
                   : "var(--color-tape-soft)";
 
               const strokeToken =
-                effectiveTier === "unvisited"
+                isHovered
+                  ? "var(--color-ink)"
+                  : isRegionHighlighted
+                  ? "var(--color-ink)"
+                  : effectiveTier === "unvisited"
                   ? "var(--color-muted)"
                   : "var(--color-ink)";
+
+              const strokeWidth =
+                isHovered || isSelected
+                  ? "2.2"
+                  : isRegionHighlighted
+                  ? "1.8"
+                  : effectiveTier === "unvisited"
+                  ? "0.9"
+                  : "1";
 
               const ariaLabel =
                 effectiveTier !== "unvisited"
@@ -909,8 +951,8 @@ export function VenueMapCanvas({
                     d={geo.path}
                     fill={fillToken}
                     stroke={strokeToken}
-                    strokeWidth={isSelected ? "2" : effectiveTier === "unvisited" ? "0.9" : "1"}
-                    strokeDasharray={effectiveTier === "unvisited" ? "3 2" : undefined}
+                    strokeWidth={strokeWidth}
+                    strokeDasharray={effectiveTier === "unvisited" && !isHovered ? "3 2" : undefined}
                     strokeLinejoin="round"
                     vectorEffect="non-scaling-stroke"
                   />
@@ -1460,11 +1502,21 @@ export function VenueMapCanvas({
           </div>
         )}
 
-        {/* Hint bar when in macro view */}
+        {/* Regional & Prefecture Text Navigator in macro overview (ADR-0141) */}
         {mode === "venues" && !selectedPrefecture && (
-          <p className="m-0 font-mono text-[11px] text-muted">
-            {t("venueMap.clickHint")}
-          </p>
+          <div className="space-y-1.5" data-testid="macro-venue-navigator-dock">
+            <RegionalPrefecturePicker
+              mapStats={mapStats}
+              hoveredPref={hoveredPref}
+              onHoverPrefecture={setHoveredPref}
+              onSelectPrefecture={(pref) => onSelectPrefecture && onSelectPrefecture(pref)}
+              activeRegion={activeRegion}
+              onSelectRegion={setActiveRegion}
+            />
+            <p className="m-0 font-mono text-[11px] text-muted">
+              {t("venueMap.clickHint")}
+            </p>
+          </div>
         )}
 
         {/* Drilled-Down Prefecture City Pills & Synchronized Venue Cards List */}
@@ -1686,10 +1738,20 @@ export function VenueMapCanvas({
             </div>
           </div>
 
-          {/* National Overview Bottom Hint Bar when no prefecture is selected */}
+          {/* National Overview Bottom Picker when no prefecture is selected */}
           {mode === "venues" && !selectedPrefecture && (
-            <div className="shrink-0 p-2 text-center font-mono text-[11px] text-muted border-t border-ink/20 mt-1">
-              🇯🇵 {t("venueMap.clickHint")}
+            <div className="shrink-0 pt-2 border-t border-ink/20 mt-1 space-y-1">
+              <RegionalPrefecturePicker
+                mapStats={mapStats}
+                hoveredPref={hoveredPref}
+                onHoverPrefecture={setHoveredPref}
+                onSelectPrefecture={(pref) => onSelectPrefecture && onSelectPrefecture(pref)}
+                activeRegion={activeRegion}
+                onSelectRegion={setActiveRegion}
+              />
+              <div className="text-center font-mono text-[11px] text-muted">
+                🇯🇵 {t("venueMap.clickHint")}
+              </div>
             </div>
           )}
 
