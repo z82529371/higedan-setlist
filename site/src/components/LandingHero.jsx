@@ -14,6 +14,7 @@ export default function LandingHero({
   onSelectTickets,
   onSelectRanking,
   onSelectJourney,
+  onSelectReleases,
   totalAllShows,
   allUsedSongs,
   allVenues,
@@ -184,6 +185,16 @@ export default function LandingHero({
           >
             <span aria-hidden="true">🏆</span> {t("landing.hotPrompts.songRanking", "歌曲演唱排行")}
           </button>
+
+          {onSelectReleases && (
+            <button
+              type="button"
+              onClick={onSelectReleases}
+              className="rounded-[4px] border border-ink/25 bg-card hover:bg-band hover:text-band-ink px-2.5 py-1 font-medium transition-colors motion-reduce:transition-none cursor-pointer shadow-2xs flex items-center gap-1"
+            >
+              <span aria-hidden="true">💿</span> {t("nav.releases", "作品")}
+            </button>
+          )}
 
           <button
             type="button"

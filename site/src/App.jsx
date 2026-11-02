@@ -4,6 +4,7 @@ import { ArchiveLayout } from "./components/layout/index.js";
 import { TicketBookPage } from "./components/ticket-book/TicketBookPage.jsx";
 import { JourneyPage } from "./components/journey/index.js";
 import { RankingPage } from "./components/ranking/RankingPage.jsx";
+import { ReleasesPage } from "./components/releases/ReleasesPage.jsx";
 import { useArchiveFilter, useArchiveRoute } from "./hooks/index.js";
 import { I18nProvider } from "./lib/i18n.jsx";
 import LandingHero from "./components/LandingHero.jsx";
@@ -66,6 +67,7 @@ export function AppContent({ probeRoute } = {}) {
     handleSelectTickets,
     handleSelectRanking,
     handleSelectJourney,
+    handleSelectReleases,
     handleReturnArchive,
     handleReturnHome,
   } = routeState;
@@ -95,6 +97,7 @@ export function AppContent({ probeRoute } = {}) {
           onSelectTickets={handleSelectTickets}
           onSelectRanking={handleSelectRanking}
           onSelectJourney={handleSelectJourney}
+          onSelectReleases={handleSelectReleases}
           onSelectTab={(newTab, options) => {
             setViewMode("archive");
             setTab(newTab);
@@ -146,6 +149,14 @@ export function AppContent({ probeRoute } = {}) {
           onReturnHome={handleReturnHome}
           onSelectTickets={handleSelectTickets}
           onSelectJourney={handleSelectJourney}
+        />
+      ) : viewMode === "releases" ? (
+        <ReleasesPage
+          onReturnArchive={handleReturnArchive}
+          onReturnHome={handleReturnHome}
+          onSelectTickets={handleSelectTickets}
+          onSelectJourney={handleSelectJourney}
+          onSelectRanking={handleSelectRanking}
         />
       ) : (
         <ArchiveLayout
