@@ -197,4 +197,127 @@ describe("36. Official Album Jacket SSOT & Cover Lightbox UI (ADR-0143)", () => 
 
     assert.ok(modalHtml.includes("2nd Single《Pretender》(2019) · 収録專輯《Traveler》"));
   });
+
+  it("renders SongCoverThumbnail correctly across released and unreleased songs", async () => {
+    const { SongCoverThumbnail } = await loadModule("src/components/slips/AlbumJacketCard.jsx");
+    const { I18nProvider } = await loadModule("src/lib/i18n.jsx");
+
+    // Released song (pretender)
+    const releasedHtml = renderToStaticMarkup(
+      React.createElement(
+        I18nProvider,
+        { initialLocale: "zh-TW" },
+        React.createElement(SongCoverThumbnail, {
+          songId: "pretender",
+          title: "Pretender",
+          size: 56,
+        })
+      )
+    );
+    assert.ok(releasedHtml.includes('data-testid="song-cover-thumb"'), "Must render thumb image for released song");
+    assert.ok(releasedHtml.includes("c03d59ccf637e7ce5754e370"), "Must use single cover image");
+    assert.ok(releasedHtml.includes("w-14 h-14"), "Must apply 56px tailwind size");
+
+    // Unreleased song (fuusen)
+    const unreleasedHtml = renderToStaticMarkup(
+      React.createElement(
+        I18nProvider,
+        { initialLocale: "zh-TW" },
+        React.createElement(SongCoverThumbnail, {
+          songId: "fuusen",
+          title: "風船",
+          size: 36,
+        })
+      )
+    );
+    assert.ok(unreleasedHtml.includes('data-testid="song-cover-vinyl"'), "Must render vinyl placeholder for unreleased song");
+    assert.ok(unreleasedHtml.includes("<svg"), "Must include SVG grooves");
+  });
+
+  it("integrates SongCoverThumbnail in RankingPage podium and progress rows", async () => {
+    const { RankingPage } = await loadModule("src/components/ranking/RankingPage.jsx");
+    const { I18nProvider } = await loadModule("src/lib/i18n.jsx");
+
+    const mockSongs = [
+      { id: "pretender", title: "Pretender" },
+      { id: "subtitle", title: "Subtitle" },
+      { id: "cry-baby", title: "Cry Baby" },
+      { id: "i-love", title: "I LOVE..." },
+    ];
+    const mockTrackShows = new Map([
+      ["song:pretender", [1, 2, 3, 4]],
+      ["song:subtitle", [1, 2, 3]],
+      ["song:cry-baby", [1, 2]],
+      ["song:i-love", [1]],
+    ]);
+
+    const html = renderToStaticMarkup(
+      React.createElement(
+        I18nProvider,
+        { initialLocale: "zh-TW" },
+        React.createElement(RankingPage, {
+          allUsedSongs: mockSongs,
+          allVenues: [],
+          trackShows: mockTrackShows,
+          showById: new Map([[1, {}], [2, {}], [3, {}], [4, {}]]),
+        })
+      )
+    );
+
+    assert.ok(html.includes("data-testid=\"song-cover-thumb\""), "RankingPage must contain cover thumbnails");
+    assert.ok(html.includes("c03d59ccf637e7ce5754e370"), "Pretender top rank must contain single cover");
+  });
+
+  it("integrates SongCoverThumbnail inside SongNavigator pill buttons", async () => {
+    const { SongNavigator } = await loadModule("src/components/navigators/SongNavigator.jsx");
+    const { I18nProvider } = await loadModule("src/lib/i18n.jsx");
+
+    const mockSongs = [
+      { id: "pretender", title: "Pretender" },
+    ];
+    const mockTrackShows = new Map([["song:pretender", [1]]]);
+
+    const html = renderToStaticMarkup(
+      React.createElement(
+        I18nProvider,
+        { initialLocale: "zh-TW" },
+        React.createElement(SongNavigator, {
+          allUsedSongs: mockSongs,
+          trackShows: mockTrackShows,
+          selAlbum: "Traveler (2019)",
+        })
+      )
+    );
+
+    assert.ok(html.includes("data-testid=\"song-cover-thumb\""), "SongNavigator pill button must contain cover thumbnail");
+    assert.ok(html.includes("w-5 h-5"), "Must have micro 20px avatar size");
+  });
+
+  it("integrates SongCoverThumbnail inside SearchBox song results", async () => {
+    const SearchBoxMod = await loadModule("src/components/SearchBox.jsx");
+    const SearchBox = SearchBoxMod.default || SearchBoxMod.SearchBox;
+    const { I18nProvider } = await loadModule("src/lib/i18n.jsx");
+
+    const mockSongs = [
+      { id: "pretender", title: "Pretender" },
+    ];
+
+    const html = renderToStaticMarkup(
+      React.createElement(
+        I18nProvider,
+        { initialLocale: "zh-TW" },
+        React.createElement(SearchBox, {
+          q: "Pretender",
+          setQ: () => {},
+          allUsedSongs: [{ id: "pretender", title: "Pretender" }],
+          allUnits: [],
+          allVenues: [],
+          initialOpen: true,
+        })
+      )
+    );
+
+    assert.ok(html.includes("data-testid=\"song-cover-thumb\""), "SearchBox must render song cover thumbnail");
+    assert.ok(html.includes("c03d59ccf637e7ce5754e370"), "Must display Pretender single cover in search result");
+  });
 });

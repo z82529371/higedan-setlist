@@ -3,6 +3,7 @@ import { ALBUM_ORDER } from "../../lib/constants.js";
 import { getSongAlbum } from "../../lib/domain.js";
 import { trackKey } from "../../lib/track.js";
 import { useI18n } from "../../lib/i18n.jsx";
+import { SongCoverThumbnail } from "../slips/AlbumJacketCard.jsx";
 
 export function SongNavigator({
   isDrawer = false,
@@ -204,12 +205,13 @@ export function SongNavigator({
                   key={s.id}
                   type="button"
                   onClick={() => handleSongClick(s.id)}
-                  className={`rounded-full px-3 py-1 text-[12px] sm:text-[13px] font-medium transition-colors motion-reduce:transition-none cursor-pointer inline-flex items-center gap-1.5 focus-visible:ring-2 focus-visible:ring-band focus-visible:outline-none ${
+                  className={`rounded-full pl-1.5 pr-3 py-1 text-[12px] sm:text-[13px] font-medium transition-colors motion-reduce:transition-none cursor-pointer inline-flex items-center gap-1.5 focus-visible:ring-2 focus-visible:ring-band focus-visible:outline-none ${
                     isCur
                       ? "bg-band text-band-ink font-bold shadow-xs border border-ink/40"
                       : "bg-paper text-ink border border-line-soft hover:bg-tape-tint/50 hover:border-ink/60"
                   }`}
                 >
+                  <SongCoverThumbnail songId={s.id} title={s.title} size={20} rounded="rounded-full" />
                   {curSortMode === "count" && (
                     <span className="font-mono text-[10px] opacity-60 tabular-nums">
                       #{String(rankNum).padStart(2, "0")}

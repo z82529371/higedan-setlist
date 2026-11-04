@@ -1,11 +1,12 @@
 import { useI18n } from "../../lib/i18n.jsx";
+import { getSongCover } from "../../lib/song-spotify.js";
 
 /**
  * VinylRecordSvg
  * Retro vinyl record placeholder with concentric groove rings and spindle hole.
  * Follows ticket aesthetic tokens (ADR-0143).
  */
-function VinylRecordSvg({ className = "w-full h-full" }) {
+export function VinylRecordSvg({ className = "w-full h-full" }) {
   return (
     <svg
       viewBox="0 0 64 64"
@@ -76,5 +77,51 @@ export function AlbumJacketCard({ title, coverUrl, onOpenLightbox }) {
         🔍
       </span>
     </button>
+  );
+}
+
+/**
+ * SongCoverThumbnail
+ * Universal lightweight album/single cover thumbnail for lists, pills, and podiums (ADR-0143).
+ */
+export function SongCoverThumbnail({
+  songId,
+  title = "",
+  size = 36,
+  rounded = "rounded-[2px]",
+  className = "",
+}) {
+  const cover = songId ? getSongCover(songId) : null;
+
+  const sizeClasses =
+    {
+      20: "w-5 h-5",
+      32: "w-8 h-8",
+      36: "w-9 h-9",
+      48: "w-12 h-12",
+      56: "w-14 h-14",
+      64: "w-16 h-16",
+    }[size] || "w-9 h-9";
+
+  if (!cover?.coverUrl) {
+    return (
+      <div
+        className={`shrink-0 ${sizeClasses} ${rounded} border border-ink/20 bg-paper/80 p-0.5 flex items-center justify-center select-none overflow-hidden ${className}`}
+        aria-hidden="true"
+        data-testid="song-cover-vinyl"
+      >
+        <VinylRecordSvg className="w-full h-full" />
+      </div>
+    );
+  }
+
+  return (
+    <img
+      src={cover.coverUrl}
+      alt={title ? `《${title}》` : ""}
+      loading="lazy"
+      className={`shrink-0 ${sizeClasses} ${rounded} border border-ink/20 object-cover shadow-2xs select-none bg-paper ${className}`}
+      data-testid="song-cover-thumb"
+    />
   );
 }

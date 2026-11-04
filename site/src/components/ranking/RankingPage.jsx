@@ -3,6 +3,7 @@ import { useI18n } from "../../lib/i18n.jsx";
 import { computeRankings } from "../../lib/ranking.js";
 import { SLIP_ARTICLE, SLIP_TAPE } from "../../lib/constants.js";
 import { TicketPerforationDivider, TicketBarcodeFooter } from "../slips/TicketCommon.jsx";
+import { SongCoverThumbnail } from "../slips/AlbumJacketCard.jsx";
 import LanguageSwitcher from "../LanguageSwitcher.jsx";
 import { MobileFloatingControls } from "../layout/MobileFloatingControls.jsx";
 
@@ -237,22 +238,27 @@ export function RankingPage({
                     </span>
                   </div>
 
-                  <div className="my-3">
-                    <div className="font-bold text-base sm:text-lg text-ink group-hover:text-band-ink transition-colors line-clamp-2 leading-snug">
-                      {isVenueBoard ? top3[1].name : top3[1].title}
+                  <div className="my-3 flex items-start gap-3">
+                    {!isVenueBoard && (
+                      <SongCoverThumbnail songId={top3[1].id} title={top3[1].title} size={56} />
+                    )}
+                    <div className="min-w-0 flex-1">
+                      <div className="font-bold text-base sm:text-lg text-ink group-hover:text-band-ink transition-colors line-clamp-2 leading-snug">
+                        {isVenueBoard ? top3[1].name : top3[1].title}
+                      </div>
+                      {!isVenueBoard && top3[1].album && (
+                        <div className="text-[11px] text-muted mt-1 font-medium truncate flex items-center gap-1">
+                          <span>💿</span>
+                          <span>{top3[1].album}</span>
+                        </div>
+                      )}
+                      {isVenueBoard && top3[1].prefecture && (
+                        <div className="text-[11px] text-muted mt-1 font-medium truncate flex items-center gap-1">
+                          <span>📍</span>
+                          <span>{top3[1].prefecture} · {top3[1].country}</span>
+                        </div>
+                      )}
                     </div>
-                    {!isVenueBoard && top3[1].album && (
-                      <div className="text-[11px] text-muted mt-1 font-medium truncate flex items-center gap-1">
-                        <span>💿</span>
-                        <span>{top3[1].album}</span>
-                      </div>
-                    )}
-                    {isVenueBoard && top3[1].prefecture && (
-                      <div className="text-[11px] text-muted mt-1 font-medium truncate flex items-center gap-1">
-                        <span>📍</span>
-                        <span>{top3[1].prefecture} · {top3[1].country}</span>
-                      </div>
-                    )}
                   </div>
 
                   <div className="pt-2 border-t border-line-soft flex items-baseline justify-between w-full">
@@ -289,22 +295,27 @@ export function RankingPage({
                     </span>
                   </div>
 
-                  <div className="my-3">
-                    <div className="font-black text-lg sm:text-xl text-ink group-hover:text-band-ink transition-colors line-clamp-2 leading-tight">
-                      {isVenueBoard ? top3[0].name : top3[0].title}
+                  <div className="my-3 flex items-start gap-3.5">
+                    {!isVenueBoard && (
+                      <SongCoverThumbnail songId={top3[0].id} title={top3[0].title} size={64} />
+                    )}
+                    <div className="min-w-0 flex-1">
+                      <div className="font-black text-lg sm:text-xl text-ink group-hover:text-band-ink transition-colors line-clamp-2 leading-tight">
+                        {isVenueBoard ? top3[0].name : top3[0].title}
+                      </div>
+                      {!isVenueBoard && top3[0].album && (
+                        <div className="text-xs text-muted mt-1 font-medium truncate flex items-center gap-1">
+                          <span>💿</span>
+                          <span>{top3[0].album}</span>
+                        </div>
+                      )}
+                      {isVenueBoard && top3[0].prefecture && (
+                        <div className="text-xs text-muted mt-1 font-medium truncate flex items-center gap-1">
+                          <span>📍</span>
+                          <span>{top3[0].prefecture} · {top3[0].country}</span>
+                        </div>
+                      )}
                     </div>
-                    {!isVenueBoard && top3[0].album && (
-                      <div className="text-xs text-muted mt-1 font-medium truncate flex items-center gap-1">
-                        <span>💿</span>
-                        <span>{top3[0].album}</span>
-                      </div>
-                    )}
-                    {isVenueBoard && top3[0].prefecture && (
-                      <div className="text-xs text-muted mt-1 font-medium truncate flex items-center gap-1">
-                        <span>📍</span>
-                        <span>{top3[0].prefecture} · {top3[0].country}</span>
-                      </div>
-                    )}
                   </div>
 
                   <div className="pt-2 border-t border-line-soft flex items-baseline justify-between w-full">
@@ -338,22 +349,27 @@ export function RankingPage({
                     </span>
                   </div>
 
-                  <div className="my-3">
-                    <div className="font-bold text-base sm:text-lg text-ink group-hover:text-band-ink transition-colors line-clamp-2 leading-snug">
-                      {isVenueBoard ? top3[2].name : top3[2].title}
+                  <div className="my-3 flex items-start gap-3">
+                    {!isVenueBoard && (
+                      <SongCoverThumbnail songId={top3[2].id} title={top3[2].title} size={56} />
+                    )}
+                    <div className="min-w-0 flex-1">
+                      <div className="font-bold text-base sm:text-lg text-ink group-hover:text-band-ink transition-colors line-clamp-2 leading-snug">
+                        {isVenueBoard ? top3[2].name : top3[2].title}
+                      </div>
+                      {!isVenueBoard && top3[2].album && (
+                        <div className="text-[11px] text-muted mt-1 font-medium truncate flex items-center gap-1">
+                          <span>💿</span>
+                          <span>{top3[2].album}</span>
+                        </div>
+                      )}
+                      {isVenueBoard && top3[2].prefecture && (
+                        <div className="text-[11px] text-muted mt-1 font-medium truncate flex items-center gap-1">
+                          <span>📍</span>
+                          <span>{top3[2].prefecture} · {top3[2].country}</span>
+                        </div>
+                      )}
                     </div>
-                    {!isVenueBoard && top3[2].album && (
-                      <div className="text-[11px] text-muted mt-1 font-medium truncate flex items-center gap-1">
-                        <span>💿</span>
-                        <span>{top3[2].album}</span>
-                      </div>
-                    )}
-                    {isVenueBoard && top3[2].prefecture && (
-                      <div className="text-[11px] text-muted mt-1 font-medium truncate flex items-center gap-1">
-                        <span>📍</span>
-                        <span>{top3[2].prefecture} · {top3[2].country}</span>
-                      </div>
-                    )}
                   </div>
 
                   <div className="pt-2 border-t border-line-soft flex items-baseline justify-between w-full">
@@ -417,10 +433,13 @@ export function RankingPage({
                     />
 
                     <div className="relative flex items-center justify-between gap-3">
-                      <div className="flex items-center gap-3 min-w-0">
-                        <span className="font-mono text-xs font-bold text-muted w-8 shrink-0 tabular-nums">
+                      <div className="flex items-center gap-2.5 sm:gap-3 min-w-0">
+                        <span className="font-mono text-xs font-bold text-muted w-7 shrink-0 tabular-nums">
                           #{rankFormatted}
                         </span>
+                        {!isVenueBoard && (
+                          <SongCoverThumbnail songId={item.id} title={item.title} size={36} />
+                        )}
                         <div className="min-w-0">
                           <span className="font-bold text-xs sm:text-sm text-ink group-hover:text-band-ink transition-colors truncate block">
                             {label}

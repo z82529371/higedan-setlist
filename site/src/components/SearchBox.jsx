@@ -11,6 +11,7 @@ import { resolveShowItems } from "../lib/resolve.js";
 import { useI18n } from "../lib/i18n.jsx";
 import { matchGeography } from "../lib/locales/geography.js";
 import { matchVenue } from "../lib/locales/venues.js";
+import { SongCoverThumbnail } from "./slips/AlbumJacketCard.jsx";
 
 export const TAXONOMY_KEYWORDS = {
   "巡演專場": [
@@ -494,20 +495,23 @@ export default function SearchBox({
                   onMouseEnter={() => setActiveIndex(itemIdx)}
                   onClick={() => handleSelectItem(s)}
                 >
-                  <div className="flex min-w-0 flex-col">
-                    <span className="truncate">
-                      {s.title}
-                      {s.unreleased && (
-                        <span className="ml-1 text-[11px] font-normal text-muted">
-                          {t("search.unreleasedSuffix", "（未發行）")}
+                  <div className="flex items-center gap-2.5 min-w-0">
+                    <SongCoverThumbnail songId={s.id} title={s.title} size={32} />
+                    <div className="flex min-w-0 flex-col">
+                      <span className="truncate">
+                        {s.title}
+                        {s.unreleased && (
+                          <span className="ml-1 text-[11px] font-normal text-muted">
+                            {t("search.unreleasedSuffix", "（未發行）")}
+                          </span>
+                        )}
+                      </span>
+                      {s.subTitle && (
+                        <span className="font-mono text-[11px] text-muted">
+                          {s.subTitle}
                         </span>
                       )}
-                    </span>
-                    {s.subTitle && (
-                      <span className="font-mono text-[11px] text-muted">
-                        {s.subTitle}
-                      </span>
-                    )}
+                    </div>
                   </div>
                   <span className="ml-2 shrink-0 font-mono text-[11px] text-muted">
                     {s.album}
