@@ -9,8 +9,11 @@ import { CATEGORY_ORDER, songFilterPillClass, TicketPerforationDivider, TicketBa
 import { SongMilestonesDrawer } from "./SongMilestonesDrawer.jsx";
 import { SongMediaStage } from "./SongMediaStage.jsx";
 import { SpotifyAudioStage } from "./SpotifyAudioStage.jsx";
+import { AlbumJacketCard } from "./AlbumJacketCard.jsx";
+import { CoverLightboxModal } from "./CoverLightboxModal.jsx";
 import { getSongMedia } from "../../lib/song-media.js";
-import { getSongSpotify } from "../../lib/song-spotify.js";
+import { getSongSpotify, buildSpotifyTrackUrl } from "../../lib/song-spotify.js";
+import { getSongReleaseProvenance } from "../../lib/song-release.js";
 
 export function SongSlip({ songId, trackShows, showById, unitData, onSelectShow, onSelectVenue }) {
   const { locale, t, localizeVenue } = useI18n();
@@ -21,10 +24,12 @@ export function SongSlip({ songId, trackShows, showById, unitData, onSelectShow,
 
   const [isYouTubeCollapsed, setIsYouTubeCollapsed] = useState(false);
   const [isSpotifyCollapsed, setIsSpotifyCollapsed] = useState(false);
+  const [isLightboxOpen, setIsLightboxOpen] = useState(false);
 
   useEffect(() => {
     setIsYouTubeCollapsed(false);
     setIsSpotifyCollapsed(false);
+    setIsLightboxOpen(false);
   }, [songId]);
 
   const media = getSongMedia(songId);
@@ -247,6 +252,7 @@ export function SongSlip({ songId, trackShows, showById, unitData, onSelectShow,
   );
 
   const albumName = getSongAlbum({ id: songId });
+  const provenance = getSongReleaseProvenance(songId, locale);
   const livefansId = songLiveFansId[songId];
   const youtubeUrl = `https://www.youtube.com/results?search_query=Official+髭男+dism+${encodeURIComponent(songTitle[songId] || songId)}+Live`;
   const spotifyUrl = `https://open.spotify.com/search/${encodeURIComponent("Official 髭男 dism " + (songTitle[songId] || songId))}`;
@@ -293,48 +299,62 @@ export function SongSlip({ songId, trackShows, showById, unitData, onSelectShow,
           </div>
         </div>
 
-        {/* Level 2: Song Title Headline */}
-        <h2 className="mt-2.5 mb-1 font-display text-[26px] sm:text-[30px] font-black leading-tight text-ink tracking-tight text-pretty">
-          {songTitle[songId] || songId}
-          {songUnreleased.has(songId) && (
-            <span className="ml-2 inline-block rounded border border-unreleased/40 bg-unreleased-wash px-2 py-0.5 font-mono text-[12px] font-semibold text-unreleased align-middle">
-              {t("songExtra.unreleasedBadge", "未發行")}
-            </span>
-          )}
-        </h2>
-        {songAlias[songId] && (
-          <div className="-mt-0.5 mb-2 font-mono text-[13px] text-muted font-medium">
-            {t("search.aliasPrefix", "別名：")}{songAlias[songId]}
+        {/* Level 2: Album Jacket + Adaptive Two-Row Grid (Mobile: Full-width badges below; Desktop: Two rows flanking jacket) (ADR-0143) */}
+        <div className="mt-2.5 mb-2 grid grid-cols-[auto_1fr] gap-x-3 sm:gap-x-3.5 gap-y-2 items-center sm:items-start">
+          {/* Col 1: Album Jacket (Mobile: Beside title; Desktop: Spans 2 rows beside title & badges) */}
+          <div className="row-span-1 sm:row-span-2 shrink-0 self-center sm:self-start">
+            <AlbumJacketCard
+              title={songTitle[songId] || songId}
+              coverUrl={spotify.coverUrl}
+              onOpenLightbox={() => setIsLightboxOpen(true)}
+            />
           </div>
-        )}
 
-        {/* Level 3a: Song Identity Summary Bar (Clean, single cohesive line) */}
-        <div className="flex flex-wrap items-center gap-2 pt-2 border-t border-line-soft font-mono text-[12px] text-muted">
-          <span className="font-bold text-ink">
-            {t("slips.performedShowsCount", "共出演 {count} 場", { count: appearances.length })}
-          </span>
-          {rarityTier && (
-            <span className={`rounded px-1.5 py-0.5 text-xs font-bold border ${rarityTier.cls}`}>
-              {rarityTier.label}
+          {/* Col 2, Row 1: Song Title Headline & Alias */}
+          <div className="min-w-0 flex flex-wrap items-baseline gap-x-2 gap-y-0.5">
+            <h2 className="font-display text-[21px] sm:text-[26px] font-black leading-tight text-ink tracking-tight text-pretty">
+              {songTitle[songId] || songId}
+              {songUnreleased.has(songId) && (
+                <span className="ml-2 inline-block rounded border border-unreleased/40 bg-unreleased-wash px-1.5 sm:px-2 py-0.5 font-mono text-[11px] sm:text-[12px] font-semibold text-unreleased align-middle">
+                  {t("songExtra.unreleasedBadge", "未發行")}
+                </span>
+              )}
+            </h2>
+            {songAlias[songId] && (
+              <span className="font-mono text-[12px] sm:text-[13px] text-muted font-medium truncate">
+                {t("search.aliasPrefix", "別名：")}{songAlias[songId]}
+              </span>
+            )}
+          </div>
+
+          {/* Col 2, Row 2 (Desktop) / Row 2 Col-span-2 (Mobile Full Width): Identity Summary Bar */}
+          <div className="col-span-2 sm:col-span-1 min-w-0 flex flex-wrap items-center gap-x-2 gap-y-1 font-mono text-[11px] sm:text-[12px] text-muted pt-1.5 sm:pt-0 border-t border-line-soft/60 sm:border-0">
+            <span className="font-bold text-ink">
+              {t("slips.performedShowsCount", "共出演 {count} 場", { count: appearances.length })}
             </span>
-          )}
-          {rarityTier?.isDormant && (
-            <span className="rounded bg-paper px-1.5 py-0.5 text-xs font-bold text-muted border border-line-soft">
-              {t("slips.song.dormantRecent", "📦 近年封箱中")}
-            </span>
-          )}
-          {hasSpecials && (
-            <span className="rounded bg-tape/20 px-1.5 py-0.5 font-bold text-ink border border-ink/20 text-xs">
-              {t("slips.song.specialVersionsCount", "✨ 特殊版本 {count}場", { count: specialVersionCounts.total })}
-            </span>
-          )}
-          {liveRole && (
-            <span className="inline-flex items-center gap-1 text-xs text-ink/80">
-              <span>· 🎯 {liveRole.positionText}</span>
-              {liveRole.avgOrder && <span>{t("slips.song.avgPosition", "(平均M{order})", { order: liveRole.avgOrder })}</span>}
-              {liveRole.encoreRate > 0 && <span>{t("slips.song.encoreRate", "· 安可率{rate}%", { rate: liveRole.encoreRate })}</span>}
-            </span>
-          )}
+            {rarityTier && (
+              <span className={`rounded px-1.5 py-0.5 text-xs font-bold border ${rarityTier.cls}`}>
+                {rarityTier.label}
+              </span>
+            )}
+            {rarityTier?.isDormant && (
+              <span className="rounded bg-paper px-1.5 py-0.5 text-xs font-bold text-muted border border-line-soft">
+                {t("slips.song.dormantRecent", "📦 近年封箱中")}
+              </span>
+            )}
+            {hasSpecials && (
+              <span className="rounded bg-tape/20 px-1.5 py-0.5 font-bold text-ink border border-ink/20 text-xs">
+                {t("slips.song.specialVersionsCount", "✨ 特殊版本 {count}場", { count: specialVersionCounts.total })}
+              </span>
+            )}
+            {liveRole && (
+              <span className="inline-flex items-center gap-1 text-xs text-ink/80">
+                <span>· 🎯 {liveRole.positionText}</span>
+                {liveRole.avgOrder && <span>{t("slips.song.avgPosition", "(平均M{order})", { order: liveRole.avgOrder })}</span>}
+                {liveRole.encoreRate > 0 && <span>{t("slips.song.encoreRate", "· 安可率{rate}%", { rate: liveRole.encoreRate })}</span>}
+              </span>
+            )}
+          </div>
         </div>
 
         {/* Level 3b: Action Toolbar & Collapsible Tools */}
@@ -685,6 +705,19 @@ export function SongSlip({ songId, trackShows, showById, unitData, onSelectShow,
       <TicketBarcodeFooter
         serial={`TRACK: ${songId.toUpperCase()} // PERF-${appearances.length.toString().padStart(3, "0")}`}
         label="OFFICIAL HIGEDAN DISM // TRACK PERFORMANCE ARCHIVE"
+      />
+
+      {/* High-res Album Jacket Lightbox Modal (ADR-0143) */}
+      <CoverLightboxModal
+        isOpen={isLightboxOpen}
+        onClose={() => setIsLightboxOpen(false)}
+        title={songTitle[songId] || songId}
+        alias={songAlias[songId] || ""}
+        album={albumName}
+        provenance={provenance}
+        coverUrl={spotify.coverUrl}
+        highResCoverUrl={spotify.highResCoverUrl}
+        spotifyTrackUrl={spotify.trackId ? buildSpotifyTrackUrl(spotify.trackId) : ""}
       />
     </article>
   );
