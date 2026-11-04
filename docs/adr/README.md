@@ -4,7 +4,7 @@
 
 ---
 
-## 決策總覽清單（共 133 篇）
+## 決策總覽清單（共 140 篇）
 
 > [!NOTE]
 > **編號跳號說明**：本目錄編號自 ADR-0001 起至 ADR-0138 止。其中 ADR-0063、ADR-0064、ADR-0065、ADR-0068、ADR-0069 共 5 篇為早期介面排版草案，後續已被 ADR-0070 單欄聚焦架構完整吸收與替代，故無獨立保留歷史檔案；實體決策文件共計 133 篇。
@@ -150,3 +150,4 @@
 | [ADR-0142: 現場影音發行與載體索引架構 (Live Releases, Video Archive Mapping & Dedicated Release Route Architecture)](0142-live-releases-and-video-archive-mapping-architecture.md) | 已採納 (Accepted) | 確立全量唱片底冊與現場投影母子架構、建立獨立現場發行主檔（data/live-releases.json）、場次聚合覆蓋模型（Show-centric Coverage）、客觀雙軌型態（獨立影音發行/影音限定盤）與載體維度解耦、單場票根卡片與 #/releases 專屬全域視圖 |
 | [ADR-0143: 官方唱片封面底冊與歌曲票券封套燈箱架構 (Official Album Jacket SSOT and Song Slip Cover Lightbox Architecture)](0143-official-album-jacket-ssot-and-song-slip-cover-lightbox-architecture.md) | 已採納 (Accepted) | 確立建置期 Spotify oEmbed 封面底冊同步管線（data/songs.json spotify.coverUrl）、歌曲票券 Header 實體唱片封套（Album Jacket Card）、復古黑膠刻紋佔位回退（Vinyl Placeholder）與 640×640 Retina 高清封套燈箱（Cover Lightbox Modal） |
 | [ADR-0144: 錄音室歷年發行雙軌整合與雙向深層連結架構 (Studio Discography Releases Tab & Bidirectional Deep-Link Architecture)](0144-studio-discography-releases-tab-and-bidirectional-deep-link-architecture.md) | 已採納 (Accepted) | 在 #/releases 整合現場影音與錄音室出版雙軌分頁、確立 5 種子分類過濾與型態前綴 ID（single-*, album-*, ep-*）、結構化曲目清單與演出票券直通（#/song/:id）、CoverLightboxModal 雙向深層連結與聚焦展開動畫 |
+| [ADR-0145: 演出歌單曲目唱片封套懸浮名片與收據排版防護架構 (Setlist Song Jacket Hover Card & Receipt Typography Protection Architecture)](0145-setlist-song-jacket-hover-card-and-receipt-typography-architecture.md) | 已採納 (Accepted) | 堅決拒絕常駐行內縮圖以捍衛 Stage Setlist Run Sheet 控台收據排版，實作桌機 180ms 防抖迷你黑膠封套懸浮名片（SongJacketHoverCard）、無封面曲目靜默、手機端純淨直達單曲票根 |

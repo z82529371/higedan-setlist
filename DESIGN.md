@@ -231,6 +231,12 @@ components:
 - **熱區範圍**: 單場歌單（`ShowSlip`）的曲目點擊僅收斂於歌名文字區塊（搭配 `px-1 -mx-1 py-0.5 inline-block touch-stamp` 提供舒適的按壓範圍）。
 - **滑動緩衝保護**: 左側演出序號（如 `M01`、`EN1`）及右側留白不綁定點擊事件，保留作為使用者大拇指上下滑動檢索時的安全非觸發區，徹底杜絕滑動時頻繁誤開彈窗。
 
+### 4. 歌單控台收據排版純粹度與桌機迷你唱片封套懸浮名片 (Setlist Receipt Typography & Desktop Mini Vinyl Sleeve, ADR-0145)
+- **拒絕常駐行內縮圖**: 單場控台曲目單（`ShowSlip`）與巡演共識歌單（`TourSlip`）堅持「STAGE SETLIST RUN SHEET」控台實體收據排版，不在每一行曲目旁常駐插入縮圖，避免連排十幾張同一張專輯的視覺雜訊與未發表曲空洞，保全文字垂直等寬掃視性（The Cue Monospace Rule）。
+- **桌機 180ms 意圖防抖懸浮名片（Mini Vinyl Sleeve Hover Card）**: 在支援精準游標的桌面設備上，游標懸停曲目滿 180ms 淡入 64×64 專輯封面封套（`w-72 border border-ink/40 bg-card shadow-[4px_4px_0_rgba(0,0,0,0.18)] dark:shadow-none`），顯示所屬單曲/專輯初登場出處與單曲歷史引導。
+- **無封面曲目靜默**: 無官方串流封面之曲目（Demo、即興過場、現場翻唱）靜默回退為純文字鏈結，不觸發懸浮窗，絕不渲染灰階佔位方塊。
+- **行動觸控純淨直達**: 行動裝置與觸控螢幕透過 `@media (hover: hover)` 隔離，完全不觸發懸浮窗，維持輕快的單次點擊直接跳轉單曲票根（`SongSlip`）檢視完整大封面與試聽舞台。
+
 ## Attended Badges & Ticket Book Touchpoints (參戰標記徽章與票夾接觸點規範)
 
 為呈現真實票根收納冊之實體工藝質感並確保無障礙對比標準，參戰記錄與票夾入口遵循以下設計規範：

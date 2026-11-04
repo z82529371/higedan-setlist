@@ -49,8 +49,8 @@ web
 | **場地篩選器**（Venue Navigator） | 即時智慧搜尋（Omnibox）＋ 互動場地地圖（8 大地方都道府縣快速跳轉與雙向空間連動）/ 登場次數排行（桌面 18 筆 / 行動 10 筆）→ 場館切換 | `site/src/components/navigators/VenueNavigator.jsx` |
 | **官方歷年發行展間**（Releases Page） | 現場影音（Live）與錄音室出版（Discography）雙軌展間、五大錄音室分類、多版本實體規格品番徽章、結構化曲目清單與雙向深層定位 | `site/src/components/releases/ReleasesPage.jsx` |
 | **排行殿堂**（Leaderboard Hall） | 歷史歌曲出勤總榜 Top 20、專場/音樂祭子榜、場館 Top 10 與金銀銅頒獎台 | `site/src/components/ranking/RankingPage.jsx` |
-| **場次票根**（Show Slip） | 單場演出票根、官方精華舞台（旗艦單場）、本篇/安可曲目單、前場曲目 Diff | `site/src/components/slips/ShowSlip.jsx` + `ShowMetadataBox.jsx` + `SongMediaStage.jsx` |
-| **巡演總覽票券**（Tour Slip） | 巡演定番歌曲、官方精華舞台（BD/DVD Digest）、輪換曲、驚喜曲目與巡演足跡日程 | `site/src/components/slips/TourSlip.jsx` + `SongMediaStage.jsx` |
+| **場次票根**（Show Slip） | 單場演出票根、官方精華舞台（旗艦單場）、本篇/安可曲目單（桌機 180ms 唱片封套懸浮名片，ADR-0145）、前場曲目 Diff | `site/src/components/slips/ShowSlip.jsx` + `ShowMetadataBox.jsx` + `SongMediaStage.jsx` + `SongJacketHoverCard.jsx` |
+| **巡演總覽票券**（Tour Slip） | 巡演定番歌曲、官方精華舞台（BD/DVD Digest）、輪換曲（桌機唱片封套懸浮名片）、驚喜曲目與巡演足跡日程 | `site/src/components/slips/TourSlip.jsx` + `TourTrackItem.jsx` + `SongMediaStage.jsx` |
 | **歌曲詳情票券**（Song Slip） | 歌曲出賽履歷、官方雙軌影音舞台（MV/Live/精華）、版本統計、首演/最新演出里程碑 | `site/src/components/slips/SongSlip.jsx` + `SongMediaStage.jsx` + `SongMilestonesDrawer.jsx` |
 | **Spotify 官方音源舞台**（Spotify Audio Stage） | 歌曲主檔 100% 官方錄音室音源與跨年份現場音源雙軌切換緊湊播放器 | `site/src/components/slips/SpotifyAudioStage.jsx` |
 | **場館詳情票券**（Venue Slip） | 場館歷史演出編年史、地理標籤與初次/最近登場 | `site/src/components/slips/VenueSlip.jsx` |

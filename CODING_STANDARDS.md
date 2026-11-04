@@ -64,3 +64,4 @@ When proposing and testing public seams during `/tdd` or `/implement`, target th
 | `spotify.js` | `validateSpotifyTrackId`, `buildSpotifyEmbedUrl` | `tests/pipeline/spotify.test.js` |
 | `ranking.js` | `computeRankings` | `tests/pipeline/ranking.test.js`, `tests/ui/ranking-page.test.js`, `tests/ui/ranking-route.test.js` |
 | `pwa.js` | `registerServiceWorker`, `unregisterServiceWorkers`, `subscribeUpdateAvailable`, `applyServiceWorkerUpdate` | `tests/invariants/pwa-invariants.test.js`, `tests/ui/update-notification-toast.test.js` |
+| `components/slips/SongJacketHoverCard.jsx` | `SongJacketHoverCard` (ADR-0145) | `tests/ui/song-jacket-hover-card.test.js` |
