@@ -833,6 +833,15 @@ export const dictEn = {
   view_show_slip: "View Show Slip",
   official_release_badge: "Official Release",
   view_releases_title: "View official live release for this show",
+  releases_tab_live: "Live Releases",
+  releases_tab_discography: "Studio Discography",
+  studio_discography_title: "Official Studio Discography",
+  studio_discography_desc: "Chronological catalog of singles, EPs, and albums by Official HIGEDAN DISM with catalog numbers and full tracklists.",
+  discography_tracks_count: "{count} Tracks",
+  discography_expand_tracks: "View Tracks",
+  discography_collapse_tracks: "Hide Tracks",
+  discography_song_stub: "Live Ticket",
+  "slips.song.viewReleaseDetails": "View Release",
 };
 
 

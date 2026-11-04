@@ -833,6 +833,15 @@ export const dictZhTw = {
   view_show_slip: "前往演出票根",
   official_release_badge: "官方映像化",
   view_releases_title: "檢視本場官方映像化與發行載體",
+  releases_tab_live: "現場影音",
+  releases_tab_discography: "錄音室作品",
+  studio_discography_title: "錄音室作品全集",
+  studio_discography_desc: "收錄 Official 髭男 dism 歷年官方發行之實體單曲、數位單曲、EP 與正規專輯規格品番與曲目清單。",
+  discography_tracks_count: "共 {count} 首收錄曲",
+  discography_expand_tracks: "展開曲目",
+  discography_collapse_tracks: "收折曲目",
+  discography_song_stub: "演出票根",
+  "slips.song.viewReleaseDetails": "查看實體發行規格",
 };
 
 

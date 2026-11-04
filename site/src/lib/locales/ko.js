@@ -833,6 +833,15 @@ export const dictKo = {
   view_show_slip: "공연 티켓 보기",
   official_release_badge: "공식 영상화",
   view_releases_title: "이 공연의 공식 영상화 및 발매 정보 보기",
+  releases_tab_live: "라이브 영상",
+  releases_tab_discography: "디스코그래피",
+  studio_discography_title: "공식 디스코그래피",
+  studio_discography_desc: "Official히게단dism이 발표한 역대 싱글, EP, 앨범의 규격 품번 및 수록곡 목록.",
+  discography_tracks_count: "총 {count}곡 수록",
+  discography_expand_tracks: "수록곡 보기",
+  discography_collapse_tracks: "수록곡 접기",
+  discography_song_stub: "라이브 이력",
+  "slips.song.viewReleaseDetails": "발매 규격 보기",
 };
 
 

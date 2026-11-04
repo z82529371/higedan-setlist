@@ -71,6 +71,10 @@ export function parseRoute(hash) {
     }
     if (normalizedPath === "/releases") {
       const res = { kind: "releases", value: null };
+      const tab = params.get("tab");
+      const id = params.get("id");
+      if (tab) res.tab = tab;
+      if (id) res.id = id;
       if (lang) res.lang = lang;
       return res;
     }
@@ -113,10 +117,19 @@ export function buildRouteHash(kind, value, options = {}) {
       ? `#/archive`
       : "#/";
 
+  const queryParams = new URLSearchParams();
+  if (kind === "releases") {
+    if (opts.tab) queryParams.set("tab", opts.tab);
+    if (opts.id) queryParams.set("id", opts.id);
+  }
+
   const lang = opts.lang && opts.lang !== DEFAULT_LOCALE && SUPPORTED_LOCALES.includes(opts.lang)
     ? opts.lang
     : null;
-  return lang ? `${base}?lang=${lang}` : base;
+  if (lang) queryParams.set("lang", lang);
+
+  const qs = queryParams.toString();
+  return qs ? `${base}?${qs}` : base;
 }
 
 export const routeHash = {

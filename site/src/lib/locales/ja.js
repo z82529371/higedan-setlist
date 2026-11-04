@@ -833,6 +833,15 @@ export const dictJa = {
   view_show_slip: "公演チケットへ",
   official_release_badge: "公式映像化",
   view_releases_title: "本公演の公式映像化・リリース情報を見る",
+  releases_tab_live: "ライブ映像",
+  releases_tab_discography: "ディスコグラフィ",
+  studio_discography_title: "公式ディスコグラフィ",
+  studio_discography_desc: "Official髭男dismがリリースした歴代のCDシングル、配信シングル、EP、アルバムの品番・規格および収録曲一覧。",
+  discography_tracks_count: "全 {count} 曲収録",
+  discography_expand_tracks: "収録曲を展開",
+  discography_collapse_tracks: "収録曲を閉じる",
+  discography_song_stub: "ライブ履歴",
+  "slips.song.viewReleaseDetails": "リリース盤面を見る",
 };
 
 
