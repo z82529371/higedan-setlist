@@ -58,6 +58,10 @@ _Avoid_: 自創未經官方定義之演出分類、模糊專場與拼盤邊界�
 
 **Spotify 官方音源舞台（Spotify Audio Stage, ADR-0138）**:
 歌曲主檔（`data/songs.json`）所收錄之官方 Spotify 串流音源。100% 覆蓋全數正式商業發行曲目之錄音室音源（22 碼 Base62 Track ID 規格驗證），並收錄跨年份巡演現場音源；於歌曲詳情票券（`SongSlip`）內建 152px 緊湊播放器，支援「錄音室原曲 vs 現場 Live」雙軌切換、多場次選台藥丸、`showId` 雙向場次直達與 Spotify App 一鍵外跳；未發行作品（`unreleased: true`）維持無污染回退。
+
+**唱片封面與封套（Record Jacket / Cover Art, ADR-0143）**:
+歌曲主檔（`data/songs.json`）所收錄之官方發行唱片封套（Album Jacket / Single Jacket）視覺資產。嚴格遵循「一手首發優先權（Jacket Precedence Hierarchy: 實體單曲/數位單曲 > 迷你專輯/EP > 正規專輯初出）」領域原則，對有獨立發行單曲或 EP 之作品優先鎖定其一手首發專屬封套（如《Pretender》台北街景霓虹套、《Subtitle》冰晶套、《Cry Baby》廢鐵美學套），避免大碟封面同質化；於建置期透過無金鑰開放之 Spotify oEmbed API 批次解析 Track ID，固化 300×300 官方 CDN 封面（`spotify.coverUrl`）；於歌曲詳情票券（`SongSlip`）頂部以響應式 CSS Grid 自適應排版（手機端封面與歌名居中並列、指標膠囊全寬舒展；桌面端封面跨行側伴），支援點擊開啟 640×640 Retina 超高畫質燈箱（Cover Lightbox）並附帶一手發行載體與所屬大碟雙重脈絡；未發行作品（`unreleased: true`）以復古黑膠刻紋軸心孔佔位圖標（Vinyl Jacket Placeholder）優雅回退，達成 100% 離線秒開與零第三方執行期 API 依賴。
+_Avoid_: 將經典單曲封面誤換為後續大碟封面破壞首發歷史記憶、於執行期動態發送外部未受控請求造成版面閃爍、任意扭曲原版封面比例、缺少黑膠回退導致破圖
 _Avoid_: 依賴外部搜尋跳轉使歌迷面臨非官方音源、未在主檔驗證 Base62 ID 格式、未發表曲污染音源舞台、多版本現場失去場次票根反向聯動
 
 **排行殿堂（Leaderboard Hall, ADR-0139）**:

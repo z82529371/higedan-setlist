@@ -205,6 +205,11 @@ _Avoid_: 缺少官方正規品番、將現場限定特典光碟與正式獨立�
 聚焦於收錄 Official 髭男 dism 歷史演出之實體光碟（Blu-ray / DVD）、作品影音限定盤特典映像或現場串流音源之商業發行紀錄。本模型為全量唱片底冊之現場演出投影子集，採獨立主檔 SSOT（`data/live-releases.json`）與場次聚合覆蓋模型（Show-centric Coverage Model）關聯單一或多個演出場次。發行型態收斂為客觀雙軌：獨立影音發行（`standalone`）與影音限定盤 / 特典映像（`bonus_video`）；數位串流（Spotify / Apple Music）與實體光碟（Blu-ray / DVD）則統一作為作品的載體格式屬性（`formats`）處理，並提供實體品番、載體規格膠囊與串流專輯雙向跳轉。
 _Avoid_: 將串流與實體發行型態混淆、將影音限定盤/特典映像與獨立專盤混淆、在載體內重複手抄全量歌單破壞 SSOT、遺漏實體光碟品番或母體作品關聯
 
+**官方唱片封面底冊與封套燈箱（Official Album Jacket SSOT, ADR-0143）**:
+全站收錄之 Official 髭男 dism 歌曲唱片封面單一真理來源。嚴格遵循「一手首發優先權（Jacket Precedence Hierarchy）」：凡有獨立發行實體單曲（Physical Single）或數位限定單曲（Digital Single）之作品（如《Pretender》、《宿命》、《Subtitle》、《Cry Baby》等），100% 優先鎖定首發單曲專屬封套與 Spotify Track ID；EP / 迷你專輯初出曲優先採用 EP 封套；僅有隨正規原創大碟初披露之曲目（如《115万キロのフィルム》、《フィラメント》、《Sharon》等）始採用正規大碟封面。建置期透過開放式 Spotify oEmbed 管線將 300×300 CDN 網址固化於歌曲主檔（`data/songs.json` 的 `spotify.coverUrl`），達成 100% 離線可用與零外部執行期 API 依賴。於歌曲詳情票券（`SongSlip`）頂部 Header 採用響應式自適應排版（手機端橫幅全寬舒展、桌面端雙行側伴），支援點擊開啟 640×640 Retina 超高解析度燈箱檢視，並同步標註一手發行載體與所屬大碟之雙重歷史脈絡；未發行作品（`unreleased: true`）採用符合票券美學之黑膠刻紋軸心孔圖標（Vinyl Jacket Placeholder）優雅回退。
+_Avoid_: 貪圖便利將經典首發單曲無差別覆蓋為後續大碟封面遺失首發視覺記憶、前端非同步動態發送外部 oEmbed API 造成骨架閃爍、扭曲唱片封套長寬比例、未發行曲目直接留白破圖
+
+
 **次級分組按鈕吧與分組維度**:
 查詢列下方提供次級分組按鈕吧，提供高階維度切換：
 
