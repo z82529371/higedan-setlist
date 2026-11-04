@@ -263,6 +263,7 @@ export const dictKo = {
       unreleasedJacket: "미발매 곡 (바이닐 레코드)",
       jacketModalTitle: "공식 앨범 자켓",
       listenOnSpotify: "Spotify에서 듣기",
+      viewSongHistory: "클릭하여 곡 이력 보기 →",
     },
     venue: {
       nativeName: "원어 명칭: {name}",

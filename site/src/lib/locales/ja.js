@@ -263,6 +263,7 @@ export const dictJa = {
       unreleasedJacket: "配信未解禁作品（レコード仕様）",
       jacketModalTitle: "公式ジャケット写真",
       listenOnSpotify: "Spotifyで聴く",
+      viewSongHistory: "クリックで楽曲履歴を表示 →",
     },
     venue: {
       nativeName: "原表記：{name}",

@@ -263,6 +263,7 @@ export const dictEn = {
       unreleasedJacket: "Unreleased Track (Vinyl Record)",
       jacketModalTitle: "Official Album Jacket",
       listenOnSpotify: "Listen on Spotify",
+      viewSongHistory: "Click to view song history →",
     },
     venue: {
       nativeName: "Native: {name}",

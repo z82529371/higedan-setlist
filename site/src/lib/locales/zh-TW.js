@@ -263,6 +263,7 @@ export const dictZhTw = {
       unreleasedJacket: "未正式發行作品（黑膠唱片）",
       jacketModalTitle: "官方唱片封套",
       listenOnSpotify: "在 Spotify 聆聽",
+      viewSongHistory: "點擊檢視單曲歷史 →",
     },
     venue: {
       nativeName: "原名：{name}",
