@@ -17,6 +17,7 @@ import { extractConcertMedia } from "../../lib/song-media.js";
 import liveReleasesData from "../../data/live-releases.json";
 import { buildLiveReleaseIndex } from "../../lib/live-releases.js";
 import { LiveReleaseSection } from "./LiveReleaseSection.jsx";
+import { SongJacketHoverCard } from "./SongJacketHoverCard.jsx";
 
 const liveReleasesIndex = buildLiveReleaseIndex(liveReleasesData);
 
@@ -285,16 +286,16 @@ export function ShowSlip({
       }
       const link = trackRoute(it, songWeight(it), locale);
       return (
-        <a
-          className={link.cls}
+        <SongJacketHoverCard
+          songId={it.songId}
+          title={title}
           href={link.hash}
+          className={link.cls}
           onClick={(e) => {
             e.preventDefault();
             onSelectSong(it.songId);
           }}
-        >
-          {title}
-        </a>
+        />
       );
     };
     const tabBar =

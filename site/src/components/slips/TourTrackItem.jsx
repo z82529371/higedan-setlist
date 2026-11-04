@@ -2,23 +2,31 @@ import React from "react";
 import { SETLIST_ITEM, SETLIST_SONG } from "../../lib/constants.js";
 import { FREQUENCY_TIER_CONFIG } from "../../lib/domain.js";
 import { routeHash } from "../../lib/track.js";
+import { useI18n } from "../../lib/i18n.jsx";
+import { SongJacketHoverCard } from "./SongJacketHoverCard.jsx";
 
-function TrackTitleAndBadges({ track, isClickable, locale, t, onSelectSong }) {
+function TrackTitleAndBadges({ track, isClickable, locale: propLocale, t: propT, onSelectSong }) {
+  const i18n = useI18n();
+  const t = propT || i18n.t;
+  const locale = propLocale || i18n.locale;
+
   return (
     <div className="min-w-0 flex-1">
       <div className="flex flex-wrap items-baseline gap-2">
         {isClickable ? (
-          <a
+          <SongJacketHoverCard
+            songId={track.songId}
+            title={track.title}
+            linkTitle={t("tourExtra.viewSongFile", "查看歌曲檔案：《{title}》", { title: track.title })}
             href={routeHash.song(track.songId, locale)}
             onClick={(e) => {
               e.preventDefault();
               onSelectSong?.(track.songId);
             }}
             className={SETLIST_SONG}
-            title={t("tourExtra.viewSongFile", "查看歌曲檔案：《{title}》", { title: track.title })}
           >
             <span className="font-bold text-[14px] sm:text-[15px]">{track.title}</span>
-          </a>
+          </SongJacketHoverCard>
         ) : (
           <span className="font-bold text-[14px] sm:text-[15px] text-ink">{track.title}</span>
         )}
@@ -44,7 +52,11 @@ function TrackTitleAndBadges({ track, isClickable, locale, t, onSelectSong }) {
   );
 }
 
-function FrequencyPill({ track, totalShows, locale, t }) {
+function FrequencyPill({ track, totalShows, locale: propLocale, t: propT }) {
+  const i18n = useI18n();
+  const t = propT || i18n.t;
+  const locale = propLocale || i18n.locale;
+
   const tierConfig =
     FREQUENCY_TIER_CONFIG[track.tier] || FREQUENCY_TIER_CONFIG.surprise;
   const tierLabel = t(`tiers.${track.tier}`, track.tierLabel);
