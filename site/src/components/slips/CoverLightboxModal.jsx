@@ -1,9 +1,11 @@
 import { useEffect } from "react";
 import { useI18n } from "../../lib/i18n.jsx";
+import { routeHash } from "../../lib/routes.js";
 
 /**
- * CoverLightboxModal (ADR-0143)
- * Fullscreen high-resolution 640x640 Retina album jacket preview modal.
+ * CoverLightboxModal (ADR-0143, ADR-0144)
+ * Fullscreen high-resolution 640x640 Retina album jacket preview modal
+ * with bidirectional deep-link button to official release card.
  */
 export function CoverLightboxModal({
   isOpen,
@@ -12,6 +14,7 @@ export function CoverLightboxModal({
   alias,
   album,
   provenance,
+  releaseId,
   coverUrl,
   highResCoverUrl,
   spotifyTrackUrl,
@@ -105,17 +108,33 @@ export function CoverLightboxModal({
             </div>
           </div>
 
-          {spotifyTrackUrl && (
-            <div className="pt-2 border-t border-line-soft/80 flex items-center justify-end">
-              <a
-                href={spotifyTrackUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 px-3 py-1 rounded-[3px] border border-line-soft bg-paper hover:bg-band hover:border-band hover:text-band-ink text-ink font-mono text-xs font-bold transition-colors no-underline cursor-pointer"
-                title={t("slips.song.listenOnSpotify", "在 Spotify 聆聽")}
-              >
-                <span>🎧 {t("slips.song.listenOnSpotify", "在 Spotify 聆聽")} ↗</span>
-              </a>
+          {(releaseId || spotifyTrackUrl) && (
+            <div className="pt-2 border-t border-line-soft/80 flex items-center justify-between gap-2 flex-wrap">
+              {releaseId ? (
+                <a
+                  href={routeHash.releases({ tab: "discography", id: releaseId })}
+                  onClick={onClose}
+                  data-testid="cover-lightbox-release-btn"
+                  className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-[3px] border border-ink/30 bg-tape hover:bg-tape-tint text-ink font-mono text-xs font-bold transition-colors no-underline cursor-pointer"
+                  title={t("slips.song.viewReleaseDetails", "查看實體發行規格與曲目")}
+                >
+                  <span>💿 {t("slips.song.viewReleaseDetails", "查看實體發行規格")} ➔</span>
+                </a>
+              ) : (
+                <span />
+              )}
+
+              {spotifyTrackUrl && (
+                <a
+                  href={spotifyTrackUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 px-3 py-1 rounded-[3px] border border-line-soft bg-paper hover:bg-band hover:border-band hover:text-band-ink text-ink font-mono text-xs font-bold transition-colors no-underline cursor-pointer"
+                  title={t("slips.song.listenOnSpotify", "在 Spotify 聆聽")}
+                >
+                  <span>🎧 {t("slips.song.listenOnSpotify", "在 Spotify 聆聽")} ↗</span>
+                </a>
+              )}
             </div>
           )}
         </div>

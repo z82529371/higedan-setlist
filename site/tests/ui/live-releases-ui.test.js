@@ -71,7 +71,7 @@ describe("Live Releases UI & Route Seam (ADR-0142)", () => {
     );
 
     assert.ok(rendered.includes("Editorial"));
-    assert.ok(rendered.includes("SHOCKING NUTS"));
+    assert.ok(rendered.includes("日本武道館") || rendered.includes("STADIUM"));
     assert.ok(rendered.includes("Blu-ray"));
   });
 

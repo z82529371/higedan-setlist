@@ -103,6 +103,34 @@ describe("36. Official Album Jacket SSOT & Cover Lightbox UI (ADR-0143)", () => 
     assert.ok(html.includes('data-testid="cover-lightbox-close-btn"'), "Must include close button");
   });
 
+  it("renders CoverLightboxModal with bidirectional deep link to release card when releaseId is provided (ADR-0144)", async () => {
+    const { CoverLightboxModal } = await loadModule("src/components/slips/CoverLightboxModal.jsx");
+    const { I18nProvider } = await loadModule("src/lib/i18n.jsx");
+
+    const html = renderToStaticMarkup(
+      React.createElement(
+        I18nProvider,
+        { initialLocale: "zh-TW" },
+        React.createElement(CoverLightboxModal, {
+          isOpen: true,
+          onClose: () => {},
+          title: "Pretender",
+          alias: "",
+          album: "Traveler",
+          provenance: "2nd Single《Pretender》(2019) · 収録專輯《Traveler》",
+          releaseId: "single-pretender",
+          coverUrl: "https://example.com/pretender.jpg",
+          highResCoverUrl: "https://example.com/pretender-high.jpg",
+          spotifyTrackUrl: "https://open.spotify.com/track/123",
+        })
+      )
+    );
+
+    assert.ok(html.includes('data-testid="cover-lightbox-release-btn"'), "Must render release button");
+    assert.ok(html.includes("#/releases?tab=discography&amp;id=single-pretender") || html.includes("#/releases?tab=discography&id=single-pretender"), "Must link to release card");
+    assert.ok(html.includes("查看實體發行規格"), "Must display localized release action copy");
+  });
+
   it("renders CoverLightboxModal as null when isOpen is false", async () => {
     const { CoverLightboxModal } = await loadModule("src/components/slips/CoverLightboxModal.jsx");
     const { I18nProvider } = await loadModule("src/lib/i18n.jsx");

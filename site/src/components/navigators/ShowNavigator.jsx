@@ -236,45 +236,6 @@ export function ShowNavigator({
                 </span>
               </div>
               <div className="flex flex-wrap gap-1.5 sm:gap-2">
-                {/* 全部類型 (ALL) 首選膠囊 */}
-                <button
-                  type="button"
-                  data-testid="show-category-all"
-                  onClick={() => {
-                    if (isDrawer && draftState) {
-                      const allU = effectiveAllUnits;
-                      const years = Array.from(
-                        new Set(allU.map((u) => unitEarliest(u).split("-")[0]))
-                      ).sort().reverse();
-                      const nextYear = years.includes(draftState.year) ? draftState.year : (years[0] || "2024");
-                      const nextUnits = allU.filter((u) => unitEarliest(u).split("-")[0] === nextYear);
-                      const nextUnit = nextUnits.find((u) => u.id === draftState.unitId) || nextUnits[0] || allU[0];
-                      const nextShowId = nextUnit ? defaultShowId(nextUnit) : "";
-                      setDraftState((prev) => ({
-                        ...prev,
-                        category: "ALL",
-                        year: nextYear,
-                        unitId: nextUnit?.id || "",
-                        showId: nextShowId,
-                        unitPage: 0,
-                        showPage: 0,
-                      }));
-                    } else {
-                      handleCategoryClick("ALL");
-                    }
-                  }}
-                  className={`rounded-full px-3.5 py-1.5 text-[12px] sm:text-[13px] font-semibold transition-colors motion-reduce:transition-none cursor-pointer inline-flex items-center gap-1.5 focus-visible:ring-2 focus-visible:ring-band focus-visible:outline-none ${
-                    curCategory === "ALL"
-                      ? "bg-band text-band-ink font-bold shadow-xs border border-ink/40"
-                      : "bg-paper text-ink border border-line-soft hover:bg-tape-tint/50 hover:border-ink/60"
-                  }`}
-                >
-                  <span>{t("showNav.allCategories", "全部類型")}</span>
-                  <span className="font-mono text-[11px] opacity-75 tabular-nums">
-                    ({categoryStats["ALL"]?.shows || 0}{t("navigators.showsUnit", "場")})
-                  </span>
-                </button>
-
                 {PERFORMANCE_CATEGORIES.map((cat) => {
                   const isCur = curCategory === cat;
                   const stat = categoryStats[cat] || { units: 0, shows: 0 };

@@ -42,9 +42,9 @@ describe("19. Unified Omnibox Search & Flattened Show & Venue Navigation (ADR-01
 
     // Verify search input exists
     assert.ok(html.includes("data-testid=\"show-search-input\""), "renders show search input");
-    // Verify ALL categories button exists
-    assert.ok(html.includes("data-testid=\"show-category-all\""), "renders ALL categories pill button");
-    assert.ok(html.includes("全部類型") || html.includes("All Categories"), "renders localized ALL categories label");
+    // Verify standard performance categories render without ALL button
+    assert.ok(!html.includes("data-testid=\"show-category-all\""), "does not render ALL categories button");
+    assert.ok(html.includes("巡演專場") || html.includes("Tour"), "renders localized Tour category pill");
     // Verify Rejoice unit renders
     assert.ok(html.includes("Rejoice"), "renders Rejoice unit");
   });

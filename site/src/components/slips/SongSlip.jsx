@@ -13,7 +13,7 @@ import { AlbumJacketCard } from "./AlbumJacketCard.jsx";
 import { CoverLightboxModal } from "./CoverLightboxModal.jsx";
 import { getSongMedia } from "../../lib/song-media.js";
 import { getSongSpotify, buildSpotifyTrackUrl } from "../../lib/song-spotify.js";
-import { getSongReleaseProvenance } from "../../lib/song-release.js";
+import { getSongReleaseProvenance, getSongReleaseId } from "../../lib/song-release.js";
 
 export function SongSlip({ songId, trackShows, showById, unitData, onSelectShow, onSelectVenue }) {
   const { locale, t, localizeVenue } = useI18n();
@@ -707,7 +707,7 @@ export function SongSlip({ songId, trackShows, showById, unitData, onSelectShow,
         label="OFFICIAL HIGEDAN DISM // TRACK PERFORMANCE ARCHIVE"
       />
 
-      {/* High-res Album Jacket Lightbox Modal (ADR-0143) */}
+      {/* High-res Album Jacket Lightbox Modal (ADR-0143, ADR-0144) */}
       <CoverLightboxModal
         isOpen={isLightboxOpen}
         onClose={() => setIsLightboxOpen(false)}
@@ -715,6 +715,7 @@ export function SongSlip({ songId, trackShows, showById, unitData, onSelectShow,
         alias={songAlias[songId] || ""}
         album={albumName}
         provenance={provenance}
+        releaseId={getSongReleaseId(songId)}
         coverUrl={spotify.coverUrl}
         highResCoverUrl={spotify.highResCoverUrl}
         spotifyTrackUrl={spotify.trackId ? buildSpotifyTrackUrl(spotify.trackId) : ""}
