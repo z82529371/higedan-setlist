@@ -178,7 +178,8 @@
       ],
       "streaming": {
         "spotifyAlbumId": "4RPF3qN6ZDGvjrxuSAi2jb"
-      }
+      },
+      "coverUrl": "https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e0255556913f016c98129dda613"
     },
     {
       "id": "hello-ep-pacifico-2020",
@@ -238,7 +239,8 @@
       ],
       "streaming": {
         "spotifyAlbumId": "6d5yPkJL9BmQ7KXr0xbiGy"
-      }
+      },
+      "coverUrl": "https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e02e1e1915cb01a80dc69767e69"
     },
     {
       "id": "editorial-blooming-universe-2021",
@@ -317,7 +319,8 @@
       ],
       "streaming": {
         "spotifyAlbumId": "1ceSzYNgQgYAXhWdvGkkEy"
-      }
+      },
+      "coverUrl": "https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e0206a6f72a56c9c54627c31d08"
     },
     {
       "id": "chessboard-tokyo-opera-city-2021",
@@ -390,7 +393,11 @@
           "showId": "1672276",
           "coverage": "full"
         }
-      ]
+      ],
+      "coverUrl": "https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e0223526770809531024ae7faa6",
+      "streaming": {
+        "spotifyAlbumId": "1iMBzn4vBsx9kd9mvARek0"
+      }
     },
     {
       "id": "stardust-four-re-ism-2026",
@@ -443,7 +450,8 @@
       ],
       "streaming": {
         "spotifyAlbumId": "5zYL6JPCUQjOuO0M9nUB0r"
-      }
+      },
+      "coverUrl": "https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e02a109e59e5b24fd437c326771"
     }
   ]
 }

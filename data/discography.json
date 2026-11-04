@@ -15,7 +15,17 @@
           "format": "cd",
           "catalogNumber": "PCCA-70529"
         }
-      ]
+      ],
+      "id": "single-no-doubt",
+      "coverUrl": "https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e02d48defab6cc1de5f4564782c",
+      "tracks": [
+        {
+          "trackNumber": 1,
+          "title": "ノーダウト",
+          "songId": "no-doubt"
+        }
+      ],
+      "spotifyAlbumId": "3i1Z5gf7HVY3eXKLPkBRxE"
     },
     {
       "index": 2,
@@ -36,7 +46,27 @@
           "format": "cd",
           "catalogNumber": "PCCA-04785"
         }
-      ]
+      ],
+      "id": "single-pretender",
+      "coverUrl": "https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e02c03d59ccf637e7ce5754e370",
+      "tracks": [
+        {
+          "trackNumber": 1,
+          "title": "Pretender",
+          "songId": "pretender"
+        },
+        {
+          "trackNumber": 2,
+          "title": "Amazing",
+          "songId": "amazing"
+        },
+        {
+          "trackNumber": 3,
+          "title": "Pretender (Instrumental)",
+          "songId": null
+        }
+      ],
+      "spotifyAlbumId": "6wx6e8e2vwidwLcMno2cew"
     },
     {
       "index": 3,
@@ -51,7 +81,22 @@
           "format": "cd",
           "catalogNumber": "PCCA-70544"
         }
-      ]
+      ],
+      "id": "single-shukumei",
+      "coverUrl": "https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e02104ab1d90435313f0bbeac0a",
+      "tracks": [
+        {
+          "trackNumber": 1,
+          "title": "宿命",
+          "songId": "shukumei"
+        },
+        {
+          "trackNumber": 2,
+          "title": "宿命 (Instrumental)",
+          "songId": null
+        }
+      ],
+      "spotifyAlbumId": "5535qs04bhKXr29EMzCzQT"
     },
     {
       "index": 4,
@@ -66,7 +111,22 @@
           "format": "cd",
           "catalogNumber": "PCCA-70549"
         }
-      ]
+      ],
+      "id": "single-i-love",
+      "coverUrl": "https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e0265f40b8174dd94a3226ad0a6",
+      "tracks": [
+        {
+          "trackNumber": 1,
+          "title": "I LOVE...",
+          "songId": "i-love"
+        },
+        {
+          "trackNumber": 2,
+          "title": "I LOVE... (Instrumental)",
+          "songId": null
+        }
+      ],
+      "spotifyAlbumId": "6imbwxzVgfsIf0vqnhtwxs"
     },
     {
       "index": 5,
@@ -93,7 +153,22 @@
           "format": "cd",
           "catalogNumber": "PCCA-70553"
         }
-      ]
+      ],
+      "id": "single-universe",
+      "coverUrl": "https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e02729baeb39b79ca07d27d6566",
+      "tracks": [
+        {
+          "trackNumber": 1,
+          "title": "Universe",
+          "songId": "universe"
+        },
+        {
+          "trackNumber": 2,
+          "title": "Universe (Instrumental)",
+          "songId": null
+        }
+      ],
+      "spotifyAlbumId": "7INGHC3LR4KsJp8nFIzol2"
     },
     {
       "index": 6,
@@ -119,6 +194,30 @@
           "name": "通常盤",
           "format": "cd",
           "catalogNumber": "PCCA-70563"
+        }
+      ],
+      "id": "single-chessboard-nichijo",
+      "coverUrl": "https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e02f2cf2d6174e1a540e7b3af7c",
+      "tracks": [
+        {
+          "trackNumber": 1,
+          "title": "Chessboard",
+          "songId": "chessboard"
+        },
+        {
+          "trackNumber": 2,
+          "title": "日常",
+          "songId": "nichijo"
+        },
+        {
+          "trackNumber": 3,
+          "title": "Chessboard (Instrumental)",
+          "songId": null
+        },
+        {
+          "trackNumber": 4,
+          "title": "日常 (Instrumental)",
+          "songId": null
         }
       ]
     },
@@ -147,6 +246,30 @@
           "format": "cd",
           "catalogNumber": "PCCA-70586"
         }
+      ],
+      "id": "single-stardust-elder-flower",
+      "coverUrl": "https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e025440ee8f2e4b92bc90736a56",
+      "tracks": [
+        {
+          "trackNumber": 1,
+          "title": "スターダスト",
+          "songId": "stardust"
+        },
+        {
+          "trackNumber": 2,
+          "title": "エルダーフラワー",
+          "songId": "elder-flower"
+        },
+        {
+          "trackNumber": 3,
+          "title": "スターダスト (Instrumental)",
+          "songId": null
+        },
+        {
+          "trackNumber": 4,
+          "title": "エルダーフラワー (Instrumental)",
+          "songId": null
+        }
       ]
     }
   ],
@@ -161,7 +284,22 @@
         "billboardHot100": null,
         "oriconDl": "24位"
       },
-      "certRIAJ": null
+      "certRIAJ": null,
+      "id": "digital-tell-me-baby-brothers",
+      "coverUrl": "https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e02665e1a694531659de404e742",
+      "tracks": [
+        {
+          "trackNumber": 1,
+          "title": "Tell Me Baby",
+          "songId": "tell-me-baby"
+        },
+        {
+          "trackNumber": 2,
+          "title": "ブラザーズ",
+          "songId": "brothers"
+        }
+      ],
+      "spotifyAlbumId": "66EuZcoqWAkmwHVgqHfSiG"
     },
     {
       "index": 2,
@@ -176,7 +314,17 @@
       },
       "certRIAJ": {
         "stream": "ゴールド"
-      }
+      },
+      "id": "digital-bad-for-me",
+      "coverUrl": "https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e022ec10b28c9b10b86b8ce2e02",
+      "tracks": [
+        {
+          "trackNumber": 1,
+          "title": "バッドフォーミー",
+          "songId": "bad-for-me"
+        }
+      ],
+      "spotifyAlbumId": "5DMLelmP0hvcWPtENrdwzB"
     },
     {
       "index": 3,
@@ -194,7 +342,17 @@
       "certRIAJ": {
         "download": "ゴールド",
         "stream": "ダブル・プラチナ"
-      }
+      },
+      "id": "digital-parabola",
+      "coverUrl": "https://image-cdn-fa.spotifycdn.com/image/ab67616d00001e02b7cd3817b649807281ff237b",
+      "tracks": [
+        {
+          "trackNumber": 1,
+          "title": "パラボラ",
+          "songId": "parabola"
+        }
+      ],
+      "spotifyAlbumId": "6veWdMPkxMW2CfvZeArlmB"
     },
     {
       "index": 4,
@@ -209,7 +367,17 @@
         "oriconDs": 3,
         "oriconSt": 7
       },
-      "certRIAJ": null
+      "certRIAJ": null,
+      "id": "digital-laughter",
+      "coverUrl": "https://image-cdn-fa.spotifycdn.com/image/ab67616d00001e0278417c2071e3fae684515f23",
+      "tracks": [
+        {
+          "trackNumber": 1,
+          "title": "Laughter",
+          "songId": "laughter"
+        }
+      ],
+      "spotifyAlbumId": "3KvEqRihHXZ2suFEnSpKO2"
     },
     {
       "index": 5,
@@ -226,7 +394,17 @@
       },
       "certRIAJ": {
         "stream": "ダイヤモンド"
-      }
+      },
+      "id": "digital-cry-baby",
+      "coverUrl": "https://image-cdn-fa.spotifycdn.com/image/ab67616d00001e0242e1509019364ad3370d4101",
+      "tracks": [
+        {
+          "trackNumber": 1,
+          "title": "Cry Baby",
+          "songId": "cry-baby"
+        }
+      ],
+      "spotifyAlbumId": "1bUVsdWQhyic0Rxn4kIH5n"
     },
     {
       "index": 6,
@@ -242,7 +420,17 @@
       },
       "certRIAJ": {
         "stream": "ゴールド"
-      }
+      },
+      "id": "digital-anarchy",
+      "coverUrl": "https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e0267ec5fe2f317073d6ccfa436",
+      "tracks": [
+        {
+          "trackNumber": 1,
+          "title": "Anarchy",
+          "songId": "anarchy"
+        }
+      ],
+      "spotifyAlbumId": "0DxahgbYv8ZUk0y1kWye4n"
     },
     {
       "index": 7,
@@ -260,7 +448,17 @@
       "certRIAJ": {
         "download": "プラチナ",
         "stream": "ダイヤモンド"
-      }
+      },
+      "id": "digital-mixed-nuts",
+      "coverUrl": "https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e02b0d70fdad2d5ff57e583524b",
+      "tracks": [
+        {
+          "trackNumber": 1,
+          "title": "ミックスナッツ",
+          "songId": "mixed-nuts"
+        }
+      ],
+      "spotifyAlbumId": "6ex2JkvBLZYGbomCfd0N85"
     },
     {
       "index": 8,
@@ -277,7 +475,17 @@
       },
       "certRIAJ": {
         "stream": "ダイヤモンド"
-      }
+      },
+      "id": "digital-subtitle",
+      "coverUrl": "https://image-cdn-fa.spotifycdn.com/image/ab67616d00001e028333a72128901f85a9910561",
+      "tracks": [
+        {
+          "trackNumber": 1,
+          "title": "Subtitle",
+          "songId": "subtitle"
+        }
+      ],
+      "spotifyAlbumId": "696Kc22jU73Oaa3cM2CylT"
     },
     {
       "index": 9,
@@ -295,7 +503,17 @@
       "certRIAJ": {
         "download": "ゴールド",
         "stream": "プラチナ"
-      }
+      },
+      "id": "digital-white-noise",
+      "coverUrl": "https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e02441539148805088db8ce9fa6",
+      "tracks": [
+        {
+          "trackNumber": 1,
+          "title": "ホワイトノイズ",
+          "songId": "white-noise"
+        }
+      ],
+      "spotifyAlbumId": "087ZBt6v5RguZ1L9hYfbS9"
     },
     {
       "index": 10,
@@ -312,7 +530,17 @@
       },
       "certRIAJ": {
         "stream": "ダブル・プラチナ"
-      }
+      },
+      "id": "digital-tattoo",
+      "coverUrl": "https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e02573e0c727d176b2ac61a0500",
+      "tracks": [
+        {
+          "trackNumber": 1,
+          "title": "TATTOO",
+          "songId": "tattoo"
+        }
+      ],
+      "spotifyAlbumId": "4JnW56WwhAK3cuVy1VEDC7"
     },
     {
       "index": 11,
@@ -328,7 +556,17 @@
       },
       "certRIAJ": {
         "stream": "ゴールド"
-      }
+      },
+      "id": "digital-chessboard",
+      "coverUrl": "https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e02f2cf2d6174e1a540e7b3af7c",
+      "tracks": [
+        {
+          "trackNumber": 1,
+          "title": "Chessboard",
+          "songId": "chessboard"
+        }
+      ],
+      "spotifyAlbumId": "5Rw4smBVtO1n7axKhmg3hm"
     },
     {
       "index": 12,
@@ -342,7 +580,17 @@
         "billboardSt": 28,
         "oriconDs": 5
       },
-      "certRIAJ": null
+      "certRIAJ": null,
+      "id": "digital-nichijo",
+      "coverUrl": "https://image-cdn-fa.spotifycdn.com/image/ab67616d00001e02a162174c1f36250c19210290",
+      "tracks": [
+        {
+          "trackNumber": 1,
+          "title": "日常",
+          "songId": "nichijo"
+        }
+      ],
+      "spotifyAlbumId": "2hMfFCHPLOKKxlfck6Sknw"
     },
     {
       "index": 13,
@@ -357,7 +605,17 @@
         "oriconDs": 2,
         "oriconSt": 23
       },
-      "certRIAJ": null
+      "certRIAJ": null,
+      "id": "digital-soulsoup",
+      "coverUrl": "https://image-cdn-fa.spotifycdn.com/image/ab67616d00001e0211124134a8c9ccaa14a56673",
+      "tracks": [
+        {
+          "trackNumber": 1,
+          "title": "SOULSOUP",
+          "songId": "soulsoup"
+        }
+      ],
+      "spotifyAlbumId": "2xhpNfblfc3x0Lkul2hf1p"
     },
     {
       "index": 14,
@@ -374,7 +632,17 @@
       },
       "certRIAJ": {
         "stream": "プラチナ"
-      }
+      },
+      "id": "digital-same-blue",
+      "coverUrl": "https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e02bbe16072fae81d6fbbb141dc",
+      "tracks": [
+        {
+          "trackNumber": 1,
+          "title": "Same Blue",
+          "songId": "same-blue"
+        }
+      ],
+      "spotifyAlbumId": "7dPMZch50b7Ntn0cpiuz7X"
     },
     {
       "index": 15,
@@ -388,7 +656,17 @@
         "billboardSt": 46,
         "oriconDs": 1
       },
-      "certRIAJ": null
+      "certRIAJ": null,
+      "id": "digital-50pct",
+      "coverUrl": "https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e02a3cb42f846dfc7f72df9502b",
+      "tracks": [
+        {
+          "trackNumber": 1,
+          "title": "50%",
+          "songId": "50pct"
+        }
+      ],
+      "spotifyAlbumId": "2uSlUBtDUEoP4ex4epfchE"
     },
     {
       "index": 16,
@@ -404,7 +682,17 @@
       },
       "certRIAJ": {
         "stream": "ゴールド"
-      }
+      },
+      "id": "digital-rashisa",
+      "coverUrl": "https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e02341a46a97106758d73a738e0",
+      "tracks": [
+        {
+          "trackNumber": 1,
+          "title": "らしさ",
+          "songId": "rashisa"
+        }
+      ],
+      "spotifyAlbumId": "0bM8WsMWMrUc533vPzMcGG"
     },
     {
       "index": 17,
@@ -417,7 +705,17 @@
         "billboardDl": 4,
         "billboardSt": 28
       },
-      "certRIAJ": null
+      "certRIAJ": null,
+      "id": "digital-sanitizer",
+      "coverUrl": "https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e022809faa218e950f03824626f",
+      "tracks": [
+        {
+          "trackNumber": 1,
+          "title": "Sanitizer",
+          "songId": "sanitizer"
+        }
+      ],
+      "spotifyAlbumId": "6osLopiqW4KzuZFTK3Qif7"
     },
     {
       "index": 18,
@@ -430,7 +728,17 @@
         "billboardDl": 9,
         "billboardSt": 62
       },
-      "certRIAJ": null
+      "certRIAJ": null,
+      "id": "digital-make-me-wonder",
+      "coverUrl": "https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e026c8ebcf7b60a913b2866e35d",
+      "tracks": [
+        {
+          "trackNumber": 1,
+          "title": "Make Me Wonder",
+          "songId": "make-me-wonder"
+        }
+      ],
+      "spotifyAlbumId": "6iLSOyr4tKSTGIuCRsEq6T"
     },
     {
       "index": 19,
@@ -445,7 +753,17 @@
         "oriconDs": 2,
         "oriconSt": 29
       },
-      "certRIAJ": null
+      "certRIAJ": null,
+      "id": "digital-elder-flower",
+      "coverUrl": "https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e0248ca6b510aa5573fcc6b197d",
+      "tracks": [
+        {
+          "trackNumber": 1,
+          "title": "エルダーフラワー",
+          "songId": "elder-flower"
+        }
+      ],
+      "spotifyAlbumId": "6Bnr1I9oVYXaEChRdKbrYE"
     },
     {
       "index": 20,
@@ -459,7 +777,41 @@
         "billboardSt": 27,
         "oriconDs": 1
       },
-      "certRIAJ": null
+      "certRIAJ": null,
+      "id": "digital-stardust",
+      "coverUrl": "https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e025440ee8f2e4b92bc90736a56",
+      "tracks": [
+        {
+          "trackNumber": 1,
+          "title": "スターダスト",
+          "songId": "stardust"
+        }
+      ],
+      "spotifyAlbumId": "5VQOZVM7WcsqMfRuT3SAxc"
+    }
+  ],
+  "collaborationSingles": [
+    {
+      "index": 1,
+      "title": "恋の最chu! / 不器用な二人で",
+      "releaseDate": "2015-02-04",
+      "label": "自主制作 (山根万理菜 & Official髭男dism)",
+      "album": "未収録",
+      "id": "single-koi-no-saichu",
+      "spotifyAlbumId": "61afn9y6yWSwCScWohOzTZ",
+      "coverUrl": "https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e02ac41dedfb556474ae9ea9aae",
+      "tracks": [
+        {
+          "trackNumber": 1,
+          "title": "恋の最chu!",
+          "songId": "koi-no-saichu"
+        },
+        {
+          "trackNumber": 2,
+          "title": "不器用な二人で",
+          "songId": "bukiyou-na-futari-de"
+        }
+      ]
     }
   ],
   "eps": [
@@ -482,7 +834,32 @@
           "format": "cd_goods",
           "catalogNumber": "LASCD-0074"
         }
-      ]
+      ],
+      "id": "ep-whats-going-on",
+      "coverUrl": "https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e024917c3a1279a47b94e280726",
+      "tracks": [
+        {
+          "trackNumber": 1,
+          "title": "What's Going On?",
+          "songId": "whats-going-on"
+        },
+        {
+          "trackNumber": 2,
+          "title": "未完成なままで",
+          "songId": "mikanseinamamade"
+        },
+        {
+          "trackNumber": 3,
+          "title": "ニットの帽子",
+          "songId": "knit-no-boushi"
+        },
+        {
+          "trackNumber": 4,
+          "title": "黄色い車",
+          "songId": "kiiroi-kuruma"
+        }
+      ],
+      "spotifyAlbumId": "14g7DTj50Vr316564kkhuK"
     },
     {
       "index": 2,
@@ -503,7 +880,32 @@
           "format": "cd",
           "catalogNumber": "PCCA-04717"
         }
-      ]
+      ],
+      "id": "ep-stand-by-you",
+      "coverUrl": "https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e02a9b10c8532efb4e0d876678a",
+      "tracks": [
+        {
+          "trackNumber": 1,
+          "title": "Stand By You",
+          "songId": "stand-by-you"
+        },
+        {
+          "trackNumber": 2,
+          "title": "FIRE GROUND",
+          "songId": "fire-ground"
+        },
+        {
+          "trackNumber": 3,
+          "title": "バッドフォーミー",
+          "songId": "bad-for-me"
+        },
+        {
+          "trackNumber": 4,
+          "title": "ブラザーズ",
+          "songId": "brothers"
+        }
+      ],
+      "spotifyAlbumId": "77x1D2BCpkwocRDCfMyMDO"
     },
     {
       "index": 3,
@@ -524,7 +926,32 @@
           "format": "cd",
           "catalogNumber": "PCCA-04961"
         }
-      ]
+      ],
+      "id": "ep-hello",
+      "coverUrl": "https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e028f58e5574dec9bbad7f42513",
+      "tracks": [
+        {
+          "trackNumber": 1,
+          "title": "HELLO",
+          "songId": "hello"
+        },
+        {
+          "trackNumber": 2,
+          "title": "パラボラ",
+          "songId": "parabola"
+        },
+        {
+          "trackNumber": 3,
+          "title": "Laughter",
+          "songId": "laughter"
+        },
+        {
+          "trackNumber": 4,
+          "title": "夏模様の猫",
+          "songId": "natsu-moyou-no-neko"
+        }
+      ],
+      "spotifyAlbumId": "0NYOwZlty0Lr8N39A2Sdnw"
     },
     {
       "index": 4,
@@ -551,7 +978,32 @@
           "format": "cd",
           "catalogNumber": "PCCA-06138"
         }
-      ]
+      ],
+      "id": "ep-mixed-nuts",
+      "coverUrl": "https://image-cdn-fa.spotifycdn.com/image/ab67616d00001e02e7268e452605a6f49f4e02ac",
+      "tracks": [
+        {
+          "trackNumber": 1,
+          "title": "ミックスナッツ",
+          "songId": "mixed-nuts"
+        },
+        {
+          "trackNumber": 2,
+          "title": "Anarchy",
+          "songId": "anarchy"
+        },
+        {
+          "trackNumber": 3,
+          "title": "クロニクル",
+          "songId": null
+        },
+        {
+          "trackNumber": 4,
+          "title": "破顔",
+          "songId": "hakan"
+        }
+      ],
+      "spotifyAlbumId": "0EFPXj8JksJk56eiITsTd1"
     },
     {
       "index": "digital-1",
@@ -560,7 +1012,32 @@
       "label": "ラストラム・ミュージックエンタテインメント",
       "album": "エスカパレード",
       "format": "digital",
-      "catalogNumber": "LACH-0006"
+      "catalogNumber": "LACH-0006",
+      "id": "ep-lady",
+      "coverUrl": "https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e0253494fd32a07ab38cccdbab4",
+      "tracks": [
+        {
+          "trackNumber": 1,
+          "title": "LADY",
+          "songId": "lady"
+        },
+        {
+          "trackNumber": 2,
+          "title": "Driver",
+          "songId": "driver"
+        },
+        {
+          "trackNumber": 3,
+          "title": "犬かキャットかで死ぬまで喧嘩しよう!",
+          "songId": "inu-ka-cat-ka-de-shinumade-kenka-shiyou"
+        },
+        {
+          "trackNumber": 4,
+          "title": "異端なスター",
+          "songId": "itan-na-star"
+        }
+      ],
+      "spotifyAlbumId": "3SG54r7kP2QwZIOs81ZkpV"
     }
   ],
   "albums": {
@@ -583,7 +1060,77 @@
             "format": "cd",
             "catalogNumber": "LACD-0293"
           }
-        ]
+        ],
+        "id": "album-escaparade",
+        "coverUrl": "https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e02b0ab6e5ff8ba422784d60191",
+        "tracks": [
+          {
+            "trackNumber": 1,
+            "title": "115万キロのフィルム",
+            "songId": "115man-kiro-no-film"
+          },
+          {
+            "trackNumber": 2,
+            "title": "ノーダウト",
+            "songId": "no-doubt"
+          },
+          {
+            "trackNumber": 3,
+            "title": "ESCAPADE",
+            "songId": "escapade"
+          },
+          {
+            "trackNumber": 4,
+            "title": "LADY",
+            "songId": "lady"
+          },
+          {
+            "trackNumber": 5,
+            "title": "たかがアイラブユー",
+            "songId": "takaga-i-love-you"
+          },
+          {
+            "trackNumber": 6,
+            "title": "されど日々は",
+            "songId": "saredo-hibi-wa"
+          },
+          {
+            "trackNumber": 7,
+            "title": "可能性",
+            "songId": "kanousei"
+          },
+          {
+            "trackNumber": 8,
+            "title": "Tell Me Baby",
+            "songId": "tell-me-baby"
+          },
+          {
+            "trackNumber": 9,
+            "title": "Second LINE",
+            "songId": "second-line"
+          },
+          {
+            "trackNumber": 10,
+            "title": "Driver",
+            "songId": "driver"
+          },
+          {
+            "trackNumber": 11,
+            "title": "相思相愛",
+            "songId": "sousisouai"
+          },
+          {
+            "trackNumber": 12,
+            "title": "ブラザーズ",
+            "songId": "brothers"
+          },
+          {
+            "trackNumber": 13,
+            "title": "発明家",
+            "songId": "hatsumeika"
+          }
+        ],
+        "spotifyAlbumId": "0TvzefPmPZ3fbUT6rrYqSQ"
       },
       {
         "index": 1,
@@ -609,7 +1156,82 @@
             "format": "cd",
             "catalogNumber": "PCCA-04822"
           }
-        ]
+        ],
+        "id": "album-traveler",
+        "coverUrl": "https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e0232e116533e9ec2de8e80226e",
+        "tracks": [
+          {
+            "trackNumber": 1,
+            "title": "イエスタデイ",
+            "songId": "yesterday"
+          },
+          {
+            "trackNumber": 2,
+            "title": "宿命",
+            "songId": "shukumei"
+          },
+          {
+            "trackNumber": 3,
+            "title": "Amazing",
+            "songId": "amazing"
+          },
+          {
+            "trackNumber": 4,
+            "title": "Rowan",
+            "songId": "rowan"
+          },
+          {
+            "trackNumber": 5,
+            "title": "バッドフォーミー",
+            "songId": "bad-for-me"
+          },
+          {
+            "trackNumber": 6,
+            "title": "最後の恋煩い",
+            "songId": "saigo-no-koi-wazurai"
+          },
+          {
+            "trackNumber": 7,
+            "title": "ビンテージ",
+            "songId": "vintage"
+          },
+          {
+            "trackNumber": 8,
+            "title": "Stand By You",
+            "songId": "stand-by-you"
+          },
+          {
+            "trackNumber": 9,
+            "title": "FIRE GROUND",
+            "songId": "fire-ground"
+          },
+          {
+            "trackNumber": 10,
+            "title": "旅は道連れ",
+            "songId": "tabi-wa-michizure"
+          },
+          {
+            "trackNumber": 11,
+            "title": "052519",
+            "songId": "052519"
+          },
+          {
+            "trackNumber": 12,
+            "title": "Pretender",
+            "songId": "pretender"
+          },
+          {
+            "trackNumber": 13,
+            "title": "ラストソング",
+            "songId": "last-song"
+          },
+          {
+            "trackNumber": 14,
+            "title": "Travelers",
+            "songId": "travelers"
+          }
+        ],
+        "spotifyAlbumId": "06EGXZmD5OR6tS45QfB15F"
       },
       {
         "index": 2,
@@ -635,7 +1257,82 @@
             "format": "cd",
             "catalogNumber": "PCCA-06057"
           }
-        ]
+        ],
+        "id": "album-editorial",
+        "coverUrl": "https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e027f1809b2d6f9e22264dd07b0",
+        "tracks": [
+          {
+            "trackNumber": 1,
+            "title": "Editorial",
+            "songId": "editorial"
+          },
+          {
+            "trackNumber": 2,
+            "title": "アポトーシス",
+            "songId": "apoptosis"
+          },
+          {
+            "trackNumber": 3,
+            "title": "I LOVE...",
+            "songId": "i-love"
+          },
+          {
+            "trackNumber": 4,
+            "title": "フィラメント",
+            "songId": "filament"
+          },
+          {
+            "trackNumber": 5,
+            "title": "HELLO",
+            "songId": "hello"
+          },
+          {
+            "trackNumber": 6,
+            "title": "Cry Baby",
+            "songId": "cry-baby"
+          },
+          {
+            "trackNumber": 7,
+            "title": "Shower",
+            "songId": "shower"
+          },
+          {
+            "trackNumber": 8,
+            "title": "みどりの雨避け",
+            "songId": "midori-no-amayoke"
+          },
+          {
+            "trackNumber": 9,
+            "title": "パラボラ",
+            "songId": "parabola"
+          },
+          {
+            "trackNumber": 10,
+            "title": "Pending Machine",
+            "songId": "pending-machine"
+          },
+          {
+            "trackNumber": 11,
+            "title": "Bedroom Talk",
+            "songId": "bedroom-talk"
+          },
+          {
+            "trackNumber": 12,
+            "title": "Laughter",
+            "songId": "laughter"
+          },
+          {
+            "trackNumber": 13,
+            "title": "Universe",
+            "songId": "universe"
+          },
+          {
+            "trackNumber": 14,
+            "title": "Lost In My Room",
+            "songId": "lost-in-my-room"
+          }
+        ],
+        "spotifyAlbumId": "62MLwTkt9WQ3ke3bvv3VVj"
       },
       {
         "index": 3,
@@ -661,7 +1358,92 @@
             "format": "cd",
             "catalogNumber": "PCCA-06304"
           }
-        ]
+        ],
+        "id": "album-rejoice",
+        "coverUrl": "https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e02a182a0c5b859cb934d210909",
+        "tracks": [
+          {
+            "trackNumber": 1,
+            "title": "Finder",
+            "songId": "finder"
+          },
+          {
+            "trackNumber": 2,
+            "title": "Get Back To 人生",
+            "songId": "get-back-to-jinsei"
+          },
+          {
+            "trackNumber": 3,
+            "title": "ミックスナッツ",
+            "songId": "mixed-nuts"
+          },
+          {
+            "trackNumber": 4,
+            "title": "SOULSOUP",
+            "songId": "soulsoup"
+          },
+          {
+            "trackNumber": 5,
+            "title": "キャッチボール",
+            "songId": "catchball"
+          },
+          {
+            "trackNumber": 6,
+            "title": "日常",
+            "songId": "nichijo"
+          },
+          {
+            "trackNumber": 7,
+            "title": "I'm home (interlude)",
+            "songId": null
+          },
+          {
+            "trackNumber": 8,
+            "title": "Sharon",
+            "songId": "sharon"
+          },
+          {
+            "trackNumber": 9,
+            "title": "濁点",
+            "songId": "dakuten"
+          },
+          {
+            "trackNumber": 10,
+            "title": "Subtitle",
+            "songId": "subtitle"
+          },
+          {
+            "trackNumber": 11,
+            "title": "Anarchy (Rejoice ver.)",
+            "songId": "anarchy-rejoice-ver"
+          },
+          {
+            "trackNumber": 12,
+            "title": "ホワイトノイズ",
+            "songId": "white-noise"
+          },
+          {
+            "trackNumber": 13,
+            "title": "うらみつらみきわみ",
+            "songId": "uramitsuramikiwami"
+          },
+          {
+            "trackNumber": 14,
+            "title": "Chessboard",
+            "songId": "chessboard"
+          },
+          {
+            "trackNumber": 15,
+            "title": "TATTOO",
+            "songId": "tattoo"
+          },
+          {
+            "trackNumber": 16,
+            "title": "B-Side Blues",
+            "songId": "b-side-blues"
+          }
+        ],
+        "spotifyAlbumId": "1MXDOIz48Pm0hESW66oAyA"
       }
     ],
     "miniAlbums": [
@@ -677,7 +1459,52 @@
             "format": "cd",
             "catalogNumber": "LACD-0251"
           }
-        ]
+        ],
+        "id": "album-love-and-peace",
+        "coverUrl": "https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e02c59e2aca230146adccbb864c",
+        "tracks": [
+          {
+            "trackNumber": 1,
+            "title": "SWEET TWEET",
+            "songId": "sweet-tweet"
+          },
+          {
+            "trackNumber": 2,
+            "title": "恋の前ならえ",
+            "songId": "koi-no-maenarae"
+          },
+          {
+            "trackNumber": 3,
+            "title": "夕暮れ沿い",
+            "songId": "yugure-zoi"
+          },
+          {
+            "trackNumber": 4,
+            "title": "雪急く朝が来る",
+            "songId": "yuki-seku-asa-ga-kuru"
+          },
+          {
+            "trackNumber": 5,
+            "title": "始発が導く幸福論",
+            "songId": "shihatsu-ga-michibiku-kouhukuron"
+          },
+          {
+            "trackNumber": 6,
+            "title": "愛なんだが…",
+            "songId": "ai-nandaga"
+          },
+          {
+            "trackNumber": 7,
+            "title": "パレード",
+            "songId": "parade"
+          },
+          {
+            "trackNumber": 8,
+            "title": "ダーリン。",
+            "songId": "darin"
+          }
+        ],
+        "spotifyAlbumId": "0K8cBxTMGkr1jTxBjvQBcX"
       },
       {
         "index": 2,
@@ -691,7 +1518,42 @@
             "format": "cd",
             "catalogNumber": "LACD-0276"
           }
-        ]
+        ],
+        "id": "album-man-in-the-mirror",
+        "coverUrl": "https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e0238a6b3af1de5e0551bcd2e04",
+        "tracks": [
+          {
+            "trackNumber": 1,
+            "title": "Clap Clap",
+            "songId": "clap-clap"
+          },
+          {
+            "trackNumber": 2,
+            "title": "コーヒーとシロップ",
+            "songId": "coffee-to-syrup"
+          },
+          {
+            "trackNumber": 3,
+            "title": "Happy Birthday To You",
+            "songId": "happy-birthday-to-you"
+          },
+          {
+            "trackNumber": 4,
+            "title": "恋の去り際",
+            "songId": "koi-no-sarigiwa"
+          },
+          {
+            "trackNumber": 5,
+            "title": "ゼロのままでいられたら",
+            "songId": "zero-no-mama-de-iraterara"
+          },
+          {
+            "trackNumber": 6,
+            "title": "日曜日のラブレター",
+            "songId": "nichiyoubi-no-love-letter"
+          }
+        ],
+        "spotifyAlbumId": "7vRfFqFrXlDeLwk32wl6UH"
       },
       {
         "index": 3,
@@ -710,7 +1572,47 @@
             "format": "cd",
             "catalogNumber": "LACD-0285"
           }
-        ]
+        ],
+        "id": "album-report",
+        "coverUrl": "https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e02d3e94d5ceefd5d6afcaf31ca",
+        "tracks": [
+          {
+            "trackNumber": 1,
+            "title": "始まりの朝",
+            "songId": "hajimari-no-asa"
+          },
+          {
+            "trackNumber": 2,
+            "title": "犬かキャットかで死ぬまで喧嘩しよう!",
+            "songId": "inu-ka-cat-ka-de-shinumade-kenka-shiyou"
+          },
+          {
+            "trackNumber": 3,
+            "title": "異端なスター",
+            "songId": "itan-na-star"
+          },
+          {
+            "trackNumber": 4,
+            "title": "55",
+            "songId": "55"
+          },
+          {
+            "trackNumber": 5,
+            "title": "Rolling",
+            "songId": "rolling"
+          },
+          {
+            "trackNumber": 6,
+            "title": "イコール",
+            "songId": "equal"
+          },
+          {
+            "trackNumber": 7,
+            "title": "Trailer",
+            "songId": "trailer"
+          }
+        ],
+        "spotifyAlbumId": "1Pa7akPNBiX95RW6zOn4hu"
       }
     ],
     "digitalAlbums": [
@@ -721,7 +1623,10 @@
         "label": "ポニーキャニオン",
         "format": "digital",
         "catalogNumber": "PCSP-03059",
-        "chartRankOricon": 16
+        "chartRankOricon": 16,
+        "id": "album-traveler-instrumentals",
+        "coverUrl": "https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e0202d20700b1e46a831ad47261",
+        "spotifyAlbumId": "6cKhEDMTUMBmKmonlxhSSc"
       },
       {
         "index": 2,
@@ -730,7 +1635,10 @@
         "label": "IRORI Records",
         "format": "digital",
         "catalogNumber": "PCSP-04192",
-        "chartRankOricon": 44
+        "chartRankOricon": 44,
+        "id": "album-editorial-instrumentals",
+        "coverUrl": "https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e0261b844af030d99f5de9b0738",
+        "spotifyAlbumId": "6aNoUpDcoSJjFdDek1N8Ls"
       },
       {
         "index": "live-1",
