@@ -8,6 +8,7 @@
   },
   "scripts": {
     "sync": "pnpm --filter ./site sync",
+    "sync:covers": "pnpm --filter ./site sync:covers",
     "lint": "pnpm --filter ./site lint",
     "test": "pnpm --filter ./site test",
     "test:pipeline": "pnpm --filter ./site test:pipeline",

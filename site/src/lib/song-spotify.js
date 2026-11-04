@@ -29,8 +29,17 @@ export function buildSpotifyTrackUrl(trackId) {
 }
 
 /**
+ * Derives a high-resolution 640x640 Retina album jacket URL from Spotify CDN thumbnail URL (ADR-0143).
+ * Spotify CDN naming maps `ab67616d00001e02` (300x300) to `ab67616d0000b273` (640x640).
+ */
+export function getHighResCoverUrl(coverUrl) {
+  if (!coverUrl || typeof coverUrl !== "string") return "";
+  return coverUrl.replace(/ab67616d00001e02/, "ab67616d0000b273");
+}
+
+/**
  * Resolves a raw song object or spotify container into a normalized spotify record.
- * Following ADR-0138 specifications.
+ * Following ADR-0138 and ADR-0143 specifications.
  */
 export function resolveSongSpotify(s) {
   if (!s || !s.spotify) {
@@ -41,6 +50,8 @@ export function resolveSongSpotify(s) {
       hasLive: false,
       hasMultipleLives: false,
       trackId: null,
+      coverUrl: null,
+      highResCoverUrl: null,
       lives: [],
       live: null,
       defaultTrack: null,
@@ -49,6 +60,8 @@ export function resolveSongSpotify(s) {
 
   const raw = s.spotify;
   const studioTrackId = typeof raw.trackId === "string" && raw.trackId.trim() ? raw.trackId.trim() : null;
+  const coverUrl = typeof raw.coverUrl === "string" && raw.coverUrl.trim() ? raw.coverUrl.trim() : null;
+  const highResCoverUrl = coverUrl ? getHighResCoverUrl(coverUrl) : null;
 
   let rawLives = [];
   if (Array.isArray(raw.live)) {
@@ -77,6 +90,8 @@ export function resolveSongSpotify(s) {
     hasLive,
     hasMultipleLives: normalizedLives.length > 1,
     trackId: studioTrackId,
+    coverUrl,
+    highResCoverUrl,
     lives: normalizedLives,
     live: normalizedLives[0] || null,
     defaultTrack: hasStudio ? "studio" : hasLive ? "live" : null,
@@ -97,4 +112,17 @@ export function getSongSpotify(songId) {
     spotifyBySongId.get(songId) ||
     resolveSongSpotify(songsData.songs?.find((s) => s.id === songId))
   );
+}
+
+/**
+ * Retrieves the official album jacket cover for a song by songId (ADR-0143).
+ * Returns `{ coverUrl, highResCoverUrl }` or null if unreleased / no cover.
+ */
+export function getSongCover(songId) {
+  const spotify = getSongSpotify(songId);
+  if (!spotify || !spotify.coverUrl) return null;
+  return {
+    coverUrl: spotify.coverUrl,
+    highResCoverUrl: spotify.highResCoverUrl || spotify.coverUrl,
+  };
 }

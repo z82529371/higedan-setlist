@@ -86,6 +86,28 @@ describe('Song Spotify Domain Engine & Pipeline Gate (ADR-0138)', () => {
       assert.equal(buildSpotifyEmbedUrl(''), '');
       assert.equal(buildSpotifyTrackUrl(''), '');
     });
+
+    it('resolves official album jacket coverUrl and derives 640x640 Retina high-res URL (ADR-0143)', async () => {
+      const { resolveSongSpotify, getHighResCoverUrl } = await loadModule('src/lib/song-spotify.js');
+      const song = {
+        id: 'same-blue',
+        title: 'Same Blue',
+        spotify: {
+          trackId: '2cupzYHOSLmMqDHRVQfI9j',
+          coverUrl: 'https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e02409f76d5a323cf3c511701cb',
+        },
+      };
+      const res = resolveSongSpotify(song);
+      assert.equal(res.coverUrl, 'https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e02409f76d5a323cf3c511701cb');
+      assert.equal(res.highResCoverUrl, 'https://image-cdn-ak.spotifycdn.com/image/ab67616d0000b273409f76d5a323cf3c511701cb');
+
+      assert.equal(
+        getHighResCoverUrl('https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e02409f76d5a323cf3c511701cb'),
+        'https://image-cdn-ak.spotifycdn.com/image/ab67616d0000b273409f76d5a323cf3c511701cb'
+      );
+      assert.equal(getHighResCoverUrl(null), '');
+      assert.equal(getHighResCoverUrl(''), '');
+    });
   });
 
   describe('2. Pipeline Data Integrity Gate across 110 Songs', () => {
@@ -108,15 +130,25 @@ describe('Song Spotify Domain Engine & Pipeline Gate (ADR-0138)', () => {
 
     const base62Regex = /^[a-zA-Z0-9]{22}$/;
 
-    it('ensures exactly 94 officially released songs have valid 22-char Base62 studio trackId', () => {
+    it('ensures exactly 94 officially released songs have valid 22-char Base62 studio trackId and official coverUrl', () => {
       const released = raw.songs.filter((s) => !s.unreleased);
       assert.equal(released.length, 94);
+
+      const spotifyCdnPattern = /^https:\/\/[a-zA-Z0-9-]+\.spotifycdn\.com\/image\/[a-f0-9]{40}$/;
 
       for (const s of released) {
         assert.ok(s.spotify, `Released song ${s.id} (${s.title}) must have spotify object`);
         assert.ok(
           base62Regex.test(s.spotify.trackId),
           `Song ${s.id} trackId "${s.spotify.trackId}" must be valid 22-char Base62`
+        );
+        assert.ok(
+          s.spotify.coverUrl,
+          `Song ${s.id} must have spotify.coverUrl (ADR-0143)`
+        );
+        assert.ok(
+          spotifyCdnPattern.test(s.spotify.coverUrl),
+          `Song ${s.id} coverUrl "${s.spotify.coverUrl}" must match Spotify CDN image URL pattern`
         );
       }
     });
@@ -157,14 +189,22 @@ describe('Song Spotify Domain Engine & Pipeline Gate (ADR-0138)', () => {
     });
 
     it('getSongSpotify helper resolves real song from synced dataset', async () => {
-      const { getSongSpotify } = await loadModule('src/lib/song-spotify.js');
+      const { getSongSpotify, getSongCover } = await loadModule('src/lib/song-spotify.js');
       const pretender = getSongSpotify('pretender');
       assert.equal(pretender.hasSpotify, true);
-      assert.equal(pretender.trackId, '49h5Aav6yn1o1ACGyovDdZ');
+      assert.equal(pretender.trackId, '0peJAyrJ03wHnagMFlpgun');
+      assert.equal(pretender.coverUrl, 'https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e02c03d59ccf637e7ce5754e370');
+      assert.ok(pretender.highResCoverUrl.includes('ab67616d0000b273c03d59ccf637e7ce5754e370'));
       assert.ok(pretender.lives.length >= 4);
+
+      const cover = getSongCover('pretender');
+      assert.ok(cover);
+      assert.equal(cover.coverUrl, pretender.coverUrl);
+      assert.equal(cover.highResCoverUrl, pretender.highResCoverUrl);
 
       const unreleased = getSongSpotify('fuusen');
       assert.equal(unreleased.hasSpotify, false);
+      assert.equal(getSongCover('fuusen'), null);
     });
   });
 });
