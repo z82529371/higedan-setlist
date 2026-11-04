@@ -26,7 +26,7 @@ web
 
 - 桌面端與行動端瀏覽器（Web App），主要於觀賞演唱會前後、通勤聽歌、討論歌單或巡演回顧時查閱。
 - 資料層由 `data/tours/`、`data/events/` 與 `data/songs/` 結構化 JSON 驅動，經同步腳本（`sync-data.mjs`）構建為靜態/輕量前端資料包。
-- 互動核心採用雙模架構（Dual-Mode Architecture）：進站為極致留白之「純淨聚光燈首頁門面（Spotlight Landing Page）」，提供大型聚焦搜尋框、熱門探索標籤與四大核心特色亮點卡（雙向檢索、單場票根、一手考證、個人巡演票夾）；進入「檔案庫檢索模式（Archive Mode）」後切換為緊湊 AppBar、單欄聚焦流視圖，提供第一公民路由導航（場次、歌曲、場館、地圖、巡演票夾與排行殿堂 `#/ranking`），全站導航器內嵌即時智慧搜尋框（Omnibox），支援「全部類型」扁平時間軸瀏覽、解耦即時過濾曲目格與響應式場館網格（桌面 18 筆 / 行動抽屜 10 筆）。
+- 互動核心採用雙模架構（Dual-Mode Architecture）：進站為極致留白之「純淨聚光燈首頁門面（Spotlight Landing Page）」，提供大型聚焦搜尋框、熱門探索標籤與四大核心特色亮點卡（雙向檢索、單場票根、一手考證、個人巡演票夾）；進入「檔案庫檢索模式（Archive Mode）」後切換為緊湊 AppBar、單欄聚焦流視圖，提供第一公民路由導航（場次、歌曲、場館、地圖、官方發行 `#/releases`、巡演票夾與排行殿堂 `#/ranking`），全站導航器內嵌即時智慧搜尋框（Omnibox），支援八大演出類型階層切換、解耦即時過濾曲目格與響應式場館網格（桌面 18 筆 / 行動抽屜 10 筆）。
 
 ## Capabilities and Constraints
 
@@ -44,9 +44,10 @@ web
 
 | 領域概念 / 介面元素 | 職責與展現內容 | 對應前端模組 |
 | :--- | :--- | :--- |
-| **場次篩選器**（Show Navigator） | 即時智慧搜尋（Omnibox）＋「全部類型」扁平時間軸 / 演出類型 → 年份 → 巡演專場 → 場次日期切換 | `site/src/components/navigators/ShowNavigator.jsx` |
+| **場次篩選器**（Show Navigator） | 即時智慧搜尋（Omnibox）＋ 演出類型（八大分類）→ 年份 → 巡演專場 → 場次日期切換 | `site/src/components/navigators/ShowNavigator.jsx` |
 | **歌曲篩選器**（Song Navigator） | 專輯分類與演唱次數解耦排序 ＋ 即時歌名搜尋 ＋ 響應式曲目格 | `site/src/components/navigators/SongNavigator.jsx` |
 | **場地篩選器**（Venue Navigator） | 即時智慧搜尋（Omnibox）＋ 互動場地地圖（8 大地方都道府縣快速跳轉與雙向空間連動）/ 登場次數排行（桌面 18 筆 / 行動 10 筆）→ 場館切換 | `site/src/components/navigators/VenueNavigator.jsx` |
+| **官方歷年發行展間**（Releases Page） | 現場影音（Live）與錄音室出版（Discography）雙軌展間、五大錄音室分類、多版本實體規格品番徽章、結構化曲目清單與雙向深層定位 | `site/src/components/releases/ReleasesPage.jsx` |
 | **排行殿堂**（Leaderboard Hall） | 歷史歌曲出勤總榜 Top 20、專場/音樂祭子榜、場館 Top 10 與金銀銅頒獎台 | `site/src/components/ranking/RankingPage.jsx` |
 | **場次票根**（Show Slip） | 單場演出票根、官方精華舞台（旗艦單場）、本篇/安可曲目單、前場曲目 Diff | `site/src/components/slips/ShowSlip.jsx` + `ShowMetadataBox.jsx` + `SongMediaStage.jsx` |
 | **巡演總覽票券**（Tour Slip） | 巡演定番歌曲、官方精華舞台（BD/DVD Digest）、輪換曲、驚喜曲目與巡演足跡日程 | `site/src/components/slips/TourSlip.jsx` + `SongMediaStage.jsx` |

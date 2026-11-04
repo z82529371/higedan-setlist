@@ -137,9 +137,13 @@ Official 髭男 dism 歷史公開公演踏破日本 43/47 都道府縣與亞洲�
 _Avoid_: 在未有官方演出登錄之縣市無中生有偽造場次、將未踏破縣市自文字列表粗暴刪除造成歌迷誤解漏抓資料、設置冗餘全部頁籤導致手機抽屜垂直暴增、破壞 Hover 雙向高亮鏡像連動。
 
 **全量唱片底冊（Band Discography SSOT）**:
-Official 髭男 dism 官方發布之全量商業與數位作品資料主檔（`data/discography.json`），涵蓋地下獨立時期至當前所有實體單曲、數位單曲、實體/數位 EP、正規原創專輯、迷你專輯、伴奏專輯與獨立影像出版物之官方品番（PONY CANYON / 自主發行編號）、發行日、順位與母體規格紀錄，作為全站音樂載體與發行歷史之權威基底。
+Official 髭男 dism 官方發布之全量商業與數位作品資料主檔（`data/discography.json`），涵蓋地下獨立時期至當前所有實體單曲、數位單曲、合作單曲、實體/數位 EP、正規專輯、迷你專輯、伴奏專輯與獨立影像出版物之官方品番（PONY CANYON / 自主發行編號）、發行日、順位與母體規格紀錄，作為全站音樂載體與發行歷史之權威基底。
 _Avoid_: 缺少官方正規品番、將現場限定特典光碟與正式獨立發行作品混淆、手工硬編碼重複資料
 
 **現場影音發行與載體索引（Live Releases, ADR-0142）**:
-聚焦於收錄 Official 髭男 dism 歷史演出之實體光碟（Blu-ray / DVD）、作品影音限定盤特典映像或現場串流音源之商業發行紀錄。本模型為全量唱片底冊之現場演出投影子集，採獨立主檔 SSOT（`data/live-releases.json`）與場次聚合覆蓋模型（Show-centric Coverage Model）關聯單一或多個演出場次。發行型態收斂為客觀雙軌：獨立影音發行（`standalone`）與影音限定盤 / 特典映像（`bonus_video`）；數位串流（Spotify / Apple Music）與實體光碟（Blu-ray / DVD）則統一作為作品的載體格式屬性（`formats`）處理，並提供實體品番、載體規格膠囊與串流專輯雙向跳轉。
-_Avoid_: 將串流與實體發行型態混淆、將影音限定盤/特典映像與獨立專盤混淆、在載體內重複手抄全量歌單破壞 SSOT、遺漏實體光碟品番或母體作品關聯
+聚焦於收錄 Official 髭男 dism 歷史演出之實體光碟（Blu-ray / DVD）、作品影音限定盤特典映像或現場串流音源之商業發行紀錄。本模型為全量唱片底冊之現場演出投影子集，採獨立主檔 SSOT（`data/live-releases.json`）與場次聚合覆蓋模型（Show-centric Coverage Model）關聯單一或多個演出場次。發行型態收斂為客觀雙軌：獨立影音發行（`standalone`）與影音限定盤 / 特典映像（`bonus_video`）；數位串流（Spotify / Apple Music）與實體光碟（Blu-ray / DVD）則統一作為作品的載體格式屬性（`formats`）處理，並提供實體品番、載體規格膠囊與串流專輯雙向跳轉。封面嚴格遵循「確定有 Spotify 串流音源始呈現封面縮圖」原則；純影音特典映像不展示任何空白佔位容器（Zero-Placeholder Invariant），維持金屬票卡的高密度視覺張力。
+_Avoid_: 將串流與實體發行型態混淆、將影音限定盤/特典映像與獨立專盤混淆、在載體內重複手抄全量歌單破壞 SSOT、遺漏實體光碟品番或母體作品關聯、為無封面之影音映像渲染空白佔位方塊
+
+**錄音室歷年發行展間（Studio Discography Releases, ADR-0144）**:
+於官方發行頁面（`#/releases?tab=discography`）提供樂團歷年出版品專屬展間。涵蓋五大錄音室分類：實體單曲（`physical_single`）、數位單曲（`digital_single`）、合作單曲（`collaboration_single`）、EP / 迷你專輯（`ep_mini_album`）、正規專輯（`studio_album`）。徹底移除不必要的「全部型態」膠囊，以精準分類聚焦呈現；每筆發行整合 Retina 官方封套、發行日期、唱片廠牌、排行榜最高位、規格品番（如 PCCA 編號）與結構化曲目清單（演出曲目支援一鍵跳轉歌曲票券）。並與歌曲詳情票券燈箱（`CoverLightboxModal`）達成「查看實體發行規格 ➔」雙向深層定位。
+_Avoid_: 混入非正式民間發行、遺漏版本品番、曲目死連結、破壞與現場檔案庫的雙向穿透閉環。
