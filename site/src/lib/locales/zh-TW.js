@@ -258,6 +258,11 @@ export const dictZhTw = {
       collapseHistory: "收合歷程 ▴",
       moreHistory: "🛠️ 更多歷程 ▾",
       onlySpecialVersions: "✨ 僅顯示特殊演出版本",
+      albumJacketAlt: "《{title}》唱片封面",
+      viewJacket: "查看《{title}》唱片封面",
+      unreleasedJacket: "未正式發行作品（黑膠唱片）",
+      jacketModalTitle: "官方唱片封套",
+      listenOnSpotify: "在 Spotify 聆聽",
     },
     venue: {
       nativeName: "原名：{name}",

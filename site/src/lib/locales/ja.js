@@ -258,6 +258,11 @@ export const dictJa = {
       collapseHistory: "履歴を閉じる ▴",
       moreHistory: "🛠️ 履歴・詳細 ▾",
       onlySpecialVersions: "✨ 特殊演出バージョンのみ表示",
+      albumJacketAlt: "《{title}》ジャケット写真",
+      viewJacket: "《{title}》のジャケット写真を拡大",
+      unreleasedJacket: "配信未解禁作品（レコード仕様）",
+      jacketModalTitle: "公式ジャケット写真",
+      listenOnSpotify: "Spotifyで聴く",
     },
     venue: {
       nativeName: "原表記：{name}",

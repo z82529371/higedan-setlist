@@ -258,6 +258,11 @@ export const dictKo = {
       collapseHistory: "이력 접기 ▴",
       moreHistory: "🛠️ 상세 이력 ▾",
       onlySpecialVersions: "✨ 특수 공연 버전만 표시",
+      albumJacketAlt: "《{title}》 앨범 커버",
+      viewJacket: "《{title}》 앨범 커버 확대",
+      unreleasedJacket: "미발매 곡 (바이닐 레코드)",
+      jacketModalTitle: "공식 앨범 자켓",
+      listenOnSpotify: "Spotify에서 듣기",
     },
     venue: {
       nativeName: "원어 명칭: {name}",

@@ -258,6 +258,11 @@ export const dictEn = {
       collapseHistory: "Collapse History ▴",
       moreHistory: "🛠️ More History ▾",
       onlySpecialVersions: "✨ Show Special Versions Only",
+      albumJacketAlt: "Album jacket of \"{title}\"",
+      viewJacket: "View album jacket for \"{title}\"",
+      unreleasedJacket: "Unreleased Track (Vinyl Record)",
+      jacketModalTitle: "Official Album Jacket",
+      listenOnSpotify: "Listen on Spotify",
     },
     venue: {
       nativeName: "Native: {name}",
