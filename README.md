@@ -6,11 +6,11 @@
 </p>
 
 <p align="center">
-  <a href="https://higedan-setlist.pages.dev"><strong>🌐 前往線上檔案庫 (Live Demo) »</strong></a>
+  <a href="https://higedan-setlist.higedan-live.workers.dev/"><strong>🌐 前往線上檔案庫 (Live Demo) »</strong></a>
 </p>
 
 <p align="center">
-  <a href="https://higedan-setlist.pages.dev"><img src="https://img.shields.io/badge/Live%20Archive-Online-008080?style=flat-square&logo=safari&logoColor=white" alt="Live Demo" /></a>
+  <a href="https://higedan-setlist.higedan-live.workers.dev/"><img src="https://img.shields.io/badge/Live%20Archive-Online-008080?style=flat-square&logo=safari&logoColor=white" alt="Live Demo" /></a>
   <img src="https://img.shields.io/badge/Shows-530%2B-blue?style=flat-square&logo=google-calendar&logoColor=white" alt="530+ Shows" />
   <img src="https://img.shields.io/badge/Japan%20Prefectures-43%20%2F%2047-orange?style=flat-square&logo=google-maps&logoColor=white" alt="43/47 Prefectures" />
   <img src="https://img.shields.io/badge/Live%20Releases-17%20Works-purple?style=flat-square&logo=discogs&logoColor=white" alt="17 Live Releases" />
@@ -37,23 +37,23 @@
 - **檔案庫單欄聚焦流（Archive Mode）**：一鍵進入緊湊檢索模式（`max-w-[960px]`），支援「類型 → 年份 → 活動 → 場次」四層階層導航，杜絕視窗滾動條拉扯。
 - **實體門票擬物工藝**：全站貫徹撕角穿孔線（Perforation）、手撕和紙膠帶、防偽條碼底欄、蓋印戳章與高對比印刷細節；單場票根自動比對展示與「前一場次之曲目差異（Setlist Diff）」。
 
-### 2. 🎟️ 我的巡演票夾與參戰紀錄（[`#/tickets`](https://higedan-setlist.pages.dev/#/tickets)）
+### 2. 🎟️ 我的巡演票夾與參戰紀錄（[`#/tickets`](https://higedan-setlist.higedan-live.workers.dev/#/tickets)）
 - **一鍵參戰打卡**：隨時在任何場次票根上點擊「參戰確認」，建立專屬於您的個人參戰歷史時間軸。
 - **生涯里程碑儀表板**：自動統計總場次數、參戰天數跨度、初次與最近參戰場次、現場神曲排行榜與全曲庫解鎖率清單。
 - **540px 參戰紀念明信片**：一鍵將個人參戰歷程渲染匯出為極具收藏價值的紀念卡（PNG）或動態旅程影片，重現專屬回憶。
 - **隱私雙軌安全備份**：資料 100% 留存於您的裝置，支援代碼複製與 JSON 備份檔雙軌匯入匯出，無任何伺服器洩漏隱憂。
 
-### 3. 🗺️ 互動場地地圖與全生涯足跡（[`#/map`](https://higedan-setlist.pages.dev/#/map)）
+### 3. 🗺️ 互動場地地圖與全生涯足跡（[`#/map`](https://higedan-setlist.higedan-live.workers.dev/#/map)）
 - **47 都道府縣踏破地圖**：精確標註樂團走過的日本 43 個都道府縣與亞洲海外巡演城市（台北、首爾、曼谷、新加坡），忠實記錄未踏破之 4 縣。
 - **八大地方分區文字導覽**：依日本標準地理劃分八大地方，支援即時雙向 Hover 地圖點亮與點擊 Spotlight 局部變焦下探。
 - **全生涯巡演足跡（`#/map/journey`）**：以動畫形式動態重現樂團歷史巡演動線，搭配專屬巡演露營車（Tour Van）與跨海飛機（Tour Airplane）視覺，感受十年現場征途。
 
-### 4. 🏆 演出排行殿堂（[`#/ranking`](https://higedan-setlist.pages.dev/#/ranking)）
+### 4. 🏆 演出排行殿堂（[`#/ranking`](https://higedan-setlist.higedan-live.workers.dev/#/ranking)）
 - **歌曲登板次數風雲榜**：統計樂團出道至今 110 首歌曲於現場演出的演奏次數，前三名設立榮譽金銀銅頒獎台（Podium）。
 - **Top 20 數據視覺條**：以高密度直式數據條直觀呈現各歌曲出賽頻率。
 - **三大專屬子榜切換**：可快速切換「巡演專場榜」、「音樂祭熱門曲」與「經典場館排行」，並支援歌名即時智慧篩選。
 
-### 5. 🎬 官方現場影音發行（[`#/releases`](https://higedan-setlist.pages.dev/#/releases)）
+### 5. 🎬 官方現場影音發行（[`#/releases`](https://higedan-setlist.higedan-live.workers.dev/#/releases)）
 - **官方全量唱片底冊（Discography SSOT）**：收錄官網全量 46 筆實體單曲、數位單曲、EP、專輯與影像出版物。
 - **17 部現場實錄載體索引**：收錄所有商業發行之現場影像光碟（Blu-ray / DVD）與串流現場音源。
 - **客觀雙軌分類**：清晰標記「獨立影音發行」與「影音限定盤 / 特典映像」，並標註「全場收錄」或「精選節錄」範圍徽章，提供實體品番與 Spotify 現場專輯直達。
