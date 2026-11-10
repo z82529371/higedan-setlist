@@ -4,7 +4,7 @@
 
 ---
 
-## 決策總覽清單（共 140 篇）
+## 決策總覽清單（共 142 篇）
 
 > [!NOTE]
 > **編號跳號說明**：本目錄編號自 ADR-0001 起至 ADR-0138 止。其中 ADR-0063、ADR-0064、ADR-0065、ADR-0068、ADR-0069 共 5 篇為早期介面排版草案，後續已被 ADR-0070 單欄聚焦架構完整吸收與替代，故無獨立保留歷史檔案；實體決策文件共計 133 篇。
@@ -151,3 +151,5 @@
 | [ADR-0143: 官方唱片封面底冊與歌曲票券封套燈箱架構 (Official Album Jacket SSOT and Song Slip Cover Lightbox Architecture)](0143-official-album-jacket-ssot-and-song-slip-cover-lightbox-architecture.md) | 已採納 (Accepted) | 確立建置期 Spotify oEmbed 封面底冊同步管線（data/songs.json spotify.coverUrl）、歌曲票券 Header 實體唱片封套（Album Jacket Card）、復古黑膠刻紋佔位回退（Vinyl Placeholder）與 640×640 Retina 高清封套燈箱（Cover Lightbox Modal） |
 | [ADR-0144: 錄音室歷年發行雙軌整合與雙向深層連結架構 (Studio Discography Releases Tab & Bidirectional Deep-Link Architecture)](0144-studio-discography-releases-tab-and-bidirectional-deep-link-architecture.md) | 已採納 (Accepted) | 在 #/releases 整合現場影音與錄音室出版雙軌分頁、確立 5 種子分類過濾與型態前綴 ID（single-*, album-*, ep-*）、結構化曲目清單與演出票券直通（#/song/:id）、CoverLightboxModal 雙向深層連結與聚焦展開動畫 |
 | [ADR-0145: 演出歌單曲目唱片封套懸浮名片與收據排版防護架構 (Setlist Song Jacket Hover Card & Receipt Typography Protection Architecture)](0145-setlist-song-jacket-hover-card-and-receipt-typography-architecture.md) | 已採納 (Accepted) | 堅決拒絕常駐行內縮圖以捍衛 Stage Setlist Run Sheet 控台收據排版，實作桌機 180ms 防抖迷你黑膠封套懸浮名片（SongJacketHoverCard）、無封面曲目靜默、手機端純淨直達單曲票根 |
+| [ADR-0146: 支援樂手主檔、巡演編制共識差異模型與出勤檔案庫架構 (Support Lineup, Musician Master SSOT & Tour Lineup Diff Architecture)](0146-support-lineup-and-musician-master-architecture.md) | 已採納 (Accepted) | 建立全域樂手主檔（data/musicians.json）、官方一手表記原則、巡演預設陣容與單場差異補丁模型（lineupDiff）、純4人編制顯式語意（supportLineup: []）、#/musician/:id 深層連結與樂手歷年現場出勤檔案抽屜（MusicianProfileDrawer） |
+| [ADR-0147: 海外副聯多國幾何錨點重新校準與全庫場館地圖邊界不變式門禁 (Overseas Asia Inset Geometric Anchor Recalibration & Venue Containment Invariants)](0147-overseas-asia-inset-geometric-anchor-recalibration-and-venue-containment-invariants.md) | 已採納 (Accepted) | 廢止局部單點錨定、確立海外副聯地理外框幾何擬合模型（台灣中心南投 23.9°N 對齊路徑中心、台北小巨蛋校準至北台灣 y≈69；韓國首爾與高陽校準至西北部 y≈62）、與建立全庫 347 實體場館 SVG 邊界包含自動化門禁 |

@@ -37,13 +37,14 @@ Engineering standards, judgement baselines, and module test seams for code revie
   - Korean (`ko.js`)
 - **No Bare CJK**: All JSX templates must use `t("...")` keys; bare CJK text outside locale files is forbidden and blocked by `pnpm check:i18n`.
 
-## 5. Empirical Geographic Data & Geocoding Provenance (ADR-0124)
+## 5. Empirical Geographic Data & Geocoding Provenance (ADR-0124, ADR-0147)
 
 - **No LLM-Memorized Coordinates**: Never estimate or hardcode `lat`/`lng` or `address` in `data/venue-profiles.json` from LLM parametric memory. Every physical venue must store both verified 4-decimal WGS84 `lat`/`lng` and its official `address` (starting with the Japanese `都道府県` for domestic venues).
 - **Authoritative Geocoding Recipe**:
   1. **Wikipedia GeoData API**: Query `https://{ja|en}.wikipedia.org/w/api.php?action=query&titles=...&redirects=1&prop=coordinates&colimit=500&format=json` (always pass `&colimit=500`; default `10` truncates batched queries).
   2. **GSI Japan Official Address & Reverse Geocoder**: `msearch.gsi.go.jp/address-search/AddressSearch?q=...` is strictly a street-address (`都道府県+市区町村+町丁・番地`) geocoder — never pass raw POI/venue names (causes substring false-positives in wrong prefectures). Pair coordinates with `msearch.gsi.go.jp/reverse-geocoder/LonLatToAddress` + `maps.gsi.go.jp/js/muni.js` (`GSI.MUNI_ARRAY`) to verify exact municipality and chome.
   3. **Overseas Venues**: Use `nominatim.openstreetmap.org` with a descriptive `User-Agent` header. Do not use `photon.komoot.io` (connection timeouts).
+- **Overseas Asia Inset Dual-Axis Adaptive Projection (ADR-0147)**: When calibrating `OVERSEAS_COUNTRY_ANCHORS` in `site/src/lib/venue-map.js`, never use the Japanese standard parallel ($\cos 36^\circ$) or a single isotropic scale that distorts regional aspect ratio. Use the country's native standard parallel $\phi_0$ and decoupled horizontal ($S_x$) and vertical ($S_y$) scales calculated from the SVG path bounding box, ensuring faithful sub-national placement (e.g. Taipei in Taipei Basin `(201.51, 65.35)`, Seoul/Goyang in Northwest South Korea `(70.02, 60.50)`). All 347 physical venues must strictly pass the regional SVG bounding box containment invariant (`tests/invariants/venue-profiles.test.js`).
 
 ## 6. Core Domain Seams & Test Map (`/tdd` & `/implement`)
 

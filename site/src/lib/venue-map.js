@@ -86,11 +86,44 @@ const MAIN_ORIGIN_X = 240;
 const MAIN_ORIGIN_Y = 528;
 
 // Anchor centers within the Top-Left Overseas Asia Inset (x: 16..266, y: 16..211)
+// Calibrated via Local Standard Parallel Dual-Axis Adaptive Projection (ADR-0124, ADR-0147)
 const OVERSEAS_COUNTRY_ANCHORS = {
-  韓國: { baseLat: 37.55, baseLng: 126.98, cx: 82, cy: 86, scale: 28 },
-  台灣: { baseLat: 25.05, baseLng: 121.55, cx: 198, cy: 96, scale: 28 },
-  泰國: { baseLat: 13.73, baseLng: 100.57, cx: 82, cy: 162, scale: 28 },
-  新加坡: { baseLat: 1.31, baseLng: 103.79, cx: 198, cy: 162, scale: 28 },
+  韓國: {
+    baseLat: 36.15,
+    baseLng: 127.85,
+    cosPhi: Math.cos((36.15 * Math.PI) / 180),
+    scaleX: 13.1581,
+    scaleY: 15.8108,
+    cx: 77.7,
+    cy: 82.15,
+  },
+  台灣: {
+    baseLat: 23.60,
+    baseLng: 121.0165,
+    cosPhi: Math.cos((23.60 * Math.PI) / 180),
+    scaleX: 13.62,
+    scaleY: 16.7845,
+    cx: 194.85,
+    cy: 89.7,
+  },
+  泰國: {
+    baseLat: 13.73,
+    baseLng: 100.57,
+    cosPhi: Math.cos((13.73 * Math.PI) / 180),
+    scaleX: 28.0,
+    scaleY: 28.0,
+    cx: 81.0,
+    cy: 161.8,
+  },
+  新加坡: {
+    baseLat: 1.35,
+    baseLng: 103.82,
+    cosPhi: Math.cos((1.35 * Math.PI) / 180),
+    scaleX: 28.0,
+    scaleY: 28.0,
+    cx: 194.2,
+    cy: 161.1,
+  },
 };
 
 /**
@@ -129,8 +162,11 @@ export function projectLatLngToSvg(lat, lng, options = {}) {
       else if (lat > 7) anchor = OVERSEAS_COUNTRY_ANCHORS["泰國"];
       else anchor = OVERSEAS_COUNTRY_ANCHORS["新加坡"];
     }
-    const dx = (lng - anchor.baseLng) * COS_36_DEG * anchor.scale;
-    const dy = -(lat - anchor.baseLat) * anchor.scale;
+    const cosPhi = anchor.cosPhi ?? Math.cos(((anchor.baseLat || 36) * Math.PI) / 180);
+    const scaleX = anchor.scaleX ?? anchor.scale;
+    const scaleY = anchor.scaleY ?? anchor.scale;
+    const dx = (lng - anchor.baseLng) * cosPhi * scaleX;
+    const dy = -(lat - anchor.baseLat) * scaleY;
     const x = Math.min(
       OVERSEAS_INSET_BOUNDS.x + OVERSEAS_INSET_BOUNDS.width - 12,
       Math.max(OVERSEAS_INSET_BOUNDS.x + 12, anchor.cx + dx)

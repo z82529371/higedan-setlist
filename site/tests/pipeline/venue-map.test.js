@@ -116,6 +116,18 @@ describe("Venue Map Pure Domain Engine (ADR-0124)", () => {
         assert.ok(pt.y >= 16 && pt.y <= 211, `Overseas y=${pt.y} must fall within top-left inset [16, 211]`);
       }
 
+      // Geo-Bounding Calibration Invariants (ADR-0147):
+      // Taipei Arena (25.05°N, 121.55°E) must project precisely to Taipei Basin (x in [198, 203], y in [63, 67]), between Tamsui (196, 65) and Keelung (207, 64)
+      assert.ok(taipei.x >= 198 && taipei.x <= 203, `Taipei x=${taipei.x} must be in Taipei Basin [198, 203]`);
+      assert.ok(taipei.y >= 63 && taipei.y <= 67, `Taipei y=${taipei.y} must be in Taipei Basin [63, 67]`);
+      const kaohsiung = projectLatLngToSvg(22.62, 120.30, { prefecture: "台灣", city: "高雄", region: "海外" });
+      assert.ok(kaohsiung.y > taipei.y + 30, `Kaohsiung y=${kaohsiung.y} must be significantly south of Taipei y=${taipei.y}`);
+
+      // Seoul & Goyang (37.5°N - 37.7°N) must project to Northwest South Korea (y in [58, 66]), never central Daejeon (y >= 80)
+      assert.ok(seoul.y >= 58 && seoul.y <= 66, `Seoul y=${seoul.y} must be in Northwest South Korea [58, 66]`);
+      assert.ok(goyang.y >= 56 && goyang.y <= 64, `Goyang y=${goyang.y} must be in Northwest South Korea [56, 64]`);
+      assert.ok(goyang.y <= seoul.y, `Goyang y=${goyang.y} should be north of Seoul y=${seoul.y}`);
+
       // Okinawa Convention Center -> bottom-right Okinawa inset
       const okinawa = projectLatLngToSvg(26.2789, 127.7336, { prefecture: "沖繩縣", city: "沖繩", region: "九州" });
       assert.ok(okinawa);

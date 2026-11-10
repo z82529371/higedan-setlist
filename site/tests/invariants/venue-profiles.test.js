@@ -4,6 +4,8 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { geoZhTw, geoJa, geoEn, geoKo } from "../../src/lib/locales/geography.js";
+import { projectLatLngToSvg } from "../../src/lib/venue-map.js";
+import { PREFECTURE_PATHS } from "../../src/lib/japan-map-paths.js";
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(here, "..", "..", "..");
@@ -189,6 +191,78 @@ describe("19. Venue Master Profiles & Invariant Gates (ADR-0111, ADR-0124)", () 
         assert.ok(dict.cities[p.city], `City '${p.city}' (${p.canonical}) missing in ${loc}`);
       }
     }
+  });
+
+  it("ensures all 347 physical venues project within their prefecture/country SVG boundaries and overseas venues adhere to sub-national geographic placement (ADR-0124, ADR-0147)", () => {
+    const physicalVenues = profiles.filter((p) => !p.isVirtual);
+    const boundsByPref = new Map();
+
+    for (const p of PREFECTURE_PATHS) {
+      const nums = p.path.match(/[-+]?\d*\.?\d+/g).map(Number);
+      const xs = nums.filter((_, i) => i % 2 === 0);
+      const ys = nums.filter((_, i) => i % 2 === 1);
+      boundsByPref.set(p.prefecture, {
+        minX: Math.min(...xs),
+        maxX: Math.max(...xs),
+        minY: Math.min(...ys),
+        maxY: Math.max(...ys),
+      });
+    }
+
+    const outOfBounds = [];
+    const margin = 12; // 12px projection margin for coastal/promontory livehouses
+
+    for (const v of physicalVenues) {
+      const pt = projectLatLngToSvg(v.lat, v.lng, {
+        prefecture: v.prefecture,
+        city: v.city,
+        region: v.region,
+      });
+
+      assert.ok(pt, `Projected point must not be null for venue: ${v.canonical}`);
+
+      const b = boundsByPref.get(v.prefecture);
+      assert.ok(b, `Missing bounding box for prefecture: ${v.prefecture}`);
+
+      if (
+        pt.x < b.minX - margin ||
+        pt.x > b.maxX + margin ||
+        pt.y < b.minY - margin ||
+        pt.y > b.maxY + margin
+      ) {
+        outOfBounds.push({ name: v.canonical, pref: v.prefecture, pt, b });
+      }
+
+      // Sub-national placement invariants (ADR-0147 aligned thresholds):
+      if (v.canonical === "台北小巨蛋") {
+        assert.ok(
+          pt.x >= 198 && pt.x <= 203,
+          `台北小巨蛋 x=${pt.x} must project to Taipei Basin longitude [198, 203]`
+        );
+        assert.ok(
+          pt.y >= 63 && pt.y <= 67,
+          `台北小巨蛋 y=${pt.y} must project to Taipei Basin latitude [63, 67], not Eastern or Southern Taiwan`
+        );
+      }
+      if (v.canonical === "KSPO DOME (奧林匹克體操競技場)" || v.canonical === "HYUNDAI CARD UNDERSTAGE") {
+        assert.ok(
+          pt.y >= 58 && pt.y <= 66,
+          `Seoul venue ${v.canonical} y=${pt.y} must project to Northwest South Korea [58, 66]`
+        );
+      }
+      if (v.canonical === "KINTEX Hall 5") {
+        assert.ok(
+          pt.y >= 56 && pt.y <= 64,
+          `Goyang venue ${v.canonical} y=${pt.y} must project to Northwest South Korea [56, 64]`
+        );
+      }
+    }
+
+    assert.strictEqual(
+      outOfBounds.length,
+      0,
+      `All 347 physical venues must project within their regional SVG boundaries. Out of bounds: ${JSON.stringify(outOfBounds)}`
+    );
   });
 });
 

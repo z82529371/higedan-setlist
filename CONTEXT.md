@@ -79,6 +79,16 @@ _Avoid_: 混入一般本家 EP / 單曲、誤降格為翻唱文字軌
 尚未正式發行音源但已於演唱會演出並於 `songs.json` 建有主檔之原創作品（含早期地下時期之《ふりだす雨、ゴキゲンな君》、《愛なんだが…》、《土星とスピカ》及主流時期之《明け方のゲッタウェイ》、《風船》等，標記 `unreleased: true`）；專輯分組自成一桶，標題後綴（未發行）。
 _Avoid_: 未發表曲、誤將早期地下原創曲當作翻唱丟棄
 
+**支援樂手主檔與巡演編制（ADR-0146）**:
+現場演出之支援樂手與大樂隊編制模型。採「樂手主檔單一真理來源（SSOT, `data/musicians.json`）+ 巡演常態模板（Tour-level `supportLineup`）+ 場次差異覆蓋（Show-level `lineupDiff`）」三層純靜態架構：
+1. **樂手主檔（`data/musicians.json`）**：每位樂手以唯一代碼（如 `atsuki-yumoto`、`numasho`、`andy-wulf`）建檔，嚴格以日本官方一手表記為名（`name`），輔以五十音讀音（`reading`）、英文字樣（`en`）、預設組別（`horns`、`percussion`、`keys`、`chorus`、`strings`、`guest`）、所屬單元（如 `Fire Horns`）與官方社群（`socials: { twitter, instagram }`）。絕不私自進行中文或韓文音譯。
+2. **巡演共識與場次差異（Consensus Diff Model）**：巡演專場宣告預設支援名單；場次預設完整繼承，若遇代班（substitution, 如 2021 Editorial 廣島前秋谷弘大代班宮田）、單場客席追加（guest, 如 2023 武道館米哉雙打擊）或缺席，於場次記載結構化補丁 `show.lineupDiff: { replace, add, remove }`，不冗餘拷貝全名單。
+3. **純 4 人編制 vs 待考證語意**：
+   - `supportLineup: []`（空陣列）：確鑿考證為「4 ピース・サポートなし」（如 2015-2018 早期巡演及 FC 專場 FOUR-RE:ISM），介面呈現「🦍 🐨 🐱 🐻 本家 4 人編制」標章。
+   - `supportLineup: undefined`（未宣告）：代表編制待考證，介面靜默不渲染空白容器（零 DOM 污染）。
+4. **展現層與深層直達**：巡演總覽票券（`TourSlip`）按管樂、打擊、鍵盤、合音分組呈現；單場票根（`ShowSlip`）以緊湊徽章列展示實質登場人員並高亮「代班」與「客席」；支援 `#/musician/:id` 一級深層連結與樂手歷年現場出勤檔案抽屜（`MusicianProfileDrawer`）。
+_Avoid_: 混入錄音室專案未登場現場之人員、私自意譯日本樂手藝名、將純4人編制與未收錄混為一談、場次代班時全量拷貝名單造成資料脫節
+
 **歌曲官方影音與現場雙軌聯動（ADR-0135）**:
 全域共用歌曲主檔（`data/songs.json`）所收錄之一手官方 YouTube 影音。採雙軌結構：「官方現場演出（`live`）」優先、「官方音樂錄影帶（`mv`）」回退。
 - **現場演出（`live`）**：支援單場或多場陣列（多場次時舞台提供年份場館版本切換，如 `[2019 武道館]`、`[2025 日產]`）；完整版優先，亦允許收錄 20～30 秒巡演預告／合輯精華（透過 `start` 與 `end` 定位區間，介面標記為「現場精華」）；允許選填關聯場次 `showId`（實現影音到歷史票根之無縫雙向直達）。
@@ -332,8 +342,8 @@ _Avoid_: 保留「全部」分類按鈕打破單據一致性、切換分類標�
 4. **國際化上下文邊界與按鈕響應不變式（I18n Context Boundary & Confirm Label Invariant）**：`I18nProvider` 必須置於 `App.jsx` 最外層包裹主應用 Hook（`AppContent`），使 `useArchiveRoute` 能無縫訂閱即時的 `I18nContext`。抽屜底部之動態確認標籤（`confirmButtonLabel`）與路由切換時之語系參數同步（`appendLang`）皆嚴格具備全語系響應能力（`zh-TW` 確認套用、`ja` 適用を確定、`en` Apply、`ko` 적용 확정），嚴禁將依賴 i18n 之 Hook 置於 Provider 之外導致語系退回寫死之預設繁中。
 _Avoid_: 非法 Hash 導致頁面崩潰或停留在無效空卡片、抽屜取消後未還原選項、引入肥大 JSDOM 拖慢本機與 CI 反饋速度、將依賴多語系的領域 Hook 掛載在 I18nProvider 外部導致行動抽屜操作按鈕漏翻。
 
-**互動式場地地圖、雙層座標聚合與巡演移動路線序列不變式（Interactive Venue Map & Tour Journey Sequence Invariants，ADR-0124）**:
-1. **雙層座標與同址多舞台真實性**：`data/venue-profiles.json` 中 347 處實體場館皆具備真實 WGS84 `lat`、`lng`（4 位小數）與 `hubId`（`"${prefecture}::${city}"`），2 處線上場館標記 `isVirtual: true` 且座標為 `null`。全國總覽以 47 都道府縣區塊＋左上亞洲海外插頁＋右下沖繩插頁為第一層聚合（Tier 1），局部放大展開場館地標（Tier 2）時，座標相同或 `< 200m` 之多廳／多舞台由前端自動以微幅放射展開（Spiderfy）呈現，嚴禁於 JSON 篡改偽造偏移經緯度。左下角票券卡於全國總覽（Tier 1）嚴格為「縣市級 HUD」（未懸浮顯示全國踏破總覽，懸浮顯示該縣市館數／場次／發跡徽章，未踏破縣市禁止空放）；點擊推進局部放大（Tier 2）後，懸浮個別場館針點方轉為「場館級 HUD」，並與下方場館清單雙向鏡像高亮同步。
+**互動式場地地圖、雙層座標聚合與巡演移動路線序列不變式（Interactive Venue Map & Tour Journey Sequence Invariants，ADR-0124, ADR-0147）**:
+1. **雙層座標與同址多舞台真實性**：`data/venue-profiles.json` 中 347 處實體場館皆具備真實 WGS84 `lat`、`lng`（4 位小數）與 `hubId`（`"${prefecture}::${city}"`），2 處線上場館標記 `isVirtual: true` 且座標為 `null`。全國總覽以 47 都道府縣區塊＋左上亞洲海外插頁＋右下沖繩插頁為第一層聚合（Tier 1），局部放大展開場館地標（Tier 2）時，座標相同或 `< 200m` 之多廳／多舞台由前端自動以微幅放射展開（Spiderfy）呈現，嚴禁於 JSON 篡改偽造偏移經緯度。海外亞洲副聯採用各國地理外框中心幾何擬合模型（ADR-0147），基準點錨定於國土地理中心並匹配向量路徑比例，確保次國家級場館拓撲真實性（台北小巨蛋精準位於台北盆地 `x ≈ 201.5, y ≈ 65.4`、首爾 KSPO DOME 與高陽 KINTEX 位於西北部 `y ≈ 60`，全庫 347 處實體場館 100% 通過 SVG 區域邊界包含門禁）。左下角票券卡於全國總覽（Tier 1）嚴格為「縣市級 HUD」（未懸浮顯示全國踏破總覽，懸浮顯示該縣市館數／場次／發跡徽章，未踏破縣市禁止空放）；點擊推進局部放大（Tier 2）後，懸浮個別場館針點方轉為「場館級 HUD」，並與下方場館清單雙向鏡像高亮同步。
 2. **巡演移動序列與三態交通工具判定契約**：`buildJourneySequence` 純函式直接連通各站真實 `lat/lng`，自動過濾 `isVirtual: true` 線上直播位移（如 `14-2021-editorial` 尾場線上配信改以「📡 線上配信」徽章獨立呈現），全生涯巡演路線預設排除 `電視演出`（可切換開啟），並 100% 保留存根場次（Stub Shows）。相鄰場次轉場嚴格區分為 `stay`（同館連日演出）、`flight`（海外／沖繩／北海道跨海）與 `van`（其餘本州・四國・九州公路網與北海道道內轉場）。
 3. **全生涯巡演足跡一級獨立頁面、懸浮 Emoji 按鈕與小尺寸場地地圖抽屜收納不變式（Career Tour Footprint Independent View, Floating Controls & Mobile Drawer Confinement Invariant，ADR-0125）**：全生涯巡演足跡升格為一級獨立頁面（`viewMode === "journey"`，`#/map/journey`），與個人巡演票夾（`#/tickets`）平級並列；行動端左下角採用直覺垂直懸浮按鈕（最上層 `🚐 巡演足跡`、中間層 `🎟️ 巡演票夾`、底層 `🏠`），抽屜（`FilterDrawer`）內部 100% 淨空不放捷徑按鈕；小尺寸螢幕（`< sm`）場地導航器（`VenueNavigator`）嚴格收納於 `FilterDrawer` 內部，網頁內文僅保留脈絡摘要條與 `VenueSlip` 場館票券明細，嚴禁大地圖畫布直接插入小尺寸網頁主體。
 _Avoid_: 引入需 API Key 之外部商業圖磚服務違反零後端靜態純粹性、於全國視角直接撒點造成高密度城市重疊黑塊、將線上直播納入物理位移導致巡演終點偏離實體千秋樂、於小尺寸網頁內文強制渲染大型場地地圖破壞票根瀏覽體驗。
