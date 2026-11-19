@@ -120,23 +120,30 @@ describe("13. i18n Foundation, Hash Route Query Parameter Seam, and Header Switc
           assert.ok(dict[sec], `Dictionary for ${loc} must contain section '${sec}'`);
         }
 
-        // Check landing keys
+        // Check landing keys (ADR-0148)
         assert.ok(dict.landing.hotExploration, `landing.hotExploration must exist in ${loc}`);
-        assert.ok(dict.landing.hotPrompts?.rejoiceTour, `landing.hotPrompts.rejoiceTour must exist in ${loc}`);
+        assert.ok(dict.landing.hotPrompts?.latestTourFallback, `landing.hotPrompts.latestTourFallback must exist in ${loc}`);
         assert.ok(dict.landing.hotPrompts?.taipeiShow, `landing.hotPrompts.taipeiShow must exist in ${loc}`);
-        assert.ok(dict.landing.hotPrompts?.songRanking, `landing.hotPrompts.songRanking must exist in ${loc}`);
+        assert.ok(dict.landing.hotPrompts?.randomTicket, `landing.hotPrompts.randomTicket must exist in ${loc}`);
+        assert.ok(dict.landing.features?.sectionHeading, `landing.features.sectionHeading must exist in ${loc}`);
         assert.ok(dict.landing.features?.bidirectionalTitle, `landing.features.bidirectionalTitle must exist in ${loc}`);
         assert.ok(dict.landing.features?.bidirectionalDesc, `landing.features.bidirectionalDesc must exist in ${loc}`);
         assert.ok(dict.landing.features?.bidirectionalAction, `landing.features.bidirectionalAction must exist in ${loc}`);
-        assert.ok(dict.landing.features?.ticketStubTitle, `landing.features.ticketStubTitle must exist in ${loc}`);
-        assert.ok(dict.landing.features?.ticketStubDesc, `landing.features.ticketStubDesc must exist in ${loc}`);
-        assert.ok(dict.landing.features?.ticketStubAction, `landing.features.ticketStubAction must exist in ${loc}`);
+        assert.ok(dict.landing.features?.venueMapTitle, `landing.features.venueMapTitle must exist in ${loc}`);
+        assert.ok(dict.landing.features?.venueMapDesc, `landing.features.venueMapDesc must exist in ${loc}`);
+        assert.ok(dict.landing.features?.venueMapAction, `landing.features.venueMapAction must exist in ${loc}`);
         assert.ok(dict.landing.features?.ticketBookTitle, `landing.features.ticketBookTitle must exist in ${loc}`);
         assert.ok(dict.landing.features?.ticketBookDesc, `landing.features.ticketBookDesc must exist in ${loc}`);
         assert.ok(dict.landing.features?.ticketBookAction, `landing.features.ticketBookAction must exist in ${loc}`);
-        assert.ok(dict.landing.features?.provenanceTitle, `landing.features.provenanceTitle must exist in ${loc}`);
-        assert.ok(dict.landing.features?.provenanceDesc, `landing.features.provenanceDesc must exist in ${loc}`);
-        assert.ok(dict.landing.features?.provenanceAction, `landing.features.provenanceAction must exist in ${loc}`);
+        assert.ok(dict.landing.features?.journeyTitle, `landing.features.journeyTitle must exist in ${loc}`);
+        assert.ok(dict.landing.features?.journeyDesc, `landing.features.journeyDesc must exist in ${loc}`);
+        assert.ok(dict.landing.features?.journeyAction, `landing.features.journeyAction must exist in ${loc}`);
+        assert.ok(dict.landing.features?.rankingTitle, `landing.features.rankingTitle must exist in ${loc}`);
+        assert.ok(dict.landing.features?.rankingDesc, `landing.features.rankingDesc must exist in ${loc}`);
+        assert.ok(dict.landing.features?.rankingAction, `landing.features.rankingAction must exist in ${loc}`);
+        assert.ok(dict.landing.features?.releasesTitle, `landing.features.releasesTitle must exist in ${loc}`);
+        assert.ok(dict.landing.features?.releasesDesc, `landing.features.releasesDesc must exist in ${loc}`);
+        assert.ok(dict.landing.features?.releasesAction, `landing.features.releasesAction must exist in ${loc}`);
         assert.ok(dict.landing.primaryCta, `landing.primaryCta must exist in ${loc}`);
         assert.ok(dict.landing.primaryCtaSubtitle, `landing.primaryCtaSubtitle must exist in ${loc}`);
         assert.ok(dict.landing.footerDisclaimer, `landing.footerDisclaimer must exist in ${loc}`);
@@ -355,10 +362,12 @@ describe("13. i18n Foundation, Hash Route Query Parameter Seam, and Header Switc
       );
       assert.ok(htmlJa.includes("双方向ディープ検索"), "ja must render 双方向ディープ検索");
       assert.ok(htmlJa.includes("人気の探索："), "ja must render 人気の探索：");
-      assert.ok(htmlJa.includes("2024 Rejoice ツアー"), "ja must render 2024 Rejoice ツアー");
+      assert.ok(htmlJa.includes("Arena Tour 2024 - Rejoice -"), "ja must render auto-derived latest tour label");
       assert.ok(htmlJa.includes("台北アリーナ公演"), "ja must render 台北アリーナ公演");
-      assert.ok(htmlJa.includes("演奏回数ランキング"), "ja must render 演奏回数ランキング");
-      assert.ok(htmlJa.includes("実物チケット＆ステージRun-Sheet"), "ja must render ticket stub title");
+      assert.ok(htmlJa.includes("ランダムで1公演"), "ja must render ランダムで1公演");
+      assert.ok(htmlJa.includes("全国会場マップ"), "ja must render venue atlas title");
+      assert.ok(htmlJa.includes("ランキング殿堂"), "ja must render ranking title");
+      assert.ok(htmlJa.includes("公式リリース"), "ja must render releases title");
       assert.ok(htmlJa.includes("全キャリア巡演動態足跡"), "ja must render journey title");
       assert.ok(htmlJa.includes("194"), "ja must interpolate dynamic venueCount");
       assert.ok(htmlJa.includes("アーカイブを探索する"), "ja must render primary CTA");
@@ -374,10 +383,12 @@ describe("13. i18n Foundation, Hash Route Query Parameter Seam, and Header Switc
       );
       assert.ok(htmlEn.includes("Bi-Directional Archive"), "en must render Bi-Directional Archive");
       assert.ok(htmlEn.includes("Trending:"), "en must render Trending:");
-      assert.ok(htmlEn.includes("2024 Rejoice Tour"), "en must render 2024 Rejoice Tour");
+      assert.ok(htmlEn.includes("Arena Tour 2024 - Rejoice -"), "en must render auto-derived latest tour label");
       assert.ok(htmlEn.includes("Taipei Arena Show"), "en must render Taipei Arena Show");
-      assert.ok(htmlEn.includes("Top Performed Songs"), "en must render Top Performed Songs");
-      assert.ok(htmlEn.includes("Authentic Ticket Stubs"), "en must render ticket stub title");
+      assert.ok(htmlEn.includes("Random Ticket"), "en must render Random Ticket");
+      assert.ok(htmlEn.includes("Venue Atlas"), "en must render venue atlas title");
+      assert.ok(htmlEn.includes("Leaderboard Hall"), "en must render ranking title");
+      assert.ok(htmlEn.includes("Official Releases"), "en must render releases title");
       assert.ok(htmlEn.includes("Career Tour Dynamic Route"), "en must render journey title");
       assert.ok(htmlEn.includes("Explore Full Archive"), "en must render primary CTA");
       assert.ok(htmlEn.includes("Unofficial non-profit Official HIGEDAN Dism"), "en must render localized footer");
@@ -392,10 +403,12 @@ describe("13. i18n Foundation, Hash Route Query Parameter Seam, and Header Switc
       );
       assert.ok(htmlKo.includes("양방향 심층 아카이브"), "ko must render 양방향 심층 아카이브");
       assert.ok(htmlKo.includes("인기 탐색:"), "ko must render 인기 탐색:");
-      assert.ok(htmlKo.includes("2024 Rejoice 투어"), "ko must render 2024 Rejoice 투어");
+      assert.ok(htmlKo.includes("Arena Tour 2024 - Rejoice -"), "ko must render auto-derived latest tour label");
       assert.ok(htmlKo.includes("타이베이 아레나 공연"), "ko must render 타이베이 아레나 공연");
-      assert.ok(htmlKo.includes("곡 연주 랭킹"), "ko must render 곡 연주 랭킹");
-      assert.ok(htmlKo.includes("실물 티켓") && htmlKo.includes("무대 전표"), "ko must render ticket stub title");
+      assert.ok(htmlKo.includes("랜덤 티켓 뽑기"), "ko must render 랜덤 티켓 뽑기");
+      assert.ok(htmlKo.includes("공연장 지도"), "ko must render venue atlas title");
+      assert.ok(htmlKo.includes("랭킹 전당"), "ko must render ranking title");
+      assert.ok(htmlKo.includes("공식 발매"), "ko must render releases title");
       assert.ok(htmlKo.includes("전체 커리어 투어 동적 발자취"), "ko must render journey title");
       assert.ok(htmlKo.includes("전체 아카이브 탐색하기"), "ko must render primary CTA");
       assert.ok(htmlKo.includes("Official 히게단 dism 팬 비공식"), "ko must render localized footer");
@@ -407,8 +420,11 @@ describe("13. i18n Foundation, Hash Route Query Parameter Seam, and Header Switc
       // 4. Preserved Design Tokens across all locales
       for (const html of [htmlJa, htmlEn, htmlKo]) {
         assert.ok(html.includes("BI-DIRECTIONAL"), "must preserve BI-DIRECTIONAL token");
-        assert.ok(html.includes("TICKET STUB"), "must preserve TICKET STUB token");
+        assert.ok(html.includes("VENUE ATLAS"), "must preserve VENUE ATLAS token");
+        assert.ok(html.includes("TICKET BOOK"), "must preserve TICKET BOOK token");
         assert.ok(html.includes("TOUR JOURNEY"), "must preserve TOUR JOURNEY token");
+        assert.ok(html.includes("LEADERBOARD"), "must preserve LEADERBOARD token");
+        assert.ok(html.includes("RELEASES"), "must preserve RELEASES token");
         assert.ok(html.includes("Pretender"), "must preserve official song name Pretender");
       }
     });
