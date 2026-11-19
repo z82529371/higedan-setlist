@@ -19,7 +19,7 @@ import {
 } from "../lib/feedback.js";
 
 const QUICK_JUMP_BTN_BASE =
-  "rounded-[3px] border px-2.5 py-1 text-ink transition-colors motion-reduce:transition-none cursor-pointer shadow-2xs touch-stamp flex items-center gap-1 hover:bg-band hover:text-band-ink";
+  "rounded-[3px] border px-3 py-1.5 text-ink transition-colors motion-reduce:transition-none cursor-pointer shadow-2xs touch-stamp flex items-center gap-1.5 hover:bg-band hover:text-band-ink";
 
 export default function LandingHero({
   onEnterArchive,
@@ -208,14 +208,14 @@ export default function LandingHero({
   ];
 
   return (
-    <div className="mx-auto max-w-[960px] px-4 sm:px-6 py-5 sm:py-10 flex flex-col items-center text-center animate-fade-in relative">
+    <div className="mx-auto max-w-[960px] px-4 sm:px-6 py-7 sm:py-12 flex flex-col items-center text-center animate-fade-in relative">
       {/* Top Utility Bar (Language Switcher Only — ADR-0107 / ADR-0115) */}
-      <div className="w-full flex justify-end items-center gap-2 mb-4 sm:mb-6">
+      <div className="w-full flex justify-end items-center gap-2 mb-6 sm:mb-8">
         <LanguageSwitcher />
       </div>
 
       {/* Master Admission Pass (ADR-0148) */}
-      <article className="relative w-full rounded-[3px] border-[1.5px] border-ink bg-card px-4 pt-9 pb-5 sm:px-[26px] sm:pt-11 sm:pb-6 shadow-xl dark:shadow-none">
+      <article className="relative w-full rounded-[3px] border-[1.5px] border-ink bg-card px-4 pt-10 pb-7 sm:px-[26px] sm:pt-14 sm:pb-9 shadow-xl dark:shadow-none">
         {/* Top Serrated Washi Tape */}
         <div
           className="washi-tape pointer-events-none absolute -top-3.5 left-1/2 -translate-x-1/2 rotate-[1.2deg] h-[26px] w-[140px] border-x border-dashed border-ink/40"
@@ -223,8 +223,8 @@ export default function LandingHero({
         />
 
         {/* Upper Stub: Brand Masthead & Monospace Spec Strip */}
-        <header className="flex flex-col items-center">
-          <div className="mb-3 inline-flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-[3px] bg-band border-[1.5px] border-ink shadow-xs">
+        <header className="flex flex-col items-center sm:px-4">
+          <div className="mb-4 sm:mb-5 inline-flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-[3px] bg-band border-[1.5px] border-ink shadow-xs">
             <img
               src="/favicon.svg"
               alt="Official髭男dism"
@@ -232,34 +232,34 @@ export default function LandingHero({
             />
           </div>
 
-          <p className="m-0 mb-1.5 font-mono text-[11px] sm:text-[12px] tracking-[0.22em] text-ink font-bold uppercase">
+          <p className="m-0 mb-2.5 font-mono text-[11px] sm:text-[12px] tracking-[0.22em] text-ink font-bold uppercase">
             {t("header.livePerformanceArchive")}
           </p>
 
           <h1 className="m-0 max-w-full font-display text-[clamp(24px,5.2vw,44px)] font-black leading-tight tracking-tight text-ink text-balance">
             <span className="whitespace-nowrap">Official髭男dism</span>{" "}
-            <span className="inline-block whitespace-nowrap font-extrabold text-band-ink bg-band/40 px-2 py-0.5 rounded-[3px] border border-ink/30 [box-decoration-break:clone]">
+            <span className="inline-block whitespace-nowrap font-extrabold text-band-ink bg-band/40 px-2.5 py-0.5 rounded-[3px] border border-ink/30 [box-decoration-break:clone]">
               {t("header.brandTitle")}
             </span>
           </h1>
 
-          <p className="mt-2.5 sm:mt-3 mb-0 text-[13px] sm:text-[15px] text-muted max-w-[580px] mx-auto leading-relaxed font-sans">
+          <p className="mt-3.5 sm:mt-4 mb-0 text-[13px] sm:text-[15px] text-muted max-w-[580px] mx-auto leading-relaxed font-sans">
             {t("header.landingSubtitle")}
           </p>
 
           {/* Printed Monospace Spec Strip */}
-          <dl className="mt-4 sm:mt-5 mb-4 sm:mb-5 w-full grid grid-cols-2 sm:grid-cols-5 border-[1.5px] border-ink/30 rounded-[3px] bg-paper/70 divide-y sm:divide-y-0 sm:divide-x divide-ink/20 text-center">
+          <dl className="mt-6 sm:mt-8 mb-6 sm:mb-8 w-full max-w-[740px] grid grid-cols-2 sm:grid-cols-5 border-[1.5px] border-ink/30 rounded-[3px] bg-paper/70 divide-y sm:divide-y-0 sm:divide-x divide-ink/20 text-center">
             {specItems.map((item, idx) => (
               <div
                 key={item.key}
-                className={`px-2 py-2 sm:py-2.5 flex flex-col items-center justify-center ${
+                className={`px-3 py-3 sm:py-3.5 flex flex-col items-center justify-center ${
                   idx === 0 ? "col-span-2 sm:col-span-1" : ""
                 }`}
               >
-                <dt className="order-2 mt-0.5 font-sans text-[11px] font-semibold text-ink/80">
+                <dt className="order-2 mt-1 font-sans text-[11px] font-semibold text-ink/80">
                   {item.label}
                 </dt>
-                <dd className="order-1 m-0 font-mono text-[14px] sm:text-[16px] font-black text-ink tabular-nums leading-none">
+                <dd className="order-1 m-0 font-mono text-[15px] sm:text-[17px] font-black text-ink tabular-nums leading-none">
                   {item.value}
                 </dd>
               </div>
@@ -268,11 +268,13 @@ export default function LandingHero({
         </header>
 
         {/* Physical Ticket Perforation Divider */}
-        <TicketPerforationDivider />
+        <div className="my-2 sm:my-3">
+          <TicketPerforationDivider />
+        </div>
 
         {/* Lower Stub: Spotlight Search + Quick Jump + Elevated Primary CTA */}
         <section
-          className="w-full max-w-[660px] mx-auto text-left"
+          className="w-full max-w-[660px] mx-auto pt-2 sm:pt-3 text-left"
           aria-label={t("landing.instantSearchAria", "即時檢索")}
         >
           <SearchBox
@@ -298,7 +300,7 @@ export default function LandingHero({
           />
 
           {/* Quick Jump Prompts (Dynamic Latest Tour + Iconic Landmarks + Random Ticket) */}
-          <div className="mt-3.5 flex flex-wrap items-center justify-center gap-1.5 sm:gap-2 text-[12px] sm:text-[13px]">
+          <div className="mt-5 sm:mt-6 flex flex-wrap items-center justify-center gap-2 sm:gap-2.5 text-[12px] sm:text-[13px]">
             <span className="text-ink font-bold mr-0.5 text-xs">
               {t("landing.hotExploration", "熱門探索：")}
             </span>
@@ -360,19 +362,19 @@ export default function LandingHero({
           </div>
 
           {/* Elevated Primary CTA inside Master Admission Pass */}
-          <div className="mt-5 sm:mt-6 flex flex-col items-center text-center">
+          <div className="mt-7 sm:mt-9 flex flex-col items-center text-center">
             <button
               type="button"
               data-testid="landing-primary-cta"
               onClick={onEnterArchive}
-              className="inline-flex items-center justify-center gap-2.5 w-full sm:w-auto px-7 py-3 rounded-[3px] bg-band text-band-ink font-bold text-[15px] sm:text-[16px] border-[1.5px] border-ink shadow-sm dark:shadow-none hover:shadow-md hover:brightness-105 transition-all motion-reduce:transition-none cursor-pointer touch-stamp focus-visible:ring-2 focus-visible:ring-band focus-visible:outline-none"
+              className="inline-flex items-center justify-center gap-2.5 w-full sm:w-auto px-8 py-3.5 rounded-[3px] bg-band text-band-ink font-bold text-[15px] sm:text-[16px] border-[1.5px] border-ink shadow-sm dark:shadow-none hover:shadow-md hover:brightness-105 transition-all motion-reduce:transition-none cursor-pointer touch-stamp focus-visible:ring-2 focus-visible:ring-band focus-visible:outline-none"
             >
               <span>{t("landing.primaryCta", "進入完整檔案庫探索")}</span>
               <span aria-hidden="true" className="font-mono text-base font-black">
                 →
               </span>
             </button>
-            <p className="mt-2 mb-0 text-[12px] text-muted">
+            <p className="mt-3 mb-0 text-[12px] text-muted">
               {t(
                 "landing.primaryCtaSubtitle",
                 "支援場次、歌曲與場館全方位切換與雙層智能導航"
@@ -382,7 +384,7 @@ export default function LandingHero({
         </section>
 
         {/* Master Admission Pass Barcode Footer */}
-        <div className="-mt-2">
+        <div className="mt-2 sm:mt-3">
           <TicketBarcodeFooter
             serial="HGD-2012-2026-ARCHIVE"
             label="ADMIT ONE // MASTER ARCHIVE PASS"
@@ -393,10 +395,10 @@ export default function LandingHero({
       {/* 6 Compact Catalog Index Stubs (3x2 Desktop / 2x3 Mobile) */}
       <section
         data-testid="landing-catalog-stubs"
-        className="mt-7 sm:mt-9 w-full text-left"
+        className="mt-10 sm:mt-14 w-full text-left"
         aria-label={t("landing.features.sectionAria", "六大典藏目錄索引")}
       >
-        <div className="mb-3 flex items-center justify-between border-b border-ink/20 pb-1.5">
+        <div className="mb-4 sm:mb-5 flex items-center justify-between border-b border-ink/20 pb-2.5">
           <span className="font-mono text-[11px] font-bold tracking-[0.18em] text-ink uppercase">
             INDEX 01—06 // {t("landing.features.sectionHeading", "典藏目錄索引")}
           </span>
@@ -405,17 +407,17 @@ export default function LandingHero({
           </span>
         </div>
 
-        <div className="grid grid-cols-2 lg:grid-cols-3 gap-2.5 sm:gap-3.5">
+        <div className="grid grid-cols-2 lg:grid-cols-3 gap-3.5 sm:gap-5">
           {catalogStubs.map((stub) => (
             <button
               key={stub.index}
               type="button"
               data-testid={stub.testId}
               onClick={stub.onClick}
-              className="group relative flex flex-col justify-between rounded-[3px] border-[1.5px] border-ink bg-card p-3.5 sm:p-4 text-left shadow-sm dark:shadow-none hover:bg-pool-wash/40 hover:shadow-md transition-all motion-reduce:transition-none cursor-pointer touch-stamp focus-visible:ring-2 focus-visible:ring-band focus-visible:outline-none"
+              className="group relative flex flex-col justify-between rounded-[3px] border-[1.5px] border-ink bg-card p-4 sm:p-5 text-left shadow-sm dark:shadow-none hover:bg-pool-wash/40 hover:shadow-md transition-all motion-reduce:transition-none cursor-pointer touch-stamp focus-visible:ring-2 focus-visible:ring-band focus-visible:outline-none"
             >
               <div>
-                <div className="flex items-center justify-between gap-1.5 mb-2">
+                <div className="flex items-center justify-between gap-1.5 mb-3">
                   <div className="inline-flex items-center gap-1.5 min-w-0">
                     <span className="font-mono text-[11px] font-black text-band-ink bg-band/35 border border-ink/30 px-1.5 py-0.5 rounded-[3px] tabular-nums shrink-0">
                       {stub.index}
@@ -442,12 +444,12 @@ export default function LandingHero({
                 <h3 className="m-0 font-display text-[14px] sm:text-[16px] font-bold text-ink leading-snug">
                   {stub.title}
                 </h3>
-                <p className="mt-1.5 mb-0 text-[12px] sm:text-[13px] text-muted leading-snug">
+                <p className="mt-2 mb-0 text-[12px] sm:text-[13px] text-muted leading-relaxed">
                   {stub.desc}
                 </p>
               </div>
 
-              <div className="mt-3 pt-2 border-t border-dashed border-ink/25 flex items-center justify-between text-[11px] sm:text-[12px] font-bold text-ink">
+              <div className="mt-4 sm:mt-5 pt-3 border-t border-dashed border-ink/25 flex items-center justify-between text-[11px] sm:text-[12px] font-bold text-ink">
                 <span className="truncate">{stub.action}</span>
                 <span
                   className="font-mono transition-transform group-hover:translate-x-1 shrink-0 ml-1"
@@ -462,7 +464,7 @@ export default function LandingHero({
       </section>
 
       {/* Minimalist Disclaimer Footer */}
-      <footer className="mt-10 sm:mt-14 pt-5 border-t border-line-soft/80 w-full text-center">
+      <footer className="mt-14 sm:mt-20 pt-7 border-t border-line-soft/80 w-full text-center">
         <p className="m-0 text-[11px] sm:text-[12px] text-muted leading-relaxed font-sans">
           {t(
             "landing.footerDisclaimer",
