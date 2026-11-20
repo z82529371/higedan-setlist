@@ -10,15 +10,17 @@ export const dictJa = {
     archive: "アーカイブ",
     ticketBook: "チケットブック",
     ranking: "ランキング",
-    journey: "巡演足跡",
-    journeyTitle: "全キャリア巡演足跡",
+    journey: "ツアー軌跡",
+    journeyTitle: "全キャリア・ツアー軌跡",
     releases: "作品",
     releasesTitle: "公式映像化・リリースアーカイブ",
     directionLabel: "検索方向",
   },
   header: {
-    archiveSubtitle: "公演・楽曲双方向アーカイブ。インディーズ初期から現在までのライブ軌跡を網羅。",
-    landingSubtitle: "2012–2026 ライブ・セットリスト双方向アーカイブ。インディーズ初期から現在までの歩みを網羅。",
+    archiveSubtitle:
+      "公演・楽曲双方向アーカイブ。インディーズ初期から現在までのライブ軌跡を網羅。",
+    landingSubtitle:
+      "2012–2026 ライブ・セットリスト双方向アーカイブ。インディーズ初期から現在までの歩みを網羅。",
     years: "2012–2026 年",
     publicShows: "公演の公開ライブ",
     performanceTypes: "大公演タイプ",
@@ -26,14 +28,14 @@ export const dictJa = {
     historicVenues: "か所の歴史的会場",
   },
   categories: {
-    "巡演專場": "ツアー",
-    "特別專場": "特別公演",
-    "聯合專場": "対バン",
-    "店家活動": "インストア",
-    "音樂祭": "フェス",
-    "學園祭": "学園祭",
-    "電視演出": "TV出演",
-    "線上直播": "配信ライブ",
+    巡演專場: "ツアー",
+    特別專場: "特別公演",
+    聯合專場: "対バン",
+    店家活動: "インストア",
+    音樂祭: "フェス",
+    學園祭: "学園祭",
+    電視演出: "TV出演",
+    線上直播: "配信ライブ",
   },
   badges: {
     premiere: "新曲",
@@ -60,15 +62,15 @@ export const dictJa = {
     overseas: "✈️ 海外",
   },
   tiers: {
-    core: "コア全勤",
+    core: "コア定番",
     regular: "定番曲",
     rotating: "日替わり",
     surprise: "レア曲",
   },
   albumGroups: {
     "EP / 單曲": "EP / シングル",
-    "合作單曲": "コラボシングル",
-    "未發行曲目": "未音源化曲",
+    合作單曲: "コラボシングル",
+    未發行曲目: "未音源化曲",
   },
   actions: {
     switchLanguage: "言語切替",
@@ -83,7 +85,7 @@ export const dictJa = {
   search: {
     placeholder: "楽曲、日程（例: 2024-09）、公演、会場を検索…",
     noResults: "一致する日程・楽曲・公演・会場がありません",
-    groupShows: "歴史公演日程",
+    groupShows: "過去の公演日程",
     groupSongs: "楽曲",
     groupUnits: "公演・ツアー",
     groupVenues: "会場",
@@ -151,7 +153,8 @@ export const dictJa = {
   },
   slips: {
     stageSetlistRunSheet: "OFFICIAL HIGEDAN DISM // STAGE SETLIST RUN SHEET",
-    tourConsensusMasterSheet: "OFFICIAL HIGEDAN DISM // TOUR CONSENSUS MASTER SHEET",
+    tourConsensusMasterSheet:
+      "OFFICIAL HIGEDAN DISM // TOUR CONSENSUS MASTER SHEET",
     officialTourSite: "公式特設サイト",
     allAccessTourOverview: "ALL ACCESS TOUR OVERVIEW",
     modeTour: "ツアー概要",
@@ -165,7 +168,8 @@ export const dictJa = {
     consensusTemplate: "CONSENSUS TEMPLATE // ツアー定番曲",
     rotatingTracks: "ROTATING TRACKS // 日替わり曲",
     specialInserts: "SPECIAL INSERTS // ツアー限定曲",
-    interludes: "INTERLUDES // 特別弾き語り・インタールード（正式曲目に含まず）",
+    interludes:
+      "INTERLUDES // 特別弾き語り・インタールード（正式曲目に含まず）",
     tourItinerary: "TOUR ITINERARY // 全国ツアースケジュール",
     tourOpener: "初日",
     tourFinale: "千秋楽",
@@ -182,14 +186,16 @@ export const dictJa = {
     saninSanctuary: "🌱 山陰結成・ゆかりの聖地",
     overseasTour: "✈️ 海外遠征・ワールドツアー",
     arenaDome: "🏟️ アリーナ・ドーム (Arena & Dome)",
-    selectSongHint: "楽曲を選択すると、全アーカイブでの登場公演を確認できます。",
-    selectVenueHint: "会場を選択すると、その会場で開催された全公演を確認できます。",
+    selectSongHint:
+      "楽曲を選択すると、全アーカイブでの登場公演を確認できます。",
+    selectVenueHint:
+      "会場を選択すると、その会場で開催された全公演を確認できます。",
     showsCount: "計 {count} 公演",
     noShowsInCategory: "このカテゴリーの公演記録はありません",
     generateMemorialCard: "記念カード生成",
     memorialCardShort: "記念カード",
     customMemorialCard: "自作記念チケット",
-    editAttendance: "参戦記録・小卡を編集",
+    editAttendance: "参戦記録・カードを編集",
     copySetlist: "📋 セトリコピー",
     copyHistory: "📋 履歴コピー",
     copied: "✓ コピー完了",
@@ -197,21 +203,27 @@ export const dictJa = {
     noPublicSetlist: "この公演の公開セットリスト記録は現在ありません",
     quest: {
       calloutTitle: "🔍 セットリスト情報募集中",
-      calloutDesc: "本公演は現在公開されているセットリスト情報がありません。Official髭男dismの初期の歩みを残すため、Twitter(X)の投稿、LiveFans、レポート記事などの情報提供をお待ちしております！",
+      calloutDesc:
+        "本公演は現在公開されているセットリスト情報がありません。Official髭男dismの初期の歩みを残すため、Twitter(X)の投稿、LiveFans、レポート記事などの情報提供をお待ちしております！",
       submitBtn: "セットリスト情報を提供する",
-      submitTitle: "情報提供ウィンドウを開き、本公演の曲目情報の手がかりを送信します",
+      submitTitle:
+        "情報提供ウィンドウを開き、本公演の曲目情報の手がかりを送信します",
       reportTime: "開演時間を提供する",
-      reportTimeTitle: "情報提供ウィンドウを開き、本公演の開場・開演時間の手がかりを送信します",
+      reportTimeTitle:
+        "情報提供ウィンドウを開き、本公演の開場・開演時間の手がかりを送信します",
       modalTitleSetlist: "🔍 曲目情報の手がかりを提供する",
       modalTitleTime: "⏰ 開演時間の手がかりを提供する",
-      modalDesc: "本公演に関する現場の記録（Twitter(X)の投稿、LiveFans、Instagram、レポート記事など）をお持ち・発見された場合は、URLを貼り付けてお知らせください。検証の上、アーカイブに反映いたします！",
+      modalDesc:
+        "本公演に関する現場の記録（Twitter(X)の投稿、LiveFans、Instagram、レポート記事など）をお持ち・発見された場合は、URLを貼り付けてお知らせください。検証の上、アーカイブに反映いたします！",
       evidenceLabel: "情報ソースのURL（必須）",
       evidencePlaceholder: "https://x.com/... や LiveFans、レポート記事のURL",
       notesLabel: "備考またはお名前（任意）",
-      notesPlaceholder: "例：写真にセットリスト記載あり、弾き語り、お名前など...",
+      notesPlaceholder:
+        "例：写真にセットリスト記載あり、弾き語り、お名前など...",
       submitting: "送信中...",
       successTitle: "📮 情報を送信しました！",
-      successDesc: "Official髭男dismの歴史アーカイブへのご協力ありがとうございます！確認の上反映いたします。",
+      successDesc:
+        "Official髭男dismの歴史アーカイブへのご協力ありがとうございます！確認の上反映いたします。",
       officialContact: "公式情報提供・お問い合わせ IG：",
       openInstagram: "内容をコピーして IG DM を開く",
       copyFallbackBtn: "情報内容をコピー",
@@ -223,9 +235,11 @@ export const dictJa = {
     tour: {
       prefecturesCities: "{prefecturesCount} 都道府県 · {citiesCount} 都市",
       trackStatsTitle: "演奏曲目統計：",
-      specialTracksDesc: "ツアー定番セットリストには未収録ながら、特定公演でサプライズ披露された限定曲：",
+      specialTracksDesc:
+        "ツアー定番セットリストには未収録ながら、特定公演でサプライズ披露された限定曲：",
       showsLabel: "対象公演：",
-      itineraryDesc: "時系列順のツアー日程・会場・都市・開演時刻（クリックで単体チケットへ直達）：",
+      itineraryDesc:
+        "時系列順のツアー日程・会場・都市・開演時刻（クリックで単体チケットへ直達）：",
       viewList: "日程タイムライン",
       viewMap: "ツアー移動ルート",
       virtualShows: "オンライン配信公演",
@@ -254,7 +268,7 @@ export const dictJa = {
       encoreRate: "· アンコール率{rate}%",
       specialVersionsCount: "特殊バージョン {count}公演",
       yearsCovered: "{count} 年間にわたる軌跡",
-      fullAttendanceBadge: "★ 全勤 ({count}/{total})",
+      fullAttendanceBadge: "★ 全公演 ({count}/{total})",
       rotationBadge: "日替わり ({count}/{total})",
       collapseHistory: "履歴を閉じる ▴",
       moreHistory: "履歴・詳細 ▾",
@@ -307,7 +321,8 @@ export const dictJa = {
       diffRemoved: "入替・除外（－）：",
       anyShowCompareTitle: "⚖️ ツアー内2公演の比較：",
       compareTarget: "比較対象：",
-      compareIdentical: "✓ 両公演計 {count} 曲のセットリストが完全に一致しています。",
+      compareIdentical:
+        "✓ 両公演計 {count} 曲のセットリストが完全に一致しています。",
       thisShowExclusive: "本公演限定（＋{count} 曲）：",
       otherShowExclusive: "比較公演限定（－{count} 曲）：",
       none: "なし",
@@ -367,7 +382,7 @@ export const dictJa = {
   },
   calendar: {
     ariaLabel: "公演カレンダー",
-    title: "歴史公演カレンダー",
+    title: "公演カレンダー",
     hint: "マークのある公演日のみ選択可",
     closeAria: "カレンダーを閉じる",
     yearSuffix: "年",
@@ -379,7 +394,7 @@ export const dictJa = {
     multiBadge: "{count}公演",
     multiDot: "●",
     legendHasShow: "黄色マーク＝公演あり（選択可）",
-    totalArchive: "全520+歴史公演",
+    totalArchive: "全520+公演アーカイブ",
     selectedDay: "{date} 計 {count} 公演",
     fallbackShow: "公演",
   },
@@ -449,7 +464,7 @@ export const dictJa = {
   songNav: {
     selectWithAlbum: "{select}（{album} · 全 {count} 曲）",
     rankWithCount: "{rank}（全 {count} 曲）",
-    leaderboardCta: "TOP3表彰台や時期別ランキングを見る？",
+    leaderboardCta: "TOP3表彰台や時期別ランキングも見る？",
     goToRanking: "演出ランキングへ →",
     allAlbums: "全アルバム",
     byTracklist: "💿 収録曲順",
@@ -459,13 +474,15 @@ export const dictJa = {
     noResults: "該当する楽曲がありません",
   },
   showNav: {
-    searchPlaceholder: "ツアー、イベント、会場名を検索（例：Rejoice、武道館...）",
+    searchPlaceholder:
+      "ツアー、イベント、会場名を検索（例：Rejoice、武道館...）",
     allCategories: "全カテゴリー",
     matchingUnitsCount: "{count} 件のツアー・イベントが見つかりました",
     emptySearchResult: "該当するツアー・イベントが見つかりません",
   },
   venueNav: {
-    searchPlaceholder: "会場名、都道府県、市区町村を検索（例：武道館、大阪...）",
+    searchPlaceholder:
+      "会場名、都道府県、市区町村を検索（例：武道館、大阪...）",
     matchingVenuesCount: "{count} 件の会場が見つかりました",
     emptySearchResult: "該当する会場が見つかりません",
     focusPrefecture: "📍「{pref}」へフォーカス",
@@ -500,7 +517,8 @@ export const dictJa = {
   },
   tourExtra: {
     viewSongFile: "楽曲ファイルを見る：《{title}》",
-    attendanceRate: "当ツアー {count} 公演登場（全 {total} 公演 · 登場率 {rate}%）",
+    attendanceRate:
+      "当ツアー {count} 公演登場（全 {total} 公演 · 登場率 {rate}%）",
     jumpConsensus: "ツアー定番曲へ移動",
     jumpRotating: "日替わり曲へ移動",
     jumpSurprise: "限定曲エリアへ移動",
@@ -620,11 +638,13 @@ export const dictJa = {
     searchPlaceholder: "ツアー名、会場、都市を検索...",
     clearFilter: "フィルターを解除",
     noFilterMatch: "条件に一致する参戦記録がありません",
-    noFilterMatchDesc: "検索キーワードまたは年のフィルターを変更してみてください。",
+    noFilterMatchDesc:
+      "検索キーワードまたは年のフィルターを変更してみてください。",
     viewShowSlip: "チケットを見る",
     removeAttended: "チケットを削除",
     emptyTitle: "まだチケットが登録されていません",
-    emptyDesc: "各公演のチケット（ShowSlip）で「チケットブックに追加」を押すと、ライブの思い出がチケットブックに保存されます！",
+    emptyDesc:
+      "各公演のチケット（ShowSlip）で「チケットブックに追加」を押すと、ライブの思い出がチケットブックに保存されます！",
     exploreCta: "公演アーカイブを探す",
     backToArchive: "アーカイブへ戻る",
     backToHome: "ホームへ戻る",
@@ -644,7 +664,8 @@ export const dictJa = {
     fanRiderLabel: "😎 参戦ファン",
     prefectureProgress: "全国制覇 {visited} / 47 都道府県",
     overseasCountUnit: "海外都市",
-    footprintEmptyHint: "現地参戦の記録がまだありません。チケットをチェックインすると、制覇した都道府県と移動軌跡が自動点灯します！",
+    footprintEmptyHint:
+      "現地参戦の記録がまだありません。チケットをチェックインすると、制覇した都道府県と移動軌跡が自動点灯します！",
     totalShows: "総公演数",
     totalTours: "ツアー数",
     totalCities: "訪問都市",
@@ -663,15 +684,18 @@ export const dictJa = {
     toursUnit: "{count} ツアー",
     citiesUnit: "{count} 都市",
     transferModalTitle: "チケットブックのバックアップと移行",
-    transferModalSubtitle: "機種変更や複数端末での同期、長期保存の際に、大切な参戦記録を安全に移行できます",
+    transferModalSubtitle:
+      "機種変更や複数端末での同期、長期保存の際に、大切な参戦記録を安全に移行できます",
     backupTrigger: "バックアップと移行記録",
     backupTriggerTitle: "参戦記録をバックアップまたは他端末へ移行",
     fileTrackTitle: "ファイルで保存・復元",
-    fileTrackDesc: "チケットブックをファイルとして保存するか、過去のバックアップファイルを読み込みます。",
+    fileTrackDesc:
+      "チケットブックをファイルとして保存するか、過去のバックアップファイルを読み込みます。",
     downloadBackup: "バックアップファイルを保存",
     selectBackupFile: "バックアップファイルを選択",
     codeTrackTitle: "かんたん移行コード",
-    codeTrackDesc: "スマホ間での移行時は、このコードをコピーして新しい端末に貼り付けるだけで同期できます。",
+    codeTrackDesc:
+      "スマホ間での移行時は、このコードをコピーして新しい端末に貼り付けるだけで同期できます。",
     copyCode: "移行コードをコピー",
     codeCopied: "✓ コピー完了",
     pasteCodePlaceholder: "ここに移行コードを貼り付け...",
@@ -683,9 +707,12 @@ export const dictJa = {
     mergeAction: "現在の記録を残して統合",
     mergeDesc: "現在の記録を維持し、新しい公演の追加や空欄の更新のみを行います",
     overwriteAction: "このバックアップで完全に上書き",
-    overwriteDesc: "現在の記録をリセットし、バックアップの内容にすべて置き換えます",
-    invalidFileError: "ファイルの形式が正しくないか破損しています。正しいバックアップファイルを選択してください",
-    invalidCodeError: "移行コードが無効か不完全です。もう一度コピーしてお試しください",
+    overwriteDesc:
+      "現在の記録をリセットし、バックアップの内容にすべて置き換えます",
+    invalidFileError:
+      "ファイルの形式が正しくないか破損しています。正しいバックアップファイルを選択してください",
+    invalidCodeError:
+      "移行コードが無効か不完全です。もう一度コピーしてお試しください",
     transferSuccessNotice: "参戦記録の更新が完了しました！",
     exportMemorialCard: "記念チケットを保存",
     exportMemorialCardTitle: "この公演の記念チケットをプレビューして保存",
@@ -731,27 +758,34 @@ export const dictJa = {
       sectionHeading: "アーカイブ索引",
       accessStubsBadge: "6つの入口",
       bidirectionalTitle: "双方向ディープ検索",
-      bidirectionalDesc: "アルバム別・演奏回数から楽曲の全演奏履歴とアレンジ差分を即検索。",
+      bidirectionalDesc:
+        "アルバム別・演奏回数から楽曲の全演奏履歴とアレンジ差分を即検索。",
       bidirectionalAction: "楽曲履歴を見る",
       venueMapTitle: "全国会場マップ",
       venueMapDesc: "日本47都道府県と海外公演会場のライブ履歴を地図で探索。",
       venueMapAction: "会場マップを開く",
       ticketBookTitle: "マイ・チケットブック",
-      ticketBookDesc: "参戦公演をオフライン記録し、楽曲解放率の集計や記念カードを書き出し。",
+      ticketBookDesc:
+        "参戦公演をオフライン記録し、楽曲解放率の集計や記念カードを書き出し。",
       ticketBookAction: "チケットブックを開く",
-      journeyTitle: "全キャリア巡演動態足跡",
-      journeyDesc: "島根から始まるツアーバンとフライトの軌跡を地図上でダイナミック再生。",
-      journeyAction: "巡演足跡を起動",
+      journeyTitle: "全キャリア・ツアー軌跡マップ",
+      journeyDesc:
+        "島根から始まるツアーバンとフライトの軌跡を地図上でダイナミック再生。",
+      journeyAction: "ツアー軌跡を見る",
       rankingTitle: "ランキング殿堂",
-      rankingDesc: "ライブ演奏回数Top 20、ワンマン・フェス別・定番会場ランキング。",
+      rankingDesc:
+        "ライブ演奏回数Top 20、ワンマン・フェス別・定番会場ランキング。",
       rankingAction: "ランキングを見る",
       releasesTitle: "公式リリース",
-      releasesDesc: "ライブ映像BD/DVD・特典ディスクと歴代ディスコグラフィ品番索引。",
+      releasesDesc:
+        "ライブ映像BD/DVD・特典ディスクと歴代ディスコグラフィ品番索引。",
       releasesAction: "公式リリースを見る",
     },
     primaryCta: "アーカイブを探索する",
-    primaryCtaSubtitle: "公演・楽曲・会場のシームレスな切り替えとスマートナビゲーション",
-    footerDisclaimer: "Official髭男dism ファンによる非公式・非営利のライブ履歴アーカイブ · 公式発表、現場記録、LiveFansの検証に基づく",
+    primaryCtaSubtitle:
+      "公演・楽曲・会場のシームレスな切り替えとスマートナビゲーション",
+    footerDisclaimer:
+      "Official髭男dism ファンによる非公式・非営利のライブ履歴アーカイブ · 公式発表、現場記録、LiveFansの検証に基づく",
   },
   footer: {
     contactLabel: "情報提供・作者 IG：",
@@ -780,19 +814,22 @@ export const dictJa = {
     tierVisited: "開催実績あり（1–15公演）",
     tierHub: "主要拠点（16公演以上）/ 🌱 山陰聖地",
     saninBadge: "🌱 山陰結成聖地",
-    prefAriaVisited: "{pref}：全 {venues} 会場・{shows} 公演。クリックで拡大表示",
+    prefAriaVisited:
+      "{pref}：全 {venues} 会場・{shows} 公演。クリックで拡大表示",
     prefAriaUnvisited: "{pref}：公演記録なし（0公演）",
     pinAria: "{venue}（{city}、全 {shows} 公演）。クリックで会場詳細を表示",
     filterAllCities: "すべての都市",
     venuesInPrefTitle: "{pref} の会場一覧（全 {venues} 会場・{shows} 公演）",
-    unvisitedNotice: "{pref} は現在登録された公演記録がありません（未開催は岩手・三重・和歌山・宮崎の4県のみ）。",
+    unvisitedNotice:
+      "{pref} は現在登録された公演記録がありません（未開催は岩手・三重・和歌山・宮崎の4県のみ）。",
     quickPickerTitle: "🏛️ エリア別都道府県ナビゲーション",
     unvisitedTag: "未開催",
     showsUnit: "公演",
-    clickHint: "NOTE: 都道府県または海外枠をクリックすると拡大して会場ピンを表示します（Escキーで全体へ戻る）。",
-    journeyTitle: "全キャリア巡演足跡",
-    journeyTitleYear: "{year}年 巡演足跡",
-    journeyTitleTour: "{tour} 巡演足跡",
+    clickHint:
+      "NOTE: 都道府県または海外枠をクリックすると拡大して会場ピンを表示します（Escキーで全体へ戻る）。",
+    journeyTitle: "全キャリア・ツアー軌跡",
+    journeyTitleYear: "{year}年 ツアー軌跡",
+    journeyTitleTour: "{tour} ツアー軌跡",
     journeySubtitle: "CAREER TOUR ROUTE // 2012 MATSUE B1 TO PRESENT",
     legendVan: "🚐 陸路ツアー車（本島道路網・道内）",
     legendFlight: "✈️ フライト航路（北海道・沖縄・海外）",
@@ -816,8 +853,8 @@ export const dictJa = {
     venueHudAction: "詳細を見る ➔",
     venueHudZoomAction: "ZOOM ➔",
     venueHudPrefBadge: "📍 {venues} 会場 · {shows} 公演",
-    hudNextStop: "第 {n} 站へ移動中",
-    hudArrivedStop: "第 {n} 站 到着",
+    hudNextStop: "{n} 公演目へ移動中",
+    hudArrivedStop: "{n} 公演目 到着",
     hudStay: "同会場連日公演",
     hudFinale: "ツアーファイナル",
     hudStart: "ツアー初日",
@@ -846,19 +883,19 @@ export const dictJa = {
   bonus_included_in: "収録作品",
   view_all_releases: "歴代ライブ作品アーカイブを見る",
   live_discography_title: "ライブ作品アーカイブ",
-  live_discography_desc: "Official髭男dismがこれまでリリースした単独ライブ映像（BD/DVD）、初回限定盤特典ディスク、および配信限定ライブ音源を網羅。",
+  live_discography_desc:
+    "Official髭男dismがこれまでリリースした単独ライブ映像（BD/DVD）、初回限定盤特典ディスク、および配信限定ライブ音源を網羅。",
   view_show_slip: "公演チケットへ",
   official_release_badge: "公式映像化",
   view_releases_title: "本公演の公式映像化・リリース情報を見る",
   releases_tab_live: "ライブ映像",
   releases_tab_discography: "ディスコグラフィ",
   studio_discography_title: "公式ディスコグラフィ",
-  studio_discography_desc: "Official髭男dismがリリースした歴代のCDシングル、配信シングル、EP、アルバムの品番・規格および収録曲一覧。",
+  studio_discography_desc:
+    "Official髭男dismがリリースした歴代のCDシングル、配信シングル、EP、アルバムの品番・規格および収録曲一覧。",
   discography_tracks_count: "全 {count} 曲収録",
   discography_expand_tracks: "収録曲を展開",
   discography_collapse_tracks: "収録曲を閉じる",
   discography_song_stub: "ライブ履歴",
   "slips.song.viewReleaseDetails": "リリース盤面を見る",
 };
-
-

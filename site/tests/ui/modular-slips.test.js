@@ -190,7 +190,7 @@ describe("23. Modular Slips & Crowdsourced Setlist Quest (#45, #40)", () => {
 
       assert.ok(htmlEn.includes('data-testid="setlist-quest-card"'), "en must render setlist-quest-card");
       assert.ok(htmlEn.includes("Seeking Setlist Information"), "en must render quest headline in English");
-      assert.ok(htmlEn.includes("Submit Setlist Information"), "en must render submit button label in English");
+      assert.ok(htmlEn.includes("Submit Setlist Info"), "en must render submit button label in English");
 
       // 4. ko
       const htmlKo = renderToStaticMarkup(

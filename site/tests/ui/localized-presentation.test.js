@@ -105,7 +105,7 @@ describe("14. Localized Presentation & Domain Taxonomy (#17)", () => {
         ko: {
           "巡演專場": "투어",
           "特別專場": "특별 공연",
-          "聯合專場": "대반",
+          "聯合專場": "합동 공연",
           "店家活動": "매장 이벤트",
           "音樂祭": "페스티벌",
           "學園祭": "대학 축제",
@@ -352,7 +352,7 @@ describe("14. Localized Presentation & Domain Taxonomy (#17)", () => {
           React.createElement(TourSlip, { tourUnitData: mockUd })
         )
       );
-      assert.ok(tourSlipHtmlJa.includes("コア全勤 100%"), "TourSlip in ja must display コア全勤 100%");
+      assert.ok(tourSlipHtmlJa.includes("コア定番 100%"), "TourSlip in ja must display コア定番 100%");
       assert.ok(tourSlipHtmlJa.includes("ツアー定番曲"), "TourSlip in ja must display ツアー定番曲");
       assert.ok(tourSlipHtmlJa.includes("全国ツアースケジュール"), "TourSlip in ja must display 全国ツアースケジュール");
       assert.ok(tourSlipHtmlJa.includes("ツアー"), "TourSlip in ja must display localized category 'ツアー'");

@@ -481,7 +481,7 @@ describe("23. Tour TicketBook Dedicated Page (#/tickets) & Timeline Management (
       assert.ok(heroHtml.includes('data-testid="landing-feature-ticket-book"'), "LandingHero must render feature card for ticket book");
       assert.ok(heroHtml.includes('data-testid="landing-feature-journey"'), "LandingHero must render feature card for tour journey");
       assert.ok(heroHtml.includes("個人巡演票夾"), "LandingHero ledger row must show ticket book title");
-      assert.ok(heroHtml.includes("全生涯巡演動態足跡"), "LandingHero ledger row must show tour journey title");
+      assert.ok(heroHtml.includes("歷年巡演動態足跡"), "LandingHero ledger row must show tour journey title");
       assert.ok(heroHtml.includes("03"), "LandingHero ledger row must show index 03 for ticket book");
 
       // Now add 1 attendance record

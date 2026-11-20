@@ -91,7 +91,7 @@ describe("28. In-App Lead Drop Modal (Seam 2 & 3: UI & Modal)", () => {
         })
       )
     );
-    assert.ok(htmlEn.includes("Provide Concert Time Lead"), "en must render time modal header");
+    assert.ok(htmlEn.includes("Submit Concert Time Info"), "en must render time modal header");
 
     // 4. ko
     const htmlKo = renderToStaticMarkup(

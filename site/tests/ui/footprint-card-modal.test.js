@@ -157,7 +157,7 @@ describe("26. Ticket Book Tour Footprint Commemorative Postcard & Pure PNG Expor
         { loc: "zh-TW", expectedPostmark: "參戰紀念", expectedBtn: "儲存明信片 (PNG)" },
         { loc: "ja", expectedPostmark: "参戦記念", expectedBtn: "ポストカードを保存 (PNG)" },
         { loc: "en", expectedPostmark: "LIVE MEMORIAL", expectedBtn: "Save Postcard (PNG)" },
-        { loc: "ko", expectedPostmark: "참전 기념", expectedBtn: "엽서 저장 (PNG)" },
+        { loc: "ko", expectedPostmark: "직관 기념", expectedBtn: "엽서 저장 (PNG)" },
       ];
 
       for (const { loc, expectedPostmark, expectedBtn } of locales) {

@@ -369,7 +369,7 @@ describe("13. i18n Foundation, Hash Route Query Parameter Seam, and Header Switc
       assert.ok(htmlJa.includes("全国会場マップ"), "ja must render venue atlas title");
       assert.ok(htmlJa.includes("ランキング殿堂"), "ja must render ranking title");
       assert.ok(htmlJa.includes("公式リリース"), "ja must render releases title");
-      assert.ok(htmlJa.includes("全キャリア巡演動態足跡"), "ja must render journey title");
+      assert.ok(htmlJa.includes("全キャリア・ツアー軌跡マップ"), "ja must render journey title");
       assert.ok(htmlJa.includes("194"), "ja must interpolate dynamic venueCount");
       assert.ok(htmlJa.includes("アーカイブを探索する"), "ja must render primary CTA");
       assert.ok(htmlJa.includes("Official髭男dism ファンによる非公式・非営利のライブ履歴アーカイブ"), "ja must render localized footer");
@@ -391,7 +391,7 @@ describe("13. i18n Foundation, Hash Route Query Parameter Seam, and Header Switc
       assert.ok(htmlEn.includes("Official Releases"), "en must render releases title");
       assert.ok(htmlEn.includes("Career Tour Dynamic Route"), "en must render journey title");
       assert.ok(htmlEn.includes("Explore Full Archive"), "en must render primary CTA");
-      assert.ok(htmlEn.includes("Unofficial non-profit Official HIGEDAN Dism"), "en must render localized footer");
+      assert.ok(htmlEn.includes("Unofficial non-profit Official HIGE DANdism"), "en must render localized footer");
       assert.ok(htmlEn.includes("Errata &amp; Author IG: "), "en must render localized contact label");
       assert.ok(htmlEn.includes("@higedan_live"), "en must render author IG account");
       assert.ok(htmlEn.includes("https://www.instagram.com/higedan_live/"), "en must render IG link");
@@ -408,9 +408,9 @@ describe("13. i18n Foundation, Hash Route Query Parameter Seam, and Header Switc
       assert.ok(htmlKo.includes("공연장 지도"), "ko must render venue atlas title");
       assert.ok(htmlKo.includes("랭킹 전당"), "ko must render ranking title");
       assert.ok(htmlKo.includes("공식 발매"), "ko must render releases title");
-      assert.ok(htmlKo.includes("전체 커리어 투어 동적 발자취"), "ko must render journey title");
+      assert.ok(htmlKo.includes("역대 투어 동적 발자취"), "ko must render journey title");
       assert.ok(htmlKo.includes("전체 아카이브 탐색하기"), "ko must render primary CTA");
-      assert.ok(htmlKo.includes("Official 히게단 dism 팬 비공식"), "ko must render localized footer");
+      assert.ok(htmlKo.includes("Official髭男dism 팬 비공식"), "ko must render localized footer");
       assert.ok(htmlKo.includes("제보 및 제작자 IG: "), "ko must render localized contact label");
       assert.ok(htmlKo.includes("@higedan_live"), "ko must render author IG account");
       assert.ok(htmlKo.includes("https://www.instagram.com/higedan_live/"), "ko must render IG link");
