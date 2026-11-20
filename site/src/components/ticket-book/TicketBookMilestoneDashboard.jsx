@@ -30,6 +30,8 @@ export function TicketBookMilestoneDashboard({
   allVenues,
   onSelectShow,
   storage,
+  mobileTab = "insights",
+  mobileTabBar = null,
 }) {
   const { t, locale } = useI18n();
 
@@ -45,10 +47,14 @@ export function TicketBookMilestoneDashboard({
   return (
     <div
       data-testid="ticket-book-milestones-dashboard"
-      className="mb-6"
+      className="mb-4 sm:mb-6 flex flex-col"
     >
-      {/* Header bar: Title & Export CTA */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-line-soft pb-3.5">
+      {/* Header bar: Title & Export CTA (Desktop: top; Mobile: inside Insights tab) */}
+      <div
+        className={`${
+          mobileTab === "insights" ? "flex" : "hidden sm:flex"
+        } order-3 sm:order-1 mt-4 sm:mt-0 flex-col sm:flex-row sm:items-center justify-between gap-2.5 sm:gap-3 border-b border-line-soft pb-3 sm:pb-3.5`}
+      >
         <div className="flex items-center gap-2">
           <span className="text-xl" aria-hidden="true">
             🏆
@@ -77,20 +83,20 @@ export function TicketBookMilestoneDashboard({
         )}
       </div>
 
-      {/* 4-Stat Metric Cards (AAA Contrast >= 7:1) */}
-      <div className="mt-3.5 grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+      {/* 4-Stat Metric Cards (AAA Contrast >= 7:1; always visible at top) */}
+      <div className="order-1 sm:order-2 mt-0 sm:mt-3.5 grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-2.5">
         {/* Total Shows */}
         <div
           data-testid="milestone-total-shows"
-          className="rounded-[4px] border border-ink/20 bg-paper/60 p-2.5 sm:p-3 text-center flex flex-col justify-between"
+          className="rounded-[4px] border border-ink/20 bg-paper/60 p-2 sm:p-3 text-center flex flex-col justify-between"
         >
           <div className="font-mono text-[10px] sm:text-[11px] font-bold text-ink uppercase">
             {t("ticketBook.totalShows", "總場次")}
           </div>
-          <div className="my-1 font-mono text-[18px] sm:text-[22px] font-black text-ink leading-none">
+          <div className="my-0.5 sm:my-1 font-mono text-[18px] sm:text-[22px] font-black text-ink leading-none">
             {milestones.totalShows}
           </div>
-          <div className="font-mono text-[10px] text-ink font-bold">
+          <div className="hidden sm:block font-mono text-[10px] text-ink font-bold">
             {t("ticketBook.showsUnit", "{count} 場", { count: milestones.totalShows })}
           </div>
         </div>
@@ -98,15 +104,15 @@ export function TicketBookMilestoneDashboard({
         {/* Total Tours */}
         <div
           data-testid="milestone-total-tours"
-          className="rounded-[4px] border border-ink/20 bg-paper/60 p-2.5 sm:p-3 text-center flex flex-col justify-between"
+          className="rounded-[4px] border border-ink/20 bg-paper/60 p-2 sm:p-3 text-center flex flex-col justify-between"
         >
           <div className="font-mono text-[10px] sm:text-[11px] font-bold text-ink uppercase">
             {t("ticketBook.totalTours", "巡演數")}
           </div>
-          <div className="my-1 font-mono text-[18px] sm:text-[22px] font-black text-ink leading-none">
+          <div className="my-0.5 sm:my-1 font-mono text-[18px] sm:text-[22px] font-black text-ink leading-none">
             {milestones.totalTours}
           </div>
-          <div className="font-mono text-[10px] text-ink font-bold">
+          <div className="hidden sm:block font-mono text-[10px] text-ink font-bold">
             {t("ticketBook.toursUnit", "{count} 巡演", { count: milestones.totalTours })}
           </div>
         </div>
@@ -114,15 +120,15 @@ export function TicketBookMilestoneDashboard({
         {/* Total Cities */}
         <div
           data-testid="milestone-total-cities"
-          className="rounded-[4px] border border-ink/20 bg-paper/60 p-2.5 sm:p-3 text-center flex flex-col justify-between"
+          className="rounded-[4px] border border-ink/20 bg-paper/60 p-2 sm:p-3 text-center flex flex-col justify-between"
         >
           <div className="font-mono text-[10px] sm:text-[11px] font-bold text-ink uppercase">
             {t("ticketBook.totalCities", "足跡城市")}
           </div>
-          <div className="my-1 font-mono text-[18px] sm:text-[22px] font-black text-ink leading-none">
+          <div className="my-0.5 sm:my-1 font-mono text-[18px] sm:text-[22px] font-black text-ink leading-none">
             {milestones.totalCities}
           </div>
-          <div className="font-mono text-[10px] text-ink font-bold">
+          <div className="hidden sm:block font-mono text-[10px] text-ink font-bold">
             {t("ticketBook.citiesUnit", "{count} 城市", { count: milestones.totalCities })}
           </div>
         </div>
@@ -133,13 +139,13 @@ export function TicketBookMilestoneDashboard({
             type="button"
             data-testid="milestone-coverage"
             onClick={onOpenSongChecklist}
-            className="rounded-[4px] border border-ink/20 bg-paper/60 p-2.5 sm:p-3 text-center flex flex-col justify-between hover:border-ink hover:bg-tape-tint/50 cursor-pointer transition-all touch-stamp group text-left sm:text-center"
+            className="rounded-[4px] border border-ink/20 bg-paper/60 p-2 sm:p-3 text-center flex flex-col justify-between hover:border-ink hover:bg-tape-tint/50 cursor-pointer transition-all touch-stamp group"
             title={t("ticketBook.viewChecklist", "查看現場曲庫解鎖成就圖鑑")}
           >
             <div className="font-mono text-[10px] sm:text-[11px] font-bold text-ink uppercase flex items-center justify-center gap-1">
               <span>{t("ticketBook.coverage", "歌曲解鎖率")}</span>
             </div>
-            <div className="my-1 font-mono text-[18px] sm:text-[22px] font-black text-ink leading-none text-center">
+            <div className="my-0.5 sm:my-1 font-mono text-[18px] sm:text-[22px] font-black text-ink leading-none text-center">
               {milestones.coveragePercentage}%
             </div>
             <MilestoneProgressBar percentage={milestones.coveragePercentage} />
@@ -148,7 +154,7 @@ export function TicketBookMilestoneDashboard({
             </div>
             <div
               data-testid="milestone-coverage-cta"
-              className="mt-2 inline-flex items-center justify-center gap-1 px-1.5 py-0.5 rounded-[3px] bg-ink/5 group-hover:bg-ink group-hover:text-paper font-mono text-[9px] sm:text-[10px] font-bold text-ink transition-colors border border-ink/20 group-hover:border-ink"
+              className="mt-1 sm:mt-2 inline-flex items-center justify-center gap-1 px-1.5 py-0.5 rounded-[3px] bg-ink/5 group-hover:bg-ink group-hover:text-paper font-mono text-[9px] sm:text-[10px] font-bold text-ink transition-colors border border-ink/20 group-hover:border-ink"
             >
               <span aria-hidden="true">📖</span>
               <span>{t("ticketBook.viewChecklistCta", "查看圖鑑 ↗")}</span>
@@ -157,12 +163,12 @@ export function TicketBookMilestoneDashboard({
         ) : (
           <div
             data-testid="milestone-coverage"
-            className="rounded-[4px] border border-ink/20 bg-paper/60 p-2.5 sm:p-3 text-center flex flex-col justify-between"
+            className="rounded-[4px] border border-ink/20 bg-paper/60 p-2 sm:p-3 text-center flex flex-col justify-between"
           >
             <div className="font-mono text-[10px] sm:text-[11px] font-bold text-ink uppercase">
               {t("ticketBook.coverage", "歌曲解鎖率")}
             </div>
-            <div className="my-1 font-mono text-[18px] sm:text-[22px] font-black text-ink leading-none">
+            <div className="my-0.5 sm:my-1 font-mono text-[18px] sm:text-[22px] font-black text-ink leading-none">
               {milestones.coveragePercentage}%
             </div>
             <MilestoneProgressBar percentage={milestones.coveragePercentage} />
@@ -173,8 +179,17 @@ export function TicketBookMilestoneDashboard({
         )}
       </div>
 
-      {/* Secondary Details: Top 3 Songs & History Milestones */}
-      <div className="mt-3.5 grid grid-cols-1 sm:grid-cols-2 gap-3 pt-3 border-t border-line-soft">
+      {/* Mobile-only Tab Bar Slot (placed cleanly below 4-stat grid) */}
+      {mobileTabBar && (
+        <div className="order-2 sm:hidden">
+          {mobileTabBar}
+        </div>
+      )}
+
+      {/* Secondary Details & Footprint Map (Desktop: always visible; Mobile: visible in Insights tab) */}
+      <div className={`${mobileTab === "insights" ? "block" : "hidden sm:block"} order-4 sm:order-3`}>
+        {/* Secondary Details: Top 3 Songs & History Milestones */}
+        <div className="mt-3.5 grid grid-cols-1 sm:grid-cols-2 gap-3 pt-3 border-t border-line-soft">
         {/* Top 3 Live Songs */}
         <div data-testid="milestone-top-songs" className="rounded-[4px] border border-line-soft bg-paper/30 p-3">
           <button
@@ -291,6 +306,7 @@ export function TicketBookMilestoneDashboard({
         onSelectShow={onSelectShow}
         storage={storage}
       />
+      </div>
     </div>
   );
 }

@@ -707,6 +707,10 @@ export const dictEn = {
     filterBySong: "Filter Shows →",
     clearSongFilter: "Clear Song Filter",
     noChecklistMatches: "No matching songs under current filter",
+    tabTimeline: "Timeline",
+    tabInsights: "Footprint & Stats",
+    showMoreShows: "Show more ({count} more)",
+    mobileTimelineNav: "Ticket book views",
   },
   landing: {
     instantSearchAria: "Instant Search",

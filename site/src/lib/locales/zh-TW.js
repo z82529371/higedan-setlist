@@ -707,6 +707,10 @@ export const dictZhTw = {
     filterBySong: "篩選參戰場次 →",
     clearSongFilter: "清除曲目篩選",
     noChecklistMatches: "目前篩選條件下無符合的曲目",
+    tabTimeline: "參戰時間軸",
+    tabInsights: "足跡與高頻曲",
+    showMoreShows: "顯示更多場次（還有 {count} 場）",
+    mobileTimelineNav: "票夾檢視切換",
   },
   landing: {
     instantSearchAria: "即時檢索",

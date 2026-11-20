@@ -707,6 +707,10 @@ export const dictKo = {
     filterBySong: "직관 공연 필터링 →",
     clearSongFilter: "곡 필터 해제",
     noChecklistMatches: "현재 필터 조건에 일치하는 곡이 없습니다",
+    tabTimeline: "직관 타임라인",
+    tabInsights: "발자취·통계",
+    showMoreShows: "더 보기 ({count}개 남음)",
+    mobileTimelineNav: "티켓북 보기 전환",
   },
   landing: {
     instantSearchAria: "실시간 검색",

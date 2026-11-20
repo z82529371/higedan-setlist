@@ -40,6 +40,8 @@ export function TicketBookPage({
   const [isTransferModalOpen, setIsTransferModalOpen] = useState(false);
   const [isSongChecklistOpen, setIsSongChecklistOpen] = useState(false);
   const [memorialShowId, setMemorialShowId] = useState(initialMemorialShowId);
+  const [mobileTab, setMobileTab] = useState("timeline");
+  const [showAllTimelineOnMobile, setShowAllTimelineOnMobile] = useState(false);
 
   const milestones = useMemo(() => {
     return computeTicketBookMilestones({
@@ -181,36 +183,83 @@ export function TicketBookPage({
     };
   }, [memorialShowId, enrichedShows, showById, unitIdByShowId, unitData]);
 
+  const MOBILE_TIMELINE_INITIAL_COUNT = 8;
+  const hasActiveFilter =
+    selectedYear !== "all" || Boolean(selectedSongId) || searchKeyword.trim() !== "";
+  const shouldCollapseMobile = !hasActiveFilter && !showAllTimelineOnMobile;
+
+  const mobileTabBar =
+    attendedShows.length > 0 ? (
+      <div
+        role="tablist"
+        aria-label={t("ticketBook.mobileTimelineNav", "票夾檢視切換")}
+        data-testid="ticket-book-mobile-tabs"
+        className="mt-3 grid grid-cols-2 rounded-[4px] border-[1.5px] border-ink bg-paper p-0.5 gap-0.5"
+      >
+        <button
+          type="button"
+          role="tab"
+          aria-selected={mobileTab === "timeline"}
+          data-testid="ticket-book-tab-timeline"
+          onClick={() => setMobileTab("timeline")}
+          className={`flex items-center justify-center gap-1.5 rounded-[3px] px-2.5 py-1.5 font-mono text-[12px] font-bold transition-colors cursor-pointer ${
+            mobileTab === "timeline"
+              ? "bg-ink text-paper shadow-2xs"
+              : "text-ink/75 hover:text-ink hover:bg-tape-tint/50"
+          }`}
+        >
+          <span aria-hidden="true">🎫</span>
+          <span>{t("ticketBook.tabTimeline", "參戰時間軸")}</span>
+          <span className="opacity-80">({count})</span>
+        </button>
+        <button
+          type="button"
+          role="tab"
+          aria-selected={mobileTab === "insights"}
+          data-testid="ticket-book-tab-insights"
+          onClick={() => setMobileTab("insights")}
+          className={`flex items-center justify-center gap-1.5 rounded-[3px] px-2.5 py-1.5 font-mono text-[12px] font-bold transition-colors cursor-pointer ${
+            mobileTab === "insights"
+              ? "bg-ink text-paper shadow-2xs"
+              : "text-ink/75 hover:text-ink hover:bg-tape-tint/50"
+          }`}
+        >
+          <span aria-hidden="true">🗺️</span>
+          <span>{t("ticketBook.tabInsights", "足跡與高頻曲")}</span>
+        </button>
+      </div>
+    ) : null;
+
   return (
-    <div className="mx-auto max-w-[960px] px-4 sm:px-6 pt-8 pb-16 sm:py-8">
+    <div className="mx-auto max-w-[960px] px-3 sm:px-6 pt-5 pb-12 sm:py-8">
       {/* Main Ticket Receipt Card */}
       <article className={SLIP_ARTICLE}>
         {/* Washi Masking Tape Top Pin */}
         <div className={SLIP_TAPE} aria-hidden="true" />
 
         {/* Ticket Book Header Title Block */}
-        <header className="flex flex-col items-center text-center pb-4">
-          <div className="mb-2.5 inline-flex items-center justify-center w-12 h-12 rounded-[4px] bg-band border-[1.5px] border-ink shadow-2xs">
+        <header className="flex flex-col items-center text-center pb-3 sm:pb-4">
+          <div className="hidden sm:inline-flex mb-2.5 items-center justify-center w-12 h-12 rounded-[4px] bg-band border-[1.5px] border-ink shadow-2xs">
             <span className="text-2xl" aria-hidden="true">🎟️</span>
           </div>
 
-          <p className="m-0 font-mono text-[11px] sm:text-[12px] tracking-[0.2em] text-muted font-bold uppercase">
+          <p className="m-0 font-mono text-[10px] sm:text-[12px] tracking-[0.18em] sm:tracking-[0.2em] text-muted font-bold uppercase">
             CONCERT TICKET BOOK // ATTENDANCE ARCHIVE
           </p>
 
-          <h1 className="m-0 mt-1.5 font-display text-[clamp(20px,4.5vw,36px)] font-black leading-tight tracking-tight text-ink">
+          <h1 className="m-0 mt-1 sm:mt-1.5 font-display text-[20px] sm:text-[clamp(24px,4.5vw,36px)] font-black leading-tight tracking-tight text-ink">
             Official髭男dism <span className="font-bold text-band-ink">{t("ticketBook.title", "我的巡演票夾")}</span>
           </h1>
 
-          <p className="mt-2 mb-0 text-[12px] sm:text-[14px] text-muted max-w-[560px] leading-relaxed">
+          <p className="hidden sm:block mt-2 mb-0 text-[12px] sm:text-[14px] text-muted max-w-[560px] leading-relaxed">
             {t("ticketBook.subtitle", "記錄你的每場參戰軌跡，珍藏專屬於你的現場回憶")}
           </p>
 
           {/* Stats Badge & Inline Backup Action */}
-          <div className="mt-3.5 flex flex-wrap items-center justify-center gap-2">
+          <div className="mt-2.5 sm:mt-3.5 flex flex-wrap items-center justify-center gap-2">
             <span
               data-testid="ticket-book-total-badge"
-              className="inline-flex items-center gap-1.5 rounded-[3px] border border-ink/30 bg-tape px-3 py-1 font-mono text-[12px] sm:text-[13px] font-extrabold text-ink"
+              className="inline-flex items-center gap-1.5 rounded-[3px] border border-ink/30 bg-tape px-2.5 sm:px-3 py-1 font-mono text-[11px] sm:text-[13px] font-extrabold text-ink"
             >
               <span>{t("ticketBook.totalAttended", "累計參戰 {count} 場", { count })}</span>
             </span>
@@ -218,7 +267,7 @@ export function TicketBookPage({
               type="button"
               data-testid="ticket-book-backup-trigger"
               onClick={() => setIsTransferModalOpen(true)}
-              className="inline-flex items-center gap-1.5 rounded-[3px] border border-ink/30 bg-paper px-3 py-1 font-mono text-[11px] sm:text-[12px] font-bold text-ink hover:bg-tape-tint touch-stamp transition-colors cursor-pointer"
+              className="inline-flex items-center gap-1.5 rounded-[3px] border border-ink/30 bg-paper px-2.5 sm:px-3 py-1 font-mono text-[11px] sm:text-[12px] font-bold text-ink hover:bg-tape-tint touch-stamp transition-colors cursor-pointer"
               title={t("ticketBook.backupTriggerTitle", "備份或跨裝置轉移您的票夾紀錄")}
             >
               <span aria-hidden="true">⇄</span>
@@ -231,7 +280,7 @@ export function TicketBookPage({
         <TicketPerforationDivider />
 
         {/* Dynamic Career Milestones Dashboard (Issue #37, #46, #54) */}
-        <div className="mt-4 sm:mt-6">
+        <div className="mt-3 sm:mt-6">
           <TicketBookMilestoneDashboard
             milestones={milestones}
             onOpenSummaryCard={() => setIsSummaryModalOpen(true)}
@@ -240,6 +289,8 @@ export function TicketBookPage({
             allVenues={allVenues}
             onSelectShow={onSelectShow}
             storage={storage}
+            mobileTab={attendedShows.length === 0 ? "timeline" : mobileTab}
+            mobileTabBar={mobileTabBar}
           />
         </div>
 
@@ -271,8 +322,8 @@ export function TicketBookPage({
             )}
           </div>
         ) : (
-          /* Case 2: Filter Toolbar & Attended Shows Timeline */
-          <div className="space-y-5">
+          /* Case 2: Filter Toolbar & Attended Shows Timeline (Mobile: visible in Timeline tab) */
+          <div className={mobileTab === "timeline" ? "block space-y-3.5 sm:space-y-5" : "hidden sm:block space-y-5"}>
             {/* Filter & Live Search Toolbar */}
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2.5 bg-paper/60 p-2.5 sm:p-3 rounded-[6px] border border-line-soft">
               {/* Year Selector & Song Filter Badge */}
@@ -374,25 +425,28 @@ export function TicketBookPage({
               </div>
             ) : (
               /* Timeline Items */
-              <div className="space-y-3.5 relative">
+              <div className="space-y-2.5 sm:space-y-3.5 relative">
                 {/* Timeline vertical track border */}
                 <div className="absolute left-[13px] sm:left-[17px] top-4 bottom-4 w-[2px] bg-line-soft -z-0 hidden sm:block" />
 
-                {filteredShows.map((item) => {
+                {filteredShows.map((item, idx) => {
                   const showKey = item.entry.showKey;
                   const formattedDate = item.show ? showDate(item.show, locale) : item.date;
                   const timeLabel = item.show ? formatShowTime(item.show, locale) : null;
                   const placeLabel = item.show ? formatShowVenueCity(item.show, t, locale) : item.venue;
+                  const isHiddenOnMobile = shouldCollapseMobile && idx >= MOBILE_TIMELINE_INITIAL_COUNT;
 
                   return (
                     <div
                       key={showKey}
                       data-testid={`timeline-item-${showKey}`}
-                      className="group relative rounded-[4px] border-[1.5px] border-ink bg-card p-3.5 sm:p-4 shadow-[2.5px_2.5px_0_rgba(0,0,0,0.08)] hover:shadow-[3px_3px_0_rgba(0,0,0,0.15)] transition-shadow"
+                      className={`${
+                        isHiddenOnMobile ? "hidden sm:block" : ""
+                      } group relative rounded-[4px] border-[1.5px] border-ink bg-card p-3 sm:p-4 shadow-[2.5px_2.5px_0_rgba(0,0,0,0.08)] hover:shadow-[3px_3px_0_rgba(0,0,0,0.15)] transition-shadow`}
                     >
-                      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-line-soft pb-2.5">
+                      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 sm:gap-2 sm:border-b sm:border-line-soft sm:pb-2.5">
                         {/* Date & Tour Type Header */}
-                        <div className="flex flex-wrap items-center gap-2">
+                        <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
                           <span className="font-mono text-[12px] sm:text-[13px] font-black text-ink tracking-tight tabular-nums bg-paper px-2 py-0.5 rounded border border-ink/20">
                             📅 {formattedDate}
                           </span>
@@ -402,19 +456,19 @@ export function TicketBookPage({
                             </span>
                           )}
                           {item.unit?.type && (
-                            <span className="rounded bg-paper px-2 py-0.5 font-mono text-[10px] font-bold text-ink border border-ink/15 uppercase">
+                            <span className="rounded bg-paper px-1.5 sm:px-2 py-0.5 font-mono text-[10px] font-bold text-ink border border-ink/15 uppercase">
                               {t(`categories.${item.unit.type}`, item.unit.type)}
                             </span>
                           )}
                         </div>
 
-                        {/* Card Top Actions: Export Memorial, View Slip & Remove Check-in */}
-                        <div className="flex flex-wrap items-center gap-2 shrink-0 self-start sm:self-auto">
+                        {/* Card Actions: Desktop top-right; Mobile compact row */}
+                        <div className="hidden sm:flex flex-wrap items-center gap-2 shrink-0">
                           <button
                             type="button"
                             data-testid={`export-memorial-btn-${showKey}`}
                             onClick={() => setMemorialShowId(showKey)}
-                            className="inline-flex items-center gap-1 rounded bg-paper/60 hover:bg-tape-tint px-2 py-0.5 font-mono text-[10px] sm:text-[11px] font-bold text-ink border border-line-soft hover:border-ink/40 transition-colors cursor-pointer touch-stamp"
+                            className="inline-flex items-center gap-1 rounded bg-paper/60 hover:bg-tape-tint px-2 py-0.5 font-mono text-[11px] font-bold text-ink border border-line-soft hover:border-ink/40 transition-colors cursor-pointer touch-stamp"
                             title={t("ticketBook.exportMemorialCardTitle", "預覽並儲存本場次的紀念票根")}
                           >
                             <span aria-hidden="true">🎨</span>
@@ -446,7 +500,7 @@ export function TicketBookPage({
                             type="button"
                             data-testid={`remove-btn-${showKey}`}
                             onClick={() => remove(showKey)}
-                            className="inline-flex items-center gap-1 rounded bg-paper/60 hover:bg-request/10 px-2 py-0.5 font-mono text-[10px] sm:text-[11px] font-bold text-muted hover:text-request border border-line-soft hover:border-request/30 transition-colors cursor-pointer"
+                            className="inline-flex items-center gap-1 rounded bg-paper/60 hover:bg-request/10 px-2 py-0.5 font-mono text-[11px] font-bold text-muted hover:text-request border border-line-soft hover:border-request/30 transition-colors cursor-pointer"
                             title={t("ticketBook.removeAttended", "移出票夾")}
                             aria-label={t("ticketBook.removeAttended", "移出票夾")}
                           >
@@ -457,13 +511,13 @@ export function TicketBookPage({
                       </div>
 
                       {/* Tour & Show Title */}
-                      <div className="pt-2.5">
-                        <h3 className="m-0 font-display text-[15px] sm:text-[16px] font-bold text-ink leading-snug">
+                      <div className="pt-1.5 sm:pt-2.5">
+                        <h3 className="m-0 font-display text-[14px] sm:text-[16px] font-bold text-ink leading-snug">
                           {item.title}
                         </h3>
 
                         {/* Venue & City */}
-                        <div className="mt-1 flex flex-wrap items-center gap-1.5 text-[12px] sm:text-[13px] text-muted">
+                        <div className="mt-1 flex flex-wrap items-center gap-1 text-[12px] sm:text-[13px] text-muted">
                           <span aria-hidden="true">📍</span>
                           <span className="font-medium text-ink">{placeLabel}</span>
                           {item.prefecture && (
@@ -475,7 +529,7 @@ export function TicketBookPage({
 
                         {/* Optional Seat Info */}
                         {item.entry.seat && (
-                          <div className="mt-2 inline-flex items-center gap-1 font-mono text-[11px] text-ink bg-paper px-2 py-0.5 rounded border border-ink/20">
+                          <div className="mt-1.5 sm:mt-2 inline-flex items-center gap-1 font-mono text-[11px] text-ink bg-paper px-2 py-0.5 rounded border border-ink/20">
                             <span aria-hidden="true">💺</span>
                             <span>{item.entry.seat}</span>
                           </div>
@@ -483,15 +537,69 @@ export function TicketBookPage({
 
                         {/* Optional Notes */}
                         {item.entry.notes && (
-                          <div className="mt-2 rounded bg-paper/70 p-2 border-l-[3px] border-band text-[12px] text-ink font-sans leading-relaxed">
+                          <div className="mt-1.5 sm:mt-2 rounded bg-paper/70 p-2 border-l-[3px] border-band text-[12px] text-ink font-sans leading-relaxed">
                             <span className="text-muted text-[11px] mr-1">💬</span>
                             {item.entry.notes}
                           </div>
                         )}
+
+                        {/* Mobile Compact Bottom Action Bar */}
+                        <div className="mt-2.5 pt-2 border-t border-line-soft/70 flex sm:hidden items-center justify-between gap-2">
+                          <div className="flex items-center gap-2">
+                            <button
+                              type="button"
+                              onClick={() => setMemorialShowId(showKey)}
+                              className="inline-flex items-center gap-1 rounded bg-paper/80 hover:bg-tape-tint px-2 py-1 font-mono text-[11px] font-bold text-ink border border-line-soft transition-colors cursor-pointer touch-stamp"
+                              title={t("ticketBook.exportMemorialCardTitle", "預覽並儲存本場次的紀念票根")}
+                            >
+                              <span aria-hidden="true">🎨</span>
+                              <span>{t("ticketBook.exportMemorialCard", "儲存紀念票根")}</span>
+                            </button>
+
+                            <a
+                              href={routeHash.show(showKey, { lang: locale })}
+                              onClick={(e) => {
+                                if (onSelectShow) {
+                                  e.preventDefault();
+                                  onSelectShow(showKey);
+                                }
+                              }}
+                              className="inline-flex items-center gap-1 rounded bg-paper/80 px-2 py-1 font-mono text-[11px] font-bold text-ink border border-line-soft hover:border-ink/40 cursor-pointer touch-stamp"
+                              title={t("ticketBook.viewShowSlip", "查看票根")}
+                            >
+                              <span aria-hidden="true">🎫</span>
+                              <span>{t("ticketBook.viewShowSlip", "查看票根")}</span>
+                              <span aria-hidden="true">→</span>
+                            </a>
+                          </div>
+
+                          <button
+                            type="button"
+                            onClick={() => remove(showKey)}
+                            className="inline-flex items-center justify-center rounded bg-paper/80 hover:bg-request/10 px-2 py-1 font-mono text-[11px] font-bold text-muted hover:text-request border border-line-soft hover:border-request/30 transition-colors cursor-pointer"
+                            title={t("ticketBook.removeAttended", "移出票夾")}
+                            aria-label={t("ticketBook.removeAttended", "移出票夾")}
+                          >
+                            <span aria-hidden="true">🗑️</span>
+                          </button>
+                        </div>
                       </div>
                     </div>
                   );
                 })}
+
+                {shouldCollapseMobile && filteredShows.length > MOBILE_TIMELINE_INITIAL_COUNT && (
+                  <button
+                    type="button"
+                    data-testid="ticket-book-show-more-btn"
+                    onClick={() => setShowAllTimelineOnMobile(true)}
+                    className="sm:hidden w-full py-2.5 px-4 rounded-[4px] border-[1.5px] border-ink bg-paper hover:bg-tape-tint font-mono text-[12px] font-bold text-ink transition-colors cursor-pointer touch-stamp"
+                  >
+                    {t("ticketBook.showMoreShows", "顯示更多場次（還有 {count} 場）", {
+                      count: filteredShows.length - MOBILE_TIMELINE_INITIAL_COUNT,
+                    })}
+                  </button>
+                )}
               </div>
             )}
           </div>
@@ -521,6 +629,7 @@ export function TicketBookPage({
         currentFilterSongId={selectedSongId}
         onFilterBySong={(songId) => {
           setSelectedSongId(songId);
+          setMobileTab("timeline");
           setIsSongChecklistOpen(false);
         }}
       />

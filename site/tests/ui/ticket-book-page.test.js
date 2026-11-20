@@ -949,4 +949,91 @@ describe("23. Tour TicketBook Dedicated Page (#/tickets) & Timeline Management (
       storage.clear();
     });
   });
+
+  describe("Subtest 10: Mobile Tabs & Timeline 8-Show Collapse Optimization", () => {
+    it("renders mobile tab bar only when attended > 0 and collapses timeline beyond 8 shows on mobile unless filtered", async () => {
+      const { TicketBookPage } = await loadModule("/src/components/ticket-book/TicketBookPage.jsx");
+      const { I18nProvider } = await loadModule("/src/lib/i18n.jsx");
+      const { getSafeStorage, recordAttendance } = await loadModule("/src/lib/ticket-book.js");
+
+      const storage = getSafeStorage();
+      storage.clear();
+
+      // 1. Empty state must NOT render mobile tab bar
+      const emptyHtml = renderToStaticMarkup(
+        React.createElement(
+          I18nProvider,
+          { initialLocale: "zh-TW" },
+          React.createElement(TicketBookPage, {
+            unitData: mockUnitData,
+            showById: mockShowById,
+            unitIdByShowId: mockUnitIdByShowId,
+            storage,
+          })
+        )
+      );
+      assert.ok(!emptyHtml.includes('data-testid="ticket-book-mobile-tabs"'), "Empty state must not render mobile tabs");
+
+      // 2. Populate 10 shows to test mobile 8-show initial cap
+      const manyShowById = new Map(mockShowById);
+      const manyUnitIdByShowId = new Map(mockUnitIdByShowId);
+      for (let i = 1; i <= 10; i++) {
+        const sid = `mock-mobile-${i}`;
+        const day = String(i).padStart(2, "0");
+        manyShowById.set(sid, {
+          id: sid,
+          date: `2024-10-${day}`,
+          city: "東京",
+          venue: "日本武道館",
+          region: "日本 - 關東",
+          prefecture: "東京都",
+          title: `Mobile Test Show ${i}`,
+        });
+        manyUnitIdByShowId.set(sid, "asia-tour-2024");
+        recordAttendance(sid, {}, storage);
+      }
+
+      const fullHtml = renderToStaticMarkup(
+        React.createElement(
+          I18nProvider,
+          { initialLocale: "zh-TW" },
+          React.createElement(TicketBookPage, {
+            unitData: mockUnitData,
+            showById: manyShowById,
+            unitIdByShowId: manyUnitIdByShowId,
+            storage,
+          })
+        )
+      );
+
+      assert.ok(fullHtml.includes('data-testid="ticket-book-mobile-tabs"'), "Must render mobile tab bar when attended > 0");
+      assert.ok(fullHtml.includes('data-testid="ticket-book-tab-timeline"'), "Must render timeline tab");
+      assert.ok(fullHtml.includes('data-testid="ticket-book-tab-insights"'), "Must render insights tab");
+      assert.ok(fullHtml.includes('data-testid="ticket-book-show-more-btn"'), "Must render show-more button when > 8 shows");
+      assert.ok(fullHtml.includes("還有 2 場"), "Show-more button must display remaining count (2)");
+      // Oldest 2 shows (index 8 and 9, i.e. mock-mobile-2 and mock-mobile-1) should carry hidden sm:block
+      assert.ok(
+        fullHtml.includes('data-testid="timeline-item-mock-mobile-1" class="hidden sm:block'),
+        "10th show in reverse-chronological order must be hidden on mobile initially"
+      );
+
+      // 3. When a filter is active, show-more button must not be rendered
+      const filteredHtml = renderToStaticMarkup(
+        React.createElement(
+          I18nProvider,
+          { initialLocale: "zh-TW" },
+          React.createElement(TicketBookPage, {
+            unitData: mockUnitData,
+            showById: manyShowById,
+            unitIdByShowId: manyUnitIdByShowId,
+            storage,
+            initialYear: "2024",
+          })
+        )
+      );
+      assert.ok(!filteredHtml.includes('data-testid="ticket-book-show-more-btn"'), "Show-more button must not appear when filter is active");
+
+      storage.clear();
+    });
+  });
 });

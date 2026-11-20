@@ -707,6 +707,10 @@ export const dictJa = {
     filterBySong: "参戦公演を絞り込む →",
     clearSongFilter: "曲の絞り込みを解除",
     noChecklistMatches: "該当する楽曲がありません",
+    tabTimeline: "参戦タイムライン",
+    tabInsights: "足跡・統計",
+    showMoreShows: "さらに表示（残り {count} 公演）",
+    mobileTimelineNav: "チケットブック表示切替",
   },
   landing: {
     instantSearchAria: "リアルタイム検索",
