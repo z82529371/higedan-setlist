@@ -2,6 +2,14 @@
   "id": "road-to-one-man-tour-2021-2022",
   "title": "Official髭男dism Road to 「one - man tour 2021-2022 (仮)」",
   "type": "特別專場",
+  "officialUrl": "https://fc.higedan.com/feature/roadto_tour2122",
+  "theme": {
+    "light": "#265c69",
+    "lightInk": "#ffffff",
+    "dark": "#59b0c4",
+    "darkInk": "#000000",
+    "source": "https://fc.higedan.com/feature/roadto_tour2122"
+  },
   "shows": [
     {
       "id": "1310531",

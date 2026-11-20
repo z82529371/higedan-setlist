@@ -25,7 +25,14 @@
           "songId": "no-doubt"
         }
       ],
-      "spotifyAlbumId": "3i1Z5gf7HVY3eXKLPkBRxE"
+      "spotifyAlbumId": "3i1Z5gf7HVY3eXKLPkBRxE",
+      "theme": {
+        "light": "#8b334e",
+        "lightInk": "#ffffff",
+        "dark": "#c86080",
+        "darkInk": "#000000",
+        "source": "https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e02d48defab6cc1de5f4564782c"
+      }
     },
     {
       "index": 2,
@@ -66,7 +73,14 @@
           "songId": null
         }
       ],
-      "spotifyAlbumId": "6wx6e8e2vwidwLcMno2cew"
+      "spotifyAlbumId": "6wx6e8e2vwidwLcMno2cew",
+      "theme": {
+        "light": "#74062a",
+        "lightInk": "#ffffff",
+        "dark": "#f9256a",
+        "darkInk": "#000000",
+        "source": "https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e02c03d59ccf637e7ce5754e370"
+      }
     },
     {
       "index": 3,
@@ -96,7 +110,14 @@
           "songId": null
         }
       ],
-      "spotifyAlbumId": "5535qs04bhKXr29EMzCzQT"
+      "spotifyAlbumId": "5535qs04bhKXr29EMzCzQT",
+      "theme": {
+        "light": "#e57d16",
+        "lightInk": "#000000",
+        "dark": "#f08e2e",
+        "darkInk": "#000000",
+        "source": "https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e02104ab1d90435313f0bbeac0a"
+      }
     },
     {
       "index": 4,
@@ -126,7 +147,14 @@
           "songId": null
         }
       ],
-      "spotifyAlbumId": "6imbwxzVgfsIf0vqnhtwxs"
+      "spotifyAlbumId": "6imbwxzVgfsIf0vqnhtwxs",
+      "theme": {
+        "light": "#b83ba6",
+        "lightInk": "#ffffff",
+        "dark": "#d060c0",
+        "darkInk": "#000000",
+        "source": "https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e0265f40b8174dd94a3226ad0a6"
+      }
     },
     {
       "index": 5,
@@ -168,7 +196,14 @@
           "songId": null
         }
       ],
-      "spotifyAlbumId": "7INGHC3LR4KsJp8nFIzol2"
+      "spotifyAlbumId": "7INGHC3LR4KsJp8nFIzol2",
+      "theme": {
+        "light": "#00aaf2",
+        "lightInk": "#000000",
+        "dark": "#1fbcff",
+        "darkInk": "#000000",
+        "source": "https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e02729baeb39b79ca07d27d6566"
+      }
     },
     {
       "index": 6,
@@ -219,7 +254,14 @@
           "title": "日常 (Instrumental)",
           "songId": null
         }
-      ]
+      ],
+      "theme": {
+        "light": "#88b549",
+        "lightInk": "#000000",
+        "dark": "#97c15d",
+        "darkInk": "#000000",
+        "source": "https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e02f2cf2d6174e1a540e7b3af7c"
+      }
     },
     {
       "index": 7,
@@ -270,7 +312,14 @@
           "title": "エルダーフラワー (Instrumental)",
           "songId": null
         }
-      ]
+      ],
+      "theme": {
+        "light": "#a5614c",
+        "lightInk": "#ffffff",
+        "dark": "#bc7c68",
+        "darkInk": "#000000",
+        "source": "https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e025440ee8f2e4b92bc90736a56"
+      }
     }
   ],
   "digitalSingles": [
@@ -299,7 +348,14 @@
           "songId": "brothers"
         }
       ],
-      "spotifyAlbumId": "66EuZcoqWAkmwHVgqHfSiG"
+      "spotifyAlbumId": "66EuZcoqWAkmwHVgqHfSiG",
+      "theme": {
+        "light": "#cfc6c2",
+        "lightInk": "#000000",
+        "dark": "#cfc6c2",
+        "darkInk": "#000000",
+        "source": "https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e02665e1a694531659de404e742"
+      }
     },
     {
       "index": 2,
@@ -324,7 +380,14 @@
           "songId": "bad-for-me"
         }
       ],
-      "spotifyAlbumId": "5DMLelmP0hvcWPtENrdwzB"
+      "spotifyAlbumId": "5DMLelmP0hvcWPtENrdwzB",
+      "theme": {
+        "light": "#fc6dfb",
+        "lightInk": "#000000",
+        "dark": "#ff6afe",
+        "darkInk": "#000000",
+        "source": "https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e022ec10b28c9b10b86b8ce2e02"
+      }
     },
     {
       "index": 3,
@@ -352,7 +415,14 @@
           "songId": "parabola"
         }
       ],
-      "spotifyAlbumId": "6veWdMPkxMW2CfvZeArlmB"
+      "spotifyAlbumId": "6veWdMPkxMW2CfvZeArlmB",
+      "theme": {
+        "light": "#357985",
+        "lightInk": "#ffffff",
+        "dark": "#5cb2c1",
+        "darkInk": "#000000",
+        "source": "https://image-cdn-fa.spotifycdn.com/image/ab67616d00001e02b7cd3817b649807281ff237b"
+      }
     },
     {
       "index": 4,
@@ -377,7 +447,14 @@
           "songId": "laughter"
         }
       ],
-      "spotifyAlbumId": "3KvEqRihHXZ2suFEnSpKO2"
+      "spotifyAlbumId": "3KvEqRihHXZ2suFEnSpKO2",
+      "theme": {
+        "light": "#dcca35",
+        "lightInk": "#000000",
+        "dark": "#e2d03c",
+        "darkInk": "#000000",
+        "source": "https://image-cdn-fa.spotifycdn.com/image/ab67616d00001e0278417c2071e3fae684515f23"
+      }
     },
     {
       "index": 5,
@@ -404,7 +481,14 @@
           "songId": "cry-baby"
         }
       ],
-      "spotifyAlbumId": "1bUVsdWQhyic0Rxn4kIH5n"
+      "spotifyAlbumId": "1bUVsdWQhyic0Rxn4kIH5n",
+      "theme": {
+        "light": "#26202d",
+        "lightInk": "#ffffff",
+        "dark": "#8d7ba3",
+        "darkInk": "#000000",
+        "source": "https://image-cdn-fa.spotifycdn.com/image/ab67616d00001e0242e1509019364ad3370d4101"
+      }
     },
     {
       "index": 6,
@@ -430,7 +514,14 @@
           "songId": "anarchy"
         }
       ],
-      "spotifyAlbumId": "0DxahgbYv8ZUk0y1kWye4n"
+      "spotifyAlbumId": "0DxahgbYv8ZUk0y1kWye4n",
+      "theme": {
+        "light": "#b61211",
+        "lightInk": "#ffffff",
+        "dark": "#f13837",
+        "darkInk": "#000000",
+        "source": "https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e0267ec5fe2f317073d6ccfa436"
+      }
     },
     {
       "index": 7,
@@ -458,7 +549,14 @@
           "songId": "mixed-nuts"
         }
       ],
-      "spotifyAlbumId": "6ex2JkvBLZYGbomCfd0N85"
+      "spotifyAlbumId": "6ex2JkvBLZYGbomCfd0N85",
+      "theme": {
+        "light": "#a35d11",
+        "lightInk": "#ffffff",
+        "dark": "#ee922f",
+        "darkInk": "#000000",
+        "source": "https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e02b0d70fdad2d5ff57e583524b"
+      }
     },
     {
       "index": 8,
@@ -485,7 +583,14 @@
           "songId": "subtitle"
         }
       ],
-      "spotifyAlbumId": "696Kc22jU73Oaa3cM2CylT"
+      "spotifyAlbumId": "696Kc22jU73Oaa3cM2CylT",
+      "theme": {
+        "light": "#9d9d9d",
+        "lightInk": "#000000",
+        "dark": "#9d9d9d",
+        "darkInk": "#000000",
+        "source": "https://image-cdn-fa.spotifycdn.com/image/ab67616d00001e028333a72128901f85a9910561"
+      }
     },
     {
       "index": 9,
@@ -513,7 +618,14 @@
           "songId": "white-noise"
         }
       ],
-      "spotifyAlbumId": "087ZBt6v5RguZ1L9hYfbS9"
+      "spotifyAlbumId": "087ZBt6v5RguZ1L9hYfbS9",
+      "theme": {
+        "light": "#74696d",
+        "lightInk": "#ffffff",
+        "dark": "#94898d",
+        "darkInk": "#000000",
+        "source": "https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e02441539148805088db8ce9fa6"
+      }
     },
     {
       "index": 10,
@@ -540,7 +652,14 @@
           "songId": "tattoo"
         }
       ],
-      "spotifyAlbumId": "4JnW56WwhAK3cuVy1VEDC7"
+      "spotifyAlbumId": "4JnW56WwhAK3cuVy1VEDC7",
+      "theme": {
+        "light": "#166f78",
+        "lightInk": "#ffffff",
+        "dark": "#3dd1e0",
+        "darkInk": "#000000",
+        "source": "https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e02573e0c727d176b2ac61a0500"
+      }
     },
     {
       "index": 11,
@@ -566,7 +685,14 @@
           "songId": "chessboard"
         }
       ],
-      "spotifyAlbumId": "5Rw4smBVtO1n7axKhmg3hm"
+      "spotifyAlbumId": "5Rw4smBVtO1n7axKhmg3hm",
+      "theme": {
+        "light": "#88b549",
+        "lightInk": "#000000",
+        "dark": "#97c15d",
+        "darkInk": "#000000",
+        "source": "https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e02f2cf2d6174e1a540e7b3af7c"
+      }
     },
     {
       "index": 12,
@@ -590,7 +716,14 @@
           "songId": "nichijo"
         }
       ],
-      "spotifyAlbumId": "2hMfFCHPLOKKxlfck6Sknw"
+      "spotifyAlbumId": "2hMfFCHPLOKKxlfck6Sknw",
+      "theme": {
+        "light": "#0e3052",
+        "lightInk": "#ffffff",
+        "dark": "#3b8fe2",
+        "darkInk": "#000000",
+        "source": "https://image-cdn-fa.spotifycdn.com/image/ab67616d00001e02a162174c1f36250c19210290"
+      }
     },
     {
       "index": 13,
@@ -615,7 +748,14 @@
           "songId": "soulsoup"
         }
       ],
-      "spotifyAlbumId": "2xhpNfblfc3x0Lkul2hf1p"
+      "spotifyAlbumId": "2xhpNfblfc3x0Lkul2hf1p",
+      "theme": {
+        "light": "#ce2d84",
+        "lightInk": "#ffffff",
+        "dark": "#dc4c9a",
+        "darkInk": "#000000",
+        "source": "https://image-cdn-fa.spotifycdn.com/image/ab67616d00001e0211124134a8c9ccaa14a56673"
+      }
     },
     {
       "index": 14,
@@ -642,7 +782,14 @@
           "songId": "same-blue"
         }
       ],
-      "spotifyAlbumId": "7dPMZch50b7Ntn0cpiuz7X"
+      "spotifyAlbumId": "7dPMZch50b7Ntn0cpiuz7X",
+      "theme": {
+        "light": "#085f6e",
+        "lightInk": "#ffffff",
+        "dark": "#29d7f5",
+        "darkInk": "#000000",
+        "source": "https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e02bbe16072fae81d6fbbb141dc"
+      }
     },
     {
       "index": 15,
@@ -666,7 +813,14 @@
           "songId": "50pct"
         }
       ],
-      "spotifyAlbumId": "2uSlUBtDUEoP4ex4epfchE"
+      "spotifyAlbumId": "2uSlUBtDUEoP4ex4epfchE",
+      "theme": {
+        "light": "#0d449d",
+        "lightInk": "#ffffff",
+        "dark": "#357df3",
+        "darkInk": "#000000",
+        "source": "https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e02a3cb42f846dfc7f72df9502b"
+      }
     },
     {
       "index": 16,
@@ -692,7 +846,14 @@
           "songId": "rashisa"
         }
       ],
-      "spotifyAlbumId": "0bM8WsMWMrUc533vPzMcGG"
+      "spotifyAlbumId": "0bM8WsMWMrUc533vPzMcGG",
+      "theme": {
+        "light": "#50759c",
+        "lightInk": "#ffffff",
+        "dark": "#6a8fb5",
+        "darkInk": "#000000",
+        "source": "https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e02341a46a97106758d73a738e0"
+      }
     },
     {
       "index": 17,
@@ -715,7 +876,14 @@
           "songId": "sanitizer"
         }
       ],
-      "spotifyAlbumId": "6osLopiqW4KzuZFTK3Qif7"
+      "spotifyAlbumId": "6osLopiqW4KzuZFTK3Qif7",
+      "theme": {
+        "light": "#b8b8b8",
+        "lightInk": "#000000",
+        "dark": "#d6d6d6",
+        "darkInk": "#000000",
+        "source": "https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e022809faa218e950f03824626f"
+      }
     },
     {
       "index": 18,
@@ -738,7 +906,14 @@
           "songId": "make-me-wonder"
         }
       ],
-      "spotifyAlbumId": "6iLSOyr4tKSTGIuCRsEq6T"
+      "spotifyAlbumId": "6iLSOyr4tKSTGIuCRsEq6T",
+      "theme": {
+        "light": "#dc2c19",
+        "lightInk": "#ffffff",
+        "dark": "#ed4331",
+        "darkInk": "#000000",
+        "source": "https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e026c8ebcf7b60a913b2866e35d"
+      }
     },
     {
       "index": 19,
@@ -763,7 +938,14 @@
           "songId": "elder-flower"
         }
       ],
-      "spotifyAlbumId": "6Bnr1I9oVYXaEChRdKbrYE"
+      "spotifyAlbumId": "6Bnr1I9oVYXaEChRdKbrYE",
+      "theme": {
+        "light": "#bcc086",
+        "lightInk": "#000000",
+        "dark": "#bdc185",
+        "darkInk": "#000000",
+        "source": "https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e0248ca6b510aa5573fcc6b197d"
+      }
     },
     {
       "index": 20,
@@ -787,7 +969,14 @@
           "songId": "stardust"
         }
       ],
-      "spotifyAlbumId": "5VQOZVM7WcsqMfRuT3SAxc"
+      "spotifyAlbumId": "5VQOZVM7WcsqMfRuT3SAxc",
+      "theme": {
+        "light": "#a5614c",
+        "lightInk": "#ffffff",
+        "dark": "#bc7c68",
+        "darkInk": "#000000",
+        "source": "https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e025440ee8f2e4b92bc90736a56"
+      }
     }
   ],
   "collaborationSingles": [
@@ -811,7 +1000,14 @@
           "title": "不器用な二人で",
           "songId": "bukiyou-na-futari-de"
         }
-      ]
+      ],
+      "theme": {
+        "light": "#117b64",
+        "lightInk": "#ffffff",
+        "dark": "#36e8c1",
+        "darkInk": "#000000",
+        "source": "https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e02ac41dedfb556474ae9ea9aae"
+      }
     }
   ],
   "eps": [
@@ -859,7 +1055,14 @@
           "songId": "kiiroi-kuruma"
         }
       ],
-      "spotifyAlbumId": "14g7DTj50Vr316564kkhuK"
+      "spotifyAlbumId": "14g7DTj50Vr316564kkhuK",
+      "theme": {
+        "light": "#4b780d",
+        "lightInk": "#ffffff",
+        "dark": "#9eee30",
+        "darkInk": "#000000",
+        "source": "https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e024917c3a1279a47b94e280726"
+      }
     },
     {
       "index": 2,
@@ -892,7 +1095,14 @@
         {
           "trackNumber": 2,
           "title": "FIRE GROUND",
-          "songId": "fire-ground"
+          "songId": "fire-ground",
+          "theme": {
+            "light": "#c1133f",
+            "lightInk": "#ffffff",
+            "dark": "#ef2e5f",
+            "darkInk": "#000000",
+            "source": "https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e02a9b10c8532efb4e0d876678a"
+          }
         },
         {
           "trackNumber": 3,
@@ -905,7 +1115,14 @@
           "songId": "brothers"
         }
       ],
-      "spotifyAlbumId": "77x1D2BCpkwocRDCfMyMDO"
+      "spotifyAlbumId": "77x1D2BCpkwocRDCfMyMDO",
+      "theme": {
+        "light": "#16359a",
+        "lightInk": "#ffffff",
+        "dark": "#5b7deb",
+        "darkInk": "#000000",
+        "source": "https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e02a9b10c8532efb4e0d876678a"
+      }
     },
     {
       "index": 3,
@@ -951,7 +1168,14 @@
           "songId": "natsu-moyou-no-neko"
         }
       ],
-      "spotifyAlbumId": "0NYOwZlty0Lr8N39A2Sdnw"
+      "spotifyAlbumId": "0NYOwZlty0Lr8N39A2Sdnw",
+      "theme": {
+        "light": "#67b7af",
+        "lightInk": "#000000",
+        "dark": "#65b9b1",
+        "darkInk": "#000000",
+        "source": "https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e028f58e5574dec9bbad7f42513"
+      }
     },
     {
       "index": 4,
@@ -1003,7 +1227,14 @@
           "songId": "hakan"
         }
       ],
-      "spotifyAlbumId": "0EFPXj8JksJk56eiITsTd1"
+      "spotifyAlbumId": "0EFPXj8JksJk56eiITsTd1",
+      "theme": {
+        "light": "#a35d11",
+        "lightInk": "#ffffff",
+        "dark": "#ee922f",
+        "darkInk": "#000000",
+        "source": "https://image-cdn-fa.spotifycdn.com/image/ab67616d00001e02e7268e452605a6f49f4e02ac"
+      }
     },
     {
       "index": "digital-1",
@@ -1037,7 +1268,14 @@
           "songId": "itan-na-star"
         }
       ],
-      "spotifyAlbumId": "3SG54r7kP2QwZIOs81ZkpV"
+      "spotifyAlbumId": "3SG54r7kP2QwZIOs81ZkpV",
+      "theme": {
+        "light": "#566fa0",
+        "lightInk": "#ffffff",
+        "dark": "#6b83b2",
+        "darkInk": "#000000",
+        "source": "https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e0253494fd32a07ab38cccdbab4"
+      }
     }
   ],
   "albums": {
@@ -1130,7 +1368,14 @@
             "songId": "hatsumeika"
           }
         ],
-        "spotifyAlbumId": "0TvzefPmPZ3fbUT6rrYqSQ"
+        "spotifyAlbumId": "0TvzefPmPZ3fbUT6rrYqSQ",
+        "theme": {
+          "light": "#0f96b5",
+          "lightInk": "#000000",
+          "dark": "#2bcdf3",
+          "darkInk": "#000000",
+          "source": "https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e02b0ab6e5ff8ba422784d60191"
+        }
       },
       {
         "index": 1,
@@ -1231,7 +1476,14 @@
             "songId": "travelers"
           }
         ],
-        "spotifyAlbumId": "06EGXZmD5OR6tS45QfB15F"
+        "spotifyAlbumId": "06EGXZmD5OR6tS45QfB15F",
+        "theme": {
+          "light": "#457671",
+          "lightInk": "#ffffff",
+          "dark": "#70aea7",
+          "darkInk": "#000000",
+          "source": "https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e0232e116533e9ec2de8e80226e"
+        }
       },
       {
         "index": 2,
@@ -1332,7 +1584,14 @@
             "songId": "lost-in-my-room"
           }
         ],
-        "spotifyAlbumId": "62MLwTkt9WQ3ke3bvv3VVj"
+        "spotifyAlbumId": "62MLwTkt9WQ3ke3bvv3VVj",
+        "theme": {
+          "light": "#cac4bb",
+          "lightInk": "#000000",
+          "dark": "#cac4bb",
+          "darkInk": "#000000",
+          "source": "https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e027f1809b2d6f9e22264dd07b0"
+        }
       },
       {
         "index": 3,
@@ -1443,7 +1702,14 @@
             "songId": "b-side-blues"
           }
         ],
-        "spotifyAlbumId": "1MXDOIz48Pm0hESW66oAyA"
+        "spotifyAlbumId": "1MXDOIz48Pm0hESW66oAyA",
+        "theme": {
+          "light": "#0f3118",
+          "lightInk": "#ffffff",
+          "dark": "#50cd71",
+          "darkInk": "#000000",
+          "source": "https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e02a182a0c5b859cb934d210909"
+        }
       }
     ],
     "miniAlbums": [
@@ -1504,7 +1770,14 @@
             "songId": "darin"
           }
         ],
-        "spotifyAlbumId": "0K8cBxTMGkr1jTxBjvQBcX"
+        "spotifyAlbumId": "0K8cBxTMGkr1jTxBjvQBcX",
+        "theme": {
+          "light": "#0e7f8c",
+          "lightInk": "#ffffff",
+          "dark": "#2edbef",
+          "darkInk": "#000000",
+          "source": "https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e02c59e2aca230146adccbb864c"
+        }
       },
       {
         "index": 2,
@@ -1553,7 +1826,14 @@
             "songId": "nichiyoubi-no-love-letter"
           }
         ],
-        "spotifyAlbumId": "7vRfFqFrXlDeLwk32wl6UH"
+        "spotifyAlbumId": "7vRfFqFrXlDeLwk32wl6UH",
+        "theme": {
+          "light": "#d4b481",
+          "lightInk": "#000000",
+          "dark": "#d6b47f",
+          "darkInk": "#000000",
+          "source": "https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e0238a6b3af1de5e0551bcd2e04"
+        }
       },
       {
         "index": 3,
@@ -1612,7 +1892,14 @@
             "songId": "trailer"
           }
         ],
-        "spotifyAlbumId": "1Pa7akPNBiX95RW6zOn4hu"
+        "spotifyAlbumId": "1Pa7akPNBiX95RW6zOn4hu",
+        "theme": {
+          "light": "#0091d2",
+          "lightInk": "#000000",
+          "dark": "#1fbaff",
+          "darkInk": "#000000",
+          "source": "https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e02d3e94d5ceefd5d6afcaf31ca"
+        }
       }
     ],
     "digitalAlbums": [
@@ -1626,7 +1913,14 @@
         "chartRankOricon": 16,
         "id": "album-traveler-instrumentals",
         "coverUrl": "https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e0202d20700b1e46a831ad47261",
-        "spotifyAlbumId": "6cKhEDMTUMBmKmonlxhSSc"
+        "spotifyAlbumId": "6cKhEDMTUMBmKmonlxhSSc",
+        "theme": {
+          "light": "#6f6f6f",
+          "lightInk": "#ffffff",
+          "dark": "#8f8f8f",
+          "darkInk": "#000000",
+          "source": "https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e0202d20700b1e46a831ad47261"
+        }
       },
       {
         "index": 2,
@@ -1638,7 +1932,14 @@
         "chartRankOricon": 44,
         "id": "album-editorial-instrumentals",
         "coverUrl": "https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e0261b844af030d99f5de9b0738",
-        "spotifyAlbumId": "6aNoUpDcoSJjFdDek1N8Ls"
+        "spotifyAlbumId": "6aNoUpDcoSJjFdDek1N8Ls",
+        "theme": {
+          "light": "#bababa",
+          "lightInk": "#000000",
+          "dark": "#bababa",
+          "darkInk": "#000000",
+          "source": "https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e0261b844af030d99f5de9b0738"
+        }
       },
       {
         "index": "live-1",

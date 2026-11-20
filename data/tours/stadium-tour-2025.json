@@ -2,6 +2,14 @@
   "id": "stadium-tour-2025",
   "title": "OFFICIAL HIGE DANDISM LIVE at STADIUM 2025",
   "type": "巡演專場",
+  "officialUrl": "https://fc.higedan.com/feature/stadium_2025",
+  "theme": {
+    "light": "#cf5ba2",
+    "lightInk": "#000000",
+    "dark": "#e378b9",
+    "darkInk": "#000000",
+    "source": "https://fc.higedan.com/feature/stadium_2025"
+  },
   "shows": [
     {
       "id": "1735836",

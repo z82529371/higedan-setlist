@@ -3,6 +3,13 @@
   "title": "official髭男dism one-man tour 2019",
   "shortTitle": "one-man tour 2019",
   "type": "巡演專場",
+  "theme": {
+    "light": "#0d6b8c",
+    "lightInk": "#ffffff",
+    "dark": "#3bb2d6",
+    "darkInk": "#000000",
+    "source": "https://higedan.com/discography/detail/15/"
+  },
   "shows": [
     {
       "id": "1049544",

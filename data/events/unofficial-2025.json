@@ -2,6 +2,14 @@
   "id": "unofficial-2025",
   "title": "Official髭男dism one-man live 2025 -UNOFFICIAL-",
   "type": "特別專場",
+  "officialUrl": "https://event.higedan.com/feature/live_2025",
+  "theme": {
+    "light": "#8206ee",
+    "lightInk": "#ffffff",
+    "dark": "#b766ff",
+    "darkInk": "#000000",
+    "source": "https://event.higedan.com/feature/live_2025"
+  },
   "shows": [
     {
       "id": "1775094",

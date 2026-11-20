@@ -2,6 +2,14 @@
   "id": "unofficial-2024",
   "title": "Official髭男dism one-man live 2024 -UNOFFICIAL-",
   "type": "特別專場",
+  "officialUrl": "https://fc.higedan.com/feature/live_2024",
+  "theme": {
+    "light": "#bebebe",
+    "lightInk": "#000000",
+    "dark": "#d4d4d4",
+    "darkInk": "#000000",
+    "source": "https://higedan.com/news/detail/100960"
+  },
   "shows": [
     {
       "id": "1672294",

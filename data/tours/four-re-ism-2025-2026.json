@@ -2,6 +2,14 @@
   "id": "four-re-ism-2025-2026",
   "title": "OFFICIAL HIGE DANDISM one-man tour FOUR-RE:ISM",
   "type": "巡演專場",
+  "officialUrl": "https://event.higedan.com/feature/zepp2025_hall2026",
+  "theme": {
+    "light": "#222222",
+    "lightInk": "#ffffff",
+    "dark": "#d4d8de",
+    "darkInk": "#000000",
+    "source": "https://fc.higedan.com/news/detail/101478"
+  },
   "templateBasis": "全自動提煉：基於 10 場演出提取 $\\ge 50\\%$ 多數共識歌單",
   "templateSetlist": [
     {

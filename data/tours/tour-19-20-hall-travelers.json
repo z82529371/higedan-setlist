@@ -3,6 +3,13 @@
   "title": "Tour 19/20 - Hall Travelers -",
   "shortTitle": "Tour 19/20 - Hall Travelers -",
   "type": "巡演專場",
+  "theme": {
+    "light": "#b80d15",
+    "lightInk": "#ffffff",
+    "dark": "#ff5252",
+    "darkInk": "#000000",
+    "source": "https://i.kfs.io/playlist/global/66713301v1/cropresize/600x600.jpg"
+  },
   "shows": [
     {
       "id": "1150083",

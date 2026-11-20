@@ -2,6 +2,14 @@
   "id": "asia-tour-2024",
   "title": "Official髭男dism Asia Tour 2024 - Rejoice -",
   "type": "巡演專場",
+  "officialUrl": "https://fc.higedan.com/feature/live_2024",
+  "theme": {
+    "light": "#4d4d4d",
+    "lightInk": "#ffffff",
+    "dark": "#b8b8b8",
+    "darkInk": "#000000",
+    "source": "https://fc.higedan.com/feature/live_2024"
+  },
   "shows": [
     {
       "id": "1720174",
