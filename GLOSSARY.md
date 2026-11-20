@@ -1,4 +1,4 @@
-# Official髭男dism 現場演出檔案庫
+# Official髭男dism LIVE ARCHIVE
 
 系統性收錄 Official 髭男 dism 公開演出的場次與曲目，建立高可信度、極速雙向檢索的現場歷史足跡與個人票夾記錄。
 

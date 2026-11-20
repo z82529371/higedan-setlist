@@ -14,6 +14,7 @@
     "test:ui": "node --test \"tests/ui/**/*.test.js\"",
     "test:file": "node --test",
     "check": "pnpm lint && pnpm test && pnpm test:invariants",
+    "check:quiet": "pnpm lint && node scripts/check-i18n.mjs && node --test --test-reporter=dot \"tests/pipeline/**/*.test.js\" \"tests/ui/**/*.test.js\" \"tests/invariants/**/*.test.js\"",
     "check:fast": "oxlint src -c .oxlintrc.json && node scripts/check-i18n.mjs && node --test \"tests/invariants/**/*.test.js\"",
     "audit:reports": "node scripts/generate-audit-reports.mjs",
     "eval": "node scripts/eval.mjs",

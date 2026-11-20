@@ -1,4 +1,6 @@
-# Official髭男dism Setlist 檔案庫
+# Official髭男dism LIVE ARCHIVE
+
+> **領域詞彙權威定義**：純領域術語定義見 [`GLOSSARY.md`](./GLOSSARY.md)（單一真理來源）；本文件聚焦於資料邊界、目錄規範與架構不變量。
 
 系統性收錄 Official 髭男 dism 公開演出的場次與曲目，提供歌曲與場次的雙向查詢，完整保存自 2012 年地下獨立時期至當前巡演之現場歷史足跡。
 

@@ -17,8 +17,6 @@ export const dictKo = {
     directionLabel: "조회 기준",
   },
   header: {
-    livePerformanceArchive: "LIVE PERFORMANCE & SETLIST ARCHIVE",
-    brandTitle: "셋리스트 아카이브",
     archiveSubtitle: "공연 및 곡 양방향 아카이브. 2012년 인디 시절부터 현재 투어까지의 모든 라이브 궤적 수록.",
     landingSubtitle: "2012–2026 라이브 공연 및 셋리스트 양방향 아카이브. 인디 시절부터 현재까지의 전 여정 수록.",
     years: "2012–2026년",

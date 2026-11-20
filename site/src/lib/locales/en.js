@@ -17,8 +17,6 @@ export const dictEn = {
     directionLabel: "Query Direction",
   },
   header: {
-    livePerformanceArchive: "LIVE PERFORMANCE & SETLIST ARCHIVE",
-    brandTitle: "Setlist Archive",
     archiveSubtitle: "Two-way live performance & setlist archive from 2012 indie era to present.",
     landingSubtitle: "2012–2026 Live performance & setlist archive. Tracking the full journey from indie days to arena tours.",
     years: "2012–2026",

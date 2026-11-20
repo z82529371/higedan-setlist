@@ -548,4 +548,68 @@ describe("9. Design Token Invariants & Dedicated URL Routes Seam (DESIGN.md, ADR
       `Decorative UI emojis must not be used in components or locales (DESIGN.md). Found in: ${violations.join(", ")}`
     );
   });
+
+  it("enforces Unified BrandPageHeader & Slip Card Header invariants across all top-level pages", () => {
+    const componentsDir = path.resolve(import.meta.dirname, "../../src/components");
+    const topLevelPages = [
+      "layout/ArchiveHeader.jsx",
+      "ticket-book/TicketBookPage.jsx",
+      "ranking/RankingPage.jsx",
+      "releases/ReleasesPage.jsx",
+      "journey/JourneyPage.jsx",
+    ];
+    const slipCardPages = topLevelPages.slice(1);
+
+    for (const rel of topLevelPages) {
+      const content = fs.readFileSync(path.join(componentsDir, rel), "utf8");
+      assert.ok(content.includes("<BrandPageHeader"), `${rel} must render unified BrandPageHeader`);
+    }
+
+    for (const rel of slipCardPages) {
+      const content = fs.readFileSync(path.join(componentsDir, rel), "utf8");
+      assert.ok(content.includes("SLIP_ARTICLE"), `${rel} must use SLIP_ARTICLE card shell`);
+      assert.ok(content.includes("<TicketPerforationDivider"), `${rel} must render TicketPerforationDivider below header`);
+    }
+  });
+
+  it("prohibits deprecated Setlist Archive brand titles in live source, manifest, and active docs", () => {
+    const repoRoot = path.resolve(import.meta.dirname, "../../..");
+    const siteRoot = path.resolve(import.meta.dirname, "../..");
+    const deprecatedTerms = [
+      "Setlist 檔案庫",
+      "Setlist Archive",
+      "セットリスト図鑑",
+      "셋리스트 아카이브",
+      "Higedan Setlist Archive",
+    ];
+    const targets = [
+      path.join(siteRoot, "index.html"),
+      path.join(siteRoot, "public/manifest.webmanifest"),
+      path.join(siteRoot, "src/components/layout/ArchiveHeader.jsx"),
+      path.join(siteRoot, "src/lib/locales/zh-TW.js"),
+      path.join(siteRoot, "src/lib/locales/en.js"),
+      path.join(siteRoot, "src/lib/locales/ja.js"),
+      path.join(siteRoot, "src/lib/locales/ko.js"),
+      path.join(repoRoot, "CONTEXT.md"),
+      path.join(repoRoot, "README.md"),
+      path.join(repoRoot, "DESIGN.md"),
+      path.join(repoRoot, "docs/adr/README.md"),
+    ];
+
+    const violations = [];
+    for (const file of targets) {
+      const content = fs.readFileSync(file, "utf8");
+      for (const term of deprecatedTerms) {
+        if (content.includes(term)) {
+          violations.push(`${path.relative(repoRoot, file).replace(/\\/g, "/")} -> ${term}`);
+        }
+      }
+    }
+
+    assert.deepEqual(
+      violations,
+      [],
+      `Deprecated brand titles must not reappear; use "Official髭男dism LIVE ARCHIVE":\n${violations.join("\n")}`
+    );
+  });
 });

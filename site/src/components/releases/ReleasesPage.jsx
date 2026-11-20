@@ -17,6 +17,7 @@ import { SLIP_ARTICLE, SLIP_TAPE } from "../../lib/constants.js";
 import { TicketPerforationDivider, TicketBarcodeFooter } from "../slips/TicketCommon.jsx";
 import { CoverLightboxModal } from "../slips/CoverLightboxModal.jsx";
 import { ArchiveFooter } from "../layout/ArchiveFooter.jsx";
+import { BrandPageHeader } from "../common/BrandPageHeader.jsx";
 
 /**
  * ReleasesPage Component (ADR-0142, ADR-0144)
@@ -233,32 +234,20 @@ export function ReleasesPage({
 
         {/* Ticket Header Title Block (Compact on mobile, aligned with TicketBookPage) */}
         <header className="flex flex-col items-center text-center pb-3 sm:pb-4">
-          <div className="hidden sm:inline-flex mb-2.5 items-center justify-center w-12 h-12 rounded-[4px] bg-band border-[1.5px] border-ink shadow-2xs">
-            <span className="text-2xl" aria-hidden="true">
-              {mainTab === "live" ? "🎬" : "💿"}
-            </span>
-          </div>
-
-          <p className="m-0 font-mono text-[10px] sm:text-[12px] tracking-[0.18em] sm:tracking-[0.2em] text-muted font-bold uppercase">
-            {mainTab === "live"
-              ? "CONCERT ARCHIVE // LIVE RELEASES"
-              : "CONCERT ARCHIVE // STUDIO DISCOGRAPHY"}
-          </p>
-
-          <h1 className="m-0 mt-1 sm:mt-1.5 font-display text-[20px] sm:text-[clamp(24px,4.5vw,36px)] font-black leading-tight tracking-tight text-ink">
-            Official髭男dism{" "}
-            <span className="font-bold text-band-ink">
-              {mainTab === "live"
+          <BrandPageHeader
+            align="center"
+            subBrand={mainTab === "live" ? "LIVE RELEASES" : "STUDIO DISCOGRAPHY"}
+            sectionLabel={
+              mainTab === "live"
                 ? t("live_discography_title", "現場影音發行")
-                : t("studio_discography_title", "錄音室作品全集")}
-            </span>
-          </h1>
-
-          <p className="hidden sm:block mt-2 mb-0 text-[12px] sm:text-[14px] text-muted max-w-[560px] leading-relaxed">
-            {mainTab === "live"
-              ? t("live_discography_desc", "收錄 Official 髭男 dism 歷年官方發行之獨立現場影音（BD/DVD）與影音限定盤特典。")
-              : t("studio_discography_desc", "收錄 Official 髭男 dism 歷年官方發行之實體單曲、數位單曲、EP 與正規專輯規格品番與曲目清單。")}
-          </p>
+                : t("studio_discography_title", "錄音室作品全集")
+            }
+            subtitle={
+              mainTab === "live"
+                ? t("live_discography_desc", "收錄 Official 髭男 dism 歷年官方發行之獨立現場影音（BD/DVD）與影音限定盤特典。")
+                : t("studio_discography_desc", "收錄 Official 髭男 dism 歷年官方發行之實體單曲、數位單曲、EP 與正規專輯規格品番與曲目清單。")
+            }
+          />
 
           {/* Stats Badge */}
           <div className="mt-2.5 sm:mt-3.5 flex items-center justify-center gap-2">

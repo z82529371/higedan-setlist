@@ -17,8 +17,6 @@ export const dictJa = {
     directionLabel: "検索方向",
   },
   header: {
-    livePerformanceArchive: "LIVE PERFORMANCE & SETLIST ARCHIVE",
-    brandTitle: "セットリスト図鑑",
     archiveSubtitle: "公演・楽曲双方向アーカイブ。インディーズ初期から現在までのライブ軌跡を網羅。",
     landingSubtitle: "2012–2026 ライブ・セットリスト双方向アーカイブ。インディーズ初期から現在までの歩みを網羅。",
     years: "2012–2026 年",

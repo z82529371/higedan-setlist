@@ -17,8 +17,6 @@ export const dictZhTw = {
     directionLabel: "查詢方向",
   },
   header: {
-    livePerformanceArchive: "LIVE PERFORMANCE & SETLIST ARCHIVE",
-    brandTitle: "Setlist 檔案庫",
     archiveSubtitle: "場次與曲目雙向檔案庫。收錄 2012 年地下獨立時期至當前巡演的完整現場足跡。",
     landingSubtitle: "2012–2026 全域現場演出與曲目雙向檔案館。收錄地下獨立時期至當前巡演的完整歷史足跡。",
     years: "2012–2026 年",

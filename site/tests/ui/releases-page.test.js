@@ -19,7 +19,7 @@ describe("ReleasesPage Dual-Track & Studio Discography UI (ADR-0144)", () => {
     assert.ok(html.includes("現場影音"));
     assert.ok(html.includes("錄音室作品"));
     // Default tab is live
-    assert.ok(html.includes("CONCERT ARCHIVE // LIVE RELEASES"));
+    assert.ok(html.includes("LIVE RELEASES"));
   });
 
   it("renders studio discography when initialTab is discography", async () => {
@@ -35,7 +35,7 @@ describe("ReleasesPage Dual-Track & Studio Discography UI (ADR-0144)", () => {
       )
     );
 
-    assert.ok(html.includes("CONCERT ARCHIVE // STUDIO DISCOGRAPHY"));
+    assert.ok(html.includes("STUDIO DISCOGRAPHY"));
     assert.ok(html.includes("錄音室作品全集"));
     assert.ok(html.includes("Pretender"));
     assert.ok(html.includes("PCCA-04784"));

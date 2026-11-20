@@ -267,7 +267,8 @@ describe("13. i18n Foundation, Hash Route Query Parameter Seam, and Header Switc
       assert.ok(archiveHtmlJa.includes("公演"), "ArchiveHeader tab must render 公演 for shows in ja");
       assert.ok(archiveHtmlJa.includes("楽曲"), "ArchiveHeader tab must render 楽曲 for songs in ja");
       assert.ok(archiveHtmlJa.includes("会場"), "ArchiveHeader tab must render 会場 for venues in ja");
-      assert.ok(archiveHtmlJa.includes("セットリスト図鑑"), "ArchiveHeader brandTitle must be localized in ja");
+      assert.ok(archiveHtmlJa.includes("Official髭男dism"), "ArchiveHeader must render unified brand title in ja");
+      assert.ok(archiveHtmlJa.includes("LIVE ARCHIVE"), "ArchiveHeader must render unified sub-brand in ja");
 
       const archiveHtmlKo = renderToStaticMarkup(
         React.createElement(
@@ -279,7 +280,8 @@ describe("13. i18n Foundation, Hash Route Query Parameter Seam, and Header Switc
       assert.ok(!archiveHtmlKo.includes('data-testid="language-switcher"'), "ArchiveHeader must not render duplicate LanguageSwitcher");
       assert.ok(archiveHtmlKo.includes("공연"), "ArchiveHeader tab must render 공연 for shows in ko");
       assert.ok(archiveHtmlKo.includes("곡"), "ArchiveHeader tab must render 곡 for songs in ko");
-      assert.ok(archiveHtmlKo.includes("셋리스트 아카이브"), "ArchiveHeader brandTitle must be localized in ko");
+      assert.ok(archiveHtmlKo.includes("Official髭男dism"), "ArchiveHeader must render unified brand title in ko");
+      assert.ok(archiveHtmlKo.includes("LIVE ARCHIVE"), "ArchiveHeader must render unified sub-brand in ko");
 
       // 4. Unified LanguageSwitcher placement: desktop in ArchiveStatusBar, mobile in MobileFloatingControls
       assert.ok(!landingHtml.includes("fixed bottom-"), "LandingHero must NOT contain fixed bottom floating FAB");

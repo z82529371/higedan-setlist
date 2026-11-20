@@ -576,7 +576,7 @@ describe("23. Tour TicketBook Dedicated Page (#/tickets) & Timeline Management (
           })
         )
       );
-      assert.ok(htmlPage.includes("🎟️"), "TicketBookPage must use 🎟️ emoji");
+      assert.ok(htmlPage.includes("TICKET BOOK"), "TicketBookPage must render unified TICKET BOOK sub-brand");
       assert.ok(!htmlPage.includes("🛂"), "TicketBookPage must NOT contain legacy 🛂 emoji");
       assert.ok(!htmlPage.includes("護照"), "TicketBookPage must NOT contain legacy 護照 keyword");
       assert.ok(htmlPage.includes('data-testid="ticket-book-backup-trigger"'), "TicketBookPage must render inline backup trigger button");

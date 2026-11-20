@@ -93,7 +93,7 @@ describe("17. Ranking Page Component Invariants", () => {
       )
     );
 
-    assert.ok(html.includes("STATISTICS"));
+    assert.ok(html.includes("LIVE RANKING"));
     assert.ok(html.includes("演出排行"));
     assert.ok(!html.includes("歷史演出之王"));
     assert.ok(!html.includes("人氣王"));

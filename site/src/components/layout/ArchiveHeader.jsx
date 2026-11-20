@@ -1,6 +1,7 @@
 import { queryTabClass } from "../../lib/constants.js";
 import { useI18n } from "../../lib/i18n.jsx";
 import { TicketIcon, MusicNoteIcon, VenuePinIcon } from "../common/ArchivalIcons.jsx";
+import { BrandPageHeader } from "../common/BrandPageHeader.jsx";
 
 export function ArchiveHeader({
   totalAllShows,
@@ -17,15 +18,11 @@ export function ArchiveHeader({
   return (
     <>
       <header className="pb-0 pt-3.5 sm:pt-6">
-        <p className="m-0 font-mono text-[11px] sm:text-[12px] tracking-[0.2em] text-muted font-bold uppercase truncate">
-          {t("header.livePerformanceArchive")}
-        </p>
-        <h1 className="m-0 mt-1.5 font-display text-[clamp(17px,4.5vw,44px)] font-extrabold leading-tight tracking-tight">
-          Official髭男dism <span className="font-bold text-ink">{t("header.brandTitle")}</span>
-        </h1>
-        <p className="mt-2 mb-0 text-[12px] sm:text-[14px] text-muted leading-relaxed">
-          {t("header.archiveSubtitle")}
-        </p>
+        <BrandPageHeader
+          align="left"
+          subBrand="LIVE ARCHIVE"
+          subtitle={t("header.archiveSubtitle")}
+        />
 
         {/* Archival Spec Ledger Line (replaces KPI Pill Bar) */}
         <div className="mt-3 border-y border-ink/20 py-1.5 font-mono text-[11px] sm:text-[12px] text-ink/85 flex flex-wrap items-center gap-x-3 gap-y-1 tabular-nums">

@@ -1,5 +1,5 @@
 ---
-name: Higedan Setlist Archive
+name: Official髭男dism LIVE ARCHIVE
 description: Official HIGE DANDISM 現場演出與曲目雙向檔案庫
 colors:
   primary: "#d19f00"
@@ -80,7 +80,7 @@ components:
     padding: "46px 26px 24px"
 ---
 
-# Design System: Higedan Setlist Archive
+# Design System: Official髭男dism LIVE ARCHIVE
 
 ## Overview
 

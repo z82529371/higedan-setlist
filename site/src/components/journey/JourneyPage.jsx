@@ -8,7 +8,9 @@ import {
 import { buildJourneySequence } from "../../lib/venue-map.js";
 import { venueProfilesByCanonical } from "../../lib/locales/venues.js";
 import { VenueMapCanvas } from "../VenueMapCanvas.jsx";
-import { SLIP_TAPE } from "../../lib/constants.js";
+import { BrandPageHeader } from "../common/BrandPageHeader.jsx";
+import { TicketPerforationDivider } from "../slips/TicketCommon.jsx";
+import { SLIP_ARTICLE, SLIP_TAPE } from "../../lib/constants.js";
 import { MobileFloatingControls } from "../layout/MobileFloatingControls.jsx";
 import { JourneyFilterDrawer } from "./JourneyFilterDrawer.jsx";
 
@@ -98,22 +100,24 @@ export function JourneyPage({
     <div className="mx-auto max-w-[960px] px-4 sm:px-6 pt-8 pb-24 sm:py-8 select-none">
         {/* Main Ticket Receipt Article */}
         <main>
-          <article className="relative rounded-[3px] border-[1.5px] border-ink bg-card px-3 sm:px-[26px] pb-6 pt-9 sm:pt-7 shadow-[5px_5px_0_rgba(0,0,0,0.14)]">
+          <article className={SLIP_ARTICLE}>
           {/* Washi Masking Tape Top Pin */}
           <div className={SLIP_TAPE} aria-hidden="true" />
 
           {/* Streamlined Ticket Header Title Block: compact & elegant */}
-          <header className="flex flex-col items-center text-center pb-3 border-b border-line-soft">
-            <h1 className="m-0 font-display text-[clamp(18px,4vw,28px)] font-black leading-tight tracking-tight text-ink flex items-center justify-center gap-2">
-              <span className="text-xl sm:text-2xl" aria-hidden="true">🚐</span>
-              <span>Official髭男dism <span className="font-bold text-band-ink">{currentJourneyTitle}</span></span>
-            </h1>
+          <header className="flex flex-col items-center text-center pb-3 sm:pb-4">
+            <BrandPageHeader
+              align="center"
+              subBrand="TOUR JOURNEY"
+              sectionLabel={currentJourneyTitle}
+              subtitle={t("landing.features.journeyDesc")}
+            />
 
             {/* Stats Badge & Mobile Inline Filter Trigger */}
-            <div className="mt-2.5 flex flex-wrap items-center justify-center gap-2">
+            <div className="mt-2.5 sm:mt-3.5 flex flex-wrap items-center justify-center gap-2">
               <span
                 data-testid="journey-stops-badge"
-                className="inline-flex items-center gap-1.5 rounded-[4px] border border-ink/30 bg-tape px-3 py-0.5 font-mono text-[11px] sm:text-[12px] font-extrabold text-ink shadow-2xs"
+                className="inline-flex items-center gap-1.5 rounded-[4px] border border-ink/30 bg-tape px-2.5 sm:px-3 py-0.5 sm:py-1 font-mono text-[11px] sm:text-[13px] font-extrabold text-ink shadow-2xs"
               >
                 <span aria-hidden="true">🚐</span>
                 <span>{activeJourney.stops.length} STOPS</span>
@@ -132,6 +136,9 @@ export function JourneyPage({
               </button>
             </div>
           </header>
+
+          {/* Perforation Divider */}
+          <TicketPerforationDivider />
 
           {/* Desktop-only Interactive Controls & Filters Toolbar */}
           <div

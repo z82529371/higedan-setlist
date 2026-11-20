@@ -27,8 +27,8 @@ describe("20. PWA Offline Support & Web App Manifest Invariants (ADR-0119)", () 
 
     it("declares required PWA metadata, colors, and standalone display", () => {
       const manifest = JSON.parse(fs.readFileSync(manifestPath, "utf-8"));
-      assert.equal(manifest.name, "Official髭男dism Setlist 檔案庫");
-      assert.equal(manifest.short_name, "髭男 Setlist");
+      assert.equal(manifest.name, "Official髭男dism LIVE ARCHIVE");
+      assert.equal(manifest.short_name, "髭男 ARCHIVE");
       assert.equal(manifest.display, "standalone");
       assert.equal(manifest.start_url, "/");
       assert.equal(manifest.scope, "/");

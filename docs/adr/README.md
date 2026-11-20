@@ -1,4 +1,4 @@
-# Official 髭男 dism Setlist 檔案庫 — 架構決策記錄 (ADR)
+# Official髭男dism LIVE ARCHIVE — 架構決策記錄 (ADR)
 
 本目錄收錄專案自創立以來的所有重大架構設計決策（ADR）。每一份決策記錄皆包含背景問題陳述、決策方案與影響驗證，並與 `CONTEXT.md` 同步作為系統領域邏輯之單一真理來源（Single Source of Truth）。
 
