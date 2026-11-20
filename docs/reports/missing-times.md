@@ -22,7 +22,7 @@
 
 | # | 日期 | 演出型態 | 巡演 / 活動名稱 | 場館 (城市) | 資料來源檔案 |
 |---|---|---|---|---|---|
-| 1 | 2012-07-07 | 特別專場 | Official髭男dism 2012.07.07 | 松江B1 (松江) | [unofficial-2012-0707.json](file:///C:/Users/User/%E9%AB%AD%E7%94%B7%20%E6%BC%94%E5%94%B1%E6%9C%83/data/events/unofficial-2012-0707.json) |
+| 1 | 2012-07-07 | 聯合專場 | Vongolecube | 松江B1 (松江) | [vongolecube-2012.json](file:///C:/Users/User/%E9%AB%AD%E7%94%B7%20%E6%BC%94%E5%94%B1%E6%9C%83/data/events/vongolecube-2012.json) |
 | 2 | 2012-09-16 | 特別專場 | Official髭男dism 2012.09.16 | 松江B1 (松江) | [unofficial-2012-0916.json](file:///C:/Users/User/%E9%AB%AD%E7%94%B7%20%E6%BC%94%E5%94%B1%E6%9C%83/data/events/unofficial-2012-0916.json) |
 | 3 | 2012-10-11 | 特別專場 | Official髭男dism 2012.10.11 | 米子AZTiC laughs (米子) | [unofficial-2012-1011.json](file:///C:/Users/User/%E9%AB%AD%E7%94%B7%20%E6%BC%94%E5%94%B1%E6%9C%83/data/events/unofficial-2012-1011.json) |
 | 4 | 2012-10-13 | 特別專場 | Official髭男dism 2012.10.13 | 松江AZTiC canova (松江) | [unofficial-2012-1013.json](file:///C:/Users/User/%E9%AB%AD%E7%94%B7%20%E6%BC%94%E5%94%B1%E6%9C%83/data/events/unofficial-2012-1013.json) |

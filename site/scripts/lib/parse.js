@@ -77,14 +77,14 @@ export function domScrambleInfo(items) {
   };
 }
 
-// MC/OPENING/SE markers, tolerant of decorative wrappers like ～MC1～.
+// MC/OPENING/OP/SE markers, tolerant of decorative wrappers like ～MC1～.
 // Bare markers and numbered variants (MC/MC1/MC 2/MC-3) are dropped;
 // MCs with content (birthday calls, trouble notes, 弾き語りMC, 楽器分工)
 // are kept as interludes. Hand-verified exceptions use `locked`.
 export function isIgnoredCmtText(t) {
   if (!t) return true;
   const up = t.toUpperCase().trim();
-  if (up === "OPENING" || up === "SE:") return true;
+  if (up === "OPENING" || up === "OPENING MOVIE" || up === "OP" || up === "SE:") return true;
   const core = up
     .replace(/^[～〜~\-_・\s「『【〈《〔［\[\(]+/g, "")
     .replace(/[～〜~\-_・\s」』】〉》〕］\]\)]+$/g, "");

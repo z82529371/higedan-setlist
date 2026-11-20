@@ -10,6 +10,8 @@ describe("3. MC / cmt Noise Filtering & Informational MC Retention (ADR-0005, AD
     assert.equal(isIgnoredCmtText("MC-3"), true);
     assert.equal(isIgnoredCmtText("〜MC1〜"), true);
     assert.equal(isIgnoredCmtText("OPENING"), true);
+    assert.equal(isIgnoredCmtText("Opening Movie"), true);
+    assert.equal(isIgnoredCmtText("OP"), true);
     assert.equal(isIgnoredCmtText("SE:"), true);
   });
 

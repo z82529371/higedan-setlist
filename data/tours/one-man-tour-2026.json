@@ -266,14 +266,6 @@
         ],
         "insert": [
           {
-            "after": 0,
-            "item": {
-              "encore": false,
-              "type": "interlude",
-              "note": "Opening Movie"
-            }
-          },
-          {
             "after": 19,
             "item": {
               "encore": true,
@@ -303,14 +295,6 @@
           20
         ],
         "insert": [
-          {
-            "after": 0,
-            "item": {
-              "encore": false,
-              "type": "interlude",
-              "note": "Opening Movie"
-            }
-          },
           {
             "after": 19,
             "item": {
@@ -342,14 +326,6 @@
         ],
         "insert": [
           {
-            "after": 0,
-            "item": {
-              "encore": false,
-              "type": "interlude",
-              "note": "Opening Movie"
-            }
-          },
-          {
             "after": 19,
             "item": {
               "encore": true,
@@ -379,14 +355,6 @@
           20
         ],
         "insert": [
-          {
-            "after": 0,
-            "item": {
-              "encore": false,
-              "type": "interlude",
-              "note": "Opening Movie"
-            }
-          },
           {
             "after": 19,
             "item": {
@@ -582,14 +550,6 @@
             "after": 0,
             "item": {
               "encore": false,
-              "type": "interlude",
-              "note": "OP"
-            }
-          },
-          {
-            "after": 0,
-            "item": {
-              "encore": false,
               "songId": "editorial",
               "note": "デジタルクワイアなし"
             }
@@ -624,14 +584,6 @@
         ],
         "insert": [
           {
-            "after": 0,
-            "item": {
-              "encore": false,
-              "type": "interlude",
-              "note": "OP"
-            }
-          },
-          {
             "after": 5,
             "item": {
               "encore": false,
@@ -660,14 +612,6 @@
           6
         ],
         "insert": [
-          {
-            "after": 0,
-            "item": {
-              "encore": false,
-              "type": "interlude",
-              "note": "OP"
-            }
-          },
           {
             "after": 5,
             "item": {
