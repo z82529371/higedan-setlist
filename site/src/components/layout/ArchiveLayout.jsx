@@ -68,6 +68,7 @@ export function ArchiveLayout({
     handleSelectUnit,
     handleSelectTourMode,
     handleReturnHome,
+    handleReturnArchive,
     handleSelectTickets,
     handleSelectRanking,
     handleSelectJourney,
@@ -529,6 +530,7 @@ export function ArchiveLayout({
         }}
         onOpenDrawer={openFilterDrawer}
         onReturnHome={handleReturnHome}
+        onReturnArchive={handleReturnArchive}
         onSelectTickets={handleSelectTickets}
         onSelectRanking={handleSelectRanking}
         onSelectJourney={handleSelectJourney}

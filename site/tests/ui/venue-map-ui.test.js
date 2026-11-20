@@ -204,8 +204,8 @@ describe("24. Interactive SVG Venue Map Canvas & Career Journey Navigator (#53, 
     assert.ok(htmlJourneyMode.includes('data-testid="career-journey-panel"'), "Must render career journey panel");
     assert.ok(htmlJourneyMode.includes('data-testid="journey-filter-bar"'), "Must render desktop journey-filter-bar");
     assert.ok(htmlJourneyMode.includes('data-testid="journey-playback-dock"'), "Must render journey playback docked directly under map canvas (ADR-0127)");
-    assert.ok(htmlJourneyMode.includes('data-testid="mobile-archive-fab"'), "Must render mobile-archive-fab with ticket-book parity (ADR-0127)");
-    assert.ok(htmlJourneyMode.includes('data-testid="mobile-journey-filter-fab"'), "Must render mobile-journey-filter-fab with ticket-book parity (ADR-0127)");
+    assert.ok(!htmlJourneyMode.includes('data-testid="mobile-archive-fab"'), "JourneyPage must not render redundant left-dock mobile-archive-fab");
+    assert.ok(htmlJourneyMode.includes('data-testid="mobile-journey-filter-fab"'), "Must render right-thumb mobile-journey-filter-fab");
     assert.ok(htmlJourneyMode.includes("pb-24"), "JourneyPage container must reserve bottom clearance for floating FABs");
     assert.ok(htmlJourneyMode.includes("washi-tape"), "JourneyPage ticket must render washi masking tape (ADR-0127)");
     assert.ok(htmlJourneyMode.includes('data-testid="journey-stops-badge"'), "JourneyPage header must render stops badge (ADR-0127)");
@@ -374,11 +374,9 @@ describe("24. Interactive SVG Venue Map Canvas & Career Journey Navigator (#53, 
       )
     );
 
-    assert.ok(htmlFloating.includes('data-testid="mobile-journey-fab"'), "Must render mobile-journey-fab");
-    assert.ok(htmlFloating.includes('data-testid="mobile-ticket-book-fab"'), "Must render mobile-ticket-book-fab");
-    const journeyIdx = htmlFloating.indexOf('data-testid="mobile-journey-fab"');
-    const ticketIdx = htmlFloating.indexOf('data-testid="mobile-ticket-book-fab"');
-    assert.ok(journeyIdx < ticketIdx, "Tour Footprint 🚐 must be placed vertically above Ticket Book 🎟️ (ADR-0125)");
+    assert.ok(!htmlFloating.includes('data-testid="mobile-journey-fab"'), "MobileFloatingControls must not render left-dock mobile-journey-fab");
+    assert.ok(!htmlFloating.includes('data-testid="mobile-ticket-book-fab"'), "MobileFloatingControls must not render left-dock mobile-ticket-book-fab");
+    assert.ok(htmlFloating.includes("篩選"), "MobileFloatingControls must render streamlined right-thumb filter button");
 
     // 3. ArchiveStatusBar quick entrance for Career Tour Footprint
     const htmlStatusBar = renderToStaticMarkup(

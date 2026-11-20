@@ -1,9 +1,20 @@
 import { trackKey } from "../../lib/track.js";
 import { useI18n } from "../../lib/i18n.jsx";
 import { useTicketBook } from "../../lib/ticket-book.js";
-import { TicketIcon, ChartBarsIcon, RouteIcon, DiscIcon, HomeIcon } from "../common/ArchivalIcons.jsx";
+import LanguageSwitcher from "../LanguageSwitcher.jsx";
+import {
+  TicketIcon,
+  ChartBarsIcon,
+  RouteIcon,
+  DiscIcon,
+  HomeIcon,
+  ArchiveBoxIcon,
+  MusicNoteIcon,
+  VenuePinIcon,
+} from "../common/ArchivalIcons.jsx";
 
 export function ArchiveStatusBar({
+  viewMode = "archive",
   tab,
   current,
   selSong,
@@ -12,6 +23,7 @@ export function ArchiveStatusBar({
   currentVenueObj,
   trackShows,
   slipRef,
+  handleReturnArchive,
   handleReturnHome,
   handleSelectTickets,
   handleSelectRanking,
@@ -21,11 +33,20 @@ export function ArchiveStatusBar({
 }) {
   const { t } = useI18n();
   const { count: ticketCount } = useTicketBook({ storage });
+
+  const navBtnClass = (isActive) =>
+    `hidden sm:inline-flex items-center gap-1.5 px-2 py-0.5 rounded-[3px] font-bold border transition-colors cursor-pointer touch-stamp text-[10px] sm:text-[11px] shrink-0 ${
+      isActive
+        ? "bg-band-ink text-band border-band-ink"
+        : "bg-band-ink/10 hover:bg-band-ink/20 text-band-ink border-band-ink/30"
+    }`;
+
   return (
     <div
+      data-testid="archive-status-bar"
       className="sticky top-0 z-40 w-full bg-band border-b border-ink/20 shadow-xs select-none"
       onClick={() => {
-        if (slipRef.current) {
+        if (slipRef?.current) {
           slipRef.current.scrollIntoView({ behavior: "smooth" });
         } else {
           window.scrollTo({ top: 0, behavior: "smooth" });
@@ -36,40 +57,52 @@ export function ArchiveStatusBar({
       title={t("statusBar.backToTopTitle", "點擊滾動回單據頂部")}
       aria-label={t("statusBar.backToTopAria", "當前狀態導航列，點擊回單據頂部")}
     >
-      <div className="w-full px-4 sm:px-6 flex items-center justify-between gap-3 py-1 sm:py-2 font-mono text-[10px] sm:text-[12px] tracking-wider sm:tracking-[0.14em] text-band-ink whitespace-nowrap overflow-hidden cursor-pointer">
+      <div className="w-full px-3 sm:px-6 flex items-center justify-between gap-2 sm:gap-3 py-1 sm:py-2 font-mono text-[10px] sm:text-[12px] tracking-wider sm:tracking-[0.14em] text-band-ink whitespace-nowrap cursor-pointer">
         {/* Left: Dynamic Context Title */}
-        <div className="truncate min-w-0 font-bold">
-          {tab === "show" && <span>{current?.unit.title ?? ""}</span>}
-          {tab === "song" && (
-            <span>
-              <span aria-hidden="true">🎵</span> {currentSongObj?.title || selSong}
-              {currentSongObj?.unreleased
-                ? t("statusBar.unreleasedSuffix", "（未發行）")
-                : currentSongObj?.album
-                ? `（${currentSongObj.album}）`
-                : ""}
+        <div className="truncate min-w-0 flex-1 overflow-hidden font-bold flex items-center gap-1.5">
+          {viewMode === "landing" && <span>Official髭男dism // LIVE ARCHIVE</span>}
+          {viewMode === "tickets" && <span>{t("ticketBook.title", "個人巡演票夾")}</span>}
+          {viewMode === "journey" && <span>{t("nav.journeyTitle", "全生涯巡演足跡")}</span>}
+          {viewMode === "ranking" && <span>{t("ranking.title", "演出排行")}</span>}
+          {viewMode === "releases" && <span>{t("nav.releasesTitle", "官方現場影音發行")}</span>}
+          {viewMode === "archive" && tab === "show" && <span>{current?.unit.title ?? ""}</span>}
+          {viewMode === "archive" && tab === "song" && (
+            <span className="inline-flex items-center gap-1 truncate">
+              <MusicNoteIcon className="w-3.5 h-3.5 shrink-0" />
+              <span className="truncate">
+                {currentSongObj?.title || selSong}
+                {currentSongObj?.unreleased
+                  ? t("statusBar.unreleasedSuffix", "（未發行）")
+                  : currentSongObj?.album
+                  ? `（${currentSongObj.album}）`
+                  : ""}
+              </span>
             </span>
           )}
-          {tab === "venue" && (
-            <span>
-              <span aria-hidden="true">🏛️</span> {selVenue}
-              {currentVenueObj?.city ? `（${t("cities." + currentVenueObj.city, currentVenueObj.city)}）` : ""}
+          {viewMode === "archive" && tab === "venue" && (
+            <span className="inline-flex items-center gap-1 truncate">
+              <VenuePinIcon className="w-3.5 h-3.5 shrink-0" />
+              <span className="truncate">
+                {selVenue}
+                {currentVenueObj?.city ? `（${t("cities." + currentVenueObj.city, currentVenueObj.city)}）` : ""}
+              </span>
             </span>
           )}
         </div>
 
-        {/* Right: Dynamic Summary Metadata + Home Button on Far Right */}
-        <div className="shrink-0 flex items-center gap-1.5 sm:gap-3 font-bold opacity-90 sm:opacity-100">
-          {tab === "show" && (
+        {/* Right: Dynamic Summary Metadata + Global Nav Buttons */}
+        <div className="shrink-0 flex items-center gap-1.5 sm:gap-2 font-bold opacity-90 sm:opacity-100">
+          {viewMode === "archive" && tab === "show" && (
             <>
               <span className="hidden sm:inline opacity-45">●</span>
               <span className="hidden sm:inline">
                 {t("statusBar.showSummary", "{shows} 場 · {songs} 首歌曲", { shows: current?.shows.length ?? 0, songs: current?.songShows.size ?? 0 })}
               </span>
               <span className="sm:hidden">{t("statusBar.showSummaryMobile", "{shows} 場", { shows: current?.shows.length ?? 0 })}</span>
+              <span className="hidden sm:inline opacity-35 select-none shrink-0">|</span>
             </>
           )}
-          {tab === "song" && (
+          {viewMode === "archive" && tab === "song" && (
             <>
               <span className="hidden sm:inline opacity-45">●</span>
               <span className="hidden sm:inline">
@@ -80,9 +113,10 @@ export function ArchiveStatusBar({
               </span>
               <span className="opacity-45">●</span>
               <span>{t("statusBar.songArchive", "歌曲檔案")}</span>
+              <span className="hidden sm:inline opacity-35 select-none shrink-0">|</span>
             </>
           )}
-          {tab === "venue" && (
+          {viewMode === "archive" && tab === "venue" && (
             <>
               <span className="hidden sm:inline opacity-45">●</span>
               <span className="hidden sm:inline">
@@ -93,10 +127,27 @@ export function ArchiveStatusBar({
               </span>
               <span className="opacity-45">●</span>
               <span>{t("statusBar.venueArchive", "場地檔案")}</span>
+              <span className="hidden sm:inline opacity-35 select-none shrink-0">|</span>
             </>
           )}
 
-          <span className="hidden sm:inline opacity-35 select-none shrink-0">|</span>
+          {/* Archive Mode Button (Desktop, shown on landing/special pages) */}
+          {viewMode !== "archive" && handleReturnArchive && (
+            <button
+              type="button"
+              data-testid="status-bar-archive-btn"
+              onClick={(e) => {
+                e.stopPropagation();
+                handleReturnArchive();
+              }}
+              className={navBtnClass(false)}
+              title={t("ticketBook.backToArchive", "檔案庫")}
+              aria-label={t("ticketBook.backToArchive", "檔案庫")}
+            >
+              <ArchiveBoxIcon className="w-3.5 h-3.5 shrink-0" />
+              <span>{t("nav.archive", "檔案庫")}</span>
+            </button>
+          )}
 
           {/* Ticket Book Action Button (Desktop) */}
           {handleSelectTickets && (
@@ -107,7 +158,7 @@ export function ArchiveStatusBar({
                 e.stopPropagation();
                 handleSelectTickets();
               }}
-              className="hidden sm:inline-flex items-center gap-1.5 px-2 py-0.5 rounded-[3px] bg-band-ink/10 hover:bg-band-ink/20 text-band-ink font-bold border border-band-ink/30 transition-colors cursor-pointer touch-stamp text-[10px] sm:text-[11px] shrink-0"
+              className={navBtnClass(viewMode === "tickets")}
               title={t("ticketBook.title", "我的巡演票夾")}
               aria-label={t("ticketBook.title", "我的巡演票夾")}
             >
@@ -116,7 +167,11 @@ export function ArchiveStatusBar({
               {ticketCount > 0 && (
                 <span
                   data-testid="status-bar-ticket-badge-count"
-                  className="inline-flex items-center justify-center rounded-[2px] bg-band-ink text-band font-mono font-bold text-[9px] min-w-[15px] h-[15px] px-1 border border-band-ink/30 tabular-nums"
+                  className={`inline-flex items-center justify-center rounded-[2px] font-mono font-bold text-[9px] min-w-[15px] h-[15px] px-1 border tabular-nums ${
+                    viewMode === "tickets"
+                      ? "bg-band text-band-ink border-band"
+                      : "bg-band-ink text-band border-band-ink/30"
+                  }`}
                 >
                   {ticketCount}
                 </span>
@@ -133,7 +188,7 @@ export function ArchiveStatusBar({
                 e.stopPropagation();
                 handleSelectRanking();
               }}
-              className="hidden sm:inline-flex items-center gap-1.5 px-2 py-0.5 rounded-[3px] bg-band-ink/10 hover:bg-band-ink/20 text-band-ink font-bold border border-band-ink/30 transition-colors cursor-pointer touch-stamp text-[10px] sm:text-[11px] shrink-0"
+              className={navBtnClass(viewMode === "ranking")}
               title={t("ranking.title", "演出排行")}
               aria-label={t("ranking.title", "演出排行")}
             >
@@ -151,7 +206,7 @@ export function ArchiveStatusBar({
                 e.stopPropagation();
                 handleSelectJourney();
               }}
-              className="hidden sm:inline-flex items-center gap-1.5 px-2 py-0.5 rounded-[3px] bg-band-ink/10 hover:bg-band-ink/20 text-band-ink font-bold border border-band-ink/30 transition-colors cursor-pointer touch-stamp text-[10px] sm:text-[11px] shrink-0"
+              className={navBtnClass(viewMode === "journey")}
               title={t("nav.journeyTitle", "全生涯長征路線")}
               aria-label={t("nav.journeyTitle", "全生涯長征路線")}
             >
@@ -169,7 +224,7 @@ export function ArchiveStatusBar({
                 e.stopPropagation();
                 handleSelectReleases();
               }}
-              className="hidden sm:inline-flex items-center gap-1.5 px-2 py-0.5 rounded-[3px] bg-band-ink/10 hover:bg-band-ink/20 text-band-ink font-bold border border-band-ink/30 transition-colors cursor-pointer touch-stamp text-[10px] sm:text-[11px] shrink-0"
+              className={navBtnClass(viewMode === "releases")}
               title={t("nav.releasesTitle", "官方現場影音發行")}
               aria-label={t("nav.releasesTitle", "官方現場影音發行")}
             >
@@ -178,20 +233,27 @@ export function ArchiveStatusBar({
             </button>
           )}
 
-          {/* Home Action Button (Desktop only; on mobile, Floating Dock already has Home button) */}
-          <button
-            type="button"
-            onClick={(e) => {
-              e.stopPropagation();
-              handleReturnHome();
-            }}
-            className="hidden sm:inline-flex items-center gap-1 px-2 py-0.5 rounded-[3px] bg-band-ink/10 hover:bg-band-ink/20 text-band-ink font-bold border border-band-ink/30 transition-colors cursor-pointer touch-stamp text-[10px] sm:text-[11px] shrink-0"
-            title={t("statusBar.backHomeTitle", "返回首頁")}
-            aria-label={t("statusBar.backHomeAria", "返回首頁")}
-          >
-            <HomeIcon className="w-3.5 h-3.5 shrink-0" />
-            <span>{t("statusBar.home", "首頁")}</span>
-          </button>
+          {/* Home Action Button (Desktop) */}
+          {handleReturnHome && (
+            <button
+              type="button"
+              onClick={(e) => {
+                e.stopPropagation();
+                handleReturnHome();
+              }}
+              className={navBtnClass(viewMode === "landing")}
+              title={t("statusBar.backHomeTitle", "返回首頁")}
+              aria-label={t("statusBar.backHomeAria", "返回首頁")}
+            >
+              <HomeIcon className="w-3.5 h-3.5 shrink-0" />
+              <span>{t("statusBar.home", "首頁")}</span>
+            </button>
+          )}
+
+          {/* Desktop Language Switcher (Mobile uses bottom-right floating stamp) */}
+          <div onClick={(e) => e.stopPropagation()} className="hidden sm:block shrink-0">
+            <LanguageSwitcher compact />
+          </div>
         </div>
       </div>
     </div>

@@ -98,10 +98,9 @@ describe("17. Ranking Page Component Invariants", () => {
     assert.ok(!html.includes("歷史演出之王"));
     assert.ok(!html.includes("人氣王"));
     assert.ok(html.includes("#01"));
-    // Mobile Floating Controls Invariant (Ticket Book & Footprint parity)
-    assert.ok(html.includes("data-testid=\"mobile-ranking-back-archive-fab\""), "renders mobile return archive button");
-    assert.ok(html.includes("data-testid=\"mobile-ranking-back-home-fab\""), "renders mobile return home button");
+    // RankingPage has 0 floating buttons (navigation & language live in ArchiveStatusBar)
     assert.ok(!html.includes("data-testid=\"mobile-ranking-fab\""), "does not render redundant mobile ranking button to itself");
+    assert.ok(!html.includes("data-testid=\"mobile-ranking-back-archive-fab\""), "does not render redundant mobile floating dock");
     assert.ok(!html.includes("開啟篩選抽屜"), "does not render archive filter drawer button");
   });
 });

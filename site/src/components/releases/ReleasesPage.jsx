@@ -13,13 +13,10 @@ import {
   formatDiscographyTypeLabel,
 } from "../../lib/discography.js";
 import { routeHash, parseRoute } from "../../lib/routes.js";
-import LanguageSwitcher from "../LanguageSwitcher.jsx";
 import { SLIP_ARTICLE, SLIP_TAPE } from "../../lib/constants.js";
 import { TicketPerforationDivider, TicketBarcodeFooter } from "../slips/TicketCommon.jsx";
 import { CoverLightboxModal } from "../slips/CoverLightboxModal.jsx";
-import { MobileFloatingControls } from "../layout/MobileFloatingControls.jsx";
 import { ArchiveFooter } from "../layout/ArchiveFooter.jsx";
-import { useTicketBook } from "../../lib/ticket-book.js";
 
 /**
  * ReleasesPage Component (ADR-0142, ADR-0144)
@@ -30,15 +27,8 @@ import { useTicketBook } from "../../lib/ticket-book.js";
 export function ReleasesPage({
   initialTab,
   initialTargetId,
-  onReturnArchive,
-  onReturnHome,
-  onSelectTickets,
-  onSelectJourney,
-  onSelectRanking,
-  storage,
 } = {}) {
   const { t, locale } = useI18n();
-  const { count: ticketCount } = useTicketBook({ storage });
 
   // Route query extraction fallback
   const parsedHash = useMemo(() => {
@@ -207,73 +197,7 @@ export function ReleasesPage({
   };
 
   return (
-    <div className="mx-auto max-w-[960px] px-3 sm:px-6 pt-3 pb-24 sm:py-8 select-none font-sans">
-      {/* Top Navigation & Language Utility Bar (Desktop only, mobile uses floating controls) */}
-      <div className="mb-4 sm:mb-6 hidden sm:flex items-center justify-between gap-3">
-        <div className="flex items-center gap-2">
-          {onReturnArchive && (
-            <button
-              type="button"
-              onClick={onReturnArchive}
-              className="inline-flex items-center gap-1.5 rounded-[4px] border border-ink/30 bg-card px-3 py-1.5 font-mono text-[11px] sm:text-[12px] font-bold text-ink shadow-2xs hover:bg-tape-tint transition-colors cursor-pointer"
-              title={t("ranking.backToArchive", "返回檔案庫")}
-            >
-              <span aria-hidden="true">←</span>
-              <span>{t("ranking.backToArchive", "返回檔案庫")}</span>
-            </button>
-          )}
-          {onReturnHome && (
-            <button
-              type="button"
-              onClick={onReturnHome}
-              className="inline-flex items-center gap-1 rounded-[4px] border border-ink/30 bg-card px-2.5 py-1.5 font-mono text-[11px] sm:text-[12px] font-bold text-ink shadow-2xs hover:bg-tape-tint transition-colors cursor-pointer"
-              title={t("ranking.backToHome", "返回首頁")}
-            >
-              <span aria-hidden="true">🏠</span>
-            </button>
-          )}
-          {onSelectTickets && (
-            <button
-              type="button"
-              onClick={onSelectTickets}
-              className="inline-flex items-center gap-1.5 rounded-[4px] border border-ink/30 bg-card px-2.5 py-1.5 font-mono text-[11px] sm:text-[12px] font-bold text-ink shadow-2xs hover:bg-tape-tint transition-colors cursor-pointer"
-              title={t("ticketBook.title", "我的巡演票夾")}
-            >
-              <span aria-hidden="true">🎟️</span>
-              <span>{t("nav.ticketBook", "票夾")}</span>
-              {ticketCount > 0 && (
-                <span className="inline-flex items-center justify-center rounded-full bg-band text-band-ink font-mono font-bold text-[9px] min-w-[15px] h-[15px] px-1 border border-ink tabular-nums">
-                  {ticketCount}
-                </span>
-              )}
-            </button>
-          )}
-          {onSelectRanking && (
-            <button
-              type="button"
-              onClick={onSelectRanking}
-              className="inline-flex items-center gap-1.5 rounded-[4px] border border-ink/30 bg-card px-2.5 py-1.5 font-mono text-[11px] sm:text-[12px] font-bold text-ink shadow-2xs hover:bg-tape-tint transition-colors cursor-pointer"
-              title={t("ranking.title", "演出排行")}
-            >
-              <span aria-hidden="true">🏆</span>
-              <span>{t("ranking.title", "演出排行")}</span>
-            </button>
-          )}
-          {onSelectJourney && (
-            <button
-              type="button"
-              onClick={onSelectJourney}
-              className="inline-flex items-center gap-1.5 rounded-[4px] border border-ink/30 bg-card px-2.5 py-1.5 font-mono text-[11px] sm:text-[12px] font-bold text-ink shadow-2xs hover:bg-tape-tint transition-colors cursor-pointer"
-              title={t("nav.journeyTitle", "全生涯巡演足跡")}
-            >
-              <span aria-hidden="true">🚐</span>
-              <span>{t("nav.journey", "巡演足跡")}</span>
-            </button>
-          )}
-        </div>
-        <LanguageSwitcher />
-      </div>
-
+    <div className="mx-auto max-w-[960px] px-3 sm:px-6 pt-8 pb-16 sm:py-8 select-none font-sans">
       {/* Main Ticket Receipt Card */}
       <article className={SLIP_ARTICLE}>
         {/* Washi Masking Tape Top Pin */}
@@ -764,17 +688,6 @@ export function ReleasesPage({
       </article>
 
       <ArchiveFooter />
-
-      {/* Mobile Floating Action Dock (Matching TicketBookPage & RankingPage) */}
-      <MobileFloatingControls
-        onReturnArchive={onReturnArchive}
-        onReturnHome={onReturnHome}
-        onSelectTickets={onSelectTickets}
-        onSelectJourney={onSelectJourney}
-        onSelectRanking={onSelectRanking}
-        ticketCount={ticketCount}
-        activeView="releases"
-      />
 
       {/* High-res Album Jacket Lightbox Modal (ADR-0143, ADR-0144) */}
       <CoverLightboxModal

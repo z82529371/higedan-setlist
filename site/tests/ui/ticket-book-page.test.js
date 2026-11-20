@@ -438,7 +438,7 @@ describe("23. Tour TicketBook Dedicated Page (#/tickets) & Timeline Management (
       assert.ok(zeroStatusBar.includes('data-testid="status-bar-ticket-book-btn"'), "ArchiveStatusBar renders ticket button");
       assert.ok(!zeroStatusBar.includes('data-testid="status-bar-ticket-badge-count"'), "ArchiveStatusBar must NOT render badge when count is 0");
 
-      const zeroMobileFab = renderToStaticMarkup(
+      const zeroMobileMenu = renderToStaticMarkup(
         React.createElement(
           I18nProvider,
           { initialLocale: "zh-TW" },
@@ -452,8 +452,8 @@ describe("23. Tour TicketBook Dedicated Page (#/tickets) & Timeline Management (
           })
         )
       );
-      assert.ok(zeroMobileFab.includes('data-testid="mobile-ticket-book-fab"'), "MobileFloatingControls renders mobile-ticket-book-fab");
-      assert.ok(!zeroMobileFab.includes('data-testid="mobile-ticket-badge-count"'), "MobileFloatingControls must NOT render badge when count is 0");
+      assert.ok(zeroMobileMenu.includes('data-testid="mobile-floating-menu-btn"'), "MobileFloatingControls renders mobile-floating-menu-btn");
+      assert.ok(!zeroMobileMenu.includes('data-testid="mobile-ticket-badge-count"'), "MobileFloatingControls must NOT render badge when count is 0");
 
       // Verify LandingHero does NOT render ticket book button
       const heroHtml = renderToStaticMarkup(
@@ -523,8 +523,8 @@ describe("23. Tour TicketBook Dedicated Page (#/tickets) & Timeline Management (
       );
       assert.ok(htmlStatusBar.includes('data-testid="status-bar-ticket-badge-count"'), "ArchiveStatusBar must render badge count when count > 0");
 
-      // 3. MobileFloatingControls (count > 0 renders badge)
-      const htmlMobileFab = renderToStaticMarkup(
+      // 3. MobileFloatingControls (count > 0 renders badge on floating MENU button)
+      const htmlMobileMenu = renderToStaticMarkup(
         React.createElement(
           I18nProvider,
           { initialLocale: "zh-TW" },
@@ -538,8 +538,8 @@ describe("23. Tour TicketBook Dedicated Page (#/tickets) & Timeline Management (
           })
         )
       );
-      assert.ok(htmlMobileFab.includes('data-testid="mobile-ticket-badge-count"'), "MobileFloatingControls must render mobile-ticket-badge-count when count > 0");
-      assert.ok(htmlMobileFab.includes(">1<"), "Mobile badge count must display 1");
+      assert.ok(htmlMobileMenu.includes('data-testid="mobile-ticket-badge-count"'), "MobileFloatingControls must render mobile-ticket-badge-count when count > 0");
+      assert.ok(htmlMobileMenu.includes(">1<"), "Mobile menu badge count must display 1");
 
       // 4. FilterDrawer (ADR-0125: Pure filter drawer without extraneous buttons)
       const htmlDrawer = renderToStaticMarkup(
@@ -579,10 +579,8 @@ describe("23. Tour TicketBook Dedicated Page (#/tickets) & Timeline Management (
       assert.ok(htmlPage.includes("🎟️"), "TicketBookPage must use 🎟️ emoji");
       assert.ok(!htmlPage.includes("🛂"), "TicketBookPage must NOT contain legacy 🛂 emoji");
       assert.ok(!htmlPage.includes("護照"), "TicketBookPage must NOT contain legacy 護照 keyword");
-      assert.ok(htmlPage.includes('data-testid="mobile-ticket-back-archive-fab"'), "TicketBookPage must render mobile back-archive FAB");
-      assert.ok(htmlPage.includes('data-testid="mobile-ticket-back-home-fab"'), "TicketBookPage must render mobile back-home FAB");
-      assert.ok(htmlPage.includes('data-testid="mobile-ticket-back-top-fab"'), "TicketBookPage must render mobile back-top FAB");
-      assert.ok(htmlPage.includes("hidden sm:flex"), "TicketBookPage top utility bar must be hidden on mobile");
+      assert.ok(htmlPage.includes('data-testid="ticket-book-backup-trigger"'), "TicketBookPage must render inline backup trigger button");
+      assert.ok(!htmlPage.includes('data-testid="mobile-ticket-back-archive-fab"'), "TicketBookPage must not render redundant left-dock mobile FABs");
 
       storage.clear();
     });

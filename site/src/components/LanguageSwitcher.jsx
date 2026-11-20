@@ -15,7 +15,7 @@ export const LOCALE_CODES = {
   ko: "KO",
 };
 
-export function LanguageSwitcher({ className = "", menuPosition = "down", fab = false }) {
+export function LanguageSwitcher({ className = "", menuPosition = "down", fab = false, compact = false }) {
   const { locale, setLocale, supportedLocales } = useI18n();
   const [isOpen, setIsOpen] = useState(false);
   const containerRef = useRef(null);
@@ -57,6 +57,8 @@ export function LanguageSwitcher({ className = "", menuPosition = "down", fab = 
         className={
           fab
             ? "flex h-10 w-10 items-center justify-center rounded-[3px] border-[1.5px] border-ink bg-paper text-ink shadow-[2px_2px_0_#000] dark:shadow-none cursor-pointer hover:bg-tape-tint transition-colors font-mono text-[11px] font-black tracking-wider touch-stamp focus-visible:outline-2 focus-visible:outline-band-ink"
+            : compact
+            ? "inline-flex items-center gap-1 px-2 py-0.5 rounded-[3px] border border-band-ink/30 bg-band-ink/10 text-band-ink hover:bg-band-ink/20 text-[10px] sm:text-[11px] font-bold transition-colors cursor-pointer touch-stamp focus-visible:outline-2 focus-visible:outline-band-ink"
             : "inline-flex items-center gap-1.5 px-2.5 py-1 min-h-[36px] sm:min-h-[38px] rounded-[3px] border-[1.5px] border-ink/30 bg-card text-ink hover:border-ink hover:bg-tape-tint/50 text-xs font-bold shadow-[2px_2px_0_rgba(0,0,0,0.08)] dark:shadow-none transition-colors cursor-pointer touch-stamp focus-visible:outline-2 focus-visible:outline-band-ink"
         }
         aria-haspopup="true"
@@ -65,6 +67,13 @@ export function LanguageSwitcher({ className = "", menuPosition = "down", fab = 
       >
         {fab ? (
           <span>{LOCALE_CODES[locale] || "TW"}</span>
+        ) : compact ? (
+          <>
+            <span className="sm:hidden font-black tracking-wider">{LOCALE_CODES[locale] || "TW"}</span>
+            <span className="hidden sm:inline text-[10px] font-black tracking-widest opacity-65" aria-hidden="true">LANG</span>
+            <span className="hidden sm:inline">{LOCALE_LABELS[locale] || locale}</span>
+            <span aria-hidden="true" className="text-[9px] opacity-70">▾</span>
+          </>
         ) : (
           <>
             <span className="text-[10px] font-black tracking-widest opacity-60" aria-hidden="true">LANG</span>

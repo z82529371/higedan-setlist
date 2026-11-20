@@ -7,6 +7,7 @@ export const dictKo = {
     shows: "공연",
     songs: "곡",
     venues: "공연장",
+    archive: "아카이브",
     ticketBook: "티켓북",
     ranking: "랭킹",
     journey: "투어 발자취",

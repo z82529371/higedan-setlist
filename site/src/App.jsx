@@ -1,6 +1,6 @@
 import { Fragment, useMemo } from "react";
 import { allUnits, buildIndex } from "./lib/domain.js";
-import { ArchiveLayout } from "./components/layout/index.js";
+import { ArchiveLayout, ArchiveStatusBar, MobileFloatingControls } from "./components/layout/index.js";
 import { TicketBookPage } from "./components/ticket-book/TicketBookPage.jsx";
 import { JourneyPage } from "./components/journey/index.js";
 import { RankingPage } from "./components/ranking/RankingPage.jsx";
@@ -104,6 +104,17 @@ export function AppContent({ probeRoute } = {}) {
 
   return (
     <Fragment>
+      {viewMode !== "archive" && (
+        <ArchiveStatusBar
+          viewMode={viewMode}
+          handleReturnArchive={handleReturnArchive}
+          handleReturnHome={handleReturnHome}
+          handleSelectTickets={handleSelectTickets}
+          handleSelectRanking={handleSelectRanking}
+          handleSelectJourney={handleSelectJourney}
+          handleSelectReleases={handleSelectReleases}
+        />
+      )}
       {viewMode === "landing" ? (
         <LandingHero
           onEnterArchive={() => setViewMode("archive")}
@@ -160,6 +171,9 @@ export function AppContent({ probeRoute } = {}) {
           onReturnArchive={handleReturnArchive}
           onReturnHome={handleReturnHome}
           onSelectTickets={handleSelectTickets}
+          onSelectRanking={handleSelectRanking}
+          onSelectJourney={handleSelectJourney}
+          onSelectReleases={handleSelectReleases}
         />
       ) : viewMode === "ranking" ? (
         <RankingPage
@@ -175,19 +189,9 @@ export function AppContent({ probeRoute } = {}) {
             setViewMode("archive");
             handleSelectVenue(vName);
           }}
-          onReturnArchive={handleReturnArchive}
-          onReturnHome={handleReturnHome}
-          onSelectTickets={handleSelectTickets}
-          onSelectJourney={handleSelectJourney}
         />
       ) : viewMode === "releases" ? (
-        <ReleasesPage
-          onReturnArchive={handleReturnArchive}
-          onReturnHome={handleReturnHome}
-          onSelectTickets={handleSelectTickets}
-          onSelectJourney={handleSelectJourney}
-          onSelectRanking={handleSelectRanking}
-        />
+        <ReleasesPage />
       ) : (
         <ArchiveLayout
           filterState={filterState}
@@ -199,6 +203,19 @@ export function AppContent({ probeRoute } = {}) {
           allVenues={allVenues}
           allUnits={allUnits}
           showById={showById}
+        />
+      )}
+
+      {/* Mobile Floating Menu + Language Controls for Landing & Standalone Special Pages */}
+      {viewMode !== "archive" && viewMode !== "journey" && (
+        <MobileFloatingControls
+          tab={viewMode}
+          onReturnHome={handleReturnHome}
+          onReturnArchive={handleReturnArchive}
+          onSelectTickets={handleSelectTickets}
+          onSelectRanking={handleSelectRanking}
+          onSelectJourney={handleSelectJourney}
+          onSelectReleases={handleSelectReleases}
         />
       )}
 

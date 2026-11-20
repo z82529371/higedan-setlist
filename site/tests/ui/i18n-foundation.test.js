@@ -215,7 +215,19 @@ describe("13. i18n Foundation, Hash Route Query Parameter Seam, and Header Switc
       );
       assert.ok(swHtmlJa.includes("日本語"), "must render active locale label '日本語'");
 
-      // 2. Integration into LandingHero
+      const { ArchiveStatusBar } = await loadModule("/src/components/layout/ArchiveStatusBar.jsx");
+
+      // 2. Integration into ArchiveStatusBar (unified across LandingHero & Archive)
+      const statusBarEn = renderToStaticMarkup(
+        React.createElement(
+          I18nProvider,
+          { initialLocale: "en" },
+          React.createElement(ArchiveStatusBar, { viewMode: "landing" })
+        )
+      );
+      assert.ok(statusBarEn.includes("EN"), "ArchiveStatusBar must render LanguageSwitcher with EN active");
+      assert.ok(!statusBarEn.includes('data-testid="status-bar-mobile-menu-btn"'), "ArchiveStatusBar must keep mobile menu in floating controls");
+
       const landingHtml = renderToStaticMarkup(
         React.createElement(
           I18nProvider,
@@ -230,7 +242,7 @@ describe("13. i18n Foundation, Hash Route Query Parameter Seam, and Header Switc
           })
         )
       );
-      assert.ok(landingHtml.includes("EN"), "LandingHero must render LanguageSwitcher with EN active");
+      assert.ok(!landingHtml.includes('data-testid="language-switcher"'), "LandingHero must not render duplicate LanguageSwitcher");
       assert.ok(landingHtml.includes("Public Shows"), "LandingHero stats must be localized in EN");
 
       // 3. Integration into ArchiveHeader across locales
@@ -252,7 +264,7 @@ describe("13. i18n Foundation, Hash Route Query Parameter Seam, and Header Switc
           React.createElement(ArchiveHeader, archiveProps)
         )
       );
-      assert.ok(archiveHtmlJa.includes("日本語"), "ArchiveHeader must render LanguageSwitcher with 日本語 active");
+      assert.ok(!archiveHtmlJa.includes('data-testid="language-switcher"'), "ArchiveHeader must not render duplicate LanguageSwitcher");
       assert.ok(archiveHtmlJa.includes("公演"), "ArchiveHeader tab must render 公演 for shows in ja");
       assert.ok(archiveHtmlJa.includes("楽曲"), "ArchiveHeader tab must render 楽曲 for songs in ja");
       assert.ok(archiveHtmlJa.includes("会場"), "ArchiveHeader tab must render 会場 for venues in ja");
@@ -265,27 +277,14 @@ describe("13. i18n Foundation, Hash Route Query Parameter Seam, and Header Switc
           React.createElement(ArchiveHeader, archiveProps)
         )
       );
-      assert.ok(archiveHtmlKo.includes("한국어"), "ArchiveHeader must render LanguageSwitcher with 한국어 active");
+      assert.ok(!archiveHtmlKo.includes('data-testid="language-switcher"'), "ArchiveHeader must not render duplicate LanguageSwitcher");
       assert.ok(archiveHtmlKo.includes("공연"), "ArchiveHeader tab must render 공연 for shows in ko");
       assert.ok(archiveHtmlKo.includes("곡"), "ArchiveHeader tab must render 곡 for songs in ko");
       assert.ok(archiveHtmlKo.includes("셋리스트 아카이브"), "ArchiveHeader brandTitle must be localized in ko");
 
-      // 4. Responsive Switcher Dichotomy & Affordance Invariant (ADR-0107)
-      // LandingHero MUST render LanguageSwitcher in static header bar and NEVER as a fixed floating FAB on mobile
+      // 4. Unified LanguageSwitcher placement: desktop in ArchiveStatusBar, mobile in MobileFloatingControls
       assert.ok(!landingHtml.includes("fixed bottom-"), "LandingHero must NOT contain fixed bottom floating FAB");
-      assert.ok(landingHtml.includes("w-full flex justify-end items-center"), "LandingHero must place LanguageSwitcher in top utility bar");
-
-      // ArchiveHeader MUST hide LanguageSwitcher on small screens to yield space for mobile chrome
-      assert.ok(archiveHtmlJa.includes("hidden sm:inline-block"), "ArchiveHeader must hide switcher on mobile via hidden sm:inline-block");
-      // Anti-regression: LanguageSwitcher root element must NOT contain unconditional inline-block when hidden is passed
-      assert.ok(
-        !archiveHtmlJa.includes('class="relative inline-block text-left select-none font-mono hidden sm:inline-block'),
-        "ArchiveHeader LanguageSwitcher must NOT have conflicting inline-block preceding hidden"
-      );
-      assert.ok(
-        archiveHtmlJa.includes('class="relative text-left select-none font-mono hidden sm:inline-block shrink-0"'),
-        "ArchiveHeader LanguageSwitcher must render clean display classes without conflicting inline-block"
-      );
+      assert.ok(statusBarEn.includes("hidden sm:block"), "ArchiveStatusBar must show LanguageSwitcher on desktop only");
 
       // Verify standalone LanguageSwitcher fallback vs override behavior
       const defaultSwitcherHtml = renderToStaticMarkup(
@@ -328,9 +327,9 @@ describe("13. i18n Foundation, Hash Route Query Parameter Seam, and Header Switc
           })
         )
       );
-      assert.ok(mobileControlsHtml.includes('data-testid="language-switcher"'), "MobileFloatingControls must render LanguageSwitcher");
-      assert.ok(mobileControlsHtml.includes("rounded-[3px]"), "MobileFloatingControls LanguageSwitcher must render square stamp FAB");
-      assert.ok(!mobileControlsHtml.includes("🌐"), "MobileFloatingControls LanguageSwitcher must not display globe emoji");
+      // 4. Floating LanguageSwitcher + Menu in MobileFloatingControls
+      assert.ok(mobileControlsHtml.includes('data-testid="language-switcher"'), "MobileFloatingControls must render floating LanguageSwitcher");
+      assert.ok(mobileControlsHtml.includes('data-testid="mobile-floating-menu-btn"'), "MobileFloatingControls must render single floating MENU button");
     });
 
     it("renders LandingHero with full localized content, dynamic venueCount, and preserved tokens across all 4 locales", async () => {

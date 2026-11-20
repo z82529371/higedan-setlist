@@ -7,6 +7,7 @@ export const dictEn = {
     shows: "Shows",
     songs: "Songs",
     venues: "Venues",
+    archive: "Archive",
     ticketBook: "Ticket Book",
     ranking: "Leaderboard",
     journey: "Tour Journey",

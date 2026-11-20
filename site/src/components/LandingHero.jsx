@@ -1,6 +1,5 @@
 import { useMemo, useState } from "react";
 import SearchBox from "./SearchBox.jsx";
-import LanguageSwitcher from "./LanguageSwitcher.jsx";
 import InteractiveFoilTicket from "./landing/InteractiveFoilTicket.jsx";
 import { useI18n } from "../lib/i18n.jsx";
 import { useTicketBook } from "../lib/ticket-book.js";
@@ -220,11 +219,6 @@ export default function LandingHero({
       style={eraStyle}
       className="mx-auto max-w-[960px] px-4 sm:px-6 py-6 sm:py-10 flex flex-col items-center animate-fade-in relative"
     >
-      {/* Top Utility Bar (Language Switcher Only — ADR-0107 / ADR-0115) */}
-      <div className="w-full flex justify-end items-center gap-2 mb-6 sm:mb-9">
-        <LanguageSwitcher />
-      </div>
-
       {/* Asymmetric Split Hero Stage: Clean Search & Masthead (Left) + Floating 3D Foil Ticket (Right) */}
       <section className="w-full grid grid-cols-1 lg:grid-cols-[1.08fr_0.92fr] gap-10 lg:gap-12 items-center">
         {/* Left: Pure Editorial Masthead + Spotlight Search + Primary CTA */}

@@ -7,6 +7,7 @@ export const dictZhTw = {
     shows: "場次",
     songs: "歌曲",
     venues: "場地",
+    archive: "檔案庫",
     ticketBook: "票夾",
     ranking: "排行",
     journey: "巡演足跡",

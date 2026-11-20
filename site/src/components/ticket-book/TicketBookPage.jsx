@@ -11,10 +11,8 @@ import { TicketBookTransferModal } from "./TicketBookTransferModal.jsx";
 import { LiveSongChecklistDrawer } from "./LiveSongChecklistDrawer.jsx";
 import { MemorialCardModal } from "../MemorialCardModal.jsx";
 import { assignCues } from "../../lib/resolve.js";
-import LanguageSwitcher from "../LanguageSwitcher.jsx";
 import { ArchiveFooter } from "../layout/ArchiveFooter.jsx";
 import { SLIP_ARTICLE, SLIP_TAPE } from "../../lib/constants.js";
-import { HomeIcon } from "../common/ArchivalIcons.jsx";
 
 export function TicketBookPage({
   unitData,
@@ -184,45 +182,7 @@ export function TicketBookPage({
   }, [memorialShowId, enrichedShows, showById, unitIdByShowId, unitData]);
 
   return (
-    <div className="mx-auto max-w-[960px] px-4 sm:px-6 pt-4 pb-24 sm:py-8">
-      {/* Top Navigation & Language Utility Bar (Desktop only, mobile uses floating docks) */}
-      <div className="mb-4 sm:mb-6 hidden sm:flex items-center justify-between gap-3">
-        <div className="flex items-center gap-2">
-          {onReturnArchive && (
-            <button
-              type="button"
-              onClick={onReturnArchive}
-              className="inline-flex items-center gap-1.5 rounded-[4px] border border-ink/30 bg-card px-3 py-1.5 font-mono text-[11px] sm:text-[12px] font-bold text-ink shadow-2xs hover:bg-tape-tint transition-colors cursor-pointer"
-              title={t("ticketBook.backToArchive", "返回檔案庫")}
-            >
-              <span aria-hidden="true">←</span>
-              <span>{t("ticketBook.backToArchive", "返回檔案庫")}</span>
-            </button>
-          )}
-          {onReturnHome && (
-            <button
-              type="button"
-              onClick={onReturnHome}
-              className="inline-flex items-center gap-1 rounded-[4px] border border-ink/30 bg-card px-2.5 py-1.5 font-mono text-[11px] sm:text-[12px] font-bold text-ink shadow-2xs hover:bg-tape-tint transition-colors cursor-pointer"
-              title={t("ticketBook.backToHome", "返回首頁")}
-            >
-              <span aria-hidden="true">🏠</span>
-            </button>
-          )}
-          <button
-            type="button"
-            data-testid="ticket-book-backup-trigger"
-            onClick={() => setIsTransferModalOpen(true)}
-            className="inline-flex items-center gap-1.5 rounded-[4px] border border-ink/30 bg-card px-2.5 py-1.5 font-mono text-[11px] sm:text-[12px] font-bold text-ink shadow-2xs hover:bg-tape-tint transition-colors cursor-pointer"
-            title={t("ticketBook.backupTriggerTitle", "備份或跨裝置轉移您的票夾紀錄")}
-          >
-            <span aria-hidden="true">🔄</span>
-            <span>{t("ticketBook.backupTrigger", "備份與轉移")}</span>
-          </button>
-        </div>
-        <LanguageSwitcher />
-      </div>
-
+    <div className="mx-auto max-w-[960px] px-4 sm:px-6 pt-8 pb-16 sm:py-8">
       {/* Main Ticket Receipt Card */}
       <article className={SLIP_ARTICLE}>
         {/* Washi Masking Tape Top Pin */}
@@ -246,15 +206,24 @@ export function TicketBookPage({
             {t("ticketBook.subtitle", "記錄你的每場參戰軌跡，珍藏專屬於你的現場回憶")}
           </p>
 
-          {/* Stats Badge */}
-          <div className="mt-3.5 flex items-center justify-center gap-2">
+          {/* Stats Badge & Inline Backup Action */}
+          <div className="mt-3.5 flex flex-wrap items-center justify-center gap-2">
             <span
               data-testid="ticket-book-total-badge"
-              className="inline-flex items-center gap-1.5 rounded-[4px] border border-ink/30 bg-tape px-3 py-1 font-mono text-[12px] sm:text-[13px] font-extrabold text-ink shadow-2xs"
+              className="inline-flex items-center gap-1.5 rounded-[3px] border border-ink/30 bg-tape px-3 py-1 font-mono text-[12px] sm:text-[13px] font-extrabold text-ink"
             >
-              <span aria-hidden="true">🎫</span>
               <span>{t("ticketBook.totalAttended", "累計參戰 {count} 場", { count })}</span>
             </span>
+            <button
+              type="button"
+              data-testid="ticket-book-backup-trigger"
+              onClick={() => setIsTransferModalOpen(true)}
+              className="inline-flex items-center gap-1.5 rounded-[3px] border border-ink/30 bg-paper px-3 py-1 font-mono text-[11px] sm:text-[12px] font-bold text-ink hover:bg-tape-tint touch-stamp transition-colors cursor-pointer"
+              title={t("ticketBook.backupTriggerTitle", "備份或跨裝置轉移您的票夾紀錄")}
+            >
+              <span aria-hidden="true">⇄</span>
+              <span>{t("ticketBook.backupTrigger", "備份與轉移")}</span>
+            </button>
           </div>
         </header>
 
@@ -579,63 +548,6 @@ export function TicketBookPage({
           initialImageUrl={initialMemorialImageUrl}
         />
       )}
-
-      {/* Mobile Floating Stamp Controls (sm:hidden) */}
-      <div className="fixed bottom-5 right-4 z-40 sm:hidden flex flex-col items-end gap-2 select-none">
-        <button
-          type="button"
-          data-testid="mobile-ticket-backup-fab"
-          onClick={() => setIsTransferModalOpen(true)}
-          className="inline-flex items-center justify-center w-10 h-10 rounded-[3px] bg-paper text-ink font-mono font-bold border-[1.5px] border-ink shadow-[2px_2px_0_#000] dark:shadow-none text-[13px] cursor-pointer hover:bg-tape-tint touch-stamp transition-colors"
-          title={t("ticketBook.backupTriggerTitle", "備份或跨裝置轉移您的票夾紀錄")}
-          aria-label={t("ticketBook.backupTrigger", "備份與轉移")}
-        >
-          ⇄
-        </button>
-        <LanguageSwitcher fab menuPosition="up" />
-      </div>
-
-      <div className="fixed bottom-5 left-4 z-30 sm:hidden flex flex-col items-start gap-2 select-none">
-        {onReturnArchive && (
-          <button
-            type="button"
-            data-testid="mobile-ticket-back-archive-fab"
-            onClick={onReturnArchive}
-            className="inline-flex items-center gap-1.5 px-3 h-10 rounded-[3px] bg-paper text-ink font-bold border-[1.5px] border-ink shadow-[2px_2px_0_#000] dark:shadow-none text-[12px] cursor-pointer hover:bg-tape-tint touch-stamp transition-colors"
-            title={t("ticketBook.backToArchive", "返回檔案庫")}
-            aria-label={t("ticketBook.backToArchive", "返回檔案庫")}
-          >
-            <span aria-hidden="true" className="font-mono">←</span>
-            <span>{t("ticketBook.backToArchive", "返回檔案庫")}</span>
-          </button>
-        )}
-
-        <div className="flex items-center gap-2">
-          {onReturnHome && (
-            <button
-              type="button"
-              data-testid="mobile-ticket-back-home-fab"
-              onClick={onReturnHome}
-              className="inline-flex items-center gap-1.5 px-3 h-10 rounded-[3px] bg-paper text-ink font-bold border-[1.5px] border-ink shadow-[2px_2px_0_#000] dark:shadow-none text-[12px] cursor-pointer hover:bg-tape-tint touch-stamp transition-colors"
-              aria-label={t("mobile.backHomeAria", "回到首頁門面")}
-              title={t("mobile.backHomeTitle", "回到首頁門面")}
-            >
-              <HomeIcon className="w-3.5 h-3.5 shrink-0" />
-              <span>{t("mobile.home", "首頁")}</span>
-            </button>
-          )}
-          <button
-            type="button"
-            data-testid="mobile-ticket-back-top-fab"
-            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            className="inline-flex items-center justify-center w-10 h-10 rounded-[3px] bg-paper text-ink font-mono font-bold border-[1.5px] border-ink shadow-[2px_2px_0_#000] dark:shadow-none text-[12px] cursor-pointer hover:bg-tape-tint touch-stamp transition-colors"
-            aria-label={t("mobile.backTopAria", "回到頁首")}
-            title={t("mobile.backTopTitle", "回到頁首")}
-          >
-            ▲
-          </button>
-        </div>
-      </div>
     </div>
   );
 }

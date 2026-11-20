@@ -7,6 +7,7 @@ export const dictJa = {
     shows: "公演",
     songs: "楽曲",
     venues: "会場",
+    archive: "アーカイブ",
     ticketBook: "チケットブック",
     ranking: "ランキング",
     journey: "巡演足跡",

@@ -8,7 +8,6 @@ import {
 import { buildJourneySequence } from "../../lib/venue-map.js";
 import { venueProfilesByCanonical } from "../../lib/locales/venues.js";
 import { VenueMapCanvas } from "../VenueMapCanvas.jsx";
-import LanguageSwitcher from "../LanguageSwitcher.jsx";
 import { SLIP_TAPE } from "../../lib/constants.js";
 import { MobileFloatingControls } from "../layout/MobileFloatingControls.jsx";
 import { JourneyFilterDrawer } from "./JourneyFilterDrawer.jsx";
@@ -21,6 +20,9 @@ export function JourneyPage({
   onReturnArchive,
   onReturnHome,
   onSelectTickets,
+  onSelectRanking,
+  onSelectJourney,
+  onSelectReleases,
 }) {
   const { t } = useI18n();
   const [includeTv, setIncludeTv] = useState(false);
@@ -83,35 +85,7 @@ export function JourneyPage({
   }, [t]);
 
   return (
-    <div className="mx-auto max-w-[960px] px-4 sm:px-6 pt-4 pb-24 sm:py-8 select-none">
-      {/* Top Floating Control Bar: desktop only */}
-      <div className="hidden sm:flex mb-4 sm:mb-6 items-center justify-between gap-2">
-          <div className="flex items-center gap-2">
-            {onReturnArchive && (
-              <button
-                type="button"
-                onClick={onReturnArchive}
-                className="inline-flex items-center gap-1.5 rounded-[4px] border border-ink/30 bg-card px-3 py-1.5 font-mono text-[11px] sm:text-[12px] font-bold text-ink shadow-2xs hover:bg-tape-tint transition-colors cursor-pointer"
-                title={t("ticketBook.backToArchive", "返回檔案庫")}
-              >
-                <span aria-hidden="true">←</span>
-                <span>{t("ticketBook.backToArchive", "返回檔案庫")}</span>
-              </button>
-            )}
-            {onReturnHome && (
-              <button
-                type="button"
-                onClick={onReturnHome}
-                className="inline-flex items-center gap-1 rounded-[4px] border border-ink/30 bg-card px-2.5 py-1.5 font-mono text-[11px] sm:text-[12px] font-bold text-ink shadow-2xs hover:bg-tape-tint transition-colors cursor-pointer"
-                title={t("ticketBook.backToHome", "返回首頁")}
-              >
-                <span aria-hidden="true">🏠</span>
-              </button>
-            )}
-          </div>
-          <LanguageSwitcher />
-        </div>
-
+    <div className="mx-auto max-w-[960px] px-4 sm:px-6 pt-8 pb-24 sm:py-8 select-none">
         {/* Main Ticket Receipt Article */}
         <main>
           <article className="relative rounded-[3px] border-[1.5px] border-ink bg-card px-3 sm:px-[26px] pb-6 pt-6 sm:pt-7 shadow-[5px_5px_0_rgba(0,0,0,0.14)]">
@@ -245,8 +219,11 @@ export function JourneyPage({
         tab="journey"
         onOpenDrawer={() => setIsDrawerOpen(true)}
         onReturnHome={onReturnHome}
-        onSelectTickets={onSelectTickets}
         onReturnArchive={onReturnArchive}
+        onSelectTickets={onSelectTickets}
+        onSelectRanking={onSelectRanking}
+        onSelectJourney={onSelectJourney}
+        onSelectReleases={onSelectReleases}
       />
 
       {/* Mobile Journey Filter Drawer */}
