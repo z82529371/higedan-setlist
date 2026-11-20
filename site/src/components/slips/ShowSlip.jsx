@@ -428,6 +428,7 @@ export function ShowSlip({
               mediaOverride={digestMedia}
               titleOverride={s.title || ud.unit.title}
               onClose={() => setShowDigestStage(false)}
+              autoMountOnOpen={true}
             />
           )}
 

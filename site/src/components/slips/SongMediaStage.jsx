@@ -25,6 +25,7 @@ export function SongMediaStage({
   onClose,
   collapsed: controlledCollapsed,
   onToggleCollapse,
+  autoMountOnOpen = false,
 }) {
   const { t } = useI18n();
   const iframeRef = useRef(null);
@@ -40,16 +41,25 @@ export function SongMediaStage({
 
   const [selectedLiveIndex, setSelectedLiveIndex] = useState(0);
   const [selectedMvIndex, setSelectedMvIndex] = useState(0);
-  const [userSwitched, setUserSwitched] = useState(false);
+  const [hasActivated, setHasActivated] = useState(() => Boolean(autoMountOnOpen));
+  const [thumbError, setThumbError] = useState(false);
 
-  // Reset active track and live/mv index whenever songId or initialTrack changes
+  // Reset active track, selection, and facade state whenever songId, mediaOverride, or initialTrack changes
   useEffect(() => {
     setActiveTrack(initialTrack || media.defaultTrack || "live");
     setSelectedLiveIndex(0);
     setSelectedMvIndex(0);
-    setUserSwitched(false);
+    setHasActivated(Boolean(autoMountOnOpen));
+    setThumbError(false);
     setInternalCollapsed(false);
-  }, [songId, initialTrack, media.defaultTrack]);
+  }, [songId, initialTrack, media.defaultTrack, mediaOverride, autoMountOnOpen]);
+
+  // Collapsing the stage unmounts the iframe and returns to the static facade
+  useEffect(() => {
+    if (isCollapsed) {
+      setHasActivated(false);
+    }
+  }, [isCollapsed]);
 
   // Safe volume dispatch (Sets volume to 50% via YouTube IFrame HTML5 PostMessage)
   const dispatchVolume = () => {
@@ -113,22 +123,32 @@ export function SongMediaStage({
         ? currentMv
         : currentLive;
 
-  // Initial load uses autoplay=0 (false) to avoid unprompted sound; user tab switch uses autoplay=1 (true)
-  const embedUrl = currentVideo
-    ? buildYouTubeEmbedUrl(
-        currentVideo.youtubeId,
-        currentVideo.start,
-        userSwitched,
-        currentVideo.end
-      )
-    : "";
+  // Only build embedUrl once activated (click-to-play facade or explicit autoMountOnOpen)
+  const embedUrl =
+    hasActivated && currentVideo
+      ? buildYouTubeEmbedUrl(
+          currentVideo.youtubeId,
+          currentVideo.start,
+          true,
+          currentVideo.end
+        )
+      : "";
   const watchUrl = currentVideo
     ? buildYouTubeWatchUrl(currentVideo.youtubeId, currentVideo.start)
     : "";
+  const thumbnailUrl =
+    currentVideo?.youtubeId && !thumbError
+      ? `https://i.ytimg.com/vi/${encodeURIComponent(currentVideo.youtubeId)}/hqdefault.jpg`
+      : "";
 
-  // Auto-regulate volume when activeTrack, selectedLiveIndex, selectedMvIndex, or embedUrl changes
+  // Reset thumbnail error state when the previewed video changes
   useEffect(() => {
-    if (!embedUrl || isCollapsed) return;
+    setThumbError(false);
+  }, [currentVideo?.youtubeId]);
+
+  // Auto-regulate volume when active iframe loads or switches video
+  useEffect(() => {
+    if (!hasActivated || !embedUrl || isCollapsed) return;
     const t1 = setTimeout(dispatchVolume, 400);
     const t2 = setTimeout(dispatchVolume, 1000);
     const t3 = setTimeout(dispatchVolume, 2000);
@@ -137,7 +157,7 @@ export function SongMediaStage({
       clearTimeout(t2);
       clearTimeout(t3);
     };
-  }, [embedUrl, activeTrack, selectedLiveIndex, selectedMvIndex, isCollapsed]);
+  }, [hasActivated, embedUrl, activeTrack, selectedLiveIndex, selectedMvIndex, isCollapsed]);
 
   if (!media.hasMedia || !currentVideo) return null;
 
@@ -147,7 +167,6 @@ export function SongMediaStage({
 
   const handleTrackChange = (track) => {
     if (track !== activeTrack) {
-      setUserSwitched(true);
       setActiveTrack(track);
     }
   };
@@ -291,7 +310,7 @@ export function SongMediaStage({
           </div>
         ) : media.hasLive ? (
           <div className="w-full sm:w-auto order-3 sm:order-2 flex items-center">
-            <span className="rounded bg-band/15 text-band-ink border border-band/30 px-2 py-0.5 text-[10px] font-bold">
+            <span className="rounded bg-band/15 text-ink border border-band/30 px-2 py-0.5 text-[10px] font-bold">
               {currentLive?.isDigest
                 ? `🎬 ${t("tourExtra.watchDigest", "巡演精華")}`
                 : currentLive?.isExcerpt
@@ -328,7 +347,6 @@ export function SongMediaStage({
                     type="button"
                     onClick={() => {
                       if (idx !== selectedLiveIndex) {
-                        setUserSwitched(true);
                         setSelectedLiveIndex(idx);
                       }
                     }}
@@ -376,7 +394,6 @@ export function SongMediaStage({
                     type="button"
                     onClick={() => {
                       if (idx !== selectedMvIndex) {
-                        setUserSwitched(true);
                         setSelectedMvIndex(idx);
                       }
                     }}
@@ -398,9 +415,9 @@ export function SongMediaStage({
             </div>
           )}
 
-          {/* 16:9 Video Embed Container */}
+          {/* 16:9 Video Embed Container (Click-to-Play Facade until activated) */}
           <div className="relative aspect-video w-full bg-black overflow-hidden">
-            {embedUrl ? (
+            {hasActivated && embedUrl ? (
               <iframe
                 ref={iframeRef}
                 src={embedUrl}
@@ -411,7 +428,44 @@ export function SongMediaStage({
                 referrerPolicy="no-referrer-when-downgrade"
                 allowFullScreen
               />
-            ) : null}
+            ) : (
+              <button
+                type="button"
+                data-testid="song-media-play-btn"
+                onClick={() => setHasActivated(true)}
+                aria-label={`${t("songExtra.playVideo", "點擊播放影片")}：${currentVideo.title || title}`}
+                className="group relative block h-full w-full cursor-pointer border-0 bg-ink/95 p-0 text-left focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-band"
+              >
+                {thumbnailUrl && (
+                  <img
+                    src={thumbnailUrl}
+                    alt={currentVideo.title || title}
+                    loading="lazy"
+                    onError={() => setThumbError(true)}
+                    className="absolute inset-0 h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+                  />
+                )}
+                <div
+                  className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/25 to-black/20 transition-colors group-hover:bg-black/35"
+                  aria-hidden="true"
+                />
+                <span className="absolute inset-0 flex flex-col items-center justify-center gap-2">
+                  <span className="flex h-14 w-14 sm:h-16 sm:w-16 items-center justify-center rounded-full border border-white/30 bg-black/75 text-white shadow-xs transition-all group-hover:scale-105 group-hover:border-band group-hover:bg-band group-hover:text-band-ink">
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                      className="ml-1 h-7 w-7 sm:h-8 sm:w-8"
+                      aria-hidden="true"
+                    >
+                      <path d="M8 5.14v14l11-7-11-7z" />
+                    </svg>
+                  </span>
+                  <span className="rounded bg-black/70 px-2.5 py-0.5 font-mono text-[11px] font-bold tracking-wide text-white/95 backdrop-blur-xs">
+                    {t("songExtra.playVideo", "點擊播放影片")}
+                  </span>
+                </span>
+              </button>
+            )}
           </div>
 
           {/* Stage Bottom Bar (Link to Show Slip or Video Information) */}
@@ -429,7 +483,7 @@ export function SongMediaStage({
                     {currentLive.title || t("songExtra.livePerformance", "現場演出紀錄")}
                   </span>
                   {currentLive.isExcerpt && currentLive.timeRangeText && (
-                    <span className="shrink-0 rounded bg-band/20 text-band-ink px-1.5 py-0.5 text-[10px] font-bold">
+                    <span className="shrink-0 rounded bg-band/20 text-ink px-1.5 py-0.5 text-[10px] font-bold">
                       ⏱️ {currentLive.timeRangeText}
                     </span>
                   )}

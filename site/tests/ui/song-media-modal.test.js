@@ -57,7 +57,7 @@ describe("33. Song Media Stage & SongSlip In-Place Integration (UI SSR)", () => 
     assert.strictEqual(html, "", "Stage must render null when song has no media");
   });
 
-  it("renders SongMediaStage with in-place iframe embed, dual tabs, show deep-link, and mobile layout", async () => {
+  it("renders SongMediaStage with click-to-play facade on initial load, dual tabs, show deep-link, and mobile layout", async () => {
     const { SongMediaStage } = await loadModule("src/components/slips/SongMediaStage.jsx");
     const { I18nProvider } = await loadModule("src/lib/i18n.jsx");
 
@@ -74,8 +74,10 @@ describe("33. Song Media Stage & SongSlip In-Place Integration (UI SSR)", () => 
 
     // Verifies stage test id
     assert.ok(htmlZh.includes('data-testid="song-media-stage"'), "Must render in-place stage");
-    // Verifies youtube embed iframe
-    assert.ok(htmlZh.includes("youtube.com/embed/bJXIYp2f0pc"), "Must load youtube embed URL");
+    // Verifies click-to-play facade instead of eager iframe
+    assert.ok(!htmlZh.includes("<iframe"), "Must NOT eagerly mount iframe on initial load");
+    assert.ok(htmlZh.includes('data-testid="song-media-play-btn"'), "Must render click-to-play facade button");
+    assert.ok(htmlZh.includes("https://i.ytimg.com/vi/bJXIYp2f0pc/hqdefault.jpg"), "Must render YouTube thumbnail");
     // Verifies dual tabs
     assert.ok(htmlZh.includes("🎪 現場 Live"), "Must render live tab");
     assert.ok(htmlZh.includes("🎬 官方 MV"), "Must render MV tab");
@@ -84,6 +86,20 @@ describe("33. Song Media Stage & SongSlip In-Place Integration (UI SSR)", () => 
     assert.ok(htmlZh.includes("one-man tour 2019 @ 日本武道館"), "Must display live venue title");
     // Verifies responsive mobile label
     assert.ok(htmlZh.includes("YouTube ↗"), "Must include mobile-optimized compact YouTube label");
+
+    // Verifies autoMountOnOpen mounts real iframe immediately
+    const htmlAutoMount = renderToStaticMarkup(
+      React.createElement(
+        I18nProvider,
+        { initialLocale: "zh-TW" },
+        React.createElement(SongMediaStage, {
+          songId: "pretender",
+          mediaOverride: mockPretenderMedia,
+          autoMountOnOpen: true,
+        })
+      )
+    );
+    assert.ok(htmlAutoMount.includes("youtube.com/embed/bJXIYp2f0pc?autoplay=1"), "autoMountOnOpen must load youtube embed URL with autoplay=1");
 
     // Japanese locale check
     const htmlJa = renderToStaticMarkup(
@@ -130,6 +146,7 @@ describe("33. Song Media Stage & SongSlip In-Place Integration (UI SSR)", () => 
         React.createElement(SongMediaStage, {
           songId: "shukumei",
           mediaOverride: mockExcerptMedia,
+          autoMountOnOpen: true,
         })
       )
     );
@@ -277,7 +294,8 @@ describe("33. Song Media Stage & SongSlip In-Place Integration (UI SSR)", () => 
       "Populated song must omit redundant toolbar jump button in favor of in-place stage"
     );
     assert.ok(htmlPretender.includes('data-testid="song-media-stage"'), "Populated song must render in-place stage");
-    assert.ok(htmlPretender.includes("youtube.com/embed/"), "Must embed youtube player in-place");
+    assert.ok(htmlPretender.includes('data-testid="song-media-play-btn"'), "Must render click-to-play facade on initial SongSlip load");
+    assert.ok(!htmlPretender.includes("youtube.com/embed/"), "Must not eagerly mount YouTube iframe on initial SongSlip load");
 
     // 2. Unpopulated song: travelers has no media -> renders fallback "▶ YouTube" and zero stage DOM
     const htmlUnpopulated = renderToStaticMarkup(
@@ -314,7 +332,7 @@ describe("33. Song Media Stage & SongSlip In-Place Integration (UI SSR)", () => 
       )
     );
     assert.ok(htmlExpanded.includes("收合 ▴"), "Expanded stage must show collapse toggle button");
-    assert.ok(htmlExpanded.includes("<iframe"), "Expanded stage must render embed iframe");
+    assert.ok(htmlExpanded.includes('data-testid="song-media-play-btn"'), "Expanded stage must render click-to-play facade");
     assert.ok(htmlExpanded.includes("🎪 現場 Live"), "Expanded stage must render track switcher");
 
     // Collapsed stage
@@ -331,6 +349,7 @@ describe("33. Song Media Stage & SongSlip In-Place Integration (UI SSR)", () => 
     );
     assert.ok(htmlCollapsed.includes("展開 ▾"), "Collapsed stage must show expand toggle button");
     assert.ok(!htmlCollapsed.includes("<iframe"), "Collapsed stage must not render embed iframe");
+    assert.ok(!htmlCollapsed.includes('data-testid="song-media-play-btn"'), "Collapsed stage must not render play facade");
     assert.ok(!htmlCollapsed.includes("🎪 現場 Live"), "Collapsed stage must not render track switcher");
     assert.ok(htmlCollapsed.includes("官方影音播放器"), "Collapsed stage must retain header title");
     assert.ok(htmlCollapsed.includes("YouTube ↗"), "Collapsed stage must retain direct outbound link");

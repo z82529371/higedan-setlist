@@ -48,12 +48,28 @@ describe("33. Concert & Tour Media Digest Stage UI (ADR-0136)", () => {
     );
 
     assert.match(html, /id="song-media-stage"/, "renders unified media stage container");
-    assert.match(html, /https:\/\/www\.youtube\.com\/embed\/y3L0pjZZqKo/, "embeds YouTube player with correct video ID");
+    assert.doesNotMatch(html, /<iframe/, "defers YouTube iframe mount on initial load to prevent focus-stealing scroll");
+    assert.match(html, /data-testid="song-media-play-btn"/, "renders click-to-play facade button");
+    assert.match(html, /https:\/\/i\.ytimg\.com\/vi\/y3L0pjZZqKo\/hqdefault\.jpg/, "renders YouTube video thumbnail in facade");
     assert.match(html, /🎬 巡演精華/, "renders localized tour digest badge");
     assert.match(html, /Tour 19\/20 -Hall Travelers-/, "renders custom title in stage header");
     assert.match(html, /前往 YouTube/, "renders compact Watch on YouTube text");
     assert.match(html, /YouTube.*↗/, "provides direct YouTube watch link");
     assert.match(html, /truncate shrink/, "ensures stage title truncates gracefully on narrow screens");
+
+    const htmlAutoMount = renderToStaticMarkup(
+      React.createElement(
+        I18nProvider,
+        { initialLocale: "zh-TW" },
+        React.createElement(SongMediaStage, {
+          mediaOverride: digestMedia,
+          titleOverride: "Tour 19/20 -Hall Travelers-",
+          onClose: () => {},
+          autoMountOnOpen: true,
+        })
+      )
+    );
+    assert.match(htmlAutoMount, /https:\/\/www\.youtube\.com\/embed\/y3L0pjZZqKo\?autoplay=1/, "autoMountOnOpen mounts YouTube iframe with autoplay=1");
   });
 
   it("renders TourSlip always-on digest stage when media.digest is present (Zero DOM Pollution when absent)", async () => {
