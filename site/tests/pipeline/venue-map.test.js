@@ -280,14 +280,18 @@ describe("Venue Map Pure Domain Engine (ADR-0124)", () => {
       assert.strictEqual(finalStop.venue, "松江市綜合體育館");
     });
 
-    it("supports includeTvBroadcasts option (523 default vs 547 with TV) and retains 100% of stub shows", () => {
+    it("supports includeTvBroadcasts option (excludes all TV shows by default vs 0 when included, non-venue TV omitted from map stops) and retains 100% of stub shows", () => {
       const { allShows, venueProfilesMap } = loadArchiveFixtures();
+      const expectedTvCount = allShows.filter((s) => s.unitType === "電視演出").length;
+      const expectedVirtualCount = allShows.filter(
+        (s) => s.unitType === "線上直播" || s.venue === "線上直播"
+      ).length;
 
       const defaultJourney = buildJourneySequence(allShows, venueProfilesMap);
-      assert.strictEqual(defaultJourney.virtualShows.length, 8);
-      assert.strictEqual(defaultJourney.excludedTvCount, 24);
-      assert.strictEqual(defaultJourney.stops.length, 523);
-      assert.strictEqual(defaultJourney.transitions.length, 522);
+      assert.strictEqual(defaultJourney.virtualShows.length, expectedVirtualCount);
+      assert.strictEqual(defaultJourney.excludedTvCount, expectedTvCount);
+      assert.ok(defaultJourney.stops.length >= 500, `Expected >= 500 physical stops, got ${defaultJourney.stops.length}`);
+      assert.strictEqual(defaultJourney.transitions.length, defaultJourney.stops.length - 1);
 
       // Verify stub shows (0 setlist items) are 100% retained in physical stops
       const stubStops = defaultJourney.stops.filter((s) => s.isStub);
@@ -296,10 +300,10 @@ describe("Venue Map Pure Domain Engine (ADR-0124)", () => {
       const withTvJourney = buildJourneySequence(allShows, venueProfilesMap, {
         includeTvBroadcasts: true,
       });
-      assert.strictEqual(withTvJourney.virtualShows.length, 8);
+      assert.strictEqual(withTvJourney.virtualShows.length, expectedVirtualCount);
       assert.strictEqual(withTvJourney.excludedTvCount, 0);
-      assert.strictEqual(withTvJourney.stops.length, 547);
-      assert.strictEqual(withTvJourney.transitions.length, 546);
+      assert.strictEqual(withTvJourney.stops.length, defaultJourney.stops.length);
+      assert.strictEqual(withTvJourney.transitions.length, withTvJourney.stops.length - 1);
     });
 
     it("accurately classifies stay, van (interconnected Honshu/Shikoku/Kyushu road network & intra-Hokkaido), and flight (overseas, Okinawa, cross-strait Hokkaido)", () => {

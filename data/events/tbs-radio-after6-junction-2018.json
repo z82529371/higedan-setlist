@@ -1,0 +1,23 @@
+{
+  "id": "tbs-radio-after6-junction-2018",
+  "title": "TBSラジオ「アフター6ジャンクション」",
+  "shortTitle": "アフター6ジャンクション",
+  "type": "線上直播",
+  "shows": [
+    {
+      "id": "after6-junction-2018-0612",
+      "date": "2018-06-12",
+      "weekday": "火",
+      "startsAt": "19:00",
+      "city": "線上直播",
+      "venue": "線上直播",
+      "region": "其他",
+      "prefecture": "",
+      "title": "LIVE & DIRECT スタジオライブ",
+      "sourceUrls": [
+        "https://natalie.mu/music/news/286276"
+      ],
+      "setlist": []
+    }
+  ]
+}
