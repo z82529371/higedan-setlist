@@ -20,6 +20,15 @@ const siteRoot = path.resolve(here, "../..");
 const repoDataRoot = path.resolve(siteRoot, "../data");
 const siteDataDest = path.resolve(siteRoot, "src/data");
 
+function safeCopySync(src, dst) {
+  try {
+    cpSync(src, dst);
+  } catch (err) {
+    // Ignore EPERM/EEXIST when a concurrent test process already synced the file on Windows
+    if (err?.code !== "EPERM" && err?.code !== "EEXIST") throw err;
+  }
+}
+
 function ensureSiteDataSynced() {
   if (!existsSync(repoDataRoot)) return;
   mkdirSync(siteDataDest, { recursive: true });
@@ -27,7 +36,7 @@ function ensureSiteDataSynced() {
     const srcFile = path.resolve(repoDataRoot, file);
     const dstFile = path.resolve(siteDataDest, file);
     if (existsSync(srcFile) && !existsSync(dstFile)) {
-      cpSync(srcFile, dstFile);
+      safeCopySync(srcFile, dstFile);
     }
   }
   for (const sub of ["tours", "events"]) {
@@ -39,12 +48,16 @@ function ensureSiteDataSynced() {
     const dstFiles = new Set(readdirSync(dstSub));
     for (const existing of dstFiles) {
       if (!srcFiles.has(existing)) {
-        rmSync(path.resolve(dstSub, existing), { force: true });
+        try {
+          rmSync(path.resolve(dstSub, existing), { force: true });
+        } catch (err) {
+          if (err?.code !== "EPERM") throw err;
+        }
       }
     }
     for (const f of srcFiles) {
       if (!dstFiles.has(f)) {
-        cpSync(path.resolve(srcSub, f), path.resolve(dstSub, f));
+        safeCopySync(path.resolve(srcSub, f), path.resolve(dstSub, f));
       }
     }
   }

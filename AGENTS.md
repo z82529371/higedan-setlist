@@ -8,9 +8,9 @@ Repository conventions and navigation pointers for AI agents working in this cod
 - **Coding Standards & TDD Seams**: Consult [`CODING_STANDARDS.md`](./CODING_STANDARDS.md) for zero-backend static purity (`ADR-0123`), consumer-friendly copy, design token invariants, multi-lingual parity rules, empirical geocoding provenance (`ADR-0124`), and the **Core Domain Seams & Test Map** for `/tdd`.
 - **Domain Model & Data Invariants**: Consult [`CONTEXT.md`](./CONTEXT.md) for domain terminology, tour vs event boundaries (`data/tours/*.json` files are named by tour slug such as `one-man-tour-2021-2022-editorial.json` while `tour.id` inside the JSON uses chronological prefix `14-2021-editorial`), 8 performance categories, monotonicity rules, and placeholder track specs (`ADR-0098`).
 - **Product Architecture**: Consult [`PRODUCT.md`](./PRODUCT.md) for spotlight landing mode, archive dual-mode toggle, and search ergonomics.
-- **Visual Design**: Consult [`DESIGN.md`](./DESIGN.md) for ticket aesthetic tokens, perforation dividers, barcode footers, and contrast rules (small badge text <14px must strictly use high-contrast ink tokens with >= 7:1 AAA contrast; arbitrary unvetted hex colors like text-[#...] are prohibited).
-- **URL Routing & Deep Links**: Consult [`site/src/lib/routes.js`](./site/src/lib/routes.js) and [`ADR-0101`](./docs/adr/0101-url-hash-deep-linking-and-route-state-machine.md) for bidirectional hash schemes (`#/song`, `#/show`, `#/venue`, `#/tour`, `#/tickets`, `#/ranking`, `#/releases`, `#/map`). Note that `#/passport` was deprecated in `ADR-0114`.
-- **Architectural Decision Records**: Consult [`docs/adr/README.md`](./docs/adr/README.md) for the full index of all architectural decisions and feature specs (Theming, Musicians, Releases, Ranking, Media Stages, Venue Map, Ticket Book, PWA).
+- **Visual Design**: Consult [`DESIGN.md`](./DESIGN.md) for ticket aesthetic tokens, zero-blur shadows, perforation dividers, barcode footers, and contrast rules.
+- **URL Routing & Deep Links**: Consult [`site/src/lib/routes.js`](./site/src/lib/routes.js) and [`ADR-0101`](./docs/adr/0101-url-hash-deep-linking-and-route-state-machine.md) for bidirectional hash schemes (`#/passport` was deprecated in `ADR-0114`).
+- **Architectural Decision Records**: Consult [`docs/adr/README.md`](./docs/adr/README.md) for the full index of all architectural decisions and feature specs.
 - **Test Harness & Modular Suites**: Consult [`site/tests/`](./site/tests/) and [`CODING_STANDARDS.md`](./CODING_STANDARDS.md#6-core-domain-seams--test-map-tdd--implement) for the 3-tier test suites (`pipeline/`, `invariants/`, `ui/`) and headless Vite SSR harness (`site/tests/helpers/vite-server.js`).
 - **CI/CD & Runtime**: Consult [`.github/workflows/ci.yml`](./.github/workflows/ci.yml) and [`.nvmrc`](./.nvmrc) for Node `>= 22.13.0` / pnpm 11 alignment.
 - **Issue Tracking**: Consult GitHub Issues via `gh issue view <number>` or `gh issue list` for feature specs and task acceptance criteria.
@@ -21,7 +21,7 @@ Multiple autonomous agents frequently operate concurrently in this repository:
 
 1. **Scratch Files Isolation**: Write all exploratory or temporary scripts to `scratch/` or `.scratch/` (both are git-ignored). Never commit or scatter ad-hoc verification scripts in repository root.
 2. **Concurrent File Protection & Scoped Verification**: Never delete, restore, or modify working tree files outside your explicit task scope (e.g. data JSON files under active audit or other agents' in-flight components). When running verification commands (`pnpm check`, `pnpm test`), if test failures occur in foreign files currently modified by concurrent agents, strictly refrain from fixing or touching those foreign files; verify your own scoped test suites (`node --test <task-test>`) and note the foreign failures in your report.
-3. **Task-Scoped Git Operations**: Always inspect git diff with `git --no-pager diff -- <path>` or path filters rather than unstaging or wiping untracked files wholesale, preventing Windows terminal pager hangs.
+3. **Task-Scoped Git Operations & Worktree Isolation**: When multiple agents edit shared UI or locale files concurrently, prefer an isolated `git worktree` (or stage only task-specific hunks). Always inspect git diff with `git --no-pager diff -- <path>` rather than unstaging or wiping untracked files wholesale, preventing Windows terminal pager hangs.
 4. **Data Inspection & Script Hygiene**: Use `node -e` or scripts under `site/scripts/` rather than PowerShell `ConvertFrom-Json` to avoid Windows UTF-8 encoding distortion. In PowerShell, strictly avoid inline nested quote escaping issues: never run inline `node -e` containing backticks (`) or multiline template literals; always write logic directly to `.scratch/temp.mjs` and run `node .scratch/temp.mjs`. For codebase code/text searches, always prefer `git grep -n "<pattern>" -- <path>` over PowerShell `Select-String` (sub-100ms vs 15-30s). Pass clean command strings like `git status` without outer escaped quotes, and invoke single commands sequentially without `&&`. Use native file tools (`write_file`) or `New-Item -ItemType Directory -Force -Path <path>` instead of `mkdir -p`.
 5. **Vite SSR & Scratch Scripts**: Execute ad-hoc snippets importing frontend modules (e.g. `domain.js`) via `pnpm eval "<code>"` or `site/scripts/eval.mjs` (which injects `loadModule('/src/lib/domain.js')` and `readJson('../data/...')`), avoiding Node.js strict ESM JSON attribute errors (`ERR_IMPORT_ATTRIBUTE_MISSING`).
 6. **pnpm Monorepo Workspace Topology (ADR-0103)**: Repository uses root `pnpm-workspace.yaml` targeting `packages: ['site']` with root `pnpm-lock.yaml`. Invoke workspace scripts from root using `pnpm --filter ./site <cmd>`.
@@ -34,19 +34,10 @@ Multiple autonomous agents frequently operate concurrently in this repository:
 
 ## Verification Commands
 
-### Inner Loop (Sub-Second Rapid Iteration)
-- `pnpm check:fast`: Runs combined static linting and CJK checks in ~50ms (`oxlint` + `check-i18n`). Use for rapid sub-second verification before heavier test execution.
-- `pnpm sync`: Compiles and syncs `data/*.json` and `data/{tours,events}` into `site/src/data/` and updates audit reports. Run whenever data files are updated.
-- `pnpm lint`: Runs `oxlint` static linting in ~20ms (`oxlint src -c .oxlintrc.json`). Run immediately after editing any component to catch undeclared variables (`no-undef`) or unused variables (`no-unused-vars`) before heavier SSR test execution.
-- `pnpm check:i18n`: Runs bare-CJK regression guard and self-tests across UI components (`site/scripts/check-i18n.mjs`).
-- `pnpm test:pipeline`: Runs pure data pipeline & consensus algorithm tests in <50ms (`site/tests/pipeline/`).
-- `pnpm test:invariants`: Runs repository structure, design tokens, cross-platform quoting, and AST invariant tests in ~120ms (`site/tests/invariants/`).
+All workspace scripts live in [`site/package.json`](./site/package.json) and root [`package.json`](./package.json):
 
-### Outer Loop (Integration & Pre-Commit Verification)
-- `pnpm test:ui`: Runs headless React SSR, route state machine, and localization tests (`site/tests/ui/`).
-- `pnpm check`: Master verification gate running `oxlint`, `check-i18n`, and all test suites. Run before every commit.
-- `pnpm test`: Runs data sync, `check-i18n`, and all test suites.
-- `pnpm build`: Production build via Vite compiler (`site/dist/`).
+- **Inner loop**: `pnpm check:fast` (`oxlint` + `check-i18n` + `test:invariants` in <200ms).
+- **Pre-commit gate**: `pnpm check` (full lint, `pnpm sync`, `check-i18n`, and all `pipeline`/`invariants`/`ui` suites) + `pnpm check:staged`.
 
 ## Agent skills
 
