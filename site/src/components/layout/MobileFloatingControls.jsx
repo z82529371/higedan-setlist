@@ -33,7 +33,74 @@ export function MobileFloatingControls({
   const { t } = useI18n();
   const { count: ticketCount } = useTicketBook({ storage });
   const [menuOpen, setMenuOpen] = useState(false);
+  const [showBackToTop, setShowBackToTop] = useState(false);
   const menuRef = useRef(null);
+
+  const scrollRafRef = useRef(null);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const onScroll = () => setShowBackToTop(window.scrollY > 320);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useEffect(() => {
+    return () => {
+      if (scrollRafRef.current != null && typeof cancelAnimationFrame === "function") {
+        cancelAnimationFrame(scrollRafRef.current);
+      }
+    };
+  }, []);
+
+  const handleScrollToTop = () => {
+    if (typeof window === "undefined") return;
+    const reduced = window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
+    if (reduced || typeof requestAnimationFrame !== "function") {
+      window.scrollTo({ top: 0, behavior: "auto" });
+      return;
+    }
+
+    if (scrollRafRef.current != null) {
+      cancelAnimationFrame(scrollRafRef.current);
+    }
+
+    const startY = window.scrollY;
+    if (startY <= 0) return;
+
+    const duration = Math.min(620, Math.max(360, startY * 0.25));
+    const startTime = performance.now();
+
+    const cancelOnInteract = () => {
+      if (scrollRafRef.current != null) {
+        cancelAnimationFrame(scrollRafRef.current);
+        scrollRafRef.current = null;
+      }
+      window.removeEventListener("touchstart", cancelOnInteract);
+      window.removeEventListener("wheel", cancelOnInteract);
+    };
+
+    window.addEventListener("touchstart", cancelOnInteract, { passive: true, once: true });
+    window.addEventListener("wheel", cancelOnInteract, { passive: true, once: true });
+
+    const step = (now) => {
+      const elapsed = now - startTime;
+      const t = Math.min(1, elapsed / duration);
+      // Ease-out quartic for a silky deceleration at the top
+      const eased = 1 - Math.pow(1 - t, 4);
+      window.scrollTo(0, Math.round(startY * (1 - eased)));
+      if (t < 1) {
+        scrollRafRef.current = requestAnimationFrame(step);
+      } else {
+        scrollRafRef.current = null;
+        window.removeEventListener("touchstart", cancelOnInteract);
+        window.removeEventListener("wheel", cancelOnInteract);
+      }
+    };
+
+    scrollRafRef.current = requestAnimationFrame(step);
+  };
 
   useEffect(() => {
     if (!menuOpen) return;
@@ -103,8 +170,21 @@ export function MobileFloatingControls({
 
   return (
     <>
-      {/* Bottom-Right: Language Stamp + Page High-Frequency Actions */}
+      {/* Bottom-Right: Back-to-Top + Language Stamp + Page High-Frequency Actions */}
       <div className="fixed bottom-5 right-4 z-40 sm:hidden flex flex-col items-end gap-2 select-none">
+        {showBackToTop && (
+          <button
+            type="button"
+            data-testid="mobile-back-to-top-btn"
+            onClick={handleScrollToTop}
+            className={`${STAMP_BTN_SQUARE} font-mono text-base`}
+            title={t("statusBar.backToTopTitle", "點擊滾動回單據頂部")}
+            aria-label={t("statusBar.backToTopTitle", "點擊滾動回單據頂部")}
+          >
+            <span aria-hidden="true">↑</span>
+          </button>
+        )}
+
         <LanguageSwitcher fab menuPosition="up" />
 
         {tab === "journey" && onOpenDrawer && (

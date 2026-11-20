@@ -225,7 +225,7 @@ export function ArchiveLayout({
         </div>
 
         {/* Mobile Current Context Summary Bar (Tap to open Filter Bottom Sheet) */}
-        <div className="sm:hidden mt-3 mb-4">
+        <div className="sm:hidden mt-3 mb-6">
           <button
             type="button"
             onClick={openFilterDrawer}
@@ -340,7 +340,7 @@ export function ArchiveLayout({
               </div>
 
               {/* Setlist Slip Receipt */}
-              <section ref={slipRef} className="mt-2 sm:mt-4 scroll-mt-8 sm:scroll-mt-10">
+              <section ref={slipRef} className="mt-4 scroll-mt-10">
                 {showSubMode === "tour" && current?.isTour ? (
                   <TourSlip
                     tourUnitData={current?.unit}
@@ -419,7 +419,7 @@ export function ArchiveLayout({
               </div>
 
               {/* Song Slip Receipt */}
-              <section ref={slipRef} className="mt-2 sm:mt-4 scroll-mt-8 sm:scroll-mt-10">
+              <section ref={slipRef} className="mt-4 scroll-mt-10">
                 <SongSlip
                   songId={selSong}
                   trackShows={trackShows}
@@ -488,7 +488,7 @@ export function ArchiveLayout({
               </div>
 
               {/* Venue Slip Receipt */}
-              <section ref={slipRef} className="mt-2 sm:mt-4 scroll-mt-8 sm:scroll-mt-10">
+              <section ref={slipRef} className="mt-4 scroll-mt-10">
                 <VenueSlip
                   venueName={selVenue}
                   globalVenueShows={globalVenueShows}

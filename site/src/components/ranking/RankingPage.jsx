@@ -39,6 +39,74 @@ export function RankingPage({
 
   const isVenueBoard = boardType === "venue";
 
+  const handleItemClick = (item) => {
+    if (isVenueBoard && onSelectVenue) onSelectVenue(item.name);
+    else if (!isVenueBoard && onSelectSong) onSelectSong(item.id);
+  };
+
+  const renderRunnerUpCard = (item, rankLabel, orderClass, desktopMinHeight) => (
+    <button
+      type="button"
+      onClick={() => handleItemClick(item)}
+      className={`${orderClass} rounded-[3px] border-[1.5px] border-ink bg-card p-3 sm:p-5 shadow-[3px_3px_0_rgba(0,0,0,0.12)] dark:shadow-none text-left cursor-pointer hover:bg-tape-tint/30 touch-stamp transition-colors flex flex-col justify-between ${desktopMinHeight} relative group`}
+    >
+      {/* Desktop Top Row: Rank Badge + Play Rate */}
+      <div className="hidden sm:flex items-center justify-between gap-2 w-full">
+        <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-[2px] bg-paper text-ink font-mono font-bold text-xs border border-ink/40">
+          <span>{rankLabel}</span>
+        </span>
+        <span className="font-mono text-[11px] font-bold text-muted tabular-nums">
+          {item.playRate.toFixed(1)}%
+        </span>
+      </div>
+
+      {/* Main Content Row (Compact horizontal on mobile, vertical body on desktop) */}
+      <div className="flex items-center sm:items-start gap-2.5 sm:gap-3 w-full sm:my-3">
+        <span className="sm:hidden shrink-0 inline-flex items-center px-1.5 py-0.5 rounded-[2px] bg-paper text-ink font-mono font-bold text-[11px] border border-ink/40">
+          {rankLabel}
+        </span>
+        {!isVenueBoard && (
+          <SongCoverThumbnail songId={item.id} title={item.title} size={48} />
+        )}
+        <div className="min-w-0 flex-1">
+          <div className="font-bold text-sm sm:text-lg text-ink group-hover:text-band-ink transition-colors truncate sm:whitespace-normal sm:line-clamp-2 leading-snug">
+            {isVenueBoard ? item.name : item.title}
+          </div>
+          {!isVenueBoard && item.album && (
+            <div className="text-[11px] text-muted mt-0.5 sm:mt-1 font-medium truncate flex items-center gap-1">
+              <span>💿</span>
+              <span className="truncate">{item.album}</span>
+            </div>
+          )}
+          {isVenueBoard && item.prefecture && (
+            <div className="text-[11px] text-muted mt-0.5 sm:mt-1 font-medium truncate flex items-center gap-1">
+              <span>📍</span>
+              <span className="truncate">{item.prefecture} · {item.country}</span>
+            </div>
+          )}
+        </div>
+        <div className="sm:hidden shrink-0 text-right">
+          <div className="font-mono text-sm font-black text-ink tabular-nums leading-tight">
+            {item.count} <span className="text-[11px] font-sans font-normal text-muted">{t("ranking.showsUnit", "場")}</span>
+          </div>
+          <div className="font-mono text-[10px] font-bold text-muted tabular-nums">
+            {item.playRate.toFixed(1)}%
+          </div>
+        </div>
+      </div>
+
+      {/* Desktop Bottom Row: Year Range + Count */}
+      <div className="hidden sm:flex pt-2 border-t border-line-soft items-baseline justify-between w-full">
+        <span className="font-mono text-[10px] text-muted">
+          {!isVenueBoard && item.firstYear ? `${item.firstYear}–${item.latestYear}` : ""}
+        </span>
+        <span className="font-mono text-base font-black text-ink tabular-nums">
+          {item.count} <span className="text-xs font-sans font-normal text-muted">{t("ranking.showsUnit", "場")}</span>
+        </span>
+      </div>
+    </button>
+  );
+
   return (
     <div className="mx-auto max-w-[960px] px-3 sm:px-6 pt-8 pb-16 sm:py-8 select-none font-sans">
       {/* Main Ticket Receipt Card */}
@@ -46,29 +114,29 @@ export function RankingPage({
         {/* Washi Masking Tape Top Pin */}
         <div className={SLIP_TAPE} aria-hidden="true" />
 
-        {/* Ticket Header Title Block */}
-        <header className="flex flex-col items-center text-center pb-4">
-          <div className="mb-2.5 inline-flex items-center justify-center w-12 h-12 rounded-[4px] bg-band border-[1.5px] border-ink shadow-2xs">
+        {/* Ticket Header Title Block (Compact on mobile) */}
+        <header className="flex flex-col items-center text-center pb-3 sm:pb-4">
+          <div className="hidden sm:inline-flex mb-2.5 items-center justify-center w-12 h-12 rounded-[4px] bg-band border-[1.5px] border-ink shadow-2xs">
             <span className="text-2xl" aria-hidden="true">🏆</span>
           </div>
 
-          <p className="m-0 font-mono text-[11px] sm:text-[12px] tracking-[0.2em] text-muted font-bold uppercase">
+          <p className="m-0 font-mono text-[10px] sm:text-[12px] tracking-[0.18em] sm:tracking-[0.2em] text-muted font-bold uppercase">
             CONCERT ARCHIVE // STATISTICS
           </p>
 
-          <h1 className="m-0 mt-1.5 font-display text-[clamp(20px,4.5vw,36px)] font-black leading-tight tracking-tight text-ink">
+          <h1 className="m-0 mt-1 sm:mt-1.5 font-display text-[20px] sm:text-[clamp(24px,4.5vw,36px)] font-black leading-tight tracking-tight text-ink">
             Official髭男dism <span className="font-bold text-band-ink">{t("ranking.title", "演出排行")}</span>
           </h1>
 
-          <p className="mt-2 mb-0 text-[12px] sm:text-[14px] text-muted max-w-[560px] leading-relaxed">
+          <p className="hidden sm:block mt-2 mb-0 text-[12px] sm:text-[14px] text-muted max-w-[560px] leading-relaxed">
             {t("ranking.subtitle", "歷年現場演出歌曲與場館累積次數統計")}
           </p>
 
           {/* Stats Badge */}
-          <div className="mt-3.5 flex items-center justify-center gap-2">
+          <div className="mt-2.5 sm:mt-3.5 flex items-center justify-center gap-2">
             <span
               data-testid="ranking-stats-badge"
-              className="inline-flex items-center gap-1.5 rounded-[4px] border border-ink/30 bg-tape px-3 py-1 font-mono text-[12px] sm:text-[13px] font-extrabold text-ink shadow-2xs"
+              className="inline-flex items-center gap-1.5 rounded-[4px] border border-ink/30 bg-tape px-2.5 sm:px-3 py-0.5 sm:py-1 font-mono text-[11px] sm:text-[13px] font-extrabold text-ink shadow-2xs"
             >
               <span aria-hidden="true">🎖️</span>
               <span>
@@ -83,9 +151,9 @@ export function RankingPage({
         {/* Perforation Divider */}
         <TicketPerforationDivider />
 
-        {/* Sub-board Selector Tabs (Toolbar styled like TicketBook and Journey bars) */}
+        {/* Sub-board Selector Tabs: single-row horizontal scroll on mobile, wrapped on desktop */}
         <div
-          className="my-5 flex flex-wrap items-center justify-center sm:justify-start gap-2 border-b border-line-soft pb-4"
+          className="mt-4 mb-5 flex items-center flex-nowrap overflow-x-auto scrollbar-none gap-1.5 pb-3 -mx-1 px-1 sm:mx-0 sm:px-0 sm:flex-wrap sm:justify-start sm:gap-2 border-b border-line-soft"
           role="tablist"
           aria-label={t("ranking.title", "演出排行")}
         >
@@ -94,7 +162,7 @@ export function RankingPage({
             role="tab"
             aria-selected={boardType === "allTime"}
             onClick={() => setBoardType("allTime")}
-            className={`rounded-[3px] px-3.5 py-1.5 font-mono text-[12px] font-bold transition-colors cursor-pointer inline-flex items-center gap-1.5 ${
+            className={`shrink-0 rounded-[3px] px-2.5 py-1 sm:px-3.5 sm:py-1.5 font-mono text-[11px] sm:text-[12px] font-bold transition-colors cursor-pointer inline-flex items-center gap-1.5 ${
               boardType === "allTime"
                 ? "bg-band text-band-ink border-[1.5px] border-ink shadow-xs"
                 : "bg-paper text-ink border border-ink/30 hover:bg-tape-tint/50"
@@ -102,7 +170,6 @@ export function RankingPage({
           >
             <span aria-hidden="true">🌟</span>
             <span>{t("ranking.tabAllTime", "歌曲總榜")}</span>
-            <span className="font-mono text-[10px] opacity-75 tabular-nums">Top 20</span>
           </button>
 
           <button
@@ -110,7 +177,7 @@ export function RankingPage({
             role="tab"
             aria-selected={boardType === "oneMan"}
             onClick={() => setBoardType("oneMan")}
-            className={`rounded-[3px] px-3.5 py-1.5 font-mono text-[12px] font-bold transition-colors cursor-pointer inline-flex items-center gap-1.5 ${
+            className={`shrink-0 rounded-[3px] px-2.5 py-1 sm:px-3.5 sm:py-1.5 font-mono text-[11px] sm:text-[12px] font-bold transition-colors cursor-pointer inline-flex items-center gap-1.5 ${
               boardType === "oneMan"
                 ? "bg-band text-band-ink border-[1.5px] border-ink shadow-xs"
                 : "bg-paper text-ink border border-ink/30 hover:bg-tape-tint/50"
@@ -125,7 +192,7 @@ export function RankingPage({
             role="tab"
             aria-selected={boardType === "festival"}
             onClick={() => setBoardType("festival")}
-            className={`rounded-[3px] px-3.5 py-1.5 font-mono text-[12px] font-bold transition-colors cursor-pointer inline-flex items-center gap-1.5 ${
+            className={`shrink-0 rounded-[3px] px-2.5 py-1 sm:px-3.5 sm:py-1.5 font-mono text-[11px] sm:text-[12px] font-bold transition-colors cursor-pointer inline-flex items-center gap-1.5 ${
               boardType === "festival"
                 ? "bg-band text-band-ink border-[1.5px] border-ink shadow-xs"
                 : "bg-paper text-ink border border-ink/30 hover:bg-tape-tint/50"
@@ -140,7 +207,7 @@ export function RankingPage({
             role="tab"
             aria-selected={boardType === "venue"}
             onClick={() => setBoardType("venue")}
-            className={`rounded-[3px] px-3.5 py-1.5 font-mono text-[12px] font-bold transition-colors cursor-pointer inline-flex items-center gap-1.5 ${
+            className={`shrink-0 rounded-[3px] px-2.5 py-1 sm:px-3.5 sm:py-1.5 font-mono text-[11px] sm:text-[12px] font-bold transition-colors cursor-pointer inline-flex items-center gap-1.5 ${
               boardType === "venue"
                 ? "bg-band text-band-ink border-[1.5px] border-ink shadow-xs"
                 : "bg-paper text-ink border border-ink/30 hover:bg-tape-tint/50"
@@ -148,105 +215,51 @@ export function RankingPage({
           >
             <span aria-hidden="true">🏟️</span>
             <span>{t("ranking.tabVenue", "登場場館榜")}</span>
-            <span className="font-mono text-[10px] opacity-75 tabular-nums">Top 10</span>
           </button>
         </div>
 
         {/* Top 3 Physical Podium (實體立體頒獎台) */}
         {top3.length > 0 && (
-          <section className="mb-8">
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 items-end">
+          <section className="mb-6 sm:mb-8">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 sm:gap-3 items-end">
               {/* Rank 2 (Silver - Left Step) */}
-              {top3[1] && (
-                <button
-                  type="button"
-                  onClick={() => {
-                    if (isVenueBoard && onSelectVenue) onSelectVenue(top3[1].name);
-                    else if (!isVenueBoard && onSelectSong) onSelectSong(top3[1].id);
-                  }}
-                  className="order-2 sm:order-1 rounded-[3px] border-[1.5px] border-ink bg-card p-4 sm:p-5 shadow-[3px_3px_0_rgba(0,0,0,0.12)] dark:shadow-none text-left cursor-pointer hover:bg-tape-tint/30 touch-stamp transition-colors flex flex-col justify-between sm:min-h-[195px] relative group"
-                >
-                  <div className="flex items-center justify-between gap-2 w-full">
-                    <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-[2px] bg-paper text-ink font-mono font-bold text-xs border border-ink/40">
-                      <span>#02</span>
-                    </span>
-                    <span className="font-mono text-[11px] font-bold text-muted tabular-nums">
-                      {top3[1].playRate.toFixed(1)}%
-                    </span>
-                  </div>
-
-                  <div className="my-3 flex items-start gap-3">
-                    {!isVenueBoard && (
-                      <SongCoverThumbnail songId={top3[1].id} title={top3[1].title} size={56} />
-                    )}
-                    <div className="min-w-0 flex-1">
-                      <div className="font-bold text-base sm:text-lg text-ink group-hover:text-band-ink transition-colors line-clamp-2 leading-snug">
-                        {isVenueBoard ? top3[1].name : top3[1].title}
-                      </div>
-                      {!isVenueBoard && top3[1].album && (
-                        <div className="text-[11px] text-muted mt-1 font-medium truncate flex items-center gap-1">
-                          <span>💿</span>
-                          <span>{top3[1].album}</span>
-                        </div>
-                      )}
-                      {isVenueBoard && top3[1].prefecture && (
-                        <div className="text-[11px] text-muted mt-1 font-medium truncate flex items-center gap-1">
-                          <span>📍</span>
-                          <span>{top3[1].prefecture} · {top3[1].country}</span>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-
-                  <div className="pt-2 border-t border-line-soft flex items-baseline justify-between w-full">
-                    <span className="font-mono text-[10px] text-muted">
-                      {!isVenueBoard && top3[1].firstYear ? `${top3[1].firstYear}–${top3[1].latestYear}` : ""}
-                    </span>
-                    <span className="font-mono text-base font-black text-ink tabular-nums">
-                      {top3[1].count} <span className="text-xs font-sans font-normal text-muted">{t("ranking.showsUnit", "場")}</span>
-                    </span>
-                  </div>
-                </button>
-              )}
+              {top3[1] && renderRunnerUpCard(top3[1], "#02", "order-2 sm:order-1", "sm:min-h-[195px]")}
 
               {/* Rank 1 (Gold - Elevated Center) */}
               {top3[0] && (
                 <button
                   type="button"
-                  onClick={() => {
-                    if (isVenueBoard && onSelectVenue) onSelectVenue(top3[0].name);
-                    else if (!isVenueBoard && onSelectSong) onSelectSong(top3[0].id);
-                  }}
-                  className="order-1 sm:order-2 rounded-[3px] border-[2px] border-ink bg-card p-5 sm:p-6 shadow-[4px_4px_0_rgba(0,0,0,0.16)] dark:shadow-none text-left cursor-pointer hover:bg-tape-tint/30 touch-stamp transition-colors flex flex-col justify-between sm:min-h-[225px] relative overflow-hidden group"
+                  onClick={() => handleItemClick(top3[0])}
+                  className="order-1 sm:order-2 rounded-[3px] border-[2px] border-ink bg-card p-3.5 sm:p-6 shadow-[4px_4px_0_rgba(0,0,0,0.16)] dark:shadow-none text-left cursor-pointer hover:bg-tape-tint/30 touch-stamp transition-colors flex flex-col justify-between sm:min-h-[225px] relative overflow-hidden group"
                 >
                   {/* Gold Banner Accent */}
                   <div className="absolute top-0 left-0 right-0 h-1.5 bg-band" />
                   
                   <div className="flex items-center justify-between gap-2 w-full">
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-[2px] bg-band text-band-ink font-mono font-black text-xs border border-ink/40">
+                    <span className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-[2px] bg-band text-band-ink font-mono font-black text-xs border border-ink/40">
                       <span>#01</span>
                     </span>
-                    <span className="font-mono text-xs font-bold text-band-ink bg-tape px-1.5 py-0.5 rounded border border-ink/20 tabular-nums">
+                    <span className="font-mono text-[11px] sm:text-xs font-bold text-band-ink bg-tape px-1.5 py-0.5 rounded border border-ink/20 tabular-nums">
                       {top3[0].playRate.toFixed(1)}%
                     </span>
                   </div>
 
-                  <div className="my-3 flex items-start gap-3.5">
+                  <div className="my-2.5 sm:my-3 flex items-start gap-3 sm:gap-3.5">
                     {!isVenueBoard && (
-                      <SongCoverThumbnail songId={top3[0].id} title={top3[0].title} size={64} />
+                      <SongCoverThumbnail songId={top3[0].id} title={top3[0].title} size={60} />
                     )}
                     <div className="min-w-0 flex-1">
-                      <div className="font-black text-lg sm:text-xl text-ink group-hover:text-band-ink transition-colors line-clamp-2 leading-tight">
+                      <div className="font-black text-base sm:text-xl text-ink group-hover:text-band-ink transition-colors line-clamp-2 leading-tight">
                         {isVenueBoard ? top3[0].name : top3[0].title}
                       </div>
                       {!isVenueBoard && top3[0].album && (
-                        <div className="text-xs text-muted mt-1 font-medium truncate flex items-center gap-1">
+                        <div className="text-[11px] sm:text-xs text-muted mt-1 font-medium truncate flex items-center gap-1">
                           <span>💿</span>
                           <span>{top3[0].album}</span>
                         </div>
                       )}
                       {isVenueBoard && top3[0].prefecture && (
-                        <div className="text-xs text-muted mt-1 font-medium truncate flex items-center gap-1">
+                        <div className="text-[11px] sm:text-xs text-muted mt-1 font-medium truncate flex items-center gap-1">
                           <span>📍</span>
                           <span>{top3[0].prefecture} · {top3[0].country}</span>
                         </div>
@@ -255,10 +268,10 @@ export function RankingPage({
                   </div>
 
                   <div className="pt-2 border-t border-line-soft flex items-baseline justify-between w-full">
-                    <span className="font-mono text-[11px] text-muted">
+                    <span className="font-mono text-[10px] sm:text-[11px] text-muted">
                       {!isVenueBoard && top3[0].firstYear ? `${top3[0].firstYear}–${top3[0].latestYear}` : ""}
                     </span>
-                    <span className="font-mono text-xl font-black text-ink tabular-nums">
+                    <span className="font-mono text-lg sm:text-xl font-black text-ink tabular-nums">
                       {top3[0].count} <span className="text-xs font-sans font-normal text-muted">{t("ranking.showsUnit", "場")}</span>
                     </span>
                   </div>
@@ -266,57 +279,7 @@ export function RankingPage({
               )}
 
               {/* Rank 3 (Bronze - Right Step) */}
-              {top3[2] && (
-                <button
-                  type="button"
-                  onClick={() => {
-                    if (isVenueBoard && onSelectVenue) onSelectVenue(top3[2].name);
-                    else if (!isVenueBoard && onSelectSong) onSelectSong(top3[2].id);
-                  }}
-                  className="order-3 rounded-[3px] border-[1.5px] border-ink bg-card p-4 sm:p-5 shadow-[3px_3px_0_rgba(0,0,0,0.12)] dark:shadow-none text-left cursor-pointer hover:bg-tape-tint/30 touch-stamp transition-colors flex flex-col justify-between sm:min-h-[180px] relative group"
-                >
-                  <div className="flex items-center justify-between gap-2 w-full">
-                    <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-[2px] bg-paper text-ink font-mono font-bold text-xs border border-ink/40">
-                      <span>#03</span>
-                    </span>
-                    <span className="font-mono text-[11px] font-bold text-muted tabular-nums">
-                      {top3[2].playRate.toFixed(1)}%
-                    </span>
-                  </div>
-
-                  <div className="my-3 flex items-start gap-3">
-                    {!isVenueBoard && (
-                      <SongCoverThumbnail songId={top3[2].id} title={top3[2].title} size={56} />
-                    )}
-                    <div className="min-w-0 flex-1">
-                      <div className="font-bold text-base sm:text-lg text-ink group-hover:text-band-ink transition-colors line-clamp-2 leading-snug">
-                        {isVenueBoard ? top3[2].name : top3[2].title}
-                      </div>
-                      {!isVenueBoard && top3[2].album && (
-                        <div className="text-[11px] text-muted mt-1 font-medium truncate flex items-center gap-1">
-                          <span>💿</span>
-                          <span>{top3[2].album}</span>
-                        </div>
-                      )}
-                      {isVenueBoard && top3[2].prefecture && (
-                        <div className="text-[11px] text-muted mt-1 font-medium truncate flex items-center gap-1">
-                          <span>📍</span>
-                          <span>{top3[2].prefecture} · {top3[2].country}</span>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-
-                  <div className="pt-2 border-t border-line-soft flex items-baseline justify-between w-full">
-                    <span className="font-mono text-[10px] text-muted">
-                      {!isVenueBoard && top3[2].firstYear ? `${top3[2].firstYear}–${top3[2].latestYear}` : ""}
-                    </span>
-                    <span className="font-mono text-base font-black text-ink tabular-nums">
-                      {top3[2].count} <span className="text-xs font-sans font-normal text-muted">{t("ranking.showsUnit", "場")}</span>
-                    </span>
-                  </div>
-                </button>
-              )}
+              {top3[2] && renderRunnerUpCard(top3[2], "#03", "order-3", "sm:min-h-[180px]")}
             </div>
 
             {/* Continuous Architectural Podium Base Step */}

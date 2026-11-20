@@ -30,109 +30,119 @@ export function JourneyPlaybackControls({ playback, stops = [] }) {
   const actionIcon = isPlaying ? "⏸" : frame.isComplete ? "↻" : "▶";
   const locked = total <= 0;
 
+  const pct = Math.round((total > 0 ? progress / total : 0) * 100);
+
   return (
     <div
       data-testid="journey-playback-controls"
       data-playing={isPlaying ? "true" : "false"}
-      className="space-y-2 rounded-[3px] border border-ink/40 bg-paper px-3 py-2.5 shadow-xs dark:shadow-none"
+      className="space-y-1.5 md:space-y-2 rounded-[3px] border border-ink/40 bg-paper px-2.5 py-2 md:px-3 md:py-2.5 shadow-xs dark:shadow-none"
     >
-      {/* Row 1: Play/Pause button + Stop progress & Venue info */}
-      <div className="flex items-center gap-2.5 sm:gap-3">
-        <button
-          type="button"
-          data-testid="journey-playback-toggle"
-          aria-label={actionLabel}
-          aria-pressed={isPlaying}
-          disabled={locked}
-          onClick={toggle}
-          className={`shrink-0 inline-flex items-center gap-1.5 rounded-[3px] border border-ink bg-band px-3 py-1.5 font-mono text-[12px] font-extrabold text-band-ink shadow-xs dark:shadow-none transition-colors ${
-            locked ? "cursor-not-allowed opacity-40" : "cursor-pointer hover:bg-card"
-          }`}
-        >
-          <span aria-hidden="true">{actionIcon}</span>
-          <span>{actionLabel}</span>
-        </button>
+      {/* Transport Controls: Compact 1-row on mobile (no duplicate date/venue), 2-row with full stop info on desktop */}
+      <div className="flex flex-wrap items-center justify-between gap-2">
+        <div className="flex items-center gap-2 sm:gap-3 min-w-0">
+          <button
+            type="button"
+            data-testid="journey-playback-toggle"
+            aria-label={actionLabel}
+            aria-pressed={isPlaying}
+            disabled={locked}
+            onClick={toggle}
+            className={`shrink-0 inline-flex items-center gap-1.5 rounded-[3px] border border-ink bg-band px-2.5 py-1 md:px-3 md:py-1.5 font-mono text-[11px] md:text-[12px] font-extrabold text-band-ink shadow-xs dark:shadow-none transition-colors ${
+              locked ? "cursor-not-allowed opacity-40" : "cursor-pointer hover:bg-card"
+            }`}
+          >
+            <span aria-hidden="true">{actionIcon}</span>
+            <span>{actionLabel}</span>
+          </button>
 
-        <div className="min-w-0 flex-1">
-          <div className="font-mono text-[10px] font-bold tracking-wide text-muted tabular-nums">
-            {t("venueMap.playbackStopLabel", null, {
-              n: arrivedIndex + 1,
-              total: Math.max(1, stops.length),
-            })}
-          </div>
-          {currentStop && (
-            <div className="flex min-w-0 flex-wrap items-center gap-1.5 text-[12px] font-extrabold text-ink leading-tight">
-              <span className="font-mono whitespace-nowrap shrink-0 tabular-nums">{currentStop.date}</span>
-              <span aria-hidden="true" className="shrink-0 text-muted">
-                ·
-              </span>
-              <span className="truncate">{localizeVenue(currentStop.venue)}</span>
+          <div className="min-w-0">
+            <div className="font-mono text-[10px] font-bold tracking-wide text-muted tabular-nums whitespace-nowrap">
+              {t("venueMap.playbackStopLabel", null, {
+                n: arrivedIndex + 1,
+                total: Math.max(1, stops.length),
+              })}
             </div>
+            {currentStop && (
+              <div className="hidden md:flex min-w-0 flex-wrap items-center gap-1.5 text-[12px] font-extrabold text-ink leading-tight">
+                <span className="font-mono whitespace-nowrap shrink-0 tabular-nums">{currentStop.date}</span>
+                <span aria-hidden="true" className="shrink-0 text-muted">
+                  ·
+                </span>
+                <span className="truncate">{localizeVenue(currentStop.venue)}</span>
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* Speed buttons (1× 2× 4×) + Camera view toggle */}
+        <div className="flex items-center gap-1.5 shrink-0">
+          <div role="group" aria-label={t("venueMap.playbackSpeedAria")} className="flex items-center gap-1">
+            {PLAYBACK_SPEEDS.map((rate) => (
+              <button
+                key={rate}
+                type="button"
+                data-testid={`journey-playback-speed-${rate}`}
+                data-speed={rate}
+                aria-pressed={speed === rate}
+                onClick={() => setSpeed(rate)}
+                className={`rounded-[3px] border px-2 py-0.5 font-mono text-[11px] font-extrabold tabular-nums transition-colors cursor-pointer ${
+                  speed === rate
+                    ? "border-ink bg-band text-band-ink shadow-2xs dark:shadow-none"
+                    : "border-ink/40 bg-paper text-ink hover:bg-card"
+                }`}
+              >
+                {rate}×
+              </button>
+            ))}
+          </div>
+
+          {toggleCameraMode && (
+            <button
+              type="button"
+              data-testid="journey-playback-camera-toggle"
+              data-camera-mode={cameraMode}
+              aria-label={t("venueMap.playbackCameraAria")}
+              aria-pressed={cameraMode === "follow"}
+              onClick={toggleCameraMode}
+              className="rounded-[3px] border border-ink/40 bg-paper px-2 py-0.5 font-mono text-[11px] font-extrabold text-ink transition-colors hover:bg-card cursor-pointer shadow-2xs dark:shadow-none"
+            >
+              {cameraMode === "follow"
+                ? t("venueMap.playbackCameraFollow")
+                : t("venueMap.playbackCameraOverview")}
+            </button>
           )}
         </div>
       </div>
 
-      {/* Row 2: Speed buttons (1× 2× 4×) + Camera view toggle */}
-      <div className="flex flex-wrap items-center justify-between gap-2 pt-1 border-t border-dashed border-ink/20">
-        <div role="group" aria-label={t("venueMap.playbackSpeedAria")} className="flex items-center gap-1">
-          {PLAYBACK_SPEEDS.map((rate) => (
-            <button
-              key={rate}
-              type="button"
-              data-testid={`journey-playback-speed-${rate}`}
-              data-speed={rate}
-              aria-pressed={speed === rate}
-              onClick={() => setSpeed(rate)}
-              className={`rounded-[3px] border px-2 py-0.5 font-mono text-[11px] font-extrabold tabular-nums transition-colors cursor-pointer ${
-                speed === rate
-                  ? "border-ink bg-band text-band-ink shadow-2xs dark:shadow-none"
-                  : "border-ink/40 bg-paper text-ink hover:bg-card"
-              }`}
-            >
-              {rate}×
-            </button>
-          ))}
-        </div>
-
-        {toggleCameraMode && (
-          <button
-            type="button"
-            data-testid="journey-playback-camera-toggle"
-            data-camera-mode={cameraMode}
-            aria-label={t("venueMap.playbackCameraAria")}
-            aria-pressed={cameraMode === "follow"}
-            onClick={toggleCameraMode}
-            className="rounded-[3px] border border-ink/40 bg-paper px-2 py-0.5 font-mono text-[11px] font-extrabold text-ink transition-colors hover:bg-card cursor-pointer shadow-2xs dark:shadow-none"
-          >
-            {cameraMode === "follow"
-              ? t("venueMap.playbackCameraFollow")
-              : t("venueMap.playbackCameraOverview")}
-          </button>
-        )}
+      {/* Scrub bar + inline percentage on mobile */}
+      <div className="flex items-center gap-2 md:block">
+        <input
+          type="range"
+          data-testid="journey-playback-scrub"
+          aria-label={t("venueMap.playbackScrubAria")}
+          aria-valuetext={
+            currentStop ? `${currentStop.date} ${localizeVenue(currentStop.venue)}` : undefined
+          }
+          min="0"
+          max={Math.max(0, total)}
+          step="0.01"
+          value={progress}
+          disabled={total <= 0}
+          onChange={(event) => scrub(event.target.value)}
+          className={`w-full accent-band ${total <= 0 ? "cursor-not-allowed" : "cursor-pointer"}`}
+        />
+        <span className="md:hidden shrink-0 font-mono text-[10px] font-bold text-ink tabular-nums">
+          {pct}%
+        </span>
       </div>
 
-      <input
-        type="range"
-        data-testid="journey-playback-scrub"
-        aria-label={t("venueMap.playbackScrubAria")}
-        aria-valuetext={
-          currentStop ? `${currentStop.date} ${localizeVenue(currentStop.venue)}` : undefined
-        }
-        min="0"
-        max={Math.max(0, total)}
-        step="0.01"
-        value={progress}
-        disabled={total <= 0}
-        onChange={(event) => scrub(event.target.value)}
-        className={`w-full accent-band ${total <= 0 ? "cursor-not-allowed" : "cursor-pointer"}`}
-      />
-
-      <div className="flex items-center justify-between gap-2 font-mono text-[10px] text-muted">
+      <div className="hidden md:flex items-center justify-between gap-2 font-mono text-[10px] text-muted">
         <span className="truncate">
           {stops[0]?.date || ""} → {stops.at(-1)?.date || ""}
         </span>
         <span className="shrink-0 tabular-nums">
-          {Math.round((total > 0 ? progress / total : 0) * 100)}%
+          {pct}%
         </span>
       </div>
     </div>

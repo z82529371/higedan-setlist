@@ -84,11 +84,21 @@ export function JourneyPage({
     return t("venueMap.journeyTitle");
   }, [t]);
 
+  const selectedTourOption =
+    journeyTourId !== "ALL"
+      ? tourOptions.find((tr) => tr.id === journeyTourId)
+      : null;
+  const mobileFilterLabel = selectedTourOption
+    ? selectedTourOption.title
+    : journeyYear !== "ALL"
+    ? journeyYear
+    : t("venueMap.allToursOption");
+
   return (
     <div className="mx-auto max-w-[960px] px-4 sm:px-6 pt-8 pb-24 sm:py-8 select-none">
         {/* Main Ticket Receipt Article */}
         <main>
-          <article className="relative rounded-[3px] border-[1.5px] border-ink bg-card px-3 sm:px-[26px] pb-6 pt-6 sm:pt-7 shadow-[5px_5px_0_rgba(0,0,0,0.14)]">
+          <article className="relative rounded-[3px] border-[1.5px] border-ink bg-card px-3 sm:px-[26px] pb-6 pt-9 sm:pt-7 shadow-[5px_5px_0_rgba(0,0,0,0.14)]">
           {/* Washi Masking Tape Top Pin */}
           <div className={SLIP_TAPE} aria-hidden="true" />
 
@@ -99,8 +109,8 @@ export function JourneyPage({
               <span>Official髭男dism <span className="font-bold text-band-ink">{currentJourneyTitle}</span></span>
             </h1>
 
-            {/* Stats Badge */}
-            <div className="mt-2.5 flex items-center justify-center gap-2">
+            {/* Stats Badge & Mobile Inline Filter Trigger */}
+            <div className="mt-2.5 flex flex-wrap items-center justify-center gap-2">
               <span
                 data-testid="journey-stops-badge"
                 className="inline-flex items-center gap-1.5 rounded-[4px] border border-ink/30 bg-tape px-3 py-0.5 font-mono text-[11px] sm:text-[12px] font-extrabold text-ink shadow-2xs"
@@ -108,6 +118,18 @@ export function JourneyPage({
                 <span aria-hidden="true">🚐</span>
                 <span>{activeJourney.stops.length} STOPS</span>
               </span>
+              <button
+                type="button"
+                data-testid="journey-mobile-filter-trigger"
+                onClick={() => setIsDrawerOpen(true)}
+                aria-label={t("mobile.openFilterAria", "開啟篩選抽屜")}
+                className="sm:hidden inline-flex items-center gap-1 max-w-[200px] rounded-[4px] border border-ink/30 bg-paper px-2.5 py-0.5 font-mono text-[11px] font-bold text-ink shadow-2xs hover:bg-tape-tint/50 cursor-pointer touch-stamp transition-colors"
+              >
+                <span aria-hidden="true">🔍</span>
+                <span className="truncate">{mobileFilterLabel}</span>
+                {includeTv && <span className="shrink-0 text-band-ink font-extrabold">+TV</span>}
+                <span aria-hidden="true" className="shrink-0 opacity-70">▾</span>
+              </button>
             </div>
           </header>
 

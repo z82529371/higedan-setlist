@@ -631,7 +631,7 @@ export function VenueMapCanvas({
           ? "h-[280px] sm:h-[300px] md:h-full md:max-h-[440px] object-contain"
           : mode === "journey"
           ? isPortrait
-            ? "h-[520px] sm:h-[600px] md:h-[640px] w-full object-contain"
+            ? "h-auto w-full md:h-[640px] object-contain"
             : "h-[420px] sm:h-[520px] md:h-[640px] w-full object-contain"
           : "h-auto"
       }`}
@@ -1250,7 +1250,7 @@ export function VenueMapCanvas({
         }
       >
         <div className={mode === "venues" && selectedPrefecture ? "md:col-span-5 flex flex-col" : ""}>
-          <div className="rounded-[3px] border-[1.5px] border-ink bg-paper shadow-xs overflow-hidden flex flex-col flex-1">
+          <div className="relative rounded-[3px] border-[1.5px] border-ink bg-paper shadow-xs overflow-hidden flex flex-col flex-1">
             <div className="relative flex items-center justify-center overflow-hidden flex-1">
               {!hideControls && (
                 <div className="absolute top-2.5 right-2.5 z-10 flex items-center gap-2">
@@ -1328,18 +1328,18 @@ export function VenueMapCanvas({
                 </div>
               )}
 
-              {/* Bottom-Left Fixed Journey Emoji Ensemble HUD (ADR-0129: desktop only, omitted on mobile/small screens) */}
-              {mode === "journey" && hudStop && !effectiveIsPersonal && (
-                <div className="hidden md:flex flex-col gap-1.5 absolute bottom-2.5 left-2.5 z-10 max-w-[280px]">
-                  <BandEnsembleHUD
-                    state={isMoving ? "moving" : activeLeg?.transitMode === "stay" ? "stay" : "arrived"}
-                    isFinal={Boolean(hudStop.isFinal && !isMoving)}
-                  />
-                </div>
-              )}
-
               {renderMapSvg(false)}
             </div>
+
+            {/* Journey Emoji Ensemble HUD: docked below map on mobile so islands aren't covered, floating bottom-left on desktop */}
+            {mode === "journey" && hudStop && !effectiveIsPersonal && (
+              <div className="border-t border-ink/20 bg-paper px-2 py-1.5 md:border-t-0 md:bg-transparent md:p-0 md:flex flex-col gap-1.5 md:absolute md:bottom-2.5 md:left-2.5 md:z-10 md:max-w-[280px]">
+                <BandEnsembleHUD
+                  state={isMoving ? "moving" : activeLeg?.transitMode === "stay" ? "stay" : "arrived"}
+                  isFinal={Boolean(hudStop.isFinal && !isMoving)}
+                />
+              </div>
+            )}
 
             {/* Mobile Docked Status Ribbon (md:hidden, docked below map frame, 100% unobscured canvas) */}
             {mode === "venues" && venueHudData && (

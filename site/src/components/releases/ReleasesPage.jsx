@@ -196,6 +196,34 @@ export function ReleasesPage({
     }
   };
 
+  const renderEditionsAndBonus = (rel) => (
+    <>
+      {rel.editions && rel.editions.length > 0 && (
+        <div className="flex flex-wrap items-center gap-1.5">
+          {rel.editions.map((ed, idx) => (
+            <span
+              key={idx}
+              className="inline-flex items-center gap-1 rounded bg-paper px-2 py-0.5 font-mono text-[10px] sm:text-[11px] text-ink font-semibold border border-line-soft"
+            >
+              <span className="font-bold">{ed.name}</span>
+              {ed.format && (
+                <span className="opacity-75 uppercase">[{ed.format.replace("_", "+")}]</span>
+              )}
+              {ed.catalogNumber && (
+                <span className="text-band-ink font-bold">{ed.catalogNumber}</span>
+              )}
+            </span>
+          ))}
+        </div>
+      )}
+      {rel.editions?.some((e) => e.bonusContent) && (
+        <p className="mt-1.5 mb-0 font-mono text-[10px] sm:text-[11px] text-muted">
+          🎁 {rel.editions.find((e) => e.bonusContent)?.bonusContent}
+        </p>
+      )}
+    </>
+  );
+
   return (
     <div className="mx-auto max-w-[960px] px-3 sm:px-6 pt-8 pb-16 sm:py-8 select-none font-sans">
       {/* Main Ticket Receipt Card */}
@@ -203,61 +231,21 @@ export function ReleasesPage({
         {/* Washi Masking Tape Top Pin */}
         <div className={SLIP_TAPE} aria-hidden="true" />
 
-        {/* Dual-Track Segmented Tab Switcher (ADR-0144) */}
-        <div className="flex items-center justify-center pt-2 pb-5 border-b border-line-soft">
-          <div
-            className="inline-flex p-1 rounded-[5px] bg-paper border border-ink/25 shadow-2xs gap-1"
-            role="tablist"
-            aria-label="Releases Track Switcher"
-          >
-            <button
-              type="button"
-              role="tab"
-              aria-selected={mainTab === "live"}
-              onClick={() => handleSwitchMainTab("live")}
-              className={`rounded-[3px] px-3.5 py-1.5 font-mono text-[12px] sm:text-[13px] font-extrabold transition-colors cursor-pointer inline-flex items-center gap-1.5 ${
-                mainTab === "live"
-                  ? "bg-band text-band-ink border border-ink shadow-xs"
-                  : "bg-transparent text-ink/75 hover:text-ink hover:bg-tape-tint/40 border border-transparent"
-              }`}
-            >
-              <span aria-hidden="true">🎬</span>
-              <span>{t("releases_tab_live", "現場影音")}</span>
-              <span className="font-mono text-[10px] opacity-80 tabular-nums">({allLiveReleases.length})</span>
-            </button>
-            <button
-              type="button"
-              role="tab"
-              aria-selected={mainTab === "discography"}
-              onClick={() => handleSwitchMainTab("discography")}
-              className={`rounded-[3px] px-3.5 py-1.5 font-mono text-[12px] sm:text-[13px] font-extrabold transition-colors cursor-pointer inline-flex items-center gap-1.5 ${
-                mainTab === "discography"
-                  ? "bg-band text-band-ink border border-ink shadow-xs"
-                  : "bg-transparent text-ink/75 hover:text-ink hover:bg-tape-tint/40 border border-transparent"
-              }`}
-            >
-              <span aria-hidden="true">💿</span>
-              <span>{t("releases_tab_discography", "錄音室作品")}</span>
-              <span className="font-mono text-[10px] opacity-80 tabular-nums">({allStudioReleases.length})</span>
-            </button>
-          </div>
-        </div>
-
-        {/* Ticket Header Title Block */}
-        <header className="flex flex-col items-center text-center py-4">
-          <div className="mb-2.5 inline-flex items-center justify-center w-12 h-12 rounded-[4px] bg-band border-[1.5px] border-ink shadow-2xs">
+        {/* Ticket Header Title Block (Compact on mobile, aligned with TicketBookPage) */}
+        <header className="flex flex-col items-center text-center pb-3 sm:pb-4">
+          <div className="hidden sm:inline-flex mb-2.5 items-center justify-center w-12 h-12 rounded-[4px] bg-band border-[1.5px] border-ink shadow-2xs">
             <span className="text-2xl" aria-hidden="true">
               {mainTab === "live" ? "🎬" : "💿"}
             </span>
           </div>
 
-          <p className="m-0 font-mono text-[11px] sm:text-[12px] tracking-[0.2em] text-muted font-bold uppercase">
+          <p className="m-0 font-mono text-[10px] sm:text-[12px] tracking-[0.18em] sm:tracking-[0.2em] text-muted font-bold uppercase">
             {mainTab === "live"
               ? "CONCERT ARCHIVE // LIVE RELEASES"
               : "CONCERT ARCHIVE // STUDIO DISCOGRAPHY"}
           </p>
 
-          <h1 className="m-0 mt-1.5 font-display text-[clamp(20px,4.5vw,36px)] font-black leading-tight tracking-tight text-ink">
+          <h1 className="m-0 mt-1 sm:mt-1.5 font-display text-[20px] sm:text-[clamp(24px,4.5vw,36px)] font-black leading-tight tracking-tight text-ink">
             Official髭男dism{" "}
             <span className="font-bold text-band-ink">
               {mainTab === "live"
@@ -266,17 +254,17 @@ export function ReleasesPage({
             </span>
           </h1>
 
-          <p className="mt-2 mb-0 text-[12px] sm:text-[14px] text-muted max-w-[560px] leading-relaxed">
+          <p className="hidden sm:block mt-2 mb-0 text-[12px] sm:text-[14px] text-muted max-w-[560px] leading-relaxed">
             {mainTab === "live"
               ? t("live_discography_desc", "收錄 Official 髭男 dism 歷年官方發行之獨立現場影音（BD/DVD）與影音限定盤特典。")
               : t("studio_discography_desc", "收錄 Official 髭男 dism 歷年官方發行之實體單曲、數位單曲、EP 與正規專輯規格品番與曲目清單。")}
           </p>
 
           {/* Stats Badge */}
-          <div className="mt-3.5 flex items-center justify-center gap-2">
+          <div className="mt-2.5 sm:mt-3.5 flex items-center justify-center gap-2">
             <span
               data-testid="releases-stats-badge"
-              className="inline-flex items-center gap-1.5 rounded-[4px] border border-ink/30 bg-tape px-3 py-1 font-mono text-[12px] sm:text-[13px] font-extrabold text-ink shadow-2xs"
+              className="inline-flex items-center gap-1.5 rounded-[4px] border border-ink/30 bg-tape px-2.5 sm:px-3 py-0.5 sm:py-1 font-mono text-[11px] sm:text-[13px] font-extrabold text-ink shadow-2xs"
             >
               <span aria-hidden="true">🎖️</span>
               <span>
@@ -291,10 +279,50 @@ export function ReleasesPage({
         {/* Perforation Divider */}
         <TicketPerforationDivider />
 
-        {/* Sub-board Selector Tabs (Ticket Stub Tab Pills) */}
+        {/* Dual-Track Segmented Tab Switcher (ADR-0144): Full-width 2-col on mobile */}
+        <div className="flex items-center justify-center mt-4 mb-3">
+          <div
+            className="grid grid-cols-2 w-full sm:inline-flex sm:w-auto p-1 rounded-[5px] bg-paper border border-ink/25 shadow-2xs gap-1"
+            role="tablist"
+            aria-label="Releases Track Switcher"
+          >
+            <button
+              type="button"
+              role="tab"
+              aria-selected={mainTab === "live"}
+              onClick={() => handleSwitchMainTab("live")}
+              className={`rounded-[3px] px-2.5 sm:px-3.5 py-1.5 font-mono text-[12px] sm:text-[13px] font-extrabold transition-colors cursor-pointer inline-flex items-center justify-center gap-1.5 ${
+                mainTab === "live"
+                  ? "bg-band text-band-ink border border-ink shadow-xs"
+                  : "bg-transparent text-ink/75 hover:text-ink hover:bg-tape-tint/40 border border-transparent"
+              }`}
+            >
+              <span aria-hidden="true">🎬</span>
+              <span>{t("releases_tab_live", "現場影音")}</span>
+              <span className="font-mono text-[10px] opacity-80 tabular-nums">({allLiveReleases.length})</span>
+            </button>
+            <button
+              type="button"
+              role="tab"
+              aria-selected={mainTab === "discography"}
+              onClick={() => handleSwitchMainTab("discography")}
+              className={`rounded-[3px] px-2.5 sm:px-3.5 py-1.5 font-mono text-[12px] sm:text-[13px] font-extrabold transition-colors cursor-pointer inline-flex items-center justify-center gap-1.5 ${
+                mainTab === "discography"
+                  ? "bg-band text-band-ink border border-ink shadow-xs"
+                  : "bg-transparent text-ink/75 hover:text-ink hover:bg-tape-tint/40 border border-transparent"
+              }`}
+            >
+              <span aria-hidden="true">💿</span>
+              <span>{t("releases_tab_discography", "錄音室作品")}</span>
+              <span className="font-mono text-[10px] opacity-80 tabular-nums">({allStudioReleases.length})</span>
+            </button>
+          </div>
+        </div>
+
+        {/* Sub-board Selector Tabs: single-row horizontal scroll on mobile, wrapped on desktop */}
         {mainTab === "live" ? (
           <div
-            className="my-5 flex flex-wrap items-center justify-center sm:justify-start gap-2 border-b border-line-soft pb-4"
+            className="mb-4 flex items-center flex-nowrap overflow-x-auto scrollbar-none gap-1.5 pb-3 -mx-1 px-1 sm:mx-0 sm:px-0 sm:flex-wrap sm:justify-start sm:gap-2 border-b border-line-soft"
             role="tablist"
             aria-label={t("live_discography_title", "現場影音發行")}
           >
@@ -308,7 +336,7 @@ export function ReleasesPage({
                   role="tab"
                   aria-selected={isActive}
                   onClick={() => setLiveFilterType(tab.id)}
-                  className={`rounded-[3px] px-3.5 py-1.5 font-mono text-[12px] font-bold transition-colors cursor-pointer inline-flex items-center gap-1.5 ${
+                  className={`shrink-0 rounded-[3px] px-2.5 py-1 sm:px-3.5 sm:py-1.5 font-mono text-[11px] sm:text-[12px] font-bold transition-colors cursor-pointer inline-flex items-center gap-1.5 ${
                     isActive
                       ? "bg-band text-band-ink border-[1.5px] border-ink shadow-xs"
                       : "bg-paper text-ink border border-ink/30 hover:bg-tape-tint/50"
@@ -323,7 +351,7 @@ export function ReleasesPage({
           </div>
         ) : (
           <div
-            className="my-5 flex flex-wrap items-center justify-center sm:justify-start gap-2 border-b border-line-soft pb-4"
+            className="mb-4 flex items-center flex-nowrap overflow-x-auto scrollbar-none gap-1.5 pb-3 -mx-1 px-1 sm:mx-0 sm:px-0 sm:flex-wrap sm:justify-start sm:gap-2 border-b border-line-soft"
             role="tablist"
             aria-label={t("studio_discography_title", "錄音室作品全集")}
           >
@@ -337,7 +365,7 @@ export function ReleasesPage({
                   role="tab"
                   aria-selected={isActive}
                   onClick={() => setDiscogFilterType(tab.id)}
-                  className={`rounded-[3px] px-3.5 py-1.5 font-mono text-[12px] font-bold transition-colors cursor-pointer inline-flex items-center gap-1.5 ${
+                  className={`shrink-0 rounded-[3px] px-2.5 py-1 sm:px-3.5 sm:py-1.5 font-mono text-[11px] sm:text-[12px] font-bold transition-colors cursor-pointer inline-flex items-center gap-1.5 ${
                     isActive
                       ? "bg-band text-band-ink border-[1.5px] border-ink shadow-xs"
                       : "bg-paper text-ink border border-ink/30 hover:bg-tape-tint/50"
@@ -366,72 +394,38 @@ export function ReleasesPage({
                   data-testid={`release-item-${rel.id}`}
                   className="group relative rounded-[4px] border-[1.5px] border-ink bg-card p-3.5 sm:p-4 shadow-[2.5px_2.5px_0_rgba(0,0,0,0.08)] hover:shadow-[3px_3px_0_rgba(0,0,0,0.15)] transition-shadow text-left"
                 >
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-line-soft pb-2.5">
-                    {/* Left: Type badge, Coverage badge, Date, and Catalog pills */}
-                    <div className="flex flex-wrap items-center gap-2">
-                      <span className="rounded bg-paper px-2 py-0.5 font-mono text-[10px] sm:text-[11px] font-bold text-ink border border-ink/20 shadow-2xs">
-                        {typeLabel}
+                  {/* Top Bar: Core identity badges only */}
+                  <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 border-b border-line-soft pb-2">
+                    <span className="rounded bg-paper px-2 py-0.5 font-mono text-[10px] sm:text-[11px] font-bold text-ink border border-ink/20 shadow-2xs">
+                      {typeLabel}
+                    </span>
+                    {primaryRecording?.coverage && (
+                      <span
+                        data-testid="release-card-coverage-badge"
+                        className={`rounded px-1.5 py-0.5 font-mono text-[10px] sm:text-[11px] font-bold border shadow-2xs ${
+                          primaryRecording.coverage === "full"
+                            ? "bg-tape-tint text-ink border-tape-line"
+                            : "bg-paper text-ink-muted border-ink/20"
+                        }`}
+                      >
+                        {formatCoverageLabel(primaryRecording.coverage, locale)}
                       </span>
-                      {primaryRecording?.coverage && (
-                        <span
-                          data-testid="release-card-coverage-badge"
-                          className={`rounded px-1.5 py-0.5 font-mono text-[10px] sm:text-[11px] font-bold border shadow-2xs ${
-                            primaryRecording.coverage === "full"
-                              ? "bg-tape-tint text-ink border-tape-line"
-                              : "bg-paper text-ink-muted border-ink/20"
-                          }`}
-                        >
-                          {formatCoverageLabel(primaryRecording.coverage, locale)}
-                        </span>
-                      )}
-                      {rel.releaseDate && (
-                        <span className="font-mono text-[11px] sm:text-[12px] font-black text-ink tracking-tight tabular-nums bg-paper px-2 py-0.5 rounded border border-ink/20">
-                          📅 {rel.releaseDate}
-                        </span>
-                      )}
-                      {rel.catalogNumbers?.map((cat) => (
-                        <span
-                          key={cat}
-                          className="font-mono text-[10px] text-muted px-1.5 py-0.5 rounded bg-paper/60 border border-line-soft"
-                        >
-                          {cat}
-                        </span>
-                      ))}
-                    </div>
-
-                    {/* Right Actions: View Show Slip & Spotify */}
-                    <div className="flex flex-wrap items-center gap-2 shrink-0 self-start sm:self-auto">
-                      {primaryRecording?.showId && (
-                        <a
-                          href={routeHash.show(primaryRecording.showId)}
-                          className="inline-flex items-center gap-1 rounded-[3px] border border-ink/30 bg-tape px-2.5 py-1 font-mono text-[11px] font-bold text-ink shadow-2xs hover:bg-tape-tint transition-colors no-underline cursor-pointer"
-                          title={t("view_show_slip", "前往演出票根")}
-                        >
-                          <span>🎫 {t("view_show_slip", "前往演出票根")} ➔</span>
-                        </a>
-                      )}
-                      {rel.streaming?.spotifyAlbumId && (
-                        <a
-                          href={`https://open.spotify.com/album/${rel.streaming.spotifyAlbumId}`}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1 rounded-[3px] border border-line-soft bg-paper px-2 py-1 font-mono text-[11px] font-bold text-ink shadow-2xs hover:bg-band hover:border-band hover:text-band-ink transition-colors no-underline cursor-pointer"
-                          title={t("slips.song.listenOnSpotify", "在 Spotify 聆聽")}
-                        >
-                          <span>🎧 Spotify ↗</span>
-                        </a>
-                      )}
-                    </div>
+                    )}
+                    {rel.releaseDate && (
+                      <span className="font-mono text-[11px] sm:text-[12px] font-black text-ink tracking-tight tabular-nums bg-paper px-2 py-0.5 rounded border border-ink/20">
+                        📅 {rel.releaseDate}
+                      </span>
+                    )}
                   </div>
 
                   {/* Card Body: Cover Art + Title + Parent Release */}
-                  <div className="pt-3 flex gap-3.5 sm:gap-4 items-start">
+                  <div className="pt-3 flex gap-3 sm:gap-4 items-start">
                     {/* Official Video / Live Cover Art (only render when coverUrl is present) */}
                     {rel.coverUrl && (
                       <button
                         type="button"
                         onClick={() => setLightboxRelease(rel)}
-                        className="group/cover relative w-[72px] h-[72px] sm:w-[92px] sm:h-[92px] rounded-[3px] border border-ink/25 bg-paper shadow-2xs shrink-0 overflow-hidden flex items-center justify-center cursor-pointer transition-colors hover:border-ink focus:outline-none focus:ring-2 focus:ring-band"
+                        className="group/cover relative w-[64px] h-[64px] sm:w-[92px] sm:h-[92px] rounded-[3px] border border-ink/25 bg-paper shadow-2xs shrink-0 overflow-hidden flex items-center justify-center cursor-pointer transition-colors hover:border-ink focus:outline-none focus:ring-2 focus:ring-band"
                         title={t("slips.song.viewJacket", "查看《{title}》唱片封面", { title: rel.title })}
                         aria-label={t("slips.song.viewJacket", "查看《{title}》唱片封面", { title: rel.title })}
                       >
@@ -453,7 +447,7 @@ export function ReleasesPage({
 
                     {/* Title & Parent Release Info */}
                     <div className="min-w-0 flex-1">
-                      <h2 className="font-display text-[17px] sm:text-[20px] font-black leading-snug text-ink tracking-tight">
+                      <h2 className="font-display text-[16px] sm:text-[20px] font-black leading-snug text-ink tracking-tight">
                         {rel.title}
                       </h2>
                       {rel.parentRelease && (
@@ -465,9 +459,9 @@ export function ReleasesPage({
                     </div>
                   </div>
 
-                  {/* Formats Pills */}
-                  <div className="mt-3 flex flex-wrap items-center gap-1.5 pt-2 border-t border-line-soft/60">
-                    <span className="font-mono text-[10px] text-muted mr-1">FORMATS:</span>
+                  {/* Formats & Catalog Pills */}
+                  <div className="mt-2.5 flex flex-wrap items-center gap-1.5 pt-2 border-t border-line-soft/60">
+                    <span className="font-mono text-[10px] text-muted mr-0.5">FORMATS:</span>
                     {rel.formats?.map((fmt) => (
                       <span
                         key={fmt}
@@ -476,7 +470,43 @@ export function ReleasesPage({
                         {formatReleaseFormatLabel(fmt)}
                       </span>
                     ))}
+                    {rel.catalogNumbers?.map((cat) => (
+                      <span
+                        key={cat}
+                        className="font-mono text-[10px] text-muted px-1.5 py-0.5 rounded bg-paper/60 border border-line-soft"
+                      >
+                        {cat}
+                      </span>
+                    ))}
                   </div>
+
+                  {/* Bottom Action Bar (Unified with Studio Discography) */}
+                  {(primaryRecording?.showId || rel.streaming?.spotifyAlbumId) && (
+                    <div className="mt-3 pt-2.5 border-t border-line-soft flex items-center justify-between flex-wrap gap-2">
+                      {primaryRecording?.showId ? (
+                        <a
+                          href={routeHash.show(primaryRecording.showId)}
+                          className="inline-flex items-center gap-1 rounded-[3px] border border-ink/30 bg-tape px-2.5 py-1 font-mono text-[11px] font-bold text-ink shadow-2xs hover:bg-tape-tint transition-colors no-underline cursor-pointer"
+                          title={t("view_show_slip", "前往演出票根")}
+                        >
+                          <span>🎫 {t("view_show_slip", "前往演出票根")} ➔</span>
+                        </a>
+                      ) : (
+                        <span />
+                      )}
+                      {rel.streaming?.spotifyAlbumId && (
+                        <a
+                          href={`https://open.spotify.com/album/${rel.streaming.spotifyAlbumId}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1 rounded-[3px] border border-line-soft bg-paper px-2 py-1 font-mono text-[11px] font-bold text-ink shadow-2xs hover:bg-band hover:border-band hover:text-band-ink transition-colors no-underline cursor-pointer"
+                          title={t("slips.song.listenOnSpotify", "在 Spotify 聆聽")}
+                        >
+                          <span>🎧 Spotify ↗</span>
+                        </a>
+                      )}
+                    </div>
+                  )}
                 </div>
               );
             })}
@@ -503,9 +533,9 @@ export function ReleasesPage({
                       : "border-ink shadow-[2.5px_2.5px_0_rgba(0,0,0,0.08)] hover:shadow-[3px_3px_0_rgba(0,0,0,0.15)]"
                   }`}
                 >
-                  {/* Top Bar: Category badge, Release Date, Label, Oricon */}
-                  <div className="flex flex-wrap items-center justify-between gap-2 border-b border-line-soft pb-2.5">
-                    <div className="flex flex-wrap items-center gap-2">
+                  {/* Top Bar: Category badge, Release Date, Oricon (Label on desktop) */}
+                  <div className="flex flex-wrap items-center justify-between gap-1.5 sm:gap-2 border-b border-line-soft pb-2">
+                    <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
                       <span className="rounded bg-paper px-2 py-0.5 font-mono text-[10px] sm:text-[11px] font-bold text-ink border border-ink/20 shadow-2xs">
                         {typeLabel}
                       </span>
@@ -520,25 +550,25 @@ export function ReleasesPage({
                         </span>
                       )}
                       {rel.label && (
-                        <span className="font-mono text-[10px] text-muted px-1.5 py-0.5 rounded bg-paper/60 border border-line-soft">
+                        <span className="hidden sm:inline-block font-mono text-[10px] text-muted px-1.5 py-0.5 rounded bg-paper/60 border border-line-soft">
                           {rel.label}
                         </span>
                       )}
                     </div>
 
                     {/* Track count badge */}
-                    <span className="font-mono text-[11px] font-bold text-muted bg-paper px-2 py-0.5 rounded border border-line-soft">
+                    <span className="font-mono text-[10px] sm:text-[11px] font-bold text-muted bg-paper px-2 py-0.5 rounded border border-line-soft">
                       {t("discography_tracks_count", "共 {count} 首收錄曲", { count: tracksCount })}
                     </span>
                   </div>
 
-                  {/* Card Body: Cover Art + Title + Editions */}
-                  <div className="pt-3 flex gap-3.5 sm:gap-4 items-start">
+                  {/* Card Body: Cover Art + Title (Editions inline on desktop, full-width below on mobile) */}
+                  <div className="pt-3 flex gap-3 sm:gap-4 items-start">
                     {/* Official Jacket Cover Art */}
                     <button
                       type="button"
                       onClick={() => setLightboxRelease(rel)}
-                      className="group/cover relative w-[72px] h-[72px] sm:w-[92px] sm:h-[92px] rounded-[3px] border border-ink/25 bg-paper shadow-2xs shrink-0 overflow-hidden flex items-center justify-center cursor-pointer transition-colors hover:border-ink focus:outline-none focus:ring-2 focus:ring-band"
+                      className="group/cover relative w-[64px] h-[64px] sm:w-[92px] sm:h-[92px] rounded-[3px] border border-ink/25 bg-paper shadow-2xs shrink-0 overflow-hidden flex items-center justify-center cursor-pointer transition-colors hover:border-ink focus:outline-none focus:ring-2 focus:ring-band"
                       title={t("slips.song.viewJacket", "查看《{title}》唱片封面", { title: rel.title })}
                       aria-label={t("slips.song.viewJacket", "查看《{title}》唱片封面", { title: rel.title })}
                     >
@@ -564,40 +594,24 @@ export function ReleasesPage({
                       </span>
                     </button>
 
-                    {/* Title & Editions Info */}
+                    {/* Title & Desktop Editions Info */}
                     <div className="min-w-0 flex-1">
-                      <h2 className="font-display text-[18px] sm:text-[22px] font-black leading-snug text-ink tracking-tight">
+                      <h2 className="font-display text-[17px] sm:text-[22px] font-black leading-snug text-ink tracking-tight">
                         {rel.title}
                       </h2>
 
-                      {/* Editions capsules with catalog numbers */}
-                      {rel.editions && rel.editions.length > 0 && (
-                        <div className="mt-2 flex flex-wrap items-center gap-1.5">
-                          {rel.editions.map((ed, idx) => (
-                            <span
-                              key={idx}
-                              className="inline-flex items-center gap-1 rounded bg-paper px-2 py-0.5 font-mono text-[10px] sm:text-[11px] text-ink font-semibold border border-line-soft"
-                            >
-                              <span className="font-bold">{ed.name}</span>
-                              {ed.format && (
-                                <span className="opacity-75 uppercase">[{ed.format.replace('_', '+')}]</span>
-                              )}
-                              {ed.catalogNumber && (
-                                <span className="text-band-ink font-bold">{ed.catalogNumber}</span>
-                              )}
-                            </span>
-                          ))}
-                        </div>
-                      )}
-
-                      {/* Bonus content notice if any */}
-                      {rel.editions?.some((e) => e.bonusContent) && (
-                        <p className="mt-1.5 mb-0 font-mono text-[10px] sm:text-[11px] text-muted">
-                          🎁 {rel.editions.find((e) => e.bonusContent)?.bonusContent}
-                        </p>
-                      )}
+                      <div className="hidden sm:block mt-2">
+                        {renderEditionsAndBonus(rel)}
+                      </div>
                     </div>
                   </div>
+
+                  {/* Mobile Full-Width Editions & Bonus Strip */}
+                  {(rel.editions?.length > 0) && (
+                    <div className="sm:hidden mt-2.5 pt-2 border-t border-line-soft/60">
+                      {renderEditionsAndBonus(rel)}
+                    </div>
+                  )}
 
                   {/* Tracklist Toggle Accordion & Verified Spotify Action */}
                   <div className="mt-3.5 pt-2.5 border-t border-line-soft flex items-center justify-between flex-wrap gap-2">
