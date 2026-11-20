@@ -163,6 +163,8 @@ test("Studio Discography Pipeline Seam (ADR-0144)", async (t) => {
     const index = buildDiscographyIndex(realData);
     const all = index.getAllReleases();
     assert.ok(all.length >= 38);
+    assert.equal(index.getReleaseById("album-traveler-instrumentals"), null);
+    assert.equal(index.getReleaseById("album-editorial-instrumentals"), null);
 
     const pretender = index.getReleaseById("single-pretender");
     assert.ok(pretender);

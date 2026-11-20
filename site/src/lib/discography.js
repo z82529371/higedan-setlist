@@ -69,8 +69,6 @@ export function buildDiscographyIndex(discographyData = {}) {
     "album-love-and-peace": "sweet-tweet",
     "album-man-in-the-mirror": "coffee-to-syrup",
     "album-report": "itan-na-star",
-    "album-traveler-instrumentals": "yesterday",
-    "album-editorial-instrumentals": "editorial",
   };
 
   const addRelease = (raw, category) => {
@@ -140,8 +138,10 @@ export function buildDiscographyIndex(discographyData = {}) {
     addRelease(m, "album");
   }
   for (const d of albums.digitalAlbums || []) {
-    // Only include studio instrumental or special albums, not live duplicates
-    if (d.index !== "live-1") {
+    // Exclude live duplicates and instrumental-only albums from the studio discography view
+    const isLive = d.index === "live-1";
+    const isInstrumental = /-instrumentals?$/i.test(d.id || "") || /instrumentals?/i.test(d.title || "");
+    if (!isLive && !isInstrumental) {
       addRelease(d, "album");
     }
   }
