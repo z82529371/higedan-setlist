@@ -889,8 +889,8 @@ let renderToStaticMarkup;
       assert.ok(tourLayoutHtml.includes("CONSENSUS TEMPLATE // 巡演定番歌單"));
       assert.ok(tourLayoutHtml.includes("巡演總覽"));
       assert.ok(tourLayoutHtml.includes("查看票根"));
-      assert.ok(tourLayoutHtml.includes("hgdnlive@gmail.com"));
-      assert.ok(tourLayoutHtml.includes("mailto:hgdnlive@gmail.com"));
+      assert.ok(!tourLayoutHtml.includes("hgdnlive@gmail.com"));
+      assert.ok(!tourLayoutHtml.includes("mailto:"));
       assert.ok(tourLayoutHtml.includes("@higedan_live"));
       assert.ok(tourLayoutHtml.includes("https://www.instagram.com/higedan_live/"));
 
@@ -980,6 +980,11 @@ let renderToStaticMarkup;
       );
       assert.ok(tourHtml.includes("TOUR CONSENSUS MASTER SHEET"));
       assert.ok(tourHtml.includes("CONSENSUS TEMPLATE // 巡演定番歌單"));
+      assert.ok(tourHtml.includes('data-testid="tour-section-tabs"'));
+      assert.ok(tourHtml.includes('data-testid="tour-tab-setlist"'));
+      assert.ok(tourHtml.includes('data-testid="tour-tab-itinerary"'));
+      assert.ok(tourHtml.includes('data-testid="tour-panel-setlist"'));
+      assert.ok(tourHtml.includes('data-testid="tour-panel-itinerary"'));
       // Pure ticket: NO internal capsule toggle inside the paper slip
       assert.ok(!tourHtml.includes("⟷"));
 

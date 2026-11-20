@@ -262,9 +262,9 @@ export function ShowSlip({
       return (
         <li
           key={prefix}
-          className={`${SETLIST_ITEM} text-[13px] text-muted [&_.cue-no]:text-line`}
+          className={`${SETLIST_ITEM} py-2.5 px-0.5 sm:px-2.5 hover:bg-black/[0.02] dark:hover:bg-white/[0.02] transition-colors text-[13px] text-muted [&_.cue-no]:text-line`}
         >
-          <span className="cue-no min-w-[42px] text-right font-mono text-[12px] text-line">
+          <span className="cue-no min-w-[24px] sm:min-w-[36px] text-right font-mono text-[12px] text-line">
             —
           </span>
           <span>{first.note || first.title || ""}</span>
@@ -315,7 +315,7 @@ export function ShowSlip({
       ) : null;
     if (multi) {
       return (
-        <li key={prefix} className={`${SETLIST_ITEM} ${slipClass}`}>
+        <li key={prefix} className={`${SETLIST_ITEM} ${slipClass} py-3 px-0.5 sm:px-2.5 hover:bg-black/[0.02] dark:hover:bg-white/[0.02] transition-colors`}>
           {tabBar}
           <span className="flex min-w-0 flex-1 flex-col gap-[6px]">
             {g.items.map((p) => (
@@ -337,7 +337,7 @@ export function ShowSlip({
       );
     }
     return (
-      <li key={prefix} className={`${SETLIST_ITEM} ${slipClass}`}>
+      <li key={prefix} className={`${SETLIST_ITEM} ${slipClass} py-3 px-0.5 sm:px-2.5 hover:bg-black/[0.02] dark:hover:bg-white/[0.02] transition-colors`}>
         {tabBar}
         <span className={`${CUE_NO} ${cueColor(first)}`}>{g.items[0].cue}</span>
         <span>
@@ -635,25 +635,25 @@ export function ShowSlip({
           onOpenLeadModal={(type) => setLeadQuestModal({ questType: type || "setlist" })}
         />
       ) : (
-        <div className="space-y-4">
+        <div className="space-y-7 sm:space-y-8">
           <div>
-            <div className="flex items-center justify-between font-mono text-xs font-bold uppercase tracking-wider text-muted pb-1.5 mb-1 border-b border-line-soft">
+            <div className="flex flex-wrap items-center justify-between gap-2 font-mono text-xs font-bold uppercase tracking-wider text-muted pb-2.5 mb-2 border-b border-line-soft">
               <span className="flex items-center gap-1.5 text-ink font-extrabold">
                 <span className="text-band">◆</span> {t("slips.mainSetlist", "MAIN SETLIST // 本篇演奏曲目")}
               </span>
-              <span className="tabular-nums text-xs font-mono">{mainCount} SONGS</span>
+              <span className="tabular-nums text-xs font-mono shrink-0">{mainCount} SONGS</span>
             </div>
             <ol className="m-0 list-none p-0 divide-y divide-line-soft/60">
               {groupRuns(main).map((g, idx) => renderRun(g, `m-${idx}`))}
             </ol>
           </div>
           {enc.length > 0 && (
-            <div className="rounded-[3px] p-3.5 sm:p-4 border border-line-soft bg-paper/50 space-y-2 mt-4">
-              <div className="flex items-center justify-between font-mono text-xs font-extrabold uppercase tracking-wider text-band pb-1.5 border-b border-line-soft/70">
+            <div className="rounded-[3px] px-2.5 py-3.5 sm:p-5 border border-line-soft bg-paper/50 space-y-3 mt-6">
+              <div className="flex flex-wrap items-center justify-between gap-2 font-mono text-xs font-extrabold uppercase tracking-wider text-band pb-2 border-b border-line-soft/70">
                 <span className="flex items-center gap-1.5">
                   <span>◆</span> {t("slips.encore", "ENCORE // 安可曲目")}
                 </span>
-                <span className="tabular-nums text-xs text-muted font-mono">{encCount} SONGS</span>
+                <span className="tabular-nums text-xs text-muted font-mono shrink-0">{encCount} SONGS</span>
               </div>
               <ol className="m-0 list-none p-0 divide-y divide-line-soft/40">
                 {groupRuns(enc).map((g, idx) => renderRun(g, `e-${idx}`))}
