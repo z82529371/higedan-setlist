@@ -17,9 +17,9 @@ const EMPTY_TRANSITIONS = [];
  * Shared by the career journey map and (later) the tour slip player: it owns progress,
  * play/pause and speed, and never touches the DOM.
  *
- * Every new journey auto-plays from the origin at DEFAULT_PLAYBACK_SPEED. Playback is
- * intentionally independent of `prefers-reduced-motion`: the route is opt-in map content
- * with its own pause control, so users can stop it whenever they want.
+ * Every new journey starts paused at the origin (unless `options.initialPlaying` is true)
+ * at DEFAULT_PLAYBACK_SPEED. Playback is intentionally independent of `prefers-reduced-motion`:
+ * the route is opt-in map content with its own play/pause control.
  */
 export function useJourneyPlayback(transitions = EMPTY_TRANSITIONS, options = {}) {
   const total = transitions.length;
@@ -29,8 +29,7 @@ export function useJourneyPlayback(transitions = EMPTY_TRANSITIONS, options = {}
       : typeof options.initialProgress === "number"
       ? options.initialProgress
       : 0;
-  const initPlaying =
-    options.initialPlaying !== undefined ? options.initialPlaying : options.initialProgress === "end" ? false : true;
+  const initPlaying = options.initialPlaying ?? false;
 
   const [progress, setProgress] = useState(initProgress);
   const [playing, setPlaying] = useState(initPlaying && total > 0);
@@ -51,7 +50,7 @@ export function useJourneyPlayback(transitions = EMPTY_TRANSITIONS, options = {}
       setPlaying(options.initialPlaying ?? false);
     } else {
       setProgress(0);
-      setPlaying(transitions.length > 0);
+      setPlaying(options.initialPlaying ?? false);
     }
   }, [transitions, options.initialProgress, options.initialPlaying]);
 

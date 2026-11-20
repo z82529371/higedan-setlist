@@ -242,7 +242,7 @@ describe("24. Interactive SVG Venue Map Canvas & Career Journey Navigator (#53, 
     assert.ok(htmlDrawer.includes('data-testid="drawer-journey-tv-toggle"'), "Must render drawer TV toggle");
     assert.ok(htmlDrawer.includes('data-testid="journey-drawer-confirm-btn"'), "Must render drawer confirm apply button");
 
-    // Sequential playback: auto-plays from the origin, single active leg, no corridor aggregation
+    // Sequential playback: starts paused at the origin, single active leg, no corridor aggregation
     assert.ok(htmlJourneyMode.includes('data-testid="journey-playback-controls"'), "Must render journey playback transport bar");
     assert.ok(htmlJourneyMode.includes('data-testid="journey-playback-toggle"'), "Must render play/pause toggle");
     assert.ok(htmlJourneyMode.includes('data-testid="journey-playback-scrub"'), "Must render draggable timeline");
@@ -262,7 +262,7 @@ describe("24. Interactive SVG Venue Map Canvas & Career Journey Navigator (#53, 
     assert.ok(!htmlJourneyMode.includes('data-leg-state="footprint"'), "Playback must start with no travelled legs drawn");
     assert.ok(!htmlJourneyMode.includes('data-testid="journey-vehicle-marker"'), "No vehicle marker before the first leg is drawn");
     assert.ok(!htmlJourneyMode.includes("data-corridor"), "Corridor aggregation must be removed in favour of sequential playback");
-    assert.ok(htmlJourneyMode.includes('data-playing="true"'), "Playback must auto-play on entering the journey page");
+    assert.ok(htmlJourneyMode.includes('data-playing="false"'), "Playback must start paused on entering the journey page");
     assert.ok(htmlJourneyMode.includes('viewBox="0 0 800 560"'), "Journey must start in national overview view (0 0 800 560) by default");
     assert.ok(!htmlJourneyMode.includes("rotateX"), "Must not use blurry CSS 3D rotateX which causes texture rasterization blur");
     assert.ok(
