@@ -67,3 +67,9 @@ When proposing and testing public seams during `/tdd` or `/implement`, target th
 | `ranking.js` | `computeRankings` | `tests/pipeline/ranking.test.js`, `tests/ui/ranking-page.test.js`, `tests/ui/ranking-route.test.js` |
 | `pwa.js` | `registerServiceWorker`, `unregisterServiceWorkers`, `subscribeUpdateAvailable`, `applyServiceWorkerUpdate` | `tests/invariants/pwa-invariants.test.js`, `tests/ui/update-notification-toast.test.js` |
 | `components/slips/SongJacketHoverCard.jsx` | `SongJacketHoverCard` (ADR-0145) | `tests/ui/song-jacket-hover-card.test.js` |
+| `components/slips/ShowSlip.jsx` | `ShowSlip` (ticket slip & TV episode headline display) | `tests/ui/show-slip.test.js` |
+| `components/navigators/ShowNavigator.jsx` | `ShowNavigator` (archive show & unit capsule selector) | `tests/ui/` |
+
+- **Dynamic Live-Fixture Assertions**: Tests running against live `data/` fixtures (`allShows`, `allVenues`, `allSongs`) must derive expected counts dynamically from the loaded dataset (e.g. `allShows.filter(...)`) rather than hardcoding global totals that break when new valid records are added. Reserve exact hardcoded counts for closed historical units (e.g. a completed tour's show count).
+
+Data validation and agent utility scripts live under `site/scripts/` (e.g. `site/scripts/validate-data.mjs`, `site/scripts/sync-data.mjs`, `site/scripts/fetch-text.mjs`).

@@ -14,15 +14,16 @@ Repository conventions and navigation pointers for AI agents working in this cod
 - **Test Harness & Modular Suites**: Consult [`site/tests/`](./site/tests/) and [`CODING_STANDARDS.md`](./CODING_STANDARDS.md#6-core-domain-seams--test-map-tdd--implement) for the 3-tier test suites (`pipeline/`, `invariants/`, `ui/`) and headless Vite SSR harness (`site/tests/helpers/vite-server.js`).
 - **CI/CD & Runtime**: Consult [`.github/workflows/ci.yml`](./.github/workflows/ci.yml) and [`.nvmrc`](./.nvmrc) for Node `>= 22.13.0` / pnpm 11 alignment.
 - **Issue Tracking**: Consult GitHub Issues via `gh issue view <number>` or `gh issue list` for feature specs and task acceptance criteria.
+- **Data Audit Exclusions**: Consult [`docs/reports/cancelled-appearances.md`](./docs/reports/cancelled-appearances.md) before flagging missing shows during external source audits.
 
 ## Multi-Agent Workspace Hygiene
 
 Multiple autonomous agents frequently operate concurrently in this repository:
 
-1. **Scratch Files Isolation**: Write all exploratory or temporary scripts to `scratch/` or `.scratch/` (both are git-ignored). Never commit or scatter ad-hoc verification scripts in repository root.
+1. **Scratch Files Isolation**: Write exploratory scripts (`.scratch/*.mjs`) to `scratch/` or `.scratch/` (git-ignored). Write generated JSON/text outputs from `node` scripts to `<appDataDir>/brain/<conversation-id>/scratch/` (Windows sandbox blocks `fs.writeFileSync` into `.scratch/` with `EPERM`). Keep repository root clean.
 2. **Concurrent File Protection & Scoped Verification**: Never delete, restore, or modify working tree files outside your explicit task scope (e.g. data JSON files under active audit or other agents' in-flight components). When running verification commands (`pnpm check`, `pnpm test`), if test failures occur in foreign files currently modified by concurrent agents, strictly refrain from fixing or touching those foreign files; verify your own scoped test suites (`node --test <task-test>`) and note the foreign failures in your report.
 3. **Task-Scoped Git Operations & Worktree Isolation**: When multiple agents edit shared UI or locale files concurrently, prefer an isolated `git worktree` (or stage only task-specific hunks). Always inspect git diff with `git --no-pager diff -- <path>` rather than unstaging or wiping untracked files wholesale, preventing Windows terminal pager hangs.
-4. **Data Inspection & Script Hygiene**: Use scripts under `site/scripts/` or write one-off `.mjs` / `.py` scripts to `.scratch/` instead of PowerShell `ConvertFrom-Json` or complex inline `node -e` / `python -c` quoting. For codebase searches, prefer `git grep -n "<pattern>" -- <path>` over PowerShell `Select-String`. **Windows PowerShell 5.1**: chain commands with `;` (never `&&`, which is a syntax error). Pass clean command strings without outer escaped quotes, and use native file tools (`write_file`) or `New-Item -ItemType Directory -Force -Path <path>` instead of `mkdir -p`.
+4. **Data Inspection & Script Hygiene**: Put exploratory/one-off scripts in `.scratch/*.mjs` (run via `node .scratch/<script>.mjs`) rather than inline `node -e` or PowerShell `ConvertFrom-Json`. Use `git grep -n "<pattern>" -- <path>` for codebase searches. In **Windows PowerShell 5.1**, chain commands with `;`, slice output with `Select-Object -First/-Last N`, pass unescaped command strings, and create files/directories with native tools (`write_file`, `New-Item -ItemType Directory -Force -Path <path>`).
 5. **Vite SSR & Scratch Scripts**: Execute ad-hoc snippets importing frontend modules (e.g. `domain.js`) via `pnpm eval "<code>"` or `site/scripts/eval.mjs` (which injects `loadModule('/src/lib/domain.js')` and `readJson('../data/...')`), avoiding Node.js strict ESM JSON attribute errors (`ERR_IMPORT_ATTRIBUTE_MISSING`).
 6. **pnpm Monorepo Workspace Topology (ADR-0103)**: Repository uses root `pnpm-workspace.yaml` targeting `packages: ['site']` with root `pnpm-lock.yaml`. Invoke workspace scripts from root using `pnpm --filter ./site <cmd>`.
 7. **Staging Hygiene Guardrail**: Run `pnpm check:staged` before committing to verify no concurrent agent files (`data/events/*.json`, `docs/reports/*.md`) were mistakenly staged, ADR indexing integrity, LF line-ending normalization, and banned/deprecated domain terms compliance. ADRs in `docs/adr/` are immutable historical records; never mutate accepted decision text in-place.
@@ -34,8 +35,8 @@ Multiple autonomous agents frequently operate concurrently in this repository:
 All workspace scripts live in [`site/package.json`](./site/package.json) and root [`package.json`](./package.json):
 
 - **Inner loop**: `pnpm check:fast` (`oxlint` + `check-i18n` + `test:invariants` in <200ms).
-- **Pre-commit gate**: `pnpm check` (full lint, `pnpm sync`, `check-i18n`, and all `pipeline`/`invariants`/`ui` suites) + `pnpm check:staged`.
-- **Windows sandbox**: Always run `git add`, `git commit`, `git push`, and `pnpm sync` directly with `BypassSandbox: true` (sandbox blocks `.git/index.lock` and `site/src/data/` writes with `EPERM`/`Permission denied`).
+- **Pre-commit gate**: `pnpm check` (full lint, `check-i18n`, and all `pipeline`/`invariants`/`ui` suites; run `pnpm sync` first when `data/` changed) + `pnpm check:staged` (see [`site/scripts/check-staged.mjs`](./site/scripts/check-staged.mjs) for `STAGED_ALLOW_EVENTS` allowlist flags).
+- **Windows sandbox**: Always run `git add`, `git commit`, `git push`, `pnpm sync`, and workspace `Remove-Item` deletions with `BypassSandbox: true` (sandbox blocks `.git/index.lock`, `site/src/data/` writes, and file deletions with `EPERM`/`Access denied`).
 
 ## Agent skills
 
