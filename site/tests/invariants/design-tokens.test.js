@@ -445,4 +445,42 @@ describe("9. Design Token Invariants & Dedicated URL Routes Seam (DESIGN.md, ADR
       `Found forbidden terms or dimension leaks in site/src/:\n${violations.join("\n")}`
     );
   });
+
+  it("prohibits oversized SaaS rounded corners (rounded-xl/2xl/3xl) in new components (DESIGN.md)", () => {
+    const componentsDir = path.resolve(import.meta.dirname, "../../src/components");
+    const legacyAllowlist = new Set([
+      "CalendarModal.jsx",
+      "MemorialCardModal.jsx",
+      "common/UpdateNotificationToast.jsx",
+    ]);
+
+    function walkJsx(dir) {
+      let results = [];
+      for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+        const fullPath = path.join(dir, entry.name);
+        if (entry.isDirectory()) {
+          results = results.concat(walkJsx(fullPath));
+        } else if (entry.name.endsWith(".jsx")) {
+          results.push(fullPath);
+        }
+      }
+      return results;
+    }
+
+    const violations = [];
+    for (const file of walkJsx(componentsDir)) {
+      const rel = path.relative(componentsDir, file).replace(/\\/g, "/");
+      if (legacyAllowlist.has(rel)) continue;
+      const content = fs.readFileSync(file, "utf8");
+      if (/\brounded-(?:xl|2xl|3xl)\b/.test(content)) {
+        violations.push(rel);
+      }
+    }
+
+    assert.deepEqual(
+      violations,
+      [],
+      `Components must adhere to ticket rounded-[3px]/rounded-full discipline (DESIGN.md). Found rounded-xl/2xl/3xl in: ${violations.join(", ")}`
+    );
+  });
 });

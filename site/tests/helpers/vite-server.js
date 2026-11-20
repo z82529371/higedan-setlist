@@ -7,6 +7,7 @@
  */
 
 import { cpSync, existsSync, mkdirSync, readdirSync, rmSync } from "node:fs";
+import os from "node:os";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -55,10 +56,18 @@ function ensureSiteDataSynced() {
 export async function getViteServer() {
   if (!serverInstance) {
     ensureSiteDataSynced();
-    const vite = await import("vite");
+    const [{ default: react }, vite] = await Promise.all([
+      import("@vitejs/plugin-react"),
+      import("vite"),
+    ]);
     serverInstance = await vite.createServer({
+      configFile: false,
       root: siteRoot,
+      cacheDir: path.join(os.tmpdir(), "higedan-vite-ssr-cache"),
+      plugins: [react()],
+      esbuild: { jsx: "automatic" },
       server: { middlewareMode: true, watch: null, hmr: false, ws: false },
+      optimizeDeps: { noDiscovery: true },
       appType: "custom",
     });
     if (serverInstance.watcher) {
