@@ -153,6 +153,7 @@ export const dictJa = {
   slips: {
     stageSetlistRunSheet: "OFFICIAL HIGEDAN DISM // STAGE SETLIST RUN SHEET",
     tourConsensusMasterSheet: "OFFICIAL HIGEDAN DISM // TOUR CONSENSUS MASTER SHEET",
+    officialTourSite: "公式特設サイト",
     allAccessTourOverview: "ALL ACCESS TOUR OVERVIEW",
     modeTour: "ツアー概要",
     modeShow: "公演チケット",
@@ -585,6 +586,7 @@ export const dictJa = {
     spotifyUnreleased: "配信未解禁",
     collapseStage: "閉じる ▴",
     expandStage: "展開 ▾",
+    playVideo: "クリックして動画を再生",
   },
   showExtra: {
     setlistAria: "公演セットリスト",
@@ -708,6 +710,12 @@ export const dictJa = {
   landing: {
     instantSearchAria: "リアルタイム検索",
     archiveSpanLabel: "収録期間",
+    shuffleJackets: "ジャケットを入れ替え",
+    ticketCard: {
+      nextTicket: "次の公演を引く",
+      openSetlist: "この公演を見る",
+      moreSongs: "ほか全 {count} 曲",
+    },
     hotExploration: "人気の探索：",
     hotPrompts: {
       latestTourFallback: "最新ツアー",

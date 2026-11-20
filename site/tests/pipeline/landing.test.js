@@ -5,6 +5,7 @@ import {
   formatLatestTourPromptLabel,
   findPlayableShowPool,
   pickRandomPlayableShow,
+  buildFeaturedTicketDeck,
 } from "../../src/lib/landing.js";
 
 describe("Landing page domain helpers (site/src/lib/landing.js)", () => {
@@ -107,6 +108,64 @@ describe("Landing page domain helpers (site/src/lib/landing.js)", () => {
       });
 
       assert.equal(pickRandomPlayableShow([{ id: "empty", shows: [{ id: "stub-1" }] }]), null);
+    });
+  });
+
+  describe("buildFeaturedTicketDeck", () => {
+    it("prioritizes themed tours newest-first, extracts first 3 non-interlude preview tracks, and excludes stub shows", () => {
+      const units = [
+        {
+          id: "plain-event",
+          title: "Plain Festival",
+          type: "音樂祭",
+          shows: [{ id: "ev-1", date: "2026-09-01", setlist: [{ songId: "pretender" }] }],
+        },
+        {
+          id: "asia-tour-2026",
+          title: "OFFICIAL HIGE DANDISM ASIA TOUR 2026",
+          type: "巡演專場",
+          theme: { light: "#d96b0b", lightInk: "#000000", dark: "#f08524", darkInk: "#000000" },
+          shows: [
+            {
+              id: "asia-tour-2026-taipei-0830",
+              date: "2026-08-30",
+              city: "台北",
+              venue: "台北小巨蛋",
+              setlist: [
+                { type: "interlude", title: "SE" },
+                { songId: "pretender" },
+                { songId: "subtitle" },
+                { songId: "cry-baby" },
+                { songId: "same-blue" },
+              ],
+            },
+            {
+              id: "asia-tour-2026-bangkok-0906",
+              date: "2026-09-06",
+              city: "曼谷",
+              venue: "UOB LIVE",
+              setlist: [{ songId: "pretender" }],
+            },
+            { id: "asia-stub", date: "2026-08-23", setlist: [] },
+          ],
+        },
+      ];
+
+      const deck = buildFeaturedTicketDeck(units, {
+        pretender: "Pretender",
+        subtitle: "Subtitle",
+        "cry-baby": "Cry Baby",
+      });
+
+      assert.equal(deck.length, 2);
+      assert.equal(deck[0].unitId, "asia-tour-2026");
+      assert.equal(deck[0].showId, "asia-tour-2026-taipei-0830");
+      assert.equal(deck[0].tourLabel, "ASIA TOUR 2026");
+      assert.equal(deck[0].totalTracks, 4);
+      assert.deepEqual(
+        deck[0].previewTracks.map((t) => `${t.cue}:${t.title}`),
+        ["M01:Pretender", "M02:Subtitle", "M03:Cry Baby"]
+      );
     });
   });
 });

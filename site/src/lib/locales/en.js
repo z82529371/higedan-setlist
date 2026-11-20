@@ -153,6 +153,7 @@ export const dictEn = {
   slips: {
     stageSetlistRunSheet: "OFFICIAL HIGEDAN DISM // STAGE SETLIST RUN SHEET",
     tourConsensusMasterSheet: "OFFICIAL HIGEDAN DISM // TOUR CONSENSUS MASTER SHEET",
+    officialTourSite: "Official Site",
     allAccessTourOverview: "ALL ACCESS TOUR OVERVIEW",
     modeTour: "Tour Consensus",
     modeShow: "Show Slip",
@@ -585,6 +586,7 @@ export const dictEn = {
     spotifyUnreleased: "Unreleased on Streaming",
     collapseStage: "Collapse ▴",
     expandStage: "Expand ▾",
+    playVideo: "Click to play video",
   },
   showExtra: {
     setlistAria: "Show setlist",
@@ -708,6 +710,12 @@ export const dictEn = {
   landing: {
     instantSearchAria: "Instant Search",
     archiveSpanLabel: "Archive Span",
+    shuffleJackets: "Shuffle Jackets",
+    ticketCard: {
+      nextTicket: "Next Ticket",
+      openSetlist: "Open Setlist",
+      moreSongs: "+ {count} tracks total",
+    },
     hotExploration: "Trending:",
     hotPrompts: {
       latestTourFallback: "Latest Tour",

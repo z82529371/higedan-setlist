@@ -153,6 +153,7 @@ export const dictKo = {
   slips: {
     stageSetlistRunSheet: "OFFICIAL HIGEDAN DISM // STAGE SETLIST RUN SHEET",
     tourConsensusMasterSheet: "OFFICIAL HIGEDAN DISM // TOUR CONSENSUS MASTER SHEET",
+    officialTourSite: "공식 특설 사이트",
     allAccessTourOverview: "ALL ACCESS TOUR OVERVIEW",
     modeTour: "투어 총람",
     modeShow: "공연 티켓",
@@ -585,6 +586,7 @@ export const dictKo = {
     spotifyUnreleased: "스트리밍 미발매",
     collapseStage: "접기 ▴",
     expandStage: "펼치기 ▾",
+    playVideo: "클릭하여 영상 재생",
   },
   showExtra: {
     setlistAria: "공연 셋리스트",
@@ -708,6 +710,12 @@ export const dictKo = {
   landing: {
     instantSearchAria: "실시간 검색",
     archiveSpanLabel: "수록 기간",
+    shuffleJackets: "재킷 새로고침",
+    ticketCard: {
+      nextTicket: "다음 티켓 뽑기",
+      openSetlist: "세트리스트 보기",
+      moreSongs: "외 총 {count}곡",
+    },
     hotExploration: "인기 탐색:",
     hotPrompts: {
       latestTourFallback: "최신 투어",

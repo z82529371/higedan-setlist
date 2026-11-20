@@ -153,6 +153,7 @@ export const dictZhTw = {
   slips: {
     stageSetlistRunSheet: "OFFICIAL HIGEDAN DISM // STAGE SETLIST RUN SHEET",
     tourConsensusMasterSheet: "OFFICIAL HIGEDAN DISM // TOUR CONSENSUS MASTER SHEET",
+    officialTourSite: "官方特設頁",
     allAccessTourOverview: "ALL ACCESS TOUR OVERVIEW",
     modeTour: "巡演總覽",
     modeShow: "單場票根",
@@ -585,6 +586,7 @@ export const dictZhTw = {
     spotifyUnreleased: "串流未上架",
     collapseStage: "收合 ▴",
     expandStage: "展開 ▾",
+    playVideo: "點擊播放影片",
   },
   showExtra: {
     setlistAria: "場次曲目清單",
@@ -708,6 +710,12 @@ export const dictZhTw = {
   landing: {
     instantSearchAria: "即時檢索",
     archiveSpanLabel: "收錄年份",
+    shuffleJackets: "換一批唱片封套",
+    ticketCard: {
+      nextTicket: "抽換下一張",
+      openSetlist: "開啟這場歌單",
+      moreSongs: "等共 {count} 首演出曲目",
+    },
     hotExploration: "熱門探索：",
     hotPrompts: {
       latestTourFallback: "最新巡演",
