@@ -24,14 +24,14 @@ export const queryTabClass = (isOn) =>
 export const filterPillClass = (isActive) =>
   `appearance-none rounded border-[1.5px] px-[14px] py-[6px] text-[13px] font-semibold cursor-pointer whitespace-nowrap transition-colors motion-reduce:transition-none focus-visible:outline-[3px] focus-visible:outline-pool focus-visible:outline-offset-2 touch-stamp ${
     isActive
-      ? "bg-band text-band-ink border-band shadow-[2px_2px_0_#d5a200] font-bold"
+      ? "bg-band text-band-ink border-band shadow-[2px_2px_0_var(--color-band)] font-bold"
       : "border-line bg-paper text-ink hover:bg-pool-wash hover:border-pool hover:text-pool"
   }`;
 
 export const unitPillClass = (isOn, isEmpty = false) =>
   `appearance-none rounded-full border px-3 py-1 text-[12px] font-semibold cursor-pointer transition-colors motion-reduce:transition-none focus-visible:outline-[3px] focus-visible:outline-pool focus-visible:outline-offset-2 touch-stamp ${
     isOn
-      ? "bg-tape text-ink border-ink font-bold shadow-[1px_1px_0_var(--color-ink)]"
+      ? "bg-tape text-band-ink border-ink font-bold shadow-[1px_1px_0_var(--color-ink)]"
       : isEmpty
       ? "border-[1.5px] border-dashed border-muted/80 bg-line-soft/80 text-muted hover:border-ink hover:text-ink hover:bg-pool-wash"
       : "border-line bg-card text-ink hover:border-ink hover:bg-pool-wash"
@@ -76,12 +76,12 @@ export const KIND_BADGE_CLASS = (k) =>
     ? "bg-[#fbe9e6] text-request"
     : k === "satoshi-solo"
     ? "bg-[#d8efe8] text-[#0b5f50]"
-    : "bg-tape text-ink";
+    : "bg-tape text-band-ink";
 
 export const DRAWER_LINK = (isOn) =>
   `flex w-full items-center justify-between gap-3 px-[14px] py-[10px] text-left no-underline transition-colors motion-reduce:transition-none focus-visible:outline-[3px] focus-visible:outline-pool focus-visible:outline-offset-2 ${
     isOn
-      ? "bg-band text-band-ink font-bold shadow-[2px_2px_0_#d5a200]"
+      ? "bg-band text-band-ink font-bold shadow-[2px_2px_0_var(--color-band)]"
       : "text-ink hover:bg-pool-wash hover:text-pool"
   }`;
 

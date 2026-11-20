@@ -29,7 +29,7 @@ export const SINGLE_EP_PROVENANCE = {
   "laughter": { type: "digital", index: "4th", title: "Laughter", year: "2020", album: "Editorial", releaseId: "digital-laughter" },
   "cry-baby": { type: "digital", index: "5th", title: "Cry Baby", year: "2021", album: "Editorial", releaseId: "digital-cry-baby" },
   "anarchy": { type: "digital", index: "6th", title: "Anarchy", year: "2022", album: "Rejoice", releaseId: "digital-anarchy" },
-  "anarchy-rejoice-ver": { type: "digital", index: "6th", title: "Anarchy", year: "2022", album: "Rejoice", releaseId: "digital-anarchy" },
+  "anarchy-rejoice-ver": { type: "digital", index: "6th", title: "Anarchy", year: "2022", album: "Rejoice", releaseId: "album-rejoice" },
   "mixed-nuts": { type: "dual_ep", digitalIndex: "7th", epIndex: "4th", title: "ミックスナッツ", epTitle: "ミックスナッツ EP", year: "2022", album: "Rejoice", releaseId: "ep-mixed-nuts" },
   "subtitle": { type: "digital", index: "8th", title: "Subtitle", year: "2022", album: "Rejoice", releaseId: "digital-subtitle" },
   "white-noise": { type: "digital", index: "9th", title: "ホワイトノイズ", year: "2023", album: "Rejoice", releaseId: "digital-white-noise" },
@@ -49,8 +49,13 @@ export const SINGLE_EP_PROVENANCE = {
   "natsu-moyou-no-neko": { type: "ep", index: "3rd", title: "HELLO EP", year: "2020", album: "Editorial", releaseId: "ep-hello" },
   "hakan": { type: "ep", index: "4th", title: "ミックスナッツ EP", year: "2022", album: "Rejoice", releaseId: "ep-mixed-nuts" },
   "choral-a": { type: "ep", index: "4th", title: "ミックスナッツ EP", year: "2022", album: "Rejoice", releaseId: "ep-mixed-nuts" },
+  // Digital EP
   "lady": { type: "digital_ep", index: "Digital 1st", title: "LADY", year: "2017", album: "エスカパレード", releaseId: "ep-lady" },
   "driver": { type: "digital_ep", index: "Digital 1st", title: "LADY", year: "2017", album: "エスカパレード", releaseId: "ep-lady" },
+
+  // Collaboration Singles
+  "koi-no-saichu": { type: "collab", index: "Collab", title: "恋の最chu! / 不器用な二人で", year: "2015", album: null, releaseId: "single-koi-no-saichu" },
+  "bukiyou-na-futari-de": { type: "collab", index: "Collab", title: "恋の最chu! / 不器用な二人で", year: "2015", album: null, releaseId: "single-koi-no-saichu" },
 };
 
 /**
@@ -125,6 +130,8 @@ export function getSongReleaseProvenance(songId, locale = "zh-TW") {
       lead = `${prov.digitalIndex} Digital Single / ${prov.epIndex} EP${openQuote}${prov.epTitle}${closeQuote}(${prov.year})`;
     } else if (prov.type === "digital_ep") {
       lead = `${prov.index} EP${openQuote}${prov.title}${closeQuote}(${prov.year})`;
+    } else if (prov.type === "collab") {
+      lead = `Collab Single${openQuote}${prov.title}${closeQuote}(${prov.year})`;
     }
 
     if (prov.album) {

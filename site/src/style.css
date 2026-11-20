@@ -77,13 +77,13 @@
 }
 
 ::selection {
-  background: #d19f00;
-  color: #000000;
+  background: var(--color-band);
+  color: var(--color-band-ink);
 }
 
 ::-moz-selection {
-  background: #d19f00;
-  color: #000000;
+  background: var(--color-band);
+  color: var(--color-band-ink);
 }
 
 html[data-theme="dark"] {
@@ -153,18 +153,26 @@ html[data-theme="dark"] {
 /* 日系手撕和紙膠帶（Serrated Washi Tape, ADR-0089） */
 .washi-tape {
   background-color: var(--color-band);
-  background-image: repeating-linear-gradient(
-    45deg,
-    rgba(255, 255, 255, 0.16) 0px,
-    rgba(255, 255, 255, 0.16) 2px,
-    transparent 2px,
-    transparent 5px
-  );
+  transition: background-color 220ms ease;
+  background-image:
+    repeating-linear-gradient(
+      45deg,
+      rgba(255, 255, 255, 0.16) 0px,
+      rgba(255, 255, 255, 0.16) 2px,
+      transparent 2px,
+      transparent 5px
+    ),
+    var(--color-tape-gradient, linear-gradient(transparent, transparent));
   clip-path: polygon(
     0% 0%, 4px 10%, 0% 20%, 4px 30%, 0% 40%, 4px 50%, 0% 60%, 4px 70%, 0% 80%, 4px 90%, 0% 100%,
     100% 100%, calc(100% - 4px) 90%, 100% 80%, calc(100% - 4px) 70%, 100% 60%, calc(100% - 4px) 50%, 100% 40%, calc(100% - 4px) 30%, 100% 20%, calc(100% - 4px) 10%, 100% 0%
   );
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.24));
+}
+
+html[data-era-gradient="active"] .bg-band,
+html[data-era-gradient="active"] .bg-tape {
+  background-image: var(--color-tape-gradient);
 }
 
 /* 日系手感紙質有機微紋理（Tactile Archival Paper Grain, ADR-0090） */

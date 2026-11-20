@@ -144,14 +144,29 @@ export function TourSlip({
         </div>
 
         {/* Level 1: Artist branding & Category badge */}
-        <div className="flex items-center justify-between gap-2">
+        <div className="flex flex-wrap items-center justify-between gap-2">
           <div className="flex items-center gap-1.5 font-mono text-[12px] font-bold tracking-[0.2em] text-muted">
             <span className="inline-block h-2 w-2 rounded-full border border-ink bg-tape" aria-hidden="true" />
             Official 髭男 dism
           </div>
-          <span className="inline-flex items-center rounded-[3px] border border-ink/30 bg-band/15 px-2 py-0.5 font-mono text-xs font-bold text-band-ink">
-            {t(`categories.${getUnitTypeLabel(tour)}`, getUnitTypeLabel(tour))}
-          </span>
+          <div className="flex flex-wrap items-center gap-1.5">
+            {tour.officialUrl && (
+              <a
+                href={tour.officialUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                data-testid="official-tour-site-link"
+                className="inline-flex items-center gap-1 rounded-[3px] border border-ink/30 bg-card hover:bg-band hover:text-band-ink hover:border-ink px-2 py-0.5 font-mono text-xs font-bold text-ink no-underline transition-colors touch-stamp"
+              >
+                <span aria-hidden="true">🌐</span>
+                <span>{t("slips.officialTourSite", "官方特設頁")}</span>
+                <span aria-hidden="true">↗</span>
+              </a>
+            )}
+            <span className="inline-flex items-center rounded-[3px] border border-ink/30 bg-band/15 px-2 py-0.5 font-mono text-xs font-bold text-ink">
+              {t(`categories.${getUnitTypeLabel(tour)}`, getUnitTypeLabel(tour))}
+            </span>
+          </div>
         </div>
 
         {/* Level 2: Tour Full Headline */}
@@ -551,7 +566,7 @@ export function TourSlip({
 
                   <div className="min-w-0 flex-1 space-y-0.5">
                     <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 font-mono text-xs">
-                      <span className="font-bold text-ink group-hover:text-band-ink transition-colors">
+                      <span className="font-bold text-ink group-hover:text-band transition-colors">
                         {showDate(stop, locale)}
                       </span>
                       {stop.isFirst && (
@@ -560,7 +575,7 @@ export function TourSlip({
                         </span>
                       )}
                       {stop.isFinal && (
-                        <span className="inline-flex items-center rounded px-1.5 py-0.5 text-[10px] font-mono font-bold bg-band/15 text-band-ink border border-band/50">
+                        <span className="inline-flex items-center rounded px-1.5 py-0.5 text-[10px] font-mono font-bold bg-band/15 text-ink border border-band/50">
                           {t("slips.tourFinale", "千秋樂")}
                         </span>
                       )}

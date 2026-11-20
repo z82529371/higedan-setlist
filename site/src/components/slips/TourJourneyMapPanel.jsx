@@ -50,7 +50,7 @@ export function TourJourneyMapPanel({
               data-testid="tour-start-stop"
               className="inline-flex items-center gap-1 rounded bg-tape/30 px-2 py-0.5 border border-ink/20 font-bold text-ink"
             >
-              <span className="text-band-ink font-extrabold">{t("slips.tour.routeStart", "首站")}:</span>
+              <span className="text-ink font-extrabold">{t("slips.tour.routeStart", "首站")}:</span>
               <span>{firstStop.date} {localizeVenue(firstStop.venue)}</span>
             </span>
           )}

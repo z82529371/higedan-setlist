@@ -5,7 +5,12 @@ import { TicketBookPage } from "./components/ticket-book/TicketBookPage.jsx";
 import { JourneyPage } from "./components/journey/index.js";
 import { RankingPage } from "./components/ranking/RankingPage.jsx";
 import { ReleasesPage } from "./components/releases/ReleasesPage.jsx";
-import { useArchiveFilter, useArchiveRoute } from "./hooks/index.js";
+import { useArchiveFilter, useArchiveRoute, useEraTheme } from "./hooks/index.js";
+import { resolveRouteEraTheme } from "./lib/tour-theme.js";
+import { buildDiscographyIndex } from "./lib/discography.js";
+import { getSongReleaseId } from "./lib/song-release.js";
+import { getSongCover } from "./lib/song-spotify.js";
+import discographyData from "./data/discography.json";
 import { I18nProvider } from "./lib/i18n.jsx";
 import LandingHero from "./components/LandingHero.jsx";
 import CalendarModal from "./components/CalendarModal.jsx";
@@ -47,6 +52,31 @@ export function AppContent({ probeRoute } = {}) {
     unitIdByShowId,
     filterState,
   });
+
+  const discographyIndex = useMemo(() => buildDiscographyIndex(discographyData), []);
+
+  // 3. Tour Era & Release Accent theming (ADR-0149, ADR-0150)
+  const eraTheme = useMemo(
+    () =>
+      resolveRouteEraTheme(routeState, {
+        unitData,
+        unitIdByShowId,
+        discographyIndex,
+        getSongReleaseIdFn: getSongReleaseId,
+        getSongCoverFn: getSongCover,
+      }),
+    [
+      routeState.viewMode,
+      routeState.tab,
+      routeState.selUnitId,
+      routeState.selShow,
+      routeState.selSong,
+      unitData,
+      unitIdByShowId,
+      discographyIndex,
+    ]
+  );
+  useEraTheme(eraTheme);
 
   if (probeRoute) {
     probeRoute(routeState);

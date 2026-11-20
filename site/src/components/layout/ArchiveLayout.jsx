@@ -541,7 +541,7 @@ export function ArchiveLayout({
             {t("footer.contactLabel", "資料勘誤與反饋：")}
             <a
               href={`mailto:${ARCHIVE_FEEDBACK_EMAIL}?subject=${encodeURIComponent(t("footer.contactSubject", "[Official HIGEDAN Archive] 資料勘誤與意見反饋"))}`}
-              className="text-ink underline hover:text-band-ink transition-colors"
+              className="text-ink underline hover:text-band transition-colors"
             >
               {ARCHIVE_FEEDBACK_EMAIL}
             </a>
@@ -552,7 +552,7 @@ export function ArchiveLayout({
               href={ARCHIVE_AUTHOR_INSTAGRAM_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-ink underline hover:text-band-ink transition-colors"
+              className="text-ink underline hover:text-band transition-colors"
             >
               @{ARCHIVE_AUTHOR_INSTAGRAM}
             </a>

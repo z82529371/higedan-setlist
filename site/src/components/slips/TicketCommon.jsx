@@ -116,7 +116,7 @@ export function DualModeCapsuleToggle({
 export const songFilterPillClass = (isActive) =>
   `appearance-none w-full flex items-center justify-center gap-1 rounded border-[1.5px] px-1.5 py-[5px] sm:px-2 text-[12px] font-semibold cursor-pointer whitespace-nowrap transition-colors motion-reduce:transition-none text-center focus-visible:outline-[2px] focus-visible:outline-pool focus-visible:outline-offset-2 ${
     isActive
-      ? "bg-band text-band-ink border-band shadow-[1px_1px_0_#d5a200] font-bold"
+      ? "bg-band text-band-ink border-band shadow-[1px_1px_0_var(--color-band)] font-bold"
       : "border-line bg-paper text-ink hover:bg-pool-wash hover:border-pool hover:text-pool"
   }`;
 

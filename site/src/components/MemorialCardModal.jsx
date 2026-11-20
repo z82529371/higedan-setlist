@@ -6,6 +6,7 @@ import { getKindArray, kindTabs } from "../lib/kind.js";
 import { useI18n, DICTIONARIES, DEFAULT_LOCALE, resolveTranslation } from "../lib/i18n.jsx";
 import { getStampById } from "../lib/stamps.js";
 import { getAttendedShow, recordAttendance, getSafeStorage, getTicketBookHolderName, setTicketBookHolderName } from "../lib/ticket-book.js";
+import { resolveMemorialAccent } from "../lib/tour-theme.js";
 
 // Session-level memory for theme choice across shows
 let sessionMemorialTheme = "vintage";
@@ -243,10 +244,11 @@ export function MemorialCardModal({
   const isVintage = theme === "vintage";
   const isWhite = theme === "white";
   const isNoir = theme === "noir";
+  const eraAccent = resolveMemorialAccent(unit, theme);
 
   const cardBgColor = isVintage ? "#fcfaf2" : isWhite ? "#ffffff" : "#111319";
 
-  const customKey = `${appliedHolderName}_${includeSeat ? appliedSeat : ""}_${includeNotes ? appliedNotes : ""}_${stampId}`;
+  const customKey = `${appliedHolderName}_${includeSeat ? appliedSeat : ""}_${includeNotes ? appliedNotes : ""}_${stampId}_${eraAccent?.accent || "default"}`;
   const currentImageKey = getMemorialImageKey(showKey, theme, locale, customKey);
   const currentImageUrl = imageUrls[currentImageKey] || initialImageUrl;
 
@@ -321,13 +323,22 @@ export function MemorialCardModal({
           <span
             className={`font-mono text-xs font-bold w-6 shrink-0 tabular-nums ${
               isEncore
-                ? "text-[#d19f00] font-extrabold w-7"
+                ? eraAccent
+                  ? "font-extrabold w-7"
+                  : "text-[#d19f00] font-extrabold w-7"
                 : isVintage
                 ? "text-[#78350f]"
                 : isWhite
                 ? "text-[#111827]"
+                : eraAccent
+                ? ""
                 : "text-[#d49a00]"
             }`}
+            style={
+              eraAccent && (isEncore || isNoir)
+                ? { color: eraAccent.textAccent }
+                : undefined
+            }
           >
             {p.cue}
           </span>
@@ -362,6 +373,8 @@ export function MemorialCardModal({
       ? "border-[#b91c1c] text-[#b91c1c]"
       : isWhite
       ? "border-[#dc2626] text-[#dc2626]"
+      : eraAccent
+      ? ""
       : "border-[#d49a00] text-[#d49a00]";
 
     const shapeBorder =
@@ -378,6 +391,11 @@ export function MemorialCardModal({
         data-testid="ticket-stamp"
         data-stamp-id={stampId}
         className={`w-14 h-14 flex flex-col items-center justify-center p-1 text-center font-bold shrink-0 select-none ${shapeBorder} ${currentStamp.rotationClass || "rotate-[-8deg]"} ${stampColorClass}`}
+        style={
+          isNoir && eraAccent
+            ? { borderColor: eraAccent.accent, color: eraAccent.textAccent }
+            : undefined
+        }
       >
         <span className="text-[7.5px] tracking-tighter leading-tight font-extrabold">{currentStamp.headerText || "HIGEDAN"}</span>
         <span className="text-[10px] leading-tight font-black">{stampText}</span>
@@ -590,15 +608,20 @@ export function MemorialCardModal({
                   '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans JP", sans-serif',
               }}
             >
-              {/* Top Golden / Tape Bar */}
+              {/* Top Era Accent / Golden Tape Bar */}
               <div
+                data-testid="memorial-top-accent-bar"
+                data-era-accent={eraAccent?.accent || ""}
                 className={`h-2.5 w-full ${
-                  isVintage
+                  eraAccent
+                    ? "border-b border-black/15"
+                    : isVintage
                     ? "bg-[#d49a00]/70 border-b border-[#b38000]/30"
                     : isWhite
                     ? "bg-[#d19f00] border-b border-[#b38000]/30"
                     : "bg-gradient-to-r from-[#d49a00] via-[#f59e0b] to-[#d49a00]"
                 }`}
+                style={eraAccent ? { backgroundColor: eraAccent.accent } : undefined}
               />
 
               <div className="p-5 space-y-4">
@@ -674,7 +697,12 @@ export function MemorialCardModal({
                       </>
                     )}
                   </div>
-                  <div className="font-mono text-xs font-bold text-[#d19f00] pt-0.5 whitespace-nowrap">
+                  <div
+                    className={`font-mono text-xs font-bold pt-0.5 whitespace-nowrap ${
+                      eraAccent ? "" : "text-[#d19f00]"
+                    }`}
+                    style={eraAccent ? { color: eraAccent.textAccent } : undefined}
+                  >
                     📅 {dateFormatted}
                   </div>
 

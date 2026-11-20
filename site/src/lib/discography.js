@@ -59,6 +59,7 @@ export function buildDiscographyIndex(discographyData = {}) {
   const byId = new Map();
   const byCategory = new Map();
   const bySongId = new Map();
+  const trackThemeBySongId = new Map();
 
   const ALBUM_LEAD_SONGS = {
     "album-traveler": "yesterday",
@@ -102,6 +103,9 @@ export function buildDiscographyIndex(discographyData = {}) {
       if (tr?.songId) {
         if (!bySongId.has(tr.songId)) {
           bySongId.set(tr.songId, item);
+        }
+        if (tr.theme && !trackThemeBySongId.has(tr.songId)) {
+          trackThemeBySongId.set(tr.songId, tr.theme);
         }
       }
     }
@@ -157,5 +161,6 @@ export function buildDiscographyIndex(discographyData = {}) {
       return byCategory.get(category) || [];
     },
     findReleaseForSong: (songId) => bySongId.get(songId) || null,
+    getTrackThemeForSong: (songId) => trackThemeBySongId.get(songId) || null,
   };
 }

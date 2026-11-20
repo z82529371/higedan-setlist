@@ -26,7 +26,7 @@ export function ArchiveHeader({
           </div>
         </div>
         <h1 className="m-0 mt-1.5 font-display text-[clamp(17px,4.5vw,44px)] font-extrabold leading-tight tracking-tight">
-          Official髭男dism <span className="font-bold text-band-ink">{t("header.brandTitle")}</span>
+          Official髭男dism <span className="font-bold text-ink">{t("header.brandTitle")}</span>
         </h1>
         <p className="mt-2 mb-0 text-[12px] sm:text-[14px] text-muted leading-relaxed">
           {t("header.archiveSubtitle")}

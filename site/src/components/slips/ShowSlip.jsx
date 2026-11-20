@@ -379,7 +379,20 @@ export function ShowSlip({
             <span className="inline-block h-2 w-2 rounded-full border border-ink bg-tape" aria-hidden="true" />
             Official 髭男 dism
           </div>
-          <div className="flex items-center gap-1.5">
+          <div className="flex flex-wrap items-center gap-1.5">
+            {ud.unit.officialUrl && (
+              <a
+                href={ud.unit.officialUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                data-testid="official-tour-site-link"
+                className="inline-flex items-center gap-1 rounded-[3px] border border-ink/30 bg-card hover:bg-band hover:text-band-ink hover:border-ink px-2 py-0.5 font-mono text-xs font-bold text-ink no-underline transition-colors touch-stamp"
+              >
+                <span aria-hidden="true">🌐</span>
+                <span>{t("slips.officialTourSite", "官方特設頁")}</span>
+                <span aria-hidden="true">↗</span>
+              </a>
+            )}
             {showReleases.length > 0 && (
               <button
                 type="button"
@@ -394,7 +407,7 @@ export function ShowSlip({
                 <span>{t("official_release_badge", "官方映像化")}</span>
               </button>
             )}
-            <span className="inline-flex items-center rounded-[3px] border border-ink/30 bg-band/15 px-2 py-0.5 font-mono text-xs font-bold text-band-ink">
+            <span className="inline-flex items-center rounded-[3px] border border-ink/30 bg-band/15 px-2 py-0.5 font-mono text-xs font-bold text-ink">
               {t(`categories.${ud.unit.type}`, ud.unit.type)}
             </span>
           </div>

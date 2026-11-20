@@ -107,7 +107,7 @@ export function SongSlip({ songId, trackShows, showById, unitData, onSelectShow,
     if (total === 0) return null;
     let label = t("slips.song.activeLive", "🎵 活躍演出曲"), cls = "text-ink bg-paper border-line-soft";
     if (total >= 100) { label = t("slips.song.coreStaple", "🔥 核心定番曲"); cls = "text-request bg-request-wash border-request/40"; }
-    else if (total >= 40) { label = t("slips.song.mainstayTrack", "⭐ 巡演主力曲"); cls = "text-band-ink bg-tape-tint border-ink/30"; }
+    else if (total >= 40) { label = t("slips.song.mainstayTrack", "⭐ 巡演主力曲"); cls = "text-ink bg-tape-tint border-ink/30"; }
     else if (total <= 3) { label = t("slips.song.phantomSpecial", "💎 幻之限定曲"); cls = "text-unreleased bg-unreleased-wash border-unreleased/40"; }
     else if (total <= 12) { label = t("slips.song.rareGem", "✨ 珍稀選曲"); cls = "text-solo bg-paper border-line-soft"; }
 
@@ -293,7 +293,7 @@ export function SongSlip({ songId, trackShows, showById, unitData, onSelectShow,
             <span className="rounded bg-paper px-2 py-0.5 font-mono text-[11px] font-bold text-muted border border-line-soft">
               {albumName}
             </span>
-            <span className="inline-flex items-center rounded-[3px] border border-ink/30 bg-band/15 px-2 py-0.5 font-mono text-xs font-bold text-band-ink">
+            <span className="inline-flex items-center rounded-[3px] border border-ink/30 bg-band/15 px-2 py-0.5 font-mono text-xs font-bold text-ink">
               SONG ARCHIVE
             </span>
           </div>
