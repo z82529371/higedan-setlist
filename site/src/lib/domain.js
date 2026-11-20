@@ -271,13 +271,15 @@ export function buildIndex() {
       showByIdMap.set(s.id, s);
       unitByShow.set(s.id, unit.id);
 
-      if (s.venue) {
+      const unitType = getUnitTypeLabel(unit);
+      const isNonVenueCategory = unitType === "線上直播" || unitType === "電視演出";
+      if (s.venue && !isNonVenueCategory) {
         if (!venueShowsMap.has(s.venue)) venueShowsMap.set(s.venue, []);
         venueShowsMap.get(s.venue).push({
           showId: s.id,
           unitId: unit.id,
           unitTitle: shortUnitTitle(unit),
-          unitType: getUnitTypeLabel(unit),
+          unitType,
           show: s,
         });
       }

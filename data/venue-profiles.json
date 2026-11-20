@@ -3876,25 +3876,6 @@
       "address": null
     },
     {
-      "id": "online-live-youtube-twitter-line",
-      "canonical": "線上直播 (YouTube / Twitter / LINE)",
-      "native": "配信ライブ (YouTube / Twitter / LINE)",
-      "region": "線上",
-      "prefecture": "線上",
-      "city": "線上",
-      "names": {
-        "zh-TW": "線上直播 (YouTube / Twitter / LINE)",
-        "ja": "配信ライブ (YouTube / Twitter / LINE)",
-        "en": "Livestream (YouTube / Twitter / LINE)",
-        "ko": "온라인 라이브 (YouTube / Twitter / LINE)"
-      },
-      "isVirtual": true,
-      "lat": null,
-      "lng": null,
-      "hubId": null,
-      "address": null
-    },
-    {
       "id": "橫濱-baysis",
       "canonical": "橫濱 BAYSIS",
       "native": "横浜BAYSIS",

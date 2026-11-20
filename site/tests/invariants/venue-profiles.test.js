@@ -120,11 +120,11 @@ describe("19. Venue Master Profiles & Invariant Gates (ADR-0111, ADR-0124)", () 
     );
   });
 
-  it("ensures 347 physical venues have valid WGS84 lat/lng (4 decimals) and hubId, and 2 livestream venues have isVirtual=true (ADR-0124)", () => {
+  it("ensures 347 physical venues have valid WGS84 lat/lng (4 decimals) and hubId, and 1 livestream venue has isVirtual=true (ADR-0124)", () => {
     const virtualVenues = profiles.filter((p) => p.isVirtual === true);
     const physicalVenues = profiles.filter((p) => !p.isVirtual);
 
-    assert.strictEqual(virtualVenues.length, 2, `Expected exactly 2 virtual venues, found ${virtualVenues.length}`);
+    assert.strictEqual(virtualVenues.length, 1, `Expected exactly 1 virtual venue, found ${virtualVenues.length}`);
     assert.strictEqual(physicalVenues.length, 347, `Expected 347 physical venues, found ${physicalVenues.length}`);
 
     for (const v of virtualVenues) {

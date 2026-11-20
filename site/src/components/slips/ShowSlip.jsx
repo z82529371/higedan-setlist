@@ -2,7 +2,7 @@ import { useState, useMemo, useRef } from "react";
 import { MemorialCardModal } from "../MemorialCardModal.jsx";
 import { KIND_TAB, SETLIST_ITEM, CUE_NO, TRACK_NOTE, SLIP_ARTICLE, SLIP_TAPE } from "../../lib/constants.js";
 import { getKindArray, primaryKind, kindTabs, slipClassFor, cueColorFor, songWeightFor, tabColorFor } from "../../lib/kind.js";
-import { songTitle, songUnreleased, showDate, getSongAlbum, formatShowTime, formatShowPlace, formatShowVenueCity } from "../../lib/domain.js";
+import { songTitle, songUnreleased, showDate, getSongAlbum, formatShowTime, formatShowPlace, formatShowVenueCity, getUnitTypeLabel } from "../../lib/domain.js";
 import { trackRoute } from "../../lib/track.js";
 import { assignCues } from "../../lib/resolve.js";
 import { getSourceLabel, TicketPerforationDivider, TicketBarcodeFooter } from "./TicketCommon.jsx";
@@ -419,6 +419,7 @@ export function ShowSlip({
         {/* Level 3: Specific Show Details Ticket Stub Box (Clean & Focused) */}
         <ShowMetadataBox
           s={s}
+          unitType={getUnitTypeLabel(ud.unit)}
           unitTitle={ud.unit.title}
           songCount={songCount}
           mainCount={mainCount}
