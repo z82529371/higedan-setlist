@@ -287,7 +287,44 @@ describe("20. PWA Offline Support & Web App Manifest Invariants (ADR-0119)", () 
       assert.ok(typeof controllerChangeHandler === "function", "Must listen to controllerchange");
 
       controllerChangeHandler();
+      controllerChangeHandler();
       assert.equal(reloaded, true, "Must reload window upon controllerchange");
+    });
+
+    it("reloads immediately when waiting worker is already activated or redundant, and falls back after timeout", () => {
+      let reloadCount = 0;
+      let posted = false;
+
+      // 1. Stale worker already activated -> immediate reload without postMessage
+      applyServiceWorkerUpdate({
+        window: { location: { reload: () => { reloadCount += 1; } } },
+        navigator: { serviceWorker: { addEventListener: () => {} } },
+        waitingWorker: { state: "activated", postMessage: () => { posted = true; } },
+      });
+      assert.equal(posted, false, "Must not post SKIP_WAITING to already-activated worker");
+      assert.equal(reloadCount, 1, "Must reload immediately for already-activated worker");
+
+      // 2. Fallback timeout triggers reload if controllerchange never fires
+      let scheduledCallback = null;
+      let scheduledDelay = null;
+      let fallbackReloads = 0;
+      applyServiceWorkerUpdate({
+        window: {
+          location: { reload: () => { fallbackReloads += 1; } },
+          setTimeout: (fn, delay) => {
+            scheduledCallback = fn;
+            scheduledDelay = delay;
+            return 42;
+          },
+          clearTimeout: () => {},
+        },
+        navigator: { serviceWorker: { addEventListener: () => {} } },
+        waitingWorker: { state: "installed", postMessage: () => {} },
+      });
+      assert.equal(fallbackReloads, 0, "Must wait for controllerchange or timeout before reloading");
+      assert.equal(scheduledDelay, 1500, "Fallback timer must be 1500ms");
+      scheduledCallback();
+      assert.equal(fallbackReloads, 1, "Fallback timer must reload once if controllerchange never fires");
     });
 
     it("guarantees registerServiceWorker runs safely in Node.js SSR without navigator defined", () => {

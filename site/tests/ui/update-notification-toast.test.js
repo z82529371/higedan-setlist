@@ -39,13 +39,13 @@ describe("29. PWA Version Update Notification Toast (ADR-0137)", () => {
     const { I18nProvider } = await loadModule("src/lib/i18n.jsx");
 
     const locales = [
-      { code: "zh-TW", expectedMsg: "巡演歌單與功能已有新版本", expectedBtn: "立即更新", expectedDismiss: "稍後" },
-      { code: "ja", expectedMsg: "ツアーセトリと新機能が更新されました", expectedBtn: "今すぐ更新", expectedDismiss: "あとで" },
-      { code: "ko", expectedMsg: "투어 세트리스트와 새로운 기능이 업데이트되었습니다", expectedBtn: "지금 업데이트", expectedDismiss: "나중에" },
-      { code: "en", expectedMsg: "Tour setlists & features updated", expectedBtn: "Update Now", expectedDismiss: "Later" },
+      { code: "zh-TW", expectedMsg: "巡演歌單與功能已有新版本", expectedBtn: "立即更新" },
+      { code: "ja", expectedMsg: "ツアーセトリと新機能が更新されました", expectedBtn: "今すぐ更新" },
+      { code: "ko", expectedMsg: "투어 세트리스트와 새로운 기능이 업데이트되었습니다", expectedBtn: "지금 업데이트" },
+      { code: "en", expectedMsg: "Tour setlists & features updated", expectedBtn: "Update Now" },
     ];
 
-    for (const { code, expectedMsg, expectedBtn, expectedDismiss } of locales) {
+    for (const { code, expectedMsg, expectedBtn } of locales) {
       const html = renderToStaticMarkup(
         React.createElement(
           I18nProvider,
@@ -56,13 +56,12 @@ describe("29. PWA Version Update Notification Toast (ADR-0137)", () => {
 
       assert.ok(html.includes('data-testid="pwa-update-toast"'), `[${code}] Must render toast container`);
       assert.ok(html.includes('data-testid="pwa-update-refresh-btn"'), `[${code}] Must render refresh button`);
-      assert.ok(html.includes('data-testid="pwa-update-dismiss-btn"'), `[${code}] Must render dismiss button`);
+      assert.ok(!html.includes('data-testid="pwa-update-dismiss-btn"'), `[${code}] Must not render dismiss button`);
       assert.ok(
         html.includes(expectedMsg) || html.includes(expectedMsg.replace("&", "&amp;")),
         `[${code}] Must contain localized message: ${expectedMsg}`
       );
       assert.ok(html.includes(expectedBtn), `[${code}] Must contain localized refresh button: ${expectedBtn}`);
-      assert.ok(html.includes(expectedDismiss), `[${code}] Must contain localized dismiss button: ${expectedDismiss}`);
     }
   });
 });

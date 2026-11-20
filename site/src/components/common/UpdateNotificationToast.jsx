@@ -9,10 +9,9 @@ import { subscribeUpdateAvailable, applyServiceWorkerUpdate } from "../../lib/pw
  * Allows user to reload immediately while preserving URL route hash,
  * or dismiss the prompt for the current session.
  */
-export function UpdateNotificationToast({ forceShow = false, onUpdate, onDismiss }) {
+export function UpdateNotificationToast({ forceShow = false, onUpdate }) {
   const { t } = useI18n();
   const [hasUpdate, setHasUpdate] = useState(false);
-  const [isDismissed, setIsDismissed] = useState(false);
   const [isUpdating, setIsUpdating] = useState(false);
 
   useEffect(() => {
@@ -24,7 +23,7 @@ export function UpdateNotificationToast({ forceShow = false, onUpdate, onDismiss
     };
   }, []);
 
-  if ((!hasUpdate && !forceShow) || isDismissed) {
+  if (!hasUpdate && !forceShow) {
     return null;
   }
 
@@ -34,13 +33,6 @@ export function UpdateNotificationToast({ forceShow = false, onUpdate, onDismiss
       onUpdate();
     } else {
       applyServiceWorkerUpdate();
-    }
-  };
-
-  const handleDismiss = () => {
-    setIsDismissed(true);
-    if (typeof onDismiss === "function") {
-      onDismiss();
     }
   };
 
@@ -69,15 +61,6 @@ export function UpdateNotificationToast({ forceShow = false, onUpdate, onDismiss
           className="inline-flex items-center justify-center rounded-[3px] border border-ink bg-band px-3 py-1.5 text-xs font-bold text-band-ink hover:brightness-105 disabled:opacity-50 cursor-pointer touch-stamp transition-colors"
         >
           {isUpdating ? t("pwa.updating", "更新中...") : t("pwa.updateNow", "立即更新")}
-        </button>
-        <button
-          type="button"
-          data-testid="pwa-update-dismiss-btn"
-          onClick={handleDismiss}
-          aria-label={t("pwa.dismissAria", "關閉版本更新提醒")}
-          className="inline-flex items-center justify-center rounded-[3px] border border-line/50 px-2.5 py-1.5 text-xs font-medium text-paper/85 hover:text-paper hover:bg-card/20 cursor-pointer touch-stamp transition-colors"
-        >
-          {t("pwa.dismiss", "稍後")}
         </button>
       </div>
     </aside>

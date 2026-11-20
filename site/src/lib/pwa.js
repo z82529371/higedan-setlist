@@ -8,6 +8,7 @@
 const CACHE_NAME_PREFIX = "higedan-setlist";
 export const VISIBILITY_CHECK_THROTTLE_MS = 15 * 60 * 1000; // 15 minutes
 export const PASSIVE_HEARTBEAT_INTERVAL_MS = 60 * 60 * 1000; // 60 minutes
+export const UPDATE_RELOAD_FALLBACK_MS = 1500; // Fallback reload if controllerchange never fires
 
 const updateListeners = new Set();
 let activeRegistration = null;
@@ -68,19 +69,44 @@ export function applyServiceWorkerUpdate(env = {}) {
   const reg = env.registration || activeRegistration;
   const waitingWorker = env.waitingWorker || env.registration?.waiting || waitingWorkerInstance || reg?.waiting;
 
-  if (nav?.serviceWorker && typeof nav.serviceWorker.addEventListener === "function") {
-    nav.serviceWorker.addEventListener("controllerchange", () => {
-      if (win?.location && typeof win.location.reload === "function") {
-        win.location.reload();
-      }
-    });
+  let hasReloaded = false;
+  let fallbackTimerId = null;
+
+  const scheduleTimeout = typeof win?.setTimeout === "function" ? win.setTimeout.bind(win) : setTimeout;
+  const cancelTimeout = typeof win?.clearTimeout === "function" ? win.clearTimeout.bind(win) : clearTimeout;
+
+  const triggerReload = () => {
+    if (hasReloaded) {
+      return;
+    }
+    hasReloaded = true;
+    if (fallbackTimerId !== null) {
+      cancelTimeout(fallbackTimerId);
+      fallbackTimerId = null;
+    }
+    if (win?.location && typeof win.location.reload === "function") {
+      win.location.reload();
+    }
+  };
+
+  // If no waiting worker exists or it has already activated/become redundant (e.g. via another tab),
+  // reload immediately instead of waiting indefinitely for controllerchange.
+  if (
+    !waitingWorker ||
+    typeof waitingWorker.postMessage !== "function" ||
+    waitingWorker.state === "activated" ||
+    waitingWorker.state === "redundant"
+  ) {
+    triggerReload();
+    return;
   }
 
-  if (waitingWorker && typeof waitingWorker.postMessage === "function") {
-    waitingWorker.postMessage({ type: "SKIP_WAITING" });
-  } else if (win?.location && typeof win.location.reload === "function") {
-    win.location.reload();
+  if (nav?.serviceWorker && typeof nav.serviceWorker.addEventListener === "function") {
+    nav.serviceWorker.addEventListener("controllerchange", triggerReload);
   }
+
+  fallbackTimerId = scheduleTimeout(triggerReload, UPDATE_RELOAD_FALLBACK_MS);
+  waitingWorker.postMessage({ type: "SKIP_WAITING" });
 }
 
 export function registerServiceWorker(env = {}) {
