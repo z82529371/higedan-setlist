@@ -401,12 +401,12 @@ _Avoid_: 在動態錄影迴圈中逐格深層爬取 DOM 節點導致掉格崩潰
 5. **累計距離全面剔除**：嚴格恪守累計距離剔除不變式（ADR-0131），版面指標聚焦於都道府縣踏破率（X / 47）、總場次與初陣／最新戰歷史紀錄。
 _Avoid_: 引入不穩定且缺乏硬體保證的瀏覽器影片錄製破壞離線可用性、於歌迷圖卡標註「遠征踏破」造成語意違和、因播放途中點擊儲存而產出路線截斷或未蓋印之半成品圖卡、在個人足跡標註累計遠征距離。
 
-**PWA 版本更新提示、背景待命接管與無干擾互動式刷新不變式（PWA Waiting Update Lifecycle & Interactive Reload Invariants，ADR-0137）**:
-1. **取消自動接管與待命生命週期（Waiting Worker Lifecycle）**：新版 Service Worker 完成預快取安裝後，不執行無條件 `skipWaiting()`，而是在背景保留於 `waiting` 狀態，杜絕背刺舊版前端正在執行的記憶體實例與中斷樂迷操作。
-2. **三軌被動更新檢查與防抖節流（Three-Track Passive Update Check with 15-Min Throttle）**：網頁載入時主動調用 `registration.update()`；當樂迷切換手機 App 回到本站（`visibilitychange`）、於站內切換歌單路由（`hashchange`）且距上次檢查超過 15 分鐘（900,000ms），以及每 60 分鐘前景心跳時，自動檢查邊緣部署，既保證版本新鮮度又杜絕常駐計時器消耗現場電力與流量。
-3. **非阻斷式票券風提示（Non-Intrusive Floating Toast）**：偵測到新版就緒時，於螢幕底部浮現高對比票券風提示橫條（`UpdateNotificationToast`），僅提供「立即更新」操作按鈕，絕不強制自動重載打斷樂迷瀏覽。
-4. **互動式接管、逾時保底與 Hash 路由無縫保全（Interactive Reload, Fallback Guard & Hash Preservation）**：樂迷點擊「立即更新」後，按鈕轉為「更新中...」禁用態；若等待中的 Worker 已失效或已接管（`activated` / `redundant`），立即執行平滑重整；否則通知 Waiting Worker 執行 `SKIP_WAITING` 並監聽 `controllerchange`，同時配置 `1500ms` 安全逾時保底重整與單次重整防護，確保絕不卡死於「更新中...」並原生保全 `#/tickets`、`#/tour/xxx` 等 Hash 路由狀態。
-_Avoid_: 無條件強制自動 `location.reload()` 造成樂迷打卡或查歌途中資料遺失、在演唱會微弱網路環境下頻繁短輪詢、彈出強制遮罩式 Modal 阻斷瀏覽體驗、在更新提示暴露生澀冰冷的 Git Commit 或建置工程黑話。
+**PWA 版本更新提示與無干擾互動式刷新不變式（PWA Update Lifecycle & Interactive Reload Invariants，ADR-0137）**:
+1. **待命接管（Deferred Activation）**：新版離線資源就緒後，於背景待命而不自動強制接管或重整頁面，避免打斷樂迷正在進行的打卡、查歌或瀏覽操作。
+2. **節能被動檢查（Energy-Conscious Passive Checks）**：僅於頁面載入、切換回前景或站內切換視圖（搭配節流防抖）以及長時開啟時的低頻心跳檢查新版，不在演唱會現場微弱網路下頻繁短輪詢。
+3. **非阻斷式更新提示（Non-Intrusive Update Prompt）**：偵測到新版就緒時，以非阻斷式浮動提示條提供「立即更新」操作，由樂迷自主決定重整時機。
+4. **可恢復刷新與路由保全（Resilient Reload & Route Preservation）**：樂迷點擊「立即更新」後，若等待中的版本已接管或無法及時切換控制權，系統必須於短暫等待後保底重整，絕不無限期卡在「更新中...」，並完整保留樂迷當前所處之路由位置。
+_Avoid_: 無條件強制自動重整造成樂迷打卡或查歌途中資料遺失、在演唱會微弱網路環境下頻繁短輪詢、彈出強制遮罩式 Modal 阻斷瀏覽體驗、在更新提示暴露工程術語或讓更新按鈕無限期卡死。
 
 **互動式場地地圖分區都道府縣文字導覽與空間雙向連動不變式（Interactive Venue Map Regional Prefecture Text Navigator & Spatial Sync Invariants，ADR-0141）**:
 1. **八大地方與亞洲海外標準劃分與「全部」頁籤排除**：場地地圖全國總覽（`mode === "venues" && !selectedPrefecture`）正下方整合雙層分區文字導覽器（`RegionalPrefecturePicker`）。頂部 Tier 1 頁籤嚴格依日本標準地理劃分 8 大地方（北海道、東北、關東、中部、近畿、中國、四國、九州沖繩）＋ 亞洲海外；預設聚焦於高頻演出重鎮關東地方（`kanto`），嚴格排除冗餘的「全部」頁籤，防止全日本 43 縣一次傾瀉造成資訊過載與行動抽屜垂直暴增。

@@ -219,6 +219,33 @@ export function checkLocaleKeyParity(locales = { "zh-TW": dictZhTw, ja: dictJa, 
   return violations;
 }
 
+export function findUnusedLocaleKeys(dict = dictZhTw) {
+  const keys = flattenKeys(dict);
+  const scanDirs = ["src/components", "src/hooks", "src/lib", "src/App.jsx", "src/main.jsx"];
+  let corpus = "";
+  for (const target of scanDirs) {
+    const full = path.join(root, target);
+    if (!fs.existsSync(full)) continue;
+    if (fs.statSync(full).isFile()) {
+      corpus += "\n" + fs.readFileSync(full, "utf8");
+      continue;
+    }
+    for (const entry of fs.readdirSync(full, { recursive: true })) {
+      const normalized = String(entry).replace(/\\/g, "/");
+      if (normalized.startsWith("locales/")) continue;
+      if (/\.(jsx|js)$/.test(normalized)) {
+        corpus += "\n" + fs.readFileSync(path.join(full, entry), "utf8");
+      }
+    }
+  }
+  return keys.filter((key) => {
+    if (corpus.includes(`"${key}"`) || corpus.includes(`'${key}'`)) return false;
+    const prefix = key.includes(".") ? key.slice(0, key.lastIndexOf(".") + 1) : "";
+    if (prefix && corpus.includes("`" + prefix + "${")) return false;
+    return true;
+  });
+}
+
 function selfTest() {
   const cases = [
     // [source, expectViolation]
@@ -317,6 +344,10 @@ const parityViolations = checkLocaleKeyParity();
 for (const pv of parityViolations) {
   total++;
   console.error(`src/lib/locales: key parity violation: ${pv}`);
+}
+const unusedKeys = findUnusedLocaleKeys();
+if (unusedKeys.length > 0) {
+  console.warn(`check-i18n [WARN]: ${unusedKeys.length} unused locale key(s): ${unusedKeys.slice(0, 10).join(", ")}${unusedKeys.length > 10 ? " ..." : ""}`);
 }
 if (total > 0) {
   console.error(
