@@ -294,7 +294,9 @@ describe("33. Song Media Stage & SongSlip In-Place Integration (UI SSR)", () => 
       "Populated song must omit redundant toolbar jump button in favor of in-place stage"
     );
     assert.ok(htmlPretender.includes('data-testid="song-media-stage"'), "Populated song must render in-place stage");
-    assert.ok(htmlPretender.includes('data-testid="song-media-play-btn"'), "Must render click-to-play facade on initial SongSlip load");
+    assert.ok(htmlPretender.includes('aria-expanded="false"'), "SongSlip YouTube stage must be pre-collapsed by default");
+    assert.ok(htmlPretender.includes("展開 ▾"), "Pre-collapsed SongSlip YouTube stage must show expand toggle");
+    assert.ok(!htmlPretender.includes('data-testid="song-media-play-btn"'), "Must not render click-to-play facade while pre-collapsed");
     assert.ok(!htmlPretender.includes("youtube.com/embed/"), "Must not eagerly mount YouTube iframe on initial SongSlip load");
 
     // 2. Unpopulated song: travelers has no media -> renders fallback "▶ YouTube" and zero stage DOM

@@ -25,13 +25,14 @@ export function SongMediaStage({
   onClose,
   collapsed: controlledCollapsed,
   onToggleCollapse,
+  defaultCollapsed = false,
   autoMountOnOpen = false,
 }) {
   const { t } = useI18n();
   const iframeRef = useRef(null);
   const media = mediaOverride || getSongMedia(songId);
 
-  const [internalCollapsed, setInternalCollapsed] = useState(false);
+  const [internalCollapsed, setInternalCollapsed] = useState(() => Boolean(defaultCollapsed));
   const isCollapsed =
     controlledCollapsed !== undefined ? controlledCollapsed : internalCollapsed;
 
@@ -51,8 +52,8 @@ export function SongMediaStage({
     setSelectedMvIndex(0);
     setHasActivated(Boolean(autoMountOnOpen));
     setThumbError(false);
-    setInternalCollapsed(false);
-  }, [songId, initialTrack, media.defaultTrack, mediaOverride, autoMountOnOpen]);
+    setInternalCollapsed(Boolean(defaultCollapsed));
+  }, [songId, initialTrack, media.defaultTrack, mediaOverride, autoMountOnOpen, defaultCollapsed]);
 
   // Collapsing the stage unmounts the iframe and returns to the static facade
   useEffect(() => {
@@ -212,6 +213,11 @@ export function SongMediaStage({
         {/* Left: Stage Title & Indicator Dot */}
         <div className="flex items-center gap-1.5 min-w-0 flex-1">
           <span className="inline-block h-2 w-2 rounded-full border border-ink bg-tape shrink-0" aria-hidden="true" />
+          {isCollapsed && currentLive?.isDigest && (
+            <span className="rounded bg-band/15 text-ink border border-band/30 px-1.5 py-0.5 text-[10px] font-bold shrink-0">
+              🎬 {t("tourExtra.watchDigest", "巡演精華")}
+            </span>
+          )}
           <span
             className="font-bold text-ink uppercase tracking-wider truncate shrink"
             title={stageTitle}

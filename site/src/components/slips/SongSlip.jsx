@@ -22,12 +22,12 @@ export function SongSlip({ songId, trackShows, showById, unitData, onSelectShow,
   const [showYearBreakdown, setShowYearBreakdown] = useState(false);
   const [showMoreTools, setShowMoreTools] = useState(false);
 
-  const [isYouTubeCollapsed, setIsYouTubeCollapsed] = useState(false);
+  const [isYouTubeCollapsed, setIsYouTubeCollapsed] = useState(true);
   const [isSpotifyCollapsed, setIsSpotifyCollapsed] = useState(false);
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
 
   useEffect(() => {
-    setIsYouTubeCollapsed(false);
+    setIsYouTubeCollapsed(true);
     setIsSpotifyCollapsed(false);
     setIsLightboxOpen(false);
   }, [songId]);

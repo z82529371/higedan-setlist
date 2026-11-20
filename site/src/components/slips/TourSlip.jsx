@@ -285,12 +285,13 @@ export function TourSlip({
           </div>
         </div>
 
-        {/* Tour Digest Stage (Always-on for flagship tours, ADR-0136) */}
+        {/* Tour Digest Stage (Pre-collapsed single-line bar for flagship tours, ADR-0136) */}
         {hasDigest && (
           <div className="mt-2.5">
             <SongMediaStage
               mediaOverride={digestMedia}
               titleOverride={tour.title}
+              defaultCollapsed={true}
             />
           </div>
         )}

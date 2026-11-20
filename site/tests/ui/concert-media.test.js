@@ -98,8 +98,11 @@ describe("33. Concert & Tour Media Digest Stage UI (ADR-0136)", () => {
         React.createElement(TourSlip, { tourUnitData: tourWithDigest })
       )
     );
-    assert.match(htmlWithDigest, /id="song-media-stage"/, "always renders media stage when digest is present");
-    assert.match(htmlWithDigest, /🎬 巡演精華/, "renders single emoji localized digest badge");
+    assert.match(htmlWithDigest, /id="song-media-stage"/, "renders media stage when digest is present");
+    assert.match(htmlWithDigest, /aria-expanded="false"/, "pre-collapses TourSlip digest stage by default");
+    assert.match(htmlWithDigest, /展開 ▾/, "renders expand toggle on pre-collapsed TourSlip digest stage");
+    assert.match(htmlWithDigest, /🎬 巡演精華/, "renders single emoji localized digest badge even when collapsed");
+    assert.doesNotMatch(htmlWithDigest, /data-testid="song-media-play-btn"/, "hides player body when pre-collapsed");
 
     // 2. Tour without Digest (Early tour) -> Zero DOM pollution
     const tourWithoutDigest = {
