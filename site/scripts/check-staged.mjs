@@ -54,6 +54,16 @@ try {
         if (raw.includes("\r\n")) {
           writeFileSync(file, raw.replace(/\r\n/g, "\n"), "utf8");
           execSync(`git add -- "${file}"`);
+          // Keep synced site/src/data mirror LF-aligned so workspace-topology invariant passes
+          if (file.startsWith("data/")) {
+            const mirror = `site/src/${file}`;
+            if (existsSync(mirror)) {
+              const mirrorRaw = readFileSync(mirror, "utf8");
+              if (mirrorRaw.includes("\r\n")) {
+                writeFileSync(mirror, mirrorRaw.replace(/\r\n/g, "\n"), "utf8");
+              }
+            }
+          }
         }
       } catch {
         // Ignore if file cannot be normalized

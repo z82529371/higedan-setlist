@@ -855,6 +855,11 @@ export function buildJourneySequence(shows = [], venueProfilesMap = null, option
     const region = s.region || profile?.region || "";
     const hubId = profile?.hubId || (prefecture && city ? `${prefecture}::${city}` : null);
 
+    // Non-venue TV broadcasts have no physical coordinates and cannot be plotted as map stops.
+    if (isTv && !venueName && lat === null && lng === null) {
+      continue;
+    }
+
     physicalCandidates.push({
       showId: s.id,
       date: s.date || "",

@@ -136,9 +136,11 @@ export function ShowSlip({
     };
   }, [targetCompareShow, showId, items, ud]);
 
+  const displayTitle = ud.unit.type === "電視演出" && s.title ? s.title : ud.unit.title;
+
   const handleCopySetlist = () => {
     const lines = [];
-    lines.push(`Official 髭男 dism - ${ud.unit.title}`);
+    lines.push(`Official 髭男 dism - ${displayTitle}`);
     lines.push(
       locale === "en"
         ? `📅 Date: ${showDate(s, locale)}`
@@ -414,13 +416,13 @@ export function ShowSlip({
 
         {/* Level 2: Tour / Event Name Headline */}
         <h2 className="mt-2.5 mb-3 font-display text-[22px] sm:text-[25px] font-black leading-tight text-ink tracking-tight text-pretty">
-          {ud.unit.title}
+          {displayTitle}
         </h2>
         {/* Level 3: Specific Show Details Ticket Stub Box (Clean & Focused) */}
         <ShowMetadataBox
           s={s}
           unitType={getUnitTypeLabel(ud.unit)}
-          unitTitle={ud.unit.title}
+          unitTitle={displayTitle}
           songCount={songCount}
           mainCount={mainCount}
           encCount={encCount}
@@ -632,7 +634,7 @@ export function ShowSlip({
       {items.length === 0 ? (
         <SetlistQuestCard
           show={s}
-          unitTitle={ud.unit.title}
+          unitTitle={displayTitle}
           onOpenLeadModal={(type) => setLeadQuestModal({ questType: type || "setlist" })}
         />
       ) : (
@@ -722,7 +724,7 @@ export function ShowSlip({
           isOpen={true}
           onClose={() => setLeadQuestModal(null)}
           show={s}
-          unitTitle={ud.unit.title}
+          unitTitle={displayTitle}
           questType={leadQuestModal.questType}
         />
       )}
