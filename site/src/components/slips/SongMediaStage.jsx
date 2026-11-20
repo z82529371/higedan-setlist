@@ -442,15 +442,15 @@ export function SongMediaStage({
                     alt={currentVideo.title || title}
                     loading="lazy"
                     onError={() => setThumbError(true)}
-                    className="absolute inset-0 h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+                    className="absolute inset-0 h-full w-full object-cover"
                   />
                 )}
                 <div
-                  className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/25 to-black/20 transition-colors group-hover:bg-black/35"
+                  className="absolute inset-0 bg-black/45 transition-colors group-hover:bg-black/30"
                   aria-hidden="true"
                 />
                 <span className="absolute inset-0 flex flex-col items-center justify-center gap-2">
-                  <span className="flex h-14 w-14 sm:h-16 sm:w-16 items-center justify-center rounded-full border border-white/30 bg-black/75 text-white shadow-xs transition-all group-hover:scale-105 group-hover:border-band group-hover:bg-band group-hover:text-band-ink">
+                  <span className="flex h-14 w-14 sm:h-16 sm:w-16 items-center justify-center rounded-full border-[1.5px] border-white/60 bg-black/80 text-white transition-colors group-hover:border-band group-hover:bg-band group-hover:text-band-ink">
                     <svg
                       viewBox="0 0 24 24"
                       fill="currentColor"
@@ -460,7 +460,7 @@ export function SongMediaStage({
                       <path d="M8 5.14v14l11-7-11-7z" />
                     </svg>
                   </span>
-                  <span className="rounded bg-black/70 px-2.5 py-0.5 font-mono text-[11px] font-bold tracking-wide text-white/95 backdrop-blur-xs">
+                  <span className="rounded-[2px] bg-black/80 px-2.5 py-0.5 font-mono text-[11px] font-bold tracking-wide text-white/95 border border-white/20">
                     {t("songExtra.playVideo", "點擊播放影片")}
                   </span>
                 </span>

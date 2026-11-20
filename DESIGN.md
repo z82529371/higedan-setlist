@@ -251,8 +251,9 @@ components:
 - **狀態列入口**: 桌面端底欄之 `[🎟️ 票夾]` 按鈕緊鄰「🏠 回首頁」，維持整齊的底部控制條美學。
 
 ### 3. 行動端雙側懸浮控制項 (Mobile Floating Dock)
-- **左側導航群組**: 於手機螢幕左下角維持單手觸控垂直排列，`[🎟️ 票夾]` 懸浮按鈕（右上角帶圓點數字徽章）垂直疊加於 `[🏠 首頁] [↑ 置頂]` 之正上方，以 `gap-2` 分隔，確保互不遮擋且符合人體工學按壓區。
-- **右側功能群組**: 右下角專供語言切換圓形懸浮球（`🌐 FAB`），選單向上彈出（`drop-up`），形成左右對稱清晰的職責分工。
+- **方正實體印章鈕規格**: 行動端懸浮控制項全面捨棄半透明毛玻璃圓球（`rounded-full` + `backdrop-blur` + `active:scale-95`），統一採用方正實體印章鈕（`rounded-[3px]`、`border-[1.5px] border-ink`、`bg-paper` 實體不透明底色、硬邊 `2px 2px 0` 位移陰影與 `.touch-stamp` 零位移按壓回饋）。
+- **左側導航群組**: 於手機螢幕左下角維持單手觸控垂直排列，票夾印章鈕（右上角帶計數標記）垂直疊加於首頁與置頂印章鈕之正上方，以 `gap-2` 分隔。
+- **右側語言印章鈕**: 右下角顯示當前語系等寬印章碼（`TW / JP / EN / KO`），選單向上彈出（`drop-up`），選單本體同樣維持實體紙卡與硬邊陰影。
 
 ## Atomic Date Presentation & Card Export Invariants (原子日期排版與小卡匯出不變量)
 
@@ -303,3 +304,22 @@ components:
 
 
 
+## Anti-AI-Slop & Physical Craftsmanship Invariants (去 AI 味與實體工藝不變量)
+
+為杜絕現代 SaaS / AI 生成介面之模板慣性（毛玻璃、大圓角、模糊擴散陰影、Emoji 膠囊牆與浮誇微動畫），全站所有視圖、彈窗與控制項嚴格遵守以下六條物理印刷不變量：
+
+1. **領域符號 vs UI 印刷圖示邊界（Domain Symbol vs. UI Chrome Rule）**:
+   - 僅限團員動物吉祥物（`🐨 🐱 🦍 🐻`）與個人遠征自駕者（`😎`）保留原生系統 Emoji 作為領域符號（參見 `GLOSSARY.md`）。
+   - 所有導航頁籤、統計列、搜尋分組、狀態標籤、按鈕前綴、提示橫幅與彈窗標題，嚴禁使用系統 Emoji（如 `🎫 🎵 📍 📅 🎭 🎬 🥇 🔥 ✨ 🎯 💡`）；一律改用單色墨線 SVG（`1.5px–1.75px` stroke）或等寬印刷排版標記（如 `NO.01`、`[01]`、`NOTE:`、`▸`、`→`）。
+2. **彈窗、抽屜與通知條實體化（Physical Overlay Rule）**:
+   - 所有 Modal、Drawer、Toast 與 Floating Dock 一律採用 `rounded-[3px]`（抽屜頂緣亦同）、`border-[1.5px] border-ink`、`bg-card` 實體不透明紙底與零模糊硬邊陰影（如 `shadow-[6px_6px_0_rgba(0,0,0,0.22)]`）。
+   - 全站禁止使用 `backdrop-blur-*`、`shadow-md/lg/xl/2xl`、`rounded-xl/2xl` 與非語意性 CSS 漸層背景。
+3. **Header 印刷規格表（Archival Spec Ledger Line）**:
+   - `ArchiveHeader` 標題下方之資料庫規模統計，嚴禁使用多顆帶框膠囊排成 KPI Pill Bar；統一收斂為單行細線分隔之等寬印刷規格表（Spec Ledger Line）。
+4. **首頁印刷目錄清單（Archival Index Ledger）**:
+   - `LandingHero` 下方 `01–06` 典藏入口嚴禁使用 `2×3` Bento 卡片牆與裝飾性小方框 Icon；改為單欄或雙欄 `1px` 印刷格線切分之目錄清單（Index Ledger），Hover 僅做底色反白或墨黑邊界切換。
+5. **乾燥精準的檔案館語氣（Archival Editorial Tone）**:
+   - 四語系介面文案（`zh-TW` / `ja` / `en` / `ko`）全面清除裝飾性 Emoji 與 SaaS 行銷動詞，維持日本官方場刊／舞台執行單（Run Sheet）之客觀精準語氣。
+6. **零縮放、零彈跳微互動（Zero-Scale / Zero-Bounce Motion Rule）**:
+   - 除巡演地圖路線播放中之即時位置信標（`animate-ping`）外，全站禁止任何圖片、封套、卡片或按鈕之 `hover:scale-*`、`active:scale-*`、`zoom-in-*`、`group-hover:-rotate-*` 與 `hover:-translate-y-*`。
+   - 按壓回饋統一採用 `.touch-stamp`（Zero Shift 淡墨壓印）。

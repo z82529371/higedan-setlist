@@ -16,17 +16,17 @@ Engineering standards, judgement baselines, and module test seams for code revie
 - **Commemorative Card Export Modals Ergonomics**: Modals dedicated to saving commemorative cards (such as `MilestoneCardModal` or `FootprintCardModal`) must stay focused on souvenir preview and one-click export (`exportElementToPng`). Never clutter export modal toolbars with player transport widgets (playback speed selectors `[1×][2×][4×]`, timeline scrubbers, replay loops) — interactive playback belongs exclusively in primary exploration views (e.g. `TicketBookFootprintMap`).
 - **Low-Friction Interactions**: Minimize steps required for fan participation. Forms must provide immediate copy-to-clipboard or direct compose fallbacks with instant visual feedback.
 
-## 3. Ticket Aesthetic & Token Discipline (DESIGN.md)
+## 3. Ticket Aesthetic & Judgement Baselines (DESIGN.md)
 
-- **Visual Tokens**:
-  - Border radius: Strictly adhere to `rounded-[3px]` for tickets, badges, and modals.
-  - Shadows: Strictly use zero-blur `shadow-xs` / `dark:shadow-none`.
-  - Monospace cue: Numbers, dates, codes, and setlist counters use `font-mono` (The Cue Monospace Rule); subtitles and explanatory labels use proportional typography.
-  - Atomic Show Date Invariant: Whenever rendering a show date alongside a venue or city name, keep the date in a dedicated `font-mono whitespace-nowrap shrink-0` span and apply `truncate` only to the sibling venue/city span so dates never clip or wrap.
-  - 540px Postcard & Ticket Slip Mobile Fluidity: Components intended for standard 540px offline export must remain 100% fluid on mobile screens. Outer card containers must strictly use `w-full max-w-[540px]`, never fixed unconstrained `w-[540px]` or hardcoded inline `width: 540px`. Inner rows (such as postmark stamps and summary metrics) must remain resilient across narrow 360px~390px viewports without vertical displacement or awkward clipping.
-- **Contrast**: Small text (<14px) and badge labels must meet AAA 7:1 contrast using semantic theme ink tokens (`text-ink`, `text-ink-muted`). Never introduce unvetted arbitrary hex colors (e.g. `text-[#...]`).
-- **Mobile Drawer Confinement Rule (ADR-0140)**: When rendering list items inside `FilterDrawer` on mobile screens, list capacity must be strictly capped (venues locked to 10 items per page; 18 items 3×6 grid is reserved exclusively for desktop wide view). This prevents vertical mobile popups from causing over 900px of scrolling blowout.
-- **Leaderboard Podium & Bar Discipline (ADR-0139)**: Podium badges (#1 gold, #2 silver, #3 bronze) and horizontal percentage bars must strictly use semantic theme tokens (`bg-paper-light`, `text-ink`, `border-ink/20`) with >= 7:1 AAA contrast in small text. Unvetted raw hex values are forbidden.
+Mechanical token bans (`rounded-xl/2xl/3xl`, `backdrop-blur-*`, `shadow-md/lg/xl/2xl`, `active:scale-*`, `hover:scale-*`, arbitrary hex `text-[#...]`, and decorative UI emojis) are enforced automatically by `tests/invariants/design-tokens.test.js` during `pnpm check` and `pnpm check:fast`. Review and implementation focus on the judgement baselines below:
+
+- **Archival Editorial Tone**: Maintain dry, authoritative stage-sheet / Japanese concert-program phrasing across all 4 locales; avoid SaaS marketing verbs and KPI-pill dashboard layouts.
+- **Visual Hierarchy**: Use `rounded-[3px]` for tickets, badges, and overlays, zero-blur hard shadows, and `font-mono` (`tabular-nums`) for numbers, dates, codes, and setlist cues (The Cue Monospace Rule).
+- **Atomic Show Date Invariant**: Whenever rendering a show date alongside a venue or city name, keep the date in a dedicated `font-mono whitespace-nowrap shrink-0` span and apply `truncate` only to the sibling venue/city span so dates never clip or wrap.
+- **540px Postcard & Ticket Slip Mobile Fluidity**: Components intended for standard 540px offline export must remain 100% fluid on mobile screens (`w-full max-w-[540px]`, never fixed `w-[540px]`), resilient across 360px–390px viewports.
+- **Contrast**: Small text (<14px) and badge labels must meet AAA 7:1 contrast using semantic theme ink tokens (`text-ink`, `text-ink-muted`).
+- **Mobile Drawer Confinement Rule (ADR-0140)**: Cap `FilterDrawer` mobile venue list capacity to 10 items per page (desktop 18-item 3×6 grid) to prevent vertical scrolling blowout.
+- **Leaderboard Podium & Bar Discipline (ADR-0139)**: Podium badges (#1 gold, #2 silver, #3 bronze) and horizontal percentage bars must use semantic theme tokens (`bg-paper-light`, `text-ink`, `border-ink/20`) with >= 7:1 AAA contrast in small text.
 
 ## 4. Multi-Lingual Parity (ADR-0107, ADR-0112)
 

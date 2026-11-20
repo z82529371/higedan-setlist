@@ -1,6 +1,7 @@
 import { trackKey } from "../../lib/track.js";
 import { useI18n } from "../../lib/i18n.jsx";
 import { useTicketBook } from "../../lib/ticket-book.js";
+import { TicketIcon, ChartBarsIcon, RouteIcon, DiscIcon, HomeIcon } from "../common/ArchivalIcons.jsx";
 
 export function ArchiveStatusBar({
   tab,
@@ -106,16 +107,16 @@ export function ArchiveStatusBar({
                 e.stopPropagation();
                 handleSelectTickets();
               }}
-              className="hidden sm:inline-flex items-center gap-1.5 px-2 py-0.5 rounded-[4px] bg-band-ink/10 hover:bg-band-ink/20 active:scale-95 text-band-ink font-bold border border-band-ink/30 transition-all cursor-pointer text-[10px] sm:text-[11px] shrink-0 shadow-2xs"
+              className="hidden sm:inline-flex items-center gap-1.5 px-2 py-0.5 rounded-[3px] bg-band-ink/10 hover:bg-band-ink/20 text-band-ink font-bold border border-band-ink/30 transition-colors cursor-pointer touch-stamp text-[10px] sm:text-[11px] shrink-0"
               title={t("ticketBook.title", "我的巡演票夾")}
               aria-label={t("ticketBook.title", "我的巡演票夾")}
             >
-              <span aria-hidden="true">🎟️</span>
+              <TicketIcon className="w-3.5 h-3.5 shrink-0" />
               <span>{t("nav.ticketBook", "票夾")}</span>
               {ticketCount > 0 && (
                 <span
                   data-testid="status-bar-ticket-badge-count"
-                  className="inline-flex items-center justify-center rounded-full bg-band-ink text-band font-mono font-bold text-[9px] min-w-[15px] h-[15px] px-1 border border-band-ink/30 tabular-nums shadow-2xs"
+                  className="inline-flex items-center justify-center rounded-[2px] bg-band-ink text-band font-mono font-bold text-[9px] min-w-[15px] h-[15px] px-1 border border-band-ink/30 tabular-nums"
                 >
                   {ticketCount}
                 </span>
@@ -132,11 +133,11 @@ export function ArchiveStatusBar({
                 e.stopPropagation();
                 handleSelectRanking();
               }}
-              className="hidden sm:inline-flex items-center gap-1.5 px-2 py-0.5 rounded-[4px] bg-band-ink/10 hover:bg-band-ink/20 active:scale-95 text-band-ink font-bold border border-band-ink/30 transition-all cursor-pointer text-[10px] sm:text-[11px] shrink-0 shadow-2xs"
+              className="hidden sm:inline-flex items-center gap-1.5 px-2 py-0.5 rounded-[3px] bg-band-ink/10 hover:bg-band-ink/20 text-band-ink font-bold border border-band-ink/30 transition-colors cursor-pointer touch-stamp text-[10px] sm:text-[11px] shrink-0"
               title={t("ranking.title", "演出排行")}
               aria-label={t("ranking.title", "演出排行")}
             >
-              <span aria-hidden="true">🏆</span>
+              <ChartBarsIcon className="w-3.5 h-3.5 shrink-0" />
               <span>{t("nav.ranking", "排行")}</span>
             </button>
           )}
@@ -150,11 +151,11 @@ export function ArchiveStatusBar({
                 e.stopPropagation();
                 handleSelectJourney();
               }}
-              className="hidden sm:inline-flex items-center gap-1.5 px-2 py-0.5 rounded-[4px] bg-band-ink/10 hover:bg-band-ink/20 active:scale-95 text-band-ink font-bold border border-band-ink/30 transition-all cursor-pointer text-[10px] sm:text-[11px] shrink-0 shadow-2xs"
+              className="hidden sm:inline-flex items-center gap-1.5 px-2 py-0.5 rounded-[3px] bg-band-ink/10 hover:bg-band-ink/20 text-band-ink font-bold border border-band-ink/30 transition-colors cursor-pointer touch-stamp text-[10px] sm:text-[11px] shrink-0"
               title={t("nav.journeyTitle", "全生涯長征路線")}
               aria-label={t("nav.journeyTitle", "全生涯長征路線")}
             >
-              <span aria-hidden="true">🚐</span>
+              <RouteIcon className="w-3.5 h-3.5 shrink-0" />
               <span>{t("nav.journey", "巡演長征")}</span>
             </button>
           )}
@@ -168,11 +169,11 @@ export function ArchiveStatusBar({
                 e.stopPropagation();
                 handleSelectReleases();
               }}
-              className="hidden sm:inline-flex items-center gap-1.5 px-2 py-0.5 rounded-[4px] bg-band-ink/10 hover:bg-band-ink/20 active:scale-95 text-band-ink font-bold border border-band-ink/30 transition-all cursor-pointer text-[10px] sm:text-[11px] shrink-0 shadow-2xs"
+              className="hidden sm:inline-flex items-center gap-1.5 px-2 py-0.5 rounded-[3px] bg-band-ink/10 hover:bg-band-ink/20 text-band-ink font-bold border border-band-ink/30 transition-colors cursor-pointer touch-stamp text-[10px] sm:text-[11px] shrink-0"
               title={t("nav.releasesTitle", "官方現場影音發行")}
               aria-label={t("nav.releasesTitle", "官方現場影音發行")}
             >
-              <span aria-hidden="true">💿</span>
+              <DiscIcon className="w-3.5 h-3.5 shrink-0" />
               <span>{t("nav.releases", "作品")}</span>
             </button>
           )}
@@ -184,11 +185,11 @@ export function ArchiveStatusBar({
               e.stopPropagation();
               handleReturnHome();
             }}
-            className="hidden sm:inline-flex items-center gap-1 px-2 py-0.5 rounded-[4px] bg-band-ink/10 hover:bg-band-ink/20 active:scale-95 text-band-ink font-bold border border-band-ink/30 transition-all cursor-pointer text-[10px] sm:text-[11px] shrink-0 shadow-2xs"
+            className="hidden sm:inline-flex items-center gap-1 px-2 py-0.5 rounded-[3px] bg-band-ink/10 hover:bg-band-ink/20 text-band-ink font-bold border border-band-ink/30 transition-colors cursor-pointer touch-stamp text-[10px] sm:text-[11px] shrink-0"
             title={t("statusBar.backHomeTitle", "返回首頁")}
             aria-label={t("statusBar.backHomeAria", "返回首頁")}
           >
-            <span aria-hidden="true">🏠</span>
+            <HomeIcon className="w-3.5 h-3.5 shrink-0" />
             <span>{t("statusBar.home", "首頁")}</span>
           </button>
         </div>

@@ -412,10 +412,8 @@ export function VenueMapCanvas({
         type: "venue",
         title: localizeVenue(activeVenueCanonical),
         badgeText: isSanin
-          ? `🌱 ${t("venueMap.saninBadge")}`
-          : isHub
-          ? `🔥 ${shows.length} ${t("navigators.showsUnit")}`
-          : `🏛️ ${shows.length} ${t("navigators.showsUnit")}`,
+          ? t("venueMap.saninBadge")
+          : `${shows.length} ${t("navigators.showsUnit")}`,
         badgeStyle: isSanin
           ? "bg-band text-band-ink"
           : isHub
@@ -1696,7 +1694,7 @@ export function VenueMapCanvas({
             {renderMapSvg(true)}
 
             {/* Floating Zoom Controls (+ / - / Reset) */}
-            <div className="absolute bottom-3 right-3 z-20 flex flex-col gap-1.5 shadow-md">
+            <div className="absolute bottom-3 right-3 z-20 flex flex-col gap-1.5">
               <button
                 type="button"
                 data-testid="modal-zoom-in"

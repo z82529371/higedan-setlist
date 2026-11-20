@@ -92,7 +92,7 @@ export default function InteractiveFoilTicket({
           opacity: isFlipping ? 0.65 : 1,
           willChange: "transform",
         }}
-        className="relative w-full rounded-[3px] border-[1.5px] border-ink bg-card shadow-xl dark:shadow-none select-none"
+        className="relative w-full rounded-[3px] border-[1.5px] border-ink bg-card shadow-[5px_5px_0_rgba(0,0,0,0.16)] dark:shadow-none select-none"
       >
         {/* Top Serrated Washi Tape synced to Tour Era Accent */}
         <div

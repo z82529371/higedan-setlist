@@ -39,7 +39,7 @@ export function LiveSongChecklistDrawer({
   return (
     <div
       data-testid="live-song-checklist-drawer"
-      className="fixed inset-0 z-50 flex flex-col justify-end sm:justify-center items-center bg-ink/60 backdrop-blur-xs p-0 sm:p-4"
+      className="fixed inset-0 z-50 flex flex-col justify-end sm:justify-center items-center bg-ink/65 p-0 sm:p-4"
       role="dialog"
       aria-modal="true"
       aria-label={t("ticketBook.checklistTitle", "現場曲庫解鎖成就圖鑑")}
@@ -48,17 +48,17 @@ export function LiveSongChecklistDrawer({
       <div className="fixed inset-0 -z-10" onClick={onClose} aria-hidden="true" />
 
       {/* Drawer Container */}
-      <div className="relative max-h-[90vh] sm:max-h-[85vh] w-full sm:max-w-[640px] rounded-t-[8px] sm:rounded-[8px] border-t-[2px] sm:border-[1.5px] border-x-[2px] sm:border-x-[1.5px] border-ink bg-card shadow-2xl flex flex-col overflow-hidden animate-in slide-in-from-bottom duration-200">
+      <div className="relative max-h-[90vh] sm:max-h-[85vh] w-full sm:max-w-[640px] rounded-t-[3px] sm:rounded-[3px] border-t-[2px] sm:border-[1.5px] border-x-[2px] sm:border-x-[1.5px] border-ink bg-card shadow-[6px_6px_0_rgba(0,0,0,0.22)] dark:shadow-none flex flex-col overflow-hidden animate-in slide-in-from-bottom duration-200">
         {/* Mobile Drag Indicator */}
         <div className="flex sm:hidden justify-center pt-2 pb-1" aria-hidden="true">
-          <div className="h-1.5 w-12 rounded-full bg-line-soft" />
+          <div className="h-1 w-10 rounded-[2px] bg-line-soft" />
         </div>
 
         {/* Header Bar */}
         <div className="flex items-center justify-between border-b border-line-soft px-4 sm:px-5 py-3 bg-paper/60">
           <div className="flex items-center gap-2">
-            <span className="text-xl" aria-hidden="true">
-              📖
+            <span className="font-mono text-[10px] font-bold tracking-[0.14em] uppercase text-ink/60" aria-hidden="true">
+              [CHECKLIST]
             </span>
             <div>
               <h2 className="m-0 font-display text-[15px] sm:text-[16px] font-bold text-ink leading-tight">

@@ -8,6 +8,13 @@ export const LOCALE_LABELS = {
   ko: "한국어",
 };
 
+export const LOCALE_CODES = {
+  "zh-TW": "TW",
+  ja: "JP",
+  en: "EN",
+  ko: "KO",
+};
+
 export function LanguageSwitcher({ className = "", menuPosition = "down", fab = false }) {
   const { locale, setLocale, supportedLocales } = useI18n();
   const [isOpen, setIsOpen] = useState(false);
@@ -49,16 +56,18 @@ export function LanguageSwitcher({ className = "", menuPosition = "down", fab = 
         onClick={() => setIsOpen((v) => !v)}
         className={
           fab
-            ? "flex h-11 w-11 items-center justify-center rounded-full border-[2px] border-ink bg-paper text-ink shadow-[2.5px_2.5px_0_#000] cursor-pointer hover:bg-tape-tint transition-colors text-base touch-stamp focus-visible:outline-2 focus-visible:outline-band-ink"
-            : "inline-flex items-center gap-1.5 px-2.5 py-1 min-h-[36px] sm:min-h-[38px] rounded-[4px] border-[1.5px] border-ink/30 bg-card text-ink hover:border-ink hover:bg-tape-tint/50 text-xs font-bold shadow-2xs transition-colors cursor-pointer touch-stamp focus-visible:outline-2 focus-visible:outline-band-ink"
+            ? "flex h-10 w-10 items-center justify-center rounded-[3px] border-[1.5px] border-ink bg-paper text-ink shadow-[2px_2px_0_#000] dark:shadow-none cursor-pointer hover:bg-tape-tint transition-colors font-mono text-[11px] font-black tracking-wider touch-stamp focus-visible:outline-2 focus-visible:outline-band-ink"
+            : "inline-flex items-center gap-1.5 px-2.5 py-1 min-h-[36px] sm:min-h-[38px] rounded-[3px] border-[1.5px] border-ink/30 bg-card text-ink hover:border-ink hover:bg-tape-tint/50 text-xs font-bold shadow-[2px_2px_0_rgba(0,0,0,0.08)] dark:shadow-none transition-colors cursor-pointer touch-stamp focus-visible:outline-2 focus-visible:outline-band-ink"
         }
         aria-haspopup="true"
         aria-expanded={isOpen}
         aria-label={`切換語系 / Switch Language / 言語切替 / 언어 선택（${LOCALE_LABELS[locale] || locale}）`}
       >
-        <span aria-hidden="true" className={fab ? "text-lg" : "text-sm"}>🌐</span>
-        {!fab && (
+        {fab ? (
+          <span>{LOCALE_CODES[locale] || "TW"}</span>
+        ) : (
           <>
+            <span className="text-[10px] font-black tracking-widest opacity-60" aria-hidden="true">LANG</span>
             <span>{LOCALE_LABELS[locale] || locale}</span>
             <span aria-hidden="true" className="text-[10px] opacity-70">▾</span>
           </>
@@ -71,8 +80,8 @@ export function LanguageSwitcher({ className = "", menuPosition = "down", fab = 
           aria-label="Language selection"
           className={
             menuPosition === "up"
-              ? "absolute bottom-full mb-2 right-0 w-28 rounded-[4px] border-[1.5px] border-ink bg-card shadow-md py-1 z-50 divide-y divide-line-soft/60"
-              : "absolute right-0 mt-1 w-28 rounded-[4px] border-[1.5px] border-ink bg-card shadow-md py-1 z-50 divide-y divide-line-soft/60"
+              ? "absolute bottom-full mb-2 right-0 w-28 rounded-[3px] border-[1.5px] border-ink bg-card shadow-[4px_4px_0_rgba(0,0,0,0.2)] dark:shadow-none py-1 z-50 divide-y divide-line-soft/60"
+              : "absolute right-0 mt-1 w-28 rounded-[3px] border-[1.5px] border-ink bg-card shadow-[4px_4px_0_rgba(0,0,0,0.2)] dark:shadow-none py-1 z-50 divide-y divide-line-soft/60"
           }
         >
           {supportedLocales.map((code) => {

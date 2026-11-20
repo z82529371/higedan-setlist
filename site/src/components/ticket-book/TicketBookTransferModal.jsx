@@ -174,14 +174,14 @@ export function TicketBookTransferModal({
       role="dialog"
       aria-modal="true"
       data-testid="ticket-book-transfer-modal"
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-ink/70 backdrop-blur-xs overflow-y-auto animate-fade-in"
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-ink/75 overflow-y-auto animate-fade-in"
     >
-      <div className="relative w-full max-w-[560px] my-8 rounded-[4px] border-[1.5px] border-ink bg-card p-5 sm:p-7 shadow-2xl text-ink font-sans">
+      <div className="relative w-full max-w-[560px] my-8 rounded-[3px] border-[1.5px] border-ink bg-card p-5 sm:p-7 shadow-[6px_6px_0_rgba(0,0,0,0.25)] dark:shadow-none text-ink font-sans">
         {/* Close Button */}
         <button
           type="button"
           onClick={onClose}
-          className="absolute top-4 right-4 p-1 rounded hover:bg-tape-tint text-muted hover:text-ink transition-colors cursor-pointer"
+          className="absolute top-4 right-4 p-1 rounded-[3px] hover:bg-tape-tint text-muted hover:text-ink transition-colors cursor-pointer touch-stamp"
           aria-label={t("common.close", "關閉")}
         >
           <span className="text-xl leading-none">✕</span>
@@ -189,8 +189,8 @@ export function TicketBookTransferModal({
 
         {/* Modal Header */}
         <div className="text-center pb-2">
-          <div className="inline-flex items-center justify-center w-10 h-10 rounded-[4px] bg-band border border-ink shadow-2xs mb-2">
-            <span className="text-xl" aria-hidden="true">🔄</span>
+          <div className="inline-block font-mono text-[10px] font-bold tracking-[0.18em] uppercase px-2 py-0.5 rounded-[2px] bg-band text-band-ink border border-ink mb-2">
+            BACKUP & TRANSFER
           </div>
           <h2 className="m-0 font-display text-[20px] sm:text-[22px] font-black text-ink tracking-tight">
             {t("ticketBook.transferModalTitle", "票夾備份與跨裝置轉移")}

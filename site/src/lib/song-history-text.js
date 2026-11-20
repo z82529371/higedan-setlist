@@ -108,21 +108,21 @@ export function buildSongHistoryText({
       );
     lines.push(
       locale === "en"
-        ? `✨ Special versions: ${parts.join(" · ")}`
+        ? `Special versions: ${parts.join(" · ")}`
         : locale === "ja"
-          ? `✨ 特殊バージョン：${parts.join(" · ")}`
+          ? `特殊バージョン：${parts.join(" · ")}`
           : locale === "ko"
-            ? `✨ 특수 버전: ${parts.join(" · ")}`
-            : `✨ 特殊版本：${parts.join(" · ")}`
+            ? `특수 버전: ${parts.join(" · ")}`
+            : `特殊版本：${parts.join(" · ")}`
     );
   }
   lines.push(
     locale === "en"
-      ? `🔗 Source: Official Hige Dandism Two-Way Archive`
+      ? `Source: Official Hige Dandism Two-Way Archive`
       : locale === "ja"
-        ? `🔗 出典：Official 髭男 dism 双方向アーカイブ`
+        ? `出典：Official 髭男 dism 双方向アーカイブ`
         : locale === "ko"
-          ? `🔗 출처: Official 히게단 dism 양방향 아카이브`
+          ? `출처: Official 히게단 dism 양방향 아카이브`
           : `🔗 來源：Official 髭男 dism 演唱會雙向檔案庫`
   );
   return lines;

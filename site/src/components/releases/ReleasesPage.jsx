@@ -507,7 +507,7 @@ export function ReleasesPage({
                       <button
                         type="button"
                         onClick={() => setLightboxRelease(rel)}
-                        className="group/cover relative w-[72px] h-[72px] sm:w-[92px] sm:h-[92px] rounded-[3px] border border-ink/25 bg-paper shadow-2xs shrink-0 overflow-hidden flex items-center justify-center cursor-pointer transition-transform hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-band"
+                        className="group/cover relative w-[72px] h-[72px] sm:w-[92px] sm:h-[92px] rounded-[3px] border border-ink/25 bg-paper shadow-2xs shrink-0 overflow-hidden flex items-center justify-center cursor-pointer transition-colors hover:border-ink focus:outline-none focus:ring-2 focus:ring-band"
                         title={t("slips.song.viewJacket", "查看《{title}》唱片封面", { title: rel.title })}
                         aria-label={t("slips.song.viewJacket", "查看《{title}》唱片封面", { title: rel.title })}
                       >
@@ -614,7 +614,7 @@ export function ReleasesPage({
                     <button
                       type="button"
                       onClick={() => setLightboxRelease(rel)}
-                      className="group/cover relative w-[72px] h-[72px] sm:w-[92px] sm:h-[92px] rounded-[3px] border border-ink/25 bg-paper shadow-2xs shrink-0 overflow-hidden flex items-center justify-center cursor-pointer transition-transform hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-band"
+                      className="group/cover relative w-[72px] h-[72px] sm:w-[92px] sm:h-[92px] rounded-[3px] border border-ink/25 bg-paper shadow-2xs shrink-0 overflow-hidden flex items-center justify-center cursor-pointer transition-colors hover:border-ink focus:outline-none focus:ring-2 focus:ring-band"
                       title={t("slips.song.viewJacket", "查看《{title}》唱片封面", { title: rel.title })}
                       aria-label={t("slips.song.viewJacket", "查看《{title}》唱片封面", { title: rel.title })}
                     >

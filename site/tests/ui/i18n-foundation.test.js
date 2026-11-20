@@ -203,7 +203,8 @@ describe("13. i18n Foundation, Hash Route Query Parameter Seam, and Header Switc
         React.createElement(I18nProvider, { initialLocale: "zh-TW" }, React.createElement(LanguageSwitcher))
       );
       assert.ok(swHtmlZh.includes("繁中"), "must render active locale label '繁中'");
-      assert.ok(swHtmlZh.includes("🌐"), "must contain globe icon");
+      assert.ok(swHtmlZh.includes("LANG"), "must contain LANG monospace label");
+      assert.ok(!swHtmlZh.includes("🌐"), "must not use globe emoji in UI chrome");
       assert.ok(swHtmlZh.includes("border-[1.5px]"), "must adhere to ticket border-1.5px token");
       assert.ok(swHtmlZh.includes("bg-card"), "must use card background token");
       assert.ok(swHtmlZh.includes("touch-stamp"), "must apply mobile touch-stamp class");
@@ -328,8 +329,8 @@ describe("13. i18n Foundation, Hash Route Query Parameter Seam, and Header Switc
         )
       );
       assert.ok(mobileControlsHtml.includes('data-testid="language-switcher"'), "MobileFloatingControls must render LanguageSwitcher");
-      assert.ok(mobileControlsHtml.includes("rounded-full"), "MobileFloatingControls LanguageSwitcher must render round FAB");
-      assert.ok(mobileControlsHtml.includes("🌐"), "MobileFloatingControls LanguageSwitcher must display globe icon");
+      assert.ok(mobileControlsHtml.includes("rounded-[3px]"), "MobileFloatingControls LanguageSwitcher must render square stamp FAB");
+      assert.ok(!mobileControlsHtml.includes("🌐"), "MobileFloatingControls LanguageSwitcher must not display globe emoji");
     });
 
     it("renders LandingHero with full localized content, dynamic venueCount, and preserved tokens across all 4 locales", async () => {
@@ -419,12 +420,8 @@ describe("13. i18n Foundation, Hash Route Query Parameter Seam, and Header Switc
 
       // 4. Preserved Design Tokens across all locales
       for (const html of [htmlJa, htmlEn, htmlKo]) {
-        assert.ok(html.includes("BI-DIRECTIONAL"), "must preserve BI-DIRECTIONAL token");
-        assert.ok(html.includes("VENUE ATLAS"), "must preserve VENUE ATLAS token");
-        assert.ok(html.includes("TICKET BOOK"), "must preserve TICKET BOOK token");
-        assert.ok(html.includes("TOUR JOURNEY"), "must preserve TOUR JOURNEY token");
-        assert.ok(html.includes("LEADERBOARD"), "must preserve LEADERBOARD token");
-        assert.ok(html.includes("RELEASES"), "must preserve RELEASES token");
+        assert.ok(html.includes("INDEX 01—06"), "must preserve INDEX 01—06 ledger header");
+        assert.ok(html.includes("01") && html.includes("06"), "must preserve 01-06 ledger numbering");
         assert.ok(html.includes("Pretender"), "must preserve official song name Pretender");
       }
     });

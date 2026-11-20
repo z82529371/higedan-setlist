@@ -407,20 +407,20 @@ export function MemorialCardModal({
   return (
     <div
       data-testid="memorial-card-modal"
-      className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/80 backdrop-blur-sm overflow-y-auto"
+      className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/85 overflow-y-auto"
       onClick={onClose}
       role="dialog"
       aria-modal="true"
       aria-label={t("memorial.modalTitle", "巡演歌單紀念票券預覽")}
     >
       <div
-        className="relative w-full max-w-[500px] max-h-[94vh] flex flex-col rounded-2xl bg-[#1e212b] border border-[#374151] shadow-2xl overflow-hidden my-auto"
+        className="relative w-full max-w-[500px] max-h-[94vh] flex flex-col rounded-[3px] bg-[#1e212b] border-[1.5px] border-ink shadow-[6px_6px_0_rgba(0,0,0,0.35)] overflow-hidden my-auto"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Modal Top Bar */}
         <div className="flex items-center justify-between px-4 py-3 border-b border-[#2d3446] bg-[#171922] text-[#f3f4f6]">
           <div className="flex items-center gap-2">
-            <span className="text-base" aria-hidden="true">📸</span>
+            <span className="font-mono text-[10px] font-bold tracking-[0.14em] uppercase text-[#d49a00]" aria-hidden="true">[PREVIEW]</span>
             <span className="font-bold text-sm tracking-wide">
               {t("memorial.modalTitle", "巡演歌單紀念票券預覽")}
             </span>
@@ -854,14 +854,14 @@ export function MemorialCardModal({
               href={currentImageUrl}
               download={`higedan-memorial-${showKey}-${theme}.png`}
               data-testid="memorial-download-btn"
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-[4px] font-mono text-xs font-bold bg-band text-band-ink border border-ink/40 shadow-2xs hover:brightness-105 transition-colors cursor-pointer"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-[3px] font-mono text-xs font-bold bg-band text-band-ink border border-ink/40 hover:brightness-105 transition-colors cursor-pointer touch-stamp"
             >
-              <span aria-hidden="true">⬇️</span>
+              <span aria-hidden="true" className="font-mono">↓</span>
               <span>{t("memorial.downloadPng", "下載透明圓角 PNG")}</span>
             </a>
           )}
-          <div className="flex items-center gap-2 text-xs text-[#d49a00] bg-[#d49a00]/10 border border-[#d49a00]/30 px-3 py-1.5 rounded-lg font-mono">
-            <span aria-hidden="true">{isGenerating ? "⏳" : "💡"}</span>
+          <div className="flex items-center gap-2 text-xs text-[#d49a00] bg-[#d49a00]/10 border border-[#d49a00]/30 px-3 py-1.5 rounded-[3px] font-mono">
+            <span aria-hidden="true" className="font-bold">{isGenerating ? "[...]" : "NOTE:"}</span>
             <span className="font-bold">
               {isGenerating
                 ? t("memorial.generating", "高清紀念卡生成中...")

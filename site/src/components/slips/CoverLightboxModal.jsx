@@ -45,12 +45,12 @@ export function CoverLightboxModal({
       aria-modal="true"
       aria-labelledby="cover-lightbox-title"
       data-testid="cover-lightbox-modal"
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-xs select-none animate-fadeIn"
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 select-none animate-fadeIn"
       onClick={(e) => {
         if (e.target === e.currentTarget) onClose();
       }}
     >
-      <div className="relative w-full max-w-sm sm:max-w-md bg-card rounded-lg border border-line-soft shadow-xs overflow-hidden flex flex-col">
+      <div className="relative w-full max-w-sm sm:max-w-md bg-card rounded-[3px] border-[1.5px] border-ink shadow-[6px_6px_0_rgba(0,0,0,0.3)] dark:shadow-none overflow-hidden flex flex-col">
         {/* Top Header Bar */}
         <div className="flex items-center justify-between px-3.5 py-2.5 bg-paper border-b border-line-soft">
           <div className="flex items-center gap-1.5 min-w-0">

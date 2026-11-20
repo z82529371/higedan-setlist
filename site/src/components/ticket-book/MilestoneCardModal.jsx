@@ -115,7 +115,7 @@ export function MilestoneCardModal({ isOpen, onClose, milestones, storage: propS
   return (
     <div
       data-testid="milestone-card-modal"
-      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-ink/60 backdrop-blur-xs overflow-y-auto"
+      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-ink/70 overflow-y-auto"
       onClick={(e) => {
         if (e.target === e.currentTarget) onClose();
       }}
@@ -124,8 +124,8 @@ export function MilestoneCardModal({ isOpen, onClose, milestones, storage: propS
         {/* Modal Top Actions Toolbar */}
         <div className="w-full flex items-center justify-between pb-3 text-card">
           <div className="flex items-center gap-2">
-            <span className="text-xl" aria-hidden="true">
-              🎫
+            <span className="font-mono text-[10px] font-bold tracking-[0.14em] uppercase text-band" aria-hidden="true">
+              [MILESTONE]
             </span>
             <span className="font-mono text-[12px] font-bold uppercase tracking-wider text-card">
               {t("ticketBook.milestonesTitle", "生涯里程碑")}
@@ -135,7 +135,7 @@ export function MilestoneCardModal({ isOpen, onClose, milestones, storage: propS
             type="button"
             data-testid="close-milestone-modal-btn"
             onClick={onClose}
-            className="rounded p-1 text-card hover:text-card/80 text-lg font-bold cursor-pointer"
+            className="rounded-[3px] p-1 text-card hover:text-card/80 text-lg font-bold cursor-pointer touch-stamp"
             aria-label={t("common.close", "關閉")}
           >
             ✕
@@ -143,12 +143,11 @@ export function MilestoneCardModal({ isOpen, onClose, milestones, storage: propS
         </div>
 
         {/* Customizer Drawer / Holder Input */}
-        <div className="w-full bg-ink/80 border border-card/30 rounded-[8px] p-2.5 mb-3 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2 shadow-lg">
+        <div className="w-full bg-ink/90 border border-card/30 rounded-[3px] p-2.5 mb-3 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2 shadow-[4px_4px_0_rgba(0,0,0,0.28)]">
           <label
             htmlFor="milestone-holder-input"
             className="font-mono text-xs font-bold text-card flex items-center gap-1.5 shrink-0"
           >
-            <span aria-hidden="true">👤</span>
             <span>{t("ticketBook.holderLabel", "歌迷暱稱・ID")}</span>
           </label>
           <input
@@ -387,14 +386,14 @@ export function MilestoneCardModal({ isOpen, onClose, milestones, storage: propS
             href={imageUrl}
             download="higedan-milestone-summary.png"
             data-testid="milestone-download-btn"
-            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-[4px] font-mono text-xs font-bold bg-band text-band-ink border border-ink/40 shadow-2xs hover:brightness-105 transition-colors cursor-pointer"
+            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-[3px] font-mono text-xs font-bold bg-band text-band-ink border border-ink/40 hover:brightness-105 transition-colors cursor-pointer touch-stamp"
           >
-            <span aria-hidden="true">⬇️</span>
+            <span aria-hidden="true" className="font-mono">↓</span>
             <span>{t("memorial.downloadPng", "下載透明圓角 PNG")}</span>
           </a>
         )}
-        <div className="flex items-center gap-2 text-xs text-card bg-ink/75 border border-card/30 px-3 py-1.5 rounded-[6px] font-mono">
-          <span aria-hidden="true">{isExporting ? "⏳" : "💡"}</span>
+        <div className="flex items-center gap-2 text-xs text-card bg-ink/85 border border-card/30 px-3 py-1.5 rounded-[3px] font-mono">
+          <span aria-hidden="true" className="font-bold">{isExporting ? "[...]" : "NOTE:"}</span>
           <span className="font-bold">
             {isExporting
               ? t("memorial.generating", "高清紀念卡生成中...")

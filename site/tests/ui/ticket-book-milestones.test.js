@@ -983,7 +983,7 @@ describe("25. TicketBook Dynamic Milestones Calculation & Summary Card (#37)", (
       // Verify DESIGN.md tokens & contrast invariants
       assert.ok(!openHtml.includes("text-[#"), "Must not use arbitrary hex colors");
       assert.ok(openHtml.includes("text-ink"), "Must use high-contrast ink tokens");
-      assert.ok(openHtml.includes("rounded-t-[8px]"), "Drawer must follow DESIGN.md card radius <= 8px");
+      assert.ok(openHtml.includes("rounded-t-[3px]"), "Drawer must follow DESIGN.md card radius <= 3px");
       assert.ok(!openHtml.includes("rounded-t-[14px]"), "Drawer must not use rounded-t-[14px]");
 
       // 3. Filtered state: only unlocked

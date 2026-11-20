@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useI18n } from "../../lib/i18n.jsx";
+import { RouteIcon } from "../common/ArchivalIcons.jsx";
 
 export function JourneyFilterDrawer({
   isOpen,
@@ -42,7 +43,7 @@ export function JourneyFilterDrawer({
 
   return (
     <div
-      className="fixed inset-0 z-50 flex flex-col justify-end bg-ink/60 backdrop-blur-xs sm:hidden"
+      className="fixed inset-0 z-50 flex flex-col justify-end bg-ink/65 sm:hidden"
       role="dialog"
       aria-modal="true"
       aria-label={t("venueMap.filterDrawerAria", "巡演篩選抽屜")}
@@ -50,16 +51,16 @@ export function JourneyFilterDrawer({
     >
       <div className="fixed inset-0" onClick={onClose} aria-hidden="true" />
 
-      <div className="relative z-10 max-h-[85vh] w-full rounded-t-[14px] border-t-[2px] border-x-[2px] border-ink bg-card shadow-2xl flex flex-col overflow-hidden animate-in slide-in-from-bottom duration-200">
+      <div className="relative z-10 max-h-[85vh] w-full rounded-t-[3px] border-t-[2px] border-x-[2px] border-ink bg-card shadow-[0_-6px_0_rgba(0,0,0,0.18)] flex flex-col overflow-hidden animate-in slide-in-from-bottom duration-200">
         {/* Drag Handle Bar */}
         <div className="flex justify-center pt-2 pb-1" aria-hidden="true">
-          <div className="h-1.5 w-12 rounded-full bg-line-soft" />
+          <div className="h-1 w-10 rounded-[2px] bg-line-soft" />
         </div>
 
         {/* Sheet Header */}
         <div className="flex items-center justify-between border-b border-line-soft px-4 py-2.5 bg-paper/50">
           <div className="flex items-center gap-2">
-            <span className="text-lg" aria-hidden="true">🚐</span>
+            <RouteIcon className="w-4 h-4 text-ink shrink-0" />
             <span className="font-display text-[14px] font-black text-ink">
               {t("venueMap.journeyFilterTitle", "巡演足跡篩選")}
             </span>
@@ -68,7 +69,7 @@ export function JourneyFilterDrawer({
           <button
             type="button"
             onClick={onClose}
-            className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-paper border border-line-soft text-muted hover:text-ink hover:bg-tape-tint cursor-pointer font-bold"
+            className="flex h-7 w-7 shrink-0 items-center justify-center rounded-[3px] bg-paper border border-ink/40 text-muted hover:text-ink hover:bg-tape-tint cursor-pointer touch-stamp font-bold"
             aria-label={t("navigators.drawer.closeAria", "關閉抽屜")}
           >
             ✕
@@ -182,7 +183,7 @@ export function JourneyFilterDrawer({
           <button
             type="button"
             onClick={onClose}
-            className="w-1/3 rounded bg-card py-2.5 font-mono text-[13px] font-bold text-ink border border-line-soft hover:bg-tape-tint/50 transition-colors cursor-pointer active:scale-[0.98]"
+            className="w-1/3 rounded-[3px] bg-card py-2.5 font-mono text-[13px] font-bold text-ink border border-line-soft hover:bg-tape-tint/50 transition-colors cursor-pointer touch-stamp"
           >
             {t("navigators.drawer.cancel", "取消")}
           </button>
@@ -190,7 +191,7 @@ export function JourneyFilterDrawer({
             type="button"
             data-testid="journey-drawer-confirm-btn"
             onClick={handleCommit}
-            className="flex-1 rounded bg-band py-2.5 px-3 font-display text-[13px] font-black text-band-ink border border-ink/40 shadow-xs hover:brightness-105 transition-all cursor-pointer active:scale-[0.98] truncate"
+            className="flex-1 rounded-[3px] bg-band py-2.5 px-3 font-display text-[13px] font-black text-band-ink border border-ink/40 hover:brightness-105 transition-colors cursor-pointer touch-stamp truncate"
           >
             {t("navigators.drawer.confirm", "確認套用")}
           </button>

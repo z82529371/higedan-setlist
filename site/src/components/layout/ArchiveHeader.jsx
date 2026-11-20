@@ -1,6 +1,7 @@
 import { queryTabClass } from "../../lib/constants.js";
 import { useI18n } from "../../lib/i18n.jsx";
 import LanguageSwitcher from "../LanguageSwitcher.jsx";
+import { TicketIcon, MusicNoteIcon, VenuePinIcon } from "../common/ArchivalIcons.jsx";
 
 export function ArchiveHeader({
   totalAllShows,
@@ -31,28 +32,32 @@ export function ArchiveHeader({
         <p className="mt-2 mb-0 text-[12px] sm:text-[14px] text-muted leading-relaxed">
           {t("header.archiveSubtitle")}
         </p>
-        <div className="mt-3 -mx-4 px-4 sm:mx-0 sm:px-0 flex items-center gap-2 overflow-x-auto sm:flex-wrap font-mono text-[11px] sm:text-[12px] text-ink scrollbar-none">
-          <span className="shrink-0 inline-flex items-center gap-1 rounded-[4px] border border-ink/20 bg-paper px-2.5 py-1 font-semibold shadow-2xs">
-            <span aria-hidden="true">📅</span> {t("header.years")}
+
+        {/* Archival Spec Ledger Line (replaces KPI Pill Bar) */}
+        <div className="mt-3 border-y border-ink/20 py-1.5 font-mono text-[11px] sm:text-[12px] text-ink/85 flex flex-wrap items-center gap-x-3 gap-y-1 tabular-nums">
+          <span className="font-bold text-ink">{t("header.years")}</span>
+          <span className="text-ink/30" aria-hidden="true">/</span>
+          <span>
+            <strong className="font-bold text-ink">{totalAllShows}</strong> {t("header.publicShows")}
           </span>
-          <span className="shrink-0 inline-flex items-center gap-1 rounded-[4px] border border-ink/20 bg-paper px-2.5 py-1 font-semibold shadow-2xs">
-            <span aria-hidden="true">🎫</span> {totalAllShows} {t("header.publicShows")}
+          <span className="text-ink/30" aria-hidden="true">/</span>
+          <span>
+            <strong className="font-bold text-ink">{categoriesCount}</strong> {t("header.performanceTypes")}
           </span>
-          <span className="shrink-0 inline-flex items-center gap-1 rounded-[4px] border border-ink/20 bg-paper px-2.5 py-1 font-semibold shadow-2xs">
-            <span aria-hidden="true">🎭</span> {categoriesCount} {t("header.performanceTypes")}
+          <span className="text-ink/30" aria-hidden="true">/</span>
+          <span>
+            <strong className="font-bold text-ink">{allUsedSongs.length}</strong> {t("header.originalSongs")}
           </span>
-          <span className="shrink-0 inline-flex items-center gap-1 rounded-[4px] border border-ink/20 bg-paper px-2.5 py-1 font-semibold shadow-2xs">
-            <span aria-hidden="true">🎵</span> {allUsedSongs.length} {t("header.originalSongs")}
-          </span>
-          <span className="shrink-0 inline-flex items-center gap-1 rounded-[4px] border border-ink/20 bg-paper px-2.5 py-1 font-semibold shadow-2xs">
-            <span aria-hidden="true">📍</span> {allVenues.length} {t("header.historicVenues")}
+          <span className="text-ink/30" aria-hidden="true">/</span>
+          <span>
+            <strong className="font-bold text-ink">{allVenues.length}</strong> {t("header.historicVenues")}
           </span>
         </div>
       </header>
 
       {/* Top 3 Query Tabs (Desktop only: on small screens, tab switching is centralized in the FilterDrawer) */}
       <div
-        className="hidden sm:grid mt-2.5 sm:mt-4 mb-3 w-full grid-cols-3 divide-x-[1.5px] divide-ink overflow-hidden rounded-[4px] border-[1.5px] border-ink bg-card shadow-sm"
+        className="hidden sm:grid mt-2.5 sm:mt-4 mb-3 w-full grid-cols-3 divide-x-[1.5px] divide-ink overflow-hidden rounded-[3px] border-[1.5px] border-ink bg-card shadow-[3px_3px_0_rgba(0,0,0,0.12)] dark:shadow-none"
         role="group"
         aria-label={t("nav.directionLabel")}
       >
@@ -66,7 +71,7 @@ export function ArchiveHeader({
           }}
           aria-pressed={tab === "show"}
         >
-          <span aria-hidden="true">🎫</span>
+          <TicketIcon className="w-4 h-4 shrink-0" />
           <span>{t("nav.shows")}</span>
           <span className="font-mono text-[11px] opacity-75 tabular-nums">
             ({totalAllShows})
@@ -83,7 +88,7 @@ export function ArchiveHeader({
           }}
           aria-pressed={tab === "song"}
         >
-          <span aria-hidden="true">🎵</span>
+          <MusicNoteIcon className="w-4 h-4 shrink-0" />
           <span>{t("nav.songs")}</span>
           <span className="font-mono text-[11px] opacity-75 tabular-nums">
             ({allUsedSongs.length})
@@ -100,7 +105,7 @@ export function ArchiveHeader({
           }}
           aria-pressed={tab === "venue"}
         >
-          <span aria-hidden="true">🏛️</span>
+          <VenuePinIcon className="w-4 h-4 shrink-0" />
           <span>{t("nav.venues")}</span>
           <span className="font-mono text-[11px] opacity-75 tabular-nums">
             ({allVenues.length})

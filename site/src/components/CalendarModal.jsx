@@ -175,7 +175,7 @@ export default function CalendarModal({
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-ink/60 backdrop-blur-xs select-none animate-fade-in"
+      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-ink/65 select-none animate-fade-in"
       role="dialog"
       aria-modal="true"
       aria-label={t("calendar.ariaLabel", "演出日曆")}
@@ -184,26 +184,23 @@ export default function CalendarModal({
       }}
     >
       <div
-        className="relative w-full max-w-[440px] rounded-2xl border-[1.5px] border-ink bg-card p-4 sm:p-5 shadow-lg text-ink"
+        className="relative w-full max-w-[440px] rounded-[3px] border-[1.5px] border-ink bg-card p-4 sm:p-5 shadow-[6px_6px_0_rgba(0,0,0,0.22)] dark:shadow-none text-ink"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header: Title + Close Button */}
         <div className="flex items-center justify-between pb-3 border-b border-line-soft">
-          <div className="flex items-center gap-2">
-            <span className="text-xl" aria-hidden="true">📅</span>
-            <div>
-              <h3 className="m-0 text-[16px] font-bold tracking-tight text-ink">
-                {t("calendar.title", "歷史演出日曆")}
-              </h3>
-              <p className="m-0 text-[11px] font-mono text-muted">
-                {t("calendar.hint", "僅點選標示之有場次日期")}
-              </p>
-            </div>
+          <div>
+            <h3 className="m-0 text-[16px] font-bold tracking-tight text-ink">
+              {t("calendar.title", "歷史演出日曆")}
+            </h3>
+            <p className="m-0 text-[11px] font-mono text-muted">
+              {t("calendar.hint", "僅點選標示之有場次日期")}
+            </p>
           </div>
           <button
             type="button"
             onClick={onClose}
-            className="flex h-8 w-8 items-center justify-center rounded-full bg-paper border border-line-soft text-muted hover:text-ink hover:bg-tape-tint active:scale-95 cursor-pointer font-bold text-sm transition-transform"
+            className="flex h-8 w-8 items-center justify-center rounded-[3px] bg-paper border border-ink/40 text-muted hover:text-ink hover:bg-tape-tint touch-stamp cursor-pointer font-bold text-sm transition-colors"
             aria-label={t("calendar.closeAria", "關閉日曆")}
           >
             ✕
@@ -268,7 +265,7 @@ export default function CalendarModal({
         </div>
 
         {/* Calendar Grid */}
-        <div className="rounded-xl border border-line-soft bg-paper/60 p-2 sm:p-2.5">
+        <div className="rounded-[3px] border border-line-soft bg-paper/60 p-2 sm:p-2.5">
           {/* Weekday headers */}
           <div className="grid grid-cols-7 gap-1 text-center font-mono text-[11px] font-bold text-muted pb-1 mb-1 border-b border-line-soft/60">
             {weekdays.map((w, idx) => (
@@ -302,7 +299,7 @@ export default function CalendarModal({
                     key={`day-${day}`}
                     type="button"
                     onClick={() => handleDayClick(dateStr, dayShows)}
-                    className="relative flex flex-col items-center justify-center h-9 sm:h-10 rounded-lg border-[1.5px] border-band-ink/60 bg-band hover:bg-band-ink hover:text-band active:scale-95 text-ink font-bold cursor-pointer transition-all shadow-2xs group"
+                    className="relative flex flex-col items-center justify-center h-9 sm:h-10 rounded-[3px] border-[1.5px] border-band-ink/60 bg-band hover:bg-band-ink hover:text-band text-ink font-bold cursor-pointer touch-stamp transition-colors group"
                     title={t("calendar.dayTitle", "{date}（{count}場演出）點擊跳轉", { date: dateStr, count })}
                   >
                     <span className="font-mono text-[12px] sm:text-[13px] leading-none">
@@ -340,11 +337,11 @@ export default function CalendarModal({
 
         {/* Multi-show Picker Popover overlay (when a date has >= 2 shows) */}
         {selectedDayShows && (
-          <div className="absolute inset-0 z-20 flex flex-col justify-end p-3 bg-ink/40 backdrop-blur-xs rounded-2xl animate-fade-in">
-            <div className="rounded-xl border-[1.5px] border-ink bg-card p-3 shadow-lg flex flex-col gap-2">
+          <div className="absolute inset-0 z-20 flex flex-col justify-end p-3 bg-ink/55 rounded-[3px] animate-fade-in">
+            <div className="rounded-[3px] border-[1.5px] border-ink bg-card p-3 shadow-[4px_4px_0_rgba(0,0,0,0.2)] dark:shadow-none flex flex-col gap-2">
               <div className="flex items-center justify-between border-b border-line-soft pb-2">
                 <span className="font-mono text-xs font-bold text-ink">
-                  📅 {t("calendar.selectedDay", "{date} 共 {count} 場演出", { date: selectedDayShows.date, count: selectedDayShows.shows.length })}
+                  {t("calendar.selectedDay", "{date} 共 {count} 場演出", { date: selectedDayShows.date, count: selectedDayShows.shows.length })}
                 </span>
                 <button
                   type="button"

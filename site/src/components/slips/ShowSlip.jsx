@@ -388,7 +388,6 @@ export function ShowSlip({
                 data-testid="official-tour-site-link"
                 className="inline-flex items-center gap-1 rounded-[3px] border border-ink/30 bg-card hover:bg-band hover:text-band-ink hover:border-ink px-2 py-0.5 font-mono text-xs font-bold text-ink no-underline transition-colors touch-stamp"
               >
-                <span aria-hidden="true">🌐</span>
                 <span>{t("slips.officialTourSite", "官方特設頁")}</span>
                 <span aria-hidden="true">↗</span>
               </a>

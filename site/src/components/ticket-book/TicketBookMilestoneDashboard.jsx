@@ -68,12 +68,11 @@ export function TicketBookMilestoneDashboard({
             type="button"
             data-testid="generate-summary-card-btn"
             onClick={onOpenSummaryCard}
-            className="inline-flex items-center justify-center gap-1.5 rounded-[4px] bg-band text-band-ink font-bold text-[11px] sm:text-[12px] px-3.5 py-1.5 border-[1.5px] border-ink shadow-2xs hover:brightness-105 transition-all cursor-pointer touch-stamp self-start sm:self-auto"
+            className="inline-flex items-center justify-center gap-1.5 rounded-[3px] bg-band text-band-ink font-bold text-[11px] sm:text-[12px] px-3.5 py-1.5 border-[1.5px] border-ink shadow-[2px_2px_0_rgba(0,0,0,0.18)] dark:shadow-none hover:brightness-105 transition-colors cursor-pointer touch-stamp self-start sm:self-auto"
             title={t("ticketBook.generateCard", "產生生涯總結小卡")}
           >
-            <span aria-hidden="true">🎫</span>
             <span>{t("ticketBook.generateCard", "產生生涯總結小卡")}</span>
-            <span aria-hidden="true">✨</span>
+            <span aria-hidden="true" className="font-mono">→</span>
           </button>
         )}
       </div>
@@ -186,8 +185,7 @@ export function TicketBookMilestoneDashboard({
             className="w-full flex items-center justify-between mb-2 pb-1.5 border-b border-line-soft/60 cursor-pointer select-none text-left focus:outline-none"
           >
             <span className="font-mono text-[11px] font-bold text-ink uppercase flex items-center gap-1">
-              <span>🔥</span>
-              <span>{t("ticketBook.topSongs", "現場神曲 Top 3")}</span>
+              <span>{t("ticketBook.topSongs", "現場高頻曲 Top 3")}</span>
             </span>
             <span className="font-mono text-[11px] font-bold text-muted transition-transform select-none" aria-hidden="true">
               {topSongsOpen ? "▼" : "▶"}

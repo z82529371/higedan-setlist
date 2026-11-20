@@ -49,11 +49,11 @@ export function UpdateNotificationToast({ forceShow = false, onUpdate, onDismiss
       data-testid="pwa-update-toast"
       role="alert"
       aria-live="polite"
-      className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 flex max-w-[calc(100vw-2rem)] sm:max-w-lg items-center gap-3 rounded-xl border-2 border-band bg-ink px-4 py-3 text-paper shadow-xl"
+      className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 flex max-w-[calc(100vw-2rem)] sm:max-w-lg items-center gap-3 rounded-[3px] border-[1.5px] border-band bg-ink px-4 py-3 text-paper shadow-[5px_5px_0_rgba(0,0,0,0.28)]"
     >
       <div className="flex items-center gap-2 min-w-0 flex-1">
-        <span className="text-base select-none shrink-0" aria-hidden="true">
-          ✨
+        <span className="font-mono text-[10px] font-bold tracking-[0.14em] uppercase text-band shrink-0" aria-hidden="true">
+          [UPDATE]
         </span>
         <p className="text-xs sm:text-sm font-medium tracking-tight text-paper truncate">
           {t("pwa.updateAvailable", "巡演歌單與功能已有新版本")}
@@ -66,7 +66,7 @@ export function UpdateNotificationToast({ forceShow = false, onUpdate, onDismiss
           data-testid="pwa-update-refresh-btn"
           onClick={handleUpdate}
           disabled={isUpdating}
-          className="inline-flex items-center justify-center rounded-lg bg-band px-3 py-1.5 text-xs font-bold text-band-ink shadow-xs hover:opacity-90 active:scale-95 disabled:opacity-50 cursor-pointer transition-all"
+          className="inline-flex items-center justify-center rounded-[3px] border border-ink bg-band px-3 py-1.5 text-xs font-bold text-band-ink hover:brightness-105 disabled:opacity-50 cursor-pointer touch-stamp transition-colors"
         >
           {isUpdating ? t("pwa.updating", "更新中...") : t("pwa.updateNow", "立即更新")}
         </button>
@@ -75,7 +75,7 @@ export function UpdateNotificationToast({ forceShow = false, onUpdate, onDismiss
           data-testid="pwa-update-dismiss-btn"
           onClick={handleDismiss}
           aria-label={t("pwa.dismissAria", "關閉版本更新提醒")}
-          className="inline-flex items-center justify-center rounded-lg border border-line/40 px-2.5 py-1.5 text-xs font-medium text-paper/80 hover:text-paper hover:bg-card/20 active:scale-95 cursor-pointer transition-all"
+          className="inline-flex items-center justify-center rounded-[3px] border border-line/50 px-2.5 py-1.5 text-xs font-medium text-paper/85 hover:text-paper hover:bg-card/20 cursor-pointer touch-stamp transition-colors"
         >
           {t("pwa.dismiss", "稍後")}
         </button>

@@ -14,6 +14,7 @@ import { assignCues } from "../../lib/resolve.js";
 import LanguageSwitcher from "../LanguageSwitcher.jsx";
 import { ArchiveFooter } from "../layout/ArchiveFooter.jsx";
 import { SLIP_ARTICLE, SLIP_TAPE } from "../../lib/constants.js";
+import { HomeIcon } from "../common/ArchivalIcons.jsx";
 
 export function TicketBookPage({
   unitData,
@@ -579,32 +580,32 @@ export function TicketBookPage({
         />
       )}
 
-      {/* Mobile Floating Action Controls (sm:hidden) */}
-      <div className="fixed bottom-5 right-4 z-40 sm:hidden flex flex-col items-end gap-2.5 select-none">
+      {/* Mobile Floating Stamp Controls (sm:hidden) */}
+      <div className="fixed bottom-5 right-4 z-40 sm:hidden flex flex-col items-end gap-2 select-none">
         <button
           type="button"
           data-testid="mobile-ticket-backup-fab"
           onClick={() => setIsTransferModalOpen(true)}
-          className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-paper/95 text-ink font-bold shadow-md border-[1.5px] border-ink text-[14px] cursor-pointer hover:bg-tape-tint active:scale-95 transition-all backdrop-blur-xs"
+          className="inline-flex items-center justify-center w-10 h-10 rounded-[3px] bg-paper text-ink font-mono font-bold border-[1.5px] border-ink shadow-[2px_2px_0_#000] dark:shadow-none text-[13px] cursor-pointer hover:bg-tape-tint touch-stamp transition-colors"
           title={t("ticketBook.backupTriggerTitle", "備份或跨裝置轉移您的票夾紀錄")}
           aria-label={t("ticketBook.backupTrigger", "備份與轉移")}
         >
-          🔄
+          ⇄
         </button>
         <LanguageSwitcher fab menuPosition="up" />
       </div>
 
-      <div className="fixed bottom-5 left-4 z-30 sm:hidden flex flex-col items-start gap-2.5 select-none">
+      <div className="fixed bottom-5 left-4 z-30 sm:hidden flex flex-col items-start gap-2 select-none">
         {onReturnArchive && (
           <button
             type="button"
             data-testid="mobile-ticket-back-archive-fab"
             onClick={onReturnArchive}
-            className="inline-flex items-center gap-1.5 px-3 h-10 rounded-full bg-paper/95 text-ink font-bold shadow-md border-[1.5px] border-ink text-[12px] cursor-pointer hover:bg-tape-tint active:scale-95 transition-all backdrop-blur-xs"
+            className="inline-flex items-center gap-1.5 px-3 h-10 rounded-[3px] bg-paper text-ink font-bold border-[1.5px] border-ink shadow-[2px_2px_0_#000] dark:shadow-none text-[12px] cursor-pointer hover:bg-tape-tint touch-stamp transition-colors"
             title={t("ticketBook.backToArchive", "返回檔案庫")}
             aria-label={t("ticketBook.backToArchive", "返回檔案庫")}
           >
-            <span aria-hidden="true">←</span>
+            <span aria-hidden="true" className="font-mono">←</span>
             <span>{t("ticketBook.backToArchive", "返回檔案庫")}</span>
           </button>
         )}
@@ -615,11 +616,11 @@ export function TicketBookPage({
               type="button"
               data-testid="mobile-ticket-back-home-fab"
               onClick={onReturnHome}
-              className="inline-flex items-center gap-1 px-3 h-10 rounded-full bg-paper/95 text-ink font-bold shadow-md border-[1.5px] border-ink text-[12px] cursor-pointer hover:bg-tape-tint active:scale-95 transition-all backdrop-blur-xs"
+              className="inline-flex items-center gap-1.5 px-3 h-10 rounded-[3px] bg-paper text-ink font-bold border-[1.5px] border-ink shadow-[2px_2px_0_#000] dark:shadow-none text-[12px] cursor-pointer hover:bg-tape-tint touch-stamp transition-colors"
               aria-label={t("mobile.backHomeAria", "回到首頁門面")}
               title={t("mobile.backHomeTitle", "回到首頁門面")}
             >
-              <span aria-hidden="true">🏠</span>
+              <HomeIcon className="w-3.5 h-3.5 shrink-0" />
               <span>{t("mobile.home", "首頁")}</span>
             </button>
           )}
@@ -627,11 +628,11 @@ export function TicketBookPage({
             type="button"
             data-testid="mobile-ticket-back-top-fab"
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-paper/95 text-ink font-bold shadow-md border border-ink text-[14px] cursor-pointer hover:bg-tape-tint active:scale-95 transition-all backdrop-blur-xs"
+            className="inline-flex items-center justify-center w-10 h-10 rounded-[3px] bg-paper text-ink font-mono font-bold border-[1.5px] border-ink shadow-[2px_2px_0_#000] dark:shadow-none text-[12px] cursor-pointer hover:bg-tape-tint touch-stamp transition-colors"
             aria-label={t("mobile.backTopAria", "回到頁首")}
             title={t("mobile.backTopTitle", "回到頁首")}
           >
-            ↑
+            ▲
           </button>
         </div>
       </div>

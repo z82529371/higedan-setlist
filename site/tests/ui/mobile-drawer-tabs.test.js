@@ -66,9 +66,10 @@ describe("29. Mobile Filter Drawer Dimension Tabs & Transactional Rollback", () 
     );
 
     assert.ok(html.includes("hidden sm:grid"), "ArchiveHeader must hide tabs on small screens via hidden sm:grid");
-    assert.ok(html.includes("🎫"), "ArchiveHeader must still contain show emoji tab for desktop");
-    assert.ok(html.includes("🎵"), "ArchiveHeader must still contain song emoji tab for desktop");
-    assert.ok(html.includes("🏛️"), "ArchiveHeader must still contain venue emoji tab for desktop");
+    assert.ok(html.includes("<svg"), "ArchiveHeader must use monochrome SVG icons instead of emojis");
+    assert.ok(!html.includes("🎫"), "ArchiveHeader must not contain show emoji");
+    assert.ok(!html.includes("🎵"), "ArchiveHeader must not contain song emoji");
+    assert.ok(!html.includes("🏛️"), "ArchiveHeader must not contain venue emoji");
   });
 
   it("verifies MobileFloatingControls displays dynamic dimension icon and unified '篩選' text across locales", () => {
@@ -93,7 +94,8 @@ describe("29. Mobile Filter Drawer Dimension Tabs & Transactional Rollback", () 
           })
         )
       );
-      assert.ok(htmlShow.includes("🎫"), `MobileFloatingControls must show 🎫 in show mode for ${locale}`);
+      assert.ok(htmlShow.includes("<svg"), `MobileFloatingControls must render SVG icon in show mode for ${locale}`);
+      assert.ok(!htmlShow.includes("🎫"), `MobileFloatingControls must not show 🎫 emoji in show mode for ${locale}`);
       assert.ok(htmlShow.includes(expectedText), `MobileFloatingControls must show ${expectedText} in show mode for ${locale}`);
 
       // 2. Song mode
@@ -109,7 +111,8 @@ describe("29. Mobile Filter Drawer Dimension Tabs & Transactional Rollback", () 
           })
         )
       );
-      assert.ok(htmlSong.includes("🎵"), `MobileFloatingControls must show 🎵 in song mode for ${locale}`);
+      assert.ok(htmlSong.includes("<svg"), `MobileFloatingControls must render SVG icon in song mode for ${locale}`);
+      assert.ok(!htmlSong.includes("🎵"), `MobileFloatingControls must not show 🎵 emoji in song mode for ${locale}`);
       assert.ok(htmlSong.includes(expectedText), `MobileFloatingControls must show ${expectedText} in song mode for ${locale}`);
 
       // 3. Venue mode
@@ -125,7 +128,8 @@ describe("29. Mobile Filter Drawer Dimension Tabs & Transactional Rollback", () 
           })
         )
       );
-      assert.ok(htmlVenue.includes("🏛️"), `MobileFloatingControls must show 🏛️ in venue mode for ${locale}`);
+      assert.ok(htmlVenue.includes("<svg"), `MobileFloatingControls must render SVG icon in venue mode for ${locale}`);
+      assert.ok(!htmlVenue.includes("🏛️"), `MobileFloatingControls must not show 🏛️ emoji in venue mode for ${locale}`);
       assert.ok(htmlVenue.includes(expectedText), `MobileFloatingControls must show ${expectedText} in venue mode for ${locale}`);
     }
   });

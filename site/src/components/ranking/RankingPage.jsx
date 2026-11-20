@@ -227,11 +227,10 @@ export function RankingPage({
                     if (isVenueBoard && onSelectVenue) onSelectVenue(top3[1].name);
                     else if (!isVenueBoard && onSelectSong) onSelectSong(top3[1].id);
                   }}
-                  className="order-2 sm:order-1 rounded-[3px] border-[1.5px] border-ink bg-card p-4 sm:p-5 shadow-xs text-left cursor-pointer hover:bg-tape-tint/30 active:scale-[0.99] transition-all flex flex-col justify-between sm:min-h-[195px] relative group"
+                  className="order-2 sm:order-1 rounded-[3px] border-[1.5px] border-ink bg-card p-4 sm:p-5 shadow-[3px_3px_0_rgba(0,0,0,0.12)] dark:shadow-none text-left cursor-pointer hover:bg-tape-tint/30 touch-stamp transition-colors flex flex-col justify-between sm:min-h-[195px] relative group"
                 >
                   <div className="flex items-center justify-between gap-2 w-full">
-                    <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-[2px] bg-paper text-ink font-mono font-bold text-xs border border-ink/40 shadow-2xs">
-                      <span aria-hidden="true">🥈</span>
+                    <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-[2px] bg-paper text-ink font-mono font-bold text-xs border border-ink/40">
                       <span>#02</span>
                     </span>
                     <span className="font-mono text-[11px] font-bold text-muted tabular-nums">
@@ -281,14 +280,13 @@ export function RankingPage({
                     if (isVenueBoard && onSelectVenue) onSelectVenue(top3[0].name);
                     else if (!isVenueBoard && onSelectSong) onSelectSong(top3[0].id);
                   }}
-                  className="order-1 sm:order-2 rounded-[3px] border-[2px] border-ink bg-card p-5 sm:p-6 shadow-md text-left cursor-pointer hover:bg-tape-tint/30 active:scale-[0.99] transition-all flex flex-col justify-between sm:min-h-[225px] relative overflow-hidden group"
+                  className="order-1 sm:order-2 rounded-[3px] border-[2px] border-ink bg-card p-5 sm:p-6 shadow-[4px_4px_0_rgba(0,0,0,0.16)] dark:shadow-none text-left cursor-pointer hover:bg-tape-tint/30 touch-stamp transition-colors flex flex-col justify-between sm:min-h-[225px] relative overflow-hidden group"
                 >
                   {/* Gold Banner Accent */}
                   <div className="absolute top-0 left-0 right-0 h-1.5 bg-band" />
                   
                   <div className="flex items-center justify-between gap-2 w-full">
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-[2px] bg-band text-band-ink font-mono font-black text-xs border border-ink/40 shadow-2xs">
-                      <span aria-hidden="true">🥇</span>
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-[2px] bg-band text-band-ink font-mono font-black text-xs border border-ink/40">
                       <span>#01</span>
                     </span>
                     <span className="font-mono text-xs font-bold text-band-ink bg-tape px-1.5 py-0.5 rounded border border-ink/20 tabular-nums">
@@ -338,11 +336,10 @@ export function RankingPage({
                     if (isVenueBoard && onSelectVenue) onSelectVenue(top3[2].name);
                     else if (!isVenueBoard && onSelectSong) onSelectSong(top3[2].id);
                   }}
-                  className="order-3 rounded-[3px] border-[1.5px] border-ink bg-card p-4 sm:p-5 shadow-xs text-left cursor-pointer hover:bg-tape-tint/30 active:scale-[0.99] transition-all flex flex-col justify-between sm:min-h-[180px] relative group"
+                  className="order-3 rounded-[3px] border-[1.5px] border-ink bg-card p-4 sm:p-5 shadow-[3px_3px_0_rgba(0,0,0,0.12)] dark:shadow-none text-left cursor-pointer hover:bg-tape-tint/30 touch-stamp transition-colors flex flex-col justify-between sm:min-h-[180px] relative group"
                 >
                   <div className="flex items-center justify-between gap-2 w-full">
-                    <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-[2px] bg-paper text-ink font-mono font-bold text-xs border border-ink/40 shadow-2xs">
-                      <span aria-hidden="true">🥉</span>
+                    <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-[2px] bg-paper text-ink font-mono font-bold text-xs border border-ink/40">
                       <span>#03</span>
                     </span>
                     <span className="font-mono text-[11px] font-bold text-muted tabular-nums">
@@ -424,7 +421,7 @@ export function RankingPage({
                       if (isVenueBoard && onSelectVenue) onSelectVenue(item.name);
                       else if (!isVenueBoard && onSelectSong) onSelectSong(item.id);
                     }}
-                    className="w-full text-left py-2.5 px-2 hover:bg-tape-tint/50 active:scale-[0.99] transition-all cursor-pointer rounded-[2px] group relative overflow-hidden"
+                    className="w-full text-left py-2.5 px-2 hover:bg-tape-tint/50 touch-stamp transition-colors cursor-pointer rounded-[2px] group relative overflow-hidden"
                   >
                     {/* Background Progress Fill Bar */}
                     <div

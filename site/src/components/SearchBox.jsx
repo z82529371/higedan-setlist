@@ -426,7 +426,7 @@ export default function SearchBox({
         {/* 📅 場次日期分組 (ADR-0096) */}
         {matchedShows.length > 0 && (
           <div>
-            <div className="sticky top-0 z-[2] flex items-center justify-between border-b border-line-soft bg-paper/95 px-3 py-1.5 font-mono text-[11px] font-bold tracking-[0.1em] text-muted uppercase backdrop-blur-xs">
+            <div className="sticky top-0 z-[2] flex items-center justify-between border-b border-line-soft bg-paper px-3 py-1.5 font-mono text-[11px] font-bold tracking-[0.1em] text-muted uppercase">
               <span><span aria-hidden="true">📅</span> {t("search.groupShows", "歷史場次日期")}</span>
               <span className="text-[11px] font-normal opacity-75">
                 {matchedShows.length} {t("navigators.showsUnit", "場")}
@@ -473,7 +473,7 @@ export default function SearchBox({
         {/* 🎵 歌曲分組 */}
         {matchedSongs.length > 0 && (
           <div>
-            <div className="sticky top-0 z-[2] flex items-center justify-between border-b border-line-soft bg-paper/95 px-3 py-1.5 font-mono text-[11px] font-bold tracking-[0.1em] text-muted uppercase backdrop-blur-xs">
+            <div className="sticky top-0 z-[2] flex items-center justify-between border-b border-line-soft bg-paper px-3 py-1.5 font-mono text-[11px] font-bold tracking-[0.1em] text-muted uppercase">
               <span><span aria-hidden="true">🎵</span> {t("search.groupSongs", "歌曲")}</span>
               <span className="text-[11px] font-normal opacity-75">
                 {matchedSongs.length} {t("navigators.songsUnit", "首")}
@@ -525,7 +525,7 @@ export default function SearchBox({
         {/* 🎤 演出／巡演分組 */}
         {matchedUnits.length > 0 && (
           <div>
-            <div className="sticky top-0 z-[2] flex items-center justify-between border-b border-line-soft bg-paper/95 px-3 py-1.5 font-mono text-[11px] font-bold tracking-[0.1em] text-muted uppercase backdrop-blur-xs">
+            <div className="sticky top-0 z-[2] flex items-center justify-between border-b border-line-soft bg-paper px-3 py-1.5 font-mono text-[11px] font-bold tracking-[0.1em] text-muted uppercase">
               <span><span aria-hidden="true">🎤</span> {t("search.groupUnits", "演出活動")}</span>
               <span className="text-[11px] font-normal opacity-75">
                 {matchedUnits.length} {t("search.unitsUnit", "部")}
@@ -565,7 +565,7 @@ export default function SearchBox({
         {/* 📍 場地分組 */}
         {matchedVenues.length > 0 && (
           <div>
-            <div className="sticky top-0 z-[2] flex items-center justify-between border-b border-line-soft bg-paper/95 px-3 py-1.5 font-mono text-[11px] font-bold tracking-[0.1em] text-muted uppercase backdrop-blur-xs">
+            <div className="sticky top-0 z-[2] flex items-center justify-between border-b border-line-soft bg-paper px-3 py-1.5 font-mono text-[11px] font-bold tracking-[0.1em] text-muted uppercase">
               <span><span aria-hidden="true">📍</span> {t("search.groupVenues", "場地")}</span>
               <span className="text-[11px] font-normal opacity-75">
                 {matchedVenues.length} {t("search.venuesUnit", "處")}
@@ -666,7 +666,7 @@ export default function SearchBox({
             <button
               type="button"
               onClick={onCloseModal}
-              className="shrink-0 flex h-9 w-9 items-center justify-center rounded-full bg-paper border border-line-soft font-bold text-muted hover:text-ink hover:bg-tape-tint active:scale-95 cursor-pointer text-sm"
+              className="shrink-0 flex h-9 w-9 items-center justify-center rounded-[3px] bg-paper border border-ink/30 font-bold text-muted hover:text-ink hover:bg-tape-tint touch-stamp cursor-pointer text-sm"
               aria-label={t("search.closeSearchAria", "關閉搜尋")}
             >
               ✕
@@ -684,7 +684,7 @@ export default function SearchBox({
               <button
                 type="button"
                 onClick={onOpenCalendar}
-                className="mt-4 inline-flex items-center gap-1.5 rounded-lg border-[1.5px] border-ink bg-band px-3.5 py-1.5 text-xs font-bold text-band-ink shadow-2xs hover:brightness-95 active:scale-95 cursor-pointer"
+                className="mt-4 inline-flex items-center gap-1.5 rounded-[3px] border-[1.5px] border-ink bg-band px-3.5 py-1.5 text-xs font-bold text-band-ink shadow-[2px_2px_0_rgba(0,0,0,0.16)] dark:shadow-none hover:brightness-95 touch-stamp cursor-pointer"
               >
                 <span>📅</span>
                 <span>{t("search.browseCalendar", "依演出日曆瀏覽")}</span>
@@ -774,7 +774,7 @@ export default function SearchBox({
             <button
               type="button"
               onClick={onOpenCalendar}
-              className={`flex items-center justify-center rounded-[4px] border border-ink/20 bg-paper hover:bg-tape-tint text-ink cursor-pointer shadow-2xs active:scale-95 transition-transform ${
+              className={`flex items-center justify-center rounded-[3px] border border-ink/25 bg-paper hover:bg-tape-tint text-ink cursor-pointer touch-stamp transition-colors ${
                 size === "lg" ? "h-8 w-8 text-base" : "h-7 w-7 text-sm"
               }`}
               title={t("search.openCalendarTitle", "開啟演出日曆")}

@@ -103,12 +103,12 @@ export function LeadDropModal({
       aria-modal="true"
       aria-labelledby="lead-modal-title"
       data-testid="lead-drop-modal"
-      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-ink/60 backdrop-blur-xs animate-fade-in"
+      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-ink/65 animate-fade-in"
       onClick={(e) => {
         if (e.target === e.currentTarget) onClose();
       }}
     >
-      <div className="relative w-full max-w-[520px] rounded-[3px] border-[1.5px] border-ink bg-card p-5 sm:p-6 text-ink shadow-xs">
+      <div className="relative w-full max-w-[520px] rounded-[3px] border-[1.5px] border-ink bg-card p-5 sm:p-6 text-ink shadow-[6px_6px_0_rgba(0,0,0,0.22)] dark:shadow-none">
         {/* Header */}
         <div className="flex items-center justify-between border-b border-line-soft pb-3 mb-4">
           <h3

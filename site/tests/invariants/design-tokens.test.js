@@ -449,9 +449,7 @@ describe("9. Design Token Invariants & Dedicated URL Routes Seam (DESIGN.md, ADR
   it("prohibits oversized SaaS rounded corners (rounded-xl/2xl/3xl) in new components (DESIGN.md)", () => {
     const componentsDir = path.resolve(import.meta.dirname, "../../src/components");
     const legacyAllowlist = new Set([
-      "CalendarModal.jsx",
       "MemorialCardModal.jsx",
-      "common/UpdateNotificationToast.jsx",
     ]);
 
     function walkJsx(dir) {
@@ -481,6 +479,73 @@ describe("9. Design Token Invariants & Dedicated URL Routes Seam (DESIGN.md, ADR
       violations,
       [],
       `Components must adhere to ticket rounded-[3px]/rounded-full discipline (DESIGN.md). Found rounded-xl/2xl/3xl in: ${violations.join(", ")}`
+    );
+  });
+
+  it("prohibits SaaS blur, soft shadows (md/lg/xl/2xl), and scale animations across components (DESIGN.md)", () => {
+    const componentsDir = path.resolve(import.meta.dirname, "../../src/components");
+
+    function walkJsx(dir) {
+      let results = [];
+      for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+        const fullPath = path.join(dir, entry.name);
+        if (entry.isDirectory()) {
+          results = results.concat(walkJsx(fullPath));
+        } else if (entry.name.endsWith(".jsx")) {
+          results.push(fullPath);
+        }
+      }
+      return results;
+    }
+
+    const violations = [];
+    const forbiddenRe = /\b(?:backdrop-blur-[a-z0-9-]+|shadow-(?:md|lg|xl|2xl)|(?:active|hover|group-hover):scale-[^\s"'`]+)\b/;
+    for (const file of walkJsx(componentsDir)) {
+      const rel = path.relative(componentsDir, file).replace(/\\/g, "/");
+      const content = fs.readFileSync(file, "utf8");
+      const match = content.match(forbiddenRe);
+      if (match) {
+        violations.push(`${rel} (${match[0]})`);
+      }
+    }
+
+    assert.deepEqual(
+      violations,
+      [],
+      `Components must follow Zero-Blur & Zero-Scale rules (DESIGN.md). Found violations in: ${violations.join(", ")}`
+    );
+  });
+
+  it("prohibits decorative UI emojis (🔥 ✨ 🎯 💡 🌐) across components and locales (DESIGN.md)", () => {
+    const componentsDir = path.resolve(import.meta.dirname, "../../src/components");
+    const localesDir = path.resolve(import.meta.dirname, "../../src/lib/locales");
+    const emojiRe = /[🔥✨🎯💡🌐]/u;
+
+    function walkFiles(dir, ext) {
+      let results = [];
+      for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+        const fullPath = path.join(dir, entry.name);
+        if (entry.isDirectory()) {
+          results = results.concat(walkFiles(fullPath, ext));
+        } else if (entry.name.endsWith(ext)) {
+          results.push(fullPath);
+        }
+      }
+      return results;
+    }
+
+    const violations = [];
+    for (const file of [...walkFiles(componentsDir, ".jsx"), ...walkFiles(localesDir, ".js")]) {
+      const content = fs.readFileSync(file, "utf8");
+      if (emojiRe.test(content)) {
+        violations.push(path.relative(path.resolve(import.meta.dirname, "../../src"), file).replace(/\\/g, "/"));
+      }
+    }
+
+    assert.deepEqual(
+      violations,
+      [],
+      `Decorative UI emojis must not be used in components or locales (DESIGN.md). Found in: ${violations.join(", ")}`
     );
   });
 });

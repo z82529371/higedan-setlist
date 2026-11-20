@@ -242,7 +242,7 @@ export function FootprintCardModal({
   return (
     <div
       data-testid="footprint-card-modal"
-      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-ink/60 backdrop-blur-xs overflow-y-auto"
+      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-ink/70 overflow-y-auto"
       onClick={(e) => {
         if (e.target === e.currentTarget) onClose();
       }}
@@ -251,8 +251,8 @@ export function FootprintCardModal({
         {/* Modal Top Actions Toolbar */}
         <div className="w-full flex items-center justify-between pb-2 text-card gap-1.5 sm:gap-2">
           <div className="flex items-center gap-1.5 min-w-0">
-            <span className="text-base sm:text-lg select-none" aria-hidden="true">
-              🗺️
+            <span className="font-mono text-[10px] font-bold tracking-[0.14em] uppercase text-band shrink-0" aria-hidden="true">
+              [POSTCARD]
             </span>
             <span className="font-mono text-[11px] sm:text-[12px] font-bold uppercase tracking-wider text-card truncate">
               {t("ticketBook.footprintModalTitle", "個人參戰足跡紀念明信片")}
@@ -263,7 +263,7 @@ export function FootprintCardModal({
             type="button"
             data-testid="close-footprint-modal-btn"
             onClick={onClose}
-            className="rounded p-1 text-card hover:text-card/80 text-base sm:text-lg font-bold cursor-pointer shrink-0"
+            className="rounded-[3px] p-1 text-card hover:text-card/80 text-base sm:text-lg font-bold cursor-pointer shrink-0 touch-stamp"
             aria-label={t("common.close", "關閉")}
           >
             ✕
@@ -271,12 +271,11 @@ export function FootprintCardModal({
         </div>
 
         {/* Customizer Drawer / Holder Input */}
-        <div className="w-full bg-ink/80 border border-card/30 rounded-[8px] p-2.5 mb-3 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2 shadow-lg">
+        <div className="w-full bg-ink/90 border border-card/30 rounded-[3px] p-2.5 mb-3 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2 shadow-[4px_4px_0_rgba(0,0,0,0.28)]">
           <label
             htmlFor="footprint-holder-input"
             className="font-mono text-xs font-bold text-card flex items-center gap-1.5 shrink-0"
           >
-            <span aria-hidden="true">👤</span>
             <span>{t("ticketBook.holderLabel", "歌迷暱稱・ID")}</span>
           </label>
           <input
@@ -491,7 +490,7 @@ export function FootprintCardModal({
             data-testid="footprint-save-png-btn"
             disabled={isExportingPng}
             onClick={handleExportPng}
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-[4px] font-mono text-xs font-bold bg-band text-band-ink border border-ink/40 shadow-xs hover:brightness-105 active:scale-95 transition-all cursor-pointer disabled:opacity-60"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-[3px] font-mono text-xs font-bold bg-band text-band-ink border border-ink/40 hover:brightness-105 touch-stamp transition-colors cursor-pointer disabled:opacity-60"
           >
             <span aria-hidden="true">{isExportingPng ? "⏳" : "📸"}</span>
             <span>
@@ -504,7 +503,7 @@ export function FootprintCardModal({
 
         {/* Save Hint Notice */}
         <div className="mt-2 text-center text-xs text-card/80 font-mono">
-          <span aria-hidden="true">💡 </span>
+          <span aria-hidden="true" className="font-bold">NOTE: </span>
           <span>{t("memorial.saveHint", "手機長按小卡存入相簿 · 電腦點右鍵另存圖片")}</span>
         </div>
       </div>

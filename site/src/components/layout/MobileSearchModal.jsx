@@ -21,7 +21,7 @@ export function MobileSearchModal({
 
   return (
     <div
-      className="fixed inset-x-0 z-50 flex flex-col bg-card/95 backdrop-blur-md sm:hidden overflow-hidden"
+      className="fixed inset-x-0 z-50 flex flex-col bg-card sm:hidden overflow-hidden"
       style={{
         height: visualViewportStyle.height,
         top: visualViewportStyle.top,

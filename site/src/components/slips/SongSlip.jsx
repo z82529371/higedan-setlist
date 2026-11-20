@@ -105,11 +105,11 @@ export function SongSlip({ songId, trackShows, showById, unitData, onSelectShow,
   const rarityTier = useMemo(() => {
     const total = appearances.length;
     if (total === 0) return null;
-    let label = t("slips.song.activeLive", "🎵 活躍演出曲"), cls = "text-ink bg-paper border-line-soft";
-    if (total >= 100) { label = t("slips.song.coreStaple", "🔥 核心定番曲"); cls = "text-request bg-request-wash border-request/40"; }
-    else if (total >= 40) { label = t("slips.song.mainstayTrack", "⭐ 巡演主力曲"); cls = "text-ink bg-tape-tint border-ink/30"; }
-    else if (total <= 3) { label = t("slips.song.phantomSpecial", "💎 幻之限定曲"); cls = "text-unreleased bg-unreleased-wash border-unreleased/40"; }
-    else if (total <= 12) { label = t("slips.song.rareGem", "✨ 珍稀選曲"); cls = "text-solo bg-paper border-line-soft"; }
+    let label = t("slips.song.activeLive", "活躍演出曲"), cls = "text-ink bg-paper border-line-soft";
+    if (total >= 100) { label = t("slips.song.coreStaple", "定番曲"); cls = "text-request bg-request-wash border-request/40"; }
+    else if (total >= 40) { label = t("slips.song.mainstayTrack", "巡演主力曲"); cls = "text-ink bg-tape-tint border-ink/30"; }
+    else if (total <= 3) { label = t("slips.song.phantomSpecial", "極少演出曲"); cls = "text-unreleased bg-unreleased-wash border-unreleased/40"; }
+    else if (total <= 12) { label = t("slips.song.rareGem", "稀少選曲"); cls = "text-solo bg-paper border-line-soft"; }
 
     const latestYear = latestShow?.date ? parseInt(latestShow.date.slice(0, 4), 10) : null;
     const isDormant = latestYear && latestYear <= 2021 && total > 3;
@@ -339,17 +339,17 @@ export function SongSlip({ songId, trackShows, showById, unitData, onSelectShow,
             )}
             {rarityTier?.isDormant && (
               <span className="rounded bg-paper px-1.5 py-0.5 text-xs font-bold text-muted border border-line-soft">
-                {t("slips.song.dormantRecent", "📦 近年封箱中")}
+                {t("slips.song.dormantRecent", "近年未演")}
               </span>
             )}
             {hasSpecials && (
               <span className="rounded bg-tape/20 px-1.5 py-0.5 font-bold text-ink border border-ink/20 text-xs">
-                {t("slips.song.specialVersionsCount", "✨ 特殊版本 {count}場", { count: specialVersionCounts.total })}
+                {t("slips.song.specialVersionsCount", "限定編曲 {count}場", { count: specialVersionCounts.total })}
               </span>
             )}
             {liveRole && (
               <span className="inline-flex items-center gap-1 text-xs text-ink/80">
-                <span>· 🎯 {liveRole.positionText}</span>
+                <span>· {liveRole.positionText}</span>
                 {liveRole.avgOrder && <span>{t("slips.song.avgPosition", "(平均M{order})", { order: liveRole.avgOrder })}</span>}
                 {liveRole.encoreRate > 0 && <span>{t("slips.song.encoreRate", "· 安可率{rate}%", { rate: liveRole.encoreRate })}</span>}
               </span>
@@ -488,7 +488,7 @@ export function SongSlip({ songId, trackShows, showById, unitData, onSelectShow,
               }`}
               onClick={() => setOnlySpecial((prev) => !prev)}
             >
-              <span>{t("slips.song.onlySpecialVersions", "✨ 僅顯示特殊演出版本")}</span>
+              <span>{t("slips.song.onlySpecialVersions", "僅顯示特殊演出版本")}</span>
               <span className="tabular-nums">({specialVersionCounts.total} {t("navigators.showsUnit", "場")})</span>
               {specialVersionCounts.solo > 0 && (
                 <span className="opacity-75">· {t("badges.satoshi-solo", "彈唱")}{specialVersionCounts.solo}</span>

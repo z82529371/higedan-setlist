@@ -113,7 +113,7 @@ export function SongJacketHoverCard({
           role="tooltip"
           aria-hidden="true"
           data-testid="song-jacket-hover-sleeve"
-          className="pointer-events-none absolute left-0 bottom-full mb-2 z-40 w-72 max-w-[calc(100vw-32px)] flex items-center gap-3 rounded-[3px] border border-ink/40 bg-card p-2.5 shadow-[4px_4px_0_rgba(0,0,0,0.18)] dark:shadow-none select-none text-left animate-in fade-in zoom-in-95 duration-100 [@media(hover:none)]:hidden"
+          className="pointer-events-none absolute left-0 bottom-full mb-2 z-40 w-72 max-w-[calc(100vw-32px)] flex items-center gap-3 rounded-[3px] border border-ink/40 bg-card p-2.5 shadow-[4px_4px_0_rgba(0,0,0,0.18)] dark:shadow-none select-none text-left animate-in fade-in duration-100 [@media(hover:none)]:hidden"
         >
           {/* Mini Vinyl Sleeve artwork */}
           <span className="relative shrink-0 w-16 h-16 rounded-[2px] overflow-hidden border border-ink/20 shadow-2xs bg-paper">

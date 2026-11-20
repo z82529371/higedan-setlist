@@ -16,71 +16,6 @@ import {
   ARCHIVE_AUTHOR_INSTAGRAM_URL,
 } from "../lib/feedback.js";
 
-function StubIcon({ type }) {
-  const common = {
-    viewBox: "0 0 20 20",
-    fill: "none",
-    stroke: "currentColor",
-    strokeWidth: "1.75",
-    strokeLinecap: "round",
-    strokeLinejoin: "round",
-    className: "w-4 h-4",
-    "aria-hidden": "true",
-  };
-
-  switch (type) {
-    case "songs":
-      return (
-        <svg {...common}>
-          <path d="M8 14.5a2 2 0 1 1-4 0 2 2 0 0 1 4 0Z" />
-          <path d="M16 12.5a2 2 0 1 1-4 0 2 2 0 0 1 4 0Z" />
-          <path d="M8 14.5V5.5l8-2v9" />
-        </svg>
-      );
-    case "venues":
-      return (
-        <svg {...common}>
-          <path d="M10 17s5-4.4 5-8.5a5 5 0 1 0-10 0C5 12.6 10 17 10 17Z" />
-          <circle cx="10" cy="8.5" r="1.8" />
-        </svg>
-      );
-    case "tickets":
-      return (
-        <svg {...common}>
-          <path d="M3 6.5a1.5 1.5 0 0 1 1.5-1.5h11A1.5 1.5 0 0 1 17 6.5v2a1.5 1.5 0 0 0 0 3v2a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 3 13.5v-2a1.5 1.5 0 0 0 0-3v-2Z" />
-          <path d="M11.5 5v10" strokeDasharray="2 2" />
-        </svg>
-      );
-    case "journey":
-      return (
-        <svg {...common}>
-          <circle cx="5" cy="14.5" r="2" />
-          <circle cx="15" cy="5.5" r="2" />
-          <path d="M7 14.5h3.5a2.5 2.5 0 0 0 0-5h-1a2.5 2.5 0 0 1 0-5H13" />
-        </svg>
-      );
-    case "ranking":
-      return (
-        <svg {...common}>
-          <path d="M3.5 16.5h13" />
-          <rect x="4.5" y="10" width="3" height="6.5" />
-          <rect x="8.5" y="5.5" width="3" height="11" />
-          <rect x="12.5" y="8" width="3" height="8.5" />
-        </svg>
-      );
-    case "releases":
-      return (
-        <svg {...common}>
-          <circle cx="10" cy="10" r="7" />
-          <circle cx="10" cy="10" r="2.2" />
-          <path d="M10 5.2a4.8 4.8 0 0 1 4.2 2.5" />
-        </svg>
-      );
-    default:
-      return null;
-  }
-}
-
 export default function LandingHero({
   onEnterArchive,
   onSelectSong,
@@ -404,7 +339,7 @@ export default function LandingHero({
                 backgroundColor: "var(--era-accent, var(--color-band))",
                 color: "var(--era-accent-ink, var(--color-band-ink))",
               }}
-              className="inline-flex items-center justify-center gap-2.5 w-full sm:w-auto px-7 py-3 rounded-[3px] font-bold text-[15px] border-[1.5px] border-ink shadow-sm dark:shadow-none hover:shadow-md hover:brightness-105 transition-all duration-300 motion-reduce:transition-none cursor-pointer touch-stamp focus-visible:ring-2 focus-visible:ring-band focus-visible:outline-none"
+              className="inline-flex items-center justify-center gap-2.5 w-full sm:w-auto px-7 py-3 rounded-[3px] font-bold text-[15px] border-[1.5px] border-ink shadow-[4px_4px_0_rgba(0,0,0,0.18)] dark:shadow-none hover:brightness-105 transition-colors duration-200 motion-reduce:transition-none cursor-pointer touch-stamp focus-visible:ring-2 focus-visible:ring-band focus-visible:outline-none"
             >
               <span>{t("landing.primaryCta", "進入完整檔案庫探索")}</span>
               <span aria-hidden="true" className="font-mono font-black">
@@ -445,79 +380,62 @@ export default function LandingHero({
         </div>
       </section>
 
-      {/* 6 Unified Monochrome Catalog Index Stubs (Hover-synced to Active 3D Ticket Era Accent) */}
+      {/* 6 Archival Index Ledger Rows (replaces Bento Feature Card Grid) */}
       <section
         data-testid="landing-catalog-stubs"
         className="mt-14 sm:mt-16 w-full text-left"
         aria-label={t("landing.features.sectionAria", "六大典藏目錄索引")}
       >
-        <div className="mb-4 flex items-center justify-between border-b border-ink/20 pb-2">
+        <div className="mb-0 flex items-center justify-between border-b-[1.5px] border-ink pb-2">
           <span className="font-mono text-[11px] font-bold tracking-[0.18em] text-ink uppercase">
             INDEX 01—06 // {t("landing.features.sectionHeading", "典藏目錄索引")}
           </span>
-          <span className="font-sans text-[11px] font-semibold text-ink/70">
+          <span className="font-mono text-[11px] font-semibold text-ink/60">
             {t("landing.features.accessStubsBadge", "6 大入口")}
           </span>
         </div>
 
-        <div className="grid grid-cols-2 lg:grid-cols-3 gap-3.5 sm:gap-4">
-          {catalogStubs.map((stub) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 border-x border-b border-ink/25 bg-card divide-y divide-ink/15 md:divide-y-0">
+          {catalogStubs.map((stub, idx) => (
             <button
               key={stub.index}
               type="button"
               data-testid={stub.testId}
               onClick={stub.onClick}
-              className="group relative flex flex-col justify-between rounded-[3px] border border-ink/20 bg-card p-4 sm:p-5 text-left transition-all duration-200 motion-reduce:transition-none hover:border-ink hover:-translate-y-0.5 hover:shadow-md dark:hover:shadow-none cursor-pointer touch-stamp overflow-hidden focus-visible:ring-2 focus-visible:ring-band focus-visible:outline-none"
+              className={`group relative flex items-baseline justify-between gap-3 px-4 py-3.5 text-left transition-colors hover:bg-tape-tint/50 cursor-pointer touch-stamp focus-visible:ring-2 focus-visible:ring-band focus-visible:outline-none ${
+                idx % 2 === 0 ? "md:border-r md:border-ink/15" : ""
+              } ${idx >= 2 ? "md:border-t md:border-ink/15" : ""}`}
             >
-              {/* Era-Synced Top Accent Micro-Bar on Hover */}
-              <span
-                aria-hidden="true"
-                className="pointer-events-none absolute top-0 left-0 right-0 h-[3px] opacity-0 group-hover:opacity-100 transition-opacity duration-200"
-                style={{ backgroundColor: "var(--era-accent, var(--color-band))" }}
-              />
-
-              <div>
-                <div className="flex items-center justify-between gap-2 mb-3">
-                  <div className="inline-flex items-center gap-2 min-w-0">
-                    <span className="inline-flex items-center justify-center w-8 h-8 rounded-[3px] border border-ink/20 bg-paper text-ink shrink-0 transition-all duration-200 motion-reduce:transition-none group-hover:-rotate-6 group-hover:border-ink group-hover:bg-[var(--era-accent,var(--color-band))] group-hover:text-[var(--era-accent-ink,var(--color-band-ink))]">
-                      <StubIcon type={stub.iconType} />
-                    </span>
-                    <div className="flex flex-col min-w-0">
-                      <span className="font-mono text-[11px] font-black text-ink/75 leading-none tabular-nums group-hover:text-ink">
-                        {stub.index}
-                      </span>
-                      <span className="hidden sm:inline mt-0.5 font-mono text-[9.5px] font-semibold tracking-[0.12em] uppercase text-ink/55 truncate">
-                        {stub.code}
-                      </span>
-                    </div>
-                  </div>
-                  {stub.badgeCount > 0 && (
-                    <span
-                      data-testid="landing-ticket-book-badge"
-                      className="inline-flex items-center rounded-[3px] bg-tape text-ink font-mono text-[10px] sm:text-[11px] font-bold px-1.5 py-0.5 border border-ink/40 shadow-2xs tabular-nums shrink-0"
-                    >
-                      ✓ {stub.badgeCount}
-                    </span>
-                  )}
-                </div>
-
-                <h3 className="m-0 font-display text-[15px] sm:text-[17px] font-bold text-ink leading-snug">
-                  {stub.title}
-                </h3>
-                <p className="mt-2 mb-0 text-[12px] sm:text-[13px] text-muted leading-relaxed">
-                  {stub.desc}
-                </p>
-              </div>
-
-              <div className="mt-4 pt-3 border-t border-dashed border-ink/15 flex items-center justify-between text-[11px] sm:text-[12px] font-semibold text-ink/80 group-hover:text-ink">
-                <span className="truncate">{stub.action}</span>
-                <span
-                  className="font-mono transition-transform group-hover:translate-x-1 shrink-0 ml-1"
-                  aria-hidden="true"
-                >
-                  →
+              <div className="flex items-baseline gap-3 min-w-0 flex-1">
+                <span className="font-mono text-[11px] font-black text-ink/55 tabular-nums shrink-0 group-hover:text-ink">
+                  {stub.index}
                 </span>
+                <div className="min-w-0 flex-1">
+                  <div className="flex items-center gap-2 flex-wrap">
+                    <h3 className="m-0 font-display text-[15px] font-bold text-ink leading-snug group-hover:underline underline-offset-4">
+                      {stub.title}
+                    </h3>
+                    {stub.badgeCount > 0 && (
+                      <span
+                        data-testid="landing-ticket-book-badge"
+                        className="inline-flex items-center rounded-[2px] bg-tape text-ink font-mono text-[10px] font-bold px-1.5 py-0.5 border border-ink/40 tabular-nums shrink-0"
+                      >
+                        ✓ {stub.badgeCount}
+                      </span>
+                    )}
+                  </div>
+                  <p className="mt-1 mb-0 text-[12px] text-muted leading-snug line-clamp-1">
+                    {stub.desc}
+                  </p>
+                </div>
               </div>
+
+              <span
+                className="font-mono text-[12px] font-bold text-ink/60 group-hover:text-ink shrink-0"
+                aria-hidden="true"
+              >
+                →
+              </span>
             </button>
           ))}
         </div>
