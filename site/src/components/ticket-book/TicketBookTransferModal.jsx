@@ -207,15 +207,23 @@ export function TicketBookTransferModal({
 
         {/* Error Feedback */}
         {errorMessage && (
-          <div className="mb-4 rounded-[3px] border border-red-500/40 bg-red-50 dark:bg-red-950/40 p-3 text-[12px] font-bold text-red-700 dark:text-red-300">
-            ⚠️ {errorMessage}
+          <div
+            role="alert"
+            className="mb-4 rounded-[3px] border-[1.5px] border-request bg-request-wash p-3 text-[12px] font-bold text-ink"
+          >
+            <span className="text-request mr-1.5" aria-hidden="true">⚠</span>
+            {errorMessage}
           </div>
         )}
 
         {/* Success Feedback */}
         {successMessage && (
-          <div className="mb-4 rounded-[3px] border border-green-600/40 bg-green-50 dark:bg-green-950/40 p-3 text-[12px] font-bold text-green-700 dark:text-green-300">
-            ✓ {successMessage}
+          <div
+            role="status"
+            className="mb-4 rounded-[3px] border-[1.5px] border-solo bg-solo-bg p-3 text-[12px] font-bold text-ink"
+          >
+            <span className="text-solo mr-1.5" aria-hidden="true">✓</span>
+            {successMessage}
           </div>
         )}
 
@@ -338,7 +346,7 @@ export function TicketBookTransferModal({
                   onClick={handleCopyCode}
                   className="inline-flex items-center justify-center gap-1.5 rounded-[4px] border border-ink/40 bg-card px-3 py-1.5 font-mono text-[11px] font-bold text-ink shadow-2xs hover:bg-tape-tint transition-colors cursor-pointer"
                 >
-                  <span aria-hidden="true">{copiedCode ? "✓" : "📋"}</span>
+                  {!copiedCode && <span aria-hidden="true">📋</span>}
                   <span>
                     {copiedCode
                       ? t("ticketBook.codeCopied", "✓ 代碼已複製")

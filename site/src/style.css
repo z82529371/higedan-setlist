@@ -8,6 +8,7 @@
    - 次要文字: #6b6366 (高對比暖灰，符合 WCAG AA 4.5:1)
 */
 @import "tailwindcss";
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
 
 @theme {
   --color-paper: #f0eee8;
