@@ -18,6 +18,7 @@ import { SLIP_ARTICLE, SLIP_TAPE } from "../../lib/constants.js";
 import { TicketPerforationDivider, TicketBarcodeFooter } from "../slips/TicketCommon.jsx";
 import { CoverLightboxModal } from "../slips/CoverLightboxModal.jsx";
 import { MobileFloatingControls } from "../layout/MobileFloatingControls.jsx";
+import { ArchiveFooter } from "../layout/ArchiveFooter.jsx";
 import { useTicketBook } from "../../lib/ticket-book.js";
 
 /**
@@ -761,6 +762,8 @@ export function ReleasesPage({
           />
         </div>
       </article>
+
+      <ArchiveFooter />
 
       {/* Mobile Floating Action Dock (Matching TicketBookPage & RankingPage) */}
       <MobileFloatingControls

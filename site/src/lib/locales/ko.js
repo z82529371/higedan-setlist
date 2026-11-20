@@ -442,7 +442,7 @@ export const dictKo = {
     collapseSongFilterTitle: "필터를 접고 곡 카ਿਰ드에 집중",
     venueFilterExpandTitle: "클릭하여 공연장 필터 펼치기",
     venuePlayedTotal: "{count}회 개최",
-    diffNote: "회차별 차이는 insert / skip 기록",
+    diffNote: "회차별 차이는 투어 표준 세트리스트 대비로 기록",
     verifyNote: "곡 순서·앙코르 표시 회차별 대조 {sources}",
     venueCountSuffix: "({count}회)",
   },

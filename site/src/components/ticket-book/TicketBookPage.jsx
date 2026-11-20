@@ -12,6 +12,7 @@ import { LiveSongChecklistDrawer } from "./LiveSongChecklistDrawer.jsx";
 import { MemorialCardModal } from "../MemorialCardModal.jsx";
 import { assignCues } from "../../lib/resolve.js";
 import LanguageSwitcher from "../LanguageSwitcher.jsx";
+import { ArchiveFooter } from "../layout/ArchiveFooter.jsx";
 import { SLIP_ARTICLE, SLIP_TAPE } from "../../lib/constants.js";
 
 export function TicketBookPage({
@@ -532,6 +533,8 @@ export function TicketBookPage({
           label={t("ticketBook.title", "我的巡演票夾")}
         />
       </article>
+
+      <ArchiveFooter />
 
       {/* Career Milestones Summary Card Modal (Issue #37) */}
       <MilestoneCardModal

@@ -442,7 +442,7 @@ export const dictZhTw = {
     collapseSongFilterTitle: "收合篩選器以專注查看下方歌曲檔案小卡",
     venueFilterExpandTitle: "點擊展開演出場館篩選器",
     venuePlayedTotal: "舉辦過 {count} 場演出",
-    diffNote: "各場差異以 insert / skip 記錄",
+    diffNote: "各場曲目差異與巡演模板比對記錄",
     verifyNote: "演出順序、安可標記逐場核對 {sources}",
     venueCountSuffix: "({count}場)",
   },

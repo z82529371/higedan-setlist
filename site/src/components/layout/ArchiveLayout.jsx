@@ -10,16 +10,12 @@ import {
 } from "../navigators/index.js";
 import { ArchiveStatusBar } from "./ArchiveStatusBar.jsx";
 import { ArchiveHeader } from "./ArchiveHeader.jsx";
+import { ArchiveFooter } from "./ArchiveFooter.jsx";
 import { FilterDrawer } from "./FilterDrawer.jsx";
 import { MobileSearchModal } from "./MobileSearchModal.jsx";
 import { MobileFloatingControls } from "./MobileFloatingControls.jsx";
 import SearchBox from "../SearchBox.jsx";
 import { useI18n } from "../../lib/i18n.jsx";
-import {
-  ARCHIVE_FEEDBACK_EMAIL,
-  ARCHIVE_AUTHOR_INSTAGRAM,
-  ARCHIVE_AUTHOR_INSTAGRAM_URL,
-} from "../../lib/feedback.js";
 
 export function ArchiveLayout({
   filterState,
@@ -92,34 +88,6 @@ export function ArchiveLayout({
   const currentVenueObj = useMemo(() => {
     return allVenues.find((v) => v.name === selVenue) || null;
   }, [allVenues, selVenue]);
-
-  const tplSongs = current?.tpl?.filter((i) => i.songId).length ?? 0;
-  const tplCount = current?.tpl?.length ?? 0;
-  const footTpl = current?.isTour
-    ? t("layout.tourTemplate", "巡演模板 {songs} 首（共 {parts} 段落）", { songs: tplSongs, parts: tplCount })
-    : current?.unit.title;
-
-  const sourceSummary = useMemo(() => {
-    if (!current?.unit?.shows) return "LiveFans";
-    const sources = new Set();
-    for (const sh of current.unit.shows) {
-      for (const u of sh.sourceUrls || []) {
-        if (/higedan\.com/i.test(u)) sources.add(t("layout.sourceOfficial", "官方網站"));
-        else if (/x\.com|twitter\.com/i.test(u)) sources.add("X");
-        else if (/livefans\.jp/i.test(u)) sources.add("LiveFans");
-        else if (/wikipedia\.org/i.test(u)) sources.add(t("layout.sourceWiki", "維基百科"));
-        else {
-          try {
-            sources.add(new URL(u).hostname.replace(/^www\./, ""));
-          } catch {
-            sources.add(t("layout.sourceExternal", "外部來源"));
-          }
-        }
-      }
-    }
-    if (sources.size === 0) return "LiveFans";
-    return Array.from(sources).join(" · ");
-  }, [current, t]);
 
   const renderShowNavigator = (isDrawer = false) => (
     <ShowNavigator
@@ -533,31 +501,7 @@ export function ArchiveLayout({
         </main>
 
         {/* Footer */}
-        <footer className="mt-12 flex flex-wrap gap-x-[18px] gap-y-[6px] border-t-[1.5px] border-ink pt-3 font-mono text-[12px] text-muted">
-          <span>{footTpl}</span>
-          <span>{current?.isTour ? t("layout.diffNote", "各場差異以 insert / skip 記錄") : ""}</span>
-          <span>{t("layout.verifyNote", "演出順序、安可標記逐場核對 {sources}", { sources: sourceSummary })}</span>
-          <span>
-            {t("footer.contactLabel", "資料勘誤與反饋：")}
-            <a
-              href={`mailto:${ARCHIVE_FEEDBACK_EMAIL}?subject=${encodeURIComponent(t("footer.contactSubject", "[Official HIGEDAN Archive] 資料勘誤與意見反饋"))}`}
-              className="text-ink underline hover:text-band transition-colors"
-            >
-              {ARCHIVE_FEEDBACK_EMAIL}
-            </a>
-          </span>
-          <span>
-            {t("footer.authorLabel", "作者 IG：")}
-            <a
-              href={ARCHIVE_AUTHOR_INSTAGRAM_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-ink underline hover:text-band transition-colors"
-            >
-              @{ARCHIVE_AUTHOR_INSTAGRAM}
-            </a>
-          </span>
-        </footer>
+        <ArchiveFooter />
       </div>
 
       {/* Mobile Filter Bottom Sheet Modal */}

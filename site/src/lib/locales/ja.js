@@ -442,7 +442,7 @@ export const dictJa = {
     collapseSongFilterTitle: "フィルターを閉じて楽曲カードに集中",
     venueFilterExpandTitle: "クリックで会場フィルターを展開",
     venuePlayedTotal: "{count} 公演開催",
-    diffNote: "各公演の差分は insert / skip で記録",
+    diffNote: "各公演の差分はツアー標準セットリストとの対比で記録",
     verifyNote: "曲順・アンコールは各公演ごとに照合 {sources}",
     venueCountSuffix: "({count}公演)",
   },

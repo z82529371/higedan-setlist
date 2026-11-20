@@ -442,7 +442,7 @@ export const dictEn = {
     collapseSongFilterTitle: "Collapse filter to focus on song card below",
     venueFilterExpandTitle: "Click to expand venue filter",
     venuePlayedTotal: "Hosted {count} shows",
-    diffNote: "Per-show diffs recorded as insert / skip",
+    diffNote: "Per-show variations tracked against the tour template",
     verifyNote: "Set order & encore marks verified per show {sources}",
     venueCountSuffix: "({count} shows)",
   },

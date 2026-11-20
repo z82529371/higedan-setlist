@@ -1,5 +1,6 @@
 export { ArchiveStatusBar } from "./ArchiveStatusBar.jsx";
 export { ArchiveHeader } from "./ArchiveHeader.jsx";
+export { ArchiveFooter } from "./ArchiveFooter.jsx";
 export { FilterDrawer } from "./FilterDrawer.jsx";
 export { MobileSearchModal } from "./MobileSearchModal.jsx";
 export { MobileFloatingControls } from "./MobileFloatingControls.jsx";

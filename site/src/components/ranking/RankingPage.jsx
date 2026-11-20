@@ -6,6 +6,7 @@ import { TicketPerforationDivider, TicketBarcodeFooter } from "../slips/TicketCo
 import { SongCoverThumbnail } from "../slips/AlbumJacketCard.jsx";
 import LanguageSwitcher from "../LanguageSwitcher.jsx";
 import { MobileFloatingControls } from "../layout/MobileFloatingControls.jsx";
+import { ArchiveFooter } from "../layout/ArchiveFooter.jsx";
 
 export function RankingPage({
   allUsedSongs = [],
@@ -494,6 +495,8 @@ export function RankingPage({
           label={t("ranking.title", "演出排行")}
         />
       </article>
+
+      <ArchiveFooter />
 
       {/* Mobile Floating Action Controls */}
       <MobileFloatingControls
