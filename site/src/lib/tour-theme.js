@@ -87,8 +87,20 @@ export function resolveRouteEraTheme(
     return null;
   }
 
-  if (routeState.tab === "show") {
-    const { selShow, selUnitId } = routeState;
+  // Live preview staged FilterDrawer selections until drawer closes or commits
+  const effectiveRoute =
+    routeState.isFilterDrawerOpen && routeState.draftState
+      ? {
+          viewMode: routeState.viewMode,
+          tab: routeState.draftState.tab || routeState.tab,
+          selUnitId: routeState.draftState.unitId,
+          selShow: routeState.draftState.showId,
+          selSong: routeState.draftState.songId,
+        }
+      : routeState;
+
+  if (effectiveRoute.tab === "show") {
+    const { selShow, selUnitId } = effectiveRoute;
     const targetUnitId =
       (selShow && unitIdByShowId?.get?.(selShow)) ||
       selUnitId ||
@@ -99,11 +111,11 @@ export function resolveRouteEraTheme(
     return resolveUnitEraTheme(ud?.unit || ud);
   }
 
-  if (routeState.tab === "song" && routeState.selSong && discographyIndex) {
-    const trackTheme = discographyIndex.getTrackThemeForSong?.(routeState.selSong);
+  if (effectiveRoute.tab === "song" && effectiveRoute.selSong && discographyIndex) {
+    const trackTheme = discographyIndex.getTrackThemeForSong?.(effectiveRoute.selSong);
     if (isValidEraTheme(trackTheme)) return trackTheme;
 
-    const coverUrl = getSongCoverFn?.(routeState.selSong)?.coverUrl;
+    const coverUrl = getSongCoverFn?.(effectiveRoute.selSong)?.coverUrl;
     if (coverUrl && typeof discographyIndex.getAllReleases === "function") {
       const matchedByCover = discographyIndex
         .getAllReleases()
@@ -112,7 +124,7 @@ export function resolveRouteEraTheme(
     }
 
     if (getSongReleaseIdFn && typeof discographyIndex.getReleaseById === "function") {
-      const releaseId = getSongReleaseIdFn(routeState.selSong);
+      const releaseId = getSongReleaseIdFn(effectiveRoute.selSong);
       if (!releaseId) return null;
       const release = discographyIndex.getReleaseById(releaseId);
       return resolveReleaseEraTheme(release);

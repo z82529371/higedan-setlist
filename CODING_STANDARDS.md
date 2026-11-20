@@ -53,6 +53,7 @@ When proposing and testing public seams during `/tdd` or `/implement`, target th
 | Domain Module (`site/src/lib/`) | Public Seam / Export | Target Test Suite (`site/tests/`) |
 | :--- | :--- | :--- |
 | `domain.js` | `buildIndex`, `computeTourStatistics`, `defaultShowId`, `getSongAlbum` | `tests/ui/tour-statistics.test.js`, `tests/pipeline/canonical-titles.test.js` |
+| `tour-theme.js` | `resolveRouteEraTheme`, `buildThemeCssVars`, `resolveMemorialAccent`, `isValidEraTheme` | `tests/pipeline/tour-theme.test.js`, `tests/ui/tour-theme-ui.test.js` |
 | `resolve.js` | `resolve`, `assignCues`, `encoreStartOrderOf` | `tests/pipeline/resolve-monotonicity.test.js` |
 | `routes.js` | `parseRoute`, `routeHash` | `tests/invariants/design-tokens.test.js`, `tests/ui/route-machine.test.js` |
 | `ticket-book.js` | `loadTicketBook`, `toggleShowAttended`, `exportBackupFile`, `parseTransferCode` | `tests/ui/ticket-book.test.js` |

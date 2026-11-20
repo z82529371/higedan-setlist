@@ -28,9 +28,6 @@ Multiple autonomous agents frequently operate concurrently in this repository:
 7. **Staging Hygiene Guardrail**: Run `pnpm check:staged` before committing to verify no concurrent agent files (`data/events/*.json`, `docs/reports/*.md`) were mistakenly staged, ADR indexing integrity, LF line-ending normalization, and banned/deprecated domain terms compliance. ADRs in `docs/adr/` are immutable historical records; never mutate accepted decision text in-place.
 8. **Parallel Subagent Discipline**: Fan out subagents only across independent files; related files sharing locales or imports are edited sequentially by one agent. Subagent writes persist even when its response is lost to a restart — always re-verify with `git diff -- <path>` before repeating an edit.
 9. **Solo Developer Workflow**: This is a solo developer repository. Commit or merge integration branches directly into `master` and push to origin; do not open GitHub Pull Requests unless explicitly instructed by the user.
-10. **Synchronous Tool Timeout & Anti-Polling Discipline**: For all terminal commands expected to finish quickly (`git`, `pnpm check`, `pnpm test`, `pnpm build`, `pnpm test:ui`), set `WaitMsBeforeAsync` to `10000ms` (maximum). When any command enters the background, strictly adhere to reactive wakeup: stop calling tools immediately and await the system notification without polling `manage_task status`.
-11. **Tool Schema & Environment Parameter Discipline**: Supply only declared schema parameters (`CommandLine`, `IsDaemon`, `WaitMsBeforeAsync`, `toolSummary` for `run_command`), and use native file tools (`read_file`, `write_file`, `edit_file`).
-12. **Coding Standards Compliance**: Follow [`CODING_STANDARDS.md`](./CODING_STANDARDS.md) for zero-backend browser-native architecture (`ADR-0123`), consumer-friendly non-jargon UI copy, and LF line-ending hygiene (`.gitattributes`).
 
 ## Verification Commands
 

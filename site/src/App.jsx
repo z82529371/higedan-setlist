@@ -71,6 +71,8 @@ export function AppContent({ probeRoute } = {}) {
       routeState.selUnitId,
       routeState.selShow,
       routeState.selSong,
+      routeState.isFilterDrawerOpen,
+      routeState.draftState,
       unitData,
       unitIdByShowId,
       discographyIndex,

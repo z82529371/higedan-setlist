@@ -181,4 +181,14 @@ describe("Tour Era Accent & Official Site Link UI (ADR-0149)", () => {
       assert.equal(theme, null, `Unreleased song "${s.id}" must fall back to null (Stage Gold)`);
     }
   });
+
+  it("wires FilterDrawer open/draftState into App.jsx eraTheme dependencies for live preview", async () => {
+    const fs = await import("node:fs");
+    const appPath = new URL("../../src/App.jsx", import.meta.url);
+    const appSource = fs.readFileSync(appPath, "utf8");
+    const memoMatch = appSource.match(/const eraTheme = useMemo\(([\s\S]*?)\n  \);/);
+    assert.ok(memoMatch, "App.jsx must compute eraTheme via useMemo");
+    assert.match(memoMatch[1], /routeState\.isFilterDrawerOpen/, "eraTheme useMemo deps must include routeState.isFilterDrawerOpen");
+    assert.match(memoMatch[1], /routeState\.draftState/, "eraTheme useMemo deps must include routeState.draftState");
+  });
 });

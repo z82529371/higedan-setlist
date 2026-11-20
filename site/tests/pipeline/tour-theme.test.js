@@ -213,6 +213,137 @@ describe("tour-theme domain seam (ADR-0149)", () => {
     );
   });
 
+  it("previews draftState era theme while FilterDrawer is open and reverts when closed", () => {
+    const TOUR_THEME = {
+      light: "#2167a8",
+      lightInk: "#ffffff",
+      dark: "#4fa3f7",
+      darkInk: "#000000",
+    };
+    const SONG_THEME = {
+      light: "#9e1c32",
+      lightInk: "#ffffff",
+      dark: "#f26b82",
+      darkInk: "#000000",
+    };
+    const unitData = new Map([
+      ["themed-tour", { unit: { id: "themed-tour", theme: TOUR_THEME } }],
+      ["unthemed-tour", { unit: { id: "unthemed-tour" } }],
+    ]);
+    const unitIdByShowId = new Map([
+      ["show-themed-1", "themed-tour"],
+      ["show-unthemed-1", "unthemed-tour"],
+    ]);
+    const discographyIndex = {
+      getTrackThemeForSong: (id) => (id === "themed-song" ? SONG_THEME : null),
+    };
+    const ctx = { unitData, unitIdByShowId, discographyIndex };
+
+    // Committed route is unthemed, but drawer is open with a themed tour in draftState -> previews TOUR_THEME
+    assert.deepEqual(
+      resolveRouteEraTheme(
+        {
+          viewMode: "archive",
+          tab: "show",
+          selUnitId: "unthemed-tour",
+          selShow: "show-unthemed-1",
+          selSong: "unthemed-song",
+          isFilterDrawerOpen: true,
+          draftState: {
+            tab: "show",
+            unitId: "themed-tour",
+            showId: "show-themed-1",
+            songId: "unthemed-song",
+          },
+        },
+        ctx
+      ),
+      TOUR_THEME
+    );
+
+    // Switching drawer tab to "song" with themed song -> previews SONG_THEME
+    assert.deepEqual(
+      resolveRouteEraTheme(
+        {
+          viewMode: "archive",
+          tab: "show",
+          selUnitId: "unthemed-tour",
+          selShow: "show-unthemed-1",
+          selSong: "unthemed-song",
+          isFilterDrawerOpen: true,
+          draftState: {
+            tab: "song",
+            unitId: "themed-tour",
+            showId: "show-themed-1",
+            songId: "themed-song",
+          },
+        },
+        ctx
+      ),
+      SONG_THEME
+    );
+
+    // Switching drawer tab to "venue" or selecting unthemed item -> null (default brand fallback)
+    assert.equal(
+      resolveRouteEraTheme(
+        {
+          viewMode: "archive",
+          tab: "show",
+          selUnitId: "themed-tour",
+          selShow: "show-themed-1",
+          isFilterDrawerOpen: true,
+          draftState: {
+            tab: "venue",
+            unitId: "themed-tour",
+            showId: "show-themed-1",
+            songId: "themed-song",
+          },
+        },
+        ctx
+      ),
+      null
+    );
+    assert.equal(
+      resolveRouteEraTheme(
+        {
+          viewMode: "archive",
+          tab: "show",
+          selUnitId: "themed-tour",
+          selShow: "show-themed-1",
+          isFilterDrawerOpen: true,
+          draftState: {
+            tab: "show",
+            unitId: "unthemed-tour",
+            showId: "show-unthemed-1",
+          },
+        },
+        ctx
+      ),
+      null
+    );
+
+    // Closing drawer (isFilterDrawerOpen: false) reverts to committed routeState
+    assert.deepEqual(
+      resolveRouteEraTheme(
+        {
+          viewMode: "archive",
+          tab: "show",
+          selUnitId: "themed-tour",
+          selShow: "show-themed-1",
+          isFilterDrawerOpen: false,
+          draftState: {
+            tab: "song",
+            unitId: "unthemed-tour",
+            showId: "show-unthemed-1",
+            songId: "themed-song",
+          },
+        },
+        ctx
+      ),
+      TOUR_THEME
+    );
+  });
+
   it("builds light and dark CSS custom properties with derived alpha tokens", () => {
     const lightVars = buildThemeCssVars(SAMPLE_THEME, false);
     assert.equal(lightVars["--color-band"], "#d96b0b");
