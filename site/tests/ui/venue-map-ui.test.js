@@ -210,7 +210,8 @@ describe("24. Interactive SVG Venue Map Canvas & Career Journey Navigator (#53, 
     assert.ok(htmlJourneyMode.includes("washi-tape"), "JourneyPage ticket must render washi masking tape (ADR-0127)");
     assert.ok(htmlJourneyMode.includes('data-testid="journey-stops-badge"'), "JourneyPage header must render stops badge (ADR-0127)");
     assert.ok(htmlJourneyMode.includes("h-[420px] sm:h-[520px] md:h-[640px]"), "Journey map canvas must render maximized height (ADR-0127)");
-    assert.ok(htmlJourneyMode.includes('data-testid="journey-tv-toggle"'), "Must render TV broadcast toggle (+24 shows)");
+    assert.ok(!htmlJourneyMode.includes('data-testid="journey-tv-toggle"'), "Must not render TV broadcast toggle (journey is physical shows only)");
+    assert.ok(!htmlJourneyMode.includes("📡"), "Must not render livestream badge on journey page");
     assert.ok(htmlJourneyMode.includes('data-testid="journey-year-select"'), "Must render year dropdown selector");
     assert.ok(htmlJourneyMode.includes('data-testid="journey-tour-select"'), "Must render tour dropdown selector");
     assert.ok(!htmlJourneyMode.includes('value="free-live-tour-2015"'), "Must exclude mini-lives/store events from tour selector");
@@ -229,9 +230,6 @@ describe("24. Interactive SVG Venue Map Canvas & Career Journey Navigator (#53, 
           careerYears: ["2021", "2024"],
           currentTourId: "ALL",
           currentYear: "ALL",
-          includeTv: false,
-          excludedTvCount: 24,
-          virtualCount: 1,
         })
       )
     );
@@ -239,7 +237,8 @@ describe("24. Interactive SVG Venue Map Canvas & Career Journey Navigator (#53, 
     assert.ok(htmlDrawer.includes('data-testid="journey-filter-drawer"'), "Must render journey-filter-drawer when open (ADR-0127)");
     assert.ok(htmlDrawer.includes('data-testid="drawer-journey-tour-select"'), "Must render drawer tour selector");
     assert.ok(htmlDrawer.includes('data-testid="drawer-journey-year-select"'), "Must render drawer year selector");
-    assert.ok(htmlDrawer.includes('data-testid="drawer-journey-tv-toggle"'), "Must render drawer TV toggle");
+    assert.ok(!htmlDrawer.includes('data-testid="drawer-journey-tv-toggle"'), "Must not render drawer TV toggle");
+    assert.ok(!htmlDrawer.includes("📡"), "Must not render livestream notice in drawer");
     assert.ok(htmlDrawer.includes('data-testid="journey-drawer-confirm-btn"'), "Must render drawer confirm apply button");
 
     // Sequential playback: starts paused at the origin, single active leg, no corridor aggregation

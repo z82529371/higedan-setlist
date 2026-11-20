@@ -27,7 +27,6 @@ export function JourneyPage({
   onSelectReleases,
 }) {
   const { t } = useI18n();
-  const [includeTv, setIncludeTv] = useState(false);
   const [journeyYear, setJourneyYear] = useState("ALL");
   const [journeyTourId, setJourneyTourId] = useState("ALL");
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -72,15 +71,10 @@ export function JourneyPage({
     });
   }, [allCareerShows, journeyYear, journeyTourId]);
 
-  const baseCareerJourney = useMemo(
+  const activeJourney = useMemo(
     () => buildJourneySequence(filteredCareerShows, venueProfilesByCanonical, { includeTvBroadcasts: false }),
     [filteredCareerShows]
   );
-
-  const activeJourney = useMemo(() => {
-    if (!includeTv) return baseCareerJourney;
-    return buildJourneySequence(filteredCareerShows, venueProfilesByCanonical, { includeTvBroadcasts: true });
-  }, [filteredCareerShows, includeTv, baseCareerJourney]);
 
   const currentJourneyTitle = useMemo(() => {
     return t("venueMap.journeyTitle");
@@ -131,7 +125,6 @@ export function JourneyPage({
               >
                 <span aria-hidden="true">🔍</span>
                 <span className="truncate">{mobileFilterLabel}</span>
-                {includeTv && <span className="shrink-0 text-band-ink font-extrabold">+TV</span>}
                 <span aria-hidden="true" className="shrink-0 opacity-70">▾</span>
               </button>
             </div>
@@ -143,36 +136,8 @@ export function JourneyPage({
           {/* Desktop-only Interactive Controls & Filters Toolbar */}
           <div
             data-testid="journey-filter-bar"
-            className="hidden sm:flex flex-wrap items-center justify-between gap-2 border-b border-line-soft py-3"
+            className="hidden sm:flex flex-wrap items-center justify-end gap-2 border-b border-line-soft py-3"
           >
-            <div className="flex flex-wrap items-center gap-2">
-              <button
-                type="button"
-                data-testid="journey-tv-toggle"
-                aria-pressed={includeTv}
-                onClick={() => setIncludeTv((prev) => !prev)}
-                className={`rounded-[3px] px-3 py-1 font-mono text-[11px] font-bold cursor-pointer transition-colors ${
-                  includeTv
-                    ? "bg-band text-band-ink border border-ink shadow-xs"
-                    : "bg-paper text-ink border border-ink/40 hover:bg-tape-tint/50"
-                }`}
-              >
-                <span>{includeTv ? "✓ " : ""}</span>
-                <span>
-                  {t("venueMap.includeTvToggle", null, {
-                    count: baseCareerJourney.excludedTvCount ?? 24,
-                  })}
-                </span>
-              </button>
-              {activeJourney.summary.virtualCount > 0 && (
-                <span className="rounded-[3px] border border-ink/30 bg-paper px-2.5 py-1 font-mono text-[11px] font-bold text-ink">
-                  {t("venueMap.virtualBadge", null, {
-                    count: activeJourney.summary.virtualCount,
-                  })}
-                </span>
-              )}
-            </div>
-
             <div className="flex flex-wrap items-center gap-3">
               <div className="flex items-center gap-2">
                 <label
@@ -259,18 +224,14 @@ export function JourneyPage({
       <JourneyFilterDrawer
         isOpen={isDrawerOpen}
         onClose={() => setIsDrawerOpen(false)}
-        onApply={({ tourId, year, includeTv: nextIncludeTv }) => {
+        onApply={({ tourId, year }) => {
           setJourneyTourId(tourId);
           setJourneyYear(year);
-          setIncludeTv(nextIncludeTv);
         }}
         tourOptions={tourOptions}
         careerYears={careerYears}
         currentTourId={journeyTourId}
         currentYear={journeyYear}
-        includeTv={includeTv}
-        excludedTvCount={baseCareerJourney.excludedTvCount ?? 24}
-        virtualCount={activeJourney.summary.virtualCount}
       />
     </div>
   );

@@ -813,8 +813,6 @@ export const dictZhTw = {
     legendVan: "🚐 陸路巡演車（本島公路網・道內）",
     legendFlight: "✈️ 跨海／國際航線（北海道・沖繩・海外）",
     legendStay: "🏕️ 同館連日駐留",
-    includeTvToggle: "包含電視演出（+{count} 場）",
-    virtualBadge: "📡 另含線上配信 {count} 場",
     filterAllYears: "全部年份（2012–2026）",
     filterByYear: "年份選擇",
     filterByTour: "指定專場巡演",

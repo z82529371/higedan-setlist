@@ -830,8 +830,6 @@ export const dictKo = {
     legendVan: "🚐 육로 투어 밴 (본섬 도로망·홋카이도 내)",
     legendFlight: "✈️ 항공 노선 (홋카이도·오키나와·해외)",
     legendStay: "🏕️ 동일 공연장 연일 체류",
-    includeTvToggle: "TV 출연 포함 (+{count}회)",
-    virtualBadge: "📡 온라인 라이브 {count}회 별도",
     filterAllYears: "전체 기간 (2012–2026)",
     filterByYear: "연도 선택",
     filterByTour: "투어 선택",

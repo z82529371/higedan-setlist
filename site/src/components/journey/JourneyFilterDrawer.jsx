@@ -10,25 +10,20 @@ export function JourneyFilterDrawer({
   careerYears = [],
   currentTourId = "ALL",
   currentYear = "ALL",
-  includeTv = false,
-  excludedTvCount = 24,
-  virtualCount = 0,
 }) {
   const { t } = useI18n();
 
   // Draft state: changes are only committed when user taps "確認套用"
   const [draftTourId, setDraftTourId] = useState(currentTourId);
   const [draftYear, setDraftYear] = useState(currentYear);
-  const [draftIncludeTv, setDraftIncludeTv] = useState(includeTv);
 
   // Sync draft state whenever drawer opens with current values
   useEffect(() => {
     if (isOpen) {
       setDraftTourId(currentTourId);
       setDraftYear(currentYear);
-      setDraftIncludeTv(includeTv);
     }
-  }, [isOpen, currentTourId, currentYear, includeTv]);
+  }, [isOpen, currentTourId, currentYear]);
 
   if (!isOpen) return null;
 
@@ -36,7 +31,6 @@ export function JourneyFilterDrawer({
     onApply({
       tourId: draftTourId,
       year: draftYear,
-      includeTv: draftIncludeTv,
     });
     onClose();
   };
@@ -132,50 +126,6 @@ export function JourneyFilterDrawer({
               ))}
             </select>
           </div>
-
-          {/* 3. TV Broadcast Toggle */}
-          <div className="pt-2 border-t border-line-soft">
-            <button
-              type="button"
-              data-testid="drawer-journey-tv-toggle"
-              aria-pressed={draftIncludeTv}
-              onClick={() => setDraftIncludeTv((prev) => !prev)}
-              className={`w-full flex items-center justify-between rounded-[4px] border p-3 cursor-pointer transition-colors ${
-                draftIncludeTv
-                  ? "bg-band text-band-ink border-ink font-bold shadow-2xs"
-                  : "bg-paper text-ink border-ink/30 hover:bg-tape-tint/40"
-              }`}
-            >
-              <div className="flex items-center gap-2">
-                <span className="text-base" aria-hidden="true">📺</span>
-                <div className="text-left">
-                  <div className="font-mono text-[12px] font-bold">
-                    {t("venueMap.includeTvToggle", null, {
-                      count: excludedTvCount,
-                    })}
-                  </div>
-                  <div className="text-[11px] opacity-75">
-                    {t("venueMap.tvBroadcastsSubtitle", "NHK紅白、Music Station 等電視棚內演出")}
-                  </div>
-                </div>
-              </div>
-              <span className="font-mono text-[13px] font-bold">
-                {draftIncludeTv ? "✓" : "○"}
-              </span>
-            </button>
-          </div>
-
-          {/* 4. Virtual Broadcasts notice */}
-          {virtualCount > 0 && (
-            <div className="flex items-center gap-2 rounded-[4px] border border-ink/20 bg-paper p-2.5 font-mono text-[11px] text-muted">
-              <span aria-hidden="true">📡</span>
-              <span>
-                {t("venueMap.virtualBadge", null, {
-                  count: virtualCount,
-                })}
-              </span>
-            </div>
-          )}
         </div>
 
         {/* Bottom Action Bar: Cancel + Confirm Apply */}

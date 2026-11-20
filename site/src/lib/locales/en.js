@@ -838,8 +838,6 @@ export const dictEn = {
     legendVan: "🚐 Overland Van (Mainland Highway / Intra-Hokkaido)",
     legendFlight: "✈️ Flight Route (Hokkaido Crossing / Okinawa / Overseas)",
     legendStay: "🏕️ Multi-Day Venue Stay",
-    includeTvToggle: "Include TV Broadcasts (+{count} shows)",
-    virtualBadge: "📡 +{count} Livestreams",
     filterAllYears: "All Career (2012–2026)",
     filterByYear: "Select Year",
     filterByTour: "Select Tour",

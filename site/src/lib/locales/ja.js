@@ -834,8 +834,6 @@ export const dictJa = {
     legendVan: "🚐 陸路ツアー車（本島道路網・道内）",
     legendFlight: "✈️ フライト航路（北海道・沖縄・海外）",
     legendStay: "🏕️ 同会場連日滞在",
-    includeTvToggle: "TV出演を含む（+{count}公演）",
-    virtualBadge: "📡 配信ライブ {count} 公演（別枠）",
     filterAllYears: "全期間（2012–2026）",
     filterByYear: "開催年指定",
     filterByTour: "ツアー指定",
