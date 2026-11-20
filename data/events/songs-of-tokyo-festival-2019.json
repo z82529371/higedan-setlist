@@ -1,0 +1,23 @@
+{
+  "id": "songs-of-tokyo-festival-2019",
+  "title": "SONGS OF TOKYO Festival 2019",
+  "type": "電視演出",
+  "shows": [
+    {
+      "id": "songs-of-tokyo-festival-2019-1027",
+      "date": "2019-10-27",
+      "title": "SONGS OF TOKYO Festival 2019",
+      "startsAt": "08:10",
+      "sourceUrls": [
+        "https://www.oricon.co.jp/prof/643869/tv/"
+      ],
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "songId": "pretender"
+        }
+      ]
+    }
+  ]
+}

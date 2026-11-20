@@ -1,0 +1,23 @@
+{
+  "id": "news-zero-2023-1214",
+  "title": "news zero",
+  "type": "電視演出",
+  "shows": [
+    {
+      "id": "news-zero-2023-1214",
+      "date": "2023-12-14",
+      "title": "news zero",
+      "startsAt": "23:00",
+      "sourceUrls": [
+        "https://natalie.mu/music/news/552758"
+      ],
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "songId": "nichijo"
+        }
+      ]
+    }
+  ]
+}

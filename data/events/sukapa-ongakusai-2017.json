@@ -6,13 +6,11 @@
     {
       "id": "sukapa-ongakusai-2017-0312",
       "date": "2017-03-12",
-      "city": "東京",
-      "venue": "BSスカパー! 特別音樂祭舞台 (電視生放送)",
-      "region": "關東",
-      "prefecture": "東京都",
       "title": "スカパー！音楽祭2017 生放送",
+      "startsAt": "19:00",
       "sourceUrls": [
-        "https://higedan.com/news/3/?page=62"
+        "https://higedan.com/news/3/?page=62",
+        "https://www.oricon.co.jp/news/2086915/full/"
       ],
       "setlist": [
         {

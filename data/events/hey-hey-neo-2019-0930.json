@@ -1,0 +1,24 @@
+{
+  "id": "hey-hey-neo-2019-0930",
+  "title": "HEY!HEY!NEO!",
+  "type": "電視演出",
+  "shows": [
+    {
+      "id": "hey-hey-neo-2019-0930",
+      "date": "2019-09-30",
+      "title": "HEY!HEY!NEO!",
+      "startsAt": "23:00",
+      "sourceUrls": [
+        "https://rockinon.com/news/detail/189469",
+        "https://www.oricon.co.jp/prof/643869/tv/p/2/"
+      ],
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "songId": "yesterday"
+        }
+      ]
+    }
+  ]
+}

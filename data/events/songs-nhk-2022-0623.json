@@ -1,0 +1,35 @@
+{
+  "id": "songs-nhk-2022-0623",
+  "title": "SONGS「Official髭男dism」",
+  "shortTitle": "SONGS",
+  "type": "電視演出",
+  "shows": [
+    {
+      "id": "songs-nhk-2022-0623",
+      "date": "2022-06-23",
+      "title": "SONGS「Official髭男dism」",
+      "startsAt": "22:00",
+      "sourceUrls": [
+        "https://natalie.mu/music/news/481443",
+        "https://www.oricon.co.jp/prof/643869/tv/"
+      ],
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "songId": "anarchy"
+        },
+        {
+          "order": 2,
+          "encore": false,
+          "songId": "mixed-nuts"
+        },
+        {
+          "order": 3,
+          "encore": false,
+          "songId": "universe"
+        }
+      ]
+    }
+  ]
+}

@@ -1,18 +1,16 @@
 {
   "id": "cdtv-live-live-christmas-2022",
   "title": "CDTVライブ ! ライブ ! ★クリスマス 4時間スペシャル★ 2022バズソング ～75選～",
-  "shortTitle": "CDTVライブ！ライブ！クリスマス",
+  "shortTitle": "CDTVライブ ! ライブ !",
   "type": "電視演出",
   "shows": [
     {
       "id": "1500153",
       "date": "2022-12-19",
       "weekday": "月",
-      "city": "東京",
-      "venue": "TBS電視台",
-      "opensAt": "19:00",
       "sourceUrls": [
-        "https://www.livefans.jp/events/1500153"
+        "https://www.livefans.jp/events/1500153",
+        "https://natalie.mu/music/news/505774"
       ],
       "setlist": [
         {
@@ -28,8 +26,7 @@
           "note": "今年の大ヒットソング2曲をSPメドレー"
         }
       ],
-      "prefecture": "東京都",
-      "region": "關東"
+      "startsAt": "19:00"
     }
   ]
 }

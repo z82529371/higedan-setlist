@@ -6,13 +6,12 @@
     {
       "id": "2022-fns-1207",
       "date": "2022-12-07",
-      "city": "東京",
-      "venue": "富士電視台",
-      "region": "關東",
-      "prefecture": "東京都",
       "title": "2022 FNS歌謡祭 第1夜",
       "sourceUrls": [
-        "https://ja.wikipedia.org/wiki/Official%E9%AB%AD%E7%94%B7dism"
+        "https://www.fujitv.co.jp/FNS/2022/table1.html",
+        "https://ja.wikipedia.org/wiki/Official%E9%AB%AD%E7%94%B7dism",
+        "https://natalie.mu/stage/news/501532",
+        "https://natalie.mu/stage/news/504114"
       ],
       "setlist": [
         {
@@ -21,18 +20,17 @@
           "songId": "subtitle"
         }
       ],
-      "opensAt": "18:30"
+      "startsAt": "21:00"
     },
     {
       "id": "2022-fns-1214",
       "date": "2022-12-14",
-      "city": "東京",
-      "venue": "富士電視台",
-      "region": "關東",
-      "prefecture": "東京都",
       "title": "2022 FNS歌謡祭 第2夜",
       "sourceUrls": [
-        "https://ja.wikipedia.org/wiki/Official%E9%AB%AD%E7%94%B7dism"
+        "https://www.fujitv.co.jp/FNS/2022/table2.html",
+        "https://ja.wikipedia.org/wiki/Official%E9%AB%AD%E7%94%B7dism",
+        "https://natalie.mu/stage/news/501532",
+        "https://natalie.mu/stage/news/504114"
       ],
       "setlist": [
         {
@@ -41,7 +39,7 @@
           "songId": "mixed-nuts"
         }
       ],
-      "opensAt": "18:30"
+      "startsAt": "21:00"
     }
   ]
 }

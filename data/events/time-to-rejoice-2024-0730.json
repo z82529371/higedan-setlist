@@ -1,0 +1,38 @@
+{
+  "id": "time-to-rejoice-2024-0730",
+  "title": "Official髭男dism special program \"Time to Rejoice\"",
+  "type": "電視演出",
+  "shows": [
+    {
+      "id": "time-to-rejoice-2024-0730",
+      "date": "2024-07-31",
+      "title": "Official髭男dism special program \"Time to Rejoice\"",
+      "startsAt": "01:30",
+      "sourceUrls": [
+        "https://natalie.mu/music/news/583284"
+      ],
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "songId": "tattoo"
+        },
+        {
+          "order": 2,
+          "encore": false,
+          "songId": "soulsoup"
+        },
+        {
+          "order": 3,
+          "encore": false,
+          "songId": "sharon"
+        },
+        {
+          "order": 4,
+          "encore": false,
+          "songId": "b-side-blues"
+        }
+      ]
+    }
+  ]
+}

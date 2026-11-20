@@ -1,6 +1,6 @@
 # Official髭男dism 未記錄時間場次清單 (Missing Show Times Report)
 
-> 本清單收錄全檔案庫中 **未記錄演出時間（opensAt 開場 與 startsAt 開演 皆缺）** 之場次，共計 **62** 場。
+> 本清單收錄全檔案庫中 **未記錄演出時間（opensAt 開場 與 startsAt 開演 皆缺）** 之場次，共計 **61** 場。
 
 ### 統計與年份分佈
 
@@ -11,14 +11,13 @@
 | 2014 | **13 場** |
 | 2015 | **24 場** |
 | 2016 | **6 場** |
-| 2017 | **1 場** |
 | 2018 | **5 場** |
 | 2019 | **4 場** |
 | 2020 | **3 場** |
 
 ---
 
-### 完整清單明細 (共 62 場)
+### 完整清單明細 (共 61 場)
 
 | # | 日期 | 演出型態 | 巡演 / 活動名稱 | 場館 (城市) | 資料來源檔案 |
 |---|---|---|---|---|---|
@@ -71,16 +70,15 @@
 | 47 | 2016-09-17 | 特別專場 | 鷹の爪団のSHIROZEME in 国宝松江城 2016 | 國寶松江城 馬出曲輪 (松江) | [takanotsumedan-shirozeme-matsuejo-2016.json](file:///C:/Users/User/%E9%AB%AD%E7%94%B7%20%E6%BC%94%E5%94%B1%E6%9C%83/data/events/takanotsumedan-shirozeme-matsuejo-2016.json) |
 | 48 | 2016-10-01 | 聯合專場 | ホタルライトヒルズバンド ～センスオブワンダーTOUR 2016～ | 柏 PALOOZA (千葉) | [hotal-light-hills-band-sense-of-wonder-tour-2016.json](file:///C:/Users/User/%E9%AB%AD%E7%94%B7%20%E6%BC%94%E5%94%B1%E6%9C%83/data/events/hotal-light-hills-band-sense-of-wonder-tour-2016.json) |
 | 49 | 2016-10-23 | 聯合專場 | ホタルライトヒルズバンド ～センスオブワンダーTOUR 2016～ | 岡山 PEPPERLAND (岡山) | [hotal-light-hills-band-sense-of-wonder-tour-2016.json](file:///C:/Users/User/%E9%AB%AD%E7%94%B7%20%E6%BC%94%E5%94%B1%E6%9C%83/data/events/hotal-light-hills-band-sense-of-wonder-tour-2016.json) |
-| 50 | 2017-03-12 | 電視演出 | スカパー！音楽祭2017 生放送 | BSスカパー! 特別音樂祭舞台 (電視生放送) (東京) | [sukapa-ongakusai-2017.json](file:///C:/Users/User/%E9%AB%AD%E7%94%B7%20%E6%BC%94%E5%94%B1%E6%9C%83/data/events/sukapa-ongakusai-2017.json) |
-| 51 | 2018-03-11 | 音樂祭 | HIROSHIMA MUSIC STADIUM -ハルバン-'18 | 廣島 Alice Garden (廣島) | [hiroshima-music-stadium-18-2018.json](file:///C:/Users/User/%E9%AB%AD%E7%94%B7%20%E6%BC%94%E5%94%B1%E6%9C%83/data/events/hiroshima-music-stadium-18-2018.json) |
-| 52 | 2018-07-29 | 音樂祭 | 未確認フェスティバル2018 | TSUTAYA O-WEST (東京) | [mikakunin-festival-2018.json](file:///C:/Users/User/%E9%AB%AD%E7%94%B7%20%E6%BC%94%E5%94%B1%E6%9C%83/data/events/mikakunin-festival-2018.json) |
-| 53 | 2018-08-03 | 音樂祭 | ROCK KIDS 802-OCHIKEN Goes ON!!-SPECIAL LIVE HIGH!HIGH!HIGH! | 難波Hatch (大阪) | [rock-kids-802-ochiken-goes-on-special-live-high-high-high-2018.json](file:///C:/Users/User/%E9%AB%AD%E7%94%B7%20%E6%BC%94%E5%94%B1%E6%9C%83/data/events/rock-kids-802-ochiken-goes-on-special-live-high-high-high-2018.json) |
-| 54 | 2018-10-06 | 音樂祭 | ZIP-FM 25th ANNIVERSARY ZIP AUTUMN SQUARE 2018 | 久屋大通公園 久屋廣場 (名古屋) | [zip-fm-25th-anniversary-zip-autumn-square-2018.json](file:///C:/Users/User/%E9%AB%AD%E7%94%B7%20%E6%BC%94%E5%94%B1%E6%9C%83/data/events/zip-fm-25th-anniversary-zip-autumn-square-2018.json) |
-| 55 | 2018-10-08 | 音樂祭 | MINAMI WHEEL 2018 | BIGCAT (大阪) | [minami-wheel-2018.json](file:///C:/Users/User/%E9%AB%AD%E7%94%B7%20%E6%BC%94%E5%94%B1%E6%9C%83/data/events/minami-wheel-2018.json) |
-| 56 | 2019-03-28 | 聯合專場 | Spotify presents Early Noise Special | EX THEATER ROPPONGI (東京) | [spotify-presents-early-noise-special-2019.json](file:///C:/Users/User/%E9%AB%AD%E7%94%B7%20%E6%BC%94%E5%94%B1%E6%9C%83/data/events/spotify-presents-early-noise-special-2019.json) |
-| 57 | 2019-04-18 | 聯合專場 | ROCK AX vol.2 | TOKYO DOME CITY HALL (東京) | [rock-ax-vol-2-2019.json](file:///C:/Users/User/%E9%AB%AD%E7%94%B7%20%E6%BC%94%E5%94%B1%E6%9C%83/data/events/rock-ax-vol-2-2019.json) |
-| 58 | 2019-05-28 | 聯合專場 | NOW PLAYING JAPAN LIVE vol.3 | 新木場STUDIO COAST (東京) | [now-playing-japan-live-vol-3-2019.json](file:///C:/Users/User/%E9%AB%AD%E7%94%B7%20%E6%BC%94%E5%94%B1%E6%9C%83/data/events/now-playing-japan-live-vol-3-2019.json) |
-| 59 | 2019-12-25 | 音樂祭 | FM802 ROCK FESTIVAL RADIO CRAZY 2019 | INTEX大阪 Z-STAGE 6號館 (大阪) | [fm802-rock-festival-radio-crazy-2019.json](file:///C:/Users/User/%E9%AB%AD%E7%94%B7%20%E6%BC%94%E5%94%B1%E6%9C%83/data/events/fm802-rock-festival-radio-crazy-2019.json) |
-| 60 | 2020-02-19 | 聯合專場 | FM802 MUSIC FREAKS LIVE | Zepp Osaka Bayside (大阪) | [fm802-music-freaks-live-2020.json](file:///C:/Users/User/%E9%AB%AD%E7%94%B7%20%E6%BC%94%E5%94%B1%E6%9C%83/data/events/fm802-music-freaks-live-2020.json) |
-| 61 | 2020-08-10 | 電視演出 | CDTV ライブ!ライブ! 4時間SP | TBS電視台 (東京) | [cdtv-higedan-fes-2020.json](file:///C:/Users/User/%E9%AB%AD%E7%94%B7%20%E6%BC%94%E5%94%B1%E6%9C%83/data/events/cdtv-higedan-fes-2020.json) |
-| 62 | 2020-11-08 | 線上直播 | 超放課後祭 Supported by 放課後『カルピス』 スペシャルライブ | 線上直播 (YouTube / Twitter / LINE) (線上) | [chou-houkagosai-calpis-2020.json](file:///C:/Users/User/%E9%AB%AD%E7%94%B7%20%E6%BC%94%E5%94%B1%E6%9C%83/data/events/chou-houkagosai-calpis-2020.json) |
+| 50 | 2018-03-11 | 音樂祭 | HIROSHIMA MUSIC STADIUM -ハルバン-'18 | 廣島 Alice Garden (廣島) | [hiroshima-music-stadium-18-2018.json](file:///C:/Users/User/%E9%AB%AD%E7%94%B7%20%E6%BC%94%E5%94%B1%E6%9C%83/data/events/hiroshima-music-stadium-18-2018.json) |
+| 51 | 2018-07-29 | 音樂祭 | 未確認フェスティバル2018 | TSUTAYA O-WEST (東京) | [mikakunin-festival-2018.json](file:///C:/Users/User/%E9%AB%AD%E7%94%B7%20%E6%BC%94%E5%94%B1%E6%9C%83/data/events/mikakunin-festival-2018.json) |
+| 52 | 2018-08-03 | 音樂祭 | ROCK KIDS 802-OCHIKEN Goes ON!!-SPECIAL LIVE HIGH!HIGH!HIGH! | 難波Hatch (大阪) | [rock-kids-802-ochiken-goes-on-special-live-high-high-high-2018.json](file:///C:/Users/User/%E9%AB%AD%E7%94%B7%20%E6%BC%94%E5%94%B1%E6%9C%83/data/events/rock-kids-802-ochiken-goes-on-special-live-high-high-high-2018.json) |
+| 53 | 2018-10-06 | 音樂祭 | ZIP-FM 25th ANNIVERSARY ZIP AUTUMN SQUARE 2018 | 久屋大通公園 久屋廣場 (名古屋) | [zip-fm-25th-anniversary-zip-autumn-square-2018.json](file:///C:/Users/User/%E9%AB%AD%E7%94%B7%20%E6%BC%94%E5%94%B1%E6%9C%83/data/events/zip-fm-25th-anniversary-zip-autumn-square-2018.json) |
+| 54 | 2018-10-08 | 音樂祭 | MINAMI WHEEL 2018 | BIGCAT (大阪) | [minami-wheel-2018.json](file:///C:/Users/User/%E9%AB%AD%E7%94%B7%20%E6%BC%94%E5%94%B1%E6%9C%83/data/events/minami-wheel-2018.json) |
+| 55 | 2019-03-28 | 聯合專場 | Spotify presents Early Noise Special | EX THEATER ROPPONGI (東京) | [spotify-presents-early-noise-special-2019.json](file:///C:/Users/User/%E9%AB%AD%E7%94%B7%20%E6%BC%94%E5%94%B1%E6%9C%83/data/events/spotify-presents-early-noise-special-2019.json) |
+| 56 | 2019-04-18 | 聯合專場 | ROCK AX vol.2 | TOKYO DOME CITY HALL (東京) | [rock-ax-vol-2-2019.json](file:///C:/Users/User/%E9%AB%AD%E7%94%B7%20%E6%BC%94%E5%94%B1%E6%9C%83/data/events/rock-ax-vol-2-2019.json) |
+| 57 | 2019-05-28 | 聯合專場 | NOW PLAYING JAPAN LIVE vol.3 | 新木場STUDIO COAST (東京) | [now-playing-japan-live-vol-3-2019.json](file:///C:/Users/User/%E9%AB%AD%E7%94%B7%20%E6%BC%94%E5%94%B1%E6%9C%83/data/events/now-playing-japan-live-vol-3-2019.json) |
+| 58 | 2019-12-25 | 音樂祭 | FM802 ROCK FESTIVAL RADIO CRAZY 2019 | INTEX大阪 Z-STAGE 6號館 (大阪) | [fm802-rock-festival-radio-crazy-2019.json](file:///C:/Users/User/%E9%AB%AD%E7%94%B7%20%E6%BC%94%E5%94%B1%E6%9C%83/data/events/fm802-rock-festival-radio-crazy-2019.json) |
+| 59 | 2020-02-19 | 聯合專場 | FM802 MUSIC FREAKS LIVE | Zepp Osaka Bayside (大阪) | [fm802-music-freaks-live-2020.json](file:///C:/Users/User/%E9%AB%AD%E7%94%B7%20%E6%BC%94%E5%94%B1%E6%9C%83/data/events/fm802-music-freaks-live-2020.json) |
+| 60 | 2020-08-10 | 電視演出 | CDTV ライブ!ライブ! 4時間SP | undefined (undefined) | [cdtv-live-live-2020.json](file:///C:/Users/User/%E9%AB%AD%E7%94%B7%20%E6%BC%94%E5%94%B1%E6%9C%83/data/events/cdtv-live-live-2020.json) |
+| 61 | 2020-11-08 | 線上直播 | 超放課後祭 Supported by 放課後『カルピス』 スペシャルライブ | 線上直播 (線上直播) | [chou-houkagosai-calpis-2020.json](file:///C:/Users/User/%E9%AB%AD%E7%94%B7%20%E6%BC%94%E5%94%B1%E6%9C%83/data/events/chou-houkagosai-calpis-2020.json) |

@@ -1,0 +1,24 @@
+{
+  "id": "cdtv-2020-0215",
+  "title": "COUNT DOWN TV",
+  "type": "電視演出",
+  "shows": [
+    {
+      "id": "cdtv-2020-0215",
+      "date": "2020-02-15",
+      "title": "COUNT DOWN TV",
+      "startsAt": "00:58",
+      "sourceUrls": [
+        "https://www.oricon.co.jp/prof/643869/tv/",
+        "https://natalie.mu/music/news/367023"
+      ],
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "songId": "i-love"
+        }
+      ]
+    }
+  ]
+}

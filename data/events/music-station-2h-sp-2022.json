@@ -1,0 +1,26 @@
+{
+  "id": "music-station-2h-sp-2022",
+  "title": "MUSIC STATION 2時間スペシャル",
+  "type": "電視演出",
+  "shows": [
+    {
+      "id": "music-station-2h-sp-2022-0805",
+      "date": "2022-08-05",
+      "title": "MUSIC STATION 2時間スペシャル",
+      "startsAt": "20:00",
+      "sourceUrls": [
+        "https://musicstation-lab.com/artist/bairpno4bz/",
+        "https://ja.wikipedia.org/wiki/Official%E9%AB%AD%E7%94%B7dism",
+        "https://natalie.mu/music/news/487548"
+      ],
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "songId": "mixed-nuts"
+        }
+      ]
+    }
+  ],
+  "shortTitle": "MUSIC STATION"
+}

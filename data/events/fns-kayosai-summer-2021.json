@@ -6,13 +6,10 @@
     {
       "id": "1327182",
       "date": "2021-07-14",
-      "city": "東京",
-      "venue": "富士電視台",
-      "region": "關東",
-      "prefecture": "東京都",
       "title": "2021 FNS歌謡祭 夏",
       "sourceUrls": [
-        "https://www.livefans.jp/events/1327182"
+        "https://www.livefans.jp/events/1327182",
+        "https://natalie.mu/music/news/433676"
       ],
       "setlist": [
         {
@@ -26,7 +23,7 @@
           "songId": "universe"
         }
       ],
-      "opensAt": "18:30"
+      "startsAt": "18:30"
     }
   ]
 }

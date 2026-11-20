@@ -7,10 +7,6 @@
     {
       "id": "1279398",
       "date": "2020-12-31",
-      "city": "東京",
-      "venue": "NHK會館",
-      "region": "關東",
-      "prefecture": "東京都",
       "title": "第71回NHK紅白歌合戦「今こそ歌おう みんなでエール」",
       "sourceUrls": [
         "https://www.livefans.jp/events/1279398"
@@ -23,7 +19,7 @@
           "note": "101スタジオ"
         }
       ],
-      "opensAt": "19:30"
+      "startsAt": "19:30"
     }
   ]
 }

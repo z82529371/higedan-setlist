@@ -1,0 +1,26 @@
+{
+  "id": "a-studio-2020-0221",
+  "title": "A-Studio",
+  "type": "電視演出",
+  "shows": [
+    {
+      "id": "a-studio-2020-0221",
+      "date": "2020-02-21",
+      "title": "A-Studio",
+      "startsAt": "23:00",
+      "sourceUrls": [
+        "https://thetv.jp/news/detail/223791/",
+        "https://thetv.jp/news/detail/223791/p2/",
+        "https://www.oricon.co.jp/prof/643869/tv/"
+      ],
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "songId": "i-love",
+          "note": "フルサイズ"
+        }
+      ]
+    }
+  ]
+}

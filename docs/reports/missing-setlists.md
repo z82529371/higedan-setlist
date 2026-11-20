@@ -1,6 +1,6 @@
 # Official髭男dism 未收錄歌單場次清單 (Missing Setlists Report)
 
-> 本清單收錄全檔案庫中 **未收錄歌單（曲目完全空白或僅具佔位符）** 之歷史場次，共計 **86** 場。
+> 本清單收錄全檔案庫中 **未收錄歌單（曲目完全空白或僅具佔位符）** 之歷史場次，共計 **88** 場。
 
 ### 統計與年份分佈
 
@@ -12,11 +12,12 @@
 | 2015 | **29 場** | Free Live Tour、店鋪發片活動、小型拼盤 |
 | 2016 | **24 場** | Free Live Tour、店鋪發片活動、小型拼盤 |
 | 2017 | **2 場** | 迷你專輯發售 Free Live、電台公開錄音、音樂祭 |
-| 2018 | **5 場** | 迷你專輯發售 Free Live、電台公開錄音、音樂祭 |
+| 2018 | **6 場** | 迷你專輯發售 Free Live、電台公開錄音、音樂祭 |
+| 2019 | **1 場** | 特定對邦活動 |
 
 ---
 
-### 完整清單明細 (共 86 場)
+### 完整清單明細 (共 88 場)
 
 | # | 日期 | 演出型態 | 巡演 / 活動名稱 | 場館 (城市) | 資料來源檔案 | 當前狀態 |
 |---|---|---|---|---|---|---|
@@ -105,4 +106,6 @@
 | 83 | 2018-03-04 | 店家活動 | インストア アコースティックミニライブ&サイン会 第2部 | 永旺夢樂城橿原 Sunshine Court (橿原) | [escapade-release-acoustic-mini-live-2018.json](file:///C:/Users/User/%E9%AB%AD%E7%94%B7%20%E6%BC%94%E5%94%B1%E6%9C%83/data/tours/escapade-release-acoustic-mini-live-2018.json) | 完全空白 |
 | 84 | 2018-03-10 | 店家活動 | インストア アコースティックミニライブ&サイン会 | 永旺夢樂城日吉津 鬱金香廣場 (日吉津) | [escapade-release-acoustic-mini-live-2018.json](file:///C:/Users/User/%E9%AB%AD%E7%94%B7%20%E6%BC%94%E5%94%B1%E6%9C%83/data/tours/escapade-release-acoustic-mini-live-2018.json) | 完全空白 |
 | 85 | 2018-03-11 | 音樂祭 | HIROSHIMA MUSIC STADIUM -ハルバン-'18 | 廣島 Alice Garden (廣島) | [hiroshima-music-stadium-18-2018.json](file:///C:/Users/User/%E9%AB%AD%E7%94%B7%20%E6%BC%94%E5%94%B1%E6%9C%83/data/events/hiroshima-music-stadium-18-2018.json) | 完全空白 |
-| 86 | 2018-07-15 | 音樂祭 | JOIN ALIVE 2018 | 岩見澤公園 NEW WALTZ (岩見澤) | [join-alive-2018.json](file:///C:/Users/User/%E9%AB%AD%E7%94%B7%20%E6%BC%94%E5%94%B1%E6%9C%83/data/events/join-alive-2018.json) | 完全空白 |
+| 86 | 2018-06-12 | 線上直播 | LIVE & DIRECT スタジオライブ | 線上直播 (線上直播) | [tbs-radio-after6-junction-2018.json](file:///C:/Users/User/%E9%AB%AD%E7%94%B7%20%E6%BC%94%E5%94%B1%E6%9C%83/data/events/tbs-radio-after6-junction-2018.json) | 完全空白 |
+| 87 | 2018-07-15 | 音樂祭 | JOIN ALIVE 2018 | 岩見澤公園 NEW WALTZ (岩見澤) | [join-alive-2018.json](file:///C:/Users/User/%E9%AB%AD%E7%94%B7%20%E6%BC%94%E5%94%B1%E6%9C%83/data/events/join-alive-2018.json) | 完全空白 |
+| 88 | 2019-08-27 | 電視演出 | うたコン | undefined (undefined) | [utacon-2019-0827.json](file:///C:/Users/User/%E9%AB%AD%E7%94%B7%20%E6%BC%94%E5%94%B1%E6%9C%83/data/events/utacon-2019-0827.json) | 完全空白 |

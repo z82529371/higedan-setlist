@@ -6,10 +6,6 @@
     {
       "id": "1328267",
       "date": "2021-07-03",
-      "city": "東京",
-      "venue": "日本電視台",
-      "region": "關東",
-      "prefecture": "東京都",
       "title": "THE MUSIC DAY 音楽は止まらない",
       "sourceUrls": [
         "https://www.livefans.jp/events/1328267"
@@ -21,7 +17,7 @@
           "songId": "cry-baby"
         }
       ],
-      "opensAt": "15:00"
+      "startsAt": "15:00"
     }
   ]
 }

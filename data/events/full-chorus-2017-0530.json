@@ -1,0 +1,23 @@
+{
+  "id": "full-chorus-2017-0530",
+  "title": "FULL CHORUS ～音楽は、フルコーラス～ #86",
+  "type": "電視演出",
+  "shows": [
+    {
+      "id": "full-chorus-2017-0530",
+      "date": "2017-05-30",
+      "title": "FULL CHORUS ～音楽は、フルコーラス～ #86",
+      "startsAt": "21:00",
+      "sourceUrls": [
+        "https://natalie.mu/music/news/233788"
+      ],
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "songId": "inu-ka-cat-ka-de-shinumade-kenka-shiyou"
+        }
+      ]
+    }
+  ]
+}

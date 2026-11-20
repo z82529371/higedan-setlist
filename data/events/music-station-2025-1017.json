@@ -1,0 +1,32 @@
+{
+  "id": "music-station-2025-1017",
+  "title": "MUSIC STATION",
+  "type": "電視演出",
+  "shows": [
+    {
+      "id": "music-station-2025-1017",
+      "date": "2025-10-17",
+      "title": "MUSIC STATION",
+      "startsAt": "21:00",
+      "sourceUrls": [
+        "https://musicstation-lab.com/artist/bairpno4bz/",
+        "https://ja.wikipedia.org/wiki/Official%E9%AB%AD%E7%94%B7dism",
+        "https://natalie.mu/music/news/643844",
+        "https://natalie.mu/music/news/643852",
+        "https://natalie.mu/music/news/644561"
+      ],
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "songId": "rashisa"
+        },
+        {
+          "order": 2,
+          "encore": false,
+          "songId": "50pct"
+        }
+      ]
+    }
+  ]
+}

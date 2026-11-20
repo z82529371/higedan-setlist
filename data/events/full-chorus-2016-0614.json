@@ -1,0 +1,30 @@
+{
+  "id": "full-chorus-2016-0614",
+  "title": "FULL CHORUS 〜音楽は、フルコーラス〜",
+  "shortTitle": "FULL CHORUS",
+  "type": "電視演出",
+  "shows": [
+    {
+      "id": "full-chorus-2016-0614",
+      "date": "2016-06-14",
+      "title": "FULL CHORUS 〜音楽は、フルコーラス〜",
+      "startsAt": "21:00",
+      "sourceUrls": [
+        "https://higedan.com/news/list/3/6/?page=47",
+        "https://natalie.mu/music/news/189195"
+      ],
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "songId": "coffee-to-syrup"
+        },
+        {
+          "order": 2,
+          "encore": false,
+          "songId": "sweet-tweet"
+        }
+      ]
+    }
+  ]
+}

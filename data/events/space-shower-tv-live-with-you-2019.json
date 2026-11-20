@@ -6,10 +6,6 @@
     {
       "id": "1183933",
       "date": "2019-09-24",
-      "city": "名古屋",
-      "venue": "Zepp Nagoya",
-      "region": "中部",
-      "prefecture": "愛知縣",
       "title": "SPACE SHOWER TV \"LIVE with YOU\"",
       "sourceUrls": [
         "https://higedan.com/news/3/?page=43",
@@ -83,7 +79,6 @@
         }
       ],
       "weekday": "火",
-      "opensAt": "18:00",
       "startsAt": "19:00"
     }
   ]

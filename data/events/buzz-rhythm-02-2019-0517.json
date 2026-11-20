@@ -1,0 +1,36 @@
+{
+  "id": "buzz-rhythm-02-2019-0517",
+  "title": "バズリズム02",
+  "type": "電視演出",
+  "shows": [
+    {
+      "id": "buzz-rhythm-02-2019-0517",
+      "date": "2019-05-18",
+      "title": "バズリズム02",
+      "startsAt": "00:59",
+      "sourceUrls": [
+        "https://news.nicovideo.jp/watch/nw5312029",
+        "https://www.oricon.co.jp/prof/643869/tv/p/2/"
+      ],
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "songId": "no-doubt",
+          "note": "[メドレー]"
+        },
+        {
+          "order": 2,
+          "encore": false,
+          "songId": "stand-by-you",
+          "note": "[メドレー]"
+        },
+        {
+          "order": 3,
+          "encore": false,
+          "songId": "pretender"
+        }
+      ]
+    }
+  ]
+}

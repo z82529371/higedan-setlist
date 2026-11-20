@@ -1,0 +1,64 @@
+{
+  "id": "music-station-2020",
+  "title": "MUSIC STATION",
+  "type": "電視演出",
+  "shows": [
+    {
+      "id": "music-station-2020-0207",
+      "date": "2020-02-07",
+      "title": "MUSIC STATION",
+      "startsAt": "21:00",
+      "sourceUrls": [
+        "https://musicstation-lab.com/artist/bairpno4bz/",
+        "https://ja.wikipedia.org/wiki/Official%E9%AB%AD%E7%94%B7dism"
+      ],
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "songId": "i-love"
+        }
+      ]
+    },
+    {
+      "id": "music-station-3-5h-sp-2020-0724",
+      "date": "2020-07-24",
+      "title": "MUSIC STATION 3時間半スペシャル",
+      "startsAt": "18:30",
+      "sourceUrls": [
+        "https://musicstation-lab.com/artist/bairpno4bz/",
+        "https://ja.wikipedia.org/wiki/Official%E9%AB%AD%E7%94%B7dism"
+      ],
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "songId": "115man-kiro-no-film"
+        },
+        {
+          "order": 2,
+          "encore": false,
+          "songId": "hello"
+        }
+      ]
+    },
+    {
+      "id": "music-station-2h-sp-2020-0821",
+      "date": "2020-08-21",
+      "title": "MUSIC STATION 2時間SP",
+      "startsAt": "20:00",
+      "sourceUrls": [
+        "https://musicstation-lab.com/artist/bairpno4bz/",
+        "https://www.oricon.co.jp/prof/643869/tv/",
+        "https://natalie.mu/music/news/392122"
+      ],
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "songId": "laughter"
+        }
+      ]
+    }
+  ]
+}

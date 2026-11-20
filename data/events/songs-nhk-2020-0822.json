@@ -1,0 +1,35 @@
+{
+  "id": "songs-nhk-2020-0822",
+  "title": "SONGS「Official髭男dism」",
+  "shortTitle": "SONGS",
+  "type": "電視演出",
+  "shows": [
+    {
+      "id": "songs-nhk-2020-0822",
+      "date": "2020-08-22",
+      "title": "SONGS「Official髭男dism」",
+      "startsAt": "23:00",
+      "sourceUrls": [
+        "https://www.oricon.co.jp/prof/643869/tv/",
+        "https://natalie.mu/music/news/390275"
+      ],
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "songId": "i-love"
+        },
+        {
+          "order": 2,
+          "encore": false,
+          "songId": "hello"
+        },
+        {
+          "order": 3,
+          "encore": false,
+          "songId": "last-song"
+        }
+      ]
+    }
+  ]
+}

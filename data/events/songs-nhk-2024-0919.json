@@ -1,0 +1,35 @@
+{
+  "id": "songs-nhk-2024-0919",
+  "title": "SONGS「Official髭男dism」",
+  "shortTitle": "SONGS",
+  "type": "電視演出",
+  "shows": [
+    {
+      "id": "songs-nhk-2024-0919",
+      "date": "2024-09-19",
+      "title": "SONGS「Official髭男dism」",
+      "startsAt": "22:00",
+      "sourceUrls": [
+        "https://skream.jp/news/2024/09/higedan_nhk_songs.php",
+        "https://www.oricon.co.jp/prof/643869/tv/"
+      ],
+      "setlist": [
+        {
+          "order": 1,
+          "encore": false,
+          "songId": "sharon"
+        },
+        {
+          "order": 2,
+          "encore": false,
+          "songId": "soulsoup"
+        },
+        {
+          "order": 3,
+          "encore": false,
+          "songId": "white-noise"
+        }
+      ]
+    }
+  ]
+}
