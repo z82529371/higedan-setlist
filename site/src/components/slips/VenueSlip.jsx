@@ -64,7 +64,7 @@ export function VenueSlip({ venueName, globalVenueShows, unitData, onSelectShow,
     ) {
       return {
         label: t("slips.saninSanctuary", "🌱 山陰發跡聖地"),
-        cls: "text-band-ink bg-tape-tint border-ink/40 font-bold",
+        cls: "text-ink bg-tape-tint border-ink/40 font-bold",
         desc: t("venueExtra.sanctuaryDesc", "樂團成軍發跡地與早期重要現場據點"),
       };
     }
@@ -342,7 +342,7 @@ export function VenueSlip({ venueName, globalVenueShows, unitData, onSelectShow,
             Official 髭男 dism
           </div>
           <div className="flex items-center gap-1.5">
-            <span className="inline-flex items-center rounded-[3px] border border-ink/30 bg-band/15 px-2 py-0.5 font-mono text-xs font-bold text-band-ink">
+            <span className="inline-flex items-center rounded-[3px] border border-ink/30 bg-band/15 px-2 py-0.5 font-mono text-xs font-bold text-ink">
               VENUE ARCHIVE
             </span>
           </div>

@@ -21,7 +21,8 @@ try {
   const envAllowed = (process.env.STAGED_ALLOW_EVENTS || "")
     .split(",")
     .map((s) => s.trim().replace(/\\/g, "/"))
-    .filter(Boolean);
+    .filter(Boolean)
+    .flatMap((s) => (s.includes("/") ? [s] : [s, `data/events/${s}`]));
 
   const allowedExceptions = new Set([
     "data/events/unofficial-2024.json",

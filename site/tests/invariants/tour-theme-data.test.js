@@ -94,4 +94,29 @@ describe("Tour Era Accent & Official URL Data Invariants (ADR-0149)", () => {
       }
     }
   });
+
+  it("prohibits pairing text-band-ink with translucent bg-band/ or bg-tape- washes in UI classes", () => {
+    const srcDir = path.resolve(__dirname, "..", "..", "src");
+    const violations = [];
+    const walk = (dir) => {
+      for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+        const full = path.join(dir, entry.name);
+        if (entry.isDirectory()) {
+          walk(full);
+        } else if (/\.(js|jsx)$/.test(entry.name)) {
+          const lines = fs.readFileSync(full, "utf8").split(/\r?\n/);
+          lines.forEach((line, idx) => {
+            const hasBareBandInk = /(?:^|[\s"'`])text-band-ink\b/.test(line);
+            const hasSolidBandBg = /(?:^|[\s"'`])bg-(band|tape)(?![/-])/.test(line);
+            const hasTranslucentWash = /\b(bg-band\/|bg-tape-|bg-tape\/)/.test(line);
+            if (hasBareBandInk && hasTranslucentWash && !hasSolidBandBg) {
+              violations.push(`${path.relative(srcDir, full)}:${idx + 1}: ${line.trim()}`);
+            }
+          });
+        }
+      }
+    };
+    walk(srcDir);
+    assert.deepEqual(violations, [], `Found text-band-ink on translucent wash:\n${violations.join("\n")}`);
+  });
 });

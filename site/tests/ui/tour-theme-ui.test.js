@@ -152,4 +152,33 @@ describe("Tour Era Accent & Official Site Link UI (ADR-0149)", () => {
 
     assert.match(htmlUnthemed, /data-era-accent=""/);
   });
+
+  it("resolves a valid Release Accent for all 94 released songs and null for all 16 unreleased songs (ADR-0150)", async () => {
+    const { resolveRouteEraTheme, isValidEraTheme } = await loadModule("src/lib/tour-theme.js");
+    const { buildDiscographyIndex } = await loadModule("src/lib/discography.js");
+    const { getSongReleaseId } = await loadModule("src/lib/song-release.js");
+    const { getSongCover } = await loadModule("src/lib/song-spotify.js");
+    const discographyData = (await loadModule("src/data/discography.json")).default;
+    const songsData = (await loadModule("src/data/songs.json")).default;
+
+    const discographyIndex = buildDiscographyIndex(discographyData);
+    const ctx = {
+      discographyIndex,
+      getSongReleaseIdFn: getSongReleaseId,
+      getSongCoverFn: getSongCover,
+    };
+
+    const released = songsData.songs.filter((s) => !s.unreleased);
+    const unreleased = songsData.songs.filter((s) => s.unreleased);
+
+    for (const s of released) {
+      const theme = resolveRouteEraTheme({ viewMode: "archive", tab: "song", selSong: s.id }, ctx);
+      assert.ok(isValidEraTheme(theme), `Released song "${s.id}" must resolve a valid Release Accent`);
+    }
+
+    for (const s of unreleased) {
+      const theme = resolveRouteEraTheme({ viewMode: "archive", tab: "song", selSong: s.id }, ctx);
+      assert.equal(theme, null, `Unreleased song "${s.id}" must fall back to null (Stage Gold)`);
+    }
+  });
 });
