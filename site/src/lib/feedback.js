@@ -1,8 +1,7 @@
 /**
- * feedback.js — Community feedback & crowdsourced setlist/time quest mailto builders (ADR-0121 / #45, #40).
+ * feedback.js — Community feedback & crowdsourced setlist/time quest builders (ADR-0121 / #45, #40).
  */
 
-export const ARCHIVE_FEEDBACK_EMAIL = "hgdnlive@gmail.com";
 export const ARCHIVE_AUTHOR_INSTAGRAM = "higedan_live";
 export const ARCHIVE_AUTHOR_INSTAGRAM_URL = "https://www.instagram.com/higedan_live/";
 
@@ -149,15 +148,6 @@ export function buildSetlistBody({ show, unitTitle, locale = "zh-TW" }) {
 }
 
 /**
- * Builds the complete prefilled mailto URL for crowdsourced setlists.
- */
-export function buildSetlistMailto({ show, unitTitle, locale = "zh-TW" }) {
-  const subject = buildSetlistSubject({ show, unitTitle, locale });
-  const body = buildSetlistBody({ show, unitTitle, locale });
-  return `mailto:${ARCHIVE_FEEDBACK_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-}
-
-/**
  * Builds the standardized email subject for missing show times.
  * Format: [Official髭男dism 開演時間情報] YYYY-MM-DD 活動名稱 @ 場館
  */
@@ -252,15 +242,6 @@ export function buildTimeBody({ show, unitTitle, locale = "zh-TW" }) {
 }
 
 /**
- * Builds the complete prefilled mailto URL for missing show times.
- */
-export function buildTimeMailto({ show, unitTitle, locale = "zh-TW" }) {
-  const subject = buildTimeSubject({ show, unitTitle, locale });
-  const body = buildTimeBody({ show, unitTitle, locale });
-  return `mailto:${ARCHIVE_FEEDBACK_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-}
-
-/**
  * Validates whether an evidence input is a syntactically valid HTTP or HTTPS URL.
  */
 export function validateEvidenceUrl(url) {
@@ -285,7 +266,7 @@ export function buildLeadSubject({ show, unitTitle, questType = "setlist" }) {
 }
 
 /**
- * Builds the structured plain body text for lead reports across RFC 6068 CRLF standards.
+ * Builds the concise plain-text body for IG DM lead reports.
  */
 export function buildLeadBody({
   show,
@@ -293,68 +274,26 @@ export function buildLeadBody({
   evidenceUrl,
   notes = "",
   questType = "setlist",
-  locale = "zh-TW",
-  newline = "\r\n",
+  newline = "\n",
 }) {
-  const { date, title, venue, showId } = getShowDescriptor({ show, unitTitle });
+  const { date, title, venuePart, showId } = getShowDescriptor({ show, unitTitle });
   const cleanUrl = typeof evidenceUrl === "string" ? evidenceUrl.trim() : "";
   const cleanNotes = typeof notes === "string" ? notes.trim() : "";
 
-  return [
-    `【Official 髭男 dism 現場情報線索回報】`,
-    `・場次 ID: ${showId}`,
-    `・演出日期: ${date}`,
-    `・活動名稱: ${title}`,
-    `・演出場館: ${venue}`,
-    `・情報類型: ${questType === "time" ? "開演時間" : "曲目情報"}`,
-    `・佐證連結: ${cleanUrl}`,
-    `・備註/稱呼: ${cleanNotes || "(無)"}`,
-    `・回報語系: ${locale}`,
-    `・提交時間: ${new Date().toISOString()}`,
-  ].join(newline);
+  const typeLabel = questType === "time" ? "開演時間" : "曲目情報";
+  const showLine = `${date} ${title}${venuePart}`.trim();
+  const lines = [
+    `[${typeLabel}] ${showLine} (ID: ${showId})`,
+    `佐證：${cleanUrl}`,
+  ];
+  if (cleanNotes) {
+    lines.push(`備註：${cleanNotes}`);
+  }
+  return lines.join(newline);
 }
 
 /**
- * Builds direct Web Gmail compose link (opens in new tab, 100% web-based, zero backend).
- */
-export function buildGmailWebComposeUrl({
-  show,
-  unitTitle,
-  evidenceUrl,
-  notes = "",
-  questType = "setlist",
-  locale = "zh-TW",
-}) {
-  const subject = buildLeadSubject({ show, unitTitle, questType });
-  const body = buildLeadBody({ show, unitTitle, evidenceUrl, notes, questType, locale });
-  return `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(ARCHIVE_FEEDBACK_EMAIL)}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-}
-
-/**
- * Builds native mailto URL for desktop mail clients.
- */
-export function buildLeadMailtoUrl({
-  show,
-  unitTitle,
-  evidenceUrl,
-  notes = "",
-  questType = "setlist",
-  locale = "zh-TW",
-}) {
-  const subject = buildLeadSubject({ show, unitTitle, questType });
-  const body = buildLeadBody({ show, unitTitle, evidenceUrl, notes, questType, locale });
-  return `mailto:${ARCHIVE_FEEDBACK_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-}
-
-const FALLBACK_LABELS = {
-  "zh-TW": { to: "收件者", subject: "主旨" },
-  ja: { to: "宛先", subject: "件名" },
-  en: { to: "To", subject: "Subject" },
-  ko: { to: "받는 사람", subject: "제목" },
-};
-
-/**
- * Builds fallback human-readable plain text for clipboard copying across locales.
+ * Builds concise clipboard text for IG DM lead reports.
  */
 export function buildLeadFallbackText({
   show,
@@ -362,17 +301,7 @@ export function buildLeadFallbackText({
   evidenceUrl,
   notes = "",
   questType = "setlist",
-  locale = "zh-TW",
 }) {
-  const subject = buildLeadSubject({ show, unitTitle, questType });
-  const body = buildLeadBody({ show, unitTitle, evidenceUrl, notes, questType, locale, newline: "\n" });
-  const labels = FALLBACK_LABELS[locale] || FALLBACK_LABELS["zh-TW"];
-  return [
-    `${labels.to}: ${ARCHIVE_FEEDBACK_EMAIL}`,
-    `Instagram: @${ARCHIVE_AUTHOR_INSTAGRAM} (${ARCHIVE_AUTHOR_INSTAGRAM_URL})`,
-    `${labels.subject}: ${subject}`,
-    ``,
-    body,
-  ].join("\n");
+  return buildLeadBody({ show, unitTitle, evidenceUrl, notes, questType, newline: "\n" });
 }
 

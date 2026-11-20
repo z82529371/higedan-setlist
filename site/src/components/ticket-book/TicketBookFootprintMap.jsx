@@ -203,39 +203,24 @@ export function TicketBookFootprintMap({
             />
           </div>
 
-          {/* Footer Metadata & Conquered Tags */}
-          <div className="flex flex-wrap items-center justify-between gap-2 pt-1 font-mono text-[11px] text-muted">
-            <div className="flex flex-wrap items-center gap-2 font-bold text-ink">
-              <span>{fanJourney?.stops?.length || 0} STOPS</span>
-              <span>·</span>
-              <span>🚐 {fanJourney?.summary?.vanCount || 0} {t("slips.tour.vanTransit", "陸路")}</span>
-              <span>·</span>
-              <span>✈️ {fanJourney?.summary?.flightCount || 0} {t("slips.tour.flightTransit", "航線")}</span>
-              <span>·</span>
-              <span>🏕️ {fanJourney?.summary?.stayCount || 0} {t("slips.tour.stayTransit", "連日駐留")}</span>
-              <span>·</span>
-              <span>📏 ~{fanJourney?.summary?.totalDistanceKm || 0} km</span>
+          {/* Conquered Prefectures Chips */}
+          {footprintStats.visitedJapanPrefectures.length > 0 && (
+            <div className="flex flex-wrap items-center gap-1 pt-1 font-mono text-[11px] text-muted">
+              {footprintStats.visitedJapanPrefectures.slice(0, 10).map((p) => (
+                <span
+                  key={p}
+                  className="inline-flex items-center rounded bg-tape-tint/70 px-1.5 py-0.2 text-[10px] font-bold text-ink border border-ink/20"
+                >
+                  {t(`prefectures.${p}`, p)}
+                </span>
+              ))}
+              {footprintStats.visitedJapanPrefectures.length > 10 && (
+                <span className="text-[10px] text-muted font-bold">
+                  +{footprintStats.visitedJapanPrefectures.length - 10}...
+                </span>
+              )}
             </div>
-
-            {/* Conquered Prefectures Chips */}
-            {footprintStats.visitedJapanPrefectures.length > 0 && (
-              <div className="flex flex-wrap items-center gap-1">
-                {footprintStats.visitedJapanPrefectures.slice(0, 10).map((p) => (
-                  <span
-                    key={p}
-                    className="inline-flex items-center rounded bg-tape-tint/70 px-1.5 py-0.2 text-[10px] font-bold text-ink border border-ink/20"
-                  >
-                    {t(`prefectures.${p}`, p)}
-                  </span>
-                ))}
-                {footprintStats.visitedJapanPrefectures.length > 10 && (
-                  <span className="text-[10px] text-muted font-bold">
-                    +{footprintStats.visitedJapanPrefectures.length - 10}...
-                  </span>
-                )}
-              </div>
-            )}
-          </div>
+          )}
         </div>
       )}
         </>

@@ -1,19 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { useI18n } from "../../lib/i18n.jsx";
 import {
-  ARCHIVE_FEEDBACK_EMAIL,
   ARCHIVE_AUTHOR_INSTAGRAM,
   ARCHIVE_AUTHOR_INSTAGRAM_URL,
   validateEvidenceUrl,
-  buildGmailWebComposeUrl,
-  buildLeadMailtoUrl,
   buildLeadFallbackText,
 } from "../../lib/feedback.js";
 
 /**
  * LeadDropModal
  * 樂迷現場情報線索投遞彈窗 (ADR-0122 / #45, #40)
- * 100% 純前端架構：提供「網頁版 Gmail 一鍵預填直達」與「一鍵複製整組內容與信箱」，零後端、零 API Key 負擔。
+ * 100% 純前端架構：提供「一鍵複製情報內容」與「複製並前往 Instagram 私訊」，零後端、零 API Key 負擔。
  */
 export function LeadDropModal({
   isOpen,
@@ -59,21 +56,16 @@ export function LeadDropModal({
 
   const isValidUrl = validateEvidenceUrl(evidenceUrl);
   const cleanUrl = evidenceUrl.trim();
+  const previewText = buildLeadFallbackText({
+    show,
+    unitTitle,
+    evidenceUrl: cleanUrl || "https://...",
+    notes,
+    questType,
+    locale,
+  });
 
-  const gmailUrl = isValidUrl
-    ? buildGmailWebComposeUrl({ show, unitTitle, evidenceUrl: cleanUrl, notes, questType, locale })
-    : "";
-
-  const mailtoUrl = isValidUrl
-    ? buildLeadMailtoUrl({ show, unitTitle, evidenceUrl: cleanUrl, notes, questType, locale })
-    : "";
-
-  const handleCopy = () => {
-    if (!isValidUrl) {
-      setErrorMsg(t("slips.quest.invalidUrl", "請填寫以 http:// 或 https:// 開頭的有效網址"));
-      return;
-    }
-    setErrorMsg("");
+  const copyLeadText = () => {
     const fallbackText = buildLeadFallbackText({
       show,
       unitTitle,
@@ -90,11 +82,23 @@ export function LeadDropModal({
     }
   };
 
-  const handleGmailClick = (e) => {
+  const handleCopy = () => {
+    if (!isValidUrl) {
+      setErrorMsg(t("slips.quest.invalidUrl", "請填寫以 http:// 或 https:// 開頭的有效網址"));
+      return;
+    }
+    setErrorMsg("");
+    copyLeadText();
+  };
+
+  const handleInstagramClick = (e) => {
     if (!isValidUrl) {
       e.preventDefault();
       setErrorMsg(t("slips.quest.invalidUrl", "請填寫以 http:// 或 https:// 開頭的有效網址"));
+      return;
     }
+    setErrorMsg("");
+    copyLeadText();
   };
 
   return (
@@ -199,6 +203,19 @@ export function LeadDropModal({
             />
           </div>
 
+          {/* Copyable Message Preview */}
+          <div>
+            <div className="text-[11px] font-mono font-bold text-muted mb-1">
+              {t("slips.quest.previewLabel", "私訊內容預覽（可直接選取複製）")}
+            </div>
+            <pre
+              data-testid="lead-preview-text"
+              className="m-0 select-all whitespace-pre-wrap break-all rounded border border-dashed border-ink/30 bg-paper/80 px-3 py-2 font-mono text-[11px] leading-relaxed text-ink"
+            >
+              {previewText}
+            </pre>
+          </div>
+
           {/* Direct Actions: Two Pure Client-Side Options */}
           <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center justify-end gap-2">
             <button
@@ -208,34 +225,30 @@ export function LeadDropModal({
               className="inline-flex min-h-[38px] items-center justify-center gap-1.5 rounded border border-line-soft bg-paper px-4 py-1.5 font-mono text-[12px] font-bold text-ink hover:border-ink hover:bg-tape-tint transition-colors cursor-pointer"
             >
               <span>{copied ? "✓" : "📋"}</span>
-              <span>{copied ? t("slips.quest.copied", "✓ 已複製到剪貼簿") : t("slips.quest.copyFallbackBtn", "複製內容與信箱")}</span>
+              <span>{copied ? t("slips.quest.copied", "已複製到剪貼簿") : t("slips.quest.copyFallbackBtn", "複製情報內容")}</span>
             </button>
 
             <a
-              href={isValidUrl ? gmailUrl : "#"}
+              href={isValidUrl ? ARCHIVE_AUTHOR_INSTAGRAM_URL : "#"}
               target="_blank"
               rel="noopener noreferrer"
               data-testid="lead-submit-btn"
-              onClick={handleGmailClick}
+              onClick={handleInstagramClick}
               className={`inline-flex min-h-[38px] items-center justify-center gap-1.5 rounded bg-band px-5 py-1.5 font-mono text-[13px] font-bold text-band-ink border border-ink/40 shadow-xs hover:brightness-105 transition-all no-underline ${
                 isValidUrl ? "cursor-pointer" : "opacity-70 cursor-not-allowed"
               }`}
             >
-              <span>📮</span>
-              <span>{t("slips.quest.openGmail", "在網頁版 Gmail 寄出")}</span>
+              <span>📸</span>
+              <span>{t("slips.quest.openInstagram", "複製並前往 IG 私訊")}</span>
               <span aria-hidden="true">→</span>
             </a>
           </div>
 
-          {/* Desktop Mail Client & Direct Email Footnote */}
+          {/* Direct Instagram Contact Footnote */}
           <div className="pt-2 border-t border-line-soft/60 flex flex-wrap items-center justify-between gap-y-1 gap-x-2 text-[11px] font-mono text-muted">
             <div className="flex flex-wrap items-center gap-x-3 gap-y-0.5">
               <div>
-                <span>📮 {t("slips.quest.officialContact", "官方勘誤信箱：")} </span>
-                <strong className="text-ink">{ARCHIVE_FEEDBACK_EMAIL}</strong>
-              </div>
-              <div>
-                <span>📸 {t("slips.quest.authorInstagram", "作者 IG：")} </span>
+                <span>📸 {t("slips.quest.officialContact", "官方勘誤與情報 IG：")} </span>
                 <a
                   href={ARCHIVE_AUTHOR_INSTAGRAM_URL}
                   target="_blank"
@@ -246,19 +259,6 @@ export function LeadDropModal({
                 </a>
               </div>
             </div>
-            <a
-              href={isValidUrl ? mailtoUrl : "#"}
-              data-testid="lead-mailto-btn"
-              onClick={(e) => {
-                if (!isValidUrl) {
-                  e.preventDefault();
-                  setErrorMsg(t("slips.quest.invalidUrl", "請填寫以 http:// 或 https:// 開頭的有效網址"));
-                }
-              }}
-              className="text-muted hover:text-ink underline transition-colors cursor-pointer"
-            >
-              {t("slips.quest.nativeMail", "使用本機郵件軟體")} ↗
-            </a>
           </div>
         </div>
       </div>

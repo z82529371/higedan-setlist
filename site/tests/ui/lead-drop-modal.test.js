@@ -50,11 +50,14 @@ describe("28. In-App Lead Drop Modal (Seam 2 & 3: UI & Modal)", () => {
     assert.ok(htmlZh.includes('data-testid="lead-evidence-input"'), "Must render evidence input");
     assert.ok(htmlZh.includes('data-testid="lead-notes-input"'), "Must render notes textarea");
     assert.ok(htmlZh.includes('data-testid="lead-submit-btn"'), "Must render submit button");
+    assert.ok(htmlZh.includes('data-testid="lead-preview-text"'), "Must render copyable message preview");
+    assert.ok(htmlZh.includes("[曲目情報] 2012-07-07 第7回 松江だんだん祭り @ 松江 AZTiC canova (ID: 2012-07-07-matsue-aztic-canova)"), "Preview must include formatted lead text");
     assert.ok(htmlZh.includes("2012-07-07"), "Must display show date");
     assert.ok(htmlZh.includes("第7回 松江だんだん祭り"), "Must display event title");
     assert.ok(htmlZh.includes("松江 AZTiC canova"), "Must display venue");
     assert.ok(htmlZh.includes("提供曲目情報線索"), "zh-TW must render modal header");
-    assert.ok(htmlZh.includes("hgdnlive@gmail.com"), "Must mention official contact email for fallback");
+    assert.ok(!htmlZh.includes("hgdnlive@gmail.com"), "Must not render deprecated feedback email");
+    assert.ok(!htmlZh.includes("mailto:"), "Must not render mailto links");
     assert.ok(htmlZh.includes("@higedan_live"), "Must render author IG handle in modal");
     assert.ok(htmlZh.includes("https://www.instagram.com/higedan_live/"), "Must render author IG link");
 

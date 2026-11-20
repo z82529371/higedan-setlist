@@ -10,7 +10,6 @@ import {
   buildFeaturedTicketDeck,
 } from "../lib/landing.js";
 import {
-  ARCHIVE_FEEDBACK_EMAIL,
   ARCHIVE_AUTHOR_INSTAGRAM,
   ARCHIVE_AUTHOR_INSTAGRAM_URL,
 } from "../lib/feedback.js";
@@ -445,17 +444,7 @@ export default function LandingHero({
         </p>
         <p className="mt-2 text-[11px] sm:text-[12px] text-muted font-sans flex flex-wrap items-center justify-center gap-x-2 gap-y-1">
           <span>
-            <span>{t("footer.contactLabel", "資料勘誤與反饋：")}</span>
-            <a
-              href={`mailto:${ARCHIVE_FEEDBACK_EMAIL}?subject=${encodeURIComponent(t("footer.contactSubject", "[Official HIGEDAN Archive] 資料勘誤與意見反饋"))}`}
-              className="text-ink underline hover:text-band-ink transition-colors"
-            >
-              {ARCHIVE_FEEDBACK_EMAIL}
-            </a>
-          </span>
-          <span className="text-line-soft" aria-hidden="true">·</span>
-          <span>
-            <span>{t("footer.authorLabel", "作者 IG：")}</span>
+            <span>{t("footer.contactLabel", "資料勘誤與作者 IG：")}</span>
             <a
               href={ARCHIVE_AUTHOR_INSTAGRAM_URL}
               target="_blank"

@@ -23,16 +23,16 @@ describe("23. Modular Slips & Crowdsourced Setlist Quest (#45, #40)", () => {
   describe("Subtest 1: Pure Function Mailto Builders (lib/feedback.js)", () => {
     it("builds valid mailto URLs with encoded subject and structured body across locales", async () => {
       const {
-        ARCHIVE_FEEDBACK_EMAIL,
+        ARCHIVE_AUTHOR_INSTAGRAM,
+        ARCHIVE_AUTHOR_INSTAGRAM_URL,
         buildSetlistSubject,
         buildSetlistBody,
-        buildSetlistMailto,
         buildTimeSubject,
         buildTimeBody,
-        buildTimeMailto,
       } = await loadModule("/src/lib/feedback.js");
 
-      assert.strictEqual(ARCHIVE_FEEDBACK_EMAIL, "hgdnlive@gmail.com");
+      assert.strictEqual(ARCHIVE_AUTHOR_INSTAGRAM, "higedan_live");
+      assert.strictEqual(ARCHIVE_AUTHOR_INSTAGRAM_URL, "https://www.instagram.com/higedan_live/");
 
       const mockShow = {
         id: "2012-07-07-matsue-aztic-canova",
@@ -79,43 +79,14 @@ describe("23. Modular Slips & Crowdsourced Setlist Quest (#45, #40)", () => {
       assert.ok(bodyKo.includes("【셋리스트 (Setlist)】"), "ko body must include Korean setlist section");
       assert.ok(bodyKo.includes("티켓 부표"), "ko body must mention ticket stubs in Korean");
 
-      // 3. Complete Mailto URL Construction
-      const mailtoUrl = buildSetlistMailto({ show: mockShow, unitTitle, locale: "zh-TW" });
-      assert.ok(mailtoUrl.startsWith("mailto:hgdnlive@gmail.com?"), "Mailto URL must target official feedback email");
-      assert.ok(mailtoUrl.includes("subject="), "Mailto URL must include encoded subject");
-      assert.ok(mailtoUrl.includes("body="), "Mailto URL must include encoded body");
-
-      const parsedUrl = new URL(mailtoUrl);
-      assert.strictEqual(parsedUrl.protocol, "mailto:");
-      assert.strictEqual(parsedUrl.pathname, "hgdnlive@gmail.com");
-      assert.strictEqual(
-        parsedUrl.searchParams.get("subject"),
-        "[Official髭男dism 現場情報] 2012-07-07 第7回 松江だんだん祭り @ 松江 AZTiC canova"
-      );
-      assert.ok(parsedUrl.searchParams.get("body").includes("2012-07-07-matsue-aztic-canova"));
-      assert.ok(
-        mailtoUrl.includes("%0D%0A"),
-        "Mailto URL body must use RFC 6068 CRLF line breaks (%0D%0A) for cross-client reliability"
-      );
-
-      // 4. Missing Time Subject & Mailto
+      // 3. Missing Time Subject & Body
       const timeSubjectZh = buildTimeSubject({ show: mockShow, unitTitle, locale: "zh-TW" });
       assert.strictEqual(
         timeSubjectZh,
         "[Official髭男dism 開演時間情報] 2012-07-07 第7回 松江だんだん祭り @ 松江 AZTiC canova"
       );
-      const timeMailto = buildTimeMailto({ show: mockShow, unitTitle, locale: "zh-TW" });
-      assert.ok(timeMailto.startsWith("mailto:hgdnlive@gmail.com?"));
-      const parsedTimeUrl = new URL(timeMailto);
-      assert.strictEqual(
-        parsedTimeUrl.searchParams.get("subject"),
-        "[Official髭男dism 開演時間情報] 2012-07-07 第7回 松江だんだん祭り @ 松江 AZTiC canova"
-      );
-      assert.ok(parsedTimeUrl.searchParams.get("body").includes("Doors"));
-      assert.ok(
-        timeMailto.includes("%0D%0A"),
-        "Time Mailto URL body must use RFC 6068 CRLF line breaks (%0D%0A) for cross-client reliability"
-      );
+      const timeBodyZh = buildTimeBody({ show: mockShow, unitTitle, locale: "zh-TW" });
+      assert.ok(timeBodyZh.includes("Doors"));
     });
   });
 

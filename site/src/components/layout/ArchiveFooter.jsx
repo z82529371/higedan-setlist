@@ -1,6 +1,5 @@
 import { useI18n } from "../../lib/i18n.jsx";
 import {
-  ARCHIVE_FEEDBACK_EMAIL,
   ARCHIVE_AUTHOR_INSTAGRAM,
   ARCHIVE_AUTHOR_INSTAGRAM_URL,
 } from "../../lib/feedback.js";
@@ -8,7 +7,7 @@ import {
 /**
  * Shared archival footer rendered across all non-fullscreen archive views.
  * Keeps deep-linked visitors informed of the unofficial/non-profit scope
- * and correction contact channels without verbose metadata clutter.
+ * and correction contact channel without verbose metadata clutter.
  */
 export function ArchiveFooter() {
   const { t } = useI18n();
@@ -23,16 +22,7 @@ export function ArchiveFooter() {
       </p>
       <div className="flex flex-wrap items-center gap-x-[18px] gap-y-[6px]">
         <span>
-          {t("footer.contactLabel", "資料勘誤與反饋：")}
-          <a
-            href={`mailto:${ARCHIVE_FEEDBACK_EMAIL}?subject=${encodeURIComponent(t("footer.contactSubject", "[Official HIGEDAN Archive] 資料勘誤與意見反饋"))}`}
-            className="text-ink underline hover:text-band transition-colors"
-          >
-            {ARCHIVE_FEEDBACK_EMAIL}
-          </a>
-        </span>
-        <span>
-          {t("footer.authorLabel", "作者 IG：")}
+          {t("footer.contactLabel", "資料勘誤與作者 IG：")}
           <a
             href={ARCHIVE_AUTHOR_INSTAGRAM_URL}
             target="_blank"

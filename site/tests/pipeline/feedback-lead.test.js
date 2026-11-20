@@ -23,15 +23,14 @@ describe("27. Crowdsourced Lead Drop Protocol (Seam 1: Pure Frontend Lead Builde
     assert.strictEqual(validateEvidenceUrl("javascript:alert(1)"), false, "Must reject javascript pseudo-protocol");
   });
 
-  it("builds Web Gmail compose URL directly targeting hgdnlive@gmail.com without any backend", async () => {
+  it("exposes official Instagram contact and builds lead subject/body without any backend", async () => {
     const {
-      buildGmailWebComposeUrl,
-      ARCHIVE_FEEDBACK_EMAIL,
+      buildLeadSubject,
+      buildLeadBody,
       ARCHIVE_AUTHOR_INSTAGRAM,
       ARCHIVE_AUTHOR_INSTAGRAM_URL,
     } = await loadModule("src/lib/feedback.js");
 
-    assert.strictEqual(ARCHIVE_FEEDBACK_EMAIL, "hgdnlive@gmail.com");
     assert.strictEqual(ARCHIVE_AUTHOR_INSTAGRAM, "higedan_live");
     assert.strictEqual(ARCHIVE_AUTHOR_INSTAGRAM_URL, "https://www.instagram.com/higedan_live/");
 
@@ -42,7 +41,11 @@ describe("27. Crowdsourced Lead Drop Protocol (Seam 1: Pure Frontend Lead Builde
     };
     const unitTitle = "第7回 松江だんだん祭り";
 
-    const gmailUrl = buildGmailWebComposeUrl({
+    const subject = buildLeadSubject({ show: mockShow, unitTitle, questType: "setlist" });
+    assert.ok(subject.includes("2012-07-07"));
+    assert.ok(subject.includes("第7回 松江だんだん祭り"));
+
+    const body = buildLeadBody({
       show: mockShow,
       unitTitle,
       evidenceUrl: "https://x.com/fan/status/12345",
@@ -50,17 +53,12 @@ describe("27. Crowdsourced Lead Drop Protocol (Seam 1: Pure Frontend Lead Builde
       questType: "setlist",
       locale: "zh-TW",
     });
-
-    assert.ok(gmailUrl.startsWith("https://mail.google.com/mail/?view=cm&fs=1"), "Must open Gmail web compose");
-    assert.ok(gmailUrl.includes(`to=${encodeURIComponent(ARCHIVE_FEEDBACK_EMAIL)}`));
-    assert.ok(gmailUrl.includes("su="));
-    assert.ok(gmailUrl.includes("body="));
-    assert.ok(gmailUrl.includes(encodeURIComponent("https://x.com/fan/status/12345")));
-    assert.ok(gmailUrl.includes(encodeURIComponent("2012-07-07-matsue-aztic-canova")));
+    assert.ok(body.includes("https://x.com/fan/status/12345"));
+    assert.ok(body.includes("2012-07-07-matsue-aztic-canova"));
   });
 
-  it("builds clean native mailto URL and fallback clipboard text across locales", async () => {
-    const { buildLeadMailtoUrl, buildLeadFallbackText, ARCHIVE_FEEDBACK_EMAIL } = await loadModule("src/lib/feedback.js");
+  it("builds concise IG DM clipboard text without email boilerplate", async () => {
+    const { buildLeadFallbackText } = await loadModule("src/lib/feedback.js");
 
     const mockShow = {
       id: "2012-07-07-matsue-aztic-canova",
@@ -69,8 +67,7 @@ describe("27. Crowdsourced Lead Drop Protocol (Seam 1: Pure Frontend Lead Builde
     };
     const unitTitle = "第7回 松江だんだん祭り";
 
-    // 1. Mailto URL
-    const mailtoUrl = buildLeadMailtoUrl({
+    const textWithNotes = buildLeadFallbackText({
       show: mockShow,
       unitTitle,
       evidenceUrl: "https://x.com/fan/status/12345",
@@ -78,31 +75,22 @@ describe("27. Crowdsourced Lead Drop Protocol (Seam 1: Pure Frontend Lead Builde
       questType: "setlist",
       locale: "zh-TW",
     });
-    assert.ok(mailtoUrl.startsWith(`mailto:${ARCHIVE_FEEDBACK_EMAIL}?`));
-    assert.ok(mailtoUrl.includes("%0D%0A"), "Must use RFC 6068 CRLF line breaks");
+    assert.ok(!textWithNotes.includes("hgdnlive@gmail.com"));
+    assert.ok(!textWithNotes.includes("主旨:"));
+    assert.ok(!textWithNotes.includes("提交時間:"));
+    assert.ok(!textWithNotes.includes("回報語系:"));
+    assert.ok(textWithNotes.includes("[曲目情報] 2012-07-07 第7回 松江だんだん祭り @ 松江 AZTiC canova (ID: 2012-07-07-matsue-aztic-canova)"));
+    assert.ok(textWithNotes.includes("佐證：https://x.com/fan/status/12345"));
+    assert.ok(textWithNotes.includes("備註：第 2 張照片有紙本"));
 
-    // 2. Fallback Clipboard Text
-    const fallbackZh = buildLeadFallbackText({
-      show: mockShow,
-      unitTitle,
-      evidenceUrl: "https://x.com/fan/status/12345",
-      notes: "第 2 張照片有紙本",
-      questType: "setlist",
-      locale: "zh-TW",
-    });
-    assert.ok(fallbackZh.includes(ARCHIVE_FEEDBACK_EMAIL));
-    assert.ok(fallbackZh.includes("2012-07-07-matsue-aztic-canova"));
-    assert.ok(fallbackZh.includes("https://x.com/fan/status/12345"));
-    assert.ok(fallbackZh.includes("收件者:"));
-
-    const fallbackJa = buildLeadFallbackText({
+    const textNoNotes = buildLeadFallbackText({
       show: mockShow,
       unitTitle,
       evidenceUrl: "https://x.com/fan/status/12345",
       questType: "time",
       locale: "ja",
     });
-    assert.ok(fallbackJa.includes("宛先:"));
-    assert.ok(fallbackJa.includes("件名:"));
+    assert.ok(textNoNotes.includes("[開演時間]"));
+    assert.ok(!textNoNotes.includes("備註"));
   });
 });

@@ -71,16 +71,12 @@ describe("11. Static SPA Architecture & Zero-Backend Invariants (ADR-0123)", () 
 
     // Must export pure helper functions without any network fetch / post calls
     assert.ok(
-      content.includes("buildGmailWebComposeUrl"),
-      "feedback.js must export buildGmailWebComposeUrl"
+      content.includes("ARCHIVE_AUTHOR_INSTAGRAM_URL"),
+      "feedback.js must export ARCHIVE_AUTHOR_INSTAGRAM_URL"
     );
     assert.ok(
       content.includes("buildLeadFallbackText"),
       "feedback.js must export buildLeadFallbackText"
-    );
-    assert.ok(
-      content.includes("buildLeadMailtoUrl"),
-      "feedback.js must export buildLeadMailtoUrl"
     );
     assert.ok(
       !content.includes("fetch("),
