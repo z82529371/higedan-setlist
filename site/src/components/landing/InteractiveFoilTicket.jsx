@@ -78,8 +78,10 @@ export default function InteractiveFoilTicket({
       {/* 3D Interactive Foil-Sheen Collectible Ticket */}
       <div
         ref={cardRef}
-        onMouseMove={handlePointerMove}
+        onPointerDown={handlePointerMove}
         onPointerMove={handlePointerMove}
+        onPointerUp={handlePointerLeave}
+        onPointerCancel={handlePointerLeave}
         onMouseLeave={handlePointerLeave}
         onPointerLeave={handlePointerLeave}
         style={{
@@ -91,6 +93,8 @@ export default function InteractiveFoilTicket({
             : "transform 420ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 420ms ease, opacity 150ms ease",
           opacity: isFlipping ? 0.65 : 1,
           willChange: "transform",
+          touchAction: "pan-y",
+          WebkitTouchCallout: "none",
         }}
         className="relative w-full rounded-[3px] border-[1.5px] border-ink bg-card shadow-[5px_5px_0_rgba(0,0,0,0.16)] dark:shadow-none select-none"
       >
@@ -133,7 +137,8 @@ export default function InteractiveFoilTicket({
                 <img
                   src={cover.coverUrl}
                   alt={cover.title || card?.tourLabel || "Official髭男dism"}
-                  className="w-full h-full object-cover"
+                  draggable={false}
+                  className="w-full h-full object-cover pointer-events-none"
                 />
               ) : (
                 <div className="w-full h-full p-1.5 flex items-center justify-center">
