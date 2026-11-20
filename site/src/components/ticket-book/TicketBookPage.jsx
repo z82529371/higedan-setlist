@@ -231,7 +231,7 @@ export function TicketBookPage({
     ) : null;
 
   return (
-    <div className="mx-auto max-w-[960px] px-3 sm:px-6 pt-5 pb-12 sm:py-8">
+    <div className="mx-auto max-w-[960px] px-3 sm:px-6 pt-8 pb-12 sm:py-8">
       {/* Main Ticket Receipt Card */}
       <article className={SLIP_ARTICLE}>
         {/* Washi Masking Tape Top Pin */}

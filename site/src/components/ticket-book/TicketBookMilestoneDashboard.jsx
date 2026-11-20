@@ -8,7 +8,7 @@ function MilestoneProgressBar({ percentage }) {
   return (
     <div
       data-testid="milestone-coverage-bar"
-      className="w-full h-1.5 bg-paper-dark/30 rounded-full overflow-hidden my-1"
+      className="w-full h-1.5 bg-paper-dark/30 rounded-full overflow-hidden"
       role="progressbar"
       aria-valuenow={percentage}
       aria-valuemin="0"
@@ -69,34 +69,48 @@ export function TicketBookMilestoneDashboard({
           </div>
         </div>
 
-        {onOpenSummaryCard && (
-          <button
-            type="button"
-            data-testid="generate-summary-card-btn"
-            onClick={onOpenSummaryCard}
-            className="inline-flex items-center justify-center gap-1.5 rounded-[3px] bg-band text-band-ink font-bold text-[11px] sm:text-[12px] px-3.5 py-1.5 border-[1.5px] border-ink shadow-[2px_2px_0_rgba(0,0,0,0.18)] dark:shadow-none hover:brightness-105 transition-colors cursor-pointer touch-stamp self-start sm:self-auto"
-            title={t("ticketBook.generateCard", "產生生涯總結小卡")}
-          >
-            <span>{t("ticketBook.generateCard", "產生生涯總結小卡")}</span>
-            <span aria-hidden="true" className="font-mono">→</span>
-          </button>
-        )}
+        <div className="flex flex-wrap items-center gap-2 self-start sm:self-auto">
+          {onOpenSongChecklist && (
+            <button
+              type="button"
+              data-testid="milestone-coverage-cta"
+              onClick={onOpenSongChecklist}
+              className="inline-flex items-center justify-center gap-1 rounded-[3px] bg-paper text-ink font-bold text-[11px] sm:text-[12px] px-3 py-1.5 border-[1.5px] border-ink/30 hover:border-ink hover:bg-tape-tint/50 transition-colors cursor-pointer touch-stamp"
+              title={t("ticketBook.viewChecklist", "查看現場曲庫解鎖成就圖鑑")}
+            >
+              <span aria-hidden="true">📖</span>
+              <span>{t("ticketBook.viewChecklistCta", "查看圖鑑 ↗")}</span>
+            </button>
+          )}
+          {onOpenSummaryCard && (
+            <button
+              type="button"
+              data-testid="generate-summary-card-btn"
+              onClick={onOpenSummaryCard}
+              className="inline-flex items-center justify-center gap-1.5 rounded-[3px] bg-band text-band-ink font-bold text-[11px] sm:text-[12px] px-3.5 py-1.5 border-[1.5px] border-ink shadow-[2px_2px_0_rgba(0,0,0,0.18)] dark:shadow-none hover:brightness-105 transition-colors cursor-pointer touch-stamp"
+              title={t("ticketBook.generateCard", "產生生涯總結小卡")}
+            >
+              <span>{t("ticketBook.generateCard", "產生生涯總結小卡")}</span>
+              <span aria-hidden="true" className="font-mono">→</span>
+            </button>
+          )}
+        </div>
       </div>
 
       {/* 4-Stat Metric Cards (AAA Contrast >= 7:1; always visible at top) */}
-      <div className="order-1 sm:order-2 mt-0 sm:mt-3.5 grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-2.5">
+      <div className="order-1 sm:order-2 mt-0 sm:mt-3.5 grid grid-cols-2 sm:grid-cols-4 gap-2.5">
         {/* Total Shows */}
         <div
           data-testid="milestone-total-shows"
-          className="rounded-[4px] border border-ink/20 bg-paper/60 p-2 sm:p-3 text-center flex flex-col justify-between"
+          className="rounded-[4px] border border-ink/20 bg-paper/60 p-2.5 sm:p-3 text-center grid grid-rows-[1fr_auto_1fr] justify-items-center"
         >
-          <div className="font-mono text-[10px] sm:text-[11px] font-bold text-ink uppercase">
+          <div className="self-start font-mono text-[10px] sm:text-[11px] font-bold text-ink uppercase">
             {t("ticketBook.totalShows", "總場次")}
           </div>
-          <div className="my-0.5 sm:my-1 font-mono text-[18px] sm:text-[22px] font-black text-ink leading-none">
+          <div className="self-center py-1 font-mono text-[20px] sm:text-[22px] font-black text-ink leading-none">
             {milestones.totalShows}
           </div>
-          <div className="hidden sm:block font-mono text-[10px] text-ink font-bold">
+          <div className="self-end font-mono text-[10px] text-ink font-bold leading-none">
             {t("ticketBook.showsUnit", "{count} 場", { count: milestones.totalShows })}
           </div>
         </div>
@@ -104,15 +118,15 @@ export function TicketBookMilestoneDashboard({
         {/* Total Tours */}
         <div
           data-testid="milestone-total-tours"
-          className="rounded-[4px] border border-ink/20 bg-paper/60 p-2 sm:p-3 text-center flex flex-col justify-between"
+          className="rounded-[4px] border border-ink/20 bg-paper/60 p-2.5 sm:p-3 text-center grid grid-rows-[1fr_auto_1fr] justify-items-center"
         >
-          <div className="font-mono text-[10px] sm:text-[11px] font-bold text-ink uppercase">
+          <div className="self-start font-mono text-[10px] sm:text-[11px] font-bold text-ink uppercase">
             {t("ticketBook.totalTours", "巡演數")}
           </div>
-          <div className="my-0.5 sm:my-1 font-mono text-[18px] sm:text-[22px] font-black text-ink leading-none">
+          <div className="self-center py-1 font-mono text-[20px] sm:text-[22px] font-black text-ink leading-none">
             {milestones.totalTours}
           </div>
-          <div className="hidden sm:block font-mono text-[10px] text-ink font-bold">
+          <div className="self-end font-mono text-[10px] text-ink font-bold leading-none">
             {t("ticketBook.toursUnit", "{count} 巡演", { count: milestones.totalTours })}
           </div>
         </div>
@@ -120,15 +134,15 @@ export function TicketBookMilestoneDashboard({
         {/* Total Cities */}
         <div
           data-testid="milestone-total-cities"
-          className="rounded-[4px] border border-ink/20 bg-paper/60 p-2 sm:p-3 text-center flex flex-col justify-between"
+          className="rounded-[4px] border border-ink/20 bg-paper/60 p-2.5 sm:p-3 text-center grid grid-rows-[1fr_auto_1fr] justify-items-center"
         >
-          <div className="font-mono text-[10px] sm:text-[11px] font-bold text-ink uppercase">
+          <div className="self-start font-mono text-[10px] sm:text-[11px] font-bold text-ink uppercase">
             {t("ticketBook.totalCities", "足跡城市")}
           </div>
-          <div className="my-0.5 sm:my-1 font-mono text-[18px] sm:text-[22px] font-black text-ink leading-none">
+          <div className="self-center py-1 font-mono text-[20px] sm:text-[22px] font-black text-ink leading-none">
             {milestones.totalCities}
           </div>
-          <div className="hidden sm:block font-mono text-[10px] text-ink font-bold">
+          <div className="self-end font-mono text-[10px] text-ink font-bold leading-none">
             {t("ticketBook.citiesUnit", "{count} 城市", { count: milestones.totalCities })}
           </div>
         </div>
@@ -139,41 +153,39 @@ export function TicketBookMilestoneDashboard({
             type="button"
             data-testid="milestone-coverage"
             onClick={onOpenSongChecklist}
-            className="rounded-[4px] border border-ink/20 bg-paper/60 p-2 sm:p-3 text-center flex flex-col justify-between hover:border-ink hover:bg-tape-tint/50 cursor-pointer transition-all touch-stamp group"
+            className="w-full rounded-[4px] border border-ink/20 bg-paper/60 p-2.5 sm:p-3 text-center grid grid-rows-[1fr_auto_1fr] justify-items-center hover:border-ink hover:bg-tape-tint/50 cursor-pointer transition-all touch-stamp group"
             title={t("ticketBook.viewChecklist", "查看現場曲庫解鎖成就圖鑑")}
           >
-            <div className="font-mono text-[10px] sm:text-[11px] font-bold text-ink uppercase flex items-center justify-center gap-1">
+            <div className="self-start font-mono text-[10px] sm:text-[11px] font-bold text-ink uppercase flex items-center justify-center gap-1">
               <span>{t("ticketBook.coverage", "歌曲解鎖率")}</span>
+              <span aria-hidden="true" className="text-[9px] opacity-75 group-hover:opacity-100">↗</span>
             </div>
-            <div className="my-0.5 sm:my-1 font-mono text-[18px] sm:text-[22px] font-black text-ink leading-none text-center">
+            <div className="self-center py-1 font-mono text-[20px] sm:text-[22px] font-black text-ink leading-none">
               {milestones.coveragePercentage}%
             </div>
-            <MilestoneProgressBar percentage={milestones.coveragePercentage} />
-            <div className="font-mono text-[10px] text-ink font-bold flex items-center justify-center gap-1">
-              <span>{milestones.unlockedSongCount} / {milestones.totalCatalogSongs}</span>
-            </div>
-            <div
-              data-testid="milestone-coverage-cta"
-              className="mt-1 sm:mt-2 inline-flex items-center justify-center gap-1 px-1.5 py-0.5 rounded-[3px] bg-ink/5 group-hover:bg-ink group-hover:text-paper font-mono text-[9px] sm:text-[10px] font-bold text-ink transition-colors border border-ink/20 group-hover:border-ink"
-            >
-              <span aria-hidden="true">📖</span>
-              <span>{t("ticketBook.viewChecklistCta", "查看圖鑑 ↗")}</span>
+            <div className="self-end w-full flex flex-col items-center gap-1">
+              <MilestoneProgressBar percentage={milestones.coveragePercentage} />
+              <div className="font-mono text-[10px] text-ink font-bold leading-none">
+                {milestones.unlockedSongCount} / {milestones.totalCatalogSongs}
+              </div>
             </div>
           </button>
         ) : (
           <div
             data-testid="milestone-coverage"
-            className="rounded-[4px] border border-ink/20 bg-paper/60 p-2 sm:p-3 text-center flex flex-col justify-between"
+            className="w-full rounded-[4px] border border-ink/20 bg-paper/60 p-2.5 sm:p-3 text-center grid grid-rows-[1fr_auto_1fr] justify-items-center"
           >
-            <div className="font-mono text-[10px] sm:text-[11px] font-bold text-ink uppercase">
+            <div className="self-start font-mono text-[10px] sm:text-[11px] font-bold text-ink uppercase">
               {t("ticketBook.coverage", "歌曲解鎖率")}
             </div>
-            <div className="my-0.5 sm:my-1 font-mono text-[18px] sm:text-[22px] font-black text-ink leading-none">
+            <div className="self-center py-1 font-mono text-[20px] sm:text-[22px] font-black text-ink leading-none">
               {milestones.coveragePercentage}%
             </div>
-            <MilestoneProgressBar percentage={milestones.coveragePercentage} />
-            <div className="font-mono text-[10px] text-ink font-bold">
-              {milestones.unlockedSongCount} / {milestones.totalCatalogSongs}
+            <div className="self-end w-full flex flex-col items-center gap-1">
+              <MilestoneProgressBar percentage={milestones.coveragePercentage} />
+              <div className="font-mono text-[10px] text-ink font-bold leading-none">
+                {milestones.unlockedSongCount} / {milestones.totalCatalogSongs}
+              </div>
             </div>
           </div>
         )}
