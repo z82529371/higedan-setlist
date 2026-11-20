@@ -73,6 +73,43 @@ describe("10. Workspace Topology & Runtime Version Invariants (ADR-0103)", () =>
     );
   });
 
+  it("guarantees site/src/data/ tours, events, and metadata JSON files are synced from data/", () => {
+    const rootDataDir = path.resolve(repoRoot, "data");
+    const siteDataDir = path.resolve(import.meta.dirname, "../../src/data");
+
+    for (const file of ["venue-profiles.json", "live-releases.json", "discography.json"]) {
+      const rootFile = path.join(rootDataDir, file);
+      if (!fs.existsSync(rootFile)) continue;
+      const siteFile = path.join(siteDataDir, file);
+      assert.ok(fs.existsSync(siteFile), `site/src/data/${file} must exist (run 'pnpm sync')`);
+      assert.equal(
+        fs.readFileSync(siteFile, "utf8"),
+        fs.readFileSync(rootFile, "utf8"),
+        `site/src/data/${file} must be byte-identical to data/${file} (run 'pnpm sync')`
+      );
+    }
+
+    for (const sub of ["tours", "events"]) {
+      const rootSub = path.join(rootDataDir, sub);
+      const siteSub = path.join(siteDataDir, sub);
+      assert.ok(fs.existsSync(siteSub), `site/src/data/${sub}/ must exist (run 'pnpm sync')`);
+      const rootFiles = fs.readdirSync(rootSub).filter((f) => f.endsWith(".json")).sort();
+      const siteFiles = fs.readdirSync(siteSub).filter((f) => f.endsWith(".json")).sort();
+      assert.deepEqual(
+        siteFiles,
+        rootFiles,
+        `site/src/data/${sub}/ file list must match data/${sub}/ (run 'pnpm sync')`
+      );
+      for (const f of rootFiles) {
+        assert.equal(
+          fs.readFileSync(path.join(siteSub, f), "utf8"),
+          fs.readFileSync(path.join(rootSub, f), "utf8"),
+          `site/src/data/${sub}/${f} must be byte-identical to data/${sub}/${f} (run 'pnpm sync')`
+        );
+      }
+    }
+  });
+
   it("guarantees all ADR documents in docs/adr/ are indexed in docs/adr/README.md", () => {
     const adrDir = path.resolve(repoRoot, "docs", "adr");
     const readmePath = path.resolve(adrDir, "README.md");

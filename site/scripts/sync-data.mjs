@@ -13,40 +13,50 @@ const dest = resolve(here, "..", "src", "data");
 validateAndCleanTours();
 
 // In-place sync without wiping dest directory to prevent concurrent Vite SSR race conditions
-mkdirSync(dest, { recursive: true });
+try {
+  mkdirSync(dest, { recursive: true });
 
-cpSync(resolve(src, "songs.json"), resolve(dest, "songs.json"));
-console.log("synced songs.json");
+  cpSync(resolve(src, "songs.json"), resolve(dest, "songs.json"));
+  console.log("synced songs.json");
 
-if (existsSync(resolve(src, "venue-profiles.json"))) {
-  cpSync(resolve(src, "venue-profiles.json"), resolve(dest, "venue-profiles.json"));
-  console.log("synced venue-profiles.json");
-}
-
-if (existsSync(resolve(src, "live-releases.json"))) {
-  cpSync(resolve(src, "live-releases.json"), resolve(dest, "live-releases.json"));
-  console.log("synced live-releases.json");
-}
-
-if (existsSync(resolve(src, "discography.json"))) {
-  cpSync(resolve(src, "discography.json"), resolve(dest, "discography.json"));
-  console.log("synced discography.json");
-}
-
-for (const sub of ["tours", "events"]) {
-  const srcSub = resolve(src, sub);
-  if (!existsSync(srcSub)) continue;
-  const destSub = resolve(dest, sub);
-  mkdirSync(destSub, { recursive: true });
-
-  const srcFiles = new Set(readdirSync(srcSub));
-  for (const existing of readdirSync(destSub)) {
-    if (!srcFiles.has(existing)) {
-      rmSync(resolve(destSub, existing), { force: true });
-    }
+  if (existsSync(resolve(src, "venue-profiles.json"))) {
+    cpSync(resolve(src, "venue-profiles.json"), resolve(dest, "venue-profiles.json"));
+    console.log("synced venue-profiles.json");
   }
-  cpSync(srcSub, destSub, { recursive: true });
-  console.log("synced", sub);
+
+  if (existsSync(resolve(src, "live-releases.json"))) {
+    cpSync(resolve(src, "live-releases.json"), resolve(dest, "live-releases.json"));
+    console.log("synced live-releases.json");
+  }
+
+  if (existsSync(resolve(src, "discography.json"))) {
+    cpSync(resolve(src, "discography.json"), resolve(dest, "discography.json"));
+    console.log("synced discography.json");
+  }
+
+  for (const sub of ["tours", "events"]) {
+    const srcSub = resolve(src, sub);
+    if (!existsSync(srcSub)) continue;
+    const destSub = resolve(dest, sub);
+    mkdirSync(destSub, { recursive: true });
+
+    const srcFiles = new Set(readdirSync(srcSub));
+    for (const existing of readdirSync(destSub)) {
+      if (!srcFiles.has(existing)) {
+        rmSync(resolve(destSub, existing), { force: true });
+      }
+    }
+    cpSync(srcSub, destSub, { recursive: true });
+    console.log("synced", sub);
+  }
+} catch (err) {
+  if (err?.code === "EPERM") {
+    console.error(
+      `[sync-data] EPERM writing to ${dest}. On Windows sandbox, re-run 'pnpm sync' with BypassSandbox: true.`
+    );
+    process.exit(1);
+  }
+  throw err;
 }
 
 // Automatically regenerate and sync audit reports

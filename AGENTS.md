@@ -38,6 +38,7 @@ All workspace scripts live in [`site/package.json`](./site/package.json) and roo
 
 - **Inner loop**: `pnpm check:fast` (`oxlint` + `check-i18n` + `test:invariants` in <200ms).
 - **Pre-commit gate**: `pnpm check` (full lint, `pnpm sync`, `check-i18n`, and all `pipeline`/`invariants`/`ui` suites) + `pnpm check:staged`.
+- **Windows sandbox**: Run `pnpm sync` (writes `site/src/data/`) and `git add`/`git commit` (`.git/index.lock`) with `BypassSandbox: true` if sandboxed execution hits `EPERM` / `Permission denied`.
 
 ## Agent skills
 
