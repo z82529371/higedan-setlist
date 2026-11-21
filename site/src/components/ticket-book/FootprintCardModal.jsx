@@ -495,7 +495,7 @@ export function FootprintCardModal({
             <span aria-hidden="true">{isExportingPng ? "⏳" : "📸"}</span>
             <span>
               {isExportingPng
-                ? t("memorial.generating", "高清紀念卡生成中...")
+                ? t("memorial.generating", "紀念卡生成中...")
                 : t("ticketBook.saveStaticPngBtn", "儲存明信片 (PNG)")}
             </span>
           </button>

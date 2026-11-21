@@ -340,7 +340,7 @@ export const dictZhTw = {
     themeWhite: "✉️ 經典純白卡",
     themeNoir: "🖤 暗夜舞台金",
     ticketFormat: "📜 單欄長條票券",
-    generating: "高清紀念卡生成中...",
+    generating: "紀念卡生成中...",
     saveHint: "手機長按小卡存入相簿 · 電腦點右鍵另存圖片",
     copySetlist: "📋 複製歌單文字",
     copied: "✓ 已複製歌單",

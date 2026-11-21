@@ -78,7 +78,7 @@ export function getMemorialStampText(locale = "zh-TW") {
  * 專為 Official 髭男 dism 巡演設計的精良歌單單欄紀念票券預覽視窗
  * - 經典「單欄長條票券」排版，保證收錄全曲 (M1 ~ M20+ 及 安可)
  * - 支援「復古手感紙質」、「經典純白卡」與「暗夜舞台黑金」三種風格切換
- * - 開窗即時 DOM 預覽零延遲，背景自動非同步產出 2x 高清真圖片覆蓋置頂
+ * - 開窗即時 DOM 預覽零延遲，背景自動非同步產出 2x 真圖片覆蓋置頂
  * - 支援多國語言 (zh-TW, ja, en, ko) 本地化票券排版與專屬朱印風格印章
  * - 支援座席（Seat）、個人心得（Notes）與專屬紀念章款式（Stamp）即時客製與隱私切換
  * - 支援下載 440px 復古實體感透明圓角 PNG 圖片
@@ -865,7 +865,7 @@ export function MemorialCardModal({
             <span aria-hidden="true" className="font-bold">{isGenerating ? "[...]" : "NOTE:"}</span>
             <span className="font-bold">
               {isGenerating
-                ? t("memorial.generating", "高清紀念卡生成中...")
+                ? t("memorial.generating", "紀念卡生成中...")
                 : t("memorial.saveHint", "手機長按小卡存入相簿 · 電腦點右鍵另存圖片")}
             </span>
           </div>

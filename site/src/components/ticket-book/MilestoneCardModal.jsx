@@ -396,7 +396,7 @@ export function MilestoneCardModal({ isOpen, onClose, milestones, storage: propS
           <span aria-hidden="true" className="font-bold">{isExporting ? "[...]" : "NOTE:"}</span>
           <span className="font-bold">
             {isExporting
-              ? t("memorial.generating", "高清紀念卡生成中...")
+              ? t("memorial.generating", "紀念卡生成中...")
               : t("memorial.saveHint", "手機長按小卡存入相簿 · 電腦點右鍵另存圖片")}
           </span>
         </div>
