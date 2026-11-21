@@ -348,7 +348,8 @@ export function MemorialCardModal({
           {tabs.map((k) => (
             <span
               key={k}
-              className={`font-mono text-[9px] px-1 py-0.2 rounded-[2px] font-bold shrink-0 leading-tight ${
+              data-testid="track-kind-badge"
+              className={`inline-flex items-center justify-center h-[14px] px-[5px] font-mono text-[9px] leading-none whitespace-nowrap rounded-[2px] font-bold shrink-0 ${
                 isNoir
                   ? "bg-tape-tint/50 text-white border border-line-soft"
                   : "bg-tape-tint/50 text-ink border border-line-soft"

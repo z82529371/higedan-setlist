@@ -242,6 +242,44 @@ describe("16. Localized Commemorative Ticket Image Export (Issue #19)", () => {
       assert.ok(htmlPropKo.includes("기념 티켓 미리보기"), "Must respect direct locale='ko' prop for title");
     });
 
+    it("renders overflow-safe track kind badges so PNG export never spills glyphs outside the frame", async () => {
+      const { MemorialCardModal } = await loadModule("/src/components/MemorialCardModal.jsx");
+
+      const unit = {
+        id: "tour-badge",
+        title: "Badge Tour",
+        isTour: true,
+        shows: [{ id: "show-badge", date: "2024-11-12", venue: "Test Venue", city: "Tokyo" }],
+      };
+
+      const html = renderToStaticMarkup(
+        React.createElement(MemorialCardModal, {
+          isOpen: true,
+          onClose: () => {},
+          show: unit.shows[0],
+          unit,
+          main: [{ cue: "M1", item: { songId: "subtitle", kind: ["request", "satoshi-solo"] } }],
+          enc: [{ cue: "EN1", item: { songId: "pretender", kind: ["premiere"] } }],
+          showIndex: 0,
+          totalShows: 1,
+          locale: "zh-TW",
+        })
+      );
+
+      const badges = [...html.matchAll(/<span[^>]*data-testid="track-kind-badge"[^>]*>([^<]*)<\/span>/g)];
+      assert.ok(badges.length >= 3, `Expected >= 3 track kind badges, got ${badges.length}`);
+      assert.ok(badges.some((m) => m[1] === "點歌"), "Request badge must render 點歌");
+
+      for (const [tag] of badges) {
+        const cls = tag.match(/class="([^"]*)"/)[1].split(/\s+/);
+        for (const required of ["inline-flex", "items-center", "h-[14px]", "leading-none", "whitespace-nowrap", "shrink-0"]) {
+          assert.ok(cls.includes(required), `Track kind badge must include "${required}" (got: ${cls.join(" ")})`);
+        }
+        assert.ok(!cls.includes("leading-tight"), "Track kind badge must not use leading-tight (glyphs sink in PNG export)");
+        assert.ok(!cls.includes("py-0.2"), "Track kind badge must not rely on py-0.2 vertical padding");
+      }
+    });
+
     it("exports and uses resolveTranslation fallback correctly", async () => {
       const { resolveTranslation } = await loadModule("/src/lib/i18n.jsx");
       assert.ok(typeof resolveTranslation === "function", "resolveTranslation must be exported as a function");
