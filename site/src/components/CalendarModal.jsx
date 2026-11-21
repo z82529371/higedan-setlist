@@ -299,7 +299,7 @@ export default function CalendarModal({
                     key={`day-${day}`}
                     type="button"
                     onClick={() => handleDayClick(dateStr, dayShows)}
-                    className="relative flex flex-col items-center justify-center h-9 sm:h-10 rounded-[3px] border-[1.5px] border-band-ink/60 bg-band hover:bg-band-ink hover:text-band text-ink font-bold cursor-pointer touch-stamp transition-colors group"
+                    className="relative flex flex-col items-center justify-center h-9 sm:h-10 rounded-[3px] border-[1.5px] border-band-ink/60 bg-band hover:bg-band-ink hover:text-band text-band-ink font-bold cursor-pointer touch-stamp transition-colors group"
                     title={t("calendar.dayTitle", "{date}（{count}場演出）點擊跳轉", { date: dateStr, count })}
                   >
                     <span className="font-mono text-[12px] sm:text-[13px] leading-none">

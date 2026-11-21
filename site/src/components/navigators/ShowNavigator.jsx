@@ -504,7 +504,7 @@ export function ShowNavigator({
                     {attendedMap[s.id] && (
                       <span
                         data-testid={`show-nav-attended-badge-${s.id}`}
-                        className="inline-flex items-center justify-center rounded-full bg-tape text-ink font-bold text-[9px] w-3.5 h-3.5 border border-ink/40 tabular-nums shadow-2xs shrink-0 select-none"
+                        className="inline-flex items-center justify-center rounded-full bg-tape text-band-ink font-bold text-[9px] w-3.5 h-3.5 border border-ink/40 tabular-nums shadow-2xs shrink-0 select-none"
                         title={t("ticketBook.attended", "已參加")}
                       >
                         ✓

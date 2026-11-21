@@ -89,7 +89,7 @@ export function ShowMetadataBox({
                     </span>
                   )}
                   <span
-                    className="ml-2 inline-flex items-center gap-0.5 rounded border border-pool/30 bg-pool/5 px-1.5 py-0.5 font-mono text-[11px] font-bold text-pool align-middle whitespace-nowrap group-hover:bg-pool group-hover:text-white transition-colors"
+                    className="ml-2 inline-flex items-center gap-0.5 rounded border border-pool/30 bg-pool/5 px-1.5 py-0.5 font-mono text-[11px] font-bold text-pool align-middle whitespace-nowrap group-hover:bg-pool group-hover:text-band-ink transition-colors"
                     aria-hidden="true"
                   >
                     <span>🏛️ {t("showExtra.venueFileLabel", "檔案")}</span>
@@ -153,7 +153,7 @@ export function ShowMetadataBox({
                     e.preventDefault();
                     onSelectVenue(s.venue);
                   }}
-                  className="inline-flex items-center gap-1 rounded border border-pool/30 bg-pool/5 px-2 py-0.5 font-mono text-[11px] font-bold text-pool whitespace-nowrap hover:bg-pool hover:text-white transition-colors cursor-pointer"
+                  className="inline-flex items-center gap-1 rounded border border-pool/30 bg-pool/5 px-2 py-0.5 font-mono text-[11px] font-bold text-pool whitespace-nowrap hover:bg-pool hover:text-band-ink transition-colors cursor-pointer"
                   title={t("showExtra.venueFileTitle", "查看此場地的全歷史演出檔案")}
                 >
                   <span>🏛️ {t("showExtra.venueFileLabel", "檔案")}</span>

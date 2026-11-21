@@ -128,7 +128,7 @@ export function RankingPage({
           <div className="mt-2.5 sm:mt-3.5 flex items-center justify-center gap-2">
             <span
               data-testid="ranking-stats-badge"
-              className="inline-flex items-center gap-1.5 rounded-[4px] border border-ink/30 bg-tape px-2.5 sm:px-3 py-0.5 sm:py-1 font-mono text-[11px] sm:text-[13px] font-extrabold text-ink shadow-2xs"
+              className="inline-flex items-center gap-1.5 rounded-[4px] border border-ink/30 bg-tape px-2.5 sm:px-3 py-0.5 sm:py-1 font-mono text-[11px] sm:text-[13px] font-extrabold text-band-ink shadow-2xs"
             >
               <span aria-hidden="true">🎖️</span>
               <span>

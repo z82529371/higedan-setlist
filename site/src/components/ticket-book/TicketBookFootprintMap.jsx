@@ -125,7 +125,7 @@ export function TicketBookFootprintMap({
 
           <span
             data-testid="footprint-progress-badge"
-            className="inline-flex items-center gap-1.5 rounded-[4px] border border-ink/30 bg-tape px-2.5 py-1 font-mono text-[11px] font-bold text-ink shadow-2xs"
+            className="inline-flex items-center gap-1.5 rounded-[4px] border border-ink/30 bg-tape px-2.5 py-1 font-mono text-[11px] font-bold text-band-ink shadow-2xs"
           >
             <span>🇯🇵</span>
             <span>

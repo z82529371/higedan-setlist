@@ -405,7 +405,7 @@ export function VenueSlip({ venueName, globalVenueShows, unitData, onSelectShow,
                 href={googleMapsUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-1 rounded border border-line-soft bg-paper px-2 py-1.5 sm:py-1 font-mono text-[11px] font-bold text-ink hover:bg-band hover:border-band transition-colors no-underline"
+                className="inline-flex items-center justify-center gap-1 rounded border border-line-soft bg-paper px-2 py-1.5 sm:py-1 font-mono text-[11px] font-bold text-ink hover:text-band-ink hover:bg-band hover:border-band transition-colors no-underline"
                 title={t("venueExtra.mapTitle", "在 Google 地圖查看場館位置")}
               >
                 <span>🗺️ Google Maps</span>

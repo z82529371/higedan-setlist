@@ -267,7 +267,7 @@ export function TicketBookTransferModal({
                 type="button"
                 data-testid="transfer-confirm-merge"
                 onClick={() => handleConfirm("merge")}
-                className="w-full inline-flex items-center justify-center gap-1.5 rounded-[4px] border-[1.5px] border-ink bg-band px-4 py-2.5 font-mono text-[12px] font-extrabold text-ink shadow-2xs hover:brightness-105 transition-all cursor-pointer"
+                className="w-full inline-flex items-center justify-center gap-1.5 rounded-[4px] border-[1.5px] border-ink bg-band px-4 py-2.5 font-mono text-[12px] font-extrabold text-band-ink shadow-2xs hover:brightness-105 transition-all cursor-pointer"
               >
                 <span>✓ {t("ticketBook.mergeAction", "保留現有並合併")}</span>
               </button>
@@ -367,7 +367,7 @@ export function TicketBookTransferModal({
                     type="button"
                     data-testid="transfer-apply-code"
                     onClick={handleApplyCode}
-                    className="inline-flex items-center gap-1 rounded-[3px] border border-ink/40 bg-tape px-3 py-1.5 font-mono text-[11px] font-extrabold text-ink shadow-2xs hover:brightness-105 cursor-pointer"
+                    className="inline-flex items-center gap-1 rounded-[3px] border border-ink/40 bg-tape px-3 py-1.5 font-mono text-[11px] font-extrabold text-band-ink shadow-2xs hover:brightness-105 cursor-pointer"
                   >
                     <span>{t("ticketBook.applyCode", "讀取代碼")}</span>
                   </button>

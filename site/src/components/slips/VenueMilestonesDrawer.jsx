@@ -39,7 +39,7 @@ export function VenueMilestonesDrawer({
           href={livefansUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-1 rounded border border-line-soft bg-paper px-2 py-1 font-mono text-[11px] font-bold text-muted hover:text-ink hover:bg-band hover:border-band transition-colors no-underline"
+          className="inline-flex items-center gap-1 rounded border border-line-soft bg-paper px-2 py-1 font-mono text-[11px] font-bold text-muted hover:text-band-ink hover:bg-band hover:border-band transition-colors no-underline"
           title={t("venueExtra.livefansTitle", "在 LiveFans 查看場館歷史")}
         >
           <span>🎫 LiveFans</span>

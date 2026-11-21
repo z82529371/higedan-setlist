@@ -707,7 +707,7 @@ export function TourSlip({
                     }}
                     className={`inline-flex items-center gap-1 rounded-[3px] px-2 py-1 text-[11px] sm:text-xs font-mono font-bold transition-colors cursor-pointer touch-stamp select-none border ${
                       attendedMap[stop.id]
-                        ? "bg-tape text-ink border-ink shadow-2xs hover:brightness-95"
+                        ? "bg-tape text-band-ink border-ink shadow-2xs hover:brightness-95"
                         : "bg-paper text-ink border-line-soft hover:bg-tape-tint/50 hover:border-ink/60"
                     }`}
                     title={

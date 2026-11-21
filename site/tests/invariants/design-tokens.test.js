@@ -159,6 +159,171 @@ describe("9. Design Token Invariants & Dedicated URL Routes Seam (DESIGN.md, ADR
     );
   });
 
+  it("enforces The Theme Ink Pairing Rule: solid theme backgrounds must use text-band-ink (DESIGN.md)", () => {
+    const srcDir = path.resolve(import.meta.dirname, "../../src");
+    const solidBgRe = /^bg-(?:band|tape|pool)$/;
+    const fixedTextRe = /^text-(?:ink|paper|white|black)(?:\/\d+)?$/;
+    const themeTextRe = /^text-band-ink$/;
+    const statefulVariants = new Set(["hover", "active", "group-hover"]);
+
+    function walkFiles(dir, pattern) {
+      let results = [];
+      for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+        const fullPath = path.join(dir, entry.name);
+        if (entry.isDirectory()) {
+          results = results.concat(walkFiles(fullPath, pattern));
+        } else if (pattern.test(entry.name)) {
+          results.push(fullPath);
+        }
+      }
+      return results;
+    }
+
+    function readLiteral(content, start) {
+      const quote = content[start];
+      let i = start + 1;
+      while (i < content.length) {
+        if (content[i] === "\\") i += 2;
+        else if (content[i] === quote) break;
+        else i++;
+      }
+      return { body: content.slice(start + 1, i), end: i };
+    }
+
+    function stripInterpolations(body) {
+      let result = "";
+      for (let i = 0; i < body.length; i++) {
+        if (body[i] === "$" && body[i + 1] === "{") {
+          let depth = 0;
+          let j = i + 1;
+          for (; j < body.length; j++) {
+            if (body[j] === "{") depth++;
+            else if (body[j] === "}") {
+              depth--;
+              if (depth === 0) break;
+            }
+          }
+          result += " ";
+          i = j;
+          continue;
+        }
+        result += body[i];
+      }
+      return result;
+    }
+
+    // Only class attribute values are inspected so apostrophes in JSX prose and comments
+    // (e.g. "isn't") cannot be mistaken for string delimiters.
+    function collectClassNameChunks(content) {
+      const chunks = [];
+      const push = (text, index) => {
+        if (/[\r\n]/.test(text)) return;
+        if (/\b(?:bg|text|border)-/.test(text)) chunks.push({ text, index });
+      };
+
+      for (const match of content.matchAll(/className\s*=\s*/g)) {
+        let i = match.index + match[0].length;
+        const first = content[i];
+        if (first === '"' || first === "'") {
+          push(readLiteral(content, i).body, i);
+          continue;
+        }
+        if (first !== "{") continue;
+
+        let depth = 0;
+        let j = i;
+        while (j < content.length) {
+          const ch = content[j];
+          if (ch === '"' || ch === "'") {
+            const literal = readLiteral(content, j);
+            push(literal.body, j);
+            j = literal.end + 1;
+            continue;
+          }
+          if (ch === "`") {
+            const literal = readLiteral(content, j);
+            push(stripInterpolations(literal.body), j);
+            for (let k = 0; k < literal.body.length; k++) {
+              if (literal.body[k] !== '"' && literal.body[k] !== "'") continue;
+              const inner = readLiteral(literal.body, k);
+              push(inner.body, j + 1 + k);
+              k = inner.end;
+            }
+            j = literal.end + 1;
+            continue;
+          }
+          if (ch === "{") depth++;
+          else if (ch === "}") {
+            depth--;
+            if (depth === 0) break;
+          }
+          j++;
+        }
+      }
+      return chunks;
+    }
+
+    function collectConstantChunks(content) {
+      const chunks = [];
+      for (let i = 0; i < content.length; i++) {
+        if (content[i] !== '"' && content[i] !== "'") continue;
+        const literal = readLiteral(content, i);
+        if (!/[\r\n]/.test(literal.body) && /\b(?:bg|text|border)-/.test(literal.body)) {
+          chunks.push({ text: literal.body, index: i });
+        }
+        i = literal.end;
+      }
+      return chunks;
+    }
+
+    function splitVariant(token) {
+      const index = token.lastIndexOf(":");
+      return index === -1
+        ? { variant: "", base: token }
+        : { variant: token.slice(0, index), base: token.slice(index + 1) };
+    }
+
+    const sources = [
+      ...walkFiles(srcDir, /\.jsx$/).map((file) => ({ file, collect: collectClassNameChunks })),
+      { file: path.join(srcDir, "lib/constants.js"), collect: collectConstantChunks },
+    ];
+
+    const violations = [];
+    for (const { file, collect } of sources) {
+      const content = fs.readFileSync(file, "utf8");
+      const relPath = path.relative(srcDir, file).replace(/\\/g, "/");
+      for (const { text, index } of collect(content)) {
+        const tokens = text.split(/\s+/).filter(Boolean);
+        const parts = tokens.map(splitVariant);
+        const line = content.slice(0, index).split("\n").length;
+
+        const hasSolidBase = parts.some((p) => p.variant === "" && solidBgRe.test(p.base));
+        const hasFixedBase = parts.some((p) => p.variant === "" && fixedTextRe.test(p.base));
+        if (hasSolidBase && hasFixedBase) {
+          violations.push(`${relPath}:${line} (solid theme background with fixed text)`);
+          continue;
+        }
+
+        for (const state of statefulVariants) {
+          const hasStateSolidBg = parts.some((p) => p.variant === state && solidBgRe.test(p.base));
+          if (!hasStateSolidBg) continue;
+          const hasStateThemeText = parts.some((p) => p.variant === state && themeTextRe.test(p.base));
+          const hasStateFixedText = parts.some((p) => p.variant === state && fixedTextRe.test(p.base));
+          if (hasStateFixedText || (!hasStateThemeText && hasFixedBase)) {
+            violations.push(`${relPath}:${line} (${state}: theme background with fixed text)`);
+            break;
+          }
+        }
+      }
+    }
+
+    assert.deepEqual(
+      violations,
+      [],
+      `Solid theme backgrounds (bg-band/bg-tape/bg-pool, including hover/active/group-hover) must pair with text-band-ink, not fixed text-ink/text-paper/text-white/text-black (DESIGN.md The Theme Ink Pairing Rule):\n${violations.join("\n")}`
+    );
+  });
+
   it("verifies multi-lingual typography stacks and The Cue Monospace Rule (ADR-0112)", () => {
     const stylePath = path.resolve(import.meta.dirname, "../../src/style.css");
     const indexPath = path.resolve(import.meta.dirname, "../../index.html");

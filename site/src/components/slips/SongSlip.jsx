@@ -379,7 +379,7 @@ export function SongSlip({ songId, trackShows, showById, unitData, onSelectShow,
                   href={youtubeUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-1 rounded border border-line-soft bg-paper px-2.5 py-1.5 sm:py-1 font-mono text-[11px] font-bold text-ink hover:bg-band hover:border-band transition-colors no-underline"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-1 rounded border border-line-soft bg-paper px-2.5 py-1.5 sm:py-1 font-mono text-[11px] font-bold text-ink hover:text-band-ink hover:bg-band hover:border-band transition-colors no-underline"
                   title={t("songExtra.youtubeTitle", "在 YouTube 搜尋現場 Live 影片")}
                 >
                   <span>▶ YouTube</span>
@@ -391,7 +391,7 @@ export function SongSlip({ songId, trackShows, showById, unitData, onSelectShow,
                   href={spotifyUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-1 rounded border border-line-soft bg-paper px-2.5 py-1.5 sm:py-1 font-mono text-[11px] font-bold text-ink hover:bg-band hover:border-band transition-colors no-underline"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-1 rounded border border-line-soft bg-paper px-2.5 py-1.5 sm:py-1 font-mono text-[11px] font-bold text-ink hover:text-band-ink hover:bg-band hover:border-band transition-colors no-underline"
                   title={t("songExtra.spotifyTitle", "在 Spotify 聆聽官方音源")}
                 >
                   <span>🎧 Spotify</span>

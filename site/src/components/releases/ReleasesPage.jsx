@@ -253,7 +253,7 @@ export function ReleasesPage({
           <div className="mt-2.5 sm:mt-3.5 flex items-center justify-center gap-2">
             <span
               data-testid="releases-stats-badge"
-              className="inline-flex items-center gap-1.5 rounded-[4px] border border-ink/30 bg-tape px-2.5 sm:px-3 py-0.5 sm:py-1 font-mono text-[11px] sm:text-[13px] font-extrabold text-ink shadow-2xs"
+              className="inline-flex items-center gap-1.5 rounded-[4px] border border-ink/30 bg-tape px-2.5 sm:px-3 py-0.5 sm:py-1 font-mono text-[11px] sm:text-[13px] font-extrabold text-band-ink shadow-2xs"
             >
               <span aria-hidden="true">🎖️</span>
               <span>
@@ -475,7 +475,7 @@ export function ReleasesPage({
                       {primaryRecording?.showId ? (
                         <a
                           href={routeHash.show(primaryRecording.showId)}
-                          className="inline-flex items-center gap-1 rounded-[3px] border border-ink/30 bg-tape px-2.5 py-1 font-mono text-[11px] font-bold text-ink shadow-2xs hover:bg-tape-tint transition-colors no-underline cursor-pointer"
+                          className="inline-flex items-center gap-1 rounded-[3px] border border-ink/30 bg-tape px-2.5 py-1 font-mono text-[11px] font-bold text-band-ink shadow-2xs hover:bg-tape-tint transition-colors no-underline cursor-pointer"
                           title={t("view_show_slip", "前往演出票根")}
                         >
                           <span>🎫 {t("view_show_slip", "前往演出票根")} ➔</span>
@@ -534,7 +534,7 @@ export function ReleasesPage({
                         </span>
                       )}
                       {rel.chartRankOricon && (
-                        <span className="font-mono text-[10px] sm:text-[11px] font-extrabold text-ink bg-tape px-2 py-0.5 rounded border border-ink/20 shadow-2xs">
+                        <span className="font-mono text-[10px] sm:text-[11px] font-extrabold text-band-ink bg-tape px-2 py-0.5 rounded border border-ink/20 shadow-2xs">
                           🏆 Oricon #{rel.chartRankOricon}
                         </span>
                       )}

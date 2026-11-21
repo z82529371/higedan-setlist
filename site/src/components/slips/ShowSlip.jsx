@@ -471,7 +471,7 @@ export function ShowSlip({
                 onClick={toggleAttendance}
                 className={`inline-flex items-center justify-center gap-1.5 rounded px-3 py-1.5 text-[11px] font-bold transition-colors cursor-pointer select-none border touch-stamp ${
                   attended
-                    ? "bg-tape text-ink border-ink font-extrabold shadow-xs hover:brightness-95"
+                    ? "bg-tape text-band-ink border-ink font-extrabold shadow-xs hover:brightness-95"
                     : "bg-paper text-ink border-line-soft hover:bg-tape-tint/50 hover:border-ink/60"
                 }`}
                 title={
@@ -679,7 +679,7 @@ export function ShowSlip({
                 onSelectShow(prevShow.id);
                 window.scrollTo({ top: 0, behavior: "smooth" });
               }}
-              className="inline-flex min-h-[42px] sm:min-h-0 items-center justify-center sm:justify-start gap-1 rounded border border-line-soft bg-paper px-3 py-2 sm:py-1 text-ink hover:bg-band hover:border-band active:bg-band transition-colors cursor-pointer truncate"
+              className="inline-flex min-h-[42px] sm:min-h-0 items-center justify-center sm:justify-start gap-1 rounded border border-line-soft bg-paper px-3 py-2 sm:py-1 text-ink hover:text-band-ink hover:bg-band hover:border-band active:bg-band active:text-band-ink transition-colors cursor-pointer truncate"
             >
               <span className="truncate">← {t("actions.prev", "上一場")}：{showDate(prevShow, locale)} {formatShowPlace(prevShow, t)}</span>
             </button>
@@ -691,7 +691,7 @@ export function ShowSlip({
                 onSelectShow(nextShow.id);
                 window.scrollTo({ top: 0, behavior: "smooth" });
               }}
-              className="inline-flex min-h-[42px] sm:min-h-0 items-center justify-center sm:justify-end gap-1 rounded border border-line-soft bg-paper px-3 py-2 sm:py-1 text-ink hover:bg-band hover:border-band active:bg-band transition-colors cursor-pointer font-bold truncate"
+              className="inline-flex min-h-[42px] sm:min-h-0 items-center justify-center sm:justify-end gap-1 rounded border border-line-soft bg-paper px-3 py-2 sm:py-1 text-ink hover:text-band-ink hover:bg-band hover:border-band active:bg-band active:text-band-ink transition-colors cursor-pointer font-bold truncate"
             >
               <span className="truncate">{t("actions.next", "下一場")}：{showDate(nextShow, locale)} {formatShowPlace(nextShow, t)} →</span>
             </button>

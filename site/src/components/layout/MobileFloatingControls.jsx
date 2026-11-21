@@ -291,7 +291,7 @@ export function MobileFloatingControls({
             {ticketCount > 0 && (
               <span
                 data-testid="mobile-ticket-badge-count"
-                className="absolute -top-1.5 -right-1.5 inline-flex items-center justify-center rounded-[2px] bg-tape text-ink font-mono font-bold text-[10px] min-w-[18px] h-[18px] px-1 border border-ink tabular-nums"
+                className="absolute -top-1.5 -right-1.5 inline-flex items-center justify-center rounded-[2px] bg-tape text-band-ink font-mono font-bold text-[10px] min-w-[18px] h-[18px] px-1 border border-ink tabular-nums"
               >
                 {ticketCount}
               </span>

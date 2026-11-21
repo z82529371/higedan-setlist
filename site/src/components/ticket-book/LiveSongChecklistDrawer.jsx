@@ -229,7 +229,7 @@ export function LiveSongChecklistDrawer({
 
                             <div className="shrink-0 flex items-center gap-2">
                               {/* Unlocked Stamp Badge */}
-                              <span className="inline-flex items-center gap-1 rounded-[3px] border border-ink/40 bg-tape px-2 py-0.5 font-mono text-[11px] font-bold text-ink shadow-2xs">
+                              <span className="inline-flex items-center gap-1 rounded-[3px] border border-ink/40 bg-tape px-2 py-0.5 font-mono text-[11px] font-bold text-band-ink shadow-2xs">
                                 <span>✓</span>
                                 <span>{t("ticketBook.unlockedBadge", "已解鎖")}</span>
                                 <span>({t("ticketBook.timesUnit", "{count} 次", { count: song.count })})</span>

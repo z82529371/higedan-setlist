@@ -119,6 +119,7 @@ components:
 ### Named Rules
 **The Gold Accent Reserve Rule.** 舞台金僅用於具有操作焦點、目前選中或膠帶裝飾的關鍵節點，在任何單一檢視視窗中佔比不超過 10%，維持金色的稀有與指引性。
 **The Zero-Blur Contrast Rule.** 所有色彩過渡與投影皆維持清晰邊界，禁止使用擴散模糊彩色光暈（Glow），確保在各類螢幕下皆具備鋒利的清晰度。
+**The Theme Ink Pairing Rule.** 主題色實心底（`bg-band`、`bg-tape`、`bg-pool`，包含 `hover:`／`active:`／`group-hover:` 狀態）上的文字與數字一律使用 `text-band-ink`，由主題配對自動切換黑白；禁止在這些實心底上固定使用 `text-ink`、`text-paper`、`text-white` 或 `text-black`。半透明主題色底（`bg-band/15`、`bg-tape/30`、`bg-tape-tint` 等壓在紙色上）維持 `text-ink`。
 
 ## Typography
 

@@ -20,7 +20,7 @@ export function SetlistQuestCard({ show, unitTitle, onOpenLeadModal }) {
       className="my-8 rounded-[3px] border-[2px] border-dotted border-ink/35 bg-paper/60 p-6 sm:p-8 text-center shadow-xs"
     >
       <div
-        className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-ink/20 bg-tape text-ink text-xl mb-3 shadow-2xs select-none"
+        className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-ink/20 bg-tape text-band-ink text-xl mb-3 shadow-2xs select-none"
         aria-hidden="true"
       >
         📮

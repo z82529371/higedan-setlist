@@ -115,7 +115,7 @@ export function CoverLightboxModal({
                   href={routeHash.releases({ tab: "discography", id: releaseId })}
                   onClick={onClose}
                   data-testid="cover-lightbox-release-btn"
-                  className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-[3px] border border-ink/30 bg-tape hover:bg-tape-tint text-ink font-mono text-xs font-bold transition-colors no-underline cursor-pointer"
+                  className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-[3px] border border-ink/30 bg-tape hover:bg-tape-tint text-band-ink font-mono text-xs font-bold transition-colors no-underline cursor-pointer"
                   title={t("slips.song.viewReleaseDetails", "查看實體發行規格與曲目")}
                 >
                   <span>💿 {t("slips.song.viewReleaseDetails", "查看實體發行規格")} ➔</span>

@@ -411,7 +411,7 @@ export default function LandingHero({
                     {stub.badgeCount > 0 && (
                       <span
                         data-testid="landing-ticket-book-badge"
-                        className="inline-flex items-center rounded-[2px] bg-tape text-ink font-mono text-[10px] font-bold px-1.5 py-0.5 border border-ink/40 tabular-nums shrink-0"
+                        className="inline-flex items-center rounded-[2px] bg-tape text-band-ink font-mono text-[10px] font-bold px-1.5 py-0.5 border border-ink/40 tabular-nums shrink-0"
                       >
                         ✓ {stub.badgeCount}
                       </span>

@@ -251,7 +251,7 @@ export function TicketBookPage({
           <div className="mt-2.5 sm:mt-3.5 flex flex-wrap items-center justify-center gap-2">
             <span
               data-testid="ticket-book-total-badge"
-              className="inline-flex items-center gap-1.5 rounded-[3px] border border-ink/30 bg-tape px-2.5 sm:px-3 py-1 font-mono text-[11px] sm:text-[13px] font-extrabold text-ink"
+              className="inline-flex items-center gap-1.5 rounded-[3px] border border-ink/30 bg-tape px-2.5 sm:px-3 py-1 font-mono text-[11px] sm:text-[13px] font-extrabold text-band-ink"
             >
               <span>{t("ticketBook.totalAttended", "累計參戰 {count} 場", { count })}</span>
             </span>
@@ -343,7 +343,7 @@ export function TicketBookPage({
                 {selectedSongId && (
                   <div
                     data-testid="ticket-book-active-song-filter"
-                    className="inline-flex items-center gap-1.5 rounded-[4px] border border-ink/40 bg-tape px-2.5 py-1 text-[11px] sm:text-[12px] font-bold text-ink shadow-2xs"
+                    className="inline-flex items-center gap-1.5 rounded-[4px] border border-ink/40 bg-tape px-2.5 py-1 text-[11px] sm:text-[12px] font-bold text-band-ink shadow-2xs"
                   >
                     <span aria-hidden="true">🎵</span>
                     <span>
